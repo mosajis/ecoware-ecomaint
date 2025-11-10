@@ -1,8 +1,15 @@
 import * as React from "react";
-import type {ThemeOptions} from "@mui/material/styles";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
-import {colorSchemes, shadows, shape, typography} from "./themePrimitives";
-
+import type { ThemeOptions } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { colorSchemes, shadows, shape, typography } from "./themePrimitives";
+import {
+  dataDisplayCustomizations,
+  dataGridCustomizations,
+  inputsCustomizations,
+  navigationCustomizations,
+  surfacesCustomizations,
+  tabsCustomization,
+} from "@/shared/theme/customization";
 
 interface AppThemeProps {
   children: React.ReactNode;
@@ -11,7 +18,7 @@ interface AppThemeProps {
 }
 
 export default function AppTheme(props: AppThemeProps) {
-  const {children, disableCustomTheme, themeComponents} = props;
+  const { children, disableCustomTheme, themeComponents } = props;
 
   const theme = React.useMemo(() => {
     if (disableCustomTheme) return createTheme();
@@ -26,7 +33,13 @@ export default function AppTheme(props: AppThemeProps) {
       shadows,
       shape,
       components: {
-        ...themeComponents,
+        ...navigationCustomizations,
+        ...inputsCustomizations,
+        ...dataDisplayCustomizations,
+        ...surfacesCustomizations,
+        ...dataGridCustomizations,
+        ...tabsCustomization
+        asdasld,
       },
     });
   }, [disableCustomTheme, themeComponents]);

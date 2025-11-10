@@ -1,4 +1,8 @@
-import {DataGrid, type DataGridProps, type GridColDef} from "@mui/x-data-grid";
+import {
+  DataGrid,
+  type DataGridProps,
+  type GridColDef,
+} from "@mui/x-data-grid";
 
 const rowNumberColumn: GridColDef = {
   field: "rowNumber",
@@ -13,16 +17,16 @@ const rowNumberColumn: GridColDef = {
     const api = params.api;
     const page = api.state.pagination.paginationModel.page ?? 0;
     const pageSize = api.state.pagination.paginationModel.pageSize ?? 20;
-    const rowIndex = params.api.getRowIndexRelativeToVisibleRows(params.id) + 1
+    const rowIndex = params.api.getRowIndexRelativeToVisibleRows(params.id) + 1;
     return page * pageSize + (rowIndex + 1);
   },
 };
 
 export default function CustomizedDataGrid({
-                                             rows, columns,
-                                             ...props
-                                           }: DataGridProps) {
-
+  rows,
+  columns,
+  ...props
+}: DataGridProps) {
   const columnsWithRowNumber = [rowNumberColumn, ...(columns || [])];
 
   return (
@@ -41,12 +45,12 @@ export default function CustomizedDataGrid({
             columnInputProps: {
               variant: "outlined",
               size: "small",
-              sx: {mt: "auto"},
+              sx: { mt: "auto" },
             },
             operatorInputProps: {
               variant: "outlined",
               size: "small",
-              sx: {mt: "auto"},
+              sx: { mt: "auto" },
             },
             valueInputProps: {
               InputComponentProps: {
