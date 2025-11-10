@@ -1,6 +1,6 @@
 import React from "react";
-import {Box, Button, Stack} from "@mui/material";
-import CustomizedDataGrid from "@/shared/components/DataGrid"; // مسیرت رو درست کن
+import { Box, Button, Stack } from "@mui/material";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid"; // مسیرت رو درست کن
 
 const TabWorkshop = () => {
   const columnsTable1 = [
@@ -39,7 +39,11 @@ const TabWorkshop = () => {
     { field: "pmEngineer", headerName: "PM Engineer", flex: 1 },
     { field: "bargeMaster", headerName: "Barge Master", flex: 1 },
     { field: "rigMaster", headerName: "Rig Master", flex: 1 },
-    { field: "personInChargeOnRig", headerName: "Person in Charge on Rig", flex: 1 },
+    {
+      field: "personInChargeOnRig",
+      headerName: "Person in Charge on Rig",
+      flex: 1,
+    },
   ];
 
   const dataTable2 = [
@@ -61,7 +65,11 @@ const TabWorkshop = () => {
       <Box>
         <Stack direction="row" spacing={1} mb={1} flexWrap="wrap">
           {["New", "Edit", "View", "Delete", "Print", "Export"].map((label) => (
-            <Button key={label} variant={label === "New" ? "contained" : "outlined"} size="small">
+            <Button
+              key={label}
+              variant={label === "New" ? "contained" : "outlined"}
+              size="small"
+            >
               {label}
             </Button>
           ))}
@@ -78,7 +86,11 @@ const TabWorkshop = () => {
       <Box>
         <Stack direction="row" spacing={1} mb={1} flexWrap="wrap">
           {["New", "Edit", "View", "Delete", "Print", "Export"].map((label) => (
-            <Button key={label} variant={label === "New" ? "contained" : "outlined"} size="small">
+            <Button
+              key={label}
+              variant={label === "New" ? "contained" : "outlined"}
+              size="small"
+            >
               {label}
             </Button>
           ))}

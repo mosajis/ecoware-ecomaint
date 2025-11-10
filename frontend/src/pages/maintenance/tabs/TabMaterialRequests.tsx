@@ -1,5 +1,5 @@
 import React from "react";
-import CustomizedDataGrid from "@/shared/components/DataGrid";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 
 const TabMaterialRequests = () => {
   const columns = [
@@ -42,7 +42,11 @@ const TabMaterialRequests = () => {
   ];
 
   return (
-    <CustomizedDataGrid label={"Material Requests"} rows={rows} columns={columns} />
+    <CustomizedDataGrid
+      label={"Material Requests"}
+      rows={rows}
+      columns={columns}
+    />
   );
 };
 

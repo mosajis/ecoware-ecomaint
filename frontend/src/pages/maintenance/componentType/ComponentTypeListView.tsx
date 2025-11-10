@@ -1,5 +1,5 @@
 import TabsComponent from "./ComponentTypeTabs";
-import CustomizedDataGrid from "@/shared/components/DataGrid";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { tblComponentUnit } from "@/core/api//generated/api";
 import { type GridColDef } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";

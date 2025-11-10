@@ -1,7 +1,7 @@
 import { lazy, Suspense, useState } from "react";
 import { Box, Tab, Tabs } from "@mui/material";
 import Splitter from "@/shared/components/Splitter";
-import DataGridProAdapter from "@/shared/components/DataGrid";
+import DataGridProAdapter from "@/shared/components/dataGrid/DataGrid";
 import Spinner from "@/shared/components/Spinner";
 
 const TabRound = lazy(() => import("@/pages/maintenance/tabs/TabRound"));

@@ -38,8 +38,7 @@ export default function AppTheme(props: AppThemeProps) {
         ...dataDisplayCustomizations,
         ...surfacesCustomizations,
         ...dataGridCustomizations,
-        ...tabsCustomization
-        asdasld,
+        ...tabsCustomization,
       },
     });
   }, [disableCustomTheme, themeComponents]);

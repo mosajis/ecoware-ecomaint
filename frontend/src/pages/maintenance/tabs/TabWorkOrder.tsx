@@ -1,6 +1,6 @@
 import React from "react";
-import {Box} from "@mui/material";
-import CustomizedDataGrid from "@/shared/components/DataGrid"; // مسیرت رو درست کن
+import { Box } from "@mui/material";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid"; // مسیرت رو درست کن
 
 const TabWorkOrder = () => {
   const columns = [
@@ -17,7 +17,11 @@ const TabWorkOrder = () => {
     { field: "pendingType", headerName: "Pending Type", flex: 1 },
     { field: "pendingDate", headerName: "Pending Date", flex: 1 },
     { field: "triggeredBy", headerName: "Triggered By", flex: 1 },
-    { field: "componentStatusName", headerName: "Component Status Name", flex: 1 },
+    {
+      field: "componentStatusName",
+      headerName: "Component Status Name",
+      flex: 1,
+    },
     { field: "priority", headerName: "Priority", flex: 1 },
     { field: "pendingBy", headerName: "Pending By", flex: 1 },
   ];

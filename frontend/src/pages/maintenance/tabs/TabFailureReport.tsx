@@ -1,6 +1,6 @@
 import React from "react";
-import {Box} from "@mui/material";
-import CustomizedDataGrid from "@/shared/components/DataGrid"; // مسیرت رو درست کن
+import { Box } from "@mui/material";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid"; // مسیرت رو درست کن
 
 const TabFailureReport = () => {
   const columns = [

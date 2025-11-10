@@ -2,71 +2,72 @@ import CheckBoxOutlineBlankRoundedIcon from "@mui/icons-material/CheckBoxOutline
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import UnfoldMoreRoundedIcon from "@mui/icons-material/UnfoldMoreRounded";
-import {alpha, Components, Theme} from '@mui/material/styles';
-import {svgIconClasses, type SvgIconProps} from '@mui/material/SvgIcon';
-import {typographyClasses} from '@mui/material/Typography';
-import {buttonBaseClasses} from '@mui/material/ButtonBase';
-import {chipClasses} from '@mui/material/Chip';
-import {iconButtonClasses} from '@mui/material/IconButton';
-import {gray, green, red} from './themePrimitives';
-import {brand, orange} from "@/shared/theme/themePrimitives";
-import {toggleButtonGroupClasses} from "@mui/material/ToggleButtonGroup";
-import {toggleButtonClasses} from "@mui/material/ToggleButton";
-import {menuItemClasses} from "@mui/material/MenuItem";
-import {dividerClasses} from "@mui/material/Divider";
-import {forwardRef} from 'react'
-import {selectClasses} from "@mui/material/Select";
-import {tabClasses} from "@mui/material/Tab";
-import {paperClasses} from "@mui/material/Paper";
-import {listItemIconClasses} from "@mui/material/ListItemIcon";
-import {checkboxClasses} from "@mui/material/Checkbox";
-import {listClasses} from "@mui/material/List";
-import {tablePaginationClasses} from "@mui/material/TablePagination";
-import {gridClasses} from "@mui/x-data-grid";
+import { alpha, Components, Theme } from "@mui/material/styles";
+import { svgIconClasses, type SvgIconProps } from "@mui/material/SvgIcon";
+import { typographyClasses } from "@mui/material/Typography";
+import { buttonBaseClasses } from "@mui/material/ButtonBase";
+import { chipClasses } from "@mui/material/Chip";
+import { iconButtonClasses } from "@mui/material/IconButton";
+import { gray, green, red } from "./themePrimitives";
+import { brand, orange } from "@/shared/theme/themePrimitives";
+import { toggleButtonGroupClasses } from "@mui/material/ToggleButtonGroup";
+import { toggleButtonClasses } from "@mui/material/ToggleButton";
+import { menuItemClasses } from "@mui/material/MenuItem";
+import { dividerClasses } from "@mui/material/Divider";
+import { forwardRef } from "react";
+import { selectClasses } from "@mui/material/Select";
+import { tabClasses } from "@mui/material/Tab";
+import { paperClasses } from "@mui/material/Paper";
+import { listItemIconClasses } from "@mui/material/ListItemIcon";
+import { checkboxClasses } from "@mui/material/Checkbox";
+import { listClasses } from "@mui/material/List";
+import { tablePaginationClasses } from "@mui/material/TablePagination";
+import { gridClasses } from "@mui/x-data-grid";
+import { outlinedInputClasses } from "@mui/material";
 
 export const dataDisplayCustomizations: Components<Theme> = {
   MuiList: {
     styleOverrides: {
       root: {
-        padding: '8px',
-        display: 'flex',
-        flexDirection: 'column',
+        padding: "8px",
+        display: "flex",
+        flexDirection: "column",
         gap: 0,
       },
     },
   },
   MuiListItem: {
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         [`& .${svgIconClasses.root}`]: {
-          width: '1rem',
-          height: '1rem',
+          width: "1rem",
+          height: "1rem",
           color: (theme.vars || theme).palette.text.secondary,
         },
         [`& .${typographyClasses.root}`]: {
           fontWeight: 500,
         },
         [`& .${buttonBaseClasses.root}`]: {
-          display: 'flex',
+          display: "flex",
           gap: 8,
-          padding: '2px 8px',
+          padding: "2px 8px",
           borderRadius: (theme.vars || theme).shape.borderRadius,
           opacity: 0.7,
-          '&.Mui-selected': {
+          "&.Mui-selected": {
             opacity: 1,
             backgroundColor: alpha(theme.palette.action.selected, 0.3),
             [`& .${svgIconClasses.root}`]: {
               color: (theme.vars || theme).palette.text.primary,
             },
-            '&:focus-visible': {
+            "&:focus-visible": {
               backgroundColor: alpha(theme.palette.action.selected, 0.3),
             },
-            '&:hover': {
+            "&:hover": {
               backgroundColor: alpha(theme.palette.action.selected, 0.5),
             },
           },
-          '&:focus-visible': {
-            backgroundColor: 'transparent',
+          "&:focus-visible": {
+            backgroundColor: "transparent",
           },
         },
       }),
@@ -74,12 +75,12 @@ export const dataDisplayCustomizations: Components<Theme> = {
   },
   MuiListItemText: {
     styleOverrides: {
-      primary: ({theme}) => ({
+      primary: ({ theme }) => ({
         fontSize: theme.typography.body2.fontSize,
         fontWeight: 500,
         lineHeight: theme.typography.body2.lineHeight,
       }),
-      secondary: ({theme}) => ({
+      secondary: ({ theme }) => ({
         fontSize: theme.typography.caption.fontSize,
         lineHeight: theme.typography.caption.lineHeight,
       }),
@@ -87,9 +88,9 @@ export const dataDisplayCustomizations: Components<Theme> = {
   },
   MuiListSubheader: {
     styleOverrides: {
-      root: ({theme}) => ({
-        backgroundColor: 'transparent',
-        padding: '4px 8px',
+      root: ({ theme }) => ({
+        backgroundColor: "transparent",
+        padding: "4px 8px",
         fontSize: theme.typography.caption.fontSize,
         fontWeight: 500,
         lineHeight: theme.typography.caption.lineHeight,
@@ -105,19 +106,19 @@ export const dataDisplayCustomizations: Components<Theme> = {
   },
   MuiChip: {
     defaultProps: {
-      size: 'small',
+      size: "small",
     },
     styleOverrides: {
-      root: ({theme}) => ({
-        border: '1px solid',
-        borderRadius: '999px',
+      root: ({ theme }) => ({
+        border: "1px solid",
+        borderRadius: "999px",
         [`& .${chipClasses.label}`]: {
           fontWeight: 600,
         },
         variants: [
           {
             props: {
-              color: 'default',
+              color: "default",
             },
             style: {
               borderColor: gray[200],
@@ -128,7 +129,7 @@ export const dataDisplayCustomizations: Components<Theme> = {
               [`& .${chipClasses.icon}`]: {
                 color: gray[500],
               },
-              ...theme.applyStyles('dark', {
+              ...theme.applyStyles("dark", {
                 borderColor: gray[700],
                 backgroundColor: gray[800],
                 [`& .${chipClasses.label}`]: {
@@ -142,7 +143,7 @@ export const dataDisplayCustomizations: Components<Theme> = {
           },
           {
             props: {
-              color: 'success',
+              color: "success",
             },
             style: {
               borderColor: green[200],
@@ -153,7 +154,7 @@ export const dataDisplayCustomizations: Components<Theme> = {
               [`& .${chipClasses.icon}`]: {
                 color: green[500],
               },
-              ...theme.applyStyles('dark', {
+              ...theme.applyStyles("dark", {
                 borderColor: green[800],
                 backgroundColor: green[900],
                 [`& .${chipClasses.label}`]: {
@@ -167,7 +168,7 @@ export const dataDisplayCustomizations: Components<Theme> = {
           },
           {
             props: {
-              color: 'error',
+              color: "error",
             },
             style: {
               borderColor: red[100],
@@ -178,7 +179,7 @@ export const dataDisplayCustomizations: Components<Theme> = {
               [`& .${chipClasses.icon}`]: {
                 color: red[500],
               },
-              ...theme.applyStyles('dark', {
+              ...theme.applyStyles("dark", {
                 borderColor: red[800],
                 backgroundColor: red[900],
                 [`& .${chipClasses.label}`]: {
@@ -191,7 +192,7 @@ export const dataDisplayCustomizations: Components<Theme> = {
             },
           },
           {
-            props: {size: 'small'},
+            props: { size: "small" },
             style: {
               maxHeight: 20,
               [`& .${chipClasses.label}`]: {
@@ -203,7 +204,7 @@ export const dataDisplayCustomizations: Components<Theme> = {
             },
           },
           {
-            props: {size: 'medium'},
+            props: { size: "medium" },
             style: {
               [`& .${chipClasses.label}`]: {
                 fontSize: theme.typography.caption.fontSize,
@@ -217,7 +218,7 @@ export const dataDisplayCustomizations: Components<Theme> = {
   MuiTablePagination: {
     styleOverrides: {
       actions: {
-        display: 'flex',
+        display: "flex",
         gap: 8,
         marginRight: 6,
         [`& .${iconButtonClasses.root}`]: {
@@ -230,17 +231,17 @@ export const dataDisplayCustomizations: Components<Theme> = {
   },
   MuiIcon: {
     defaultProps: {
-      fontSize: 'small',
+      fontSize: "small",
     },
     styleOverrides: {
       root: {
         variants: [
           {
             props: {
-              fontSize: 'small',
+              fontSize: "small",
             },
             style: {
-              fontSize: '1rem',
+              fontSize: "1rem",
             },
           },
         ],
@@ -252,15 +253,15 @@ export const dataDisplayCustomizations: Components<Theme> = {
 export const feedbackCustomizations: Components<Theme> = {
   MuiAlert: {
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         borderRadius: 10,
         backgroundColor: orange[100],
         color: (theme.vars || theme).palette.text.primary,
         border: `1px solid ${alpha(orange[300], 0.5)}`,
-        '& .MuiAlert-icon': {
+        "& .MuiAlert-icon": {
           color: orange[500],
         },
-        ...theme.applyStyles('dark', {
+        ...theme.applyStyles("dark", {
           backgroundColor: `${alpha(orange[900], 0.5)}`,
           border: `1px solid ${alpha(orange[800], 0.5)}`,
         }),
@@ -269,10 +270,10 @@ export const feedbackCustomizations: Components<Theme> = {
   },
   MuiDialog: {
     styleOverrides: {
-      root: ({theme}) => ({
-        '& .MuiDialog-paper': {
-          borderRadius: '10px',
-          border: '1px solid',
+      root: ({ theme }) => ({
+        "& .MuiDialog-paper": {
+          borderRadius: "10px",
+          border: "1px solid",
           borderColor: (theme.vars || theme).palette.divider,
         },
       }),
@@ -280,11 +281,11 @@ export const feedbackCustomizations: Components<Theme> = {
   },
   MuiLinearProgress: {
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         height: 8,
         borderRadius: 8,
         backgroundColor: gray[200],
-        ...theme.applyStyles('dark', {
+        ...theme.applyStyles("dark", {
           backgroundColor: gray[800],
         }),
       }),
@@ -299,7 +300,7 @@ export const inputsCustomizations: Components<Theme> = {
       disableRipple: true,
     },
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         boxSizing: "border-box",
         transition: "all 100ms ease-in",
         "&:focus-visible": {
@@ -311,11 +312,10 @@ export const inputsCustomizations: Components<Theme> = {
   },
   MuiButton: {
     styleOverrides: {
-      root: ({theme}) => ({
-        // fontWeight: theme.typography.fontWeightBold,
-        // boxShadow: "none",
-        // borderRadius: (theme.vars || theme).shape.borderRadius,
-        // textTransform: "none",
+      root: ({ theme }) => ({
+        boxShadow: "none",
+        borderRadius: (theme.vars || theme).shape.borderRadius,
+        textTransform: "none",
         variants: [
           {
             props: {
@@ -378,14 +378,8 @@ export const inputsCustomizations: Components<Theme> = {
             style: {
               color: "white",
               backgroundColor: brand[300],
-              backgroundImage: `linear-gradient(to bottom, ${alpha(
-                brand[400],
-                0.8
-              )}, ${brand[500]})`,
-              boxShadow: `inset 0 2px 0 ${alpha(
-                brand[200],
-                0.2
-              )}, inset 0 -2px 0 ${alpha(brand[700], 0.4)}`,
+              backgroundImage: `linear-gradient(to bottom, ${alpha(brand[400], 0.8)}, ${brand[500]})`,
+              boxShadow: `inset 0 2px 0 ${alpha(brand[200], 0.2)}, inset 0 -2px 0 ${alpha(brand[700], 0.4)}`,
               border: `1px solid ${brand[500]}`,
               "&:hover": {
                 backgroundColor: brand[700],
@@ -512,7 +506,7 @@ export const inputsCustomizations: Components<Theme> = {
   },
   MuiIconButton: {
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         boxShadow: "none",
         borderRadius: (theme.vars || theme).shape.borderRadius,
         textTransform: "none",
@@ -549,7 +543,7 @@ export const inputsCustomizations: Components<Theme> = {
               width: "2.25rem",
               height: "2.25rem",
               padding: "0.25rem",
-              [`& .${svgIconClasses.root}`]: {fontSize: "1rem"},
+              [`& .${svgIconClasses.root}`]: { fontSize: "1rem" },
             },
           },
           {
@@ -567,7 +561,7 @@ export const inputsCustomizations: Components<Theme> = {
   },
   MuiToggleButtonGroup: {
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         borderRadius: "10px",
         boxShadow: `0 4px 16px ${alpha(gray[400], 0.2)}`,
         [`& .${toggleButtonGroupClasses.selected}`]: {
@@ -584,7 +578,7 @@ export const inputsCustomizations: Components<Theme> = {
   },
   MuiToggleButton: {
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         padding: "12px 16px",
         textTransform: "none",
         borderRadius: "10px",
@@ -604,14 +598,14 @@ export const inputsCustomizations: Components<Theme> = {
       disableRipple: true,
       icon: (
         <CheckBoxOutlineBlankRoundedIcon
-          sx={{color: "hsla(210, 0%, 0%, 0.0)"}}
+          sx={{ color: "hsla(210, 0%, 0%, 0.0)" }}
         />
       ),
-      checkedIcon: <CheckRoundedIcon sx={{height: 14, width: 14}}/>,
-      indeterminateIcon: <RemoveRoundedIcon sx={{height: 14, width: 14}}/>,
+      checkedIcon: <CheckRoundedIcon sx={{ height: 14, width: 14 }} />,
+      indeterminateIcon: <RemoveRoundedIcon sx={{ height: 14, width: 14 }} />,
     },
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         margin: 10,
         height: 16,
         width: 16,
@@ -656,17 +650,9 @@ export const inputsCustomizations: Components<Theme> = {
   },
   MuiInputBase: {
     styleOverrides: {
-      root: ({theme}: { theme: Theme }) => ({
+      root: {
         border: "none",
-
-        " .MuiOutlinedInput-input": {
-          paddingTop: "12px",
-          paddingBottom: "12px",
-          fontSize: "0.85rem",
-        },
-      }),
-
-
+      },
       input: {
         "&::placeholder": {
           opacity: 0.7,
@@ -675,10 +661,57 @@ export const inputsCustomizations: Components<Theme> = {
       },
     },
   },
-
+  MuiOutlinedInput: {
+    styleOverrides: {
+      input: {
+        padding: 0,
+      },
+      root: ({ theme }) => ({
+        padding: "8px 12px",
+        color: (theme.vars || theme).palette.text.primary,
+        borderRadius: (theme.vars || theme).shape.borderRadius,
+        border: `1px solid ${(theme.vars || theme).palette.divider}`,
+        backgroundColor: (theme.vars || theme).palette.background.default,
+        transition: "border 120ms ease-in",
+        "&:hover": {
+          borderColor: gray[400],
+        },
+        [`&.${outlinedInputClasses.focused}`]: {
+          outline: `0px solid ${alpha(brand[500], 0.5)}`,
+          borderColor: brand[400],
+        },
+        ...theme.applyStyles("dark", {
+          "&:hover": {
+            borderColor: gray[500],
+          },
+        }),
+        variants: [
+          {
+            props: {
+              size: "small",
+            },
+            style: {
+              height: "2.25rem",
+            },
+          },
+          {
+            props: {
+              size: "medium",
+            },
+            style: {
+              height: "2.5rem",
+            },
+          },
+        ],
+      }),
+      notchedOutline: {
+        border: "none",
+      },
+    },
+  },
   MuiInputAdornment: {
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         color: (theme.vars || theme).palette.grey[500],
         ...theme.applyStyles("dark", {
           color: (theme.vars || theme).palette.grey[400],
@@ -688,7 +721,7 @@ export const inputsCustomizations: Components<Theme> = {
   },
   MuiFormLabel: {
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         typography: theme.typography.caption,
         marginBottom: 8,
       }),
@@ -699,7 +732,7 @@ export const inputsCustomizations: Components<Theme> = {
 export const navigationCustomizations: Components<Theme> = {
   MuiMenuItem: {
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         borderRadius: (theme.vars || theme).shape.borderRadius,
         padding: "6px 8px",
         [`&.${menuItemClasses.focusVisible}`]: {
@@ -721,7 +754,7 @@ export const navigationCustomizations: Components<Theme> = {
           margin: "0 -8px",
         },
       },
-      paper: ({theme}) => ({
+      paper: ({ theme }) => ({
         marginTop: "4px",
         borderRadius: (theme.vars || theme).shape.borderRadius,
         border: `1px solid ${(theme.vars || theme).palette.divider}`,
@@ -744,14 +777,12 @@ export const navigationCustomizations: Components<Theme> = {
   },
   MuiSelect: {
     defaultProps: {
-      IconComponent: forwardRef<SVGSVGElement, SvgIconProps>(
-        (props, ref) => (
-          <UnfoldMoreRoundedIcon fontSize="small" {...props} ref={ref}/>
-        )
-      ),
+      IconComponent: forwardRef<SVGSVGElement, SvgIconProps>((props, ref) => (
+        <UnfoldMoreRoundedIcon fontSize="small" {...props} ref={ref} />
+      )),
     },
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         borderRadius: (theme.vars || theme).shape.borderRadius,
         border: "1px solid",
         borderColor: gray[200],
@@ -792,7 +823,7 @@ export const navigationCustomizations: Components<Theme> = {
           },
         }),
       }),
-      select: ({theme}) => ({
+      select: ({ theme }) => ({
         display: "flex",
         alignItems: "center",
         ...theme.applyStyles("dark", {
@@ -810,7 +841,7 @@ export const navigationCustomizations: Components<Theme> = {
       underline: "none",
     },
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         color: (theme.vars || theme).palette.text.primary,
         fontWeight: 500,
         position: "relative",
@@ -840,14 +871,14 @@ export const navigationCustomizations: Components<Theme> = {
   },
   MuiDrawer: {
     styleOverrides: {
-      paper: ({theme}) => ({
+      paper: ({ theme }) => ({
         backgroundColor: (theme.vars || theme).palette.background.default,
       }),
     },
   },
   MuiPaginationItem: {
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         "&.Mui-selected": {
           color: "white",
           backgroundColor: (theme.vars || theme).palette.grey[900],
@@ -863,8 +894,8 @@ export const navigationCustomizations: Components<Theme> = {
   },
   MuiTabs: {
     styleOverrides: {
-      root: {minHeight: "fit-content"},
-      indicator: ({theme}) => ({
+      root: { minHeight: "fit-content" },
+      indicator: ({ theme }) => ({
         backgroundColor: (theme.vars || theme).palette.grey[800],
         ...theme.applyStyles("dark", {
           backgroundColor: (theme.vars || theme).palette.grey[200],
@@ -874,7 +905,7 @@ export const navigationCustomizations: Components<Theme> = {
   },
   MuiTab: {
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         padding: "6px 8px",
         marginBottom: "8px",
         textTransform: "none",
@@ -907,7 +938,7 @@ export const navigationCustomizations: Components<Theme> = {
   },
   MuiStepConnector: {
     styleOverrides: {
-      line: ({theme}) => ({
+      line: ({ theme }) => ({
         borderTop: "1px solid",
         borderColor: (theme.vars || theme).palette.divider,
         flex: 1,
@@ -917,7 +948,7 @@ export const navigationCustomizations: Components<Theme> = {
   },
   MuiStepIcon: {
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         color: "transparent",
         border: `1px solid ${gray[400]}`,
         width: 12,
@@ -947,7 +978,7 @@ export const navigationCustomizations: Components<Theme> = {
         }),
         variants: [
           {
-            props: {completed: true},
+            props: { completed: true },
             style: {
               width: 12,
               height: 12,
@@ -959,16 +990,15 @@ export const navigationCustomizations: Components<Theme> = {
   },
   MuiStepLabel: {
     styleOverrides: {
-      label: ({theme}) => ({
+      label: ({ theme }) => ({
         "&.Mui-completed": {
           opacity: 0.6,
-          ...theme.applyStyles("dark", {opacity: 0.5}),
+          ...theme.applyStyles("dark", { opacity: 0.5 }),
         },
       }),
     },
   },
 };
-
 
 export const surfacesCustomizations: Components<Theme> = {
   MuiAccordion: {
@@ -977,7 +1007,7 @@ export const surfacesCustomizations: Components<Theme> = {
       disableGutters: true,
     },
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         padding: 4,
         overflow: "clip",
         backgroundColor: (theme.vars || theme).palette.background.default,
@@ -1002,20 +1032,20 @@ export const surfacesCustomizations: Components<Theme> = {
   },
   MuiAccordionSummary: {
     styleOverrides: {
-      root: ({theme}) => ({
+      root: ({ theme }) => ({
         border: "none",
         borderRadius: 8,
-        "&:hover": {backgroundColor: gray[50]},
-        "&:focus-visible": {backgroundColor: "transparent"},
+        "&:hover": { backgroundColor: gray[50] },
+        "&:focus-visible": { backgroundColor: "transparent" },
         ...theme.applyStyles("dark", {
-          "&:hover": {backgroundColor: gray[800]},
+          "&:hover": { backgroundColor: gray[800] },
         }),
       }),
     },
   },
   MuiAccordionDetails: {
     styleOverrides: {
-      root: {mb: 20, border: "none"},
+      root: { mb: 20, border: "none" },
     },
   },
   MuiPaper: {
@@ -1025,7 +1055,7 @@ export const surfacesCustomizations: Components<Theme> = {
   },
   MuiCard: {
     styleOverrides: {
-      root: ({theme}) => {
+      root: ({ theme }) => {
         return {
           padding: 16,
           gap: 16,
@@ -1060,7 +1090,7 @@ export const surfacesCustomizations: Components<Theme> = {
     styleOverrides: {
       root: {
         padding: 0,
-        "&:last-child": {paddingBottom: 0},
+        "&:last-child": { paddingBottom: 0 },
       },
     },
   },
@@ -1080,11 +1110,10 @@ export const surfacesCustomizations: Components<Theme> = {
   },
 };
 
-
-export const tabsCustomization = {
+export const tabsCustomization: Components<Theme> = {
   MuiTabs: {
     styleOverrides: {
-      root: ({theme}: { theme: Theme }) => ({
+      root: ({ theme }: { theme: Theme }) => ({
         minHeight: 42,
         border: `1px solid ${(theme.vars || theme).palette.divider}`, // حالا شناخته میشه
         borderBottom: 0,
@@ -1123,11 +1152,10 @@ export const tabsCustomization = {
   },
 };
 
-
 export const dataGridCustomizations = {
   MuiDataGrid: {
     styleOverrides: {
-      root: ({theme}: { theme: Theme }) => ({
+      root: ({ theme }: { theme: Theme }) => ({
         overflow: "clip",
         borderColor: (theme.vars || theme).palette.divider,
         backgroundColor: (theme.vars || theme).palette.background.default,
@@ -1164,10 +1192,10 @@ export const dataGridCustomizations = {
           },
         },
       }),
-      cell: ({theme}: any) => ({
+      cell: ({ theme }: any) => ({
         borderTopColor: (theme.vars || theme).palette.divider,
       }),
-      menu: ({theme}: any) => ({
+      menu: ({ theme }: any) => ({
         borderRadius: theme.shape.borderRadius,
         backgroundImage: "none",
         [`& .${paperClasses.root}`]: {
@@ -1184,7 +1212,7 @@ export const dataGridCustomizations = {
           paddingRight: 0,
         },
       }),
-      row: ({theme}: any) => ({
+      row: ({ theme }: any) => ({
         "&:last-of-type": {
           borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
         },
@@ -1198,7 +1226,7 @@ export const dataGridCustomizations = {
           },
         },
       }),
-      iconButtonContainer: ({theme}: any) => ({
+      iconButtonContainer: ({ theme }: any) => ({
         [`& .${iconButtonClasses.root}`]: {
           border: "none",
           backgroundColor: "transparent",
@@ -1219,8 +1247,7 @@ export const dataGridCustomizations = {
           }),
         },
       }),
-
-      menuIconButton: ({theme}: any) => ({
+      menuIconButton: ({ theme }: any) => ({
         border: "none",
         backgroundColor: "transparent",
         "&:hover": {
@@ -1239,20 +1266,21 @@ export const dataGridCustomizations = {
           },
         }),
       }),
-      filterForm: ({theme}: any) => ({
+      filterForm: ({ theme }: any) => ({
         gap: theme.spacing(1),
         alignItems: "flex-end",
       }),
-      columnsManagementHeader: ({theme}: any) => ({
+      columnsManagementHeader: ({ theme }: any) => ({
         paddingRight: theme.spacing(3),
         paddingLeft: theme.spacing(3),
       }),
+
       columnHeaderTitleContainer: {
         flexGrow: 1,
         justifyContent: "space-between",
       },
 
-      columnHeaderDraggableContainer: {paddingRight: 2},
+      columnHeaderDraggableContainer: { paddingRight: 2 },
     },
   },
 };

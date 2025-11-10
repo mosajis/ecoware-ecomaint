@@ -1,6 +1,6 @@
 import React from "react";
-import {Box, Button, Stack} from "@mui/material";
-import CustomizedDataGrid from "@/shared/components/DataGrid"; // مسیرت رو درست کن
+import { Box, Button, Stack } from "@mui/material";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid"; // مسیرت رو درست کن
 
 const TabMaintLog = () => {
   const columns = [
@@ -11,7 +11,11 @@ const TabMaintLog = () => {
     { field: "discipline", headerName: "Discipline", flex: 1 },
     { field: "reportedBy", headerName: "Reported By", flex: 1 },
     { field: "followStatus", headerName: "Follow Status", flex: 1 },
-    { field: "currentUserFollowStatus", headerName: "Current User Follow Status", flex: 1 },
+    {
+      field: "currentUserFollowStatus",
+      headerName: "Current User Follow Status",
+      flex: 1,
+    },
     { field: "followCount", headerName: "Follow Count", flex: 1 },
     { field: "follower", headerName: "Follower", flex: 1 },
     { field: "status", headerName: "Status", flex: 1 },
@@ -21,7 +25,11 @@ const TabMaintLog = () => {
     { field: "totalAttach", headerName: "Total Attach", flex: 1 },
     { field: "totalMessage", headerName: "Total Message", flex: 1 },
     { field: "downTime", headerName: "DownTime (Min)", flex: 1 },
-    { field: "componentStatusName", headerName: "Component Status Name", flex: 1 },
+    {
+      field: "componentStatusName",
+      headerName: "Component Status Name",
+      flex: 1,
+    },
     { field: "isCritical", headerName: "Is Critical", flex: 1 },
     { field: "unplanned", headerName: "Unplanned", flex: 1 },
   ];
@@ -56,11 +64,24 @@ const TabMaintLog = () => {
     <Box display="flex" flexDirection="column" height="100%">
       <Stack direction="row" spacing={1} mb={1} flexWrap="wrap">
         {[
-          "Filter", "Custom Filter", "Follow Up", "Reviewed", "Notes",
-          "History", "Attachments", "Stock Print", "Log Control",
-          "Request", "Forward", "Analysis", "Sample Oil", "Recheck"
+          "Filter",
+          "Custom Filter",
+          "Follow Up",
+          "Reviewed",
+          "Notes",
+          "History",
+          "Attachments",
+          "Stock Print",
+          "Log Control",
+          "Request",
+          "Forward",
+          "Analysis",
+          "Sample Oil",
+          "Recheck",
         ].map((label) => (
-          <Button key={label} variant="outlined" size="small">{label}</Button>
+          <Button key={label} variant="outlined" size="small">
+            {label}
+          </Button>
         ))}
       </Stack>
 

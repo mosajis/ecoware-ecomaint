@@ -1,6 +1,6 @@
 import React from "react";
-import {Box, Button, Stack} from "@mui/material";
-import CustomizedDataGrid from "@/shared/components/DataGrid"; // مسیرت رو درست کن
+import { Box, Button, Stack } from "@mui/material";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid"; // مسیرت رو درست کن
 
 const TabJob = () => {
   const columns = [
@@ -33,12 +33,21 @@ const TabJob = () => {
   return (
     <Box display={"flex"} height={"100%"} flexDirection={"column"}>
       <Stack direction="row" spacing={1} mb={1} height={"fit-content"}>
-        <Button variant="contained" size={"small"}>New Job</Button>
-        <Button variant="outlined" size={"small"}>Print Jobs</Button>
+        <Button variant="contained" size={"small"}>
+          New Job
+        </Button>
+        <Button variant="outlined" size={"small"}>
+          Print Jobs
+        </Button>
       </Stack>
 
       {/* DataGrid */}
-      <CustomizedDataGrid style={{ flex: 1}} label={"Job"} rows={rows} columns={columns} />
+      <CustomizedDataGrid
+        style={{ flex: 1 }}
+        label={"Job"}
+        rows={rows}
+        columns={columns}
+      />
     </Box>
   );
 };

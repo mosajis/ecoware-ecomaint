@@ -1,6 +1,6 @@
 import React from "react";
-import {Box, Button, Stack} from "@mui/material";
-import CustomizedDataGrid from "@/shared/components/DataGrid"; // مسیرت رو درست کن
+import { Box, Button, Stack } from "@mui/material";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid"; // مسیرت رو درست کن
 
 const TabCounter = () => {
   const columns = [
@@ -31,11 +31,21 @@ const TabCounter = () => {
   return (
     <Box display="flex" flexDirection="column" height="100%">
       <Stack direction="row" spacing={1} mb={1} height="fit-content">
-        <Button variant="contained" size="small">New</Button>
-        <Button variant="outlined" size="small">Set Counter</Button>
-        <Button variant="outlined" size="small">Save</Button>
-        <Button variant="outlined" color="error" size="small">Delete</Button>
-        <Button variant="outlined" size="small">Replace</Button>
+        <Button variant="contained" size="small">
+          New
+        </Button>
+        <Button variant="outlined" size="small">
+          Set Counter
+        </Button>
+        <Button variant="outlined" size="small">
+          Save
+        </Button>
+        <Button variant="outlined" color="error" size="small">
+          Delete
+        </Button>
+        <Button variant="outlined" size="small">
+          Replace
+        </Button>
       </Stack>
 
       {/* DataGrid */}

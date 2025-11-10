@@ -1,6 +1,6 @@
 import React from "react";
-import {Box} from "@mui/material";
-import CustomizedDataGrid from "@/shared/components/DataGrid"; // مسیرت رو درست کن
+import { Box } from "@mui/material";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid"; // مسیرت رو درست کن
 
 const TabJobAttachment = () => {
   const columns = [
@@ -10,7 +10,11 @@ const TabJobAttachment = () => {
     { field: "isExternal", headerName: "Is External", flex: 1 },
     { field: "attachRelation", headerName: "Attach Relation", flex: 1 },
     { field: "attachGroupName", headerName: "Attach Group Name", flex: 1 },
-    { field: "attachSubGroupName", headerName: "Attach Sub Group Name", flex: 1 },
+    {
+      field: "attachSubGroupName",
+      headerName: "Attach Sub Group Name",
+      flex: 1,
+    },
   ];
 
   const rows = [

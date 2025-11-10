@@ -1,27 +1,32 @@
-import {useState} from "react";
-import {Box, IconButton, Stack} from "@mui/material";
-import {type GridColDef, type GridRenderCellParams} from "@mui/x-data-grid";
-import CustomizedDataGrid from "@/shared/components/DataGrid";
-import {tblAddress} from "@/core/api/generated/api";
+import { useState } from "react";
+import { Box, Button, IconButton, Stack, Tooltip } from "@mui/material";
+import { tblAddress } from "@/core/api/generated/api";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { type GridColDef, type GridRenderCellParams } from "@mui/x-data-grid";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import AddressFormDialog from "./AddressFormDialog";
-import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ToolbarButton from "@/shared/components/dataGrid/toolbar/ToolbarButton";
 
 export default function AddressListPage() {
   const queryClient = useQueryClient();
   const [selected, setSelected] = useState<any | null>(null);
   const [openForm, setOpenForm] = useState(false);
 
-  const [paginationModel, setPaginationModel] = useState({ page: 1, pageSize: 20 });
+  const [paginationModel, setPaginationModel] = useState({
+    page: 1,
+    pageSize: 20,
+  });
 
   const { data, isLoading } = useQuery({
     queryKey: ["tblAddress", paginationModel.page, paginationModel.pageSize],
-    queryFn: async () => tblAddress.getAll({
-      page: paginationModel.page,
-      perPage: paginationModel.pageSize,
-      force: true,
-    }),
+    queryFn: async () =>
+      tblAddress.getAll({
+        page: paginationModel.page,
+        perPage: paginationModel.pageSize,
+        force: true,
+      }),
   });
 
   const deleteMutation = useMutation({
@@ -41,7 +46,7 @@ export default function AddressListPage() {
   };
 
   const columns: GridColDef[] = [
-    { field: "code", headerName: "Code", flex: 1,  },
+    { field: "code", headerName: "Code", flex: 1 },
     { field: "name", headerName: "Name", flex: 1 },
     { field: "address1", headerName: "Address 1", flex: 1 },
     { field: "address2", headerName: "Address 2", flex: 1 },
@@ -56,10 +61,18 @@ export default function AddressListPage() {
       filterable: false,
       renderCell: (params: GridRenderCellParams) => (
         <Stack direction="row" spacing={1} onClick={(e) => e.stopPropagation()}>
-          <IconButton size="small" onClick={() => handleEdit(params.row)}>
+          <IconButton
+            size="small"
+            onClick={() => handleEdit(params.row)}
+            sx={{ borderRadius: 50 }}
+          >
             <EditIcon fontSize="small" />
           </IconButton>
-          <IconButton size="small" color="error" onClick={() => handleDelete(params.row)}>
+          <IconButton
+            size="small"
+            color="error"
+            onClick={() => handleDelete(params.row)}
+          >
             <DeleteIcon fontSize="small" />
           </IconButton>
         </Stack>
@@ -70,13 +83,11 @@ export default function AddressListPage() {
   return (
     <Box height="100%">
       <CustomizedDataGrid
+        onAddClick={() => alert("s")}
         rows={data?.items}
         columns={columns}
         loading={isLoading}
-        // rowCount={data?.total}
-        // paginationMode="server"
-        // paginationModel={paginationModel}
-        // onPaginationModelChange={setPaginationModel}
+        showToolbar
         getRowId={(row) => row.addressId}
       />
 

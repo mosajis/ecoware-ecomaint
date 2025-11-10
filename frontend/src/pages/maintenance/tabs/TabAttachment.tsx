@@ -1,6 +1,13 @@
 import React from "react";
-import {Box, Button, Checkbox, FormControlLabel, Stack, TextField,} from "@mui/material";
-import CustomizedDataGrid from "@/shared/components/DataGrid"; // مسیرت رو درست کن
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Stack,
+  TextField,
+} from "@mui/material";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid"; // مسیرت رو درست کن
 
 const TabAttachment = () => {
   const columns = [
@@ -27,15 +34,26 @@ const TabAttachment = () => {
         <TextField label="File Name" size="small" fullWidth />
         <TextField label="Description" size="small" fullWidth />
         <TextField label="Path" size="small" fullWidth />
-        <FormControlLabel control={<Checkbox size="small" />} label="Is External File" />
+        <FormControlLabel
+          control={<Checkbox size="small" />}
+          label="Is External File"
+        />
       </Box>
 
       {/* Form Buttons */}
       <Stack direction="row" spacing={1}>
-        <Button variant="contained" size="small">Save</Button>
-        <Button variant="outlined" size="small">New</Button>
-        <Button variant="outlined" size="small">Select</Button>
-        <Button variant="outlined" size="small" color="error">Delete</Button>
+        <Button variant="contained" size="small">
+          Save
+        </Button>
+        <Button variant="outlined" size="small">
+          New
+        </Button>
+        <Button variant="outlined" size="small">
+          Select
+        </Button>
+        <Button variant="outlined" size="small" color="error">
+          Delete
+        </Button>
       </Stack>
 
       {/* DataGrid */}

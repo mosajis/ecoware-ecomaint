@@ -1,6 +1,6 @@
 import React from "react";
-import {Box, Button, Stack} from "@mui/material";
-import CustomizedDataGrid from "@/shared/components/DataGrid"; // مسیرت رو درست کن
+import { Box, Button, Stack } from "@mui/material";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid"; // مسیرت رو درست کن
 
 const TabPart = () => {
   const columns = [
@@ -27,8 +27,12 @@ const TabPart = () => {
   return (
     <Box display="flex" flexDirection="column" height="100%">
       <Stack direction="row" spacing={1} mb={1}>
-        <Button variant="contained" size="small">New</Button>
-        <Button variant="outlined" size="small">Export</Button>
+        <Button variant="contained" size="small">
+          New
+        </Button>
+        <Button variant="outlined" size="small">
+          Export
+        </Button>
       </Stack>
 
       <CustomizedDataGrid

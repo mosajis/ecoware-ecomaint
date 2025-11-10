@@ -25,7 +25,7 @@ function parseSortString(sort?: string): Record<string, "asc" | "desc"> {
       }
       return acc;
     },
-    {} as Record<string, "asc" | "desc">
+    {} as Record<string, "asc" | "desc">,
   );
 }
 
@@ -100,7 +100,7 @@ export class BaseController<Model extends Record<string, any>> {
           }
 
           const sortObj = parseSortString(sort);
-          const usePagination = paginate !== false;
+          const usePagination = !!paginate;
 
           return await service.findAll({
             where: parsedFilter,
@@ -121,7 +121,7 @@ export class BaseController<Model extends Record<string, any>> {
             perPage: t.Integer(),
             totalPages: t.Integer(),
           }),
-        }
+        },
       );
     }
 
@@ -140,7 +140,7 @@ export class BaseController<Model extends Record<string, any>> {
           }
           return await service.findOne(
             { id: Number(params.id) },
-            parsedInclude
+            parsedInclude,
           );
         },
         {
@@ -151,7 +151,7 @@ export class BaseController<Model extends Record<string, any>> {
             include: t.Optional(t.String()),
           }),
           response: t.Union([responseSchema, t.Null()]),
-        }
+        },
       );
     }
 
@@ -177,7 +177,7 @@ export class BaseController<Model extends Record<string, any>> {
           params: t.Object({ id: t.Number() }),
           body: updateSchema,
           response: responseSchema,
-        }
+        },
       );
     }
 
@@ -188,7 +188,7 @@ export class BaseController<Model extends Record<string, any>> {
         async ({ params, query }) =>
           await service.delete(
             { id: Number(params.id) },
-            { force: query.force }
+            { force: query.force },
           ),
         {
           tags,
@@ -196,7 +196,7 @@ export class BaseController<Model extends Record<string, any>> {
           params: t.Object({ id: t.Number() }),
           query: t.Object({ force: t.Optional(t.Boolean()) }),
           response: responseSchema,
-        }
+        },
       );
     }
 
@@ -225,7 +225,7 @@ export class BaseController<Model extends Record<string, any>> {
           response: t.Object({
             deleted: t.Integer(),
           }),
-        }
+        },
       );
     }
 
@@ -250,7 +250,7 @@ export class BaseController<Model extends Record<string, any>> {
           detail: { summary: "Count" },
           query: querySchema,
           response: t.Object({ count: t.Integer() }),
-        }
+        },
       );
     }
 

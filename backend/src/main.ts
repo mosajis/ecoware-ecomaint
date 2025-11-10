@@ -1,5 +1,4 @@
 import swagger from "@elysiajs/swagger";
-import crudRoutes from "./routes/crud";
 import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
 import { pluginErrorHandler } from "./plugins/error.plugin";
@@ -13,7 +12,7 @@ const app = new Elysia()
       origin: ["http://localhost:5173"],
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"],
-    })
+    }),
   )
   // error handler
   .use(pluginErrorHandler)
@@ -30,7 +29,7 @@ const app = new Elysia()
           description: "API documentation",
         },
       },
-    })
+    }),
   )
 
   // React static
@@ -38,8 +37,15 @@ const app = new Elysia()
     staticPlugin({
       indexHTML: true,
       prefix: "",
-    })
+    }),
   );
 
-app.listen(3000);
-console.log(`🚀 Server running on http://localhost:${3000}`);
+const portArgIndex = process.argv.findIndex((arg) => arg === "--port");
+const portArg = process.argv[portArgIndex + 1];
+const port = portArgIndex !== -1 && portArg ? parseInt(portArg, 10) : 5273;
+
+const info = app.listen(port);
+const environment = info?.server?.development ? "development" : "production";
+const origin = info?.server?.url.origin;
+
+console.log(`🚀 Server[${environment}] running on ${origin}`);
