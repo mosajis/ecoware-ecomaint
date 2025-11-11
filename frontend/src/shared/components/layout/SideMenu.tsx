@@ -21,9 +21,7 @@ const Drawer = styled(MuiDrawer)(({ open }) => ({
   height: "100%",
   "& .MuiDrawer-paper": {
     width: open ? drawerWidth : drawerClosedWidth,
-
     backgroundColor: "#f5f6fa",
-
     transform: open ? "translateX(0)" : `translateX(-${drawerWidth}px)`,
     transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
   },

@@ -1279,6 +1279,9 @@ export const dataGridCustomizations = {
         flexGrow: 1,
         justifyContent: "space-between",
       },
+      ["columnSeparator--sideRight"]: ({ theme }: any) => ({
+        color: theme.palette.divider,
+      }),
 
       columnHeaderDraggableContainer: { paddingRight: 2 },
     },

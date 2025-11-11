@@ -9,8 +9,10 @@ import ButtonExport from "./toolbar/ButtonExport";
 import ButtonColumns from "./toolbar/ButtonColumns";
 import ButtonFilters from "./toolbar/ButtonFilter";
 import ButtonSearch from "./toolbar/ButtonSearch";
+import { Typography } from "@mui/material";
 
 interface DataGridToolbarProps {
+  label: string;
   onAddClick?: () => void;
   onRefreshClick?: () => void;
 }
@@ -18,21 +20,11 @@ interface DataGridToolbarProps {
 export default function DataGridToolbar({
   onAddClick,
   onRefreshClick,
+  label,
 }: DataGridToolbarProps) {
   return (
     <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
-      <Box display="flex" gap={0.5}>
-        {onAddClick && (
-          <ToolbarButton title="Add" onClick={onAddClick}>
-            <AddIcon />
-          </ToolbarButton>
-        )}
-        {onRefreshClick && (
-          <ToolbarButton title="Refresh" onClick={onRefreshClick}>
-            <RefreshIcon />
-          </ToolbarButton>
-        )}
-      </Box>
+      <Typography fontWeight={"bold"}>{label}</Typography>
 
       <Box display="flex" gap={0.5}>
         <ButtonSearch />
@@ -40,6 +32,16 @@ export default function DataGridToolbar({
         <ButtonExport />
         <ButtonColumns />
         <ButtonFilters />
+        {onRefreshClick && (
+          <ToolbarButton title="Refresh" onClick={onRefreshClick}>
+            <RefreshIcon />
+          </ToolbarButton>
+        )}
+        {onAddClick && (
+          <ToolbarButton title="Add" onClick={onAddClick}>
+            <AddIcon />
+          </ToolbarButton>
+        )}
       </Box>
     </Toolbar>
   );

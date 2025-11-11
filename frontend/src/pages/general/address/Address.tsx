@@ -83,6 +83,7 @@ export default function AddressListPage() {
   return (
     <Box height="100%">
       <CustomizedDataGrid
+        label="Address"
         onAddClick={() => alert("s")}
         rows={data?.items}
         columns={columns}

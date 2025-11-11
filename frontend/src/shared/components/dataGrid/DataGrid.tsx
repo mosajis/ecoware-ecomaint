@@ -25,6 +25,7 @@ const rowNumberColumn: GridColDef = {
 
 interface CustomizedDataGridProps extends DataGridProps {
   leftToolbar?: React.ReactNode;
+  label?: string;
   onAddClick?: () => void;
   onRefreshClick?: () => void;
 }
@@ -34,6 +35,7 @@ export default function CustomizedDataGrid({
   columns = [],
   leftToolbar,
   initialState,
+  label,
   onAddClick,
   onRefreshClick,
   ...rest
@@ -55,6 +57,7 @@ export default function CustomizedDataGrid({
           // @ts-ignore
           onAddClick,
           onRefreshClick,
+          label,
         },
       }}
       {...rest}

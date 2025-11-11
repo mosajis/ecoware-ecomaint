@@ -1,6 +1,6 @@
-import {useEffect, useState} from "react";
-import {Box, TextField} from "@mui/material";
-import {DataGrid, GridColDef} from "@mui/x-data-grid";
+import { useEffect, useState } from "react";
+import { Box, TextField } from "@mui/material";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Spinner from "@/shared/components/Spinner";
 import Splitter from "@/shared/components/Splitter";
 
@@ -61,7 +61,6 @@ export default function ComponentJob() {
   return (
     <Box height="100%" width="100%">
       <Splitter initialPrimarySize="70%" horizontal>
-        {/* بالا: جدول */}
         <Box sx={{ height: "100%", overflow: "hidden" }}>
           <DataGrid
             rows={rows}
@@ -71,7 +70,6 @@ export default function ComponentJob() {
           />
         </Box>
 
-        {/* پایین: متن */}
         <Box p={1}>
           <TextField
             fullWidth

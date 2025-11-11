@@ -12,7 +12,6 @@ interface ProvidersProps {
 }
 
 const Providers = ({ children }: ProvidersProps) => {
-  console.log("here");
   return (
     <JotaiProvider>
       <QueryClientProvider client={queryClient}>

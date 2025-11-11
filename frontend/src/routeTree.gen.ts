@@ -18,6 +18,8 @@ import { Route as ProtectedMaintenanceRoundRouteImport } from './routes/_protect
 import { Route as ProtectedMaintenanceFunctionRouteImport } from './routes/_protected/maintenance/function'
 import { Route as ProtectedMaintenanceComponentTypeRouteImport } from './routes/_protected/maintenance/component-type'
 import { Route as ProtectedMaintenanceComponentJobRouteImport } from './routes/_protected/maintenance/component-job'
+import { Route as ProtectedGeneralMaintRouteImport } from './routes/_protected/general/maint'
+import { Route as ProtectedGeneralEmployeeDisciplineRouteImport } from './routes/_protected/general/employee-discipline'
 import { Route as ProtectedGeneralAddressRouteImport } from './routes/_protected/general/address'
 
 const ProtectedRouteRoute = ProtectedRouteRouteImport.update({
@@ -69,6 +71,17 @@ const ProtectedMaintenanceComponentJobRoute =
     path: '/maintenance/component-job',
     getParentRoute: () => ProtectedRouteRoute,
   } as any)
+const ProtectedGeneralMaintRoute = ProtectedGeneralMaintRouteImport.update({
+  id: '/general/maint',
+  path: '/general/maint',
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
+const ProtectedGeneralEmployeeDisciplineRoute =
+  ProtectedGeneralEmployeeDisciplineRouteImport.update({
+    id: '/general/employee-discipline',
+    path: '/general/employee-discipline',
+    getParentRoute: () => ProtectedRouteRoute,
+  } as any)
 const ProtectedGeneralAddressRoute = ProtectedGeneralAddressRouteImport.update({
   id: '/general/address',
   path: '/general/address',
@@ -80,6 +93,8 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof ProtectedDashboardRoute
   '/auth/login': typeof AuthLoginRoute
   '/general/address': typeof ProtectedGeneralAddressRoute
+  '/general/employee-discipline': typeof ProtectedGeneralEmployeeDisciplineRoute
+  '/general/maint': typeof ProtectedGeneralMaintRoute
   '/maintenance/component-job': typeof ProtectedMaintenanceComponentJobRoute
   '/maintenance/component-type': typeof ProtectedMaintenanceComponentTypeRoute
   '/maintenance/function': typeof ProtectedMaintenanceFunctionRoute
@@ -91,6 +106,8 @@ export interface FileRoutesByTo {
   '/dashboard': typeof ProtectedDashboardRoute
   '/auth/login': typeof AuthLoginRoute
   '/general/address': typeof ProtectedGeneralAddressRoute
+  '/general/employee-discipline': typeof ProtectedGeneralEmployeeDisciplineRoute
+  '/general/maint': typeof ProtectedGeneralMaintRoute
   '/maintenance/component-job': typeof ProtectedMaintenanceComponentJobRoute
   '/maintenance/component-type': typeof ProtectedMaintenanceComponentTypeRoute
   '/maintenance/function': typeof ProtectedMaintenanceFunctionRoute
@@ -104,6 +121,8 @@ export interface FileRoutesById {
   '/_protected/dashboard': typeof ProtectedDashboardRoute
   '/auth/login': typeof AuthLoginRoute
   '/_protected/general/address': typeof ProtectedGeneralAddressRoute
+  '/_protected/general/employee-discipline': typeof ProtectedGeneralEmployeeDisciplineRoute
+  '/_protected/general/maint': typeof ProtectedGeneralMaintRoute
   '/_protected/maintenance/component-job': typeof ProtectedMaintenanceComponentJobRoute
   '/_protected/maintenance/component-type': typeof ProtectedMaintenanceComponentTypeRoute
   '/_protected/maintenance/function': typeof ProtectedMaintenanceFunctionRoute
@@ -117,6 +136,8 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/auth/login'
     | '/general/address'
+    | '/general/employee-discipline'
+    | '/general/maint'
     | '/maintenance/component-job'
     | '/maintenance/component-type'
     | '/maintenance/function'
@@ -128,6 +149,8 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/auth/login'
     | '/general/address'
+    | '/general/employee-discipline'
+    | '/general/maint'
     | '/maintenance/component-job'
     | '/maintenance/component-type'
     | '/maintenance/function'
@@ -140,6 +163,8 @@ export interface FileRouteTypes {
     | '/_protected/dashboard'
     | '/auth/login'
     | '/_protected/general/address'
+    | '/_protected/general/employee-discipline'
+    | '/_protected/general/maint'
     | '/_protected/maintenance/component-job'
     | '/_protected/maintenance/component-type'
     | '/_protected/maintenance/function'
@@ -218,6 +243,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedMaintenanceComponentJobRouteImport
       parentRoute: typeof ProtectedRouteRoute
     }
+    '/_protected/general/maint': {
+      id: '/_protected/general/maint'
+      path: '/general/maint'
+      fullPath: '/general/maint'
+      preLoaderRoute: typeof ProtectedGeneralMaintRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/general/employee-discipline': {
+      id: '/_protected/general/employee-discipline'
+      path: '/general/employee-discipline'
+      fullPath: '/general/employee-discipline'
+      preLoaderRoute: typeof ProtectedGeneralEmployeeDisciplineRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
     '/_protected/general/address': {
       id: '/_protected/general/address'
       path: '/general/address'
@@ -231,6 +270,8 @@ declare module '@tanstack/react-router' {
 interface ProtectedRouteRouteChildren {
   ProtectedDashboardRoute: typeof ProtectedDashboardRoute
   ProtectedGeneralAddressRoute: typeof ProtectedGeneralAddressRoute
+  ProtectedGeneralEmployeeDisciplineRoute: typeof ProtectedGeneralEmployeeDisciplineRoute
+  ProtectedGeneralMaintRoute: typeof ProtectedGeneralMaintRoute
   ProtectedMaintenanceComponentJobRoute: typeof ProtectedMaintenanceComponentJobRoute
   ProtectedMaintenanceComponentTypeRoute: typeof ProtectedMaintenanceComponentTypeRoute
   ProtectedMaintenanceFunctionRoute: typeof ProtectedMaintenanceFunctionRoute
@@ -241,6 +282,9 @@ interface ProtectedRouteRouteChildren {
 const ProtectedRouteRouteChildren: ProtectedRouteRouteChildren = {
   ProtectedDashboardRoute: ProtectedDashboardRoute,
   ProtectedGeneralAddressRoute: ProtectedGeneralAddressRoute,
+  ProtectedGeneralEmployeeDisciplineRoute:
+    ProtectedGeneralEmployeeDisciplineRoute,
+  ProtectedGeneralMaintRoute: ProtectedGeneralMaintRoute,
   ProtectedMaintenanceComponentJobRoute: ProtectedMaintenanceComponentJobRoute,
   ProtectedMaintenanceComponentTypeRoute:
     ProtectedMaintenanceComponentTypeRoute,

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Collapse, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack,} from "@mui/material";
+
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
@@ -15,7 +15,6 @@ import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
 import HelpRoundedIcon from "@mui/icons-material/HelpRounded";
-import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
 import PrecisionManufacturingRoundedIcon from "@mui/icons-material/PrecisionManufacturingRounded";
 import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
 import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
@@ -30,7 +29,17 @@ import ListAltRoundedIcon from "@mui/icons-material/ListAltRounded";
 import WorkHistoryRoundedIcon from "@mui/icons-material/WorkHistoryRounded";
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import HourglassEmptyRoundedIcon from "@mui/icons-material/HourglassEmptyRounded";
-import {useRouter, useRouterState} from "@tanstack/react-router";
+import { useRouter, useRouterState } from "@tanstack/react-router";
+import {
+  Collapse,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Stack,
+} from "@mui/material";
 
 type MenuItem = {
   text: string;
@@ -62,18 +71,6 @@ const menuSections: {
     title: "General",
     icon: <CategoryRoundedIcon />,
     items: [
-      // {
-      //   text: "Drawing",
-      //   icon: <BrushRoundedIcon />,
-      //   id: "general:drawing",
-      //   path: "/general/drawing",
-      // },
-      // {
-      //   text: "Product Type",
-      //   icon: <CategoryRoundedIcon />,
-      //   id: "general:productType",
-      //   path: "/general/product-type",
-      // },
       {
         text: "Address",
         icon: <LocationOnRoundedIcon />,
@@ -87,10 +84,10 @@ const menuSections: {
         path: "/general/location",
       },
       {
-        text: "Discipline",
-        icon: <SchoolRoundedIcon />,
-        id: "general:discipline",
-        path: "/general/discipline",
+        text: "Employee / Discipline",
+        icon: <PeopleRoundedIcon />,
+        id: "general:employee",
+        path: "/general/employee-discipline",
       },
       {
         text: "Counter Type",
@@ -98,30 +95,14 @@ const menuSections: {
         id: "general:counterType",
         path: "/general/counter-type",
       },
+
       {
-        text: "Employee",
-        icon: <PeopleRoundedIcon />,
-        id: "general:employee",
-        path: "/general/employee",
-      },
-      {
-        text: "Maint Type",
-        icon: <BuildRoundedIcon />,
-        id: "general:maintType",
-        path: "/general/maint-type",
-      },
-      {
-        text: "Maint Class",
+        text: "Maint",
         icon: <PrecisionManufacturingRoundedIcon />,
-        id: "general:maintClass",
-        path: "/general/maint-class",
+        id: "general:maint",
+        path: "/general/maint",
       },
-      {
-        text: "Maint Cause",
-        icon: <ArticleRoundedIcon />,
-        id: "general:maintCause",
-        path: "/general/maint-cause",
-      },
+
       {
         text: "Follow Status",
         icon: <LoopRoundedIcon />,
@@ -344,7 +325,6 @@ export default function MenuContent() {
                 ) : null}
               </ListItemButton>
             </ListItem>
-
             {/* زیرمنوها */}
             {section.items.length !== 0 && (
               <Collapse
@@ -352,7 +332,7 @@ export default function MenuContent() {
                 timeout="auto"
                 unmountOnExit
               >
-                <List component="div" disablePadding dense sx={{ pl: 2 }}>
+                <List component="div" disablePadding dense sx={{ pl: 1 }}>
                   {section.items.map((item) => {
                     const isActiveChild = currentPath === item.path;
                     return (
@@ -360,15 +340,9 @@ export default function MenuContent() {
                         <ListItemButton
                           onClick={() => handleNavigate(item.path)}
                           selected={isActiveChild}
-                          sx={{
-                            borderRadius: 1,
-                            "&.Mui-selected": {
-                              backgroundColor: "primary.light",
-                            },
-                          }}
                         >
                           {item.icon && (
-                            <ListItemIcon sx={{ minWidth: 32 }}>
+                            <ListItemIcon sx={{ minWidth: 20 }}>
                               {item.icon}
                             </ListItemIcon>
                           )}
@@ -380,7 +354,6 @@ export default function MenuContent() {
                 </List>
               </Collapse>
             )}
-
             {index < menuSections.length - 1 && <Divider sx={{ my: 0.5 }} />}
           </React.Fragment>
         );
