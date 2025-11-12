@@ -40,32 +40,14 @@ export default function EmployeeDiscipline() {
     },
   ];
 
-  // جدول 2: لیست Discipline ها
-  const disciplineColumns = [{ field: "name", headerName: "Name", width: 200 }];
-  const disciplineRows = [
-    { id: 1, name: "Warning" },
-    { id: 2, name: "Suspension" },
-    { id: 3, name: "Termination" },
-  ];
-
   return (
-    <Splitter initialPrimarySize="70%">
-      <CustomizedDataGrid
-        label="Employee "
-        showToolbar
-        rows={employeeRows}
-        columns={employeeColumns}
-        onAddClick={() => console.log("Add employee")}
-        onRefreshClick={() => console.log("Refresh employee list")}
-      />
-      <CustomizedDataGrid
-        label="Discipline "
-        showToolbar
-        rows={disciplineRows}
-        columns={disciplineColumns}
-        onAddClick={() => console.log("Add discipline")}
-        onRefreshClick={() => console.log("Refresh discipline list")}
-      />
-    </Splitter>
+    <CustomizedDataGrid
+      label="Employee "
+      showToolbar
+      rows={employeeRows}
+      columns={employeeColumns}
+      onAddClick={() => console.log("Add employee")}
+      onRefreshClick={() => console.log("Refresh employee list")}
+    />
   );
 }

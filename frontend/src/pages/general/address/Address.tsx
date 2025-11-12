@@ -46,8 +46,8 @@ export default function AddressListPage() {
   };
 
   const columns: GridColDef[] = [
-    { field: "code", headerName: "Code", flex: 1 },
-    { field: "name", headerName: "Name", flex: 1 },
+    { field: "code", headerName: "Code", width: 60 },
+    { field: "name", headerName: "Name", editable: true },
     { field: "address1", headerName: "Address 1", flex: 1 },
     { field: "address2", headerName: "Address 2", flex: 1 },
     { field: "phone", headerName: "Phone", flex: 1 },

@@ -17,10 +17,11 @@ const ControllerTblAddress = new BaseController({
   swagger: {
     tags: ["tblAddress"],
   },
+  // pk: "addressId",
   service: ServiceTblAddress,
   createSchema: TblAddressInputCreate,
   updateSchema: TblAddressInputUpdate,
   responseSchema: buildResponseSchema(TblAddressPlain, TblAddress),
 }).app;
 
-export default ControllerTblAddress
+export default ControllerTblAddress;

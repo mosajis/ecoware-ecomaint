@@ -29,6 +29,8 @@ import ListAltRoundedIcon from "@mui/icons-material/ListAltRounded";
 import WorkHistoryRoundedIcon from "@mui/icons-material/WorkHistoryRounded";
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import HourglassEmptyRoundedIcon from "@mui/icons-material/HourglassEmptyRounded";
+import BrightnessAutoIcon from "@mui/icons-material/BrightnessAuto";
+
 import { useRouter, useRouterState } from "@tanstack/react-router";
 import {
   Collapse,
@@ -84,10 +86,16 @@ const menuSections: {
         path: "/general/location",
       },
       {
-        text: "Employee / Discipline",
+        text: "Employee",
         icon: <PeopleRoundedIcon />,
         id: "general:employee",
-        path: "/general/employee-discipline",
+        path: "/general/employee",
+      },
+      {
+        text: "Discipline",
+        icon: <BrightnessAutoIcon />,
+        id: "general:discipline",
+        path: "/general/discipline",
       },
       {
         text: "Counter Type",
@@ -97,7 +105,7 @@ const menuSections: {
       },
 
       {
-        text: "Maint",
+        text: "Maint Class",
         icon: <PrecisionManufacturingRoundedIcon />,
         id: "general:maint",
         path: "/general/maint",
