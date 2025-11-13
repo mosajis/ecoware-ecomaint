@@ -17,7 +17,7 @@ const ControllerTblAddress = new BaseController({
   swagger: {
     tags: ["tblAddress"],
   },
-  // pk: "addressId",
+  primaryKey: "addressId",
   service: ServiceTblAddress,
   createSchema: TblAddressInputCreate,
   updateSchema: TblAddressInputUpdate,

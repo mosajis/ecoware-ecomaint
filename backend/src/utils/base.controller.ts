@@ -25,7 +25,7 @@ function parseSortString(sort?: string): Record<string, "asc" | "desc"> {
       }
       return acc;
     },
-    {} as Record<string, "asc" | "desc">,
+    {} as Record<string, "asc" | "desc">
   );
 }
 
@@ -36,6 +36,7 @@ export interface BaseControllerOptions<Model> {
   createSchema: any;
   updateSchema: any;
   responseSchema: any;
+  primaryKey?: string; // 🆕 کلید اصلی (پیش‌فرض: id)
   extend?: (app: Elysia) => void;
   excludeRoutes?: (
     | "getAll"
@@ -60,6 +61,7 @@ export class BaseController<Model extends Record<string, any>> {
     swagger,
     extend,
     excludeRoutes = [],
+    primaryKey = "id", // 🆕 مقدار پیش‌فرض id
   }: BaseControllerOptions<Model>) {
     const { tags } = swagger;
     const app = new Elysia({ prefix });
@@ -121,14 +123,14 @@ export class BaseController<Model extends Record<string, any>> {
             perPage: t.Integer(),
             totalPages: t.Integer(),
           }),
-        },
+        }
       );
     }
 
-    // 🧩 GET /:id (Get One)
+    // 🧩 GET /:primaryKey (Get One)
     if (isEnabled("getOne")) {
       app.get(
-        "/:id",
+        `/:${primaryKey}`,
         async ({ params, query }) => {
           let parsedInclude: Record<string, any> = {};
           if (query.include) {
@@ -138,20 +140,25 @@ export class BaseController<Model extends Record<string, any>> {
               throw new Error("Invalid include JSON");
             }
           }
+          const keyValue = params[primaryKey];
           return await service.findOne(
-            { id: Number(params.id) },
-            parsedInclude,
+            {
+              [primaryKey]: isNaN(Number(keyValue))
+                ? keyValue
+                : Number(keyValue),
+            },
+            parsedInclude
           );
         },
         {
           tags,
           detail: { summary: "Get one" },
-          params: t.Object({ id: t.Number() }),
+          params: t.Object({ [primaryKey]: t.Union([t.String(), t.Number()]) }),
           query: t.Object({
             include: t.Optional(t.String()),
           }),
           response: t.Union([responseSchema, t.Null()]),
-        },
+        }
       );
     }
 
@@ -165,38 +172,53 @@ export class BaseController<Model extends Record<string, any>> {
       });
     }
 
-    // 🧩 PUT /:id (Update)
+    // 🧩 PUT /:primaryKey (Update)
     if (isEnabled("update")) {
       app.put(
-        "/:id",
-        async ({ params, body }) =>
-          await service.update({ id: Number(params.id) }, body),
+        `/:${primaryKey}`,
+        async ({ params, body }) => {
+          const keyValue = params[primaryKey];
+          return await service.update(
+            {
+              [primaryKey]: isNaN(Number(keyValue))
+                ? keyValue
+                : Number(keyValue),
+            },
+            body
+          );
+        },
         {
           tags,
           detail: { summary: "Update" },
-          params: t.Object({ id: t.Number() }),
+          params: t.Object({ [primaryKey]: t.Union([t.String(), t.Number()]) }),
           body: updateSchema,
           response: responseSchema,
-        },
+        }
       );
     }
 
-    // 🧩 DELETE /:id (Soft or Force Delete)
+    // 🧩 DELETE /:primaryKey (Soft or Force Delete)
     if (isEnabled("delete")) {
       app.delete(
-        "/:id",
-        async ({ params, query }) =>
-          await service.delete(
-            { id: Number(params.id) },
-            { force: query.force },
-          ),
+        `/:${primaryKey}`,
+        async ({ params, query }) => {
+          const keyValue = params[primaryKey];
+          return await service.delete(
+            {
+              [primaryKey]: isNaN(Number(keyValue))
+                ? keyValue
+                : Number(keyValue),
+            },
+            { force: query.force }
+          );
+        },
         {
           tags,
           detail: { summary: "Delete one" },
-          params: t.Object({ id: t.Number() }),
+          params: t.Object({ [primaryKey]: t.Union([t.String(), t.Number()]) }),
           query: t.Object({ force: t.Optional(t.Boolean()) }),
           response: responseSchema,
-        },
+        }
       );
     }
 
@@ -225,7 +247,7 @@ export class BaseController<Model extends Record<string, any>> {
           response: t.Object({
             deleted: t.Integer(),
           }),
-        },
+        }
       );
     }
 
@@ -250,7 +272,7 @@ export class BaseController<Model extends Record<string, any>> {
           detail: { summary: "Count" },
           query: querySchema,
           response: t.Object({ count: t.Integer() }),
-        },
+        }
       );
     }
 

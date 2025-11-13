@@ -14,7 +14,7 @@ export class BaseService<T extends { id: any }> {
 
   constructor(model: any, options: BaseServiceOptions = {}) {
     this.model = model;
-    this.maxLimit = options.maxLimit ?? 1000;
+    this.maxLimit = options.maxLimit ?? 5000;
     this.softDelete = options.softDelete ?? false;
     this.softDeleteField = options.softDeleteField ?? "deletedAt";
     this.allowedIncludes = options.allowedIncludes ?? [];
