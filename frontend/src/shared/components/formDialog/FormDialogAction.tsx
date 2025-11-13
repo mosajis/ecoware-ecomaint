@@ -12,13 +12,23 @@ export default function FormDialogAction({
   onCancel,
   submitting,
   cancelText = "Cancel",
-  submitText = "Submit",
+  submitText = "Ok",
   disabled = false,
 }: DialogActionsWrapperProps) {
   const isDisabled = disabled || submitting;
 
   return (
-    <DialogActions sx={{ display: "flex" }}>
+    <>
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        sx={{ flex: 1 }}
+        disabled={isDisabled}
+        startIcon={submitting && <CircularProgress size={18} />}
+      >
+        {submitText}
+      </Button>
       <Button
         onClick={onCancel}
         color="inherit"
@@ -28,17 +38,6 @@ export default function FormDialogAction({
       >
         {cancelText}
       </Button>
-      <Button
-        type="submit"
-        form="dynamic-form"
-        variant="contained"
-        color="primary"
-        sx={{ flex: 1 }}
-        disabled={isDisabled}
-        startIcon={submitting && <CircularProgress size={18} />}
-      >
-        {submitText}
-      </Button>
-    </DialogActions>
+    </>
   );
 }

@@ -14,7 +14,8 @@ const schema = z.object({
   address2: z.string().optional().nullable(),
   phone: z.string().optional().nullable(),
   eMail: z.string().email("Invalid email").optional().nullable(),
-  country: z.string().optional().nullable(),
+  code: z.string(),
+  contact: z.string().optional().nullable(),
 });
 
 export type AddressFormValues = z.infer<typeof schema>;
@@ -45,7 +46,8 @@ function AddressFormDialog({
       address2: "",
       phone: "",
       eMail: "",
-      country: "",
+      code: "",
+      contact: "",
     }),
     []
   );
@@ -99,7 +101,8 @@ function AddressFormDialog({
             address2: res.address2 ?? "",
             phone: res.phone ?? "",
             eMail: res.eMail ?? "",
-            country: res.country ?? "",
+            contact: res.contact ?? "",
+            code: res.code ?? "",
           });
         }
       } catch (err) {
@@ -140,56 +143,79 @@ function AddressFormDialog({
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1}>
+      <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1.5}>
+        <TextField
+          label="Code *"
+          {...register("code")}
+          error={!!errors.name}
+          size="small"
+          helperText={errors.name?.message}
+          InputLabelProps={{ shrink: true }}
+          disabled={isDisabled}
+          sx={{ gridColumn: "span 2" }}
+        />
+
         <TextField
           label="Name *"
           {...register("name")}
           error={!!errors.name}
+          size="small"
           helperText={errors.name?.message}
+          InputLabelProps={{ shrink: true }}
           disabled={isDisabled}
-          sx={{ gridColumn: "span 2" }}
+          sx={{ gridColumn: "span 4" }}
         />
-        <TextField
-          label="Country"
-          {...register("country")}
-          error={!!errors.country}
-          helperText={errors.country?.message}
-          disabled={isDisabled}
-          sx={{ gridColumn: "span 2" }}
-        />
+
         <TextField
           label="Address 1"
           {...register("address1")}
           error={!!errors.address1}
+          size="small"
           helperText={errors.address1?.message}
+          InputLabelProps={{ shrink: true }}
           disabled={isDisabled}
           sx={{ gridColumn: "span 4" }}
         />
         <TextField
           label="Address 2"
           {...register("address2")}
+          size="small"
           error={!!errors.address2}
           helperText={errors.address2?.message}
+          InputLabelProps={{ shrink: true }}
           disabled={isDisabled}
           sx={{ gridColumn: "span 4" }}
         />
         <TextField
-          label="Phone"
-          {...register("phone")}
-          error={!!errors.phone}
-          helperText={errors.phone?.message}
+          label="Contact person"
+          {...register("contact")}
+          error={!!errors.name}
+          size="small"
+          helperText={errors.name?.message}
+          InputLabelProps={{ shrink: true }}
           disabled={isDisabled}
           sx={{ gridColumn: "span 2" }}
         />
         <TextField
+          size="small"
+          label="Phone"
+          {...register("phone")}
+          error={!!errors.phone}
+          helperText={errors.phone?.message}
+          InputLabelProps={{ shrink: true }}
+          disabled={isDisabled}
+          sx={{ gridColumn: "span 2" }}
+        />
+        <TextField
+          size="small"
           label="Email"
           {...register("eMail")}
           error={!!errors.eMail}
           helperText={errors.eMail?.message}
+          InputLabelProps={{ shrink: true }}
           disabled={isDisabled}
           sx={{ gridColumn: "span 2" }}
         />
-        {JSON.stringify(errors)}
       </Box>
     </FormDialog>
   );

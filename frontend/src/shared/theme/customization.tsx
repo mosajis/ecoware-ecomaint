@@ -719,14 +719,13 @@ export const inputsCustomizations: Components<Theme> = {
   //     }),
   //   },
   // },
-  // MuiFormLabel: {
-  //   styleOverrides: {
-  //     root: ({ theme }) => ({
-  //       typography: theme.typography.caption,
-  //       marginBottom: 8,
-  //     }),
-  //   },
-  // },
+  MuiFormLabel: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        fontSize: "15px",
+      }),
+    },
+  },
 };
 
 export const navigationCustomizations: Components<Theme> = {
@@ -1193,7 +1192,7 @@ export const dataGridCustomizations = {
         },
       }),
       cell: ({ theme }: any) => ({
-        borderTopColor: (theme.vars || theme).palette.divider,
+        border: ".5px solid " + (theme.vars || theme).palette.divider,
       }),
       menu: ({ theme }: any) => ({
         borderRadius: theme.shape.borderRadius,

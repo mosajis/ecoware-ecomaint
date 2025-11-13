@@ -65,18 +65,26 @@ export default function DataGridActions({
       </Stack>
 
       {/* Confirm Dialog */}
-      <Dialog open={confirmOpen} onClose={handleCancelDelete}>
-        <DialogTitle>Are you sure you want to delete this item?</DialogTitle>
+      <Dialog
+        open={confirmOpen}
+        onClose={handleCancelDelete}
+        fullWidth
+        maxWidth="xs"
+      >
+        <DialogTitle sx={{ fontWeight: "normal" }}>
+          Are you sure you want to delete this item?
+        </DialogTitle>
         <DialogActions sx={{ display: "flex" }}>
-          <Button onClick={handleCancelDelete} color="inherit">
-            Cancel
-          </Button>
           <Button
+            sx={{ flex: 1 }}
             onClick={handleConfirmDelete}
             color="error"
             variant="contained"
           >
             Delete
+          </Button>
+          <Button sx={{ flex: 1 }} onClick={handleCancelDelete} color="inherit">
+            Cancel
           </Button>
         </DialogActions>
       </Dialog>

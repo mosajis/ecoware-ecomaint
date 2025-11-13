@@ -15,7 +15,7 @@ schema = schema.replace(
   (match, modelName, body) => {
     const configs = sequenceMap[modelName];
 
-    if (!configs) return match; // اگر map نداره، رد شو
+    if (!configs) return match;
     configs.forEach((config) => {
       const fieldRegex = new RegExp(`^\\s*${config.field}\\s+\\w+[^\n]*`, "gm");
 

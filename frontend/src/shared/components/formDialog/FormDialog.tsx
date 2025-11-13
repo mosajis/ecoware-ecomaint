@@ -1,4 +1,9 @@
-import { Dialog, DialogContent, CircularProgress } from "@mui/material";
+import {
+  Dialog,
+  DialogContent,
+  CircularProgress,
+  DialogActions,
+} from "@mui/material";
 import FormDialogHeader from "./FormDialogHeader";
 import FormDialogAction from "./FormDialogAction";
 import Spinner from "../Spinner";
@@ -25,7 +30,7 @@ export default function FormDialog({
   onSubmit,
   children,
   cancelText = "Cancel",
-  submitText = "Submit",
+  submitText = "Ok",
   disabled = false,
 }: FormDialogWrapperProps) {
   const isDisabled = disabled || submitting || loadingInitial;
@@ -45,16 +50,19 @@ export default function FormDialog({
       />
 
       <DialogContent dividers>
-        <form onSubmit={onSubmit}>{children}</form>
+        <form onSubmit={onSubmit}>
+          {children}
+          <DialogActions sx={{ p: 0, m: 0, mt: 2 }}>
+            <FormDialogAction
+              onCancel={onClose}
+              submitting={submitting}
+              cancelText={cancelText}
+              submitText={submitText}
+              disabled={isDisabled}
+            />
+          </DialogActions>
+        </form>
       </DialogContent>
-
-      <FormDialogAction
-        onCancel={onClose}
-        submitting={submitting}
-        cancelText={cancelText}
-        submitText={submitText}
-        disabled={isDisabled}
-      />
     </Dialog>
   );
 }
