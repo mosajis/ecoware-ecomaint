@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
-import {Box, CircularProgress} from "@mui/material";
-import {TreeItem} from "@mui/x-tree-view"
-import {tblComponentUnit} from "@/core/api/generated/api";
-import type {DynamicResponse} from "@/core/api/dynamicTypes";
+import React, { useEffect, useState } from "react";
+import { Box, CircularProgress } from "@mui/material";
+import { TreeItem } from "@mui/x-tree-view";
+import { tblComponentUnit } from "@/core/api/generated/api";
+import type { DynamicResponse } from "@/core/api/dynamicTypes";
 
 type ComponentUnit = DynamicResponse<"getTblComponentUnit">["items"][number];
 
@@ -17,7 +17,7 @@ const ComponentUnitTreeView = () => {
   const [loading, setLoading] = useState(true);
 
   const mapToTree = (data: ComponentUnit[]): TypeTree[] => {
-    return data.map(item => ({
+    return data.map((item) => ({
       title: item.compNo,
       key: item.compId,
       // اگر children داری:
@@ -27,7 +27,7 @@ const ComponentUnitTreeView = () => {
 
   useEffect(() => {
     setLoading(true);
-    tblComponentUnit.getAll().then(data => {
+    tblComponentUnit.getAll().then((data) => {
       const formatted = mapToTree(data.items);
       setTreeData(formatted);
       setLoading(false);
@@ -35,7 +35,7 @@ const ComponentUnitTreeView = () => {
   }, []);
 
   const renderTreeItems = (nodes: TypeTree[]) => {
-    return nodes.map(node => (
+    return nodes.map((node) => (
       <TreeItem
         key={node.key}
         itemId={String(node.key)}

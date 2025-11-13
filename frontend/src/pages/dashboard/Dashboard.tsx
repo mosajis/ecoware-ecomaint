@@ -71,44 +71,42 @@ export default function MaintenanceDashboard() {
       {/* ✅ KPI Cards */}
       <Grid container spacing={2}>
         {kpiData.map((kpi) => (
-          <Grid item xs={12} sm={6} md={3} key={kpi.label}>
-            <Paper sx={{ p: 2, textAlign: "center" }}>
-              <Typography variant="h6">{kpi.label}</Typography>
-              <Typography variant="h4" fontWeight="bold">
-                {kpi.value}
-              </Typography>
-            </Paper>
-          </Grid>
+          <Paper sx={{ p: 2, textAlign: "center" }}>
+            <Typography variant="h6">{kpi.label}</Typography>
+            <Typography variant="h4" fontWeight="bold">
+              {kpi.value}
+            </Typography>
+          </Paper>
         ))}
       </Grid>
 
-      {/* ✅ Split: Work Orders + Critical Equipments */}
-      {/* Left: Pie Chart */}
-      <Paper sx={{ p: 2 }}>
-        <Typography variant="h6">Work Order Status</Typography>
-        <PieChart width={300} height={240}>
-          <Pie
-            data={workOrderStatusData}
-            dataKey="value"
-            nameKey="name"
-            label
-            outerRadius={80}
-          >
-            {workOrderStatusData.map((_, idx) => (
-              <Cell key={idx} />
-            ))}
-          </Pie>
-          <ReTooltip />
-          <Legend />
-        </PieChart>
-      </Paper>
+      <Box display={"flex"}>
+        <Paper sx={{ p: 2 }}>
+          <Typography variant="h6">Work Order Status</Typography>
+          <PieChart width={300} height={240}>
+            <Pie
+              data={workOrderStatusData}
+              dataKey="value"
+              nameKey="name"
+              label
+              outerRadius={80}
+            >
+              {workOrderStatusData.map((_, idx) => (
+                <Cell key={idx} />
+              ))}
+            </Pie>
+            <ReTooltip />
+            <Legend />
+          </PieChart>
+        </Paper>
 
-      {/* Right: Critical Equipments */}
-      <CustomizedDataGrid
-        rows={criticalEquipments}
-        columns={criticalCols}
-        onRefreshClick={() => console.log("refresh critical")}
-      />
+        {/* Right: Critical Equipments */}
+        <CustomizedDataGrid
+          rows={criticalEquipments}
+          columns={criticalCols}
+          onRefreshClick={() => console.log("refresh critical")}
+        />
+      </Box>
 
       <Divider />
 

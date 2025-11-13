@@ -2,34 +2,30 @@ import { Box, IconButton, Typography } from "@mui/material";
 import {
   RichTreeView,
   TreeItem,
+  TreeViewBaseItem,
   type RichTreeViewProps,
 } from "@mui/x-tree-view";
 import CustomTreeItem from "./TreeItem";
 import ExpandIcon from "@mui/icons-material/Expand";
 
-interface TreeItem {
-  id: string;
-  label: string;
-  children?: TreeItem[];
-}
-
-interface TreeProps extends RichTreeViewProps<TreeItem, false> {
-  label?: string; // 👈 اضافه شد
+interface TreeProps extends RichTreeViewProps<TreeViewBaseItem, false> {
+  label?: string;
 }
 
 export default function Tree({ items, label, ...other }: TreeProps) {
-  const wrappedRoot: TreeItem = {
+  const wrappedRoot: TreeViewBaseItem = {
     id: "__root__",
-    label: "_root_",
+    label: label || "",
     children: [...(items ?? [])],
   };
 
   return (
     <Box
       sx={(theme) => ({
+        overflow: "auto",
         height: "100%",
         border: `1px solid ${(theme.vars || theme).palette.divider}`,
-        borderRadius: ` ${theme.shape.borderRadius}px `,
+        borderRadius: ` ${theme.shape.borderRadius}px`,
       })}
     >
       {label && (

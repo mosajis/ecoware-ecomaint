@@ -10,9 +10,6 @@ import {
 
 const CustomTreeItem = styled(TreeItem)(({ theme }) => {
   const { mode, setMode } = useColorScheme();
-
-  // (theme.vars || theme.palette.background.paper
-
   return {
     position: "relative",
 
@@ -30,7 +27,7 @@ const CustomTreeItem = styled(TreeItem)(({ theme }) => {
         width: 18,
         height: 1,
         // @ts-ignore
-        borderBottom: `1px dashed ${getDesignTokens(mode).palette.grey[300]}}`,
+        borderBottom: `1px dashed ${getDesignTokens(mode).palette.grey[300]}`,
       },
     },
 

@@ -19,8 +19,12 @@ import { Route as ProtectedMaintenanceFunctionRouteImport } from './routes/_prot
 import { Route as ProtectedMaintenanceComponentUnitRouteImport } from './routes/_protected/maintenance/component-unit'
 import { Route as ProtectedMaintenanceComponentTypeRouteImport } from './routes/_protected/maintenance/component-type'
 import { Route as ProtectedMaintenanceComponentJobRouteImport } from './routes/_protected/maintenance/component-job'
+import { Route as ProtectedGeneralPendingTypeRouteImport } from './routes/_protected/general/pending-type'
 import { Route as ProtectedGeneralMaintRouteImport } from './routes/_protected/general/maint'
 import { Route as ProtectedGeneralLocationRouteImport } from './routes/_protected/general/location'
+import { Route as ProtectedGeneralJobDescriptionRouteImport } from './routes/_protected/general/job-description'
+import { Route as ProtectedGeneralJobClassRouteImport } from './routes/_protected/general/job-class'
+import { Route as ProtectedGeneralFollowStatusRouteImport } from './routes/_protected/general/follow-status'
 import { Route as ProtectedGeneralEmployeeRouteImport } from './routes/_protected/general/employee'
 import { Route as ProtectedGeneralDisciplineRouteImport } from './routes/_protected/general/discipline'
 import { Route as ProtectedGeneralCounterTypeRouteImport } from './routes/_protected/general/counter-type'
@@ -81,6 +85,12 @@ const ProtectedMaintenanceComponentJobRoute =
     path: '/maintenance/component-job',
     getParentRoute: () => ProtectedRouteRoute,
   } as any)
+const ProtectedGeneralPendingTypeRoute =
+  ProtectedGeneralPendingTypeRouteImport.update({
+    id: '/general/pending-type',
+    path: '/general/pending-type',
+    getParentRoute: () => ProtectedRouteRoute,
+  } as any)
 const ProtectedGeneralMaintRoute = ProtectedGeneralMaintRouteImport.update({
   id: '/general/maint',
   path: '/general/maint',
@@ -90,6 +100,24 @@ const ProtectedGeneralLocationRoute =
   ProtectedGeneralLocationRouteImport.update({
     id: '/general/location',
     path: '/general/location',
+    getParentRoute: () => ProtectedRouteRoute,
+  } as any)
+const ProtectedGeneralJobDescriptionRoute =
+  ProtectedGeneralJobDescriptionRouteImport.update({
+    id: '/general/job-description',
+    path: '/general/job-description',
+    getParentRoute: () => ProtectedRouteRoute,
+  } as any)
+const ProtectedGeneralJobClassRoute =
+  ProtectedGeneralJobClassRouteImport.update({
+    id: '/general/job-class',
+    path: '/general/job-class',
+    getParentRoute: () => ProtectedRouteRoute,
+  } as any)
+const ProtectedGeneralFollowStatusRoute =
+  ProtectedGeneralFollowStatusRouteImport.update({
+    id: '/general/follow-status',
+    path: '/general/follow-status',
     getParentRoute: () => ProtectedRouteRoute,
   } as any)
 const ProtectedGeneralEmployeeRoute =
@@ -124,8 +152,12 @@ export interface FileRoutesByFullPath {
   '/general/counter-type': typeof ProtectedGeneralCounterTypeRoute
   '/general/discipline': typeof ProtectedGeneralDisciplineRoute
   '/general/employee': typeof ProtectedGeneralEmployeeRoute
+  '/general/follow-status': typeof ProtectedGeneralFollowStatusRoute
+  '/general/job-class': typeof ProtectedGeneralJobClassRoute
+  '/general/job-description': typeof ProtectedGeneralJobDescriptionRoute
   '/general/location': typeof ProtectedGeneralLocationRoute
   '/general/maint': typeof ProtectedGeneralMaintRoute
+  '/general/pending-type': typeof ProtectedGeneralPendingTypeRoute
   '/maintenance/component-job': typeof ProtectedMaintenanceComponentJobRoute
   '/maintenance/component-type': typeof ProtectedMaintenanceComponentTypeRoute
   '/maintenance/component-unit': typeof ProtectedMaintenanceComponentUnitRoute
@@ -141,8 +173,12 @@ export interface FileRoutesByTo {
   '/general/counter-type': typeof ProtectedGeneralCounterTypeRoute
   '/general/discipline': typeof ProtectedGeneralDisciplineRoute
   '/general/employee': typeof ProtectedGeneralEmployeeRoute
+  '/general/follow-status': typeof ProtectedGeneralFollowStatusRoute
+  '/general/job-class': typeof ProtectedGeneralJobClassRoute
+  '/general/job-description': typeof ProtectedGeneralJobDescriptionRoute
   '/general/location': typeof ProtectedGeneralLocationRoute
   '/general/maint': typeof ProtectedGeneralMaintRoute
+  '/general/pending-type': typeof ProtectedGeneralPendingTypeRoute
   '/maintenance/component-job': typeof ProtectedMaintenanceComponentJobRoute
   '/maintenance/component-type': typeof ProtectedMaintenanceComponentTypeRoute
   '/maintenance/component-unit': typeof ProtectedMaintenanceComponentUnitRoute
@@ -160,8 +196,12 @@ export interface FileRoutesById {
   '/_protected/general/counter-type': typeof ProtectedGeneralCounterTypeRoute
   '/_protected/general/discipline': typeof ProtectedGeneralDisciplineRoute
   '/_protected/general/employee': typeof ProtectedGeneralEmployeeRoute
+  '/_protected/general/follow-status': typeof ProtectedGeneralFollowStatusRoute
+  '/_protected/general/job-class': typeof ProtectedGeneralJobClassRoute
+  '/_protected/general/job-description': typeof ProtectedGeneralJobDescriptionRoute
   '/_protected/general/location': typeof ProtectedGeneralLocationRoute
   '/_protected/general/maint': typeof ProtectedGeneralMaintRoute
+  '/_protected/general/pending-type': typeof ProtectedGeneralPendingTypeRoute
   '/_protected/maintenance/component-job': typeof ProtectedMaintenanceComponentJobRoute
   '/_protected/maintenance/component-type': typeof ProtectedMaintenanceComponentTypeRoute
   '/_protected/maintenance/component-unit': typeof ProtectedMaintenanceComponentUnitRoute
@@ -179,8 +219,12 @@ export interface FileRouteTypes {
     | '/general/counter-type'
     | '/general/discipline'
     | '/general/employee'
+    | '/general/follow-status'
+    | '/general/job-class'
+    | '/general/job-description'
     | '/general/location'
     | '/general/maint'
+    | '/general/pending-type'
     | '/maintenance/component-job'
     | '/maintenance/component-type'
     | '/maintenance/component-unit'
@@ -196,8 +240,12 @@ export interface FileRouteTypes {
     | '/general/counter-type'
     | '/general/discipline'
     | '/general/employee'
+    | '/general/follow-status'
+    | '/general/job-class'
+    | '/general/job-description'
     | '/general/location'
     | '/general/maint'
+    | '/general/pending-type'
     | '/maintenance/component-job'
     | '/maintenance/component-type'
     | '/maintenance/component-unit'
@@ -214,8 +262,12 @@ export interface FileRouteTypes {
     | '/_protected/general/counter-type'
     | '/_protected/general/discipline'
     | '/_protected/general/employee'
+    | '/_protected/general/follow-status'
+    | '/_protected/general/job-class'
+    | '/_protected/general/job-description'
     | '/_protected/general/location'
     | '/_protected/general/maint'
+    | '/_protected/general/pending-type'
     | '/_protected/maintenance/component-job'
     | '/_protected/maintenance/component-type'
     | '/_protected/maintenance/component-unit'
@@ -302,6 +354,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedMaintenanceComponentJobRouteImport
       parentRoute: typeof ProtectedRouteRoute
     }
+    '/_protected/general/pending-type': {
+      id: '/_protected/general/pending-type'
+      path: '/general/pending-type'
+      fullPath: '/general/pending-type'
+      preLoaderRoute: typeof ProtectedGeneralPendingTypeRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
     '/_protected/general/maint': {
       id: '/_protected/general/maint'
       path: '/general/maint'
@@ -314,6 +373,27 @@ declare module '@tanstack/react-router' {
       path: '/general/location'
       fullPath: '/general/location'
       preLoaderRoute: typeof ProtectedGeneralLocationRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/general/job-description': {
+      id: '/_protected/general/job-description'
+      path: '/general/job-description'
+      fullPath: '/general/job-description'
+      preLoaderRoute: typeof ProtectedGeneralJobDescriptionRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/general/job-class': {
+      id: '/_protected/general/job-class'
+      path: '/general/job-class'
+      fullPath: '/general/job-class'
+      preLoaderRoute: typeof ProtectedGeneralJobClassRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/general/follow-status': {
+      id: '/_protected/general/follow-status'
+      path: '/general/follow-status'
+      fullPath: '/general/follow-status'
+      preLoaderRoute: typeof ProtectedGeneralFollowStatusRouteImport
       parentRoute: typeof ProtectedRouteRoute
     }
     '/_protected/general/employee': {
@@ -353,8 +433,12 @@ interface ProtectedRouteRouteChildren {
   ProtectedGeneralCounterTypeRoute: typeof ProtectedGeneralCounterTypeRoute
   ProtectedGeneralDisciplineRoute: typeof ProtectedGeneralDisciplineRoute
   ProtectedGeneralEmployeeRoute: typeof ProtectedGeneralEmployeeRoute
+  ProtectedGeneralFollowStatusRoute: typeof ProtectedGeneralFollowStatusRoute
+  ProtectedGeneralJobClassRoute: typeof ProtectedGeneralJobClassRoute
+  ProtectedGeneralJobDescriptionRoute: typeof ProtectedGeneralJobDescriptionRoute
   ProtectedGeneralLocationRoute: typeof ProtectedGeneralLocationRoute
   ProtectedGeneralMaintRoute: typeof ProtectedGeneralMaintRoute
+  ProtectedGeneralPendingTypeRoute: typeof ProtectedGeneralPendingTypeRoute
   ProtectedMaintenanceComponentJobRoute: typeof ProtectedMaintenanceComponentJobRoute
   ProtectedMaintenanceComponentTypeRoute: typeof ProtectedMaintenanceComponentTypeRoute
   ProtectedMaintenanceComponentUnitRoute: typeof ProtectedMaintenanceComponentUnitRoute
@@ -369,8 +453,12 @@ const ProtectedRouteRouteChildren: ProtectedRouteRouteChildren = {
   ProtectedGeneralCounterTypeRoute: ProtectedGeneralCounterTypeRoute,
   ProtectedGeneralDisciplineRoute: ProtectedGeneralDisciplineRoute,
   ProtectedGeneralEmployeeRoute: ProtectedGeneralEmployeeRoute,
+  ProtectedGeneralFollowStatusRoute: ProtectedGeneralFollowStatusRoute,
+  ProtectedGeneralJobClassRoute: ProtectedGeneralJobClassRoute,
+  ProtectedGeneralJobDescriptionRoute: ProtectedGeneralJobDescriptionRoute,
   ProtectedGeneralLocationRoute: ProtectedGeneralLocationRoute,
   ProtectedGeneralMaintRoute: ProtectedGeneralMaintRoute,
+  ProtectedGeneralPendingTypeRoute: ProtectedGeneralPendingTypeRoute,
   ProtectedMaintenanceComponentJobRoute: ProtectedMaintenanceComponentJobRoute,
   ProtectedMaintenanceComponentTypeRoute:
     ProtectedMaintenanceComponentTypeRoute,

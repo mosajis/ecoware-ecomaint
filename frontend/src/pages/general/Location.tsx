@@ -40,21 +40,30 @@ function buildTree(items: LocationItem[]): TreeViewBaseItem[] {
 export default function Location() {
   const [treeItems, setTreeItems] = useState<TreeViewBaseItem[]>([]);
   const [rows, setRows] = useState<LocationItem[]>([]);
+  const [loading, setLoading] = useState(false);
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
 
   // ✅ Load all and build tree
   useEffect(() => {
-    tblLocation.getAll().then((res) => {
-      const data: LocationItem[] = res.items.map((x) => ({
-        id: x.locationId,
-        parentId: x.parentLocationId,
-        name: x.name ?? "",
-        code: x.locationCode ?? "",
-        orderId: x.orderId,
-      }));
-      setTreeItems(buildTree(data));
-      setRows(data);
-    });
+    setLoading(true);
+    tblLocation
+      .getAll({
+        paginate: false,
+      })
+      .then((res) => {
+        const data: LocationItem[] = res.items.map((x) => ({
+          id: x.locationId,
+          parentId: x.parentLocationId,
+          name: x.name ?? "",
+          code: x.locationCode ?? "",
+          orderId: x.orderId,
+        }));
+        setTreeItems(buildTree(data));
+        setRows(data);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   const columns = [
@@ -67,6 +76,7 @@ export default function Location() {
     <Splitter>
       <CustomizedTree label="Tree View" items={treeItems} />
       <CustomizedDataGrid
+        loading={loading}
         showToolbar
         label="List View"
         rows={rows}

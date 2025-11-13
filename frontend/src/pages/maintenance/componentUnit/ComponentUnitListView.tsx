@@ -32,19 +32,23 @@ const ComponentUnitListView = () => {
 
   useEffect(() => {
     setLoading(true);
-    tblComponentUnit.getAll().then((data) => {
-      const formattedData: ComponentData[] = data.items.map((item) => ({
-        id: item.compId,
-        compId: item.compId,
-        compTypeId: item.compTypeId,
-        model: "N/A",
-        serialNo: item.serialNo || "N/A",
-        comment1: "N/A",
-        statusId: item.statusId || "N/A",
-      }));
-      setTableData(formattedData);
-      setLoading(false);
-    });
+    tblComponentUnit
+      .getAll({
+        paginate: false,
+      })
+      .then((data) => {
+        const formattedData: ComponentData[] = data.items.map((item) => ({
+          id: item.compId,
+          compId: item.compId,
+          compTypeId: item.compTypeId,
+          model: "N/A",
+          serialNo: item.serialNo || "N/A",
+          comment1: "N/A",
+          statusId: item.statusId || "N/A",
+        }));
+        setTableData(formattedData);
+        setLoading(false);
+      });
   }, []);
 
   return (

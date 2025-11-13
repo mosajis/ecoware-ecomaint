@@ -1,88 +1,198 @@
-import {useEffect, useState} from "react";
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack, TextField} from "@mui/material";
-import {tblAddress} from "@/core/api/generated/api";
-import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
+import { memo, useEffect, useMemo, useState, useCallback } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Box, TextField } from "@mui/material";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import { tblAddress } from "@/core/api/generated/api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export default function AddressFormDialog({ open, onClose, initialData }: any) {
+// === Validation Schema ===
+const schema = z.object({
+  name: z.string().min(1, "Name is required").nullable(),
+  address1: z.string().optional().nullable(),
+  address2: z.string().optional().nullable(),
+  phone: z.string().optional().nullable(),
+  eMail: z.string().email("Invalid email").optional().nullable(),
+  country: z.string().optional().nullable(),
+});
+
+export type AddressFormValues = z.infer<typeof schema>;
+
+type Props = {
+  open: boolean;
+  mode: "create" | "update";
+  recordId?: number;
+  onClose: () => void;
+  onSuccess: (data: any) => void;
+};
+
+function AddressFormDialog({
+  open,
+  mode,
+  recordId,
+  onClose,
+  onSuccess,
+}: Props) {
   const queryClient = useQueryClient();
+  const [loadingInitial, setLoadingInitial] = useState(false);
 
-  // --- اگر Edit باشد، دیتای کامل را بگیر
-  const { data: fullData, isLoading } = useQuery({
-    enabled: !!initialData?.addressId,
-    queryKey: ["tblAddress", initialData?.addressId],
-    queryFn: () =>
-      tblAddress.getById(initialData.addressId).then((r) => r),
+  // ✅ useMemo برای جلوگیری از بازسازی defaultValues در هر رندر
+  const defaultValues = useMemo(
+    () => ({
+      name: "",
+      address1: "",
+      address2: "",
+      phone: "",
+      eMail: "",
+      country: "",
+    }),
+    []
+  );
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<AddressFormValues>({
+    resolver: zodResolver(schema),
+    defaultValues,
   });
 
-  // --- فرم اولیه (در حالت New این خالی می‌ماند)
-  const [form, setForm] = useState({
-    code: "",
-    name: "",
-    address1: "",
-    address2: "",
-    phone: "",
-    eMail: "",
-    country: "",
-  });
-
-  // مقداردهی فرم بعد از دریافت داده کامل
-  useEffect(() => {
-    if (fullData) {
-      setForm({
-        code: fullData.code ?? "",
-        name: fullData.name ?? "",
-        address1: fullData.address1 ?? "",
-        address2: fullData.address2 ?? "",
-        phone: fullData.phone ?? "",
-        eMail: fullData.eMail ?? "",
-        country: fullData.country ?? "",
-      });
-    }
-  }, [fullData]);
-
-  // --- Create یا Update
-  const mutation = useMutation({
-    mutationFn: () => {
-      if (initialData?.addressId) {
-        return tblAddress.update(initialData.addressId, form);
-      }
-      return tblAddress.create(form);
-    },
-    onSuccess: () => {
+  // ✅ Mutation‌ها memo شوند تا در هر رندر دوباره ساخته نشن
+  const createMutation = useMutation({
+    mutationFn: (formData: AddressFormValues) => tblAddress.create(formData),
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["tblAddress"] });
+      onSuccess(data);
       onClose();
     },
   });
 
-  const handleChange = (key: string) => (e: any) =>
-    setForm((prev) => ({ ...prev, [key]: e.target.value }));
+  const updateMutation = useMutation({
+    mutationFn: ({
+      id,
+      formData,
+    }: {
+      id: number;
+      formData: AddressFormValues;
+    }) => tblAddress.update(id, formData),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["tblAddress"] });
+      onSuccess(data);
+      onClose();
+    },
+  });
 
-  if (initialData?.addressId && isLoading) return null; // یا یک Spinner نمایش بدیم
+  // ✅ useCallback برای جلوگیری از رندرهای اضافی هنگام fetchData
+  const fetchData = useCallback(async () => {
+    if (mode === "update" && recordId) {
+      setLoadingInitial(true);
+      try {
+        const res = await tblAddress.getById(recordId);
+        if (res) {
+          // فقط فیلدهای مرتبط با فرم رو reset کن
+          reset({
+            name: res.name ?? "",
+            address1: res.address1 ?? "",
+            address2: res.address2 ?? "",
+            phone: res.phone ?? "",
+            eMail: res.eMail ?? "",
+            country: res.country ?? "",
+          });
+        }
+      } catch (err) {
+        console.error("Failed to load address", err);
+      } finally {
+        setLoadingInitial(false);
+      }
+    } else {
+      reset(defaultValues);
+    }
+  }, [mode, recordId, reset, defaultValues]);
+
+  // === Fetch only when dialog opens ===
+  useEffect(() => {
+    if (open) fetchData();
+  }, [open, fetchData]);
+
+  const submitting = createMutation.isPending || updateMutation.isPending;
+  const isDisabled = loadingInitial || submitting;
+
+  const handleFormSubmit = useCallback(
+    (values: AddressFormValues) => {
+      if (mode === "create") {
+        createMutation.mutate(values);
+      } else if (mode === "update" && recordId) {
+        updateMutation.mutate({ id: recordId, formData: values });
+      }
+    },
+    [mode, recordId, createMutation, updateMutation]
+  );
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle>
-        {initialData?.addressId ? "Edit Address" : "New Address"}
-      </DialogTitle>
-
-      <DialogContent>
-        <Stack spacing={2} mt={1}>
-          <TextField label="Code" value={form.code} onChange={handleChange("code")} />
-          <TextField label="Name" value={form.name} onChange={handleChange("name")} />
-          <TextField label="Address 1" value={form.address1} onChange={handleChange("address1")} />
-          <TextField label="Address 2" value={form.address2} onChange={handleChange("address2")} />
-          <TextField label="Phone" value={form.phone} onChange={handleChange("phone")} />
-          <TextField label="Email" value={form.eMail} onChange={handleChange("eMail")} />
-          <TextField label="Country" value={form.country} onChange={handleChange("country")} />
-        </Stack>
-      </DialogContent>
-
-      <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button variant="contained" onClick={() => mutation.mutate()}>
-          Save
-        </Button>
-      </DialogActions>
-    </Dialog>
+    <FormDialog
+      open={open}
+      onClose={onClose}
+      title={mode === "create" ? "Create Address" : "Edit Address"}
+      submitting={submitting}
+      loadingInitial={loadingInitial}
+      onSubmit={handleSubmit(handleFormSubmit)}
+    >
+      <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1}>
+        <TextField
+          label="Name *"
+          {...register("name")}
+          error={!!errors.name}
+          helperText={errors.name?.message}
+          disabled={isDisabled}
+          sx={{ gridColumn: "span 2" }}
+        />
+        <TextField
+          label="Country"
+          {...register("country")}
+          error={!!errors.country}
+          helperText={errors.country?.message}
+          disabled={isDisabled}
+          sx={{ gridColumn: "span 2" }}
+        />
+        <TextField
+          label="Address 1"
+          {...register("address1")}
+          error={!!errors.address1}
+          helperText={errors.address1?.message}
+          disabled={isDisabled}
+          sx={{ gridColumn: "span 4" }}
+        />
+        <TextField
+          label="Address 2"
+          {...register("address2")}
+          error={!!errors.address2}
+          helperText={errors.address2?.message}
+          disabled={isDisabled}
+          sx={{ gridColumn: "span 4" }}
+        />
+        <TextField
+          label="Phone"
+          {...register("phone")}
+          error={!!errors.phone}
+          helperText={errors.phone?.message}
+          disabled={isDisabled}
+          sx={{ gridColumn: "span 2" }}
+        />
+        <TextField
+          label="Email"
+          {...register("eMail")}
+          error={!!errors.eMail}
+          helperText={errors.eMail?.message}
+          disabled={isDisabled}
+          sx={{ gridColumn: "span 2" }}
+        />
+        {JSON.stringify(errors)}
+      </Box>
+    </FormDialog>
   );
 }
+
+export default memo(AddressFormDialog);
