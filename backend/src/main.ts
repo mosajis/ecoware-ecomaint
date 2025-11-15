@@ -12,7 +12,7 @@ const app = new Elysia()
       origin: ["http://localhost:5173"],
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"],
-    }),
+    })
   )
   // error handler
   .use(pluginErrorHandler)
@@ -24,12 +24,12 @@ const app = new Elysia()
       path: "/docs",
       documentation: {
         info: {
-          title: "Ecoware API",
+          title: "ECO | API",
           version: "1.0.0",
           description: "API documentation",
         },
       },
-    }),
+    })
   )
 
   // React static
@@ -37,7 +37,7 @@ const app = new Elysia()
     staticPlugin({
       indexHTML: true,
       prefix: "",
-    }),
+    })
   );
 
 const portArgIndex = process.argv.findIndex((arg) => arg === "--port");

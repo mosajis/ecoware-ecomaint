@@ -20,6 +20,7 @@ export const dataGridActionColumn = ({
   width,
   sortable: false,
   filterable: false,
+  disableColumnMenu: true,
   renderCell: (params: GridRenderCellParams) => (
     <DataGridActions
       onEdit={onEdit ? () => onEdit(params.row) : undefined}

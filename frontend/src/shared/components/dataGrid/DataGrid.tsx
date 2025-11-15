@@ -53,6 +53,10 @@ export default function CustomizedDataGrid({
       // @ts-ignore
       slots={{ toolbar: DataGridToolbar }}
       slotProps={{
+        loadingOverlay: {
+          variant: "linear-progress",
+          noRowsVariant: "linear-progress",
+        },
         toolbar: {
           // @ts-ignore
           onAddClick,

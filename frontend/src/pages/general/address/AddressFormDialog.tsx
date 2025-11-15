@@ -13,7 +13,7 @@ const schema = z.object({
   address1: z.string().optional().nullable(),
   address2: z.string().optional().nullable(),
   phone: z.string().optional().nullable(),
-  eMail: z.string().email("Invalid email").optional().nullable(),
+  eMail: z.string().email("Invalid email").or(z.literal("")).nullable(),
   code: z.string(),
   contact: z.string().optional().nullable(),
 });
@@ -23,7 +23,7 @@ export type AddressFormValues = z.infer<typeof schema>;
 type Props = {
   open: boolean;
   mode: "create" | "update";
-  recordId?: number;
+  recordId?: number | null;
   onClose: () => void;
   onSuccess: (data: any) => void;
 };
@@ -147,10 +147,12 @@ function AddressFormDialog({
         <TextField
           label="Code *"
           {...register("code")}
-          error={!!errors.name}
+          error={!!errors.code}
+          helperText={errors.code?.message}
           size="small"
-          helperText={errors.name?.message}
-          InputLabelProps={{ shrink: true }}
+          slotProps={{
+            inputLabel: { shrink: true },
+          }}
           disabled={isDisabled}
           sx={{ gridColumn: "span 2" }}
         />
@@ -159,9 +161,11 @@ function AddressFormDialog({
           label="Name *"
           {...register("name")}
           error={!!errors.name}
-          size="small"
           helperText={errors.name?.message}
-          InputLabelProps={{ shrink: true }}
+          size="small"
+          slotProps={{
+            inputLabel: { shrink: true },
+          }}
           disabled={isDisabled}
           sx={{ gridColumn: "span 4" }}
         />
@@ -170,49 +174,63 @@ function AddressFormDialog({
           label="Address 1"
           {...register("address1")}
           error={!!errors.address1}
-          size="small"
           helperText={errors.address1?.message}
-          InputLabelProps={{ shrink: true }}
+          size="small"
+          slotProps={{
+            inputLabel: { shrink: true },
+          }}
           disabled={isDisabled}
           sx={{ gridColumn: "span 4" }}
         />
+
         <TextField
           label="Address 2"
           {...register("address2")}
-          size="small"
           error={!!errors.address2}
           helperText={errors.address2?.message}
-          InputLabelProps={{ shrink: true }}
+          size="small"
+          slotProps={{
+            inputLabel: { shrink: true },
+          }}
           disabled={isDisabled}
           sx={{ gridColumn: "span 4" }}
         />
+
         <TextField
           label="Contact person"
           {...register("contact")}
-          error={!!errors.name}
+          error={!!errors.contact}
+          helperText={errors.contact?.message}
           size="small"
-          helperText={errors.name?.message}
-          InputLabelProps={{ shrink: true }}
+          slotProps={{
+            inputLabel: { shrink: true },
+          }}
           disabled={isDisabled}
           sx={{ gridColumn: "span 2" }}
         />
+
         <TextField
-          size="small"
           label="Phone"
           {...register("phone")}
           error={!!errors.phone}
           helperText={errors.phone?.message}
-          InputLabelProps={{ shrink: true }}
+          size="small"
+          slotProps={{
+            inputLabel: { shrink: true },
+          }}
           disabled={isDisabled}
           sx={{ gridColumn: "span 2" }}
         />
+
         <TextField
-          size="small"
           label="Email"
           {...register("eMail")}
           error={!!errors.eMail}
           helperText={errors.eMail?.message}
-          InputLabelProps={{ shrink: true }}
+          size="small"
+          slotProps={{
+            inputLabel: { shrink: true },
+          }}
           disabled={isDisabled}
           sx={{ gridColumn: "span 2" }}
         />

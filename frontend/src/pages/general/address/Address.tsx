@@ -2,26 +2,27 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import AddressFormDialog from "./AddressFormDialog";
 import { useCallback, useMemo, useState } from "react";
 import { Box } from "@mui/material";
-import { tblAddress } from "@/core/api/generated/api";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { type GridColDef, type GridRenderCellParams } from "@mui/x-data-grid";
+import { tblAddress, TypeTblAddress } from "@/core/api/generated/api";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { type GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { queryClient } from "@/core/api/queryClient";
 
 export default function AddressListPage() {
-  const [selected, setSelected] = useState<any | null>(null);
+  const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
 
   // === Queries ===
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery<{
+    items: TypeTblAddress[];
+    total: number;
+  }>({
     queryKey: ["tblAddress"],
-    queryFn: async () =>
-      tblAddress.getAll({
-        paginate: false,
-      }),
+    queryFn: async () => tblAddress.getAll({ paginate: false }),
   });
 
+  // === Mutations ===
   const deleteMutation = useMutation({
     mutationFn: (id: number) => tblAddress.deleteById(id),
     onSuccess: () => {
@@ -31,26 +32,26 @@ export default function AddressListPage() {
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
-    setSelected(null);
+    setSelectedRowId(null);
     setMode("create");
     setOpenForm(true);
   }, []);
 
-  const handleEdit = useCallback((row: any) => {
-    setSelected(row);
+  const handleEdit = useCallback((row: TypeTblAddress) => {
+    setSelectedRowId(row.addressId);
     setMode("update");
     setOpenForm(true);
   }, []);
 
-  const handleDelete = useCallback((row: any) => {
+  const handleDelete = useCallback((row: TypeTblAddress) => {
     deleteMutation.mutate(row.addressId);
   }, []);
 
+  // === Columns ===
   const columns = useMemo<GridColDef[]>(
     () => [
-      { field: "code", headerName: "Code", width: 60 },
+      { field: "code", headerName: "Code" },
       { field: "name", headerName: "Name", flex: 1 },
-      { field: "addressId", headerName: "AddressId", flex: 1 }, // hideable columns
       { field: "address1", headerName: "Address 1", flex: 1 },
       { field: "address2", headerName: "Address 2", flex: 1 },
       { field: "phone", headerName: "Phone", flex: 1 },
@@ -77,19 +78,9 @@ export default function AddressListPage() {
         <AddressFormDialog
           open={openForm}
           mode={mode}
-          recordId={selected?.addressId}
+          recordId={selectedRowId}
           onClose={() => setOpenForm(false)}
-          onSuccess={(data) => {
-            queryClient.setQueryData(["tblAddress"], (oldData) => {
-              // if (!oldData) return { items: [data], total: 1 };
-              // const items = [...oldData.items];
-              // const index = items.findIndex(
-              //   (i) => i.addressId === data.addressId
-              // );
-              // if (index > -1) items[index] = data;
-              // else items.unshift(data);
-              // return { ...oldData, items };
-            });
+          onSuccess={(newData: TypeTblAddress) => {
             setOpenForm(false);
           }}
         />
