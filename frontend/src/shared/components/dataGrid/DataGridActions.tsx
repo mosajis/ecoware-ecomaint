@@ -5,10 +5,15 @@ import {
   DialogTitle,
   DialogActions,
   Button,
+  DialogContent,
+  Typography,
+  Box,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import DataGridActionsButton from "./DataGridActionsButton";
+import DialogHeader from "../dialog/DialogHeader";
 
 interface DataGridActionsProps {
   onEdit?: () => void;
@@ -71,9 +76,28 @@ export default function DataGridActions({
         fullWidth
         maxWidth="xs"
       >
-        <DialogTitle sx={{ fontWeight: "normal" }}>
-          Are you sure you want to delete this item?
-        </DialogTitle>
+        <DialogHeader title="Delete Item" />
+        <DialogContent dividers sx={{ py: 5 }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              flexDirection: "column",
+              gap: 2,
+            }}
+          >
+            <WarningAmberIcon
+              color="error"
+              sx={{
+                fontSize: "3rem",
+              }}
+            />
+            <Typography>
+              Are you certain you want to delete this item?
+            </Typography>
+          </Box>
+        </DialogContent>
         <DialogActions sx={{ display: "flex" }}>
           <Button
             sx={{ flex: 1 }}

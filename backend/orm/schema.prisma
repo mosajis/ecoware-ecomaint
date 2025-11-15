@@ -123,7 +123,7 @@ model TblActionUsers {
 }
 
 model TblAddress {
-  addressId               Int       @id(map: "PK_tblAddress") @default(dbgenerated("NEXT VALUE FOR [Seq_Address]"), map: "DF_tbladdress_ID") @map("AddressID")
+  addressId               Int       @id(map: "PK_tblAddress") @default(dbgenerated("NEXT VALUE FOR [Seq_Address]"), map: "DF_AddressID") @map("AddressID")
   layoutId                Int?      @map("LayoutID")
   gradeId                 Int?      @map("GradeID")
   portalId                Int?      @map("PortalID")
@@ -172,7 +172,7 @@ model TblAddress {
 }
 
 model TblAddressProduct {
-  addressProductId Int       @id(map: "PK_tblAddressProduct") @default(dbgenerated("NEXT VALUE FOR [Seq_AddressProduct]"), map: "DF_AddressProduct_ID") @map("AddressProductID")
+  addressProductId Int       @id(map: "PK_tblAddressProduct") @default(dbgenerated("NEXT VALUE FOR [Seq_AddressProduct]"), map: "DF_AddressProductID") @map("AddressProductID")
   addressId        Int?      @map("AddressID")
   productTypeId    Int?      @map("ProductTypeID")
   deptId           Int?      @map("DeptID")
@@ -193,7 +193,7 @@ model TblAddressProduct {
 }
 
 model TblAppInfo {
-  appInfoId      Int       @id(map: "PK_tblAppInfo") @default(dbgenerated("NEXT VALUE FOR [dbo].[Seq_AppInfo]"), map: "DF_tblAppInfo_ID") @map("AppInfoId")
+  appInfoId      Int       @id(map: "PK_tblAppInfo") @default(dbgenerated("NEXT VALUE FOR [Seq_AppInfo]"), map: "DF_AppInfoId") @map("AppInfoId")
   deptId         Int?      @map("DeptId")
   deptName       String?   @map("DeptName") @db.NVarChar(500)
   suffixId       Int?      @map("SuffixId")
@@ -237,7 +237,7 @@ model TblAppSysParams {
 }
 
 model TblCompCounter {
-  compCounterId    Int       @id(clustered: false, map: "PK_tblCompCounter") @default(dbgenerated("NEXT VALUE FOR [Seq_CompCounter]"), map: "DF_CompCounter_ID") @map("CompCounterID")
+  compCounterId    Int       @id(clustered: false, map: "PK_tblCompCounter") @default(dbgenerated("NEXT VALUE FOR [Seq_CompCounter]"), map: "DF_CompCounterID") @map("CompCounterID")
   compId           Int?      @map("CompID")
   counterTypeId    Int?      @map("CounterTypeID")
   currentValue     Int?      @map("CurrentValue")
@@ -268,7 +268,7 @@ model TblCompCounter {
 }
 
 model TblCompCounterLog {
-  compCounterLogId Int       @id(clustered: false, map: "PK_tblCompCounterLog") @default(dbgenerated("NEXT VALUE FOR [Seq_CompCounterLog]"), map: "DF_CompCounterLog_ID") @map("CompCounterLogID")
+  compCounterLogId Int       @id(clustered: false, map: "PK_tblCompCounterLog") @default(dbgenerated("NEXT VALUE FOR [Seq_CompCounterLog]"), map: "DF_CompCounterLogID") @map("CompCounterLogID")
   compCounterId    Int?      @map("CompCounterID")
   dependsOnId      Int?      @map("DependsOnID")
   currentDate      DateTime? @map("CurrentDate") @db.DateTime
@@ -297,7 +297,7 @@ model TblCompCounterLog {
 }
 
 model TblCompJob {
-  compJobId           Int       @id(map: "PK_tblCompJob") @default(dbgenerated("NEXT VALUE FOR [Seq_CompJob]"), map: "DF_CompJob_ID") @map("CompJobID")
+  compJobId           Int       @id(map: "PK_tblCompJob") @default(dbgenerated("NEXT VALUE FOR [Seq_CompJob]"), map: "DF_CompJobID") @map("CompJobID")
   historyLayout       Int?      @map("HistoryLayout")
   discId              Int?      @map("DiscID")
   compId              Int?      @map("CompID")
@@ -353,7 +353,7 @@ model TblCompJob {
 }
 
 model TblCompJobCounter {
-  compJobCounterId Int       @id(map: "PK_tblCompJobCounter_1") @default(dbgenerated("NEXT VALUE FOR [Seq_CompJobCounter]"), map: "DF_CompJobCounter_ID") @map("CompJobCounterID")
+  compJobCounterId Int       @id(map: "PK_tblCompJobCounter_1") @default(dbgenerated("NEXT VALUE FOR [Seq_CompJobCounter]"), map: "DF_CompJobCounterID") @map("CompJobCounterID")
   compJobId        Int?      @map("CompJobID")
   compCounterId    Int?      @map("CompCounterID")
   frequency        Int?      @map("Frequency")
@@ -382,7 +382,7 @@ model TblCompJobCounter {
 }
 
 model TblCompJobDependency {
-  compJobDependencyId Int       @id(map: "PK_tblCompJobDependency") @default(dbgenerated("NEXT VALUE FOR [Seq_CompJobDependency]"), map: "DF_CompJobDependency_ID") @map("CompJobDependencyID")
+  compJobDependencyId Int       @id(map: "PK_tblCompJobDependency") @default(dbgenerated("NEXT VALUE FOR [Seq_CompJobDependency]"), map: "DF_CompJobDependencyID") @map("CompJobDependencyID")
   compJobId           Int?      @map("CompJobID")
   dependsOnId         Int?      @map("DependsOnID")
   functionId          Int?      @map("FunctionID")
@@ -404,7 +404,7 @@ model TblCompJobDependency {
 }
 
 model TblCompJobMeasurePoint {
-  compJobMeasurePointId Int       @id(map: "PK_tblCompJobMeasurePoint") @default(dbgenerated("NEXT VALUE FOR [Seq_CompJobMeasurePoint]"), map: "DF_CompJobMeasurePoint_ID") @map("CompJobMeasurePointID")
+  compJobMeasurePointId Int       @id(map: "PK_tblCompJobMeasurePoint") @default(dbgenerated("NEXT VALUE FOR [Seq_CompJobMeasurePoint]"), map: "DF_CompJobMeasurePointID") @map("CompJobMeasurePointID")
   compMeasurePointId    Int?      @map("CompMeasurePointID")
   compJobId             Int?      @map("CompJobID")
   triggerJob            Int?      @map("TriggerJob")
@@ -430,7 +430,7 @@ model TblCompJobMeasurePoint {
 }
 
 model TblCompJobRelation {
-  compJobRelationId Int       @id(map: "PK_tblCompJobRelation") @default(dbgenerated("NEXT VALUE FOR [Seq_CompJobRelation]"), map: "DF_CompJobRelation_ID") @map("CompJobRelationID")
+  compJobRelationId Int       @id(map: "PK_tblCompJobRelation") @default(dbgenerated("NEXT VALUE FOR [Seq_CompJobRelation]"), map: "DF_CompJobRelationID") @map("CompJobRelationID")
   mainJobId         Int?      @map("MainJobID")
   relatedJobId      Int?      @map("RelatedJobID")
   deptId            Int?      @map("DeptID")
@@ -451,7 +451,7 @@ model TblCompJobRelation {
 }
 
 model TblCompJobTrigger {
-  compJobTriggerId Int       @id(map: "PK_tblCompJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_CompJobTrigger]"), map: "DF_CompJobTrigger_ID") @map("CompJobTriggerID")
+  compJobTriggerId Int       @id(map: "PK_tblCompJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_CompJobTrigger]"), map: "DF_CompJobTriggerID") @map("CompJobTriggerID")
   jobTriggerId     Int?      @map("JobTriggerID")
   compJobId        Int?      @map("CompJobID")
   deptId           Int?      @map("DeptID")
@@ -472,7 +472,7 @@ model TblCompJobTrigger {
 }
 
 model TblCompMeasurePoint {
-  compMeasurePointId  Int       @id(map: "PK_tblCompMeasurePoint") @default(dbgenerated("NEXT VALUE FOR [Seq_CompMeasurePoint]"), map: "DF_CompMeasurePoint_ID") @map("CompMeasurePointID")
+  compMeasurePointId  Int       @id(map: "PK_tblCompMeasurePoint") @default(dbgenerated("NEXT VALUE FOR [Seq_CompMeasurePoint]"), map: "DF_CompMeasurePointID") @map("CompMeasurePointID")
   compId              Int?      @map("CompID")
   counterTypeId       Int?      @map("CounterTypeID")
   changedBy           Int?      @map("ChangedBy")
@@ -500,7 +500,7 @@ model TblCompMeasurePoint {
 }
 
 model TblCompMeasurePointLog {
-  compMeasurePointLogId Int       @id(map: "PK_tblCompMeasurePointLog") @default(dbgenerated("NEXT VALUE FOR [Seq_CompMeasurePointLog]"), map: "DF_CompMeasurePointLog_ID") @map("CompMeasurePointLogID")
+  compMeasurePointLogId Int       @id(map: "PK_tblCompMeasurePointLog") @default(dbgenerated("NEXT VALUE FOR [Seq_CompMeasurePointLog]"), map: "DF_CompMeasurePointLogID") @map("CompMeasurePointLogID")
   compMeasurePointId    Int?      @map("CompMeasurePointID")
   changedBy             Int?      @map("ChangedBy")
   changedDate           DateTime? @map("ChangedDate") @db.DateTime
@@ -525,7 +525,7 @@ model TblCompMeasurePointLog {
 }
 
 model TblCompOilInfo {
-  compOilInfoId    Int       @id(map: "PK_TblCompOilInfo") @default(dbgenerated("NEXT VALUE FOR [Seq_CompOilInfo]"), map: "DF_CompOilInfo_ID") @map("CompOilInfoID")
+  compOilInfoId    Int       @id(map: "PK_TblCompOilInfo") @default(dbgenerated("NEXT VALUE FOR [Seq_CompOilInfo]"), map: "DF_CompOilInfoID") @map("CompOilInfoID")
   compId           Int?      @map("CompId")
   compCounterId    Int?      @map("CompCounterID")
   partTypeId       Int?      @map("PartTypeID")
@@ -551,7 +551,7 @@ model TblCompOilInfo {
 }
 
 model TblComponentUnit {
-  compId             Int       @id(map: "PK_tblComponentUnit") @default(dbgenerated("NEXT VALUE FOR [Seq_ComponentUnit]"), map: "DF_ComponentUnit_ID") @map("CompID")
+  compId             Int       @id(map: "PK_tblComponentUnit") @default(dbgenerated("NEXT VALUE FOR [Seq_ComponentUnit]"), map: "DF_CompID") @map("CompID")
   compTypeId         Int?      @map("CompTypeID")
   locationId         Int?      @map("LocationID")
   parentCompId       Int?      @map("ParentCompID")
@@ -619,7 +619,7 @@ model TblComponentUnit {
 }
 
 model TblCompSpare {
-  compSpareId    Int       @id(map: "PK_tblCompSpare") @default(dbgenerated("NEXT VALUE FOR [Seq_CompSpare]"), map: "DF_CompSpare_ID") @map("CompSpareID")
+  compSpareId    Int       @id(map: "PK_tblCompSpare") @default(dbgenerated("NEXT VALUE FOR [Seq_CompSpare]"), map: "DF_CompSpareID") @map("CompSpareID")
   compTypeId     Int?      @map("CompTypeID")
   partTypeId     Int?      @map("PartTypeID")
   quantity       Int?      @map("Quantity")
@@ -644,7 +644,7 @@ model TblCompSpare {
 }
 
 model TblCompSpareDetail {
-  compSpareDetailId Int       @id(map: "PK_tblCompSpareDetail") @default(dbgenerated("NEXT VALUE FOR [Seq_CompSpareDetail]"), map: "DF_CompSpareDetail_ID") @map("CompSpareDetailID")
+  compSpareDetailId Int       @id(map: "PK_tblCompSpareDetail") @default(dbgenerated("NEXT VALUE FOR [Seq_CompSpareDetail]"), map: "DF_CompSpareDetailID") @map("CompSpareDetailID")
   compSpareId       Int?      @map("CompSpareID")
   userDefText1      String?   @map("UserDefText1") @db.NVarChar(20)
   userDefText2      String?   @map("UserDefText2") @db.NVarChar(20)
@@ -668,7 +668,7 @@ model TblCompSpareDetail {
 }
 
 model TblCompStatus {
-  compStatusId    Int       @id(map: "PK_CompStatus") @default(dbgenerated("NEXT VALUE FOR [Seq_CompStatus]"), map: "DF_CompStatus_ID") @map("CompStatusId")
+  compStatusId    Int       @id(map: "PK_CompStatus") @default(dbgenerated("NEXT VALUE FOR [Seq_CompStatus]"), map: "DF_CompStatusId") @map("CompStatusId")
   compStatusName  String?   @map("CompStatusName") @db.NVarChar(500)
   compStatusGroup Int?      @map("CompStatusGroup")
   userText1       String?   @map("UserText1") @db.NVarChar(300)
@@ -689,7 +689,7 @@ model TblCompStatus {
 }
 
 model TblCompStatusLog {
-  compStatusLogId  Int       @id(map: "PK_tblCompStatusLog") @default(dbgenerated("NEXT VALUE FOR [Seq_CompStatusLog]"), map: "DF_CompStatusLog_ID") @map("CompStatusLogID")
+  compStatusLogId  Int       @id(map: "PK_tblCompStatusLog") @default(dbgenerated("NEXT VALUE FOR [Seq_CompStatusLog]"), map: "DF_CompStatusLogID") @map("CompStatusLogID")
   compId           Int?      @map("CompID")
   fromStatusId     Int?      @map("FromStatusID")
   toStatusId       Int?      @map("ToStatusID")
@@ -716,7 +716,7 @@ model TblCompStatusLog {
 }
 
 model TblCompType {
-  compTypeId         Int       @id(map: "PK_tblComponentType") @default(dbgenerated("NEXT VALUE FOR [Seq_CompType]"), map: "DF_CompType_ID") @map("CompTypeID")
+  compTypeId         Int       @id(map: "PK_tblComponentType") @default(dbgenerated("NEXT VALUE FOR [Seq_CompType]"), map: "DF_CompTypeID") @map("CompTypeID")
   componentClassId   Int?      @map("ComponentClassID")
   parentCompTypeId   Int?      @map("ParentCompTypeID")
   primaryVendorId    Int?      @map("PrimaryVendorID")
@@ -752,7 +752,7 @@ model TblCompType {
 }
 
 model TblCompTypeCounter {
-  compTypeCounterId Int       @id(map: "PK_tblCompTypeCounter") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeCounter]"), map: "DF_CompTypeCounter_ID") @map("CompTypeCounterID")
+  compTypeCounterId Int       @id(map: "PK_tblCompTypeCounter") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeCounter]"), map: "DF_CompTypeCounterID") @map("CompTypeCounterID")
   compTypeId        Int?      @map("CompTypeID")
   counterTypeId     Int?      @map("CounterTypeID")
   averageCountRate  Int?      @map("AverageCountRate")
@@ -775,7 +775,7 @@ model TblCompTypeCounter {
 }
 
 model TblCompTypeJob {
-  compTypeJobId       Int       @id(map: "PK_tblCompTypeJob") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeJob]"), map: "DF_CompTypeJob_ID") @map("CompTypeJobID")
+  compTypeJobId       Int       @id(map: "PK_tblCompTypeJob") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeJob]"), map: "DF_CompTypeJobID") @map("CompTypeJobID")
   compTypeId          Int?      @map("CompTypeID")
   historyLayout       Int?      @map("HistoryLayout")
   discId              Int?      @map("DiscID")
@@ -820,7 +820,7 @@ model TblCompTypeJob {
 }
 
 model TblCompTypeJobCounter {
-  compTypeJobCounterId Int       @id(map: "PK_tblCompTypeJobCounter") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeJobCounter]"), map: "DF_CompTypeJobCounter_ID") @map("CompTypeJobCounterID")
+  compTypeJobCounterId Int       @id(map: "PK_tblCompTypeJobCounter") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeJobCounter]"), map: "DF_CompTypeJobCounterID") @map("CompTypeJobCounterID")
   compTypeJobId        Int?      @map("CompTypeJobID")
   compTypeCounterId    Int?      @map("CompTypeCounterID")
   frequency            Int?      @map("Frequency")
@@ -845,7 +845,7 @@ model TblCompTypeJobCounter {
 }
 
 model TblCompTypeJobMeasurePoint {
-  compTypeJobMeasurePointId Int       @id(map: "PK_tblCompTypeJobMeasurePoint") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeJobMeasurePoint]"), map: "DF_CompTypeJobMeasurePoint_ID") @map("CompTypeJobMeasurePointID")
+  compTypeJobMeasurePointId Int       @id(map: "PK_tblCompTypeJobMeasurePoint") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeJobMeasurePoint]"), map: "DF_CompTypeJobMeasurePointID") @map("CompTypeJobMeasurePointID")
   compTypeMeasurePointId    Int?      @map("CompTypeMeasurePointID")
   compTypeJobId             Int?      @map("CompTypeJobID")
   triggerJob                Int?      @map("TriggerJob")
@@ -871,7 +871,7 @@ model TblCompTypeJobMeasurePoint {
 }
 
 model TblCompTypeJobTrigger {
-  compTypeJobTriggerId Int       @id(map: "PK_tblCompTypeJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeJobTrigger]"), map: "DF_CompTypeJobTrigger_ID") @map("CompTypeJobTriggerID")
+  compTypeJobTriggerId Int       @id(map: "PK_tblCompTypeJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeJobTrigger]"), map: "DF_CompTypeJobTriggerID") @map("CompTypeJobTriggerID")
   jobTriggerId         Int?      @map("JobTriggerID")
   compTypeJobId        Int?      @map("CompTypeJobID")
   deptId               Int?      @map("DeptID")
@@ -892,7 +892,7 @@ model TblCompTypeJobTrigger {
 }
 
 model TblCompTypeMeasurePoint {
-  compTypeMeasurePointId Int       @id(map: "PK_tblCompTypeMeasurePoint") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeMeasurePoint]"), map: "DF_CompTypeMeasurePoint_ID") @map("CompTypeMeasurePointID")
+  compTypeMeasurePointId Int       @id(map: "PK_tblCompTypeMeasurePoint") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeMeasurePoint]"), map: "DF_CompTypeMeasurePointID") @map("CompTypeMeasurePointID")
   compTypeId             Int?      @map("CompTypeID")
   counterTypeId          Int?      @map("CounterTypeID")
   unitId                 Int?      @map("UnitID")
@@ -917,7 +917,7 @@ model TblCompTypeMeasurePoint {
 }
 
 model TblCompTypeRelation {
-  compTypeRelationId Int       @id(map: "PK_tblCompTypeRelation") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeRelation]"), map: "DF_CompTypeRelation_ID") @map("CompTypeRelationID")
+  compTypeRelationId Int       @id(map: "PK_tblCompTypeRelation") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeRelation]"), map: "DF_CompTypeRelationID") @map("CompTypeRelationID")
   compTypeId         Int?      @map("CompTypeID")
   relatedId          Int?      @map("RelatedID")
   deptId             Int?      @map("DeptID")
@@ -938,7 +938,7 @@ model TblCompTypeRelation {
 }
 
 model TblCompTypeRequiredDiscipline {
-  compTypeReqDiscId Int       @id(map: "PK_tblCompTypeRequiredDiscipline") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeRequiredDiscipline]"), map: "DF_CompTypeRequiredDiscipline_ID") @map("CompTypeReqDiscID")
+  compTypeReqDiscId Int       @id(map: "PK_tblCompTypeRequiredDiscipline") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeRequiredDiscipline]"), map: "DF_CompTypeReqDiscID") @map("CompTypeReqDiscID")
   compTypeJobId     Int?      @map("CompTypeJobID")
   discId            Int?      @map("DiscID")
   currencyCode      String?   @map("CurrencyCode") @db.NVarChar(3)
@@ -962,7 +962,7 @@ model TblCompTypeRequiredDiscipline {
 }
 
 model TblCompTypeRequiredPart {
-  compTypeReqPartId   Int       @id(map: "PK_tblCompTypeRequiredPart") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeRequiredPart]"), map: "DF_CompTypeRequiredPart_ID") @map("CompTypeReqPartID")
+  compTypeReqPartId   Int       @id(map: "PK_tblCompTypeRequiredPart") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeRequiredPart]"), map: "DF_CompTypeReqPartID") @map("CompTypeReqPartID")
   compTypeJobId       Int?      @map("CompTypeJobID")
   partTypeId          Int?      @map("PartTypeID")
   quantity            Int?      @map("Quantity")
@@ -987,7 +987,7 @@ model TblCompTypeRequiredPart {
 }
 
 model TblCounterType {
-  counterTypeId  Int       @id(map: "PK_tblCounterType") @default(dbgenerated("NEXT VALUE FOR [Seq_CounterType]"), map: "DF_CounterType_ID") @map("CounterTypeID")
+  counterTypeId  Int       @id(map: "PK_tblCounterType") @default(dbgenerated("NEXT VALUE FOR [Seq_CounterType]"), map: "DF_CounterTypeID") @map("CounterTypeID")
   code           String?   @map("Code") @db.NVarChar(10)
   name           String?   @map("Name") @db.NVarChar(30)
   maxDailyValue  Int?      @map("MaxDailyValue")
@@ -1010,7 +1010,7 @@ model TblCounterType {
 }
 
 model TblDailyReorts {
-  dailyReortId       Int       @id(map: "PK_tblDailyReorts") @default(dbgenerated("NEXT VALUE FOR [Seq_DailyReorts]"), map: "DF_DailyReorts_ID") @map("DailyReortId")
+  dailyReortId       Int       @id(map: "PK_tblDailyReorts") @default(dbgenerated("NEXT VALUE FOR [Seq_DailyReorts]"), map: "DF_DailyReortId") @map("DailyReortId")
   reportTitle        String?   @map("ReportTitle") @db.NVarChar(200)
   reportText         String?   @map("ReportText") @db.NVarChar(300)
   processHasSusppend Int?      @map("ProcessHasSusppend") @db.TinyInt
@@ -1045,7 +1045,7 @@ model TblDailyReorts {
 }
 
 model TblDailyReportConsumable {
-  dailyReportConsumableId Int       @id(map: "PK_DailyReportConsumable") @default(dbgenerated("NEXT VALUE FOR [Seq_DailyReportConsumable]"), map: "DF_DailyReportConsumable_ID") @map("DailyReportConsumableId")
+  dailyReportConsumableId Int       @id(map: "PK_DailyReportConsumable") @default(dbgenerated("NEXT VALUE FOR [Seq_DailyReportConsumable]"), map: "DF_DailyReportConsumableId") @map("DailyReportConsumableId")
   dailyReportId           Int?      @map("DailyReportID")
   partId                  Int?      @map("PartID")
   partName                String?   @map("PartName") @db.NVarChar(200)
@@ -1071,7 +1071,7 @@ model TblDailyReportConsumable {
 }
 
 model TblDailyReportRequest {
-  dailyReportRequestId Int       @id(map: "PK_DailyReportRequest") @default(dbgenerated("NEXT VALUE FOR [Seq_DailyReportRequest]"), map: "DF_DailyReportRequest_ID") @map("DailyReportRequestId")
+  dailyReportRequestId Int       @id(map: "PK_DailyReportRequest") @default(dbgenerated("NEXT VALUE FOR [Seq_DailyReportRequest]"), map: "DF_DailyReportRequestId") @map("DailyReportRequestId")
   dailyReportId        Int?      @map("DailyReportID")
   partId               Int?      @map("PartID")
   partName             String?   @map("PartName") @db.NVarChar(200)
@@ -1097,7 +1097,7 @@ model TblDailyReportRequest {
 }
 
 model TblDashboardAlert {
-  dashboardAlertId   Int       @id(map: "PK_tblDashboardAlert") @default(dbgenerated("NEXT VALUE FOR [Seq_DashboardAlert]"), map: "DF_DashboardAlert_ID") @map("DashboardAlertID")
+  dashboardAlertId   Int       @id(map: "PK_tblDashboardAlert") @default(dbgenerated("NEXT VALUE FOR [Seq_DashboardAlert]"), map: "DF_DashboardAlertID") @map("DashboardAlertID")
   alertGroupId       Int?      @map("AlertGroupID")
   name               String?   @map("Name") @db.NVarChar(40)
   description        String?   @map("Description") @db.NVarChar(300)
@@ -1125,7 +1125,7 @@ model TblDashboardAlert {
 }
 
 model TblDashboardConfig {
-  dashboardConfigId Int       @id(map: "PK_tblDashboardConfig") @default(dbgenerated("NEXT VALUE FOR [Seq_DashboardConfig]"), map: "DF_DashboardConfig_ID") @map("DashboardConfigID")
+  dashboardConfigId Int       @id(map: "PK_tblDashboardConfig") @default(dbgenerated("NEXT VALUE FOR [Seq_DashboardConfig]"), map: "DF_DashboardConfigID") @map("DashboardConfigID")
   dashboardAlertId  Int?      @map("DashboardAlertID")
   ownerId           Int?      @map("OwnerID")
   deptId            Int?      @map("DeptID")
@@ -1166,7 +1166,7 @@ model TblDefaultScreenConfig {
 }
 
 model TblDepartment {
-  deptId         Int       @id(map: "PK_tblDepartment") @default(dbgenerated("NEXT VALUE FOR [Seq_Department]"), map: "DF_Department_ID") @map("DeptID")
+  deptId         Int       @id(map: "PK_tblDepartment") @default(dbgenerated("NEXT VALUE FOR [Seq_Department]"), map: "DF_DeptID") @map("DeptID")
   deptCode       Int?      @map("DeptCode")
   instId         Int?      @map("InstID")
   costCentreId   Int?      @map("CostCentreID")
@@ -1195,7 +1195,7 @@ model TblDepartment {
 }
 
 model TblDiscipline {
-  discId         Int       @id(map: "PK_tblDiscipline") @default(dbgenerated("NEXT VALUE FOR [Seq_Discipline]"), map: "DF_Discipline_ID") @map("DiscID")
+  discId         Int       @id(map: "PK_tblDiscipline") @default(dbgenerated("NEXT VALUE FOR [Seq_Discipline]"), map: "DF_DiscID") @map("DiscID")
   code           String?   @map("Code") @db.NVarChar(10)
   name           String?   @map("Name") @db.NVarChar(20)
   externalDisc   Int?      @map("ExternalDisc")
@@ -1218,7 +1218,7 @@ model TblDiscipline {
 }
 
 model TblDocType {
-  docTypeId          Int       @id(map: "PK_tblDocType") @default(dbgenerated("NEXT VALUE FOR [Seq_DocType]"), map: "DF_DocType_ID") @map("DocTypeID")
+  docTypeId          Int       @id(map: "PK_tblDocType") @default(dbgenerated("NEXT VALUE FOR [Seq_DocType]"), map: "DF_DocTypeID") @map("DocTypeID")
   docTypeName        String?   @map("DocTypeName") @db.NVarChar(200)
   docTypePersianName String?   @map("DocTypePersianName") @db.NVarChar(200)
   deptId             Int?      @map("DeptID")
@@ -1239,7 +1239,7 @@ model TblDocType {
 }
 
 model TblEmployee {
-  employeeId      Int       @id(map: "PK_tblEmployee") @default(dbgenerated("NEXT VALUE FOR [Seq_Employee]"), map: "DF_Employee_ID") @map("EmployeeID")
+  employeeId      Int       @id(map: "PK_tblEmployee") @default(dbgenerated("NEXT VALUE FOR [Seq_Employee]"), map: "DF_EmployeeID") @map("EmployeeID")
   layoutId        Int?      @map("LayoutID")
   code            String?   @map("Code") @db.NVarChar(10)
   lastName        String?   @map("LastName") @db.NVarChar(40)
@@ -1314,7 +1314,7 @@ model TblEmployee {
 }
 
 model TblFailureReports {
-  failureReportId   Int       @id(map: "PK_tblFailureReports") @default(dbgenerated("NEXT VALUE FOR [Seq_FailureReports]"), map: "DF_FailureReports_ID") @map("FailureReportId")
+  failureReportId   Int       @id(map: "PK_tblFailureReports") @default(dbgenerated("NEXT VALUE FOR [Seq_FailureReports]"), map: "DF_FailureReportId") @map("FailureReportId")
   compId            Int?      @map("CompID")
   discId            Int?      @map("DiscID")
   maintLogId        Int?      @map("MaintLogID")
@@ -1353,7 +1353,7 @@ model TblFailureReports {
 }
 
 model TblFiltersInfo {
-  filterInfoId   Int       @id(map: "PK_tblFiltersInfo") @default(dbgenerated("NEXT VALUE FOR [Seq_FiltersInfo]"), map: "DF_FiltersInfo_ID") @map("FilterInfoID")
+  filterInfoId   Int       @id(map: "PK_tblFiltersInfo") @default(dbgenerated("NEXT VALUE FOR [Seq_FiltersInfo]"), map: "DF_FilterInfoID") @map("FilterInfoID")
   filterName     String?   @map("FilterName") @db.NVarChar(50)
   filterXml      String?   @map("FilterXML") @db.NVarChar(300)
   filterVer      Int?      @map("FilterVer")
@@ -1375,7 +1375,7 @@ model TblFiltersInfo {
 }
 
 model TblFollowStatus {
-  followStatusId   Int       @id(map: "PK_tblFollowStatus") @default(dbgenerated("NEXT VALUE FOR [Seq_FollowStatus]"), map: "DF_FollowStatus_ID") @map("FollowStatusID")
+  followStatusId   Int       @id(map: "PK_tblFollowStatus") @default(dbgenerated("NEXT VALUE FOR [Seq_FollowStatus]"), map: "DF_FollowStatusID") @map("FollowStatusID")
   fsName           String?   @map("FSName") @db.NVarChar(200)
   fsDesc           String?   @map("FSDesc") @db.NVarChar(500)
   fsGroup          Int?      @map("FSGroup")
@@ -1399,7 +1399,7 @@ model TblFollowStatus {
 }
 
 model TblFunctions {
-  functionId       Int       @id(map: "PK_tblFunctions") @default(dbgenerated("NEXT VALUE FOR [Seq_Functions]"), map: "DF_Functions_ID") @map("FunctionID")
+  functionId       Int       @id(map: "PK_tblFunctions") @default(dbgenerated("NEXT VALUE FOR [Seq_Functions]"), map: "DF_FunctionID") @map("FunctionID")
   compId           Int?      @map("CompID")
   criticalityId    Int?      @map("CriticalityID")
   layoutId         Int?      @map("LayoutID")
@@ -1438,7 +1438,7 @@ model TblFunctions {
 }
 
 model TblJobClass {
-  jobClassId               Int       @id(map: "PK_tblJobClass") @default(dbgenerated("NEXT VALUE FOR [Seq_JobClass]"), map: "DF_JobClass_ID") @map("JobClassID")
+  jobClassId               Int       @id(map: "PK_tblJobClass") @default(dbgenerated("NEXT VALUE FOR [Seq_JobClass]"), map: "DF_JobClassID") @map("JobClassID")
   workflowInitialStatusId  Int?      @map("WorkflowInitialStatusID")
   workflowLockTypeId       Int?      @map("WorkflowLockTypeID")
   qWorkflowInitialStatusId Int?      @map("QWorkflowInitialStatusID")
@@ -1463,7 +1463,7 @@ model TblJobClass {
 }
 
 model TblJobClassAccess {
-  jobClassAccessId Int       @id(map: "PK_tblJobClassAccess") @default(dbgenerated("NEXT VALUE FOR [Seq_JobClassAccess]"), map: "DF_JobClassAccess_ID") @map("JobClassAccessID")
+  jobClassAccessId Int       @id(map: "PK_tblJobClassAccess") @default(dbgenerated("NEXT VALUE FOR [Seq_JobClassAccess]"), map: "DF_JobClassAccessID") @map("JobClassAccessID")
   sysGroupId       Int?      @map("sys_group_id")
   jobClassId       Int?      @map("JobClassID")
   deptId           Int?      @map("DeptID")
@@ -1484,7 +1484,7 @@ model TblJobClassAccess {
 }
 
 model TblJobDescription {
-  jobDescId            Int       @id(map: "PK_tblJobDescription") @default(dbgenerated("NEXT VALUE FOR [Seq_JobDescription]"), map: "DF_JobDescription_ID") @map("JobDescID")
+  jobDescId            Int       @id(map: "PK_tblJobDescription") @default(dbgenerated("NEXT VALUE FOR [Seq_JobDescription]"), map: "DF_JobDescID") @map("JobDescID")
   layoutId             Int?      @map("LayoutID")
   jobClassId           Int?      @map("JobClassID")
   jobDescCode          String?   @map("JobDescCode") @db.NVarChar(300)
@@ -1518,7 +1518,7 @@ model TblJobDescription {
 }
 
 model TblJobTrigger {
-  jobTriggerId   Int       @id(map: "PK_tblJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_JobTrigger]"), map: "DF_JobTrigger_ID") @map("JobTriggerID")
+  jobTriggerId   Int       @id(map: "PK_tblJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_JobTrigger]"), map: "DF_JobTriggerID") @map("JobTriggerID")
   descr          String?   @map("Descr") @db.NVarChar(300)
   deptId         Int?      @map("DeptID")
   exportMarker   Int?      @map("ExportMarker")
@@ -1538,7 +1538,7 @@ model TblJobTrigger {
 }
 
 model TblJobTriggerLog {
-  jobTriggerLogId Int       @id(map: "PK_tblJobTrigger_Log") @default(dbgenerated("NEXT VALUE FOR [Seq_JobTrigger_Log]"), map: "DF_JobTrigger_Log_ID") @map("JobTriggerLogID")
+  jobTriggerLogId Int       @id(map: "PK_tblJobTrigger_Log") @default(dbgenerated("NEXT VALUE FOR [Seq_JobTrigger_Log]"), map: "DF_JobTriggerLogID") @map("JobTriggerLogID")
   jobTriggerId    Int       @map("JobTriggerID")
   workOrderId     Int       @map("WorkOrderID")
   userId          Int?      @map("UserID")
@@ -1560,7 +1560,7 @@ model TblJobTriggerLog {
 }
 
 model TblJobVersion {
-  jobVersionId   Int       @id(map: "PK_tblJobVersion") @default(dbgenerated("NEXT VALUE FOR [Seq_JobVersion]"), map: "DF_JobVersion_ID") @map("JobVersionID")
+  jobVersionId   Int       @id(map: "PK_tblJobVersion") @default(dbgenerated("NEXT VALUE FOR [Seq_JobVersion]"), map: "DF_JobVersionID") @map("JobVersionID")
   layoutId       Int?      @map("LayoutID")
   jobVersionNo   String?   @map("JobVersionNo") @db.NVarChar(200)
   jobDescTitle   String?   @map("JobDescTitle") @db.NVarChar(200)
@@ -1610,7 +1610,7 @@ model TblLocation {
 }
 
 model TblLogCounter {
-  logCounterId   Int       @id(map: "PK_tblLogCounter") @default(dbgenerated("NEXT VALUE FOR [Seq_LogCounter]"), map: "DF_LogCounter_ID") @map("LogCounterID")
+  logCounterId   Int       @id(map: "PK_tblLogCounter") @default(dbgenerated("NEXT VALUE FOR [Seq_LogCounter]"), map: "DF_LogCounterID") @map("LogCounterID")
   maintLogId     Int?      @map("MaintLogID")
   counterTypeId  Int?      @map("CounterTypeID")
   frequency      Int?      @map("Frequency")
@@ -1635,7 +1635,7 @@ model TblLogCounter {
 }
 
 model TblLogDiscipline {
-  logDiscId      Int       @id(map: "PK_tblLogDiscipline1") @default(dbgenerated("NEXT VALUE FOR [Seq_LogDiscipline]"), map: "DF_LogDiscipline_ID") @map("LogDiscID")
+  logDiscId      Int       @id(map: "PK_tblLogDiscipline1") @default(dbgenerated("NEXT VALUE FOR [Seq_LogDiscipline]"), map: "DF_LogDiscID") @map("LogDiscID")
   maintLogId     Int?      @map("MaintLogID")
   employeeId     Int?      @map("EmployeeID")
   discId         Int?      @map("DiscID")
@@ -1686,7 +1686,7 @@ model TblLogDiscipline {
 }
 
 model TblLoginAudit {
-  loginAuditId   Int       @id(map: "PK_tblLoginAudit") @default(dbgenerated("NEXT VALUE FOR [Seq_LoginAudit]"), map: "DF_LoginAudit_ID") @map("LoginAuditID")
+  loginAuditId   Int       @id(map: "PK_tblLoginAudit") @default(dbgenerated("NEXT VALUE FOR [Seq_LoginAudit]"), map: "DF_LoginAuditID") @map("LoginAuditID")
   loginId        String?   @map("LoginID") @db.NVarChar(50)
   userId         Int?      @map("UserID")
   logStatus      Int?      @map("LogStatus")
@@ -1711,7 +1711,7 @@ model TblLoginAudit {
 }
 
 model TblMaintCause {
-  maintCauseId   Int       @id(map: "PK_tblMaintCause") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintCause]"), map: "DF_MaintCause_ID") @map("MaintCauseID")
+  maintCauseId   Int       @id(map: "PK_tblMaintCause") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintCause]"), map: "DF_MaintCauseID") @map("MaintCauseID")
   descr          String?   @map("Descr") @db.NVarChar(30)
   deptId         Int?      @map("DeptID")
   exportMarker   Int?      @map("ExportMarker")
@@ -1731,7 +1731,7 @@ model TblMaintCause {
 }
 
 model TblMaintClass {
-  maintClassId   Int       @id(map: "PK_tblMaintClass") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintClass]"), map: "DF_MaintClass_ID") @map("MaintClassID")
+  maintClassId   Int       @id(map: "PK_tblMaintClass") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintClass]"), map: "DF_MaintClassID") @map("MaintClassID")
   descr          String?   @map("Descr") @db.NVarChar(30)
   deptId         Int?      @map("DeptID")
   exportMarker   Int?      @map("ExportMarker")
@@ -1751,7 +1751,7 @@ model TblMaintClass {
 }
 
 model TblMaintLog {
-  maintLogId         Int       @id(clustered: false, map: "PK_tblMaintLog") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintLog]"), map: "DF_MaintLog_ID") @map("MaintLogID")
+  maintLogId         Int       @id(clustered: false, map: "PK_tblMaintLog") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintLog]"), map: "DF_MaintLogID") @map("MaintLogID")
   maintCauseId       Int?      @map("MaintCauseID")
   maintTypeId        Int?      @map("MaintTypeID")
   maintClassId       Int?      @map("MaintClassID")
@@ -1778,7 +1778,7 @@ model TblMaintLog {
   exportMarker       Int?      @map("ExportMarker")
   lastUpdated        DateTime? @map("LastUpdated") @db.DateTime
   history            String?   @map("History") @db.NVarChar(300)
-  mlStatus           Int?      @default(5, map: "DF_tblMaintLog_MLStatus") @map("MLStatus")
+  mlStatus           Int?      @map("MLStatus")
   followStatusId     Int?      @map("FollowStatusId")
   userText1          String?   @map("UserText1") @db.NVarChar(300)
   userText2          String?   @map("UserText2") @db.NVarChar(300)
@@ -1830,7 +1830,7 @@ model TblMaintLogStocks {
 }
 
 model TblMaintLogArchive {
-  maintLogArchiveId Int       @id(map: "PK_tblMaintLogArchive") @map("MaintLogArchiveID")
+  maintLogArchiveId Int       @id(map: "PK_tblMaintLogArchive") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintLogArchive]"), map: "DF_MaintLogArchiveID") @map("MaintLogArchiveID")
   maintCauseId      Int?      @map("MaintCauseID")
   maintTypeId       Int?      @map("MaintTypeID")
   maintClassId      Int?      @map("MaintClassID")
@@ -1901,7 +1901,7 @@ model TblMaintLogFollow {
 }
 
 model TblMaintType {
-  maintTypeId    Int       @id(map: "PK_tblMaintType") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintType]"), map: "DF_MaintType_ID") @map("MaintTypeID")
+  maintTypeId    Int       @id(map: "PK_tblMaintType") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintType]"), map: "DF_MaintTypeID") @map("MaintTypeID")
   descr          String?   @map("Descr") @db.NVarChar(30)
   deptId         Int?      @map("DeptID")
   exportMarker   Int?      @map("ExportMarker")
@@ -1921,7 +1921,7 @@ model TblMaintType {
 }
 
 model TblMaterialRequest {
-  materialRequestId          Int       @id(map: "PK_tblMaterialRequest") @default(dbgenerated("NEXT VALUE FOR [Seq_MaterialRequest]"), map: "DF_MaterialRequest_ID") @map("MaterialRequestID")
+  materialRequestId          Int       @id(map: "PK_tblMaterialRequest") @default(dbgenerated("NEXT VALUE FOR [Seq_MaterialRequest]"), map: "DF_MaterialRequestID") @map("MaterialRequestID")
   materialRequestDate        DateTime  @map("MaterialRequestDate") @db.DateTime
   materialRequestDocNo       String    @map("MaterialRequestDocNo") @db.NVarChar(50)
   materialRequestNo          String?   @map("MaterialRequestNo") @db.NVarChar(50)
@@ -1963,7 +1963,7 @@ model TblMaterialRequest {
 }
 
 model TblMaterialRequestItems {
-  materialRequestItemsId Int       @id(map: "PK_tblMaterialRequestItems") @default(dbgenerated("NEXT VALUE FOR [Seq_MaterialRequestItems]"), map: "DF_MaterialRequestItems_ID") @map("MaterialRequestItemsID")
+  materialRequestItemsId Int       @id(map: "PK_tblMaterialRequestItems") @default(dbgenerated("NEXT VALUE FOR [Seq_MaterialRequestItems]"), map: "DF_MaterialRequestItemsID") @map("MaterialRequestItemsID")
   materialRequestId      Int       @map("MaterialRequestID")
   compId                 Int?      @map("CompID")
   itemtDesc              String    @map("ItemtDesc") @db.NVarChar(300)
@@ -1987,7 +1987,7 @@ model TblMaterialRequestItems {
 }
 
 model TblOilSamplingLog {
-  oilSamplingLogId     Int       @id(map: "PK_TblOilSamplingLog") @default(dbgenerated("NEXT VALUE FOR [Seq_Message]"), map: "DF_Message_ID") @map("OilSamplingLogID")
+  oilSamplingLogId     Int       @id(map: "PK_TblOilSamplingLog") @default(dbgenerated("NEXT VALUE FOR [Seq_OilSamplingLog]"), map: "DF_OilSamplingLogID") @map("OilSamplingLogID")
   compOilInfoId        Int       @map("CompOilInfoID")
   compCounterId        Int       @map("CompCounterID")
   maintLogId           Int?      @map("MaintLogID")
@@ -2035,7 +2035,7 @@ model TblOilSamplingLog {
 }
 
 model TblPendingType {
-  pendTypeId     Int       @id(map: "PK_tblPendingType") @default(dbgenerated("NEXT VALUE FOR [Seq_MessageAttachment]"), map: "DF_MessageAttachment_ID") @map("PendTypeId")
+  pendTypeId     Int       @id(map: "PK_tblPendingType") @default(dbgenerated("NEXT VALUE FOR [Seq_PendingType]"), map: "DF_PendTypeId") @map("PendTypeId")
   parentId       Int       @default(0, map: "DF_tblPendingType_ParentId") @map("ParentId")
   groupId        Int       @default(0, map: "DF_tblPendingType_GroupId") @map("GroupId")
   pendTypeName   String    @map("PendTypeName") @db.NVarChar(150)
@@ -2059,7 +2059,7 @@ model TblPendingType {
 }
 
 model TblProductType {
-  productTypeId  Int       @id(map: "PK_tblProductType") @default(dbgenerated("NEXT VALUE FOR [Seq_MessageReceivers]"), map: "DF_MessageReceivers_ID") @map("ProductTypeID")
+  productTypeId  Int       @id(map: "PK_tblProductType") @default(dbgenerated("NEXT VALUE FOR [Seq_ProductType]"), map: "DF_ProductTypeID") @map("ProductTypeID")
   descr          String?   @map("Descr") @db.NVarChar(30)
   deptId         Int?      @map("DeptID")
   exportMarker   Int?      @map("ExportMarker")
@@ -2079,7 +2079,7 @@ model TblProductType {
 }
 
 model TblReScheduleLog {
-  rescheduleLogId Int       @id(map: "PK_tblRescheduleLog") @default(dbgenerated("NEXT VALUE FOR [Seq_OilSamplingLog]"), map: "DF_OilSamplingLog_ID") @map("RescheduleLogID")
+  rescheduleLogId Int       @id(map: "PK_tblRescheduleLog") @default(dbgenerated("NEXT VALUE FOR [Seq_ReScheduleLog]"), map: "DF_RescheduleLogID") @map("RescheduleLogID")
   workOrderId     Int?      @map("WorkOrderID")
   fromDueDate     DateTime? @map("FromDueDate") @db.DateTime
   toDueDate       DateTime? @map("ToDueDate") @db.DateTime
@@ -2104,7 +2104,7 @@ model TblReScheduleLog {
 }
 
 model TblRotationLog {
-  rotationLogId  Int       @id(map: "PK_tblRotationLog") @default(dbgenerated("NEXT VALUE FOR [Seq_Order]"), map: "DF_Order_ID") @map("RotationLogID")
+  rotationLogId  Int       @id(map: "PK_tblRotationLog") @default(dbgenerated("NEXT VALUE FOR [Seq_RotationLog]"), map: "DF_RotationLogID") @map("RotationLogID")
   compId         Int?      @map("CompID")
   functionId     Int?      @map("FunctionID")
   userInsertedId Int?      @map("UserInsertedID")
@@ -2130,7 +2130,7 @@ model TblRotationLog {
 }
 
 model TblRound {
-  roundId                 Int       @id(map: "PK_tblRound") @default(dbgenerated("NEXT VALUE FOR [Seq_PendingType]"), map: "DF_PendingType_ID") @map("RoundID")
+  roundId                 Int       @id(map: "PK_tblRound") @default(dbgenerated("NEXT VALUE FOR [Seq_Round]"), map: "DF_RoundID") @map("RoundID")
   maintCauseId            Int?      @map("MaintCauseID")
   maintClassId            Int?      @map("MaintClassID")
   maintTypeId             Int?      @map("MaintTypeID")
@@ -2176,7 +2176,7 @@ model TblRound {
 }
 
 model TblRoundCompJob {
-  roundCompJobId   Int       @id(map: "PK_tblRoundCompJob") @default(dbgenerated("NEXT VALUE FOR [Seq_ProductType]"), map: "DF_ProductType_ID") @map("RoundCompJobID")
+  roundCompJobId   Int       @id(map: "PK_tblRoundCompJob") @default(dbgenerated("NEXT VALUE FOR [Seq_RoundCompJob]"), map: "DF_RoundCompJobID") @map("RoundCompJobID")
   compJobId        Int       @map("CompJobID")
   roundId          Int       @map("RoundID")
   jobSequence      Int?      @map("JobSequence")
@@ -2204,7 +2204,7 @@ model TblRoundCompJob {
 }
 
 model TblSpareLocation {
-  spareLocationId Int       @id(map: "PK_tblSpareLocation") @default(dbgenerated("NEXT VALUE FOR [Seq_QualityGrade]"), map: "DF_QualityGrade_ID") @map("SpareLocationID")
+  spareLocationId Int       @id(map: "PK_tblSpareLocation") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareLocation]"), map: "DF_SpareLocationID") @map("SpareLocationID")
   partId          Int?      @map("PartID")
   locationId      Int?      @map("LocationID")
   inStock         Int?      @map("InStock")
@@ -2231,7 +2231,7 @@ model TblSpareLocation {
 }
 
 model TblSpareType {
-  partTypeId        Int       @id(map: "PK_tblSpareType") @default(dbgenerated("NEXT VALUE FOR [Seq_ReceiverGroup]"), map: "DF_ReceiverGroup_ID") @map("PartTypeID")
+  partTypeId        Int       @id(map: "PK_tblSpareType") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareType]"), map: "DF_PartTypeID") @map("PartTypeID")
   parentPartTypeId  Int?      @map("ParentPartTypeID")
   stockClassId      Int?      @map("StockClassID")
   layoutId          Int?      @map("LayoutID")
@@ -2280,7 +2280,7 @@ model TblSpareType {
 }
 
 model TblSpareUnit {
-  partId            Int       @id(map: "PK_tblSpareUnit") @default(dbgenerated("NEXT VALUE FOR [Seq_ReceiverGroupUsers]"), map: "DF_ReceiverGroupUsers_ID") @map("PartID")
+  partId            Int       @id(map: "PK_tblSpareUnit") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareUnit]"), map: "DF_PartID") @map("PartID")
   partTypeId        Int?      @map("PartTypeID")
   defaultLocationId Int?      @map("DefaultLocationID")
   locationDetail    String?   @map("LocationDetail") @db.NVarChar(200)
@@ -2317,7 +2317,7 @@ model TblSpareUnit {
 }
 
 model TblStockClass {
-  stockClassId     Int       @id(map: "PK_tblStockClass") @default(dbgenerated("NEXT VALUE FOR [Seq_RequiredPart]"), map: "DF_RequiredPart_ID") @map("StockClassID")
+  stockClassId     Int       @id(map: "PK_tblStockClass") @default(dbgenerated("NEXT VALUE FOR [Seq_StockClass]"), map: "DF_StockClassID") @map("StockClassID")
   code             String?   @map("Code") @db.NVarChar(200)
   descr            String?   @map("Descr") @db.NVarChar(200)
   receiptTolerance Int?      @map("ReceiptTolerance")
@@ -2339,7 +2339,7 @@ model TblStockClass {
 }
 
 model TblTableId {
-  name           String    @id(map: "PK_tblTableID") @default("NEXT VALUE FOR [Seq_ReScheduleLog]", map: "DF_ReScheduleLog_ID") @map("Name") @db.NVarChar(50)
+  name           String    @id(map: "PK_tblTableID") @default("NEXT VALUE FOR [Seq_TableID]", map: "DF_Name") @map("Name") @db.NVarChar(50)
   beginId        String?   @map("BeginId") @db.NVarChar(50)
   lastId         String?   @map("LastId") @db.NVarChar(50)
   spare1         String?   @map("Spare1") @db.NVarChar(50)
@@ -2366,7 +2366,7 @@ model TblTableId {
 }
 
 model TblUnit {
-  unitId         Int       @id(map: "PK_tblUnit") @default(dbgenerated("NEXT VALUE FOR [Seq_RotationLog]"), map: "DF_RotationLog_ID") @map("UnitID")
+  unitId         Int       @id(map: "PK_tblUnit") @default(dbgenerated("NEXT VALUE FOR [Seq_Unit]"), map: "DF_UnitID") @map("UnitID")
   code           String?   @map("Code") @db.NVarChar(10)
   name           String?   @map("Name") @db.NVarChar(15)
   allowDecimals  Int?      @map("AllowDecimals")
@@ -2389,7 +2389,7 @@ model TblUnit {
 }
 
 model TblUserAttachmentInfo {
-  attachmentId   Int       @id(map: "PK_tblUser_AttachmentInfo") @default(dbgenerated("NEXT VALUE FOR [Seq_Round]"), map: "DF_Round_ID") @map("AttachmentId")
+  attachmentId   Int       @id(map: "PK_tblUser_AttachmentInfo") @map("AttachmentId")
   fileTypeId     Int       @map("FileTypeId") @db.TinyInt
   userId         Int?      @map("UserId")
   attTitle       String?   @db.NVarChar(50)
@@ -2416,9 +2416,9 @@ model TblUserAttachmentInfo {
 }
 
 model TblUserAttachmentRelations {
-  attachmentId      Int       @default(dbgenerated("NEXT VALUE FOR [Seq_RoundCompJob]"), map: "DF_RoundCompJob_ID") @map("AttachmentId")
-  foreignId         Int       @default(dbgenerated("NEXT VALUE FOR [Seq_SenderGroup]"), map: "DF_SenderGroup_ID") @map("ForeignId")
-  foreignTableIndex Int       @default(dbgenerated("NEXT VALUE FOR [Seq_SendReceiveDocType]"), map: "DF_SendReceiveDocType_ID") @map("ForeignTableIndex") @db.SmallInt
+  attachmentId      Int       @map("AttachmentId")
+  foreignId         Int       @map("ForeignId")
+  foreignTableIndex Int       @map("ForeignTableIndex") @db.SmallInt
   userId            Int       @map("UserId")
   lastUpdate        DateTime? @map("LastUpdate") @db.DateTime
   userText1         String?   @map("UserText1") @db.NVarChar(500)
@@ -2440,7 +2440,7 @@ model TblUserAttachmentRelations {
 }
 
 model TblUserDataAccess {
-  userDataAccessId Int       @id(map: "PK_TblUserDataAccess") @default(dbgenerated("NEXT VALUE FOR [Seq_SendReceiveLog]"), map: "DF_SendReceiveLog_ID") @map("UserDataAccessId")
+  userDataAccessId Int       @id(map: "PK_TblUserDataAccess") @default(dbgenerated("NEXT VALUE FOR [Seq_UserDataAccess]"), map: "DF_UserDataAccessId") @map("UserDataAccessId")
   userId           Int?      @map("UserId")
   discId           Int?      @map("DiscId")
   groupId          Int?      @map("GroupId")
@@ -2461,7 +2461,7 @@ model TblUserDataAccess {
 }
 
 model TblUserSign {
-  userSignId     Int       @id(map: "PK_tblUserSign") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareDepreciation]"), map: "DF_SpareDepreciation_ID") @map("UserSignID")
+  userSignId     Int       @id(map: "PK_tblUserSign") @default(dbgenerated("NEXT VALUE FOR [Seq_UserSign]"), map: "DF_UserSignID") @map("UserSignID")
   userId         Int?      @map("UserID")
   signImage      Bytes?    @map("SignImage") @db.Image
   userPosition   String?   @map("UserPosition") @db.NVarChar(500)
@@ -2483,7 +2483,7 @@ model TblUserSign {
 }
 
 model TblWoJob {
-  woJobId              Int       @id(map: "PK_tblWOJob") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareLocation]"), map: "DF_SpareLocation_ID") @map("WOJobID")
+  woJobId              Int       @id(map: "PK_tblWOJob") @default(dbgenerated("NEXT VALUE FOR [Seq_WOJob]"), map: "DF_WOJobID") @map("WOJobID")
   workOrderId          Int?      @map("WorkOrderID")
   compJobId            Int?      @map("CompJobID")
   jobSequence          Int?      @map("JobSequence")
@@ -2507,7 +2507,7 @@ model TblWoJob {
 }
 
 model TblWorkOrder {
-  workOrderId        Int       @id(map: "PK_tblWorkOrder") @default(dbgenerated("NEXT VALUE FOR [Seq_SparePartLog]"), map: "DF_SparePartLog_ID") @map("WorkOrderID")
+  workOrderId        Int       @id(map: "PK_tblWorkOrder") @default(dbgenerated("NEXT VALUE FOR [Seq_WorkOrder]"), map: "DF_WorkOrderID") @map("WorkOrderID")
   applicationId      Int?      @map("ApplicationID")
   compJobId          Int?      @map("CompJobID")
   maintClassId       Int?      @map("MaintClassID")
@@ -2604,7 +2604,7 @@ model TblWorkOrder {
 }
 
 model TblWorkShopComponent {
-  wShopCompId       Int       @id(map: "PK_tblWorkShopComponent") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareType]"), map: "DF_SpareType_ID") @map("WShopCompID")
+  wShopCompId       Int       @id(map: "PK_tblWorkShopComponent") @default(dbgenerated("NEXT VALUE FOR [Seq_WorkShopComponent]"), map: "DF_WShopCompID") @map("WShopCompID")
   wShopRequestId    Int       @map("WShopRequestID")
   compId            Int       @map("CompID")
   compDesc          String?   @map("CompDesc") @db.NVarChar(200)
@@ -2629,7 +2629,7 @@ model TblWorkShopComponent {
 }
 
 model TblWorkShopDone {
-  wShopDoneId            Int       @id(map: "PK_tblWorkShopDone") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareTypeAlternative]"), map: "DF_SpareTypeAlternative_ID") @map("WShopDoneID")
+  wShopDoneId            Int       @id(map: "PK_tblWorkShopDone") @default(dbgenerated("NEXT VALUE FOR [Seq_WorkShopDone]"), map: "DF_WShopDoneID") @map("WShopDoneID")
   wShopRequestId         Int       @map("WShopRequestID")
   compeleteDate          DateTime? @map("CompeleteDate") @db.DateTime
   descRepairCompelet     String?   @map("DescRepairCompelet") @db.NVarChar(300)
@@ -2666,7 +2666,7 @@ model TblWorkShopDone {
 }
 
 model TblWorkShopRequest {
-  wShopRequestId         Int       @id(map: "PK_tblWorkShopRequest") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareTypeExcel]"), map: "DF_SpareTypeExcel_ID") @map("WShopRequestID")
+  wShopRequestId         Int       @id(map: "PK_tblWorkShopRequest") @map("WShopRequestID")
   rigName                String?   @map("RigName") @db.NVarChar(200)
   jobOrderType           Int?      @map("JobOrderType")
   wShopRequestNo         Int?      @map("WShopRequestNO")

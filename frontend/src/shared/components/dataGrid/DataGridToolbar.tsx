@@ -9,10 +9,11 @@ import ButtonExport from "./toolbar/ButtonExport";
 import ButtonColumns from "./toolbar/ButtonColumns";
 import ButtonFilters from "./toolbar/ButtonFilter";
 import ButtonSearch from "./toolbar/ButtonSearch";
-import { Typography } from "@mui/material";
+import { Typography, useTheme, LinearProgress } from "@mui/material";
 
 interface DataGridToolbarProps {
   label: string;
+  loading?: boolean; // اضافه شد
   onAddClick?: () => void;
   onRefreshClick?: () => void;
 }
@@ -21,28 +22,43 @@ export default function DataGridToolbar({
   onAddClick,
   onRefreshClick,
   label,
+  loading,
 }: DataGridToolbarProps) {
-  return (
-    <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
-      <Typography fontWeight={"bold"}>{label}</Typography>
+  const theme = useTheme();
 
-      <Box display="flex" gap={0.5}>
-        <ButtonSearch />
-        <ButtonDensity />
-        <ButtonExport />
-        <ButtonColumns />
-        <ButtonFilters />
-        {onRefreshClick && (
-          <ToolbarButton title="Refresh" onClick={onRefreshClick}>
-            <RefreshIcon />
-          </ToolbarButton>
-        )}
-        {onAddClick && (
-          <ToolbarButton title="Add" onClick={onAddClick}>
-            <AddIcon />
-          </ToolbarButton>
-        )}
-      </Box>
-    </Toolbar>
+  return (
+    <Box sx={{ width: "100%" }}>
+      {/* Toolbar */}
+      <Toolbar
+        style={{
+          display: "flex",
+          paddingLeft: ".5rem",
+          justifyContent: "space-between",
+          borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
+        }}
+      >
+        <Typography fontWeight={"bold"}>{label}</Typography>
+
+        <Box display="flex" gap={0.5}>
+          <ButtonSearch />
+          <ButtonDensity />
+          <ButtonExport />
+          <ButtonColumns />
+          <ButtonFilters />
+          {onRefreshClick && (
+            <ToolbarButton title="Refresh" onClick={onRefreshClick}>
+              <RefreshIcon />
+            </ToolbarButton>
+          )}
+          {onAddClick && (
+            <ToolbarButton title="Add" onClick={onAddClick}>
+              <AddIcon />
+            </ToolbarButton>
+          )}
+        </Box>
+      </Toolbar>
+
+      {loading && <LinearProgress />}
+    </Box>
   );
 }

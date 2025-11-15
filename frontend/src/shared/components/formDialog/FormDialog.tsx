@@ -1,12 +1,6 @@
-import {
-  Dialog,
-  DialogContent,
-  CircularProgress,
-  DialogActions,
-} from "@mui/material";
-import FormDialogHeader from "./FormDialogHeader";
+import { Dialog, DialogContent, DialogActions } from "@mui/material";
 import FormDialogAction from "./FormDialogAction";
-import Spinner from "../Spinner";
+import DialogHeader from "../dialog/DialogHeader";
 
 export type FormDialogWrapperProps = {
   open: boolean;
@@ -14,8 +8,8 @@ export type FormDialogWrapperProps = {
   title: string;
   submitting?: boolean;
   loadingInitial?: boolean;
-  onSubmit?: () => void;
-  children: React.ReactNode; // محتوای فرم
+  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void; // ⚡ حتماً event را بگیر
+  children: React.ReactNode;
   cancelText?: string;
   submitText?: string;
   disabled?: boolean;
@@ -42,7 +36,7 @@ export default function FormDialog({
       fullWidth
       maxWidth="sm"
     >
-      <FormDialogHeader
+      <DialogHeader
         title={title}
         onClose={onClose}
         loading={loadingInitial}
@@ -50,7 +44,12 @@ export default function FormDialog({
       />
 
       <DialogContent dividers>
-        <form onSubmit={onSubmit}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault(); // جلوگیری از reload مرورگر
+            onSubmit?.(e);
+          }}
+        >
           {children}
           <DialogActions sx={{ p: 0, m: 0, mt: 2 }}>
             <FormDialogAction

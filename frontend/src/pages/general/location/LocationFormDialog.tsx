@@ -1,20 +1,20 @@
 import { memo, useEffect, useMemo, useState, useCallback } from "react";
 import { Box, TextField } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import { tblLocation, TypeTblLocation } from "@/core/api/generated/api";
 
-// === Validation Schema with Yup ===
-const schema = Yup.object({
-  name: Yup.string().required("Name is required"),
-  locationCode: Yup.string().required("Code is required"),
-  parentLocationId: Yup.number().nullable(),
-  orderId: Yup.number().nullable(),
+// === Validation Schema with Zod ===
+const schema = z.object({
+  name: z.string().min(1, "Name is required"),
+  locationCode: z.string(),
+  parentLocationId: z.number().nullable().optional(),
+  orderId: z.number().nullable().optional(),
 });
 
-export type LocationFormValues = Yup.InferType<typeof schema>;
+export type LocationFormValues = z.infer<typeof schema>;
 
 type Props = {
   open: boolean;
@@ -45,7 +45,7 @@ function LocationFormDialog({
   );
 
   const { control, handleSubmit, reset } = useForm<LocationFormValues>({
-    resolver: yupResolver(schema),
+    resolver: zodResolver(schema),
     defaultValues,
   });
 
@@ -80,12 +80,15 @@ function LocationFormDialog({
     async (values: LocationFormValues) => {
       try {
         setSubmitting(true);
-        let result: TypeTblLocation;
 
+        // ✅ Validate with Zod
+        const validated = schema.parse(values);
+
+        let result: TypeTblLocation;
         if (mode === "create") {
-          result = await tblLocation.create(values);
+          result = await tblLocation.create(validated);
         } else if (mode === "update" && recordId) {
-          result = await tblLocation.update(recordId, values);
+          result = await tblLocation.update(recordId, validated);
         } else {
           return;
         }
@@ -103,7 +106,7 @@ function LocationFormDialog({
 
   return (
     <FormDialog
-      open={true}
+      open={open}
       onClose={onClose}
       title={mode === "create" ? "Create Location" : "Edit Location"}
       submitting={submitting}
@@ -117,7 +120,6 @@ function LocationFormDialog({
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              slotProps={{ inputLabel: { shrink: true } }}
               label="Code *"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -133,7 +135,6 @@ function LocationFormDialog({
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              slotProps={{ inputLabel: { shrink: true } }}
               label="Name *"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -149,7 +150,6 @@ function LocationFormDialog({
           render={({ field }) => (
             <TextField
               {...field}
-              slotProps={{ inputLabel: { shrink: true } }}
               label="Parent Id"
               type="number"
               size="small"
@@ -170,7 +170,6 @@ function LocationFormDialog({
           render={({ field }) => (
             <TextField
               {...field}
-              slotProps={{ inputLabel: { shrink: true } }}
               label="Order"
               type="number"
               size="small"

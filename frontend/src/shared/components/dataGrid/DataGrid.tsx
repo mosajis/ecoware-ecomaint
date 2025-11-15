@@ -36,6 +36,7 @@ export default function CustomizedDataGrid({
   leftToolbar,
   initialState,
   label,
+  loading,
   onAddClick,
   onRefreshClick,
   ...rest
@@ -53,15 +54,12 @@ export default function CustomizedDataGrid({
       // @ts-ignore
       slots={{ toolbar: DataGridToolbar }}
       slotProps={{
-        loadingOverlay: {
-          variant: "linear-progress",
-          noRowsVariant: "linear-progress",
-        },
         toolbar: {
           // @ts-ignore
           onAddClick,
           onRefreshClick,
           label,
+          loading, // پاس دادن loading
         },
       }}
       {...rest}
