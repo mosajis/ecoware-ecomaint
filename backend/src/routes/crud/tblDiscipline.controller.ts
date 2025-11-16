@@ -17,10 +17,11 @@ const ControllerTblDiscipline = new BaseController({
   swagger: {
     tags: ["tblDiscipline"],
   },
+  primaryKey: "discId",
   service: ServiceTblDiscipline,
   createSchema: TblDisciplineInputCreate,
   updateSchema: TblDisciplineInputUpdate,
   responseSchema: buildResponseSchema(TblDisciplinePlain, TblDiscipline),
 }).app;
 
-export default ControllerTblDiscipline
+export default ControllerTblDiscipline;

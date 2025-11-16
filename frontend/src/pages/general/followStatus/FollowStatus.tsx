@@ -1,20 +1,23 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import AddressFormDialog from "./AddressFormDialog";
+import FollowStatusFormDialog from "./FollowStatusFormDialog";
 import { useCallback, useMemo, useState } from "react";
 import { Box } from "@mui/material";
-import { tblAddress, TypeTblAddress } from "@/core/api/generated/api";
-import { type GridColDef } from "@mui/x-data-grid";
+import { tblFollowStatus, TypeTblFollowStatus } from "@/core/api/generated/api";
+import { GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { useDataGrid } from "../_hooks/useDataGrid";
 
-export default function AddressListPage() {
-  const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
+export default function FollowStatusListPage() {
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
 
   // === useDataGrid ===
   const { rows, loading, fetchData, handleDelete, handleFormSuccess } =
-    useDataGrid<TypeTblAddress, number>(tblAddress, (x) => x.addressId);
+    useDataGrid<TypeTblFollowStatus, number>(
+      tblFollowStatus,
+      (x) => x.followStatusId
+    );
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
@@ -23,22 +26,18 @@ export default function AddressListPage() {
     setOpenForm(true);
   }, []);
 
-  const handleEdit = useCallback((row: TypeTblAddress) => {
-    setSelectedRowId(row.addressId);
+  const handleEdit = useCallback((row: TypeTblFollowStatus) => {
+    setSelectedRowId(row.followStatusId);
     setMode("update");
     setOpenForm(true);
   }, []);
 
   // === Columns ===
-  const columns = useMemo<GridColDef[]>(
+  const columns = useMemo<GridColDef<TypeTblFollowStatus>[]>(
     () => [
-      { field: "code", headerName: "Code", width: 120 },
-      { field: "name", headerName: "Name", flex: 1 },
-      { field: "address1", headerName: "Address 1", flex: 1 },
-      { field: "address2", headerName: "Address 2", flex: 1 },
-      { field: "phone", headerName: "Phone", flex: 2 },
-      { field: "contact", headerName: "Contact Person", flex: 1 },
-      { field: "eMail", headerName: "Email", flex: 1 },
+      { field: "fsName", headerName: "Name", flex: 2 },
+      { field: "fsDesc", headerName: "Description", flex: 3 },
+      { field: "sortId", headerName: "Order No", width: 120 },
       dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
     ],
     [handleEdit, handleDelete]
@@ -47,23 +46,23 @@ export default function AddressListPage() {
   return (
     <Box height="100%">
       <CustomizedDataGrid
-        label="Address"
+        label="Follow Status"
         showToolbar
-        onAddClick={handleCreate}
-        onRefreshClick={() => fetchData()}
         rows={rows}
         columns={columns}
         loading={loading}
-        getRowId={(row) => row.addressId}
+        getRowId={(row) => row.followStatusId}
+        onAddClick={handleCreate}
+        onRefreshClick={fetchData}
       />
 
-      <AddressFormDialog
+      <FollowStatusFormDialog
         open={openForm}
         mode={mode}
         recordId={selectedRowId}
         onClose={() => setOpenForm(false)}
-        onSuccess={(record) => {
-          handleFormSuccess(record);
+        onSuccess={() => {
+          fetchData();
           setOpenForm(false);
         }}
       />

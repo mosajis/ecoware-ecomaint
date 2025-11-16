@@ -17,10 +17,11 @@ const ControllerTblJobClass = new BaseController({
   swagger: {
     tags: ["tblJobClass"],
   },
+  primaryKey: "jobClassId",
   service: ServiceTblJobClass,
   createSchema: TblJobClassInputCreate,
   updateSchema: TblJobClassInputUpdate,
   responseSchema: buildResponseSchema(TblJobClassPlain, TblJobClass),
 }).app;
 
-export default ControllerTblJobClass
+export default ControllerTblJobClass;

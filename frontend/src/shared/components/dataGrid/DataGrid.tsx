@@ -4,6 +4,7 @@ import {
   type DataGridProps,
   type GridColDef,
 } from "@mui/x-data-grid";
+import { useMemo } from "react";
 
 const rowNumberColumn: GridColDef = {
   field: "rowNumber",
@@ -14,13 +15,6 @@ const rowNumberColumn: GridColDef = {
   disableColumnMenu: true,
   align: "center",
   headerAlign: "center",
-  renderCell: (params) => {
-    const api = params.api;
-    const page = api.state.pagination.paginationModel.page ?? 0;
-    const pageSize = api.state.pagination.paginationModel.pageSize ?? 20;
-    const rowIndex = api.getRowIndexRelativeToVisibleRows(params.id) + 1;
-    return page * pageSize + rowIndex;
-  },
 };
 
 interface CustomizedDataGridProps extends DataGridProps {
@@ -41,11 +35,22 @@ export default function CustomizedDataGrid({
   onRefreshClick,
   ...rest
 }: CustomizedDataGridProps) {
-  const columnsWithRowNumber: GridColDef[] = [rowNumberColumn, ...columns];
+  const indexedRows = useMemo(() => {
+    if (!rows) return;
+    return rows.map((row, index) => ({
+      ...row,
+      rowNumber: index + 1,
+    }));
+  }, [rows]);
+
+  const columnsWithRowNumber = useMemo(
+    () => [rowNumberColumn, ...columns],
+    [columns]
+  );
 
   return (
     <DataGrid
-      rows={rows}
+      rows={indexedRows}
       columns={columnsWithRowNumber}
       initialState={{
         density: "compact",
@@ -59,7 +64,7 @@ export default function CustomizedDataGrid({
           onAddClick,
           onRefreshClick,
           label,
-          loading, // پاس دادن loading
+          loading,
         },
       }}
       {...rest}

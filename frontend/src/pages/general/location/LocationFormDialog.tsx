@@ -1,4 +1,4 @@
-import { memo, useEffect, useMemo, useState, useCallback } from "react";
+import { memo, useEffect, useState, useCallback } from "react";
 import { Box, TextField } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,43 +34,49 @@ function LocationFormDialog({
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const defaultValues: LocationFormValues = useMemo(
-    () => ({
-      name: "",
-      locationCode: "",
-      parentLocationId: null,
-      orderId: null,
-    }),
-    []
-  );
+  const defaultValues: LocationFormValues = {
+    name: "",
+    locationCode: "",
+    parentLocationId: null,
+    orderId: null,
+  };
 
   const { control, handleSubmit, reset } = useForm<LocationFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
   });
 
-  // === Fetch initial data for update ===
+  // === Fetch initial data for update with AbortController ===
   const fetchData = useCallback(async () => {
-    if (mode === "update" && recordId) {
-      setLoadingInitial(true);
-      try {
-        const res = await tblLocation.getById(recordId);
+    if (mode !== "update" || !recordId) {
+      reset(defaultValues);
+      return;
+    }
+
+    setLoadingInitial(true);
+    const controller = new AbortController();
+
+    try {
+      const res = await tblLocation.getById(recordId);
+      if (!controller.signal.aborted) {
         reset({
           name: res?.name ?? "",
           locationCode: res?.locationCode ?? "",
           parentLocationId: res?.parentLocationId ?? null,
           orderId: res?.orderId ?? null,
         });
-      } finally {
-        setLoadingInitial(false);
       }
-    } else {
-      reset(defaultValues);
+    } finally {
+      setLoadingInitial(false);
     }
-  }, [mode, recordId, reset, defaultValues]);
+
+    return () => controller.abort();
+  }, [mode, recordId, reset]);
 
   useEffect(() => {
-    if (open) fetchData();
+    if (open) {
+      fetchData();
+    }
   }, [open, fetchData]);
 
   const isDisabled = loadingInitial || submitting;
@@ -78,25 +84,26 @@ function LocationFormDialog({
   // === Handle form submit ===
   const handleFormSubmit = useCallback(
     async (values: LocationFormValues) => {
+      const parsed = schema.safeParse(values);
+      if (!parsed.success) {
+        console.error("Validation failed", parsed.error.format());
+        return;
+      }
+
       try {
         setSubmitting(true);
-
-        // ✅ Validate with Zod
-        const validated = schema.parse(values);
-
         let result: TypeTblLocation;
+
         if (mode === "create") {
-          result = await tblLocation.create(validated);
+          result = await tblLocation.create(parsed.data);
         } else if (mode === "update" && recordId) {
-          result = await tblLocation.update(recordId, validated);
+          result = await tblLocation.update(recordId, parsed.data);
         } else {
           return;
         }
 
         onSuccess(result);
         onClose();
-      } catch (err) {
-        console.error("Submit failed", err);
       } finally {
         setSubmitting(false);
       }

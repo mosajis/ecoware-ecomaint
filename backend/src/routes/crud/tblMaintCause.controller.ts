@@ -17,10 +17,11 @@ const ControllerTblMaintCause = new BaseController({
   swagger: {
     tags: ["tblMaintCause"],
   },
+  primaryKey: "maintCauseId",
   service: ServiceTblMaintCause,
   createSchema: TblMaintCauseInputCreate,
   updateSchema: TblMaintCauseInputUpdate,
   responseSchema: buildResponseSchema(TblMaintCausePlain, TblMaintCause),
 }).app;
 
-export default ControllerTblMaintCause
+export default ControllerTblMaintCause;

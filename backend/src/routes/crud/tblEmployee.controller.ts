@@ -17,10 +17,11 @@ const ControllerTblEmployee = new BaseController({
   swagger: {
     tags: ["tblEmployee"],
   },
+  primaryKey: "employeeId",
   service: ServiceTblEmployee,
   createSchema: TblEmployeeInputCreate,
   updateSchema: TblEmployeeInputUpdate,
   responseSchema: buildResponseSchema(TblEmployeePlain, TblEmployee),
 }).app;
 
-export default ControllerTblEmployee
+export default ControllerTblEmployee;

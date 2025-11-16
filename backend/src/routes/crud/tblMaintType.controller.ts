@@ -17,10 +17,11 @@ const ControllerTblMaintType = new BaseController({
   swagger: {
     tags: ["tblMaintType"],
   },
+  primaryKey: "maintTypeId",
   service: ServiceTblMaintType,
   createSchema: TblMaintTypeInputCreate,
   updateSchema: TblMaintTypeInputUpdate,
   responseSchema: buildResponseSchema(TblMaintTypePlain, TblMaintType),
 }).app;
 
-export default ControllerTblMaintType
+export default ControllerTblMaintType;

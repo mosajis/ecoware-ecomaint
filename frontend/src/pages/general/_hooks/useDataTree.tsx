@@ -1,15 +1,25 @@
 import { useState, useEffect, useCallback } from "react";
 import { TreeViewBaseItem } from "@mui/x-tree-view";
 
+export type QueryParams = {
+  page?: number;
+  perPage?: number;
+  sort?: string;
+  filter?: string;
+  include?: string;
+  paginate?: boolean;
+  force?: boolean;
+};
+
 export type TreeNode<T> = TreeViewBaseItem & {
   parentId: string | null;
   children?: TreeNode<T>[];
   data?: T;
 };
 
-export function useTreeGrid<T, K extends string | number, P = undefined>(
+export function useDataTree<T, K extends string | number>(
   api: {
-    getAll: (params?: P) => Promise<{ items: T[] }>;
+    getAll: (params?: QueryParams) => Promise<{ items: T[] }>;
     deleteById: (id: K) => Promise<any>;
   },
   mapper: (row: T) => TreeNode<T>,
@@ -19,7 +29,7 @@ export function useTreeGrid<T, K extends string | number, P = undefined>(
   const [treeItems, setTreeItems] = useState<TreeNode<T>[]>([]);
   const [loading, setLoading] = useState(false);
 
-  // --- Helper: build tree from flat array ---
+  // Build tree helper
   const buildTree = useCallback((nodes: TreeNode<T>[]) => {
     const map = new Map<string, TreeNode<T>>();
     nodes.forEach((n) => map.set(n.id, { ...n, children: [] }));
@@ -36,7 +46,7 @@ export function useTreeGrid<T, K extends string | number, P = undefined>(
     return roots;
   }, []);
 
-  // --- Helper: flatten tree to array ---
+  // flatten
   const flattenTree = useCallback((nodes: TreeNode<T>[]): TreeNode<T>[] => {
     return nodes.reduce<TreeNode<T>[]>((acc, n) => {
       const { children, ...rest } = n;
@@ -48,12 +58,16 @@ export function useTreeGrid<T, K extends string | number, P = undefined>(
     }, []);
   }, []);
 
-  // --- Fetch data (با پارامتر اختیاری) ---
+  // --- fetchData with QueryParams ---
   const fetchData = useCallback(
-    async (params?: any) => {
+    async (params?: QueryParams) => {
       setLoading(true);
       try {
-        const res = await api.getAll({ ...params, paginate: false });
+        const res = await api.getAll({
+          ...params,
+          paginate: false, // ثابت + safe
+        });
+
         setRows(res.items);
 
         const nodes = res.items.map(mapper);
@@ -65,7 +79,6 @@ export function useTreeGrid<T, K extends string | number, P = undefined>(
     [api, mapper, buildTree]
   );
 
-  // --- Delete row ---
   const handleDelete = useCallback(
     async (row: T) => {
       const id = getId(row);
@@ -86,32 +99,24 @@ export function useTreeGrid<T, K extends string | number, P = undefined>(
     [api, getId]
   );
 
-  // --- Add or update row ---
   const handleFormSuccess = useCallback(
     (updatedRecord: T) => {
       const id = getId(updatedRecord);
 
-      // Update rows
       setRows((prev) => {
         const exists = prev.find((r) => getId(r) === id);
         if (exists)
           return prev.map((r) => (getId(r) === id ? updatedRecord : r));
-        return [updatedRecord, ...prev]; // create: add to top
+        return [updatedRecord, ...prev];
       });
 
-      // Update treeItems
       setTreeItems((prev) => {
         const flat = flattenTree(prev);
-        const existingIndex = flat.findIndex((n) => n.id === id.toString());
+        const idx = flat.findIndex((n) => n.id === id.toString());
         const newNode = mapper(updatedRecord);
 
-        if (existingIndex > -1) {
-          // Update: جای قبلی حفظ شود
-          flat[existingIndex] = newNode;
-        } else {
-          // Create: به ابتدای array اضافه شود
-          flat.unshift(newNode);
-        }
+        if (idx > -1) flat[idx] = newNode;
+        else flat.unshift(newNode);
 
         return buildTree(flat);
       });
@@ -119,9 +124,8 @@ export function useTreeGrid<T, K extends string | number, P = undefined>(
     [mapper, getId, flattenTree, buildTree]
   );
 
-  // --- Refresh row ---
   const handleRefresh = useCallback(
-    (params?: P) => fetchData(params),
+    (params?: QueryParams) => fetchData(params),
     [fetchData]
   );
 
@@ -136,6 +140,6 @@ export function useTreeGrid<T, K extends string | number, P = undefined>(
     fetchData,
     handleDelete,
     handleFormSuccess,
-    handleRefresh, // اضافه شد
+    handleRefresh,
   };
 }

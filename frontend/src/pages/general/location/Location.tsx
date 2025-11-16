@@ -5,7 +5,8 @@ import LocationFormDialog from "./LocationFormDialog";
 import { useState, useCallback } from "react";
 import { tblLocation, TypeTblLocation } from "@/core/api/generated/api";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
-import { useTreeGrid } from "../_hooks/useTreeGrid";
+import { GridColDef } from "@mui/x-data-grid";
+import { useDataTree } from "../_hooks/useDataTree";
 
 export default function LocationListPage() {
   const [openForm, setOpenForm] = useState(false);
@@ -33,7 +34,7 @@ export default function LocationListPage() {
     handleDelete,
     handleFormSuccess,
     handleRefresh,
-  } = useTreeGrid<TypeTblLocation, number>(tblLocation, mapper, getId);
+  } = useDataTree<TypeTblLocation, number>(tblLocation, mapper, getId);
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
@@ -49,13 +50,14 @@ export default function LocationListPage() {
   }, []);
 
   const handleRefreshClicked = useCallback(() => {
-    handleRefresh(); // فراخوانی refresh hook
+    handleRefresh();
   }, [handleRefresh]);
 
   // === Columns ===
-  const columns = [
+  const columns: GridColDef<TypeTblLocation>[] = [
     { field: "locationCode", headerName: "Code", width: 120 },
-    { field: "locationId", headerName: "id", width: 120 },
+    { field: "locationId", headerName: "Id", width: 100 },
+    { field: "parentLocationId", headerName: "ParentId", width: 120 },
     { field: "name", headerName: "Name", flex: 1 },
     { field: "orderId", headerName: "Order", width: 80 },
     dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),

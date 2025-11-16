@@ -17,10 +17,11 @@ const ControllerTblFollowStatus = new BaseController({
   swagger: {
     tags: ["tblFollowStatus"],
   },
+  primaryKey: "followStatusId",
   service: ServiceTblFollowStatus,
   createSchema: TblFollowStatusInputCreate,
   updateSchema: TblFollowStatusInputUpdate,
   responseSchema: buildResponseSchema(TblFollowStatusPlain, TblFollowStatus),
 }).app;
 
-export default ControllerTblFollowStatus
+export default ControllerTblFollowStatus;

@@ -504,6 +504,21 @@ export const inputsCustomizations: Components<Theme> = {
       }),
     },
   },
+  MuiAutocomplete: {
+    styleOverrides: {
+      root: {
+        "& .MuiAutocomplete-endAdornment .MuiIconButton-root": {
+          border: 0,
+          borderRadius: "100%",
+          width: 29,
+          height: 29,
+        },
+        "& .MuiSvgIcon": {
+          fontSize: "17px",
+        },
+      },
+    },
+  },
   MuiIconButton: {
     styleOverrides: {
       root: ({ theme }) => ({

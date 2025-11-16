@@ -17,10 +17,11 @@ const ControllerTblPendingType = new BaseController({
   swagger: {
     tags: ["tblPendingType"],
   },
+  primaryKey: "pendTypeId",
   service: ServiceTblPendingType,
   createSchema: TblPendingTypeInputCreate,
   updateSchema: TblPendingTypeInputUpdate,
   responseSchema: buildResponseSchema(TblPendingTypePlain, TblPendingType),
 }).app;
 
-export default ControllerTblPendingType
+export default ControllerTblPendingType;

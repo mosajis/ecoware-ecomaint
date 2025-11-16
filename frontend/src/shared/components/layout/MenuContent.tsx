@@ -107,8 +107,8 @@ const menuSections: {
       {
         text: "Maint Class",
         icon: <PrecisionManufacturingRoundedIcon />,
-        id: "general:maint",
-        path: "/general/maint",
+        id: "general:maint-class",
+        path: "/general/maint-class",
       },
 
       {

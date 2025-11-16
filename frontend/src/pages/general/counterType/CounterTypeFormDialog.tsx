@@ -1,33 +1,32 @@
-import { memo, useEffect, useMemo, useState, useCallback } from "react";
+import { memo, useEffect, useState, useCallback, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Box, TextField, Button } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import { tblAddress, TypeTblAddress } from "@/core/api/generated/api";
+import { tblCounterType, TypeTblCounterType } from "@/core/api/generated/api";
 
-// === Validation Schema with Zod ===
+// === Zod schema ===
 const schema = z.object({
   code: z.string().nullable(),
   name: z.string().min(1, "Name is required").nullable(),
-  address1: z.string().nullable(),
-  address2: z.string().nullable(),
-  phone: z.string().nullable(),
-  eMail: z.string().nullable(),
-  contact: z.string().nullable(),
+  maxDailyValue: z.number().nullable(),
+  type: z.number().nullable(),
+  deptId: z.number().nullable(),
+  exportMarker: z.number().nullable(),
 });
 
-export type AddressFormValues = z.infer<typeof schema>;
+export type CounterTypeFormValues = z.infer<typeof schema>;
 
 type Props = {
   open: boolean;
   mode: "create" | "update";
   recordId?: number | null;
   onClose: () => void;
-  onSuccess: (data: TypeTblAddress) => void;
+  onSuccess: (data: TypeTblCounterType) => void;
 };
 
-function AddressFormDialog({
+function CounterTypeFormDialog({
   open,
   mode,
   recordId,
@@ -37,15 +36,14 @@ function AddressFormDialog({
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const defaultValues: AddressFormValues = useMemo(
+  const defaultValues: CounterTypeFormValues = useMemo(
     () => ({
       code: "",
       name: "",
-      address1: "",
-      address2: "",
-      phone: "",
-      eMail: "",
-      contact: "",
+      maxDailyValue: null,
+      type: null,
+      deptId: null,
+      exportMarker: null,
     }),
     []
   );
@@ -55,30 +53,30 @@ function AddressFormDialog({
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<AddressFormValues>({
+  } = useForm<CounterTypeFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
   });
 
-  // === Fetch initial data
+  // === Fetch data for update ===
   const fetchData = useCallback(async () => {
     if (mode === "update" && recordId) {
       setLoadingInitial(true);
       try {
-        const res = await tblAddress.getById(recordId);
+        const res = await tblCounterType.getById(recordId);
         if (res) {
           reset({
             code: res.code ?? "",
             name: res.name ?? "",
-            address1: res.address1 ?? "",
-            address2: res.address2 ?? "",
-            phone: res.phone ?? "",
-            eMail: res.eMail ?? "",
-            contact: res.contact ?? "",
+            maxDailyValue: res.maxDailyValue ?? null,
+            type: res.type ?? null,
+            deptId: res.deptId ?? null,
+            exportMarker: res.exportMarker ?? null,
           });
         }
       } catch (err) {
-        console.error("Failed to load address", err);
+        console.error("Failed to fetch CounterType", err);
+        reset(defaultValues);
       } finally {
         setLoadingInitial(false);
       }
@@ -93,24 +91,22 @@ function AddressFormDialog({
 
   const isDisabled = loadingInitial || submitting;
 
-  // === Form submit handler
   const handleFormSubmit = useCallback(
-    async (values: AddressFormValues) => {
+    async (values: CounterTypeFormValues) => {
       setSubmitting(true);
       try {
-        let result: TypeTblAddress | undefined;
+        let result: TypeTblCounterType;
         if (mode === "create") {
-          result = await tblAddress.create(values);
+          result = await tblCounterType.create(values);
         } else if (mode === "update" && recordId) {
-          result = await tblAddress.update(recordId, values);
+          result = await tblCounterType.update(recordId, values);
+        } else {
+          return;
         }
-
-        if (result) {
-          onSuccess(result);
-          onClose();
-        }
+        onSuccess(result);
+        onClose();
       } catch (err) {
-        console.error("Failed to submit address form", err);
+        console.error("Submit failed", err);
       } finally {
         setSubmitting(false);
       }
@@ -122,7 +118,7 @@ function AddressFormDialog({
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === "create" ? "Create Address" : "Edit Address"}
+      title={mode === "create" ? "Create Counter Type" : "Edit Counter Type"}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
@@ -134,7 +130,7 @@ function AddressFormDialog({
           render={({ field }) => (
             <TextField
               {...field}
-              label="Code *"
+              label="Code"
               size="small"
               error={!!errors.code}
               helperText={errors.code?.message}
@@ -143,7 +139,6 @@ function AddressFormDialog({
             />
           )}
         />
-
         <Controller
           name="name"
           control={control}
@@ -155,87 +150,87 @@ function AddressFormDialog({
               error={!!errors.name}
               helperText={errors.name?.message}
               disabled={isDisabled}
-              sx={{ gridColumn: "span 4" }}
-            />
-          )}
-        />
-
-        <Controller
-          name="address1"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Address 1"
-              size="small"
-              error={!!errors.address1}
-              helperText={errors.address1?.message}
-              disabled={isDisabled}
-              sx={{ gridColumn: "span 4" }}
-            />
-          )}
-        />
-
-        <Controller
-          name="address2"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Address 2"
-              size="small"
-              error={!!errors.address2}
-              helperText={errors.address2?.message}
-              disabled={isDisabled}
-              sx={{ gridColumn: "span 4" }}
-            />
-          )}
-        />
-
-        <Controller
-          name="contact"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Contact Person"
-              size="small"
-              error={!!errors.contact}
-              helperText={errors.contact?.message}
-              disabled={isDisabled}
               sx={{ gridColumn: "span 2" }}
             />
           )}
         />
-
         <Controller
-          name="phone"
+          name="maxDailyValue"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label="Phone"
+              label="Max Daily Value"
+              type="number"
               size="small"
-              error={!!errors.phone}
-              helperText={errors.phone?.message}
               disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
+              sx={{ gridColumn: "span 1" }}
+              value={field.value ?? ""}
+              onChange={(e) =>
+                field.onChange(
+                  e.target.value === "" ? null : Number(e.target.value)
+                )
+              }
             />
           )}
         />
-
         <Controller
-          name="eMail"
+          name="type"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label="Email"
+              label="Type"
+              type="number"
               size="small"
-              error={!!errors.eMail}
-              helperText={errors.eMail?.message}
               disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
+              sx={{ gridColumn: "span 1" }}
+              value={field.value ?? ""}
+              onChange={(e) =>
+                field.onChange(
+                  e.target.value === "" ? null : Number(e.target.value)
+                )
+              }
+            />
+          )}
+        />
+        <Controller
+          name="deptId"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Dept ID"
+              type="number"
+              size="small"
+              disabled={isDisabled}
+              sx={{ gridColumn: "span 1" }}
+              value={field.value ?? ""}
+              onChange={(e) =>
+                field.onChange(
+                  e.target.value === "" ? null : Number(e.target.value)
+                )
+              }
+            />
+          )}
+        />
+        <Controller
+          name="exportMarker"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Export Marker"
+              type="number"
+              size="small"
+              disabled={isDisabled}
+              sx={{ gridColumn: "span 1" }}
+              value={field.value ?? ""}
+              onChange={(e) =>
+                field.onChange(
+                  e.target.value === "" ? null : Number(e.target.value)
+                )
+              }
             />
           )}
         />
@@ -244,4 +239,4 @@ function AddressFormDialog({
   );
 }
 
-export default memo(AddressFormDialog);
+export default memo(CounterTypeFormDialog);
