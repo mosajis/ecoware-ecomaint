@@ -97,15 +97,20 @@ function LocationFormDialog({
         if (mode === "create") {
           result = await tblLocation.create({
             ...parsed.data,
-            userId: 0,
-            costCentreId: 0,
-            deptId: 0,
-            exportMarker: 0,
-            lastUpdated: new Date().getTime(),
-            orderId: 0,
+            tblLocation: {
+              connect: {
+                locationId: Number(parsed.data.parentLocationId || 0),
+              },
+            },
           });
         } else if (mode === "update" && recordId) {
-          result = await tblLocation.update(recordId, parsed.data);
+          result = await tblLocation.update(recordId, {
+            tblLocation: {
+              connect: {
+                locationId: Number(parsed.data.parentLocationId),
+              },
+            },
+          });
         } else {
           return;
         }
