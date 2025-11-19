@@ -1,10 +1,25 @@
-import { sequenceMap } from "./update-scehma-seq";
-
 const fs = require("fs");
 const path = require("path");
 
 const schemaPath = path.resolve("./orm/schema.prisma");
 let schema = fs.readFileSync(schemaPath, "utf-8");
+
+export const sequenceMap = {
+  TblAddress: [
+    {
+      field: "addressId",
+      replacement:
+        'addressId Int @id(map: "PK_tblAddress") @default(dbgenerated("NEXT VALUE FOR [Seq_Address]"), map: "DF_tbladdress_ID") @map("AddressID")',
+    },
+  ],
+  TblLocation: [
+    {
+      field: "locationId",
+      replacement:
+        'locationId Int @id(map: "PK_tblLocation") @default(dbgenerated("NEXT VALUE FOR [Seq_Location]"), map: "DF_tbllocation_ID") @map("LocationID")',
+    },
+  ],
+};
 
 schema = schema.replace(
   /model\s+(\w+)\s+\{([\s\S]*?)\n\}/gm,

@@ -190,6 +190,7 @@ export class BaseController<Model extends Record<string, any>> {
         {
           tags,
           detail: { summary: "Update" },
+          validate: false,
           params: t.Object({ [primaryKey]: t.Union([t.String(), t.Number()]) }),
           body: updateSchema,
           response: responseSchema,

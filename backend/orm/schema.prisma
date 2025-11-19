@@ -10,12 +10,6 @@ generator prismabox {
   typeboxImportDependencyName = "elysia"
   typeboxImportVariableName   = "t"
 }
-
-generator zod {
-  provider = "prisma-zod-generator"
-  output   = "./generated/zod"
-}
-
 datasource db {
   provider = "sqlserver"
   url      = env("DATABASE_URL")

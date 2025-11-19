@@ -22,7 +22,6 @@
     "bcrypt": "^6.0.0",
     "elysia": "latest",
     "mssql": "^11.0.1",
-    "prisma-zod-generator": "^1.32.1",
     "prismabox": "^1.1.25",
     "zod": "^4.1.12"
   },
@@ -31,7 +30,8 @@
     "@types/mssql": "^9.1.8",
     "bun-types": "latest",
     "prisma": "^6.16.2",
-    "prisma-case-format": "^2.2.1"
+    "prisma-case-format": "^2.2.1",
+    "ts-morph": "^27.0.2"
   },
   "module": "src/index.js"
 }

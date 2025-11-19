@@ -35,6 +35,11 @@ async function main() {
       continue;
     }
 
+    // پیدا کردن primary key از DMMF
+    const model = dmmf.datamodel.models.find((m) => m.name === modelName);
+    const primaryField = model.fields.find((f) => f.isId);
+    const primaryKey = primaryField ? primaryField.name : "id"; // اگر نبود id فرضی بگذار
+
     const content = `import { BaseController } from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
 import { PrismaClient } from "orm/generated/prisma";
@@ -54,6 +59,7 @@ const Controller${modelName} = new BaseController({
   swagger: {
     tags: ["${camel}"],
   },
+  primaryKey: "${primaryKey}",
   service: Service${modelName},
   createSchema: ${modelName}InputCreate,
   updateSchema: ${modelName}InputUpdate,
