@@ -13,22 +13,37 @@ import { Typography, useTheme, LinearProgress } from "@mui/material";
 
 interface DataGridToolbarProps {
   label: string;
-  loading?: boolean; // اضافه شد
+  loading?: boolean;
   onAddClick?: () => void;
   onRefreshClick?: () => void;
+
+  disableSearch?: boolean;
+  disableDensity?: boolean;
+  disableExport?: boolean;
+  disableColumns?: boolean;
+  disableFilters?: boolean;
+  disableAdd?: boolean;
+  disableRefresh?: boolean;
 }
 
-export default function DataGridToolbar({
-  onAddClick,
-  onRefreshClick,
-  label,
-  loading,
-}: DataGridToolbarProps) {
+export default function DataGridToolbar(props: DataGridToolbarProps) {
   const theme = useTheme();
+  const {
+    label,
+    loading,
+    onAddClick,
+    onRefreshClick,
+    disableSearch,
+    disableDensity,
+    disableExport,
+    disableColumns,
+    disableFilters,
+    disableAdd,
+    disableRefresh,
+  } = props;
 
   return (
     <Box sx={{ width: "100%" }}>
-      {/* Toolbar */}
       <Toolbar
         style={{
           display: "flex",
@@ -37,20 +52,20 @@ export default function DataGridToolbar({
           borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
         }}
       >
-        <Typography fontWeight={"bold"}>{label}</Typography>
+        <Typography fontWeight="bold">{label}</Typography>
 
         <Box display="flex" gap={0.5}>
-          <ButtonSearch />
-          <ButtonDensity />
-          <ButtonExport />
-          <ButtonColumns />
-          <ButtonFilters />
-          {onRefreshClick && (
+          {!disableSearch && <ButtonSearch />}
+          {!disableDensity && <ButtonDensity />}
+          {!disableExport && <ButtonExport />}
+          {!disableColumns && <ButtonColumns />}
+          {!disableFilters && <ButtonFilters />}
+          {!disableRefresh && onRefreshClick && (
             <ToolbarButton title="Refresh" onClick={onRefreshClick}>
               <RefreshIcon />
             </ToolbarButton>
           )}
-          {onAddClick && (
+          {!disableAdd && onAddClick && (
             <ToolbarButton title="Add" onClick={onAddClick}>
               <AddIcon />
             </ToolbarButton>

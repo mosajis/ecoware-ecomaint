@@ -1,7 +1,6 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import AddressFormDialog from "./AddressFormDialog";
 import { useCallback, useMemo, useState } from "react";
-import { Box } from "@mui/material";
 import { tblAddress, TypeTblAddress } from "@/core/api/generated/api";
 import { type GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
@@ -45,12 +44,14 @@ export default function AddressListPage() {
   );
 
   return (
-    <Box height="100%">
+    <>
       <CustomizedDataGrid
         label="Address"
         showToolbar
         onAddClick={handleCreate}
         onRefreshClick={() => fetchData()}
+        disableDensity
+        disableRowNumber
         rows={rows}
         columns={columns}
         loading={loading}
@@ -67,6 +68,6 @@ export default function AddressListPage() {
           setOpenForm(false);
         }}
       />
-    </Box>
+    </>
   );
 }

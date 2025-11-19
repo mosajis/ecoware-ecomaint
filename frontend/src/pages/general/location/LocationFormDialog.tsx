@@ -1,9 +1,9 @@
+import * as z from "zod";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
 import { memo, useEffect, useState, useCallback } from "react";
 import { Box, TextField } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import FormDialog from "@/shared/components/formDialog/FormDialog";
 import { tblLocation, TypeTblLocation } from "@/core/api/generated/api";
 
 // === Validation Schema with Zod ===
@@ -95,7 +95,15 @@ function LocationFormDialog({
         let result: TypeTblLocation;
 
         if (mode === "create") {
-          result = await tblLocation.create(parsed.data);
+          result = await tblLocation.create({
+            ...parsed.data,
+            userId: 0,
+            costCentreId: 0,
+            deptId: 0,
+            exportMarker: 0,
+            lastUpdated: new Date().getTime(),
+            orderId: 0,
+          });
         } else if (mode === "update" && recordId) {
           result = await tblLocation.update(recordId, parsed.data);
         } else {

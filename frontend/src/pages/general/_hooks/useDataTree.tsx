@@ -29,15 +29,16 @@ export function useDataTree<T, K extends string | number>(
   const [treeItems, setTreeItems] = useState<TreeNode<T>[]>([]);
   const [loading, setLoading] = useState(false);
 
-  // Build tree helper
   const buildTree = useCallback((nodes: TreeNode<T>[]) => {
     const map = new Map<string, TreeNode<T>>();
-    nodes.forEach((n) => map.set(n.id, { ...n, children: [] }));
+    nodes.forEach((n) => map.set(n.id.toString(), { ...n, children: [] }));
 
     const roots: TreeNode<T>[] = [];
     map.forEach((node) => {
-      if (node.parentId && map.has(node.parentId)) {
-        (map.get(node.parentId)!.children ||= []).push(node);
+      const parentId = node.parentId?.toString() ?? null;
+
+      if (parentId && map.has(parentId)) {
+        (map.get(parentId)!.children ||= []).push(node);
       } else {
         roots.push(node);
       }

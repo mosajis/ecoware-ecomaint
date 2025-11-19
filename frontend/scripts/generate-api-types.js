@@ -6,7 +6,7 @@ import { execSync } from "child_process";
 
 const url = "http://localhost:5273/docs/json";
 const outputPath = "./openapi.json";
-const typesPath = "./src/api/generated/api.types.ts";
+const typesPath = "./src/core/api/generated/api.types.ts";
 
 function download(url, dest) {
   return new Promise((resolve, reject) => {

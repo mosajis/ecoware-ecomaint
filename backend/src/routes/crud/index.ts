@@ -4,7 +4,6 @@ export { default as ControllerDocumentSignature } from "./documentSignature.cont
 export { default as ControllerDocumentSignatureLog } from "./documentSignatureLog.controller";
 export { default as ControllerTblActionUsers } from "./tblActionUsers.controller";
 export { default as ControllerTblAddress } from "./tblAddress.controller";
-export { default as ControllerTblAddressProduct } from "./tblAddressProduct.controller";
 export { default as ControllerTblAppInfo } from "./tblAppInfo.controller";
 export { default as ControllerTblAppSysParams } from "./tblAppSysParams.controller";
 export { default as ControllerTblCompCounter } from "./tblCompCounter.controller";

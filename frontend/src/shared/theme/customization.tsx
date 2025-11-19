@@ -312,6 +312,9 @@ export const inputsCustomizations: Components<Theme> = {
   },
   MuiButton: {
     styleOverrides: {
+      loadingIndicator: {
+        color: "#fff", // 🔹 اسپینر سفید
+      },
       root: ({ theme }) => ({
         boxShadow: "none",
         borderRadius: (theme.vars || theme).shape.borderRadius,

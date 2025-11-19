@@ -25,7 +25,7 @@ export default function FormDialogAction({
         color="primary"
         sx={{ flex: 1 }}
         disabled={isDisabled}
-        startIcon={submitting && <CircularProgress size={18} />}
+        loading={submitting}
       >
         {submitText}
       </Button>

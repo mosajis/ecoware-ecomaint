@@ -3,6 +3,7 @@ import {
   DataGrid,
   type DataGridProps,
   type GridColDef,
+  type GridSlotsComponent,
 } from "@mui/x-data-grid";
 import { useMemo } from "react";
 
@@ -18,55 +19,99 @@ const rowNumberColumn: GridColDef = {
 };
 
 interface CustomizedDataGridProps extends DataGridProps {
-  leftToolbar?: React.ReactNode;
   label?: string;
   onAddClick?: () => void;
   onRefreshClick?: () => void;
+
+  disableSearch?: boolean;
+  disableDensity?: boolean;
+  disableExport?: boolean;
+  disableColumns?: boolean;
+  disableFilters?: boolean;
+  disableAdd?: boolean;
+  disableRefresh?: boolean;
+
+  disableRowNumber?: boolean;
 }
 
 export default function CustomizedDataGrid({
   rows,
   columns = [],
-  leftToolbar,
   initialState,
   label,
   loading,
   onAddClick,
   onRefreshClick,
+  disableSearch,
+  disableDensity,
+  disableExport,
+  disableColumns,
+  disableFilters,
+  disableAdd,
+  disableRefresh,
+  disableRowNumber,
   ...rest
 }: CustomizedDataGridProps) {
   const indexedRows = useMemo(() => {
-    if (!rows) return;
-    return rows.map((row, index) => ({
-      ...row,
-      rowNumber: index + 1,
-    }));
-  }, [rows]);
+    if (!rows) return [];
+    if (disableRowNumber) return rows;
+    return rows.map((row, index) => ({ ...row, rowNumber: index + 1 }));
+  }, [rows, disableRowNumber]);
 
-  const columnsWithRowNumber = useMemo(
-    () => [rowNumberColumn, ...columns],
-    [columns]
+  const columnsWithRowNumber = useMemo(() => {
+    return disableRowNumber ? columns : [rowNumberColumn, ...columns];
+  }, [columns, disableRowNumber]);
+
+  const mergedInitialState = useMemo(() => {
+    return {
+      density: "compact" as const,
+      ...initialState,
+    };
+  }, [initialState]);
+
+  const ToolbarWrapper = useMemo(
+    () => (props: any) => (
+      <DataGridToolbar
+        {...props}
+        label={label!}
+        loading={loading}
+        onAddClick={onAddClick}
+        onRefreshClick={onRefreshClick}
+        disableSearch={disableSearch}
+        disableDensity={disableDensity}
+        disableExport={disableExport}
+        disableColumns={disableColumns}
+        disableFilters={disableFilters}
+        disableAdd={disableAdd}
+        disableRefresh={disableRefresh}
+      />
+    ),
+    [
+      label,
+      loading,
+      onAddClick,
+      onRefreshClick,
+      disableSearch,
+      disableDensity,
+      disableExport,
+      disableColumns,
+      disableFilters,
+      disableAdd,
+      disableRefresh,
+    ]
+  );
+
+  const slots: Partial<GridSlotsComponent> = useMemo(
+    () => ({ toolbar: ToolbarWrapper }),
+    [ToolbarWrapper]
   );
 
   return (
     <DataGrid
       rows={indexedRows}
       columns={columnsWithRowNumber}
-      initialState={{
-        density: "compact",
-        ...initialState,
-      }}
-      // @ts-ignore
-      slots={{ toolbar: DataGridToolbar }}
-      slotProps={{
-        toolbar: {
-          // @ts-ignore
-          onAddClick,
-          onRefreshClick,
-          label,
-          loading,
-        },
-      }}
+      initialState={mergedInitialState}
+      slots={slots}
       {...rest}
     />
   );

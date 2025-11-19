@@ -38,9 +38,11 @@ export function useDataGrid<T, K extends string | number>(
 
   const handleDelete = useCallback(
     async (row: T) => {
+      setLoading(true);
       const id = getId(row);
       await api.deleteById(id);
       setRows((prev) => prev.filter((x) => getId(x) !== id));
+      setLoading(false);
     },
     [api, getId]
   );
