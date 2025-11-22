@@ -1,13 +1,12 @@
 {
-  "name": "frontend",
+  "name": "econaint-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "bunx vite",
     "build": "bunx vite build",
-    "preview": "bunx vite preview",
-    "lint": "bunx eslint ."
+    "preview": "bunx vite preview"
   },
   "dependencies": {
     "@emotion/styled": "^11.14.1",
