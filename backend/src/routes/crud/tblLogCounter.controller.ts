@@ -17,6 +17,7 @@ const ControllerTblLogCounter = new BaseController({
   swagger: {
     tags: ["tblLogCounter"],
   },
+  primaryKey: "logCounterId",
   service: ServiceTblLogCounter,
   createSchema: TblLogCounterInputCreate,
   updateSchema: TblLogCounterInputUpdate,

@@ -1,9 +1,9 @@
-import swagger from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
 import { pluginErrorHandler } from "./plugins/error.plugin";
 import { staticPlugin } from "@elysiajs/static";
 import { allRoutes } from "./routes/routes";
+import { openapi } from "@elysiajs/openapi";
 
 const app = new Elysia()
   // CORS
@@ -14,14 +14,19 @@ const app = new Elysia()
       allowedHeaders: ["Content-Type", "Authorization"],
     })
   )
-  // error handler
+
+  // Error handler
   .use(pluginErrorHandler)
-  // mount auto CRUD
+
+  // API routes
   .use(allRoutes)
-  // Swagger docs
+
+  // OpenAPI plugin
   .use(
-    swagger({
+    openapi({
       path: "/docs",
+      specPath: "/docs/json",
+      provider: "scalar",
       documentation: {
         info: {
           title: "ECO | API",
@@ -32,7 +37,6 @@ const app = new Elysia()
     })
   )
 
-  // React static
   .use(
     staticPlugin({
       indexHTML: true,
@@ -40,10 +44,12 @@ const app = new Elysia()
     })
   );
 
+// تعیین پورت
 const portArgIndex = process.argv.findIndex((arg) => arg === "--port");
 const portArg = process.argv[portArgIndex + 1];
 const port = portArgIndex !== -1 && portArg ? parseInt(portArg, 10) : 5273;
 
+// اجرای سرور
 const info = app.listen(port);
 const environment = info?.server?.development ? "development" : "production";
 const origin = info?.server?.url.origin;

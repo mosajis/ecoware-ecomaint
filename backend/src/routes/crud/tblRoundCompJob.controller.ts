@@ -17,6 +17,7 @@ const ControllerTblRoundCompJob = new BaseController({
   swagger: {
     tags: ["tblRoundCompJob"],
   },
+  primaryKey: "roundCompJobId",
   service: ServiceTblRoundCompJob,
   createSchema: TblRoundCompJobInputCreate,
   updateSchema: TblRoundCompJobInputUpdate,

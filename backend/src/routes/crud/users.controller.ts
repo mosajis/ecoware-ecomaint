@@ -17,6 +17,7 @@ const ControllerUsers = new BaseController({
   swagger: {
     tags: ["users"],
   },
+  primaryKey: "userId",
   service: ServiceUsers,
   createSchema: UsersInputCreate,
   updateSchema: UsersInputUpdate,

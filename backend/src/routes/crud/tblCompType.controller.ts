@@ -17,6 +17,7 @@ const ControllerTblCompType = new BaseController({
   swagger: {
     tags: ["tblCompType"],
   },
+  primaryKey: "compTypeId",
   service: ServiceTblCompType,
   createSchema: TblCompTypeInputCreate,
   updateSchema: TblCompTypeInputUpdate,

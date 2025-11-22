@@ -17,6 +17,7 @@ const ControllerTblRotationLog = new BaseController({
   swagger: {
     tags: ["tblRotationLog"],
   },
+  primaryKey: "rotationLogId",
   service: ServiceTblRotationLog,
   createSchema: TblRotationLogInputCreate,
   updateSchema: TblRotationLogInputUpdate,

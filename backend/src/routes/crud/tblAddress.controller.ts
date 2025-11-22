@@ -24,4 +24,4 @@ const ControllerTblAddress = new BaseController({
   responseSchema: buildResponseSchema(TblAddressPlain, TblAddress),
 }).app;
 
-export default ControllerTblAddress;
+export default ControllerTblAddress

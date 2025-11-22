@@ -1,5 +1,6 @@
 import { BaseController } from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
+import { PrismaClient } from "orm/generated/prisma";
 import {
   TblLocation,
   TblLocationInputCreate,
@@ -23,4 +24,4 @@ const ControllerTblLocation = new BaseController({
   responseSchema: buildResponseSchema(TblLocationPlain, TblLocation),
 }).app;
 
-export default ControllerTblLocation;
+export default ControllerTblLocation

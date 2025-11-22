@@ -17,6 +17,7 @@ const ControllerTblFunctions = new BaseController({
   swagger: {
     tags: ["tblFunctions"],
   },
+  primaryKey: "functionId",
   service: ServiceTblFunctions,
   createSchema: TblFunctionsInputCreate,
   updateSchema: TblFunctionsInputUpdate,

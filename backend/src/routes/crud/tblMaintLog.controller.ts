@@ -17,6 +17,7 @@ const ControllerTblMaintLog = new BaseController({
   swagger: {
     tags: ["tblMaintLog"],
   },
+  primaryKey: "maintLogId",
   service: ServiceTblMaintLog,
   createSchema: TblMaintLogInputCreate,
   updateSchema: TblMaintLogInputUpdate,

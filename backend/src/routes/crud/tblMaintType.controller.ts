@@ -24,4 +24,4 @@ const ControllerTblMaintType = new BaseController({
   responseSchema: buildResponseSchema(TblMaintTypePlain, TblMaintType),
 }).app;
 
-export default ControllerTblMaintType;
+export default ControllerTblMaintType

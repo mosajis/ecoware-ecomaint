@@ -17,6 +17,7 @@ const ControllerTblCompJob = new BaseController({
   swagger: {
     tags: ["tblCompJob"],
   },
+  primaryKey: "compJobId",
   service: ServiceTblCompJob,
   createSchema: TblCompJobInputCreate,
   updateSchema: TblCompJobInputUpdate,

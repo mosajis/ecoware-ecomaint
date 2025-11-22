@@ -17,6 +17,7 @@ const ControllerTblReScheduleLog = new BaseController({
   swagger: {
     tags: ["tblReScheduleLog"],
   },
+  primaryKey: "rescheduleLogId",
   service: ServiceTblReScheduleLog,
   createSchema: TblReScheduleLogInputCreate,
   updateSchema: TblReScheduleLogInputUpdate,

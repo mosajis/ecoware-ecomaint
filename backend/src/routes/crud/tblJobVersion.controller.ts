@@ -17,6 +17,7 @@ const ControllerTblJobVersion = new BaseController({
   swagger: {
     tags: ["tblJobVersion"],
   },
+  primaryKey: "jobVersionId",
   service: ServiceTblJobVersion,
   createSchema: TblJobVersionInputCreate,
   updateSchema: TblJobVersionInputUpdate,

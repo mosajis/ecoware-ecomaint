@@ -17,6 +17,7 @@ const ControllerTblOilSamplingLog = new BaseController({
   swagger: {
     tags: ["tblOilSamplingLog"],
   },
+  primaryKey: "oilSamplingLogId",
   service: ServiceTblOilSamplingLog,
   createSchema: TblOilSamplingLogInputCreate,
   updateSchema: TblOilSamplingLogInputUpdate,

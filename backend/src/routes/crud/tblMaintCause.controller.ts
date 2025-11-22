@@ -24,4 +24,4 @@ const ControllerTblMaintCause = new BaseController({
   responseSchema: buildResponseSchema(TblMaintCausePlain, TblMaintCause),
 }).app;
 
-export default ControllerTblMaintCause;
+export default ControllerTblMaintCause

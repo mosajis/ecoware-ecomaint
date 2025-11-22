@@ -17,6 +17,7 @@ const ControllerTblCompOilInfo = new BaseController({
   swagger: {
     tags: ["tblCompOilInfo"],
   },
+  primaryKey: "compOilInfoId",
   service: ServiceTblCompOilInfo,
   createSchema: TblCompOilInfoInputCreate,
   updateSchema: TblCompOilInfoInputUpdate,

@@ -17,6 +17,7 @@ const ControllerTblWorkOrder = new BaseController({
   swagger: {
     tags: ["tblWorkOrder"],
   },
+  primaryKey: "workOrderId",
   service: ServiceTblWorkOrder,
   createSchema: TblWorkOrderInputCreate,
   updateSchema: TblWorkOrderInputUpdate,

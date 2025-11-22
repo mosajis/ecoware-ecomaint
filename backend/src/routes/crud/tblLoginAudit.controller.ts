@@ -17,6 +17,7 @@ const ControllerTblLoginAudit = new BaseController({
   swagger: {
     tags: ["tblLoginAudit"],
   },
+  primaryKey: "loginAuditId",
   service: ServiceTblLoginAudit,
   createSchema: TblLoginAuditInputCreate,
   updateSchema: TblLoginAuditInputUpdate,

@@ -24,4 +24,4 @@ const ControllerTblEmployee = new BaseController({
   responseSchema: buildResponseSchema(TblEmployeePlain, TblEmployee),
 }).app;
 
-export default ControllerTblEmployee;
+export default ControllerTblEmployee

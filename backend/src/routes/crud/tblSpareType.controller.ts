@@ -17,6 +17,7 @@ const ControllerTblSpareType = new BaseController({
   swagger: {
     tags: ["tblSpareType"],
   },
+  primaryKey: "partTypeId",
   service: ServiceTblSpareType,
   createSchema: TblSpareTypeInputCreate,
   updateSchema: TblSpareTypeInputUpdate,

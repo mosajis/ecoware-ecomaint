@@ -17,6 +17,7 @@ const ControllerTblLogDiscipline = new BaseController({
   swagger: {
     tags: ["tblLogDiscipline"],
   },
+  primaryKey: "logDiscId",
   service: ServiceTblLogDiscipline,
   createSchema: TblLogDisciplineInputCreate,
   updateSchema: TblLogDisciplineInputUpdate,

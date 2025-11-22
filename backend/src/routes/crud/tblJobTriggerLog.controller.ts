@@ -17,6 +17,7 @@ const ControllerTblJobTriggerLog = new BaseController({
   swagger: {
     tags: ["tblJobTriggerLog"],
   },
+  primaryKey: "jobTriggerLogId",
   service: ServiceTblJobTriggerLog,
   createSchema: TblJobTriggerLogInputCreate,
   updateSchema: TblJobTriggerLogInputUpdate,

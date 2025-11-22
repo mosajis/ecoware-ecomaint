@@ -1,125 +1,113 @@
 const fs = require("fs");
 const path = require("path");
+const _ = require("lodash");
 
 const TablePKs = {
-  tblAddress: "AddressID",
-  tblCompCounter: "CompCounterID",
-  tblCompCounterLog: "CompCounterLogID",
-  tblCompJob: "CompJobID",
-  tblCompJobCounter: "CompJobCounterID",
-  tblCompJobMeasurePoint: "CompJobMeasurePointID",
-  tblCompJobTrigger: "CompJobTriggerID",
-  tblCompMeasurePoint: "CompMeasurePointID",
-  tblCompMeasurePointLog: "CompMeasurePointLogID",
+  TblAddress: "AddressID",
+  TblCompCounter: "CompCounterID",
+  TblCompCounterLog: "CompCounterLogID",
+  TblCompJob: "CompJobID",
+  TblCompJobCounter: "CompJobCounterID",
+  TblCompJobMeasurePoint: "CompJobMeasurePointID",
+  TblCompJobTrigger: "CompJobTriggerID",
+  TblCompMeasurePoint: "CompMeasurePointID",
+  TblCompMeasurePointLog: "CompMeasurePointLogID",
   TblCompOilInfo: "CompOilInfoID",
-  tblComponentUnit: "CompID",
-  tblCompSpare: "CompSpareID",
-  tblCompStatus: "CompStatusId",
-  tblCompStatusLog: "CompStatusLogID",
-  tblCompType: "CompTypeID",
-  tblCompTypeCounter: "CompTypeCounterID",
-  tblCompTypeJob: "CompTypeJobID",
-  tblCompTypeJobCounter: "CompTypeJobCounterID",
-  tblCompTypeJobMeasurePoint: "CompTypeJobMeasurePointID",
-  tblCompTypeJobTrigger: "CompTypeJobTriggerID",
-  tblCompTypeMeasurePoint: "CompTypeMeasurePointID",
-  tblCounterType: "CounterTypeID",
-  tblDepartment: "DeptID",
-  tblDiscipline: "DiscID",
-  tblEmployee: "EmployeeID",
-  tblFailureReports: "FailureReportId",
-  tblFollowStatus: "FollowStatusID",
-  tblFunctions: "FunctionID",
-  tblJobClass: "JobClassID",
-  tblJobDescription: "JobDescID",
-  tblJobTrigger: "JobTriggerID",
-  tblJobTrigger_Log: "JobTriggerLogID",
-  tblJobVersion: "JobVersionID",
-  tblLocation: "LocationID",
-  tblLogCounter: "LogCounterID",
-  tblLogDiscipline: "LogDiscID",
-  tblLoginAudit: "LoginAuditID",
-  tblMaintCause: "MaintCauseID",
-  tblMaintClass: "MaintClassID",
-  tblMaintLog: "MaintLogID",
-  tblMaintLog_Stocks: "MaintLogStockId",
-  tblMaintLogFollow: "FollowID",
-  tblMaintType: "MaintTypeID",
+  TblComponentUnit: "CompID",
+  TblCompSpare: "CompSpareID",
+  TblCompStatus: "CompStatusId",
+  TblCompStatusLog: "CompStatusLogID",
+  TblCompType: "CompTypeID",
+  TblCompTypeCounter: "CompTypeCounterID",
+  TblCompTypeJob: "CompTypeJobID",
+  TblCompTypeJobCounter: "CompTypeJobCounterID",
+  TblCompTypeJobMeasurePoint: "CompTypeJobMeasurePointID",
+  TblCompTypeJobTrigger: "CompTypeJobTriggerID",
+  TblCompTypeMeasurePoint: "CompTypeMeasurePointID",
+  TblCounterType: "CounterTypeID",
+  TblDepartment: "DeptID",
+  TblDiscipline: "DiscID",
+  TblEmployee: "EmployeeID",
+  TblFailureReports: "FailureReportId",
+  TblFollowStatus: "FollowStatusID",
+  TblFunctions: "FunctionID",
+  TblJobClass: "JobClassID",
+  TblJobDescription: "JobDescID",
+  TblJobTrigger: "JobTriggerID",
+  TblJobTrigger_Log: "JobTriggerLogID",
+  TblJobVersion: "JobVersionID",
+  TblLocation: "LocationID",
+  TblLogCounter: "LogCounterID",
+  TblLogDiscipline: "LogDiscID",
+  TblLoginAudit: "LoginAuditID",
+  TblMaintCause: "MaintCauseID",
+  TblMaintClass: "MaintClassID",
+  TblMaintLog: "MaintLogID",
+  TblMaintLog_Stocks: "MaintLogStockId",
+  TblMaintLogFollow: "FollowID",
+  TblMaintType: "MaintTypeID",
   TblOilSamplingLog: "OilSamplingLogID",
-  tblPendingType: "PendTypeId",
-  tblReScheduleLog: "RescheduleLogID",
-  tblRotationLog: "RotationLogID",
-  tblRound: "RoundID",
-  tblRoundCompJob: "RoundCompJobID",
-  tblSpareType: "PartTypeID",
-  tblSpareUnit: "PartID",
-  tblUnit: "UnitID",
-  tblWorkOrder: "WorkOrderID",
-  tblWorkShopComponent: "WShopCompID",
-  tblWorkShopDone: "WShopDoneID",
-  tblWorkShopRequest: "WShopRequestID",
+  TblPendingType: "PendTypeId",
+  TblReScheduleLog: "RescheduleLogID",
+  TblRotationLog: "RotationLogID",
+  TblRound: "RoundID",
+  TblRoundCompJob: "RoundCompJobID",
+  TblSpareType: "PartTypeID",
+  TblSpareUnit: "PartID",
+  TblUnit: "UnitID",
+  TblWorkOrder: "WorkOrderID",
+  TblWorkShopComponent: "WShopCompID",
+  TblWorkShopDone: "WShopDoneID",
+  TblWorkShopRequest: "WShopRequestID",
   Users: "UserID",
 };
 
-// مسیر فولدر تولیدی PrismaBox
+// مسیر فولدر خروجی PrismaBox
 const prismaboxDir = path.resolve("./orm/generated/prismabox");
 
 let fixedCount = 0;
 
-// --- ریجکس اصلی برای شناسایی "id" مستقل در connect و disconnect ---
+// ساخت Regex برای اصلاح id:
 function buildRegexFor(pk) {
   return {
-    connectSingle: new RegExp(
-      `connect\\s*:\\s*t\\.Object\\s*\\(\\s*\\{\\s*id(?=\\s*:)`,
-      "g"
-    ),
-    connectMany: new RegExp(
-      `connect\\s*:\\s*t\\.Array\\s*\\(\\s*t\\.Object\\s*\\(\\s*\\{\\s*id(?=\\s*:)`,
-      "g"
-    ),
-    disconnectSingle: new RegExp(
-      `disconnect\\s*:\\s*t\\.Object\\s*\\(\\s*\\{\\s*id(?=\\s*:)`,
-      "g"
-    ),
-    disconnectMany: new RegExp(
-      `disconnect\\s*:\\s*t\\.Array\\s*\\(\\s*t\\.Object\\s*\\(\\s*\\{\\s*id(?=\\s*:)`,
-      "g"
-    ),
+    connectSingle: /connect\s*:\s*t\.Object\s*\(\s*\{\s*id\s*:/g,
+    connectMany: /connect\s*:\s*t\.Array\s*\(\s*t\.Object\s*\(\s*\{\s*id\s*:/g,
+    disconnectSingle: /disconnect\s*:\s*t\.Object\s*\(\s*\{\s*id\s*:/g,
+    disconnectMany:
+      /disconnect\s*:\s*t\.Array\s*\(\s*t\.Object\s*\(\s*\{\s*id\s*:/g,
   };
 }
 
-// پردازش هر فایل
+// اصلاح یک فایل
 function fixFile(filePath, pk) {
   let content = fs.readFileSync(filePath, "utf-8");
   const original = content;
 
-  const patterns = buildRegexFor(pk);
+  const p = buildRegexFor(pk);
 
+  content = content.replace(p.connectSingle, `connect: t.Object({ ${pk}:`);
   content = content.replace(
-    patterns.connectSingle,
-    `connect: t.Object({ ${pk}`
+    p.connectMany,
+    `connect: t.Array(t.Object({ ${pk}:`
   );
   content = content.replace(
-    patterns.connectMany,
-    `connect: t.Array(t.Object({ ${pk}`
+    p.disconnectSingle,
+    `disconnect: t.Object({ ${pk}:`
   );
   content = content.replace(
-    patterns.disconnectSingle,
-    `disconnect: t.Object({ ${pk}`
-  );
-  content = content.replace(
-    patterns.disconnectMany,
-    `disconnect: t.Array(t.Object({ ${pk}`
+    p.disconnectMany,
+    `disconnect: t.Array(t.Object({ ${pk}:`
   );
 
   if (content !== original) {
     fixedCount++;
     fs.writeFileSync(filePath, content, "utf-8");
-    console.log("✓ fixed:", filePath);
+  } else {
+    console.log("x fixed:", filePath);
   }
 }
 
-// پیمایش مسیر
+// پیمایش تمام فایل‌ها
 function walk(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
 
@@ -135,11 +123,11 @@ function walk(dir) {
 
     const fileContent = fs.readFileSync(full, "utf-8");
 
+    // فقط وقتی جدول موجود باشد
     for (const [tableName, pk] of Object.entries(TablePKs)) {
       if (fileContent.includes(tableName)) {
-        fixFile(full, pk);
-      } else {
-        console.log("not found: " + tableName);
+        fixFile(full, _.camelCase(pk));
+        break;
       }
     }
   }

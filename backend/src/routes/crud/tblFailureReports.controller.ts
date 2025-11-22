@@ -17,6 +17,7 @@ const ControllerTblFailureReports = new BaseController({
   swagger: {
     tags: ["tblFailureReports"],
   },
+  primaryKey: "failureReportId",
   service: ServiceTblFailureReports,
   createSchema: TblFailureReportsInputCreate,
   updateSchema: TblFailureReportsInputUpdate,

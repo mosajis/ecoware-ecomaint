@@ -17,6 +17,7 @@ const ControllerTblRound = new BaseController({
   swagger: {
     tags: ["tblRound"],
   },
+  primaryKey: "roundId",
   service: ServiceTblRound,
   createSchema: TblRoundInputCreate,
   updateSchema: TblRoundInputUpdate,

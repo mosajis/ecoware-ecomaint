@@ -17,6 +17,7 @@ const ControllerTblMaintLogStocks = new BaseController({
   swagger: {
     tags: ["tblMaintLogStocks"],
   },
+  primaryKey: "maintLogStockId",
   service: ServiceTblMaintLogStocks,
   createSchema: TblMaintLogStocksInputCreate,
   updateSchema: TblMaintLogStocksInputUpdate,

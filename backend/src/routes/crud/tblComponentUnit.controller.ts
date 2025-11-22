@@ -17,10 +17,11 @@ const ControllerTblComponentUnit = new BaseController({
   swagger: {
     tags: ["tblComponentUnit"],
   },
+  primaryKey: "compId",
   service: ServiceTblComponentUnit,
   createSchema: TblComponentUnitInputCreate,
   updateSchema: TblComponentUnitInputUpdate,
   responseSchema: buildResponseSchema(TblComponentUnitPlain, TblComponentUnit),
 }).app;
 
-export default ControllerTblComponentUnit;
+export default ControllerTblComponentUnit

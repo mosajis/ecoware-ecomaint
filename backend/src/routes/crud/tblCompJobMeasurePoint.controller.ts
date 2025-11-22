@@ -17,6 +17,7 @@ const ControllerTblCompJobMeasurePoint = new BaseController({
   swagger: {
     tags: ["tblCompJobMeasurePoint"],
   },
+  primaryKey: "compJobMeasurePointId",
   service: ServiceTblCompJobMeasurePoint,
   createSchema: TblCompJobMeasurePointInputCreate,
   updateSchema: TblCompJobMeasurePointInputUpdate,
