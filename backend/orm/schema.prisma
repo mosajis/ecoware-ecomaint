@@ -10,6 +10,7 @@ generator prismabox {
   typeboxImportDependencyName = "elysia"
   typeboxImportVariableName   = "t"
 }
+
 datasource db {
   provider = "sqlserver"
   url      = env("DATABASE_URL")

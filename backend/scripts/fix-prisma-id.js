@@ -1,70 +1,150 @@
-// scripts/fix-prismaBox.js
-import fs from "fs";
-import path from "path";
+const fs = require("fs");
+const path = require("path");
 
-// مسیر فولدر Prisma Box و فایل schema
+const TablePKs = {
+  tblAddress: "AddressID",
+  tblCompCounter: "CompCounterID",
+  tblCompCounterLog: "CompCounterLogID",
+  tblCompJob: "CompJobID",
+  tblCompJobCounter: "CompJobCounterID",
+  tblCompJobMeasurePoint: "CompJobMeasurePointID",
+  tblCompJobTrigger: "CompJobTriggerID",
+  tblCompMeasurePoint: "CompMeasurePointID",
+  tblCompMeasurePointLog: "CompMeasurePointLogID",
+  TblCompOilInfo: "CompOilInfoID",
+  tblComponentUnit: "CompID",
+  tblCompSpare: "CompSpareID",
+  tblCompStatus: "CompStatusId",
+  tblCompStatusLog: "CompStatusLogID",
+  tblCompType: "CompTypeID",
+  tblCompTypeCounter: "CompTypeCounterID",
+  tblCompTypeJob: "CompTypeJobID",
+  tblCompTypeJobCounter: "CompTypeJobCounterID",
+  tblCompTypeJobMeasurePoint: "CompTypeJobMeasurePointID",
+  tblCompTypeJobTrigger: "CompTypeJobTriggerID",
+  tblCompTypeMeasurePoint: "CompTypeMeasurePointID",
+  tblCounterType: "CounterTypeID",
+  tblDepartment: "DeptID",
+  tblDiscipline: "DiscID",
+  tblEmployee: "EmployeeID",
+  tblFailureReports: "FailureReportId",
+  tblFollowStatus: "FollowStatusID",
+  tblFunctions: "FunctionID",
+  tblJobClass: "JobClassID",
+  tblJobDescription: "JobDescID",
+  tblJobTrigger: "JobTriggerID",
+  tblJobTrigger_Log: "JobTriggerLogID",
+  tblJobVersion: "JobVersionID",
+  tblLocation: "LocationID",
+  tblLogCounter: "LogCounterID",
+  tblLogDiscipline: "LogDiscID",
+  tblLoginAudit: "LoginAuditID",
+  tblMaintCause: "MaintCauseID",
+  tblMaintClass: "MaintClassID",
+  tblMaintLog: "MaintLogID",
+  tblMaintLog_Stocks: "MaintLogStockId",
+  tblMaintLogFollow: "FollowID",
+  tblMaintType: "MaintTypeID",
+  TblOilSamplingLog: "OilSamplingLogID",
+  tblPendingType: "PendTypeId",
+  tblReScheduleLog: "RescheduleLogID",
+  tblRotationLog: "RotationLogID",
+  tblRound: "RoundID",
+  tblRoundCompJob: "RoundCompJobID",
+  tblSpareType: "PartTypeID",
+  tblSpareUnit: "PartID",
+  tblUnit: "UnitID",
+  tblWorkOrder: "WorkOrderID",
+  tblWorkShopComponent: "WShopCompID",
+  tblWorkShopDone: "WShopDoneID",
+  tblWorkShopRequest: "WShopRequestID",
+  Users: "UserID",
+};
+
+// مسیر فولدر تولیدی PrismaBox
 const prismaboxDir = path.resolve("./orm/generated/prismabox");
-const schemaPath = path.resolve("./orm/schema.prisma");
 
-// 1️⃣ استخراج primary key ها از schema.prisma
-function parseSchemaPrimaryKeys(schemaFile) {
-  const schema = fs.readFileSync(schemaFile, "utf-8");
-  const pkMap = {};
+let fixedCount = 0;
 
-  const modelRegex = /model\s+(\w+)\s+{([\s\S]*?)}/g;
-  let match;
-  while ((match = modelRegex.exec(schema))) {
-    const modelName = match[1];
-    const body = match[2];
-
-    const pkRegex = /(\w+)\s+[\w\[\]]+\s+@id\b/g;
-    const pkMatch = pkRegex.exec(body);
-    if (pkMatch) {
-      pkMap[modelName] = pkMatch[1]; // modelName -> primary key field
-    }
-  }
-
-  return pkMap;
+// --- ریجکس اصلی برای شناسایی "id" مستقل در connect و disconnect ---
+function buildRegexFor(pk) {
+  return {
+    connectSingle: new RegExp(
+      `connect\\s*:\\s*t\\.Object\\s*\\(\\s*\\{\\s*id(?=\\s*:)`,
+      "g"
+    ),
+    connectMany: new RegExp(
+      `connect\\s*:\\s*t\\.Array\\s*\\(\\s*t\\.Object\\s*\\(\\s*\\{\\s*id(?=\\s*:)`,
+      "g"
+    ),
+    disconnectSingle: new RegExp(
+      `disconnect\\s*:\\s*t\\.Object\\s*\\(\\s*\\{\\s*id(?=\\s*:)`,
+      "g"
+    ),
+    disconnectMany: new RegExp(
+      `disconnect\\s*:\\s*t\\.Array\\s*\\(\\s*t\\.Object\\s*\\(\\s*\\{\\s*id(?=\\s*:)`,
+      "g"
+    ),
+  };
 }
 
-// 2️⃣ اصلاح فایل‌ها
-function fixFile(filePath, pkMap) {
+// پردازش هر فایل
+function fixFile(filePath, pk) {
   let content = fs.readFileSync(filePath, "utf-8");
+  const original = content;
 
-  // regex ساده برای پیدا کردن connect.id و disconnect.id
-  // و تبدیل آن به connect.<PK> / disconnect.<PK>
-  for (const [modelName, pk] of Object.entries(pkMap)) {
-    const connectRegex = new RegExp(
-      `(connect:\\s*t\\.Object\\(\\s*{)\\s*id:`,
-      "g"
-    );
-    content = content.replace(connectRegex, `$1 ${pk}:`);
+  const patterns = buildRegexFor(pk);
 
-    const disconnectRegex = new RegExp(
-      `(disconnect:\\s*t\\.Array\\(\\s*t\\.Object\\(\\s*{)\\s*id:`,
-      "g"
-    );
-    content = content.replace(disconnectRegex, `$1 ${pk}:`);
+  content = content.replace(
+    patterns.connectSingle,
+    `connect: t.Object({ ${pk}`
+  );
+  content = content.replace(
+    patterns.connectMany,
+    `connect: t.Array(t.Object({ ${pk}`
+  );
+  content = content.replace(
+    patterns.disconnectSingle,
+    `disconnect: t.Object({ ${pk}`
+  );
+  content = content.replace(
+    patterns.disconnectMany,
+    `disconnect: t.Array(t.Object({ ${pk}`
+  );
+
+  if (content !== original) {
+    fixedCount++;
+    fs.writeFileSync(filePath, content, "utf-8");
+    console.log("✓ fixed:", filePath);
   }
-
-  fs.writeFileSync(filePath, content, "utf-8");
-  console.log(`✅ Fixed ${filePath}`);
 }
 
-// 3️⃣ پیمایش فولدر Prisma Box
-function walkDir(dir, pkMap) {
+// پیمایش مسیر
+function walk(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      walkDir(fullPath, pkMap);
-    } else if (entry.name.endsWith(".ts")) {
-      fixFile(fullPath, pkMap);
+
+  for (const e of entries) {
+    const full = path.join(dir, e.name);
+
+    if (e.isDirectory()) {
+      walk(full);
+      continue;
+    }
+
+    if (!e.name.endsWith(".ts")) continue;
+
+    const fileContent = fs.readFileSync(full, "utf-8");
+
+    for (const [tableName, pk] of Object.entries(TablePKs)) {
+      if (fileContent.includes(tableName)) {
+        fixFile(full, pk);
+      } else {
+        console.log("not found: " + tableName);
+      }
     }
   }
 }
 
-// اجرای کل فرآیند
-const pkMap = parseSchemaPrimaryKeys(schemaPath);
-walkDir(prismaboxDir, pkMap);
-console.log("🎉 All Prisma Box files updated with correct PK in relations!");
+console.log("⏳ Fixing PrismaBox files...");
+walk(prismaboxDir);
+console.log(`🎉 Done. Updated ${fixedCount} files.`);
