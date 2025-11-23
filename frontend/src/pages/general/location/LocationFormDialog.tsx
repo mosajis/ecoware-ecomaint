@@ -10,7 +10,7 @@ import { tblLocation, TypeTblLocation } from "@/core/api/generated/api";
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
   locationCode: z.string(),
-  parentLocationId: z.number().nullable().optional(),
+  parentLocationId: z.number(),
   orderId: z.number().nullable().optional(),
 });
 
@@ -37,7 +37,7 @@ function LocationFormDialog({
   const defaultValues: LocationFormValues = {
     name: "",
     locationCode: "",
-    parentLocationId: null,
+    parentLocationId: 0,
     orderId: null,
   };
 
@@ -62,7 +62,7 @@ function LocationFormDialog({
         reset({
           name: res?.name ?? "",
           locationCode: res?.locationCode ?? "",
-          parentLocationId: res?.parentLocationId ?? null,
+          parentLocationId: res?.parentLocationId ?? 0,
           orderId: res?.orderId ?? null,
         });
       }
@@ -94,22 +94,32 @@ function LocationFormDialog({
         setSubmitting(true);
         let result: TypeTblLocation;
 
+        const parentId =
+          parsed.data.parentLocationId &&
+          Number(parsed.data.parentLocationId) > 0
+            ? Number(parsed.data.parentLocationId)
+            : null;
+
         if (mode === "create") {
           result = await tblLocation.create({
             ...parsed.data,
-            tblLocation: {
-              connect: {
-                locationId: Number(parsed.data.parentLocationId || 0),
-              },
-            },
+            ...(parentId
+              ? {
+                  tblLocation: {
+                    connect: { locationId: parentId },
+                  },
+                }
+              : {}),
           });
         } else if (mode === "update" && recordId) {
           result = await tblLocation.update(recordId, {
-            tblLocation: {
-              connect: {
-                locationId: Number(parsed.data.parentLocationId),
-              },
-            },
+            ...(parentId
+              ? {
+                  tblLocation: {
+                    connect: { locationId: parentId },
+                  },
+                }
+              : {}),
           });
         } else {
           return;

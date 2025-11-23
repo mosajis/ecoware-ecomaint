@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "./generated/prisma"
+  provider        = "prisma-client-js"
+  output          = "./generated/prisma"
   previewFeatures = ["multiSchema"]
 }
 
@@ -352,6 +352,7 @@ model TblComponentUnit {
   tblCompCounters    TblCompCounter[]
   tblCompJobs        TblCompJob[]
   tblAddress         TblAddress?      @relation(fields: [vendorId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblAddress")
+  tblLocation        TblLocation?     @relation(fields: [locationId], references: [locationId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblLocation")
 
   @@index([compTypeId], map: "CU_CompTypeId_IX")
   @@index([locationId], map: "CU_LocationID_ix")
@@ -878,16 +879,19 @@ model TblJobVersion {
 }
 
 model TblLocation {
-  locationId       Int       @id(map: "PK_tblLocation") @default(dbgenerated("NEXT VALUE FOR [Seq_Location]"), map: "DF_tbllocation_ID") @map("LocationID")
-  parentLocationId Int?      @map("ParentLocationID")
-  costCentreId     Int?      @map("CostCentreID")
-  name             String?   @map("Name") @db.NVarChar(60)
-  locationCode     String?   @map("LocationCode") @db.NVarChar(20)
-  deptId           Int?      @map("DeptID")
-  exportMarker     Int?      @map("ExportMarker")
-  lastupdate       DateTime? @db.DateTime
-  orderId          Int?      @map("OrderID")
-  userId           Int?      @map("UserID")
+  locationId        Int                @id(map: "PK_tblLocation") @default(dbgenerated("NEXT VALUE FOR [Seq_Location]"), map: "DF_tbllocation_ID") @map("LocationID")
+  parentLocationId  Int?               @map("ParentLocationID")
+  costCentreId      Int?               @map("CostCentreID")
+  name              String?            @map("Name") @db.NVarChar(60)
+  locationCode      String?            @map("LocationCode") @db.NVarChar(20)
+  deptId            Int?               @map("DeptID")
+  exportMarker      Int?               @map("ExportMarker")
+  lastupdate        DateTime?          @db.DateTime
+  orderId           Int?               @map("OrderID")
+  userId            Int?               @map("UserID")
+  tblComponentUnits TblComponentUnit[]
+  tblLocation       TblLocation?       @relation("tblLocationTotblLocation", fields: [parentLocationId], references: [locationId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLocation_tblLocation")
+  otherTblLocations TblLocation[]      @relation("tblLocationTotblLocation")
 
   @@map("tblLocation")
   @@schema("dbo")

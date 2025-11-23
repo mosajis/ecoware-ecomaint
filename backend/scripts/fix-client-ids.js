@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const _ = require("lodash");
 
-const TablePKs = {
+export const TablePKs = {
   TblAddress: "AddressID",
   TblCompCounter: "CompCounterID",
   TblCompCounterLog: "CompCounterLogID",
@@ -107,7 +107,6 @@ function fixFile(filePath, pk) {
   }
 }
 
-// پیمایش تمام فایل‌ها
 function walk(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
 
@@ -133,6 +132,5 @@ function walk(dir) {
   }
 }
 
-console.log("⏳ Fixing PrismaBox files...");
 walk(prismaboxDir);
 console.log(`🎉 Done. Updated ${fixedCount} files.`);

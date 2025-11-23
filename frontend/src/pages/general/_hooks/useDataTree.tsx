@@ -82,6 +82,7 @@ export function useDataTree<T, K extends string | number>(
 
   const handleDelete = useCallback(
     async (row: T) => {
+      setLoading(true);
       const id = getId(row);
       await api.deleteById(id);
 
@@ -96,12 +97,14 @@ export function useDataTree<T, K extends string | number>(
           }));
 
       setTreeItems((prev) => removeFromTree(prev));
+      setLoading(false);
     },
-    [api, getId]
+    [api, getId, setLoading]
   );
 
   const handleFormSuccess = useCallback(
     (updatedRecord: T) => {
+      setLoading(true);
       const id = getId(updatedRecord);
 
       setRows((prev) => {
@@ -121,6 +124,8 @@ export function useDataTree<T, K extends string | number>(
 
         return buildTree(flat);
       });
+
+      setLoading(false);
     },
     [mapper, getId, flattenTree, buildTree]
   );

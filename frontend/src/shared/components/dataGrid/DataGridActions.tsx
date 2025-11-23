@@ -2,7 +2,6 @@ import { useState, ReactNode } from "react";
 import {
   Stack,
   Dialog,
-  DialogTitle,
   DialogActions,
   Button,
   DialogContent,
@@ -76,7 +75,7 @@ export default function DataGridActions({
         fullWidth
         maxWidth="xs"
       >
-        <DialogHeader title="Delete Item" />
+        <DialogHeader title="Delete Item" onClose={handleCancelDelete} />
         <DialogContent dividers sx={{ py: 5 }}>
           <Box
             sx={{

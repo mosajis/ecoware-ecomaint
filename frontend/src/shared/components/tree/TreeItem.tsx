@@ -7,6 +7,7 @@ import {
   treeItemClasses,
   type RichTreeViewProps,
 } from "@mui/x-tree-view";
+import { memo } from "react";
 
 const CustomTreeItem = styled(TreeItem)(({ theme }) => {
   const { mode, setMode } = useColorScheme();
@@ -49,4 +50,4 @@ const CustomTreeItem = styled(TreeItem)(({ theme }) => {
   };
 });
 
-export default CustomTreeItem;
+export default memo(CustomTreeItem);

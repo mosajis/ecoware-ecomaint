@@ -310,6 +310,14 @@ export const inputsCustomizations: Components<Theme> = {
       }),
     },
   },
+  MuiLinearProgress: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        height: 1,
+      }),
+    },
+  },
+
   MuiButton: {
     styleOverrides: {
       loadingIndicator: {
