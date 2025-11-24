@@ -38,8 +38,8 @@ type OriginalQuery<K extends keyof operations> =
 
 // گام ۲: تعریف فیلدهای مورد نیاز با نوع جدید
 type FilterAndIncludeFields = {
-  filter: object | any;
-  include: object | any;
+  filter?: object | any;
+  include?: object | any;
 };
 
 // گام ۳: نوع کمکی برای اعمال بازنویسی روی تک‌تک اعضای Union

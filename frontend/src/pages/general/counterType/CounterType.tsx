@@ -1,13 +1,16 @@
 import Splitter from "@/shared/components/Splitter";
 import CounterTypeFormDialog from "./CounterTypeFormDialog";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import TabComponentUnit from "./tabs/TabComponentUnit";
 import TabContainer from "@/shared/components/TabContainer";
 import React, { useState, useCallback } from "react";
 import { Box, Tab, Tabs } from "@mui/material";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { useDataGrid } from "../_hooks/useDataGrid";
 import { tblCounterType, TypeTblCounterType } from "@/core/api/generated/api";
+import TabCompUnitCounter from "./tabs/TabCompUnitCounter";
+import TabCompTypeCounter from "./tabs/TabCompTypeCounter";
+import TabCompJobCounter from "./tabs/TabCompJobCounter";
+import TabCompTypeJobCounter from "./tabs/TabCompTypeJobCounter";
 
 const tabList = [
   { label: "Component", key: "component" },
@@ -24,6 +27,10 @@ export default function CounterTypePage() {
   const [selectedCounterType, setSelectedCounterType] =
     useState<TypeTblCounterType | null>(null);
 
+  const getAllCounterTypes = useCallback(() => {
+    return tblCounterType.getAll({ paginate: false });
+  }, []);
+
   const {
     rows: counterTypes,
     loading: loadingCounterTypes,
@@ -31,7 +38,7 @@ export default function CounterTypePage() {
     handleDelete: deleteCounterType,
     handleFormSuccess: counterTypeFormSuccess,
   } = useDataGrid(
-    tblCounterType.getAll,
+    getAllCounterTypes,
     tblCounterType.deleteById,
     "counterTypeId"
   );
@@ -86,26 +93,32 @@ export default function CounterTypePage() {
 
         <TabContainer>
           {activeTab === "component" && (
-            <TabComponentUnit
+            <TabCompUnitCounter
               label={selectedCounterType?.name}
               counterTypeId={selectedCounterType?.counterTypeId}
             />
           )}
 
-          {
-            activeTab === "compType" && "compType"
-            // <TabCompType counterTypeId={selectedCounterTypeId} />
-          }
+          {activeTab === "compType" && (
+            <TabCompTypeCounter
+              label={selectedCounterType?.name}
+              counterTypeId={selectedCounterType?.counterTypeId}
+            />
+          )}
 
-          {
-            activeTab === "compJob" && "compJob"
-            // <TabCompJob counterTypeId={selectedCounterTypeId} />
-          }
+          {activeTab === "compJob" && (
+            <TabCompJobCounter
+              label={selectedCounterType?.name}
+              counterTypeId={selectedCounterType?.counterTypeId}
+            />
+          )}
 
-          {
-            activeTab === "compTypeJob" && "compTypeJob"
-            // <TabCompTypeJob counterTypeId={selectedCounterTypeId} />
-          }
+          {activeTab === "compTypeJob" && (
+            <TabCompTypeJobCounter
+              label={selectedCounterType?.name}
+              counterTypeId={selectedCounterType?.counterTypeId}
+            />
+          )}
         </TabContainer>
       </Box>
 

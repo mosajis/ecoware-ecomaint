@@ -1,11 +1,6 @@
-import React, { useCallback } from "react";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import {
-  tblCompCounter,
-  tblComponentUnit,
-  TypeTblCompCounter,
-} from "@/core/api/generated/api";
-import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
+import { useCallback } from "react";
+import { tblCompCounter, TypeTblCompCounter } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "../../_hooks/useDataGrid";
 
@@ -53,7 +48,7 @@ const columns: GridColDef<TypeTblCompCounter>[] = [
   },
 ];
 
-export default function TabComponentUnit(props: TabComponentUnitProps) {
+export default function TabCompUnitCounter(props: TabComponentUnitProps) {
   const { counterTypeId, label } = props;
 
   if (!counterTypeId) {
@@ -70,6 +65,7 @@ export default function TabComponentUnit(props: TabComponentUnitProps) {
 
   const getAll = useCallback(() => {
     return tblCompCounter.getAll({
+      paginate: false,
       filter: { counterTypeId },
       include: { tblComponentUnit: true },
     });

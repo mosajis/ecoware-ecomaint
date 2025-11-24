@@ -10,10 +10,8 @@ const querySchema = t.Object({
   filter: t.Optional(t.String()),
   include: t.Optional(t.String()),
   paginate: t.Optional(t.Boolean()),
-  force: t.Optional(t.Boolean()), // برای delete واقعی
+  force: t.Optional(t.Boolean()),
 });
-
-type Query = Static<typeof querySchema>;
 
 function parseSortString(sort?: string): Record<string, "asc" | "desc"> {
   if (!sort) return {};
@@ -100,8 +98,6 @@ export class BaseController<Model extends Record<string, any>> {
               throw new Error("Invalid include JSON");
             }
           }
-
-          console.log(parsedInclude);
 
           const sortObj = parseSortString(sort);
           const usePagination = !!paginate;
