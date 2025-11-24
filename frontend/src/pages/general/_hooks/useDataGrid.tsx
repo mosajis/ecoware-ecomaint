@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 
 type ExtractQuery<F> = F extends (params?: infer Q) => any ? Q : never;
 
@@ -22,12 +22,16 @@ export function useDataGrid<
 
   const getIdValue = useCallback((row: T) => row[keyId], [keyId]);
 
+  // -----------------------------
+  // 1) یک ref برای نگه‌داشتن fetchData
+  // -----------------------------
+  const fetchRef = useRef<(params?: Q) => void>(() => {});
+
   const fetchData = useCallback(
     async (params?: Q) => {
       setLoading(true);
       try {
         const res = await getAll(params);
-        // پشتیبانی از { items: [...] } و آرایه مستقیم
         if (Array.isArray(res)) {
           setRows(res);
         } else if ("items" in res && Array.isArray(res.items)) {
@@ -43,6 +47,21 @@ export function useDataGrid<
     [getAll]
   );
 
+  // ref همیشه نسخه جدید fetchData را نگه می‌دارد
+  useEffect(() => {
+    fetchRef.current = fetchData;
+  }, [fetchData]);
+
+  // -----------------------------
+  // 2) یک handleRefresh که تغییر نمی‌کند
+  // -----------------------------
+  const handleRefresh = useCallback(() => {
+    fetchRef.current();
+  }, []); // هیچ وابستگی → همیشه ثابت
+
+  // -----------------------------
+  // حذف، ذخیره و آپدیت ردیف‌ها
+  // -----------------------------
   const handleDelete = useCallback(
     async (row: T) => {
       const id = getIdValue(row);
@@ -67,8 +86,7 @@ export function useDataGrid<
     [getIdValue]
   );
 
-  const handleRefresh = useCallback(() => fetchData(), [fetchData]);
-
+  // بارگذاری اولیه
   useEffect(() => {
     fetchData();
   }, [fetchData]);
@@ -79,6 +97,6 @@ export function useDataGrid<
     fetchData,
     handleDelete,
     handleFormSuccess,
-    handleRefresh,
+    handleRefresh, // stable forever
   };
 }

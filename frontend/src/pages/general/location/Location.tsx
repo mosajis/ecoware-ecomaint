@@ -18,7 +18,7 @@ export default function LocationListPage() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
 
-  // === Mapping ===
+  // === Mapping Transformer ===
   const mapper = useCallback(
     (row: TypeTblLocation) => ({
       id: row.locationId.toString(),
@@ -29,8 +29,7 @@ export default function LocationListPage() {
     []
   );
 
-  const getId = useCallback((row: TypeTblLocation) => row.locationId, []);
-
+  // === useDataTree ===
   const {
     rows,
     treeItems,
@@ -38,7 +37,12 @@ export default function LocationListPage() {
     handleDelete,
     handleFormSuccess,
     handleRefresh,
-  } = useDataTree<TypeTblLocation, number>(tblLocation, mapper, getId);
+  } = useDataTree(
+    useCallback(() => tblLocation.getAll({ paginate: false }), []),
+    tblLocation.deleteById,
+    "locationId",
+    mapper
+  );
 
   // === Handlers ===
   const handleCreate = () => {
@@ -47,23 +51,22 @@ export default function LocationListPage() {
     setOpenForm(true);
   };
 
-  const handleEdit = ({ locationId }: { locationId: number }) => {
-    setSelectedRowId(locationId);
+  const handleEdit = (row: TypeTblLocation) => {
+    setSelectedRowId(row.locationId);
     setMode("update");
     setOpenForm(true);
   };
 
-  // → OPEN CONFIRM MODAL
-  const handleDeleteWithModal = ({ locationId }: { locationId: number }) => {
-    setDeleteTargetId(locationId);
+  // === ONE unified delete handler (SAFE) ===
+  const openDeleteModal = (id: number) => {
+    setDeleteTargetId(id);
     setConfirmOpen(true);
   };
 
-  // → CONFIRM DELETE
   const confirmDelete = async () => {
     if (deleteTargetId == null) return;
 
-    await handleDelete(deleteTargetId);
+    await handleDelete({ locationId: deleteTargetId } as any);
     setConfirmOpen(false);
     setDeleteTargetId(null);
   };
@@ -82,26 +85,25 @@ export default function LocationListPage() {
     { field: "orderId", headerName: "Order", width: 80 },
     dataGridActionColumn({
       onEdit: handleEdit,
-      onDelete: handleDeleteWithModal, // ← استفاده از مودال
+      onDelete: (row) => openDeleteModal(row.locationId), // SAFE
     }),
   ];
 
   return (
     <>
       <Splitter>
+        {/* === TREE VIEW === */}
         <CustomizedTree
           onRefresh={handleRefresh}
           label="Tree View"
           items={treeItems}
           loading={loading}
           onAddClick={handleCreate}
-          onEditClick={(id) => handleEdit({ locationId: id })}
-          onDeleteClick={(id) =>
-            handleDeleteWithModal({ locationId: id } as any)
-          }
-          onItemSelect={(id) => console.log(id)}
+          onEditClick={(id) => handleEdit({ locationId: id } as any)}
+          onDeleteClick={(id) => openDeleteModal(Number(id))} // SAFE
         />
 
+        {/* === GRID VIEW === */}
         <CustomizedDataGrid
           showToolbar
           label="List View"
@@ -110,7 +112,7 @@ export default function LocationListPage() {
           columns={columns}
           onRefreshClick={handleRefresh}
           onAddClick={handleCreate}
-          getRowId={getId}
+          getRowId={(row) => row.locationId}
         />
       </Splitter>
 

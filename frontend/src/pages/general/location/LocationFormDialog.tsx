@@ -102,7 +102,9 @@ function LocationFormDialog({
 
         if (mode === "create") {
           result = await tblLocation.create({
-            ...parsed.data,
+            name: parsed.data.name,
+            locationCode: parsed.data.locationCode,
+
             ...(parentId
               ? {
                   tblLocation: {
@@ -113,13 +115,18 @@ function LocationFormDialog({
           });
         } else if (mode === "update" && recordId) {
           result = await tblLocation.update(recordId, {
+            name: parsed.data.name,
+            locationCode: parsed.data.locationCode,
+
             ...(parentId
               ? {
                   tblLocation: {
                     connect: { locationId: parentId },
                   },
                 }
-              : {}),
+              : {
+                  tblLocation: { disconnect: true },
+                }),
           });
         } else {
           return;

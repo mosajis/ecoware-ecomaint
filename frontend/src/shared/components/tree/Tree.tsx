@@ -9,19 +9,18 @@ import {
 } from "@mui/x-tree-view";
 
 interface TreeProps
-  extends Omit<RichTreeViewProps<TreeViewBaseItem, false>, "onSelect"> {
+  extends Omit<RichTreeViewProps<TreeViewBaseItem, false>, ""> {
   label?: string;
   loading?: boolean;
   onRefresh?: () => void;
   toolbarActions?: ReactNode;
   onAddClick?: () => void;
   onEditClick?: (id: number) => void;
-  onDeleteClick?: (id: string) => void;
-  onItemSelect?: (id: string) => void; // نام متفاوت برای جلوگیری از conflict
+  onDeleteClick?: (id: number) => void;
 }
 
 export default function Tree({
-  items,
+  items = [],
   label,
   loading,
   toolbarActions,
@@ -29,23 +28,11 @@ export default function Tree({
   onAddClick,
   onEditClick,
   onDeleteClick,
-  onItemSelect,
   ...other
 }: TreeProps) {
-  /** ریشه درخت */
-  const wrappedRoot = useMemo<TreeViewBaseItem>(
-    () => ({
-      id: "__root__",
-      label: label || "",
-      children: [...(items ?? [])],
-    }),
-    [items, label]
-  );
-
   const [searchText, setSearchText] = useState("");
-  const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  /** فیلتر فقط بر اساس سرچ */
+  /** سرچ روی درخت */
   const filterNode = useCallback(
     (node: TreeViewBaseItem): TreeViewBaseItem | null => {
       const match = node.label.toLowerCase().includes(searchText.toLowerCase());
@@ -67,43 +54,44 @@ export default function Tree({
   );
 
   const filteredTree = useMemo(() => {
-    return filterNode(wrappedRoot) ?? { ...wrappedRoot, children: [] };
-  }, [wrappedRoot, filterNode]);
+    return items.map(filterNode).filter(Boolean) as TreeViewBaseItem[];
+  }, [items, filterNode]);
 
-  const [expandedItems, setExpandedItems] = useState<string[]>(["__root__"]);
+  /** مدیریت expand‌ها */
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
-  /** Expand خودکار هنگام سرچ */
+  /** auto-expand در حالت سرچ */
   useEffect(() => {
     if (!searchText) return;
 
-    const matchedIds: string[] = [];
+    const matches: string[] = [];
+
     const walk = (node: TreeViewBaseItem) => {
       if (node.label.toLowerCase().includes(searchText.toLowerCase())) {
-        matchedIds.push(node.id);
+        matches.push(node.id);
       }
       node.children?.forEach(walk);
     };
 
-    walk(filteredTree);
-    setExpandedItems(["__root__", ...matchedIds]);
+    filteredTree.forEach(walk);
+    setExpandedItems(matches);
   }, [searchText, filteredTree]);
 
+  /** گرفتن همه IDها برای expandAll */
   const allIds = useMemo(() => {
     const result: string[] = [];
+
     const walk = (node: TreeViewBaseItem) => {
       result.push(node.id);
       node.children?.forEach(walk);
     };
-    walk(filteredTree);
+
+    filteredTree.forEach(walk);
     return result;
   }, [filteredTree]);
 
   const handleExpandAll = useCallback(() => setExpandedItems(allIds), [allIds]);
-  const handleCollapseAll = useCallback(
-    () => setExpandedItems(["__root__"]),
-    []
-  );
-
+  const handleCollapseAll = useCallback(() => setExpandedItems([]), []);
   const onExpandedChange = useCallback(
     (event: React.SyntheticEvent | null, ids: string[]) =>
       setExpandedItems(ids),
@@ -135,9 +123,9 @@ export default function Tree({
       {loading && <LinearProgress />}
 
       <Box sx={{ flex: 1, overflow: "auto" }}>
-        {filteredTree.children && filteredTree.children.length > 0 ? (
+        {filteredTree.length > 0 ? (
           <RichTreeView
-            items={[filteredTree]}
+            items={filteredTree}
             slots={{ item: CustomTreeItem }}
             slotProps={{
               item: {
@@ -148,12 +136,6 @@ export default function Tree({
             }}
             expandedItems={expandedItems}
             onExpandedItemsChange={onExpandedChange}
-            selectedItems={selectedId}
-            onSelectedItemsChange={(event, id) => {
-              if (!id || id === "__root__") return;
-              setSelectedId(id);
-              onItemSelect?.(id);
-            }}
             {...other}
           />
         ) : (

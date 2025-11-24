@@ -11,9 +11,12 @@ export default function AddressListPage() {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
 
+  const getAll = useCallback(() => {
+    return tblAddress.getAll({ paginate: false });
+  }, []);
   // === useDataGrid ===
   const { rows, loading, fetchData, handleDelete, handleFormSuccess } =
-    useDataGrid<TypeTblAddress, number>(tblAddress, (x) => x.addressId);
+    useDataGrid(getAll, tblAddress.deleteById, "addressId");
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
@@ -49,7 +52,7 @@ export default function AddressListPage() {
         label="Address"
         showToolbar
         onAddClick={handleCreate}
-        onRefreshClick={() => fetchData()}
+        onRefreshClick={fetchData}
         disableDensity
         disableRowNumber
         rows={rows}

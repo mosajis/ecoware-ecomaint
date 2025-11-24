@@ -17,17 +17,22 @@ export type TreeNode<T> = TreeViewBaseItem & {
   data?: T;
 };
 
-export function useDataTree<T, K extends string | number>(
-  api: {
-    getAll: (params?: QueryParams) => Promise<{ items: T[] }>;
-    deleteById: (id: K) => Promise<any>;
-  },
-  mapper: (row: T) => TreeNode<T>,
-  getId: (row: T) => K
+export function useDataTree<
+  GetAllFn extends (...args: any[]) => Promise<{ items: T[] }>,
+  DeleteFn extends (id: any) => Promise<any>,
+  T,
+  K extends keyof T,
+>(
+  getAll: GetAllFn,
+  deleteById: DeleteFn,
+  keyId: K,
+  mapper: (row: T) => TreeNode<T>
 ) {
   const [rows, setRows] = useState<T[]>([]);
   const [treeItems, setTreeItems] = useState<TreeNode<T>[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const getIdValue = useCallback((row: T) => row[keyId] as any, [keyId]);
 
   const buildTree = useCallback((nodes: TreeNode<T>[]) => {
     const map = new Map<string, TreeNode<T>>();
@@ -47,7 +52,6 @@ export function useDataTree<T, K extends string | number>(
     return roots;
   }, []);
 
-  // flatten
   const flattenTree = useCallback((nodes: TreeNode<T>[]): TreeNode<T>[] => {
     return nodes.reduce<TreeNode<T>[]>((acc, n) => {
       const { children, ...rest } = n;
@@ -59,14 +63,13 @@ export function useDataTree<T, K extends string | number>(
     }, []);
   }, []);
 
-  // --- fetchData with QueryParams ---
   const fetchData = useCallback(
     async (params?: QueryParams) => {
       setLoading(true);
       try {
-        const res = await api.getAll({
+        const res = await getAll({
           ...params,
-          paginate: false, // ثابت + safe
+          paginate: false,
         });
 
         setRows(res.items);
@@ -77,16 +80,17 @@ export function useDataTree<T, K extends string | number>(
         setLoading(false);
       }
     },
-    [api, mapper, buildTree]
+    [getAll, mapper, buildTree]
   );
 
   const handleDelete = useCallback(
     async (row: T) => {
       setLoading(true);
-      const id = getId(row);
-      await api.deleteById(id);
+      const id = getIdValue(row);
 
-      setRows((prev) => prev.filter((r) => getId(r) !== id));
+      await deleteById(id);
+
+      setRows((prev) => prev.filter((r) => getIdValue(r) !== id));
 
       const removeFromTree = (nodes: TreeNode<T>[]): TreeNode<T>[] =>
         nodes
@@ -97,21 +101,22 @@ export function useDataTree<T, K extends string | number>(
           }));
 
       setTreeItems((prev) => removeFromTree(prev));
+
       setLoading(false);
     },
-    [api, getId, setLoading]
+    [deleteById, getIdValue]
   );
 
   const handleFormSuccess = useCallback(
     (updatedRecord: T) => {
       setLoading(true);
-      const id = getId(updatedRecord);
+      const id = getIdValue(updatedRecord);
 
       setRows((prev) => {
-        const exists = prev.find((r) => getId(r) === id);
-        if (exists)
-          return prev.map((r) => (getId(r) === id ? updatedRecord : r));
-        return [updatedRecord, ...prev];
+        const exists = prev.some((r) => getIdValue(r) === id);
+        return exists
+          ? prev.map((r) => (getIdValue(r) === id ? updatedRecord : r))
+          : [updatedRecord, ...prev];
       });
 
       setTreeItems((prev) => {
@@ -127,7 +132,7 @@ export function useDataTree<T, K extends string | number>(
 
       setLoading(false);
     },
-    [mapper, getId, flattenTree, buildTree]
+    [mapper, getIdValue, flattenTree, buildTree]
   );
 
   const handleRefresh = useCallback(
