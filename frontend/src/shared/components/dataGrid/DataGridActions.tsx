@@ -13,6 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import DataGridActionsButton from "./DataGridActionsButton";
 import DialogHeader from "../dialog/DialogHeader";
+import ConfirmDialog from "../ConfirmDialog";
 
 interface DataGridActionsProps {
   onEdit?: () => void;
@@ -69,48 +70,13 @@ export default function DataGridActions({
       </Stack>
 
       {/* Confirm Dialog */}
-      <Dialog
+      <ConfirmDialog
         open={confirmOpen}
-        onClose={handleCancelDelete}
-        fullWidth
-        maxWidth="xs"
-      >
-        <DialogHeader title="Delete Item" onClose={handleCancelDelete} />
-        <DialogContent dividers sx={{ py: 5 }}>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              flexDirection: "column",
-              gap: 2,
-            }}
-          >
-            <WarningAmberIcon
-              color="error"
-              sx={{
-                fontSize: "3rem",
-              }}
-            />
-            <Typography>
-              Are you certain you want to delete this item?
-            </Typography>
-          </Box>
-        </DialogContent>
-        <DialogActions sx={{ display: "flex" }}>
-          <Button
-            sx={{ flex: 1 }}
-            onClick={handleConfirmDelete}
-            color="error"
-            variant="contained"
-          >
-            Delete
-          </Button>
-          <Button sx={{ flex: 1 }} onClick={handleCancelDelete} color="inherit">
-            Cancel
-          </Button>
-        </DialogActions>
-      </Dialog>
+        onCancel={handleCancelDelete}
+        onConfirm={handleConfirmDelete}
+        title="Delete Item"
+        message="Are you certain you want to delete this item?"
+      />
     </>
   );
 }

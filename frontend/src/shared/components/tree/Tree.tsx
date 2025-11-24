@@ -1,27 +1,35 @@
 import { useState, useMemo, useCallback, ReactNode, useEffect } from "react";
 import CustomTreeItem from "./TreeItem";
-import TreeToolbar from "./TreeToolbar"; // Toolbar که قبلاً ساختیم
-import { Box, LinearProgress, Typography } from "@mui/material";
+import TreeToolbar from "./TreeToolbar";
+import { Box, LinearProgress } from "@mui/material";
 import {
   RichTreeView,
   TreeViewBaseItem,
   type RichTreeViewProps,
 } from "@mui/x-tree-view";
 
-interface TreeProps extends RichTreeViewProps<TreeViewBaseItem, false> {
+interface TreeProps
+  extends Omit<RichTreeViewProps<TreeViewBaseItem, false>, "onSelect"> {
   label?: string;
   loading?: boolean;
-  filterFn?: (node: TreeViewBaseItem) => boolean;
-  toolbarActions?: ReactNode; // مثل DataGridActions
+  onRefresh?: () => void;
+  toolbarActions?: ReactNode;
+  onAddClick?: () => void;
+  onEditClick?: (id: number) => void;
+  onDeleteClick?: (id: string) => void;
+  onItemSelect?: (id: string) => void; // نام متفاوت برای جلوگیری از conflict
 }
 
 export default function Tree({
   items,
   label,
   loading,
-  filterFn,
-  onSelect,
   toolbarActions,
+  onRefresh,
+  onAddClick,
+  onEditClick,
+  onDeleteClick,
+  onItemSelect,
   ...other
 }: TreeProps) {
   /** ریشه درخت */
@@ -35,47 +43,51 @@ export default function Tree({
   );
 
   const [searchText, setSearchText] = useState("");
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  // filterFn را با سرچ ترکیب می‌کنیم
-  const combinedFilterFn = useCallback(
-    (node: TreeViewBaseItem) => {
-      if (searchText) {
-        return node.label.toLowerCase().includes(searchText.toLowerCase());
+  /** فیلتر فقط بر اساس سرچ */
+  const filterNode = useCallback(
+    (node: TreeViewBaseItem): TreeViewBaseItem | null => {
+      const match = node.label.toLowerCase().includes(searchText.toLowerCase());
+
+      if (!node.children || node.children.length === 0) {
+        return match ? { ...node } : null;
       }
-      return true;
+
+      const filteredChildren = node.children
+        .map(filterNode)
+        .filter(Boolean) as TreeViewBaseItem[];
+
+      if (filteredChildren.length > 0 || match) {
+        return { ...node, children: filteredChildren };
+      }
+      return null;
     },
     [searchText]
   );
 
-  // filteredTree را بر اساس combinedFilterFn می‌سازیم
   const filteredTree = useMemo(() => {
-    const filterNode = (node: TreeViewBaseItem): TreeViewBaseItem | null => {
-      if (!node.children || node.children.length === 0) {
-        return combinedFilterFn(node) ? { ...node } : null;
-      }
-      const filteredChildren = node.children
-        .map(filterNode)
-        .filter(Boolean) as TreeViewBaseItem[];
-      if (filteredChildren.length > 0 || combinedFilterFn(node)) {
-        return { ...node, children: filteredChildren };
-      }
-      return null;
-    };
     return filterNode(wrappedRoot) ?? { ...wrappedRoot, children: [] };
-  }, [wrappedRoot, combinedFilterFn]);
+  }, [wrappedRoot, filterNode]);
 
+  const [expandedItems, setExpandedItems] = useState<string[]>(["__root__"]);
+
+  /** Expand خودکار هنگام سرچ */
   useEffect(() => {
     if (!searchText) return;
-    const matchedIds: string[] = [];
-    const collectMatched = (node: TreeViewBaseItem) => {
-      if (combinedFilterFn(node)) matchedIds.push(node.id);
-      node.children?.forEach(collectMatched);
-    };
-    collectMatched(filteredTree);
-    setExpandedItems(["__root__", ...matchedIds]); // parentها expand می‌شوند
-  }, [searchText, filteredTree, combinedFilterFn]);
 
-  /** استخراج تمام IDها */
+    const matchedIds: string[] = [];
+    const walk = (node: TreeViewBaseItem) => {
+      if (node.label.toLowerCase().includes(searchText.toLowerCase())) {
+        matchedIds.push(node.id);
+      }
+      node.children?.forEach(walk);
+    };
+
+    walk(filteredTree);
+    setExpandedItems(["__root__", ...matchedIds]);
+  }, [searchText, filteredTree]);
+
   const allIds = useMemo(() => {
     const result: string[] = [];
     const walk = (node: TreeViewBaseItem) => {
@@ -86,8 +98,6 @@ export default function Tree({
     return result;
   }, [filteredTree]);
 
-  const [expandedItems, setExpandedItems] = useState<string[]>(["__root__"]);
-
   const handleExpandAll = useCallback(() => setExpandedItems(allIds), [allIds]);
   const handleCollapseAll = useCallback(
     () => setExpandedItems(["__root__"]),
@@ -95,22 +105,8 @@ export default function Tree({
   );
 
   const onExpandedChange = useCallback(
-    (event: React.SyntheticEvent | null, itemIds: string[]) =>
-      setExpandedItems(itemIds),
-    []
-  );
-
-  /** پیدا کردن node واقعی با ID */
-  const findNodeById = useCallback(
-    (node: TreeViewBaseItem, id: string): TreeViewBaseItem | null => {
-      if (node.id === id) return node;
-      if (!node.children) return null;
-      for (const child of node.children) {
-        const result = findNodeById(child, id);
-        if (result) return result;
-      }
-      return null;
-    },
+    (event: React.SyntheticEvent | null, ids: string[]) =>
+      setExpandedItems(ids),
     []
   );
 
@@ -131,8 +127,9 @@ export default function Tree({
         onExpandAll={handleExpandAll}
         onCollapseAll={handleCollapseAll}
         actions={toolbarActions}
-        onRefresh={console.log}
-        onSearch={(value) => setSearchText(value)}
+        onRefresh={onRefresh}
+        onSearch={setSearchText}
+        onAdd={onAddClick}
       />
 
       {loading && <LinearProgress />}
@@ -142,9 +139,21 @@ export default function Tree({
           <RichTreeView
             items={[filteredTree]}
             slots={{ item: CustomTreeItem }}
+            slotProps={{
+              item: {
+                // @ts-ignore
+                onEditClick: onEditClick,
+                onDeleteClick: onDeleteClick,
+              },
+            }}
             expandedItems={expandedItems}
             onExpandedItemsChange={onExpandedChange}
-            defaultExpandedItems={["__root__"]}
+            selectedItems={selectedId}
+            onSelectedItemsChange={(event, id) => {
+              if (!id || id === "__root__") return;
+              setSelectedId(id);
+              onItemSelect?.(id);
+            }}
             {...other}
           />
         ) : (

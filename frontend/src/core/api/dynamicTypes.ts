@@ -33,5 +33,20 @@ export type DynamicDelete<K extends keyof operations> =
       : never
     : never;
 
-export type DynamicQuery<K extends keyof operations> =
+type OriginalQuery<K extends keyof operations> =
   operations[K]["parameters"]["query"];
+
+// گام ۲: تعریف فیلدهای مورد نیاز با نوع جدید
+type FilterAndIncludeFields = {
+  filter: object | any;
+  include: object | any;
+};
+
+// گام ۳: نوع کمکی برای اعمال بازنویسی روی تک‌تک اعضای Union
+type OverrideUnion<T> = T extends object
+  ? Omit<T, keyof FilterAndIncludeFields> & FilterAndIncludeFields
+  : T;
+
+export type DynamicQuery<K extends keyof operations> = OverrideUnion<
+  OriginalQuery<K>
+>;

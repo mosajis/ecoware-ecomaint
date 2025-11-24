@@ -21,6 +21,7 @@ const ignoreResources = [
   "authAuthorization",
 ];
 
+// helper camelCase
 function camelCase(str) {
   return str
     .replace(/[-_/](.)/g, (_, c) => c.toUpperCase())
@@ -36,28 +37,37 @@ while ((match = opRegex.exec(typesContent)) !== null) {
   const method = match[1]; // get/post/put/delete
   const name = match[2]; // مثل SysdiagramsByDiagramId
 
-  // شناسایی اسم ریسورس واقعی (حذف هر نوع ByXId و Count)
+  // شناسایی اسم ریسورس واقعی (حذف ByXId و Count)
   const resourceName = camelCase(
-    name
-      .replace(/By[A-Z].*Id$/, "") // حذف ByDiagramId, ByXYZId, BySomethingId
-      .replace(/Count$/, "") // حذف Count
+    name.replace(/By[A-Z].*Id$/, "").replace(/Count$/, "")
   );
 
   if (!resourcesMap[resourceName]) resourcesMap[resourceName] = {};
   resourcesMap[resourceName][method] = resourcesMap[resourceName][method] || [];
-
-  // خود نام کامل operation مثل getSysdiagramsByDiagramId
   resourcesMap[resourceName][method].push(match[0].split(":")[0]);
 }
 
-// تولید خروجی
+// === تولید خروجی ===
 let output = `// ⚠️ Auto-generated file. Do not edit manually.
 import { api } from '@/service/axios';
 import type { DynamicResponse, DynamicQuery, DynamicCreate, DynamicUpdate } from '../dynamicTypes';
 
+// 🔥 Utility برای stringify خودکار query
+function stringifyQuery<Q extends Record<string, any>>(query?: Q) {
+  if (!query) return query;
+  const result: Record<string, any> = {};
+  Object.entries(query).forEach(([key, value]) => {
+    if (value !== undefined && typeof value === "object") {
+      result[key] = JSON.stringify(value);
+    } else {
+      result[key] = value;
+    }
+  });
+  return result as Q;
+}
+
 `;
 
-// ساخت خروجی برای هر resource
 for (const [resource, ops] of Object.entries(resourcesMap)) {
   if (ignoreResources.includes(resource)) {
     console.log(`🚫 Ignored: ${resource}`);
@@ -65,74 +75,60 @@ for (const [resource, ops] of Object.entries(resourcesMap)) {
   }
 
   const getOps = ops.get || [];
-
-  // پیدا کردن getAll (بدون ByXId, بدون Count)
   let getAllOp = getOps.find((x) => !/By[A-Z].*Id$|Count/i.test(x));
-
-  // fallback اگر نام دقیقاً getResource بود
   if (!getAllOp) {
     const expected = "get" + resource[0].toUpperCase() + resource.slice(1);
     getAllOp = getOps.find((x) => x === expected);
   }
 
-  // نام Type
   const typeName = resource[0].toUpperCase() + resource.slice(1);
-
-  // ساخت Type فقط از getAll
   if (getAllOp) {
     output += `export type Type${typeName} = DynamicResponse<'${getAllOp}'>['items'][0];\n`;
   }
 
-  // ساخت object ریسورس
   output += `export const ${resource} = {\n`;
 
   const getByIdOp = getOps.find((x) => /By[A-Z].*Id$/.test(x));
   const countOp = getOps.find((x) => /Count/i.test(x));
 
-  // GET ALL
   if (getAllOp)
     output += `  getAll: (query?: DynamicQuery<'${getAllOp}'>) =>
-    api.get<DynamicResponse<'${getAllOp}'>>('/${resource}', { params: query }),\n`;
+    api.get<DynamicResponse<'${getAllOp}'>>('/${resource}', { params: stringifyQuery(query) }),\n`;
 
-  // GET BY ID
   if (getByIdOp)
     output += `  getById: (id: number, query?: DynamicQuery<'${getByIdOp}'>) =>
-    api.get<DynamicResponse<'${getByIdOp}'>>(\`/${resource}/\${id}\`, { params: query }),\n`;
+    api.get<DynamicResponse<'${getByIdOp}'>>(\`/${resource}/\${id}\`, { params: stringifyQuery(query) }),\n`;
 
-  // COUNT
   if (countOp)
     output += `  count: (query?: DynamicQuery<'${countOp}'>) =>
-    api.get<DynamicResponse<'${countOp}'>>('/${resource}/count', { params: query }),\n`;
+    api.get<DynamicResponse<'${countOp}'>>('/${resource}/count', { params: stringifyQuery(query) }),\n`;
 
-  // POST
   const postOp = ops.post?.[0];
   if (postOp)
     output += `  create: (data: DynamicCreate<'${postOp}'>) =>
     api.post<DynamicResponse<'${postOp}'>>('/${resource}', { data }),\n`;
 
-  // PUT
   const putOp = ops.put?.find((x) => /By[A-Z].*Id$/.test(x)) || ops.put?.[0];
   if (putOp)
     output += `  update: (id: number, data: DynamicUpdate<'${putOp}'>) =>
     api.put<DynamicResponse<'${putOp}'>>(\`/${resource}/\${id}\`, { data }),\n`;
 
-  // DELETE
   const delOps = ops.delete || [];
   const delById = delOps.find((x) => /By[A-Z].*Id$/.test(x));
   const delAll = delOps.find((x) => !/By[A-Z].*Id$/.test(x));
 
   if (delById)
     output += `  deleteById: (id: number, query?: DynamicQuery<'${delById}'>) =>
-    api.delete<DynamicResponse<'${delById}'>>(\`/${resource}/\${id}\`, { params: query }),\n`;
+    api.delete<DynamicResponse<'${delById}'>>(\`/${resource}/\${id}\`, { params: stringifyQuery(query) }),\n`;
 
   if (delAll)
     output += `  deleteAll: (query?: DynamicQuery<'${delAll}'>) =>
-    api.delete<DynamicResponse<'${delAll}'>>('/${resource}', { params: query }),\n`;
+    api.delete<DynamicResponse<'${delAll}'>>('/${resource}', { params: stringifyQuery(query) }),\n`;
 
   output += `};\n\n`;
 }
 
-// ذخیره خروجی
+// ذخیره فایل خروجی
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, output, "utf-8");
 

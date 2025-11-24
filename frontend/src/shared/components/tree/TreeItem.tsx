@@ -1,24 +1,24 @@
+import React from "react";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Box, IconButton, Typography, Tooltip } from "@mui/material";
 import { getDesignTokens } from "@/shared/theme/themePrimitives";
-import styled from "@emotion/styled";
-import { alpha, Box, Typography, useColorScheme } from "@mui/material";
+import { styled, useColorScheme } from "@mui/material/styles";
 import {
-  RichTreeView,
   TreeItem,
   treeItemClasses,
-  type RichTreeViewProps,
+  type TreeItemProps,
 } from "@mui/x-tree-view";
-import { memo } from "react";
 
-const CustomTreeItem = styled(TreeItem)(({ theme }) => {
-  const { mode, setMode } = useColorScheme();
+export const StyledTreeItem = styled(TreeItem)(({ theme }) => {
+  const { mode } = useColorScheme();
+
   return {
     position: "relative",
 
     [`& .${treeItemClasses.content}`]: {
       position: "relative",
-      // @ts-ignore
       padding: theme.spacing(0.3, 1),
-      // @ts-ignore
       margin: theme.spacing(0.3, 0),
       "&::before": {
         content: '""',
@@ -50,4 +50,91 @@ const CustomTreeItem = styled(TreeItem)(({ theme }) => {
   };
 });
 
-export default memo(CustomTreeItem);
+interface CustomLabelProps {
+  label: string;
+  id: string;
+  onEditClick?: (id: string) => void;
+  onDeleteClick?: (id: string) => void;
+}
+
+const CustomLabel = React.memo(
+  function CustomLabel({
+    label,
+    id,
+    onEditClick,
+    onDeleteClick,
+  }: CustomLabelProps) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          pr: 1,
+        }}
+      >
+        <Typography sx={{ flex: 1 }}>{label}</Typography>
+
+        <Box>
+          <Tooltip title="Edit">
+            <IconButton
+              size="small"
+              sx={{ width: 30, height: 30 }}
+              onClick={(e) => {
+                e.stopPropagation();
+                onEditClick?.(id);
+              }}
+            >
+              <EditIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip title="Delete">
+            <IconButton
+              size="small"
+              sx={{ width: 30, height: 30 }}
+              onClick={(e) => {
+                e.stopPropagation();
+                onDeleteClick?.(id);
+              }}
+            >
+              <DeleteIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
+        </Box>
+      </Box>
+    );
+  },
+  // جلوگیری از رندرهای اضافی
+  (prev, next) =>
+    prev.label === next.label &&
+    prev.id === next.id &&
+    prev.onEditClick === next.onEditClick &&
+    prev.onDeleteClick === next.onDeleteClick
+);
+
+function CustomTreeItemBase(
+  props: TreeItemProps & {
+    onEditClick?: (id: string) => void;
+    onDeleteClick?: (id: string) => void;
+  }
+) {
+  const { itemId, label, onEditClick, onDeleteClick, ...other } = props;
+
+  return (
+    <StyledTreeItem
+      itemId={itemId}
+      label={
+        <CustomLabel
+          id={itemId!}
+          label={label as string}
+          onEditClick={onEditClick}
+          onDeleteClick={onDeleteClick}
+        />
+      }
+      {...other}
+    />
+  );
+}
+
+export default React.memo(CustomTreeItemBase);

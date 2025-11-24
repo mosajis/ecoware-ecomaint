@@ -1,13 +1,13 @@
+import Splitter from "@/shared/components/Splitter";
+import CounterTypeFormDialog from "./CounterTypeFormDialog";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import TabComponentUnit from "./tabs/TabComponentUnit";
+import TabContainer from "@/shared/components/TabContainer";
 import React, { useState, useCallback } from "react";
 import { Box, Tab, Tabs } from "@mui/material";
-import Splitter from "@/shared/components/Splitter";
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import CounterTypeFormDialog from "./CounterTypeFormDialog"; // فرم CRUD
-import { tblCounterType, TypeTblCounterType } from "@/core/api/generated/api";
-import { GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { useDataGrid } from "../_hooks/useDataGrid";
-import TabContainer from "@/shared/components/TabContainer";
+import { tblCounterType, TypeTblCounterType } from "@/core/api/generated/api";
 
 const tabList = [
   { label: "Component", key: "component" },
@@ -21,15 +21,22 @@ export default function CounterTypePage() {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+  const [selectedCounterType, setSelectedCounterType] =
+    useState<TypeTblCounterType | null>(null);
 
-  // === useDataGrid برای سمت راست (DataGrid تب فعال) ===
-  const { rows, loading, fetchData, handleDelete, handleFormSuccess } =
-    useDataGrid<TypeTblCounterType, number>(
-      tblCounterType,
-      (x) => x.counterTypeId
-    );
+  const {
+    rows: counterTypes,
+    loading: loadingCounterTypes,
+    fetchData: fetchCounterTypes,
+    handleDelete: deleteCounterType,
+    handleFormSuccess: counterTypeFormSuccess,
+  } = useDataGrid(
+    tblCounterType.getAll,
+    tblCounterType.deleteById,
+    "counterTypeId"
+  );
 
-  // === Handlers فرم ===
+  // Handlers
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
     setMode("create");
@@ -46,49 +53,70 @@ export default function CounterTypePage() {
     setActiveTab(newValue);
   };
 
-  // === ستون‌ها ===
-  const columns: GridColDef<TypeTblCounterType>[] = [
-    { field: "name", headerName: "Name", flex: 1 },
-    dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
-  ];
-
   return (
     <Splitter initialPrimarySize="25%">
-      {/* Left Table ثابت */}
+      {/* Left Grid */}
       <CustomizedDataGrid
-        rows={rows}
-        columns={columns}
-        loading={loading}
-        label={`Counter Type`}
+        rows={counterTypes}
+        columns={[
+          { field: "name", headerName: "Name", flex: 1 },
+          { field: "counterTypeId", headerName: "Id", flex: 1 },
+          dataGridActionColumn({
+            onEdit: handleEdit,
+            onDelete: deleteCounterType,
+          }),
+        ]}
+        loading={loadingCounterTypes}
+        label="Counter Type"
         showToolbar
         onAddClick={handleCreate}
-        onRefreshClick={fetchData}
+        onRefreshClick={fetchCounterTypes}
         getRowId={(row) => row.counterTypeId}
+        rowSelection
+        onRowClick={(params) => setSelectedCounterType(params.row)}
       />
 
-      {/* Right Table با تب‌ها */}
+      {/* Right Grid / Tabs */}
       <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
-        <Tabs
-          value={activeTab}
-          onChange={handleTabChange}
-          variant="scrollable"
-          scrollButtons="auto"
-        >
+        <Tabs value={activeTab} onChange={handleTabChange}>
           {tabList.map((tab) => (
             <Tab key={tab.key} label={tab.label} value={tab.key} />
           ))}
         </Tabs>
 
-        <TabContainer>asd</TabContainer>
+        <TabContainer>
+          {activeTab === "component" && (
+            <TabComponentUnit
+              label={selectedCounterType?.name}
+              counterTypeId={selectedCounterType?.counterTypeId}
+            />
+          )}
+
+          {
+            activeTab === "compType" && "compType"
+            // <TabCompType counterTypeId={selectedCounterTypeId} />
+          }
+
+          {
+            activeTab === "compJob" && "compJob"
+            // <TabCompJob counterTypeId={selectedCounterTypeId} />
+          }
+
+          {
+            activeTab === "compTypeJob" && "compTypeJob"
+            // <TabCompTypeJob counterTypeId={selectedCounterTypeId} />
+          }
+        </TabContainer>
       </Box>
 
+      {/* CounterType Form Dialog */}
       <CounterTypeFormDialog
         open={openForm}
         mode={mode}
         recordId={selectedRowId}
         onClose={() => setOpenForm(false)}
         onSuccess={(record) => {
-          handleFormSuccess(record);
+          counterTypeFormSuccess(record);
           setOpenForm(false);
         }}
       />

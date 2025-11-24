@@ -101,6 +101,8 @@ export class BaseController<Model extends Record<string, any>> {
             }
           }
 
+          console.log(parsedInclude);
+
           const sortObj = parseSortString(sort);
           const usePagination = !!paginate;
 

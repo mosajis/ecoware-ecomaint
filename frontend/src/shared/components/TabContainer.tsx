@@ -1,10 +1,10 @@
-import React, { ReactNode, CSSProperties } from "react";
+import { ReactNode, CSSProperties } from "react";
 import { Box, BoxProps } from "@mui/material";
 
 type TabContainerProps = {
-  children: ReactNode;
-  style?: CSSProperties; // قابلیت اضافه کردن استایل دلخواه
-  boxProps?: BoxProps; // انتقال سایر props به Box
+  children?: ReactNode;
+  style?: CSSProperties;
+  boxProps?: BoxProps;
 };
 
 export default function TabContainer({
@@ -19,6 +19,8 @@ export default function TabContainer({
         border: `1px solid ${(theme.vars || theme).palette.divider}`,
         borderTop: 0,
         borderRadius: "0 0 8px 8px",
+        height: "100%",
+        maxHeight: "calc(100% - 42px)",
         ...style,
       })}
       {...boxProps}

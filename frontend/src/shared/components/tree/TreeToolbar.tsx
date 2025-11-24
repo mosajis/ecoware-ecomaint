@@ -10,9 +10,8 @@ import {
 import { ReactNode } from "react";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen";
-import ExpandIcon from "@mui/icons-material/Expand";
-import CollapseIcon from "@mui/icons-material/CloseFullscreen";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import AddIcon from "@mui/icons-material/Add";
 import ButtonSearch from "./toolbar/ButtonSearch";
 
 interface TreeToolbarProps {
@@ -22,6 +21,7 @@ interface TreeToolbarProps {
   onFilter?: () => void;
   onSearch?: (value: string) => void;
   onRefresh?: () => void;
+  onAdd?: () => void;
   actions?: ReactNode;
 }
 
@@ -32,6 +32,7 @@ export default function TreeToolbar({
   onFilter,
   onSearch,
   onRefresh,
+  onAdd,
   actions,
 }: TreeToolbarProps) {
   const [searchText, setSearchText] = useState("");
@@ -60,7 +61,7 @@ export default function TreeToolbar({
       >
         <Typography fontWeight="bold">{label}</Typography>
 
-        <Stack direction="row" spacing={1} alignItems="center">
+        <Stack direction="row" spacing={0.5} alignItems="center">
           {/* Search Input */}
           {onSearch && <ButtonSearch onSearch={handleSearchChange} />}
 
@@ -84,6 +85,14 @@ export default function TreeToolbar({
             <Tooltip title="Refresh">
               <IconButton size="small" onClick={onRefresh}>
                 <RefreshIcon />
+              </IconButton>
+            </Tooltip>
+          )}
+
+          {onAdd && (
+            <Tooltip title="Add">
+              <IconButton size="small" onClick={onAdd}>
+                <AddIcon />
               </IconButton>
             </Tooltip>
           )}

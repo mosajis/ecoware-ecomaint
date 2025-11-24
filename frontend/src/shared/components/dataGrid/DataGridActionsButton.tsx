@@ -23,7 +23,7 @@ export default function DataGridActionsButton({
         sx={{
           width: `${size}px`,
           height: `${size}px`,
-          borderRadius: "50%",
+          borderRadius: "10px",
         }}
       >
         {icon}

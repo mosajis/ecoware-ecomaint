@@ -56,7 +56,7 @@ export class BaseService<T extends { id: any }> {
       this.model.findMany({
         where,
         orderBy,
-        include: safeInclude,
+        include: include,
         skip: safeSkip,
         take: take ?? safePerPage,
       }),

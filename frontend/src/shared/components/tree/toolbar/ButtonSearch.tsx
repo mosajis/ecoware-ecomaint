@@ -11,19 +11,47 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import CancelIcon from "@mui/icons-material/Cancel";
 
-type OwnerState = { expanded: boolean };
+interface ButtonSearchProps {
+  onSearch: (value: string) => void;
+}
 
+interface OwnerState {
+  expanded: boolean;
+}
+
+/* --------------------------------------------------
+   Wrapper → مدیریت فضای واقعی
+   -------------------------------------------------- */
+const FieldWrapper = styled("div")<{ expanded: boolean }>(({ expanded }) => ({
+  display: "grid",
+  gridTemplateColumns: "1fr",
+  position: "relative",
+
+  // تعیین مقدار width در حالت بسته
+  "--trigger-width": expanded ? "260px" : "0px",
+}));
+
+/* --------------------------------------------------
+   TextField → استایل دقیق طبق درخواست شما
+   -------------------------------------------------- */
 const StyledTextField = styled(TextField)<{ ownerState: OwnerState }>(
   ({ theme, ownerState }) => ({
-    width: ownerState.expanded ? 260 : 0,
+    gridArea: "1 / 1",
+    overflowX: "clip",
+    width: ownerState.expanded ? 260 : "var(--trigger-width)",
     opacity: ownerState.expanded ? 1 : 0,
-    transition: theme.transitions.create(["width", "opacity"]),
+
+    transition: theme.transitions.create(["width", "opacity"], {
+      duration: 200,
+    }),
+
+    // رفع min-width پیش‌فرض MUI
+    "& .MuiInputBase-root": {
+      minWidth: 0,
+      height: 36,
+    },
   })
 );
-
-interface ButtonSearchProps {
-  onSearch: (value: string) => void; // همیشه مقدار string
-}
 
 export default function ButtonSearch({ onSearch }: ButtonSearchProps) {
   const [expanded, setExpanded] = useState(false);
@@ -31,27 +59,31 @@ export default function ButtonSearch({ onSearch }: ButtonSearchProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  /* ---------------- handle change ---------------- */
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const val = e.target.value;
       setValue(val);
-      onSearch(val); // فقط string پاس میشه
+      onSearch(val);
     },
     [onSearch]
   );
 
+  /* ---------------- clear ---------------- */
   const handleClear = useCallback(() => {
     setValue("");
-    onSearch(""); // وقتی پاک می‌کنیم هم string پاس میشه
+    onSearch("");
     setExpanded(false);
   }, [onSearch]);
 
-  const handleToggle = useCallback(() => setExpanded(true), []);
-
+  /* ---------------- focus when open ---------------- */
   useEffect(() => {
-    if (expanded) inputRef.current?.focus();
+    if (expanded) {
+      setTimeout(() => inputRef.current?.focus(), 30);
+    }
   }, [expanded]);
 
+  /* ---------------- close if clicked outside ---------------- */
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -63,28 +95,34 @@ export default function ButtonSearch({ onSearch }: ButtonSearchProps) {
         setExpanded(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [expanded, value]);
 
   return (
-    <Stack direction="row" spacing={1} alignItems="center" ref={containerRef}>
+    <Stack
+      direction="row"
+      alignItems="center"
+      spacing={expanded ? 1 : 0}
+      ref={containerRef}
+    >
       {!expanded && (
         <Tooltip title="Search">
-          <IconButton size="small" onClick={handleToggle}>
+          <IconButton size="small" onClick={() => setExpanded(true)}>
             <SearchIcon fontSize="small" />
           </IconButton>
         </Tooltip>
       )}
 
-      <Box sx={{ position: "relative" }}>
+      <FieldWrapper expanded={expanded}>
         <StyledTextField
+          ownerState={{ expanded }}
           size="small"
-          placeholder="Search..."
+          placeholder="Search…"
           value={value}
           onChange={handleChange}
           inputRef={inputRef}
-          ownerState={{ expanded }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -93,14 +131,18 @@ export default function ButtonSearch({ onSearch }: ButtonSearchProps) {
             ),
             endAdornment: value && (
               <InputAdornment position="end">
-                <IconButton size="small" onClick={handleClear}>
+                <IconButton
+                  size="small"
+                  onClick={handleClear}
+                  sx={{ border: 0 }}
+                >
                   <CancelIcon fontSize="small" />
                 </IconButton>
               </InputAdornment>
             ),
           }}
         />
-      </Box>
+      </FieldWrapper>
     </Stack>
   );
 }
