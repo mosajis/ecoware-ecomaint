@@ -7,12 +7,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { tblLocation, TypeTblLocation } from "@/core/api/generated/api";
 import { AsyncSelectDialog } from "@/shared/components/AsyncSelectDialog";
 import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { buildRelation } from "@/core/api/helper";
 
 // === Validation Schema ===
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
   locationCode: z.string(),
-  parentLocationId: z.number().nullable().optional(),
+  parentLocationId: z
+    .object({
+      locationId: z.number(),
+      name: z.string().nullable().optional(),
+    })
+    .nullable()
+    .optional(),
   orderId: z.number().nullable().optional(),
 });
 
@@ -51,6 +58,7 @@ function LocationFormDialog({
     resolver: zodResolver(schema),
     defaultValues,
   });
+
   // === Load record in edit mode ===
   const fetchData = useCallback(async () => {
     if (mode !== "update" || !recordId) {
@@ -62,12 +70,14 @@ function LocationFormDialog({
     setLoadingInitial(true);
 
     try {
-      const res = await tblLocation.getById(recordId);
+      const res = await tblLocation.getById(recordId, {
+        include: { tblLocation: true },
+      });
 
       reset({
         name: res?.name ?? "",
         locationCode: res?.locationCode ?? "",
-        parentLocationId: res?.parentLocationId ?? null,
+        parentLocationId: res?.tblLocation ?? null,
         orderId: res?.orderId ?? null,
       });
 
@@ -99,27 +109,27 @@ function LocationFormDialog({
 
         let result: TypeTblLocation;
 
-        const parentId =
-          parsed.data.parentLocationId &&
-          Number(parsed.data.parentLocationId) > 0
-            ? Number(parsed.data.parentLocationId)
-            : null;
+        const parentId = parsed.data.parentLocationId
+          ? parsed.data.parentLocationId.locationId
+          : null;
+
+        const parentRelation = buildRelation(
+          "tblLocation",
+          "locationId",
+          parentId
+        );
 
         if (mode === "create") {
           result = await tblLocation.create({
             name: parsed.data.name,
             locationCode: parsed.data.locationCode,
-            ...(parentId
-              ? { tblLocation: { connect: { locationId: parentId } } }
-              : {}),
+            ...parentRelation,
           });
         } else {
           result = await tblLocation.update(recordId!, {
             name: parsed.data.name,
             locationCode: parsed.data.locationCode,
-            ...(parentId
-              ? { tblLocation: { connect: { locationId: parentId } } }
-              : { tblLocation: { disconnect: true } }),
+            ...parentRelation,
           });
         }
 
@@ -176,7 +186,6 @@ function LocationFormDialog({
         />
 
         {/* Parent Location */}
-
         <Controller
           name="parentLocationId"
           control={control}

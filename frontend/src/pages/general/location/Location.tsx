@@ -85,7 +85,7 @@ export default function LocationListPage() {
     { field: "orderId", headerName: "Order", width: 80 },
     dataGridActionColumn({
       onEdit: handleEdit,
-      onDelete: (row) => openDeleteModal(row.locationId), // SAFE
+      onDelete: handleDelete,
     }),
   ];
 

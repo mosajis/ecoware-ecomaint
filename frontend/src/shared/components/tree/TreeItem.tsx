@@ -70,12 +70,11 @@ const CustomLabel = React.memo(
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          pr: 1,
         }}
       >
         <Typography sx={{ flex: 1 }}>{label}</Typography>
 
-        <Box>
+        <Box display={"flex"} gap={0.5}>
           <Tooltip title="Edit">
             <IconButton
               size="small"

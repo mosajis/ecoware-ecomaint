@@ -84,7 +84,7 @@ export class BaseService<T extends { id: any }> {
       )
     );
 
-    return this.model.findFirst({ where, include: safeInclude });
+    return this.model.findFirst({ where, include: include });
   }
 
   // ✏️ بروزرسانی
