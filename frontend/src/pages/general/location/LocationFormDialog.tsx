@@ -5,12 +5,14 @@ import { Box, TextField } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { tblLocation, TypeTblLocation } from "@/core/api/generated/api";
+import { AsyncSelectDialog } from "@/shared/components/AsyncSelectDialog";
+import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
 
-// === Validation Schema with Zod ===
+// === Validation Schema ===
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
   locationCode: z.string(),
-  parentLocationId: z.number(),
+  parentLocationId: z.number().nullable().optional(),
   orderId: z.number().nullable().optional(),
 });
 
@@ -34,64 +36,67 @@ function LocationFormDialog({
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
+  const [parentLocation, setParentLocation] = useState<TypeTblLocation | null>(
+    null
+  );
+
   const defaultValues: LocationFormValues = {
     name: "",
     locationCode: "",
-    parentLocationId: 0,
+    parentLocationId: null,
     orderId: null,
   };
 
-  const { control, handleSubmit, reset } = useForm<LocationFormValues>({
+  const { control, handleSubmit, reset, watch } = useForm<LocationFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
   });
-
-  // === Fetch initial data for update with AbortController ===
+  // === Load record in edit mode ===
   const fetchData = useCallback(async () => {
     if (mode !== "update" || !recordId) {
       reset(defaultValues);
+      setParentLocation(null);
       return;
     }
 
     setLoadingInitial(true);
-    const controller = new AbortController();
 
     try {
       const res = await tblLocation.getById(recordId);
-      if (!controller.signal.aborted) {
-        reset({
-          name: res?.name ?? "",
-          locationCode: res?.locationCode ?? "",
-          parentLocationId: res?.parentLocationId ?? 0,
-          orderId: res?.orderId ?? null,
-        });
+
+      reset({
+        name: res?.name ?? "",
+        locationCode: res?.locationCode ?? "",
+        parentLocationId: res?.parentLocationId ?? null,
+        orderId: res?.orderId ?? null,
+      });
+
+      // نمایش parent
+      if (res?.tblLocation) {
+        setParentLocation(res.tblLocation);
+      } else {
+        setParentLocation(null);
       }
     } finally {
       setLoadingInitial(false);
     }
-
-    return () => controller.abort();
   }, [mode, recordId, reset]);
 
   useEffect(() => {
-    if (open) {
-      fetchData();
-    }
+    if (open) fetchData();
   }, [open, fetchData]);
 
   const isDisabled = loadingInitial || submitting;
 
-  // === Handle form submit ===
+  // === Submit Handler ===
   const handleFormSubmit = useCallback(
     async (values: LocationFormValues) => {
       const parsed = schema.safeParse(values);
-      if (!parsed.success) {
-        console.error("Validation failed", parsed.error.format());
-        return;
-      }
+      if (!parsed.success) return;
 
       try {
         setSubmitting(true);
+
         let result: TypeTblLocation;
 
         const parentId =
@@ -104,32 +109,18 @@ function LocationFormDialog({
           result = await tblLocation.create({
             name: parsed.data.name,
             locationCode: parsed.data.locationCode,
-
             ...(parentId
-              ? {
-                  tblLocation: {
-                    connect: { locationId: parentId },
-                  },
-                }
+              ? { tblLocation: { connect: { locationId: parentId } } }
               : {}),
           });
-        } else if (mode === "update" && recordId) {
-          result = await tblLocation.update(recordId, {
+        } else {
+          result = await tblLocation.update(recordId!, {
             name: parsed.data.name,
             locationCode: parsed.data.locationCode,
-
             ...(parentId
-              ? {
-                  tblLocation: {
-                    connect: { locationId: parentId },
-                  },
-                }
-              : {
-                  tblLocation: { disconnect: true },
-                }),
+              ? { tblLocation: { connect: { locationId: parentId } } }
+              : { tblLocation: { disconnect: true } }),
           });
-        } else {
-          return;
         }
 
         onSuccess(result);
@@ -150,22 +141,25 @@ function LocationFormDialog({
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1.5}>
+      <Box display="grid" gridTemplateColumns="repeat(1, 1fr)" gap={1.5}>
+        {/* Code */}
         <Controller
           name="locationCode"
           control={control}
           render={({ field, fieldState }) => (
             <TextField
+              sx={{ width: "75%" }}
               {...field}
-              label="Code *"
+              label="Code"
+              size="small"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
-              size="small"
               disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
             />
           )}
         />
+
+        {/* Name */}
         <Controller
           name="name"
           control={control}
@@ -173,34 +167,38 @@ function LocationFormDialog({
             <TextField
               {...field}
               label="Name *"
+              size="small"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
-              size="small"
               disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
             />
           )}
         />
+
+        {/* Parent Location */}
+
         <Controller
           name="parentLocationId"
           control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Parent Id"
-              type="number"
-              size="small"
-              disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
-              value={field.value ?? ""}
-              onChange={(e) =>
-                field.onChange(
-                  e.target.value === "" ? null : Number(e.target.value)
-                )
+          render={({ field, fieldState }) => (
+            <AsyncSelectField
+              dialogMaxWidth="sm"
+              label="Parent Location"
+              selectionMode="single"
+              value={field.value} // رکورد کامل
+              request={() =>
+                tblLocation.getAll({ paginate: false }).then((res) => res.items)
               }
+              columns={[{ field: "name", headerName: "Name", flex: 1 }]}
+              getRowId={(row) => row.locationId}
+              onChange={field.onChange}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
             />
           )}
         />
+
+        {/* Order */}
         <Controller
           name="orderId"
           control={control}
@@ -208,10 +206,10 @@ function LocationFormDialog({
             <TextField
               {...field}
               label="Order"
+              sx={{ width: "50%" }}
               type="number"
               size="small"
               disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
               value={field.value ?? ""}
               onChange={(e) =>
                 field.onChange(
@@ -222,6 +220,8 @@ function LocationFormDialog({
           )}
         />
       </Box>
+
+      {/* Dialog Select */}
     </FormDialog>
   );
 }

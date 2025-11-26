@@ -9,7 +9,7 @@ import { tblAddress, TypeTblAddress } from "@/core/api/generated/api";
 // === Validation Schema with Zod ===
 const schema = z.object({
   code: z.string().nullable(),
-  name: z.string().min(1, "Name is required").nullable(),
+  name: z.string().min(1, "Name is required"),
   address1: z.string().nullable(),
   address2: z.string().nullable(),
   phone: z.string().nullable(),
@@ -134,7 +134,7 @@ function AddressFormDialog({
           render={({ field }) => (
             <TextField
               {...field}
-              label="Code *"
+              label="Code"
               size="small"
               error={!!errors.code}
               helperText={errors.code?.message}
