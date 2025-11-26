@@ -11,12 +11,14 @@ export default function DisciplineList() {
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
-  // === Mapping & getId (برای DataGrid) ===
-  const getId = useCallback((row: TypeTblDiscipline) => row.discId, []);
+  const getAll = useCallback(
+    () => tblDiscipline.getAll({ paginate: false }),
+    []
+  );
 
   // === Hook ===
   const { rows, loading, handleDelete, handleFormSuccess, handleRefresh } =
-    useDataGrid<TypeTblDiscipline, number>(tblDiscipline, getId);
+    useDataGrid(getAll, tblDiscipline.deleteById, "discId");
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
@@ -51,7 +53,7 @@ export default function DisciplineList() {
         columns={columns}
         onAddClick={handleCreate}
         onRefreshClick={handleRefreshClicked}
-        getRowId={getId}
+        getRowId={(row) => row.discId}
       />
 
       <DisciplineFormDialog
