@@ -10,7 +10,6 @@ import { tblJobClass, TypeTblJobClass } from "@/core/api/generated/api";
 const schema = z.object({
   code: z.string().nullable(),
   name: z.string().min(1, "Name is required").nullable(),
-  orderId: z.number().nullable(),
 });
 
 export type JobClassFormValues = z.infer<typeof schema>;
@@ -38,7 +37,6 @@ function JobClassFormDialog({
     () => ({
       code: "",
       name: "",
-      orderId: null,
     }),
     []
   );
@@ -63,7 +61,6 @@ function JobClassFormDialog({
           reset({
             code: res.code ?? "",
             name: res.name ?? "",
-            orderId: res.orderId ?? null,
           });
         }
       } catch (err) {
@@ -116,7 +113,7 @@ function JobClassFormDialog({
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1.5}>
+      <Box display="grid" gridTemplateColumns="repeat(1, 1fr)" gap={1.5}>
         <Controller
           name="code"
           control={control}
@@ -145,27 +142,6 @@ function JobClassFormDialog({
               helperText={errors.name?.message}
               disabled={isDisabled}
               sx={{ gridColumn: "span 2" }}
-            />
-          )}
-        />
-
-        <Controller
-          name="orderId"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Order No"
-              type="number"
-              size="small"
-              disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
-              value={field.value ?? ""}
-              onChange={(e) =>
-                field.onChange(
-                  e.target.value === "" ? null : Number(e.target.value)
-                )
-              }
             />
           )}
         />

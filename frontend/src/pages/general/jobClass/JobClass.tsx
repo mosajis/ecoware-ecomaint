@@ -12,9 +12,11 @@ export default function JobClassPage() {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
 
+  const getAll = useCallback(() => tblJobClass.getAll({ paginate: false }), []);
+
   // === useDataGrid ===
   const { rows, loading, fetchData, handleDelete, handleFormSuccess } =
-    useDataGrid<TypeTblJobClass, number>(tblJobClass, (x) => x.jobClassId);
+    useDataGrid(getAll, tblJobClass.deleteById, "jobClassId");
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
@@ -32,7 +34,7 @@ export default function JobClassPage() {
   // === Columns ===
   const columns = useMemo<GridColDef<TypeTblJobClass>[]>(
     () => [
-      { field: "orderNo", headerName: "Order No", width: 120 },
+      { field: "code", headerName: "Code", width: 120 },
       { field: "name", headerName: "Name", flex: 2 },
       dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
     ],
@@ -57,8 +59,8 @@ export default function JobClassPage() {
         mode={mode}
         recordId={selectedRowId}
         onClose={() => setOpenForm(false)}
-        onSuccess={() => {
-          fetchData();
+        onSuccess={(record) => {
+          handleFormSuccess(record);
           setOpenForm(false);
         }}
       />

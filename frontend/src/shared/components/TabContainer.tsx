@@ -20,7 +20,7 @@ export default function TabContainer({
         borderTop: 0,
         borderRadius: "0 0 8px 8px",
         height: "100%",
-        maxHeight: "calc(100% - 42px)",
+        maxHeight: "calc(100% - 44px)",
         ...style,
       })}
       {...boxProps}
