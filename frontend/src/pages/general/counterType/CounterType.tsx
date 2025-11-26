@@ -61,68 +61,67 @@ export default function CounterTypePage() {
   };
 
   return (
-    <Splitter initialPrimarySize="25%">
-      {/* Left Grid */}
-      <CustomizedDataGrid
-        rows={counterTypes}
-        columns={[
-          { field: "name", headerName: "Name", flex: 1 },
-          { field: "counterTypeId", headerName: "Id", flex: 1 },
-          dataGridActionColumn({
-            onEdit: handleEdit,
-            onDelete: deleteCounterType,
-          }),
-        ]}
-        loading={loadingCounterTypes}
-        label="Counter Type"
-        showToolbar
-        onAddClick={handleCreate}
-        onRefreshClick={fetchCounterTypes}
-        getRowId={(row) => row.counterTypeId}
-        rowSelection
-        onRowClick={(params) => setSelectedCounterType(params.row)}
-      />
+    <>
+      <Splitter initialPrimarySize="30%">
+        {/* Left Grid */}
+        <CustomizedDataGrid
+          rows={counterTypes}
+          columns={[
+            { field: "name", headerName: "Name", flex: 1 },
+            dataGridActionColumn({
+              onEdit: handleEdit,
+              onDelete: deleteCounterType,
+            }),
+          ]}
+          loading={loadingCounterTypes}
+          label="Counter Type"
+          showToolbar
+          onAddClick={handleCreate}
+          onRefreshClick={fetchCounterTypes}
+          getRowId={(row) => row.counterTypeId}
+          rowSelection
+          onRowClick={(params) => setSelectedCounterType(params.row)}
+        />
 
-      {/* Right Grid / Tabs */}
-      <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
-        <Tabs value={activeTab} onChange={handleTabChange}>
-          {tabList.map((tab) => (
-            <Tab key={tab.key} label={tab.label} value={tab.key} />
-          ))}
-        </Tabs>
+        {/* Right Grid / Tabs */}
+        <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+          <Tabs value={activeTab} onChange={handleTabChange}>
+            {tabList.map((tab) => (
+              <Tab key={tab.key} label={tab.label} value={tab.key} />
+            ))}
+          </Tabs>
 
-        <TabContainer>
-          {activeTab === "component" && (
-            <TabCompUnitCounter
-              label={selectedCounterType?.name}
-              counterTypeId={selectedCounterType?.counterTypeId}
-            />
-          )}
+          <TabContainer>
+            {activeTab === "component" && (
+              <TabCompUnitCounter
+                label={selectedCounterType?.name}
+                counterTypeId={selectedCounterType?.counterTypeId}
+              />
+            )}
 
-          {activeTab === "compType" && (
-            <TabCompTypeCounter
-              label={selectedCounterType?.name}
-              counterTypeId={selectedCounterType?.counterTypeId}
-            />
-          )}
+            {activeTab === "compType" && (
+              <TabCompTypeCounter
+                label={selectedCounterType?.name}
+                counterTypeId={selectedCounterType?.counterTypeId}
+              />
+            )}
 
-          {activeTab === "compJob" && (
-            <TabCompJobCounter
-              label={selectedCounterType?.name}
-              counterTypeId={selectedCounterType?.counterTypeId}
-            />
-          )}
+            {activeTab === "compJob" && (
+              <TabCompJobCounter
+                label={selectedCounterType?.name}
+                counterTypeId={selectedCounterType?.counterTypeId}
+              />
+            )}
 
-          {activeTab === "compTypeJob" && (
-            <TabCompTypeJobCounter
-              label={selectedCounterType?.name}
-              counterTypeId={selectedCounterType?.counterTypeId}
-            />
-          )}
-        </TabContainer>
-      </Box>
-
-      {/* CounterType Form Dialog */}
+            {activeTab === "compTypeJob" && (
+              <TabCompTypeJobCounter
+                label={selectedCounterType?.name}
+                counterTypeId={selectedCounterType?.counterTypeId}
+              />
+            )}
+          </TabContainer>
+        </Box>
+      </Splitter>
       <CounterTypeFormDialog
         open={openForm}
         mode={mode}
@@ -133,6 +132,6 @@ export default function CounterTypePage() {
           setOpenForm(false);
         }}
       />
-    </Splitter>
+    </>
   );
 }

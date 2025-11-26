@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback } from "react";
 import { Box } from "@mui/material";
 import Splitter from "@/shared/components/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
@@ -19,14 +19,23 @@ import MaintCauseFormDialog from "./MaintCauseFormDialog.js";
 
 export default function MaintPage() {
   // ---------------- Maint Type ----------------
-  const getIdType = useCallback((row: any) => row.maintTypeId, []);
+
+  const getAllType = useCallback(
+    () => tblMaintType.getAll({ paginate: false }),
+    []
+  );
+
   const {
     rows: typeRows,
     loading: loadingType,
     handleDelete: handleDeleteType,
     handleFormSuccess: handleTypeSuccess,
     handleRefresh: refreshType,
-  } = useDataGrid(tblMaintType, getIdType);
+  } = useDataGrid(
+    getAllType,
+    (id: number) => tblMaintType.deleteById(id),
+    "maintTypeId"
+  );
 
   const typeColumns: GridColDef<TypeTblMaintType>[] = [
     { field: "descr", headerName: "Description", flex: 1 },
@@ -47,14 +56,21 @@ export default function MaintPage() {
   }, []);
 
   // ---------------- Maint Class ----------------
-  const getIdClass = useCallback((row: any) => row.maintClassId, []);
+  const getAllClass = useCallback(
+    () => tblMaintClass.getAll({ paginate: false }),
+    []
+  );
   const {
     rows: classRows,
     loading: loadingClass,
     handleDelete: handleDeleteClass,
     handleFormSuccess: handleClassSuccess,
     handleRefresh: refreshClass,
-  } = useDataGrid(tblMaintClass, getIdClass);
+  } = useDataGrid(
+    getAllClass,
+    (id: number) => tblMaintClass.deleteById(id),
+    "maintClassId"
+  );
 
   const classColumns: GridColDef<TypeTblMaintClass>[] = [
     { field: "descr", headerName: "Description", flex: 1 },
@@ -78,14 +94,21 @@ export default function MaintPage() {
   );
 
   // ---------------- Maint Cause ----------------
-  const getIdCause = useCallback((row: any) => row.maintCauseId, []);
+  const getAllCause = useCallback(
+    () => tblMaintCause.getAll({ paginate: false }),
+    []
+  );
   const {
     rows: causeRows,
     loading: loadingCause,
     handleDelete: handleDeleteCause,
     handleFormSuccess: handleCauseSuccess,
     handleRefresh: refreshCause,
-  } = useDataGrid(tblMaintCause, getIdCause);
+  } = useDataGrid(
+    getAllCause,
+    (id: number) => tblMaintCause.deleteById(id),
+    "maintCauseId"
+  );
 
   const causeColumns: GridColDef<TypeTblMaintCause>[] = [
     { field: "descr", headerName: "Description", flex: 1 },
@@ -111,7 +134,6 @@ export default function MaintPage() {
   return (
     <Box height="100%" display="flex" flexDirection="column">
       <Splitter initialPrimarySize="34%">
-        {/* Panel 1 - Maint Type */}
         <CustomizedDataGrid
           label="Maint Type"
           showToolbar
@@ -120,12 +142,11 @@ export default function MaintPage() {
           loading={loadingType}
           onAddClick={() => openTypeForm("create")}
           onRefreshClick={refreshType}
-          getRowId={getIdType}
+          disableRowNumber
+          getRowId={(row) => row.maintTypeId}
         />
 
-        {/* Panel 2 contains Splitter for Class + Cause */}
         <Splitter initialPrimarySize="50%">
-          {/* Panel 2.1 - Maint Class */}
           <CustomizedDataGrid
             label="Maint Class"
             showToolbar
@@ -134,10 +155,10 @@ export default function MaintPage() {
             loading={loadingClass}
             onAddClick={() => openClassForm("create")}
             onRefreshClick={refreshClass}
-            getRowId={getIdClass}
+            disableRowNumber
+            getRowId={(row) => row.maintClassId}
           />
 
-          {/* Panel 2.2 - Maint Cause */}
           <CustomizedDataGrid
             label="Maint Cause"
             showToolbar
@@ -146,12 +167,12 @@ export default function MaintPage() {
             loading={loadingCause}
             onAddClick={() => openCauseForm("create")}
             onRefreshClick={refreshCause}
-            getRowId={getIdCause}
+            disableRowNumber
+            getRowId={(row) => row.maintCauseId}
           />
         </Splitter>
       </Splitter>
 
-      {/* ---------------- Form Dialogs ---------------- */}
       <MaintTypeFormDialog
         open={openType}
         mode={modeType}
