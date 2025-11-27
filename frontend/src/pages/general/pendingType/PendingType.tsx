@@ -11,11 +11,13 @@ export default function PendingTypePage() {
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
+  const getAll = useCallback(
+    () => tblPendingType.getAll({ paginate: false }),
+    []
+  );
+
   const { rows, loading, fetchData, handleDelete, handleFormSuccess } =
-    useDataGrid<TypeTblPendingType, number>(
-      tblPendingType,
-      (x) => x.pendTypeId
-    );
+    useDataGrid(getAll, tblPendingType.deleteById, "pendTypeId");
 
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
@@ -29,7 +31,7 @@ export default function PendingTypePage() {
     setOpenForm(true);
   }, []);
 
-  const columns: GridColDef[] = useMemo(
+  const columns: GridColDef<TypeTblPendingType>[] = useMemo(
     () => [
       { field: "pendTypeName", headerName: "Name", flex: 2 },
       { field: "parentId", headerName: "Parent Id", flex: 1 },
@@ -50,7 +52,7 @@ export default function PendingTypePage() {
         loading={loading}
         getRowId={(row) => row.pendTypeId}
         onAddClick={handleCreate}
-        onRefreshClick={() => fetchData()}
+        onRefreshClick={fetchData}
       />
 
       {openForm && (

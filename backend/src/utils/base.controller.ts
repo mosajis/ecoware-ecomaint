@@ -165,12 +165,19 @@ export class BaseController<Model extends Record<string, any>> {
 
     // 🧩 POST / (Create)
     if (isEnabled("create")) {
-      app.post("/", async ({ body }) => await service.create(body), {
-        tags,
-        detail: { summary: "Create" },
-        body: createSchema,
-        response: responseSchema,
-      });
+      app.post(
+        "/",
+        async ({ body }) => {
+          console.log(body);
+          return await service.create(body);
+        },
+        {
+          tags,
+          detail: { summary: "Create" },
+          body: createSchema,
+          response: responseSchema,
+        }
+      );
     }
 
     // 🧩 PUT /:primaryKey (Update)

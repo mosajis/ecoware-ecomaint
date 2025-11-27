@@ -1131,10 +1131,10 @@ model TblOilSamplingLog {
 
 model TblPendingType {
   pendTypeId   Int       @id(map: "PK_tblPendingType") @default(dbgenerated("NEXT VALUE FOR [Seq_PendingType]"), map: "DF_PendTypeId") @map("PendTypeId")
-  parentId     Int       @default(0, map: "DF_tblPendingType_ParentId") @map("ParentId")
-  groupId      Int       @default(0, map: "DF_tblPendingType_GroupId") @map("GroupId")
+  parentId     Int?      @default(0, map: "DF_tblPendingType_ParentId") @map("ParentId")
+  groupId      Int?      @default(0, map: "DF_tblPendingType_GroupId") @map("GroupId")
   pendTypeName String    @map("PendTypeName") @db.NVarChar(150)
-  deptId       Int       @map("DeptID")
+  deptId       Int?      @map("DeptID")
   exportMarker Int?      @map("ExportMarker")
   lastupdate   DateTime? @db.DateTime
   sortId       Int?      @map("SortID")

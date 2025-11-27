@@ -11,7 +11,6 @@ const schema = z.object({
   groupId: z.number().nullable(),
   sortId: z.number().nullable(),
   description: z.string().nullable(),
-  exportMarker: z.number().nullable(),
 });
 
 export type PendingTypeFormValues = z.infer<typeof schema>;
@@ -37,11 +36,9 @@ function PendingTypeFormDialog({
   const defaultValues: PendingTypeFormValues = useMemo(
     () => ({
       pendTypeName: "",
-      parentId: null,
       groupId: null,
       sortId: null,
       description: "",
-      exportMarker: null,
     }),
     []
   );
@@ -66,7 +63,6 @@ function PendingTypeFormDialog({
           groupId: res?.groupId ?? null,
           sortId: res?.sortId ?? null,
           description: res?.description ?? "",
-          exportMarker: res?.exportMarker ?? null,
         });
       } catch (err) {
         console.error("Failed to fetch Pending Type", err);
@@ -89,24 +85,11 @@ function PendingTypeFormDialog({
     async (values: PendingTypeFormValues) => {
       setSubmitting(true);
       try {
-        const payload: Omit<TypeTblPendingType, "pendTypeId"> = {
-          parentId: 0, // مقدار پیش‌فرض
-          deptId: 0,
+        const payload = {
           pendTypeName: values.pendTypeName ?? "",
           description: values.description ?? "",
           groupId: values.groupId ?? 0,
           sortId: values.sortId ?? 0,
-          exportMarker: values.exportMarker ?? null,
-          lastUpdated: null,
-          userText1: null,
-          userText2: null,
-          userFloat1: null,
-          userFloat2: null,
-          userInt1: null,
-          userInt2: null,
-          orderId: null,
-          userId: null,
-          lastUpdatedUtc: null,
         };
 
         let result: TypeTblPendingType;
@@ -205,26 +188,6 @@ function PendingTypeFormDialog({
               size="small"
               disabled={isDisabled}
               sx={{ gridColumn: "span 4" }}
-            />
-          )}
-        />
-        <Controller
-          name="exportMarker"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Export Marker"
-              type="number"
-              size="small"
-              disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
-              value={field.value ?? ""}
-              onChange={(e) =>
-                field.onChange(
-                  e.target.value === "" ? null : Number(e.target.value)
-                )
-              }
             />
           )}
         />

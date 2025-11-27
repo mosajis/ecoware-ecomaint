@@ -12,12 +12,15 @@ export default function FollowStatusListPage() {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
 
+  // === getAll ===
+  const getAll = useCallback(
+    () => tblFollowStatus.getAll({ paginate: false }),
+    []
+  );
+
   // === useDataGrid ===
   const { rows, loading, fetchData, handleDelete, handleFormSuccess } =
-    useDataGrid<TypeTblFollowStatus, number>(
-      tblFollowStatus,
-      (x) => x.followStatusId
-    );
+    useDataGrid(getAll, tblFollowStatus.deleteById, "followStatusId");
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
@@ -61,8 +64,8 @@ export default function FollowStatusListPage() {
         mode={mode}
         recordId={selectedRowId}
         onClose={() => setOpenForm(false)}
-        onSuccess={() => {
-          fetchData();
+        onSuccess={(record) => {
+          handleFormSuccess(record);
           setOpenForm(false);
         }}
       />
