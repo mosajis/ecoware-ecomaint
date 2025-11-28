@@ -13,6 +13,9 @@ import { Route as ProtectedRouteRouteImport } from './routes/_protected/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
 import { Route as ProtectedDashboardRouteImport } from './routes/_protected/dashboard'
+import { Route as ProtectedStockStockUsedRouteImport } from './routes/_protected/stock/stock-used'
+import { Route as ProtectedStockStockTypeRouteImport } from './routes/_protected/stock/stock-type'
+import { Route as ProtectedStockStockItemRouteImport } from './routes/_protected/stock/stock-item'
 import { Route as ProtectedMaintenanceWorkOrderRouteImport } from './routes/_protected/maintenance/work-order'
 import { Route as ProtectedMaintenanceRoundRouteImport } from './routes/_protected/maintenance/round'
 import { Route as ProtectedMaintenanceFunctionRouteImport } from './routes/_protected/maintenance/function'
@@ -47,6 +50,21 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
 const ProtectedDashboardRoute = ProtectedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
+const ProtectedStockStockUsedRoute = ProtectedStockStockUsedRouteImport.update({
+  id: '/stock/stock-used',
+  path: '/stock/stock-used',
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
+const ProtectedStockStockTypeRoute = ProtectedStockStockTypeRouteImport.update({
+  id: '/stock/stock-type',
+  path: '/stock/stock-type',
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
+const ProtectedStockStockItemRoute = ProtectedStockStockItemRouteImport.update({
+  id: '/stock/stock-item',
+  path: '/stock/stock-item',
   getParentRoute: () => ProtectedRouteRoute,
 } as any)
 const ProtectedMaintenanceWorkOrderRoute =
@@ -165,6 +183,9 @@ export interface FileRoutesByFullPath {
   '/maintenance/function': typeof ProtectedMaintenanceFunctionRoute
   '/maintenance/round': typeof ProtectedMaintenanceRoundRoute
   '/maintenance/work-order': typeof ProtectedMaintenanceWorkOrderRoute
+  '/stock/stock-item': typeof ProtectedStockStockItemRoute
+  '/stock/stock-type': typeof ProtectedStockStockTypeRoute
+  '/stock/stock-used': typeof ProtectedStockStockUsedRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -186,6 +207,9 @@ export interface FileRoutesByTo {
   '/maintenance/function': typeof ProtectedMaintenanceFunctionRoute
   '/maintenance/round': typeof ProtectedMaintenanceRoundRoute
   '/maintenance/work-order': typeof ProtectedMaintenanceWorkOrderRoute
+  '/stock/stock-item': typeof ProtectedStockStockItemRoute
+  '/stock/stock-type': typeof ProtectedStockStockTypeRoute
+  '/stock/stock-used': typeof ProtectedStockStockUsedRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -209,6 +233,9 @@ export interface FileRoutesById {
   '/_protected/maintenance/function': typeof ProtectedMaintenanceFunctionRoute
   '/_protected/maintenance/round': typeof ProtectedMaintenanceRoundRoute
   '/_protected/maintenance/work-order': typeof ProtectedMaintenanceWorkOrderRoute
+  '/_protected/stock/stock-item': typeof ProtectedStockStockItemRoute
+  '/_protected/stock/stock-type': typeof ProtectedStockStockTypeRoute
+  '/_protected/stock/stock-used': typeof ProtectedStockStockUsedRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -232,6 +259,9 @@ export interface FileRouteTypes {
     | '/maintenance/function'
     | '/maintenance/round'
     | '/maintenance/work-order'
+    | '/stock/stock-item'
+    | '/stock/stock-type'
+    | '/stock/stock-used'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -253,6 +283,9 @@ export interface FileRouteTypes {
     | '/maintenance/function'
     | '/maintenance/round'
     | '/maintenance/work-order'
+    | '/stock/stock-item'
+    | '/stock/stock-type'
+    | '/stock/stock-used'
   id:
     | '__root__'
     | '/'
@@ -275,6 +308,9 @@ export interface FileRouteTypes {
     | '/_protected/maintenance/function'
     | '/_protected/maintenance/round'
     | '/_protected/maintenance/work-order'
+    | '/_protected/stock/stock-item'
+    | '/_protected/stock/stock-type'
+    | '/_protected/stock/stock-used'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -311,6 +347,27 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof ProtectedDashboardRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/stock/stock-used': {
+      id: '/_protected/stock/stock-used'
+      path: '/stock/stock-used'
+      fullPath: '/stock/stock-used'
+      preLoaderRoute: typeof ProtectedStockStockUsedRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/stock/stock-type': {
+      id: '/_protected/stock/stock-type'
+      path: '/stock/stock-type'
+      fullPath: '/stock/stock-type'
+      preLoaderRoute: typeof ProtectedStockStockTypeRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/stock/stock-item': {
+      id: '/_protected/stock/stock-item'
+      path: '/stock/stock-item'
+      fullPath: '/stock/stock-item'
+      preLoaderRoute: typeof ProtectedStockStockItemRouteImport
       parentRoute: typeof ProtectedRouteRoute
     }
     '/_protected/maintenance/work-order': {
@@ -446,6 +503,9 @@ interface ProtectedRouteRouteChildren {
   ProtectedMaintenanceFunctionRoute: typeof ProtectedMaintenanceFunctionRoute
   ProtectedMaintenanceRoundRoute: typeof ProtectedMaintenanceRoundRoute
   ProtectedMaintenanceWorkOrderRoute: typeof ProtectedMaintenanceWorkOrderRoute
+  ProtectedStockStockItemRoute: typeof ProtectedStockStockItemRoute
+  ProtectedStockStockTypeRoute: typeof ProtectedStockStockTypeRoute
+  ProtectedStockStockUsedRoute: typeof ProtectedStockStockUsedRoute
 }
 
 const ProtectedRouteRouteChildren: ProtectedRouteRouteChildren = {
@@ -468,6 +528,9 @@ const ProtectedRouteRouteChildren: ProtectedRouteRouteChildren = {
   ProtectedMaintenanceFunctionRoute: ProtectedMaintenanceFunctionRoute,
   ProtectedMaintenanceRoundRoute: ProtectedMaintenanceRoundRoute,
   ProtectedMaintenanceWorkOrderRoute: ProtectedMaintenanceWorkOrderRoute,
+  ProtectedStockStockItemRoute: ProtectedStockStockItemRoute,
+  ProtectedStockStockTypeRoute: ProtectedStockStockTypeRoute,
+  ProtectedStockStockUsedRoute: ProtectedStockStockUsedRoute,
 }
 
 const ProtectedRouteRouteWithChildren = ProtectedRouteRoute._addFileChildren(
