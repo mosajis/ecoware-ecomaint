@@ -5,7 +5,7 @@ const { getDMMF } = require("@prisma/internals");
 const schemaPath = path.resolve("./orm/schema.prisma");
 const outputPath = path.resolve("./src/routes/crud");
 
-const excludeModels = [];
+const excludeModels = ["getSysdiagrams"];
 
 function camelCase(name) {
   return name.charAt(0).toLowerCase() + name.slice(1);
