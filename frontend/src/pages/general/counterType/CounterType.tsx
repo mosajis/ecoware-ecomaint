@@ -27,10 +27,6 @@ export default function CounterTypePage() {
   const [selectedCounterType, setSelectedCounterType] =
     useState<TypeTblCounterType | null>(null);
 
-  const getAllCounterTypes = useCallback(() => {
-    return tblCounterType.getAll({ paginate: false });
-  }, []);
-
   const {
     rows: counterTypes,
     loading: loadingCounterTypes,
@@ -38,7 +34,7 @@ export default function CounterTypePage() {
     handleDelete: deleteCounterType,
     handleFormSuccess: counterTypeFormSuccess,
   } = useDataGrid(
-    getAllCounterTypes,
+    tblCounterType.getAll,
     tblCounterType.deleteById,
     "counterTypeId"
   );

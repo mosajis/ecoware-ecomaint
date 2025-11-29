@@ -11,14 +11,9 @@ export default function DisciplineList() {
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
-  const getAll = useCallback(
-    () => tblDiscipline.getAll({ paginate: false }),
-    []
-  );
-
   // === Hook ===
   const { rows, loading, handleDelete, handleFormSuccess, handleRefresh } =
-    useDataGrid(getAll, tblDiscipline.deleteById, "discId");
+    useDataGrid(tblDiscipline.getAll, tblDiscipline.deleteById, "discId");
 
   // === Handlers ===
   const handleCreate = useCallback(() => {

@@ -69,7 +69,6 @@ export function useDataTree<
       try {
         const res = await getAll({
           ...params,
-          paginate: false,
         });
 
         setRows(res.items);

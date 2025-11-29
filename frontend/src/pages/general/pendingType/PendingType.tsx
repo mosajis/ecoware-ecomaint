@@ -11,13 +11,8 @@ export default function PendingTypePage() {
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
-  const getAll = useCallback(
-    () => tblPendingType.getAll({ paginate: false }),
-    []
-  );
-
   const { rows, loading, fetchData, handleDelete, handleFormSuccess } =
-    useDataGrid(getAll, tblPendingType.deleteById, "pendTypeId");
+    useDataGrid(tblPendingType.getAll, tblPendingType.deleteById, "pendTypeId");
 
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);

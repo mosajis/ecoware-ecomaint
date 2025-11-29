@@ -1,9 +1,11 @@
-import {createFileRoute} from "@tanstack/react-router";
-import {z} from "zod";
-import {lazy, Suspense} from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { z } from "zod";
+import { lazy, Suspense } from "react";
 import Spinner from "@/shared/components/Spinner";
 
-const Page = lazy(() => import("@/pages/maintenance/componentType/ComponentTypeListView"));
+const Page = lazy(
+  () => import("@/pages/maintenance/componentType/ComponentType")
+);
 
 const tabSearchSchema = z.object({
   tab: z.string().optional(),
@@ -12,8 +14,8 @@ const tabSearchSchema = z.object({
 export const Route = createFileRoute("/_protected/maintenance/component-type")({
   validateSearch: (search) => tabSearchSchema.parse(search),
   component: () => (
-    <Suspense fallback={<Spinner/>}>
-      <Page/>
+    <Suspense fallback={<Spinner />}>
+      <Page />
     </Suspense>
   ),
 });

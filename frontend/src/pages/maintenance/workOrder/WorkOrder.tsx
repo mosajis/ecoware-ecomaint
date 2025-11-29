@@ -7,34 +7,34 @@ import DataGridProAdapter from "@/shared/components/dataGrid/DataGrid"; // اگ�
 
 // ---- Lazy Tabs ----
 const TabWorkOrderInfo = lazy(
-  () => import("@/pages/maintenance/tabs/TabWorkOrder")
+  () => import("@/pages/maintenance/componentType/tabs/TabWorkOrder")
 );
 const TabPendingDetails = lazy(
-  () => import("@/pages/maintenance/tabs/TabJobAttachment")
+  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
 );
 const TabJobDescription = lazy(
-  () => import("@/pages/maintenance/tabs/TabJobAttachment")
+  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
 );
 const TabJobAttachments = lazy(
-  () => import("@/pages/maintenance/tabs/TabJobAttachment")
+  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
 );
 const TabWoAttachments = lazy(
-  () => import("@/pages/maintenance/tabs/TabJobAttachment")
+  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
 );
 const TabMaintenanceLog = lazy(
-  () => import("@/pages/maintenance/tabs/TabJobAttachment")
+  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
 );
 const TabComponentLog = lazy(
-  () => import("@/pages/maintenance/tabs/TabJobAttachment")
+  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
 );
 const TabSendReceive = lazy(
-  () => import("@/pages/maintenance/tabs/TabJobAttachment")
+  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
 );
 const TabMeasurePoints = lazy(
-  () => import("@/pages/maintenance/tabs/TabMeasures")
+  () => import("@/pages/maintenance/componentType/tabs/TabMeasures")
 );
 const TabRescheduleLog = lazy(
-  () => import("@/pages/maintenance/tabs/TabJobAttachment")
+  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
 );
 
 const TABS = [

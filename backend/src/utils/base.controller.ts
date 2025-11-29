@@ -77,7 +77,7 @@ export class BaseController<Model extends Record<string, any>> {
             sort,
             filter,
             include,
-            paginate = true,
+            paginate = false,
           } = query;
 
           let parsedFilter: Record<string, any> = {};
@@ -168,7 +168,6 @@ export class BaseController<Model extends Record<string, any>> {
       app.post(
         "/",
         async ({ body }) => {
-          console.log(body);
           return await service.create(body);
         },
         {

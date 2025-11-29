@@ -4,8 +4,12 @@ import Splitter from "@/shared/components/Splitter";
 import DataGridProAdapter from "@/shared/components/dataGrid/DataGrid";
 import Spinner from "@/shared/components/Spinner";
 
-const TabRound = lazy(() => import("@/pages/maintenance/tabs/TabRound"));
-const TabJobs = lazy(() => import("@/pages/maintenance/tabs/TabJob"));
+const TabRound = lazy(
+  () => import("@/pages/maintenance/componentType/tabs/TabRound")
+);
+const TabJobs = lazy(
+  () => import("@/pages/maintenance/componentType/tabs/TabJob")
+);
 
 const TABS = [
   { label: "Round", Component: TabRound },

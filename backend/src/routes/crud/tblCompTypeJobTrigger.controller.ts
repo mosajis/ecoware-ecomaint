@@ -10,7 +10,9 @@ import {
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
-export const ServiceTblCompTypeJobTrigger = new BaseService(prisma.tblCompTypeJobTrigger);
+export const ServiceTblCompTypeJobTrigger = new BaseService(
+  prisma.tblCompTypeJobTrigger
+);
 
 const ControllerTblCompTypeJobTrigger = new BaseController({
   prefix: "/tblCompTypeJobTrigger",
@@ -21,7 +23,10 @@ const ControllerTblCompTypeJobTrigger = new BaseController({
   service: ServiceTblCompTypeJobTrigger,
   createSchema: TblCompTypeJobTriggerInputCreate,
   updateSchema: TblCompTypeJobTriggerInputUpdate,
-  responseSchema: buildResponseSchema(TblCompTypeJobTriggerPlain, TblCompTypeJobTrigger),
+  responseSchema: buildResponseSchema(
+    TblCompTypeJobTriggerPlain,
+    TblCompTypeJobTrigger
+  ),
 }).app;
 
-export default ControllerTblCompTypeJobTrigger
+export default ControllerTblCompTypeJobTrigger;

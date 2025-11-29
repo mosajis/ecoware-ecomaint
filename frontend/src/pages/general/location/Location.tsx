@@ -38,7 +38,7 @@ export default function LocationListPage() {
     handleFormSuccess,
     handleRefresh,
   } = useDataTree(
-    useCallback(() => tblLocation.getAll({ paginate: false }), []),
+    tblLocation.getAll,
     tblLocation.deleteById,
     "locationId",
     mapper

@@ -187,9 +187,7 @@ function JobDescriptionFormDialog({
               label="Job Class"
               selectionMode="single"
               value={field.value}
-              request={() =>
-                tblJobClass.getAll({ paginate: false }).then((res) => res.items)
-              }
+              request={() => tblJobClass.getAll().then((res) => res.items)}
               columns={[{ field: "name", headerName: "Name", flex: 1 }]}
               getRowId={(row) => row.jobClassId}
               onChange={field.onChange}

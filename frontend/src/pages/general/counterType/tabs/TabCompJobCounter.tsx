@@ -1,11 +1,12 @@
-import React, { useCallback } from "react";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import { useCallback } from "react";
+import { GridColDef } from "@mui/x-data-grid";
+import { useDataGrid } from "../../_hooks/useDataGrid";
 import {
+  tblCompCounter,
   tblCompJobCounter,
   TypeTblCompJobCounter,
 } from "@/core/api/generated/api";
-import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "../../_hooks/useDataGrid";
 
 interface TabCompJobCounterProps {
   counterTypeId: number | null | undefined;
@@ -72,9 +73,20 @@ export default function TabCompJobCounter(props: TabCompJobCounterProps) {
     );
   }
 
-  const getAll = useCallback(() => {
-    return tblCompJobCounter.getAll({
+  const getAll = useCallback(async () => {
+    // select * from tblcomponentumit where compid in (1001,1002,1003)
+    const compCounters = await tblCompCounter.getAll({
       filter: { counterTypeId },
+    });
+
+    const compCountersIds = compCounters.items.map((i) => i.compCounterId);
+
+    return tblCompJobCounter.getAll({
+      filter: {
+        compCounterId: {
+          in: compCountersIds,
+        },
+      },
       include: { tblCompJob: true, tblCompCounter: true },
     });
   }, [counterTypeId]);

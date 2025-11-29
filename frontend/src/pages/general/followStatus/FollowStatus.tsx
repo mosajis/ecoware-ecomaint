@@ -12,15 +12,13 @@ export default function FollowStatusListPage() {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
 
-  // === getAll ===
-  const getAll = useCallback(
-    () => tblFollowStatus.getAll({ paginate: false }),
-    []
-  );
-
   // === useDataGrid ===
   const { rows, loading, fetchData, handleDelete, handleFormSuccess } =
-    useDataGrid(getAll, tblFollowStatus.deleteById, "followStatusId");
+    useDataGrid(
+      tblFollowStatus.getAll,
+      tblFollowStatus.deleteById,
+      "followStatusId"
+    );
 
   // === Handlers ===
   const handleCreate = useCallback(() => {

@@ -5,6 +5,7 @@ import * as z from "zod";
 import { Box, TextField } from "@mui/material";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import {
+  tblAddress,
   tblDiscipline,
   tblEmployee,
   TypeTblEmployee,
@@ -28,12 +29,7 @@ export const schema = z.object({
       label: z.string(),
     })
     .nullable(),
-  position: z
-    .object({
-      id: z.number(),
-      label: z.string(),
-    })
-    .nullable(),
+
   hrsAvailWeek: z.number().nullable(),
 });
 
@@ -80,7 +76,12 @@ function EmployeeFormDialog({
     if (mode === "update" && recordId) {
       setLoadingInitial(true);
       try {
-        const res = await tblEmployee.getById(recordId);
+        const res = await tblEmployee.getById(recordId, {
+          include: {
+            tblDiscipline: true,
+            tblAddress: true,
+          },
+        });
         if (res) {
           reset({
             code: res.code ?? "",
@@ -90,10 +91,7 @@ function EmployeeFormDialog({
               ? { id: res.address.id, label: res.address.label }
               : null,
             discipline: res.discipline
-              ? { id: res.discipline.discId!, label: res.discipline.name ?? "" }
-              : null,
-            position: res.position
-              ? { id: res.position.id, label: res.position.name ?? "" }
+              ? { id: res.discipline.id!, label: res.discipline.name ?? "" }
               : null,
             hrsAvailWeek: res.hrsAvailWeek ?? null,
           });
@@ -223,25 +221,9 @@ function EmployeeFormDialog({
           control={control}
           label="Discipline"
           disabled={isDisabled}
-          apiCall={() =>
-            tblDiscipline.getAll({ paginate: false }).then((res) => res.items)
-          }
+          apiCall={() => tblDiscipline.getAll().then((res) => res.items)}
           mapper={(d) => ({ id: d.discId!, label: d.name ?? "" })}
           sx={{ gridColumn: "span 2" }}
-        />
-
-        <Controller
-          name="position"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Position"
-              size="small"
-              disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
-            />
-          )}
         />
 
         <Controller

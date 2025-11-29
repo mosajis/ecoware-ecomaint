@@ -20,10 +20,7 @@ import MaintCauseFormDialog from "./MaintCauseFormDialog.js";
 export default function MaintPage() {
   // ---------------- Maint Type ----------------
 
-  const getAllType = useCallback(
-    () => tblMaintType.getAll({ paginate: false }),
-    []
-  );
+  const getAllType = useCallback(() => tblMaintType.getAll(), []);
 
   const {
     rows: typeRows,
@@ -55,11 +52,6 @@ export default function MaintPage() {
     setOpenType(true);
   }, []);
 
-  // ---------------- Maint Class ----------------
-  const getAllClass = useCallback(
-    () => tblMaintClass.getAll({ paginate: false }),
-    []
-  );
   const {
     rows: classRows,
     loading: loadingClass,
@@ -67,7 +59,7 @@ export default function MaintPage() {
     handleFormSuccess: handleClassSuccess,
     handleRefresh: refreshClass,
   } = useDataGrid(
-    getAllClass,
+    tblMaintClass.getAll,
     (id: number) => tblMaintClass.deleteById(id),
     "maintClassId"
   );
@@ -94,10 +86,7 @@ export default function MaintPage() {
   );
 
   // ---------------- Maint Cause ----------------
-  const getAllCause = useCallback(
-    () => tblMaintCause.getAll({ paginate: false }),
-    []
-  );
+
   const {
     rows: causeRows,
     loading: loadingCause,
@@ -105,7 +94,7 @@ export default function MaintPage() {
     handleFormSuccess: handleCauseSuccess,
     handleRefresh: refreshCause,
   } = useDataGrid(
-    getAllCause,
+    tblMaintCause.getAll,
     (id: number) => tblMaintCause.deleteById(id),
     "maintCauseId"
   );

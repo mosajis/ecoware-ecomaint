@@ -2,7 +2,12 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import EmployeeFormDialog from "./EmployeeFormDialog";
 import ConfirmDialog from "@/shared/components/ConfirmDialog";
 import { useState, useCallback } from "react";
-import { tblEmployee, TypeTblEmployee } from "@/core/api/generated/api";
+import {
+  tblAddress,
+  tblDiscipline,
+  tblEmployee,
+  TypeTblEmployee,
+} from "@/core/api/generated/api";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "../_hooks/useDataGrid";
@@ -20,7 +25,16 @@ export default function EmployeeDiscipline() {
   // === getId function
   const getId = useCallback((row: TypeTblEmployee) => row.employeeId, []);
 
-  const getAll = useCallback(() => tblEmployee.getAll({ paginate: false }), []);
+  const getAll = useCallback(
+    () =>
+      tblEmployee.getAll({
+        include: {
+          tblAddress: true,
+          tblDiscipline: true,
+        },
+      }),
+    []
+  );
 
   // === useDataGrid hook
   const { rows, loading, handleDelete, handleFormSuccess, handleRefresh } =
@@ -71,9 +85,18 @@ export default function EmployeeDiscipline() {
     { field: "code", headerName: "Code", width: 100 },
     { field: "lastName", headerName: "Last Name", flex: 1 },
     { field: "firstName", headerName: "First Name", flex: 1 },
-    { field: "address", headerName: "Address", flex: 1 },
-    { field: "discipline", headerName: "Discipline", flex: 1 },
-    { field: "position", headerName: "Position", flex: 1 },
+    {
+      field: "address",
+      headerName: "Address",
+      flex: 1,
+      valueGetter: (v, row) => row.tblAddress?.name,
+    },
+    {
+      field: "discipline",
+      headerName: "Discipline",
+      flex: 1,
+      valueGetter: (v, row) => row.tblDiscipline?.name,
+    },
     { field: "hrsAvailWeek", headerName: "Hrs Avail/Week", flex: 1 },
     dataGridActionColumn({
       onEdit: handleEdit,
@@ -102,7 +125,7 @@ export default function EmployeeDiscipline() {
         onSuccess={handleFormSuccess}
       />
 
-      <ConfirmDialog
+      {/* <ConfirmDialog
         open={confirmOpen}
         title="Delete Employee"
         message="Are you sure you want to delete this employee?"
@@ -110,7 +133,7 @@ export default function EmployeeDiscipline() {
         confirmColor="error"
         onConfirm={confirmDelete}
         onCancel={cancelDelete}
-      />
+      /> */}
     </>
   );
 }

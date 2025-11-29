@@ -58,7 +58,6 @@ export default function TabCompTypeCounter(props: TabCompTypeCounterProps) {
 
   const getAll = useCallback(() => {
     return tblCompTypeCounter.getAll({
-      paginate: false,
       filter: { counterTypeId },
       include: { tblCounterType: true },
     });

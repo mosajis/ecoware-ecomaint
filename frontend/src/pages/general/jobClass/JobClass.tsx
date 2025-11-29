@@ -12,11 +12,9 @@ export default function JobClassPage() {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
 
-  const getAll = useCallback(() => tblJobClass.getAll({ paginate: false }), []);
-
   // === useDataGrid ===
   const { rows, loading, fetchData, handleDelete, handleFormSuccess } =
-    useDataGrid(getAll, tblJobClass.deleteById, "jobClassId");
+    useDataGrid(tblJobClass.getAll, tblJobClass.deleteById, "jobClassId");
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
