@@ -1,18 +1,10 @@
 import react from "@vitejs/plugin-react-swc";
 import * as path from "path";
-import {defineConfig} from "vite";
+import { defineConfig } from "vite";
 // @ts-ignore: Unreachable code error
-import {tanstackRouter} from '@tanstack/router-plugin/vite'
 
 export default defineConfig({
-  plugins: [
-    react(),
-
-    tanstackRouter({
-      target: "react",
-      autoCodeSplitting: true,
-    }),
-  ],
+  plugins: [react()],
   build: {
     cssCodeSplit: true,
     outDir: "../build/public",

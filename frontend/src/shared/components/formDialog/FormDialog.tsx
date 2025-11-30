@@ -1,6 +1,11 @@
-import { Dialog, DialogContent, DialogActions } from "@mui/material";
 import FormDialogAction from "./FormDialogAction";
 import DialogHeader from "../dialog/DialogHeader";
+import {
+  Dialog,
+  DialogContent,
+  DialogActions,
+  DialogProps,
+} from "@mui/material";
 
 export type FormDialogWrapperProps = {
   open: boolean;
@@ -8,11 +13,12 @@ export type FormDialogWrapperProps = {
   title: string;
   submitting?: boolean;
   loadingInitial?: boolean;
-  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void; // ⚡ حتماً event را بگیر
+  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
   children: React.ReactNode;
   cancelText?: string;
   submitText?: string;
   disabled?: boolean;
+  maxWidth?: DialogProps["maxWidth"];
 };
 
 export default function FormDialog({
@@ -26,6 +32,7 @@ export default function FormDialog({
   cancelText = "Cancel",
   submitText = "Ok",
   disabled = false,
+  maxWidth = "sm",
 }: FormDialogWrapperProps) {
   const isDisabled = disabled || submitting || loadingInitial;
 
@@ -34,7 +41,7 @@ export default function FormDialog({
       open={open}
       onClose={isDisabled ? undefined : onClose}
       fullWidth
-      maxWidth="sm"
+      maxWidth={maxWidth}
     >
       <DialogHeader
         title={title}
@@ -46,11 +53,12 @@ export default function FormDialog({
       <DialogContent dividers>
         <form
           onSubmit={(e) => {
-            e.preventDefault(); // جلوگیری از reload مرورگر
+            e.preventDefault();
             onSubmit?.(e);
           }}
         >
           {children}
+
           <DialogActions sx={{ p: 0, m: 0, mt: 2 }}>
             <FormDialogAction
               onCancel={onClose}

@@ -1,20 +1,32 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { tblCompTypeJob, TypeTblCompTypeJob } from "@/core/api/generated/api";
 import { useDataGrid } from "@/pages/general/_hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
+import { useNavigate } from "@tanstack/react-router";
 
 type Props = {
   selected?: number | null;
 };
 
 const TabJob = ({ selected }: Props) => {
+  // ===== Dialog State =====
+  const navigate = useNavigate();
+
+  const handleCreate = () => {
+    if (!selected) return;
+    navigate({
+      to: `${selected}/job`, // اگر selected = componentTypeId
+    });
+  };
+
   // === getAll callback ===
   const getAll = useCallback(() => {
     if (!selected) return Promise.resolve({ items: [] });
     return tblCompTypeJob.getAll({
       include: {
         tblJobDescription: true,
+        tblDiscipline: true,
       },
       filter: {
         // compTypeId: selected,
@@ -30,8 +42,8 @@ const TabJob = ({ selected }: Props) => {
   );
 
   // === Columns ===
-  const columns = useMemo<GridColDef<TypeTblCompTypeJob>[]>(
-    () => [
+  const columns = useMemo<GridColDef<TypeTblCompTypeJob>[]>(() => {
+    return [
       {
         field: "jobCode",
         headerName: "Job Code",
@@ -46,26 +58,28 @@ const TabJob = ({ selected }: Props) => {
       },
       {
         field: "discipline",
-        headerName: "Discipline",
+        headerName: "Discipline (set Rel)",
         flex: 1,
-        valueGetter: (value, row) => row.tblMaintClass?.descr || "",
+        // valueGetter: (value, row) =>  "",
       },
       { field: "frequency", headerName: "Frequency", flex: 1 },
       { field: "frequencyPeriod", headerName: "Frequency Period", flex: 1 },
-    ],
-    []
-  );
+    ];
+  }, []);
 
   return (
-    <CustomizedDataGrid
-      label="Job"
-      rows={rows}
-      columns={columns}
-      loading={loading}
-      showToolbar
-      getRowId={(row) => row.compTypeJobId}
-      onRefreshClick={fetchData}
-    />
+    <>
+      <CustomizedDataGrid
+        label="Job"
+        rows={rows}
+        columns={columns}
+        loading={loading}
+        showToolbar
+        getRowId={(row) => row.compTypeJobId}
+        onRefreshClick={fetchData}
+        onAddClick={handleCreate}
+      />
+    </>
   );
 };
 
