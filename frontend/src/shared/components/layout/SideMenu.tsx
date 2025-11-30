@@ -66,7 +66,7 @@ export default function SideMenu() {
         <MenuContent />
       </Box>
 
-      <Stack
+      {/* <Stack
         direction="row"
         sx={{
           p: 2,
@@ -88,10 +88,10 @@ export default function SideMenu() {
           <Typography variant="caption" sx={{ color: "text.secondary" }}>
             {auth.user?.uName || "Fill Name"}
           </Typography>
-        </Box>
+        </Box> */}
 
-        <OptionsMenu />
-      </Stack>
+      {/* <OptionsMenu /> */}
+      {/* </Stack> */}
     </Drawer>
   );
 }

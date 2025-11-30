@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
 import {
   Box,
   Button,
@@ -17,10 +16,10 @@ import {
   TextField,
   Link,
 } from "@mui/material";
-import { login } from "../auth.api";
 import { LOCAL_STORAGE } from "@/const";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
+import { login } from "../auth.api";
 
 // 🧩 Zod schema
 const loginSchema = z.object({
@@ -33,38 +32,15 @@ type LoginForm = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const navigatge = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  // 🔥 Mutation
-  const loginMutation = useMutation({
-    mutationFn: login,
-    onSuccess: (res: any) => {
-      if (res.accessToken) {
-        localStorage.setItem(LOCAL_STORAGE.ACCESS_KEY, res.accessToken);
-        toast.success("Logged in successfully!");
-        navigatge({
-          to: "/",
-        });
-      } else {
-        toast.error(res.message || "Login failed.");
-      }
-    },
-    onError: (err: any) => {
-      const errorMsg =
-        err?.response?.data?.message ||
-        err?.message ||
-        "An error occurred while logging in.";
-      toast.error(errorMsg);
-    },
-  });
-
-  // 🎯 React Hook Form
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginForm>({
-    resolver: zodResolver(loginSchema as any),
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       username: "",
       password: "",
@@ -72,9 +48,27 @@ export default function LoginPage() {
     },
   });
 
-  // ✅ Submit handler
-  const onSubmit = (data: LoginForm) => {
-    loginMutation.mutate(data);
+  const onSubmit = async (data: LoginForm) => {
+    setLoading(true);
+    try {
+      const res = await login(data);
+
+      if (res?.accessToken) {
+        localStorage.setItem(LOCAL_STORAGE.ACCESS_KEY, res.accessToken);
+        toast.success("Logged in successfully!");
+        navigate({ to: "/" });
+      } else {
+        toast.error("Login failed.");
+      }
+    } catch (err: any) {
+      const msg =
+        err?.response?.data?.message ||
+        err?.message ||
+        "An error occurred while logging in.";
+      toast.error(msg);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -90,7 +84,7 @@ export default function LoginPage() {
         display="flex"
         justifyContent="center"
         flexDirection="column"
-        padding="4rem"
+        p="4rem"
       >
         <Box>
           <Box pb={4}>
@@ -141,8 +135,7 @@ export default function LoginPage() {
                     ),
                     endAdornment: (
                       <Box
-                        style={{ cursor: "pointer" }}
-                        color="gray"
+                        sx={{ cursor: "pointer" }}
                         onClick={() => setShowPassword(!showPassword)}
                         display="flex"
                       >
@@ -157,10 +150,10 @@ export default function LoginPage() {
                 type="submit"
                 variant="contained"
                 color="secondary"
-                disabled={loginMutation.isPending}
+                disabled={loading}
                 sx={{ mt: 0 }}
               >
-                {loginMutation.isPending ? "Signing In..." : "SIGN IN"}
+                {loading ? "Signing In..." : "SIGN IN"}
               </Button>
 
               <Box
@@ -169,18 +162,10 @@ export default function LoginPage() {
                 alignItems="center"
               >
                 <FormControlLabel
-                  style={{
-                    margin: 0,
-                    display: "flex",
-                    gap: 10,
-                    alignItems: "center",
-                  }}
-                  control={
-                    <Checkbox style={{ margin: 0 }} {...register("remember")} />
-                  }
+                  sx={{ m: 0, gap: 1 }}
+                  control={<Checkbox {...register("remember")} />}
                   label="Remember me"
                 />
-
                 <Link
                   href="#"
                   underline="hover"

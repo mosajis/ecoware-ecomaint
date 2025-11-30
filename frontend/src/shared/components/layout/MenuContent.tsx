@@ -1,368 +1,164 @@
-import * as React from "react";
-
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
-import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
-import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded";
-import BadgeRoundedIcon from "@mui/icons-material/BadgeRounded";
-import CategoryRoundedIcon from "@mui/icons-material/CategoryRounded";
-import BuildRoundedIcon from "@mui/icons-material/BuildRounded";
-import Inventory2RoundedIcon from "@mui/icons-material/Inventory2Rounded";
-import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
-import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
-import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
-import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
-import HelpRoundedIcon from "@mui/icons-material/HelpRounded";
-import PrecisionManufacturingRoundedIcon from "@mui/icons-material/PrecisionManufacturingRounded";
-import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
-import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
-import LoopRoundedIcon from "@mui/icons-material/LoopRounded";
-import WarningAmberRoundedIcon from "@mui/icons-material/WarningAmberRounded";
-import PostAddRoundedIcon from "@mui/icons-material/PostAddRounded";
-import FlashOnRoundedIcon from "@mui/icons-material/FlashOnRounded";
-import UpdateRoundedIcon from "@mui/icons-material/UpdateRounded";
-import HistoryRoundedIcon from "@mui/icons-material/HistoryRounded";
-import ExploreRoundedIcon from "@mui/icons-material/ExploreRounded";
-import ListAltRoundedIcon from "@mui/icons-material/ListAltRounded";
-import WorkHistoryRoundedIcon from "@mui/icons-material/WorkHistoryRounded";
-import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
-import HourglassEmptyRoundedIcon from "@mui/icons-material/HourglassEmptyRounded";
-import BrightnessAutoIcon from "@mui/icons-material/BrightnessAuto";
-
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useRouter, useRouterState } from "@tanstack/react-router";
+import { menuContentItems, MenuItem } from "./MenuContentItems";
+import React from "react";
 import {
-  Collapse,
-  Divider,
+  Stack,
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
-  Stack,
+  ListItemIcon,
+  Collapse,
+  Divider,
 } from "@mui/material";
-
-type MenuItem = {
-  text: string;
-  icon?: React.ReactNode;
-  children?: MenuItem[];
-  id?: string;
-  path: string;
-};
-
-const menuSections: {
-  title: string;
-  icon: React.ReactNode;
-  items: MenuItem[];
-  path?: string;
-}[] = [
-  {
-    title: "Quick Access",
-    icon: <HomeRoundedIcon />,
-    items: [],
-    path: "/quick-access",
-  },
-  {
-    title: "Dashboard",
-    icon: <DashboardRoundedIcon />,
-    items: [],
-    path: "/dashboard",
-  },
-  {
-    title: "General",
-    icon: <CategoryRoundedIcon />,
-    items: [
-      {
-        text: "Address",
-        icon: <LocationOnRoundedIcon />,
-        id: "general:address",
-        path: "/general/address",
-      },
-      {
-        text: "Location",
-        icon: <BusinessRoundedIcon />,
-        id: "general:location",
-        path: "/general/location",
-      },
-      {
-        text: "Employee",
-        icon: <PeopleRoundedIcon />,
-        id: "general:employee",
-        path: "/general/employee",
-      },
-      {
-        text: "Discipline",
-        icon: <BrightnessAutoIcon />,
-        id: "general:discipline",
-        path: "/general/discipline",
-      },
-      {
-        text: "Counter Type",
-        icon: <BadgeRoundedIcon />,
-        id: "general:counterType",
-        path: "/general/counter-type",
-      },
-
-      {
-        text: "Maint Class",
-        icon: <PrecisionManufacturingRoundedIcon />,
-        id: "general:maint-class",
-        path: "/general/maint-class",
-      },
-
-      {
-        text: "Follow Status",
-        icon: <LoopRoundedIcon />,
-        id: "general:followStatus",
-        path: "/general/follow-status",
-      },
-      {
-        text: "Pending Type",
-        icon: <HourglassEmptyRoundedIcon />,
-        id: "general:pendingType",
-        path: "/general/pending-type",
-      },
-      {
-        text: "Job Class",
-        icon: <WorkHistoryRoundedIcon />,
-        id: "general:jobClass",
-        path: "/general/job-class",
-      },
-      {
-        text: "Job Description",
-        icon: <DescriptionRoundedIcon />,
-        id: "general:jobDescription",
-        path: "/general/job-description",
-      },
-    ],
-  },
-  {
-    title: "Maintenance",
-    icon: <BuildRoundedIcon />,
-    items: [
-      {
-        text: "Function",
-        icon: <SettingsRoundedIcon />,
-        id: "maint:function",
-        path: "/maintenance/function",
-      },
-      {
-        text: "Component Unit",
-        icon: <Inventory2RoundedIcon />,
-        id: "maint:componentType:component",
-        path: "/maintenance/component-unit",
-      },
-      {
-        text: "Component Type",
-        icon: <PrecisionManufacturingRoundedIcon />,
-        id: "maint:componentType",
-        path: "/maintenance/component-type",
-      },
-      {
-        text: "Component Job",
-        icon: <BuildRoundedIcon />,
-        id: "maint:componentType:componentJob",
-        path: "/maintenance/component-job",
-      },
-      {
-        text: "Work Order",
-        icon: <AssignmentRoundedIcon />,
-        id: "maint:workOrder",
-        path: "/maintenance/work-order",
-      },
-      {
-        text: "Round",
-        icon: <LoopRoundedIcon />,
-        id: "maint:round",
-        path: "/maintenance/round",
-      },
-
-      {
-        text: "Unplanned Jobs",
-        icon: <WarningAmberRoundedIcon />,
-        id: "maint:unplannedJobs",
-        path: "/maintenance/unplanned-jobs",
-      },
-      {
-        text: "Requisition Work",
-        icon: <PostAddRoundedIcon />,
-        id: "maint:requisitionWork",
-        path: "/maintenance/requisition-work",
-      },
-      {
-        text: "Component Trigger",
-        icon: <FlashOnRoundedIcon />,
-        id: "maint:componentTrigger",
-        path: "/maintenance/component-trigger",
-      },
-      {
-        text: "Update Counter",
-        icon: <UpdateRoundedIcon />,
-        id: "maint:updateCounter",
-        path: "/maintenance/update-counter",
-      },
-      {
-        text: "Counter Log",
-        icon: <HistoryRoundedIcon />,
-        id: "maint:counterLog",
-        path: "/maintenance/counter-log",
-      },
-      {
-        text: "Measure Points",
-        icon: <ExploreRoundedIcon />,
-        id: "maint:measurePoints",
-        path: "/maintenance/measure-points",
-      },
-      {
-        text: "Measure Points Logs",
-        icon: <ListAltRoundedIcon />,
-        id: "maint:measurePointsLogs",
-        path: "/maintenance/measure-points-logs",
-      },
-      {
-        text: "Maint Log",
-        icon: <ArticleRoundedIcon />,
-        id: "maint:maintLog",
-        path: "/maintenance/maint-log",
-      },
-    ],
-  },
-  {
-    title: "Stock",
-    icon: <Inventory2RoundedIcon />,
-    items: [
-      {
-        text: "Stock Type",
-        icon: <CategoryRoundedIcon />,
-        id: "stock:type",
-        path: "/stock/stock-type",
-      },
-      {
-        text: "Stock Item",
-        icon: <Inventory2RoundedIcon />,
-        id: "stock:item",
-        path: "/stock/stock-item",
-      },
-      {
-        text: "Stock Used",
-        icon: <Inventory2RoundedIcon />,
-        id: "stock:stock-used",
-        path: "/stock/stock-used",
-      },
-    ],
-  },
-  {
-    title: "Report",
-    icon: <AssessmentRoundedIcon />,
-    items: [],
-    path: "/report",
-  },
-  { title: "Users", icon: <PeopleRoundedIcon />, items: [], path: "/users" },
-  {
-    title: "Settings",
-    icon: <SettingsRoundedIcon />,
-    items: [],
-    path: "/settings",
-  },
-  { title: "About", icon: <InfoRoundedIcon />, items: [], path: "/about" },
-  {
-    title: "Feedback",
-    icon: <HelpRoundedIcon />,
-    items: [],
-    path: "/feedback",
-  },
-];
 
 export default function MenuContent() {
   const router = useRouter();
   const { location } = useRouterState();
   const currentPath = location.pathname;
 
-  const [openSection, setOpenSection] = React.useState<string | null>(null);
+  const [openSections, setOpenSections] = React.useState<
+    Record<string, boolean>
+  >({});
 
-  // باز کردن منوی والد بر اساس مسیر فعلی
+  // باز شدن خودکار بر اساس مسیر فعلی
   React.useEffect(() => {
-    const parent = menuSections.find((section) =>
-      section.items?.some((item) => currentPath.startsWith(item.path))
-    );
-    if (parent) setOpenSection(parent.title);
+    const newOpen: Record<string, boolean> = {};
+    menuContentItems.forEach((section) => {
+      if (
+        section.items?.some((item) =>
+          item.children
+            ? item.children.some((child) => currentPath.startsWith(child.path))
+            : currentPath.startsWith(item.path)
+        )
+      ) {
+        newOpen[section.title] = true;
+        section.items?.forEach((item) => {
+          if (
+            item.children?.some((child) => currentPath.startsWith(child.path))
+          ) {
+            newOpen[item.id || item.text] = true;
+          }
+        });
+      }
+    });
+    setOpenSections(newOpen);
   }, [currentPath]);
 
-  const handleToggle = (title: string) => {
-    setOpenSection((prev) => (prev === title ? null : title));
+  const handleToggle = (key: string) => {
+    setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
   const handleNavigate = (path?: string) => {
     if (path) router.navigate({ to: path });
   };
 
+  const renderItem = (item: MenuItem, level: number = 2) => {
+    const hasChildren = item.children && item.children.length > 0;
+    const isActive =
+      currentPath === item.path ||
+      (hasChildren &&
+        item.children!.some((child) => currentPath === child.path));
+
+    return (
+      <React.Fragment key={item.id || item.text}>
+        <ListItem disablePadding>
+          <ListItemButton
+            sx={{ gap: "10px !important" }}
+            onClick={() =>
+              hasChildren
+                ? handleToggle(item.id || item.text)
+                : handleNavigate(item.path)
+            }
+            selected={isActive}
+          >
+            {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+            <ListItemText primary={item.text} />
+            {hasChildren &&
+              (openSections[item.id || item.text] ? (
+                <ExpandLess />
+              ) : (
+                <ExpandMore />
+              ))}
+          </ListItemButton>
+        </ListItem>
+
+        {hasChildren && (
+          <Collapse
+            in={openSections[item.id || item.text]}
+            timeout="auto"
+            unmountOnExit
+          >
+            <List component="div" disablePadding dense sx={{ p: 0, pl: level }}>
+              {item.children!.map((child) => renderItem(child, level + 1))}
+            </List>
+          </Collapse>
+        )}
+      </React.Fragment>
+    );
+  };
+
   return (
     <Stack sx={{ flexGrow: 1, p: 1 }}>
-      {menuSections.map((section, index) => {
+      {menuContentItems.map((section, index) => {
         const isActiveParent =
           currentPath === section.path ||
-          section.items?.some((item) => currentPath.startsWith(item.path));
+          section.items?.some((item) =>
+            item.children
+              ? item.children.some((child) =>
+                  currentPath.startsWith(child.path)
+                )
+              : currentPath.startsWith(item.path)
+          );
+
+        const hasItems = section.items && section.items.length > 0;
 
         return (
           <React.Fragment key={section.title}>
-            {/* منوی سطح اول */}
+            {/* سطح اول */}
             <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 onClick={() =>
-                  section.items.length
+                  hasItems
                     ? handleToggle(section.title)
                     : handleNavigate(section.path)
                 }
                 selected={isActiveParent}
-                sx={{
-                  borderRadius: 1,
-                  "&.Mui-selected": {
-                    backgroundColor: "primary.main !important",
-                  },
-                }}
+                sx={{ borderRadius: 1 }}
               >
                 <ListItemIcon>{section.icon}</ListItemIcon>
                 <ListItemText primary={section.title} />
-                {section.items.length !== 0 ? (
-                  openSection === section.title ? (
+                {hasItems &&
+                  (openSections[section.title] ? (
                     <ExpandLess />
                   ) : (
                     <ExpandMore />
-                  )
-                ) : null}
+                  ))}
               </ListItemButton>
             </ListItem>
-            {/* زیرمنوها */}
-            {section.items.length !== 0 && (
+
+            {/* سطح دوم و سوم */}
+            {hasItems && (
               <Collapse
-                in={openSection === section.title}
+                in={openSections[section.title]}
                 timeout="auto"
                 unmountOnExit
               >
-                <List component="div" disablePadding dense sx={{ pl: 1 }}>
-                  {section.items.map((item) => {
-                    const isActiveChild = currentPath === item.path;
-                    return (
-                      <ListItem key={item.text} disablePadding>
-                        <ListItemButton
-                          onClick={() => handleNavigate(item.path)}
-                          selected={isActiveChild}
-                        >
-                          {item.icon && (
-                            <ListItemIcon sx={{ minWidth: 20 }}>
-                              {item.icon}
-                            </ListItemIcon>
-                          )}
-                          <ListItemText primary={item.text} />
-                        </ListItemButton>
-                      </ListItem>
-                    );
-                  })}
+                <List
+                  component="div"
+                  disablePadding
+                  dense
+                  sx={{ pl: 1.5, pr: 0 }}
+                >
+                  {section.items.map((item) => renderItem(item, 2))}
                 </List>
               </Collapse>
             )}
-            {index < menuSections.length - 1 && <Divider sx={{ my: 0.5 }} />}
+
+            {index < menuContentItems.length - 1 && (
+              <Divider sx={{ my: 0.5 }} />
+            )}
           </React.Fragment>
         );
       })}

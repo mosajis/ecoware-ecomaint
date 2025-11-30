@@ -1,7 +1,6 @@
-import type {DynamicResponse} from "@/core/api/dynamicTypes";
-import {atom} from "jotai";
+import type { DynamicResponse } from "@/core/api/dynamicTypes";
+import { atom } from "jotai";
 
-export const atomAuth = atom<DynamicResponse<"getAuthAuthorization">>({
+export const atomAuth = atom({
   authorized: false,
-  user: null,
 });

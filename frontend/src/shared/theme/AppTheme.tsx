@@ -17,35 +17,47 @@ interface AppThemeProps {
   themeComponents?: ThemeOptions["components"];
 }
 
-export default function AppTheme(props: AppThemeProps) {
-  const { children, disableCustomTheme, themeComponents } = props;
+// تم ثابت خارج از کامپوننت
+const defaultTheme = createTheme({
+  cssVariables: {
+    colorSchemeSelector: "data-mui-color-scheme",
+    cssVarPrefix: "template",
+  },
+  colorSchemes,
+  typography,
+  shadows,
+  shape,
+  components: {
+    ...navigationCustomizations,
+    ...inputsCustomizations,
+    ...dataDisplayCustomizations,
+    ...surfacesCustomizations,
+    ...dataGridCustomizations,
+    ...tabsCustomization,
+  },
+});
 
+export default function AppTheme({
+  children,
+  disableCustomTheme,
+  themeComponents,
+}: AppThemeProps) {
   const theme = React.useMemo(() => {
-    if (disableCustomTheme) return createTheme();
+    if (disableCustomTheme) return createTheme(); // تم پیش‌فرض MUI
 
+    if (!themeComponents) return defaultTheme;
+
+    // اگر themeComponents اضافه شده، فقط آن‌ها را merge کن
     return createTheme({
-      cssVariables: {
-        colorSchemeSelector: "data-mui-color-scheme",
-        cssVarPrefix: "template",
-      },
-      colorSchemes,
-      typography,
-      shadows,
-      shape,
+      ...defaultTheme,
       components: {
-        ...navigationCustomizations,
-        ...inputsCustomizations,
-        ...dataDisplayCustomizations,
-        ...surfacesCustomizations,
-        ...dataGridCustomizations,
-        ...tabsCustomization,
+        ...defaultTheme.components,
+        ...themeComponents,
       },
     });
   }, [disableCustomTheme, themeComponents]);
 
-  if (disableCustomTheme) {
-    return <>{children}</>;
-  }
+  if (disableCustomTheme) return <>{children}</>;
 
   return (
     <ThemeProvider theme={theme} disableTransitionOnChange>
