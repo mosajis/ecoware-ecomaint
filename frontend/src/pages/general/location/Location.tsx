@@ -1,22 +1,17 @@
 import Splitter from "@/shared/components/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import CustomizedTree from "@/shared/components/tree/Tree";
 import LocationFormDialog from "./LocationFormDialog";
-import ConfirmDialog from "@/shared/components/ConfirmDialog";
+import CustomizedTree from "@/shared/components/tree/CustomeTree";
 import { useState, useCallback } from "react";
 import { tblLocation, TypeTblLocation } from "@/core/api/generated/api";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataTree } from "../_hooks/useDataTree";
 
-export default function LocationListPage() {
+export default function PageLocation() {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
-
-  // Confirm delete states
-  const [confirmOpen, setConfirmOpen] = useState(false);
-  const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
 
   // === Mapping Transformer ===
   const mapper = useCallback(
@@ -57,32 +52,11 @@ export default function LocationListPage() {
     setOpenForm(true);
   };
 
-  // === ONE unified delete handler (SAFE) ===
-  const openDeleteModal = (id: number) => {
-    setDeleteTargetId(id);
-    setConfirmOpen(true);
-  };
-
-  const confirmDelete = async () => {
-    if (deleteTargetId == null) return;
-
-    await handleDelete({ locationId: deleteTargetId } as any);
-    setConfirmOpen(false);
-    setDeleteTargetId(null);
-  };
-
-  const cancelDelete = () => {
-    setConfirmOpen(false);
-    setDeleteTargetId(null);
-  };
-
   // === Columns ===
   const columns: GridColDef<TypeTblLocation>[] = [
-    { field: "locationCode", headerName: "Code", width: 120 },
-    { field: "locationId", headerName: "Id", width: 100 },
-    { field: "parentLocationId", headerName: "ParentId", width: 120 },
+    { field: "locationCode", headerName: "Code", width: 60 },
     { field: "name", headerName: "Name", flex: 1 },
-    { field: "orderId", headerName: "Order", width: 80 },
+    { field: "orderId", headerName: "SortID", width: 80 },
     dataGridActionColumn({
       onEdit: handleEdit,
       onDelete: handleDelete,
@@ -98,9 +72,10 @@ export default function LocationListPage() {
           label="Tree View"
           items={treeItems}
           loading={loading}
+          getRowId={(row) => row.locationId}
           onAddClick={handleCreate}
-          onEditClick={(id) => handleEdit({ locationId: id } as any)}
-          onDeleteClick={(id) => openDeleteModal(Number(id))} // SAFE
+          onEditClick={handleEdit}
+          onDeleteClick={handleDelete}
         />
 
         {/* === GRID VIEW === */}
@@ -123,15 +98,6 @@ export default function LocationListPage() {
         recordId={selectedRowId}
         onClose={() => setOpenForm(false)}
         onSuccess={handleFormSuccess}
-      />
-
-      {/* === CONFIRM DELETE === */}
-      <ConfirmDialog
-        open={confirmOpen}
-        onCancel={cancelDelete}
-        onConfirm={confirmDelete}
-        title="Delete Location"
-        message="Are you sure you want to delete this location?"
       />
     </>
   );

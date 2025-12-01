@@ -153,7 +153,7 @@ function FollowStatusFormDialog({
           render={({ field }) => (
             <TextField
               {...field}
-              label="Order No"
+              label="Sort ID"
               type="number"
               size="small"
               disabled={isDisabled}

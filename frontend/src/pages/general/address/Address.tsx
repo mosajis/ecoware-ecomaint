@@ -6,20 +6,14 @@ import { type GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { useDataGrid } from "../_hooks/useDataGrid";
 
-export default function AddressPage() {
+export default function PageAddress() {
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
 
   // === useDataGrid ===
-  const {
-    rows,
-    loading,
-    fetchData,
-    handleDelete,
-    handleFormSuccess,
-    handleRefresh,
-  } = useDataGrid(tblAddress.getAll, tblAddress.deleteById, "addressId");
+  const { rows, loading, handleDelete, handleFormSuccess, handleRefresh } =
+    useDataGrid(tblAddress.getAll, tblAddress.deleteById, "addressId");
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
@@ -37,7 +31,7 @@ export default function AddressPage() {
   // === Columns ===
   const columns = useMemo<GridColDef<TypeTblAddress>[]>(
     () => [
-      { field: "code", headerName: "Code", width: 120 },
+      { field: "code", headerName: "Code", width: 60 },
       { field: "name", headerName: "Name", flex: 1 },
       { field: "address1", headerName: "Address 1", flex: 1 },
       { field: "address2", headerName: "Address 2", flex: 1 },

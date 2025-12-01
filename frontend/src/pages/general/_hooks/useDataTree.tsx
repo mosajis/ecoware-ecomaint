@@ -134,10 +134,9 @@ export function useDataTree<
     [mapper, getIdValue, flattenTree, buildTree]
   );
 
-  const handleRefresh = useCallback(
-    (params?: QueryParams) => fetchData(params),
-    [fetchData]
-  );
+  const handleRefresh = useCallback(() => {
+    fetchData();
+  }, [fetchData]);
 
   useEffect(() => {
     fetchData();

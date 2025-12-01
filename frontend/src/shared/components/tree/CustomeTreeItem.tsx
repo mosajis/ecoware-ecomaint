@@ -9,6 +9,7 @@ import {
   treeItemClasses,
   type TreeItemProps,
 } from "@mui/x-tree-view";
+import DataGridActionsButton from "../dataGrid/DataGridActionsButton";
 
 export const StyledTreeItem = styled(TreeItem)(({ theme }) => {
   const { mode } = useColorScheme();
@@ -75,31 +76,27 @@ const CustomLabel = React.memo(
         <Typography sx={{ flex: 1 }}>{label}</Typography>
 
         <Box display={"flex"} gap={0.5}>
-          <Tooltip title="Edit">
-            <IconButton
-              size="small"
-              sx={{ width: 30, height: 30 }}
+          {onEditClick && (
+            <DataGridActionsButton
+              title="Edit"
+              icon={<EditIcon fontSize="small" sx={{ color: "#4671b6ff" }} />}
               onClick={(e) => {
                 e.stopPropagation();
                 onEditClick?.(id);
               }}
-            >
-              <EditIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
+            />
+          )}
 
-          <Tooltip title="Delete">
-            <IconButton
-              size="small"
-              sx={{ width: 30, height: 30 }}
+          {onDeleteClick && (
+            <DataGridActionsButton
+              title="Delete"
+              icon={<DeleteIcon fontSize="small" sx={{ color: "#be3c3cff" }} />}
               onClick={(e) => {
                 e.stopPropagation();
                 onDeleteClick?.(id);
               }}
-            >
-              <DeleteIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
+            />
+          )}
         </Box>
       </Box>
     );

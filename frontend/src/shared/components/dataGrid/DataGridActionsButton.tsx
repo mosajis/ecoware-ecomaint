@@ -6,7 +6,7 @@ interface DataGridActionsButtonProps {
   icon: ReactNode;
 
   onClick?: MouseEventHandler<HTMLButtonElement>;
-  size?: number; // 👈 کنترل سایز به صورت عددی (پیش‌فرض 30)
+  size?: number;
 }
 
 export default function DataGridActionsButton({
@@ -23,7 +23,7 @@ export default function DataGridActionsButton({
         sx={{
           width: `${size}px`,
           height: `${size}px`,
-          borderRadius: "10px",
+          borderRadius: "8px",
         }}
       >
         {icon}

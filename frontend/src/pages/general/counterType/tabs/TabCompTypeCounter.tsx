@@ -17,7 +17,7 @@ const columns: GridColDef<TypeTblCompTypeCounter>[] = [
   {
     field: "code",
     headerName: "Code",
-    flex: 1,
+    width: 60,
     valueGetter: (_, row) => row.tblCounterType?.code,
   },
   {
@@ -34,8 +34,8 @@ const columns: GridColDef<TypeTblCompTypeCounter>[] = [
   },
   {
     field: "orderId",
-    headerName: "Order ID",
-    flex: 1,
+    headerName: "Sort ID",
+    width: 60,
     valueGetter: (_, row) => row.tblCounterType?.orderId,
   },
 ];

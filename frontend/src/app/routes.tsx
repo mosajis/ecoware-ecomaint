@@ -3,8 +3,10 @@ import { createRoute, createRootRoute } from "@tanstack/react-router";
 import AppLayout from "@/shared/components/layout/AppLayout";
 import { LOCAL_STORAGE } from "@/const";
 import AppAuthorization from "@/shared/components/AppAthorization";
-import LoginPage from "@/pages/auth/login/login.page";
-import AddressPage from "@/pages/general/address/Address";
+
+import PageLogin from "@/pages/auth/login/login.page";
+import PageAddress from "@/pages/general/address/Address";
+import PageLocation from "@/pages/general/location/Location";
 
 // --- Root ---
 export const rootRoute = createRootRoute({
@@ -44,7 +46,7 @@ export const indexRoute = createRoute({
 export const AuthLoginRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/auth/login",
-  component: LoginPage,
+  component: PageLogin,
 });
 
 // --- Protected Routes ---
@@ -59,12 +61,12 @@ export const dashboardRoute = createRoute({
 export const generalAddressRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/general/address",
-  component: AddressPage,
+  component: PageAddress,
 });
 export const generalLocationRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/general/location",
-  component: () => "Location Page",
+  component: PageLocation,
 });
 export const generalEmployeeRoute = createRoute({
   getParentRoute: () => protectedRoute,
