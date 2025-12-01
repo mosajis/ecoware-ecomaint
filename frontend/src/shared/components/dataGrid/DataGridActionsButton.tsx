@@ -13,7 +13,7 @@ export default function DataGridActionsButton({
   title,
   icon,
   onClick,
-  size = 30,
+  size = 26,
 }: DataGridActionsButtonProps) {
   return (
     <Tooltip title={title}>

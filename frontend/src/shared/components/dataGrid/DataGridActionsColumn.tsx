@@ -10,7 +10,7 @@ interface DataGridActionColumnProps {
 }
 
 export const dataGridActionColumn = ({
-  width = 100,
+  width = 77,
   onEdit,
   onDelete,
   renderExtras,

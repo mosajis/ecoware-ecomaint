@@ -53,7 +53,7 @@ export default function DataGridActions({
         {onEdit && (
           <DataGridActionsButton
             title="Edit"
-            icon={<EditIcon fontSize="small" />}
+            icon={<EditIcon fontSize="small" sx={{ color: "#4671b6ff" }} />}
             onClick={onEdit}
           />
         )}
@@ -61,7 +61,7 @@ export default function DataGridActions({
         {onDelete && (
           <DataGridActionsButton
             title="Delete"
-            icon={<DeleteIcon fontSize="small" />}
+            icon={<DeleteIcon fontSize="small" sx={{ color: "#be3c3cff" }} />}
             onClick={handleDeleteClick}
           />
         )}

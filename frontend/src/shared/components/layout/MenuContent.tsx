@@ -22,7 +22,6 @@ export default function MenuContent() {
     Record<string, boolean>
   >({});
 
-  // باز شدن خودکار بر اساس مسیر فعلی
   React.useEffect(() => {
     const newOpen: Record<string, boolean> = {};
     menuContentItems.forEach((section) => {
@@ -56,16 +55,15 @@ export default function MenuContent() {
 
   const renderItem = (item: MenuItem, level: number = 2) => {
     const hasChildren = item.children && item.children.length > 0;
-    const isActive =
-      currentPath === item.path ||
-      (hasChildren &&
-        item.children!.some((child) => currentPath === child.path));
+    const isActive = currentPath === item.path;
 
     return (
       <React.Fragment key={item.id || item.text}>
         <ListItem disablePadding>
           <ListItemButton
-            sx={{ gap: "10px !important" }}
+            sx={{
+              gap: "10px !important",
+            }}
             onClick={() =>
               hasChildren
                 ? handleToggle(item.id || item.text)
@@ -90,7 +88,12 @@ export default function MenuContent() {
             timeout="auto"
             unmountOnExit
           >
-            <List component="div" disablePadding dense sx={{ p: 0, pl: level }}>
+            <List
+              component="div"
+              disablePadding
+              dense
+              sx={{ p: 0.5, pl: level }}
+            >
               {item.children!.map((child) => renderItem(child, level + 1))}
             </List>
           </Collapse>

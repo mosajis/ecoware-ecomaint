@@ -6,14 +6,20 @@ import { type GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { useDataGrid } from "../_hooks/useDataGrid";
 
-export default function AddressListPage() {
+export default function AddressPage() {
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
 
   // === useDataGrid ===
-  const { rows, loading, fetchData, handleDelete, handleFormSuccess } =
-    useDataGrid(tblAddress.getAll, tblAddress.deleteById, "addressId");
+  const {
+    rows,
+    loading,
+    fetchData,
+    handleDelete,
+    handleFormSuccess,
+    handleRefresh,
+  } = useDataGrid(tblAddress.getAll, tblAddress.deleteById, "addressId");
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
@@ -29,7 +35,7 @@ export default function AddressListPage() {
   }, []);
 
   // === Columns ===
-  const columns = useMemo<GridColDef[]>(
+  const columns = useMemo<GridColDef<TypeTblAddress>[]>(
     () => [
       { field: "code", headerName: "Code", width: 120 },
       { field: "name", headerName: "Name", flex: 1 },
@@ -49,9 +55,7 @@ export default function AddressListPage() {
         label="Address"
         showToolbar
         onAddClick={handleCreate}
-        onRefreshClick={fetchData}
-        disableDensity
-        disableRowNumber
+        onRefreshClick={handleRefresh}
         rows={rows}
         columns={columns}
         loading={loading}

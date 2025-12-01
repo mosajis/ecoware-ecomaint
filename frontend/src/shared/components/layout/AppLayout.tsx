@@ -3,8 +3,8 @@ import { alpha, Box } from "@mui/material";
 import { lazy, Suspense, useMemo } from "react";
 import { Outlet } from "@tanstack/react-router";
 
-const Header = lazy(() => import("@/shared/components/layout/Header"));
 const SideMenu = lazy(() => import("@/shared/components/layout/SideMenu"));
+const Header = lazy(() => import("@/shared/components/layout/Header"));
 
 function AppLayout() {
   const contentSx = useMemo(

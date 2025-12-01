@@ -10,7 +10,7 @@ type Props = {
   children: ReactNode;
 };
 
-export default function AppAuthorizationWrapper({ children }: Props) {
+export default function AppAuthorization({ children }: Props) {
   const setAuth = useSetAtom(atomAuth);
   const [loading, setLoading] = useState(true);
 

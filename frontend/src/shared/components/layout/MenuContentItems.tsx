@@ -9,8 +9,6 @@ import Inventory2RoundedIcon from "@mui/icons-material/Inventory2Rounded";
 import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
-import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
-import HelpRoundedIcon from "@mui/icons-material/HelpRounded";
 import PrecisionManufacturingRoundedIcon from "@mui/icons-material/PrecisionManufacturingRounded";
 import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
 import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
@@ -26,7 +24,7 @@ import WorkHistoryRoundedIcon from "@mui/icons-material/WorkHistoryRounded";
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import HourglassEmptyRoundedIcon from "@mui/icons-material/HourglassEmptyRounded";
 import BrightnessAutoIcon from "@mui/icons-material/BrightnessAuto";
-import CircleIcon from "@mui/icons-material/Circle";
+
 import { Box } from "@mui/material";
 
 const BulletIcon = () => (
@@ -140,12 +138,40 @@ export const menuContentItems: {
         icon: <SettingsRoundedIcon />,
         id: "maint:function",
         path: "/maintenance/function",
+        children: [
+          {
+            text: "Tree View",
+            id: "maint:Function:tree",
+            path: "/maintenance/function/tree-view",
+            icon: <BulletIcon />,
+          },
+          {
+            text: "List View",
+            id: "maint:Function:list",
+            path: "/maintenance/function/list-view",
+            icon: <BulletIcon />,
+          },
+        ],
       },
       {
         text: "Component Unit",
         icon: <Inventory2RoundedIcon />,
-        id: "maint:componentType:component",
+        id: "maint:componentUnit:component",
         path: "/maintenance/component-unit",
+        children: [
+          {
+            text: "Tree View",
+            id: "maint:componentUnit:tree",
+            path: "/maintenance/component-unit/tree-view",
+            icon: <BulletIcon />,
+          },
+          {
+            text: "List View",
+            id: "maint:componentUnit:list",
+            path: "/maintenance/component-unit/list-view",
+            icon: <BulletIcon />,
+          },
+        ],
       },
       {
         text: "Component Type",
@@ -172,6 +198,20 @@ export const menuContentItems: {
         icon: <BuildRoundedIcon />,
         id: "maint:componentType:componentJob",
         path: "/maintenance/component-job",
+        children: [
+          {
+            text: "Tree View",
+            id: "maint:componentType:tree",
+            path: "/maintenance/component-job/tree-view",
+            icon: <BulletIcon />,
+          },
+          {
+            text: "List View",
+            id: "maint:componentType:list",
+            path: "/maintenance/component-job/list-view",
+            icon: <BulletIcon />,
+          },
+        ],
       },
       {
         text: "Work Order",

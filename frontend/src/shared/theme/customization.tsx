@@ -52,20 +52,20 @@ export const dataDisplayCustomizations: Components<Theme> = {
           gap: 8,
           padding: "2px 8px",
           borderRadius: (theme.vars || theme).shape.borderRadius,
-          opacity: 0.7,
-          "&.Mui-selected": {
-            opacity: 1,
-            backgroundColor: alpha(theme.palette.action.selected, 0.3),
-            [`& .${svgIconClasses.root}`]: {
-              color: (theme.vars || theme).palette.text.primary,
-            },
-            "&:focus-visible": {
-              backgroundColor: alpha(theme.palette.action.selected, 0.3),
-            },
-            "&:hover": {
-              backgroundColor: alpha(theme.palette.action.selected, 0.5),
-            },
-          },
+          opacity: 0.8,
+          // "&.Mui-selected": {
+          //   opacity: 1,
+          //   backgroundColor: alpha(theme.palette.action.selected, 0.3),
+          //   [`& .${svgIconClasses.root}`]: {
+          //     color: (theme.vars || theme).palette.text.primary,
+          //   },
+          //   "&:focus-visible": {
+          //     backgroundColor: alpha(theme.palette.action.selected, 0.3),
+          //   },
+          //   "&:hover": {
+          //     backgroundColor: alpha(theme.palette.action.selected, 0.5),
+          //   },
+          // },
           "&:focus-visible": {
             backgroundColor: "transparent",
           },
@@ -744,7 +744,6 @@ export const navigationCustomizations: Components<Theme> = {
         border: "1px solid",
         borderColor: gray[200],
         backgroundColor: (theme.vars || theme).palette.background.paper,
-        boxShadow: `inset 0 1px 0 1px hsla(220, 0%, 100%, 0.6), inset 0 -1px 0 1px hsla(220, 35%, 90%, 0.5)`,
         "&:hover": {
           borderColor: gray[300],
           backgroundColor: (theme.vars || theme).palette.background.paper,
@@ -1148,9 +1147,23 @@ export const dataGridCustomizations = {
             },
           },
         },
+        [`& .${gridClasses.footerContainer}`]: {
+          backgroundColor: (theme.vars || theme).palette.background.paper,
+          borderTop: `1px solid ${(theme.vars || theme).palette.divider}`, // border
+          minHeight: 42, // ارتفاع کمتر
+          maxHeight: 42,
+        },
+
+        [`& .MuiTablePagination-toolbar`]: {
+          minHeight: 42, // ارتفاع کمتر
+          maxHeight: 42,
+          paddingLeft: theme.spacing(1),
+          paddingRight: theme.spacing(1),
+        },
       }),
       cell: ({ theme }: any) => ({
-        border: ".5px solid " + (theme.vars || theme).palette.divider,
+        borderRight: ".5px solid " + (theme.vars || theme).palette.divider,
+        borderTop: ".5px solid " + (theme.vars || theme).palette.divider,
       }),
       menu: ({ theme }: any) => ({
         borderRadius: theme.shape.borderRadius,
