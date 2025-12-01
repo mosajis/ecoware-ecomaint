@@ -8,6 +8,7 @@ import PageLogin from "@/pages/auth/login/login.page";
 import PageAddress from "@/pages/general/address/Address";
 import PageLocation from "@/pages/general/location/Location";
 import PageEmployee from "@/pages/general/employee/Employee";
+import PageDiscipline from "@/pages/general/discipline/Discipline";
 
 // --- Root ---
 export const rootRoute = createRootRoute({
@@ -77,7 +78,7 @@ export const generalEmployeeRoute = createRoute({
 export const generalDisciplineRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/general/discipline",
-  component: () => "Discipline Page",
+  component: PageDiscipline,
 });
 export const generalCounterTypeRoute = createRoute({
   getParentRoute: () => protectedRoute,
