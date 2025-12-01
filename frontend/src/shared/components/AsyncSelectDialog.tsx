@@ -1,6 +1,6 @@
 import DialogHeader from "./dialog/DialogHeader";
 import CustomizedDataGrid from "./dataGrid/DataGrid";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Dialog, DialogContent, DialogActions, Button } from "@mui/material";
 import {
   GridRowId,
@@ -47,27 +47,24 @@ export function AsyncSelectDialog<TItem extends Record<string, any>>({
     ids: new Set<GridRowId>(),
   });
 
-  useEffect(() => {
-    if (!open) return;
-
-    const controller = new AbortController();
-
+  // === fetchData function for useEffect and Refresh ===
+  const fetchData = useCallback(async () => {
+    setLoading(true);
     setSelection({ type: "include", ids: new Set<GridRowId>() });
 
-    setLoading(true);
+    try {
+      const data = await request();
+      const items = extractRows ? extractRows(data) : data.items;
+      setRows(Array.isArray(items) ? items : []);
+    } finally {
+      setLoading(false);
+    }
+  }, [request, extractRows]);
 
-    request()
-      .then((data) => {
-        if (controller.signal.aborted) return;
-        const items = extractRows ? extractRows(data) : data;
-        setRows(Array.isArray(items) ? items : []);
-      })
-      .finally(() => {
-        if (!controller.signal.aborted) setLoading(false);
-      });
-
-    return () => controller.abort();
-  }, [open]);
+  // === Load data on open ===
+  useEffect(() => {
+    if (open) fetchData();
+  }, [open, fetchData]);
 
   const handleOk = () => {
     if (selectionMode === "single") {
@@ -87,6 +84,7 @@ export function AsyncSelectDialog<TItem extends Record<string, any>>({
       <DialogContent sx={{ height, p: 1 }}>
         <CustomizedDataGrid
           getRowId={getRowId}
+          onRefreshClick={fetchData} // 🔹 استفاده از fetchData
           label={title}
           rows={rows}
           columns={columns}
@@ -118,7 +116,7 @@ export function AsyncSelectDialog<TItem extends Record<string, any>>({
           sx={{ flex: 1 }}
           onClick={onClose}
         >
-          Cancell
+          Cancel
         </Button>
       </DialogActions>
     </Dialog>

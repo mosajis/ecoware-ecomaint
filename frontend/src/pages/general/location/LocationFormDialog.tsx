@@ -195,7 +195,7 @@ function LocationFormDialog({
               label="Parent Location"
               selectionMode="single"
               value={field.value} // رکورد کامل
-              request={() => tblLocation.getAll().then((res) => res.items)}
+              request={tblLocation.getAll}
               columns={[{ field: "name", headerName: "Name", flex: 1 }]}
               getRowId={(row) => row.locationId}
               onChange={field.onChange}

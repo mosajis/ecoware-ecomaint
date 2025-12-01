@@ -7,6 +7,7 @@ import AppAuthorization from "@/shared/components/AppAthorization";
 import PageLogin from "@/pages/auth/login/login.page";
 import PageAddress from "@/pages/general/address/Address";
 import PageLocation from "@/pages/general/location/Location";
+import PageEmployee from "@/pages/general/employee/Employee";
 
 // --- Root ---
 export const rootRoute = createRootRoute({
@@ -71,7 +72,7 @@ export const generalLocationRoute = createRoute({
 export const generalEmployeeRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/general/employee",
-  component: () => "Employee Page",
+  component: PageEmployee,
 });
 export const generalDisciplineRoute = createRoute({
   getParentRoute: () => protectedRoute,

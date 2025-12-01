@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { Controller, Control } from "react-hook-form";
 import { TextField, CircularProgress } from "@mui/material";
 import Autocomplete, {
@@ -35,6 +35,7 @@ export default function AsyncSelect<T>({
   const [options, setOptions] = useState<AsyncSelectOption[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
+  const loadedOnceRef = useRef(false); // ✅ track if loaded once
 
   // Debounced load function for search
   const loadOptions = useCallback(
@@ -55,6 +56,14 @@ export default function AsyncSelect<T>({
     [apiCall, mapper]
   );
 
+  const handleOpen = () => {
+    // فقط دفعه اول باز شدن
+    if (!loadedOnceRef.current) {
+      loadOptions("");
+      loadedOnceRef.current = true;
+    }
+  };
+
   return (
     <Controller
       name={name}
@@ -67,18 +76,39 @@ export default function AsyncSelect<T>({
           getOptionLabel={(option) => option.label}
           onChange={(_, value) => field.onChange(value)}
           inputValue={inputValue}
-          onInputChange={(_, value) => {
+          onInputChange={(_, value, reason) => {
             setInputValue(value);
-            loadOptions(value);
+            if (reason === "input") loadOptions(value); // فقط وقتی کاربر تایپ می‌کنه
           }}
           disabled={disabled}
           loading={loading}
-          onOpen={() => loadOptions(inputValue)}
+          onOpen={handleOpen}
           isOptionEqualToValue={(option, value) => option.id === value.id}
           renderInput={(params: AutocompleteRenderInputParams) => (
-            <TextField {...params} label={label} size="small" />
+            <TextField
+              {...params}
+              label={label}
+              size="small"
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: (
+                  <>
+                    {loading && <CircularProgress color="inherit" size={20} />}
+                    {params.InputProps.endAdornment}
+                  </>
+                ),
+              }}
+            />
           )}
-          sx={sx}
+          sx={{
+            "& .MuiAutocomplete-endAdornment .MuiIconButton-root": {
+              backgroundColor: "transparent",
+              "&:hover": {
+                backgroundColor: "transparent",
+              },
+            },
+            ...sx,
+          }}
         />
       )}
     />

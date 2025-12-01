@@ -1,28 +1,33 @@
+import * as z from "zod";
+import AsyncSelect from "@/shared/components/AsyncSelect";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
 import { memo, useEffect, useMemo, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Box, TextField } from "@mui/material";
-import FormDialog from "@/shared/components/formDialog/FormDialog";
+import { Box, Grid, TextField } from "@mui/material";
 import {
   tblAddress,
   tblDiscipline,
   tblEmployee,
+  TypeTblAddress,
   TypeTblEmployee,
 } from "@/core/api/generated/api";
-import AsyncSelect from "@/shared/components/AsyncSelect";
+import { buildRelation } from "@/core/api/helper";
+import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
 
 // === Validation Schema ===
 export const schema = z.object({
   code: z.string().nullable(),
   lastName: z.string().min(1, "Last Name is required").nullable(),
   firstName: z.string().min(1, "First Name is required").nullable(),
+
   address: z
     .object({
-      id: z.number(),
-      label: z.string(),
+      addressId: z.number(),
+      name: z.string(),
     })
     .nullable(),
+
   discipline: z
     .object({
       id: z.number(),
@@ -60,7 +65,6 @@ function EmployeeFormDialog({
       firstName: "",
       address: null,
       discipline: null,
-      position: null,
       hrsAvailWeek: null,
     }),
     []
@@ -71,7 +75,7 @@ function EmployeeFormDialog({
     defaultValues,
   });
 
-  // === Fetch initial data for edit
+  // === Fetch initial data ===
   const fetchData = useCallback(async () => {
     if (mode === "update" && recordId) {
       setLoadingInitial(true);
@@ -82,18 +86,28 @@ function EmployeeFormDialog({
             tblAddress: true,
           },
         });
+
         if (res) {
           reset({
             code: res.code ?? "",
             lastName: res.lastName ?? "",
             firstName: res.firstName ?? "",
-            address: res.address
-              ? { id: res.address.id, label: res.address.label }
+
+            address: res.tblAddress
+              ? {
+                  addressId: res.tblAddress.addressId,
+                  name: res.tblAddress.name ?? "",
+                }
               : null,
-            discipline: res.discipline
-              ? { id: res.discipline.id!, label: res.discipline.name ?? "" }
+
+            discipline: res.tblDiscipline
+              ? {
+                  id: res.tblDiscipline.discId,
+                  label: res.tblDiscipline.name ?? "",
+                }
               : null,
-            hrsAvailWeek: res.hrsAvailWeek ?? null,
+
+            hrsAvailWeek: res.available ?? null,
           });
         }
       } finally {
@@ -110,17 +124,29 @@ function EmployeeFormDialog({
 
   const isDisabled = loadingInitial || submitting;
 
-  // === Submit handler
+  // === Submit Handler ===
   const handleFormSubmit = useCallback(
     async (values: EmployeeFormValues) => {
       setSubmitting(true);
+
       try {
-        // Map object fields to ids for API
         const payload = {
-          ...values,
-          addressId: values.address?.id ?? null,
-          disciplineId: values.discipline?.id ?? null,
-          positionId: values.position?.id ?? null,
+          code: values.code ?? null,
+          lastName: values.lastName ?? "",
+          firstName: values.firstName ?? "",
+          available: values.hrsAvailWeek ?? 0,
+
+          // ⭐⭐⭐ Relation Mapping — Clean & Reusable
+          ...buildRelation(
+            "tblAddress",
+            "addressId",
+            values.address?.addressId ?? null
+          ),
+          ...buildRelation(
+            "tblDiscipline",
+            "discId",
+            values.discipline?.id ?? null
+          ),
         };
 
         let result: TypeTblEmployee;
@@ -153,77 +179,89 @@ function EmployeeFormDialog({
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1.5}>
+      <Box display="flex" flexDirection={"column"} gap={1}>
+        {/* Code (70%) */}
         <Controller
           name="code"
           control={control}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
+              sx={{ width: "70%" }}
               label="Code"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               size="small"
               disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
             />
           )}
         />
 
-        <Controller
-          name="lastName"
-          control={control}
-          render={({ field, fieldState }) => (
-            <TextField
-              {...field}
-              label="Last Name *"
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
-              size="small"
-              disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
-            />
-          )}
-        />
+        <Box display={"flex"} gap={1}>
+          <Controller
+            name="lastName"
+            control={control}
+            render={({ field, fieldState }) => (
+              <TextField
+                {...field}
+                sx={{ flex: "1" }}
+                label="Last Name *"
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
+                size="small"
+                disabled={isDisabled}
+              />
+            )}
+          />
 
-        <Controller
-          name="firstName"
-          control={control}
-          render={({ field, fieldState }) => (
-            <TextField
-              {...field}
-              label="First Name *"
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
-              size="small"
-              disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
-            />
-          )}
-        />
+          {/* First Name (50%) */}
+          <Controller
+            name="firstName"
+            control={control}
+            render={({ field, fieldState }) => (
+              <TextField
+                {...field}
+                sx={{ flex: "1" }}
+                label="First Name *"
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
+                size="small"
+                disabled={isDisabled}
+              />
+            )}
+          />
+        </Box>
 
+        {/* Address (70%) */}
         <Controller
           name="address"
           control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
+          render={({ field, fieldState }) => (
+            <AsyncSelectField
+              dialogMaxWidth="sm"
               label="Address"
-              size="small"
-              disabled={isDisabled}
-              sx={{ gridColumn: "span 4" }}
+              selectionMode="single"
+              value={field.value}
+              request={tblAddress.getAll}
+              columns={[{ field: "name", headerName: "Address", flex: 1 }]}
+              getRowId={(row) => row.addressId}
+              onChange={field.onChange}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
             />
           )}
         />
-
+        {/* Discipline (30%) */}
         <AsyncSelect
           name="discipline"
           control={control}
           label="Discipline"
           disabled={isDisabled}
           apiCall={() => tblDiscipline.getAll().then((res) => res.items)}
-          mapper={(d) => ({ id: d.discId!, label: d.name ?? "" })}
-          sx={{ gridColumn: "span 2" }}
+          mapper={(d) => ({
+            id: d.discId!,
+            label: d.name ?? "",
+          })}
         />
 
         <Controller
@@ -232,11 +270,11 @@ function EmployeeFormDialog({
           render={({ field }) => (
             <TextField
               {...field}
+              sx={{ width: "50%" }}
               label="Hrs Avail Week"
               type="number"
               size="small"
               disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
               value={field.value ?? ""}
               onChange={(e) =>
                 field.onChange(

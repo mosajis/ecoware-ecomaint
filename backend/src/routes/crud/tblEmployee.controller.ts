@@ -1,6 +1,5 @@
 import { BaseController } from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
-import { PrismaClient } from "orm/generated/prisma";
 import {
   TblEmployee,
   TblEmployeeInputCreate,
@@ -24,4 +23,4 @@ const ControllerTblEmployee = new BaseController({
   responseSchema: buildResponseSchema(TblEmployeePlain, TblEmployee),
 }).app;
 
-export default ControllerTblEmployee
+export default ControllerTblEmployee;

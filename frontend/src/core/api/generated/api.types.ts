@@ -10856,7 +10856,7 @@ export interface operations {
                                 lastupdate: null | (Record<string, never> | number);
                                 orderId: null | (number);
                             };
-                            tblCompType?: {
+                            tblCompType?: null | {
                                 compTypeId: number;
                                 componentClassId: null | (number);
                                 parentCompTypeId: null | (number);
@@ -10880,7 +10880,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                            otherTblCompType?: null | {
+                            otherTblCompTypes?: {
                                 compTypeId: number;
                                 componentClassId: null | (number);
                                 parentCompTypeId: null | (number);
@@ -10903,7 +10903,7 @@ export interface operations {
                                 parentCompTypeId_2: null | (number);
                                 orderId: null | (number);
                                 userId: null | (number);
-                            };
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -10941,15 +10941,15 @@ export interface operations {
                             addressId: number;
                         };
                     };
-                    tblCompType: {
+                    tblCompType?: {
                         connect: {
-                            id: number;
+                            compTypeId: number;
                         };
                     };
-                    otherTblCompType?: {
+                    otherTblCompTypes?: {
                         connect: {
                             id: number;
-                        };
+                        }[];
                     };
                 };
                 "application/x-www-form-urlencoded": {
@@ -10970,15 +10970,15 @@ export interface operations {
                             addressId: number;
                         };
                     };
-                    tblCompType: {
+                    tblCompType?: {
                         connect: {
-                            id: number;
+                            compTypeId: number;
                         };
                     };
-                    otherTblCompType?: {
+                    otherTblCompTypes?: {
                         connect: {
                             id: number;
-                        };
+                        }[];
                     };
                 };
                 "multipart/form-data": {
@@ -10999,15 +10999,15 @@ export interface operations {
                             addressId: number;
                         };
                     };
-                    tblCompType: {
+                    tblCompType?: {
                         connect: {
-                            id: number;
+                            compTypeId: number;
                         };
                     };
-                    otherTblCompType?: {
+                    otherTblCompTypes?: {
                         connect: {
                             id: number;
-                        };
+                        }[];
                     };
                 };
             };
@@ -11058,7 +11058,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                         };
-                        tblCompType?: {
+                        tblCompType?: null | {
                             compTypeId: number;
                             componentClassId: null | (number);
                             parentCompTypeId: null | (number);
@@ -11082,7 +11082,7 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         };
-                        otherTblCompType?: null | {
+                        otherTblCompTypes?: {
                             compTypeId: number;
                             componentClassId: null | (number);
                             parentCompTypeId: null | (number);
@@ -11105,7 +11105,7 @@ export interface operations {
                             parentCompTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
-                        };
+                        }[];
                     };
                 };
             };
@@ -11199,7 +11199,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                         };
-                        tblCompType?: {
+                        tblCompType?: null | {
                             compTypeId: number;
                             componentClassId: null | (number);
                             parentCompTypeId: null | (number);
@@ -11223,7 +11223,7 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         };
-                        otherTblCompType?: null | {
+                        otherTblCompTypes?: {
                             compTypeId: number;
                             componentClassId: null | (number);
                             parentCompTypeId: null | (number);
@@ -11246,7 +11246,7 @@ export interface operations {
                             parentCompTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
-                        };
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -11283,15 +11283,18 @@ export interface operations {
                         disconnect?: boolean;
                     };
                     tblCompType?: {
-                        connect: {
-                            id: number;
-                        };
-                    };
-                    otherTblCompType?: {
                         connect?: {
-                            id: number;
+                            compTypeId: number;
                         };
                         disconnect?: boolean;
+                    };
+                    otherTblCompTypes?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
                     };
                 };
                 "application/x-www-form-urlencoded": {
@@ -11314,15 +11317,18 @@ export interface operations {
                         disconnect?: boolean;
                     };
                     tblCompType?: {
-                        connect: {
-                            id: number;
-                        };
-                    };
-                    otherTblCompType?: {
                         connect?: {
-                            id: number;
+                            compTypeId: number;
                         };
                         disconnect?: boolean;
+                    };
+                    otherTblCompTypes?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
                     };
                 };
                 "multipart/form-data": {
@@ -11345,15 +11351,18 @@ export interface operations {
                         disconnect?: boolean;
                     };
                     tblCompType?: {
-                        connect: {
-                            id: number;
-                        };
-                    };
-                    otherTblCompType?: {
                         connect?: {
-                            id: number;
+                            compTypeId: number;
                         };
                         disconnect?: boolean;
+                    };
+                    otherTblCompTypes?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
                     };
                 };
             };
@@ -11404,7 +11413,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                         };
-                        tblCompType?: {
+                        tblCompType?: null | {
                             compTypeId: number;
                             componentClassId: null | (number);
                             parentCompTypeId: null | (number);
@@ -11428,7 +11437,7 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         };
-                        otherTblCompType?: null | {
+                        otherTblCompTypes?: {
                             compTypeId: number;
                             componentClassId: null | (number);
                             parentCompTypeId: null | (number);
@@ -11451,7 +11460,7 @@ export interface operations {
                             parentCompTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
-                        };
+                        }[];
                     };
                 };
             };
@@ -11515,7 +11524,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                         };
-                        tblCompType?: {
+                        tblCompType?: null | {
                             compTypeId: number;
                             componentClassId: null | (number);
                             parentCompTypeId: null | (number);
@@ -11539,7 +11548,7 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         };
-                        otherTblCompType?: null | {
+                        otherTblCompTypes?: {
                             compTypeId: number;
                             componentClassId: null | (number);
                             parentCompTypeId: null | (number);
@@ -11562,7 +11571,7 @@ export interface operations {
                             parentCompTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
-                        };
+                        }[];
                     };
                 };
             };
@@ -12138,6 +12147,18 @@ export interface operations {
                             mandatoryStockUsage: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                            tblDiscipline?: null | {
+                                discId: number;
+                                code: null | string;
+                                name: null | string;
+                                externalDisc: null | (number);
+                                parentDiscId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
                             tblJobDescription?: null | {
                                 jobDescId: number;
                                 layoutId: null | (number);
@@ -12187,6 +12208,10 @@ export interface operations {
                                 lastupdate: null | (Record<string, never> | number);
                                 orderId: null | (number);
                                 userId: null | (number);
+                            };
+                            tblPeriod?: null | {
+                                periodId: number;
+                                name: string;
                             };
                             tblCompTypeJobCounters?: {
                                 compTypeJobCounterId: number;
@@ -12242,6 +12267,11 @@ export interface operations {
                     lastupdate?: null | (Record<string, never> | number);
                     mandatoryResource?: null | (number);
                     mandatoryStockUsage?: null | (number);
+                    tblDiscipline?: {
+                        connect: {
+                            discId: number;
+                        };
+                    };
                     tblJobDescription?: {
                         connect: {
                             jobDescId: number;
@@ -12260,6 +12290,11 @@ export interface operations {
                     tblMaintType?: {
                         connect: {
                             maintTypeId: number;
+                        };
+                    };
+                    tblPeriod?: {
+                        connect: {
+                            id: number;
                         };
                     };
                     tblCompTypeJobCounters?: {
@@ -12289,6 +12324,11 @@ export interface operations {
                     lastupdate?: null | (Record<string, never> | number);
                     mandatoryResource?: null | (number);
                     mandatoryStockUsage?: null | (number);
+                    tblDiscipline?: {
+                        connect: {
+                            discId: number;
+                        };
+                    };
                     tblJobDescription?: {
                         connect: {
                             jobDescId: number;
@@ -12307,6 +12347,11 @@ export interface operations {
                     tblMaintType?: {
                         connect: {
                             maintTypeId: number;
+                        };
+                    };
+                    tblPeriod?: {
+                        connect: {
+                            id: number;
                         };
                     };
                     tblCompTypeJobCounters?: {
@@ -12336,6 +12381,11 @@ export interface operations {
                     lastupdate?: null | (Record<string, never> | number);
                     mandatoryResource?: null | (number);
                     mandatoryStockUsage?: null | (number);
+                    tblDiscipline?: {
+                        connect: {
+                            discId: number;
+                        };
+                    };
                     tblJobDescription?: {
                         connect: {
                             jobDescId: number;
@@ -12354,6 +12404,11 @@ export interface operations {
                     tblMaintType?: {
                         connect: {
                             maintTypeId: number;
+                        };
+                    };
+                    tblPeriod?: {
+                        connect: {
+                            id: number;
                         };
                     };
                     tblCompTypeJobCounters?: {
@@ -12404,6 +12459,18 @@ export interface operations {
                         mandatoryStockUsage: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblDiscipline?: null | {
+                            discId: number;
+                            code: null | string;
+                            name: null | string;
+                            externalDisc: null | (number);
+                            parentDiscId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                         tblJobDescription?: null | {
                             jobDescId: number;
                             layoutId: null | (number);
@@ -12453,6 +12520,10 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
+                        };
+                        tblPeriod?: null | {
+                            periodId: number;
+                            name: string;
                         };
                         tblCompTypeJobCounters?: {
                             compTypeJobCounterId: number;
@@ -12555,6 +12626,18 @@ export interface operations {
                         mandatoryStockUsage: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblDiscipline?: null | {
+                            discId: number;
+                            code: null | string;
+                            name: null | string;
+                            externalDisc: null | (number);
+                            parentDiscId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                         tblJobDescription?: null | {
                             jobDescId: number;
                             layoutId: null | (number);
@@ -12604,6 +12687,10 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
+                        };
+                        tblPeriod?: null | {
+                            periodId: number;
+                            name: string;
                         };
                         tblCompTypeJobCounters?: {
                             compTypeJobCounterId: number;
@@ -12656,6 +12743,12 @@ export interface operations {
                     lastupdate?: null | (Record<string, never> | number);
                     mandatoryResource?: null | (number);
                     mandatoryStockUsage?: null | (number);
+                    tblDiscipline?: {
+                        connect?: {
+                            discId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblJobDescription?: {
                         connect?: {
                             jobDescId: number;
@@ -12677,6 +12770,12 @@ export interface operations {
                     tblMaintType?: {
                         connect?: {
                             maintTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblPeriod?: {
+                        connect?: {
+                            id: number;
                         };
                         disconnect?: boolean;
                     };
@@ -12710,6 +12809,12 @@ export interface operations {
                     lastupdate?: null | (Record<string, never> | number);
                     mandatoryResource?: null | (number);
                     mandatoryStockUsage?: null | (number);
+                    tblDiscipline?: {
+                        connect?: {
+                            discId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblJobDescription?: {
                         connect?: {
                             jobDescId: number;
@@ -12731,6 +12836,12 @@ export interface operations {
                     tblMaintType?: {
                         connect?: {
                             maintTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblPeriod?: {
+                        connect?: {
+                            id: number;
                         };
                         disconnect?: boolean;
                     };
@@ -12764,6 +12875,12 @@ export interface operations {
                     lastupdate?: null | (Record<string, never> | number);
                     mandatoryResource?: null | (number);
                     mandatoryStockUsage?: null | (number);
+                    tblDiscipline?: {
+                        connect?: {
+                            discId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblJobDescription?: {
                         connect?: {
                             jobDescId: number;
@@ -12785,6 +12902,12 @@ export interface operations {
                     tblMaintType?: {
                         connect?: {
                             maintTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblPeriod?: {
+                        connect?: {
+                            id: number;
                         };
                         disconnect?: boolean;
                     };
@@ -12839,6 +12962,18 @@ export interface operations {
                         mandatoryStockUsage: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblDiscipline?: null | {
+                            discId: number;
+                            code: null | string;
+                            name: null | string;
+                            externalDisc: null | (number);
+                            parentDiscId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                         tblJobDescription?: null | {
                             jobDescId: number;
                             layoutId: null | (number);
@@ -12888,6 +13023,10 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
+                        };
+                        tblPeriod?: null | {
+                            periodId: number;
+                            name: string;
                         };
                         tblCompTypeJobCounters?: {
                             compTypeJobCounterId: number;
@@ -12960,6 +13099,18 @@ export interface operations {
                         mandatoryStockUsage: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblDiscipline?: null | {
+                            discId: number;
+                            code: null | string;
+                            name: null | string;
+                            externalDisc: null | (number);
+                            parentDiscId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                         tblJobDescription?: null | {
                             jobDescId: number;
                             layoutId: null | (number);
@@ -13009,6 +13160,10 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
+                        };
+                        tblPeriod?: null | {
+                            periodId: number;
+                            name: string;
                         };
                         tblCompTypeJobCounters?: {
                             compTypeJobCounterId: number;
@@ -16784,6 +16939,40 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
+                            tblCompTypeJobs?: {
+                                compTypeJobId: number;
+                                compTypeId: null | (number);
+                                historyLayout: null | (number);
+                                discId: null | (number);
+                                jobDescId: null | (number);
+                                jobConditionId: null | (number);
+                                frequency: null | (number);
+                                frequencyPeriod: null | (number);
+                                planningMethod: null | (number);
+                                statusNone: null | (number);
+                                statusInUse: null | (number);
+                                statusAvailable: null | (number);
+                                statusRepair: null | (number);
+                                estTotalDuration: null | (number);
+                                estCurrencyCode: null | string;
+                                estPrice: null | (number);
+                                outputFormat: null | (number);
+                                maintClassId: null | (number);
+                                maintCauseId: null | (number);
+                                maintTypeId: null | (number);
+                                rescheduleLimitId: null | (number);
+                                priority: null | (number);
+                                window: null | (number);
+                                active: null | (number);
+                                mandatoryHistory: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                mandatoryResource: null | (number);
+                                mandatoryStockUsage: null | (number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
                             tblEmployees?: {
                                 employeeId: number;
                                 layoutId: null | (number);
@@ -16878,6 +17067,11 @@ export interface operations {
                             compJobId: number;
                         }[];
                     };
+                    tblCompTypeJobs?: {
+                        connect: {
+                            compTypeJobId: number;
+                        }[];
+                    };
                     tblEmployees?: {
                         connect: {
                             employeeId: number;
@@ -16895,6 +17089,11 @@ export interface operations {
                             compJobId: number;
                         }[];
                     };
+                    tblCompTypeJobs?: {
+                        connect: {
+                            compTypeJobId: number;
+                        }[];
+                    };
                     tblEmployees?: {
                         connect: {
                             employeeId: number;
@@ -16910,6 +17109,11 @@ export interface operations {
                     tblCompJobs?: {
                         connect: {
                             compJobId: number;
+                        }[];
+                    };
+                    tblCompTypeJobs?: {
+                        connect: {
+                            compTypeJobId: number;
                         }[];
                     };
                     tblEmployees?: {
@@ -16974,6 +17178,40 @@ export interface operations {
                             layoutId: null | (number);
                             notes: null | string;
                             userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            mandatoryResource: null | (number);
+                            mandatoryStockUsage: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCompTypeJobs?: {
+                            compTypeJobId: number;
+                            compTypeId: null | (number);
+                            historyLayout: null | (number);
+                            discId: null | (number);
+                            jobDescId: null | (number);
+                            jobConditionId: null | (number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            planningMethod: null | (number);
+                            statusNone: null | (number);
+                            statusInUse: null | (number);
+                            statusAvailable: null | (number);
+                            statusRepair: null | (number);
+                            estTotalDuration: null | (number);
+                            estCurrencyCode: null | string;
+                            estPrice: null | (number);
+                            outputFormat: null | (number);
+                            maintClassId: null | (number);
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            rescheduleLimitId: null | (number);
+                            priority: null | (number);
+                            window: null | (number);
+                            active: null | (number);
+                            mandatoryHistory: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -17155,6 +17393,40 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblCompTypeJobs?: {
+                            compTypeJobId: number;
+                            compTypeId: null | (number);
+                            historyLayout: null | (number);
+                            discId: null | (number);
+                            jobDescId: null | (number);
+                            jobConditionId: null | (number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            planningMethod: null | (number);
+                            statusNone: null | (number);
+                            statusInUse: null | (number);
+                            statusAvailable: null | (number);
+                            statusRepair: null | (number);
+                            estTotalDuration: null | (number);
+                            estCurrencyCode: null | string;
+                            estPrice: null | (number);
+                            outputFormat: null | (number);
+                            maintClassId: null | (number);
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            rescheduleLimitId: null | (number);
+                            priority: null | (number);
+                            window: null | (number);
+                            active: null | (number);
+                            mandatoryHistory: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            mandatoryResource: null | (number);
+                            mandatoryStockUsage: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblEmployees?: {
                             employeeId: number;
                             layoutId: null | (number);
@@ -17249,6 +17521,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompTypeJobs?: {
+                        connect?: {
+                            compTypeJobId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblEmployees?: {
                         connect?: {
                             employeeId: number;
@@ -17272,6 +17552,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompTypeJobs?: {
+                        connect?: {
+                            compTypeJobId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblEmployees?: {
                         connect?: {
                             employeeId: number;
@@ -17290,6 +17578,14 @@ export interface operations {
                     tblCompJobs?: {
                         connect?: {
                             compJobId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeJobs?: {
+                        connect?: {
+                            compTypeJobId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -17360,6 +17656,40 @@ export interface operations {
                             layoutId: null | (number);
                             notes: null | string;
                             userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            mandatoryResource: null | (number);
+                            mandatoryStockUsage: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCompTypeJobs?: {
+                            compTypeJobId: number;
+                            compTypeId: null | (number);
+                            historyLayout: null | (number);
+                            discId: null | (number);
+                            jobDescId: null | (number);
+                            jobConditionId: null | (number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            planningMethod: null | (number);
+                            statusNone: null | (number);
+                            statusInUse: null | (number);
+                            statusAvailable: null | (number);
+                            statusRepair: null | (number);
+                            estTotalDuration: null | (number);
+                            estCurrencyCode: null | string;
+                            estPrice: null | (number);
+                            outputFormat: null | (number);
+                            maintClassId: null | (number);
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            rescheduleLimitId: null | (number);
+                            priority: null | (number);
+                            window: null | (number);
+                            active: null | (number);
+                            mandatoryHistory: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -17503,6 +17833,40 @@ export interface operations {
                             layoutId: null | (number);
                             notes: null | string;
                             userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            mandatoryResource: null | (number);
+                            mandatoryStockUsage: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCompTypeJobs?: {
+                            compTypeJobId: number;
+                            compTypeId: null | (number);
+                            historyLayout: null | (number);
+                            discId: null | (number);
+                            jobDescId: null | (number);
+                            jobConditionId: null | (number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            planningMethod: null | (number);
+                            statusNone: null | (number);
+                            statusInUse: null | (number);
+                            statusAvailable: null | (number);
+                            statusRepair: null | (number);
+                            estTotalDuration: null | (number);
+                            estCurrencyCode: null | string;
+                            estPrice: null | (number);
+                            outputFormat: null | (number);
+                            maintClassId: null | (number);
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            rescheduleLimitId: null | (number);
+                            priority: null | (number);
+                            window: null | (number);
+                            active: null | (number);
+                            mandatoryHistory: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
