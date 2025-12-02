@@ -70,15 +70,16 @@ export default function TabCompUnitCounter(props: TabComponentUnitProps) {
   const { rows, loading, fetchData } = useDataGrid(
     getAll,
     tblCompCounter.deleteById,
-    "compCounterId"
+    "compCounterId",
+    !!counterTypeId
   );
 
   return (
     <CustomizedDataGrid
-      rows={counterTypeId ? rows : []}
+      rows={rows}
       columns={columns}
       loading={loading}
-      label={label || undefined}
+      label={label || "Component"}
       showToolbar
       onRefreshClick={fetchData}
       getRowId={(row) => row.compCounterId}

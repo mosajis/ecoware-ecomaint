@@ -10,6 +10,7 @@ import PageLocation from "@/pages/general/location/Location";
 import PageEmployee from "@/pages/general/employee/Employee";
 import PageDiscipline from "@/pages/general/discipline/Discipline";
 import PageCounterType from "@/pages/general/counterType/CounterType";
+import PageMaintClass from "@/pages/general/maintClass/MaintClass";
 
 // --- Root ---
 export const rootRoute = createRootRoute({
@@ -89,7 +90,7 @@ export const generalCounterTypeRoute = createRoute({
 export const generalMaintClassRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/general/maint-class",
-  component: () => "Maint Class Page",
+  component: PageMaintClass,
 });
 export const generalFollowStatusRoute = createRoute({
   getParentRoute: () => protectedRoute,

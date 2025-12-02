@@ -1,7 +1,9 @@
-import { useState, useCallback } from "react";
-import { Box } from "@mui/material";
+import MaintClassFormDialog from "./MaintClassFormDialog.js";
+import MaintTypeFormDialog from "./MaintTypeFormDialog.js";
+import MaintCauseFormDialog from "./MaintCauseFormDialog.js";
 import Splitter from "@/shared/components/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import { useState, useCallback } from "react";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { GridColDef } from "@mui/x-data-grid";
 import {
@@ -13,26 +15,16 @@ import {
   TypeTblMaintClass,
 } from "@/core/api/generated/api";
 import { useDataGrid } from "../_hooks/useDataGrid.js";
-import MaintClassFormDialog from "./MaintClassFormDialog.js";
-import MaintTypeFormDialog from "./MaintTypeFormDialog.js";
-import MaintCauseFormDialog from "./MaintCauseFormDialog.js";
 
-export default function MaintPage() {
+export default function PageMaintClass() {
   // ---------------- Maint Type ----------------
-
-  const getAllType = useCallback(() => tblMaintType.getAll(), []);
-
   const {
     rows: typeRows,
     loading: loadingType,
     handleDelete: handleDeleteType,
     handleFormSuccess: handleTypeSuccess,
     handleRefresh: refreshType,
-  } = useDataGrid(
-    getAllType,
-    (id: number) => tblMaintType.deleteById(id),
-    "maintTypeId"
-  );
+  } = useDataGrid(tblMaintType.getAll, tblMaintType.deleteById, "maintTypeId");
 
   const typeColumns: GridColDef<TypeTblMaintType>[] = [
     { field: "descr", headerName: "Description", flex: 1 },
@@ -60,7 +52,7 @@ export default function MaintPage() {
     handleRefresh: refreshClass,
   } = useDataGrid(
     tblMaintClass.getAll,
-    (id: number) => tblMaintClass.deleteById(id),
+    tblMaintClass.deleteById,
     "maintClassId"
   );
 
@@ -95,7 +87,7 @@ export default function MaintPage() {
     handleRefresh: refreshCause,
   } = useDataGrid(
     tblMaintCause.getAll,
-    (id: number) => tblMaintCause.deleteById(id),
+    tblMaintCause.deleteById,
     "maintCauseId"
   );
 
@@ -121,7 +113,7 @@ export default function MaintPage() {
   );
 
   return (
-    <Box height="100%" display="flex" flexDirection="column">
+    <>
       <Splitter initialPrimarySize="34%">
         <CustomizedDataGrid
           label="Maint Type"
@@ -131,7 +123,6 @@ export default function MaintPage() {
           loading={loadingType}
           onAddClick={() => openTypeForm("create")}
           onRefreshClick={refreshType}
-          disableRowNumber
           getRowId={(row) => row.maintTypeId}
         />
 
@@ -144,7 +135,6 @@ export default function MaintPage() {
             loading={loadingClass}
             onAddClick={() => openClassForm("create")}
             onRefreshClick={refreshClass}
-            disableRowNumber
             getRowId={(row) => row.maintClassId}
           />
 
@@ -156,7 +146,6 @@ export default function MaintPage() {
             loading={loadingCause}
             onAddClick={() => openCauseForm("create")}
             onRefreshClick={refreshCause}
-            disableRowNumber
             getRowId={(row) => row.maintCauseId}
           />
         </Splitter>
@@ -185,6 +174,6 @@ export default function MaintPage() {
         onClose={() => setOpenCause(false)}
         onSuccess={handleCauseSuccess}
       />
-    </Box>
+    </>
   );
 }
