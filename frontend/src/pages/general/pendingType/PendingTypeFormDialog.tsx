@@ -9,7 +9,6 @@ import { tblPendingType, TypeTblPendingType } from "@/core/api/generated/api";
 const schema = z.object({
   pendTypeName: z.string().min(1, "Name is required").nullable(),
   groupId: z.number().nullable(),
-  sortId: z.number().nullable(),
   description: z.string().nullable(),
 });
 
@@ -61,7 +60,6 @@ function PendingTypeFormDialog({
         reset({
           pendTypeName: res?.pendTypeName ?? "",
           groupId: res?.groupId ?? null,
-          sortId: res?.sortId ?? null,
           description: res?.description ?? "",
         });
       } catch (err) {
@@ -89,7 +87,6 @@ function PendingTypeFormDialog({
           pendTypeName: values.pendTypeName ?? "",
           description: values.description ?? "",
           groupId: values.groupId ?? 0,
-          sortId: values.sortId ?? 0,
         };
 
         let result: TypeTblPendingType;
@@ -145,26 +142,6 @@ function PendingTypeFormDialog({
             <TextField
               {...field}
               label="Group Id"
-              type="number"
-              size="small"
-              disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
-              value={field.value ?? ""}
-              onChange={(e) =>
-                field.onChange(
-                  e.target.value === "" ? null : Number(e.target.value)
-                )
-              }
-            />
-          )}
-        />
-        <Controller
-          name="sortId"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Sort ID"
               type="number"
               size="small"
               disabled={isDisabled}

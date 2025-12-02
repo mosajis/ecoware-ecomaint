@@ -31,7 +31,6 @@ export default function PendingTypePage() {
       { field: "pendTypeName", headerName: "Name", flex: 2 },
       { field: "parentId", headerName: "Parent Id", flex: 1 },
       { field: "groupId", headerName: "Group Id", flex: 1 },
-      { field: "sortId", headerName: "Sort Id", flex: 1 },
       dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
     ],
     [handleEdit, handleDelete]

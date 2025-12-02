@@ -7,7 +7,7 @@ import { GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { useDataGrid } from "../_hooks/useDataGrid";
 
-export default function FollowStatusListPage() {
+export default function PageFollowStatus() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
@@ -38,7 +38,6 @@ export default function FollowStatusListPage() {
     () => [
       { field: "fsName", headerName: "Name", flex: 2 },
       { field: "fsDesc", headerName: "Description", flex: 3 },
-      { field: "sortId", headerName: "Order No", width: 120 },
       dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
     ],
     [handleEdit, handleDelete]

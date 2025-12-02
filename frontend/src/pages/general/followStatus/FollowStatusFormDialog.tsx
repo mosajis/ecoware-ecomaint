@@ -10,7 +10,6 @@ import { tblFollowStatus, TypeTblFollowStatus } from "@/core/api/generated/api";
 const schema = z.object({
   fsName: z.string().min(1, "Name is required").nullable(),
   fsDesc: z.string().nullable(),
-  sortId: z.number().nullable(),
 });
 
 export type FollowStatusFormValues = z.infer<typeof schema>;
@@ -20,7 +19,7 @@ type Props = {
   mode: "create" | "update";
   recordId?: number | null;
   onClose: () => void;
-  onSuccess: () => void;
+  onSuccess: (data: TypeTblFollowStatus) => void;
 };
 
 function FollowStatusFormDialog({
@@ -33,12 +32,10 @@ function FollowStatusFormDialog({
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  // === Default Values
   const defaultValues: FollowStatusFormValues = useMemo(
     () => ({
       fsName: "",
       fsDesc: "",
-      sortId: null,
     }),
     []
   );
@@ -55,17 +52,14 @@ function FollowStatusFormDialog({
 
   // === Fetch data for update mode
   const fetchData = useCallback(async () => {
-    if (mode === "update" && recordId != null) {
+    if (mode === "update" && recordId) {
       setLoadingInitial(true);
       try {
         const res = await tblFollowStatus.getById(recordId);
-        if (res) {
-          reset({
-            fsName: res.fsName ?? "",
-            fsDesc: res.fsDesc ?? "",
-            sortId: res.sortId ?? null,
-          });
-        }
+        reset({
+          fsName: res?.fsName ?? "",
+          fsDesc: res?.fsDesc ?? "",
+        });
       } catch (err) {
         console.error("Failed to fetch FollowStatus", err);
         reset(defaultValues);
@@ -91,12 +85,12 @@ function FollowStatusFormDialog({
         let result: TypeTblFollowStatus;
         if (mode === "create") {
           result = await tblFollowStatus.create(values);
-        } else if (mode === "update" && recordId != null) {
+        } else if (mode === "update" && recordId) {
           result = await tblFollowStatus.update(recordId, values);
         } else {
           return;
         }
-        onSuccess();
+        onSuccess(result);
         onClose();
       } catch (err) {
         console.error("Submit failed", err);
@@ -144,26 +138,6 @@ function FollowStatusFormDialog({
               helperText={errors.fsDesc?.message}
               disabled={isDisabled}
               sx={{ gridColumn: "span 4" }}
-            />
-          )}
-        />
-        <Controller
-          name="sortId"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Sort ID"
-              type="number"
-              size="small"
-              disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
-              value={field.value ?? ""}
-              onChange={(e) =>
-                field.onChange(
-                  e.target.value === "" ? null : Number(e.target.value)
-                )
-              }
             />
           )}
         />

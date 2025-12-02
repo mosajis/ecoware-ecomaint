@@ -11,6 +11,7 @@ import PageEmployee from "@/pages/general/employee/Employee";
 import PageDiscipline from "@/pages/general/discipline/Discipline";
 import PageCounterType from "@/pages/general/counterType/CounterType";
 import PageMaintClass from "@/pages/general/maintClass/MaintClass";
+import PageFollowStatus from "@/pages/general/followStatus/FollowStatus";
 
 // --- Root ---
 export const rootRoute = createRootRoute({
@@ -95,7 +96,7 @@ export const generalMaintClassRoute = createRoute({
 export const generalFollowStatusRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/general/follow-status",
-  component: () => "Follow Status Page",
+  component: PageFollowStatus,
 });
 export const generalPendingTypeRoute = createRoute({
   getParentRoute: () => protectedRoute,

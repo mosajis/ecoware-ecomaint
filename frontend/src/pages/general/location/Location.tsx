@@ -56,7 +56,6 @@ export default function PageLocation() {
   const columns: GridColDef<TypeTblLocation>[] = [
     { field: "locationCode", headerName: "Code", width: 60 },
     { field: "name", headerName: "Name", flex: 1 },
-    { field: "orderId", headerName: "SortID", width: 80 },
     dataGridActionColumn({
       onEdit: handleEdit,
       onDelete: handleDelete,
