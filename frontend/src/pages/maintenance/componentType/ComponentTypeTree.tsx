@@ -7,8 +7,10 @@ import { useDataGrid } from "@/pages/general/_hooks/useDataGrid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { tblCompType, TypeTblCompType } from "@/core/api/generated/api";
 import { type GridColDef } from "@mui/x-data-grid";
+import CustomizedTree from "@/shared/components/tree/CustomeTree";
+import { useDataTree } from "@/pages/general/_hooks/useDataTree";
 
-export default function PageComponentTypeList() {
+export default function PageComponentTypeTree() {
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
   const [selectedCompTypeId, setSelectedCompTypeId] = useState<number | null>(
     null
@@ -24,9 +26,6 @@ export default function PageComponentTypeList() {
     });
   }, []);
 
-  const { rows, loading, fetchData, handleDelete, handleFormSuccess } =
-    useDataGrid(getAll, tblCompType.deleteById, "compTypeId");
-
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
     setMode("create");
@@ -38,6 +37,32 @@ export default function PageComponentTypeList() {
     setMode("update");
     setOpenForm(true);
   }, []);
+
+  // === Mapping Transformer ===
+  const mapper = useCallback(
+    (row: TypeTblCompType) => ({
+      id: row.compTypeId.toString(),
+      label: row.compName ?? "",
+      parentId: row.parentCompTypeId?.toString() ?? null,
+      data: row,
+    }),
+    []
+  );
+
+  // === useDataTree ===
+  const {
+    rows,
+    treeItems,
+    loading,
+    handleDelete,
+    handleFormSuccess,
+    handleRefresh,
+  } = useDataTree(
+    tblCompType.getAll,
+    tblCompType.deleteById,
+    "compTypeId",
+    mapper
+  );
 
   const columns = useMemo<GridColDef<TypeTblCompType>[]>(
     () => [
@@ -57,21 +82,17 @@ export default function PageComponentTypeList() {
 
   return (
     <>
-      <Splitter horizontal>
-        <CustomizedDataGrid
-          label="Component Type"
-          showToolbar
-          onAddClick={handleCreate}
-          onRefreshClick={fetchData}
-          rows={rows}
-          columns={columns}
+      <Splitter>
+        <CustomizedTree
+          onRefresh={handleRefresh}
+          label="Tree View"
+          items={treeItems}
           loading={loading}
           getRowId={(row) => row.compTypeId}
-          disableDensity
-          disableRowNumber
-          onRowClick={(params) => setSelectedCompTypeId(params.row.compTypeId)}
+          onAddClick={handleCreate}
+          onEditClick={handleEdit}
+          onDeleteClick={handleDelete}
         />
-
         <TabsComponent selectedCompTypeId={selectedCompTypeId} />
       </Splitter>
 

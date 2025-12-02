@@ -235,7 +235,7 @@ function ComponentTypeFormDialog({
               label="Maker (Address)"
               selectionMode="single"
               value={field.value}
-              request={() => tblAddress.getAll().then((res) => res.items)}
+              request={tblAddress.getAll}
               columns={[{ field: "name", headerName: "Address", flex: 1 }]}
               getRowId={(row) => row.addressId}
               onChange={field.onChange}
@@ -256,7 +256,7 @@ function ComponentTypeFormDialog({
               label="Parent Component Type"
               selectionMode="single"
               value={field.value}
-              request={() => tblCompType.getAll().then((res) => res.items)}
+              request={tblCompType.getAll}
               columns={[{ field: "compName", headerName: "Name", flex: 1 }]}
               getRowId={(row) => row.compTypeId}
               onChange={field.onChange}

@@ -35,6 +35,7 @@ export default function PageJobDescription() {
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
     setMode("create");
+    setHtml("");
     setOpenForm(true);
   }, []);
 
@@ -47,8 +48,7 @@ export default function PageJobDescription() {
   // === Columns ===
   const columns: GridColDef<TypeTblJobDescription>[] = useMemo(
     () => [
-      { field: "jobDescCode", headerName: "JobDescCode", width: 120 },
-      { field: "jobDesc", headerName: "JobDesc", flex: 1 },
+      { field: "jobDescCode", headerName: "JobDescCode", width: 60 },
       {
         field: "jobClass",
         headerName: "JobClass",
@@ -60,6 +60,22 @@ export default function PageJobDescription() {
     ],
     [handleEdit, handleDelete]
   );
+
+  // === SAVE DESCRIPTION ===
+  const handleSaveDescription = async (newValue: string) => {
+    if (!selectedRowId) return;
+
+    await tblJobDescription.update(selectedRowId, {
+      jobDesc: newValue,
+    });
+
+    handleRefresh();
+  };
+
+  const handleRowClick = (params: any) => {
+    setSelectedRowId(params.row.jobDescId);
+    setHtml(params.row.jobDesc || "");
+  };
 
   return (
     <>
@@ -83,16 +99,19 @@ export default function PageJobDescription() {
             loading={loading}
             onAddClick={handleCreate}
             rows={rows}
+            onRefreshClick={handleRefresh}
             columns={columns}
             showToolbar
-            onRowClick={(params) => setHtml(params.row.jobDesc)}
+            onRowClick={handleRowClick}
           />
 
           <AppEditor
+            key={selectedRowId}
             initValue={html}
-            onSave={(newValue) => console.log(newValue)}
+            onSave={handleSaveDescription}
           />
         </Splitter>
+
         <JobDescriptionTabs />
       </Splitter>
 

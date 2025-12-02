@@ -15,6 +15,8 @@ import PageFollowStatus from "@/pages/general/followStatus/FollowStatus";
 import PagePendingType from "@/pages/general/pendingType/PendingType";
 import PageJobClass from "@/pages/general/jobClass/JobClass";
 import PageJobDescription from "@/pages/general/jobDescription/JobDescription";
+import PageComponentTypeList from "@/pages/maintenance/componentType/ComponentType";
+import PageComponentTypeTree from "@/pages/maintenance/componentType/ComponentTypeTree";
 
 // --- Root ---
 export const rootRoute = createRootRoute({
@@ -131,17 +133,16 @@ export const maintComponentUnitRoute = createRoute({
 export const maintComponentTypeRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/maintenance/component-type",
-  component: () => "Component Type Page",
 });
 export const maintComponentTypeTreeRoute = createRoute({
   getParentRoute: () => maintComponentTypeRoute,
   path: "tree-view",
-  component: () => "Component Type - Tree View Page",
+  component: PageComponentTypeTree,
 });
 export const maintComponentTypeListRoute = createRoute({
   getParentRoute: () => maintComponentTypeRoute,
   path: "list-view",
-  component: () => "Component Type - List View Page",
+  component: PageComponentTypeList,
 });
 export const maintComponentJobRoute = createRoute({
   getParentRoute: () => protectedRoute,
