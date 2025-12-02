@@ -12,7 +12,7 @@ import {
   TypeTblJobDescription,
 } from "@/core/api/generated/api";
 
-export default function JobDescription() {
+export default function PageJobDescription() {
   const [html, setHtml] = useState("");
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
   const [openForm, setOpenForm] = useState(false);
@@ -21,12 +21,11 @@ export default function JobDescription() {
   // === DataGrid ===
   const getAll = useCallback(() => {
     return tblJobDescription.getAll({
-      paginate: true,
       include: { tblJobClass: true },
     });
   }, []);
 
-  const { rows, loading, fetchData, handleDelete } = useDataGrid(
+  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
     getAll,
     tblJobDescription.deleteById,
     "jobDescId"
@@ -71,7 +70,6 @@ export default function JobDescription() {
         minPrimarySize="20%"
         minSecondarySize="20%"
       >
-        <JobDescriptionTabs />
         <Splitter
           horizontal={false}
           initialPrimarySize="65%"
@@ -91,6 +89,7 @@ export default function JobDescription() {
 
           <AppEditor value={html} onChange={(e) => setHtml(e.target.value)} />
         </Splitter>
+        <JobDescriptionTabs />
       </Splitter>
 
       <JobDescriptionFormDialog
@@ -99,7 +98,7 @@ export default function JobDescription() {
         recordId={selectedRowId}
         onClose={() => setOpenForm(false)}
         onSuccess={() => {
-          fetchData();
+          handleRefresh();
           setOpenForm(false);
         }}
       />

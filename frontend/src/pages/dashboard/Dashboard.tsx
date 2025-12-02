@@ -44,7 +44,7 @@ const pmSchedule = [
 
 // ✅ Columns
 const criticalCols = [
-  { field: "code", headerName: "Code", flex: 1 },
+  { field: "code", headerName: "Code", width: 60 },
   { field: "name", headerName: "Name", flex: 2 },
   { field: "failures", headerName: "Failures", flex: 1 },
   { field: "downtime", headerName: "Downtime (hrs)", flex: 1 },

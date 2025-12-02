@@ -13,6 +13,8 @@ import PageCounterType from "@/pages/general/counterType/CounterType";
 import PageMaintClass from "@/pages/general/maintClass/MaintClass";
 import PageFollowStatus from "@/pages/general/followStatus/FollowStatus";
 import PagePendingType from "@/pages/general/pendingType/PendingType";
+import PageJobClass from "@/pages/general/jobClass/JobClass";
+import PageJobDescription from "@/pages/general/jobDescription/JobDescription";
 
 // --- Root ---
 export const rootRoute = createRootRoute({
@@ -107,12 +109,12 @@ export const generalPendingTypeRoute = createRoute({
 export const generalJobClassRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/general/job-class",
-  component: () => "Job Class Page",
+  component: PageJobClass,
 });
 export const generalJobDescriptionRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/general/job-description",
-  component: () => "Job Description Page",
+  component: PageJobDescription,
 });
 
 // --- Maintenance ---
