@@ -2,7 +2,7 @@ import { memo, useEffect, useState, useCallback, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Box, TextField } from "@mui/material";
+import { Box, MenuItem, TextField } from "@mui/material";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import { tblCounterType, TypeTblCounterType } from "@/core/api/generated/api";
 
@@ -10,10 +10,7 @@ import { tblCounterType, TypeTblCounterType } from "@/core/api/generated/api";
 const schema = z.object({
   code: z.string().nullable(),
   name: z.string().min(1, "Name is required").nullable(),
-  maxDailyValue: z.number().nullable(),
   type: z.number().nullable(),
-  deptId: z.number().nullable(),
-  exportMarker: z.number().nullable(),
 });
 
 export type CounterTypeFormValues = z.infer<typeof schema>;
@@ -68,10 +65,7 @@ function CounterTypeFormDialog({
           reset({
             code: res.code ?? "",
             name: res.name ?? "",
-            maxDailyValue: res.maxDailyValue ?? null,
             type: res.type ?? null,
-            deptId: res.deptId ?? null,
-            exportMarker: res.exportMarker ?? null,
           });
         }
       } catch (err) {
@@ -123,7 +117,7 @@ function CounterTypeFormDialog({
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1.5}>
+      <Box display="flex" flexDirection={"column"} gap={1.5}>
         <Controller
           name="code"
           control={control}
@@ -135,7 +129,7 @@ function CounterTypeFormDialog({
               error={!!errors.code}
               helperText={errors.code?.message}
               disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
+              sx={{ width: "70%" }}
             />
           )}
         />
@@ -150,27 +144,6 @@ function CounterTypeFormDialog({
               error={!!errors.name}
               helperText={errors.name?.message}
               disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
-            />
-          )}
-        />
-        <Controller
-          name="maxDailyValue"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Max Daily Value"
-              type="number"
-              size="small"
-              disabled={isDisabled}
-              sx={{ gridColumn: "span 1" }}
-              value={field.value ?? ""}
-              onChange={(e) =>
-                field.onChange(
-                  e.target.value === "" ? null : Number(e.target.value)
-                )
-              }
             />
           )}
         />
@@ -180,58 +153,21 @@ function CounterTypeFormDialog({
           render={({ field }) => (
             <TextField
               {...field}
+              select
               label="Type"
-              type="number"
               size="small"
               disabled={isDisabled}
-              sx={{ gridColumn: "span 1" }}
+              sx={{ width: "50%" }}
               value={field.value ?? ""}
               onChange={(e) =>
                 field.onChange(
                   e.target.value === "" ? null : Number(e.target.value)
                 )
               }
-            />
-          )}
-        />
-        <Controller
-          name="deptId"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Dept ID"
-              type="number"
-              size="small"
-              disabled={isDisabled}
-              sx={{ gridColumn: "span 1" }}
-              value={field.value ?? ""}
-              onChange={(e) =>
-                field.onChange(
-                  e.target.value === "" ? null : Number(e.target.value)
-                )
-              }
-            />
-          )}
-        />
-        <Controller
-          name="exportMarker"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Export Marker"
-              type="number"
-              size="small"
-              disabled={isDisabled}
-              sx={{ gridColumn: "span 1" }}
-              value={field.value ?? ""}
-              onChange={(e) =>
-                field.onChange(
-                  e.target.value === "" ? null : Number(e.target.value)
-                )
-              }
-            />
+            >
+              <MenuItem value={3}>Measure</MenuItem>
+              <MenuItem value={0}>Counter</MenuItem>
+            </TextField>
           )}
         />
       </Box>

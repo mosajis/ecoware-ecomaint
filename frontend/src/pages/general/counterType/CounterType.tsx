@@ -1,31 +1,17 @@
 import Splitter from "@/shared/components/Splitter";
 import CounterTypeFormDialog from "./CounterTypeFormDialog";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import TabContainer from "@/shared/components/TabContainer";
-import React, { useState, useCallback } from "react";
-import { Box, Tab, Tabs } from "@mui/material";
+import CounterTypeTabs from "./CounterTypeTabs";
+import { useState, useCallback } from "react";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { useDataGrid } from "../_hooks/useDataGrid";
 import { tblCounterType, TypeTblCounterType } from "@/core/api/generated/api";
-import TabCompUnitCounter from "./tabs/TabCompUnitCounter";
-import TabCompTypeCounter from "./tabs/TabCompTypeCounter";
-import TabCompJobCounter from "./tabs/TabCompJobCounter";
-import TabCompTypeJobCounter from "./tabs/TabCompTypeJobCounter";
 
-const tabList = [
-  { label: "Component", key: "component" },
-  { label: "CompType", key: "compType" },
-  { label: "CompJob", key: "compJob" },
-  { label: "CompTypeJob", key: "compTypeJob" },
-];
-
-export default function CounterTypePage() {
-  const [activeTab, setActiveTab] = useState("component");
+export default function PageCounterType() {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
-  const [selectedCounterType, setSelectedCounterType] =
-    useState<TypeTblCounterType | null>(null);
+  const [selected, setSelected] = useState<TypeTblCounterType | null>(null);
 
   const {
     rows: counterTypes,
@@ -33,6 +19,7 @@ export default function CounterTypePage() {
     fetchData: fetchCounterTypes,
     handleDelete: deleteCounterType,
     handleFormSuccess: counterTypeFormSuccess,
+    handleRefresh,
   } = useDataGrid(
     tblCounterType.getAll,
     tblCounterType.deleteById,
@@ -52,10 +39,6 @@ export default function CounterTypePage() {
     setOpenForm(true);
   }, []);
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
-    setActiveTab(newValue);
-  };
-
   return (
     <>
       <Splitter initialPrimarySize="30%">
@@ -72,51 +55,20 @@ export default function CounterTypePage() {
           loading={loadingCounterTypes}
           label="Counter Type"
           showToolbar
+          disableDensity
+          disableColumns
+          disableExport
           onAddClick={handleCreate}
-          onRefreshClick={fetchCounterTypes}
+          onRefreshClick={handleRefresh}
           getRowId={(row) => row.counterTypeId}
           rowSelection
-          onRowClick={(params) => setSelectedCounterType(params.row)}
+          onRowClick={(params) => setSelected(params.row)}
         />
 
-        {/* Right Grid / Tabs */}
-        <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
-          <Tabs value={activeTab} onChange={handleTabChange}>
-            {tabList.map((tab) => (
-              <Tab key={tab.key} label={tab.label} value={tab.key} />
-            ))}
-          </Tabs>
-
-          <TabContainer>
-            {activeTab === "component" && (
-              <TabCompUnitCounter
-                label={selectedCounterType?.name}
-                counterTypeId={selectedCounterType?.counterTypeId}
-              />
-            )}
-
-            {activeTab === "compType" && (
-              <TabCompTypeCounter
-                label={selectedCounterType?.name}
-                counterTypeId={selectedCounterType?.counterTypeId}
-              />
-            )}
-
-            {activeTab === "compJob" && (
-              <TabCompJobCounter
-                label={selectedCounterType?.name}
-                counterTypeId={selectedCounterType?.counterTypeId}
-              />
-            )}
-
-            {activeTab === "compTypeJob" && (
-              <TabCompTypeJobCounter
-                label={selectedCounterType?.name}
-                counterTypeId={selectedCounterType?.counterTypeId}
-              />
-            )}
-          </TabContainer>
-        </Box>
+        <CounterTypeTabs
+          counterTypeId={selected?.counterTypeId}
+          label={selected?.name}
+        />
       </Splitter>
       <CounterTypeFormDialog
         open={openForm}

@@ -20,7 +20,8 @@ const columns: GridColDef<TypeTblCompCounter>[] = [
     field: "compTypeId",
     headerName: "Comp Type",
     flex: 1,
-    valueGetter: (_, row) => row.tblComponentUnit?.compTypeId,
+    // @ts-ignore
+    valueGetter: (_, row) => row.tblComponentUnit?.tblCompType?.compName,
   },
   {
     field: "model",
@@ -44,29 +45,25 @@ const columns: GridColDef<TypeTblCompCounter>[] = [
     field: "statusId",
     headerName: "Status",
     flex: 1,
-    valueGetter: (_, row) => row.tblComponentUnit?.statusId,
+    // @ts-ignore
+    valueGetter: (_, row) => row.tblComponentUnit?.tblCompStatus.compStatusName,
   },
 ];
 
 export default function TabCompUnitCounter(props: TabComponentUnitProps) {
   const { counterTypeId, label } = props;
 
-  if (!counterTypeId) {
-    return (
-      <CustomizedDataGrid
-        rows={[]}
-        columns={columns}
-        loading={false}
-        label="Component"
-        showToolbar
-      />
-    );
-  }
-
   const getAll = useCallback(() => {
     return tblCompCounter.getAll({
       filter: { counterTypeId },
-      include: { tblComponentUnit: true },
+      include: {
+        tblComponentUnit: {
+          include: {
+            tblCompType: true,
+            tblCompStatus: true,
+          },
+        },
+      },
     });
   }, [counterTypeId]);
 
@@ -78,12 +75,12 @@ export default function TabCompUnitCounter(props: TabComponentUnitProps) {
 
   return (
     <CustomizedDataGrid
-      rows={rows}
+      rows={counterTypeId ? rows : []}
       columns={columns}
       loading={loading}
       label={label || undefined}
       showToolbar
-      onRefreshClick={fetchData} // query ثابت است
+      onRefreshClick={fetchData}
       getRowId={(row) => row.compCounterId}
     />
   );

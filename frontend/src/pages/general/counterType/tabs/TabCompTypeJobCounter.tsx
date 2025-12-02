@@ -50,18 +50,6 @@ export default function TabCompTypeJobCounter(
 ) {
   const { counterTypeId, label } = props;
 
-  if (!counterTypeId) {
-    return (
-      <CustomizedDataGrid
-        rows={[]}
-        columns={columns}
-        loading={false}
-        label="Type Job Counters"
-        showToolbar
-      />
-    );
-  }
-
   const getAll = useCallback(() => {
     return tblCompTypeJobCounter.getAll({
       filter: { counterTypeId },
@@ -77,7 +65,7 @@ export default function TabCompTypeJobCounter(
 
   return (
     <CustomizedDataGrid
-      rows={rows}
+      rows={counterTypeId ? rows : []}
       columns={columns}
       loading={loading}
       label={label || undefined}

@@ -62,7 +62,7 @@ function DisciplineFormDialog({
   }, [mode, recordId, reset, defaultValues]);
 
   useEffect(() => {
-    if (open) fetchData(); // فقط وقتی فرم باز است fetch کن
+    if (open) fetchData();
   }, [open, fetchData]);
 
   const isDisabled = loadingInitial || submitting;

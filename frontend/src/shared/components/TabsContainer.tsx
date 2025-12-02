@@ -4,27 +4,25 @@ import { useNavigate, useRouter, useSearch } from "@tanstack/react-router";
 import Spinner from "@/shared/components/Spinner";
 import TabContainer from "./TabContainer";
 
-export type ReusableTabItem = {
+export type ReusableTabItem<T = any> = {
   label: string;
   icon: JSX.Element;
-  component?: React.LazyExoticComponent<
-    React.FC<{ selected?: number | null | undefined }>
-  >;
+  component?: React.LazyExoticComponent<React.FC<T>>;
   containerProps?: React.ComponentProps<typeof TabContainer>;
 };
 
 type Props = {
   tabs: ReusableTabItem[];
-  queryParamKey?: string; // default: "tab"
+  queryParamKey?: string;
   fillHeight?: boolean;
-  selected?: number | null | undefined; // <--- اضافه شد
+  tabProps?: Record<string, any>; // ← prop اضافه شد
 };
 
 const TabsContainer = ({
   tabs,
   queryParamKey = "tab",
   fillHeight = true,
-  selected,
+  tabProps,
 }: Props) => {
   const router = useRouter();
   const current = router.state.location.pathname;
@@ -51,8 +49,6 @@ const TabsContainer = ({
   };
 
   const ActiveComponent = tabs.find((t) => t.label === activeTab)?.component;
-  const activeContainerProps =
-    tabs.find((t) => t.label === activeTab)?.containerProps || {};
 
   return (
     <div
@@ -63,6 +59,7 @@ const TabsContainer = ({
       }}
     >
       <Tabs
+        sx={{ px: 1 }}
         value={activeTab}
         onChange={handleChange}
         variant="scrollable"
@@ -80,10 +77,12 @@ const TabsContainer = ({
         ))}
       </Tabs>
 
-      <TabContainer {...activeContainerProps}>
+      <TabContainer
+        {...tabs.find((t) => t.label === activeTab)?.containerProps}
+      >
         {ActiveComponent && (
           <Suspense fallback={<Spinner />}>
-            <ActiveComponent selected={selected} />
+            <ActiveComponent {...tabProps} />
           </Suspense>
         )}
       </TabContainer>

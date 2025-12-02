@@ -3588,21 +3588,8 @@ export interface operations {
                                 maintBudgetId: null | (number);
                                 stockBudgetId: null | (number);
                                 costCentreId: null | (number);
-                                transCodeId01: null | (number);
-                                transCodeId02: null | (number);
-                                transCodeId03: null | (number);
-                                transCodeId04: null | (number);
-                                transCodeId05: null | (number);
-                                transCodeId06: null | (number);
-                                transCodeId07: null | (number);
-                                transCodeId08: null | (number);
-                                transCodeId09: null | (number);
-                                transCodeId10: null | (number);
                                 compNo: null | string;
                                 serialNo: null | string;
-                                purchDate: null | (Record<string, never> | number);
-                                purchCurr: null | string;
-                                purchPrice: null | (number);
                                 depreciationTime: null | (number);
                                 warrantyEnd: null | (Record<string, never> | number);
                                 userDefCurr: null | string;
@@ -3611,13 +3598,8 @@ export interface operations {
                                 userDefText2: null | string;
                                 userDefText3: null | string;
                                 userDefText4: null | string;
-                                userDefText5: null | string;
-                                userDefText6: null | string;
-                                userDefText7: null | string;
                                 misc1: null | string;
                                 misc2: null | string;
-                                account: null | string;
-                                userDefName: null | string;
                                 unplannedLayout: null | (number);
                                 lastUsedLocationId: null | (number);
                                 statusId: null | (number);
@@ -3628,8 +3610,6 @@ export interface operations {
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
                                 isCritical: null | (number);
-                                parentCompId_2: null | (number);
-                                compTypeId_2: null | (number);
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
@@ -3860,21 +3840,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -3883,13 +3850,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -3900,8 +3862,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -4071,21 +4031,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -4094,13 +4041,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -4111,8 +4053,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -4367,21 +4307,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -4390,13 +4317,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -4407,8 +4329,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -4548,21 +4468,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -4571,13 +4478,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -4588,8 +4490,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -4768,21 +4668,8 @@ export interface operations {
                                 maintBudgetId: null | (number);
                                 stockBudgetId: null | (number);
                                 costCentreId: null | (number);
-                                transCodeId01: null | (number);
-                                transCodeId02: null | (number);
-                                transCodeId03: null | (number);
-                                transCodeId04: null | (number);
-                                transCodeId05: null | (number);
-                                transCodeId06: null | (number);
-                                transCodeId07: null | (number);
-                                transCodeId08: null | (number);
-                                transCodeId09: null | (number);
-                                transCodeId10: null | (number);
                                 compNo: null | string;
                                 serialNo: null | string;
-                                purchDate: null | (Record<string, never> | number);
-                                purchCurr: null | string;
-                                purchPrice: null | (number);
                                 depreciationTime: null | (number);
                                 warrantyEnd: null | (Record<string, never> | number);
                                 userDefCurr: null | string;
@@ -4791,13 +4678,8 @@ export interface operations {
                                 userDefText2: null | string;
                                 userDefText3: null | string;
                                 userDefText4: null | string;
-                                userDefText5: null | string;
-                                userDefText6: null | string;
-                                userDefText7: null | string;
                                 misc1: null | string;
                                 misc2: null | string;
-                                account: null | string;
-                                userDefName: null | string;
                                 unplannedLayout: null | (number);
                                 lastUsedLocationId: null | (number);
                                 statusId: null | (number);
@@ -4808,8 +4690,6 @@ export interface operations {
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
                                 isCritical: null | (number);
-                                parentCompId_2: null | (number);
-                                compTypeId_2: null | (number);
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
@@ -5015,21 +4895,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -5038,13 +4905,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -5055,8 +4917,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                         };
@@ -5189,21 +5049,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -5212,13 +5059,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -5229,8 +5071,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                         };
@@ -5457,21 +5297,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -5480,13 +5307,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -5497,8 +5319,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                         };
@@ -5601,21 +5421,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -5624,13 +5431,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -5641,8 +5443,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                         };
@@ -6284,21 +6084,8 @@ export interface operations {
                                 maintBudgetId: null | (number);
                                 stockBudgetId: null | (number);
                                 costCentreId: null | (number);
-                                transCodeId01: null | (number);
-                                transCodeId02: null | (number);
-                                transCodeId03: null | (number);
-                                transCodeId04: null | (number);
-                                transCodeId05: null | (number);
-                                transCodeId06: null | (number);
-                                transCodeId07: null | (number);
-                                transCodeId08: null | (number);
-                                transCodeId09: null | (number);
-                                transCodeId10: null | (number);
                                 compNo: null | string;
                                 serialNo: null | string;
-                                purchDate: null | (Record<string, never> | number);
-                                purchCurr: null | string;
-                                purchPrice: null | (number);
                                 depreciationTime: null | (number);
                                 warrantyEnd: null | (Record<string, never> | number);
                                 userDefCurr: null | string;
@@ -6307,13 +6094,8 @@ export interface operations {
                                 userDefText2: null | string;
                                 userDefText3: null | string;
                                 userDefText4: null | string;
-                                userDefText5: null | string;
-                                userDefText6: null | string;
-                                userDefText7: null | string;
                                 misc1: null | string;
                                 misc2: null | string;
-                                account: null | string;
-                                userDefName: null | string;
                                 unplannedLayout: null | (number);
                                 lastUsedLocationId: null | (number);
                                 statusId: null | (number);
@@ -6324,8 +6106,6 @@ export interface operations {
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
                                 isCritical: null | (number);
-                                parentCompId_2: null | (number);
-                                compTypeId_2: null | (number);
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
@@ -6674,21 +6454,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -6697,13 +6464,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -6714,8 +6476,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                         };
@@ -6904,21 +6664,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -6927,13 +6674,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -6944,8 +6686,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                         };
@@ -7318,21 +7058,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -7341,13 +7068,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -7358,8 +7080,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                         };
@@ -7518,21 +7238,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -7541,13 +7248,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -7558,8 +7260,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                         };
@@ -10254,6 +9954,40 @@ export interface operations {
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
+                            tblComponentUnits?: {
+                                compId: number;
+                                compTypeId: null | (number);
+                                locationId: null | (number);
+                                parentCompId: null | (number);
+                                vendorId: null | (number);
+                                maintBudgetId: null | (number);
+                                stockBudgetId: null | (number);
+                                costCentreId: null | (number);
+                                compNo: null | string;
+                                serialNo: null | string;
+                                depreciationTime: null | (number);
+                                warrantyEnd: null | (Record<string, never> | number);
+                                userDefCurr: null | string;
+                                userDefValue: null | (number);
+                                userDefText1: null | string;
+                                userDefText2: null | string;
+                                userDefText3: null | string;
+                                userDefText4: null | string;
+                                misc1: null | string;
+                                misc2: null | string;
+                                unplannedLayout: null | (number);
+                                lastUsedLocationId: null | (number);
+                                statusId: null | (number);
+                                layoutId: null | (number);
+                                notes: null | string;
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                isCritical: null | (number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -10278,18 +10012,33 @@ export interface operations {
                     compStatusGroup?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblComponentUnits?: {
+                        connect: {
+                            compId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     compStatusName?: null | string;
                     compStatusGroup?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblComponentUnits?: {
+                        connect: {
+                            compId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     compStatusName?: null | string;
                     compStatusGroup?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblComponentUnits?: {
+                        connect: {
+                            compId: number;
+                        }[];
+                    };
                 };
             };
         };
@@ -10309,6 +10058,40 @@ export interface operations {
                         deptId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | (Record<string, never> | number);
+                        tblComponentUnits?: {
+                            compId: number;
+                            compTypeId: null | (number);
+                            locationId: null | (number);
+                            parentCompId: null | (number);
+                            vendorId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            compNo: null | string;
+                            serialNo: null | string;
+                            depreciationTime: null | (number);
+                            warrantyEnd: null | (Record<string, never> | number);
+                            userDefCurr: null | string;
+                            userDefValue: null | (number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            misc1: null | string;
+                            misc2: null | string;
+                            unplannedLayout: null | (number);
+                            lastUsedLocationId: null | (number);
+                            statusId: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -10372,6 +10155,40 @@ export interface operations {
                         deptId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | (Record<string, never> | number);
+                        tblComponentUnits?: {
+                            compId: number;
+                            compTypeId: null | (number);
+                            locationId: null | (number);
+                            parentCompId: null | (number);
+                            vendorId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            compNo: null | string;
+                            serialNo: null | string;
+                            depreciationTime: null | (number);
+                            warrantyEnd: null | (Record<string, never> | number);
+                            userDefCurr: null | string;
+                            userDefValue: null | (number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            misc1: null | string;
+                            misc2: null | string;
+                            unplannedLayout: null | (number);
+                            lastUsedLocationId: null | (number);
+                            statusId: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -10393,18 +10210,42 @@ export interface operations {
                     compStatusGroup?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblComponentUnits?: {
+                        connect?: {
+                            compId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     compStatusName?: null | string;
                     compStatusGroup?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblComponentUnits?: {
+                        connect?: {
+                            compId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     compStatusName?: null | string;
                     compStatusGroup?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblComponentUnits?: {
+                        connect?: {
+                            compId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
             };
         };
@@ -10424,6 +10265,40 @@ export interface operations {
                         deptId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | (Record<string, never> | number);
+                        tblComponentUnits?: {
+                            compId: number;
+                            compTypeId: null | (number);
+                            locationId: null | (number);
+                            parentCompId: null | (number);
+                            vendorId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            compNo: null | string;
+                            serialNo: null | string;
+                            depreciationTime: null | (number);
+                            warrantyEnd: null | (Record<string, never> | number);
+                            userDefCurr: null | string;
+                            userDefValue: null | (number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            misc1: null | string;
+                            misc2: null | string;
+                            unplannedLayout: null | (number);
+                            lastUsedLocationId: null | (number);
+                            statusId: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -10457,6 +10332,40 @@ export interface operations {
                         deptId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | (Record<string, never> | number);
+                        tblComponentUnits?: {
+                            compId: number;
+                            compTypeId: null | (number);
+                            locationId: null | (number);
+                            parentCompId: null | (number);
+                            vendorId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            compNo: null | string;
+                            serialNo: null | string;
+                            depreciationTime: null | (number);
+                            warrantyEnd: null | (Record<string, never> | number);
+                            userDefCurr: null | string;
+                            userDefValue: null | (number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            misc1: null | string;
+                            misc2: null | string;
+                            unplannedLayout: null | (number);
+                            lastUsedLocationId: null | (number);
+                            statusId: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -10840,6 +10749,40 @@ export interface operations {
                             parentCompTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                            tblComponentUnits?: {
+                                compId: number;
+                                compTypeId: null | (number);
+                                locationId: null | (number);
+                                parentCompId: null | (number);
+                                vendorId: null | (number);
+                                maintBudgetId: null | (number);
+                                stockBudgetId: null | (number);
+                                costCentreId: null | (number);
+                                compNo: null | string;
+                                serialNo: null | string;
+                                depreciationTime: null | (number);
+                                warrantyEnd: null | (Record<string, never> | number);
+                                userDefCurr: null | string;
+                                userDefValue: null | (number);
+                                userDefText1: null | string;
+                                userDefText2: null | string;
+                                userDefText3: null | string;
+                                userDefText4: null | string;
+                                misc1: null | string;
+                                misc2: null | string;
+                                unplannedLayout: null | (number);
+                                lastUsedLocationId: null | (number);
+                                statusId: null | (number);
+                                layoutId: null | (number);
+                                notes: null | string;
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                isCritical: null | (number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
                             tblAddress?: null | {
                                 addressId: number;
                                 name: null | string;
@@ -10936,6 +10879,11 @@ export interface operations {
                     lastupdate?: null | (Record<string, never> | number);
                     componentClassId_2?: null | (number);
                     parentCompTypeId_2?: null | (number);
+                    tblComponentUnits?: {
+                        connect: {
+                            compId: number;
+                        }[];
+                    };
                     tblAddress?: {
                         connect: {
                             addressId: number;
@@ -10965,6 +10913,11 @@ export interface operations {
                     lastupdate?: null | (Record<string, never> | number);
                     componentClassId_2?: null | (number);
                     parentCompTypeId_2?: null | (number);
+                    tblComponentUnits?: {
+                        connect: {
+                            compId: number;
+                        }[];
+                    };
                     tblAddress?: {
                         connect: {
                             addressId: number;
@@ -10994,6 +10947,11 @@ export interface operations {
                     lastupdate?: null | (Record<string, never> | number);
                     componentClassId_2?: null | (number);
                     parentCompTypeId_2?: null | (number);
+                    tblComponentUnits?: {
+                        connect: {
+                            compId: number;
+                        }[];
+                    };
                     tblAddress?: {
                         connect: {
                             addressId: number;
@@ -11042,6 +11000,40 @@ export interface operations {
                         parentCompTypeId_2: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblComponentUnits?: {
+                            compId: number;
+                            compTypeId: null | (number);
+                            locationId: null | (number);
+                            parentCompId: null | (number);
+                            vendorId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            compNo: null | string;
+                            serialNo: null | string;
+                            depreciationTime: null | (number);
+                            warrantyEnd: null | (Record<string, never> | number);
+                            userDefCurr: null | string;
+                            userDefValue: null | (number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            misc1: null | string;
+                            misc2: null | string;
+                            unplannedLayout: null | (number);
+                            lastUsedLocationId: null | (number);
+                            statusId: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblAddress?: null | {
                             addressId: number;
                             name: null | string;
@@ -11183,6 +11175,40 @@ export interface operations {
                         parentCompTypeId_2: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblComponentUnits?: {
+                            compId: number;
+                            compTypeId: null | (number);
+                            locationId: null | (number);
+                            parentCompId: null | (number);
+                            vendorId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            compNo: null | string;
+                            serialNo: null | string;
+                            depreciationTime: null | (number);
+                            warrantyEnd: null | (Record<string, never> | number);
+                            userDefCurr: null | string;
+                            userDefValue: null | (number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            misc1: null | string;
+                            misc2: null | string;
+                            unplannedLayout: null | (number);
+                            lastUsedLocationId: null | (number);
+                            statusId: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblAddress?: null | {
                             addressId: number;
                             name: null | string;
@@ -11276,6 +11302,14 @@ export interface operations {
                     lastupdate?: null | (Record<string, never> | number);
                     componentClassId_2?: null | (number);
                     parentCompTypeId_2?: null | (number);
+                    tblComponentUnits?: {
+                        connect?: {
+                            compId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblAddress?: {
                         connect?: {
                             addressId: number;
@@ -11310,6 +11344,14 @@ export interface operations {
                     lastupdate?: null | (Record<string, never> | number);
                     componentClassId_2?: null | (number);
                     parentCompTypeId_2?: null | (number);
+                    tblComponentUnits?: {
+                        connect?: {
+                            compId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblAddress?: {
                         connect?: {
                             addressId: number;
@@ -11344,6 +11386,14 @@ export interface operations {
                     lastupdate?: null | (Record<string, never> | number);
                     componentClassId_2?: null | (number);
                     parentCompTypeId_2?: null | (number);
+                    tblComponentUnits?: {
+                        connect?: {
+                            compId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblAddress?: {
                         connect?: {
                             addressId: number;
@@ -11397,6 +11447,40 @@ export interface operations {
                         parentCompTypeId_2: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblComponentUnits?: {
+                            compId: number;
+                            compTypeId: null | (number);
+                            locationId: null | (number);
+                            parentCompId: null | (number);
+                            vendorId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            compNo: null | string;
+                            serialNo: null | string;
+                            depreciationTime: null | (number);
+                            warrantyEnd: null | (Record<string, never> | number);
+                            userDefCurr: null | string;
+                            userDefValue: null | (number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            misc1: null | string;
+                            misc2: null | string;
+                            unplannedLayout: null | (number);
+                            lastUsedLocationId: null | (number);
+                            statusId: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblAddress?: null | {
                             addressId: number;
                             name: null | string;
@@ -11508,6 +11592,40 @@ export interface operations {
                         parentCompTypeId_2: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblComponentUnits?: {
+                            compId: number;
+                            compTypeId: null | (number);
+                            locationId: null | (number);
+                            parentCompId: null | (number);
+                            vendorId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            compNo: null | string;
+                            serialNo: null | string;
+                            depreciationTime: null | (number);
+                            warrantyEnd: null | (Record<string, never> | number);
+                            userDefCurr: null | string;
+                            userDefValue: null | (number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            misc1: null | string;
+                            misc2: null | string;
+                            unplannedLayout: null | (number);
+                            lastUsedLocationId: null | (number);
+                            statusId: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblAddress?: null | {
                             addressId: number;
                             name: null | string;
@@ -14716,21 +14834,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -14739,13 +14844,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -14756,8 +14856,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                             tblCompCounters?: {
@@ -14840,6 +14938,40 @@ export interface operations {
                                 lastupdate: null | (Record<string, never> | number);
                                 orderId: null | (number);
                             };
+                            tblCompStatus?: null | {
+                                compStatusId: number;
+                                compStatusName: null | string;
+                                compStatusGroup: null | (number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                            };
+                            tblCompType?: null | {
+                                compTypeId: number;
+                                componentClassId: null | (number);
+                                parentCompTypeId: null | (number);
+                                primaryVendorId: null | (number);
+                                compTypeNo: null | string;
+                                compName: null | string;
+                                compType: null | string;
+                                compTypeModel: null | string;
+                                makerId: null | (number);
+                                userDefMarPol: null | (number);
+                                userDefImoNo: null | string;
+                                userDefText1: null | string;
+                                layoutId: null | (number);
+                                notes: null | string;
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                componentClassId_2: null | (number);
+                                parentCompTypeId_2: null | (number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
                             tblLocation?: null | {
                                 locationId: number;
                                 parentLocationId: null | (number);
@@ -14872,21 +15004,8 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    transCodeId01?: null | (number);
-                    transCodeId02?: null | (number);
-                    transCodeId03?: null | (number);
-                    transCodeId04?: null | (number);
-                    transCodeId05?: null | (number);
-                    transCodeId06?: null | (number);
-                    transCodeId07?: null | (number);
-                    transCodeId08?: null | (number);
-                    transCodeId09?: null | (number);
-                    transCodeId10?: null | (number);
                     compNo?: null | string;
                     serialNo?: null | string;
-                    purchDate?: null | (Record<string, never> | number);
-                    purchCurr?: null | string;
-                    purchPrice?: null | (number);
                     depreciationTime?: null | (number);
                     warrantyEnd?: null | (Record<string, never> | number);
                     userDefCurr?: null | string;
@@ -14895,20 +15014,13 @@ export interface operations {
                     userDefText2?: null | string;
                     userDefText3?: null | string;
                     userDefText4?: null | string;
-                    userDefText5?: null | string;
-                    userDefText6?: null | string;
-                    userDefText7?: null | string;
                     misc1?: null | string;
                     misc2?: null | string;
-                    account?: null | string;
-                    userDefName?: null | string;
                     unplannedLayout?: null | (number);
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     isCritical?: null | (number);
-                    parentCompId_2?: null | (number);
-                    compTypeId_2?: null | (number);
                     tblCompCounters?: {
                         connect: {
                             compCounterId: number;
@@ -14922,6 +15034,16 @@ export interface operations {
                     tblAddress?: {
                         connect: {
                             addressId: number;
+                        };
+                    };
+                    tblCompStatus?: {
+                        connect: {
+                            compStatusId: number;
+                        };
+                    };
+                    tblCompType?: {
+                        connect: {
+                            compTypeId: number;
                         };
                     };
                     tblLocation?: {
@@ -14931,21 +15053,8 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    transCodeId01?: null | (number);
-                    transCodeId02?: null | (number);
-                    transCodeId03?: null | (number);
-                    transCodeId04?: null | (number);
-                    transCodeId05?: null | (number);
-                    transCodeId06?: null | (number);
-                    transCodeId07?: null | (number);
-                    transCodeId08?: null | (number);
-                    transCodeId09?: null | (number);
-                    transCodeId10?: null | (number);
                     compNo?: null | string;
                     serialNo?: null | string;
-                    purchDate?: null | (Record<string, never> | number);
-                    purchCurr?: null | string;
-                    purchPrice?: null | (number);
                     depreciationTime?: null | (number);
                     warrantyEnd?: null | (Record<string, never> | number);
                     userDefCurr?: null | string;
@@ -14954,20 +15063,13 @@ export interface operations {
                     userDefText2?: null | string;
                     userDefText3?: null | string;
                     userDefText4?: null | string;
-                    userDefText5?: null | string;
-                    userDefText6?: null | string;
-                    userDefText7?: null | string;
                     misc1?: null | string;
                     misc2?: null | string;
-                    account?: null | string;
-                    userDefName?: null | string;
                     unplannedLayout?: null | (number);
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     isCritical?: null | (number);
-                    parentCompId_2?: null | (number);
-                    compTypeId_2?: null | (number);
                     tblCompCounters?: {
                         connect: {
                             compCounterId: number;
@@ -14981,6 +15083,16 @@ export interface operations {
                     tblAddress?: {
                         connect: {
                             addressId: number;
+                        };
+                    };
+                    tblCompStatus?: {
+                        connect: {
+                            compStatusId: number;
+                        };
+                    };
+                    tblCompType?: {
+                        connect: {
+                            compTypeId: number;
                         };
                     };
                     tblLocation?: {
@@ -14990,21 +15102,8 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    transCodeId01?: null | (number);
-                    transCodeId02?: null | (number);
-                    transCodeId03?: null | (number);
-                    transCodeId04?: null | (number);
-                    transCodeId05?: null | (number);
-                    transCodeId06?: null | (number);
-                    transCodeId07?: null | (number);
-                    transCodeId08?: null | (number);
-                    transCodeId09?: null | (number);
-                    transCodeId10?: null | (number);
                     compNo?: null | string;
                     serialNo?: null | string;
-                    purchDate?: null | (Record<string, never> | number);
-                    purchCurr?: null | string;
-                    purchPrice?: null | (number);
                     depreciationTime?: null | (number);
                     warrantyEnd?: null | (Record<string, never> | number);
                     userDefCurr?: null | string;
@@ -15013,20 +15112,13 @@ export interface operations {
                     userDefText2?: null | string;
                     userDefText3?: null | string;
                     userDefText4?: null | string;
-                    userDefText5?: null | string;
-                    userDefText6?: null | string;
-                    userDefText7?: null | string;
                     misc1?: null | string;
                     misc2?: null | string;
-                    account?: null | string;
-                    userDefName?: null | string;
                     unplannedLayout?: null | (number);
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     isCritical?: null | (number);
-                    parentCompId_2?: null | (number);
-                    compTypeId_2?: null | (number);
                     tblCompCounters?: {
                         connect: {
                             compCounterId: number;
@@ -15040,6 +15132,16 @@ export interface operations {
                     tblAddress?: {
                         connect: {
                             addressId: number;
+                        };
+                    };
+                    tblCompStatus?: {
+                        connect: {
+                            compStatusId: number;
+                        };
+                    };
+                    tblCompType?: {
+                        connect: {
+                            compTypeId: number;
                         };
                     };
                     tblLocation?: {
@@ -15066,21 +15168,8 @@ export interface operations {
                         maintBudgetId: null | (number);
                         stockBudgetId: null | (number);
                         costCentreId: null | (number);
-                        transCodeId01: null | (number);
-                        transCodeId02: null | (number);
-                        transCodeId03: null | (number);
-                        transCodeId04: null | (number);
-                        transCodeId05: null | (number);
-                        transCodeId06: null | (number);
-                        transCodeId07: null | (number);
-                        transCodeId08: null | (number);
-                        transCodeId09: null | (number);
-                        transCodeId10: null | (number);
                         compNo: null | string;
                         serialNo: null | string;
-                        purchDate: null | (Record<string, never> | number);
-                        purchCurr: null | string;
-                        purchPrice: null | (number);
                         depreciationTime: null | (number);
                         warrantyEnd: null | (Record<string, never> | number);
                         userDefCurr: null | string;
@@ -15089,13 +15178,8 @@ export interface operations {
                         userDefText2: null | string;
                         userDefText3: null | string;
                         userDefText4: null | string;
-                        userDefText5: null | string;
-                        userDefText6: null | string;
-                        userDefText7: null | string;
                         misc1: null | string;
                         misc2: null | string;
-                        account: null | string;
-                        userDefName: null | string;
                         unplannedLayout: null | (number);
                         lastUsedLocationId: null | (number);
                         statusId: null | (number);
@@ -15106,8 +15190,6 @@ export interface operations {
                         exportMarker: null | (number);
                         lastupdate: null | (Record<string, never> | number);
                         isCritical: null | (number);
-                        parentCompId_2: null | (number);
-                        compTypeId_2: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
                         tblCompCounters?: {
@@ -15189,6 +15271,40 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
+                        };
+                        tblCompStatus?: null | {
+                            compStatusId: number;
+                            compStatusName: null | string;
+                            compStatusGroup: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                        };
+                        tblCompType?: null | {
+                            compTypeId: number;
+                            componentClassId: null | (number);
+                            parentCompTypeId: null | (number);
+                            primaryVendorId: null | (number);
+                            compTypeNo: null | string;
+                            compName: null | string;
+                            compType: null | string;
+                            compTypeModel: null | string;
+                            makerId: null | (number);
+                            userDefMarPol: null | (number);
+                            userDefImoNo: null | string;
+                            userDefText1: null | string;
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            componentClassId_2: null | (number);
+                            parentCompTypeId_2: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
                         };
                         tblLocation?: null | {
                             locationId: number;
@@ -15265,21 +15381,8 @@ export interface operations {
                         maintBudgetId: null | (number);
                         stockBudgetId: null | (number);
                         costCentreId: null | (number);
-                        transCodeId01: null | (number);
-                        transCodeId02: null | (number);
-                        transCodeId03: null | (number);
-                        transCodeId04: null | (number);
-                        transCodeId05: null | (number);
-                        transCodeId06: null | (number);
-                        transCodeId07: null | (number);
-                        transCodeId08: null | (number);
-                        transCodeId09: null | (number);
-                        transCodeId10: null | (number);
                         compNo: null | string;
                         serialNo: null | string;
-                        purchDate: null | (Record<string, never> | number);
-                        purchCurr: null | string;
-                        purchPrice: null | (number);
                         depreciationTime: null | (number);
                         warrantyEnd: null | (Record<string, never> | number);
                         userDefCurr: null | string;
@@ -15288,13 +15391,8 @@ export interface operations {
                         userDefText2: null | string;
                         userDefText3: null | string;
                         userDefText4: null | string;
-                        userDefText5: null | string;
-                        userDefText6: null | string;
-                        userDefText7: null | string;
                         misc1: null | string;
                         misc2: null | string;
-                        account: null | string;
-                        userDefName: null | string;
                         unplannedLayout: null | (number);
                         lastUsedLocationId: null | (number);
                         statusId: null | (number);
@@ -15305,8 +15403,6 @@ export interface operations {
                         exportMarker: null | (number);
                         lastupdate: null | (Record<string, never> | number);
                         isCritical: null | (number);
-                        parentCompId_2: null | (number);
-                        compTypeId_2: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
                         tblCompCounters?: {
@@ -15388,6 +15484,40 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
+                        };
+                        tblCompStatus?: null | {
+                            compStatusId: number;
+                            compStatusName: null | string;
+                            compStatusGroup: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                        };
+                        tblCompType?: null | {
+                            compTypeId: number;
+                            componentClassId: null | (number);
+                            parentCompTypeId: null | (number);
+                            primaryVendorId: null | (number);
+                            compTypeNo: null | string;
+                            compName: null | string;
+                            compType: null | string;
+                            compTypeModel: null | string;
+                            makerId: null | (number);
+                            userDefMarPol: null | (number);
+                            userDefImoNo: null | string;
+                            userDefText1: null | string;
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            componentClassId_2: null | (number);
+                            parentCompTypeId_2: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
                         };
                         tblLocation?: null | {
                             locationId: number;
@@ -15418,21 +15548,8 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    transCodeId01?: null | (number);
-                    transCodeId02?: null | (number);
-                    transCodeId03?: null | (number);
-                    transCodeId04?: null | (number);
-                    transCodeId05?: null | (number);
-                    transCodeId06?: null | (number);
-                    transCodeId07?: null | (number);
-                    transCodeId08?: null | (number);
-                    transCodeId09?: null | (number);
-                    transCodeId10?: null | (number);
                     compNo?: null | string;
                     serialNo?: null | string;
-                    purchDate?: null | (Record<string, never> | number);
-                    purchCurr?: null | string;
-                    purchPrice?: null | (number);
                     depreciationTime?: null | (number);
                     warrantyEnd?: null | (Record<string, never> | number);
                     userDefCurr?: null | string;
@@ -15441,20 +15558,13 @@ export interface operations {
                     userDefText2?: null | string;
                     userDefText3?: null | string;
                     userDefText4?: null | string;
-                    userDefText5?: null | string;
-                    userDefText6?: null | string;
-                    userDefText7?: null | string;
                     misc1?: null | string;
                     misc2?: null | string;
-                    account?: null | string;
-                    userDefName?: null | string;
                     unplannedLayout?: null | (number);
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     isCritical?: null | (number);
-                    parentCompId_2?: null | (number);
-                    compTypeId_2?: null | (number);
                     tblCompCounters?: {
                         connect?: {
                             compCounterId: number;
@@ -15474,6 +15584,18 @@ export interface operations {
                     tblAddress?: {
                         connect?: {
                             addressId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblCompStatus?: {
+                        connect?: {
+                            compStatusId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblCompType?: {
+                        connect?: {
+                            compTypeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -15485,21 +15607,8 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    transCodeId01?: null | (number);
-                    transCodeId02?: null | (number);
-                    transCodeId03?: null | (number);
-                    transCodeId04?: null | (number);
-                    transCodeId05?: null | (number);
-                    transCodeId06?: null | (number);
-                    transCodeId07?: null | (number);
-                    transCodeId08?: null | (number);
-                    transCodeId09?: null | (number);
-                    transCodeId10?: null | (number);
                     compNo?: null | string;
                     serialNo?: null | string;
-                    purchDate?: null | (Record<string, never> | number);
-                    purchCurr?: null | string;
-                    purchPrice?: null | (number);
                     depreciationTime?: null | (number);
                     warrantyEnd?: null | (Record<string, never> | number);
                     userDefCurr?: null | string;
@@ -15508,20 +15617,13 @@ export interface operations {
                     userDefText2?: null | string;
                     userDefText3?: null | string;
                     userDefText4?: null | string;
-                    userDefText5?: null | string;
-                    userDefText6?: null | string;
-                    userDefText7?: null | string;
                     misc1?: null | string;
                     misc2?: null | string;
-                    account?: null | string;
-                    userDefName?: null | string;
                     unplannedLayout?: null | (number);
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     isCritical?: null | (number);
-                    parentCompId_2?: null | (number);
-                    compTypeId_2?: null | (number);
                     tblCompCounters?: {
                         connect?: {
                             compCounterId: number;
@@ -15541,6 +15643,18 @@ export interface operations {
                     tblAddress?: {
                         connect?: {
                             addressId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblCompStatus?: {
+                        connect?: {
+                            compStatusId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblCompType?: {
+                        connect?: {
+                            compTypeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -15552,21 +15666,8 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    transCodeId01?: null | (number);
-                    transCodeId02?: null | (number);
-                    transCodeId03?: null | (number);
-                    transCodeId04?: null | (number);
-                    transCodeId05?: null | (number);
-                    transCodeId06?: null | (number);
-                    transCodeId07?: null | (number);
-                    transCodeId08?: null | (number);
-                    transCodeId09?: null | (number);
-                    transCodeId10?: null | (number);
                     compNo?: null | string;
                     serialNo?: null | string;
-                    purchDate?: null | (Record<string, never> | number);
-                    purchCurr?: null | string;
-                    purchPrice?: null | (number);
                     depreciationTime?: null | (number);
                     warrantyEnd?: null | (Record<string, never> | number);
                     userDefCurr?: null | string;
@@ -15575,20 +15676,13 @@ export interface operations {
                     userDefText2?: null | string;
                     userDefText3?: null | string;
                     userDefText4?: null | string;
-                    userDefText5?: null | string;
-                    userDefText6?: null | string;
-                    userDefText7?: null | string;
                     misc1?: null | string;
                     misc2?: null | string;
-                    account?: null | string;
-                    userDefName?: null | string;
                     unplannedLayout?: null | (number);
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     isCritical?: null | (number);
-                    parentCompId_2?: null | (number);
-                    compTypeId_2?: null | (number);
                     tblCompCounters?: {
                         connect?: {
                             compCounterId: number;
@@ -15608,6 +15702,18 @@ export interface operations {
                     tblAddress?: {
                         connect?: {
                             addressId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblCompStatus?: {
+                        connect?: {
+                            compStatusId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblCompType?: {
+                        connect?: {
+                            compTypeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -15636,21 +15742,8 @@ export interface operations {
                         maintBudgetId: null | (number);
                         stockBudgetId: null | (number);
                         costCentreId: null | (number);
-                        transCodeId01: null | (number);
-                        transCodeId02: null | (number);
-                        transCodeId03: null | (number);
-                        transCodeId04: null | (number);
-                        transCodeId05: null | (number);
-                        transCodeId06: null | (number);
-                        transCodeId07: null | (number);
-                        transCodeId08: null | (number);
-                        transCodeId09: null | (number);
-                        transCodeId10: null | (number);
                         compNo: null | string;
                         serialNo: null | string;
-                        purchDate: null | (Record<string, never> | number);
-                        purchCurr: null | string;
-                        purchPrice: null | (number);
                         depreciationTime: null | (number);
                         warrantyEnd: null | (Record<string, never> | number);
                         userDefCurr: null | string;
@@ -15659,13 +15752,8 @@ export interface operations {
                         userDefText2: null | string;
                         userDefText3: null | string;
                         userDefText4: null | string;
-                        userDefText5: null | string;
-                        userDefText6: null | string;
-                        userDefText7: null | string;
                         misc1: null | string;
                         misc2: null | string;
-                        account: null | string;
-                        userDefName: null | string;
                         unplannedLayout: null | (number);
                         lastUsedLocationId: null | (number);
                         statusId: null | (number);
@@ -15676,8 +15764,6 @@ export interface operations {
                         exportMarker: null | (number);
                         lastupdate: null | (Record<string, never> | number);
                         isCritical: null | (number);
-                        parentCompId_2: null | (number);
-                        compTypeId_2: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
                         tblCompCounters?: {
@@ -15759,6 +15845,40 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
+                        };
+                        tblCompStatus?: null | {
+                            compStatusId: number;
+                            compStatusName: null | string;
+                            compStatusGroup: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                        };
+                        tblCompType?: null | {
+                            compTypeId: number;
+                            componentClassId: null | (number);
+                            parentCompTypeId: null | (number);
+                            primaryVendorId: null | (number);
+                            compTypeNo: null | string;
+                            compName: null | string;
+                            compType: null | string;
+                            compTypeModel: null | string;
+                            makerId: null | (number);
+                            userDefMarPol: null | (number);
+                            userDefImoNo: null | string;
+                            userDefText1: null | string;
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            componentClassId_2: null | (number);
+                            parentCompTypeId_2: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
                         };
                         tblLocation?: null | {
                             locationId: number;
@@ -15805,21 +15925,8 @@ export interface operations {
                         maintBudgetId: null | (number);
                         stockBudgetId: null | (number);
                         costCentreId: null | (number);
-                        transCodeId01: null | (number);
-                        transCodeId02: null | (number);
-                        transCodeId03: null | (number);
-                        transCodeId04: null | (number);
-                        transCodeId05: null | (number);
-                        transCodeId06: null | (number);
-                        transCodeId07: null | (number);
-                        transCodeId08: null | (number);
-                        transCodeId09: null | (number);
-                        transCodeId10: null | (number);
                         compNo: null | string;
                         serialNo: null | string;
-                        purchDate: null | (Record<string, never> | number);
-                        purchCurr: null | string;
-                        purchPrice: null | (number);
                         depreciationTime: null | (number);
                         warrantyEnd: null | (Record<string, never> | number);
                         userDefCurr: null | string;
@@ -15828,13 +15935,8 @@ export interface operations {
                         userDefText2: null | string;
                         userDefText3: null | string;
                         userDefText4: null | string;
-                        userDefText5: null | string;
-                        userDefText6: null | string;
-                        userDefText7: null | string;
                         misc1: null | string;
                         misc2: null | string;
-                        account: null | string;
-                        userDefName: null | string;
                         unplannedLayout: null | (number);
                         lastUsedLocationId: null | (number);
                         statusId: null | (number);
@@ -15845,8 +15947,6 @@ export interface operations {
                         exportMarker: null | (number);
                         lastupdate: null | (Record<string, never> | number);
                         isCritical: null | (number);
-                        parentCompId_2: null | (number);
-                        compTypeId_2: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
                         tblCompCounters?: {
@@ -15928,6 +16028,40 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
+                        };
+                        tblCompStatus?: null | {
+                            compStatusId: number;
+                            compStatusName: null | string;
+                            compStatusGroup: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                        };
+                        tblCompType?: null | {
+                            compTypeId: number;
+                            componentClassId: null | (number);
+                            parentCompTypeId: null | (number);
+                            primaryVendorId: null | (number);
+                            compTypeNo: null | string;
+                            compName: null | string;
+                            compType: null | string;
+                            compTypeModel: null | string;
+                            makerId: null | (number);
+                            userDefMarPol: null | (number);
+                            userDefImoNo: null | string;
+                            userDefText1: null | string;
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            componentClassId_2: null | (number);
+                            parentCompTypeId_2: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
                         };
                         tblLocation?: null | {
                             locationId: number;
@@ -22425,21 +22559,8 @@ export interface operations {
                                 maintBudgetId: null | (number);
                                 stockBudgetId: null | (number);
                                 costCentreId: null | (number);
-                                transCodeId01: null | (number);
-                                transCodeId02: null | (number);
-                                transCodeId03: null | (number);
-                                transCodeId04: null | (number);
-                                transCodeId05: null | (number);
-                                transCodeId06: null | (number);
-                                transCodeId07: null | (number);
-                                transCodeId08: null | (number);
-                                transCodeId09: null | (number);
-                                transCodeId10: null | (number);
                                 compNo: null | string;
                                 serialNo: null | string;
-                                purchDate: null | (Record<string, never> | number);
-                                purchCurr: null | string;
-                                purchPrice: null | (number);
                                 depreciationTime: null | (number);
                                 warrantyEnd: null | (Record<string, never> | number);
                                 userDefCurr: null | string;
@@ -22448,13 +22569,8 @@ export interface operations {
                                 userDefText2: null | string;
                                 userDefText3: null | string;
                                 userDefText4: null | string;
-                                userDefText5: null | string;
-                                userDefText6: null | string;
-                                userDefText7: null | string;
                                 misc1: null | string;
                                 misc2: null | string;
-                                account: null | string;
-                                userDefName: null | string;
                                 unplannedLayout: null | (number);
                                 lastUsedLocationId: null | (number);
                                 statusId: null | (number);
@@ -22465,8 +22581,6 @@ export interface operations {
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
                                 isCritical: null | (number);
-                                parentCompId_2: null | (number);
-                                compTypeId_2: null | (number);
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
@@ -22605,21 +22719,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -22628,13 +22729,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -22645,8 +22741,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -22748,21 +22842,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -22771,13 +22852,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -22788,8 +22864,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -22946,21 +23020,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -22969,13 +23030,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -22986,8 +23042,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -23059,21 +23113,8 @@ export interface operations {
                             maintBudgetId: null | (number);
                             stockBudgetId: null | (number);
                             costCentreId: null | (number);
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
                             compNo: null | string;
                             serialNo: null | string;
-                            purchDate: null | (Record<string, never> | number);
-                            purchCurr: null | string;
-                            purchPrice: null | (number);
                             depreciationTime: null | (number);
                             warrantyEnd: null | (Record<string, never> | number);
                             userDefCurr: null | string;
@@ -23082,13 +23123,8 @@ export interface operations {
                             userDefText2: null | string;
                             userDefText3: null | string;
                             userDefText4: null | string;
-                            userDefText5: null | string;
-                            userDefText6: null | string;
-                            userDefText7: null | string;
                             misc1: null | string;
                             misc2: null | string;
-                            account: null | string;
-                            userDefName: null | string;
                             unplannedLayout: null | (number);
                             lastUsedLocationId: null | (number);
                             statusId: null | (number);
@@ -23099,8 +23135,6 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
-                            parentCompId_2: null | (number);
-                            compTypeId_2: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
