@@ -8,7 +8,6 @@ import { tblPendingType, TypeTblPendingType } from "@/core/api/generated/api";
 
 const schema = z.object({
   pendTypeName: z.string().min(1, "Name is required").nullable(),
-  groupId: z.number().nullable(),
   description: z.string().nullable(),
 });
 
@@ -59,7 +58,6 @@ function PendingTypeFormDialog({
         const res = await tblPendingType.getById(recordId);
         reset({
           pendTypeName: res?.pendTypeName ?? "",
-          groupId: res?.groupId ?? null,
           description: res?.description ?? "",
         });
       } catch (err) {
@@ -86,7 +84,6 @@ function PendingTypeFormDialog({
         const payload = {
           pendTypeName: values.pendTypeName ?? "",
           description: values.description ?? "",
-          groupId: values.groupId ?? 0,
         };
 
         let result: TypeTblPendingType;
@@ -131,27 +128,6 @@ function PendingTypeFormDialog({
               helperText={errors.pendTypeName?.message}
               disabled={isDisabled}
               sx={{ gridColumn: "span 4" }}
-            />
-          )}
-        />
-
-        <Controller
-          name="groupId"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Group Id"
-              type="number"
-              size="small"
-              disabled={isDisabled}
-              sx={{ gridColumn: "span 2" }}
-              value={field.value ?? ""}
-              onChange={(e) =>
-                field.onChange(
-                  e.target.value === "" ? null : Number(e.target.value)
-                )
-              }
             />
           )}
         />

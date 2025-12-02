@@ -13,7 +13,7 @@ export default function PageFollowStatus() {
   const [mode, setMode] = useState<"create" | "update">("create");
 
   // === useDataGrid ===
-  const { rows, loading, fetchData, handleDelete, handleFormSuccess } =
+  const { rows, loading, handleRefresh, handleDelete, handleFormSuccess } =
     useDataGrid(
       tblFollowStatus.getAll,
       tblFollowStatus.deleteById,
@@ -44,7 +44,7 @@ export default function PageFollowStatus() {
   );
 
   return (
-    <Box height="100%">
+    <>
       <CustomizedDataGrid
         label="Follow Status"
         showToolbar
@@ -53,7 +53,7 @@ export default function PageFollowStatus() {
         loading={loading}
         getRowId={(row) => row.followStatusId}
         onAddClick={handleCreate}
-        onRefreshClick={fetchData}
+        onRefreshClick={handleRefresh}
       />
 
       <FollowStatusFormDialog
@@ -66,6 +66,6 @@ export default function PageFollowStatus() {
           setOpenForm(false);
         }}
       />
-    </Box>
+    </>
   );
 }

@@ -6,12 +6,12 @@ import { GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { useDataGrid } from "../_hooks/useDataGrid";
 
-export default function PendingTypePage() {
+export default function PagePendingType() {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
-  const { rows, loading, fetchData, handleDelete, handleFormSuccess } =
+  const { rows, loading, handleRefresh, handleDelete, handleFormSuccess } =
     useDataGrid(tblPendingType.getAll, tblPendingType.deleteById, "pendTypeId");
 
   const handleCreate = useCallback(() => {
@@ -29,8 +29,7 @@ export default function PendingTypePage() {
   const columns: GridColDef<TypeTblPendingType>[] = useMemo(
     () => [
       { field: "pendTypeName", headerName: "Name", flex: 2 },
-      { field: "parentId", headerName: "Parent Id", flex: 1 },
-      { field: "groupId", headerName: "Group Id", flex: 1 },
+      { field: "description", headerName: "Description", flex: 2 },
       dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
     ],
     [handleEdit, handleDelete]
@@ -46,7 +45,7 @@ export default function PendingTypePage() {
         loading={loading}
         getRowId={(row) => row.pendTypeId}
         onAddClick={handleCreate}
-        onRefreshClick={fetchData}
+        onRefreshClick={handleRefresh}
       />
 
       {openForm && (
