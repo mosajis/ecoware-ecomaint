@@ -4,6 +4,7 @@ import AppTheme from "@/shared/theme/AppTheme";
 import { Toaster } from "sonner";
 import { type ReactNode } from "react";
 import { Provider as JotaiProvider } from "jotai";
+import { EditorProvider } from "react-simple-wysiwyg";
 
 interface ProvidersProps {
   children?: ReactNode;
@@ -14,7 +15,9 @@ const Providers = ({ children }: ProvidersProps) => {
     <JotaiProvider>
       <AppTheme>
         <CssBaseline enableColorScheme />
-        <AppRouter />
+        <EditorProvider>
+          <AppRouter />
+        </EditorProvider>
         {children}
       </AppTheme>
 

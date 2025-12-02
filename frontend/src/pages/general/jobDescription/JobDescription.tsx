@@ -85,9 +85,13 @@ export default function PageJobDescription() {
             rows={rows}
             columns={columns}
             showToolbar
+            onRowClick={(params) => setHtml(params.row.jobDesc)}
           />
 
-          <AppEditor value={html} onChange={(e) => setHtml(e.target.value)} />
+          <AppEditor
+            initValue={html}
+            onSave={(newValue) => console.log(newValue)}
+          />
         </Splitter>
         <JobDescriptionTabs />
       </Splitter>

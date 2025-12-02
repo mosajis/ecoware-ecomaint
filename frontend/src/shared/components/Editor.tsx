@@ -1,10 +1,9 @@
-import React, { useCallback, useMemo, memo } from "react";
+import React, { useCallback, useMemo, memo, useState, useEffect } from "react";
 import Editor, {
   Toolbar,
   BtnBold,
   BtnItalic,
   createButton,
-  EditorProvider,
   ContentEditableEvent,
 } from "react-simple-wysiwyg";
 
@@ -18,8 +17,8 @@ const BtnUndo = createButton("Undo", "↶", "undo");
 const BtnRedo = createButton("Redo", "↷", "redo");
 
 interface ReusableEditorProps {
-  value: string;
-  onChange: (e: ContentEditableEvent) => void;
+  initValue?: string;
+  onSave?: (currentValue: string) => void;
   placeholder?: string;
   disabled?: boolean;
   containerStyle?: React.CSSProperties;
@@ -27,7 +26,7 @@ interface ReusableEditorProps {
 }
 
 // === Toolbar Memoized ===
-const EditorToolbar = memo(() => (
+const EditorToolbar = memo(({ onSave }: { onSave?: () => void }) => (
   <Toolbar>
     <BtnBold />
     <BtnItalic />
@@ -36,46 +35,66 @@ const EditorToolbar = memo(() => (
     <BtnAlignRight />
     <BtnUndo />
     <BtnRedo />
+    {onSave && (
+      <button
+        onClick={onSave}
+        style={{
+          padding: "4px 8px",
+          margin: "0 4px",
+          backgroundColor: "#1976d2",
+          color: "white",
+          border: "none",
+          borderRadius: "4px",
+          cursor: "pointer",
+          fontWeight: "bold",
+          fontSize: "14px",
+        }}
+        title="Save"
+      >
+        ✓
+      </button>
+    )}
   </Toolbar>
 ));
 
 function AppEditorComponent({
-  value,
-  onChange,
+  initValue = "",
+  onSave,
   placeholder,
   disabled = false,
   containerStyle,
   className,
 }: ReusableEditorProps) {
-  // callback memoized برای جلوگیری از re-render غیرضروری
-  const handleChange = useCallback(
-    (e: ContentEditableEvent) => {
-      onChange(e);
-    },
-    [onChange]
-  );
+  const [value, setValue] = useState("");
 
-  // استایل نهایی با useMemo
+  useEffect(() => {
+    setValue(initValue);
+  }, [initValue]);
+  const handleChange = useCallback((e: ContentEditableEvent) => {
+    setValue(e.target.value);
+  }, []);
+
+  const handleSave = useCallback(() => {
+    if (onSave) onSave(value);
+  }, [onSave, value]);
+
   const mergedStyle = useMemo(
     () => ({ width: "100%", height: "100%", ...containerStyle }),
     [containerStyle]
   );
 
   return (
-    <EditorProvider>
-      <Editor
-        value={value}
-        onChange={handleChange}
-        placeholder={placeholder}
-        disabled={disabled}
-        containerProps={{ style: mergedStyle }}
-        className={className}
-      >
-        <EditorToolbar />
-      </Editor>
-    </EditorProvider>
+    <Editor
+      value={value}
+      onChange={handleChange}
+      placeholder={placeholder}
+      disabled={disabled}
+      containerProps={{ style: mergedStyle }}
+      className={className}
+    >
+      <EditorToolbar onSave={handleSave} />
+    </Editor>
   );
 }
 
-// export با React.memo برای جلوگیری از رندرهای غیرضروری
 export default memo(AppEditorComponent);
