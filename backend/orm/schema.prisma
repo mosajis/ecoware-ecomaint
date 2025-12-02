@@ -284,21 +284,8 @@ model TblComponentUnit {
   maintBudgetId      Int?             @map("MaintBudgetID")
   stockBudgetId      Int?             @map("StockBudgetID")
   costCentreId       Int?             @map("CostCentreID")
-  transCodeId01      Int?             @map("TransCodeID01")
-  transCodeId02      Int?             @map("TransCodeID02")
-  transCodeId03      Int?             @map("TransCodeID03")
-  transCodeId04      Int?             @map("TransCodeID04")
-  transCodeId05      Int?             @map("TransCodeID05")
-  transCodeId06      Int?             @map("TransCodeID06")
-  transCodeId07      Int?             @map("TransCodeID07")
-  transCodeId08      Int?             @map("TransCodeID08")
-  transCodeId09      Int?             @map("TransCodeID09")
-  transCodeId10      Int?             @map("TransCodeID10")
   compNo             String?          @map("CompNo") @db.NVarChar(90)
   serialNo           String?          @map("SerialNo") @db.NVarChar(80)
-  purchDate          DateTime?        @map("PurchDate") @db.DateTime
-  purchCurr          String?          @map("PurchCurr") @db.NVarChar(3)
-  purchPrice         Int?             @map("PurchPrice")
   depreciationTime   Int?             @map("DepreciationTime")
   warrantyEnd        DateTime?        @map("WarrantyEnd") @db.DateTime
   userDefCurr        String?          @map("UserDefCurr") @db.NVarChar(3)
@@ -307,13 +294,8 @@ model TblComponentUnit {
   userDefText2       String?          @map("UserDefText2") @db.NVarChar(200)
   userDefText3       String?          @map("UserDefText3") @db.NVarChar(200)
   userDefText4       String?          @map("UserDefText4") @db.NVarChar(200)
-  userDefText5       String?          @map("UserDefText5") @db.NVarChar(200)
-  userDefText6       String?          @map("UserDefText6") @db.NVarChar(200)
-  userDefText7       String?          @map("UserDefText7") @db.NVarChar(200)
   misc1              String?          @map("Misc1") @db.NVarChar(200)
   misc2              String?          @map("Misc2") @db.NVarChar(200)
-  account            String?          @map("Account") @db.NVarChar(15)
-  userDefName        String?          @map("UserDefName") @db.NVarChar(200)
   unplannedLayout    Int?             @map("UnplannedLayout")
   lastUsedLocationId Int?             @map("LastUsedLocationID")
   statusId           Int?             @map("StatusID")
@@ -324,13 +306,13 @@ model TblComponentUnit {
   exportMarker       Int?             @map("ExportMarker")
   lastupdate         DateTime?        @db.DateTime
   isCritical         Int?             @map("IsCritical") @db.TinyInt
-  parentCompId_2     Int?             @map("ParentCompID_2")
-  compTypeId_2       Int?             @map("CompTypeID_2")
   orderId            Int?             @map("OrderID")
   userId             Int?             @map("UserID")
   tblCompCounters    TblCompCounter[]
   tblCompJobs        TblCompJob[]
   tblAddress         TblAddress?      @relation(fields: [vendorId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblAddress")
+  tblCompStatus      TblCompStatus?   @relation(fields: [statusId], references: [compStatusId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblCompStatus")
+  tblCompType        TblCompType?     @relation(fields: [compTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblCompType")
   tblLocation        TblLocation?     @relation(fields: [locationId], references: [locationId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblLocation")
 
   @@index([compTypeId], map: "CU_CompTypeId_IX")
@@ -359,14 +341,15 @@ model TblCompSpare {
 }
 
 model TblCompStatus {
-  compStatusId    Int       @id(map: "PK_CompStatus") @default(dbgenerated("NEXT VALUE FOR [Seq_CompStatus]"), map: "DF_CompStatusId") @map("CompStatusId")
-  compStatusName  String?   @map("CompStatusName") @db.NVarChar(500)
-  compStatusGroup Int?      @map("CompStatusGroup")
-  orderId         Int?      @map("OrderID")
-  userId          Int?      @map("UserID")
-  deptId          Int?      @map("DeptID")
-  exportMarker    Int?      @map("ExportMarker")
-  lastupdate      DateTime? @db.DateTime
+  compStatusId      Int                @id(map: "PK_CompStatus") @default(dbgenerated("NEXT VALUE FOR [Seq_CompStatus]"), map: "DF_CompStatusId") @map("CompStatusId")
+  compStatusName    String?            @map("CompStatusName") @db.NVarChar(500)
+  compStatusGroup   Int?               @map("CompStatusGroup")
+  orderId           Int?               @map("OrderID")
+  userId            Int?               @map("UserID")
+  deptId            Int?               @map("DeptID")
+  exportMarker      Int?               @map("ExportMarker")
+  lastupdate        DateTime?          @db.DateTime
+  tblComponentUnits TblComponentUnit[]
 
   @@map("tblCompStatus")
   @@schema("dbo")
@@ -393,31 +376,32 @@ model TblCompStatusLog {
 }
 
 model TblCompType {
-  compTypeId         Int           @id(map: "PK_tblComponentType") @default(dbgenerated("NEXT VALUE FOR [Seq_CompType]"), map: "DF_CompTypeID") @map("CompTypeID")
-  componentClassId   Int?          @map("ComponentClassID")
-  parentCompTypeId   Int?          @map("ParentCompTypeID")
-  primaryVendorId    Int?          @map("PrimaryVendorID")
-  compTypeNo         String?       @map("CompTypeNo") @db.NVarChar(80)
-  compName           String?       @map("CompName") @db.NVarChar(80)
-  compType           String?       @map("CompType") @db.NVarChar(80)
-  compTypeModel      String?       @map("CompTypeModel") @db.NVarChar(80)
-  makerId            Int?          @map("MakerID")
-  userDefMarPol      Int?          @map("UserDefMarPol")
-  userDefImoNo       String?       @map("UserDefImoNo") @db.NVarChar(80)
-  userDefText1       String?       @map("UserDefText1") @db.NVarChar(80)
-  layoutId           Int?          @map("LayoutID")
-  notes              String?       @map("Notes") @db.NVarChar(500)
-  userTableId        Int?          @map("UserTableID")
-  deptId             Int?          @map("DeptID")
-  exportMarker       Int?          @map("ExportMarker")
-  lastupdate         DateTime?     @db.DateTime
-  componentClassId_2 Int?          @map("ComponentClassID_2")
-  parentCompTypeId_2 Int?          @map("ParentCompTypeID_2")
-  orderId            Int?          @map("OrderID")
-  userId             Int?          @map("UserID")
-  tblAddress         TblAddress?   @relation(fields: [makerId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompType_tblAddress")
-  tblCompType        TblCompType?  @relation("tblCompTypeTotblCompType", fields: [parentCompTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompType_tblCompType")
-  otherTblCompTypes  TblCompType[] @relation("tblCompTypeTotblCompType")
+  compTypeId         Int                @id(map: "PK_tblComponentType") @default(dbgenerated("NEXT VALUE FOR [Seq_CompType]"), map: "DF_CompTypeID") @map("CompTypeID")
+  componentClassId   Int?               @map("ComponentClassID")
+  parentCompTypeId   Int?               @map("ParentCompTypeID")
+  primaryVendorId    Int?               @map("PrimaryVendorID")
+  compTypeNo         String?            @map("CompTypeNo") @db.NVarChar(80)
+  compName           String?            @map("CompName") @db.NVarChar(80)
+  compType           String?            @map("CompType") @db.NVarChar(80)
+  compTypeModel      String?            @map("CompTypeModel") @db.NVarChar(80)
+  makerId            Int?               @map("MakerID")
+  userDefMarPol      Int?               @map("UserDefMarPol")
+  userDefImoNo       String?            @map("UserDefImoNo") @db.NVarChar(80)
+  userDefText1       String?            @map("UserDefText1") @db.NVarChar(80)
+  layoutId           Int?               @map("LayoutID")
+  notes              String?            @map("Notes") @db.NVarChar(500)
+  userTableId        Int?               @map("UserTableID")
+  deptId             Int?               @map("DeptID")
+  exportMarker       Int?               @map("ExportMarker")
+  lastupdate         DateTime?          @db.DateTime
+  componentClassId_2 Int?               @map("ComponentClassID_2")
+  parentCompTypeId_2 Int?               @map("ParentCompTypeID_2")
+  orderId            Int?               @map("OrderID")
+  userId             Int?               @map("UserID")
+  tblComponentUnits  TblComponentUnit[]
+  tblAddress         TblAddress?        @relation(fields: [makerId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompType_tblAddress")
+  tblCompType        TblCompType?       @relation("tblCompTypeTotblCompType", fields: [parentCompTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompType_tblCompType")
+  otherTblCompTypes  TblCompType[]      @relation("tblCompTypeTotblCompType")
 
   @@index([componentClassId], map: "TblCompType_ComponentClassId_IX")
   @@map("tblCompType")
