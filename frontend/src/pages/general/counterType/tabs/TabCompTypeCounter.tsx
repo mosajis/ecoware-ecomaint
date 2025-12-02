@@ -27,12 +27,6 @@ const columns: GridColDef<TypeTblCompTypeCounter>[] = [
     valueGetter: (_, row) => row.tblCounterType?.name,
   },
   {
-    field: "maxDailyValue",
-    headerName: "Max Daily Value",
-    flex: 1,
-    valueGetter: (_, row) => row.tblCounterType?.maxDailyValue,
-  },
-  {
     field: "orderId",
     headerName: "Sort ID",
     width: 60,
