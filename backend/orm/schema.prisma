@@ -376,32 +376,33 @@ model TblCompStatusLog {
 }
 
 model TblCompType {
-  compTypeId         Int                @id(map: "PK_tblComponentType") @default(dbgenerated("NEXT VALUE FOR [Seq_CompType]"), map: "DF_CompTypeID") @map("CompTypeID")
-  componentClassId   Int?               @map("ComponentClassID")
-  parentCompTypeId   Int?               @map("ParentCompTypeID")
-  primaryVendorId    Int?               @map("PrimaryVendorID")
-  compTypeNo         String?            @map("CompTypeNo") @db.NVarChar(80)
-  compName           String?            @map("CompName") @db.NVarChar(80)
-  compType           String?            @map("CompType") @db.NVarChar(80)
-  compTypeModel      String?            @map("CompTypeModel") @db.NVarChar(80)
-  makerId            Int?               @map("MakerID")
-  userDefMarPol      Int?               @map("UserDefMarPol")
-  userDefImoNo       String?            @map("UserDefImoNo") @db.NVarChar(80)
-  userDefText1       String?            @map("UserDefText1") @db.NVarChar(80)
-  layoutId           Int?               @map("LayoutID")
-  notes              String?            @map("Notes") @db.NVarChar(500)
-  userTableId        Int?               @map("UserTableID")
-  deptId             Int?               @map("DeptID")
-  exportMarker       Int?               @map("ExportMarker")
-  lastupdate         DateTime?          @db.DateTime
-  componentClassId_2 Int?               @map("ComponentClassID_2")
-  parentCompTypeId_2 Int?               @map("ParentCompTypeID_2")
-  orderId            Int?               @map("OrderID")
-  userId             Int?               @map("UserID")
-  tblComponentUnits  TblComponentUnit[]
-  tblAddress         TblAddress?        @relation(fields: [makerId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompType_tblAddress")
-  tblCompType        TblCompType?       @relation("tblCompTypeTotblCompType", fields: [parentCompTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompType_tblCompType")
-  otherTblCompTypes  TblCompType[]      @relation("tblCompTypeTotblCompType")
+  compTypeId          Int                  @id(map: "PK_tblComponentType") @default(dbgenerated("NEXT VALUE FOR [Seq_CompType]"), map: "DF_CompTypeID") @map("CompTypeID")
+  componentClassId    Int?                 @map("ComponentClassID")
+  parentCompTypeId    Int?                 @map("ParentCompTypeID")
+  primaryVendorId     Int?                 @map("PrimaryVendorID")
+  compTypeNo          String?              @map("CompTypeNo") @db.NVarChar(80)
+  compName            String?              @map("CompName") @db.NVarChar(80)
+  compType            String?              @map("CompType") @db.NVarChar(80)
+  compTypeModel       String?              @map("CompTypeModel") @db.NVarChar(80)
+  makerId             Int?                 @map("MakerID")
+  userDefMarPol       Int?                 @map("UserDefMarPol")
+  userDefImoNo        String?              @map("UserDefImoNo") @db.NVarChar(80)
+  userDefText1        String?              @map("UserDefText1") @db.NVarChar(80)
+  layoutId            Int?                 @map("LayoutID")
+  notes               String?              @map("Notes") @db.NVarChar(500)
+  userTableId         Int?                 @map("UserTableID")
+  deptId              Int?                 @map("DeptID")
+  exportMarker        Int?                 @map("ExportMarker")
+  lastupdate          DateTime?            @db.DateTime
+  componentClassId_2  Int?                 @map("ComponentClassID_2")
+  parentCompTypeId_2  Int?                 @map("ParentCompTypeID_2")
+  orderId             Int?                 @map("OrderID")
+  userId              Int?                 @map("UserID")
+  tblComponentUnits   TblComponentUnit[]
+  tblAddress          TblAddress?          @relation(fields: [makerId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompType_tblAddress")
+  tblCompType         TblCompType?         @relation("tblCompTypeTotblCompType", fields: [parentCompTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompType_tblCompType")
+  otherTblCompTypes   TblCompType[]        @relation("tblCompTypeTotblCompType")
+  tblCompTypeCounters TblCompTypeCounter[]
 
   @@index([componentClassId], map: "TblCompType_ComponentClassId_IX")
   @@map("tblCompType")
@@ -419,6 +420,7 @@ model TblCompTypeCounter {
   lastupdate             DateTime?               @db.DateTime
   orderId                Int?                    @map("OrderID")
   userId                 Int?                    @map("UserID")
+  tblCompType            TblCompType?            @relation(fields: [compTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeCounter_tblCompType")
   tblCounterType         TblCounterType?         @relation(fields: [counterTypeId], references: [counterTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeCounter_tblCounterType")
   tblCompTypeJobCounters TblCompTypeJobCounter[]
 

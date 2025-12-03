@@ -1,9 +1,9 @@
+import * as z from "zod";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
 import { memo, useEffect, useState, useCallback, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { Box, MenuItem, TextField } from "@mui/material";
-import FormDialog from "@/shared/components/formDialog/FormDialog";
 import { tblCounterType, TypeTblCounterType } from "@/core/api/generated/api";
 
 // === Zod schema ===
@@ -37,10 +37,7 @@ function CounterTypeFormDialog({
     () => ({
       code: "",
       name: "",
-      maxDailyValue: null,
       type: null,
-      deptId: null,
-      exportMarker: null,
     }),
     []
   );

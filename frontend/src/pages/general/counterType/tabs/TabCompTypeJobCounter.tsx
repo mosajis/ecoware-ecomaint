@@ -1,7 +1,9 @@
 import React, { useCallback } from "react";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import {
+  tblCompTypeCounter,
   tblCompTypeJobCounter,
+  tblJobDescription,
   TypeTblCompTypeJobCounter,
 } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
@@ -17,11 +19,12 @@ const columns: GridColDef<TypeTblCompTypeJobCounter>[] = [
     field: "jobDescId",
     headerName: "Job Desc",
     flex: 1,
-    valueGetter: (_, row) => row.tblCompTypeJob?.jobDescId,
+    valueGetter: (_, row) =>
+      row.tblCompTypeJob?.tblJobDescription?.jobDescTitle,
   },
   {
     field: "maintTypeId",
-    headerName: "Maint Type",
+    headerName: "Maint Type (set Rel)",
     flex: 1,
     valueGetter: (_, row) => row.tblCompTypeJob?.maintTypeId,
   },
@@ -32,16 +35,10 @@ const columns: GridColDef<TypeTblCompTypeJobCounter>[] = [
     valueGetter: (_, row) => row.frequency,
   },
   {
-    field: "window",
-    headerName: "Window",
+    field: "compTypeCounter",
+    headerName: "Counter Type",
     flex: 1,
-    valueGetter: (_, row) => row.window,
-  },
-  {
-    field: "compTypeCounterId",
-    headerName: "Type Counter Id",
-    flex: 1,
-    valueGetter: (_, row) => row.compTypeCounterId,
+    valueGetter: (_, row) => row?.tblCompTypeCounter?.tblCompType?.compName,
   },
 ];
 
@@ -50,22 +47,36 @@ export default function TabCompTypeJobCounter(
 ) {
   const { counterTypeId, label } = props;
 
-  const getAll = useCallback(() => {
+  const getAll = useCallback(async () => {
     return tblCompTypeJobCounter.getAll({
-      filter: { counterTypeId },
-      include: { tblCompTypeJob: true, tblCompTypeCounter: true },
+      filter: {
+        tblCompTypeCounter: {
+          counterTypeId,
+        },
+      },
+      include: {
+        tblCompTypeCounter: {
+          include: { tblCompType: true },
+        },
+        tblCompTypeJob: {
+          include: {
+            tblJobDescription: true,
+          },
+        },
+      },
     });
   }, [counterTypeId]);
 
   const { rows, loading, fetchData } = useDataGrid(
     getAll,
     tblCompTypeJobCounter.deleteById,
-    "compTypeJobCounterId"
+    "compTypeJobCounterId",
+    !!counterTypeId
   );
 
   return (
     <CustomizedDataGrid
-      rows={counterTypeId ? rows : []}
+      rows={rows}
       columns={columns}
       loading={loading}
       label={label || undefined}

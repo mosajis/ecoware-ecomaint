@@ -12,13 +12,13 @@ interface TabComponentUnitProps {
 const columns: GridColDef<TypeTblCompCounter>[] = [
   {
     field: "compNo",
-    headerName: "Comp Name",
+    headerName: "Component",
     flex: 1,
     valueGetter: (_, row) => row.tblComponentUnit?.compNo,
   },
   {
     field: "compTypeId",
-    headerName: "Comp Type",
+    headerName: "CompType",
     flex: 1,
     // @ts-ignore
     valueGetter: (_, row) => row.tblComponentUnit?.tblCompType?.compName,
@@ -31,7 +31,7 @@ const columns: GridColDef<TypeTblCompCounter>[] = [
   },
   {
     field: "serialNo",
-    headerName: "Serial No",
+    headerName: "SerialNo",
     flex: 1,
     valueGetter: (_, row) => row.tblComponentUnit?.serialNo,
   },
@@ -46,7 +46,8 @@ const columns: GridColDef<TypeTblCompCounter>[] = [
     headerName: "Status",
     flex: 1,
     // @ts-ignore
-    valueGetter: (_, row) => row.tblComponentUnit?.tblCompStatus.compStatusName,
+    valueGetter: (_, row) =>
+      row.tblComponentUnit?.tblCompStatus?.compStatusName,
   },
 ];
 

@@ -12,9 +12,6 @@ import TabsContainer, {
 } from "@/shared/components/TabsContainer";
 
 // Lazy imports
-const TabDetails = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabDetails")
-);
 const TabJob = lazy(
   () => import("@/pages/maintenance/componentType/tabs/TabJob")
 );
@@ -81,7 +78,7 @@ const ComponentTypeTabs = ({ selectedCompTypeId }: Props) => {
       tabs={tabs}
       queryParamKey="tab"
       fillHeight={true}
-      selected={selectedCompTypeId}
+      tabProps={{ selected: selectedCompTypeId }}
     />
   );
 };

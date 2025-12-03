@@ -16,7 +16,7 @@ const TabJob = ({ selected }: Props) => {
   const handleCreate = () => {
     if (!selected) return;
     navigate({
-      to: `${selected}/job`, // اگر selected = componentTypeId
+      to: `/maintenance/component-type/${selected}/job`,
     });
   };
 

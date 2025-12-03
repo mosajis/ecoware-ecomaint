@@ -17,20 +17,14 @@ const columns: GridColDef<TypeTblCompTypeCounter>[] = [
   {
     field: "code",
     headerName: "Code",
-    width: 60,
-    valueGetter: (_, row) => row.tblCounterType?.code,
+    width: 120,
+    valueGetter: (_, row) => row.tblCompType?.compTypeNo,
   },
   {
     field: "name",
-    headerName: "Type No",
+    headerName: "Name",
     flex: 1,
-    valueGetter: (_, row) => row.tblCounterType?.name,
-  },
-  {
-    field: "orderId",
-    headerName: "Sort ID",
-    width: 60,
-    valueGetter: (_, row) => row.tblCounterType?.orderId,
+    valueGetter: (_, row) => row?.tblCompType?.compName,
   },
 ];
 
@@ -53,7 +47,7 @@ export default function TabCompTypeCounter(props: TabCompTypeCounterProps) {
   const getAll = useCallback(() => {
     return tblCompTypeCounter.getAll({
       filter: { counterTypeId },
-      include: { tblCounterType: true },
+      include: { tblCompType: true },
     });
   }, [counterTypeId]);
 

@@ -18,11 +18,11 @@ const columns: GridColDef<TypeTblCompJobCounter>[] = [
     field: "jobDesc",
     headerName: "Job Description",
     flex: 1,
-    valueGetter: (_, row) => row.tblCompJob?.jobDescId,
+    valueGetter: (_, row) => row.tblCompJob?.tblJobDescription.jobDescTitle,
   },
   {
     field: "maintType",
-    headerName: "Maint Type",
+    headerName: "Maint Type (set Rrel)",
     flex: 1,
     valueGetter: (_, row) => row.tblCompJob?.maintTypeId,
   },
@@ -50,12 +50,6 @@ const columns: GridColDef<TypeTblCompJobCounter>[] = [
     flex: 1,
     valueGetter: (_, row) => row.window,
   },
-  {
-    field: "compCounterId",
-    headerName: "Comp Counter Id",
-    flex: 1,
-    valueGetter: (_, row) => row.compCounterId,
-  },
 ];
 
 export default function TabCompJobCounter(props: TabCompJobCounterProps) {
@@ -73,21 +67,46 @@ export default function TabCompJobCounter(props: TabCompJobCounterProps) {
     );
   }
 
+  // const getAll = useCallback(async () => {
+  //   // select * from tblcomponentumit where compid in (1001,1002,1003)
+  //   const compCounters = await tblCompCounter.getAll({
+  //     filter: { counterTypeId },
+  //   });
+
+  //   const compCountersIds = compCounters.items.map((i) => i.compCounterId);
+
+  //   return tblCompJobCounter.getAll({
+  //     filter: {
+  //       compCounterId: {
+  //         in: compCountersIds,
+  //       },
+  //     },
+  //     include: {
+  //       tblCompCounter: true,
+  //       tblCompJob: {
+  //         include: {
+  //           tblJobDescription: true,
+  //         },
+  //       },
+  //     },
+  //   });
+  // }, [counterTypeId]);
+
   const getAll = useCallback(async () => {
-    // select * from tblcomponentumit where compid in (1001,1002,1003)
-    const compCounters = await tblCompCounter.getAll({
-      filter: { counterTypeId },
-    });
-
-    const compCountersIds = compCounters.items.map((i) => i.compCounterId);
-
     return tblCompJobCounter.getAll({
       filter: {
-        compCounterId: {
-          in: compCountersIds,
+        tblCompCounter: {
+          counterTypeId,
         },
       },
-      include: { tblCompJob: true, tblCompCounter: true },
+      include: {
+        tblCompCounter: true,
+        tblCompJob: {
+          include: {
+            tblJobDescription: true,
+          },
+        },
+      },
     });
   }, [counterTypeId]);
 
