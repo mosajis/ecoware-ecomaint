@@ -3320,7 +3320,7 @@ export interface operations {
                             diagramId: number;
                             version: null | (number);
                             definition: null | (unknown | Record<string, never>);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -3701,7 +3701,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -4740,7 +4740,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -5589,7 +5589,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -6188,7 +6188,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -7481,7 +7481,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -8137,7 +8137,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -8446,7 +8446,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -8712,7 +8712,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -9039,7 +9039,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -9344,7 +9344,7 @@ export interface operations {
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -9655,7 +9655,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -9988,7 +9988,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -10440,7 +10440,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -10847,7 +10847,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -11786,7 +11786,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -12345,7 +12345,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -13415,7 +13415,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -13969,7 +13969,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -14278,7 +14278,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -14541,7 +14541,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -14984,7 +14984,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -16177,7 +16177,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -16682,7 +16682,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -17171,7 +17171,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -18223,7 +18223,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -19163,7 +19163,7 @@ export interface operations {
                             failureNumber: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -19589,7 +19589,7 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                             deptId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -19902,7 +19902,63 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                            tblFunctions?: null | {
+                                functionId: number;
+                                compId: null | (number);
+                                criticalityId: null | (number);
+                                layoutId: null | (number);
+                                costCentreId: null | (number);
+                                maintBudgetId: null | (number);
+                                stockBudgetId: null | (number);
+                                locationId: null | (number);
+                                funcNo: null | string;
+                                funcDescr: null | string;
+                                funcRef: null | string;
+                                parentFunctionId: null | (number);
+                                userDefText: null | string;
+                                userDefText2: null | string;
+                                userDefText3: null | string;
+                                userDefText4: null | string;
+                                userDefText5: null | string;
+                                userDefText6: null | string;
+                                notes: null | string;
+                                statusId: null | (number);
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
+                            otherTblFunctions?: {
+                                functionId: number;
+                                compId: null | (number);
+                                criticalityId: null | (number);
+                                layoutId: null | (number);
+                                costCentreId: null | (number);
+                                maintBudgetId: null | (number);
+                                stockBudgetId: null | (number);
+                                locationId: null | (number);
+                                funcNo: null | string;
+                                funcDescr: null | string;
+                                funcRef: null | string;
+                                parentFunctionId: null | (number);
+                                userDefText: null | string;
+                                userDefText2: null | string;
+                                userDefText3: null | string;
+                                userDefText4: null | string;
+                                userDefText5: null | string;
+                                userDefText6: null | string;
+                                notes: null | string;
+                                statusId: null | (number);
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -19934,6 +19990,16 @@ export interface operations {
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblFunctions?: {
+                        connect: {
+                            functionId: number;
+                        };
+                    };
+                    otherTblFunctions?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     funcNo?: null | string;
@@ -19948,6 +20014,16 @@ export interface operations {
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblFunctions?: {
+                        connect: {
+                            functionId: number;
+                        };
+                    };
+                    otherTblFunctions?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     funcNo?: null | string;
@@ -19962,6 +20038,16 @@ export interface operations {
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblFunctions?: {
+                        connect: {
+                            functionId: number;
+                        };
+                    };
+                    otherTblFunctions?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                 };
             };
         };
@@ -19999,6 +20085,62 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblFunctions?: null | {
+                            functionId: number;
+                            compId: null | (number);
+                            criticalityId: null | (number);
+                            layoutId: null | (number);
+                            costCentreId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            locationId: null | (number);
+                            funcNo: null | string;
+                            funcDescr: null | string;
+                            funcRef: null | string;
+                            parentFunctionId: null | (number);
+                            userDefText: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            userDefText5: null | string;
+                            userDefText6: null | string;
+                            notes: null | string;
+                            statusId: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        otherTblFunctions?: {
+                            functionId: number;
+                            compId: null | (number);
+                            criticalityId: null | (number);
+                            layoutId: null | (number);
+                            costCentreId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            locationId: null | (number);
+                            funcNo: null | string;
+                            funcDescr: null | string;
+                            funcRef: null | string;
+                            parentFunctionId: null | (number);
+                            userDefText: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            userDefText5: null | string;
+                            userDefText6: null | string;
+                            notes: null | string;
+                            statusId: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -20080,6 +20222,62 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblFunctions?: null | {
+                            functionId: number;
+                            compId: null | (number);
+                            criticalityId: null | (number);
+                            layoutId: null | (number);
+                            costCentreId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            locationId: null | (number);
+                            funcNo: null | string;
+                            funcDescr: null | string;
+                            funcRef: null | string;
+                            parentFunctionId: null | (number);
+                            userDefText: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            userDefText5: null | string;
+                            userDefText6: null | string;
+                            notes: null | string;
+                            statusId: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        otherTblFunctions?: {
+                            functionId: number;
+                            compId: null | (number);
+                            criticalityId: null | (number);
+                            layoutId: null | (number);
+                            costCentreId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            locationId: null | (number);
+                            funcNo: null | string;
+                            funcDescr: null | string;
+                            funcRef: null | string;
+                            parentFunctionId: null | (number);
+                            userDefText: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            userDefText5: null | string;
+                            userDefText6: null | string;
+                            notes: null | string;
+                            statusId: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -20109,6 +20307,20 @@ export interface operations {
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblFunctions?: {
+                        connect?: {
+                            functionId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblFunctions?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     funcNo?: null | string;
@@ -20123,6 +20335,20 @@ export interface operations {
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblFunctions?: {
+                        connect?: {
+                            functionId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblFunctions?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     funcNo?: null | string;
@@ -20137,6 +20363,20 @@ export interface operations {
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblFunctions?: {
+                        connect?: {
+                            functionId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblFunctions?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
             };
         };
@@ -20174,6 +20414,62 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblFunctions?: null | {
+                            functionId: number;
+                            compId: null | (number);
+                            criticalityId: null | (number);
+                            layoutId: null | (number);
+                            costCentreId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            locationId: null | (number);
+                            funcNo: null | string;
+                            funcDescr: null | string;
+                            funcRef: null | string;
+                            parentFunctionId: null | (number);
+                            userDefText: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            userDefText5: null | string;
+                            userDefText6: null | string;
+                            notes: null | string;
+                            statusId: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        otherTblFunctions?: {
+                            functionId: number;
+                            compId: null | (number);
+                            criticalityId: null | (number);
+                            layoutId: null | (number);
+                            costCentreId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            locationId: null | (number);
+                            funcNo: null | string;
+                            funcDescr: null | string;
+                            funcRef: null | string;
+                            parentFunctionId: null | (number);
+                            userDefText: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            userDefText5: null | string;
+                            userDefText6: null | string;
+                            notes: null | string;
+                            statusId: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -20225,6 +20521,62 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblFunctions?: null | {
+                            functionId: number;
+                            compId: null | (number);
+                            criticalityId: null | (number);
+                            layoutId: null | (number);
+                            costCentreId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            locationId: null | (number);
+                            funcNo: null | string;
+                            funcDescr: null | string;
+                            funcRef: null | string;
+                            parentFunctionId: null | (number);
+                            userDefText: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            userDefText5: null | string;
+                            userDefText6: null | string;
+                            notes: null | string;
+                            statusId: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        otherTblFunctions?: {
+                            functionId: number;
+                            compId: null | (number);
+                            criticalityId: null | (number);
+                            layoutId: null | (number);
+                            costCentreId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            locationId: null | (number);
+                            funcNo: null | string;
+                            funcDescr: null | string;
+                            funcRef: null | string;
+                            parentFunctionId: null | (number);
+                            userDefText: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            userDefText5: null | string;
+                            userDefText6: null | string;
+                            notes: null | string;
+                            statusId: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -20320,7 +20672,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -20843,7 +21195,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -21692,7 +22044,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             userId: null | (number);
                             orderId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -21954,7 +22306,7 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -22229,7 +22581,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             userId: null | (number);
                             orderId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -22608,7 +22960,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -23233,7 +23585,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -23550,7 +23902,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -24087,7 +24439,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             deptId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -24463,7 +24815,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -25191,7 +25543,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -25865,7 +26217,7 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -26300,7 +26652,7 @@ export interface operations {
                             followStatuseId: null | (number);
                             waitingTime: null | number;
                             orderId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -26615,7 +26967,7 @@ export interface operations {
                             userId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -26971,7 +27323,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -27650,7 +28002,7 @@ export interface operations {
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -28174,7 +28526,7 @@ export interface operations {
                             description: null | string;
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -28461,7 +28813,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -28771,7 +29123,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -29093,7 +29445,7 @@ export interface operations {
                             defineMethodOnReporting: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -29565,7 +29917,7 @@ export interface operations {
                             deleteOnRotation: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -29896,7 +30248,7 @@ export interface operations {
                             farsiDescription: null | string;
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -30409,7 +30761,7 @@ export interface operations {
                             itemStatus: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -30818,7 +31170,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -31163,7 +31515,7 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -31846,7 +32198,7 @@ export interface operations {
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -32155,7 +32507,7 @@ export interface operations {
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -32567,7 +32919,7 @@ export interface operations {
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;
@@ -33044,7 +33396,7 @@ export interface operations {
                             orderId: null | (number);
                             deptId: null | (number);
                             lastUpdate: null | (Record<string, never> | number);
-                        }[];
+                        }[] | unknown;
                         total: number;
                         page: number;
                         perPage: number;

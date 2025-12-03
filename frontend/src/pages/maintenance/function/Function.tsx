@@ -1,3 +1,4 @@
+import Splitter from "@/shared/components/Splitter";
 import TabsComponent from "./FunctionTabs";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { tblFunctions, TypeTblFunctions } from "@/core/api/generated/api";
@@ -5,15 +6,15 @@ import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActio
 import { useDataGrid } from "@/pages/general/_hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
 import { useCallback, useMemo, useState } from "react";
-import Splitter from "@/shared/components/Splitter";
+import FunctionFormDialog from "./FunctionFormDialog";
 
-export default function FunctionListView() {
+export default function PageFunction() {
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
 
   // === useDataGrid ===
-  const { rows, loading, fetchData, handleDelete, handleFormSuccess } =
+  const { rows, loading, handleRefresh, handleDelete, handleFormSuccess } =
     useDataGrid(tblFunctions.getAll, tblFunctions.deleteById, "functionId");
 
   // === Handlers ===
@@ -32,11 +33,9 @@ export default function FunctionListView() {
   // === Columns ===
   const columns = useMemo<GridColDef<TypeTblFunctions>[]>(
     () => [
-      { field: "compId", headerName: "Comp Name", flex: 1 },
-      { field: "compTypeId", headerName: "Comp Type", flex: 1 },
       { field: "funcNo", headerName: "Function No", flex: 1 },
-      { field: "funcDescr", headerName: "Description", flex: 2 },
-      { field: "statusId", headerName: "Status", flex: 1 },
+      { field: "Component", headerName: "Component", flex: 1 },
+      { field: "funcDescr", headerName: "funcDescr", flex: 1 },
       dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
     ],
     [handleEdit, handleDelete]
@@ -45,24 +44,19 @@ export default function FunctionListView() {
   return (
     <>
       <Splitter horizontal>
-        <TabsComponent />
-
         <CustomizedDataGrid
           label="Functions"
           showToolbar
           onAddClick={handleCreate}
-          onRefreshClick={fetchData}
+          onRefreshClick={handleRefresh}
           rows={rows}
           columns={columns}
           loading={loading}
           getRowId={(row) => row.functionId}
-          disableDensity
-          disableRowNumber
-          checkboxSelection
-          disableMultipleRowSelection
         />
+        <TabsComponent />
       </Splitter>
-      {/* <FunctionFormDialog
+      <FunctionFormDialog
         open={openForm}
         mode={mode}
         recordId={selectedRowId}
@@ -71,7 +65,7 @@ export default function FunctionListView() {
           handleFormSuccess(record);
           setOpenForm(false);
         }}
-      /> */}
+      />
     </>
   );
 }

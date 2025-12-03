@@ -17,6 +17,7 @@ import PageJobClass from "@/pages/general/jobClass/JobClass";
 import PageJobDescription from "@/pages/general/jobDescription/JobDescription";
 import PageComponentTypeList from "@/pages/maintenance/componentType/ComponentType";
 import PageComponentTypeTree from "@/pages/maintenance/componentType/ComponentTypeTree";
+import PageFunction from "@/pages/maintenance/function/Function";
 
 // --- Root ---
 export const rootRoute = createRootRoute({
@@ -120,16 +121,30 @@ export const generalJobDescriptionRoute = createRoute({
 });
 
 // --- Maintenance ---
+
+// Function ----------------------------------------
 export const maintFunctionRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/maintenance/function",
-  component: () => "Function Page",
 });
+export const maintFunctionListRoute = createRoute({
+  getParentRoute: () => maintFunctionRoute,
+  path: "list-view",
+  component: PageFunction,
+});
+export const maintFunctionTreeRoute = createRoute({
+  getParentRoute: () => maintFunctionRoute,
+  path: "tree-view",
+});
+
+// Component Unit ----------------------------------
 export const maintComponentUnitRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/maintenance/component-unit",
   component: () => "Component Unit Page",
 });
+
+// Component Type ----------------------------------
 export const maintComponentTypeRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/maintenance/component-type",
@@ -144,6 +159,7 @@ export const maintComponentTypeListRoute = createRoute({
   path: "list-view",
   component: PageComponentTypeList,
 });
+
 export const maintComponentJobRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/maintenance/component-job",
@@ -248,7 +264,10 @@ export const routeTree = rootRoute.addChildren([
     generalJobClassRoute,
     generalJobDescriptionRoute,
     // Maintenance
-    maintFunctionRoute,
+    maintFunctionRoute.addChildren([
+      maintFunctionListRoute,
+      maintFunctionTreeRoute,
+    ]),
     maintComponentUnitRoute,
     maintComponentTypeRoute.addChildren([
       maintComponentTypeTreeRoute,

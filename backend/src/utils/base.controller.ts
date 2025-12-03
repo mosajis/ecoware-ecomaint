@@ -115,7 +115,7 @@ export class BaseController<Model extends Record<string, any>> {
           detail: { summary: "Get all" },
           query: querySchema,
           response: t.Object({
-            items: t.Union([t.Array(responseSchema), t.Array(t.Any())]),
+            items: t.Union([t.Array(responseSchema), t.Any()]),
             total: t.Integer(),
             page: t.Integer(),
             perPage: t.Integer(),
