@@ -18,6 +18,7 @@ import PageJobDescription from "@/pages/general/jobDescription/JobDescription";
 import PageComponentTypeList from "@/pages/maintenance/componentType/ComponentType";
 import PageComponentTypeTree from "@/pages/maintenance/componentType/ComponentTypeTree";
 import PageFunction from "@/pages/maintenance/function/Function";
+import ComponentTypeJob from "@/pages/maintenance/componentType/pages/ComponentTypeJob";
 
 // --- Root ---
 export const rootRoute = createRootRoute({
@@ -171,11 +172,18 @@ export const maintComponentTypeTreeRoute = createRoute({
 });
 export const maintComponentTypeListRoute = createRoute({
   getParentRoute: () => maintComponentTypeRoute,
-  path: "list-view",
+  path: "/",
   component: PageComponentTypeList,
   beforeLoad: () => ({ breadcrumb: "List View" }),
 });
-
+export const maintComponentTypeDetailRoute = createRoute({
+  getParentRoute: () => maintComponentTypeRoute,
+  path: "$id/job",
+  component: ComponentTypeJob,
+  beforeLoad: ({ params }) => ({
+    breadcrumb: params?.id ?? "ComponentType",
+  }),
+});
 // سایر Maintenance
 export const maintComponentJobRoute = createRoute({
   getParentRoute: () => protectedRoute,
@@ -305,6 +313,7 @@ export const routeTree = rootRoute.addChildren([
     maintComponentTypeRoute.addChildren([
       maintComponentTypeTreeRoute,
       maintComponentTypeListRoute,
+      maintComponentTypeDetailRoute,
     ]),
     maintComponentJobRoute,
     maintWorkOrderRoute,
