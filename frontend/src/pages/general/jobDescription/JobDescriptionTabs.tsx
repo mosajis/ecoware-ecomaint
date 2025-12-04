@@ -20,9 +20,9 @@ const TabRevision = lazy(() => import("./tabs/TabRevision"));
 // Define tabs in reusable format
 const JobDescTabs: ReusableTabItem[] = [
   { label: "MaintLog", icon: <CheckCircle />, component: TabMaintLog },
-  { label: "Attachment", icon: <AttachFile />, component: TabAttachment },
   { label: "Component Unit", icon: <Build />, component: TabComponentUnit },
   { label: "Triggers", icon: <Tune />, component: TabTriggers },
+  { label: "Attachment", icon: <AttachFile />, component: TabAttachment },
   { label: "Revision", icon: <AddBox />, component: TabRevision },
 ];
 

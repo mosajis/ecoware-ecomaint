@@ -24,7 +24,7 @@ export default function PageComponentTypeList() {
     });
   }, []);
 
-  const { rows, loading, fetchData, handleDelete, handleFormSuccess } =
+  const { rows, loading, handleRefresh, handleDelete, handleFormSuccess } =
     useDataGrid(getAll, tblCompType.deleteById, "compTypeId");
 
   const handleCreate = useCallback(() => {
@@ -62,7 +62,7 @@ export default function PageComponentTypeList() {
           label="Component Type"
           showToolbar
           onAddClick={handleCreate}
-          onRefreshClick={fetchData}
+          onRefreshClick={handleRefresh}
           rows={rows}
           columns={columns}
           loading={loading}

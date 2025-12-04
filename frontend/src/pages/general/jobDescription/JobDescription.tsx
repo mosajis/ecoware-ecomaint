@@ -48,7 +48,7 @@ export default function PageJobDescription() {
   // === Columns ===
   const columns: GridColDef<TypeTblJobDescription>[] = useMemo(
     () => [
-      { field: "jobDescCode", headerName: "JobDescCode", width: 60 },
+      { field: "jobDescCode", headerName: "Code", width: 120 },
       {
         field: "jobClass",
         headerName: "JobClass",

@@ -1,17 +1,16 @@
+import FormDialog from "@/shared/components/formDialog/FormDialog";
 import * as z from "zod";
 import { memo, useEffect, useState, useCallback } from "react";
 import { Box, TextField } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import FormDialog from "@/shared/components/formDialog/FormDialog";
+import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { buildRelation } from "@/core/api/helper";
 import {
   tblJobDescription,
   tblJobClass,
   TypeTblJobDescription,
-  TypeTblJobClass,
 } from "@/core/api/generated/api";
-import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
-import { buildRelation } from "@/core/api/helper";
 
 // === Validation Schema ===
 const schema = z.object({
@@ -187,7 +186,7 @@ function JobDescriptionFormDialog({
               label="Job Class"
               selectionMode="single"
               value={field.value}
-              request={() => tblJobClass.getAll().then((res) => res.items)}
+              request={tblJobClass.getAll}
               columns={[{ field: "name", headerName: "Name", flex: 1 }]}
               getRowId={(row) => row.jobClassId}
               onChange={field.onChange}

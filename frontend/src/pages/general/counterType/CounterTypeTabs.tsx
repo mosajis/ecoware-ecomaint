@@ -6,12 +6,10 @@ import { lazy } from "react";
 import { AccountTree, BarChart, ContentCopy } from "@mui/icons-material";
 
 // Lazy imports
-const TabCompUnitCounter = lazy(() => import("./tabs/TabCompUnitCounter"));
-const TabCompTypeCounter = lazy(() => import("./tabs/TabCompTypeCounter"));
-const TabCompJobCounter = lazy(() => import("./tabs/TabCompJobCounter"));
-const TabCompTypeJobCounter = lazy(
-  () => import("./tabs/TabCompTypeJobCounter")
-);
+const TabCompUnitCounter = lazy(() => import("./tabs/TabCompUnit"));
+const TabCompTypeCounter = lazy(() => import("./tabs/TabCompType"));
+const TabCompJobCounter = lazy(() => import("./tabs/TabCompJob"));
+const TabCompTypeJobCounter = lazy(() => import("./tabs/TabCompTypeJob"));
 
 // Define tabs using the reusable format
 const tabs: ReusableTabItem[] = [
