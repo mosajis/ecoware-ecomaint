@@ -11,7 +11,8 @@
     "prisma:fix-schema-sequences": "bun run ./scripts/fix-schema-sequences.js",
     "prisma:fix-client-ids": "bun run ./scripts/fix-client-ids.js",
     "generate:api": "bun scripts/generate-api.js",
-    "dev": "bun run --watch src/main.ts"
+    "dev": "bun run --watch src/main.ts",
+    "build": "bun run ./scripts/build.js"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.4.0",
