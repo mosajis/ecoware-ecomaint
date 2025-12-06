@@ -13,11 +13,11 @@ await mkdir(outDir, { recursive: true });
 
 // اجرای Prisma generate
 console.log("🔧 Running prisma generate...");
-await $`bun run prisma:generate`; // ❗ bun prisma:generate غلط بود
+await $`bun run prisma:generate`;
 
-// Build TypeScript
-console.log("🏗️ Building TypeScript...");
-await $`bun x tsc -p tsconfig.build.json`;
+// Build و bundle با Bun (تمام imports + node_modules bundle میشه)
+console.log("🏗️ Building & bundling with Bun...");
+await $`bun build src/main.ts --outdir ${outDir} --target bun --release`;
 
 // کپی ORM
 console.log("📁 Copying ORM folder...");
