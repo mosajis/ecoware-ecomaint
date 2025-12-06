@@ -4,8 +4,8 @@ import {
   tblCompTypeCounter,
   TypeTblCompTypeCounter,
 } from "@/core/api/generated/api";
-import { useDataGrid } from "@/pages/general/_hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 type Props = {
   selected?: number | null;

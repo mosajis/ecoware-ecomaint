@@ -1,7 +1,7 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useCallback } from "react";
 import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "../../_hooks/useDataGrid";
+import { useDataGrid } from "../../hooks/useDataGrid";
 import {
   tblCompCounter,
   tblCompJobCounter,

@@ -5,7 +5,7 @@ import {
   TypeTblCompTypeCounter,
 } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "../../_hooks/useDataGrid";
+import { useDataGrid } from "../../hooks/useDataGrid";
 
 interface TabCompTypeCounterProps {
   counterTypeId: number | null | undefined;

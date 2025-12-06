@@ -4,8 +4,8 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import CounterTypeTabs from "./CounterTypeTabs";
 import { useState, useCallback } from "react";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
-import { useDataGrid } from "../_hooks/useDataGrid";
 import { tblCounterType, TypeTblCounterType } from "@/core/api/generated/api";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 export default function PageCounterType() {
   const [openForm, setOpenForm] = useState(false);
@@ -16,7 +16,6 @@ export default function PageCounterType() {
   const {
     rows: counterTypes,
     loading: loadingCounterTypes,
-    fetchData: fetchCounterTypes,
     handleDelete: deleteCounterType,
     handleFormSuccess: counterTypeFormSuccess,
     handleRefresh,

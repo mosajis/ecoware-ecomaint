@@ -1,9 +1,9 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useCallback, useMemo, useState } from "react";
 import { tblCompTypeJob, TypeTblCompTypeJob } from "@/core/api/generated/api";
-import { useDataGrid } from "@/pages/general/_hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
 import { useNavigate } from "@tanstack/react-router";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 type Props = {
   selected?: number | null;

@@ -3,12 +3,11 @@ import TabsComponent from "./ComponentTypeTabs";
 import Splitter from "@/shared/components/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useCallback, useMemo, useState } from "react";
-import { useDataGrid } from "@/pages/general/_hooks/useDataGrid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { tblCompType, TypeTblCompType } from "@/core/api/generated/api";
 import { type GridColDef } from "@mui/x-data-grid";
 import CustomizedTree from "@/shared/components/tree/CustomeTree";
-import { useDataTree } from "@/pages/general/_hooks/useDataTree";
+import { useDataTree } from "@/shared/hooks/useDataTree";
 
 export default function PageComponentTypeTree() {
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null);

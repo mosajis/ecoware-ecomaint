@@ -2,7 +2,7 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useCallback } from "react";
 import { tblCompCounter, TypeTblCompCounter } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "../../_hooks/useDataGrid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 interface TabComponentUnitProps {
   counterTypeId: number | null | undefined;
@@ -45,8 +45,8 @@ const columns: GridColDef<TypeTblCompCounter>[] = [
     field: "statusId",
     headerName: "Status",
     flex: 1,
-    // @ts-ignore
     valueGetter: (_, row) =>
+      // @ts-ignore
       row.tblComponentUnit?.tblCompStatus?.compStatusName,
   },
 ];

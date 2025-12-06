@@ -3,7 +3,6 @@ import AppEditor from "@/shared/components/Editor";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import JobDescriptionFormDialog from "./JobDescriptionFormDialog";
 import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "../_hooks/useDataGrid";
 import { useCallback, useMemo, useState } from "react";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { JobDescriptionTabs } from "./JobDescriptionTabs";
@@ -11,6 +10,7 @@ import {
   tblJobDescription,
   TypeTblJobDescription,
 } from "@/core/api/generated/api";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 export default function PageJobDescription() {
   const [html, setHtml] = useState("");

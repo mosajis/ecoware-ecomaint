@@ -3,10 +3,10 @@ import TabsComponent from "./FunctionTabs";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { tblFunctions, TypeTblFunctions } from "@/core/api/generated/api";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
-import { useDataGrid } from "@/pages/general/_hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
 import { useCallback, useMemo, useState } from "react";
 import FunctionFormDialog from "./FunctionFormDialog";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 export default function PageFunction() {
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null);

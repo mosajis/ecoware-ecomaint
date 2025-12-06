@@ -6,7 +6,7 @@ import { useState, useCallback } from "react";
 import { tblLocation, TypeTblLocation } from "@/core/api/generated/api";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { GridColDef } from "@mui/x-data-grid";
-import { useDataTree } from "../_hooks/useDataTree";
+import { useDataTree } from "@/shared/hooks/useDataTree";
 
 export default function PageLocation() {
   const [openForm, setOpenForm] = useState(false);

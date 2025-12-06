@@ -1,6 +1,5 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import Splitter from "@/shared/components/Splitter";
-import TabsContainer from "@/shared/components/TabsContainer";
 import ComponentTypeJobTabs from "./ComponentTypeJobTabs";
 import ComponentTypeJobFormDialog from "./ComponentTypeJobFormDialog";
 import { useCallback, useEffect, useState } from "react";
@@ -8,16 +7,13 @@ import { GridColDef } from "@mui/x-data-grid";
 import {
   tblCompType,
   tblCompTypeJob,
-  tblJobDescription,
   TypeTblCompTypeJob,
 } from "@/core/api/generated/api";
-import { useDataGrid } from "@/pages/general/_hooks/useDataGrid";
 import { useMatch, useParams } from "@tanstack/react-router";
 import { maintComponentTypeDetailRoute } from "@/app/routes";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
-import { Cancel, Check, CheckCircle } from "@mui/icons-material";
 import { StatusIcon } from "../utils/StatusIcon";
-import { logicTblCompTypeJob } from "./ComponentTypeJob.logic";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 export default function ComponentTypeJob() {
   const { id } = useParams({ from: maintComponentTypeDetailRoute.id });

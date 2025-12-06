@@ -3310,13 +3310,13 @@ export interface operations {
     getTblAddress: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -3468,7 +3468,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -3728,13 +3728,13 @@ export interface operations {
     deleteTblAddress: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -4356,13 +4356,13 @@ export interface operations {
     getTblAddressCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -4386,13 +4386,13 @@ export interface operations {
     getTblCompCounter: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -4507,7 +4507,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -4742,13 +4742,13 @@ export interface operations {
     deleteTblCompCounter: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -5268,13 +5268,13 @@ export interface operations {
     getTblCompCounterCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -5298,13 +5298,13 @@ export interface operations {
     getTblCompCounterLog: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -5356,7 +5356,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -5480,13 +5480,13 @@ export interface operations {
     deleteTblCompCounterLog: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -5748,13 +5748,13 @@ export interface operations {
     getTblCompCounterLogCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -5778,13 +5778,13 @@ export interface operations {
     getTblCompJob: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -5974,7 +5974,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -6401,13 +6401,13 @@ export interface operations {
     deleteTblCompJob: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -7284,13 +7284,13 @@ export interface operations {
     getTblCompJobCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -7314,13 +7314,13 @@ export interface operations {
     getTblCompJobCounter: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -7415,7 +7415,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -7594,13 +7594,13 @@ export interface operations {
     deleteTblCompJobCounter: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -8006,13 +8006,13 @@ export interface operations {
     getTblCompJobCounterCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -8036,13 +8036,13 @@ export interface operations {
     getTblCompJobMeasurePoint: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -8132,7 +8132,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -8300,13 +8300,13 @@ export interface operations {
     deleteTblCompJobMeasurePoint: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -8691,13 +8691,13 @@ export interface operations {
     getTblCompJobMeasurePointCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -8721,13 +8721,13 @@ export interface operations {
     getTblCompJobTrigger: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -8751,7 +8751,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -8808,13 +8808,13 @@ export interface operations {
     deleteTblCompJobTrigger: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -8950,13 +8950,13 @@ export interface operations {
     getTblCompJobTriggerCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -8980,13 +8980,13 @@ export interface operations {
     getTblCompMeasurePoint: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -9056,7 +9056,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -9222,13 +9222,13 @@ export interface operations {
     deleteTblCompMeasurePoint: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -9580,13 +9580,13 @@ export interface operations {
     getTblCompMeasurePointCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -9610,13 +9610,13 @@ export interface operations {
     getTblCompMeasurePointLog: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -9644,7 +9644,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -9717,13 +9717,13 @@ export interface operations {
     deleteTblCompMeasurePointLog: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -9883,13 +9883,13 @@ export interface operations {
     getTblCompMeasurePointLogCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -9913,13 +9913,13 @@ export interface operations {
     getTblCompOilInfo: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -9949,7 +9949,7 @@ export interface operations {
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -10024,13 +10024,13 @@ export interface operations {
     deleteTblCompOilInfo: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -10196,13 +10196,13 @@ export interface operations {
     getTblCompOilInfoCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -10226,13 +10226,13 @@ export interface operations {
     getTblCompSpare: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -10260,7 +10260,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -10333,13 +10333,13 @@ export interface operations {
     deleteTblCompSpare: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -10499,13 +10499,13 @@ export interface operations {
     getTblCompSpareCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -10529,13 +10529,13 @@ export interface operations {
     getTblCompStatus: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -10593,7 +10593,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -10705,13 +10705,13 @@ export interface operations {
     deleteTblCompStatus: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -10979,13 +10979,13 @@ export interface operations {
     getTblCompStatusCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -11009,13 +11009,13 @@ export interface operations {
     getTblCompStatusLog: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -11045,7 +11045,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -11114,13 +11114,13 @@ export interface operations {
     deleteTblCompStatusLog: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -11280,13 +11280,13 @@ export interface operations {
     getTblCompStatusLogCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -11310,13 +11310,13 @@ export interface operations {
     getTblCompType: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -11498,7 +11498,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -11833,13 +11833,13 @@ export interface operations {
     deleteTblCompType: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -12611,13 +12611,13 @@ export interface operations {
     getTblCompTypeCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -12641,13 +12641,13 @@ export interface operations {
     getTblCompTypeCounter: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -12723,7 +12723,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -12883,13 +12883,13 @@ export interface operations {
     deleteTblCompTypeCounter: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -13247,13 +13247,13 @@ export interface operations {
     getTblCompTypeCounterCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -13277,13 +13277,13 @@ export interface operations {
     getTblCompTypeJob: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -13450,7 +13450,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -13839,13 +13839,13 @@ export interface operations {
     deleteTblCompTypeJob: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -14638,13 +14638,13 @@ export interface operations {
     getTblCompTypeJobCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -14695,13 +14695,13 @@ export interface operations {
     getTblCompTypeJobCounter: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -14775,7 +14775,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -14924,13 +14924,13 @@ export interface operations {
     deleteTblCompTypeJobCounter: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -15264,13 +15264,13 @@ export interface operations {
     getTblCompTypeJobCounterCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -15294,13 +15294,13 @@ export interface operations {
     getTblCompTypeJobMeasurePoint: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -15377,7 +15377,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -15532,13 +15532,13 @@ export interface operations {
     deleteTblCompTypeJobMeasurePoint: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -15884,13 +15884,13 @@ export interface operations {
     getTblCompTypeJobMeasurePointCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -15914,13 +15914,13 @@ export interface operations {
     getTblCompTypeJobTrigger: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -15944,7 +15944,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -16001,13 +16001,13 @@ export interface operations {
     deleteTblCompTypeJobTrigger: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -16143,13 +16143,13 @@ export interface operations {
     getTblCompTypeJobTriggerCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -16173,13 +16173,13 @@ export interface operations {
     getTblCompTypeMeasurePoint: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -16246,7 +16246,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -16400,13 +16400,13 @@ export interface operations {
     deleteTblCompTypeMeasurePoint: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -16740,13 +16740,13 @@ export interface operations {
     getTblCompTypeMeasurePointCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -16770,13 +16770,13 @@ export interface operations {
     getTblComponentUnit: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -16950,7 +16950,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -17292,13 +17292,13 @@ export interface operations {
     deleteTblComponentUnit: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -18049,13 +18049,13 @@ export interface operations {
     getTblComponentUnitCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -18079,13 +18079,13 @@ export interface operations {
     getTblCounterType: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -18174,7 +18174,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -18368,13 +18368,13 @@ export interface operations {
     deleteTblCounterType: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -18813,13 +18813,13 @@ export interface operations {
     getTblCounterTypeCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -18843,13 +18843,13 @@ export interface operations {
     getTblDepartment: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -18881,7 +18881,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -18973,13 +18973,13 @@ export interface operations {
     deleteTblDepartment: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -19166,13 +19166,13 @@ export interface operations {
     getTblDepartmentCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -19196,13 +19196,13 @@ export interface operations {
     getTblDiscipline: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -19370,7 +19370,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -19625,13 +19625,13 @@ export interface operations {
     deleteTblDiscipline: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -20280,13 +20280,13 @@ export interface operations {
     getTblDisciplineCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -20310,13 +20310,13 @@ export interface operations {
     getTblEmployee: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -20422,7 +20422,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -20726,13 +20726,13 @@ export interface operations {
     deleteTblEmployee: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -21285,13 +21285,13 @@ export interface operations {
     getTblEmployeeCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -21315,13 +21315,13 @@ export interface operations {
     getTblFailureReports: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -21362,7 +21362,7 @@ export interface operations {
                             failureNumber: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -21484,13 +21484,13 @@ export interface operations {
     deleteTblFailureReports: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -21725,13 +21725,13 @@ export interface operations {
     getTblFailureReportsCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -21755,13 +21755,13 @@ export interface operations {
     getTblFollowStatus: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -21788,7 +21788,7 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                             deptId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -21860,13 +21860,13 @@ export interface operations {
     deleteTblFollowStatus: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -22023,13 +22023,13 @@ export interface operations {
     getTblFollowStatusCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -22053,13 +22053,13 @@ export interface operations {
     getTblFunctions: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -22157,7 +22157,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -22348,13 +22348,13 @@ export interface operations {
     deleteTblFunctions: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -22784,13 +22784,13 @@ export interface operations {
     getTblFunctionsCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -22814,13 +22814,13 @@ export interface operations {
     getTblJobClass: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -22871,7 +22871,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -22976,13 +22976,13 @@ export interface operations {
     deleteTblJobClass: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -23229,13 +23229,13 @@ export interface operations {
     getTblJobClassCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -23259,13 +23259,13 @@ export interface operations {
     getTblJobDescription: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -23394,7 +23394,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -23631,13 +23631,13 @@ export interface operations {
     deleteTblJobDescription: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -24184,13 +24184,13 @@ export interface operations {
     getTblJobDescriptionCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -24214,13 +24214,13 @@ export interface operations {
     getTblJobTrigger: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -24243,7 +24243,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             userId: null | (number);
                             orderId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -24302,13 +24302,13 @@ export interface operations {
     deleteTblJobTrigger: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -24444,13 +24444,13 @@ export interface operations {
     getTblJobTriggerCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -24474,13 +24474,13 @@ export interface operations {
     getTblJobTriggerLog: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -24505,7 +24505,7 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -24566,13 +24566,13 @@ export interface operations {
     deleteTblJobTriggerLog: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -24714,13 +24714,13 @@ export interface operations {
     getTblJobTriggerLogCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -24744,13 +24744,13 @@ export interface operations {
     getTblJobVersion: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -24780,7 +24780,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             userId: null | (number);
                             orderId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -24861,13 +24861,13 @@ export interface operations {
     deleteTblJobVersion: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -25039,13 +25039,13 @@ export interface operations {
     getTblJobVersionCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -25069,13 +25069,13 @@ export interface operations {
     getTblLocation: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -25159,7 +25159,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -25327,13 +25327,13 @@ export interface operations {
     deleteTblLocation: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -25721,13 +25721,13 @@ export interface operations {
     getTblLocationCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -25751,13 +25751,13 @@ export interface operations {
     getTblLogCounter: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -25784,7 +25784,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -25853,13 +25853,13 @@ export interface operations {
     deleteTblLogCounter: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -26013,13 +26013,13 @@ export interface operations {
     getTblLogCounterCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -26043,13 +26043,13 @@ export interface operations {
     getTblLogDiscipline: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -26101,7 +26101,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -26267,13 +26267,13 @@ export interface operations {
     deleteTblLogDiscipline: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -26574,13 +26574,13 @@ export interface operations {
     getTblLogDisciplineCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -26604,13 +26604,13 @@ export interface operations {
     getTblLoginAudit: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -26638,7 +26638,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             deptId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -26711,13 +26711,13 @@ export interface operations {
     deleteTblLoginAudit: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -26877,13 +26877,13 @@ export interface operations {
     getTblLoginAuditCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -26907,13 +26907,13 @@ export interface operations {
     getTblMaintCause: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -27014,7 +27014,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -27181,13 +27181,13 @@ export interface operations {
     deleteTblMaintCause: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -27605,13 +27605,13 @@ export interface operations {
     getTblMaintCauseCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -27635,13 +27635,13 @@ export interface operations {
     getTblMaintClass: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -27742,7 +27742,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -27909,13 +27909,13 @@ export interface operations {
     deleteTblMaintClass: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -28333,13 +28333,13 @@ export interface operations {
     getTblMaintClassCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -28363,13 +28363,13 @@ export interface operations {
     getTblMaintLog: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -28416,7 +28416,7 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -28535,13 +28535,13 @@ export interface operations {
     deleteTblMaintLog: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -28785,13 +28785,13 @@ export interface operations {
     getTblMaintLogCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -28815,13 +28815,13 @@ export interface operations {
     getTblMaintLogFollow: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -28851,7 +28851,7 @@ export interface operations {
                             followStatuseId: null | (number);
                             waitingTime: null | number;
                             orderId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -28929,13 +28929,13 @@ export interface operations {
     deleteTblMaintLogFollow: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -29104,13 +29104,13 @@ export interface operations {
     getTblMaintLogFollowCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -29134,13 +29134,13 @@ export interface operations {
     getTblMaintLogStocks: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -29166,7 +29166,7 @@ export interface operations {
                             userId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -29231,13 +29231,13 @@ export interface operations {
     deleteTblMaintLogStocks: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -29385,13 +29385,13 @@ export interface operations {
     getTblMaintLogStocksCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -29415,13 +29415,13 @@ export interface operations {
     getTblMaintType: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -29522,7 +29522,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -29689,13 +29689,13 @@ export interface operations {
     deleteTblMaintType: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -30113,13 +30113,13 @@ export interface operations {
     getTblMaintTypeCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -30143,13 +30143,13 @@ export interface operations {
     getTblOilSamplingLog: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -30201,7 +30201,7 @@ export interface operations {
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -30361,13 +30361,13 @@ export interface operations {
     deleteTblOilSamplingLog: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -30662,13 +30662,13 @@ export interface operations {
     getTblOilSamplingLogCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -30692,13 +30692,13 @@ export interface operations {
     getTblPendingType: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -30725,7 +30725,7 @@ export interface operations {
                             description: null | string;
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -30791,13 +30791,13 @@ export interface operations {
     deleteTblPendingType: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -30948,13 +30948,13 @@ export interface operations {
     getTblPendingTypeCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -30978,13 +30978,13 @@ export interface operations {
     getTblPeriod: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -31080,7 +31080,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -31236,13 +31236,13 @@ export interface operations {
     deleteTblPeriod: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -31639,13 +31639,13 @@ export interface operations {
     getTblPeriodCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -31669,13 +31669,13 @@ export interface operations {
     getTblReScheduleLog: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -31703,7 +31703,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -31779,13 +31779,13 @@ export interface operations {
     deleteTblReScheduleLog: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -31948,13 +31948,13 @@ export interface operations {
     getTblReScheduleLogCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -31978,13 +31978,13 @@ export interface operations {
     getTblRotationLog: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -32013,7 +32013,7 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -32084,13 +32084,13 @@ export interface operations {
     deleteTblRotationLog: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -32250,13 +32250,13 @@ export interface operations {
     getTblRotationLogCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -32280,13 +32280,13 @@ export interface operations {
     getTblRound: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -32335,7 +32335,7 @@ export interface operations {
                             defineMethodOnReporting: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -32471,13 +32471,13 @@ export interface operations {
     deleteTblRound: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -32742,13 +32742,13 @@ export interface operations {
     getTblRoundCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -32772,13 +32772,13 @@ export interface operations {
     getTblRoundCompJob: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -32807,7 +32807,7 @@ export interface operations {
                             deleteOnRotation: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -32881,13 +32881,13 @@ export interface operations {
     deleteTblRoundCompJob: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -33050,13 +33050,13 @@ export interface operations {
     getTblRoundCompJobCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -33080,13 +33080,13 @@ export interface operations {
     getTblSpareType: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -33138,7 +33138,7 @@ export interface operations {
                             farsiDescription: null | string;
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -33286,13 +33286,13 @@ export interface operations {
     deleteTblSpareType: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -33575,13 +33575,13 @@ export interface operations {
     getTblSpareTypeCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -33605,13 +33605,13 @@ export interface operations {
     getTblSpareUnit: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -33651,7 +33651,7 @@ export interface operations {
                             itemStatus: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -33766,13 +33766,13 @@ export interface operations {
     deleteTblSpareUnit: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -33998,13 +33998,13 @@ export interface operations {
     getTblSpareUnitCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -34028,13 +34028,13 @@ export interface operations {
     getTblUnit: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -34091,7 +34091,7 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -34223,13 +34223,13 @@ export interface operations {
     deleteTblUnit: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -34524,13 +34524,13 @@ export interface operations {
     getTblUnitCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -34554,13 +34554,13 @@ export interface operations {
     getTblWorkOrder: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -34638,7 +34638,7 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -34851,13 +34851,13 @@ export interface operations {
     deleteTblWorkOrder: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -35257,13 +35257,13 @@ export interface operations {
     getTblWorkOrderCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -35287,13 +35287,13 @@ export interface operations {
     getTblWorkShopComponent: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -35321,7 +35321,7 @@ export interface operations {
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -35391,13 +35391,13 @@ export interface operations {
     deleteTblWorkShopComponent: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -35554,13 +35554,13 @@ export interface operations {
     getTblWorkShopComponentCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -35584,13 +35584,13 @@ export interface operations {
     getTblWorkShopDone: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -35630,7 +35630,7 @@ export interface operations {
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -35736,13 +35736,13 @@ export interface operations {
     deleteTblWorkShopDone: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -35959,13 +35959,13 @@ export interface operations {
     getTblWorkShopDoneCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -35989,13 +35989,13 @@ export interface operations {
     getTblWorkShopRequest: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -36042,7 +36042,7 @@ export interface operations {
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -36179,13 +36179,13 @@ export interface operations {
     deleteTblWorkShopRequest: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -36447,13 +36447,13 @@ export interface operations {
     getTblWorkShopRequestCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -36477,13 +36477,13 @@ export interface operations {
     getUsers: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -36519,7 +36519,7 @@ export interface operations {
                             orderId: null | (number);
                             deptId: null | (number);
                             lastUpdate: null | (Record<string, never> | number);
-                        }[] | unknown;
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -36624,13 +36624,13 @@ export interface operations {
     deleteUsers: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;
@@ -36838,13 +36838,13 @@ export interface operations {
     getUsersCount: {
         parameters: {
             query?: {
-                page?: number;
-                perPage?: number;
+                page?: string | (number | string);
+                perPage?: string | (number | string);
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean;
-                force?: boolean;
+                paginate?: (boolean | string) | string;
+                force?: (boolean | string) | string;
             };
             header?: never;
             path?: never;

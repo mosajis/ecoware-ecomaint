@@ -37,9 +37,18 @@ function download(url, dest) {
 
 async function fixTypesFile(path) {
   let content = await fsp.readFile(path, "utf-8");
+
+  // اصلاح string | number به number
   content = content.replace(/\bstring\s*\|\s*number\b/g, "number");
+
+  // حذف همه | unknown ها
+  content = content.replace(/\s*\|\s*unknown/g, "");
+
+  // اختیاری: حذف | any هم اگر لازم باشه
+  // content = content.replace(/\s*\|\s*any/g, "");
+
   await fsp.writeFile(path, content, "utf-8");
-  console.log("✅ Fixed string | number types to number");
+  console.log("✅ Fixed types and removed | unknown");
 }
 
 (async () => {

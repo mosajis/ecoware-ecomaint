@@ -14,7 +14,7 @@ import {
   TypeTblMaintType,
   TypeTblMaintClass,
 } from "@/core/api/generated/api";
-import { useDataGrid } from "../_hooks/useDataGrid.js";
+import { useDataGrid } from "@/shared/hooks/useDataGrid.js";
 
 export default function PageMaintClass() {
   // ---------------- Maint Type ----------------

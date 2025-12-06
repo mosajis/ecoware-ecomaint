@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 import { tblFollowStatus, TypeTblFollowStatus } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
-import { useDataGrid } from "../_hooks/useDataGrid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 export default function PageFollowStatus() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);

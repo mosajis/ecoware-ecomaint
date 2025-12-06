@@ -4,7 +4,7 @@ import PendingTypeFormDialog from "./PendingTypeFormDialog";
 import { tblPendingType, TypeTblPendingType } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
-import { useDataGrid } from "../_hooks/useDataGrid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 export default function PagePendingType() {
   const [openForm, setOpenForm] = useState(false);

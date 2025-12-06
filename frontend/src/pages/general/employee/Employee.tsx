@@ -4,7 +4,7 @@ import { useState, useCallback } from "react";
 import { tblEmployee, TypeTblEmployee } from "@/core/api/generated/api";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "../_hooks/useDataGrid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 export default function PageEmployee() {
   const [openForm, setOpenForm] = useState(false);

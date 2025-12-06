@@ -8,7 +8,7 @@ import {
 } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
-import { useDataGrid } from "@/pages/general/_hooks/useDataGrid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 export default function ComponentUnitListView() {
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null);

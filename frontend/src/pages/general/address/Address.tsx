@@ -4,7 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 import { tblAddress, TypeTblAddress } from "@/core/api/generated/api";
 import { type GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
-import { useDataGrid } from "../_hooks/useDataGrid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 export default function PageAddress() {
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
