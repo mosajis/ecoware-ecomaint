@@ -22,7 +22,7 @@ const TabCounter = ({ selected }: Props) => {
         tblCompTypeJobCounters: true,
       },
       filter: {
-        // compTypeId: selected,
+        compTypeId: selected,
       },
     });
   }, [selected]);

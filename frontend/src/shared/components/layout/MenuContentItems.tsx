@@ -188,7 +188,7 @@ export const menuContentItems: {
           {
             text: "List View",
             id: "maint:componentType:list",
-            path: "/maintenance/component-type/list-view",
+            path: "/maintenance/component-type",
             icon: <BulletIcon />,
           },
         ],

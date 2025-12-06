@@ -29,7 +29,7 @@ const TabJob = ({ selected }: Props) => {
         tblDiscipline: true,
       },
       filter: {
-        // compTypeId: selected,
+        compTypeId: selected,
       },
     });
   }, [selected]);

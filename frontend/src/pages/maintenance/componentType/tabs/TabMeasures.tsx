@@ -17,7 +17,12 @@ const TabMeasuresPage = ({ selected }: Props) => {
     if (!selected) return Promise.resolve({ items: [] });
 
     return tblCompTypeMeasurePoint.getAll({
-      // filter: { compTypeId: selected },
+      filter: {
+        // compTypeId: selected,
+      },
+      include: {
+        tblCounterType: true,
+      },
     });
   }, [selected]);
 
@@ -31,7 +36,12 @@ const TabMeasuresPage = ({ selected }: Props) => {
   // === Columns ===
   const columns = useMemo<GridColDef<TypeTblCompTypeMeasurePoint>[]>(
     () => [
-      { field: "measureName", headerName: "Measure Name", flex: 1 },
+      {
+        field: "measureName",
+        headerName: "Measure Name",
+        flex: 1,
+        valueGetter: (v, row) => row?.tblCounterType?.name,
+      },
       { field: "unitName", headerName: "Unit Name", flex: 1 },
       { field: "unitDescription", headerName: "Unit Description", flex: 1 },
       { field: "setValue", headerName: "Set Value", flex: 1 },

@@ -6188,6 +6188,21 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
+                            tblCompJobMeasurePoints?: {
+                                compJobMeasurePointId: number;
+                                compMeasurePointId: null | (number);
+                                compJobId: null | (number);
+                                triggerJob: null | (number);
+                                useOperationalValues: null | (number);
+                                minValue: null | (number);
+                                maxValue: null | (number);
+                                updateOnReport: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
                         }[] | unknown;
                         total: number;
                         page: number;
@@ -6268,6 +6283,11 @@ export interface operations {
                             compJobCounterId: number;
                         }[];
                     };
+                    tblCompJobMeasurePoints?: {
+                        connect: {
+                            compJobMeasurePointId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     historyLayout?: null | (number);
@@ -6330,6 +6350,11 @@ export interface operations {
                             compJobCounterId: number;
                         }[];
                     };
+                    tblCompJobMeasurePoints?: {
+                        connect: {
+                            compJobMeasurePointId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     historyLayout?: null | (number);
@@ -6390,6 +6415,11 @@ export interface operations {
                     tblCompJobCounters?: {
                         connect: {
                             compJobCounterId: number;
+                        }[];
+                    };
+                    tblCompJobMeasurePoints?: {
+                        connect: {
+                            compJobMeasurePointId: number;
                         }[];
                     };
                 };
@@ -6555,6 +6585,21 @@ export interface operations {
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
                             orderNumber: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCompJobMeasurePoints?: {
+                            compJobMeasurePointId: number;
+                            compMeasurePointId: null | (number);
+                            compJobId: null | (number);
+                            triggerJob: null | (number);
+                            useOperationalValues: null | (number);
+                            minValue: null | (number);
+                            maxValue: null | (number);
+                            updateOnReport: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -6768,6 +6813,21 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblCompJobMeasurePoints?: {
+                            compJobMeasurePointId: number;
+                            compMeasurePointId: null | (number);
+                            compJobId: null | (number);
+                            triggerJob: null | (number);
+                            useOperationalValues: null | (number);
+                            minValue: null | (number);
+                            maxValue: null | (number);
+                            updateOnReport: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -6854,6 +6914,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompJobMeasurePoints?: {
+                        connect?: {
+                            compJobMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     historyLayout?: null | (number);
@@ -6925,6 +6993,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompJobMeasurePoints?: {
+                        connect?: {
+                            compJobMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     historyLayout?: null | (number);
@@ -6991,6 +7067,14 @@ export interface operations {
                     tblCompJobCounters?: {
                         connect?: {
                             compJobCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompJobMeasurePoints?: {
+                        connect?: {
+                            compJobMeasurePointId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -7159,6 +7243,21 @@ export interface operations {
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
                             orderNumber: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCompJobMeasurePoints?: {
+                            compJobMeasurePointId: number;
+                            compMeasurePointId: null | (number);
+                            compJobId: null | (number);
+                            triggerJob: null | (number);
+                            useOperationalValues: null | (number);
+                            minValue: null | (number);
+                            maxValue: null | (number);
+                            updateOnReport: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -7339,6 +7438,21 @@ export interface operations {
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
                             orderNumber: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCompJobMeasurePoints?: {
+                            compJobMeasurePointId: number;
+                            compMeasurePointId: null | (number);
+                            compJobId: null | (number);
+                            triggerJob: null | (number);
+                            useOperationalValues: null | (number);
+                            minValue: null | (number);
+                            maxValue: null | (number);
+                            updateOnReport: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -8137,6 +8251,67 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            tblCompJob?: null | {
+                                compJobId: number;
+                                historyLayout: null | (number);
+                                discId: null | (number);
+                                compId: null | (number);
+                                jobDescId: null | (number);
+                                jobConditionId: null | (number);
+                                maintClassId: null | (number);
+                                maintCauseId: null | (number);
+                                maintTypeId: null | (number);
+                                maintBudgetId: null | (number);
+                                stockBudgetId: null | (number);
+                                accountCodeId: null | (number);
+                                rescheduleLimitId: null | (number);
+                                frequency: null | (number);
+                                frequencyPeriod: null | (number);
+                                changeReason: null | string;
+                                planningMethod: null | (number);
+                                statusNone: null | (number);
+                                statusInUse: null | (number);
+                                statusAvailable: null | (number);
+                                statusRepair: null | (number);
+                                estTotalDuration: null | (number);
+                                estCurrencyCode: null | string;
+                                estPrice: null | (number);
+                                lastDone: null | (Record<string, never> | number);
+                                nextDueDate: null | (Record<string, never> | number);
+                                cbmStatus: null | (number);
+                                outputFormat: null | (number);
+                                priority: null | (number);
+                                window: null | (number);
+                                active: null | (number);
+                                mandatoryHistory: null | (number);
+                                layoutId: null | (number);
+                                notes: null | string;
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                mandatoryResource: null | (number);
+                                mandatoryStockUsage: null | (number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
+                            tblCompMeasurePoint?: null | {
+                                compMeasurePointId: number;
+                                compId: null | (number);
+                                counterTypeId: null | (number);
+                                changedBy: null | (number);
+                                currentDate: null | (Record<string, never> | number);
+                                unitId: null | (number);
+                                currentValue: null | (number);
+                                setValue: null | (number);
+                                operationalMinValue: null | (number);
+                                operationalMaxValue: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
                         }[] | unknown;
                         total: number;
                         page: number;
@@ -8164,6 +8339,16 @@ export interface operations {
                     updateOnReport?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompJob?: {
+                        connect: {
+                            compJobId: number;
+                        };
+                    };
+                    tblCompMeasurePoint?: {
+                        connect: {
+                            compMeasurePointId: number;
+                        };
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     triggerJob?: null | (number);
@@ -8173,6 +8358,16 @@ export interface operations {
                     updateOnReport?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompJob?: {
+                        connect: {
+                            compJobId: number;
+                        };
+                    };
+                    tblCompMeasurePoint?: {
+                        connect: {
+                            compMeasurePointId: number;
+                        };
+                    };
                 };
                 "multipart/form-data": {
                     triggerJob?: null | (number);
@@ -8182,6 +8377,16 @@ export interface operations {
                     updateOnReport?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompJob?: {
+                        connect: {
+                            compJobId: number;
+                        };
+                    };
+                    tblCompMeasurePoint?: {
+                        connect: {
+                            compMeasurePointId: number;
+                        };
+                    };
                 };
             };
         };
@@ -8206,6 +8411,67 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompJob?: null | {
+                            compJobId: number;
+                            historyLayout: null | (number);
+                            discId: null | (number);
+                            compId: null | (number);
+                            jobDescId: null | (number);
+                            jobConditionId: null | (number);
+                            maintClassId: null | (number);
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            accountCodeId: null | (number);
+                            rescheduleLimitId: null | (number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            changeReason: null | string;
+                            planningMethod: null | (number);
+                            statusNone: null | (number);
+                            statusInUse: null | (number);
+                            statusAvailable: null | (number);
+                            statusRepair: null | (number);
+                            estTotalDuration: null | (number);
+                            estCurrencyCode: null | string;
+                            estPrice: null | (number);
+                            lastDone: null | (Record<string, never> | number);
+                            nextDueDate: null | (Record<string, never> | number);
+                            cbmStatus: null | (number);
+                            outputFormat: null | (number);
+                            priority: null | (number);
+                            window: null | (number);
+                            active: null | (number);
+                            mandatoryHistory: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            mandatoryResource: null | (number);
+                            mandatoryStockUsage: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblCompMeasurePoint?: null | {
+                            compMeasurePointId: number;
+                            compId: null | (number);
+                            counterTypeId: null | (number);
+                            changedBy: null | (number);
+                            currentDate: null | (Record<string, never> | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -8274,6 +8540,67 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompJob?: null | {
+                            compJobId: number;
+                            historyLayout: null | (number);
+                            discId: null | (number);
+                            compId: null | (number);
+                            jobDescId: null | (number);
+                            jobConditionId: null | (number);
+                            maintClassId: null | (number);
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            accountCodeId: null | (number);
+                            rescheduleLimitId: null | (number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            changeReason: null | string;
+                            planningMethod: null | (number);
+                            statusNone: null | (number);
+                            statusInUse: null | (number);
+                            statusAvailable: null | (number);
+                            statusRepair: null | (number);
+                            estTotalDuration: null | (number);
+                            estCurrencyCode: null | string;
+                            estPrice: null | (number);
+                            lastDone: null | (Record<string, never> | number);
+                            nextDueDate: null | (Record<string, never> | number);
+                            cbmStatus: null | (number);
+                            outputFormat: null | (number);
+                            priority: null | (number);
+                            window: null | (number);
+                            active: null | (number);
+                            mandatoryHistory: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            mandatoryResource: null | (number);
+                            mandatoryStockUsage: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblCompMeasurePoint?: null | {
+                            compMeasurePointId: number;
+                            compId: null | (number);
+                            counterTypeId: null | (number);
+                            changedBy: null | (number);
+                            currentDate: null | (Record<string, never> | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     } & (Record<string, never> | null);
                 };
             };
@@ -8298,6 +8625,18 @@ export interface operations {
                     updateOnReport?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompJob?: {
+                        connect?: {
+                            compJobId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblCompMeasurePoint?: {
+                        connect?: {
+                            compMeasurePointId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     triggerJob?: null | (number);
@@ -8307,6 +8646,18 @@ export interface operations {
                     updateOnReport?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompJob?: {
+                        connect?: {
+                            compJobId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblCompMeasurePoint?: {
+                        connect?: {
+                            compMeasurePointId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
                 "multipart/form-data": {
                     triggerJob?: null | (number);
@@ -8316,6 +8667,18 @@ export interface operations {
                     updateOnReport?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompJob?: {
+                        connect?: {
+                            compJobId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblCompMeasurePoint?: {
+                        connect?: {
+                            compMeasurePointId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
             };
         };
@@ -8340,6 +8703,67 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompJob?: null | {
+                            compJobId: number;
+                            historyLayout: null | (number);
+                            discId: null | (number);
+                            compId: null | (number);
+                            jobDescId: null | (number);
+                            jobConditionId: null | (number);
+                            maintClassId: null | (number);
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            accountCodeId: null | (number);
+                            rescheduleLimitId: null | (number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            changeReason: null | string;
+                            planningMethod: null | (number);
+                            statusNone: null | (number);
+                            statusInUse: null | (number);
+                            statusAvailable: null | (number);
+                            statusRepair: null | (number);
+                            estTotalDuration: null | (number);
+                            estCurrencyCode: null | string;
+                            estPrice: null | (number);
+                            lastDone: null | (Record<string, never> | number);
+                            nextDueDate: null | (Record<string, never> | number);
+                            cbmStatus: null | (number);
+                            outputFormat: null | (number);
+                            priority: null | (number);
+                            window: null | (number);
+                            active: null | (number);
+                            mandatoryHistory: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            mandatoryResource: null | (number);
+                            mandatoryStockUsage: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblCompMeasurePoint?: null | {
+                            compMeasurePointId: number;
+                            compId: null | (number);
+                            counterTypeId: null | (number);
+                            changedBy: null | (number);
+                            currentDate: null | (Record<string, never> | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -8378,6 +8802,67 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompJob?: null | {
+                            compJobId: number;
+                            historyLayout: null | (number);
+                            discId: null | (number);
+                            compId: null | (number);
+                            jobDescId: null | (number);
+                            jobConditionId: null | (number);
+                            maintClassId: null | (number);
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            accountCodeId: null | (number);
+                            rescheduleLimitId: null | (number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            changeReason: null | string;
+                            planningMethod: null | (number);
+                            statusNone: null | (number);
+                            statusInUse: null | (number);
+                            statusAvailable: null | (number);
+                            statusRepair: null | (number);
+                            estTotalDuration: null | (number);
+                            estCurrencyCode: null | string;
+                            estPrice: null | (number);
+                            lastDone: null | (Record<string, never> | number);
+                            nextDueDate: null | (Record<string, never> | number);
+                            cbmStatus: null | (number);
+                            outputFormat: null | (number);
+                            priority: null | (number);
+                            window: null | (number);
+                            active: null | (number);
+                            mandatoryHistory: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            mandatoryResource: null | (number);
+                            mandatoryStockUsage: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblCompMeasurePoint?: null | {
+                            compMeasurePointId: number;
+                            compId: null | (number);
+                            counterTypeId: null | (number);
+                            changedBy: null | (number);
+                            currentDate: null | (Record<string, never> | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -8712,6 +9197,33 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            tblCompJobMeasurePoints?: {
+                                compJobMeasurePointId: number;
+                                compMeasurePointId: null | (number);
+                                compJobId: null | (number);
+                                triggerJob: null | (number);
+                                useOperationalValues: null | (number);
+                                minValue: null | (number);
+                                maxValue: null | (number);
+                                updateOnReport: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
+                            tblCounterType?: null | {
+                                counterTypeId: number;
+                                code: null | string;
+                                name: null | string;
+                                maxDailyValue: null | (number);
+                                type: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
                         }[] | unknown;
                         total: number;
                         page: number;
@@ -8740,6 +9252,16 @@ export interface operations {
                     operationalMaxValue?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompJobMeasurePoints?: {
+                        connect: {
+                            compJobMeasurePointId: number;
+                        }[];
+                    };
+                    tblCounterType?: {
+                        connect: {
+                            counterTypeId: number;
+                        };
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     changedBy?: null | (number);
@@ -8750,6 +9272,16 @@ export interface operations {
                     operationalMaxValue?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompJobMeasurePoints?: {
+                        connect: {
+                            compJobMeasurePointId: number;
+                        }[];
+                    };
+                    tblCounterType?: {
+                        connect: {
+                            counterTypeId: number;
+                        };
+                    };
                 };
                 "multipart/form-data": {
                     changedBy?: null | (number);
@@ -8760,6 +9292,16 @@ export interface operations {
                     operationalMaxValue?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompJobMeasurePoints?: {
+                        connect: {
+                            compJobMeasurePointId: number;
+                        }[];
+                    };
+                    tblCounterType?: {
+                        connect: {
+                            counterTypeId: number;
+                        };
+                    };
                 };
             };
         };
@@ -8786,6 +9328,33 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompJobMeasurePoints?: {
+                            compJobMeasurePointId: number;
+                            compMeasurePointId: null | (number);
+                            compJobId: null | (number);
+                            triggerJob: null | (number);
+                            useOperationalValues: null | (number);
+                            minValue: null | (number);
+                            maxValue: null | (number);
+                            updateOnReport: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCounterType?: null | {
+                            counterTypeId: number;
+                            code: null | string;
+                            name: null | string;
+                            maxDailyValue: null | (number);
+                            type: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -8856,6 +9425,33 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompJobMeasurePoints?: {
+                            compJobMeasurePointId: number;
+                            compMeasurePointId: null | (number);
+                            compJobId: null | (number);
+                            triggerJob: null | (number);
+                            useOperationalValues: null | (number);
+                            minValue: null | (number);
+                            maxValue: null | (number);
+                            updateOnReport: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCounterType?: null | {
+                            counterTypeId: number;
+                            code: null | string;
+                            name: null | string;
+                            maxDailyValue: null | (number);
+                            type: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     } & (Record<string, never> | null);
                 };
             };
@@ -8881,6 +9477,20 @@ export interface operations {
                     operationalMaxValue?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompJobMeasurePoints?: {
+                        connect?: {
+                            compJobMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCounterType?: {
+                        connect?: {
+                            counterTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     changedBy?: null | (number);
@@ -8891,6 +9501,20 @@ export interface operations {
                     operationalMaxValue?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompJobMeasurePoints?: {
+                        connect?: {
+                            compJobMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCounterType?: {
+                        connect?: {
+                            counterTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
                 "multipart/form-data": {
                     changedBy?: null | (number);
@@ -8901,6 +9525,20 @@ export interface operations {
                     operationalMaxValue?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompJobMeasurePoints?: {
+                        connect?: {
+                            compJobMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCounterType?: {
+                        connect?: {
+                            counterTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
             };
         };
@@ -8927,6 +9565,33 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompJobMeasurePoints?: {
+                            compJobMeasurePointId: number;
+                            compMeasurePointId: null | (number);
+                            compJobId: null | (number);
+                            triggerJob: null | (number);
+                            useOperationalValues: null | (number);
+                            minValue: null | (number);
+                            maxValue: null | (number);
+                            updateOnReport: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCounterType?: null | {
+                            counterTypeId: number;
+                            code: null | string;
+                            name: null | string;
+                            maxDailyValue: null | (number);
+                            type: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -8967,6 +9632,33 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompJobMeasurePoints?: {
+                            compJobMeasurePointId: number;
+                            compMeasurePointId: null | (number);
+                            compJobId: null | (number);
+                            triggerJob: null | (number);
+                            useOperationalValues: null | (number);
+                            minValue: null | (number);
+                            maxValue: null | (number);
+                            updateOnReport: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCounterType?: null | {
+                            counterTypeId: number;
+                            code: null | string;
+                            name: null | string;
+                            maxDailyValue: null | (number);
+                            type: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -10847,6 +11539,18 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
+                            tblCompTypeCounters?: {
+                                compTypeCounterId: number;
+                                compTypeId: null | (number);
+                                counterTypeId: null | (number);
+                                averageCountRate: null | (number);
+                                useCalcAverage: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
                         }[] | unknown;
                         total: number;
                         page: number;
@@ -10899,6 +11603,11 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompTypeCounters?: {
+                        connect: {
+                            compTypeCounterId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     compTypeNo?: null | string;
@@ -10933,6 +11642,11 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompTypeCounters?: {
+                        connect: {
+                            compTypeCounterId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     compTypeNo?: null | string;
@@ -10965,6 +11679,11 @@ export interface operations {
                     otherTblCompTypes?: {
                         connect: {
                             id: number;
+                        }[];
+                    };
+                    tblCompTypeCounters?: {
+                        connect: {
+                            compTypeCounterId: number;
                         }[];
                     };
                 };
@@ -11095,6 +11814,18 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             componentClassId_2: null | (number);
                             parentCompTypeId_2: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCompTypeCounters?: {
+                            compTypeCounterId: number;
+                            compTypeId: null | (number);
+                            counterTypeId: null | (number);
+                            averageCountRate: null | (number);
+                            useCalcAverage: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -11273,6 +12004,18 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblCompTypeCounters?: {
+                            compTypeCounterId: number;
+                            compTypeId: null | (number);
+                            counterTypeId: null | (number);
+                            averageCountRate: null | (number);
+                            useCalcAverage: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -11330,6 +12073,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompTypeCounters?: {
+                        connect?: {
+                            compTypeCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     compTypeNo?: null | string;
@@ -11372,6 +12123,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompTypeCounters?: {
+                        connect?: {
+                            compTypeCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     compTypeNo?: null | string;
@@ -11409,6 +12168,14 @@ export interface operations {
                     otherTblCompTypes?: {
                         connect?: {
                             id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeCounters?: {
+                        connect?: {
+                            compTypeCounterId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -11542,6 +12309,18 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             componentClassId_2: null | (number);
                             parentCompTypeId_2: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCompTypeCounters?: {
+                            compTypeCounterId: number;
+                            compTypeId: null | (number);
+                            counterTypeId: null | (number);
+                            averageCountRate: null | (number);
+                            useCalcAverage: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -11690,6 +12469,18 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblCompTypeCounters?: {
+                            compTypeCounterId: number;
+                            compTypeId: null | (number);
+                            counterTypeId: null | (number);
+                            averageCountRate: null | (number);
+                            useCalcAverage: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -11760,6 +12551,30 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            tblCompType?: null | {
+                                compTypeId: number;
+                                componentClassId: null | (number);
+                                parentCompTypeId: null | (number);
+                                primaryVendorId: null | (number);
+                                compTypeNo: null | string;
+                                compName: null | string;
+                                compType: null | string;
+                                compTypeModel: null | string;
+                                makerId: null | (number);
+                                userDefMarPol: null | (number);
+                                userDefImoNo: null | string;
+                                userDefText1: null | string;
+                                layoutId: null | (number);
+                                notes: null | string;
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                componentClassId_2: null | (number);
+                                parentCompTypeId_2: null | (number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
                             tblCounterType?: null | {
                                 counterTypeId: number;
                                 code: null | string;
@@ -11810,6 +12625,11 @@ export interface operations {
                     useCalcAverage?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompType?: {
+                        connect: {
+                            compTypeId: number;
+                        };
+                    };
                     tblCounterType?: {
                         connect: {
                             counterTypeId: number;
@@ -11826,6 +12646,11 @@ export interface operations {
                     useCalcAverage?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompType?: {
+                        connect: {
+                            compTypeId: number;
+                        };
+                    };
                     tblCounterType?: {
                         connect: {
                             counterTypeId: number;
@@ -11842,6 +12667,11 @@ export interface operations {
                     useCalcAverage?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompType?: {
+                        connect: {
+                            compTypeId: number;
+                        };
+                    };
                     tblCounterType?: {
                         connect: {
                             counterTypeId: number;
@@ -11873,6 +12703,30 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompType?: null | {
+                            compTypeId: number;
+                            componentClassId: null | (number);
+                            parentCompTypeId: null | (number);
+                            primaryVendorId: null | (number);
+                            compTypeNo: null | string;
+                            compName: null | string;
+                            compType: null | string;
+                            compTypeModel: null | string;
+                            makerId: null | (number);
+                            userDefMarPol: null | (number);
+                            userDefImoNo: null | string;
+                            userDefText1: null | string;
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            componentClassId_2: null | (number);
+                            parentCompTypeId_2: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                         tblCounterType?: null | {
                             counterTypeId: number;
                             code: null | string;
@@ -11964,6 +12818,30 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompType?: null | {
+                            compTypeId: number;
+                            componentClassId: null | (number);
+                            parentCompTypeId: null | (number);
+                            primaryVendorId: null | (number);
+                            compTypeNo: null | string;
+                            compName: null | string;
+                            compType: null | string;
+                            compTypeModel: null | string;
+                            makerId: null | (number);
+                            userDefMarPol: null | (number);
+                            userDefImoNo: null | string;
+                            userDefText1: null | string;
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            componentClassId_2: null | (number);
+                            parentCompTypeId_2: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                         tblCounterType?: null | {
                             counterTypeId: number;
                             code: null | string;
@@ -12011,6 +12889,12 @@ export interface operations {
                     useCalcAverage?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompType?: {
+                        connect?: {
+                            compTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblCounterType?: {
                         connect?: {
                             counterTypeId: number;
@@ -12031,6 +12915,12 @@ export interface operations {
                     useCalcAverage?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompType?: {
+                        connect?: {
+                            compTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblCounterType?: {
                         connect?: {
                             counterTypeId: number;
@@ -12051,6 +12941,12 @@ export interface operations {
                     useCalcAverage?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompType?: {
+                        connect?: {
+                            compTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblCounterType?: {
                         connect?: {
                             counterTypeId: number;
@@ -12086,6 +12982,30 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompType?: null | {
+                            compTypeId: number;
+                            componentClassId: null | (number);
+                            parentCompTypeId: null | (number);
+                            primaryVendorId: null | (number);
+                            compTypeNo: null | string;
+                            compName: null | string;
+                            compType: null | string;
+                            compTypeModel: null | string;
+                            makerId: null | (number);
+                            userDefMarPol: null | (number);
+                            userDefImoNo: null | string;
+                            userDefText1: null | string;
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            componentClassId_2: null | (number);
+                            parentCompTypeId_2: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                         tblCounterType?: null | {
                             counterTypeId: number;
                             code: null | string;
@@ -12147,6 +13067,30 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompType?: null | {
+                            compTypeId: number;
+                            componentClassId: null | (number);
+                            parentCompTypeId: null | (number);
+                            primaryVendorId: null | (number);
+                            compTypeNo: null | string;
+                            compName: null | string;
+                            compType: null | string;
+                            compTypeModel: null | string;
+                            makerId: null | (number);
+                            userDefMarPol: null | (number);
+                            userDefImoNo: null | string;
+                            userDefText1: null | string;
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            componentClassId_2: null | (number);
+                            parentCompTypeId_2: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                         tblCounterType?: null | {
                             counterTypeId: number;
                             code: null | string;
@@ -12345,6 +13289,21 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
+                            tblCompTypeJobMeasurePoints?: {
+                                compTypeJobMeasurePointId: number;
+                                compTypeMeasurePointId: null | (number);
+                                compTypeJobId: null | (number);
+                                triggerJob: null | (number);
+                                useOperationalValues: null | (number);
+                                minValue: null | (number);
+                                maxValue: null | (number);
+                                updateOnReport: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
                         }[] | unknown;
                         total: number;
                         page: number;
@@ -12420,6 +13379,11 @@ export interface operations {
                             compTypeJobCounterId: number;
                         }[];
                     };
+                    tblCompTypeJobMeasurePoints?: {
+                        connect: {
+                            compTypeJobMeasurePointId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     historyLayout?: null | (number);
@@ -12477,6 +13441,11 @@ export interface operations {
                             compTypeJobCounterId: number;
                         }[];
                     };
+                    tblCompTypeJobMeasurePoints?: {
+                        connect: {
+                            compTypeJobMeasurePointId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     historyLayout?: null | (number);
@@ -12532,6 +13501,11 @@ export interface operations {
                     tblCompTypeJobCounters?: {
                         connect: {
                             compTypeJobCounterId: number;
+                        }[];
+                    };
+                    tblCompTypeJobMeasurePoints?: {
+                        connect: {
+                            compTypeJobMeasurePointId: number;
                         }[];
                     };
                 };
@@ -12654,6 +13628,21 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCompTypeJobMeasurePoints?: {
+                            compTypeJobMeasurePointId: number;
+                            compTypeMeasurePointId: null | (number);
+                            compTypeJobId: null | (number);
+                            triggerJob: null | (number);
+                            useOperationalValues: null | (number);
+                            minValue: null | (number);
+                            maxValue: null | (number);
+                            updateOnReport: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -12824,6 +13813,21 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblCompTypeJobMeasurePoints?: {
+                            compTypeJobMeasurePointId: number;
+                            compTypeMeasurePointId: null | (number);
+                            compTypeJobId: null | (number);
+                            triggerJob: null | (number);
+                            useOperationalValues: null | (number);
+                            minValue: null | (number);
+                            maxValue: null | (number);
+                            updateOnReport: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -12905,6 +13909,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompTypeJobMeasurePoints?: {
+                        connect?: {
+                            compTypeJobMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     historyLayout?: null | (number);
@@ -12971,6 +13983,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompTypeJobMeasurePoints?: {
+                        connect?: {
+                            compTypeJobMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     historyLayout?: null | (number);
@@ -13032,6 +14052,14 @@ export interface operations {
                     tblCompTypeJobCounters?: {
                         connect?: {
                             compTypeJobCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeJobMeasurePoints?: {
+                        connect?: {
+                            compTypeJobMeasurePointId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -13157,6 +14185,21 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCompTypeJobMeasurePoints?: {
+                            compTypeJobMeasurePointId: number;
+                            compTypeMeasurePointId: null | (number);
+                            compTypeJobId: null | (number);
+                            triggerJob: null | (number);
+                            useOperationalValues: null | (number);
+                            minValue: null | (number);
+                            maxValue: null | (number);
+                            updateOnReport: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -13294,6 +14337,21 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCompTypeJobMeasurePoints?: {
+                            compTypeJobMeasurePointId: number;
+                            compTypeMeasurePointId: null | (number);
+                            compTypeJobId: null | (number);
+                            triggerJob: null | (number);
+                            useOperationalValues: null | (number);
+                            minValue: null | (number);
+                            maxValue: null | (number);
+                            updateOnReport: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -13969,6 +15027,54 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            tblCompTypeJob?: null | {
+                                compTypeJobId: number;
+                                compTypeId: null | (number);
+                                historyLayout: null | (number);
+                                discId: null | (number);
+                                jobDescId: null | (number);
+                                jobConditionId: null | (number);
+                                frequency: null | (number);
+                                frequencyPeriod: null | (number);
+                                planningMethod: null | (number);
+                                statusNone: null | (number);
+                                statusInUse: null | (number);
+                                statusAvailable: null | (number);
+                                statusRepair: null | (number);
+                                estTotalDuration: null | (number);
+                                estCurrencyCode: null | string;
+                                estPrice: null | (number);
+                                outputFormat: null | (number);
+                                maintClassId: null | (number);
+                                maintCauseId: null | (number);
+                                maintTypeId: null | (number);
+                                rescheduleLimitId: null | (number);
+                                priority: null | (number);
+                                window: null | (number);
+                                active: null | (number);
+                                mandatoryHistory: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                mandatoryResource: null | (number);
+                                mandatoryStockUsage: null | (number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
+                            tblCompTypeMeasurePoint?: null | {
+                                compTypeMeasurePointId: number;
+                                compTypeId: null | (number);
+                                counterTypeId: null | (number);
+                                unitId: null | (number);
+                                setValue: null | (number);
+                                operationalMinValue: null | (number);
+                                operationalMaxValue: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
                         }[] | unknown;
                         total: number;
                         page: number;
@@ -13996,6 +15102,16 @@ export interface operations {
                     updateOnReport?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompTypeJob?: {
+                        connect: {
+                            compTypeJobId: number;
+                        };
+                    };
+                    tblCompTypeMeasurePoint?: {
+                        connect: {
+                            compTypeMeasurePointId: number;
+                        };
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     triggerJob?: null | (number);
@@ -14005,6 +15121,16 @@ export interface operations {
                     updateOnReport?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompTypeJob?: {
+                        connect: {
+                            compTypeJobId: number;
+                        };
+                    };
+                    tblCompTypeMeasurePoint?: {
+                        connect: {
+                            compTypeMeasurePointId: number;
+                        };
+                    };
                 };
                 "multipart/form-data": {
                     triggerJob?: null | (number);
@@ -14014,6 +15140,16 @@ export interface operations {
                     updateOnReport?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompTypeJob?: {
+                        connect: {
+                            compTypeJobId: number;
+                        };
+                    };
+                    tblCompTypeMeasurePoint?: {
+                        connect: {
+                            compTypeMeasurePointId: number;
+                        };
+                    };
                 };
             };
         };
@@ -14038,6 +15174,54 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompTypeJob?: null | {
+                            compTypeJobId: number;
+                            compTypeId: null | (number);
+                            historyLayout: null | (number);
+                            discId: null | (number);
+                            jobDescId: null | (number);
+                            jobConditionId: null | (number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            planningMethod: null | (number);
+                            statusNone: null | (number);
+                            statusInUse: null | (number);
+                            statusAvailable: null | (number);
+                            statusRepair: null | (number);
+                            estTotalDuration: null | (number);
+                            estCurrencyCode: null | string;
+                            estPrice: null | (number);
+                            outputFormat: null | (number);
+                            maintClassId: null | (number);
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            rescheduleLimitId: null | (number);
+                            priority: null | (number);
+                            window: null | (number);
+                            active: null | (number);
+                            mandatoryHistory: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            mandatoryResource: null | (number);
+                            mandatoryStockUsage: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblCompTypeMeasurePoint?: null | {
+                            compTypeMeasurePointId: number;
+                            compTypeId: null | (number);
+                            counterTypeId: null | (number);
+                            unitId: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -14106,6 +15290,54 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompTypeJob?: null | {
+                            compTypeJobId: number;
+                            compTypeId: null | (number);
+                            historyLayout: null | (number);
+                            discId: null | (number);
+                            jobDescId: null | (number);
+                            jobConditionId: null | (number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            planningMethod: null | (number);
+                            statusNone: null | (number);
+                            statusInUse: null | (number);
+                            statusAvailable: null | (number);
+                            statusRepair: null | (number);
+                            estTotalDuration: null | (number);
+                            estCurrencyCode: null | string;
+                            estPrice: null | (number);
+                            outputFormat: null | (number);
+                            maintClassId: null | (number);
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            rescheduleLimitId: null | (number);
+                            priority: null | (number);
+                            window: null | (number);
+                            active: null | (number);
+                            mandatoryHistory: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            mandatoryResource: null | (number);
+                            mandatoryStockUsage: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblCompTypeMeasurePoint?: null | {
+                            compTypeMeasurePointId: number;
+                            compTypeId: null | (number);
+                            counterTypeId: null | (number);
+                            unitId: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     } & (Record<string, never> | null);
                 };
             };
@@ -14130,6 +15362,18 @@ export interface operations {
                     updateOnReport?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompTypeJob?: {
+                        connect?: {
+                            compTypeJobId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblCompTypeMeasurePoint?: {
+                        connect?: {
+                            compTypeMeasurePointId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     triggerJob?: null | (number);
@@ -14139,6 +15383,18 @@ export interface operations {
                     updateOnReport?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompTypeJob?: {
+                        connect?: {
+                            compTypeJobId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblCompTypeMeasurePoint?: {
+                        connect?: {
+                            compTypeMeasurePointId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
                 "multipart/form-data": {
                     triggerJob?: null | (number);
@@ -14148,6 +15404,18 @@ export interface operations {
                     updateOnReport?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompTypeJob?: {
+                        connect?: {
+                            compTypeJobId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblCompTypeMeasurePoint?: {
+                        connect?: {
+                            compTypeMeasurePointId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
             };
         };
@@ -14172,6 +15440,54 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompTypeJob?: null | {
+                            compTypeJobId: number;
+                            compTypeId: null | (number);
+                            historyLayout: null | (number);
+                            discId: null | (number);
+                            jobDescId: null | (number);
+                            jobConditionId: null | (number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            planningMethod: null | (number);
+                            statusNone: null | (number);
+                            statusInUse: null | (number);
+                            statusAvailable: null | (number);
+                            statusRepair: null | (number);
+                            estTotalDuration: null | (number);
+                            estCurrencyCode: null | string;
+                            estPrice: null | (number);
+                            outputFormat: null | (number);
+                            maintClassId: null | (number);
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            rescheduleLimitId: null | (number);
+                            priority: null | (number);
+                            window: null | (number);
+                            active: null | (number);
+                            mandatoryHistory: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            mandatoryResource: null | (number);
+                            mandatoryStockUsage: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblCompTypeMeasurePoint?: null | {
+                            compTypeMeasurePointId: number;
+                            compTypeId: null | (number);
+                            counterTypeId: null | (number);
+                            unitId: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -14210,6 +15526,54 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompTypeJob?: null | {
+                            compTypeJobId: number;
+                            compTypeId: null | (number);
+                            historyLayout: null | (number);
+                            discId: null | (number);
+                            jobDescId: null | (number);
+                            jobConditionId: null | (number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            planningMethod: null | (number);
+                            statusNone: null | (number);
+                            statusInUse: null | (number);
+                            statusAvailable: null | (number);
+                            statusRepair: null | (number);
+                            estTotalDuration: null | (number);
+                            estCurrencyCode: null | string;
+                            estPrice: null | (number);
+                            outputFormat: null | (number);
+                            maintClassId: null | (number);
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            rescheduleLimitId: null | (number);
+                            priority: null | (number);
+                            window: null | (number);
+                            active: null | (number);
+                            mandatoryHistory: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            mandatoryResource: null | (number);
+                            mandatoryStockUsage: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblCompTypeMeasurePoint?: null | {
+                            compTypeMeasurePointId: number;
+                            compTypeId: null | (number);
+                            counterTypeId: null | (number);
+                            unitId: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -14541,6 +15905,33 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            tblCompTypeJobMeasurePoints?: {
+                                compTypeJobMeasurePointId: number;
+                                compTypeMeasurePointId: null | (number);
+                                compTypeJobId: null | (number);
+                                triggerJob: null | (number);
+                                useOperationalValues: null | (number);
+                                minValue: null | (number);
+                                maxValue: null | (number);
+                                updateOnReport: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
+                            tblCounterType?: null | {
+                                counterTypeId: number;
+                                code: null | string;
+                                name: null | string;
+                                maxDailyValue: null | (number);
+                                type: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
                         }[] | unknown;
                         total: number;
                         page: number;
@@ -14566,6 +15957,16 @@ export interface operations {
                     operationalMaxValue?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompTypeJobMeasurePoints?: {
+                        connect: {
+                            compTypeJobMeasurePointId: number;
+                        }[];
+                    };
+                    tblCounterType?: {
+                        connect: {
+                            counterTypeId: number;
+                        };
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     setValue?: null | (number);
@@ -14573,6 +15974,16 @@ export interface operations {
                     operationalMaxValue?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompTypeJobMeasurePoints?: {
+                        connect: {
+                            compTypeJobMeasurePointId: number;
+                        }[];
+                    };
+                    tblCounterType?: {
+                        connect: {
+                            counterTypeId: number;
+                        };
+                    };
                 };
                 "multipart/form-data": {
                     setValue?: null | (number);
@@ -14580,6 +15991,16 @@ export interface operations {
                     operationalMaxValue?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompTypeJobMeasurePoints?: {
+                        connect: {
+                            compTypeJobMeasurePointId: number;
+                        }[];
+                    };
+                    tblCounterType?: {
+                        connect: {
+                            counterTypeId: number;
+                        };
+                    };
                 };
             };
         };
@@ -14603,6 +16024,33 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompTypeJobMeasurePoints?: {
+                            compTypeJobMeasurePointId: number;
+                            compTypeMeasurePointId: null | (number);
+                            compTypeJobId: null | (number);
+                            triggerJob: null | (number);
+                            useOperationalValues: null | (number);
+                            minValue: null | (number);
+                            maxValue: null | (number);
+                            updateOnReport: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCounterType?: null | {
+                            counterTypeId: number;
+                            code: null | string;
+                            name: null | string;
+                            maxDailyValue: null | (number);
+                            type: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -14670,6 +16118,33 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompTypeJobMeasurePoints?: {
+                            compTypeJobMeasurePointId: number;
+                            compTypeMeasurePointId: null | (number);
+                            compTypeJobId: null | (number);
+                            triggerJob: null | (number);
+                            useOperationalValues: null | (number);
+                            minValue: null | (number);
+                            maxValue: null | (number);
+                            updateOnReport: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCounterType?: null | {
+                            counterTypeId: number;
+                            code: null | string;
+                            name: null | string;
+                            maxDailyValue: null | (number);
+                            type: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     } & (Record<string, never> | null);
                 };
             };
@@ -14692,6 +16167,20 @@ export interface operations {
                     operationalMaxValue?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompTypeJobMeasurePoints?: {
+                        connect?: {
+                            compTypeJobMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCounterType?: {
+                        connect?: {
+                            counterTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     setValue?: null | (number);
@@ -14699,6 +16188,20 @@ export interface operations {
                     operationalMaxValue?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompTypeJobMeasurePoints?: {
+                        connect?: {
+                            compTypeJobMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCounterType?: {
+                        connect?: {
+                            counterTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
                 "multipart/form-data": {
                     setValue?: null | (number);
@@ -14706,6 +16209,20 @@ export interface operations {
                     operationalMaxValue?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblCompTypeJobMeasurePoints?: {
+                        connect?: {
+                            compTypeJobMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCounterType?: {
+                        connect?: {
+                            counterTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
             };
         };
@@ -14729,6 +16246,33 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompTypeJobMeasurePoints?: {
+                            compTypeJobMeasurePointId: number;
+                            compTypeMeasurePointId: null | (number);
+                            compTypeJobId: null | (number);
+                            triggerJob: null | (number);
+                            useOperationalValues: null | (number);
+                            minValue: null | (number);
+                            maxValue: null | (number);
+                            updateOnReport: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCounterType?: null | {
+                            counterTypeId: number;
+                            code: null | string;
+                            name: null | string;
+                            maxDailyValue: null | (number);
+                            type: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -14766,6 +16310,33 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCompTypeJobMeasurePoints?: {
+                            compTypeJobMeasurePointId: number;
+                            compTypeMeasurePointId: null | (number);
+                            compTypeJobId: null | (number);
+                            triggerJob: null | (number);
+                            useOperationalValues: null | (number);
+                            minValue: null | (number);
+                            maxValue: null | (number);
+                            updateOnReport: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCounterType?: null | {
+                            counterTypeId: number;
+                            code: null | string;
+                            name: null | string;
+                            maxDailyValue: null | (number);
+                            type: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -16165,12 +17736,43 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
+                            tblCompMeasurePoints?: {
+                                compMeasurePointId: number;
+                                compId: null | (number);
+                                counterTypeId: null | (number);
+                                changedBy: null | (number);
+                                currentDate: null | (Record<string, never> | number);
+                                unitId: null | (number);
+                                currentValue: null | (number);
+                                setValue: null | (number);
+                                operationalMinValue: null | (number);
+                                operationalMaxValue: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
                             tblCompTypeCounters?: {
                                 compTypeCounterId: number;
                                 compTypeId: null | (number);
                                 counterTypeId: null | (number);
                                 averageCountRate: null | (number);
                                 useCalcAverage: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
+                            tblCompTypeMeasurePoints?: {
+                                compTypeMeasurePointId: number;
+                                compTypeId: null | (number);
+                                counterTypeId: null | (number);
+                                unitId: null | (number);
+                                setValue: null | (number);
+                                operationalMinValue: null | (number);
+                                operationalMaxValue: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -16208,9 +17810,19 @@ export interface operations {
                             compCounterId: number;
                         }[];
                     };
+                    tblCompMeasurePoints?: {
+                        connect: {
+                            compMeasurePointId: number;
+                        }[];
+                    };
                     tblCompTypeCounters?: {
                         connect: {
                             compTypeCounterId: number;
+                        }[];
+                    };
+                    tblCompTypeMeasurePoints?: {
+                        connect: {
+                            compTypeMeasurePointId: number;
                         }[];
                     };
                 };
@@ -16226,9 +17838,19 @@ export interface operations {
                             compCounterId: number;
                         }[];
                     };
+                    tblCompMeasurePoints?: {
+                        connect: {
+                            compMeasurePointId: number;
+                        }[];
+                    };
                     tblCompTypeCounters?: {
                         connect: {
                             compTypeCounterId: number;
+                        }[];
+                    };
+                    tblCompTypeMeasurePoints?: {
+                        connect: {
+                            compTypeMeasurePointId: number;
                         }[];
                     };
                 };
@@ -16244,9 +17866,19 @@ export interface operations {
                             compCounterId: number;
                         }[];
                     };
+                    tblCompMeasurePoints?: {
+                        connect: {
+                            compMeasurePointId: number;
+                        }[];
+                    };
                     tblCompTypeCounters?: {
                         connect: {
                             compTypeCounterId: number;
+                        }[];
+                    };
+                    tblCompTypeMeasurePoints?: {
+                        connect: {
+                            compTypeMeasurePointId: number;
                         }[];
                     };
                 };
@@ -16290,12 +17922,43 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblCompMeasurePoints?: {
+                            compMeasurePointId: number;
+                            compId: null | (number);
+                            counterTypeId: null | (number);
+                            changedBy: null | (number);
+                            currentDate: null | (Record<string, never> | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblCompTypeCounters?: {
                             compTypeCounterId: number;
                             compTypeId: null | (number);
                             counterTypeId: null | (number);
                             averageCountRate: null | (number);
                             useCalcAverage: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCompTypeMeasurePoints?: {
+                            compTypeMeasurePointId: number;
+                            compTypeId: null | (number);
+                            counterTypeId: null | (number);
+                            unitId: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -16387,12 +18050,43 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblCompMeasurePoints?: {
+                            compMeasurePointId: number;
+                            compId: null | (number);
+                            counterTypeId: null | (number);
+                            changedBy: null | (number);
+                            currentDate: null | (Record<string, never> | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblCompTypeCounters?: {
                             compTypeCounterId: number;
                             compTypeId: null | (number);
                             counterTypeId: null | (number);
                             averageCountRate: null | (number);
                             useCalcAverage: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCompTypeMeasurePoints?: {
+                            compTypeMeasurePointId: number;
+                            compTypeId: null | (number);
+                            counterTypeId: null | (number);
+                            unitId: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -16430,9 +18124,25 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompMeasurePoints?: {
+                        connect?: {
+                            compMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblCompTypeCounters?: {
                         connect?: {
                             compTypeCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeMeasurePoints?: {
+                        connect?: {
+                            compTypeMeasurePointId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -16454,9 +18164,25 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompMeasurePoints?: {
+                        connect?: {
+                            compMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblCompTypeCounters?: {
                         connect?: {
                             compTypeCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeMeasurePoints?: {
+                        connect?: {
+                            compTypeMeasurePointId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -16478,9 +18204,25 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompMeasurePoints?: {
+                        connect?: {
+                            compMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblCompTypeCounters?: {
                         connect?: {
                             compTypeCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeMeasurePoints?: {
+                        connect?: {
+                            compTypeMeasurePointId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -16527,12 +18269,43 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblCompMeasurePoints?: {
+                            compMeasurePointId: number;
+                            compId: null | (number);
+                            counterTypeId: null | (number);
+                            changedBy: null | (number);
+                            currentDate: null | (Record<string, never> | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblCompTypeCounters?: {
                             compTypeCounterId: number;
                             compTypeId: null | (number);
                             counterTypeId: null | (number);
                             averageCountRate: null | (number);
                             useCalcAverage: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCompTypeMeasurePoints?: {
+                            compTypeMeasurePointId: number;
+                            compTypeId: null | (number);
+                            counterTypeId: null | (number);
+                            unitId: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -16594,12 +18367,43 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblCompMeasurePoints?: {
+                            compMeasurePointId: number;
+                            compId: null | (number);
+                            counterTypeId: null | (number);
+                            changedBy: null | (number);
+                            currentDate: null | (Record<string, never> | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblCompTypeCounters?: {
                             compTypeCounterId: number;
                             compTypeId: null | (number);
                             counterTypeId: null | (number);
                             averageCountRate: null | (number);
                             useCalcAverage: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblCompTypeMeasurePoints?: {
+                            compTypeMeasurePointId: number;
+                            compTypeId: null | (number);
+                            counterTypeId: null | (number);
+                            unitId: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
