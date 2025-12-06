@@ -16,24 +16,6 @@ function stringifyQuery<Q extends Record<string, any>>(query?: Q) {
   return result as Q;
 }
 
-export type TypeSysdiagrams = DynamicResponse<'getSysdiagrams'>['items'][0];
-export const sysdiagrams = {
-  getAll: (query?: DynamicQuery<'getSysdiagrams'>) =>
-    api.get<DynamicResponse<'getSysdiagrams'>>('/sysdiagrams', { params: stringifyQuery(query) }),
-  getById: (id: number, query?: DynamicQuery<'getSysdiagramsByDiagramId'>) =>
-    api.get<DynamicResponse<'getSysdiagramsByDiagramId'>>(`/sysdiagrams/${id}`, { params: stringifyQuery(query) }),
-  count: (query?: DynamicQuery<'getSysdiagramsCount'>) =>
-    api.get<DynamicResponse<'getSysdiagramsCount'>>('/sysdiagrams/count', { params: stringifyQuery(query) }),
-  create: (data: DynamicCreate<'postSysdiagrams'>) =>
-    api.post<DynamicResponse<'postSysdiagrams'>>('/sysdiagrams', { data }),
-  update: (id: number, data: DynamicUpdate<'putSysdiagramsByDiagramId'>) =>
-    api.put<DynamicResponse<'putSysdiagramsByDiagramId'>>(`/sysdiagrams/${id}`, { data }),
-  deleteById: (id: number, query?: DynamicQuery<'deleteSysdiagramsByDiagramId'>) =>
-    api.delete<DynamicResponse<'deleteSysdiagramsByDiagramId'>>(`/sysdiagrams/${id}`, { params: stringifyQuery(query) }),
-  deleteAll: (query?: DynamicQuery<'deleteSysdiagrams'>) =>
-    api.delete<DynamicResponse<'deleteSysdiagrams'>>('/sysdiagrams', { params: stringifyQuery(query) }),
-};
-
 export type TypeTblAddress = DynamicResponse<'getTblAddress'>['items'][0];
 export const tblAddress = {
   getAll: (query?: DynamicQuery<'getTblAddress'>) =>
@@ -320,6 +302,11 @@ export const tblCompTypeJob = {
     api.delete<DynamicResponse<'deleteTblCompTypeJobByCompTypeJobId'>>(`/tblCompTypeJob/${id}`, { params: stringifyQuery(query) }),
   deleteAll: (query?: DynamicQuery<'deleteTblCompTypeJob'>) =>
     api.delete<DynamicResponse<'deleteTblCompTypeJob'>>('/tblCompTypeJob', { params: stringifyQuery(query) }),
+};
+
+export const tblCompTypeJobByCompTypeJobIdEffect = {
+  create: (data: DynamicCreate<'postTblCompTypeJobByCompTypeJobIdEffect'>) =>
+    api.post<DynamicResponse<'postTblCompTypeJobByCompTypeJobIdEffect'>>('/tblCompTypeJobByCompTypeJobIdEffect', { data }),
 };
 
 export type TypeTblCompTypeJobCounter = DynamicResponse<'getTblCompTypeJobCounter'>['items'][0];
@@ -842,6 +829,24 @@ export const tblPendingType = {
     api.delete<DynamicResponse<'deleteTblPendingTypeByPendTypeId'>>(`/tblPendingType/${id}`, { params: stringifyQuery(query) }),
   deleteAll: (query?: DynamicQuery<'deleteTblPendingType'>) =>
     api.delete<DynamicResponse<'deleteTblPendingType'>>('/tblPendingType', { params: stringifyQuery(query) }),
+};
+
+export type TypeTblPeriod = DynamicResponse<'getTblPeriod'>['items'][0];
+export const tblPeriod = {
+  getAll: (query?: DynamicQuery<'getTblPeriod'>) =>
+    api.get<DynamicResponse<'getTblPeriod'>>('/tblPeriod', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblPeriodByPeriodId'>) =>
+    api.get<DynamicResponse<'getTblPeriodByPeriodId'>>(`/tblPeriod/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblPeriodCount'>) =>
+    api.get<DynamicResponse<'getTblPeriodCount'>>('/tblPeriod/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblPeriod'>) =>
+    api.post<DynamicResponse<'postTblPeriod'>>('/tblPeriod', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblPeriodByPeriodId'>) =>
+    api.put<DynamicResponse<'putTblPeriodByPeriodId'>>(`/tblPeriod/${id}`, { data }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblPeriodByPeriodId'>) =>
+    api.delete<DynamicResponse<'deleteTblPeriodByPeriodId'>>(`/tblPeriod/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblPeriod'>) =>
+    api.delete<DynamicResponse<'deleteTblPeriod'>>('/tblPeriod', { params: stringifyQuery(query) }),
 };
 
 export type TypeTblReScheduleLog = DynamicResponse<'getTblReScheduleLog'>['items'][0];

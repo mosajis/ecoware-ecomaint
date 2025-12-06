@@ -18,9 +18,10 @@ const TabMeasuresPage = ({ selected }: Props) => {
 
     return tblCompTypeMeasurePoint.getAll({
       filter: {
-        // compTypeId: selected,
+        compTypeId: selected,
       },
       include: {
+        tblUnit: true,
         tblCounterType: true,
       },
     });
@@ -42,12 +43,27 @@ const TabMeasuresPage = ({ selected }: Props) => {
         flex: 1,
         valueGetter: (v, row) => row?.tblCounterType?.name,
       },
-      { field: "unitName", headerName: "Unit Name", flex: 1 },
-      { field: "unitDescription", headerName: "Unit Description", flex: 1 },
+      {
+        field: "unitName",
+        headerName: "Unit Name",
+        flex: 1,
+        valueGetter: (v, row) => row?.tblUnit?.name,
+      },
+      {
+        field: "unitDescription",
+        headerName: "Unit Description",
+        flex: 1,
+        valueGetter: (v, row) => row?.tblUnit?.description,
+      },
       { field: "setValue", headerName: "Set Value", flex: 1 },
       {
-        field: "operationalMainValue",
-        headerName: "Operational Main Value",
+        field: "operationalMinValue",
+        headerName: "Min Value",
+        flex: 1,
+      },
+      {
+        field: "operationalMaxValue",
+        headerName: "Max Value",
         flex: 1,
       },
     ],

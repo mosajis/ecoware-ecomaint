@@ -3,7 +3,6 @@ import { useState } from "react";
 import { TextField } from "@mui/material";
 import { AsyncSelectDialog } from "./AsyncSelectDialog";
 import type { GridRowId } from "@mui/x-data-grid";
-
 export type AsyncSelectFieldProps<TItem extends Record<string, any>> = {
   label?: string;
   placeholder?: string;
@@ -16,7 +15,9 @@ export type AsyncSelectFieldProps<TItem extends Record<string, any>> = {
 
   request: () => Promise<any>;
   extractRows?: (data: any) => TItem[];
+
   getRowId: (row: TItem) => GridRowId;
+  getOptionLabel?: (item: TItem) => string | null | undefined;
   onChange: (value: TItem | TItem[] | null) => void;
 
   dialogHeight?: number | string;
@@ -30,12 +31,13 @@ export function AsyncSelectField<TItem extends Record<string, any>>({
   disabled = false,
   selectionMode = "single",
   request,
-  extractRows,
+  extractRows = (data) => data.items ?? [],
   columns,
   getRowId,
   onChange,
   error,
   helperText,
+  getOptionLabel = (item) => item?.name ?? Object.values(item)[1] ?? "",
   dialogHeight = 600,
   dialogMaxWidth = "md",
 }: AsyncSelectFieldProps<TItem>) {
@@ -44,10 +46,10 @@ export function AsyncSelectField<TItem extends Record<string, any>>({
   const displayValue =
     selectionMode === "single"
       ? value
-        ? (value as TItem).name
+        ? getOptionLabel(value as TItem)
         : ""
       : Array.isArray(value)
-        ? (value as TItem[]).map((v) => v.name).join(", ")
+        ? value.map((v) => getOptionLabel(v)).join(", ")
         : "";
 
   return (
@@ -63,9 +65,7 @@ export function AsyncSelectField<TItem extends Record<string, any>>({
         error={error}
         helperText={helperText}
         slotProps={{
-          input: {
-            endAdornment: <MoreHorizIcon />,
-          },
+          input: { endAdornment: <MoreHorizIcon /> },
         }}
       />
 

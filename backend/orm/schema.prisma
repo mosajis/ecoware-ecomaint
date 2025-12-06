@@ -153,6 +153,7 @@ model TblCompJob {
   tblMaintCause           TblMaintCause?           @relation(fields: [maintCauseId], references: [maintCauseId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJob_tblMaintCause")
   tblMaintClass           TblMaintClass?           @relation(fields: [maintClassId], references: [maintClassId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJob_tblMaintClass")
   tblMaintType            TblMaintType?            @relation(fields: [maintTypeId], references: [maintTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJob_tblMaintType")
+  tblPeriod               TblPeriod?               @relation(fields: [frequencyPeriod], references: [periodId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJob_tblPeriod")
   tblCompJobCounters      TblCompJobCounter[]
   tblCompJobMeasurePoints TblCompJobMeasurePoint[]
 
@@ -409,6 +410,7 @@ model TblCompType {
   tblCompType         TblCompType?         @relation("tblCompTypeTotblCompType", fields: [parentCompTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompType_tblCompType")
   otherTblCompTypes   TblCompType[]        @relation("tblCompTypeTotblCompType")
   tblCompTypeCounters TblCompTypeCounter[]
+  tblCompTypeJobs     TblCompTypeJob[]
 
   @@index([componentClassId], map: "TblCompType_ComponentClassId_IX")
   @@map("tblCompType")
@@ -467,6 +469,7 @@ model TblCompTypeJob {
   mandatoryStockUsage         Int?                         @map("MandatoryStockUsage")
   orderId                     Int?                         @map("OrderID")
   userId                      Int?                         @map("UserID")
+  tblCompType                 TblCompType?                 @relation(fields: [compTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJob_tblCompType")
   tblDiscipline               TblDiscipline?               @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJob_tblDiscipline")
   tblJobDescription           TblJobDescription?           @relation(fields: [jobDescId], references: [jobDescId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJob_tblJobDescription")
   tblMaintCause               TblMaintCause?               @relation(fields: [maintCauseId], references: [maintCauseId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJob_tblMaintCause")
@@ -1160,6 +1163,7 @@ model TblPendingType {
 model TblPeriod {
   periodId        Int              @id(map: "PK_tblPeriod") @map("PeriodID")
   name            String           @map("Name") @db.NVarChar(50)
+  tblCompJobs     TblCompJob[]
   tblCompTypeJobs TblCompTypeJob[]
 
   @@map("tblPeriod")

@@ -1,4 +1,3 @@
-export { default as ControllerSysdiagrams } from "./sysdiagrams.controller";
 export { default as ControllerTblAddress } from "./tblAddress.controller";
 export { default as ControllerTblCompCounter } from "./tblCompCounter.controller";
 export { default as ControllerTblCompCounterLog } from "./tblCompCounterLog.controller";
@@ -44,6 +43,7 @@ export { default as ControllerTblMaintLogFollow } from "./tblMaintLogFollow.cont
 export { default as ControllerTblMaintType } from "./tblMaintType.controller";
 export { default as ControllerTblOilSamplingLog } from "./tblOilSamplingLog.controller";
 export { default as ControllerTblPendingType } from "./tblPendingType.controller";
+export { default as ControllerTblPeriod } from "./tblPeriod.controller";
 export { default as ControllerTblReScheduleLog } from "./tblReScheduleLog.controller";
 export { default as ControllerTblRotationLog } from "./tblRotationLog.controller";
 export { default as ControllerTblRound } from "./tblRound.controller";

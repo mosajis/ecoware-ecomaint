@@ -50,6 +50,7 @@ const TablePKs = {
   TblPendingType: "PendTypeId",
   TblReScheduleLog: "RescheduleLogID",
   TblRotationLog: "RotationLogID",
+  TblPeriod: "PeriodID",
   TblRound: "RoundID",
   TblRoundCompJob: "RoundCompJobID",
   TblSpareType: "PartTypeID",

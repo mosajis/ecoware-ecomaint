@@ -19,6 +19,7 @@ import PageComponentTypeList from "@/pages/maintenance/componentType/ComponentTy
 import PageComponentTypeTree from "@/pages/maintenance/componentType/ComponentTypeTree";
 import PageFunction from "@/pages/maintenance/function/Function";
 import ComponentTypeJob from "@/pages/maintenance/componentType/pages/ComponentTypeJob";
+import { tblCompType } from "@/core/api/generated/api";
 
 // --- Root ---
 export const rootRoute = createRootRoute({
@@ -179,11 +180,25 @@ export const maintComponentTypeListRoute = createRoute({
 export const maintComponentTypeDetailRoute = createRoute({
   getParentRoute: () => maintComponentTypeRoute,
   path: "$id/job",
+
+  // // loader داده compType رو می‌گیره و می‌فرسته به کامپوننت
+  // loader: async ({ params }) => {
+  //   if (!params.id) return null;
+  //   const compType = await tblCompType.getById(Number(params.id));
+  //   return { compType };
+  // },
+
+  // // قبل از لود، breadcrumb رو با استفاده از params یا loader می‌سازیم
+  // beforeLoad: async ({ params,  }) => {
+  //   // فقط بر اساس params یا داده‌های موجود
+  //   return {
+  //     breadcrumb: params.compName ?? "Component Type",
+  //   };
+  // },
+
   component: ComponentTypeJob,
-  beforeLoad: ({ params }) => ({
-    breadcrumb: params?.id ?? "ComponentType",
-  }),
 });
+
 // سایر Maintenance
 export const maintComponentJobRoute = createRoute({
   getParentRoute: () => protectedRoute,
