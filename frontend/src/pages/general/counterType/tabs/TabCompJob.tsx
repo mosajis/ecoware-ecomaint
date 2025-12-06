@@ -1,12 +1,12 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useCallback } from "react";
 import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "../../hooks/useDataGrid";
 import {
   tblCompCounter,
   tblCompJobCounter,
   TypeTblCompJobCounter,
 } from "@/core/api/generated/api";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 interface TabCompJobCounterProps {
   counterTypeId: number | null | undefined;
@@ -18,6 +18,7 @@ const columns: GridColDef<TypeTblCompJobCounter>[] = [
     field: "jobDesc",
     headerName: "Job Description",
     flex: 1,
+    // @ts-ignore
     valueGetter: (_, row) => row.tblCompJob?.tblJobDescription.jobDescTitle,
   },
   {

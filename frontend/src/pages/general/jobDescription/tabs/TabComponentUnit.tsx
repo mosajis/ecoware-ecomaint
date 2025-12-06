@@ -1,11 +1,11 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useCallback } from "react";
 import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "../../hooks/useDataGrid";
 import {
   tblComponentUnit,
   TypeTblComponentUnit,
 } from "@/core/api/generated/api";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 interface TabComponentUnitProps {
   compUnitId?: number | null;
@@ -17,91 +17,91 @@ const columns: GridColDef<TypeTblComponentUnit>[] = [
     field: "compJobId",
     headerName: "CompJobId",
     flex: 1,
-    valueGetter: (_, r) => r.compJobId,
+    // valueGetter: (_, r) => r.tbl,
   },
   {
     field: "frequency",
     headerName: "Frequency",
     flex: 1,
-    valueGetter: (_, r) => r.frequency,
+    // valueGetter: (_, r) => r.frequency,
   },
   {
     field: "lastDone",
     headerName: "Last Done",
     flex: 1,
-    valueGetter: (_, r) => r.lastDone,
+    // valueGetter: (_, r) => r.lastDone,
   },
   {
     field: "disciplineName",
     headerName: "Disipline Name",
     flex: 1,
-    valueGetter: (_, r) => r.tblDiscipline?.discName,
+    // valueGetter: (_, r) => r.tblDiscipline?.discName,
   },
   {
     field: "nextDueDate",
     headerName: "Next DueDate",
     flex: 1,
-    valueGetter: (_, r) => r.nextDueDate,
+    // valueGetter: (_, r) => r.nextDueDate,
   },
   {
     field: "priority",
     headerName: "Priority",
     flex: 1,
-    valueGetter: (_, r) => r.priority,
+    // valueGetter: (_, r) => r.priority,
   },
   {
     field: "window",
     headerName: "Window",
     flex: 1,
-    valueGetter: (_, r) => r.window,
+    // valueGetter: (_, r) => r.window,
   },
   {
     field: "compNo",
     headerName: "CompNo",
     flex: 1,
-    valueGetter: (_, r) => r.tblComponentUnit?.compNo,
+    // valueGetter: (_, r) => r.tblComponentUnit?.compNo,
   },
   {
     field: "userDefText1",
     headerName: "UserDefText1",
     flex: 1,
-    valueGetter: (_, r) => r.tblComponentUnit?.userDefText1,
+    // valueGetter: (_, r) => r.tblComponentUnit?.userDefText1,
   },
   {
     field: "serialNo",
     headerName: "Serial No",
     flex: 1,
-    valueGetter: (_, r) => r.tblComponentUnit?.serialNo,
+    // valueGetter: (_, r) => r.tblComponentUnit?.serialNo,
   },
   {
     field: "locationName",
     headerName: "Location Name",
     flex: 1,
-    valueGetter: (_, r) => r.tblLocation?.locName,
+    // valueGetter: (_, r) => r.tblLocation?.locName,
   },
   {
     field: "nextDueDateStr",
     headerName: "NextDueDatestr",
     flex: 1,
-    valueGetter: (_, r) => r.nextDueDateStr,
+    // valueGetter: (_, r) => r.nextDueDateStr,
   },
   {
     field: "lastDoneStr",
     headerName: "LastDoneStr",
     flex: 1,
-    valueGetter: (_, r) => r.lastDoneStr,
+    // valueGetter: (_, r) => r.lastDoneStr,
   },
   {
     field: "persianNextDueDate",
     headerName: "Persian Next Due Date",
     flex: 1,
-    valueGetter: (_, r) => r.persianNextDueDate,
+    // valueGetter: (_, r) => r.persianNextDueDate,
   },
   {
     field: "persianLastDone",
     headerName: "Persian Last Done",
     flex: 1,
-    valueGetter: (_, r) => r.persianLastDone,
+    // valueGetter: (_, r) => r.persianLastDone,
   },
 ];
 
@@ -122,7 +122,7 @@ export default function TabComponentUnit(props: TabComponentUnitProps) {
   const { rows, loading, fetchData } = useDataGrid(
     getAll,
     tblComponentUnit.deleteById,
-    "compJobId",
+    "compId",
     !!compUnitId
   );
 

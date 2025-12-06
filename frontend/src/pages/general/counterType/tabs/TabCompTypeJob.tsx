@@ -7,7 +7,7 @@ import {
   TypeTblCompTypeJobCounter,
 } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "../../hooks/useDataGrid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 interface TabCompTypeJobCounterProps {
   counterTypeId: number | null | undefined;
@@ -20,6 +20,7 @@ const columns: GridColDef<TypeTblCompTypeJobCounter>[] = [
     headerName: "Job Desc",
     flex: 1,
     valueGetter: (_, row) =>
+      // @ts-ignore
       row.tblCompTypeJob?.tblJobDescription?.jobDescTitle,
   },
   {
@@ -38,6 +39,7 @@ const columns: GridColDef<TypeTblCompTypeJobCounter>[] = [
     field: "compTypeCounter",
     headerName: "Counter Type",
     flex: 1,
+    // @ts-ignore
     valueGetter: (_, row) => row?.tblCompTypeCounter?.tblCompType?.compName,
   },
 ];

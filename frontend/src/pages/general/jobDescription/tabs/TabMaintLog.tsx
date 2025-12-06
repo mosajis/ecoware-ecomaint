@@ -2,7 +2,7 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useCallback } from "react";
 import { tblMaintLog, TypeTblMaintLog } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "../../hooks/useDataGrid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 interface TabMaintLogProps {
   label?: string | null;
@@ -13,19 +13,19 @@ const columns: GridColDef<TypeTblMaintLog>[] = [
     field: "component",
     headerName: "Component",
     flex: 1,
-    valueGetter: (_, r) => r.tblComponentUnit?.compNo,
+    // valueGetter: (_, r) => r.tblComponentUnit?.compNo,
   },
   {
     field: "jobCode",
     headerName: "JobCode",
     flex: 1,
-    valueGetter: (_, r) => r.tblJob?.jobCode,
+    // valueGetter: (_, r) => r.tblJob?.jobCode,
   },
   {
     field: "jobName",
     headerName: "JobName",
     flex: 1,
-    valueGetter: (_, r) => r.tblJob?.jobName,
+    // valueGetter: (_, r) => r.tblJob?.jobName,
   },
   {
     field: "dateDone",
@@ -37,73 +37,73 @@ const columns: GridColDef<TypeTblMaintLog>[] = [
     field: "discipline",
     headerName: "Discipline",
     flex: 1,
-    valueGetter: (_, r) => r.tblDiscipline?.discName,
+    // valueGetter: (_, r) => r.tblDiscipline?.discName,
   },
   {
     field: "reportedBy",
     headerName: "Reported By",
     flex: 1,
-    valueGetter: (_, r) => r.reportedBy,
+    // valueGetter: (_, r) => r.reportedBy,
   },
   {
     field: "followStatus",
     headerName: "Follow Status",
     flex: 1,
-    valueGetter: (_, r) => r.tblFollowStatus?.statusName,
+    // valueGetter: (_, r) => r.tblFollowStatus?.statusName,
   },
   {
     field: "currentFollow",
     headerName: "Current User Follow Status",
     flex: 1,
-    valueGetter: (_, r) => r.currentUserFollowStatus,
+    // valueGetter: (_, r) => r.currentUserFollowStatus,
   },
   {
     field: "followCount",
     headerName: "Follow Count",
     flex: 1,
-    valueGetter: (_, r) => r.followCount,
+    // valueGetter: (_, r) => r.followCount,
   },
   {
     field: "follower",
     headerName: "Follower",
     flex: 1,
-    valueGetter: (_, r) => r.follower,
+    // valueGetter: (_, r) => r.follower,
   },
   {
     field: "status",
     headerName: "Status",
     flex: 1,
-    valueGetter: (_, r) => r.tblMaintStatus?.statusName,
+    // valueGetter: (_, r) => r.tblMaintStatus?.statusName,
   },
   {
     field: "stockUsed",
     headerName: "Stock Used",
     flex: 1,
-    valueGetter: (_, r) => r.stockUsed,
+    // valueGetter: (_, r) => r.stockUsed,
   },
   {
     field: "empHrs",
     headerName: "Emp/hrs",
     flex: 1,
-    valueGetter: (_, r) => r.empHours,
+    // valueGetter: (_, r) => r.empHours,
   },
   {
     field: "maintClass",
     headerName: "Maint Class",
     flex: 1,
-    valueGetter: (_, r) => r.tblMaintClass?.className,
+    // valueGetter: (_, r) => r.tblMaintClass?.className,
   },
   {
     field: "totalAttach",
     headerName: "Total Attach",
     flex: 1,
-    valueGetter: (_, r) => r.totalAttach,
+    // valueGetter: (_, r) => r.totalAttach,
   },
   {
     field: "totalMessage",
     headerName: "Total Message",
     flex: 1,
-    valueGetter: (_, r) => r.totalMessage,
+    // valueGetter: (_, r) => r.totalMessage,
   },
   {
     field: "downTime",
@@ -115,19 +115,19 @@ const columns: GridColDef<TypeTblMaintLog>[] = [
     field: "compStatus",
     headerName: "Comp Status Name",
     flex: 1,
-    valueGetter: (_, r) => r.tblComponentUnit?.tblCompStatus?.compStatusName,
+    // valueGetter: (_, r) => r.tblComponentUnit?.tblCompStatus?.compStatusName,
   },
   {
     field: "isCritical",
     headerName: "IsCritical",
     flex: 1,
-    valueGetter: (_, r) => (r.isCritical ? "Yes" : "No"),
+    // valueGetter: (_, r) => (r.isCritical ? "Yes" : "No"),
   },
   {
     field: "unplanned",
     headerName: "Unplanned",
     flex: 1,
-    valueGetter: (_, r) => (r.unplanned ? "Yes" : "No"),
+    // valueGetter: (_, r) => (r.unplanned ? "Yes" : "No"),
   },
 ];
 
