@@ -1,12 +1,10 @@
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import { lazy } from "react";
-import {
-  AccountTree,
-  AttachFile,
-  BarChart,
-  BugReport,
-  ContentCopy,
-} from "@mui/icons-material";
+import AccountTree from "@mui/icons-material/AccountTree";
+import AttachFile from "@mui/icons-material/AttachFile";
+import BarChart from "@mui/icons-material/BarChart";
+import BugReport from "@mui/icons-material/BugReport";
+import ContentCopy from "@mui/icons-material/ContentCopy";
 import TabsContainer, {
   ReusableTabItem,
 } from "@/shared/components/TabsContainer";

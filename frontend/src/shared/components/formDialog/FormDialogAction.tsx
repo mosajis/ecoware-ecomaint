@@ -1,4 +1,4 @@
-import { DialogActions, Button, CircularProgress } from "@mui/material";
+import Button from "@mui/material/Button";
 
 type DialogActionsWrapperProps = {
   onCancel: () => void;

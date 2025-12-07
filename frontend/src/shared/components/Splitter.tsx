@@ -1,9 +1,9 @@
 import { Split } from "@geoffcox/react-splitter";
 import { useTheme } from "@mui/material/styles";
-import React from "react";
+import { ReactNode } from "react";
 
 interface SplitterProps {
-  children: React.ReactNode[];
+  children: ReactNode[];
   horizontal?: boolean;
   initialPrimarySize?: string;
   resetOnDoubleClick?: boolean;

@@ -2,7 +2,9 @@ import { memo, useEffect, useMemo, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Box, TextField, Button } from "@mui/material";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import { tblAddress, TypeTblAddress } from "@/core/api/generated/api";
 

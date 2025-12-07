@@ -2,24 +2,21 @@ import TabsContainer, {
   ReusableTabItem,
 } from "@/shared/components/TabsContainer";
 import { lazy } from "react";
-import {
-  AccountTree,
-  AddBox,
-  AttachFile,
-  BarChart,
-  Book,
-  BugReport,
-  Build,
-  CheckCircle,
-  ColorLens,
-  ContentCopy,
-  Description,
-  DirectionsCar,
-  DoneAll,
-  Inbox,
-  StackedLineChart,
-  Tune,
-} from "@mui/icons-material";
+import AccountTree from "@mui/icons-material/AccountTree";
+import AddBox from "@mui/icons-material/AddBox";
+import AttachFile from "@mui/icons-material/AttachFile";
+import BarChart from "@mui/icons-material/BarChart";
+import BugReport from "@mui/icons-material/BugReport";
+import Build from "@mui/icons-material/Build";
+import CheckCircle from "@mui/icons-material/CheckCircle";
+import ColorLens from "@mui/icons-material/ColorLens";
+import ContentCopy from "@mui/icons-material/ContentCopy";
+import Description from "@mui/icons-material/Description";
+import DirectionsCar from "@mui/icons-material/DirectionsCar";
+import DoneAll from "@mui/icons-material/DoneAll";
+import Inbox from "@mui/icons-material/Inbox";
+import StackedLineChart from "@mui/icons-material/StackedLineChart";
+import Tune from "@mui/icons-material/Tune";
 
 // Lazy imports
 const TabDetails = lazy(

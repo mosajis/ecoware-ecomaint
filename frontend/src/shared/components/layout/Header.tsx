@@ -1,7 +1,9 @@
 import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import { Stack, Box, IconButton } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
 import { useSetAtom } from "jotai";
 import { atomSideMenuOpen } from "@/shared/atoms/layout.atom";
 

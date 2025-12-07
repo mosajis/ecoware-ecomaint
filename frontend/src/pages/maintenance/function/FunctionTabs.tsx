@@ -1,14 +1,12 @@
 import { lazy } from "react";
-import {
-  Description,
-  AccountTree,
-  BarChart,
-  ContentCopy,
-  DoneAll,
-  AttachFile,
-  BugReport,
-  EditNote,
-} from "@mui/icons-material";
+import Description from "@mui/icons-material/Description";
+import AccountTree from "@mui/icons-material/AccountTree";
+import BarChart from "@mui/icons-material/BarChart";
+import ContentCopy from "@mui/icons-material/ContentCopy";
+import DoneAll from "@mui/icons-material/DoneAll";
+import AttachFile from "@mui/icons-material/AttachFile";
+import BugReport from "@mui/icons-material/BugReport";
+import EditNote from "@mui/icons-material/EditNote";
 import TabsContainer, {
   ReusableTabItem,
 } from "@/shared/components/TabsContainer";

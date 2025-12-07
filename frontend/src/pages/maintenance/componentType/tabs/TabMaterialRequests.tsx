@@ -1,4 +1,3 @@
-import React from "react";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 
 const TabMaterialRequests = () => {

@@ -1,5 +1,8 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-import { Box, Button, Tab, Tabs } from "@mui/material";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Button from "@mui/material/Button";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import Spinner from "@/shared/components/Spinner";
 import Splitter from "@/shared/components/Splitter";

@@ -1,12 +1,9 @@
 import { useState, useCallback } from "react";
-import {
-  TextField,
-  IconButton,
-  Stack,
-  Tooltip,
-  Box,
-  Typography,
-} from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import Stack from "@mui/material/Stack";
+import Tooltip from "@mui/material/Tooltip";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import { ReactNode } from "react";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen";

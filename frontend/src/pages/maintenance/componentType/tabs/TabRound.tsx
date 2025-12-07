@@ -1,29 +1,31 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField
-} from "@mui/material";
-import {useState} from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import { useState } from "react";
 
 export default function TabRound() {
-
   const [lastDone, setLastDone] = useState(null);
   const [nextDue, setNextDue] = useState(null);
 
   return (
     <Box>
-      <Box p={2} display="grid" gap={2} width="100%" gridTemplateColumns={"1fr 1fr 1fr"}>
+      <Box
+        p={2}
+        display="grid"
+        gap={2}
+        width="100%"
+        gridTemplateColumns={"1fr 1fr 1fr"}
+      >
+        <TextField label="Round Code" fullWidth />
+        <TextField label="Round Title" fullWidth />
 
-        <TextField label="Round Code" fullWidth/>
-        <TextField label="Round Title" fullWidth/>
-
-        <TextField label="Period Frequency" fullWidth type="number"/>
+        <TextField label="Period Frequency" fullWidth type="number" />
 
         <FormControl fullWidth>
           <InputLabel>Frequency Repeat</InputLabel>
@@ -89,16 +91,19 @@ export default function TabRound() {
         </FormControl>
 
         <FormControlLabel
-          control={<Checkbox/>}
+          control={<Checkbox />}
           label="Include all jobs when gathering work orders"
         />
       </Box>
       <Box display="flex" gap={1} mt={1}>
-        <Button variant="contained" color="primary">Save</Button>
+        <Button variant="contained" color="primary">
+          Save
+        </Button>
         <Button variant="outlined">New</Button>
-        <Button variant="outlined" color="error">Delete</Button>
+        <Button variant="outlined" color="error">
+          Delete
+        </Button>
       </Box>
     </Box>
-  )
-    ;
+  );
 }

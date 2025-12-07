@@ -1,4 +1,5 @@
-import { Typography, Box } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import { useRouter, useRouterState } from "@tanstack/react-router";
 
 export default function HeaderBreadcrumbs() {

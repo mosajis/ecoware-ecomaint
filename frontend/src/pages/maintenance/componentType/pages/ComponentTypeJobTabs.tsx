@@ -1,12 +1,6 @@
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import { lazy } from "react";
-import {
-  AccountTree,
-  AttachFile,
-  BarChart,
-  BugReport,
-  ContentCopy,
-} from "@mui/icons-material";
+import BarChart from "@mui/icons-material/BarChart";
 import TabsContainer, {
   ReusableTabItem,
 } from "@/shared/components/TabsContainer";

@@ -1,6 +1,6 @@
 import Axios from "axios";
 import qs from "qs";
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash-es/isEmpty";
 import { configAxios } from "@/config";
 import { LOCAL_STORAGE } from "@/const";
 

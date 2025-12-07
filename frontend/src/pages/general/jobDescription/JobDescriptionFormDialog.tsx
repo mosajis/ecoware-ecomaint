@@ -1,7 +1,8 @@
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import * as z from "zod";
 import { memo, useEffect, useState, useCallback } from "react";
-import { Box, TextField } from "@mui/material";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AsyncSelectField } from "@/shared/components/AsyncSelectField";

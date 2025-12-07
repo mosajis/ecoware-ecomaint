@@ -1,12 +1,9 @@
-import React from "react";
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Stack,
-  TextField,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid"; // مسیرت رو درست کن
 
 const TabAttachment = () => {

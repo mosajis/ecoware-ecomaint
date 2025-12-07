@@ -4,7 +4,8 @@ import FormDialog from "@/shared/components/formDialog/FormDialog";
 import { memo, useEffect, useMemo, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, Grid, TextField } from "@mui/material";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import {
   tblAddress,
   tblDiscipline,

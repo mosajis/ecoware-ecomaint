@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 import CheckCircleSharpIcon from "@mui/icons-material/CheckCircleSharp";
 import ImgDarkBg from "@/assets/images/dark-image.png";
 

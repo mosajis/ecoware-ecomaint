@@ -1,10 +1,6 @@
-import React from "react";
-import {
-  ColumnsPanelTrigger,
-  FilterPanelTrigger,
-  ToolbarButton,
-} from "@mui/x-data-grid";
-import { Tooltip, Badge } from "@mui/material";
+import { ColumnsPanelTrigger, ToolbarButton } from "@mui/x-data-grid";
+import Tooltip from "@mui/material/Tooltip";
+import Badge from "@mui/material/Badge";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
 
 import {

@@ -1,4 +1,5 @@
-import { IconButton, Tooltip } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import type { ReactNode, MouseEventHandler } from "react";
 
 interface DataGridActionsButtonProps {

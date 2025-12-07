@@ -1,7 +1,10 @@
 import DialogHeader from "./dialog/DialogHeader";
 import CustomizedDataGrid from "./dataGrid/DataGrid";
 import { useEffect, useState, useCallback } from "react";
-import { Dialog, DialogContent, DialogActions, Button } from "@mui/material";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
 import {
   GridRowId,
   GridRowIdGetter,

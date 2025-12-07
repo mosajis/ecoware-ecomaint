@@ -1,10 +1,11 @@
+import debounce from "lodash-es/debounce";
 import { useState, useCallback, useRef } from "react";
 import { Controller, Control } from "react-hook-form";
-import { TextField, CircularProgress } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import TextField from "@mui/material/TextField";
 import Autocomplete, {
   AutocompleteRenderInputParams,
 } from "@mui/material/Autocomplete";
-import { debounce } from "lodash";
 
 export interface AsyncSelectOption {
   id: number | string;

@@ -1,5 +1,6 @@
 import { cloneElement, JSX, Suspense, useEffect, useState } from "react";
-import { Tabs, Tab } from "@mui/material";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import { useNavigate, useRouter, useSearch } from "@tanstack/react-router";
 import Spinner from "@/shared/components/Spinner";
 import TabContainer from "./TabContainer";

@@ -1,4 +1,5 @@
-import { Badge, Tooltip } from "@mui/material";
+import Badge from "@mui/material/Badge";
+import Tooltip from "@mui/material/Tooltip";
 import { FilterPanelTrigger, ToolbarButton } from "@mui/x-data-grid";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 

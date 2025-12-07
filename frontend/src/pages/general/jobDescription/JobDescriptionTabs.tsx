@@ -2,13 +2,11 @@ import { lazy } from "react";
 import TabsContainer, {
   type ReusableTabItem,
 } from "@/shared/components/TabsContainer";
-import {
-  AttachFile,
-  Build,
-  CheckCircle,
-  Tune,
-  AddBox,
-} from "@mui/icons-material";
+import AttachFile from "@mui/icons-material/AttachFile";
+import Build from "@mui/icons-material/Build";
+import CheckCircle from "@mui/icons-material/CheckCircle";
+import Tune from "@mui/icons-material/Tune";
+import AddBox from "@mui/icons-material/AddBox";
 
 // Lazy-loaded tab components
 const TabMaintLog = lazy(() => import("./tabs/TabMaintLog"));

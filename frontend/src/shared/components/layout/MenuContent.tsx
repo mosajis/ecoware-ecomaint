@@ -1,28 +1,25 @@
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 import { useRouter, useRouterState } from "@tanstack/react-router";
 import { menuContentItems, MenuItem } from "./MenuContentItems";
-import React from "react";
-import {
-  Stack,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  ListItemIcon,
-  Collapse,
-  Divider,
-} from "@mui/material";
+import Stack from "@mui/material/Stack";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Collapse from "@mui/material/Collapse";
+import Divider from "@mui/material/Divider";
+import { useEffect, useState, Fragment } from "react";
 
 export default function MenuContent() {
   const router = useRouter();
   const { location } = useRouterState();
   const currentPath = location.pathname;
 
-  const [openSections, setOpenSections] = React.useState<
-    Record<string, boolean>
-  >({});
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
 
-  React.useEffect(() => {
+  useEffect(() => {
     const newOpen: Record<string, boolean> = {};
     menuContentItems.forEach((section) => {
       if (
@@ -58,7 +55,7 @@ export default function MenuContent() {
     const isActive = currentPath === item.path;
 
     return (
-      <React.Fragment key={item.id || item.text}>
+      <Fragment key={item.id || item.text}>
         <ListItem disablePadding>
           <ListItemButton
             sx={{
@@ -98,7 +95,7 @@ export default function MenuContent() {
             </List>
           </Collapse>
         )}
-      </React.Fragment>
+      </Fragment>
     );
   };
 
@@ -118,7 +115,7 @@ export default function MenuContent() {
         const hasItems = section.items && section.items.length > 0;
 
         return (
-          <React.Fragment key={section.title}>
+          <Fragment key={section.title}>
             {/* سطح اول */}
             <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton
@@ -162,7 +159,7 @@ export default function MenuContent() {
             {index < menuContentItems.length - 1 && (
               <Divider sx={{ my: 0.5 }} />
             )}
-          </React.Fragment>
+          </Fragment>
         );
       })}
     </Stack>

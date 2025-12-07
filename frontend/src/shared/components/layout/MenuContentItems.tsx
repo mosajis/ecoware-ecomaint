@@ -24,8 +24,7 @@ import WorkHistoryRoundedIcon from "@mui/icons-material/WorkHistoryRounded";
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import HourglassEmptyRoundedIcon from "@mui/icons-material/HourglassEmptyRounded";
 import BrightnessAutoIcon from "@mui/icons-material/BrightnessAuto";
-
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 
 const BulletIcon = () => (
   <Box

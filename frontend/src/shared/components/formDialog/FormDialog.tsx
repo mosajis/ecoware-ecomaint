@@ -1,11 +1,10 @@
-import FormDialogAction from "./FormDialogAction";
+import React, { Suspense } from "react";
 import DialogHeader from "../dialog/DialogHeader";
-import {
-  Dialog,
-  DialogContent,
-  DialogActions,
-  DialogProps,
-} from "@mui/material";
+import FormDialogAction from "./FormDialogAction";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import type { DialogProps } from "@mui/material/Dialog";
 
 export type FormDialogWrapperProps = {
   open: boolean;
@@ -14,7 +13,7 @@ export type FormDialogWrapperProps = {
   submitting?: boolean;
   loadingInitial?: boolean;
   onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
-  children: React.ReactNode;
+  children: React.ReactNode; // این می‌تونه lazy هم باشه
   cancelText?: string;
   submitText?: string;
   disabled?: boolean;
@@ -57,7 +56,8 @@ export default function FormDialog({
             onSubmit?.(e);
           }}
         >
-          {children}
+          {/* اینجا children می‌تونه lazy load باشه */}
+          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
 
           <DialogActions sx={{ p: 0, m: 0, mt: 2 }}>
             <FormDialogAction

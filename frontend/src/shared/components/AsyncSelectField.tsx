@@ -1,6 +1,7 @@
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useState } from "react";
-import { TextField } from "@mui/material";
+import TextField from "@mui/material/TextField";
+
 import { AsyncSelectDialog } from "./AsyncSelectDialog";
 import type { GridRowId } from "@mui/x-data-grid";
 export type AsyncSelectFieldProps<TItem extends Record<string, any>> = {

@@ -7,15 +7,13 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  InputAdornment,
-  TextField,
-  Link,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
 import { LOCAL_STORAGE } from "@/const";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";

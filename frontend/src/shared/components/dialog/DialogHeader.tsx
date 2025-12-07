@@ -1,9 +1,7 @@
-import {
-  DialogTitle,
-  IconButton,
-  CircularProgress,
-  DialogTitleProps,
-} from "@mui/material";
+import DialogTitle from "@mui/material/DialogTitle";
+import type { DialogTitleProps } from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
+import CircularProgress from "@mui/material/CircularProgress";
 import CloseIcon from "@mui/icons-material/Close";
 
 type DialogHeaderProps = DialogTitleProps & {

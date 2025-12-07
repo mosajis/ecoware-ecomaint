@@ -1,7 +1,7 @@
-import React from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Box, IconButton, Typography, Tooltip } from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import { getDesignTokens } from "@/shared/theme/themePrimitives";
 import { styled, useColorScheme } from "@mui/material/styles";
 import {
@@ -10,6 +10,7 @@ import {
   type TreeItemProps,
 } from "@mui/x-tree-view";
 import DataGridActionsButton from "../dataGrid/DataGridActionsButton";
+import { memo } from "react";
 
 export const StyledTreeItem = styled(TreeItem)(({ theme }) => {
   const { mode } = useColorScheme();
@@ -58,7 +59,7 @@ interface CustomLabelProps {
   onDeleteClick?: (id: string) => void;
 }
 
-const CustomLabel = React.memo(
+const CustomLabel = memo(
   function CustomLabel({
     label,
     id,
@@ -133,4 +134,4 @@ function CustomTreeItemBase(
   );
 }
 
-export default React.memo(CustomTreeItemBase);
+export default memo(CustomTreeItemBase);

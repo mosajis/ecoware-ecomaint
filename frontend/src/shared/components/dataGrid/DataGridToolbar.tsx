@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Toolbar } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
@@ -9,7 +8,9 @@ import ButtonExport from "./toolbar/ButtonExport";
 import ButtonColumns from "./toolbar/ButtonColumns";
 import ButtonFilters from "./toolbar/ButtonFilter";
 import ButtonSearch from "./toolbar/ButtonSearch";
-import { Typography, useTheme, LinearProgress } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
+import LinearProgress from "@mui/material/LinearProgress";
 
 interface DataGridToolbarProps {
   label: string;

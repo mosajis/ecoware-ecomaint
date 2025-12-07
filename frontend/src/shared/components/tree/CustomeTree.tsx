@@ -2,7 +2,8 @@ import { useState, useMemo, useCallback, ReactNode, useEffect } from "react";
 import CustomTreeItem from "./CustomeTreeItem";
 import TreeToolbar from "./TreeToolbar";
 import ConfirmDialog from "@/shared/components/ConfirmDialog";
-import { Box, LinearProgress } from "@mui/material";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
 import {
   RichTreeView,
   TreeViewBaseItem,

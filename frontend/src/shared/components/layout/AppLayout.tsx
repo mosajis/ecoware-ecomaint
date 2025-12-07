@@ -1,5 +1,6 @@
 import Spinner from "../Spinner";
-import { alpha, Box } from "@mui/material";
+import Box from "@mui/material/Box";
+import { alpha } from "@mui/material/styles";
 import { lazy, Suspense, useMemo } from "react";
 import { Outlet } from "@tanstack/react-router";
 

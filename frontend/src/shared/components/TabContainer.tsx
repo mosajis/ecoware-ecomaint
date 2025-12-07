@@ -1,5 +1,6 @@
 import { ReactNode, CSSProperties } from "react";
-import { Box, BoxProps } from "@mui/material";
+import Box from "@mui/material/Box";
+import type { BoxProps } from "@mui/material/Box";
 
 type TabContainerProps = {
   children?: ReactNode;

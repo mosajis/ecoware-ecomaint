@@ -3,7 +3,9 @@ import TabsContainer, {
   ReusableTabItem,
 } from "@/shared/components/TabsContainer";
 import { lazy } from "react";
-import { AccountTree, BarChart, ContentCopy } from "@mui/icons-material";
+import AccountTree from "@mui/icons-material/AccountTree";
+import BarChart from "@mui/icons-material/BarChart";
+import ContentCopy from "@mui/icons-material/ContentCopy";
 
 // Lazy imports
 const TabCompUnitCounter = lazy(() => import("./tabs/TabCompUnit"));

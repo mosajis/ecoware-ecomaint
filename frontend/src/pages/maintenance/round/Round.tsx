@@ -1,5 +1,7 @@
 import { lazy, Suspense, useState } from "react";
-import { Box, Tab, Tabs } from "@mui/material";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
 import Splitter from "@/shared/components/Splitter";
 import DataGridProAdapter from "@/shared/components/dataGrid/DataGrid";
 import Spinner from "@/shared/components/Spinner";

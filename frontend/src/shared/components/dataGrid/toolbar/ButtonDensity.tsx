@@ -4,11 +4,9 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import CheckIcon from "@mui/icons-material/Check";
-import {
-  DensityLarge as DensityLargeIcon,
-  DensityMedium as DensityMediumIcon,
-  DensitySmall as DensitySmallIcon,
-} from "@mui/icons-material";
+import DensityLargeIcon from "@mui/icons-material/DensityLarge";
+import DensityMediumIcon from "@mui/icons-material/DensityMedium";
+import DensitySmallIcon from "@mui/icons-material/DensitySmall";
 import {
   GridDensity,
   ToolbarButton,
@@ -16,7 +14,7 @@ import {
   useGridSelector,
   gridDensitySelector,
 } from "@mui/x-data-grid";
-import React from "react";
+import { useRef, useState } from "react";
 
 const DENSITY_OPTIONS: {
   label: string;
@@ -43,8 +41,8 @@ const DENSITY_OPTIONS: {
 export default function ButtonDensity() {
   const apiRef = useGridApiContext();
   const density = useGridSelector(apiRef, gridDensitySelector);
-  const [densityMenuOpen, setDensityMenuOpen] = React.useState(false);
-  const densityMenuTriggerRef = React.useRef<HTMLButtonElement>(null);
+  const [densityMenuOpen, setDensityMenuOpen] = useState(false);
+  const densityMenuTriggerRef = useRef<HTMLButtonElement>(null);
 
   return (
     <>

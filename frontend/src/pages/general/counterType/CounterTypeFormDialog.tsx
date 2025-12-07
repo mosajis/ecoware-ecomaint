@@ -3,7 +3,9 @@ import FormDialog from "@/shared/components/formDialog/FormDialog";
 import { memo, useEffect, useState, useCallback, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, MenuItem, TextField } from "@mui/material";
+import Box from "@mui/material/Box";
+import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
 import { tblCounterType, TypeTblCounterType } from "@/core/api/generated/api";
 
 // === Zod schema ===

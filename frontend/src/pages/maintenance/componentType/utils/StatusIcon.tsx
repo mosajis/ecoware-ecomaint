@@ -1,5 +1,7 @@
-import { Check, Cancel, CheckCircle } from "@mui/icons-material";
-import { Box } from "@mui/material";
+import Cancel from "@mui/icons-material/Cancel";
+import CheckCircle from "@mui/icons-material/CheckCircle";
+import Box from "@mui/material/Box";
+
 import { FC } from "react";
 
 type StatusIconProps = {

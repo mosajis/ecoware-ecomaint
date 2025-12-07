@@ -1,7 +1,7 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import FollowStatusFormDialog from "./FollowStatusFormDialog";
 import { useCallback, useMemo, useState } from "react";
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 import { tblFollowStatus, TypeTblFollowStatus } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
