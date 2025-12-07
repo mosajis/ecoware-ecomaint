@@ -4,6 +4,7 @@ import { lazy, Suspense } from "react";
 import AppLayout from "@/shared/components/layout/AppLayout";
 import { LOCAL_STORAGE } from "@/const";
 import AppAuthorization from "@/shared/components/AppAthorization";
+import Spinner from "@/shared/components/Spinner";
 
 // Lazy load all page components
 const PageLogin = lazy(() => import("@/pages/auth/login/login.page"));
@@ -43,7 +44,7 @@ const ComponentTypeJob = lazy(
 );
 
 // Loading fallback component
-const LoadingFallback = () => <div>Loading...</div>;
+const LoadingFallback = () => <Spinner />;
 
 // Wrapper for lazy components
 const LazyComponent = ({

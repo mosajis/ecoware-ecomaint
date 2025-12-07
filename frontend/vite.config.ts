@@ -31,10 +31,6 @@ export default defineConfig({
             if (id.includes("lodash-es")) return "lodash-es";
             return "vendors";
           }
-
-          // Route/component-based splitting
-          if (id.includes("SideMenu")) return "sidemenu";
-          if (id.includes("Header")) return "header";
         },
       },
     },

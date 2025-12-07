@@ -5,6 +5,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import type { DialogProps } from "@mui/material/Dialog";
+import Spinner from "../Spinner";
 
 export type FormDialogWrapperProps = {
   open: boolean;
@@ -56,8 +57,7 @@ export default function FormDialog({
             onSubmit?.(e);
           }}
         >
-          {/* اینجا children می‌تونه lazy load باشه */}
-          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+          <Suspense fallback={<Spinner />}>{children}</Suspense>
 
           <DialogActions sx={{ p: 0, m: 0, mt: 2 }}>
             <FormDialogAction

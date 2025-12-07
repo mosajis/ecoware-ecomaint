@@ -40,7 +40,7 @@ const app = new Elysia()
   .use(
     staticPlugin({
       indexHTML: true,
-      prefix: "",
+      prefix: "/",
     })
   );
 
