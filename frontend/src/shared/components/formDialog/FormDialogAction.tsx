@@ -22,7 +22,7 @@ export default function FormDialogAction({
       <Button
         type="submit"
         variant="contained"
-        color="primary"
+        color="secondary"
         sx={{ flex: 1 }}
         disabled={isDisabled}
         loading={submitting}

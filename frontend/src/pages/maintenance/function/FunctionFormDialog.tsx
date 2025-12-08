@@ -7,18 +7,33 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
-import { tblFunctions, TypeTblFunctions } from "@/core/api/generated/api";
+import {
+  tblFunctions,
+  tblComponentUnit,
+  TypeTblFunctions,
+} from "@/core/api/generated/api";
+import { buildRelation } from "@/core/api/helper";
 
 // =======================
 // VALIDATION SCHEMA
 // =======================
 const schema = z.object({
-  functionName: z.string(),
+  funcNo: z.string().min(1, "Function No is required"),
+  funcDescr: z.string().min(1, "Function Description is required"),
+  funcRef: z.string().nullable().optional(),
 
   parent: z
     .object({
       functionId: z.number(),
-      funcDescr: z.string().nullable().optional(),
+      funcNo: z.string().nullable().optional(),
+    })
+    .nullable()
+    .optional(),
+
+  component: z
+    .object({
+      compId: z.number(),
+      compNo: z.string().nullable().optional(),
     })
     .nullable()
     .optional(),
@@ -48,8 +63,11 @@ function FunctionFormDialog({
   const [submitting, setSubmitting] = useState(false);
 
   const defaultValues: FunctionFormValues = {
-    functionName: "",
+    funcNo: "",
+    funcDescr: "",
+    funcRef: "",
     parent: null,
+    component: null,
   };
 
   const { control, handleSubmit, reset } = useForm<FunctionFormValues>({
@@ -67,17 +85,28 @@ function FunctionFormDialog({
     }
 
     setLoadingInitial(true);
+
     try {
       const res = await tblFunctions.getById(recordId, {
-        include: { tblFunctions: true }, // parent
+        include: { tblFunctions: true, tblComponentUnit: true },
       });
 
       reset({
-        functionName: res?.funcDescr ?? "",
+        funcNo: res?.funcNo ?? "",
+        funcDescr: res?.funcDescr ?? "",
+        funcRef: res?.funcRef ?? "",
+
         parent: res?.tblFunctions
           ? {
               functionId: res.tblFunctions.functionId,
-              funcDescr: res.tblFunctions.funcDescr ?? null,
+              funcNo: res.tblFunctions.funcDescr ?? null,
+            }
+          : null,
+
+        component: res?.tblComponentUnit
+          ? {
+              compId: res.tblComponentUnit.compId,
+              compNo: res.tblComponentUnit.compNo ?? null,
             }
           : null,
       });
@@ -103,11 +132,16 @@ function FunctionFormDialog({
       setSubmitting(true);
 
       try {
-        const payload = {
-          funcDescr: parsed.data.functionName,
+        const d = parsed.data;
+        console.log(d.parent?.functionId);
 
-          // parentFunctionId → ست کردن آی‌دی پدر
-          parentFunctionId: parsed.data.parent?.functionId ?? null,
+        const payload = {
+          funcNo: d.funcNo,
+          funcDescr: d.funcDescr,
+          funcRef: d.funcRef ?? "",
+
+          ...buildRelation("tblComponentUnit", "compId", d.component?.compId),
+          ...buildRelation("tblFunctions", "functionId", d.parent?.functionId),
         };
 
         let result: TypeTblFunctions;
@@ -139,18 +173,76 @@ function FunctionFormDialog({
       onClose={onClose}
       onSubmit={handleSubmit(onSubmitForm)}
     >
-      <Box display="grid" gridTemplateColumns="1fr" gap={1.5}>
-        {/* Function Name */}
+      <Box display="flex" flexDirection={"column"} gap={1.5}>
+        {/* Function No */}
         <Controller
-          name="functionName"
+          name="funcNo"
           control={control}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              label="Function Name"
+              label="Function No"
               size="small"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
+              disabled={isDisabled}
+            />
+          )}
+        />
+
+        {/* Function Description */}
+        <Controller
+          name="funcDescr"
+          control={control}
+          render={({ field, fieldState }) => (
+            <TextField
+              {...field}
+              label="Function Description"
+              size="small"
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
+              disabled={isDisabled}
+            />
+          )}
+        />
+
+        {/* Function Ref */}
+        <Controller
+          name="funcRef"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Function Reference"
+              size="small"
+              disabled={isDisabled}
+            />
+          )}
+        />
+
+        {/* Component Select */}
+        <Controller
+          name="component"
+          control={control}
+          render={({ field, fieldState }) => (
+            <AsyncSelectField
+              dialogMaxWidth="sm"
+              label="Component"
+              selectionMode="single"
+              request={tblComponentUnit.getAll}
+              getOptionLabel={(row) => row.compNo}
+              value={field.value}
+              onChange={field.onChange}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
+              columns={[
+                {
+                  field: "compNo",
+                  headerName: "Component",
+                  flex: 1,
+                },
+              ]}
+              getRowId={(row) => row.compId}
               disabled={isDisabled}
             />
           )}
@@ -164,6 +256,7 @@ function FunctionFormDialog({
             <AsyncSelectField
               dialogMaxWidth="sm"
               label="Parent Function"
+              getOptionLabel={(row) => row.funcNo}
               selectionMode="single"
               request={tblFunctions.getAll}
               value={field.value}

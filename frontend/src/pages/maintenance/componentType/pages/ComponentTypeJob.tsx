@@ -12,7 +12,7 @@ import {
 import { useMatch, useParams } from "@tanstack/react-router";
 import { maintComponentTypeDetailRoute } from "@/app/routes";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
-import { StatusIcon } from "../utils/StatusIcon";
+import { StatusIcon } from "../../../../shared/components/StatusIcon";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 export default function ComponentTypeJob() {
@@ -78,8 +78,8 @@ export default function ComponentTypeJob() {
     });
   }, [compTypeId]);
 
-  const handleDeleteLogic = (row) => {
-    console.log(row);
+  const handleDeleteLogic = (row: any) => {
+    // console.log(row);
     // handleDelete(row);
     // logicTblCompTypeJob.effect(row.compTypeJobId, 2);
   };
@@ -194,7 +194,7 @@ export default function ComponentTypeJob() {
           columns={columns}
           loading={loading}
           onAddClick={handleCreate}
-          onRowDoubleClick={handleEdit}
+          // onRowDoubleClick={handleEdit}
           label="Component Type Job"
           showToolbar
           onRefreshClick={handleRefresh}

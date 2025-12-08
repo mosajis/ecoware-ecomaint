@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import { FC } from "react";
 
 type StatusIconProps = {
-  status?: boolean | null;
+  status?: boolean | null | number | undefined;
   size?: "small" | "medium" | "large";
 };
 

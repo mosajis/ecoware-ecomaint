@@ -106,7 +106,7 @@ function JobDescriptionFormDialog({
         const jobClassRelation = buildRelation(
           "tblJobClass",
           "jobClassId",
-          parsed.data.jobClassId?.jobClassId ?? null
+          parsed.data.jobClassId?.jobClassId
         );
 
         let result: TypeTblJobDescription;

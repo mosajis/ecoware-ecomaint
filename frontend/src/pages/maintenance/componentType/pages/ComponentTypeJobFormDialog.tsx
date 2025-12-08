@@ -239,36 +239,32 @@ function ComponentTypeJobFormDialog({
           statusInUse: v.statusInUse ? 1 : 0,
           statusRepair: v.statusRepair ? 1 : 0,
           // ======= روابط =======
-          ...buildRelation(
-            "tblCompType",
-            "compTypeId",
-            compType?.compTypeId ?? null
-          ),
+          ...buildRelation("tblCompType", "compTypeId", compType?.compTypeId),
           ...buildRelation(
             "tblPeriod",
             "periodId",
-            v.frequencyPeriod?.periodId ?? null
+            v.frequencyPeriod?.periodId
           ),
           ...buildRelation(
             "tblJobDescription",
             "jobDescId",
-            v.jobDesc?.jobDescId ?? null
+            v.jobDesc?.jobDescId
           ),
-          ...buildRelation("tblDiscipline", "discId", v.disc?.discId ?? null),
+          ...buildRelation("tblDiscipline", "discId", v.disc?.discId),
           ...buildRelation(
             "tblMaintClass",
             "maintClassId",
-            v.maintClass?.maintClassId ?? null
+            v.maintClass?.maintClassId
           ),
           ...buildRelation(
             "tblMaintCause",
             "maintCauseId",
-            v.maintCause?.maintCauseId ?? null
+            v.maintCause?.maintCauseId
           ),
           ...buildRelation(
             "tblMaintType",
             "maintTypeId",
-            v.maintType?.maintTypeId ?? null
+            v.maintType?.maintTypeId
           ),
 
           active: v.active ? 1 : 0,

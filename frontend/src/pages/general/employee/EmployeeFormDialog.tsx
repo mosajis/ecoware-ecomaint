@@ -137,17 +137,13 @@ function EmployeeFormDialog({
           firstName: values.firstName ?? "",
           available: values.hrsAvailWeek ?? 0,
 
-          // ⭐⭐⭐ Relation Mapping — Clean & Reusable
+          // Relation
           ...buildRelation(
             "tblAddress",
             "addressId",
-            values.address?.addressId ?? null
+            values.address?.addressId
           ),
-          ...buildRelation(
-            "tblDiscipline",
-            "discId",
-            values.discipline?.id ?? null
-          ),
+          ...buildRelation("tblDiscipline", "discId", values.discipline?.id),
         };
 
         let result: TypeTblEmployee;

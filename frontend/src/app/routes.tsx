@@ -39,6 +39,9 @@ const PageComponentTypeTree = lazy(
 const PageFunction = lazy(
   () => import("@/pages/maintenance/function/Function")
 );
+const PageFunctionTree = lazy(
+  () => import("@/pages/maintenance/function/FunctionTree")
+);
 const ComponentTypeJob = lazy(
   () => import("@/pages/maintenance/componentType/pages/ComponentTypeJob")
 );
@@ -187,14 +190,15 @@ export const maintFunctionRoute = createRoute({
 
 export const maintFunctionListRoute = createRoute({
   getParentRoute: () => maintFunctionRoute,
-  path: "list-view",
+  path: "/",
   component: () => <LazyComponent Component={PageFunction} />,
   beforeLoad: () => ({ breadcrumb: "List View" }),
 });
 
 export const maintFunctionTreeRoute = createRoute({
   getParentRoute: () => maintFunctionRoute,
-  path: "tree-view",
+  path: "/tree-view",
+  component: () => <LazyComponent Component={PageFunctionTree} />,
   beforeLoad: () => ({ breadcrumb: "Tree View" }),
 });
 
@@ -231,7 +235,6 @@ export const maintComponentTypeDetailRoute = createRoute({
   component: () => <LazyComponent Component={ComponentTypeJob} />,
 });
 
-// باقی routes (placeholder برای اختصار)
 export const maintComponentJobRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/maintenance/component-job",
@@ -245,8 +248,6 @@ export const maintWorkOrderRoute = createRoute({
   component: () => "Work Order Page",
   beforeLoad: () => ({ breadcrumb: "Work Order" }),
 });
-
-// ... (باقی routes به همین صورت)
 
 // --- Route Tree ---
 export const routeTree = rootRoute.addChildren([

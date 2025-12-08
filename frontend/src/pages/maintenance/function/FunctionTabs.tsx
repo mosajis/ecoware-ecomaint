@@ -6,37 +6,25 @@ import ContentCopy from "@mui/icons-material/ContentCopy";
 import DoneAll from "@mui/icons-material/DoneAll";
 import AttachFile from "@mui/icons-material/AttachFile";
 import BugReport from "@mui/icons-material/BugReport";
-import EditNote from "@mui/icons-material/EditNote";
+import RestoreIcon from "@mui/icons-material/Restore";
 import TabsContainer, {
   ReusableTabItem,
 } from "@/shared/components/TabsContainer";
 
 // Lazy-loaded components
-const TabDetails = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabDetails")
-);
-const TabJob = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabJob")
-);
-const TabCounter = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabCounter")
-);
-const TabWorkOrder = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabWorkOrder")
-);
-const TabMaintLog = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabMaintLog")
-);
-const TabAttachment = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabAttachment")
-);
-const TabFailureReport = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabFailureReport")
-);
+const TabDetails = lazy(() => import("./tabs/TabDetails"));
+const TabJob = lazy(() => import("./tabs/TabJob"));
+const TabCounter = lazy(() => import("./tabs/TabCounter"));
+const TabWorkOrder = lazy(() => import("./tabs/TabWorkOrder"));
+const TabMaintLog = lazy(() => import("./tabs/TabMaintLog"));
+const TabAttachment = lazy(() => import("./tabs/TabAttachment"));
+const TabFailureReport = lazy(() => import("./tabs/TabFailureReport"));
+const TabRotationLog = lazy(() => import("./tabs/TabRotationLog"));
 
 // Tabs definition
 const tabs: ReusableTabItem[] = [
   { label: "Details", icon: <Description />, component: TabDetails },
+  { label: "RotaionLog", icon: <RestoreIcon />, component: TabRotationLog },
   { label: "Job", icon: <AccountTree />, component: TabJob },
   { label: "Counter", icon: <BarChart />, component: TabCounter },
   { label: "Work Order", icon: <ContentCopy />, component: TabWorkOrder },

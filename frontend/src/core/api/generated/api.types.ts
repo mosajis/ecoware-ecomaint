@@ -16950,6 +16950,34 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
+                            tblFunctions?: {
+                                functionId: number;
+                                compId: null | (number);
+                                criticalityId: null | (number);
+                                layoutId: null | (number);
+                                costCentreId: null | (number);
+                                maintBudgetId: null | (number);
+                                stockBudgetId: null | (number);
+                                locationId: null | (number);
+                                funcNo: null | string;
+                                funcDescr: null | string;
+                                funcRef: null | string;
+                                parentFunctionId: null | (number);
+                                userDefText: null | string;
+                                userDefText2: null | string;
+                                userDefText3: null | string;
+                                userDefText4: null | string;
+                                userDefText5: null | string;
+                                userDefText6: null | string;
+                                notes: null | string;
+                                statusId: null | (number);
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
                             tblMaintLogs?: {
                                 maintLogId: number;
                                 maintCauseId: null | (number);
@@ -16982,6 +17010,68 @@ export interface operations {
                                 followStatusId: null | (number);
                                 orderId: null | (number);
                                 userId: null | (number);
+                            }[];
+                            tblWorkOrders?: {
+                                workOrderId: number;
+                                applicationId: null | (number);
+                                compJobId: null | (number);
+                                maintClassId: null | (number);
+                                maintTypeId: null | (number);
+                                maintCauseId: null | (number);
+                                createdBy: null | (number);
+                                issuedBy: null | (number);
+                                plannedBy: null | (number);
+                                issuedDate: null | (Record<string, never> | number);
+                                respDiscId: null | (number);
+                                vendorId: null | (number);
+                                compId: null | (number);
+                                jobConditionId: null | (number);
+                                roundId: null | (number);
+                                procedureJobId: null | (number);
+                                procedureVersionId: null | (number);
+                                nonConfId: null | (number);
+                                accidentId: null | (number);
+                                parentWorkOrderId: null | (number);
+                                costCentreId: null | (number);
+                                accountCodeId: null | (number);
+                                budgetCodeDefId: null | (number);
+                                woNo: null | string;
+                                title: null | string;
+                                priority: null | (number);
+                                estTotalDuration: null | (number);
+                                dueDate: null | (Record<string, never> | number);
+                                dueDateLocked: null | (number);
+                                window: null | (number);
+                                created: null | (Record<string, never> | number);
+                                started: null | (Record<string, never> | number);
+                                completed: null | (Record<string, never> | number);
+                                userDefText1: null | string;
+                                userDefText2: null | string;
+                                userDefText3: null | string;
+                                userDefText4: null | string;
+                                description: null | string;
+                                filed: null | (number);
+                                unexpected: null | (number);
+                                workflowStatusId: null | (number);
+                                woStatus: null | (number);
+                                woOrigin: null | (number);
+                                cause: null | string;
+                                effect: null | string;
+                                actionTaken: null | string;
+                                plannedStart: null | (Record<string, never> | number);
+                                outputFormat: null | (number);
+                                woTriggeredBy: null | (number);
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                reportingMethod: null | (number);
+                                pendingBy: null | (number);
+                                pendTypeId: null | (number);
+                                pendingdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                                userComment: null | string;
                             }[];
                         }[];
                         total: number;
@@ -17050,9 +17140,19 @@ export interface operations {
                             locationId: number;
                         };
                     };
+                    tblFunctions?: {
+                        connect: {
+                            functionId: number;
+                        }[];
+                    };
                     tblMaintLogs?: {
                         connect: {
                             maintLogId: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
                         }[];
                     };
                 };
@@ -17104,9 +17204,19 @@ export interface operations {
                             locationId: number;
                         };
                     };
+                    tblFunctions?: {
+                        connect: {
+                            functionId: number;
+                        }[];
+                    };
                     tblMaintLogs?: {
                         connect: {
                             maintLogId: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
                         }[];
                     };
                 };
@@ -17158,9 +17268,19 @@ export interface operations {
                             locationId: number;
                         };
                     };
+                    tblFunctions?: {
+                        connect: {
+                            functionId: number;
+                        }[];
+                    };
                     tblMaintLogs?: {
                         connect: {
                             maintLogId: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
                         }[];
                     };
                 };
@@ -17332,6 +17452,34 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         };
+                        tblFunctions?: {
+                            functionId: number;
+                            compId: null | (number);
+                            criticalityId: null | (number);
+                            layoutId: null | (number);
+                            costCentreId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            locationId: null | (number);
+                            funcNo: null | string;
+                            funcDescr: null | string;
+                            funcRef: null | string;
+                            parentFunctionId: null | (number);
+                            userDefText: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            userDefText5: null | string;
+                            userDefText6: null | string;
+                            notes: null | string;
+                            statusId: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | (number);
@@ -17364,6 +17512,68 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
                         }[];
                     };
                 };
@@ -17578,6 +17788,34 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         };
+                        tblFunctions?: {
+                            functionId: number;
+                            compId: null | (number);
+                            criticalityId: null | (number);
+                            layoutId: null | (number);
+                            costCentreId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            locationId: null | (number);
+                            funcNo: null | string;
+                            funcDescr: null | string;
+                            funcRef: null | string;
+                            parentFunctionId: null | (number);
+                            userDefText: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            userDefText5: null | string;
+                            userDefText6: null | string;
+                            notes: null | string;
+                            statusId: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | (number);
@@ -17610,6 +17848,68 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
                         }[];
                     } & (Record<string, never> | null);
                 };
@@ -17685,9 +17985,25 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblFunctions?: {
+                        connect?: {
+                            functionId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblMaintLogs?: {
                         connect?: {
                             maintLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -17752,9 +18068,25 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblFunctions?: {
+                        connect?: {
+                            functionId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblMaintLogs?: {
                         connect?: {
                             maintLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -17819,9 +18151,25 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblFunctions?: {
+                        connect?: {
+                            functionId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblMaintLogs?: {
                         connect?: {
                             maintLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -17996,6 +18344,34 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         };
+                        tblFunctions?: {
+                            functionId: number;
+                            compId: null | (number);
+                            criticalityId: null | (number);
+                            layoutId: null | (number);
+                            costCentreId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            locationId: null | (number);
+                            funcNo: null | string;
+                            funcDescr: null | string;
+                            funcRef: null | string;
+                            parentFunctionId: null | (number);
+                            userDefText: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            userDefText5: null | string;
+                            userDefText6: null | string;
+                            notes: null | string;
+                            statusId: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | (number);
@@ -18028,6 +18404,68 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
                         }[];
                     };
                 };
@@ -18212,6 +18650,34 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         };
+                        tblFunctions?: {
+                            functionId: number;
+                            compId: null | (number);
+                            criticalityId: null | (number);
+                            layoutId: null | (number);
+                            costCentreId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            locationId: null | (number);
+                            funcNo: null | string;
+                            funcDescr: null | string;
+                            funcRef: null | string;
+                            parentFunctionId: null | (number);
+                            userDefText: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            userDefText5: null | string;
+                            userDefText6: null | string;
+                            notes: null | string;
+                            statusId: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | (number);
@@ -18244,6 +18710,68 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
                         }[];
                     };
                 };
@@ -22509,6 +23037,40 @@ export interface operations {
                             lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            tblComponentUnit?: null | {
+                                compId: number;
+                                compTypeId: null | (number);
+                                locationId: null | (number);
+                                parentCompId: null | (number);
+                                vendorId: null | (number);
+                                maintBudgetId: null | (number);
+                                stockBudgetId: null | (number);
+                                costCentreId: null | (number);
+                                compNo: null | string;
+                                serialNo: null | string;
+                                depreciationTime: null | (number);
+                                warrantyEnd: null | (Record<string, never> | number);
+                                userDefCurr: null | string;
+                                userDefValue: null | (number);
+                                userDefText1: null | string;
+                                userDefText2: null | string;
+                                userDefText3: null | string;
+                                userDefText4: null | string;
+                                misc1: null | string;
+                                misc2: null | string;
+                                unplannedLayout: null | (number);
+                                lastUsedLocationId: null | (number);
+                                statusId: null | (number);
+                                layoutId: null | (number);
+                                notes: null | string;
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                isCritical: null | (number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
                             tblFunctions?: null | {
                                 functionId: number;
                                 compId: null | (number);
@@ -22565,6 +23127,18 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
+                            tblLocation?: null | {
+                                locationId: number;
+                                parentLocationId: null | (number);
+                                costCentreId: null | (number);
+                                name: null | string;
+                                locationCode: null | string;
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
                             tblMaintLogs?: {
                                 maintLogId: number;
                                 maintCauseId: null | (number);
@@ -22630,6 +23204,11 @@ export interface operations {
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblComponentUnit?: {
+                        connect: {
+                            compId: number;
+                        };
+                    };
                     tblFunctions?: {
                         connect: {
                             functionId: number;
@@ -22639,6 +23218,11 @@ export interface operations {
                         connect: {
                             id: number;
                         }[];
+                    };
+                    tblLocation?: {
+                        connect: {
+                            locationId: number;
+                        };
                     };
                     tblMaintLogs?: {
                         connect: {
@@ -22659,6 +23243,11 @@ export interface operations {
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblComponentUnit?: {
+                        connect: {
+                            compId: number;
+                        };
+                    };
                     tblFunctions?: {
                         connect: {
                             functionId: number;
@@ -22668,6 +23257,11 @@ export interface operations {
                         connect: {
                             id: number;
                         }[];
+                    };
+                    tblLocation?: {
+                        connect: {
+                            locationId: number;
+                        };
                     };
                     tblMaintLogs?: {
                         connect: {
@@ -22688,6 +23282,11 @@ export interface operations {
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblComponentUnit?: {
+                        connect: {
+                            compId: number;
+                        };
+                    };
                     tblFunctions?: {
                         connect: {
                             functionId: number;
@@ -22697,6 +23296,11 @@ export interface operations {
                         connect: {
                             id: number;
                         }[];
+                    };
+                    tblLocation?: {
+                        connect: {
+                            locationId: number;
+                        };
                     };
                     tblMaintLogs?: {
                         connect: {
@@ -22740,6 +23344,40 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblComponentUnit?: null | {
+                            compId: number;
+                            compTypeId: null | (number);
+                            locationId: null | (number);
+                            parentCompId: null | (number);
+                            vendorId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            compNo: null | string;
+                            serialNo: null | string;
+                            depreciationTime: null | (number);
+                            warrantyEnd: null | (Record<string, never> | number);
+                            userDefCurr: null | string;
+                            userDefValue: null | (number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            misc1: null | string;
+                            misc2: null | string;
+                            unplannedLayout: null | (number);
+                            lastUsedLocationId: null | (number);
+                            statusId: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                         tblFunctions?: null | {
                             functionId: number;
                             compId: null | (number);
@@ -22796,6 +23434,18 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblLocation?: null | {
+                            locationId: number;
+                            parentLocationId: null | (number);
+                            costCentreId: null | (number);
+                            name: null | string;
+                            locationCode: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                         tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | (number);
@@ -22910,6 +23560,40 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblComponentUnit?: null | {
+                            compId: number;
+                            compTypeId: null | (number);
+                            locationId: null | (number);
+                            parentCompId: null | (number);
+                            vendorId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            compNo: null | string;
+                            serialNo: null | string;
+                            depreciationTime: null | (number);
+                            warrantyEnd: null | (Record<string, never> | number);
+                            userDefCurr: null | string;
+                            userDefValue: null | (number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            misc1: null | string;
+                            misc2: null | string;
+                            unplannedLayout: null | (number);
+                            lastUsedLocationId: null | (number);
+                            statusId: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                         tblFunctions?: null | {
                             functionId: number;
                             compId: null | (number);
@@ -22966,6 +23650,18 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblLocation?: null | {
+                            locationId: number;
+                            parentLocationId: null | (number);
+                            costCentreId: null | (number);
+                            name: null | string;
+                            locationCode: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                         tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | (number);
@@ -23028,6 +23724,12 @@ export interface operations {
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblComponentUnit?: {
+                        connect?: {
+                            compId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblFunctions?: {
                         connect?: {
                             functionId: number;
@@ -23041,6 +23743,12 @@ export interface operations {
                         disconnect?: {
                             id: number;
                         }[];
+                    };
+                    tblLocation?: {
+                        connect?: {
+                            locationId: number;
+                        };
+                        disconnect?: boolean;
                     };
                     tblMaintLogs?: {
                         connect?: {
@@ -23064,6 +23772,12 @@ export interface operations {
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblComponentUnit?: {
+                        connect?: {
+                            compId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblFunctions?: {
                         connect?: {
                             functionId: number;
@@ -23077,6 +23791,12 @@ export interface operations {
                         disconnect?: {
                             id: number;
                         }[];
+                    };
+                    tblLocation?: {
+                        connect?: {
+                            locationId: number;
+                        };
+                        disconnect?: boolean;
                     };
                     tblMaintLogs?: {
                         connect?: {
@@ -23100,6 +23820,12 @@ export interface operations {
                     notes?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
+                    tblComponentUnit?: {
+                        connect?: {
+                            compId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblFunctions?: {
                         connect?: {
                             functionId: number;
@@ -23113,6 +23839,12 @@ export interface operations {
                         disconnect?: {
                             id: number;
                         }[];
+                    };
+                    tblLocation?: {
+                        connect?: {
+                            locationId: number;
+                        };
+                        disconnect?: boolean;
                     };
                     tblMaintLogs?: {
                         connect?: {
@@ -23159,6 +23891,40 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblComponentUnit?: null | {
+                            compId: number;
+                            compTypeId: null | (number);
+                            locationId: null | (number);
+                            parentCompId: null | (number);
+                            vendorId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            compNo: null | string;
+                            serialNo: null | string;
+                            depreciationTime: null | (number);
+                            warrantyEnd: null | (Record<string, never> | number);
+                            userDefCurr: null | string;
+                            userDefValue: null | (number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            misc1: null | string;
+                            misc2: null | string;
+                            unplannedLayout: null | (number);
+                            lastUsedLocationId: null | (number);
+                            statusId: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                         tblFunctions?: null | {
                             functionId: number;
                             compId: null | (number);
@@ -23215,6 +23981,18 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblLocation?: null | {
+                            locationId: number;
+                            parentLocationId: null | (number);
+                            costCentreId: null | (number);
+                            name: null | string;
+                            locationCode: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                         tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | (number);
@@ -23299,6 +24077,40 @@ export interface operations {
                         lastupdate: null | (Record<string, never> | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblComponentUnit?: null | {
+                            compId: number;
+                            compTypeId: null | (number);
+                            locationId: null | (number);
+                            parentCompId: null | (number);
+                            vendorId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            compNo: null | string;
+                            serialNo: null | string;
+                            depreciationTime: null | (number);
+                            warrantyEnd: null | (Record<string, never> | number);
+                            userDefCurr: null | string;
+                            userDefValue: null | (number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            misc1: null | string;
+                            misc2: null | string;
+                            unplannedLayout: null | (number);
+                            lastUsedLocationId: null | (number);
+                            statusId: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                         tblFunctions?: null | {
                             functionId: number;
                             compId: null | (number);
@@ -23355,6 +24167,18 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblLocation?: null | {
+                            locationId: number;
+                            parentLocationId: null | (number);
+                            costCentreId: null | (number);
+                            name: null | string;
+                            locationCode: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                         tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | (number);
@@ -25951,6 +26775,34 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
+                            tblFunctions?: {
+                                functionId: number;
+                                compId: null | (number);
+                                criticalityId: null | (number);
+                                layoutId: null | (number);
+                                costCentreId: null | (number);
+                                maintBudgetId: null | (number);
+                                stockBudgetId: null | (number);
+                                locationId: null | (number);
+                                funcNo: null | string;
+                                funcDescr: null | string;
+                                funcRef: null | string;
+                                parentFunctionId: null | (number);
+                                userDefText: null | string;
+                                userDefText2: null | string;
+                                userDefText3: null | string;
+                                userDefText4: null | string;
+                                userDefText5: null | string;
+                                userDefText6: null | string;
+                                notes: null | string;
+                                statusId: null | (number);
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
                             tblLocation?: null | {
                                 locationId: number;
                                 parentLocationId: null | (number);
@@ -26004,6 +26856,11 @@ export interface operations {
                             compId: number;
                         }[];
                     };
+                    tblFunctions?: {
+                        connect: {
+                            functionId: number;
+                        }[];
+                    };
                     tblLocation?: {
                         connect: {
                             locationId: number;
@@ -26025,6 +26882,11 @@ export interface operations {
                             compId: number;
                         }[];
                     };
+                    tblFunctions?: {
+                        connect: {
+                            functionId: number;
+                        }[];
+                    };
                     tblLocation?: {
                         connect: {
                             locationId: number;
@@ -26044,6 +26906,11 @@ export interface operations {
                     tblComponentUnits?: {
                         connect: {
                             compId: number;
+                        }[];
+                    };
+                    tblFunctions?: {
+                        connect: {
+                            functionId: number;
                         }[];
                     };
                     tblLocation?: {
@@ -26108,6 +26975,34 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblFunctions?: {
+                            functionId: number;
+                            compId: null | (number);
+                            criticalityId: null | (number);
+                            layoutId: null | (number);
+                            costCentreId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            locationId: null | (number);
+                            funcNo: null | string;
+                            funcDescr: null | string;
+                            funcRef: null | string;
+                            parentFunctionId: null | (number);
+                            userDefText: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            userDefText5: null | string;
+                            userDefText6: null | string;
+                            notes: null | string;
+                            statusId: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -26234,6 +27129,34 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblFunctions?: {
+                            functionId: number;
+                            compId: null | (number);
+                            criticalityId: null | (number);
+                            layoutId: null | (number);
+                            costCentreId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            locationId: null | (number);
+                            funcNo: null | string;
+                            funcDescr: null | string;
+                            funcRef: null | string;
+                            parentFunctionId: null | (number);
+                            userDefText: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            userDefText5: null | string;
+                            userDefText6: null | string;
+                            notes: null | string;
+                            statusId: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblLocation?: null | {
                             locationId: number;
                             parentLocationId: null | (number);
@@ -26287,6 +27210,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblFunctions?: {
+                        connect?: {
+                            functionId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblLocation?: {
                         connect?: {
                             locationId: number;
@@ -26315,6 +27246,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblFunctions?: {
+                        connect?: {
+                            functionId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblLocation?: {
                         connect?: {
                             locationId: number;
@@ -26338,6 +27277,14 @@ export interface operations {
                     tblComponentUnits?: {
                         connect?: {
                             compId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblFunctions?: {
+                        connect?: {
+                            functionId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -26409,6 +27356,34 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblFunctions?: {
+                            functionId: number;
+                            compId: null | (number);
+                            criticalityId: null | (number);
+                            layoutId: null | (number);
+                            costCentreId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            locationId: null | (number);
+                            funcNo: null | string;
+                            funcDescr: null | string;
+                            funcRef: null | string;
+                            parentFunctionId: null | (number);
+                            userDefText: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            userDefText5: null | string;
+                            userDefText6: null | string;
+                            notes: null | string;
+                            statusId: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -26502,6 +27477,34 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
                             isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblFunctions?: {
+                            functionId: number;
+                            compId: null | (number);
+                            criticalityId: null | (number);
+                            layoutId: null | (number);
+                            costCentreId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            locationId: null | (number);
+                            funcNo: null | string;
+                            funcDescr: null | string;
+                            funcRef: null | string;
+                            parentFunctionId: null | (number);
+                            userDefText: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            userDefText5: null | string;
+                            userDefText6: null | string;
+                            notes: null | string;
+                            statusId: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
@@ -27863,6 +28866,68 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
+                            tblWorkOrders?: {
+                                workOrderId: number;
+                                applicationId: null | (number);
+                                compJobId: null | (number);
+                                maintClassId: null | (number);
+                                maintTypeId: null | (number);
+                                maintCauseId: null | (number);
+                                createdBy: null | (number);
+                                issuedBy: null | (number);
+                                plannedBy: null | (number);
+                                issuedDate: null | (Record<string, never> | number);
+                                respDiscId: null | (number);
+                                vendorId: null | (number);
+                                compId: null | (number);
+                                jobConditionId: null | (number);
+                                roundId: null | (number);
+                                procedureJobId: null | (number);
+                                procedureVersionId: null | (number);
+                                nonConfId: null | (number);
+                                accidentId: null | (number);
+                                parentWorkOrderId: null | (number);
+                                costCentreId: null | (number);
+                                accountCodeId: null | (number);
+                                budgetCodeDefId: null | (number);
+                                woNo: null | string;
+                                title: null | string;
+                                priority: null | (number);
+                                estTotalDuration: null | (number);
+                                dueDate: null | (Record<string, never> | number);
+                                dueDateLocked: null | (number);
+                                window: null | (number);
+                                created: null | (Record<string, never> | number);
+                                started: null | (Record<string, never> | number);
+                                completed: null | (Record<string, never> | number);
+                                userDefText1: null | string;
+                                userDefText2: null | string;
+                                userDefText3: null | string;
+                                userDefText4: null | string;
+                                description: null | string;
+                                filed: null | (number);
+                                unexpected: null | (number);
+                                workflowStatusId: null | (number);
+                                woStatus: null | (number);
+                                woOrigin: null | (number);
+                                cause: null | string;
+                                effect: null | string;
+                                actionTaken: null | string;
+                                plannedStart: null | (Record<string, never> | number);
+                                outputFormat: null | (number);
+                                woTriggeredBy: null | (number);
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                reportingMethod: null | (number);
+                                pendingBy: null | (number);
+                                pendTypeId: null | (number);
+                                pendingdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                                userComment: null | string;
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -27901,6 +28966,11 @@ export interface operations {
                             maintLogId: number;
                         }[];
                     };
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     descr?: null | string;
@@ -27921,6 +28991,11 @@ export interface operations {
                             maintLogId: number;
                         }[];
                     };
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     descr?: null | string;
@@ -27939,6 +29014,11 @@ export interface operations {
                     tblMaintLogs?: {
                         connect: {
                             maintLogId: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
                         }[];
                     };
                 };
@@ -28069,6 +29149,68 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
                         }[];
                     };
                 };
@@ -28243,6 +29385,68 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -28287,6 +29491,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     descr?: null | string;
@@ -28316,6 +29528,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     descr?: null | string;
@@ -28340,6 +29560,14 @@ export interface operations {
                     tblMaintLogs?: {
                         connect?: {
                             maintLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -28473,6 +29701,68 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
                         }[];
                     };
                 };
@@ -28616,6 +29906,68 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
                         }[];
                     };
                 };
@@ -28795,6 +30147,68 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
+                            tblWorkOrders?: {
+                                workOrderId: number;
+                                applicationId: null | (number);
+                                compJobId: null | (number);
+                                maintClassId: null | (number);
+                                maintTypeId: null | (number);
+                                maintCauseId: null | (number);
+                                createdBy: null | (number);
+                                issuedBy: null | (number);
+                                plannedBy: null | (number);
+                                issuedDate: null | (Record<string, never> | number);
+                                respDiscId: null | (number);
+                                vendorId: null | (number);
+                                compId: null | (number);
+                                jobConditionId: null | (number);
+                                roundId: null | (number);
+                                procedureJobId: null | (number);
+                                procedureVersionId: null | (number);
+                                nonConfId: null | (number);
+                                accidentId: null | (number);
+                                parentWorkOrderId: null | (number);
+                                costCentreId: null | (number);
+                                accountCodeId: null | (number);
+                                budgetCodeDefId: null | (number);
+                                woNo: null | string;
+                                title: null | string;
+                                priority: null | (number);
+                                estTotalDuration: null | (number);
+                                dueDate: null | (Record<string, never> | number);
+                                dueDateLocked: null | (number);
+                                window: null | (number);
+                                created: null | (Record<string, never> | number);
+                                started: null | (Record<string, never> | number);
+                                completed: null | (Record<string, never> | number);
+                                userDefText1: null | string;
+                                userDefText2: null | string;
+                                userDefText3: null | string;
+                                userDefText4: null | string;
+                                description: null | string;
+                                filed: null | (number);
+                                unexpected: null | (number);
+                                workflowStatusId: null | (number);
+                                woStatus: null | (number);
+                                woOrigin: null | (number);
+                                cause: null | string;
+                                effect: null | string;
+                                actionTaken: null | string;
+                                plannedStart: null | (Record<string, never> | number);
+                                outputFormat: null | (number);
+                                woTriggeredBy: null | (number);
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                reportingMethod: null | (number);
+                                pendingBy: null | (number);
+                                pendTypeId: null | (number);
+                                pendingdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                                userComment: null | string;
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -28833,6 +30247,11 @@ export interface operations {
                             maintLogId: number;
                         }[];
                     };
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     descr?: null | string;
@@ -28853,6 +30272,11 @@ export interface operations {
                             maintLogId: number;
                         }[];
                     };
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     descr?: null | string;
@@ -28871,6 +30295,11 @@ export interface operations {
                     tblMaintLogs?: {
                         connect: {
                             maintLogId: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
                         }[];
                     };
                 };
@@ -29001,6 +30430,68 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
                         }[];
                     };
                 };
@@ -29175,6 +30666,68 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -29219,6 +30772,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     descr?: null | string;
@@ -29248,6 +30809,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     descr?: null | string;
@@ -29272,6 +30841,14 @@ export interface operations {
                     tblMaintLogs?: {
                         connect?: {
                             maintLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -29405,6 +30982,68 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
                         }[];
                     };
                 };
@@ -29548,6 +31187,68 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
                         }[];
                     };
                 };
@@ -29776,8 +31477,6 @@ export interface operations {
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
                                 maintCauseId: null | (number);
-                                layoutId: null | (number);
-                                historyLayout: null | (number);
                                 createdBy: null | (number);
                                 issuedBy: null | (number);
                                 plannedBy: null | (number);
@@ -30215,8 +31914,6 @@ export interface operations {
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
                             maintCauseId: null | (number);
-                            layoutId: null | (number);
-                            historyLayout: null | (number);
                             createdBy: null | (number);
                             issuedBy: null | (number);
                             plannedBy: null | (number);
@@ -30494,8 +32191,6 @@ export interface operations {
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
                             maintCauseId: null | (number);
-                            layoutId: null | (number);
-                            historyLayout: null | (number);
                             createdBy: null | (number);
                             issuedBy: null | (number);
                             plannedBy: null | (number);
@@ -30957,8 +32652,6 @@ export interface operations {
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
                             maintCauseId: null | (number);
-                            layoutId: null | (number);
-                            historyLayout: null | (number);
                             createdBy: null | (number);
                             issuedBy: null | (number);
                             plannedBy: null | (number);
@@ -31206,8 +32899,6 @@ export interface operations {
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
                             maintCauseId: null | (number);
-                            layoutId: null | (number);
-                            historyLayout: null | (number);
                             createdBy: null | (number);
                             issuedBy: null | (number);
                             plannedBy: null | (number);
@@ -32041,6 +33732,68 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
+                            tblWorkOrders?: {
+                                workOrderId: number;
+                                applicationId: null | (number);
+                                compJobId: null | (number);
+                                maintClassId: null | (number);
+                                maintTypeId: null | (number);
+                                maintCauseId: null | (number);
+                                createdBy: null | (number);
+                                issuedBy: null | (number);
+                                plannedBy: null | (number);
+                                issuedDate: null | (Record<string, never> | number);
+                                respDiscId: null | (number);
+                                vendorId: null | (number);
+                                compId: null | (number);
+                                jobConditionId: null | (number);
+                                roundId: null | (number);
+                                procedureJobId: null | (number);
+                                procedureVersionId: null | (number);
+                                nonConfId: null | (number);
+                                accidentId: null | (number);
+                                parentWorkOrderId: null | (number);
+                                costCentreId: null | (number);
+                                accountCodeId: null | (number);
+                                budgetCodeDefId: null | (number);
+                                woNo: null | string;
+                                title: null | string;
+                                priority: null | (number);
+                                estTotalDuration: null | (number);
+                                dueDate: null | (Record<string, never> | number);
+                                dueDateLocked: null | (number);
+                                window: null | (number);
+                                created: null | (Record<string, never> | number);
+                                started: null | (Record<string, never> | number);
+                                completed: null | (Record<string, never> | number);
+                                userDefText1: null | string;
+                                userDefText2: null | string;
+                                userDefText3: null | string;
+                                userDefText4: null | string;
+                                description: null | string;
+                                filed: null | (number);
+                                unexpected: null | (number);
+                                workflowStatusId: null | (number);
+                                woStatus: null | (number);
+                                woOrigin: null | (number);
+                                cause: null | string;
+                                effect: null | string;
+                                actionTaken: null | string;
+                                plannedStart: null | (Record<string, never> | number);
+                                outputFormat: null | (number);
+                                woTriggeredBy: null | (number);
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                reportingMethod: null | (number);
+                                pendingBy: null | (number);
+                                pendTypeId: null | (number);
+                                pendingdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                                userComment: null | string;
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -32079,6 +33832,11 @@ export interface operations {
                             maintLogId: number;
                         }[];
                     };
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     descr?: null | string;
@@ -32099,6 +33857,11 @@ export interface operations {
                             maintLogId: number;
                         }[];
                     };
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     descr?: null | string;
@@ -32117,6 +33880,11 @@ export interface operations {
                     tblMaintLogs?: {
                         connect: {
                             maintLogId: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
                         }[];
                     };
                 };
@@ -32247,6 +34015,68 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
                         }[];
                     };
                 };
@@ -32421,6 +34251,68 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -32465,6 +34357,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     descr?: null | string;
@@ -32494,6 +34394,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     descr?: null | string;
@@ -32518,6 +34426,14 @@ export interface operations {
                     tblMaintLogs?: {
                         connect?: {
                             maintLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -32651,6 +34567,68 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
                         }[];
                     };
                 };
@@ -32794,6 +34772,68 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
                         }[];
                     };
                 };
@@ -33415,6 +35455,68 @@ export interface operations {
                             description: null | string;
                             orderId: null | (number);
                             userId: null | (number);
+                            tblWorkOrders?: {
+                                workOrderId: number;
+                                applicationId: null | (number);
+                                compJobId: null | (number);
+                                maintClassId: null | (number);
+                                maintTypeId: null | (number);
+                                maintCauseId: null | (number);
+                                createdBy: null | (number);
+                                issuedBy: null | (number);
+                                plannedBy: null | (number);
+                                issuedDate: null | (Record<string, never> | number);
+                                respDiscId: null | (number);
+                                vendorId: null | (number);
+                                compId: null | (number);
+                                jobConditionId: null | (number);
+                                roundId: null | (number);
+                                procedureJobId: null | (number);
+                                procedureVersionId: null | (number);
+                                nonConfId: null | (number);
+                                accidentId: null | (number);
+                                parentWorkOrderId: null | (number);
+                                costCentreId: null | (number);
+                                accountCodeId: null | (number);
+                                budgetCodeDefId: null | (number);
+                                woNo: null | string;
+                                title: null | string;
+                                priority: null | (number);
+                                estTotalDuration: null | (number);
+                                dueDate: null | (Record<string, never> | number);
+                                dueDateLocked: null | (number);
+                                window: null | (number);
+                                created: null | (Record<string, never> | number);
+                                started: null | (Record<string, never> | number);
+                                completed: null | (Record<string, never> | number);
+                                userDefText1: null | string;
+                                userDefText2: null | string;
+                                userDefText3: null | string;
+                                userDefText4: null | string;
+                                description: null | string;
+                                filed: null | (number);
+                                unexpected: null | (number);
+                                workflowStatusId: null | (number);
+                                woStatus: null | (number);
+                                woOrigin: null | (number);
+                                cause: null | string;
+                                effect: null | string;
+                                actionTaken: null | string;
+                                plannedStart: null | (Record<string, never> | number);
+                                outputFormat: null | (number);
+                                woTriggeredBy: null | (number);
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                reportingMethod: null | (number);
+                                pendingBy: null | (number);
+                                pendTypeId: null | (number);
+                                pendingdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                                userComment: null | string;
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -33439,18 +35541,33 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     description?: null | string;
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     pendTypeName: string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     description?: null | string;
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     pendTypeName: string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     description?: null | string;
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
                 };
             };
         };
@@ -33473,6 +35590,68 @@ export interface operations {
                         description: null | string;
                         orderId: null | (number);
                         userId: null | (number);
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        }[];
                     };
                 };
             };
@@ -33539,6 +35718,68 @@ export interface operations {
                         description: null | string;
                         orderId: null | (number);
                         userId: null | (number);
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -33560,18 +35801,42 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     description?: null | string;
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     pendTypeName?: string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     description?: null | string;
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     pendTypeName?: string;
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     description?: null | string;
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
             };
         };
@@ -33594,6 +35859,68 @@ export interface operations {
                         description: null | string;
                         orderId: null | (number);
                         userId: null | (number);
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        }[];
                     };
                 };
             };
@@ -33630,6 +35957,68 @@ export interface operations {
                         description: null | string;
                         orderId: null | (number);
                         userId: null | (number);
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        }[];
                     };
                 };
             };
@@ -35229,6 +37618,68 @@ export interface operations {
                             defineMethodOnReporting: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                            tblWorkOrders?: {
+                                workOrderId: number;
+                                applicationId: null | (number);
+                                compJobId: null | (number);
+                                maintClassId: null | (number);
+                                maintTypeId: null | (number);
+                                maintCauseId: null | (number);
+                                createdBy: null | (number);
+                                issuedBy: null | (number);
+                                plannedBy: null | (number);
+                                issuedDate: null | (Record<string, never> | number);
+                                respDiscId: null | (number);
+                                vendorId: null | (number);
+                                compId: null | (number);
+                                jobConditionId: null | (number);
+                                roundId: null | (number);
+                                procedureJobId: null | (number);
+                                procedureVersionId: null | (number);
+                                nonConfId: null | (number);
+                                accidentId: null | (number);
+                                parentWorkOrderId: null | (number);
+                                costCentreId: null | (number);
+                                accountCodeId: null | (number);
+                                budgetCodeDefId: null | (number);
+                                woNo: null | string;
+                                title: null | string;
+                                priority: null | (number);
+                                estTotalDuration: null | (number);
+                                dueDate: null | (Record<string, never> | number);
+                                dueDateLocked: null | (number);
+                                window: null | (number);
+                                created: null | (Record<string, never> | number);
+                                started: null | (Record<string, never> | number);
+                                completed: null | (Record<string, never> | number);
+                                userDefText1: null | string;
+                                userDefText2: null | string;
+                                userDefText3: null | string;
+                                userDefText4: null | string;
+                                description: null | string;
+                                filed: null | (number);
+                                unexpected: null | (number);
+                                workflowStatusId: null | (number);
+                                woStatus: null | (number);
+                                woOrigin: null | (number);
+                                cause: null | string;
+                                effect: null | string;
+                                actionTaken: null | string;
+                                plannedStart: null | (Record<string, never> | number);
+                                outputFormat: null | (number);
+                                woTriggeredBy: null | (number);
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                reportingMethod: null | (number);
+                                pendingBy: null | (number);
+                                pendTypeId: null | (number);
+                                pendingdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                                userComment: null | string;
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -35269,6 +37720,11 @@ export interface operations {
                     mandatoryResource?: null | (number);
                     mandatoryStockUsage?: null | (number);
                     defineMethodOnReporting?: null | (number);
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     roundCode?: null | string;
@@ -35291,6 +37747,11 @@ export interface operations {
                     mandatoryResource?: null | (number);
                     mandatoryStockUsage?: null | (number);
                     defineMethodOnReporting?: null | (number);
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     roundCode?: null | string;
@@ -35313,6 +37774,11 @@ export interface operations {
                     mandatoryResource?: null | (number);
                     mandatoryStockUsage?: null | (number);
                     defineMethodOnReporting?: null | (number);
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
                 };
             };
         };
@@ -35357,6 +37823,68 @@ export interface operations {
                         defineMethodOnReporting: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        }[];
                     };
                 };
             };
@@ -35445,6 +37973,68 @@ export interface operations {
                         defineMethodOnReporting: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -35482,6 +38072,14 @@ export interface operations {
                     mandatoryResource?: null | (number);
                     mandatoryStockUsage?: null | (number);
                     defineMethodOnReporting?: null | (number);
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     roundCode?: null | string;
@@ -35504,6 +38102,14 @@ export interface operations {
                     mandatoryResource?: null | (number);
                     mandatoryStockUsage?: null | (number);
                     defineMethodOnReporting?: null | (number);
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     roundCode?: null | string;
@@ -35526,6 +38132,14 @@ export interface operations {
                     mandatoryResource?: null | (number);
                     mandatoryStockUsage?: null | (number);
                     defineMethodOnReporting?: null | (number);
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
             };
         };
@@ -35570,6 +38184,68 @@ export interface operations {
                         defineMethodOnReporting: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        }[];
                     };
                 };
             };
@@ -35628,6 +38304,68 @@ export interface operations {
                         defineMethodOnReporting: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        }[];
                     };
                 };
             };
@@ -37476,8 +40214,6 @@ export interface operations {
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
                             maintCauseId: null | (number);
-                            layoutId: null | (number);
-                            historyLayout: null | (number);
                             createdBy: null | (number);
                             issuedBy: null | (number);
                             plannedBy: null | (number);
@@ -37565,6 +40301,239 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
+                            tblComponentUnit?: null | {
+                                compId: number;
+                                compTypeId: null | (number);
+                                locationId: null | (number);
+                                parentCompId: null | (number);
+                                vendorId: null | (number);
+                                maintBudgetId: null | (number);
+                                stockBudgetId: null | (number);
+                                costCentreId: null | (number);
+                                compNo: null | string;
+                                serialNo: null | string;
+                                depreciationTime: null | (number);
+                                warrantyEnd: null | (Record<string, never> | number);
+                                userDefCurr: null | string;
+                                userDefValue: null | (number);
+                                userDefText1: null | string;
+                                userDefText2: null | string;
+                                userDefText3: null | string;
+                                userDefText4: null | string;
+                                misc1: null | string;
+                                misc2: null | string;
+                                unplannedLayout: null | (number);
+                                lastUsedLocationId: null | (number);
+                                statusId: null | (number);
+                                layoutId: null | (number);
+                                notes: null | string;
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                isCritical: null | (number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
+                            tblMaintCause?: null | {
+                                maintCauseId: number;
+                                descr: null | string;
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
+                            tblMaintClass?: null | {
+                                maintClassId: number;
+                                descr: null | string;
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
+                            tblMaintType?: null | {
+                                maintTypeId: number;
+                                descr: null | string;
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
+                            tblPendingType?: null | {
+                                pendTypeId: number;
+                                parentId: null | (number);
+                                groupId: null | (number);
+                                pendTypeName: string;
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                sortId: null | (number);
+                                description: null | string;
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
+                            tblRound?: null | {
+                                roundId: number;
+                                maintCauseId: null | (number);
+                                maintClassId: null | (number);
+                                maintTypeId: null | (number);
+                                maintBudgetId: null | (number);
+                                stockBudgetId: null | (number);
+                                costCentreId: null | (number);
+                                rescheduleLimitId: null | (number);
+                                roundCode: null | string;
+                                roundTitle: null | string;
+                                historyLayout: null | (number);
+                                layoutId: null | (number);
+                                discId: null | (number);
+                                frequency: null | (number);
+                                frequencyPeriod: null | (number);
+                                planningMethod: null | (number);
+                                includeAllJobs: null | (number);
+                                reportingMethod: null | (number);
+                                lastDone: null | (Record<string, never> | number);
+                                nextDueDate: null | (Record<string, never> | number);
+                                description: null | string;
+                                priority: null | (number);
+                                window: null | (number);
+                                outputFormat: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                mandatoryHistory: null | (number);
+                                mandatoryResource: null | (number);
+                                mandatoryStockUsage: null | (number);
+                                defineMethodOnReporting: null | (number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
+                            tblWorkOrder?: null | {
+                                workOrderId: number;
+                                applicationId: null | (number);
+                                compJobId: null | (number);
+                                maintClassId: null | (number);
+                                maintTypeId: null | (number);
+                                maintCauseId: null | (number);
+                                createdBy: null | (number);
+                                issuedBy: null | (number);
+                                plannedBy: null | (number);
+                                issuedDate: null | (Record<string, never> | number);
+                                respDiscId: null | (number);
+                                vendorId: null | (number);
+                                compId: null | (number);
+                                jobConditionId: null | (number);
+                                roundId: null | (number);
+                                procedureJobId: null | (number);
+                                procedureVersionId: null | (number);
+                                nonConfId: null | (number);
+                                accidentId: null | (number);
+                                parentWorkOrderId: null | (number);
+                                costCentreId: null | (number);
+                                accountCodeId: null | (number);
+                                budgetCodeDefId: null | (number);
+                                woNo: null | string;
+                                title: null | string;
+                                priority: null | (number);
+                                estTotalDuration: null | (number);
+                                dueDate: null | (Record<string, never> | number);
+                                dueDateLocked: null | (number);
+                                window: null | (number);
+                                created: null | (Record<string, never> | number);
+                                started: null | (Record<string, never> | number);
+                                completed: null | (Record<string, never> | number);
+                                userDefText1: null | string;
+                                userDefText2: null | string;
+                                userDefText3: null | string;
+                                userDefText4: null | string;
+                                description: null | string;
+                                filed: null | (number);
+                                unexpected: null | (number);
+                                workflowStatusId: null | (number);
+                                woStatus: null | (number);
+                                woOrigin: null | (number);
+                                cause: null | string;
+                                effect: null | string;
+                                actionTaken: null | string;
+                                plannedStart: null | (Record<string, never> | number);
+                                outputFormat: null | (number);
+                                woTriggeredBy: null | (number);
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                reportingMethod: null | (number);
+                                pendingBy: null | (number);
+                                pendTypeId: null | (number);
+                                pendingdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                                userComment: null | string;
+                            };
+                            otherTblWorkOrders?: {
+                                workOrderId: number;
+                                applicationId: null | (number);
+                                compJobId: null | (number);
+                                maintClassId: null | (number);
+                                maintTypeId: null | (number);
+                                maintCauseId: null | (number);
+                                createdBy: null | (number);
+                                issuedBy: null | (number);
+                                plannedBy: null | (number);
+                                issuedDate: null | (Record<string, never> | number);
+                                respDiscId: null | (number);
+                                vendorId: null | (number);
+                                compId: null | (number);
+                                jobConditionId: null | (number);
+                                roundId: null | (number);
+                                procedureJobId: null | (number);
+                                procedureVersionId: null | (number);
+                                nonConfId: null | (number);
+                                accidentId: null | (number);
+                                parentWorkOrderId: null | (number);
+                                costCentreId: null | (number);
+                                accountCodeId: null | (number);
+                                budgetCodeDefId: null | (number);
+                                woNo: null | string;
+                                title: null | string;
+                                priority: null | (number);
+                                estTotalDuration: null | (number);
+                                dueDate: null | (Record<string, never> | number);
+                                dueDateLocked: null | (number);
+                                window: null | (number);
+                                created: null | (Record<string, never> | number);
+                                started: null | (Record<string, never> | number);
+                                completed: null | (Record<string, never> | number);
+                                userDefText1: null | string;
+                                userDefText2: null | string;
+                                userDefText3: null | string;
+                                userDefText4: null | string;
+                                description: null | string;
+                                filed: null | (number);
+                                unexpected: null | (number);
+                                workflowStatusId: null | (number);
+                                woStatus: null | (number);
+                                woOrigin: null | (number);
+                                cause: null | string;
+                                effect: null | string;
+                                actionTaken: null | string;
+                                plannedStart: null | (Record<string, never> | number);
+                                outputFormat: null | (number);
+                                woTriggeredBy: null | (number);
+                                userTableId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                reportingMethod: null | (number);
+                                pendingBy: null | (number);
+                                pendTypeId: null | (number);
+                                pendingdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                                userComment: null | string;
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -37585,7 +40554,6 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    historyLayout?: null | (number);
                     createdBy?: null | (number);
                     issuedBy?: null | (number);
                     plannedBy?: null | (number);
@@ -37624,11 +40592,50 @@ export interface operations {
                     tblMaintLogs?: {
                         connect: {
                             maintLogId: number;
+                        }[];
+                    };
+                    tblComponentUnit?: {
+                        connect: {
+                            compId: number;
+                        };
+                    };
+                    tblMaintCause?: {
+                        connect: {
+                            maintCauseId: number;
+                        };
+                    };
+                    tblMaintClass?: {
+                        connect: {
+                            maintClassId: number;
+                        };
+                    };
+                    tblMaintType?: {
+                        connect: {
+                            maintTypeId: number;
+                        };
+                    };
+                    tblPendingType?: {
+                        connect: {
+                            pendTypeId: number;
+                        };
+                    };
+                    tblRound?: {
+                        connect: {
+                            roundId: number;
+                        };
+                    };
+                    tblWorkOrder?: {
+                        connect: {
+                            workOrderId: number;
+                        };
+                    };
+                    otherTblWorkOrders?: {
+                        connect: {
+                            id: number;
                         }[];
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    historyLayout?: null | (number);
                     createdBy?: null | (number);
                     issuedBy?: null | (number);
                     plannedBy?: null | (number);
@@ -37669,9 +40676,48 @@ export interface operations {
                             maintLogId: number;
                         }[];
                     };
+                    tblComponentUnit?: {
+                        connect: {
+                            compId: number;
+                        };
+                    };
+                    tblMaintCause?: {
+                        connect: {
+                            maintCauseId: number;
+                        };
+                    };
+                    tblMaintClass?: {
+                        connect: {
+                            maintClassId: number;
+                        };
+                    };
+                    tblMaintType?: {
+                        connect: {
+                            maintTypeId: number;
+                        };
+                    };
+                    tblPendingType?: {
+                        connect: {
+                            pendTypeId: number;
+                        };
+                    };
+                    tblRound?: {
+                        connect: {
+                            roundId: number;
+                        };
+                    };
+                    tblWorkOrder?: {
+                        connect: {
+                            workOrderId: number;
+                        };
+                    };
+                    otherTblWorkOrders?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
-                    historyLayout?: null | (number);
                     createdBy?: null | (number);
                     issuedBy?: null | (number);
                     plannedBy?: null | (number);
@@ -37710,6 +40756,46 @@ export interface operations {
                     tblMaintLogs?: {
                         connect: {
                             maintLogId: number;
+                        }[];
+                    };
+                    tblComponentUnit?: {
+                        connect: {
+                            compId: number;
+                        };
+                    };
+                    tblMaintCause?: {
+                        connect: {
+                            maintCauseId: number;
+                        };
+                    };
+                    tblMaintClass?: {
+                        connect: {
+                            maintClassId: number;
+                        };
+                    };
+                    tblMaintType?: {
+                        connect: {
+                            maintTypeId: number;
+                        };
+                    };
+                    tblPendingType?: {
+                        connect: {
+                            pendTypeId: number;
+                        };
+                    };
+                    tblRound?: {
+                        connect: {
+                            roundId: number;
+                        };
+                    };
+                    tblWorkOrder?: {
+                        connect: {
+                            workOrderId: number;
+                        };
+                    };
+                    otherTblWorkOrders?: {
+                        connect: {
+                            id: number;
                         }[];
                     };
                 };
@@ -37729,8 +40815,6 @@ export interface operations {
                         maintClassId: null | (number);
                         maintTypeId: null | (number);
                         maintCauseId: null | (number);
-                        layoutId: null | (number);
-                        historyLayout: null | (number);
                         createdBy: null | (number);
                         issuedBy: null | (number);
                         plannedBy: null | (number);
@@ -37817,6 +40901,239 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblComponentUnit?: null | {
+                            compId: number;
+                            compTypeId: null | (number);
+                            locationId: null | (number);
+                            parentCompId: null | (number);
+                            vendorId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            compNo: null | string;
+                            serialNo: null | string;
+                            depreciationTime: null | (number);
+                            warrantyEnd: null | (Record<string, never> | number);
+                            userDefCurr: null | string;
+                            userDefValue: null | (number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            misc1: null | string;
+                            misc2: null | string;
+                            unplannedLayout: null | (number);
+                            lastUsedLocationId: null | (number);
+                            statusId: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintCause?: null | {
+                            maintCauseId: number;
+                            descr: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintClass?: null | {
+                            maintClassId: number;
+                            descr: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintType?: null | {
+                            maintTypeId: number;
+                            descr: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblPendingType?: null | {
+                            pendTypeId: number;
+                            parentId: null | (number);
+                            groupId: null | (number);
+                            pendTypeName: string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            sortId: null | (number);
+                            description: null | string;
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblRound?: null | {
+                            roundId: number;
+                            maintCauseId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            rescheduleLimitId: null | (number);
+                            roundCode: null | string;
+                            roundTitle: null | string;
+                            historyLayout: null | (number);
+                            layoutId: null | (number);
+                            discId: null | (number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            planningMethod: null | (number);
+                            includeAllJobs: null | (number);
+                            reportingMethod: null | (number);
+                            lastDone: null | (Record<string, never> | number);
+                            nextDueDate: null | (Record<string, never> | number);
+                            description: null | string;
+                            priority: null | (number);
+                            window: null | (number);
+                            outputFormat: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            mandatoryHistory: null | (number);
+                            mandatoryResource: null | (number);
+                            mandatoryStockUsage: null | (number);
+                            defineMethodOnReporting: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblWorkOrder?: null | {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        };
+                        otherTblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
                         }[];
                     };
                 };
@@ -37879,8 +41196,6 @@ export interface operations {
                         maintClassId: null | (number);
                         maintTypeId: null | (number);
                         maintCauseId: null | (number);
-                        layoutId: null | (number);
-                        historyLayout: null | (number);
                         createdBy: null | (number);
                         issuedBy: null | (number);
                         plannedBy: null | (number);
@@ -37968,6 +41283,239 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblComponentUnit?: null | {
+                            compId: number;
+                            compTypeId: null | (number);
+                            locationId: null | (number);
+                            parentCompId: null | (number);
+                            vendorId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            compNo: null | string;
+                            serialNo: null | string;
+                            depreciationTime: null | (number);
+                            warrantyEnd: null | (Record<string, never> | number);
+                            userDefCurr: null | string;
+                            userDefValue: null | (number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            misc1: null | string;
+                            misc2: null | string;
+                            unplannedLayout: null | (number);
+                            lastUsedLocationId: null | (number);
+                            statusId: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintCause?: null | {
+                            maintCauseId: number;
+                            descr: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintClass?: null | {
+                            maintClassId: number;
+                            descr: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintType?: null | {
+                            maintTypeId: number;
+                            descr: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblPendingType?: null | {
+                            pendTypeId: number;
+                            parentId: null | (number);
+                            groupId: null | (number);
+                            pendTypeName: string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            sortId: null | (number);
+                            description: null | string;
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblRound?: null | {
+                            roundId: number;
+                            maintCauseId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            rescheduleLimitId: null | (number);
+                            roundCode: null | string;
+                            roundTitle: null | string;
+                            historyLayout: null | (number);
+                            layoutId: null | (number);
+                            discId: null | (number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            planningMethod: null | (number);
+                            includeAllJobs: null | (number);
+                            reportingMethod: null | (number);
+                            lastDone: null | (Record<string, never> | number);
+                            nextDueDate: null | (Record<string, never> | number);
+                            description: null | string;
+                            priority: null | (number);
+                            window: null | (number);
+                            outputFormat: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            mandatoryHistory: null | (number);
+                            mandatoryResource: null | (number);
+                            mandatoryStockUsage: null | (number);
+                            defineMethodOnReporting: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblWorkOrder?: null | {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        };
+                        otherTblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -37985,7 +41533,6 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    historyLayout?: null | (number);
                     createdBy?: null | (number);
                     issuedBy?: null | (number);
                     plannedBy?: null | (number);
@@ -38024,6 +41571,56 @@ export interface operations {
                     tblMaintLogs?: {
                         connect?: {
                             maintLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblComponentUnit?: {
+                        connect?: {
+                            compId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintCause?: {
+                        connect?: {
+                            maintCauseId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintClass?: {
+                        connect?: {
+                            maintClassId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintType?: {
+                        connect?: {
+                            maintTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblPendingType?: {
+                        connect?: {
+                            pendTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblRound?: {
+                        connect?: {
+                            roundId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblWorkOrder?: {
+                        connect?: {
+                            workOrderId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblWorkOrders?: {
+                        connect?: {
+                            id: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -38031,7 +41628,6 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    historyLayout?: null | (number);
                     createdBy?: null | (number);
                     issuedBy?: null | (number);
                     plannedBy?: null | (number);
@@ -38075,9 +41671,58 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblComponentUnit?: {
+                        connect?: {
+                            compId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintCause?: {
+                        connect?: {
+                            maintCauseId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintClass?: {
+                        connect?: {
+                            maintClassId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintType?: {
+                        connect?: {
+                            maintTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblPendingType?: {
+                        connect?: {
+                            pendTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblRound?: {
+                        connect?: {
+                            roundId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblWorkOrder?: {
+                        connect?: {
+                            workOrderId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblWorkOrders?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
-                    historyLayout?: null | (number);
                     createdBy?: null | (number);
                     issuedBy?: null | (number);
                     plannedBy?: null | (number);
@@ -38116,6 +41761,56 @@ export interface operations {
                     tblMaintLogs?: {
                         connect?: {
                             maintLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblComponentUnit?: {
+                        connect?: {
+                            compId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintCause?: {
+                        connect?: {
+                            maintCauseId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintClass?: {
+                        connect?: {
+                            maintClassId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintType?: {
+                        connect?: {
+                            maintTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblPendingType?: {
+                        connect?: {
+                            pendTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblRound?: {
+                        connect?: {
+                            roundId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblWorkOrder?: {
+                        connect?: {
+                            workOrderId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblWorkOrders?: {
+                        connect?: {
+                            id: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -38138,8 +41833,6 @@ export interface operations {
                         maintClassId: null | (number);
                         maintTypeId: null | (number);
                         maintCauseId: null | (number);
-                        layoutId: null | (number);
-                        historyLayout: null | (number);
                         createdBy: null | (number);
                         issuedBy: null | (number);
                         plannedBy: null | (number);
@@ -38226,6 +41919,239 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblComponentUnit?: null | {
+                            compId: number;
+                            compTypeId: null | (number);
+                            locationId: null | (number);
+                            parentCompId: null | (number);
+                            vendorId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            compNo: null | string;
+                            serialNo: null | string;
+                            depreciationTime: null | (number);
+                            warrantyEnd: null | (Record<string, never> | number);
+                            userDefCurr: null | string;
+                            userDefValue: null | (number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            misc1: null | string;
+                            misc2: null | string;
+                            unplannedLayout: null | (number);
+                            lastUsedLocationId: null | (number);
+                            statusId: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintCause?: null | {
+                            maintCauseId: number;
+                            descr: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintClass?: null | {
+                            maintClassId: number;
+                            descr: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintType?: null | {
+                            maintTypeId: number;
+                            descr: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblPendingType?: null | {
+                            pendTypeId: number;
+                            parentId: null | (number);
+                            groupId: null | (number);
+                            pendTypeName: string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            sortId: null | (number);
+                            description: null | string;
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblRound?: null | {
+                            roundId: number;
+                            maintCauseId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            rescheduleLimitId: null | (number);
+                            roundCode: null | string;
+                            roundTitle: null | string;
+                            historyLayout: null | (number);
+                            layoutId: null | (number);
+                            discId: null | (number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            planningMethod: null | (number);
+                            includeAllJobs: null | (number);
+                            reportingMethod: null | (number);
+                            lastDone: null | (Record<string, never> | number);
+                            nextDueDate: null | (Record<string, never> | number);
+                            description: null | string;
+                            priority: null | (number);
+                            window: null | (number);
+                            outputFormat: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            mandatoryHistory: null | (number);
+                            mandatoryResource: null | (number);
+                            mandatoryStockUsage: null | (number);
+                            defineMethodOnReporting: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblWorkOrder?: null | {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        };
+                        otherTblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
                         }[];
                     };
                 };
@@ -38258,8 +42184,6 @@ export interface operations {
                         maintClassId: null | (number);
                         maintTypeId: null | (number);
                         maintCauseId: null | (number);
-                        layoutId: null | (number);
-                        historyLayout: null | (number);
                         createdBy: null | (number);
                         issuedBy: null | (number);
                         plannedBy: null | (number);
@@ -38346,6 +42270,239 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblComponentUnit?: null | {
+                            compId: number;
+                            compTypeId: null | (number);
+                            locationId: null | (number);
+                            parentCompId: null | (number);
+                            vendorId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            compNo: null | string;
+                            serialNo: null | string;
+                            depreciationTime: null | (number);
+                            warrantyEnd: null | (Record<string, never> | number);
+                            userDefCurr: null | string;
+                            userDefValue: null | (number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            misc1: null | string;
+                            misc2: null | string;
+                            unplannedLayout: null | (number);
+                            lastUsedLocationId: null | (number);
+                            statusId: null | (number);
+                            layoutId: null | (number);
+                            notes: null | string;
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            isCritical: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintCause?: null | {
+                            maintCauseId: number;
+                            descr: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintClass?: null | {
+                            maintClassId: number;
+                            descr: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintType?: null | {
+                            maintTypeId: number;
+                            descr: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblPendingType?: null | {
+                            pendTypeId: number;
+                            parentId: null | (number);
+                            groupId: null | (number);
+                            pendTypeName: string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            sortId: null | (number);
+                            description: null | string;
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblRound?: null | {
+                            roundId: number;
+                            maintCauseId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintBudgetId: null | (number);
+                            stockBudgetId: null | (number);
+                            costCentreId: null | (number);
+                            rescheduleLimitId: null | (number);
+                            roundCode: null | string;
+                            roundTitle: null | string;
+                            historyLayout: null | (number);
+                            layoutId: null | (number);
+                            discId: null | (number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            planningMethod: null | (number);
+                            includeAllJobs: null | (number);
+                            reportingMethod: null | (number);
+                            lastDone: null | (Record<string, never> | number);
+                            nextDueDate: null | (Record<string, never> | number);
+                            description: null | string;
+                            priority: null | (number);
+                            window: null | (number);
+                            outputFormat: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            mandatoryHistory: null | (number);
+                            mandatoryResource: null | (number);
+                            mandatoryStockUsage: null | (number);
+                            defineMethodOnReporting: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblWorkOrder?: null | {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        };
+                        otherTblWorkOrders?: {
+                            workOrderId: number;
+                            applicationId: null | (number);
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            vendorId: null | (number);
+                            compId: null | (number);
+                            jobConditionId: null | (number);
+                            roundId: null | (number);
+                            procedureJobId: null | (number);
+                            procedureVersionId: null | (number);
+                            nonConfId: null | (number);
+                            accidentId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            costCentreId: null | (number);
+                            accountCodeId: null | (number);
+                            budgetCodeDefId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            dueDateLocked: null | (number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            userDefText1: null | string;
+                            userDefText2: null | string;
+                            userDefText3: null | string;
+                            userDefText4: null | string;
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workflowStatusId: null | (number);
+                            woStatus: null | (number);
+                            woOrigin: null | (number);
+                            cause: null | string;
+                            effect: null | string;
+                            actionTaken: null | string;
+                            plannedStart: null | (Record<string, never> | number);
+                            outputFormat: null | (number);
+                            woTriggeredBy: null | (number);
+                            userTableId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
                         }[];
                     };
                 };

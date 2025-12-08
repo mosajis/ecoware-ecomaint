@@ -1,7 +1,7 @@
 export function buildRelation(
   relationName: string,
   idField: string,
-  id: number | null
+  id: number | null | undefined
 ) {
   if (id == null) {
     return {};

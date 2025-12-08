@@ -132,13 +132,13 @@ function ComponentTypeFormDialog({
         const makerRel = buildRelation(
           "tblAddress",
           "addressId",
-          parsed.data.maker?.addressId ?? null
+          parsed.data.maker?.addressId
         );
 
         const parentRel = buildRelation(
           "tblCompType",
           "compTypeId",
-          parsed.data.tblCompType?.compTypeId ?? null
+          parsed.data.tblCompType?.compTypeId
         );
 
         const payload = {

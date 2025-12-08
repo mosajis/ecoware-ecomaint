@@ -107,7 +107,7 @@ export function AsyncSelectDialog<TItem extends Record<string, any>>({
         <Button
           type="submit"
           variant="contained"
-          color="primary"
+          color="secondary"
           sx={{ flex: 1 }}
           onClick={handleOk}
         >

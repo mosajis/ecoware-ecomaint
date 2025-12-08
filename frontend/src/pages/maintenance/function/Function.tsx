@@ -13,9 +13,18 @@ export default function PageFunction() {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
 
+  const getAll = useCallback(
+    () =>
+      tblFunctions.getAll({
+        include: {
+          tblComponentUnit: true,
+        },
+      }),
+    []
+  );
   // === useDataGrid ===
   const { rows, loading, handleRefresh, handleDelete, handleFormSuccess } =
-    useDataGrid(tblFunctions.getAll, tblFunctions.deleteById, "functionId");
+    useDataGrid(getAll, tblFunctions.deleteById, "functionId");
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
@@ -34,8 +43,14 @@ export default function PageFunction() {
   const columns = useMemo<GridColDef<TypeTblFunctions>[]>(
     () => [
       { field: "funcNo", headerName: "Function No", flex: 1 },
-      { field: "Component", headerName: "Component", flex: 1 },
-      { field: "funcDescr", headerName: "funcDescr", flex: 1 },
+      { field: "funcDescr", headerName: "Function Descr", flex: 1 },
+      { field: "funcRef", headerName: "Function Ref", flex: 1 },
+      {
+        field: "component",
+        headerName: "Component",
+        flex: 1,
+        valueGetter: (_, row) => row.tblComponentUnit?.compNo,
+      },
       dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
     ],
     [handleEdit, handleDelete]
@@ -61,10 +76,7 @@ export default function PageFunction() {
         mode={mode}
         recordId={selectedRowId}
         onClose={() => setOpenForm(false)}
-        onSuccess={(record) => {
-          handleFormSuccess(record);
-          setOpenForm(false);
-        }}
+        onSuccess={(record) => handleRefresh()}
       />
     </>
   );
