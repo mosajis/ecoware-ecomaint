@@ -44,3 +44,4 @@
 
 build/**
 backend/public/**
+frontend/dist-stats.html
