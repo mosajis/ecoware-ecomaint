@@ -10,7 +10,6 @@ import { useDataGrid } from "@/shared/hooks/useDataGrid";
 export default function PageCounterType() {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
-  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   const [selected, setSelected] = useState<TypeTblCounterType | null>(null);
 
   const {
@@ -27,13 +26,13 @@ export default function PageCounterType() {
 
   // Handlers
   const handleCreate = useCallback(() => {
-    setSelectedRowId(null);
+    setSelected(null);
     setMode("create");
     setOpenForm(true);
   }, []);
 
   const handleEdit = useCallback((row: TypeTblCounterType) => {
-    setSelectedRowId(row.counterTypeId);
+    setSelected(row);
     setMode("update");
     setOpenForm(true);
   }, []);
@@ -72,7 +71,7 @@ export default function PageCounterType() {
       <CounterTypeFormDialog
         open={openForm}
         mode={mode}
-        recordId={selectedRowId}
+        recordId={selected?.counterTypeId}
         onClose={() => setOpenForm(false)}
         onSuccess={(record) => {
           counterTypeFormSuccess(record);

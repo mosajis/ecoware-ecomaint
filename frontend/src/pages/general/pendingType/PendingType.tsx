@@ -1,6 +1,6 @@
-import { useState, useCallback, useMemo } from "react";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import PendingTypeFormDialog from "./PendingTypeFormDialog";
+import { useState, useCallback, useMemo } from "react";
 import { tblPendingType, TypeTblPendingType } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";

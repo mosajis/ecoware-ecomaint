@@ -8,7 +8,7 @@ import {
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 interface TabComponentUnitProps {
-  compUnitId?: number | null;
+  jobDescriptionId?: number | null;
   label?: string | null;
 }
 
@@ -106,24 +106,24 @@ const columns: GridColDef<TypeTblComponentUnit>[] = [
 ];
 
 export default function TabComponentUnit(props: TabComponentUnitProps) {
-  const { compUnitId, label } = props;
+  const { jobDescriptionId, label } = props;
 
   const getAll = useCallback(() => {
     return tblComponentUnit.getAll({
-      filter: compUnitId ? { compUnitId } : undefined,
+      // filter: compUnitId ? { compUnitId } : undefined,
       include: {
         tblComponentUnit: true,
         tblLocation: true,
         tblDiscipline: true,
       },
     });
-  }, [compUnitId]);
+  }, [jobDescriptionId]);
 
   const { rows, loading, fetchData } = useDataGrid(
     getAll,
     tblComponentUnit.deleteById,
     "compId",
-    !!compUnitId
+    !!jobDescriptionId
   );
 
   return (

@@ -6,17 +6,17 @@ import { GridColDef } from "@mui/x-data-grid";
 import { useCallback, useMemo, useState } from "react";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { JobDescriptionTabs } from "./JobDescriptionTabs";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
   tblJobDescription,
   TypeTblJobDescription,
 } from "@/core/api/generated/api";
-import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 export default function PageJobDescription() {
   const [html, setHtml] = useState("");
-  const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
+  const [selected, setSelected] = useState<TypeTblJobDescription | null>(null);
 
   // === DataGrid ===
   const getAll = useCallback(() => {
@@ -33,14 +33,14 @@ export default function PageJobDescription() {
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
-    setSelectedRowId(null);
+    setSelected(null);
     setMode("create");
     setHtml("");
     setOpenForm(true);
   }, []);
 
   const handleEdit = useCallback((row: TypeTblJobDescription) => {
-    setSelectedRowId(row.jobDescId);
+    setSelected(row);
     setMode("update");
     setOpenForm(true);
   }, []);
@@ -49,6 +49,7 @@ export default function PageJobDescription() {
   const columns: GridColDef<TypeTblJobDescription>[] = useMemo(
     () => [
       { field: "jobDescCode", headerName: "Code", width: 120 },
+      { field: "jobDescTitle", headerName: "JobTitle", flex: 2 },
       {
         field: "jobClass",
         headerName: "JobClass",
@@ -63,9 +64,9 @@ export default function PageJobDescription() {
 
   // === SAVE DESCRIPTION ===
   const handleSaveDescription = async (newValue: string) => {
-    if (!selectedRowId) return;
+    if (!selected) return;
 
-    await tblJobDescription.update(selectedRowId, {
+    await tblJobDescription.update(selected.jobDescId, {
       jobDesc: newValue,
     });
 
@@ -73,7 +74,7 @@ export default function PageJobDescription() {
   };
 
   const handleRowClick = (params: any) => {
-    setSelectedRowId(params.row.jobDescId);
+    setSelected(params.row);
     setHtml(params.row.jobDesc || "");
   };
 
@@ -106,19 +107,22 @@ export default function PageJobDescription() {
           />
 
           <AppEditor
-            key={selectedRowId}
+            key={selected?.jobDescId}
             initValue={html}
             onSave={handleSaveDescription}
           />
         </Splitter>
 
-        <JobDescriptionTabs />
+        <JobDescriptionTabs
+          label={selected?.jobDescTitle}
+          jobDescriptionId={selected?.jobDescId}
+        />
       </Splitter>
 
       <JobDescriptionFormDialog
         open={openForm}
         mode={mode}
-        recordId={selectedRowId}
+        recordId={selected?.jobDescId}
         onClose={() => setOpenForm(false)}
         onSuccess={() => {
           handleRefresh();

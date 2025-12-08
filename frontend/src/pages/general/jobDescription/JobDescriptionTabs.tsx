@@ -24,6 +24,18 @@ const JobDescTabs: ReusableTabItem[] = [
   { label: "Revision", icon: <AddBox />, component: TabRevision },
 ];
 
-export function JobDescriptionTabs() {
-  return <TabsContainer tabs={JobDescTabs} queryParamKey="tab" />;
+type Props = {
+  jobDescriptionId?: number | undefined | null;
+  label?: string | null;
+};
+
+export function JobDescriptionTabs(props: Props) {
+  const { jobDescriptionId, label } = props;
+  return (
+    <TabsContainer
+      tabs={JobDescTabs}
+      queryParamKey="tab"
+      tabProps={{ jobDescriptionId, label }}
+    />
+  );
 }
