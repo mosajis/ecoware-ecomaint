@@ -19,52 +19,19 @@ import StackedLineChart from "@mui/icons-material/StackedLineChart";
 import Tune from "@mui/icons-material/Tune";
 
 // Lazy imports
-const TabDetails = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabDetails")
-);
-const TabJob = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabJob")
-);
-const TabCounter = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabCounter")
-);
-const TabWorkOrder = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabWorkOrder")
-);
-const TabMaintLog = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabMaintLog")
-);
-const TabAttachment = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabAttachment")
-);
-const TabJobAttachment = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
-);
-const TabFailureReport = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabFailureReport")
-);
-const TabPerformed = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabPerformed")
-);
-const TabPart = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabPart")
-);
-const TabMeasures = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabMeasures")
-);
-const TabOilInfo = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabOilInfo")
-);
-const TabStockUsed = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabStockUsed")
-);
-
-const TabWorkshop = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabWorkshop")
-);
-const TabMaterialRequests = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabMaterialRequests")
-);
+const TabDetails = lazy(() => import("./tabs/TabDetails"));
+const TabJob = lazy(() => import("./tabs/TabJob"));
+const TabCounter = lazy(() => import("./tabs/TabCounter"));
+const TabWorkOrder = lazy(() => import("./tabs/TabWorkOrder"));
+const TabMaintLog = lazy(() => import("./tabs/TabMaintLog"));
+const TabAttachment = lazy(() => import("./tabs/TabAttachment"));
+const TabJobAttachment = lazy(() => import("./tabs/TabJobAttachment"));
+const TabFailureReport = lazy(() => import("./tabs/TabFailureReport"));
+const TabPerformed = lazy(() => import("./tabs/TabPerformed"));
+const TabPart = lazy(() => import("./tabs/TabPart"));
+const TabMeasures = lazy(() => import("./tabs/TabMeasures"));
+const TabOilInfo = lazy(() => import("./tabs/TabOilInfo"));
+const TabStockUsed = lazy(() => import("./tabs/TabStockUsed"));
 
 // Define tabs
 const tabs: ReusableTabItem[] = [
@@ -81,12 +48,6 @@ const tabs: ReusableTabItem[] = [
   { label: "Measures", icon: <Tune />, component: TabMeasures },
   { label: "Oil Info", icon: <ColorLens />, component: TabOilInfo },
   { label: "Stock Used", icon: <StackedLineChart />, component: TabStockUsed },
-  { label: "Workshop", icon: <DirectionsCar />, component: TabWorkshop },
-  {
-    label: "Material Requests",
-    icon: <Inbox />,
-    component: TabMaterialRequests,
-  },
 ];
 
 const ComponentUnitTabs = () => {

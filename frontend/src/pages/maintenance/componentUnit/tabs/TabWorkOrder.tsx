@@ -5,16 +5,16 @@ import { GridColDef } from "@mui/x-data-grid";
 import { tblWorkOrder, TypeTblWorkOrder } from "@/core/api/generated/api";
 
 interface TabWorkOrderProps {
-  functionId?: number | null;
+  compUnitId?: number | null;
   label?: string | null;
 }
 
-const TabWorkOrder = ({ functionId, label }: TabWorkOrderProps) => {
+const TabWorkOrder = ({ compUnitId, label }: TabWorkOrderProps) => {
   const { rows, loading, handleRefresh } = useDataGrid(
     tblWorkOrder.getAll,
     tblWorkOrder.deleteAll,
     "workOrderId",
-    !!functionId
+    !!compUnitId
   );
 
   const columns = useMemo<GridColDef<TypeTblWorkOrder>[]>(
@@ -93,6 +93,37 @@ const TabWorkOrder = ({ functionId, label }: TabWorkOrderProps) => {
       {
         field: "pendingDate",
         headerName: "Pendying Date",
+        width: 150,
+        // valueGetter: (row) => row.pendingDate ?? "",
+      },
+
+      {
+        field: "trigger",
+        headerName: "Pendying Date",
+        width: 150,
+        // valueGetter: (row) => row.pendingDate ?? "",
+      },
+      {
+        field: "priority",
+        headerName: "Priority",
+        width: 150,
+        // valueGetter: (row) => row.pendingDate ?? "",
+      },
+      {
+        field: "triggeredBY",
+        headerName: "TriggeredBY",
+        width: 150,
+        // valueGetter: (row) => row.pendingDate ?? "",
+      },
+      {
+        field: "compStatus",
+        headerName: "compStatus",
+        width: 150,
+        // valueGetter: (row) => row.pendingDate ?? "",
+      },
+      {
+        field: "penddingBy",
+        headerName: "penddingBy",
         width: 150,
         // valueGetter: (row) => row.pendingDate ?? "",
       },

@@ -30,6 +30,14 @@ const PageJobClass = lazy(() => import("@/pages/general/jobClass/JobClass"));
 const PageJobDescription = lazy(
   () => import("@/pages/general/jobDescription/JobDescription")
 );
+
+const PageComponentUnitList = lazy(
+  () => import("@/pages/maintenance/componentUnit/ComponentUnit")
+);
+const PageComponentUnitTree = lazy(
+  () => import("@/pages/maintenance/componentUnit/ComponentUnitTree")
+);
+
 const PageComponentTypeList = lazy(
   () => import("@/pages/maintenance/componentType/ComponentType")
 );
@@ -205,8 +213,18 @@ export const maintFunctionTreeRoute = createRoute({
 export const maintComponentUnitRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/maintenance/component-unit",
-  component: () => "Component Unit Page",
   beforeLoad: () => ({ breadcrumb: "Component Unit" }),
+});
+
+export const maintComponentUnitListRoute = createRoute({
+  getParentRoute: () => maintComponentUnitRoute,
+  component: () => <LazyComponent Component={PageComponentUnitList} />,
+  path: "/",
+});
+export const maintComponentUnitTreeRoute = createRoute({
+  getParentRoute: () => maintComponentUnitRoute,
+  component: () => <LazyComponent Component={PageComponentUnitTree} />,
+  path: "/tree-view",
 });
 
 export const maintComponentTypeRoute = createRoute({
@@ -268,7 +286,10 @@ export const routeTree = rootRoute.addChildren([
       maintFunctionListRoute,
       maintFunctionTreeRoute,
     ]),
-    maintComponentUnitRoute,
+    maintComponentUnitRoute.addChildren([
+      maintComponentUnitListRoute,
+      maintComponentUnitTreeRoute,
+    ]),
     maintComponentTypeRoute.addChildren([
       maintComponentTypeTreeRoute,
       maintComponentTypeListRoute,
