@@ -1,8 +1,7 @@
-import { useMemo, useState, useCallback } from "react";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import { useMemo, useCallback } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
-import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import {
   tblJobDescription,
   TypeTblJobDescription,

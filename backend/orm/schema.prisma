@@ -1020,13 +1020,10 @@ model TblMaintLog {
   maintTypeId                     Int?               @map("MaintTypeID")
   maintClassId                    Int?               @map("MaintClassID")
   functionId                      Int?               @map("FunctionID")
-  budgetCodeId                    Int?               @map("BudgetCodeID")
   jobDescId                       Int?               @map("JobDescID")
   workOrderId                     Int?               @map("WorkOrderID")
   compId                          Int?               @map("CompID")
   roundId                         Int?               @map("RoundID")
-  procedureVersionId              Int?               @map("ProcedureVersionID")
-  jobVersionId                    Int?               @map("JobVersionID")
   totalDuration                   Int?               @map("TotalDuration")
   downTime                        Int?               @map("DownTime")
   dateDone                        DateTime?          @map("DateDone") @db.DateTime
@@ -1036,7 +1033,6 @@ model TblMaintLog {
   overdueReason                   String?            @map("OverdueReason") @db.NVarChar(300)
   unexpected                      Int?               @map("Unexpected")
   cbmStatus                       Int?               @map("CBMStatus")
-  usage                           Int?               @map("Usage")
   loggedBy                        Int?               @map("LoggedBy")
   deptId                          Int?               @map("DeptID")
   exportMarker                    Int?               @map("ExportMarker")
@@ -1389,58 +1385,58 @@ model TblUnit {
 }
 
 model TblWorkOrder {
-  workOrderId                       Int               @id(map: "PK_tblWorkOrder") @default(dbgenerated("NEXT VALUE FOR [Seq_WorkOrder]"), map: "DF_WorkOrderID") @map("WorkOrderID")
-  applicationId                     Int?              @map("ApplicationID")
-  compJobId                         Int?              @map("CompJobID")
-  maintClassId                      Int?              @map("MaintClassID")
-  maintTypeId                       Int?              @map("MaintTypeID")
-  maintCauseId                      Int?              @map("MaintCauseID")
-  createdBy                         Int?              @map("CreatedBy")
-  issuedBy                          Int?              @map("IssuedBy")
-  plannedBy                         Int?              @map("PlannedBy")
-  issuedDate                        DateTime?         @map("IssuedDate") @db.DateTime
-  respDiscId                        Int?              @map("RespDiscID")
-  compId                            Int?              @map("CompID")
-  roundId                           Int?              @map("RoundID")
-  parentWorkOrderId                 Int?              @map("ParentWorkOrderID")
-  woNo                              String?           @map("WONo") @db.NVarChar(20)
-  title                             String?           @map("Title")
-  priority                          Int?              @map("Priority")
-  estTotalDuration                  Int?              @map("EstTotalDuration")
-  dueDate                           DateTime?         @map("DueDate") @db.DateTime
-  window                            Int?              @map("Window")
-  created                           DateTime?         @map("Created") @db.DateTime
-  started                           DateTime?         @map("Started") @db.DateTime
-  completed                         DateTime?         @map("Completed") @db.DateTime
-  description                       String?           @map("Description") @db.NVarChar(300)
-  filed                             Int?              @map("Filed")
-  unexpected                        Int?              @map("Unexpected")
-  woStatus                          Int?              @map("WOStatus")
-  deptId                            Int?              @map("DeptID")
-  exportMarker                      Int?              @map("ExportMarker")
-  lastupdate                        DateTime?         @db.DateTime
-  reportingMethod                   Int?              @map("ReportingMethod")
-  pendingBy                         Int?              @map("PendingBy")
-  pendTypeId                        Int?              @map("PendTypeId")
-  pendingdate                       DateTime?         @map("Pendingdate") @db.Date
-  orderId                           Int?              @map("OrderID")
-  userId                            Int?              @map("UserID")
-  userComment                       String?           @map("UserComment") @db.NVarChar(300)
+  workOrderId                       Int                 @id(map: "PK_tblWorkOrder") @default(dbgenerated("NEXT VALUE FOR [Seq_WorkOrder]"), map: "DF_WorkOrderID") @map("WorkOrderID")
+  compJobId                         Int?                @map("CompJobID")
+  maintClassId                      Int?                @map("MaintClassID")
+  maintTypeId                       Int?                @map("MaintTypeID")
+  maintCauseId                      Int?                @map("MaintCauseID")
+  createdBy                         Int?                @map("CreatedBy")
+  issuedBy                          Int?                @map("IssuedBy")
+  plannedBy                         Int?                @map("PlannedBy")
+  issuedDate                        DateTime?           @map("IssuedDate") @db.DateTime
+  respDiscId                        Int?                @map("RespDiscID")
+  compId                            Int?                @map("CompID")
+  roundId                           Int?                @map("RoundID")
+  parentWorkOrderId                 Int?                @map("ParentWorkOrderID")
+  woNo                              String?             @map("WONo") @db.NVarChar(20)
+  title                             String?             @map("Title")
+  priority                          Int?                @map("Priority")
+  estTotalDuration                  Int?                @map("EstTotalDuration")
+  dueDate                           DateTime?           @map("DueDate") @db.DateTime
+  window                            Int?                @map("Window")
+  created                           DateTime?           @map("Created") @db.DateTime
+  started                           DateTime?           @map("Started") @db.DateTime
+  completed                         DateTime?           @map("Completed") @db.DateTime
+  description                       String?             @map("Description") @db.NVarChar(300)
+  filed                             Int?                @map("Filed")
+  unexpected                        Int?                @map("Unexpected")
+  workOrderStatusId                 Int?                @map("WorkOrderStatusId")
+  deptId                            Int?                @map("DeptID")
+  exportMarker                      Int?                @map("ExportMarker")
+  lastupdate                        DateTime?           @db.DateTime
+  reportingMethod                   Int?                @map("ReportingMethod")
+  pendingBy                         Int?                @map("PendingBy")
+  pendTypeId                        Int?                @map("PendTypeId")
+  pendingdate                       DateTime?           @map("Pendingdate") @db.Date
+  orderId                           Int?                @map("OrderID")
+  userId                            Int?                @map("UserID")
+  userComment                       String?             @map("UserComment") @db.NVarChar(300)
   tblMaintLogs                      TblMaintLog[]
-  tblCompJob                        TblCompJob?       @relation(fields: [compJobId], references: [compJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblCompJob")
-  tblComponentUnit                  TblComponentUnit? @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblComponentUnit")
-  tblDiscipline                     TblDiscipline?    @relation(fields: [respDiscId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblDiscipline")
-  tblMaintCause                     TblMaintCause?    @relation(fields: [maintCauseId], references: [maintCauseId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblMaintCause")
-  tblMaintClass                     TblMaintClass?    @relation(fields: [maintClassId], references: [maintClassId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblMaintClass")
-  tblMaintType                      TblMaintType?     @relation(fields: [maintTypeId], references: [maintTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblMaintType")
-  tblPendingType                    TblPendingType?   @relation(fields: [pendTypeId], references: [pendTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblPendingType")
-  tblRound                          TblRound?         @relation(fields: [roundId], references: [roundId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblRound")
-  tblWorkOrder                      TblWorkOrder?     @relation("tblWorkOrderTotblWorkOrder", fields: [parentWorkOrderId], references: [workOrderId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblWorkOrder")
-  otherTblWorkOrders                TblWorkOrder[]    @relation("tblWorkOrderTotblWorkOrder")
-  usersTblWorkOrderIssuedByToUsers  Users?            @relation("tblWorkOrder_IssuedByToUsers", fields: [issuedBy], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_Users")
-  usersTblWorkOrderPlannedByToUsers Users?            @relation("tblWorkOrder_PlannedByToUsers", fields: [plannedBy], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_Users1")
-  usersTblWorkOrderCreatedByToUsers Users?            @relation("tblWorkOrder_CreatedByToUsers", fields: [createdBy], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_Users2")
-  usersTblWorkOrderPendingByToUsers Users?            @relation("tblWorkOrder_PendingByToUsers", fields: [pendingBy], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_Users3")
+  tblCompJob                        TblCompJob?         @relation(fields: [compJobId], references: [compJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblCompJob")
+  tblComponentUnit                  TblComponentUnit?   @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblComponentUnit")
+  tblDiscipline                     TblDiscipline?      @relation(fields: [respDiscId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblDiscipline")
+  tblMaintCause                     TblMaintCause?      @relation(fields: [maintCauseId], references: [maintCauseId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblMaintCause")
+  tblMaintClass                     TblMaintClass?      @relation(fields: [maintClassId], references: [maintClassId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblMaintClass")
+  tblMaintType                      TblMaintType?       @relation(fields: [maintTypeId], references: [maintTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblMaintType")
+  tblPendingType                    TblPendingType?     @relation(fields: [pendTypeId], references: [pendTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblPendingType")
+  tblRound                          TblRound?           @relation(fields: [roundId], references: [roundId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblRound")
+  tblWorkOrder                      TblWorkOrder?       @relation("tblWorkOrderTotblWorkOrder", fields: [parentWorkOrderId], references: [workOrderId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblWorkOrder")
+  otherTblWorkOrders                TblWorkOrder[]      @relation("tblWorkOrderTotblWorkOrder")
+  tblWorkOrderStatus                TblWorkOrderStatus? @relation(fields: [workOrderStatusId], references: [workOrderStatusId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblWorkOrderStatus")
+  usersTblWorkOrderIssuedByToUsers  Users?              @relation("tblWorkOrder_IssuedByToUsers", fields: [issuedBy], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_Users")
+  usersTblWorkOrderPlannedByToUsers Users?              @relation("tblWorkOrder_PlannedByToUsers", fields: [plannedBy], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_Users1")
+  usersTblWorkOrderCreatedByToUsers Users?              @relation("tblWorkOrder_CreatedByToUsers", fields: [createdBy], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_Users2")
+  usersTblWorkOrderPendingByToUsers Users?              @relation("tblWorkOrder_PendingByToUsers", fields: [pendingBy], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_Users3")
 
   @@index([compId], map: "MI_tblworkorder_CompID")
   @@index([compJobId], map: "MI_tblworkorder_CompJobID")
@@ -1457,14 +1453,23 @@ model TblWorkOrder {
   @@index([title], map: "MI_tblworkorder_Title")
   @@index([woNo], map: "MI_tblworkorder_WONo")
   @@index([workOrderId], map: "MI_tblworkorder_WorkOrderID")
-  @@index([woStatus], map: "MI_tblworkorder_WOStatus")
+  @@index([workOrderStatusId], map: "MI_tblworkorder_WOStatus")
   @@index([deptId], map: "WO_DeptId_Ix")
   @@index([maintCauseId], map: "WO_MaintCauseId_ix")
   @@index([maintClassId], map: "WO_MaintClassId_ix")
   @@index([maintTypeId], map: "WO_MaintTypeId_ix")
-  @@index([workOrderId, woStatus], map: "WO_WoIdWostatusId_ix")
-  @@index([workOrderId, respDiscId, woStatus], map: "WO_WoIdWoStatusIdDiscId")
+  @@index([workOrderId, workOrderStatusId], map: "WO_WoIdWostatusId_ix")
+  @@index([workOrderId, respDiscId, workOrderStatusId], map: "WO_WoIdWoStatusIdDiscId")
   @@map("tblWorkOrder")
+  @@schema("dbo")
+}
+
+model TblWorkOrderStatus {
+  workOrderStatusId Int            @id(map: "PK_tblWorkOrderStatus") @map("WorkOrderStatusId")
+  name              String         @db.NVarChar(50)
+  tblWorkOrders     TblWorkOrder[]
+
+  @@map("tblWorkOrderStatus")
   @@schema("dbo")
 }
 

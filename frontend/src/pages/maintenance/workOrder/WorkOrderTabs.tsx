@@ -20,14 +20,14 @@ const TabRescheduleLog = lazy(() => import("./tabs/TabRescheduleLog"));
 
 const tabs = [
   {
-    label: "Pending Details",
-    icon: <HourglassEmptyIcon />,
-    component: TabPendingDetails,
-  },
-  {
     label: "Job Description",
     icon: <DescriptionIcon />,
     component: TabJobDescription,
+  },
+  {
+    label: "Pending Details",
+    icon: <HourglassEmptyIcon />,
+    component: TabPendingDetails,
   },
 
   {

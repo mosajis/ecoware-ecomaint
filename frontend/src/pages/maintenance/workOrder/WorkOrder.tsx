@@ -21,43 +21,44 @@ const columns: GridColDef<TypeTblWorkOrder>[] = [
   {
     field: "jobCode",
     headerName: "Job Code",
-    flex: 1,
+    width: 90,
     // @ts-ignore
     valueGetter: (_, row) => row?.tblCompJob?.tblJobDescription?.jobDescCode,
   },
   {
     field: "component",
     headerName: "Component",
-    flex: 1,
+    flex: 2,
     valueGetter: (_, row) => row.tblComponentUnit?.compNo,
   },
   {
     field: "location",
     headerName: "Location",
-    flex: 1,
+    width: 150,
     // @ts-ignore
     valueGetter: (_, row) => row?.tblComponentUnit?.tblLocation?.name,
   },
   {
     field: "jobDescTitle",
     headerName: "JobDescTitle",
-    flex: 1,
+    flex: 2,
     // @ts-ignore
     valueGetter: (_, row) => row?.tblCompJob?.tblJobDescription?.jobDescTitle,
   },
   {
     field: "disipline",
     headerName: "Disipline",
-    flex: 1,
+    width: 100,
     valueGetter: (_, row) => row?.tblDiscipline?.name,
   },
   {
     field: "status",
-    headerName: "Status (W-Rel)",
-    flex: 1,
+    headerName: "Status",
+    width: 90,
+    valueGetter: (_, row) => row?.tblWorkOrderStatus?.name,
   },
   { field: "dueDate", headerName: "Due Date", flex: 1 },
-  { field: "completedDate", headerName: "Completed Date", flex: 1 },
+  { field: "completed", headerName: "Completed Date", flex: 1 },
   { field: "overDue (w-Rel)", headerName: "OverDue", flex: 1 },
   {
     field: "pendingType",
@@ -73,13 +74,13 @@ const columns: GridColDef<TypeTblWorkOrder>[] = [
   },
   {
     field: "componentStatus",
-    headerName: "Component Status",
+    headerName: "Comp Status",
     flex: 1,
     valueGetter: (_, row) =>
       // @ts-ignore
       row?.tblComponentUnit?.tblCompStatus?.compStatusName,
   },
-  { field: "priority", headerName: "Priority", flex: 1 },
+  { field: "priority", headerName: "Priority", width: 70 },
 ];
 
 export default function WorkOrderPage() {
@@ -101,6 +102,7 @@ export default function WorkOrderPage() {
           },
           tblPendingType: true,
           tblDiscipline: true,
+          tblWorkOrderStatus: true,
         },
       }),
     []
@@ -131,13 +133,11 @@ export default function WorkOrderPage() {
               { label: "Issue", icon: <AssignmentTurnedInIcon /> },
               { label: "Complete", icon: <CheckCircleIcon /> },
               { label: "Pending", icon: <HourglassEmptyIcon /> },
-              { label: "Control", icon: <TuneIcon /> },
-              { label: "Cancel", icon: <CancelIcon /> },
-              { label: "Request", icon: <RequestPageIcon /> },
-              { label: "Forward", icon: <ArrowForwardIcon /> },
-              { label: "Reschedule", icon: <EventRepeatIcon /> },
-              { label: "HandOver", icon: <HandshakeIcon /> },
               { label: "Postponed", icon: <ScheduleIcon /> },
+              { label: "Report", icon: <ScheduleIcon /> },
+              // { label: "Cancel", icon: <ScheduleIcon /> }, // m
+              // { label: "Request", icon: <RequestPageIcon /> }, // m
+              // { label: "Reschedule", icon: <EventRepeatIcon /> }, // m
             ]}
           />
         }

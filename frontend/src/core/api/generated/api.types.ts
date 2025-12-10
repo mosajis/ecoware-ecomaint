@@ -5976,7 +5976,6 @@ export interface operations {
                             }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -6001,7 +6000,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -6449,7 +6448,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -6474,7 +6472,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -6717,7 +6715,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -6742,7 +6739,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -7235,7 +7232,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -7260,7 +7256,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -7473,7 +7469,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -7498,7 +7493,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -17218,13 +17213,10 @@ export interface operations {
                                 maintTypeId: null | (number);
                                 maintClassId: null | (number);
                                 functionId: null | (number);
-                                budgetCodeId: null | (number);
                                 jobDescId: null | (number);
                                 workOrderId: null | (number);
                                 compId: null | (number);
                                 roundId: null | (number);
-                                procedureVersionId: null | (number);
-                                jobVersionId: null | (number);
                                 totalDuration: null | (number);
                                 downTime: null | (number);
                                 dateDone: null | (Record<string, never> | number);
@@ -17234,7 +17226,6 @@ export interface operations {
                                 overdueReason: null | string;
                                 unexpected: null | (number);
                                 cbmStatus: null | (number);
-                                usage: null | (number);
                                 loggedBy: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
@@ -17247,7 +17238,6 @@ export interface operations {
                             }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -17272,7 +17262,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -17697,13 +17687,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -17713,7 +17700,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -17726,7 +17712,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -17751,7 +17736,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -18010,13 +17995,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -18026,7 +18008,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -18039,7 +18020,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -18064,7 +18044,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -18543,13 +18523,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -18559,7 +18536,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -18572,7 +18548,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -18597,7 +18572,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -18826,13 +18801,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -18842,7 +18814,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -18855,7 +18826,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -18880,7 +18850,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -20223,7 +20193,6 @@ export interface operations {
                             }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -20248,7 +20217,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -20524,7 +20493,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -20549,7 +20517,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -20770,7 +20738,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -20795,7 +20762,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -21104,7 +21071,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -21129,7 +21095,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -21320,7 +21286,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -21345,7 +21310,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -22879,13 +22844,10 @@ export interface operations {
                                 maintTypeId: null | (number);
                                 maintClassId: null | (number);
                                 functionId: null | (number);
-                                budgetCodeId: null | (number);
                                 jobDescId: null | (number);
                                 workOrderId: null | (number);
                                 compId: null | (number);
                                 roundId: null | (number);
-                                procedureVersionId: null | (number);
-                                jobVersionId: null | (number);
                                 totalDuration: null | (number);
                                 downTime: null | (number);
                                 dateDone: null | (Record<string, never> | number);
@@ -22895,7 +22857,6 @@ export interface operations {
                                 overdueReason: null | string;
                                 unexpected: null | (number);
                                 cbmStatus: null | (number);
-                                usage: null | (number);
                                 loggedBy: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
@@ -22991,13 +22952,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -23007,7 +22965,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -23090,13 +23047,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -23106,7 +23060,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -23208,13 +23161,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -23224,7 +23174,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -23277,13 +23226,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -23293,7 +23239,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -23498,13 +23443,10 @@ export interface operations {
                                 maintTypeId: null | (number);
                                 maintClassId: null | (number);
                                 functionId: null | (number);
-                                budgetCodeId: null | (number);
                                 jobDescId: null | (number);
                                 workOrderId: null | (number);
                                 compId: null | (number);
                                 roundId: null | (number);
-                                procedureVersionId: null | (number);
-                                jobVersionId: null | (number);
                                 totalDuration: null | (number);
                                 downTime: null | (number);
                                 dateDone: null | (Record<string, never> | number);
@@ -23514,7 +23456,6 @@ export interface operations {
                                 overdueReason: null | string;
                                 unexpected: null | (number);
                                 cbmStatus: null | (number);
-                                usage: null | (number);
                                 loggedBy: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
@@ -23805,13 +23746,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -23821,7 +23759,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -24021,13 +23958,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -24037,7 +23971,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -24352,13 +24285,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -24368,7 +24298,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -24538,13 +24467,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -24554,7 +24480,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -25189,13 +25114,10 @@ export interface operations {
                                 maintTypeId: null | (number);
                                 maintClassId: null | (number);
                                 functionId: null | (number);
-                                budgetCodeId: null | (number);
                                 jobDescId: null | (number);
                                 workOrderId: null | (number);
                                 compId: null | (number);
                                 roundId: null | (number);
-                                procedureVersionId: null | (number);
-                                jobVersionId: null | (number);
                                 totalDuration: null | (number);
                                 downTime: null | (number);
                                 dateDone: null | (Record<string, never> | number);
@@ -25205,7 +25127,6 @@ export interface operations {
                                 overdueReason: null | string;
                                 unexpected: null | (number);
                                 cbmStatus: null | (number);
-                                usage: null | (number);
                                 loggedBy: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
@@ -25466,13 +25387,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -25482,7 +25400,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -25667,13 +25584,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -25683,7 +25597,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -25971,13 +25884,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -25987,7 +25897,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -26142,13 +26051,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -26158,7 +26064,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -29192,13 +29097,10 @@ export interface operations {
                                 maintTypeId: null | (number);
                                 maintClassId: null | (number);
                                 functionId: null | (number);
-                                budgetCodeId: null | (number);
                                 jobDescId: null | (number);
                                 workOrderId: null | (number);
                                 compId: null | (number);
                                 roundId: null | (number);
-                                procedureVersionId: null | (number);
-                                jobVersionId: null | (number);
                                 totalDuration: null | (number);
                                 downTime: null | (number);
                                 dateDone: null | (Record<string, never> | number);
@@ -29208,7 +29110,6 @@ export interface operations {
                                 overdueReason: null | string;
                                 unexpected: null | (number);
                                 cbmStatus: null | (number);
-                                usage: null | (number);
                                 loggedBy: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
@@ -29221,7 +29122,6 @@ export interface operations {
                             }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -29246,7 +29146,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -29453,13 +29353,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -29469,7 +29366,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -29482,7 +29378,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -29507,7 +29402,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -29665,13 +29560,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -29681,7 +29573,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -29694,7 +29585,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -29719,7 +29609,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -29959,13 +29849,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -29975,7 +29862,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -29988,7 +29874,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -30013,7 +29898,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -30141,13 +30026,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -30157,7 +30039,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -30170,7 +30051,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -30195,7 +30075,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -30358,13 +30238,10 @@ export interface operations {
                                 maintTypeId: null | (number);
                                 maintClassId: null | (number);
                                 functionId: null | (number);
-                                budgetCodeId: null | (number);
                                 jobDescId: null | (number);
                                 workOrderId: null | (number);
                                 compId: null | (number);
                                 roundId: null | (number);
-                                procedureVersionId: null | (number);
-                                jobVersionId: null | (number);
                                 totalDuration: null | (number);
                                 downTime: null | (number);
                                 dateDone: null | (Record<string, never> | number);
@@ -30374,7 +30251,6 @@ export interface operations {
                                 overdueReason: null | string;
                                 unexpected: null | (number);
                                 cbmStatus: null | (number);
-                                usage: null | (number);
                                 loggedBy: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
@@ -30387,7 +30263,6 @@ export interface operations {
                             }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -30412,7 +30287,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -30619,13 +30494,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -30635,7 +30507,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -30648,7 +30519,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -30673,7 +30543,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -30831,13 +30701,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -30847,7 +30714,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -30860,7 +30726,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -30885,7 +30750,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -31125,13 +30990,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -31141,7 +31003,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -31154,7 +31015,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -31179,7 +31039,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -31307,13 +31167,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -31323,7 +31180,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -31336,7 +31192,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -31361,7 +31216,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -31438,13 +31293,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -31454,7 +31306,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -31595,7 +31446,6 @@ export interface operations {
                             };
                             tblWorkOrder?: null | {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -31620,7 +31470,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -31705,7 +31555,6 @@ export interface operations {
                     overdueReason?: null | string;
                     unexpected?: null | (number);
                     cbmStatus?: null | (number);
-                    usage?: null | (number);
                     loggedBy?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
@@ -31777,7 +31626,6 @@ export interface operations {
                     overdueReason?: null | string;
                     unexpected?: null | (number);
                     cbmStatus?: null | (number);
-                    usage?: null | (number);
                     loggedBy?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
@@ -31849,7 +31697,6 @@ export interface operations {
                     overdueReason?: null | string;
                     unexpected?: null | (number);
                     cbmStatus?: null | (number);
-                    usage?: null | (number);
                     loggedBy?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
@@ -31926,13 +31773,10 @@ export interface operations {
                         maintTypeId: null | (number);
                         maintClassId: null | (number);
                         functionId: null | (number);
-                        budgetCodeId: null | (number);
                         jobDescId: null | (number);
                         workOrderId: null | (number);
                         compId: null | (number);
                         roundId: null | (number);
-                        procedureVersionId: null | (number);
-                        jobVersionId: null | (number);
                         totalDuration: null | (number);
                         downTime: null | (number);
                         dateDone: null | (Record<string, never> | number);
@@ -31942,7 +31786,6 @@ export interface operations {
                         overdueReason: null | string;
                         unexpected: null | (number);
                         cbmStatus: null | (number);
-                        usage: null | (number);
                         loggedBy: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
@@ -32083,7 +31926,6 @@ export interface operations {
                         };
                         tblWorkOrder?: null | {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -32108,7 +31950,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -32224,13 +32066,10 @@ export interface operations {
                         maintTypeId: null | (number);
                         maintClassId: null | (number);
                         functionId: null | (number);
-                        budgetCodeId: null | (number);
                         jobDescId: null | (number);
                         workOrderId: null | (number);
                         compId: null | (number);
                         roundId: null | (number);
-                        procedureVersionId: null | (number);
-                        jobVersionId: null | (number);
                         totalDuration: null | (number);
                         downTime: null | (number);
                         dateDone: null | (Record<string, never> | number);
@@ -32240,7 +32079,6 @@ export interface operations {
                         overdueReason: null | string;
                         unexpected: null | (number);
                         cbmStatus: null | (number);
-                        usage: null | (number);
                         loggedBy: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
@@ -32381,7 +32219,6 @@ export interface operations {
                         };
                         tblWorkOrder?: null | {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -32406,7 +32243,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -32488,7 +32325,6 @@ export interface operations {
                     overdueReason?: null | string;
                     unexpected?: null | (number);
                     cbmStatus?: null | (number);
-                    usage?: null | (number);
                     loggedBy?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
@@ -32571,7 +32407,6 @@ export interface operations {
                     overdueReason?: null | string;
                     unexpected?: null | (number);
                     cbmStatus?: null | (number);
-                    usage?: null | (number);
                     loggedBy?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
@@ -32654,7 +32489,6 @@ export interface operations {
                     overdueReason?: null | string;
                     unexpected?: null | (number);
                     cbmStatus?: null | (number);
-                    usage?: null | (number);
                     loggedBy?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
@@ -32742,13 +32576,10 @@ export interface operations {
                         maintTypeId: null | (number);
                         maintClassId: null | (number);
                         functionId: null | (number);
-                        budgetCodeId: null | (number);
                         jobDescId: null | (number);
                         workOrderId: null | (number);
                         compId: null | (number);
                         roundId: null | (number);
-                        procedureVersionId: null | (number);
-                        jobVersionId: null | (number);
                         totalDuration: null | (number);
                         downTime: null | (number);
                         dateDone: null | (Record<string, never> | number);
@@ -32758,7 +32589,6 @@ export interface operations {
                         overdueReason: null | string;
                         unexpected: null | (number);
                         cbmStatus: null | (number);
-                        usage: null | (number);
                         loggedBy: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
@@ -32899,7 +32729,6 @@ export interface operations {
                         };
                         tblWorkOrder?: null | {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -32924,7 +32753,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -33010,13 +32839,10 @@ export interface operations {
                         maintTypeId: null | (number);
                         maintClassId: null | (number);
                         functionId: null | (number);
-                        budgetCodeId: null | (number);
                         jobDescId: null | (number);
                         workOrderId: null | (number);
                         compId: null | (number);
                         roundId: null | (number);
-                        procedureVersionId: null | (number);
-                        jobVersionId: null | (number);
                         totalDuration: null | (number);
                         downTime: null | (number);
                         dateDone: null | (Record<string, never> | number);
@@ -33026,7 +32852,6 @@ export interface operations {
                         overdueReason: null | string;
                         unexpected: null | (number);
                         cbmStatus: null | (number);
-                        usage: null | (number);
                         loggedBy: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
@@ -33167,7 +32992,6 @@ export interface operations {
                         };
                         tblWorkOrder?: null | {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -33192,7 +33016,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -33999,13 +33823,10 @@ export interface operations {
                                 maintTypeId: null | (number);
                                 maintClassId: null | (number);
                                 functionId: null | (number);
-                                budgetCodeId: null | (number);
                                 jobDescId: null | (number);
                                 workOrderId: null | (number);
                                 compId: null | (number);
                                 roundId: null | (number);
-                                procedureVersionId: null | (number);
-                                jobVersionId: null | (number);
                                 totalDuration: null | (number);
                                 downTime: null | (number);
                                 dateDone: null | (Record<string, never> | number);
@@ -34015,7 +33836,6 @@ export interface operations {
                                 overdueReason: null | string;
                                 unexpected: null | (number);
                                 cbmStatus: null | (number);
-                                usage: null | (number);
                                 loggedBy: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
@@ -34028,7 +33848,6 @@ export interface operations {
                             }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -34053,7 +33872,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -34260,13 +34079,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -34276,7 +34092,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -34289,7 +34104,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -34314,7 +34128,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -34472,13 +34286,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -34488,7 +34299,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -34501,7 +34311,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -34526,7 +34335,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -34766,13 +34575,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -34782,7 +34588,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -34795,7 +34600,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -34820,7 +34624,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -34948,13 +34752,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -34964,7 +34765,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -34977,7 +34777,6 @@ export interface operations {
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -35002,7 +34801,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -35636,7 +35435,6 @@ export interface operations {
                             userId: null | (number);
                             tblWorkOrders?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -35661,7 +35459,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -35748,7 +35546,6 @@ export interface operations {
                         userId: null | (number);
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -35773,7 +35570,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -35853,7 +35650,6 @@ export interface operations {
                         userId: null | (number);
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -35878,7 +35674,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -35971,7 +35767,6 @@ export interface operations {
                         userId: null | (number);
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -35996,7 +35791,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -36046,7 +35841,6 @@ export interface operations {
                         userId: null | (number);
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -36071,7 +35865,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -36229,13 +36023,10 @@ export interface operations {
                                 maintTypeId: null | (number);
                                 maintClassId: null | (number);
                                 functionId: null | (number);
-                                budgetCodeId: null | (number);
                                 jobDescId: null | (number);
                                 workOrderId: null | (number);
                                 compId: null | (number);
                                 roundId: null | (number);
-                                procedureVersionId: null | (number);
-                                jobVersionId: null | (number);
                                 totalDuration: null | (number);
                                 downTime: null | (number);
                                 dateDone: null | (Record<string, never> | number);
@@ -36245,7 +36036,6 @@ export interface operations {
                                 overdueReason: null | string;
                                 unexpected: null | (number);
                                 cbmStatus: null | (number);
-                                usage: null | (number);
                                 loggedBy: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
@@ -36425,13 +36215,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -36441,7 +36228,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -36593,13 +36379,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -36609,7 +36392,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -36813,13 +36595,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -36829,7 +36608,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -36951,13 +36729,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -36967,7 +36742,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -37684,7 +37458,6 @@ export interface operations {
                             userId: null | (number);
                             tblWorkOrders?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -37709,7 +37482,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -37866,7 +37639,6 @@ export interface operations {
                         userId: null | (number);
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -37891,7 +37663,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -37993,7 +37765,6 @@ export interface operations {
                         userId: null | (number);
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -38018,7 +37789,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -38181,7 +37952,6 @@ export interface operations {
                         userId: null | (number);
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -38206,7 +37976,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -38278,7 +38048,6 @@ export interface operations {
                         userId: null | (number);
                         tblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -38303,7 +38072,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -40158,7 +39927,6 @@ export interface operations {
                     "application/json": {
                         items: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -40183,7 +39951,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -40200,13 +39968,10 @@ export interface operations {
                                 maintTypeId: null | (number);
                                 maintClassId: null | (number);
                                 functionId: null | (number);
-                                budgetCodeId: null | (number);
                                 jobDescId: null | (number);
                                 workOrderId: null | (number);
                                 compId: null | (number);
                                 roundId: null | (number);
-                                procedureVersionId: null | (number);
-                                jobVersionId: null | (number);
                                 totalDuration: null | (number);
                                 downTime: null | (number);
                                 dateDone: null | (Record<string, never> | number);
@@ -40216,7 +39981,6 @@ export interface operations {
                                 overdueReason: null | string;
                                 unexpected: null | (number);
                                 cbmStatus: null | (number);
-                                usage: null | (number);
                                 loggedBy: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
@@ -40394,7 +40158,6 @@ export interface operations {
                             };
                             tblWorkOrder?: null | {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -40419,7 +40182,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -40433,7 +40196,6 @@ export interface operations {
                             };
                             otherTblWorkOrders?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -40458,7 +40220,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -40470,6 +40232,10 @@ export interface operations {
                                 userId: null | (number);
                                 userComment: null | string;
                             }[];
+                            tblWorkOrderStatus?: null | {
+                                workOrderStatusId: number;
+                                name: string;
+                            };
                             usersTblWorkOrderIssuedByToUsers?: null | {
                                 userId: number;
                                 employeeId: null | (number);
@@ -40594,7 +40360,6 @@ export interface operations {
                     description?: null | string;
                     filed?: null | (number);
                     unexpected?: null | (number);
-                    woStatus?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     reportingMethod?: null | (number);
@@ -40655,6 +40420,11 @@ export interface operations {
                         connect: {
                             id: number;
                         }[];
+                    };
+                    tblWorkOrderStatus?: {
+                        connect: {
+                            id: number;
+                        };
                     };
                     usersTblWorkOrderIssuedByToUsers?: {
                         connect: {
@@ -40694,7 +40464,6 @@ export interface operations {
                     description?: null | string;
                     filed?: null | (number);
                     unexpected?: null | (number);
-                    woStatus?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     reportingMethod?: null | (number);
@@ -40755,6 +40524,11 @@ export interface operations {
                         connect: {
                             id: number;
                         }[];
+                    };
+                    tblWorkOrderStatus?: {
+                        connect: {
+                            id: number;
+                        };
                     };
                     usersTblWorkOrderIssuedByToUsers?: {
                         connect: {
@@ -40794,7 +40568,6 @@ export interface operations {
                     description?: null | string;
                     filed?: null | (number);
                     unexpected?: null | (number);
-                    woStatus?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     reportingMethod?: null | (number);
@@ -40856,6 +40629,11 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkOrderStatus?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                     usersTblWorkOrderIssuedByToUsers?: {
                         connect: {
                             id: number;
@@ -40888,7 +40666,6 @@ export interface operations {
                 content: {
                     "application/json": {
                         workOrderId: number;
-                        applicationId: null | (number);
                         compJobId: null | (number);
                         maintClassId: null | (number);
                         maintTypeId: null | (number);
@@ -40913,7 +40690,7 @@ export interface operations {
                         description: null | string;
                         filed: null | (number);
                         unexpected: null | (number);
-                        woStatus: null | (number);
+                        workOrderStatusId: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | (Record<string, never> | number);
@@ -40930,13 +40707,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -40946,7 +40720,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -41124,7 +40897,6 @@ export interface operations {
                         };
                         tblWorkOrder?: null | {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -41149,7 +40921,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -41163,7 +40935,6 @@ export interface operations {
                         };
                         otherTblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -41188,7 +40959,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -41200,6 +40971,10 @@ export interface operations {
                             userId: null | (number);
                             userComment: null | string;
                         }[];
+                        tblWorkOrderStatus?: null | {
+                            workOrderStatusId: number;
+                            name: string;
+                        };
                         usersTblWorkOrderIssuedByToUsers?: null | {
                             userId: number;
                             employeeId: null | (number);
@@ -41344,7 +41119,6 @@ export interface operations {
                 content: {
                     "application/json": {
                         workOrderId: number;
-                        applicationId: null | (number);
                         compJobId: null | (number);
                         maintClassId: null | (number);
                         maintTypeId: null | (number);
@@ -41369,7 +41143,7 @@ export interface operations {
                         description: null | string;
                         filed: null | (number);
                         unexpected: null | (number);
-                        woStatus: null | (number);
+                        workOrderStatusId: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | (Record<string, never> | number);
@@ -41386,13 +41160,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -41402,7 +41173,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -41580,7 +41350,6 @@ export interface operations {
                         };
                         tblWorkOrder?: null | {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -41605,7 +41374,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -41619,7 +41388,6 @@ export interface operations {
                         };
                         otherTblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -41644,7 +41412,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -41656,6 +41424,10 @@ export interface operations {
                             userId: null | (number);
                             userComment: null | string;
                         }[];
+                        tblWorkOrderStatus?: null | {
+                            workOrderStatusId: number;
+                            name: string;
+                        };
                         usersTblWorkOrderIssuedByToUsers?: null | {
                             userId: number;
                             employeeId: null | (number);
@@ -41777,7 +41549,6 @@ export interface operations {
                     description?: null | string;
                     filed?: null | (number);
                     unexpected?: null | (number);
-                    woStatus?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     reportingMethod?: null | (number);
@@ -41853,6 +41624,12 @@ export interface operations {
                         disconnect?: {
                             id: number;
                         }[];
+                    };
+                    tblWorkOrderStatus?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
                     };
                     usersTblWorkOrderIssuedByToUsers?: {
                         connect?: {
@@ -41896,7 +41673,6 @@ export interface operations {
                     description?: null | string;
                     filed?: null | (number);
                     unexpected?: null | (number);
-                    woStatus?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     reportingMethod?: null | (number);
@@ -41972,6 +41748,12 @@ export interface operations {
                         disconnect?: {
                             id: number;
                         }[];
+                    };
+                    tblWorkOrderStatus?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
                     };
                     usersTblWorkOrderIssuedByToUsers?: {
                         connect?: {
@@ -42015,7 +41797,6 @@ export interface operations {
                     description?: null | string;
                     filed?: null | (number);
                     unexpected?: null | (number);
-                    woStatus?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | (Record<string, never> | number);
                     reportingMethod?: null | (number);
@@ -42092,6 +41873,12 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkOrderStatus?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     usersTblWorkOrderIssuedByToUsers?: {
                         connect?: {
                             id: number;
@@ -42128,7 +41915,6 @@ export interface operations {
                 content: {
                     "application/json": {
                         workOrderId: number;
-                        applicationId: null | (number);
                         compJobId: null | (number);
                         maintClassId: null | (number);
                         maintTypeId: null | (number);
@@ -42153,7 +41939,7 @@ export interface operations {
                         description: null | string;
                         filed: null | (number);
                         unexpected: null | (number);
-                        woStatus: null | (number);
+                        workOrderStatusId: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | (Record<string, never> | number);
@@ -42170,13 +41956,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -42186,7 +41969,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -42364,7 +42146,6 @@ export interface operations {
                         };
                         tblWorkOrder?: null | {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -42389,7 +42170,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -42403,7 +42184,6 @@ export interface operations {
                         };
                         otherTblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -42428,7 +42208,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -42440,6 +42220,10 @@ export interface operations {
                             userId: null | (number);
                             userComment: null | string;
                         }[];
+                        tblWorkOrderStatus?: null | {
+                            workOrderStatusId: number;
+                            name: string;
+                        };
                         usersTblWorkOrderIssuedByToUsers?: null | {
                             userId: number;
                             employeeId: null | (number);
@@ -42554,7 +42338,6 @@ export interface operations {
                 content: {
                     "application/json": {
                         workOrderId: number;
-                        applicationId: null | (number);
                         compJobId: null | (number);
                         maintClassId: null | (number);
                         maintTypeId: null | (number);
@@ -42579,7 +42362,7 @@ export interface operations {
                         description: null | string;
                         filed: null | (number);
                         unexpected: null | (number);
-                        woStatus: null | (number);
+                        workOrderStatusId: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | (Record<string, never> | number);
@@ -42596,13 +42379,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -42612,7 +42392,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -42790,7 +42569,6 @@ export interface operations {
                         };
                         tblWorkOrder?: null | {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -42815,7 +42593,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -42829,7 +42607,6 @@ export interface operations {
                         };
                         otherTblWorkOrders?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -42854,7 +42631,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -42866,6 +42643,10 @@ export interface operations {
                             userId: null | (number);
                             userComment: null | string;
                         }[];
+                        tblWorkOrderStatus?: null | {
+                            workOrderStatusId: number;
+                            name: string;
+                        };
                         usersTblWorkOrderIssuedByToUsers?: null | {
                             userId: number;
                             employeeId: null | (number);
@@ -44230,13 +44011,10 @@ export interface operations {
                                 maintTypeId: null | (number);
                                 maintClassId: null | (number);
                                 functionId: null | (number);
-                                budgetCodeId: null | (number);
                                 jobDescId: null | (number);
                                 workOrderId: null | (number);
                                 compId: null | (number);
                                 roundId: null | (number);
-                                procedureVersionId: null | (number);
-                                jobVersionId: null | (number);
                                 totalDuration: null | (number);
                                 downTime: null | (number);
                                 dateDone: null | (Record<string, never> | number);
@@ -44246,7 +44024,6 @@ export interface operations {
                                 overdueReason: null | string;
                                 unexpected: null | (number);
                                 cbmStatus: null | (number);
-                                usage: null | (number);
                                 loggedBy: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
@@ -44263,13 +44040,10 @@ export interface operations {
                                 maintTypeId: null | (number);
                                 maintClassId: null | (number);
                                 functionId: null | (number);
-                                budgetCodeId: null | (number);
                                 jobDescId: null | (number);
                                 workOrderId: null | (number);
                                 compId: null | (number);
                                 roundId: null | (number);
-                                procedureVersionId: null | (number);
-                                jobVersionId: null | (number);
                                 totalDuration: null | (number);
                                 downTime: null | (number);
                                 dateDone: null | (Record<string, never> | number);
@@ -44279,7 +44053,6 @@ export interface operations {
                                 overdueReason: null | string;
                                 unexpected: null | (number);
                                 cbmStatus: null | (number);
-                                usage: null | (number);
                                 loggedBy: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
@@ -44292,7 +44065,6 @@ export interface operations {
                             }[];
                             tblWorkOrderTblWorkOrderIssuedByToUsers?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -44317,7 +44089,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -44331,7 +44103,6 @@ export interface operations {
                             }[];
                             tblWorkOrderTblWorkOrderPlannedByToUsers?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -44356,7 +44127,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -44370,7 +44141,6 @@ export interface operations {
                             }[];
                             tblWorkOrderTblWorkOrderCreatedByToUsers?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -44395,7 +44165,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -44409,7 +44179,6 @@ export interface operations {
                             }[];
                             tblWorkOrderTblWorkOrderPendingByToUsers?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -44434,7 +44203,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -44639,13 +44408,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -44655,7 +44421,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -44672,13 +44437,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -44688,7 +44450,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -44701,7 +44462,6 @@ export interface operations {
                         }[];
                         tblWorkOrderTblWorkOrderIssuedByToUsers?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -44726,7 +44486,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -44740,7 +44500,6 @@ export interface operations {
                         }[];
                         tblWorkOrderTblWorkOrderPlannedByToUsers?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -44765,7 +44524,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -44779,7 +44538,6 @@ export interface operations {
                         }[];
                         tblWorkOrderTblWorkOrderCreatedByToUsers?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -44804,7 +44562,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -44818,7 +44576,6 @@ export interface operations {
                         }[];
                         tblWorkOrderTblWorkOrderPendingByToUsers?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -44843,7 +44600,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -44936,13 +44693,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -44952,7 +44706,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -44969,13 +44722,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -44985,7 +44735,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -44998,7 +44747,6 @@ export interface operations {
                         }[];
                         tblWorkOrderTblWorkOrderIssuedByToUsers?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -45023,7 +44771,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -45037,7 +44785,6 @@ export interface operations {
                         }[];
                         tblWorkOrderTblWorkOrderPlannedByToUsers?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -45062,7 +44809,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -45076,7 +44823,6 @@ export interface operations {
                         }[];
                         tblWorkOrderTblWorkOrderCreatedByToUsers?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -45101,7 +44847,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -45115,7 +44861,6 @@ export interface operations {
                         }[];
                         tblWorkOrderTblWorkOrderPendingByToUsers?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -45140,7 +44885,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -45396,13 +45141,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -45412,7 +45154,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -45429,13 +45170,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -45445,7 +45183,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -45458,7 +45195,6 @@ export interface operations {
                         }[];
                         tblWorkOrderTblWorkOrderIssuedByToUsers?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -45483,7 +45219,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -45497,7 +45233,6 @@ export interface operations {
                         }[];
                         tblWorkOrderTblWorkOrderPlannedByToUsers?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -45522,7 +45257,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -45536,7 +45271,6 @@ export interface operations {
                         }[];
                         tblWorkOrderTblWorkOrderCreatedByToUsers?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -45561,7 +45295,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -45575,7 +45309,6 @@ export interface operations {
                         }[];
                         tblWorkOrderTblWorkOrderPendingByToUsers?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -45600,7 +45333,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -45663,13 +45396,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -45679,7 +45409,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -45696,13 +45425,10 @@ export interface operations {
                             maintTypeId: null | (number);
                             maintClassId: null | (number);
                             functionId: null | (number);
-                            budgetCodeId: null | (number);
                             jobDescId: null | (number);
                             workOrderId: null | (number);
                             compId: null | (number);
                             roundId: null | (number);
-                            procedureVersionId: null | (number);
-                            jobVersionId: null | (number);
                             totalDuration: null | (number);
                             downTime: null | (number);
                             dateDone: null | (Record<string, never> | number);
@@ -45712,7 +45438,6 @@ export interface operations {
                             overdueReason: null | string;
                             unexpected: null | (number);
                             cbmStatus: null | (number);
-                            usage: null | (number);
                             loggedBy: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
@@ -45725,7 +45450,6 @@ export interface operations {
                         }[];
                         tblWorkOrderTblWorkOrderIssuedByToUsers?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -45750,7 +45474,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -45764,7 +45488,6 @@ export interface operations {
                         }[];
                         tblWorkOrderTblWorkOrderPlannedByToUsers?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -45789,7 +45512,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -45803,7 +45526,6 @@ export interface operations {
                         }[];
                         tblWorkOrderTblWorkOrderCreatedByToUsers?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -45828,7 +45550,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -45842,7 +45564,6 @@ export interface operations {
                         }[];
                         tblWorkOrderTblWorkOrderPendingByToUsers?: {
                             workOrderId: number;
-                            applicationId: null | (number);
                             compJobId: null | (number);
                             maintClassId: null | (number);
                             maintTypeId: null | (number);
@@ -45867,7 +45588,7 @@ export interface operations {
                             description: null | string;
                             filed: null | (number);
                             unexpected: null | (number);
-                            woStatus: null | (number);
+                            workOrderStatusId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | (Record<string, never> | number);
@@ -46040,13 +45761,10 @@ export interface operations {
                                 maintTypeId: null | (number);
                                 maintClassId: null | (number);
                                 functionId: null | (number);
-                                budgetCodeId: null | (number);
                                 jobDescId: null | (number);
                                 workOrderId: null | (number);
                                 compId: null | (number);
                                 roundId: null | (number);
-                                procedureVersionId: null | (number);
-                                jobVersionId: null | (number);
                                 totalDuration: null | (number);
                                 downTime: null | (number);
                                 dateDone: null | (Record<string, never> | number);
@@ -46056,7 +45774,6 @@ export interface operations {
                                 overdueReason: null | string;
                                 unexpected: null | (number);
                                 cbmStatus: null | (number);
-                                usage: null | (number);
                                 loggedBy: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
@@ -46073,13 +45790,10 @@ export interface operations {
                                 maintTypeId: null | (number);
                                 maintClassId: null | (number);
                                 functionId: null | (number);
-                                budgetCodeId: null | (number);
                                 jobDescId: null | (number);
                                 workOrderId: null | (number);
                                 compId: null | (number);
                                 roundId: null | (number);
-                                procedureVersionId: null | (number);
-                                jobVersionId: null | (number);
                                 totalDuration: null | (number);
                                 downTime: null | (number);
                                 dateDone: null | (Record<string, never> | number);
@@ -46089,7 +45803,6 @@ export interface operations {
                                 overdueReason: null | string;
                                 unexpected: null | (number);
                                 cbmStatus: null | (number);
-                                usage: null | (number);
                                 loggedBy: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
@@ -46102,7 +45815,6 @@ export interface operations {
                             }[];
                             tblWorkOrderTblWorkOrderIssuedByToUsers?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -46127,7 +45839,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -46141,7 +45853,6 @@ export interface operations {
                             }[];
                             tblWorkOrderTblWorkOrderPlannedByToUsers?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -46166,7 +45877,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -46180,7 +45891,6 @@ export interface operations {
                             }[];
                             tblWorkOrderTblWorkOrderCreatedByToUsers?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -46205,7 +45915,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
@@ -46219,7 +45929,6 @@ export interface operations {
                             }[];
                             tblWorkOrderTblWorkOrderPendingByToUsers?: {
                                 workOrderId: number;
-                                applicationId: null | (number);
                                 compJobId: null | (number);
                                 maintClassId: null | (number);
                                 maintTypeId: null | (number);
@@ -46244,7 +45953,7 @@ export interface operations {
                                 description: null | string;
                                 filed: null | (number);
                                 unexpected: null | (number);
-                                woStatus: null | (number);
+                                workOrderStatusId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | (Record<string, never> | number);
