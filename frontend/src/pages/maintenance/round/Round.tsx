@@ -1,22 +1,8 @@
-import { lazy, Suspense, useState } from "react";
-import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
 import Splitter from "@/shared/components/Splitter";
-import DataGridProAdapter from "@/shared/components/dataGrid/DataGrid";
-import Spinner from "@/shared/components/Spinner";
-
-const TabRound = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabRound")
-);
-const TabJobs = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabJob")
-);
-
-const TABS = [
-  { label: "Round", Component: TabRound },
-  { label: "Jobs", Component: TabJobs },
-];
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import TabsComponent from "./RoundTabs";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { tblRound } from "@/core/api/generated/api";
 
 const columns = [
   { field: "roundCode", headerName: "Round Code", flex: 1 },
@@ -40,35 +26,21 @@ const columns = [
 ];
 
 export default function RoundPage() {
-  const [activeTab, setActiveTab] = useState("Round");
-  const ActiveComponent = TABS.find((t) => t.label === activeTab)?.Component;
+  const { rows, loading, handleRefresh, handleDelete, handleFormSuccess } =
+    useDataGrid(tblRound.getAll, tblRound.deleteById, "roundId");
 
   return (
     <Splitter horizontal initialPrimarySize="50%" minPrimarySize="200px">
-      {/* 🔹 بخش بالایی Splitter → Tabs + Tab Content */}
-      <Box
-        display="flex"
-        flexDirection="column"
-        height="100%"
-        overflow="hidden"
-      >
-        <Tabs value={activeTab} onChange={(_, v) => setActiveTab(v)}>
-          {TABS.map((t) => (
-            <Tab key={t.label} value={t.label} label={t.label} />
-          ))}
-        </Tabs>
-
-        <Box flex={1} p={1} sx={{ overflow: "auto" }}>
-          <Suspense fallback={<Spinner />}>
-            {ActiveComponent ? <ActiveComponent /> : null}
-          </Suspense>
-        </Box>
-      </Box>
-
-      {/* 🔻 بخش پایینی Splitter → DataGrid */}
-      <Box p={1}>
-        <DataGridProAdapter rows={[]} columns={columns} />
-      </Box>
+      <CustomizedDataGrid
+        showToolbar
+        loading={loading}
+        label="Rounds"
+        rows={rows}
+        onRefreshClick={handleRefresh}
+        columns={columns}
+        getRowId={(row) => row.roundId}
+      />
+      <TabsComponent />
     </Splitter>
   );
 }

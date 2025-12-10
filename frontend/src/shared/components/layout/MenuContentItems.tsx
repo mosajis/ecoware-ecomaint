@@ -197,20 +197,6 @@ export const menuContentItems: {
         icon: <BuildRoundedIcon />,
         id: "maint:componentType:componentJob",
         path: "/maintenance/component-job",
-        children: [
-          {
-            text: "Tree View",
-            id: "maint:componentType:tree",
-            path: "/maintenance/component-job/tree-view",
-            icon: <BulletIcon />,
-          },
-          {
-            text: "List View",
-            id: "maint:componentType:list",
-            path: "/maintenance/component-job/list-view",
-            icon: <BulletIcon />,
-          },
-        ],
       },
       {
         text: "Work Order",

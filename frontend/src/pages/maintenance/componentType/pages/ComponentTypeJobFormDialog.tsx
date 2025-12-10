@@ -1,16 +1,17 @@
 import * as z from "zod";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import { memo, useEffect, useState, useCallback } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import RadioGroup from "@mui/material/RadioGroup";
 import Radio from "@mui/material/Radio";
+import { memo, useEffect, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
-
+import { buildRelation } from "@/core/api/helper";
+import { logicTblCompTypeJob } from "./ComponentTypeJob.logic";
 import {
   tblCompTypeJob,
   tblJobDescription,
@@ -20,10 +21,7 @@ import {
   tblMaintType,
   TypeTblCompTypeJob,
   tblPeriod,
-  TypeTblPeriod,
 } from "@/core/api/generated/api";
-import { buildRelation } from "@/core/api/helper";
-import { logicTblCompTypeJob } from "./ComponentTypeJob.logic";
 
 const boxStyle = {
   width: "100%",

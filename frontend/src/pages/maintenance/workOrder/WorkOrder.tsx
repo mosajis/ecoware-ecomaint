@@ -1,149 +1,147 @@
-import { lazy, Suspense, useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
-import Button from "@mui/material/Button";
-import { useNavigate, useSearch } from "@tanstack/react-router";
-import Spinner from "@/shared/components/Spinner";
 import Splitter from "@/shared/components/Splitter";
-import DataGridProAdapter from "@/shared/components/dataGrid/DataGrid"; // اگر DataGrid خودت داری عوض کن
+import TabsComponent from "./WorkOrderTabs";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import { useCallback } from "react";
+import { tblWorkOrder, TypeTblWorkOrder } from "@/core/api/generated/api";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { GridColDef } from "@mui/x-data-grid";
+import DataGridActionBar from "@/shared/components/dataGrid/DataGridActionBar";
+import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
+import TuneIcon from "@mui/icons-material/Tune";
+import CancelIcon from "@mui/icons-material/Cancel";
+import RequestPageIcon from "@mui/icons-material/RequestPage";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import EventRepeatIcon from "@mui/icons-material/EventRepeat";
+import HandshakeIcon from "@mui/icons-material/Handshake";
+import ScheduleIcon from "@mui/icons-material/Schedule";
 
-// ---- Lazy Tabs ----
-const TabWorkOrderInfo = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabWorkOrder")
-);
-const TabPendingDetails = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
-);
-const TabJobDescription = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
-);
-const TabJobAttachments = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
-);
-const TabWoAttachments = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
-);
-const TabMaintenanceLog = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
-);
-const TabComponentLog = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
-);
-const TabSendReceive = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
-);
-const TabMeasurePoints = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabMeasures")
-);
-const TabRescheduleLog = lazy(
-  () => import("@/pages/maintenance/componentType/tabs/TabJobAttachment")
-);
-
-const TABS = [
-  { label: "WorkOrder Info", Component: TabWorkOrderInfo },
-  { label: "Pending Details", Component: TabPendingDetails },
-  { label: "Job Description", Component: TabJobDescription },
-  { label: "Job Attachments", Component: TabJobAttachments },
-  { label: "WO Attachments", Component: TabWoAttachments },
-  { label: "Maintenance Log", Component: TabMaintenanceLog },
-  { label: "Component Log", Component: TabComponentLog },
-  { label: "Send / Receive", Component: TabSendReceive },
-  { label: "Measure Points", Component: TabMeasurePoints },
-  { label: "Reschedule Log", Component: TabRescheduleLog },
-];
-
-const columns = [
-  { field: "number", headerName: "Number", flex: 1 },
-  { field: "jobCode", headerName: "Job Code", flex: 1 },
-  { field: "component", headerName: "Component", flex: 1 },
-  { field: "location", headerName: "Location", flex: 1 },
-  { field: "jobDescTitle", headerName: "JobDescTitle", flex: 1 },
-  { field: "disipline", headerName: "Disipline", flex: 1 },
-  { field: "status", headerName: "Status", flex: 1 },
+const columns: GridColDef<TypeTblWorkOrder>[] = [
+  {
+    field: "jobCode",
+    headerName: "Job Code",
+    flex: 1,
+    // @ts-ignore
+    valueGetter: (_, row) => row?.tblCompJob?.tblJobDescription?.jobDescCode,
+  },
+  {
+    field: "component",
+    headerName: "Component",
+    flex: 1,
+    valueGetter: (_, row) => row.tblComponentUnit?.compNo,
+  },
+  {
+    field: "location",
+    headerName: "Location",
+    flex: 1,
+    // @ts-ignore
+    valueGetter: (_, row) => row?.tblComponentUnit?.tblLocation?.name,
+  },
+  {
+    field: "jobDescTitle",
+    headerName: "JobDescTitle",
+    flex: 1,
+    // @ts-ignore
+    valueGetter: (_, row) => row?.tblCompJob?.tblJobDescription?.jobDescTitle,
+  },
+  {
+    field: "disipline",
+    headerName: "Disipline",
+    flex: 1,
+    valueGetter: (_, row) => row?.tblDiscipline?.name,
+  },
+  {
+    field: "status",
+    headerName: "Status (W-Rel)",
+    flex: 1,
+  },
   { field: "dueDate", headerName: "Due Date", flex: 1 },
   { field: "completedDate", headerName: "Completed Date", flex: 1 },
-  { field: "overDue", headerName: "OverDue", flex: 1 },
-  { field: "pendingType", headerName: "Pending Type", flex: 1 },
-  { field: "pendingDate", headerName: "Pending Date", flex: 1 },
-  { field: "triggeredBy", headerName: "Triggered By", flex: 1 },
-  { field: "componentStatus", headerName: "Component Status", flex: 1 },
+  { field: "overDue (w-Rel)", headerName: "OverDue", flex: 1 },
+  {
+    field: "pendingType",
+    headerName: "Pending Type",
+    flex: 1,
+    valueGetter: (_, row) => row?.tblPendingType?.pendTypeName,
+  },
+  { field: "pendingdate", headerName: "Pending Date", flex: 1 },
+  {
+    field: "triggeredBy",
+    headerName: "Triggered By (W-Rel)",
+    flex: 1,
+  },
+  {
+    field: "componentStatus",
+    headerName: "Component Status",
+    flex: 1,
+    valueGetter: (_, row) =>
+      // @ts-ignore
+      row?.tblComponentUnit?.tblCompStatus?.compStatusName,
+  },
   { field: "priority", headerName: "Priority", flex: 1 },
 ];
 
 export default function WorkOrderPage() {
-  const navigate = useNavigate({ from: "" });
-
-  const searchTab = useSearch({
-    strict: false,
-    select: (s) => s.tab as string | undefined,
-  });
-
-  const [activeTab, setActiveTab] = useState(searchTab || TABS[0].label);
-
-  useEffect(() => {
-    if (searchTab && searchTab !== activeTab) setActiveTab(searchTab);
-  }, [searchTab]);
-
-  const handleChange = (_: any, newValue: string) => {
-    setActiveTab(newValue);
-    navigate({ search: () => ({ tab: newValue }) });
-  };
-
-  const ActiveComponent = TABS.find((t) => t.label === activeTab)?.Component;
+  const getAll = useCallback(
+    () =>
+      tblWorkOrder.getAll({
+        paginate: true,
+        include: {
+          tblComponentUnit: {
+            include: {
+              tblCompStatus: true,
+              tblLocation: true,
+            },
+          },
+          tblCompJob: {
+            include: {
+              tblJobDescription: true,
+            },
+          },
+          tblPendingType: true,
+          tblDiscipline: true,
+        },
+      }),
+    []
+  );
+  // === useDataGrid ===
+  const { rows, loading, handleRefresh } = useDataGrid(
+    getAll,
+    tblWorkOrder.deleteById,
+    "workOrderId"
+  );
 
   return (
-    <Box height="100%">
-      {/* Tabs */}
-      <Tabs
-        value={activeTab}
-        onChange={handleChange}
-        variant="scrollable"
-        scrollButtons="auto"
-      >
-        {TABS.map((t) => (
-          <Tab key={t.label} value={t.label} label={t.label} />
-        ))}
-      </Tabs>
+    <Splitter horizontal initialPrimarySize="45%">
+      <TabsComponent />
 
-      {/* Splitter Layout */}
-      <Splitter horizontal initialPrimarySize="55%">
-        {/* TAB CONTENT */}
-        <Box p={1} sx={{ overflow: "auto" }}>
-          <Suspense fallback={<Spinner />}>
-            {ActiveComponent ? <ActiveComponent /> : null}
-          </Suspense>
-        </Box>
-
-        {/* GRID + ACTIONS */}
-        <Box p={1} display="flex" flexDirection="column" gap={1}>
-          {/* Action Buttons */}
-          <Box display="flex" gap={1} flexWrap="wrap">
-            {[
-              "Filter",
-              "Custom Filter",
-              "Issue",
-              "Complete",
-              "Pending",
-              "Control",
-              "Cancel",
-              "Request",
-              "Forward",
-              "Re-Schedule",
-              "HandOver",
-            ].map((btn) => (
-              <Button key={btn} variant="outlined" size="small">
-                {btn}
-              </Button>
-            ))}
-          </Box>
-
-          {/* DataGrid */}
-          <Box flexGrow={1} minHeight={0}>
-            <DataGridProAdapter rows={[]} columns={columns} />
-          </Box>
-        </Box>
-      </Splitter>
-    </Box>
+      <CustomizedDataGrid
+        showToolbar
+        disableDensity
+        label="WorkOrders"
+        loading={loading}
+        onRefreshClick={handleRefresh}
+        getRowId={(row) => row.workOrderId}
+        rows={rows}
+        columns={columns}
+        toolbarChildren={
+          <DataGridActionBar
+            actions={[
+              { label: "Issue", icon: <AssignmentTurnedInIcon /> },
+              { label: "Complete", icon: <CheckCircleIcon /> },
+              { label: "Pending", icon: <HourglassEmptyIcon /> },
+              { label: "Control", icon: <TuneIcon /> },
+              { label: "Cancel", icon: <CancelIcon /> },
+              { label: "Request", icon: <RequestPageIcon /> },
+              { label: "Forward", icon: <ArrowForwardIcon /> },
+              { label: "Reschedule", icon: <EventRepeatIcon /> },
+              { label: "HandOver", icon: <HandshakeIcon /> },
+              { label: "Postponed", icon: <ScheduleIcon /> },
+            ]}
+          />
+        }
+      />
+    </Splitter>
   );
 }

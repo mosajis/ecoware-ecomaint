@@ -1,10 +1,10 @@
+import AppLayout from "@/shared/components/layout/AppLayout";
+import AppAuthorization from "@/shared/components/AppAthorization";
+import Spinner from "@/shared/components/Spinner";
 import { Outlet, redirect } from "@tanstack/react-router";
 import { createRoute, createRootRoute } from "@tanstack/react-router";
 import { lazy, Suspense } from "react";
-import AppLayout from "@/shared/components/layout/AppLayout";
 import { LOCAL_STORAGE } from "@/const";
-import AppAuthorization from "@/shared/components/AppAthorization";
-import Spinner from "@/shared/components/Spinner";
 
 // Lazy load all page components
 const PageLogin = lazy(() => import("@/pages/auth/login/login.page"));
@@ -44,15 +44,25 @@ const PageComponentTypeList = lazy(
 const PageComponentTypeTree = lazy(
   () => import("@/pages/maintenance/componentType/ComponentTypeTree")
 );
+const ComponentTypeJob = lazy(
+  () => import("@/pages/maintenance/componentType/pages/ComponentTypeJob")
+);
 const PageFunction = lazy(
   () => import("@/pages/maintenance/function/Function")
 );
 const PageFunctionTree = lazy(
   () => import("@/pages/maintenance/function/FunctionTree")
 );
-const ComponentTypeJob = lazy(
-  () => import("@/pages/maintenance/componentType/pages/ComponentTypeJob")
+
+const PageComponentJobList = lazy(
+  () => import("@/pages/maintenance/componentJob/ComponentJob")
 );
+
+const PageComponentWorkOrder = lazy(
+  () => import("@/pages/maintenance/workOrder/WorkOrder")
+);
+
+const PageRound = lazy(() => import("@/pages/maintenance/round/Round"));
 
 // Loading fallback component
 const LoadingFallback = () => <Spinner />;
@@ -190,32 +200,30 @@ export const generalJobDescriptionRoute = createRoute({
 });
 
 // --- Maintenance ---
+// --- Maintenance --- Functions --------------------
 export const maintFunctionRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/maintenance/function",
   beforeLoad: () => ({ breadcrumb: "Function" }),
 });
-
 export const maintFunctionListRoute = createRoute({
   getParentRoute: () => maintFunctionRoute,
   path: "/",
   component: () => <LazyComponent Component={PageFunction} />,
   beforeLoad: () => ({ breadcrumb: "List View" }),
 });
-
 export const maintFunctionTreeRoute = createRoute({
   getParentRoute: () => maintFunctionRoute,
   path: "/tree-view",
   component: () => <LazyComponent Component={PageFunctionTree} />,
   beforeLoad: () => ({ breadcrumb: "Tree View" }),
 });
-
+// --- Maintenance --- Component Unit ---------------
 export const maintComponentUnitRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/maintenance/component-unit",
   beforeLoad: () => ({ breadcrumb: "Component Unit" }),
 });
-
 export const maintComponentUnitListRoute = createRoute({
   getParentRoute: () => maintComponentUnitRoute,
   component: () => <LazyComponent Component={PageComponentUnitList} />,
@@ -227,44 +235,51 @@ export const maintComponentUnitTreeRoute = createRoute({
   path: "/tree-view",
 });
 
+// --- Maintenance --- Component Type ---------------
 export const maintComponentTypeRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/maintenance/component-type",
   beforeLoad: () => ({ breadcrumb: "Component Type" }),
 });
-
 export const maintComponentTypeTreeRoute = createRoute({
   getParentRoute: () => maintComponentTypeRoute,
   path: "tree-view",
   component: () => <LazyComponent Component={PageComponentTypeTree} />,
   beforeLoad: () => ({ breadcrumb: "Tree View" }),
 });
-
 export const maintComponentTypeListRoute = createRoute({
   getParentRoute: () => maintComponentTypeRoute,
   path: "/",
   component: () => <LazyComponent Component={PageComponentTypeList} />,
   beforeLoad: () => ({ breadcrumb: "List View" }),
 });
-
 export const maintComponentTypeDetailRoute = createRoute({
   getParentRoute: () => maintComponentTypeRoute,
   path: "$id/job",
   component: () => <LazyComponent Component={ComponentTypeJob} />,
 });
 
+// --- Maintenance --- Component Job ----------------
 export const maintComponentJobRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/maintenance/component-job",
-  component: () => "Component Job Page",
+  component: () => <LazyComponent Component={PageComponentJobList} />,
   beforeLoad: () => ({ breadcrumb: "Component Job" }),
 });
 
 export const maintWorkOrderRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/maintenance/work-order",
-  component: () => "Work Order Page",
+  component: () => <LazyComponent Component={PageComponentWorkOrder} />,
   beforeLoad: () => ({ breadcrumb: "Work Order" }),
+});
+
+// --- Maintenance --- Round ------------------------
+export const maintRoundRoute = createRoute({
+  getParentRoute: () => protectedRoute,
+  path: "/maintenance/round",
+  component: () => <LazyComponent Component={PageRound} />,
+  beforeLoad: () => ({ breadcrumb: "Round" }),
 });
 
 // --- Route Tree ---
@@ -297,6 +312,6 @@ export const routeTree = rootRoute.addChildren([
     ]),
     maintComponentJobRoute,
     maintWorkOrderRoute,
-    // ... باقی routes
+    maintRoundRoute,
   ]),
 ]);

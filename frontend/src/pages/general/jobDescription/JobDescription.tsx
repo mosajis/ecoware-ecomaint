@@ -78,6 +78,8 @@ export default function PageJobDescription() {
     setHtml(params.row.jobDesc || "");
   };
 
+  // Fix Job Description Spillter size (increase editor width)
+
   return (
     <>
       <Splitter

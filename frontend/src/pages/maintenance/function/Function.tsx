@@ -23,8 +23,11 @@ export default function PageFunction() {
     []
   );
   // === useDataGrid ===
-  const { rows, loading, handleRefresh, handleDelete, handleFormSuccess } =
-    useDataGrid(getAll, tblFunctions.deleteById, "functionId");
+  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
+    getAll,
+    tblFunctions.deleteById,
+    "functionId"
+  );
 
   // === Handlers ===
   const handleCreate = useCallback(() => {

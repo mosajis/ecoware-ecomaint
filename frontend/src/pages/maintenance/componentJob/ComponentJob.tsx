@@ -1,88 +1,157 @@
-import { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import Spinner from "@/shared/components/Spinner";
 import Splitter from "@/shared/components/Splitter";
+import Editor from "@/shared/components/Editor";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
+import { useState, useCallback, useMemo } from "react";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import {
+  tblCompJob,
+  tblJobDescription,
+  type TypeTblCompJob,
+} from "@/core/api/generated/api";
+import {
+  GridRowSelectionCheckboxParams,
+  type GridColDef,
+} from "@mui/x-data-grid";
 
-// fake fetch => جای این را با API واقعی خودت عوض کن
-async function fetchJobsData() {
-  return [
-    {
-      id: 1,
-      roundCode: "R-01",
-      roundTitle: "Routine Check",
-      compTypeName: "Pump",
-      compNo: "P-123",
-      jobCode: "JB-441",
-      jobTitle: "Inspect Oil Level",
-      jobDisiplice: "Mechanical",
-      frequency: 30,
-      frequencyPeriod: "Days",
-      lastDone: "2024-09-01",
-      nextDueDate: "2024-10-01",
-      realOverDue: 0,
-      lastTimeDone: "08:34",
-    },
-  ];
-}
+export default function PageComponentJob() {
+  const [openForm, setOpenForm] = useState(false);
+  const [mode, setMode] = useState<"create" | "update">("create");
+  const [selected, setSelected] = useState<TypeTblCompJob | null>(null);
+  const [html, setHtml] = useState("");
 
-const columns: GridColDef[] = [
-  { field: "roundCode", headerName: "Round Code", flex: 1 },
-  { field: "roundTitle", headerName: "Round Title", flex: 1 },
-  { field: "compTypeName", headerName: "CompType Name", flex: 1 },
-  { field: "compNo", headerName: "CompNo", flex: 1 },
-  { field: "jobCode", headerName: "Job Code", flex: 1 },
-  { field: "jobTitle", headerName: "Job Title", flex: 1 },
-  { field: "jobDisiplice", headerName: "Job Disiplice", flex: 1 },
-  { field: "frequency", headerName: "Frequency", flex: 1 },
-  { field: "frequencyPeriod", headerName: "Frequency Period", flex: 1 },
-  { field: "lastDone", headerName: "Last Done", flex: 1 },
-  { field: "nextDueDate", headerName: "NextDueDate", flex: 1 },
-  { field: "realOverDue", headerName: "RealOverDue", flex: 1 },
-  { field: "lastTimeDone", headerName: "LastTimeDone", flex: 1 },
-];
-
-export default function ComponentJob() {
-  const [rows, setRows] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [text, setText] = useState("");
-
-  useEffect(() => {
-    const load = async () => {
-      const data = await fetchJobsData();
-      setRows(data);
-      setLoading(false);
-    };
-    load();
+  const getAll = useCallback(() => {
+    return tblCompJob.getAll({
+      include: {
+        tblComponentUnit: {
+          include: {
+            tblCompType: true,
+          },
+        },
+        tblJobDescription: true,
+        tblPeriod: true,
+        tblDiscipline: true,
+      },
+    });
   }, []);
 
-  if (loading) return <Spinner />;
+  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
+    getAll,
+    tblCompJob.deleteById,
+    "compJobId"
+  );
+
+  // === CREATE ===
+  const handleCreate = useCallback(() => {
+    setSelected(null);
+    setMode("create");
+    setHtml("");
+    setOpenForm(true);
+  }, []);
+
+  // === EDIT ===
+  const handleEdit = useCallback((row: TypeTblCompJob) => {
+    setSelected(row);
+    setMode("update");
+    setOpenForm(true);
+  }, []);
+
+  // === SAVE DESCRIPTION ===
+  const handleSaveDescription = async (newValue: string) => {
+    if (!selected) return;
+    if (!selected.jobDescId) return;
+
+    await tblJobDescription.update(selected.jobDescId, {
+      jobDesc: newValue,
+    });
+
+    handleRefresh();
+  };
+
+  const handleRowClick = (params: any) => {
+    setSelected(params.row);
+    setHtml(params.row?.tblJobDescription?.jobDesc);
+  };
+
+  const columns: GridColDef<TypeTblCompJob>[] = [
+    { field: "roundCode", headerName: "Round Code", flex: 1 },
+    { field: "roundTitle", headerName: "Round Title", flex: 1 },
+
+    {
+      field: "compTypeName",
+      headerName: "CompType Name",
+      flex: 1,
+      // @ts-ignore
+      valueGetter: (value, row) => row.tblComponentUnit?.tblCompType.compType,
+    },
+
+    {
+      field: "compNo",
+      headerName: "CompNo",
+      flex: 1,
+      valueGetter: (value, row) => row.tblComponentUnit?.compNo,
+    },
+
+    {
+      field: "jobCode",
+      headerName: "Job Code",
+      flex: 1,
+      valueGetter: (value, row) => row.tblJobDescription?.jobDescCode,
+    },
+
+    {
+      field: "jobTitle",
+      headerName: "Job Title",
+      flex: 1,
+      valueGetter: (value, row) => row.tblJobDescription?.jobDescTitle,
+    },
+
+    {
+      field: "jobDisiplice",
+      headerName: "Job Disiplice",
+      flex: 1,
+      valueGetter: (value, row) => row.tblDiscipline?.name,
+    },
+
+    { field: "frequency", headerName: "Frequency", flex: 1 },
+
+    {
+      field: "frequencyPeriod",
+      headerName: "Frequency Period",
+      flex: 1,
+      valueGetter: (value, row) => row.tblPeriod?.name,
+    },
+
+    { field: "lastDone", headerName: "Last Done", flex: 1 },
+    { field: "nextDueDate", headerName: "NextDueDate", flex: 1 },
+
+    { field: "realOverDue", headerName: "RealOverDue", flex: 1 },
+    { field: "lastTimeDone", headerName: "LastTimeDone", flex: 1 },
+
+    dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
+  ];
 
   return (
-    <Box height="100%" width="100%">
+    <>
       <Splitter initialPrimarySize="70%" horizontal>
-        <Box sx={{ height: "100%", overflow: "hidden" }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            disableRowSelectionOnClick
-            sx={{ border: "1px solid", borderColor: "divider" }}
-          />
-        </Box>
+        <CustomizedDataGrid
+          rows={rows}
+          loading={loading}
+          columns={columns}
+          label="Component Job"
+          showToolbar
+          onAddClick={handleCreate}
+          onRefreshClick={handleRefresh}
+          getRowId={(row) => row.compJobId}
+          onRowClick={handleRowClick}
+        />
 
-        <Box p={1}>
-          <TextField
-            fullWidth
-            multiline
-            minRows={5}
-            maxRows={12}
-            label="Remarks / Notes"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
-        </Box>
+        <Editor
+          key={selected?.compJobId}
+          initValue={html}
+          onSave={handleSaveDescription}
+        />
       </Splitter>
-    </Box>
+    </>
   );
 }

@@ -9,11 +9,11 @@ import {
 } from "@/core/api/generated/api";
 
 interface TabJobProps {
-  functionId?: number | null;
+  roundId?: number | null;
   label?: string | null;
 }
 
-const TabJob = ({ functionId, label }: TabJobProps) => {
+const TabJob = ({ roundId, label }: TabJobProps) => {
   // const [openForm, setOpenForm] = useState(false);
   // const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
@@ -22,8 +22,8 @@ const TabJob = ({ functionId, label }: TabJobProps) => {
     useDataGrid(
       tblJobDescription.getAll,
       tblJobDescription.deleteById,
-      "jobDescId",
-      !!functionId
+      "jobDescId"
+      //   !!roundId
     );
 
   // --- Handlers ---

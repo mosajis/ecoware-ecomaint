@@ -1,9 +1,8 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import {
-  tblCompTypeCounter,
   tblCompTypeJobCounter,
-  tblJobDescription,
+  tblMaintType,
   TypeTblCompTypeJobCounter,
 } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
@@ -25,9 +24,10 @@ const columns: GridColDef<TypeTblCompTypeJobCounter>[] = [
   },
   {
     field: "maintTypeId",
-    headerName: "Maint Type (set Rel)",
+    headerName: "Maint Type",
     flex: 1,
-    valueGetter: (_, row) => row.tblCompTypeJob?.maintTypeId,
+    // @ts-ignore
+    valueGetter: (_, row) => row.tblCompTypeJob?.tblMaintType.descr,
   },
   {
     field: "frequency",
@@ -62,6 +62,7 @@ export default function TabCompTypeJobCounter(
         },
         tblCompTypeJob: {
           include: {
+            tblMaintType: true,
             tblJobDescription: true,
           },
         },

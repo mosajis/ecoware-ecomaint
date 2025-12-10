@@ -32,6 +32,8 @@ interface CustomizedDataGridProps extends DataGridProps {
   disableRefresh?: boolean;
 
   disableRowNumber?: boolean;
+
+  toolbarChildren?: React.ReactNode;
 }
 
 export default function CustomizedDataGrid({
@@ -50,6 +52,7 @@ export default function CustomizedDataGrid({
   disableAdd,
   disableRefresh,
   disableRowNumber,
+  toolbarChildren,
   ...rest
 }: CustomizedDataGridProps) {
   const indexedRows = useMemo(() => {
@@ -84,7 +87,9 @@ export default function CustomizedDataGrid({
         disableFilters={disableFilters}
         disableAdd={disableAdd}
         disableRefresh={disableRefresh}
-      />
+      >
+        {toolbarChildren}
+      </DataGridToolbar>
     ),
     [
       label,

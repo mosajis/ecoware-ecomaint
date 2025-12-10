@@ -25,10 +25,13 @@ interface DataGridToolbarProps {
   disableFilters?: boolean;
   disableAdd?: boolean;
   disableRefresh?: boolean;
+
+  children?: React.ReactNode; // <-- اضافه شد
 }
 
 export default function DataGridToolbar(props: DataGridToolbarProps) {
   const theme = useTheme();
+
   const {
     label,
     loading,
@@ -41,6 +44,7 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
     disableFilters,
     disableAdd,
     disableRefresh,
+    children, // <-- اضافه شد
   } = props;
 
   return (
@@ -53,7 +57,12 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
           borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
         }}
       >
-        <Typography fontWeight="bold">{label}</Typography>
+        <Box display={"flex"} alignItems={"center"} gap={2}>
+          <Typography fontWeight="bold">{label}</Typography>
+
+          {/* 🔥 children اینجا رندر می‌شود */}
+          {children}
+        </Box>
 
         <Box display="flex" gap={0.5}>
           {!disableSearch && <ButtonSearch />}
