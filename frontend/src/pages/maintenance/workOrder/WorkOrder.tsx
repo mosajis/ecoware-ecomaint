@@ -13,6 +13,7 @@ import { tblWorkOrder, TypeTblWorkOrder } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
+import WorkOrderFilterDialog from "./WorkORderFilterDialog";
 
 const calculateOverdue = (row: any) => {
   const status = row?.tblWorkOrderStatus?.name?.toLowerCase();
@@ -181,74 +182,81 @@ export default function WorkOrderPage() {
   const handleReport = () => {};
 
   return (
-    <Splitter horizontal initialPrimarySize="45%">
-      <TabsComponent workOrderId={selectedRow?.workOrderId} />
+    <>
+      <Splitter horizontal initialPrimarySize="45%">
+        <TabsComponent workOrder={selectedRow} />
 
-      <CustomizedDataGrid
-        showToolbar
-        disableDensity
-        label="WorkOrders"
-        loading={loading}
-        onRefreshClick={handleRefresh}
-        getRowId={(row) => row.workOrderId}
-        onRowClick={(params) => setSelectedRow(params.row)}
-        rows={rows}
-        columns={columns}
-        toolbarChildren={
-          <DataGridActionBar
-            actions={[
-              {
-                label: "Issue",
-                icon: <AssignmentTurnedInIcon />,
-                onClick: handleIssue,
-                disabled: !selectedRow || loading,
-              },
-              {
-                label: "Complete",
-                icon: <CheckCircleIcon />,
-                onClick: handleComplete,
-                disabled: !selectedRow || loading,
-              },
-              {
-                label: "Pending",
-                icon: <HourglassEmptyIcon />,
-                onClick: handlePending,
-                disabled: !selectedRow || loading,
-              },
-              {
-                label: "Postponed",
-                icon: <ScheduleIcon />,
-                onClick: handlePostponed,
-                disabled: !selectedRow || loading,
-              },
-              {
-                label: "Report",
-                icon: <ScheduleIcon />,
-                onClick: handleReport,
-                disabled: !selectedRow || loading,
-              },
-              {
-                label: "Cancel",
-                icon: <ScheduleIcon />,
-                onClick: handleCancel,
-                disabled: !selectedRow || loading,
-              },
-              {
-                label: "Request",
-                icon: <RequestPageIcon />,
-                onClick: handleRequest,
-                disabled: !selectedRow || loading,
-              },
-              {
-                label: "Reschedule",
-                icon: <EventRepeatIcon />,
-                onClick: handleReschedule,
-                disabled: !selectedRow || loading,
-              },
-            ]}
-          />
-        }
+        <CustomizedDataGrid
+          showToolbar
+          disableDensity
+          label="WorkOrders"
+          loading={loading}
+          onRefreshClick={handleRefresh}
+          getRowId={(row) => row.workOrderId}
+          onRowClick={(params) => setSelectedRow(params.row)}
+          rows={rows}
+          columns={columns}
+          toolbarChildren={
+            <DataGridActionBar
+              actions={[
+                {
+                  label: "Issue",
+                  icon: <AssignmentTurnedInIcon />,
+                  onClick: handleIssue,
+                  disabled: !selectedRow || loading,
+                },
+                {
+                  label: "Complete",
+                  icon: <CheckCircleIcon />,
+                  onClick: handleComplete,
+                  disabled: !selectedRow || loading,
+                },
+                {
+                  label: "Pending",
+                  icon: <HourglassEmptyIcon />,
+                  onClick: handlePending,
+                  disabled: !selectedRow || loading,
+                },
+                {
+                  label: "Postponed",
+                  icon: <ScheduleIcon />,
+                  onClick: handlePostponed,
+                  disabled: !selectedRow || loading,
+                },
+                {
+                  label: "Report",
+                  icon: <ScheduleIcon />,
+                  onClick: handleReport,
+                  disabled: !selectedRow || loading,
+                },
+                {
+                  label: "Cancel",
+                  icon: <ScheduleIcon />,
+                  onClick: handleCancel,
+                  disabled: !selectedRow || loading,
+                },
+                {
+                  label: "Request",
+                  icon: <RequestPageIcon />,
+                  onClick: handleRequest,
+                  disabled: !selectedRow || loading,
+                },
+                {
+                  label: "Reschedule",
+                  icon: <EventRepeatIcon />,
+                  onClick: handleReschedule,
+                  disabled: !selectedRow || loading,
+                },
+              ]}
+            />
+          }
+        />
+      </Splitter>
+      <WorkOrderFilterDialog
+        onApplyFilter={() => {}}
+        onClose={() => {}}
+        open={true}
       />
-    </Splitter>
+    </>
   );
 }

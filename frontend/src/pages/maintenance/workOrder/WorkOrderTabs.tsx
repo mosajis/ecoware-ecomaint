@@ -8,9 +8,10 @@ import MemoryIcon from "@mui/icons-material/Memory";
 import StraightenIcon from "@mui/icons-material/Straighten";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import TabsContainer from "@/shared/components/TabsContainer";
+import { TypeTblWorkOrder } from "@/core/api/generated/api";
 
-const TabPendingDetails = lazy(() => import("./tabs/TabPendingDetail"));
 const TabJobDescription = lazy(() => import("./tabs/TabJobDescription"));
+const TabPendingDetails = lazy(() => import("./tabs/TabPendingDetail"));
 const TabJobAttachments = lazy(() => import("./tabs/TabJobAttachments"));
 const TabWoAttachments = lazy(() => import("./tabs/TabWoAttachments"));
 const TabMaintenanceLog = lazy(() => import("./tabs/TabMaintenanceLog"));
@@ -63,18 +64,18 @@ const tabs = [
 ];
 
 type Props = {
-  workOrderId?: number | undefined | null;
+  workOrder?: TypeTblWorkOrder | null;
   label?: string | null;
 };
 
 const TabsComponent = (props: Props) => {
-  const { workOrderId, label } = props;
+  const { workOrder, label } = props;
   return (
     <TabsContainer
       tabs={tabs}
       queryParamKey="tab"
       tabProps={{
-        workOrderId,
+        workOrder,
         label,
       }}
     />

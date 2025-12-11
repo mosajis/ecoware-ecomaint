@@ -4,30 +4,31 @@ import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
   tblCompTypeMeasurePoint,
+  tblReScheduleLog,
+  TypeTblWorkOrder,
   type TypeTblCompMeasurePoint,
 } from "@/core/api/generated/api";
 
 interface Props {
-  workOrderId?: number | null;
+  workOrder?: TypeTblWorkOrder | null;
   label?: string | null;
 }
 
-const TabRescheduleLog = ({ workOrderId }: Props) => {
+const TabRescheduleLog = ({ workOrder }: Props) => {
   // === getAll callback ===
   const getAll = useCallback(() => {
-    return tblCompTypeMeasurePoint.getAll({
-      include: {
-        tblUnit: true,
-        tblCounterType: true,
+    return tblReScheduleLog.getAll({
+      filter: {
+        workOrderId: workOrder?.workOrderId,
       },
     });
-  }, []);
+  }, [workOrder?.workOrderId]);
 
   // === useDataGrid ===
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
-    tblCompTypeMeasurePoint.deleteById,
-    "compTypeMeasurePointId"
+    tblReScheduleLog.deleteById,
+    "rescheduleLogId"
   );
 
   // === Columns ===
@@ -70,7 +71,7 @@ const TabRescheduleLog = ({ workOrderId }: Props) => {
       loading={loading}
       showToolbar
       onRefreshClick={handleRefresh}
-      getRowId={(row) => row.compTypeMeasurePointId}
+      getRowId={(row) => row.rescheduleLogId}
     />
   );
 };

@@ -1,33 +1,38 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useCallback, useMemo } from "react";
 import {
+  tblCompMeasurePoint,
   tblCompTypeMeasurePoint,
+  TypeTblWorkOrder,
   type TypeTblCompMeasurePoint,
 } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 interface Props {
-  workOrderId?: number | null;
+  workOrder?: TypeTblWorkOrder | null;
   label?: string | null;
 }
 
-const TabMeasurePoints = ({ workOrderId }: Props) => {
+const TabMeasurePoints = ({ workOrder }: Props) => {
   // === getAll callback ===
   const getAll = useCallback(() => {
-    return tblCompTypeMeasurePoint.getAll({
+    return tblCompMeasurePoint.getAll({
+      filter: {
+        compId: workOrder?.compId,
+      },
       include: {
         tblUnit: true,
         tblCounterType: true,
       },
     });
-  }, []);
+  }, [workOrder]);
 
   // === useDataGrid ===
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
     tblCompTypeMeasurePoint.deleteById,
-    "compTypeMeasurePointId"
+    "compMeasurePointId"
   );
 
   // === Columns ===
@@ -85,7 +90,7 @@ const TabMeasurePoints = ({ workOrderId }: Props) => {
       loading={loading}
       showToolbar
       onRefreshClick={handleRefresh}
-      getRowId={(row) => row.compTypeMeasurePointId}
+      getRowId={(row) => row.compMeasurePointId}
     />
   );
 };

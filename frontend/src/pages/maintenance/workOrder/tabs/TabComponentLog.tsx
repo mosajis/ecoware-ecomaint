@@ -1,16 +1,20 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { tblMaintLog, TypeTblMaintLog } from "@/core/api/generated/api";
+import {
+  tblMaintLog,
+  TypeTblMaintLog,
+  TypeTblWorkOrder,
+} from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
 import { useCallback } from "react";
 
 interface Props {
-  workOrderId?: number | null;
+  workOrder?: TypeTblWorkOrder | null;
   label?: string | null;
 }
 
 const TabComponentLog = (props: Props) => {
-  const { workOrderId } = props;
+  const { workOrder } = props;
 
   const columns: GridColDef<TypeTblMaintLog>[] = [
     {
@@ -116,7 +120,9 @@ const TabComponentLog = (props: Props) => {
   const getAll = useCallback(
     () =>
       tblMaintLog.getAll({
-        paginate: true,
+        filter: {
+          compId: workOrder?.compId,
+        },
         include: {
           tblComponentUnit: {
             include: {
@@ -127,13 +133,14 @@ const TabComponentLog = (props: Props) => {
           tblMaintClass: true,
         },
       }),
-    []
+    [workOrder]
   );
   // === useDataGrid ===
   const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
     tblMaintLog.deleteById,
-    "maintLogId"
+    "maintLogId",
+    !!workOrder?.workOrderId
   );
 
   return (
