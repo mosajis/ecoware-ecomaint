@@ -92,6 +92,7 @@ export default function CustomizedDataGrid({
       </DataGridToolbar>
     ),
     [
+      toolbarChildren,
       label,
       loading,
       onAddClick,

@@ -1,4 +1,4 @@
-import { alpha, useTheme } from "@mui/material";
+import { alpha, useColorScheme, useTheme } from "@mui/material";
 import React, {
   useCallback,
   memo,
@@ -74,6 +74,7 @@ const EditorToolbar = memo(
     autoSaveStatus: "idle" | "saving" | "saved";
   }) => {
     const theme = useTheme();
+    const { mode, setMode } = useColorScheme();
     const rightBtnColors = getButtonColors(theme, disabled || loading);
 
     const saveBtnStyle: React.CSSProperties = {
@@ -100,6 +101,7 @@ const EditorToolbar = memo(
           display: "flex",
           justifyContent: "space-between",
           backgroundColor: (theme.vars || theme).palette.background.paper,
+          borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
           padding: "0 8px",
           height: 45,
           flexWrap: "wrap",
@@ -107,19 +109,25 @@ const EditorToolbar = memo(
       >
         {/* Formatting buttons */}
         <div style={{ display: "flex", gap: "4px", alignItems: "center" }}>
-          <BtnBold />
-          <BtnItalic />
+          <BtnBold style={{ color: mode === "light" ? "#333" : "white" }} />
+          <BtnItalic style={{ color: mode === "light" ? "#333" : "white" }} />
 
           <div style={dividerStyle(theme)} />
 
-          <BtnAlignLeft />
-          <BtnAlignCenter />
-          <BtnAlignRight />
+          <BtnAlignLeft
+            style={{ color: mode === "light" ? "#333" : "white" }}
+          />
+          <BtnAlignCenter
+            style={{ color: mode === "light" ? "#333" : "white" }}
+          />
+          <BtnAlignRight
+            style={{ color: mode === "light" ? "#333" : "white" }}
+          />
 
           <div style={dividerStyle(theme)} />
 
-          <BtnUndo />
-          <BtnRedo />
+          <BtnUndo style={{ color: mode === "light" ? "#333" : "white" }} />
+          <BtnRedo style={{ color: mode === "light" ? "#333" : "white" }} />
         </div>
 
         {/* Right side: autosave + manual save */}

@@ -1,10 +1,27 @@
 html,
 body,
 #root {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .split-container {
-    gap: .2rem;
+  gap: 0.2rem;
+}
+
+.rsw-ce:focus {
+  outline: none !important;
+}
+.rsw-ce:focus {
+  outline: none !important;
+}
+.rsw-btn {
+  border-radius: 4px;
+}
+.rsw-btn:hover {
+  background: #e0e0e07d !important;
+}
+
+.rsw-btn[data-active="true"] {
+  background: #e0e0e07d !important;
 }

@@ -57,6 +57,7 @@ const TablePKs = {
   TblSpareUnit: "PartID",
   TblUnit: "UnitID",
   TblWorkOrder: "WorkOrderID",
+  TblWorkOrderStatus: "WorkOrderStatusId",
   TblWorkShopComponent: "WShopCompID",
   TblWorkShopDone: "WShopDoneID",
   TblWorkShopRequest: "WShopRequestID",
@@ -223,7 +224,7 @@ function fixFile(filePath, fieldToPKMap) {
     const pkCamelCase = fieldToPKMap[fieldName];
 
     if (!pkCamelCase) {
-      console.warn(`⚠️  فیلد ${fieldName} در نقشه پیدا نشد`);
+      console.warn(`⚠️  cannot find: ${fieldName}`);
       continue;
     }
 

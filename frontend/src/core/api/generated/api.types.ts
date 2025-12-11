@@ -40423,7 +40423,7 @@ export interface operations {
                     };
                     tblWorkOrderStatus?: {
                         connect: {
-                            id: number;
+                            workOrderStatusId: number;
                         };
                     };
                     usersTblWorkOrderIssuedByToUsers?: {
@@ -40527,7 +40527,7 @@ export interface operations {
                     };
                     tblWorkOrderStatus?: {
                         connect: {
-                            id: number;
+                            workOrderStatusId: number;
                         };
                     };
                     usersTblWorkOrderIssuedByToUsers?: {
@@ -40631,7 +40631,7 @@ export interface operations {
                     };
                     tblWorkOrderStatus?: {
                         connect: {
-                            id: number;
+                            workOrderStatusId: number;
                         };
                     };
                     usersTblWorkOrderIssuedByToUsers?: {
@@ -41627,7 +41627,7 @@ export interface operations {
                     };
                     tblWorkOrderStatus?: {
                         connect?: {
-                            id: number;
+                            workOrderStatusId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -41751,7 +41751,7 @@ export interface operations {
                     };
                     tblWorkOrderStatus?: {
                         connect?: {
-                            id: number;
+                            workOrderStatusId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -41875,7 +41875,7 @@ export interface operations {
                     };
                     tblWorkOrderStatus?: {
                         connect?: {
-                            id: number;
+                            workOrderStatusId: number;
                         };
                         disconnect?: boolean;
                     };

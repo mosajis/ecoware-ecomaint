@@ -44,7 +44,7 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
     disableFilters,
     disableAdd,
     disableRefresh,
-    children, // <-- اضافه شد
+    children,
   } = props;
 
   return (
