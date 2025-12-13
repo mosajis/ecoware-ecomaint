@@ -1,25 +1,22 @@
+import FormDialog from "@/shared/components/formDialog/FormDialog";
 import React, { useState } from "react";
 import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
   TextField,
   FormGroup,
   FormControlLabel,
   Checkbox,
   Box,
-  Button,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Paper,
-  Grid,
   Typography,
+  Divider,
 } from "@mui/material";
-import ClearIcon from "@mui/icons-material/Clear";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import {
+  tblComponentUnit,
+  tblCompType,
+  tblMaintClass,
+  tblMaintType,
+  tblPendingType,
+} from "@/core/api/generated/api";
 
 const RESPONSIBILITIES = [
   "Electrician",
@@ -55,8 +52,58 @@ const COMPONENT_STATUSES = [
   "Transferred",
 ];
 
-const PRIORITY_OPTIONS = [0, 1, 2, 3, 4, 5];
+interface AsyncSelectProps {
+  label: string;
+  request: any;
+}
 
+const AsyncSelect = ({ label, request }: AsyncSelectProps) => (
+  <AsyncSelectField
+    dialogMaxWidth="sm"
+    label={label}
+    selectionMode="single"
+    request={request}
+    columns={[{ field: "name", headerName: "Name", flex: 1 }]}
+    getRowId={(row) => row.compId}
+    onChange={() => {}}
+  />
+);
+
+interface CheckboxGroupProps {
+  title: string;
+  items: string[];
+  selected?: string[];
+  onChange: (value: string) => void;
+}
+
+const CheckboxGroup = ({
+  title,
+  items,
+  selected = [],
+  onChange,
+}: CheckboxGroupProps) => (
+  <Box>
+    <Box sx={{ fontWeight: "bold" }} pb={1}>
+      {title}
+    </Box>
+    <FormGroup>
+      {items.map((item) => (
+        <FormControlLabel
+          key={item}
+          sx={{ height: "1.7rem" }}
+          control={
+            <Checkbox
+              size="small"
+              checked={selected.includes(item)}
+              onChange={() => onChange(item)}
+            />
+          }
+          label={item}
+        />
+      ))}
+    </FormGroup>
+  </Box>
+);
 export interface WorkOrderFilter {
   number?: string;
   title?: string;
@@ -150,7 +197,6 @@ export default function WorkOrderFilterDialog({
   };
 
   const handleApply = () => {
-    // ساخت filter object برای prisma
     const prismaFilter: any = {
       AND: [
         filters.number && {
@@ -187,18 +233,15 @@ export default function WorkOrderFilterDialog({
         filters.maintClass && {
           maintClass: { contains: filters.maintClass, mode: "insensitive" },
         },
-        filters.workOrderStatuses &&
-          filters.workOrderStatuses.length > 0 && {
-            status: { in: filters.workOrderStatuses },
-          },
-        filters.componentStatuses &&
-          filters.componentStatuses.length > 0 && {
-            componentStatus: { in: filters.componentStatuses },
-          },
-        filters.responsibilities &&
-          filters.responsibilities.length > 0 && {
-            responsibility: { in: filters.responsibilities },
-          },
+        filters.workOrderStatuses?.length && {
+          status: { in: filters.workOrderStatuses },
+        },
+        filters.componentStatuses?.length && {
+          componentStatus: { in: filters.componentStatuses },
+        },
+        filters.responsibilities?.length && {
+          responsibility: { in: filters.responsibilities },
+        },
         filters.dueNow && {
           dueDate: { equals: new Date().toISOString().split("T")[0] },
         },
@@ -243,260 +286,147 @@ export default function WorkOrderFilterDialog({
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle>فیلتر کردن Work Order</DialogTitle>
-      <DialogContent dividers sx={{ maxHeight: "70vh", overflowY: "auto" }}>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 3, pt: 2 }}>
-          {/* Filter Work Order Section */}
-          <Paper elevation={0} sx={{ p: 2, bgcolor: "#f5f5f5" }}>
-            <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: "bold" }}>
-              فیلتر Work Order
-            </Typography>
-            <Grid container spacing={2}>
+    <FormDialog open={open} onClose={onClose} title="Filter" maxWidth="md">
+      <Box display="flex" gap={1.5}>
+        <Box>
+          <Box sx={{ fontWeight: "bold" }} pb={1}>
+            WorkOrder Info
+          </Box>
+
+          <Box
+            display={"grid"}
+            gap={1.5}
+            width={"100%"}
+            gridTemplateColumns={"1fr 1fr 1fr"}
+          >
+            <Box display={"flex"} flexDirection={"column"} gap={1.5}>
               <TextField
                 fullWidth
                 size="small"
-                label="شماره"
+                label="Number"
                 name="number"
                 value={filters.number}
                 onChange={handleTextChange}
-                variant="outlined"
               />
               <TextField
-                fullWidth
                 size="small"
-                label="عنوان"
+                label="Title"
                 name="title"
                 value={filters.title}
                 onChange={handleTextChange}
-                variant="outlined"
               />
               <TextField
-                fullWidth
                 size="small"
                 label="Job Code"
                 name="jobCode"
                 value={filters.jobCode}
                 onChange={handleTextChange}
-                variant="outlined"
               />
-              <FormControl fullWidth size="small">
-                <InputLabel>اولویت</InputLabel>
-                <Select
-                  name="priority"
-                  value={filters.priority ?? ""}
-                  onChange={handleSelectChange}
-                  label="اولویت"
-                >
-                  <MenuItem value="">همه</MenuItem>
-                  {PRIORITY_OPTIONS.map((p) => (
-                    <MenuItem key={p} value={p}>
-                      {p}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-          </Paper>
+              <TextField
+                type="number"
+                size="small"
+                label="Priority"
+                name="priority"
+                value={filters.priority}
+                onChange={handleTextChange}
+              />
+            </Box>
 
-          {/* Component Section */}
-          <Paper elevation={0} sx={{ p: 2, bgcolor: "#f5f5f5" }}>
-            <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: "bold" }}>
-              کامپوننت
-            </Typography>
-            <TextField
-              fullWidth
-              size="small"
-              label="کامپوننت"
-              name="component"
-              value={filters.component}
-              onChange={handleTextChange}
-              variant="outlined"
-            />
-            <TextField
-              fullWidth
-              size="small"
-              label="Component Class"
-              name="componentClass"
-              value={filters.componentClass}
-              onChange={handleTextChange}
-              variant="outlined"
-            />
-            <TextField
-              fullWidth
-              size="small"
-              label="Component Type"
-              name="componentType"
-              value={filters.componentType}
-              onChange={handleTextChange}
-              variant="outlined"
-            />
-            <TextField
-              fullWidth
-              size="small"
-              label="Pending Type"
-              name="pendingType"
-              value={filters.pendingType}
-              onChange={handleTextChange}
-              variant="outlined"
-            />
-            <TextField
-              fullWidth
-              size="small"
-              label="Maint Type"
-              name="maintType"
-              value={filters.maintType}
-              onChange={handleTextChange}
-              variant="outlined"
-            />
-            <TextField
-              fullWidth
-              size="small"
-              label="Maint Class"
-              name="maintClass"
-              value={filters.maintClass}
-              onChange={handleTextChange}
-              variant="outlined"
-            />
-          </Paper>
+            <Box display={"flex"} gap={1.5} flexDirection={"column"}>
+              <AsyncSelect
+                label="Component"
+                request={tblComponentUnit.getAll}
+              />
+              <AsyncSelect
+                label="Component Type"
+                request={tblCompType.getAll}
+              />
+              <AsyncSelect
+                label="Component Class"
+                request={tblComponentUnit.getAll}
+              />
+            </Box>
+            <Box display={"flex"} gap={1.5} flexDirection={"column"}>
+              <AsyncSelect label="Maint Type" request={tblMaintType.getAll} />
+              <AsyncSelect label="Maint Class" request={tblMaintClass.getAll} />
+              <AsyncSelect
+                label="Pending Type"
+                request={tblPendingType.getAll}
+              />
+            </Box>
+          </Box>
+        </Box>
+      </Box>
 
-          {/* WorkOrder Status Section */}
-          <Paper elevation={0} sx={{ p: 2, bgcolor: "#f5f5f5" }}>
-            <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: "bold" }}>
-              وضعیت Work Order
-            </Typography>
-            <FormGroup row>
-              {WORKORDER_STATUSES.map((status) => (
-                <FormControlLabel
-                  key={status}
-                  control={
-                    <Checkbox
-                      checked={
-                        filters.workOrderStatuses?.includes(status) ?? false
-                      }
-                      onChange={() =>
-                        handleMultiCheckboxChange("workOrderStatuses", status)
-                      }
-                      size="small"
-                    />
-                  }
-                  label={status}
-                />
-              ))}
-            </FormGroup>
-          </Paper>
+      <Divider sx={{ my: 1.5 }} />
 
-          {/* Component Status Section */}
-          <Paper elevation={0} sx={{ p: 2, bgcolor: "#f5f5f5" }}>
-            <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: "bold" }}>
-              وضعیت کامپوننت
-            </Typography>
-            <FormGroup row>
-              {COMPONENT_STATUSES.map((status) => (
-                <FormControlLabel
-                  key={status}
-                  control={
-                    <Checkbox
-                      checked={
-                        filters.componentStatuses?.includes(status) ?? false
-                      }
-                      onChange={() =>
-                        handleMultiCheckboxChange("componentStatuses", status)
-                      }
-                      size="small"
-                    />
-                  }
-                  label={status}
-                />
-              ))}
-            </FormGroup>
-          </Paper>
+      <Box sx={{ display: "flex", gap: 1.5 }}>
+        <CheckboxGroup
+          title="Resp. Discipline"
+          items={RESPONSIBILITIES}
+          selected={filters.responsibilities}
+          onChange={(v) => handleMultiCheckboxChange("responsibilities", v)}
+        />
 
-          {/* Responsibilities Section */}
-          <Paper elevation={0} sx={{ p: 2, bgcolor: "#f5f5f5" }}>
-            <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: "bold" }}>
-              مسئولین
-            </Typography>
-            <FormGroup>
-              {RESPONSIBILITIES.map((resp) => (
-                <FormControlLabel
-                  key={resp}
-                  control={
-                    <Checkbox
-                      checked={
-                        filters.responsibilities?.includes(resp) ?? false
-                      }
-                      onChange={() =>
-                        handleMultiCheckboxChange("responsibilities", resp)
-                      }
-                      size="small"
-                    />
-                  }
-                  label={resp}
-                />
-              ))}
-            </FormGroup>
-          </Paper>
+        <Divider orientation="vertical" flexItem />
 
-          {/* Planning Section */}
-          <Paper elevation={0} sx={{ p: 2, bgcolor: "#f5f5f5" }}>
-            <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: "bold" }}>
-              برنامه‌ریزی
-            </Typography>
-            <FormGroup>
+        <CheckboxGroup
+          title="WorkOrder Status"
+          items={WORKORDER_STATUSES}
+          selected={filters.workOrderStatuses}
+          onChange={(v) => handleMultiCheckboxChange("workOrderStatuses", v)}
+        />
+
+        <Divider orientation="vertical" flexItem />
+
+        <CheckboxGroup
+          title="Component Status"
+          items={COMPONENT_STATUSES}
+          selected={filters.componentStatuses}
+          onChange={(v) => handleMultiCheckboxChange("componentStatuses", v)}
+        />
+
+        <Divider orientation="vertical" flexItem />
+
+        <Box>
+          <Box sx={{ fontWeight: "bold" }} pb={1}>
+            Planning
+          </Box>
+
+          <FormGroup>
+            {[
+              { key: "dueNow", label: "Due Now" },
+              { key: "overDue", label: "Over due" },
+              { key: "dueThisWeek", label: "Due This Week" },
+              { key: "dueNextWeek", label: "Due next week" },
+            ].map(({ key, label }) => (
               <FormControlLabel
+                key={key}
+                sx={{ height: "1.7rem" }}
                 control={
                   <Checkbox
-                    checked={filters.dueNow ?? false}
-                    onChange={() => handleCheckboxChange("dueNow")}
                     size="small"
+                    checked={filters[key as keyof typeof filters] ?? false}
+                    onChange={() => handleCheckboxChange(key)}
                   />
                 }
-                label="Due Now"
+                label={label}
               />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={filters.overDue ?? false}
-                    onChange={() => handleCheckboxChange("overDue")}
-                    size="small"
-                  />
-                }
-                label="Over due"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={filters.dueThisWeek ?? false}
-                    onChange={() => handleCheckboxChange("dueThisWeek")}
-                    size="small"
-                  />
-                }
-                label="Due This Week"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={filters.dueNextWeek ?? false}
-                    onChange={() => handleCheckboxChange("dueNextWeek")}
-                    size="small"
-                  />
-                }
-                label="Due next week"
-              />
-            </FormGroup>
-            <Box sx={{ display: "flex", gap: 2, mt: 2, alignItems: "center" }}>
-              <Typography variant="body2">Due between</Typography>
+            ))}
+          </FormGroup>
+
+          <Box sx={{ display: "flex", gap: 1, flexDirection: "column", mt: 1 }}>
+            <Typography variant="body2" fontWeight="bold">
+              Due Between
+            </Typography>
+
+            <Box display="flex" gap={1.5} alignItems="center">
               <TextField
                 type="date"
                 size="small"
                 name="dueFrom"
                 value={filters.dueFrom}
                 onChange={handleTextChange}
-                InputLabelProps={{ shrink: true }}
-                slotProps={{
-                  input: { style: { width: "150px" } },
-                }}
               />
               <Typography>-</Typography>
               <TextField
@@ -505,48 +435,11 @@ export default function WorkOrderFilterDialog({
                 name="dueTo"
                 value={filters.dueTo}
                 onChange={handleTextChange}
-                InputLabelProps={{ shrink: true }}
-                slotProps={{
-                  input: { style: { width: "150px" } },
-                }}
               />
             </Box>
-          </Paper>
-
-          {/* Critical Component */}
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={filters.criticalComponent ?? false}
-                onChange={() => handleCheckboxChange("criticalComponent")}
-                size="small"
-              />
-            }
-            label="Critical Component"
-          />
+          </Box>
         </Box>
-      </DialogContent>
-      <DialogActions sx={{ p: 2 }}>
-        <Button
-          variant="outlined"
-          color="error"
-          startIcon={<ClearIcon />}
-          onClick={handleClearFilter}
-        >
-          Clear Filter
-        </Button>
-        <Button onClick={onClose} variant="outlined">
-          Cancel
-        </Button>
-        <Button
-          onClick={handleApply}
-          variant="contained"
-          color="success"
-          startIcon={<CheckCircleIcon />}
-        >
-          Ok
-        </Button>
-      </DialogActions>
-    </Dialog>
+      </Box>
+    </FormDialog>
   );
 }

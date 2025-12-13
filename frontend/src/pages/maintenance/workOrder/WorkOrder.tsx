@@ -14,6 +14,7 @@ import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import WorkOrderFilterDialog from "./WorkORderFilterDialog";
+import { formatDateTime } from "@/core/api/helper";
 
 const calculateOverdue = (row: any) => {
   const status = row?.tblWorkOrderStatus?.name?.toLowerCase();
@@ -93,7 +94,7 @@ export default function WorkOrderPage() {
     {
       field: "location",
       headerName: "Location",
-      width: 150,
+      width: 100,
       // @ts-ignore
       valueGetter: (_, row) => row?.tblComponentUnit?.tblLocation?.name,
     },
@@ -116,12 +117,22 @@ export default function WorkOrderPage() {
       width: 90,
       valueGetter: (_, row) => row?.tblWorkOrderStatus?.name,
     },
-    { field: "dueDate", headerName: "Due Date", flex: 1 },
-    { field: "completed", headerName: "Completed Date", flex: 1 },
+    {
+      field: "dueDate",
+      headerName: "Due Date",
+      width: 130,
+      valueFormatter: (value) => (value ? formatDateTime(value) : ""),
+    },
+    {
+      field: "completed",
+      headerName: "Completed Date",
+      width: 130,
+      valueFormatter: (value) => (value ? formatDateTime(value) : ""),
+    },
     {
       field: "overDue",
       headerName: "OverDue",
-      flex: 1,
+      width: 80,
       valueGetter: (_, row) => calculateOverdue(row),
       renderCell: (params) => {
         const value = params.value;
@@ -133,19 +144,17 @@ export default function WorkOrderPage() {
     {
       field: "pendingType",
       headerName: "Pending Type",
-      flex: 1,
       valueGetter: (_, row) => row?.tblPendingType?.pendTypeName,
     },
-    { field: "pendingdate", headerName: "Pending Date", flex: 1 },
+    { field: "pendingdate", headerName: "Pending Date" },
     {
       field: "triggeredBy",
       headerName: "Triggered By (W-Rel)",
-      flex: 1,
     },
     {
       field: "componentStatus",
       headerName: "Comp Status",
-      flex: 1,
+      width: 110,
       valueGetter: (_, row) =>
         // @ts-ignore
         row?.tblComponentUnit?.tblCompStatus?.compStatusName,
@@ -252,11 +261,11 @@ export default function WorkOrderPage() {
           }
         />
       </Splitter>
-      <WorkOrderFilterDialog
+      {/* <WorkOrderFilterDialog
         onApplyFilter={() => {}}
         onClose={() => {}}
         open={true}
-      />
+      /> */}
     </>
   );
 }

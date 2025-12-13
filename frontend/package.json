@@ -19,6 +19,8 @@
     "@tanstack/react-router": "^1.134.12",
     "axios": "^1.13.1",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "date-fns-jalali": "^4.1.0-0",
     "dayjs": "^1.11.19",
     "jotai": "^2.15.1",
     "lodash-es": "^4.17.21",
