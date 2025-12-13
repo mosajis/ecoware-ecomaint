@@ -8,49 +8,28 @@ import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 import RequestPageIcon from "@mui/icons-material/RequestPage";
 import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 import ScheduleIcon from "@mui/icons-material/Schedule";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import { useCallback, useState } from "react";
 import { tblWorkOrder, TypeTblWorkOrder } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
-import WorkOrderFilterDialog from "./WorkORderFilterDialog";
+import WorkOrderFilterDialog, {
+  WorkOrderFilter,
+} from "./WorkORderFilterDialog";
 import { formatDateTime } from "@/core/api/helper";
-
-const calculateOverdue = (row: any) => {
-  const status = row?.tblWorkOrderStatus?.name?.toLowerCase();
-
-  // اگر وضعیت در حالت‌های نادیده‌گرفته‌شده بود → خالی
-  if (!status || ["complete", "control", "cancel"].includes(status)) {
-    return "";
-  }
-
-  const dueDate = row?.dueDate;
-  if (!dueDate) return "";
-
-  const due = new Date(dueDate);
-  if (isNaN(due.getTime())) return ""; // اگر تاریخ معتبر نبود
-
-  const now = new Date();
-  const diffDays = Math.ceil(
-    (due.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
-  );
-
-  return diffDays;
-};
+import { calculateOverdue } from "./workOrderHelper";
 
 export default function WorkOrderPage() {
   const [selectedRow, setSelectedRow] = useState<TypeTblWorkOrder | null>(null);
-  const [openForm, setOpenForm] = useState(false);
-
-  const handleEdit = (row: TypeTblWorkOrder) => {
-    setSelectedRow(row);
-    setOpenForm(true);
-  };
+  const [filter, setFilter] = useState<WorkOrderFilter | null>(null);
+  const [filterOpen, setFilterOpen] = useState(false);
 
   const getAll = useCallback(
     () =>
       tblWorkOrder.getAll({
         paginate: true,
+        filter: filter ?? undefined,
         include: {
           tblComponentUnit: {
             include: {
@@ -68,7 +47,7 @@ export default function WorkOrderPage() {
           tblWorkOrderStatus: true,
         },
       }),
-    []
+    [filter]
   );
 
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
@@ -76,6 +55,8 @@ export default function WorkOrderPage() {
     tblWorkOrder.deleteById,
     "workOrderId"
   );
+
+  /* ---------- Columns ---------- */
 
   const columns: GridColDef<TypeTblWorkOrder>[] = [
     {
@@ -106,9 +87,9 @@ export default function WorkOrderPage() {
       valueGetter: (_, row) => row?.tblCompJob?.tblJobDescription?.jobDescTitle,
     },
     {
-      field: "disipline",
-      headerName: "Disipline",
-      width: 100,
+      field: "discipline",
+      headerName: "Discipline",
+      width: 110,
       valueGetter: (_, row) => row?.tblDiscipline?.name,
     },
     {
@@ -135,33 +116,23 @@ export default function WorkOrderPage() {
       width: 80,
       valueGetter: (_, row) => calculateOverdue(row),
       renderCell: (params) => {
-        const value = params.value;
-        const color = value < 0 ? "red" : "green";
-        return <span style={{ color, fontWeight: 600 }}>{value}</span>;
+        if (params.value === "") return "";
+        const color = params.value < 0 ? "red" : "green";
+        return <span style={{ color, fontWeight: 600 }}>{params.value}</span>;
       },
     },
-
     {
       field: "pendingType",
       headerName: "Pending Type",
       valueGetter: (_, row) => row?.tblPendingType?.pendTypeName,
     },
-    { field: "pendingdate", headerName: "Pending Date" },
     {
-      field: "triggeredBy",
-      headerName: "Triggered By (W-Rel)",
+      field: "priority",
+      headerName: "Priority",
+      width: 70,
     },
-    {
-      field: "componentStatus",
-      headerName: "Comp Status",
-      width: 110,
-      valueGetter: (_, row) =>
-        // @ts-ignore
-        row?.tblComponentUnit?.tblCompStatus?.compStatusName,
-    },
-    { field: "priority", headerName: "Priority", width: 70 },
     dataGridActionColumn({
-      onEdit: handleEdit,
+      onEdit: (row) => setSelectedRow(row),
       onDelete: handleDelete,
     }),
   ];
@@ -180,19 +151,18 @@ export default function WorkOrderPage() {
     handleRefresh();
   };
 
-  const handleIssue = () => updateStatus(3);
-  const handleComplete = () => updateStatus(5);
-  const handlePending = () => updateStatus(4);
-  const handlePostponed = () => updateStatus(8);
-  const handleCancel = () => updateStatus(7);
-  const handleRequest = () => updateStatus(1);
-
-  const handleReschedule = () => {};
-  const handleReport = () => {};
+  // multiple select
+  // issue => باز کردن مودال نمایش ریپورت و اوکی
+  // complete => باز کردن ریپورت اوکی و تغییر وضعیت
+  // pend => چگ از روی نرم افزار
+  // postponed =>  چگ از روی نرم افزار
+  // cancel => empty
+  // request =>  چگ از روی نرم افزار
+  // reschedule =>  چگ از روی نرم افزار
 
   return (
     <>
-      <Splitter horizontal initialPrimarySize="45%">
+      <Splitter horizontal initialPrimarySize="40%">
         <TabsComponent workOrder={selectedRow} />
 
         <CustomizedDataGrid
@@ -200,72 +170,76 @@ export default function WorkOrderPage() {
           disableDensity
           label="WorkOrders"
           loading={loading}
-          onRefreshClick={handleRefresh}
-          getRowId={(row) => row.workOrderId}
-          onRowClick={(params) => setSelectedRow(params.row)}
           rows={rows}
           columns={columns}
+          getRowId={(row) => row.workOrderId}
+          onRowClick={(params) => setSelectedRow(params.row)}
+          onRefreshClick={handleRefresh}
           toolbarChildren={
             <DataGridActionBar
               actions={[
                 {
+                  label: "Filter",
+                  icon: <FilterAltIcon />,
+                  variant: filter ? "contained" : "text",
+                  onClick: () => setFilterOpen(true),
+                },
+                {
                   label: "Issue",
                   icon: <AssignmentTurnedInIcon />,
-                  onClick: handleIssue,
-                  disabled: !selectedRow || loading,
+                  onClick: () => updateStatus(3),
+                  disabled: !selectedRow || loading, // only plan or request enable
                 },
                 {
                   label: "Complete",
                   icon: <CheckCircleIcon />,
-                  onClick: handleComplete,
-                  disabled: !selectedRow || loading,
+                  onClick: () => updateStatus(5),
+                  disabled: !selectedRow || loading, // plan control complete cancel disable
                 },
                 {
                   label: "Pending",
                   icon: <HourglassEmptyIcon />,
-                  onClick: handlePending,
-                  disabled: !selectedRow || loading,
+                  onClick: () => updateStatus(4),
+                  disabled: !selectedRow || loading, // only issue enable
                 },
                 {
                   label: "Postponed",
                   icon: <ScheduleIcon />,
-                  onClick: handlePostponed,
-                  disabled: !selectedRow || loading,
-                },
-                {
-                  label: "Report",
-                  icon: <ScheduleIcon />,
-                  onClick: handleReport,
-                  disabled: !selectedRow || loading,
+                  onClick: () => updateStatus(8),
+                  disabled: !selectedRow || loading, // only pend or issue enable
                 },
                 {
                   label: "Cancel",
                   icon: <ScheduleIcon />,
-                  onClick: handleCancel,
-                  disabled: !selectedRow || loading,
+                  onClick: () => updateStatus(7),
+                  disabled: !selectedRow || loading, // همیشه فعال
                 },
                 {
                   label: "Request",
                   icon: <RequestPageIcon />,
-                  onClick: handleRequest,
-                  disabled: !selectedRow || loading,
+                  onClick: () => updateStatus(1),
+                  disabled: !selectedRow || loading, // همیشه فعال
                 },
                 {
                   label: "Reschedule",
                   icon: <EventRepeatIcon />,
-                  onClick: handleReschedule,
-                  disabled: !selectedRow || loading,
+                  onClick: () => {},
+                  disabled: !selectedRow || loading, // complete control disable
                 },
               ]}
             />
           }
         />
       </Splitter>
-      {/* <WorkOrderFilterDialog
-        onApplyFilter={() => {}}
-        onClose={() => {}}
-        open={true}
-      /> */}
+
+      <WorkOrderFilterDialog
+        open={filterOpen}
+        onClose={() => setFilterOpen(false)}
+        onApplyFilter={(prismaFilter) => {
+          setFilter(prismaFilter);
+          setFilterOpen(false);
+        }}
+      />
     </>
   );
 }

@@ -1,4 +1,6 @@
 import Button from "@mui/material/Button";
+import IconCheck from "@mui/icons-material/Check";
+import IconClose from "@mui/icons-material/Close";
 
 type DialogActionsWrapperProps = {
   onCancel: () => void;
@@ -26,6 +28,7 @@ export default function FormDialogAction({
         sx={{ flex: 1 }}
         disabled={isDisabled}
         loading={submitting}
+        startIcon={<IconCheck />}
       >
         {submitText}
       </Button>
@@ -35,6 +38,7 @@ export default function FormDialogAction({
         variant="outlined"
         sx={{ flex: 1 }}
         disabled={isDisabled}
+        startIcon={<IconClose />}
       >
         {cancelText}
       </Button>

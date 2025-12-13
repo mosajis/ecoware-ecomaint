@@ -32,7 +32,8 @@ const TabMeasurePoints = ({ workOrder }: Props) => {
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
     tblCompTypeMeasurePoint.deleteById,
-    "compMeasurePointId"
+    "compMeasurePointId",
+    !!workOrder?.compId
   );
 
   // === Columns ===

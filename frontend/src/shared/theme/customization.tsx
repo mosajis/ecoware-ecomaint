@@ -1146,7 +1146,10 @@ export const dataGridCustomizations = {
           backgroundColor: (theme.vars || theme).palette.action.hover,
         },
         "&.Mui-selected": {
-          background: (theme.vars || theme).palette.action.selected,
+          background: "rgb(251 235 170 / 30%) !important",
+          ...theme.applyStyles("dark", {
+            background: "rgb(131 131 131 / 30%) !important",
+          }),
           "&:hover": {
             backgroundColor: (theme.vars || theme).palette.action.hover,
           },

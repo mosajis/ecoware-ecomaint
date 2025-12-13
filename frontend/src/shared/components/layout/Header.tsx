@@ -10,7 +10,9 @@ import { atomSideMenuOpen } from "@/shared/atoms/layout.atom";
 import HeaderBreadcrumbs from "./HeaderBreadcrumbs";
 import MenuButton from "./MenuButton";
 import ColorModeIconDropdown from "./ColorModeIconDropdown";
-import Search from "../Search";
+import Search from "./DigitalTime";
+import LanguageModeIconDropdown from "./LanguageModeIconDropdown";
+import DigitalTime from "./DigitalTime";
 
 export default function Header() {
   const setOpen = useSetAtom(atomSideMenuOpen);
@@ -37,10 +39,11 @@ export default function Header() {
 
       {/* Right side: Search + Notifications + Color mode */}
       <Stack direction="row" spacing={1} alignItems="center">
-        <Search />
+        <DigitalTime />
         <MenuButton showBadge>
           <NotificationsRoundedIcon />
         </MenuButton>
+        <LanguageModeIconDropdown />
         <ColorModeIconDropdown />
       </Stack>
     </Stack>

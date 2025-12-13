@@ -28,7 +28,8 @@ const TabRescheduleLog = ({ workOrder }: Props) => {
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
     tblReScheduleLog.deleteById,
-    "rescheduleLogId"
+    "rescheduleLogId",
+    !!workOrder?.workOrderId
   );
 
   // === Columns ===
