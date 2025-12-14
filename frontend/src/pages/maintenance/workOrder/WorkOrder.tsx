@@ -9,16 +9,18 @@ import RequestPageIcon from "@mui/icons-material/RequestPage";
 import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { tblWorkOrder, TypeTblWorkOrder } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
-import WorkOrderFilterDialog, {
-  WorkOrderFilter,
-} from "./WorkORderFilterDialog";
 import { formatDateTime } from "@/core/api/helper";
 import { calculateOverdue } from "./workOrderHelper";
+import WorkOrderFilterDialog, {
+  type WorkOrderFilter,
+} from "./WorkOrderFilterDialog";
+import { useReactToPrint } from "react-to-print";
+import { ReportPrint } from "./report/ReportPrint";
 
 export default function WorkOrderPage() {
   const [selectedRow, setSelectedRow] = useState<TypeTblWorkOrder | null>(null);
@@ -40,6 +42,7 @@ export default function WorkOrderPage() {
           tblCompJob: {
             include: {
               tblJobDescription: true,
+              tblPeriod: true,
             },
           },
           tblPendingType: true,
@@ -160,11 +163,38 @@ export default function WorkOrderPage() {
   // request =>  چگ از روی نرم افزار
   // reschedule =>  چگ از روی نرم افزار
 
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const handlePrint = useReactToPrint({
+    contentRef,
+  });
+
   return (
     <>
       <Splitter horizontal initialPrimarySize="40%">
-        <TabsComponent workOrder={selectedRow} />
+        {/* <TabsComponent workOrder={selectedRow} /> */}
 
+        <div>
+          <button onClick={handlePrint}>Print</button>
+
+          {/* مخفی روی صفحه، فقط برای پرینت */}
+          <div style={{ display: "none" }}>
+            <ReportPrint
+              ref={contentRef}
+              workOrders={
+                selectedRow
+                  ? [
+                      selectedRow as any,
+                      selectedRow as any,
+                      selectedRow as any,
+                      selectedRow as any,
+                      selectedRow as any,
+                    ]
+                  : []
+              }
+            />
+          </div>
+        </div>
         <CustomizedDataGrid
           showToolbar
           disableDensity
