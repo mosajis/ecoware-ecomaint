@@ -1,5 +1,4 @@
 import Splitter from "@/shared/components/Splitter";
-import TabsComponent from "./WorkOrderTabs";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import DataGridActionBar from "@/shared/components/dataGrid/DataGridActionBar";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
@@ -12,7 +11,7 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import { useCallback, useRef, useState } from "react";
 import { tblWorkOrder, TypeTblWorkOrder } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { GridColDef } from "@mui/x-data-grid";
+import { GridColDef, GridRowId } from "@mui/x-data-grid";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { formatDateTime } from "@/core/api/helper";
 import { calculateOverdue } from "./workOrderHelper";
@@ -22,10 +21,26 @@ import WorkOrderFilterDialog, {
 import { useReactToPrint } from "react-to-print";
 import { ReportPrint } from "./report/ReportPrint";
 
+type GridRowSelectionModel = {
+  type: "include" | "exclude";
+  ids: Set<GridRowId>;
+};
+
 export default function WorkOrderPage() {
-  const [selectedRow, setSelectedRow] = useState<TypeTblWorkOrder | null>(null);
+  // const [selectedRow, setSelectedRow] = useState<TypeTblWorkOrder | null>(null);
+
+  const [rowSelectionModel, setRowSelectionModel] =
+    useState<GridRowSelectionModel>({
+      type: "include",
+      ids: new Set<GridRowId>(),
+    });
+
+  const [selectedRows, setSelectedRows] = useState<TypeTblWorkOrder[]>([]);
+
   const [filter, setFilter] = useState<WorkOrderFilter | null>(null);
   const [filterOpen, setFilterOpen] = useState(false);
+
+  /* ---------- Data ---------- */
 
   const getAll = useCallback(
     () =>
@@ -134,34 +149,31 @@ export default function WorkOrderPage() {
       headerName: "Priority",
       width: 70,
     },
-    dataGridActionColumn({
-      onEdit: (row) => setSelectedRow(row),
-      onDelete: handleDelete,
-    }),
+    // dataGridActionColumn({
+    //   onEdit: (row) => setSelectedRow(row),
+    //   onDelete: handleDelete,
+    // }),
   ];
 
-  const updateStatus = async (statusId: number) => {
-    if (!selectedRow) return;
+  /* ---------- Actions ---------- */
 
-    await tblWorkOrder.update(selectedRow.workOrderId, {
-      tblWorkOrderStatus: {
-        connect: {
-          workOrderStatusId: statusId,
-        },
-      },
-    });
+  const updateStatus = async (statusId: number) => {
+    if (selectedRows.length === 0) return;
+
+    await Promise.all(
+      selectedRows.map((row) =>
+        tblWorkOrder.update(row.workOrderId, {
+          tblWorkOrderStatus: {
+            connect: { workOrderStatusId: statusId },
+          },
+        })
+      )
+    );
 
     handleRefresh();
   };
 
-  // multiple select
-  // issue => باز کردن مودال نمایش ریپورت و اوکی
-  // complete => باز کردن ریپورت اوکی و تغییر وضعیت
-  // pend => چگ از روی نرم افزار
-  // postponed =>  چگ از روی نرم افزار
-  // cancel => empty
-  // request =>  چگ از روی نرم افزار
-  // reschedule =>  چگ از روی نرم افزار
+  /* ---------- Print ---------- */
 
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -169,42 +181,39 @@ export default function WorkOrderPage() {
     contentRef,
   });
 
+  /* ---------- Render ---------- */
+
   return (
     <>
       <Splitter horizontal initialPrimarySize="40%">
-        {/* <TabsComponent workOrder={selectedRow} /> */}
-
         <div>
-          <button onClick={handlePrint}>Print</button>
+          <button onClick={handlePrint} disabled={selectedRows.length === 0}>
+            Print
+          </button>
 
-          {/* مخفی روی صفحه، فقط برای پرینت */}
+          {/* فقط برای پرینت */}
           <div style={{ display: "none" }}>
-            <ReportPrint
-              ref={contentRef}
-              workOrders={
-                selectedRow
-                  ? [
-                      selectedRow as any,
-                      selectedRow as any,
-                      selectedRow as any,
-                      selectedRow as any,
-                      selectedRow as any,
-                    ]
-                  : []
-              }
-            />
+            <ReportPrint ref={contentRef} workOrders={selectedRows} />
           </div>
         </div>
+
         <CustomizedDataGrid
-          showToolbar
-          disableDensity
-          label="WorkOrders"
-          loading={loading}
           rows={rows}
           columns={columns}
           getRowId={(row) => row.workOrderId}
-          onRowClick={(params) => setSelectedRow(params.row)}
-          onRefreshClick={handleRefresh}
+          checkboxSelection
+          rowSelectionModel={rowSelectionModel}
+          onRowSelectionModelChange={(newModel) => {
+            // newModel: GridRowSelectionModel
+            setRowSelectionModel(newModel);
+
+            // extract selected rows
+            const selectedIds = Array.from(newModel.ids) as number[];
+            const selected = rows.filter((r) =>
+              selectedIds.includes(r.workOrderId)
+            );
+            setSelectedRows(selected);
+          }}
           toolbarChildren={
             <DataGridActionBar
               actions={[
@@ -218,43 +227,43 @@ export default function WorkOrderPage() {
                   label: "Issue",
                   icon: <AssignmentTurnedInIcon />,
                   onClick: () => updateStatus(3),
-                  disabled: !selectedRow || loading, // only plan or request enable
+                  disabled: selectedRows.length === 0 || loading,
                 },
                 {
                   label: "Complete",
                   icon: <CheckCircleIcon />,
                   onClick: () => updateStatus(5),
-                  disabled: !selectedRow || loading, // plan control complete cancel disable
+                  disabled: selectedRows.length === 0 || loading,
                 },
                 {
                   label: "Pending",
                   icon: <HourglassEmptyIcon />,
                   onClick: () => updateStatus(4),
-                  disabled: !selectedRow || loading, // only issue enable
+                  disabled: selectedRows.length === 0 || loading,
                 },
                 {
                   label: "Postponed",
                   icon: <ScheduleIcon />,
                   onClick: () => updateStatus(8),
-                  disabled: !selectedRow || loading, // only pend or issue enable
+                  disabled: selectedRows.length === 0 || loading,
                 },
                 {
                   label: "Cancel",
                   icon: <ScheduleIcon />,
                   onClick: () => updateStatus(7),
-                  disabled: !selectedRow || loading, // همیشه فعال
+                  disabled: selectedRows.length === 0 || loading,
                 },
                 {
                   label: "Request",
                   icon: <RequestPageIcon />,
                   onClick: () => updateStatus(1),
-                  disabled: !selectedRow || loading, // همیشه فعال
+                  disabled: selectedRows.length === 0 || loading,
                 },
                 {
                   label: "Reschedule",
                   icon: <EventRepeatIcon />,
                   onClick: () => {},
-                  disabled: !selectedRow || loading, // complete control disable
+                  disabled: selectedRows.length === 0 || loading,
                 },
               ]}
             />

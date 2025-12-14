@@ -1,46 +1,61 @@
 import { TypeTblWorkOrder } from "@/core/api/generated/api";
 import { formatDateTime } from "@/core/api/helper";
 import { forwardRef } from "react";
+import { calculateOverdue } from "../workOrderHelper";
 
 type Props = {
   workOrders: TypeTblWorkOrder[];
 };
 
-type WOProps = {
-  wo: TypeTblWorkOrder;
-};
-
 const val = (v?: string | number | null) => v ?? "-";
 
-const PrintWorkOrder = ({ wo }: WOProps) => {
-  const componentName = wo.tblComponentUnit?.compNo ?? "-";
+const PrintWorkOrder = ({ workorder }: { workorder: TypeTblWorkOrder }) => {
+  const componentName = workorder.tblComponentUnit?.compNo ?? "-";
 
-  const serialNumber = wo.tblComponentUnit?.serialNo ?? "-";
-  const isCritical = wo.tblComponentUnit?.isCritical ?? "-";
+  const serialNumber = workorder.tblComponentUnit?.serialNo ?? "-";
+  const isCritical = workorder.tblComponentUnit?.isCritical ?? "-";
 
   // @ts-ignore
-  const location = wo.tblComponentUnit?.tblLocation.name ?? "-";
+  const location = workorder.tblComponentUnit?.tblLocation.name ?? "-";
 
-  const discipline = wo.tblDiscipline?.name ?? "-";
+  const discipline = workorder.tblDiscipline?.name ?? "-";
 
-  const frequency = wo.tblCompJob?.frequency ?? "-";
+  const frequency = workorder.tblCompJob?.frequency ?? "-";
   // @ts-ignore
-  const frequencyPeriod = wo.tblCompJob?.tblPeriod.name ?? "-";
+  const frequencyPeriod = workorder.tblCompJob?.tblPeriod.name ?? "-";
   // @ts-ignore
-  const jobCode = wo.tblCompJob?.tblJobDescription.jobDescCode ?? "-";
+  const jobCode = workorder.tblCompJob?.tblJobDescription.jobDescCode ?? "-";
   // @ts-ignore
-  const jobDesc = wo.tblCompJob?.tblJobDescription.jobDesc ?? "-";
+  const jobDesc = workorder.tblCompJob?.tblJobDescription.jobDesc ?? "-";
+  // @ts-ignore
+  const pendTypeName = workorder.tblPendingType?.pendTypeName ?? "-";
+  const pendingDate = workorder.pendingdate;
+  const pendingDescription = workorder?.tblPendingType?.description;
+
+  const overDue = calculateOverdue(workorder);
 
   return (
-    <div key={wo.workOrderId} className="print-block">
+    <div key={workorder.workOrderId} className="print-block">
       <table>
         <tbody>
+          <tr>
+            <td className="label">Title</td>
+            <td>{workorder.title}</td>
+            <td className="label">PlannedBy</td>
+            <td>{workorder.usersTblWorkOrderPlannedByToUsers?.uName}</td>
+            <td className="label">Priority</td>
+            <td>{workorder.priority}</td>
+          </tr>
           <tr>
             <td className="label">Component</td>
             <td>{componentName}</td>
 
             <td className="label">Due Date</td>
-            <td>{formatDateTime(String(wo.dueDate))}</td>
+            <td>
+              {workorder.dueDate
+                ? formatDateTime(String(workorder.dueDate))
+                : "-"}
+            </td>
 
             <td className="label">Discipline</td>
             <td>{discipline}</td>
@@ -51,7 +66,11 @@ const PrintWorkOrder = ({ wo }: WOProps) => {
             <td>{location}</td>
 
             <td className="label">Last Done</td>
-            <td>{formatDateTime(String(wo.completed))}</td>
+            <td>
+              {workorder.completed
+                ? formatDateTime(String(workorder.completed))
+                : "-"}
+            </td>
 
             <td className="label">Frequency</td>
             <td>
@@ -61,13 +80,20 @@ const PrintWorkOrder = ({ wo }: WOProps) => {
 
           <tr>
             <td className="label">Job Title</td>
-            <td>{val(wo.title)}</td>
+            <td>{val(workorder.title)}</td>
 
             <td className="label">Over Due</td>
-            <td>{val(wo.overDue)}</td>
+            <td
+              style={{
+                color: Number(overDue) < 0 ? "red" : "green",
+                fontWeight: 600,
+              }}
+            >
+              {overDue}
+            </td>
 
             <td className="label">WO No</td>
-            <td>{val(wo.woNo)}</td>
+            <td>{val(workorder.woNo)}</td>
           </tr>
 
           <tr>
@@ -83,27 +109,46 @@ const PrintWorkOrder = ({ wo }: WOProps) => {
             <td className="label">Job Description</td>
             <td colSpan={5}>{jobDesc}</td>
           </tr>
+          <tr>
+            <td className="label">Pend Type</td>
+            <td colSpan={3}>{pendTypeName}</td>
+            <td className="label">Pend Date</td>
+            <td colSpan={2}>
+              {/* {pendingDate ? formatDateTime(String(pendingDate)) : "-"} */}
+            </td>
+          </tr>
+
+          <tr>
+            <td className="label">Pend Description</td>
+            <td colSpan={5}>{pendingDescription}</td>
+          </tr>
         </tbody>
       </table>
     </div>
   );
 };
 
-const PrintHeader = () => (
+const PrintHeader = ({ total }: { total: number }) => (
   <div className="print-header">
-    <h1>Preventive Maintenance System</h1>
-    <h3>Workorder List</h3>
+    <h1>Ecoware (Preventive Maintenance System)</h1>
+    <div>
+      <strong>Printed At:</strong> {formatDateTime(new Date().toISOString())}
+    </div>
+    <h3>Work Order Report</h3>
+    <div>
+      <strong>Total WorkOrders:</strong> {total}
+    </div>
   </div>
 );
 
 export const ReportPrint = forwardRef<HTMLDivElement, Props>(
   ({ workOrders }, ref) => {
     return (
-      <div ref={ref}>
-        <PrintHeader />
+      <div ref={ref} className="print-root">
+        <PrintHeader total={workOrders.length} />
 
         {workOrders.map((wo) => (
-          <PrintWorkOrder key={wo.workOrderId} wo={wo} />
+          <PrintWorkOrder key={wo.workOrderId} workorder={wo} />
         ))}
       </div>
     );
