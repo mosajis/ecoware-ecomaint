@@ -73,7 +73,7 @@ const PageMeasurePointsLogs = lazy(
 );
 
 const PageCountersLog = lazy(
-  () => import("@/pages/maintenance/countersLog/CountersLog")
+  () => import("@/pages/maintenance/counterLog/CounterLog")
 );
 
 // Loading fallback component
