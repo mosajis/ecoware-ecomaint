@@ -76,6 +76,16 @@ const PageCountersLog = lazy(
   () => import("@/pages/maintenance/counterLog/CounterLog")
 );
 
+const PageMaintLog = lazy(
+  () => import("@/pages/maintenance/maintLog/MaintLog")
+);
+
+const PageStockItem = lazy(() => import("@/pages/stock/stockItem/StockItem"));
+const PageStockType = lazy(() => import("@/pages/stock/stockType/StockType"));
+const PageStockUsed = lazy(() => import("@/pages/stock/stockUsed/StockUsed"));
+
+const PageUsers = lazy(() => import("@/pages/users/Users"));
+
 // Loading fallback component
 const LoadingFallback = () => <Spinner />;
 
@@ -316,6 +326,48 @@ export const maintMeasureCountersLogRoute = createRoute({
   beforeLoad: () => ({ breadcrumb: "Counters Logs" }),
 });
 
+// --- Maintenance --- CountersLog ------------------------
+export const maintMaintLogRoute = createRoute({
+  getParentRoute: () => protectedRoute,
+  path: "/maintenance/maint-log",
+  component: () => <LazyComponent Component={PageMaintLog} />,
+  beforeLoad: () => ({ breadcrumb: "Maint Logs" }),
+});
+
+// --- Stock ---------------------------
+export const stockRoute = createRoute({
+  getParentRoute: () => protectedRoute,
+  path: "/stock",
+});
+
+export const stockStockTypeRoute = createRoute({
+  getParentRoute: () => stockRoute,
+  path: "/type",
+  component: () => <LazyComponent Component={PageStockType} />,
+  beforeLoad: () => ({ breadcrumb: "Stock Types" }),
+});
+
+export const stockStockItemRoute = createRoute({
+  getParentRoute: () => stockRoute,
+  path: "/item",
+  component: () => <LazyComponent Component={PageStockItem} />,
+  beforeLoad: () => ({ breadcrumb: "Stock Items" }),
+});
+
+export const stockStockUsedRoute = createRoute({
+  getParentRoute: () => stockRoute,
+  path: "/used",
+  component: () => <LazyComponent Component={PageStockUsed} />,
+  beforeLoad: () => ({ breadcrumb: "Stock Used" }),
+});
+
+export const usersRoute = createRoute({
+  getParentRoute: () => protectedRoute,
+  path: "/users",
+  component: () => <LazyComponent Component={PageUsers} />,
+  beforeLoad: () => ({ breadcrumb: "Users" }),
+});
+
 // --- Route Tree ---
 export const routeTree = rootRoute.addChildren([
   indexRoute.addChildren([AuthLoginRoute]),
@@ -344,11 +396,18 @@ export const routeTree = rootRoute.addChildren([
       maintComponentTypeListRoute,
       maintComponentTypeDetailRoute,
     ]),
+    stockRoute.addChildren([
+      stockStockTypeRoute,
+      stockStockItemRoute,
+      stockStockUsedRoute,
+    ]),
     maintComponentJobRoute,
     maintWorkOrderRoute,
     maintRoundRoute,
     maintMeasurePointsRoute,
     maintMeasurePointsLogsRoute,
     maintMeasureCountersLogRoute,
+    maintMaintLogRoute,
+    usersRoute,
   ]),
 ]);

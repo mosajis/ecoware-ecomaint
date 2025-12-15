@@ -3,12 +3,11 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid"; // مس�
 
 const TabStockUsed = () => {
   const columns = [
+    { field: "stockCode", headerName: "Stock Code", flex: 1 },
     { field: "mescCode", headerName: "MESC Code", flex: 1 },
     { field: "extraNo", headerName: "Extra No", flex: 1 },
-    { field: "partName", headerName: "Part Name", flex: 1 },
+    { field: "stockName", headerName: "Stock Name", flex: 1 },
     { field: "qyt", headerName: "QYT", flex: 1 },
-    { field: "unitName", headerName: "Unit Name", flex: 1 },
-    { field: "totalMainLogs", headerName: "Total Main Logs", flex: 1 },
   ];
 
   const rows = [
