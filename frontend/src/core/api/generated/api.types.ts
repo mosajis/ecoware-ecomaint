@@ -4,6 +4,61 @@
  */
 
 export interface paths {
+    "/sysdiagrams/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all */
+        get: operations["getSysdiagrams"];
+        put?: never;
+        /** Create */
+        post: operations["postSysdiagrams"];
+        /** Delete all */
+        delete: operations["deleteSysdiagrams"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/sysdiagrams/{diagramId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one */
+        get: operations["getSysdiagramsByDiagramId"];
+        /** Update */
+        put: operations["putSysdiagramsByDiagramId"];
+        post?: never;
+        /** Delete one */
+        delete: operations["deleteSysdiagramsByDiagramId"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/sysdiagrams/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Count */
+        get: operations["getSysdiagramsCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tblAddress/": {
         parameters: {
             query?: never;
@@ -2991,6 +3046,61 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/tblWorkOrderStatus/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all */
+        get: operations["getTblWorkOrderStatus"];
+        put?: never;
+        /** Create */
+        post: operations["postTblWorkOrderStatus"];
+        /** Delete all */
+        delete: operations["deleteTblWorkOrderStatus"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblWorkOrderStatus/{workOrderStatusId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one */
+        get: operations["getTblWorkOrderStatusByWorkOrderStatusId"];
+        /** Update */
+        put: operations["putTblWorkOrderStatusByWorkOrderStatusId"];
+        post?: never;
+        /** Delete one */
+        delete: operations["deleteTblWorkOrderStatusByWorkOrderStatusId"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblWorkOrderStatus/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Count */
+        get: operations["getTblWorkOrderStatusCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tblWorkShopComponent/": {
         parameters: {
             query?: never;
@@ -3307,6 +3417,256 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    getSysdiagrams: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            name: string;
+                            principalId: number;
+                            diagramId: number;
+                            version: null | (number);
+                            definition: null | (unknown | Record<string, never>);
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
+    };
+    postSysdiagrams: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name: string;
+                    version?: null | (number);
+                    definition?: null | (unknown | Record<string, never>);
+                };
+                "application/x-www-form-urlencoded": {
+                    name: string;
+                    version?: null | (number);
+                    definition?: null | (unknown | Record<string, never>);
+                };
+                "multipart/form-data": {
+                    name: string;
+                    version?: null | (number);
+                    definition?: null | (unknown | Record<string, never>);
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        name: string;
+                        principalId: number;
+                        diagramId: number;
+                        version: null | (number);
+                        definition: null | (unknown | Record<string, never>);
+                    };
+                };
+            };
+        };
+    };
+    deleteSysdiagrams: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        deleted: number;
+                    };
+                };
+            };
+        };
+    };
+    getSysdiagramsByDiagramId: {
+        parameters: {
+            query?: {
+                include?: string;
+            };
+            header?: never;
+            path: {
+                diagramId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        name: string;
+                        principalId: number;
+                        diagramId: number;
+                        version: null | (number);
+                        definition: null | (unknown | Record<string, never>);
+                    } & (Record<string, never> | null);
+                };
+            };
+        };
+    };
+    putSysdiagramsByDiagramId: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                diagramId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    version?: null | (number);
+                    definition?: null | (unknown | Record<string, never>);
+                };
+                "application/x-www-form-urlencoded": {
+                    name?: string;
+                    version?: null | (number);
+                    definition?: null | (unknown | Record<string, never>);
+                };
+                "multipart/form-data": {
+                    name?: string;
+                    version?: null | (number);
+                    definition?: null | (unknown | Record<string, never>);
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        name: string;
+                        principalId: number;
+                        diagramId: number;
+                        version: null | (number);
+                        definition: null | (unknown | Record<string, never>);
+                    };
+                };
+            };
+        };
+    };
+    deleteSysdiagramsByDiagramId: {
+        parameters: {
+            query?: {
+                force?: boolean;
+            };
+            header?: never;
+            path: {
+                diagramId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        name: string;
+                        principalId: number;
+                        diagramId: number;
+                        version: null | (number);
+                        definition: null | (unknown | Record<string, never>);
+                    };
+                };
+            };
+        };
+    };
+    getSysdiagramsCount: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
     getTblAddress: {
         parameters: {
             query?: {
@@ -42741,6 +43101,458 @@ export interface operations {
         };
     };
     getTblWorkOrderCount: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblWorkOrderStatus: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            workOrderStatusId: number;
+                            name: string;
+                            tblWorkOrders?: {
+                                workOrderId: number;
+                                compJobId: null | (number);
+                                maintClassId: null | (number);
+                                maintTypeId: null | (number);
+                                maintCauseId: null | (number);
+                                createdBy: null | (number);
+                                issuedBy: null | (number);
+                                plannedBy: null | (number);
+                                issuedDate: null | (Record<string, never> | number);
+                                respDiscId: null | (number);
+                                compId: null | (number);
+                                roundId: null | (number);
+                                parentWorkOrderId: null | (number);
+                                woNo: null | string;
+                                title: null | string;
+                                priority: null | (number);
+                                estTotalDuration: null | (number);
+                                dueDate: null | (Record<string, never> | number);
+                                window: null | (number);
+                                created: null | (Record<string, never> | number);
+                                started: null | (Record<string, never> | number);
+                                completed: null | (Record<string, never> | number);
+                                description: null | string;
+                                filed: null | (number);
+                                unexpected: null | (number);
+                                workOrderStatusId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | (Record<string, never> | number);
+                                reportingMethod: null | (number);
+                                pendingBy: null | (number);
+                                pendTypeId: null | (number);
+                                pendingdate: null | (Record<string, never> | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                                userComment: null | string;
+                            }[];
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
+    };
+    postTblWorkOrderStatus: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name: string;
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    name: string;
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    name: string;
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workOrderStatusId: number;
+                        name: string;
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workOrderStatusId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblWorkOrderStatus: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        deleted: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblWorkOrderStatusByWorkOrderStatusId: {
+        parameters: {
+            query?: {
+                include?: string;
+            };
+            header?: never;
+            path: {
+                workOrderStatusId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workOrderStatusId: number;
+                        name: string;
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workOrderStatusId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        }[];
+                    } & (Record<string, never> | null);
+                };
+            };
+        };
+    };
+    putTblWorkOrderStatusByWorkOrderStatusId: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                workOrderStatusId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    name?: string;
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    name?: string;
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workOrderStatusId: number;
+                        name: string;
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workOrderStatusId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblWorkOrderStatusByWorkOrderStatusId: {
+        parameters: {
+            query?: {
+                force?: boolean;
+            };
+            header?: never;
+            path: {
+                workOrderStatusId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workOrderStatusId: number;
+                        name: string;
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | (Record<string, never> | number);
+                            respDiscId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | (Record<string, never> | number);
+                            window: null | (number);
+                            created: null | (Record<string, never> | number);
+                            started: null | (Record<string, never> | number);
+                            completed: null | (Record<string, never> | number);
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workOrderStatusId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | (Record<string, never> | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | (Record<string, never> | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    getTblWorkOrderStatusCount: {
         parameters: {
             query?: {
                 page?: number;

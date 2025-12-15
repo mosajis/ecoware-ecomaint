@@ -64,6 +64,18 @@ const PageComponentWorkOrder = lazy(
 
 const PageRound = lazy(() => import("@/pages/maintenance/round/Round"));
 
+const PageMeasurePoints = lazy(
+  () => import("@/pages/maintenance/measurePoints/MeasurePoints")
+);
+
+const PageMeasurePointsLogs = lazy(
+  () => import("@/pages/maintenance/measurePointsLogs/MeasurePointsLogs")
+);
+
+const PageCountersLog = lazy(
+  () => import("@/pages/maintenance/countersLog/CountersLog")
+);
+
 // Loading fallback component
 const LoadingFallback = () => <Spinner />;
 
@@ -282,6 +294,28 @@ export const maintRoundRoute = createRoute({
   beforeLoad: () => ({ breadcrumb: "Round" }),
 });
 
+// --- Maintenance --- MeasurePoints ------------------------
+export const maintMeasurePointsRoute = createRoute({
+  getParentRoute: () => protectedRoute,
+  path: "/maintenance/measure-points",
+  component: () => <LazyComponent Component={PageMeasurePoints} />,
+  beforeLoad: () => ({ breadcrumb: "Measure Points" }),
+});
+export const maintMeasurePointsLogsRoute = createRoute({
+  getParentRoute: () => protectedRoute,
+  path: "/maintenance/measure-points-logs",
+  component: () => <LazyComponent Component={PageMeasurePointsLogs} />,
+  beforeLoad: () => ({ breadcrumb: "Measure Points Logs" }),
+});
+
+// --- Maintenance --- CountersLog ------------------------
+export const maintMeasureCountersLogRoute = createRoute({
+  getParentRoute: () => protectedRoute,
+  path: "/maintenance/counters-log",
+  component: () => <LazyComponent Component={PageCountersLog} />,
+  beforeLoad: () => ({ breadcrumb: "Counters Logs" }),
+});
+
 // --- Route Tree ---
 export const routeTree = rootRoute.addChildren([
   indexRoute.addChildren([AuthLoginRoute]),
@@ -313,5 +347,8 @@ export const routeTree = rootRoute.addChildren([
     maintComponentJobRoute,
     maintWorkOrderRoute,
     maintRoundRoute,
+    maintMeasurePointsRoute,
+    maintMeasurePointsLogsRoute,
+    maintMeasureCountersLogRoute,
   ]),
 ]);

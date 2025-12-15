@@ -1,3 +1,4 @@
+import Box from "@mui/material/Box";
 import DataGridToolbar from "./DataGridToolbar";
 import {
   DataGrid,
@@ -10,7 +11,7 @@ import { useMemo } from "react";
 const rowNumberColumn: GridColDef = {
   field: "rowNumber",
   headerName: "#",
-  width: 60,
+  width: 35,
   sortable: false,
   filterable: false,
   disableColumnMenu: true,

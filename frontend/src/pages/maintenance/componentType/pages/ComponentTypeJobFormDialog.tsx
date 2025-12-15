@@ -6,10 +6,11 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import RadioGroup from "@mui/material/RadioGroup";
 import Radio from "@mui/material/Radio";
-import { memo, useEffect, useState, useCallback } from "react";
+import { memo, useEffect, useState, useCallback, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { BorderedBox } from "@/shared/components/BorderedBox";
 import { buildRelation } from "@/core/api/helper";
 import { logicTblCompTypeJob } from "./ComponentTypeJob.logic";
 import {
@@ -22,18 +23,6 @@ import {
   TypeTblCompTypeJob,
   tblPeriod,
 } from "@/core/api/generated/api";
-
-const boxStyle = {
-  width: "100%",
-  border: "1px solid #63656a",
-  justifyContent: "space-between",
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
-  padding: "0",
-  paddingLeft: "10px",
-  borderRadius: "8px",
-};
 
 // ========= Schema =========
 const schema = z.object({
@@ -122,6 +111,26 @@ type Props = {
   } | null;
 };
 
+const DEFAULT_VALUES: JobFormValues = {
+  compType: null,
+  jobDesc: null,
+  disc: null,
+  maintClass: null,
+  maintCause: null,
+  maintType: null,
+  frequency: null,
+  frequencyPeriod: null,
+  priority: null,
+  window: null,
+  statusNone: true,
+  statusAvailable: true,
+  statusInUse: true,
+  statusRepair: true,
+  planningMethod: "Variable",
+  active: true,
+  mandatoryHistory: false,
+};
+
 function ComponentTypeJobFormDialog({
   open,
   mode,
@@ -133,30 +142,10 @@ function ComponentTypeJobFormDialog({
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const defaultValues: JobFormValues = {
-    compType: compType ?? null,
-
-    jobDesc: null,
-    disc: null,
-
-    maintClass: null,
-    maintCause: null,
-    maintType: null,
-
-    frequency: null,
-    frequencyPeriod: null,
-    priority: null,
-    window: null,
-
-    statusNone: true,
-    statusAvailable: true,
-    statusInUse: true,
-    statusRepair: true,
-
-    planningMethod: "Variable",
-    active: true,
-    mandatoryHistory: false,
-  };
+  const defaultValues = useMemo(
+    () => ({ ...DEFAULT_VALUES, compType: compType ?? null }),
+    [compType]
+  );
 
   const { control, handleSubmit, reset } = useForm<JobFormValues>({
     resolver: zodResolver(schema),
@@ -171,7 +160,6 @@ function ComponentTypeJobFormDialog({
     }
 
     setLoadingInitial(true);
-
     try {
       const res = await tblCompTypeJob.getById(recordId, {
         include: {
@@ -186,27 +174,23 @@ function ComponentTypeJobFormDialog({
       reset({
         jobDesc: res?.tblJobDescription ?? null,
         disc: res?.tblDiscipline ?? null,
-
         maintClass: res?.tblMaintClass ?? null,
         maintCause: res?.tblMaintCause ?? null,
         maintType: res?.tblMaintType ?? null,
-
         frequency: res?.frequency ?? null,
         frequencyPeriod: res?.tblPeriod ?? null,
         priority: res?.priority ?? null,
         window: res?.window ?? null,
-
         statusNone: !!res?.statusNone,
         statusAvailable: !!res?.statusAvailable,
         statusInUse: !!res?.statusInUse,
         statusRepair: !!res?.statusRepair,
-
         planningMethod: res?.planningMethod === 1 ? "Fixed" : "Variable",
       });
     } finally {
       setLoadingInitial(false);
     }
-  }, [mode, recordId, reset]);
+  }, [mode, recordId, reset, defaultValues]);
 
   useEffect(() => {
     if (open) fetchData();
@@ -226,17 +210,14 @@ function ComponentTypeJobFormDialog({
         setSubmitting(true);
 
         const body = {
-          // ======= فیلدهای اصلی =======
           frequency: v.frequency ?? null,
           priority: v.priority ?? null,
           window: v.window ?? null,
           planningMethod: v.planningMethod === "Fixed" ? 1 : 0,
-
           statusNone: v.statusNone ? 1 : 0,
           statusAvailable: v.statusAvailable ? 1 : 0,
           statusInUse: v.statusInUse ? 1 : 0,
           statusRepair: v.statusRepair ? 1 : 0,
-          // ======= روابط =======
           ...buildRelation("tblCompType", "compTypeId", compType?.compTypeId),
           ...buildRelation(
             "tblPeriod",
@@ -264,7 +245,6 @@ function ComponentTypeJobFormDialog({
             "maintTypeId",
             v.maintType?.maintTypeId
           ),
-
           active: v.active ? 1 : 0,
           mandatoryHistory: v.mandatoryHistory ? 1 : 0,
         };
@@ -273,8 +253,6 @@ function ComponentTypeJobFormDialog({
 
         if (mode === "create") {
           result = await tblCompTypeJob.create(body);
-
-          // business Logic
           logicTblCompTypeJob.effect(result.compTypeJobId, 0);
         } else {
           result = await tblCompTypeJob.update(recordId!, body);
@@ -287,7 +265,7 @@ function ComponentTypeJobFormDialog({
         setSubmitting(false);
       }
     },
-    [mode, recordId, onSuccess, onClose]
+    [mode, recordId, compType?.compTypeId, onSuccess, onClose]
   );
 
   return (
@@ -295,12 +273,13 @@ function ComponentTypeJobFormDialog({
       maxWidth="md"
       open={open}
       onClose={onClose}
-      title={mode === "create" ? "Comp Type Job" : "Edit Comp Type Job "}
+      title={mode === "create" ? "Comp Type Job" : "Edit Comp Type Job"}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display="flex" flexDirection={"column"} gap={1.5}>
+      <Box display="flex" flexDirection="column" gap={1.5}>
+        {/* Component Type */}
         <TextField
           label="Component Type"
           value={compType?.compName ?? ""}
@@ -308,12 +287,13 @@ function ComponentTypeJobFormDialog({
           fullWidth
           disabled
         />
+
         {/* Job Description */}
         <Controller
           name="jobDesc"
           control={control}
           render={({ field }) => (
-            <Box width={"60%"}>
+            <Box width="60%">
               <AsyncSelectField
                 dialogMaxWidth="sm"
                 label="Job Description"
@@ -330,12 +310,13 @@ function ComponentTypeJobFormDialog({
             </Box>
           )}
         />
+
         {/* Discipline */}
         <Controller
           name="disc"
           control={control}
           render={({ field }) => (
-            <Box width={"45%"}>
+            <Box width="45%">
               <AsyncSelectField
                 dialogMaxWidth="sm"
                 label="Discipline"
@@ -349,8 +330,9 @@ function ComponentTypeJobFormDialog({
             </Box>
           )}
         />
-        <Box display={"flex"} gap={1.5} width={"66%"}>
-          {/* Frequency */}
+
+        {/* Frequency & Period */}
+        <Box display="flex" gap={1.5} width="66%">
           <Controller
             name="frequency"
             control={control}
@@ -371,7 +353,6 @@ function ComponentTypeJobFormDialog({
               />
             )}
           />
-          {/* Frequency */}
           <Controller
             name="frequencyPeriod"
             control={control}
@@ -391,8 +372,9 @@ function ComponentTypeJobFormDialog({
             )}
           />
         </Box>
-        <Box display={"flex"} gap={1.5}>
-          {/* Maint Class */}
+
+        {/* Maintenance Fields */}
+        <Box display="flex" gap={1.5}>
           <Controller
             name="maintClass"
             control={control}
@@ -411,8 +393,6 @@ function ComponentTypeJobFormDialog({
               />
             )}
           />
-
-          {/* Maint Cause */}
           <Controller
             name="maintCause"
             control={control}
@@ -431,8 +411,6 @@ function ComponentTypeJobFormDialog({
               />
             )}
           />
-
-          {/* Maint Type */}
           <Controller
             name="maintType"
             control={control}
@@ -452,8 +430,9 @@ function ComponentTypeJobFormDialog({
             )}
           />
         </Box>
-        {/* Priority */}
-        <Box display={"flex"} width={"66%"} gap={1.5}>
+
+        {/* Priority & Window */}
+        <Box display="flex" width="66%" gap={1.5}>
           <Controller
             name="priority"
             control={control}
@@ -474,8 +453,6 @@ function ComponentTypeJobFormDialog({
               />
             )}
           />
-
-          {/* Window */}
           <Controller
             name="window"
             control={control}
@@ -500,9 +477,8 @@ function ComponentTypeJobFormDialog({
       </Box>
 
       {/* Status Checkboxes */}
-      <Box mt={2} width={"80%"} sx={{ ...boxStyle }}>
-        <Box>Component Status</Box>
-        <Box display={"flex"}>
+      <BorderedBox label="Component Status" mt={2} width="80%">
+        <Box display="flex">
           <Controller
             name="statusNone"
             control={control}
@@ -544,12 +520,12 @@ function ComponentTypeJobFormDialog({
             )}
           />
         </Box>
-      </Box>
+      </BorderedBox>
 
-      <Box display={"flex"} gap={1.5} width={"100%"}>
-        {/* Planning Method Radio */}
-        <Box mt={2} sx={{ ...boxStyle }}>
-          <Box>Planning Method</Box>
+      {/* Bottom Section */}
+      <Box display="flex" gap={1.5} width="100%">
+        {/* Planning Method */}
+        <BorderedBox label="Planning Method" mt={2}>
           <Controller
             name="planningMethod"
             control={control}
@@ -568,9 +544,10 @@ function ComponentTypeJobFormDialog({
               </RadioGroup>
             )}
           />
-        </Box>
-        <Box mt={2} sx={{ ...boxStyle }}>
-          <Box>Advanced Option</Box>
+        </BorderedBox>
+
+        {/* Advanced Options */}
+        <BorderedBox label="Advanced Option" mt={2}>
           <Box>
             <Controller
               name="active"
@@ -593,7 +570,7 @@ function ComponentTypeJobFormDialog({
               )}
             />
           </Box>
-        </Box>
+        </BorderedBox>
       </Box>
     </FormDialog>
   );

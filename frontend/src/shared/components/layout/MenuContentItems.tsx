@@ -229,16 +229,16 @@ export const menuContentItems: {
         path: "/maintenance/component-trigger",
       },
       {
-        text: "Update Counter",
+        text: "Counter Update",
         icon: <UpdateRoundedIcon />,
         id: "maint:updateCounter",
         path: "/maintenance/update-counter",
       },
       {
-        text: "Counter Log",
+        text: "Counter Logs",
         icon: <HistoryRoundedIcon />,
         id: "maint:counterLog",
-        path: "/maintenance/counter-log",
+        path: "/maintenance/counters-log",
       },
       {
         text: "Measure Points",

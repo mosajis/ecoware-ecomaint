@@ -1,3 +1,4 @@
+export { default as ControllerSysdiagrams } from "./sysdiagrams.controller";
 export { default as ControllerTblAddress } from "./tblAddress.controller";
 export { default as ControllerTblCompCounter } from "./tblCompCounter.controller";
 export { default as ControllerTblCompCounterLog } from "./tblCompCounterLog.controller";
@@ -52,6 +53,7 @@ export { default as ControllerTblSpareType } from "./tblSpareType.controller";
 export { default as ControllerTblSpareUnit } from "./tblSpareUnit.controller";
 export { default as ControllerTblUnit } from "./tblUnit.controller";
 export { default as ControllerTblWorkOrder } from "./tblWorkOrder.controller";
+export { default as ControllerTblWorkOrderStatus } from "./tblWorkOrderStatus.controller";
 export { default as ControllerTblWorkShopComponent } from "./tblWorkShopComponent.controller";
 export { default as ControllerTblWorkShopDone } from "./tblWorkShopDone.controller";
 export { default as ControllerTblWorkShopRequest } from "./tblWorkShopRequest.controller";

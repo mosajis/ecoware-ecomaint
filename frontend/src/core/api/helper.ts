@@ -19,12 +19,17 @@ export function buildRelation(
 
 export function formatDateTime(
   sqlDateTime: string,
-  isJalali = false,
+  isJalali?: boolean,
   pattern?: string
 ): string {
+  const useJalali =
+    typeof isJalali === "boolean"
+      ? isJalali
+      : localStorage.getItem("language") === "fa";
+
   const date = new Date(sqlDateTime.replace(" ", "T"));
 
-  return isJalali
+  return useJalali
     ? formatJalali(date, pattern ?? "yyyy/MM/dd HH:mm")
     : formatGregorian(date, pattern ?? "yyyy/MM/dd HH:mm");
 }

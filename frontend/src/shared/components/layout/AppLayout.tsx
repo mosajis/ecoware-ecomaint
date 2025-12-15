@@ -12,7 +12,7 @@ function AppLayout() {
     () => ({
       flexGrow: 1,
       width: "100%",
-      height: "calc(100vh - 80px)",
+      height: "calc(100vh - 60px)",
       overflow: "auto",
       px: 1,
     }),

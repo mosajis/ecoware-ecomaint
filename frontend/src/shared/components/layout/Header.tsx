@@ -22,15 +22,14 @@ export default function Header() {
       direction="row"
       alignItems="center"
       justifyContent="space-between"
-      spacing={2}
       sx={{
-        p: 2,
+        p: 1,
         display: { xs: "none", md: "flex" },
         width: "100%",
       }}
     >
       {/* Left side: Menu button + Breadcrumbs */}
-      <Box display="flex" alignItems="center" gap={2}>
+      <Box display="flex" alignItems="center" gap={1.5}>
         <IconButton size="small" onClick={() => setOpen((o) => !o)}>
           <MenuIcon />
         </IconButton>

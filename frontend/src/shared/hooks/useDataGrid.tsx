@@ -1,33 +1,21 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 
-// Extract query type
-type ExtractQuery<F extends (...args: any) => any> = F extends (
-  params?: infer Q
-) => any
-  ? Q
-  : never;
-
-// Extract items type
-type ExtractItems<F extends (...args: any) => any> =
-  Awaited<ReturnType<F>> extends { items: (infer T)[] } ? T : never;
-
-export function useDataGrid<
-  GetAllFn extends (...args: any[]) => Promise<any>,
-  DeleteFn extends (id: any) => Promise<any>,
-  T = ExtractItems<GetAllFn>,
-  Q = Parameters<GetAllFn>[0],
-  K extends keyof T = keyof T,
->(getAll: GetAllFn, deleteById: DeleteFn, keyId: K, isEnabled: boolean = true) {
+export function useDataGrid<T, K extends keyof T = keyof T>(
+  getAll: (params?: any) => Promise<{ items: T[] } | T[]>,
+  deleteById: (id: any) => Promise<any>,
+  keyId: K,
+  isEnabled: boolean = true
+) {
   const [rows, setRows] = useState<T[]>([]);
   const [loading, setLoading] = useState(false);
 
   const getIdValue = useCallback((row: T) => row[keyId], [keyId]);
-  const fetchRef = useRef<(params?: Q) => Promise<void>>(() =>
+  const fetchRef = useRef<(params?: any) => Promise<void>>(() =>
     Promise.resolve()
   );
 
   const fetchData = useCallback(
-    async (params?: Q) => {
+    async (params?: any) => {
       if (!isEnabled) return;
       setLoading(true);
       try {
@@ -97,3 +85,10 @@ export function useDataGrid<
     handleRefresh,
   };
 }
+
+// ✅ استفاده:
+// const { rows, loading, handleRefresh } = useDataGrid<TypeTblWorkOrderWithRels>(
+//     getAll,
+//     tblWorkOrder.deleteById,
+//     "workOrderId"
+// );

@@ -8,39 +8,41 @@ import RequestPageIcon from "@mui/icons-material/RequestPage";
 import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import { useCallback, useRef, useState } from "react";
+import PrintIcon from "@mui/icons-material/Print";
+import Box from "@mui/material/Box";
+import TabsComponent from "./WorkOrderTabs";
+import ReportPrintTemplate from "./report/ReportPrintTemplate";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { tblWorkOrder, TypeTblWorkOrder } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { GridColDef, GridRowId } from "@mui/x-data-grid";
-import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
+import { GridColDef, GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
 import { formatDateTime } from "@/core/api/helper";
+import { useReactToPrint } from "react-to-print";
+import { toast } from "sonner";
+import { TypeTblWorkOrderWithRels } from "./workOrderTypes";
+import { STATUS_TRANSITIONS, WorkOrderStatus } from "./WorkOrderStatus";
 import { calculateOverdue } from "./workOrderHelper";
 import WorkOrderFilterDialog, {
   type WorkOrderFilter,
 } from "./WorkOrderFilterDialog";
-import { useReactToPrint } from "react-to-print";
-import { ReportPrint } from "./report/ReportPrint";
-
-type GridRowSelectionModel = {
-  type: "include" | "exclude";
-  ids: Set<GridRowId>;
-};
+import ReportPrintDialog from "./report/ReportPrintDialog";
 
 export default function WorkOrderPage() {
-  // const [selectedRow, setSelectedRow] = useState<TypeTblWorkOrder | null>(null);
-
-  const [rowSelectionModel, setRowSelectionModel] =
-    useState<GridRowSelectionModel>({
-      type: "include",
-      ids: new Set<GridRowId>(),
-    });
-
-  const [selectedRows, setSelectedRows] = useState<TypeTblWorkOrder[]>([]);
-
+  /* ------------------------------------------------------------------ */
+  /* State */
+  /* ------------------------------------------------------------------ */
+  const [issueDialogOpen, setIssueDialogOpen] = useState(false);
+  const [selectedRows, setSelectedRows] = useState<GridRowId[]>([]);
   const [filter, setFilter] = useState<WorkOrderFilter | null>(null);
   const [filterOpen, setFilterOpen] = useState(false);
 
-  /* ---------- Data ---------- */
+  /* ------------------------------------------------------------------ */
+  /* Print */
+  /* ------------------------------------------------------------------ */
+
+  /* ------------------------------------------------------------------ */
+  /* Data */
+  /* ------------------------------------------------------------------ */
 
   const getAll = useCallback(
     () =>
@@ -68,209 +70,298 @@ export default function WorkOrderPage() {
     [filter]
   );
 
-  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
-    getAll,
-    tblWorkOrder.deleteById,
-    "workOrderId"
-  );
-
-  /* ---------- Columns ---------- */
-
-  const columns: GridColDef<TypeTblWorkOrder>[] = [
-    {
-      field: "jobCode",
-      headerName: "Job Code",
-      width: 90,
-      // @ts-ignore
-      valueGetter: (_, row) => row?.tblCompJob?.tblJobDescription?.jobDescCode,
-    },
-    {
-      field: "component",
-      headerName: "Component",
-      flex: 2,
-      valueGetter: (_, row) => row.tblComponentUnit?.compNo,
-    },
-    {
-      field: "location",
-      headerName: "Location",
-      width: 100,
-      // @ts-ignore
-      valueGetter: (_, row) => row?.tblComponentUnit?.tblLocation?.name,
-    },
-    {
-      field: "jobDescTitle",
-      headerName: "JobDescTitle",
-      flex: 2,
-      // @ts-ignore
-      valueGetter: (_, row) => row?.tblCompJob?.tblJobDescription?.jobDescTitle,
-    },
-    {
-      field: "discipline",
-      headerName: "Discipline",
-      width: 110,
-      valueGetter: (_, row) => row?.tblDiscipline?.name,
-    },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 90,
-      valueGetter: (_, row) => row?.tblWorkOrderStatus?.name,
-    },
-    {
-      field: "dueDate",
-      headerName: "Due Date",
-      width: 130,
-      valueFormatter: (value) => (value ? formatDateTime(value) : ""),
-    },
-    {
-      field: "completed",
-      headerName: "Completed Date",
-      width: 130,
-      valueFormatter: (value) => (value ? formatDateTime(value) : ""),
-    },
-    {
-      field: "overDue",
-      headerName: "OverDue",
-      width: 80,
-      valueGetter: (_, row) => calculateOverdue(row),
-      renderCell: (params) => {
-        if (params.value === "") return "";
-        const color = params.value < 0 ? "red" : "green";
-        return <span style={{ color, fontWeight: 600 }}>{params.value}</span>;
-      },
-    },
-    {
-      field: "pendingType",
-      headerName: "Pending Type",
-      valueGetter: (_, row) => row?.tblPendingType?.pendTypeName,
-    },
-    {
-      field: "priority",
-      headerName: "Priority",
-      width: 70,
-    },
-    // dataGridActionColumn({
-    //   onEdit: (row) => setSelectedRow(row),
-    //   onDelete: handleDelete,
-    // }),
-  ];
-
-  /* ---------- Actions ---------- */
-
-  const updateStatus = async (statusId: number) => {
-    if (selectedRows.length === 0) return;
-
-    await Promise.all(
-      selectedRows.map((row) =>
-        tblWorkOrder.update(row.workOrderId, {
-          tblWorkOrderStatus: {
-            connect: { workOrderStatusId: statusId },
-          },
-        })
-      )
+  const { rows, loading, handleRefresh } =
+    useDataGrid<TypeTblWorkOrderWithRels>(
+      getAll,
+      tblWorkOrder.deleteById,
+      "workOrderId"
     );
 
-    handleRefresh();
+  /* ------------------------------------------------------------------ */
+  /* Derived selection - Memoized */
+  /* ------------------------------------------------------------------ */
+
+  const selectedWorkOrders = useMemo<TypeTblWorkOrderWithRels[]>(() => {
+    return rows.filter((r) => selectedRows.includes(r.workOrderId));
+  }, [selectedRows, rows]);
+
+  /* ------------------------------------------------------------------ */
+  /* Helpers */
+  /* ------------------------------------------------------------------ */
+
+  const ensureSelection = useCallback((): boolean => {
+    if (selectedRows.length === 0) {
+      toast.error("Please select at least one Work Order");
+      return false;
+    }
+    return true;
+  }, [selectedRows.length]);
+
+  const canTransition = (
+    transition: {
+      allowedFrom: WorkOrderStatus[];
+    },
+    rows: TypeTblWorkOrderWithRels[]
+  ): boolean => {
+    return rows.every((row) =>
+      transition.allowedFrom.includes(
+        row?.tblWorkOrderStatus?.name as WorkOrderStatus
+      )
+    );
   };
 
-  /* ---------- Print ---------- */
+  const updateStatus = useCallback(
+    async (targetStatus: WorkOrderStatus): Promise<void> => {
+      if (!ensureSelection()) return;
 
-  const contentRef = useRef<HTMLDivElement>(null);
+      const transition = STATUS_TRANSITIONS[targetStatus];
 
-  const handlePrint = useReactToPrint({
-    contentRef,
-  });
+      if (!transition) {
+        toast.error("This action is not supported for the selected status");
+        return;
+      }
 
-  /* ---------- Render ---------- */
+      if (!canTransition(transition, selectedWorkOrders)) {
+        toast.error(transition.errorMessage);
+        return;
+      }
+
+      try {
+        const results = await Promise.allSettled(
+          selectedWorkOrders.map((row) =>
+            tblWorkOrder.update(row.workOrderId, {
+              tblWorkOrderStatus: {
+                connect: { workOrderStatusId: transition.statusId },
+              },
+            })
+          )
+        );
+
+        const failures = results.filter((r) => r.status === "rejected");
+
+        if (failures.length > 0) {
+          toast.error(
+            `${failures.length} item(s) failed to update. Please try again.`
+          );
+        } else {
+          toast.success("All items updated successfully");
+        }
+
+        await handleRefresh();
+      } catch (error) {
+        console.error("Update status error:", error);
+        toast.error("An unexpected error occurred");
+      }
+    },
+    [ensureSelection, selectedWorkOrders, handleRefresh]
+  );
+
+  const handleReschedule = useCallback((): void => {
+    if (!ensureSelection()) return;
+    // TODO: Implement reschedule dialog/logic
+    console.warn("Reschedule not yet implemented");
+    toast.info("Reschedule feature coming soon");
+  }, [ensureSelection]);
+
+  // const handlePrint = useCallback((): void => {
+  //   if (!ensureSelection()) return;
+  //   printFn();
+  // }, [ensureSelection, printFn]);
+
+  const handleIssueDialogClose = useCallback(() => {
+    setIssueDialogOpen(false);
+  }, []);
+
+  // وقتی عملیات Issue موفقیت‌آمیز بود
+  const handleIssueDialogSuccess = useCallback(() => {
+    toast.success("WorkOrder issued successfully");
+    setIssueDialogOpen(false);
+    // می‌تونید اینجا handleRefresh یا هر آپدیت دیگری هم انجام بدید
+    handleRefresh();
+  }, [handleRefresh]);
+
+  /* ------------------------------------------------------------------ */
+  /* Button Click Handler */
+  /* ------------------------------------------------------------------ */
+  const handleOpenIssueDialog = useCallback(() => {
+    if (!ensureSelection()) return;
+    setIssueDialogOpen(true);
+  }, [ensureSelection]);
+
+  /* ------------------------------------------------------------------ */
+  /* Columns - Memoized */
+  /* ------------------------------------------------------------------ */
+
+  const columns: GridColDef<TypeTblWorkOrderWithRels>[] = useMemo(
+    () => [
+      {
+        field: "jobCode",
+        headerName: "Job Code",
+        width: 90,
+        valueGetter: (_, row) =>
+          row?.tblCompJob?.tblJobDescription?.jobDescCode,
+      },
+      {
+        field: "component",
+        headerName: "Component",
+        flex: 2,
+        valueGetter: (_, row) => row.tblComponentUnit?.compNo,
+      },
+      {
+        field: "location",
+        headerName: "Location",
+        width: 100,
+        valueGetter: (_, row) => row?.tblComponentUnit?.tblLocation?.name,
+      },
+      {
+        field: "jobDescTitle",
+        headerName: "Job Desc",
+        flex: 2,
+        valueGetter: (_, row) =>
+          row?.tblCompJob?.tblJobDescription?.jobDescTitle,
+      },
+      {
+        field: "discipline",
+        headerName: "Discipline",
+        width: 110,
+        valueGetter: (_, row) => row?.tblDiscipline?.name,
+      },
+      {
+        field: "status",
+        headerName: "Status",
+        width: 90,
+        valueGetter: (_, row) => row?.tblWorkOrderStatus?.name,
+      },
+      {
+        field: "dueDate",
+        headerName: "Due Date",
+        width: 130,
+        valueFormatter: (value) => (value ? formatDateTime(value) : ""),
+      },
+      {
+        field: "completed",
+        headerName: "Completed Date",
+        width: 130,
+        valueFormatter: (value) => (value ? formatDateTime(value) : ""),
+      },
+      {
+        field: "overDue",
+        headerName: "OverDue",
+        width: 80,
+        valueGetter: (_, row) => calculateOverdue(row),
+        renderCell: (params) => {
+          if (params.value == null) return "";
+          return (
+            <span
+              style={{
+                color: params.value < 0 ? "red" : "green",
+                fontWeight: 600,
+              }}
+            >
+              {params.value}
+            </span>
+          );
+        },
+      },
+      {
+        field: "pendingType",
+        headerName: "Pending Type",
+        valueGetter: (_, row) => row?.tblPendingType?.pendTypeName,
+      },
+      {
+        field: "priority",
+        headerName: "Priority",
+        width: 70,
+      },
+    ],
+    []
+  );
+
+  /* ------------------------------------------------------------------ */
+  /* Actions - Memoized */
+  /* ------------------------------------------------------------------ */
+
+  const actions = useMemo(
+    () => [
+      {
+        label: "Filter",
+        icon: <FilterAltIcon />,
+        onClick: () => setFilterOpen(true),
+        disabled: loading,
+      },
+      {
+        label: "Issue",
+        icon: <AssignmentTurnedInIcon />,
+        onClick: handleOpenIssueDialog,
+        disabled: selectedRows.length === 0,
+      },
+      {
+        label: "Complete",
+        icon: <CheckCircleIcon />,
+        onClick: () => updateStatus("Complete"),
+        disabled: selectedRows.length === 0,
+      },
+      {
+        label: "Pending",
+        icon: <HourglassEmptyIcon />,
+        onClick: () => updateStatus("Pend"),
+        disabled: selectedRows.length === 0,
+      },
+      {
+        label: "Postponed",
+        icon: <ScheduleIcon />,
+        onClick: () => updateStatus("Postponed"),
+        disabled: selectedRows.length === 0,
+      },
+      {
+        label: "Request",
+        icon: <RequestPageIcon />,
+        onClick: () => updateStatus("Request"),
+        disabled: selectedRows.length === 0,
+      },
+      {
+        label: "Reschedule",
+        icon: <EventRepeatIcon />,
+        disabled: selectedRows.length === 0,
+        onClick: handleReschedule,
+      },
+      // {
+      //   label: "Print",
+      //   icon: <PrintIcon />,
+      //   disabled: selectedRows.length === 0,
+      //   onClick: handlePrint,
+      // },
+    ],
+    [selectedRows.length, loading, handleReschedule]
+  );
 
   return (
     <>
       <Splitter horizontal initialPrimarySize="40%">
-        <div>
-          <button onClick={handlePrint} disabled={selectedRows.length === 0}>
-            Print
-          </button>
-
-          {/* فقط برای پرینت */}
-          <div style={{ display: "none" }}>
-            <ReportPrint ref={contentRef} workOrders={selectedRows} />
-          </div>
-        </div>
+        <TabsComponent />
 
         <CustomizedDataGrid
+          label="WorkOrders"
           rows={rows}
           columns={columns}
-          getRowId={(row) => row.workOrderId}
+          loading={loading}
           checkboxSelection
-          rowSelectionModel={rowSelectionModel}
-          onRowSelectionModelChange={(newModel) => {
-            // newModel: GridRowSelectionModel
-            setRowSelectionModel(newModel);
-
-            // extract selected rows
-            const selectedIds = Array.from(newModel.ids) as number[];
-            const selected = rows.filter((r) =>
-              selectedIds.includes(r.workOrderId)
-            );
-            setSelectedRows(selected);
+          showToolbar
+          getRowId={(row) => row.workOrderId}
+          onRowSelectionModelChange={(rowSelectionModel) => {
+            setSelectedRows(Array.from(rowSelectionModel.ids));
           }}
-          toolbarChildren={
-            <DataGridActionBar
-              actions={[
-                {
-                  label: "Filter",
-                  icon: <FilterAltIcon />,
-                  variant: filter ? "contained" : "text",
-                  onClick: () => setFilterOpen(true),
-                },
-                {
-                  label: "Issue",
-                  icon: <AssignmentTurnedInIcon />,
-                  onClick: () => updateStatus(3),
-                  disabled: selectedRows.length === 0 || loading,
-                },
-                {
-                  label: "Complete",
-                  icon: <CheckCircleIcon />,
-                  onClick: () => updateStatus(5),
-                  disabled: selectedRows.length === 0 || loading,
-                },
-                {
-                  label: "Pending",
-                  icon: <HourglassEmptyIcon />,
-                  onClick: () => updateStatus(4),
-                  disabled: selectedRows.length === 0 || loading,
-                },
-                {
-                  label: "Postponed",
-                  icon: <ScheduleIcon />,
-                  onClick: () => updateStatus(8),
-                  disabled: selectedRows.length === 0 || loading,
-                },
-                {
-                  label: "Cancel",
-                  icon: <ScheduleIcon />,
-                  onClick: () => updateStatus(7),
-                  disabled: selectedRows.length === 0 || loading,
-                },
-                {
-                  label: "Request",
-                  icon: <RequestPageIcon />,
-                  onClick: () => updateStatus(1),
-                  disabled: selectedRows.length === 0 || loading,
-                },
-                {
-                  label: "Reschedule",
-                  icon: <EventRepeatIcon />,
-                  onClick: () => {},
-                  disabled: selectedRows.length === 0 || loading,
-                },
-              ]}
-            />
-          }
+          toolbarChildren={<DataGridActionBar actions={actions} />}
         />
       </Splitter>
 
+      <ReportPrintDialog
+        workOrders={selectedWorkOrders}
+        open={issueDialogOpen}
+        onClose={handleIssueDialogClose}
+        title="Issue WorkOrder"
+        onSubmit={() => alert("asd")}
+      />
       <WorkOrderFilterDialog
         open={filterOpen}
         onClose={() => setFilterOpen(false)}

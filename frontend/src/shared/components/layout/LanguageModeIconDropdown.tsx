@@ -4,10 +4,11 @@ import IconButton, { type IconButtonOwnProps } from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
+import { LOCAL_STORAGE } from "@/const";
 
 type Language = "fa" | "en";
 
-const STORAGE_KEY = "language";
+const STORAGE_KEY = LOCAL_STORAGE.LANG;
 
 export default function LanguageDropdown(props: IconButtonOwnProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

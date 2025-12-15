@@ -1,6 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import "@/assets/fonts/digit.css";
+import { formatDateTime } from "@/core/api/helper";
 
 function pad(num: number) {
   return String(num).padStart(2, "0");
@@ -21,21 +22,40 @@ export default function DigitalTime() {
   const minutes = pad(time.getMinutes());
   const seconds = pad(time.getSeconds());
 
+  const formattedDate = formatDateTime(
+    time.toISOString(),
+    undefined,
+    "EEEE, MMM d, yyyy"
+  );
+
   return (
     <Box
-      sx={{
-        fontFamily: "Digital",
-        fontSize: "1.65rem", // بزرگ‌تر و متناسب با glow
-        fontWeight: 700,
-        display: "flex",
-        alignItems: "center",
-      }}
+      textAlign={"center"}
+      display={"flex"}
+      flexDirection={"column"}
+      position="relative"
+      top="2px"
     >
-      <span>{hours}</span>
-      <span>:</span>
-      <span>{minutes}</span>
-      <span>:</span>
-      <span>{seconds}</span>
+      <Box
+        sx={{
+          fontFamily: "Digital",
+          fontSize: "1.65rem",
+          fontWeight: 700,
+          display: "flex",
+          alignItems: "center",
+          lineHeight: 0.7,
+          justifyContent: "center",
+        }}
+      >
+        <span>{hours}</span>
+        <span>:</span>
+        <span>{minutes}</span>
+        <span>:</span>
+        <span>{seconds}</span>
+      </Box>
+      <Box fontSize={"10px"} pt={"1.5px"}>
+        {formattedDate}
+      </Box>
     </Box>
   );
 }
