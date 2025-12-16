@@ -14,7 +14,7 @@ interface Props {
   label?: string | null;
 }
 
-const TabMeasurePoints = ({ workOrder }: Props) => {
+const TabMeasurePoints = ({ workOrder, label }: Props) => {
   // === getAll callback ===
   const getAll = useCallback(() => {
     return tblCompMeasurePoint.getAll({
@@ -85,7 +85,7 @@ const TabMeasurePoints = ({ workOrder }: Props) => {
 
   return (
     <CustomizedDataGrid
-      label="Measures"
+      label={label || "Measures"}
       rows={rows}
       columns={columns}
       loading={loading}

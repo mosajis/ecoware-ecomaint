@@ -14,7 +14,7 @@ interface Props {
   label?: string | null;
 }
 
-const TabRescheduleLog = ({ workOrder }: Props) => {
+const TabRescheduleLog = ({ workOrder, label }: Props) => {
   // === getAll callback ===
   const getAll = useCallback(() => {
     return tblReScheduleLog.getAll({
@@ -66,7 +66,7 @@ const TabRescheduleLog = ({ workOrder }: Props) => {
 
   return (
     <CustomizedDataGrid
-      label="Measures"
+      label={label || "Reschedule Log"}
       rows={rows}
       columns={columns}
       loading={loading}

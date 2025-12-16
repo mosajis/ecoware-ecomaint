@@ -1,0 +1,52 @@
+@media print {
+  .print-wrapper {
+    display: none;
+  }
+
+  .print-wrapper .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .print-wrapper {
+    display: block;
+  }
+
+  .print-wrapper .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .print-wrapper .header-space {
+    height: 75px;
+  }
+
+  .print-wrapper .footer,
+  .print-wrapper .footer-space {
+    height: 45px;
+  }
+  .print-wrapper .footer-space {
+    width: 100%;
+    left: 0;
+  }
+
+  .print-wrapper .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+  }
+
+  .print-wrapper .footer {
+    position: fixed;
+    bottom: 0;
+  }
+
+  .print-wrapper .content {
+    width: 100vw;
+  }
+}

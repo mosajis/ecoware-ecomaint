@@ -1,0 +1,64 @@
+@media print {
+  .template-workorder-footer,
+  .template-workorder-header,
+  .template-workorder-box-parent {
+    margin: auto;
+    width: 98%;
+  }
+
+  .template-workorder-header {
+    display: grid;
+    grid-template-columns: 5fr 2fr;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    border-bottom: 1px solid #444444;
+  }
+
+  .template-workorder-header h1 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .template-workorder-header h3 {
+    margin: 4px 0 0;
+  }
+
+  .template-workorder-footer {
+    border: 1px solid 444444;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    justify-content: space-between;
+  }
+
+  .template-workorder-box-parent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .template-workorder-box {
+    width: calc(100% - 4px);
+    page-break-inside: avoid;
+    break-inside: "avoid";
+    border-collapse: collapse;
+    font-size: 11px;
+  }
+
+  .template-workorder-box td {
+    border: 1px solid #333;
+    padding: 4px;
+    vertical-align: top;
+  }
+  .template-workorder-box th {
+    padding: 4px;
+    vertical-align: top;
+  }
+
+  .template-workorder-box .label {
+    font-weight: bold;
+    background: #f0f0f0;
+  }
+}

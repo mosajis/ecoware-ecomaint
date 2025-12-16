@@ -65,11 +65,12 @@ const tabs = [
 
 type Props = {
   workOrder?: TypeTblWorkOrder | null;
-  label?: string | null;
 };
 
 const TabsComponent = (props: Props) => {
-  const { workOrder, label } = props;
+  const { workOrder } = props;
+  const label = workOrder?.title;
+
   return (
     <TabsContainer
       tabs={tabs}

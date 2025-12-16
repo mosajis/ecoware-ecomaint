@@ -24,6 +24,7 @@ import { listClasses } from "@mui/material/List";
 import { tablePaginationClasses } from "@mui/material/TablePagination";
 import { gridClasses } from "@mui/x-data-grid";
 import { outlinedInputClasses, tabsClasses } from "@mui/material";
+import { blue } from "@mui/material/colors";
 
 export const dataDisplayCustomizations: Components<Theme> = {
   MuiList: {
@@ -192,6 +193,57 @@ export const dataDisplayCustomizations: Components<Theme> = {
             },
           },
           {
+            props: {
+              color: "warning",
+            },
+            style: {
+              borderColor: orange[200],
+              backgroundColor: orange[50],
+              [`& .${chipClasses.label}`]: {
+                color: orange[700],
+              },
+              [`& .${chipClasses.icon}`]: {
+                color: orange[700],
+              },
+              ...theme.applyStyles("dark", {
+                borderColor: orange[800],
+                backgroundColor: orange[900],
+                [`& .${chipClasses.label}`]: {
+                  color: orange[300],
+                },
+                [`& .${chipClasses.icon}`]: {
+                  color: orange[300],
+                },
+              }),
+            },
+          },
+          // اضافه کردن info
+          {
+            props: {
+              color: "info",
+            },
+            style: {
+              borderColor: blue[200],
+              backgroundColor: blue[50],
+              [`& .${chipClasses.label}`]: {
+                color: blue[300],
+              },
+              [`& .${chipClasses.icon}`]: {
+                color: blue[300],
+              },
+              ...theme.applyStyles("dark", {
+                borderColor: blue[800],
+                backgroundColor: blue[900],
+                [`& .${chipClasses.label}`]: {
+                  color: blue[100],
+                },
+                [`& .${chipClasses.icon}`]: {
+                  color: blue[100],
+                },
+              }),
+            },
+          },
+          {
             props: { size: "small" },
             style: {
               maxHeight: 20,
@@ -215,6 +267,7 @@ export const dataDisplayCustomizations: Components<Theme> = {
       }),
     },
   },
+
   MuiTablePagination: {
     styleOverrides: {
       actions: {
@@ -251,43 +304,15 @@ export const dataDisplayCustomizations: Components<Theme> = {
 };
 
 export const feedbackCustomizations: Components<Theme> = {
-  MuiAlert: {
-    styleOverrides: {
-      root: ({ theme }) => ({
-        borderRadius: 10,
-        backgroundColor: orange[100],
-        color: (theme.vars || theme).palette.text.primary,
-        border: `1px solid ${alpha(orange[300], 0.5)}`,
-        "& .MuiAlert-icon": {
-          color: orange[500],
-        },
-        ...theme.applyStyles("dark", {
-          backgroundColor: `${alpha(orange[900], 0.5)}`,
-          border: `1px solid ${alpha(orange[800], 0.5)}`,
-        }),
-      }),
-    },
-  },
   MuiDialog: {
     styleOverrides: {
       root: ({ theme }) => ({
         "& .MuiDialog-paper": {
           borderRadius: "10px",
           border: "1px solid",
+          backgroundImage: "none",
           borderColor: (theme.vars || theme).palette.divider,
         },
-      }),
-    },
-  },
-  MuiLinearProgress: {
-    styleOverrides: {
-      root: ({ theme }) => ({
-        height: 8,
-        borderRadius: 8,
-        backgroundColor: gray[200],
-        ...theme.applyStyles("dark", {
-          backgroundColor: gray[800],
-        }),
       }),
     },
   },

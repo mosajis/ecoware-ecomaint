@@ -6,9 +6,9 @@ import { BorderedBox } from "@/shared/components/BorderedBox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import RadioGroup from "@mui/material/RadioGroup";
 import Radio from "@mui/material/Radio";
-import ReportPrintTemplate from "./ReportPrintTemplate";
-import { TypeTblWorkOrderWithRels } from "../workOrderTypes";
+import { TypeTblWorkOrderWithRels } from "./workOrderTypes";
 import { useReactToPrint } from "react-to-print";
+import WorkOrderReport from "./report/Report";
 
 type Props = {
   title: string;
@@ -25,8 +25,10 @@ function ReportPrintDialog({
   onClose,
   workOrders,
 }: Props) {
-  const [outputFormat, setOutputFormat] = useState<string>("list");
-  const [sortOrder, setSortOrder] = useState<string>("component");
+  const [outputFormat, setOutputFormat] = useState<"list" | "details">("list");
+  const [sortOrder, setSortOrder] = useState<
+    "component" | "workOrderNumber" | "dueDate"
+  >("component");
 
   const contentRef = useRef<HTMLDivElement>(null);
   const printFn = useReactToPrint({ contentRef });
@@ -37,21 +39,20 @@ function ReportPrintDialog({
 
   return (
     <FormDialog open={open} onClose={onClose} title={title} onSubmit={onSubmit}>
-      {/* Output Format Section */}
-      <Box display={"flex"} gap={1}>
+      <Box display="flex" gap={2}>
         <BorderedBox label="Output Format" direction="column">
           <RadioGroup
             value={outputFormat}
-            onChange={(e) => setOutputFormat(e.target.value)}
+            onChange={(e) =>
+              setOutputFormat(e.target.value as "list" | "details")
+            }
           >
             <FormControlLabel
-              style={{ height: "1.8rem" }}
               value="list"
               control={<Radio size="small" />}
               label="List"
             />
             <FormControlLabel
-              style={{ height: "1.8rem" }}
               value="details"
               control={<Radio size="small" />}
               label="List With Details"
@@ -59,26 +60,26 @@ function ReportPrintDialog({
           </RadioGroup>
         </BorderedBox>
 
-        {/* Sort Order Section */}
         <BorderedBox label="Sort Order" direction="column">
           <RadioGroup
             value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
+            onChange={(e) =>
+              setSortOrder(
+                e.target.value as "component" | "workOrderNumber" | "dueDate"
+              )
+            }
           >
             <FormControlLabel
-              style={{ height: "1.8rem" }}
               value="component"
               control={<Radio size="small" />}
               label="Component"
             />
             <FormControlLabel
-              style={{ height: "1.8rem" }}
               value="workOrderNumber"
               control={<Radio size="small" />}
               label="Work Order Number"
             />
             <FormControlLabel
-              style={{ height: "1.8rem" }}
               value="dueDate"
               control={<Radio size="small" />}
               label="Due Date"
@@ -86,17 +87,23 @@ function ReportPrintDialog({
           </RadioGroup>
         </BorderedBox>
       </Box>
+
       <Button
         onClick={handlePrint}
         variant="outlined"
         color="primary"
-        sx={{ mt: 1, width: "100%" }}
+        sx={{ mt: 2, width: "100%" }}
       >
         Print
       </Button>
-      {/* Hidden Print Template */}
+
       <Box display="none">
-        <ReportPrintTemplate ref={contentRef} workOrders={workOrders} />
+        <WorkOrderReport
+          ref={contentRef}
+          workOrders={workOrders}
+          outputFormat={outputFormat}
+          sortOrder={sortOrder}
+        />
       </Box>
     </FormDialog>
   );

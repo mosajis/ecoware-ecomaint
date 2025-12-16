@@ -9,6 +9,7 @@ import {
   navigationCustomizations,
   surfacesCustomizations,
   tabsCustomization,
+  feedbackCustomizations,
 } from "@/shared/theme/customization";
 
 interface AppThemeProps {
@@ -34,6 +35,7 @@ const defaultTheme = createTheme({
     ...surfacesCustomizations,
     ...dataGridCustomizations,
     ...tabsCustomization,
+    ...feedbackCustomizations,
   },
 });
 

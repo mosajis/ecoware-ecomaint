@@ -14,7 +14,7 @@ interface Props {
 }
 
 const TabMaintenanceLog = (props: Props) => {
-  const { workOrder } = props;
+  const { workOrder, label } = props;
 
   const columns: GridColDef<TypeTblMaintLog>[] = [
     {
@@ -147,7 +147,7 @@ const TabMaintenanceLog = (props: Props) => {
   return (
     <CustomizedDataGrid
       showToolbar
-      label="MaintLog"
+      label={label || "MaintLog"}
       loading={loading}
       onRefreshClick={handleRefresh}
       getRowId={(row) => row.maintLogId}
