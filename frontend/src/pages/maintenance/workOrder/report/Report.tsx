@@ -18,6 +18,7 @@ interface WorkOrderReportProps {
 const ReportWorkOrder = forwardRef<HTMLDivElement, WorkOrderReportProps>(
   ({ workOrders, outputFormat, sortOrder }, ref) => (
     <Printable
+      pagePadding={11}
       ref={ref}
       Footer={<ReportFooter />}
       Header={

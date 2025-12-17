@@ -1,6 +1,6 @@
 @media print {
   .print-wrapper {
-    display: none;
+    display: block;
   }
 
   .print-wrapper .header {
@@ -8,10 +8,6 @@
     top: 0;
     left: 0;
     width: 100%;
-  }
-
-  .print-wrapper {
-    display: block;
   }
 
   .print-wrapper .footer {
@@ -23,12 +19,12 @@
 
   .print-wrapper .header,
   .print-wrapper .header-space {
-    height: 140px;
+    height: 100px;
   }
 
   .print-wrapper .footer,
   .print-wrapper .footer-space {
-    height: 40px;
+    height: 45px;
   }
   .print-wrapper .footer-space {
     width: 100%;
@@ -49,5 +45,7 @@
 
   .print-wrapper .content {
     width: 100vw;
+    position: relative;
+    left: -2px;
   }
 }

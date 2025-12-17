@@ -5,6 +5,7 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import TabsComponent from "./WorkOrderTabs";
 import StatusChip from "./customCell/Status";
 import OverdueText from "./customCell/OverDue";
+import ReportWorkOrder from "./report/Report";
 import { useCallback, useMemo, useState } from "react";
 import { tblWorkOrder } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
@@ -16,6 +17,9 @@ import WorkOrderFilterDialog, {
 } from "./WorkOrderDialogFilter";
 import { ReportHeader } from "./report/ReportHeader";
 
+// export default (
+//   <ReportWorkOrder outputFormat="list" sortOrder="component" workOrders={[]} />
+// );
 export default function WorkOrderPage() {
   const [issueDialogOpen, setIssueDialogOpen] = useState(false);
   const [selectedRows, setSelectedRows] = useState<GridRowId[]>([]);
@@ -26,6 +30,7 @@ export default function WorkOrderPage() {
     () =>
       tblWorkOrder.getAll({
         paginate: true,
+        perPage: 200,
         filter: filter ?? undefined,
         include: {
           tblComponentUnit: {
