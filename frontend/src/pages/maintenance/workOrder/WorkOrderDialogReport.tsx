@@ -6,9 +6,9 @@ import { BorderedBox } from "@/shared/components/BorderedBox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import RadioGroup from "@mui/material/RadioGroup";
 import Radio from "@mui/material/Radio";
-import { TypeTblWorkOrderWithRels } from "./workOrderTypes";
 import { useReactToPrint } from "react-to-print";
 import WorkOrderReport from "./report/Report";
+import { TypeTblWorkOrderWithRels } from "./types";
 
 type Props = {
   title: string;

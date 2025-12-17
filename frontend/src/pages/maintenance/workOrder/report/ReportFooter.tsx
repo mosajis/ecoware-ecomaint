@@ -1,18 +1,14 @@
 import { formatDateTime } from "@/core/api/helper";
 
 type FooterProps = {
-  printDate?: string | Date;
-  printedBy?: string;
+  printedBy: string;
 };
 
-export const ReportFooter = ({
-  printDate = new Date(),
-  printedBy = "Administrator",
-}: FooterProps) => {
+export const ReportFooter = ({ printedBy }: FooterProps) => {
   return (
     <div className="template-workorder-footer">
       <div>
-        <strong>Printed At:</strong> {formatDateTime(printDate)}
+        <strong>Printed At:</strong> {formatDateTime(new Date())}
       </div>
       <div>
         <strong>Printed By:</strong> {printedBy}

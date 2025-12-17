@@ -128,7 +128,7 @@ export default function WorkOrderFilterDialog({
   onApplyFilter,
 }: WorkOrderFilterDialogProps) {
   const [filters, setFilters] = useState<FiltersState>({
-    number: "",
+    number: "123",
     title: "",
     jobCode: "",
     priority: "",

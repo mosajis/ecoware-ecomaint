@@ -1,8 +1,8 @@
 import { TypeTblWorkOrderWithRels } from "../types";
 import ReportTable from "./ReportTable";
 
-type OutputFormat = "list" | "details";
-type SortOrder = "component" | "workOrderNumber" | "dueDate";
+export type OutputFormat = "list" | "details";
+export type SortOrder = "component" | "workOrderNumber" | "dueDate";
 
 const sortWorkOrders = (
   workOrders: TypeTblWorkOrderWithRels[],
@@ -17,11 +17,14 @@ const sortWorkOrders = (
         b.tblComponentUnit?.compNo ?? ""
       ),
     workOrderNumber: (a, b) => (a.woNo ?? "").localeCompare(b.woNo ?? ""),
-    dueDate: (a, b) =>
-      ((a.dueDate as any) ?? "").localeCompare(b.dueDate ?? ""),
+    dueDate: (a, b) => {
+      const dateA = a.dueDate ? new Date(a.dueDate).getTime() : 0;
+      const dateB = b.dueDate ? new Date(b.dueDate).getTime() : 0;
+      return dateA - dateB;
+    },
   };
 
-  return [...workOrders].sort(comparators[sortOrder] || (() => 0));
+  return [...workOrders].sort(comparators[sortOrder]);
 };
 
 interface ContentProps {
@@ -37,17 +40,13 @@ const ReportContent = ({
 }: ContentProps) => {
   const sorted = sortWorkOrders(workOrders, sortOrder);
 
-  return (
-    <div className="template-workorder-box-parent">
-      {sorted.map((wo) => (
-        <ReportTable
-          workorder={wo}
-          key={wo.workOrderId}
-          outputFormat={outputFormat}
-        />
-      ))}
-    </div>
-  );
+  return sorted.map((wo) => (
+    <ReportTable
+      workorder={wo}
+      key={wo.workOrderId}
+      outputFormat={outputFormat}
+    />
+  ));
 };
 
 export default ReportContent;

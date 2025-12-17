@@ -1,34 +1,19 @@
-import { formatDateTime } from "@/core/api/helper";
-
 type HeaderProps = {
   title: string;
-  total: number;
-  printDate?: Date;
-  reportId?: string;
-  generatedBy?: string;
-  dateRange?: {
-    from: Date;
-    to: Date;
-  };
+  location: string;
+  totalLength: number;
 };
 
-export const ReportHeader = ({
-  title,
-  total,
-  printDate = new Date(),
-  reportId = "-",
-  generatedBy = "System",
-  dateRange,
-}: HeaderProps) => {
+export const ReportHeader = ({ title, location, totalLength }: HeaderProps) => {
   return (
     <div className="report-workorder-header">
       <h1>Ecoware (Preventive Maintenance System)</h1>
       <div>
-        <strong>Location:</strong> Pasargad 100
+        <strong>Location:</strong> {location}
       </div>
-      <h3>Work Order Report</h3>
+      <h3>{title}</h3>
       <div>
-        <strong>Total: </strong> {total}
+        <strong>Total: </strong> {JSON.stringify(totalLength)}
       </div>
     </div>
   );

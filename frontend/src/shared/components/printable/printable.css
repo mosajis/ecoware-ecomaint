@@ -16,16 +16,6 @@
     left: 0;
     width: 100%;
   }
-
-  .print-wrapper .header,
-  .print-wrapper .header-space {
-    height: 100px;
-  }
-
-  .print-wrapper .footer,
-  .print-wrapper .footer-space {
-    height: 45px;
-  }
   .print-wrapper .footer-space {
     width: 100%;
     left: 0;

@@ -4,27 +4,14 @@ import "./printable.css";
 type PrintableSlot<P = {}> = React.ReactNode | React.ComponentType<P>;
 
 interface PrintableProps<HProps = unknown, CProps = unknown, FProps = unknown> {
-  Header?: PrintableSlot<HProps>;
-  Content: PrintableSlot<CProps>;
-  Footer?: PrintableSlot<FProps>;
+  Header?: any;
+  Content: any;
+  Footer?: any;
 
-  headerProps?: HProps;
-  contentProps?: CProps;
-  footerProps?: FProps;
-
-  pagePadding?: number;
+  headerHeight: number;
+  pagePadding: number;
+  footerHeight: number;
   style?: React.CSSProperties;
-}
-
-function renderSlot<P>(Slot: PrintableSlot<P> | undefined, props?: P) {
-  if (!Slot) return null;
-
-  if (React.isValidElement(Slot)) {
-    return Slot;
-  }
-
-  const Component = Slot as React.ComponentType<P>;
-  return <Component {...(props as any)} />;
 }
 
 const Printable = React.forwardRef<HTMLDivElement, PrintableProps>(
@@ -33,11 +20,8 @@ const Printable = React.forwardRef<HTMLDivElement, PrintableProps>(
       Header,
       Content,
       Footer,
-
-      headerProps,
-      contentProps,
-      footerProps,
-
+      headerHeight = 100,
+      footerHeight = 45,
       pagePadding = 8,
       style,
     },
@@ -51,7 +35,10 @@ const Printable = React.forwardRef<HTMLDivElement, PrintableProps>(
           <thead>
             <tr>
               <td>
-                <div className="header-space" />
+                <div
+                  className="header-space"
+                  style={{ height: headerHeight }}
+                />
               </td>
             </tr>
           </thead>
@@ -66,7 +53,7 @@ const Printable = React.forwardRef<HTMLDivElement, PrintableProps>(
                     paddingRight: pagePaddingMM,
                   }}
                 >
-                  {renderSlot(Content, contentProps)}
+                  {Content}
                 </div>
               </td>
             </tr>
@@ -75,7 +62,7 @@ const Printable = React.forwardRef<HTMLDivElement, PrintableProps>(
           <tfoot>
             <tr>
               <td>
-                <div className="footer-space" />
+                <div className="footer-space" style={{ height: "45px" }} />
               </td>
             </tr>
           </tfoot>
@@ -85,12 +72,13 @@ const Printable = React.forwardRef<HTMLDivElement, PrintableProps>(
           <div
             className="header"
             style={{
+              height: headerHeight,
               paddingTop: pagePadding / 1.5 + "mm",
               paddingLeft: pagePaddingMM,
               paddingRight: pagePaddingMM,
             }}
           >
-            {renderSlot(Header, headerProps)}
+            {Header}
           </div>
         )}
 
@@ -98,11 +86,12 @@ const Printable = React.forwardRef<HTMLDivElement, PrintableProps>(
           <div
             className="footer"
             style={{
+              height: footerHeight,
               paddingLeft: pagePaddingMM,
               paddingRight: pagePaddingMM,
             }}
           >
-            {renderSlot(Footer, footerProps)}
+            {Footer}
           </div>
         )}
       </div>
