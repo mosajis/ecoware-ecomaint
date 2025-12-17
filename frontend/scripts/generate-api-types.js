@@ -44,6 +44,8 @@ async function fixTypesFile(path) {
   // حذف همه | unknown ها
   content = content.replace(/\s*\|\s*unknown/g, "");
 
+  content = content.replace(/\s*\|\s*\(?Record<string,\s*never>\)?/g, "");
+
   // اختیاری: حذف | any هم اگر لازم باشه
   // content = content.replace(/\s*\|\s*any/g, "");
 

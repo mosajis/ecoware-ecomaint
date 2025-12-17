@@ -10,10 +10,11 @@ import { tblWorkOrder } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { GridColDef, GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
 import { calculateOverdue, formatDateTime } from "@/core/api/helper";
-import { TypeTblWorkOrderWithRels } from "./workOrderTypes";
+import { TypeTblWorkOrderWithRels } from "./types";
 import WorkOrderFilterDialog, {
   type WorkOrderFilter,
 } from "./WorkOrderDialogFilter";
+import { ReportHeader } from "./report/ReportHeader";
 
 export default function WorkOrderPage() {
   const [issueDialogOpen, setIssueDialogOpen] = useState(false);
@@ -24,7 +25,7 @@ export default function WorkOrderPage() {
   const getAll = useCallback(
     () =>
       tblWorkOrder.getAll({
-        paginate: false,
+        paginate: true,
         filter: filter ?? undefined,
         include: {
           tblComponentUnit: {
@@ -180,9 +181,7 @@ export default function WorkOrderPage() {
 
   return (
     <>
-      <Splitter horizontal initialPrimarySize="40%">
-        <TabsComponent workOrder={selectedWorkOrders[0] || undefined} />
-
+      <Splitter horizontal initialPrimarySize="60%">
         <CustomizedDataGrid
           label="WorkOrders"
           rows={rows}
@@ -205,6 +204,7 @@ export default function WorkOrderPage() {
             />
           }
         />
+        <TabsComponent workOrder={selectedWorkOrders[0] || undefined} />
       </Splitter>
 
       <ReportPrintDialog

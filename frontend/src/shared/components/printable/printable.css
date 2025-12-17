@@ -21,13 +21,14 @@
     width: 100%;
   }
 
+  .print-wrapper .header,
   .print-wrapper .header-space {
-    height: 75px;
+    height: 140px;
   }
 
   .print-wrapper .footer,
   .print-wrapper .footer-space {
-    height: 45px;
+    height: 40px;
   }
   .print-wrapper .footer-space {
     width: 100%;

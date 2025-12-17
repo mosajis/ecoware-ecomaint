@@ -62,9 +62,6 @@ export default function WorkOrderActionBar({
     {
       ...WORK_ORDER_ACTIONS.request,
       onClick: onRequest,
-      disabled:
-        selectedCount === 0 ||
-        !WORK_ORDER_ACTIONS.request.isEnabled(selectedStatuses),
     },
   ];
 

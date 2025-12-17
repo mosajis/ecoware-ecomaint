@@ -1,42 +1,100 @@
+.template-workorder-header {
+  padding-top: 35px;
+
+  padding-bottom: 10px;
+  width: calc(100% - 70px);
+  margin: auto;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white;
+  border-bottom: 1px solid #b9b9b9;
+}
+
+.template-workorder-footer {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1f2937;
+  background-color: #f8f8f8;
+  border-top: 1px solid #eeeeee;
+}
+
+/* Top layout */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Brand */
+.header-brand {
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brand-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.report-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Meta info */
+.header-meta {
+  text-align: left;
+  font-size: 13.5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-item {
+  white-space: nowrap;
+}
+
+.m {
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+.s {
+  margin-top: 10px;
+}
+
+.d {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 @media print {
-  .template-workorder-footer,
-  .template-workorder-header,
   .template-workorder-box-parent {
     margin: auto;
-    width: 98%;
+    width: 100%;
+    padding: 35px;
   }
 
-  .template-workorder-header {
-    display: grid;
-    grid-template-columns: 5fr 2fr;
-    align-items: center;
-    padding-bottom: 0.5rem;
-    padding-top: 0.5rem;
-    border-bottom: 1px solid #444444;
-  }
-
-  .template-workorder-header h1 {
-    margin: 0;
-    font-size: 20px;
-  }
-
-  .template-workorder-header h3 {
-    margin: 4px 0 0;
+  .template-workorder-box-parent {
+    padding-top: 0;
   }
 
   .template-workorder-footer {
-    border: 1px solid 444444;
     display: flex;
     align-items: center;
     padding: 0.5rem;
+    padding-right: 20px;
+    padding-left: 20px;
     justify-content: space-between;
+    font-size: 13px;
   }
 
   .template-workorder-box-parent {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     gap: 10px;
   }
   .template-workorder-box {
@@ -44,7 +102,7 @@
     page-break-inside: avoid;
     break-inside: "avoid";
     border-collapse: collapse;
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .template-workorder-box td {

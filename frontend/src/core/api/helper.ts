@@ -19,7 +19,7 @@ export function buildRelation(
 }
 
 export function formatDateTime(
-  sqlDateTime: string,
+  dateTime: string | Date | number,
   isJalali?: boolean,
   pattern?: string
 ): string {
@@ -28,7 +28,11 @@ export function formatDateTime(
       ? isJalali
       : localStorage.getItem("language") === "fa";
 
-  const date = new Date(sqlDateTime.replace(" ", "T"));
+  if (typeof dateTime === "string") {
+    dateTime = dateTime.replace(" ", "T");
+  }
+
+  const date = new Date(dateTime);
 
   return useJalali
     ? formatJalali(date, pattern ?? "yyyy/MM/dd HH:mm")
@@ -46,7 +50,7 @@ export const calculateOverdue = (row: TypeTblWorkOrder) => {
       typeof dueDate !== "number" &&
       !(dueDate instanceof Date))
   ) {
-    return "";
+    return "-";
   }
 
   if (!status || ["complete", "control"].includes(status)) {
@@ -69,3 +73,5 @@ export const calculateOverdue = (row: TypeTblWorkOrder) => {
 
   return diffDays;
 };
+
+export const val = (v?: string | number | null) => v ?? "-";

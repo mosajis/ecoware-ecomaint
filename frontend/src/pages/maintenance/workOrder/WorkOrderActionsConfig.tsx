@@ -3,7 +3,7 @@ import CheckCircle from "@mui/icons-material/CheckCircle";
 import HourglassEmpty from "@mui/icons-material/HourglassEmpty";
 import RequestPage from "@mui/icons-material/RequestPage";
 import Schedule from "@mui/icons-material/Schedule";
-import { STATUS, TypeWorkOrderStatus } from "./workOrderTypes";
+import { STATUS, TypeWorkOrderStatus } from "./types";
 
 export type ActionKey =
   | "issue"

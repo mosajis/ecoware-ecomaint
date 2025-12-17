@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Chip } from "@mui/material";
-import { STATUS } from "../workOrderTypes";
+import { STATUS } from "../types";
 
 type StatusKey = keyof typeof STATUS;
 
@@ -19,8 +19,8 @@ const statusColors: Record<
   PENDING: "warning",
   CONTROL: "info",
   COMPLETE: "success",
-  CANCEL: "error",
-  POSTPONED: "default",
+  CANCEL: "default",
+  POSTPONED: "error",
 };
 
 interface StatusChipProps {
