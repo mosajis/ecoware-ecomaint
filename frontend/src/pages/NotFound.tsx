@@ -1,5 +1,9 @@
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
-import { Box, Button, Divider, Stack, Typography } from '@mui/material'
+import Typography from '@mui/material/Typography'
+import Stack from '@mui/material/Stack'
+import Divider from '@mui/material/Divider'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import { useNavigate, useRouter } from '@tanstack/react-router'
 
 export function NotFound() {
