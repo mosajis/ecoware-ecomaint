@@ -1,113 +1,116 @@
-import AppLayout from "@/shared/components/layout/AppLayout";
-import AppAuthorization from "@/shared/components/AppAthorization";
-import Spinner from "@/shared/components/Spinner";
-import { Outlet, redirect } from "@tanstack/react-router";
-import { createRoute, createRootRoute } from "@tanstack/react-router";
-import { lazy, Suspense } from "react";
-import { LOCAL_STORAGE } from "@/const";
+import AppLayout from '@/shared/components/layout/AppLayout'
+import AppAuthorization from '@/shared/components/AppAthorization'
+import Spinner from '@/shared/components/Spinner'
+import { Outlet, redirect } from '@tanstack/react-router'
+import { createRoute, createRootRoute } from '@tanstack/react-router'
+import { lazy, Suspense } from 'react'
+import { LOCAL_STORAGE } from '@/const'
+import { NotFound } from '@/pages/NotFound'
 
 // Lazy load all page components
-const PageLogin = lazy(() => import("@/pages/auth/login/login.page"));
-const PageAddress = lazy(() => import("@/pages/general/address/Address"));
-const PageLocation = lazy(() => import("@/pages/general/location/Location"));
-const PageEmployee = lazy(() => import("@/pages/general/employee/Employee"));
+const PageLogin = lazy(() => import('@/pages/auth/login/login.page'))
+const PageAddress = lazy(() => import('@/pages/general/address/Address'))
+const PageLocation = lazy(() => import('@/pages/general/location/Location'))
+const PageEmployee = lazy(() => import('@/pages/general/employee/Employee'))
 const PageDiscipline = lazy(
-  () => import("@/pages/general/discipline/Discipline")
-);
+  () => import('@/pages/general/discipline/Discipline')
+)
 const PageCounterType = lazy(
-  () => import("@/pages/general/counterType/CounterType")
-);
+  () => import('@/pages/general/counterType/CounterType')
+)
 const PageMaintClass = lazy(
-  () => import("@/pages/general/maintClass/MaintClass")
-);
+  () => import('@/pages/general/maintClass/MaintClass')
+)
 const PageFollowStatus = lazy(
-  () => import("@/pages/general/followStatus/FollowStatus")
-);
+  () => import('@/pages/general/followStatus/FollowStatus')
+)
 const PagePendingType = lazy(
-  () => import("@/pages/general/pendingType/PendingType")
-);
-const PageJobClass = lazy(() => import("@/pages/general/jobClass/JobClass"));
+  () => import('@/pages/general/pendingType/PendingType')
+)
+const PageJobClass = lazy(() => import('@/pages/general/jobClass/JobClass'))
 const PageJobDescription = lazy(
-  () => import("@/pages/general/jobDescription/JobDescription")
-);
+  () => import('@/pages/general/jobDescription/JobDescription')
+)
 
 const PageComponentUnitList = lazy(
-  () => import("@/pages/maintenance/componentUnit/ComponentUnit")
-);
+  () => import('@/pages/maintenance/componentUnit/ComponentUnit')
+)
 const PageComponentUnitTree = lazy(
-  () => import("@/pages/maintenance/componentUnit/ComponentUnitTree")
-);
+  () => import('@/pages/maintenance/componentUnit/ComponentUnitTree')
+)
 
 const PageComponentTypeList = lazy(
-  () => import("@/pages/maintenance/componentType/ComponentType")
-);
+  () => import('@/pages/maintenance/componentType/ComponentType')
+)
 const PageComponentTypeTree = lazy(
-  () => import("@/pages/maintenance/componentType/ComponentTypeTree")
-);
+  () => import('@/pages/maintenance/componentType/ComponentTypeTree')
+)
 const ComponentTypeJob = lazy(
-  () => import("@/pages/maintenance/componentType/pages/ComponentTypeJob")
-);
-const PageFunction = lazy(
-  () => import("@/pages/maintenance/function/Function")
-);
+  () => import('@/pages/maintenance/componentType/pages/ComponentTypeJob')
+)
+const PageFunction = lazy(() => import('@/pages/maintenance/function/Function'))
 const PageFunctionTree = lazy(
-  () => import("@/pages/maintenance/function/FunctionTree")
-);
+  () => import('@/pages/maintenance/function/FunctionTree')
+)
 
 const PageComponentJobList = lazy(
-  () => import("@/pages/maintenance/componentJob/ComponentJob")
-);
+  () => import('@/pages/maintenance/componentJob/ComponentJob')
+)
 
 const PageComponentWorkOrder = lazy(
-  () => import("@/pages/maintenance/workOrder/WorkOrder")
-);
+  () => import('@/pages/maintenance/workOrder/WorkOrder')
+)
 
-const PageRound = lazy(() => import("@/pages/maintenance/round/Round"));
+const PageRound = lazy(() => import('@/pages/maintenance/round/Round'))
 
 const PageMeasurePoints = lazy(
-  () => import("@/pages/maintenance/measurePoints/MeasurePoints")
-);
+  () => import('@/pages/maintenance/measurePoints/MeasurePoints')
+)
 
 const PageMeasurePointsLogs = lazy(
-  () => import("@/pages/maintenance/measurePointsLogs/MeasurePointsLogs")
-);
+  () => import('@/pages/maintenance/measurePointsLogs/MeasurePointsLogs')
+)
 
 const PageCountersLog = lazy(
-  () => import("@/pages/maintenance/counterLog/CounterLog")
-);
+  () => import('@/pages/maintenance/counterLog/CounterLog')
+)
 
-const PageMaintLog = lazy(
-  () => import("@/pages/maintenance/maintLog/MaintLog")
-);
+const PageMaintLog = lazy(() => import('@/pages/maintenance/maintLog/MaintLog'))
 
-const PageStockItem = lazy(() => import("@/pages/stock/stockItem/StockItem"));
-const PageStockType = lazy(() => import("@/pages/stock/stockType/StockType"));
-const PageStockUsed = lazy(() => import("@/pages/stock/stockUsed/StockUsed"));
+const PageStockItem = lazy(() => import('@/pages/stock/stockItem/StockItem'))
+const PageStockType = lazy(() => import('@/pages/stock/stockType/StockType'))
+const PageStockUsed = lazy(() => import('@/pages/stock/stockUsed/StockUsed'))
 
-const PageUsers = lazy(() => import("@/pages/users/Users"));
+const PageUsers = lazy(() => import('@/pages/users/Users'))
+
+const PageReportWork = lazy(
+  () => import('@/pages/maintenance/reportWork/ReportWork')
+)
 
 // Loading fallback component
-const LoadingFallback = () => <Spinner />;
+const LoadingFallback = () => <Spinner />
 
 // Wrapper for lazy components
 const LazyComponent = ({
   Component,
 }: {
-  Component: React.ComponentType<any>;
+  Component: React.ComponentType<any>
 }) => (
   <Suspense fallback={<LoadingFallback />}>
     <Component />
   </Suspense>
-);
+)
 
 // --- Root ---
 export const rootRoute = createRootRoute({
+  notFoundComponent: NotFound,
   component: () => <Outlet />,
-});
+})
 
 // --- Pathless Protected Route ---
 export const protectedRoute = createRoute({
-  id: "protected",
+  notFoundComponent: NotFound,
+  id: 'protected',
   getParentRoute: () => rootRoute,
   component: () => (
     <AppAuthorization>
@@ -115,258 +118,265 @@ export const protectedRoute = createRoute({
     </AppAuthorization>
   ),
   beforeLoad: async ({ location }) => {
-    const token = localStorage.getItem(LOCAL_STORAGE.ACCESS_KEY);
+    const token = localStorage.getItem(LOCAL_STORAGE.ACCESS_KEY)
     if (!token) {
       throw redirect({
-        to: "/auth/login",
+        to: '/auth/login',
         search: { redirect: location.href },
-      });
+      })
     }
   },
-});
+})
 
 // --- Redirect "/" → "/dashboard" ---
 export const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/",
+  path: '/',
   beforeLoad: async () => {
-    throw redirect({ to: "/dashboard" });
+    throw redirect({ to: '/dashboard' })
   },
-});
+})
 
 // --- Auth Login ---
 export const AuthLoginRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/auth/login",
+  path: '/auth/login',
   component: () => <LazyComponent Component={PageLogin} />,
-  beforeLoad: () => ({ breadcrumb: "Login" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Login' }),
+})
 
 // --- Dashboard ---
 export const dashboardRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/dashboard",
-  component: () => "Dashboard Page",
-  beforeLoad: () => ({ breadcrumb: "Dashboard" }),
-});
+  path: '/dashboard',
+  component: () => 'Dashboard Page',
+  beforeLoad: () => ({ breadcrumb: 'Dashboard' }),
+})
 
 // --- General ---
 export const generalAddressRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/general/address",
+  path: '/general/address',
   component: () => <LazyComponent Component={PageAddress} />,
-  beforeLoad: () => ({ breadcrumb: "Address" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Address' }),
+})
 
 export const generalLocationRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/general/location",
+  path: '/general/location',
   component: () => <LazyComponent Component={PageLocation} />,
-  beforeLoad: () => ({ breadcrumb: "Location" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Location' }),
+})
 
 export const generalEmployeeRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/general/employee",
+  path: '/general/employee',
   component: () => <LazyComponent Component={PageEmployee} />,
-  beforeLoad: () => ({ breadcrumb: "Employee" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Employee' }),
+})
 
 export const generalDisciplineRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/general/discipline",
+  path: '/general/discipline',
   component: () => <LazyComponent Component={PageDiscipline} />,
-  beforeLoad: () => ({ breadcrumb: "Discipline" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Discipline' }),
+})
 
 export const generalCounterTypeRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/general/counter-type",
+  path: '/general/counter-type',
   component: () => <LazyComponent Component={PageCounterType} />,
-  beforeLoad: () => ({ breadcrumb: "Counter Type" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Counter Type' }),
+})
 
 export const generalMaintClassRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/general/maint-class",
+  path: '/general/maint-class',
   component: () => <LazyComponent Component={PageMaintClass} />,
-  beforeLoad: () => ({ breadcrumb: "Maint Class" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Maint Class' }),
+})
 
 export const generalFollowStatusRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/general/follow-status",
+  path: '/general/follow-status',
   component: () => <LazyComponent Component={PageFollowStatus} />,
-  beforeLoad: () => ({ breadcrumb: "Follow Status" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Follow Status' }),
+})
 
 export const generalPendingTypeRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/general/pending-type",
+  path: '/general/pending-type',
   component: () => <LazyComponent Component={PagePendingType} />,
-  beforeLoad: () => ({ breadcrumb: "Pending Type" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Pending Type' }),
+})
 
 export const generalJobClassRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/general/job-class",
+  path: '/general/job-class',
   component: () => <LazyComponent Component={PageJobClass} />,
-  beforeLoad: () => ({ breadcrumb: "Job Class" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Job Class' }),
+})
 
 export const generalJobDescriptionRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/general/job-description",
+  path: '/general/job-description',
   component: () => <LazyComponent Component={PageJobDescription} />,
-  beforeLoad: () => ({ breadcrumb: "Job Description" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Job Description' }),
+})
 
 // --- Maintenance ---
 // --- Maintenance --- Functions --------------------
 export const maintFunctionRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/maintenance/function",
-  beforeLoad: () => ({ breadcrumb: "Function" }),
-});
+  path: '/maintenance/function',
+  beforeLoad: () => ({ breadcrumb: 'Function' }),
+})
 export const maintFunctionListRoute = createRoute({
   getParentRoute: () => maintFunctionRoute,
-  path: "/",
+  path: '/',
   component: () => <LazyComponent Component={PageFunction} />,
-  beforeLoad: () => ({ breadcrumb: "List View" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'List View' }),
+})
 export const maintFunctionTreeRoute = createRoute({
   getParentRoute: () => maintFunctionRoute,
-  path: "/tree-view",
+  path: '/tree-view',
   component: () => <LazyComponent Component={PageFunctionTree} />,
-  beforeLoad: () => ({ breadcrumb: "Tree View" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Tree View' }),
+})
 // --- Maintenance --- Component Unit ---------------
 export const maintComponentUnitRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/maintenance/component-unit",
-  beforeLoad: () => ({ breadcrumb: "Component Unit" }),
-});
+  path: '/maintenance/component-unit',
+  beforeLoad: () => ({ breadcrumb: 'Component Unit' }),
+})
 export const maintComponentUnitListRoute = createRoute({
   getParentRoute: () => maintComponentUnitRoute,
   component: () => <LazyComponent Component={PageComponentUnitList} />,
-  path: "/",
-});
+  path: '/',
+})
 export const maintComponentUnitTreeRoute = createRoute({
   getParentRoute: () => maintComponentUnitRoute,
   component: () => <LazyComponent Component={PageComponentUnitTree} />,
-  path: "/tree-view",
-});
+  path: '/tree-view',
+})
 
 // --- Maintenance --- Component Type ---------------
 export const maintComponentTypeRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/maintenance/component-type",
-  beforeLoad: () => ({ breadcrumb: "Component Type" }),
-});
+  path: '/maintenance/component-type',
+  beforeLoad: () => ({ breadcrumb: 'Component Type' }),
+})
 export const maintComponentTypeTreeRoute = createRoute({
   getParentRoute: () => maintComponentTypeRoute,
-  path: "tree-view",
+  path: 'tree-view',
   component: () => <LazyComponent Component={PageComponentTypeTree} />,
-  beforeLoad: () => ({ breadcrumb: "Tree View" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Tree View' }),
+})
 export const maintComponentTypeListRoute = createRoute({
   getParentRoute: () => maintComponentTypeRoute,
-  path: "/",
+  path: '/',
   component: () => <LazyComponent Component={PageComponentTypeList} />,
-  beforeLoad: () => ({ breadcrumb: "List View" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'List View' }),
+})
 export const maintComponentTypeDetailRoute = createRoute({
   getParentRoute: () => maintComponentTypeRoute,
-  path: "$id/job",
+  path: '$id/job',
   component: () => <LazyComponent Component={ComponentTypeJob} />,
-});
+})
 
 // --- Maintenance --- Component Job ----------------
 export const maintComponentJobRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/maintenance/component-job",
+  path: '/maintenance/component-job',
   component: () => <LazyComponent Component={PageComponentJobList} />,
-  beforeLoad: () => ({ breadcrumb: "Component Job" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Component Job' }),
+})
 
 export const maintWorkOrderRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/maintenance/work-order",
+  path: '/maintenance/work-order',
   component: () => <LazyComponent Component={PageComponentWorkOrder} />,
-  beforeLoad: () => ({ breadcrumb: "Work Order" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Work Order' }),
+})
 
 // --- Maintenance --- Round ------------------------
 export const maintRoundRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/maintenance/round",
+  path: '/maintenance/round',
   component: () => <LazyComponent Component={PageRound} />,
-  beforeLoad: () => ({ breadcrumb: "Round" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Round' }),
+})
 
 // --- Maintenance --- MeasurePoints ------------------------
 export const maintMeasurePointsRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/maintenance/measure-points",
+  path: '/maintenance/measure-points',
   component: () => <LazyComponent Component={PageMeasurePoints} />,
-  beforeLoad: () => ({ breadcrumb: "Measure Points" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Measure Points' }),
+})
 export const maintMeasurePointsLogsRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/maintenance/measure-points-logs",
+  path: '/maintenance/measure-points-logs',
   component: () => <LazyComponent Component={PageMeasurePointsLogs} />,
-  beforeLoad: () => ({ breadcrumb: "Measure Points Logs" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Measure Points Logs' }),
+})
 
 // --- Maintenance --- CountersLog ------------------------
 export const maintMeasureCountersLogRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/maintenance/counters-log",
+  path: '/maintenance/counters-log',
   component: () => <LazyComponent Component={PageCountersLog} />,
-  beforeLoad: () => ({ breadcrumb: "Counters Logs" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Counters Logs' }),
+})
 
 // --- Maintenance --- CountersLog ------------------------
 export const maintMaintLogRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/maintenance/maint-log",
+  path: '/maintenance/maint-log',
   component: () => <LazyComponent Component={PageMaintLog} />,
-  beforeLoad: () => ({ breadcrumb: "Maint Logs" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Maint Logs' }),
+})
 
 // --- Stock ---------------------------
 export const stockRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/stock",
-});
+  path: '/stock',
+})
 
 export const stockStockTypeRoute = createRoute({
   getParentRoute: () => stockRoute,
-  path: "/type",
+  path: '/type',
   component: () => <LazyComponent Component={PageStockType} />,
-  beforeLoad: () => ({ breadcrumb: "Stock Types" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Stock Types' }),
+})
 
 export const stockStockItemRoute = createRoute({
   getParentRoute: () => stockRoute,
-  path: "/item",
+  path: '/item',
   component: () => <LazyComponent Component={PageStockItem} />,
-  beforeLoad: () => ({ breadcrumb: "Stock Items" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Stock Items' }),
+})
 
 export const stockStockUsedRoute = createRoute({
   getParentRoute: () => stockRoute,
-  path: "/used",
+  path: '/used',
   component: () => <LazyComponent Component={PageStockUsed} />,
-  beforeLoad: () => ({ breadcrumb: "Stock Used" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Stock Used' }),
+})
 
 export const usersRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: "/users",
+  path: '/users',
   component: () => <LazyComponent Component={PageUsers} />,
-  beforeLoad: () => ({ breadcrumb: "Users" }),
-});
+  beforeLoad: () => ({ breadcrumb: 'Users' }),
+})
+
+export const maintReportWork = createRoute({
+  getParentRoute: () => protectedRoute,
+  path: '/maintenance/report-work',
+  component: () => <LazyComponent Component={PageReportWork} />,
+  beforeLoad: () => ({ breadcrumb: 'Report Work' }),
+})
 
 // --- Route Tree ---
 export const routeTree = rootRoute.addChildren([
@@ -408,6 +418,7 @@ export const routeTree = rootRoute.addChildren([
     maintMeasurePointsLogsRoute,
     maintMeasureCountersLogRoute,
     maintMaintLogRoute,
+    maintReportWork,
     usersRoute,
   ]),
-]);
+])
