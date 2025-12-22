@@ -25,6 +25,10 @@ import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded'
 import HourglassEmptyRoundedIcon from '@mui/icons-material/HourglassEmptyRounded'
 import BrightnessAutoIcon from '@mui/icons-material/BrightnessAuto'
 import Box from '@mui/material/Box'
+import TodayRoundedIcon from '@mui/icons-material/TodayRounded'
+import ReportProblemRoundedIcon from '@mui/icons-material/ReportProblemRounded'
+import WorkRoundedIcon from '@mui/icons-material/WorkRounded'
+import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded'
 
 const BulletIcon = () => (
   <Box
@@ -229,7 +233,7 @@ export const menuContentItems: {
         path: '/maintenance/component-trigger',
       },
       {
-        text: 'Counter Update (x)',
+        text: 'Counter Update',
         icon: <UpdateRoundedIcon />,
         id: 'maint:updateCounter',
         path: '/maintenance/update-counter',
@@ -288,8 +292,33 @@ export const menuContentItems: {
   {
     title: 'Report',
     icon: <AssessmentRoundedIcon />,
-    items: [],
     path: '/report',
+    items: [
+      {
+        text: 'Daily Report',
+        icon: <TodayRoundedIcon />,
+        id: 'report:daily',
+        path: '/report/daily',
+      },
+      {
+        text: 'Failure Report',
+        icon: <ReportProblemRoundedIcon />,
+        id: 'report:failure',
+        path: '/report/failure',
+      },
+      {
+        text: 'Job Report',
+        icon: <WorkRoundedIcon />,
+        id: 'report:job',
+        path: '/report/job',
+      },
+      {
+        text: 'Monthly Report',
+        icon: <CalendarMonthRoundedIcon />,
+        id: 'report:monthly',
+        path: '/report/monthly',
+      },
+    ],
   },
   { title: 'Users', icon: <PeopleRoundedIcon />, items: [], path: '/users' },
 ]

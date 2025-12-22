@@ -1,7 +1,7 @@
 import * as z from 'zod'
 import Splitter from '@/shared/components/Splitter'
 import Editor from '@/shared/components/Editor'
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useState } from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Checkbox from '@mui/material/Checkbox'
@@ -123,22 +123,40 @@ const TabGeneral: React.FC = () => {
   const hasCounterType = counterTypes.length > 0
 
   return (
-    <Splitter horizontal>
-      <Splitter initialPrimarySize='30%'>
-        <Box display={'flex'} flexDirection={'column'} gap={1.5} pt={1}>
-          <Controller
-            name='dateDone'
-            control={control}
-            render={({ field }) => (
-              <DateField
-                label='Date Done'
-                field={field}
-                disabled={isDisabled}
-              />
-            )}
-          />
-
-          <Box display={'flex'} gap={1}>
+    <Box display={'flex'} gap={1.5} flexDirection={'column'} height={'100%'}>
+      <Box display='flex' flexDirection='column'>
+        {/* <Controller
+          name='unexpected'
+          control={control}
+          render={({ field }) => (
+            <FormControlLabel
+              sx={{ m: 0 }}
+              label='Unexpected'
+              control={
+                <Checkbox
+                  size='small'
+                  checked={field.value}
+                  onChange={e => field.onChange(e.target.checked)}
+                  disabled={isDisabled}
+                />
+              }
+            />
+          )}
+        /> */}
+        <Box display={'flex'} width={'100%'} gap={1}>
+          {/* Total Duration / Waiting */}
+          <Box display='flex' flexDirection='column' gap={1.5} width={'100%'}>
+            <Controller
+              name='dateDone'
+              control={control}
+              render={({ field }) => (
+                <DateField
+                  label='Date Done'
+                  field={field}
+                  disabled={isDisabled}
+                />
+              )}
+            />
             <Controller
               name='totalDuration'
               control={control}
@@ -151,7 +169,6 @@ const TabGeneral: React.FC = () => {
               )}
             />
 
-            {/* Waiting */}
             <Controller
               name='waitingMin'
               control={control}
@@ -165,8 +182,8 @@ const TabGeneral: React.FC = () => {
             />
           </Box>
 
-          {/* Running Hours */}
-          <Box display={'flex'} gap={1}>
+          {/* Running Values */}
+          <Box display='flex' flexDirection='column' gap={1.5} width={'100%'}>
             <Controller
               name='runningNew'
               control={control}
@@ -204,88 +221,67 @@ const TabGeneral: React.FC = () => {
             />
           </Box>
 
-          {/* Maint Type */}
-          <Controller
-            name='maintType'
-            control={control}
-            render={({ field }) => (
-              <AsyncSelectField
-                label='Maint Type'
-                value={field.value}
-                request={tblMaintType.getAll}
-                columns={[
-                  { field: 'descr', headerName: 'Description', flex: 1 },
-                ]}
-                getRowId={row => row.maintTypeId}
-                onChange={field.onChange}
-              />
-            )}
-          />
+          {/* Maint Type / Cause / Class */}
+          <Box display='flex' flexDirection='column' gap={1.5} width={'100%'}>
+            <Controller
+              name='maintType'
+              control={control}
+              render={({ field }) => (
+                <AsyncSelectField
+                  label='Maint Type'
+                  value={field.value}
+                  request={tblMaintType.getAll}
+                  columns={[
+                    { field: 'descr', headerName: 'Description', flex: 1 },
+                  ]}
+                  getRowId={row => row.maintTypeId}
+                  onChange={field.onChange}
+                />
+              )}
+            />
 
-          {/* Maint Cause */}
-          <Controller
-            name='maintCause'
-            control={control}
-            render={({ field }) => (
-              <AsyncSelectField
-                label='Maint Cause'
-                value={field.value}
-                request={tblMaintCause.getAll}
-                columns={[
-                  { field: 'descr', headerName: 'Description', flex: 1 },
-                ]}
-                getRowId={row => row.maintCauseId}
-                onChange={field.onChange}
-              />
-            )}
-          />
+            <Controller
+              name='maintCause'
+              control={control}
+              render={({ field }) => (
+                <AsyncSelectField
+                  label='Maint Cause'
+                  value={field.value}
+                  request={tblMaintCause.getAll}
+                  columns={[
+                    { field: 'descr', headerName: 'Description', flex: 1 },
+                  ]}
+                  getRowId={row => row.maintCauseId}
+                  onChange={field.onChange}
+                />
+              )}
+            />
 
-          {/* Maint Class */}
-          <Controller
-            name='maintClass'
-            control={control}
-            render={({ field }) => (
-              <AsyncSelectField
-                label='Maint Class'
-                value={field.value}
-                request={tblMaintClass.getAll}
-                columns={[
-                  { field: 'descr', headerName: 'Description', flex: 1 },
-                ]}
-                getRowId={row => row.maintClassId}
-                onChange={field.onChange}
-              />
-            )}
-          />
-          {/* Unexpected */}
-          <Controller
-            name='unexpected'
-            control={control}
-            render={({ field }) => (
-              <FormControlLabel
-                style={{
-                  margin: 0,
-                }}
-                label='Unexpected'
-                control={
-                  <Checkbox
-                    size='small'
-                    checked={field.value}
-                    onChange={e => field.onChange(e.target.checked)}
-                    disabled={isDisabled}
-                  />
-                }
-              />
-            )}
-          />
+            <Controller
+              name='maintClass'
+              control={control}
+              render={({ field }) => (
+                <AsyncSelectField
+                  label='Maint Class'
+                  value={field.value}
+                  request={tblMaintClass.getAll}
+                  columns={[
+                    { field: 'descr', headerName: 'Description', flex: 1 },
+                  ]}
+                  getRowId={row => row.maintClassId}
+                  onChange={field.onChange}
+                />
+              )}
+            />
+          </Box>
         </Box>
+      </Box>
+
+      <Box display={'flex'} gap={1} height={'100%'}>
         <Editor />
-      </Splitter>
-      <Splitter>
         <Editor />
-        <Editor />
-      </Splitter>
-    </Splitter>
+      </Box>
+    </Box>
   )
 }
 

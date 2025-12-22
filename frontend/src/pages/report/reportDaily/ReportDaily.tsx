@@ -1,13 +1,11 @@
-import Splitter from '@/shared/components/Splitter'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import { GridColDef } from '@mui/x-data-grid'
 import { useCallback, useMemo, useState } from 'react'
 import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 import { tblSpareType, TypeTblSpareType } from '@/core/api/generated/api'
-import TabsComponent from './StockTypeTabs'
 
-export default function PageStockType() {
+export default function PageReportDaily() {
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
   const [selected, setSelected] = useState<TypeTblSpareType | null>(null)
@@ -34,19 +32,22 @@ export default function PageStockType() {
   // === Columns ===
   const columns: GridColDef<TypeTblSpareType>[] = useMemo(
     () => [
-      { field: 'partName', headerName: 'Part Name', width: 120 },
-      { field: 'makerRef', headerName: 'Maker Ref', flex: 2 },
+      { field: 'partName', headerName: 'Number', width: 120 },
+      { field: 'makerRef', headerName: 'Comp No', flex: 2 },
       {
         field: 'MESC',
-        headerName: 'MESC (not set)',
+        headerName: 'Failure Date',
         flex: 1,
         valueGetter: (value, row) => row?.tblJobClass?.name,
       },
-      { field: 'extraNo', headerName: 'Extra No', flex: 1 },
-      { field: 'changeReason', headerName: 'Unit Name (not set)', flex: 1 },
-      { field: 'notes', headerName: 'Notes', flex: 1 },
-      { field: 'description', headerName: 'Description (not set)', flex: 1 },
-      { field: 'farsiDescription', headerName: 'Farsi Desc', flex: 1 },
+      { field: 'extraNo', headerName: 'Title', flex: 1 },
+      { field: 'changeReason', headerName: 'Total Wait', flex: 1 },
+      { field: 'notes', headerName: 'Disc. Name', flex: 1 },
+      { field: 'description', headerName: 'Last Updated', flex: 1 },
+      { field: 'farsiDescription', headerName: 'Loged By', flex: 1 },
+      { field: 'farsiDescription', headerName: 'Approved By', flex: 1 },
+      { field: 'farsiDescription', headerName: 'Closed By', flex: 1 },
+      { field: 'farsiDescription', headerName: 'Closed Date', flex: 1 },
       dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
     ],
     [handleEdit, handleDelete]
@@ -67,27 +68,16 @@ export default function PageStockType() {
   }
 
   return (
-    <>
-      <Splitter
-        horizontal
-        initialPrimarySize='50%'
-        resetOnDoubleClick
-        minPrimarySize='20%'
-        minSecondarySize='20%'
-      >
-        <CustomizedDataGrid
-          label='Stock Type'
-          getRowId={row => row.partTypeId}
-          loading={loading}
-          onAddClick={handleCreate}
-          rows={rows}
-          onRefreshClick={handleRefresh}
-          columns={columns}
-          showToolbar
-          onRowClick={handleRowClick}
-        />
-        <TabsComponent />
-      </Splitter>
-    </>
+    <CustomizedDataGrid
+      label='Daily Report'
+      getRowId={row => row.partTypeId}
+      loading={loading}
+      onAddClick={handleCreate}
+      rows={rows}
+      onRefreshClick={handleRefresh}
+      columns={columns}
+      showToolbar
+      onRowClick={handleRowClick}
+    />
   )
 }

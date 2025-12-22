@@ -6,7 +6,6 @@ import Inventory from '@mui/icons-material/Inventory'
 import Build from '@mui/icons-material/Build'
 import ReportProblem from '@mui/icons-material/ReportProblem'
 import Straighten from '@mui/icons-material/Straighten'
-import Comment from '@mui/icons-material/Comment'
 
 import TabsContainer, {
   ReusableTabItem,
@@ -16,7 +15,6 @@ import TabsContainer, {
 const TabGeneral = lazy(() => import('./tabs/TabGeneral'))
 const TabResourceUsed = lazy(() => import('./tabs/TabResourceUsed'))
 const TabStockUsed = lazy(() => import('./tabs/TabStockUsed'))
-const TabFailureReport = lazy(() => import('./tabs/TabFailureReport'))
 const TabAttachments = lazy(() => import('./tabs/TabAttachments'))
 const TabMeasurePoints = lazy(() => import('./tabs/TabMeasurePoints'))
 
@@ -25,11 +23,6 @@ const tabs: ReusableTabItem[] = [
   { label: 'General', icon: <AccountTree />, component: TabGeneral },
   { label: 'Resource Used', icon: <Build />, component: TabResourceUsed },
   { label: 'Stock Used', icon: <Inventory />, component: TabStockUsed },
-  {
-    label: 'Failiure report',
-    icon: <ReportProblem />,
-    component: TabFailureReport,
-  },
   { label: 'Attachments', icon: <AttachFile />, component: TabAttachments },
   { label: 'Messurepoints', icon: <Straighten />, component: TabMeasurePoints },
 ]
@@ -50,4 +43,3 @@ const TabsComponent = ({ selectedMaintLogId }: Props) => {
 }
 
 export default TabsComponent
-// ...existing code...

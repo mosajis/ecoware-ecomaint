@@ -6,6 +6,7 @@ import { createRoute, createRootRoute } from '@tanstack/react-router'
 import { lazy, Suspense } from 'react'
 import { LOCAL_STORAGE } from '@/const'
 import { NotFound } from '@/pages/NotFound'
+import ReportMounthly from '@/pages/report/reportMounthly/ReportMounthly'
 
 // Lazy load all page components
 const PageLogin = lazy(() => import('@/pages/auth/login/login.page'))
@@ -31,7 +32,6 @@ const PageJobClass = lazy(() => import('@/pages/general/jobClass/JobClass'))
 const PageJobDescription = lazy(
   () => import('@/pages/general/jobDescription/JobDescription')
 )
-
 const PageComponentUnitList = lazy(
   () => import('@/pages/maintenance/componentUnit/ComponentUnit')
 )
@@ -76,15 +76,28 @@ const PageCountersLog = lazy(
 )
 
 const PageMaintLog = lazy(() => import('@/pages/maintenance/maintLog/MaintLog'))
-
 const PageStockItem = lazy(() => import('@/pages/stock/stockItem/StockItem'))
 const PageStockType = lazy(() => import('@/pages/stock/stockType/StockType'))
 const PageStockUsed = lazy(() => import('@/pages/stock/stockUsed/StockUsed'))
-
 const PageUsers = lazy(() => import('@/pages/users/Users'))
-
 const PageReportWork = lazy(
   () => import('@/pages/maintenance/reportWork/ReportWork')
+)
+const PageCounterUpdate = lazy(
+  () => import('@/pages/maintenance/counterUpdate/CountersUpdate')
+)
+
+const PageReportDaily = lazy(
+  () => import('@/pages/report/reportDaily/ReportDaily')
+)
+const PageReportFailure = lazy(
+  () => import('@/pages/report/reportFailure/ReportFailure')
+)
+
+const PageReportJob = lazy(() => import('@/pages/report/reportJob/ReportJob'))
+
+const PageReportMonthly = lazy(
+  () => import('@/pages/report/reportMounthly/ReportMounthly')
 )
 
 // Loading fallback component
@@ -337,6 +350,14 @@ export const maintMaintLogRoute = createRoute({
   beforeLoad: () => ({ breadcrumb: 'Maint Logs' }),
 })
 
+// --- Maintenance --- counter update ------------------------
+export const maintCounterUpdateRoute = createRoute({
+  getParentRoute: () => protectedRoute,
+  path: '/maintenance/update-counter',
+  component: () => <LazyComponent Component={PageCounterUpdate} />,
+  beforeLoad: () => ({ breadcrumb: 'Update Counter' }),
+})
+
 // --- Stock ---------------------------
 export const stockRoute = createRoute({
   getParentRoute: () => protectedRoute,
@@ -376,6 +397,40 @@ export const maintReportWork = createRoute({
   path: '/maintenance/report-work',
   component: () => <LazyComponent Component={PageReportWork} />,
   beforeLoad: () => ({ breadcrumb: 'Report Work' }),
+})
+
+// --- Stock ---------------------------
+export const ReportRoute = createRoute({
+  getParentRoute: () => protectedRoute,
+  path: '/report',
+})
+
+export const ReportDailyRoute = createRoute({
+  getParentRoute: () => ReportRoute,
+  path: '/daily',
+  component: () => <LazyComponent Component={PageReportDaily} />,
+  beforeLoad: () => ({ breadcrumb: 'Daily Report' }),
+})
+
+export const ReportFailureRoute = createRoute({
+  getParentRoute: () => ReportRoute,
+  path: '/failure',
+  component: () => <LazyComponent Component={PageReportFailure} />,
+  beforeLoad: () => ({ breadcrumb: 'Failure Report' }),
+})
+
+export const ReportJobRoute = createRoute({
+  getParentRoute: () => ReportRoute,
+  path: '/job',
+  component: () => <LazyComponent Component={PageReportJob} />,
+  beforeLoad: () => ({ breadcrumb: 'Job Report' }),
+})
+
+export const ReportMonthlyRoute = createRoute({
+  getParentRoute: () => ReportRoute,
+  path: '/monthly',
+  component: () => <LazyComponent Component={PageReportMonthly} />,
+  beforeLoad: () => ({ breadcrumb: 'Mounthly Report' }),
 })
 
 // --- Route Tree ---
@@ -419,6 +474,14 @@ export const routeTree = rootRoute.addChildren([
     maintMeasureCountersLogRoute,
     maintMaintLogRoute,
     maintReportWork,
+    maintCounterUpdateRoute,
     usersRoute,
+
+    ReportRoute.addChildren([
+      ReportDailyRoute,
+      ReportFailureRoute,
+      ReportJobRoute,
+      ReportMonthlyRoute,
+    ]),
   ]),
 ])
