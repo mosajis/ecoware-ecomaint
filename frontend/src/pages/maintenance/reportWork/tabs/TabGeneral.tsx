@@ -123,7 +123,7 @@ const TabGeneral: React.FC = () => {
   const hasCounterType = counterTypes.length > 0
 
   return (
-    <Box display={'flex'} gap={1.5} p={1}>
+    <Splitter horizontal>
       <Splitter initialPrimarySize='30%'>
         <Box display={'flex'} flexDirection={'column'} gap={1.5} pt={1}>
           <Controller
@@ -281,7 +281,11 @@ const TabGeneral: React.FC = () => {
         </Box>
         <Editor />
       </Splitter>
-    </Box>
+      <Splitter>
+        <Editor />
+        <Editor />
+      </Splitter>
+    </Splitter>
   )
 }
 

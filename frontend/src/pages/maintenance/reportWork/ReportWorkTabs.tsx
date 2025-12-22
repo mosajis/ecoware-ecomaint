@@ -15,7 +15,6 @@ import TabsContainer, {
 // Lazy imports (updated)
 const TabGeneral = lazy(() => import('./tabs/TabGeneral'))
 const TabResourceUsed = lazy(() => import('./tabs/TabResourceUsed'))
-const TabOverDueReason = lazy(() => import('./tabs/TabOverDueReason'))
 const TabStockUsed = lazy(() => import('./tabs/TabStockUsed'))
 const TabFailureReport = lazy(() => import('./tabs/TabFailureReport'))
 const TabAttachments = lazy(() => import('./tabs/TabAttachments'))
@@ -25,7 +24,6 @@ const TabMeasurePoints = lazy(() => import('./tabs/TabMeasurePoints'))
 const tabs: ReusableTabItem[] = [
   { label: 'General', icon: <AccountTree />, component: TabGeneral },
   { label: 'Resource Used', icon: <Build />, component: TabResourceUsed },
-  { label: 'OverDue Reason', icon: <Comment />, component: TabOverDueReason },
   { label: 'Stock Used', icon: <Inventory />, component: TabStockUsed },
   {
     label: 'Failiure report',

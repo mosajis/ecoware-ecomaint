@@ -4,6 +4,7 @@ import { Box, Typography } from '@mui/material'
 import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
 import { tblComponentUnit, tblJobDescription } from '@/core/api/generated/api'
 import { useParams } from '@tanstack/react-router'
+import Splitter from '@/shared/components/Splitter'
 
 type ComponentUnit = {
   compId: number
@@ -80,7 +81,7 @@ const ReportWork = () => {
   /* ======================= render ======================= */
 
   return (
-    <Box>
+    <Box height={'100%'}>
       {/* Header */}
       <Box mb={1.5} display={'flex'} gap={1.5}>
         <AsyncSelectField<ComponentUnit>
