@@ -15,11 +15,7 @@ const OpenReportWorkDialogButton = ({ selectedMaintLogId }: Props) => {
         Report Work
       </Button>
 
-      <ReportWorkDialog
-        open={true}
-        onClose={() => setOpen(false)}
-        selectedMaintLogId={selectedMaintLogId}
-      />
+      <ReportWorkDialog open={true} onClose={() => setOpen(false)} />
     </>
   )
 }

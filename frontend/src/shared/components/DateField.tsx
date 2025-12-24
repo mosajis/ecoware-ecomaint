@@ -1,0 +1,66 @@
+import React from 'react'
+import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers'
+import { CalendarToday, AccessTime, Event } from '@mui/icons-material'
+import { DateTimeType } from '@/const'
+
+interface DateFieldProps {
+  label: string
+  field: any
+  disabled?: boolean
+  type?: DateTimeType
+}
+const DateField: React.FC<DateFieldProps> = ({
+  label,
+  field,
+  disabled = false,
+  type = 'DATE',
+  ...restProps
+}) => {
+  const dateValue = field.value ? new Date(field.value) : null
+
+  const handleChange = (newValue: Date | null) => {
+    field.onChange(newValue ? newValue.toISOString() : null)
+  }
+
+  const getDefaultIcon = (): React.ElementType => {
+    switch (type) {
+      case 'TIME':
+        return AccessTime
+      case 'DATETIME':
+        return Event
+      case 'DATE':
+      default:
+        return CalendarToday
+    }
+  }
+
+  const Picker =
+    type === 'TIME'
+      ? TimePicker
+      : type === 'DATETIME'
+      ? DateTimePicker
+      : DatePicker
+
+  return (
+    <Picker
+      {...restProps}
+      ampm={false}
+      label={label}
+      value={dateValue}
+      onChange={handleChange}
+      disabled={disabled}
+      slots={{ openPickerIcon: getDefaultIcon() }}
+      slotProps={{
+        textField: {
+          fullWidth: true,
+          size: 'small',
+        },
+      }}
+      timeSteps={
+        type === 'TIME' || type === 'DATETIME' ? { minutes: 1 } : undefined
+      }
+    />
+  )
+}
+
+export default DateField

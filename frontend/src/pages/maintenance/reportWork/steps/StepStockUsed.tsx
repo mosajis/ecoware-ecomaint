@@ -1,4 +1,5 @@
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
+import ReportWorkStep from '../ReportWorkStep'
 
 const TabStockUsed = () => {
   const columns = [
@@ -10,7 +11,10 @@ const TabStockUsed = () => {
     { field: 'totalMainLogs', headerName: 'Total Main Logs', flex: 1 },
   ]
 
-  return <CustomizedDataGrid label='Stock Used' rows={[]} columns={columns} />
+  return (
+    <ReportWorkStep>
+      <CustomizedDataGrid label='Stock Used' rows={[]} columns={columns} />
+    </ReportWorkStep>
+  )
 }
-
 export default TabStockUsed

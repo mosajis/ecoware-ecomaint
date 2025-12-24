@@ -1,4 +1,5 @@
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
+import ReportWorkStep from '../ReportWorkStep'
 
 const TabResourceUsed = () => {
   const columns = [
@@ -8,7 +9,9 @@ const TabResourceUsed = () => {
   ]
 
   return (
-    <CustomizedDataGrid label='Resource Used' rows={[]} columns={columns} />
+    <ReportWorkStep>
+      <CustomizedDataGrid label='Resource Used' rows={[]} columns={columns} />
+    </ReportWorkStep>
   )
 }
 

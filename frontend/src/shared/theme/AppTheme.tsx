@@ -1,7 +1,7 @@
-import * as React from "react";
-import type { ThemeOptions } from "@mui/material/styles";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { colorSchemes, shadows, shape, typography } from "./themePrimitives";
+import * as React from 'react'
+import type { ThemeOptions } from '@mui/material/styles'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { colorSchemes, shadows, shape, typography } from './themePrimitives'
 import {
   dataDisplayCustomizations,
   dataGridCustomizations,
@@ -10,19 +10,20 @@ import {
   surfacesCustomizations,
   tabsCustomization,
   feedbackCustomizations,
-} from "@/shared/theme/customization";
+  datePickersCustomizations,
+} from '@/shared/theme/customization'
 
 interface AppThemeProps {
-  children: React.ReactNode;
-  disableCustomTheme?: boolean;
-  themeComponents?: ThemeOptions["components"];
+  children: React.ReactNode
+  disableCustomTheme?: boolean
+  themeComponents?: ThemeOptions['components']
 }
 
 // تم ثابت خارج از کامپوننت
 const defaultTheme = createTheme({
   cssVariables: {
-    colorSchemeSelector: "data-mui-color-scheme",
-    cssVarPrefix: "template",
+    colorSchemeSelector: 'data-mui-color-scheme',
+    cssVarPrefix: 'template',
   },
   colorSchemes,
   typography,
@@ -36,8 +37,9 @@ const defaultTheme = createTheme({
     ...dataGridCustomizations,
     ...tabsCustomization,
     ...feedbackCustomizations,
+    ...datePickersCustomizations,
   },
-});
+})
 
 export default function AppTheme({
   children,
@@ -45,9 +47,9 @@ export default function AppTheme({
   themeComponents,
 }: AppThemeProps) {
   const theme = React.useMemo(() => {
-    if (disableCustomTheme) return createTheme(); // تم پیش‌فرض MUI
+    if (disableCustomTheme) return createTheme() // تم پیش‌فرض MUI
 
-    if (!themeComponents) return defaultTheme;
+    if (!themeComponents) return defaultTheme
 
     // اگر themeComponents اضافه شده، فقط آن‌ها را merge کن
     return createTheme({
@@ -56,14 +58,14 @@ export default function AppTheme({
         ...defaultTheme.components,
         ...themeComponents,
       },
-    });
-  }, [disableCustomTheme, themeComponents]);
+    })
+  }, [disableCustomTheme, themeComponents])
 
-  if (disableCustomTheme) return <>{children}</>;
+  if (disableCustomTheme) return <>{children}</>
 
   return (
     <ThemeProvider theme={theme} disableTransitionOnChange>
       {children}
     </ThemeProvider>
-  );
+  )
 }

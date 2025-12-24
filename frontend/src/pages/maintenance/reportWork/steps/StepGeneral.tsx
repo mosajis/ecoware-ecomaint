@@ -1,24 +1,20 @@
 import * as z from 'zod'
-import Splitter from '@/shared/components/Splitter'
 import Editor from '@/shared/components/Editor'
-import React, { memo, useState } from 'react'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import dayjs from 'dayjs'
-
-import { useForm, Controller } from 'react-hook-form'
+import ReportWorkStep from '../ReportWorkStep'
+import { memo, useState } from 'react'
+import { Box, TextField } from '@mui/material'
+import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
 import {
   tblMaintType,
   tblMaintCause,
   tblMaintClass,
-  tblCounterType,
   TypeTblCounterType,
 } from '@/core/api/generated/api'
+import DateField from '@/shared/components/DateField'
 
+/** ----------------------- Schema ----------------------- */
 const selectSchema = <T extends z.ZodRawShape>(shape: T) =>
   z.object(shape).nullable()
 
@@ -36,12 +32,10 @@ const schema = z.object({
     maintTypeId: z.number(),
     descr: z.string(),
   }),
-
   maintCause: selectSchema({
     maintCauseId: z.number(),
     descr: z.string(),
   }),
-
   maintClass: selectSchema({
     maintClassId: z.number(),
     descr: z.string(),
@@ -51,7 +45,7 @@ const schema = z.object({
 export type TabGeneralValues = z.infer<typeof schema>
 
 const defaultValues: TabGeneralValues = {
-  dateDone: dayjs().format('YYYY-MM-DD'),
+  dateDone: new Date().toISOString(),
   totalDuration: null,
   waitingMin: null,
   unexpected: false,
@@ -64,6 +58,8 @@ const defaultValues: TabGeneralValues = {
   maintCause: null,
   maintClass: null,
 }
+
+/** ----------------------- Components ----------------------- */
 const NumberField = ({
   label,
   field,
@@ -86,28 +82,8 @@ const NumberField = ({
   />
 )
 
-const DateField = ({
-  label,
-  field,
-  disabled,
-}: {
-  label: string
-  field: any
-  disabled?: boolean
-}) => (
-  <TextField
-    label={label}
-    type='date'
-    fullWidth
-    value={field.value ?? ''}
-    size='small'
-    onChange={e => field.onChange(e.target.value || null)}
-    InputLabelProps={{ shrink: true }}
-    disabled={disabled}
-  />
-)
-
-const TabGeneral: React.FC = () => {
+/** ----------------------- Main Component ----------------------- */
+const TabGeneral = () => {
   const [loadingInitial, setLoadingInitial] = useState(false)
   const [counterTypes, setCounterTypes] = useState<TypeTblCounterType[]>([])
 
@@ -123,38 +99,15 @@ const TabGeneral: React.FC = () => {
   const hasCounterType = counterTypes.length > 0
 
   return (
-    <Box display={'flex'} gap={1.5} flexDirection={'column'} height={'100%'}>
-      <Box display='flex' flexDirection='column'>
-        {/* <Controller
-          name='unexpected'
-          control={control}
-          render={({ field }) => (
-            <FormControlLabel
-              sx={{ m: 0 }}
-              label='Unexpected'
-              control={
-                <Checkbox
-                  size='small'
-                  checked={field.value}
-                  onChange={e => field.onChange(e.target.checked)}
-                  disabled={isDisabled}
-                />
-              }
-            />
-          )}
-        /> */}
-        <Box display={'flex'} width={'100%'} gap={1}>
-          {/* Total Duration / Waiting */}
-          <Box display='flex' flexDirection='column' gap={1.5} width={'100%'}>
+    <ReportWorkStep>
+      <Box display='flex' flexDirection='column' gap={1.5} height='100%'>
+        <Box display='flex' gap={1}>
+          <Box display='flex' flexDirection='column' gap={1.5} flex={1}>
             <Controller
               name='dateDone'
               control={control}
               render={({ field }) => (
-                <DateField
-                  label='Date Done'
-                  field={field}
-                  disabled={isDisabled}
-                />
+                <DateField type='DATE' label='Date Done' field={field} />
               )}
             />
             <Controller
@@ -168,7 +121,6 @@ const TabGeneral: React.FC = () => {
                 />
               )}
             />
-
             <Controller
               name='waitingMin'
               control={control}
@@ -182,8 +134,7 @@ const TabGeneral: React.FC = () => {
             />
           </Box>
 
-          {/* Running Values */}
-          <Box display='flex' flexDirection='column' gap={1.5} width={'100%'}>
+          <Box display='flex' flexDirection='column' gap={1.5} flex={1}>
             <Controller
               name='runningNew'
               control={control}
@@ -195,7 +146,6 @@ const TabGeneral: React.FC = () => {
                 />
               )}
             />
-
             <Controller
               name='runningLastValue'
               control={control}
@@ -207,7 +157,6 @@ const TabGeneral: React.FC = () => {
                 />
               )}
             />
-
             <Controller
               name='runningLastDateRead'
               control={control}
@@ -221,8 +170,7 @@ const TabGeneral: React.FC = () => {
             />
           </Box>
 
-          {/* Maint Type / Cause / Class */}
-          <Box display='flex' flexDirection='column' gap={1.5} width={'100%'}>
+          <Box display='flex' flexDirection='column' gap={1.5} flex={1}>
             <Controller
               name='maintType'
               control={control}
@@ -239,7 +187,6 @@ const TabGeneral: React.FC = () => {
                 />
               )}
             />
-
             <Controller
               name='maintCause'
               control={control}
@@ -256,7 +203,6 @@ const TabGeneral: React.FC = () => {
                 />
               )}
             />
-
             <Controller
               name='maintClass'
               control={control}
@@ -275,14 +221,14 @@ const TabGeneral: React.FC = () => {
             />
           </Box>
         </Box>
-      </Box>
 
-      <Box display={'flex'} gap={1} height={'100%'}>
-        <Editor />
-        <Editor />
+        <Box display='flex' gap={1} flex={1}>
+          <Editor label='History' />
+          <Editor label='Not Set' />
+        </Box>
       </Box>
-    </Box>
+    </ReportWorkStep>
   )
 }
 
-export default memo(TabGeneral)
+export default TabGeneral

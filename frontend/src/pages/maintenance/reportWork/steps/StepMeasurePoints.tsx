@@ -6,6 +6,7 @@ import {
 } from '@/core/api/generated/api'
 import { GridColDef } from '@mui/x-data-grid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
+import ReportWorkStep from '../ReportWorkStep'
 
 interface TabMaintLogProps {
   compUnitId?: number | null
@@ -68,15 +69,17 @@ const TabMeasures = ({ compUnitId }: TabMaintLogProps) => {
   )
 
   return (
-    <CustomizedDataGrid
-      label='Measures'
-      rows={rows}
-      columns={columns}
-      loading={loading}
-      showToolbar
-      onRefreshClick={handleRefresh}
-      getRowId={row => row.compTypeMeasurePointId}
-    />
+    <ReportWorkStep>
+      <CustomizedDataGrid
+        label='Measures'
+        rows={rows}
+        columns={columns}
+        loading={loading}
+        showToolbar
+        onRefreshClick={handleRefresh}
+        getRowId={row => row.compTypeMeasurePointId}
+      />
+    </ReportWorkStep>
   )
 }
 
