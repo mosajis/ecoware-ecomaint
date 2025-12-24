@@ -44,7 +44,6 @@ const DateField: React.FC<DateFieldProps> = ({
   return (
     <Picker
       {...restProps}
-      ampm={false}
       label={label}
       value={dateValue}
       onChange={handleChange}
@@ -56,6 +55,7 @@ const DateField: React.FC<DateFieldProps> = ({
           size: 'small',
         },
       }}
+      {...((type === 'TIME' || type === 'DATETIME') && { ampm: false })}
       timeSteps={
         type === 'TIME' || type === 'DATETIME' ? { minutes: 1 } : undefined
       }
