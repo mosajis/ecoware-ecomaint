@@ -1,17 +1,14 @@
 import React, { useState } from 'react'
-import {
-  DialogContent,
-  DialogActions,
-  Box,
-  Button,
-  TextField,
-} from '@mui/material'
-import { useAtom } from 'jotai'
-import { activeStepAtom } from './ReportWorkAtom'
+import DialogContent from '@mui/material/DialogContent'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
 import ReportWorkStepper from './reportWorkStepper'
+import DialogActions from '@mui/material/DialogActions'
+import { useAtom } from 'jotai'
 import { reportWorkSteps } from './reportWorkSteps'
-import AsyncSelect from '@/shared/components/AsyncSelect'
 import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
+import { atomActiveStep, atomInitalData } from './ReportWorkAtom'
 import {
   tblComponentUnit,
   TypeTblComponentUnit,
@@ -20,7 +17,7 @@ import {
 interface ReportWorkStepProps {
   children: React.ReactNode
   disabled?: boolean
-  onNext?: (nextStep: number) => void
+  onNext?: (goNext: () => void) => void
   onPrev?: (prevStep: number) => void
   finishLabel?: string
 }
@@ -33,17 +30,20 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
   finishLabel = 'Finish',
 }) => {
   const totalSteps = reportWorkSteps.length
-  const [componentUnit, setComponentUnit] =
-    useState<TypeTblComponentUnit | null>(null)
-  const [activeStep, setActiveStep] = useAtom(activeStepAtom)
 
-  const handleNext = () => {
+  const [activeStep, setActiveStep] = useAtom(atomActiveStep)
+  const [initalData, setInitData] = useAtom(atomInitalData)
+
+  const handleNextClick = () => {
+    if (onNext) {
+      onNext(goNext)
+    }
+  }
+
+  const goNext = () => {
     if (activeStep < totalSteps - 1) {
       const nextStep = activeStep + 1
       setActiveStep(nextStep)
-      onNext?.(nextStep)
-    } else {
-      onNext?.(activeStep)
     }
   }
 
@@ -55,6 +55,18 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
     }
   }
 
+  const handleChangeComponentUnit = (
+    componentUnit: TypeTblComponentUnit | null
+  ) => {
+    setInitData({
+      componentUnit: componentUnit,
+      maintLog: null,
+      workOrder: null,
+    })
+  }
+
+  disabled = disabled || !initalData.componentUnit?.compId
+
   return (
     <>
       <DialogContent
@@ -64,13 +76,12 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
         <ReportWorkStepper />
         <Box display={'grid'} gap={1.5} gridTemplateColumns={'1fr 1fr'}>
           <AsyncSelectField
-            dialogMaxWidth='sm'
             label='Component'
-            selectionMode='single'
+            disabled={!!initalData.maintLog || !!initalData.workOrder}
             request={tblComponentUnit.getAll}
             getOptionLabel={row => row.compNo}
-            value={componentUnit}
-            onChange={r => setComponentUnit(r as any)}
+            value={initalData.componentUnit}
+            onChange={handleChangeComponentUnit}
             columns={[
               {
                 field: 'compNo',
@@ -84,10 +95,14 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
             fullWidth
             size='small'
             label='Job Title'
-            slotProps={{ input: { readOnly: true } }}
+            value={initalData.workOrder?.title || '--'}
+            slotProps={{
+              input: { readOnly: true },
+              inputLabel: { shrink: true },
+            }}
           />
         </Box>
-        {children}
+        {initalData.componentUnit?.compId && children}
       </DialogContent>
 
       <DialogActions>
@@ -96,11 +111,20 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
         </Button>
 
         {activeStep === totalSteps - 1 ? (
-          <Button variant='contained' onClick={handleNext} disabled={disabled}>
-            {finishLabel}
+          <Button
+            variant='contained'
+            // onClick={handleNextClick}
+            disabled={disabled}
+          >
+            {finishLabel + 'unset onClick'}
           </Button>
         ) : (
-          <Button variant='contained' onClick={handleNext} disabled={disabled}>
+          <Button
+            variant='contained'
+            color='secondary'
+            onClick={handleNextClick}
+            disabled={disabled}
+          >
             Next
           </Button>
         )}

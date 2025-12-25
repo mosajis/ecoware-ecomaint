@@ -215,12 +215,6 @@ export const menuContentItems: {
         path: '/maintenance/round',
       },
       {
-        text: 'Report Work (x)',
-        icon: <WarningAmberRoundedIcon />,
-        id: 'maint:report-wrok',
-        path: '/maintenance/report-work',
-      },
-      {
         text: 'Requisition Work (x)',
         icon: <PostAddRoundedIcon />,
         id: 'maint:requisitionWork',

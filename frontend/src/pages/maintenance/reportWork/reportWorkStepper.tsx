@@ -1,10 +1,10 @@
 import { Stepper, Step, StepLabel } from '@mui/material'
 import { reportWorkSteps } from './reportWorkSteps'
 import { useAtom } from 'jotai'
-import { activeStepAtom } from './ReportWorkAtom'
+import { atomActiveStep } from './ReportWorkAtom'
 
 const ReportWorkStepper = () => {
-  const [activeStep, setActiveStep] = useAtom(activeStepAtom)
+  const [activeStep, setActiveStep] = useAtom(atomActiveStep)
 
   return (
     <Stepper activeStep={activeStep} alternativeLabel>

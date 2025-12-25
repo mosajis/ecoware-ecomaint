@@ -1,13 +1,13 @@
-import { FC } from "react";
+import { FC } from 'react'
 
 interface OverdueTextProps {
-  value?: number | null;
+  value?: number | null
 }
 
-const Overdue: FC<OverdueTextProps> = ({ value }) => {
-  if (value == null) return null;
+const OverdueText: FC<OverdueTextProps> = ({ value }) => {
+  if (value == null) return null
 
-  const color = value < 0 ? "red" : "green";
+  const color = value < 0 ? 'red' : 'green'
 
   return (
     <span
@@ -18,7 +18,7 @@ const Overdue: FC<OverdueTextProps> = ({ value }) => {
     >
       {value}
     </span>
-  );
-};
+  )
+}
 
-export default Overdue;
+export default OverdueText

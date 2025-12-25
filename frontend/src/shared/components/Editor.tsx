@@ -24,8 +24,9 @@ const BtnRedo = createButton('Redo', '↷', 'redo')
 
 // === Types ===
 interface AppEditorProps {
-  initValue?: string
+  initValue?: string | null
   onSave?: (currentValue: string) => Promise<void> | void
+  onChange?: (currentValue: string) => void
   placeholder?: string
   disabled?: boolean
   readOnly?: boolean
@@ -133,70 +134,78 @@ const EditorToolbar = memo(
           <BtnUndo style={{ color: mode === 'light' ? '#333' : 'white' }} />
           <BtnRedo style={{ color: mode === 'light' ? '#333' : 'white' }} />
 
-          <div style={dividerStyle(theme)} />
-
           {/* Right side: autosave + manual save */}
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-            {autoSaveEnabled && (
+          {!readOnly && (
+            <>
+              <div style={dividerStyle(theme)} />
               <div
-                style={{
-                  fontSize: '12px',
-                  opacity: 0.7,
-                  display: 'flex',
-                  gap: '4px',
-                }}
+                style={{ display: 'flex', gap: '8px', alignItems: 'center' }}
               >
-                {autoSaveStatus === 'saving' && (
-                  <span
+                {autoSaveEnabled && (
+                  <div
                     style={{
-                      width: '10px',
-                      height: '10px',
-                      borderRadius: '50%',
-                      border: '2px solid currentColor',
-                      borderTop: '2px solid transparent',
-                      animation: 'spin .7s linear infinite',
+                      fontSize: '12px',
+                      opacity: 0.7,
+                      display: 'flex',
+                      gap: '4px',
                     }}
-                  />
+                  >
+                    {autoSaveStatus === 'saving' && (
+                      <span
+                        style={{
+                          width: '10px',
+                          height: '10px',
+                          borderRadius: '50%',
+                          border: '2px solid currentColor',
+                          borderTop: '2px solid transparent',
+                          animation: 'spin .7s linear infinite',
+                        }}
+                      />
+                    )}
+                    {autoSaveStatus === 'saved' && <span>✓</span>}
+                    {autoSaveStatus === 'idle' && <span>●</span>}
+                    <span>Auto-save</span>
+                  </div>
                 )}
-                {autoSaveStatus === 'saved' && <span>✓</span>}
-                {autoSaveStatus === 'idle' && <span>●</span>}
-                <span>Auto-save</span>
-              </div>
-            )}
 
-            {!readOnly && !autoSaveEnabled && (
-              <button
-                onClick={onSave}
-                disabled={disabled || loading}
-                style={saveBtnStyle}
-                title={loading ? 'Saving...' : disabled ? 'No changes' : 'Save'}
-                onMouseEnter={e =>
-                  !disabled &&
-                  !loading &&
-                  (e.currentTarget.style.backgroundColor =
-                    rightBtnColors.bgHover)
-                }
-                onMouseLeave={e =>
-                  (e.currentTarget.style.backgroundColor = rightBtnColors.bg)
-                }
-              >
-                {loading ? (
-                  <span
-                    style={{
-                      width: '14px',
-                      height: '14px',
-                      borderRadius: '50%',
-                      border: '2px solid currentColor',
-                      borderTop: '2px solid transparent',
-                      animation: 'spin .7s linear infinite',
-                    }}
-                  />
-                ) : (
-                  '✓ Save'
+                {!autoSaveEnabled && (
+                  <button
+                    onClick={onSave}
+                    disabled={disabled || loading}
+                    style={saveBtnStyle}
+                    title={
+                      loading ? 'Saving...' : disabled ? 'No changes' : 'Save'
+                    }
+                    onMouseEnter={e =>
+                      !disabled &&
+                      !loading &&
+                      (e.currentTarget.style.backgroundColor =
+                        rightBtnColors.bgHover)
+                    }
+                    onMouseLeave={e =>
+                      (e.currentTarget.style.backgroundColor =
+                        rightBtnColors.bg)
+                    }
+                  >
+                    {loading ? (
+                      <span
+                        style={{
+                          width: '14px',
+                          height: '14px',
+                          borderRadius: '50%',
+                          border: '2px solid currentColor',
+                          borderTop: '2px solid transparent',
+                          animation: 'spin .7s linear infinite',
+                        }}
+                      />
+                    ) : (
+                      '✓ Save'
+                    )}
+                  </button>
                 )}
-              </button>
-            )}
-          </div>
+              </div>
+            </>
+          )}
         </div>
 
         <style>
@@ -214,6 +223,7 @@ const EditorToolbar = memo(
 function AppEditor({
   initValue = '',
   onSave,
+  onChange,
   placeholder = 'Start typing...',
   disabled = false,
   readOnly = false,
@@ -238,8 +248,8 @@ function AppEditor({
 
   // Sync initial value
   useEffect(() => {
-    setValue(initValue)
-    setInitial(initValue)
+    setValue(initValue || '')
+    setInitial(initValue || '')
     setChanged(false)
   }, [initValue])
 
@@ -276,6 +286,11 @@ function AppEditor({
       const hasChanged = newVal !== initial
       setChanged(hasChanged)
 
+      // Call onChange callback
+      if (onChange) {
+        onChange(newVal)
+      }
+
       if (autoSave && hasChanged && onSave) {
         if (debounceRef.current) clearTimeout(debounceRef.current)
 
@@ -286,7 +301,7 @@ function AppEditor({
         }, autoSaveDelay)
       }
     },
-    [initial, autoSave, autoSaveDelay, onSave, readOnly]
+    [initial, autoSave, autoSaveDelay, onSave, onChange, readOnly]
   )
 
   const handleSave = useCallback(async () => {

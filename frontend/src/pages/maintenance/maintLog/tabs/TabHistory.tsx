@@ -1,7 +1,17 @@
-import React from "react";
+import { TypeTblMaintLog } from '@/core/api/generated/api'
+import Editor from '@/shared/components/Editor'
 
-const TabHistory = () => {
-  return <div>TabHistory</div>;
-};
+type props = {
+  selected: TypeTblMaintLog
+  label?: string
+}
 
-export default TabHistory;
+const TabHistory = (props: props) => {
+  const { label, selected } = props
+
+  return (
+    <Editor label={label || 'History'} initValue={selected?.history} readOnly />
+  )
+}
+
+export default TabHistory

@@ -3425,8 +3425,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -3509,8 +3509,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -3645,8 +3645,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -3675,8 +3675,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -4093,8 +4093,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -4721,8 +4721,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -4751,8 +4751,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -5107,8 +5107,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -5633,8 +5633,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -5663,8 +5663,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -5845,8 +5845,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -6113,8 +6113,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -6143,8 +6143,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -6857,8 +6857,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -7878,8 +7878,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -7908,8 +7908,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -8188,8 +8188,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -8600,8 +8600,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -8630,8 +8630,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -8894,8 +8894,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -9285,8 +9285,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -9315,8 +9315,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -9402,8 +9402,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -9544,8 +9544,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -9574,8 +9574,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -9816,8 +9816,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -10174,8 +10174,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -10204,8 +10204,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -10311,8 +10311,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -10477,8 +10477,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -10507,8 +10507,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -10618,8 +10618,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -10790,8 +10790,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -10820,8 +10820,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -10927,8 +10927,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -11093,8 +11093,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -11123,8 +11123,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -11299,8 +11299,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -11573,8 +11573,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -11603,8 +11603,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -11708,8 +11708,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -11874,8 +11874,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -11904,8 +11904,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -12427,8 +12427,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -13205,8 +13205,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -13235,8 +13235,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -13477,8 +13477,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -13841,8 +13841,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -13871,8 +13871,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -14433,8 +14433,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -15232,8 +15232,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -15289,8 +15289,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -15518,8 +15518,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -15858,8 +15858,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -15888,8 +15888,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -16126,8 +16126,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -16478,8 +16478,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -16508,8 +16508,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -16595,8 +16595,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -16737,8 +16737,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -16767,8 +16767,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -16994,8 +16994,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -17334,8 +17334,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -17364,8 +17364,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -18121,8 +18121,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -19235,8 +19235,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -19265,8 +19265,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -19355,6 +19355,19 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
+                            tblLogCounters?: {
+                                logCounterId: number;
+                                maintLogId: null | (number);
+                                counterTypeId: null | (number);
+                                frequency: null | (number);
+                                reportedCount: null | (number);
+                                overdueCount: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -19401,6 +19414,11 @@ export interface operations {
                             compTypeMeasurePointId: number;
                         }[];
                     };
+                    tblLogCounters?: {
+                        connect: {
+                            logCounterId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     code?: null | string;
@@ -19429,6 +19447,11 @@ export interface operations {
                             compTypeMeasurePointId: number;
                         }[];
                     };
+                    tblLogCounters?: {
+                        connect: {
+                            logCounterId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     code?: null | string;
@@ -19455,6 +19478,11 @@ export interface operations {
                     tblCompTypeMeasurePoints?: {
                         connect: {
                             compTypeMeasurePointId: number;
+                        }[];
+                    };
+                    tblLogCounters?: {
+                        connect: {
+                            logCounterId: number;
                         }[];
                     };
                 };
@@ -19541,6 +19569,19 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblLogCounters?: {
+                            logCounterId: number;
+                            maintLogId: null | (number);
+                            counterTypeId: null | (number);
+                            frequency: null | (number);
+                            reportedCount: null | (number);
+                            overdueCount: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -19554,8 +19595,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -19669,6 +19710,19 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblLogCounters?: {
+                            logCounterId: number;
+                            maintLogId: null | (number);
+                            counterTypeId: null | (number);
+                            frequency: null | (number);
+                            reportedCount: null | (number);
+                            overdueCount: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -19724,6 +19778,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblLogCounters?: {
+                        connect?: {
+                            logCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     code?: null | string;
@@ -19764,6 +19826,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblLogCounters?: {
+                        connect?: {
+                            logCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     code?: null | string;
@@ -19799,6 +19869,14 @@ export interface operations {
                     tblCompTypeMeasurePoints?: {
                         connect?: {
                             compTypeMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblLogCounters?: {
+                        connect?: {
+                            logCounterId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -19882,6 +19960,19 @@ export interface operations {
                             setValue: null | (number);
                             operationalMinValue: null | (number);
                             operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblLogCounters?: {
+                            logCounterId: number;
+                            maintLogId: null | (number);
+                            counterTypeId: null | (number);
+                            frequency: null | (number);
+                            reportedCount: null | (number);
+                            overdueCount: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | number);
@@ -19986,6 +20077,19 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblLogCounters?: {
+                            logCounterId: number;
+                            maintLogId: null | (number);
+                            counterTypeId: null | (number);
+                            frequency: null | (number);
+                            reportedCount: null | (number);
+                            overdueCount: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -19999,8 +20103,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -20029,8 +20133,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -20159,8 +20263,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -20352,8 +20456,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -20382,8 +20486,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -20902,8 +21006,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -21695,8 +21799,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -21725,8 +21829,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -22141,8 +22245,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -22700,8 +22804,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -22730,8 +22834,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -22899,8 +23003,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -23140,8 +23244,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -23170,8 +23274,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -23227,6 +23331,22 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
+                            tblMaintLogFollows?: {
+                                followId: number;
+                                userId: number;
+                                maintLogId: number;
+                                workorderId: number;
+                                isRequest: null | (number);
+                                isWaiting: null | (number);
+                                isUnPlan: null | (number);
+                                followDesc: null | string;
+                                deptId: number;
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                followStatuseId: null | (number);
+                                waitingTime: null | number;
+                                orderId: null | (number);
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -23258,6 +23378,11 @@ export interface operations {
                             maintLogId: number;
                         }[];
                     };
+                    tblMaintLogFollows?: {
+                        connect: {
+                            followId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     fsName?: null | string;
@@ -23271,6 +23396,11 @@ export interface operations {
                             maintLogId: number;
                         }[];
                     };
+                    tblMaintLogFollows?: {
+                        connect: {
+                            followId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     fsName?: null | string;
@@ -23282,6 +23412,11 @@ export interface operations {
                     tblMaintLogs?: {
                         connect: {
                             maintLogId: number;
+                        }[];
+                    };
+                    tblMaintLogFollows?: {
+                        connect: {
+                            followId: number;
                         }[];
                     };
                 };
@@ -23335,6 +23470,22 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            userId: number;
+                            maintLogId: number;
+                            workorderId: number;
+                            isRequest: null | (number);
+                            isWaiting: null | (number);
+                            isUnPlan: null | (number);
+                            followDesc: null | string;
+                            deptId: number;
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId: null | (number);
+                            waitingTime: null | number;
+                            orderId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -23348,8 +23499,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -23430,6 +23581,22 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            userId: number;
+                            maintLogId: number;
+                            workorderId: number;
+                            isRequest: null | (number);
+                            isWaiting: null | (number);
+                            isUnPlan: null | (number);
+                            followDesc: null | string;
+                            deptId: number;
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId: null | (number);
+                            waitingTime: null | number;
+                            orderId: null | (number);
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -23461,6 +23628,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblMaintLogFollows?: {
+                        connect?: {
+                            followId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     fsName?: null | string;
@@ -23477,6 +23652,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblMaintLogFollows?: {
+                        connect?: {
+                            followId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     fsName?: null | string;
@@ -23488,6 +23671,14 @@ export interface operations {
                     tblMaintLogs?: {
                         connect?: {
                             maintLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogFollows?: {
+                        connect?: {
+                            followId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -23543,6 +23734,22 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            userId: number;
+                            maintLogId: number;
+                            workorderId: number;
+                            isRequest: null | (number);
+                            isWaiting: null | (number);
+                            isUnPlan: null | (number);
+                            followDesc: null | string;
+                            deptId: number;
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId: null | (number);
+                            waitingTime: null | number;
+                            orderId: null | (number);
                         }[];
                     };
                 };
@@ -23609,6 +23816,22 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            userId: number;
+                            maintLogId: number;
+                            workorderId: number;
+                            isRequest: null | (number);
+                            isWaiting: null | (number);
+                            isUnPlan: null | (number);
+                            followDesc: null | string;
+                            deptId: number;
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId: null | (number);
+                            waitingTime: null | number;
+                            orderId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -23622,8 +23845,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -23652,8 +23875,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -24142,8 +24365,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -24863,8 +25086,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -24893,8 +25116,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -25055,8 +25278,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -25308,8 +25531,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -25338,8 +25561,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -25783,8 +26006,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -26447,8 +26670,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -26477,8 +26700,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -26565,8 +26788,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -26707,8 +26930,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -26737,8 +26960,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -26829,8 +27052,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -26977,8 +27200,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -27007,8 +27230,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -27124,8 +27347,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -27302,8 +27525,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -27332,8 +27555,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -27661,8 +27884,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -28163,8 +28386,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -28193,8 +28416,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -28221,6 +28444,47 @@ export interface operations {
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            tblCounterType?: null | {
+                                counterTypeId: number;
+                                code: null | string;
+                                name: null | string;
+                                maxDailyValue: null | (number);
+                                type: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
+                            tblMaintLog?: null | {
+                                maintLogId: number;
+                                maintCauseId: null | (number);
+                                maintTypeId: null | (number);
+                                maintClassId: null | (number);
+                                functionId: null | (number);
+                                jobDescId: null | (number);
+                                workOrderId: null | (number);
+                                compId: null | (number);
+                                roundId: null | (number);
+                                totalDuration: null | (number);
+                                downTime: null | (number);
+                                dateDone: null | number);
+                                frequency: null | (number);
+                                frequencyPeriod: null | (number);
+                                overdueCount: null | (number);
+                                overdueReason: null | string;
+                                unexpected: null | (number);
+                                cbmStatus: null | (number);
+                                loggedBy: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                history: null | string;
+                                mlStatus: null | (number);
+                                followStatusId: null | (number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
                         }[];
                         total: number;
                         page: number;
@@ -28246,6 +28510,16 @@ export interface operations {
                     overdueCount?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
+                    tblCounterType?: {
+                        connect: {
+                            counterTypeId: number;
+                        };
+                    };
+                    tblMaintLog?: {
+                        connect: {
+                            maintLogId: number;
+                        };
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     frequency?: null | (number);
@@ -28253,6 +28527,16 @@ export interface operations {
                     overdueCount?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
+                    tblCounterType?: {
+                        connect: {
+                            counterTypeId: number;
+                        };
+                    };
+                    tblMaintLog?: {
+                        connect: {
+                            maintLogId: number;
+                        };
+                    };
                 };
                 "multipart/form-data": {
                     frequency?: null | (number);
@@ -28260,6 +28544,16 @@ export interface operations {
                     overdueCount?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
+                    tblCounterType?: {
+                        connect: {
+                            counterTypeId: number;
+                        };
+                    };
+                    tblMaintLog?: {
+                        connect: {
+                            maintLogId: number;
+                        };
+                    };
                 };
             };
         };
@@ -28282,6 +28576,47 @@ export interface operations {
                         lastupdate: null | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCounterType?: null | {
+                            counterTypeId: number;
+                            code: null | string;
+                            name: null | string;
+                            maxDailyValue: null | (number);
+                            type: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintLog?: null | {
+                            maintLogId: number;
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintClassId: null | (number);
+                            functionId: null | (number);
+                            jobDescId: null | (number);
+                            workOrderId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            totalDuration: null | (number);
+                            downTime: null | (number);
+                            dateDone: null | number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            overdueCount: null | (number);
+                            overdueReason: null | string;
+                            unexpected: null | (number);
+                            cbmStatus: null | (number);
+                            loggedBy: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            history: null | string;
+                            mlStatus: null | (number);
+                            followStatusId: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -28295,8 +28630,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -28348,6 +28683,47 @@ export interface operations {
                         lastupdate: null | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCounterType?: null | {
+                            counterTypeId: number;
+                            code: null | string;
+                            name: null | string;
+                            maxDailyValue: null | (number);
+                            type: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintLog?: null | {
+                            maintLogId: number;
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintClassId: null | (number);
+                            functionId: null | (number);
+                            jobDescId: null | (number);
+                            workOrderId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            totalDuration: null | (number);
+                            downTime: null | (number);
+                            dateDone: null | number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            overdueCount: null | (number);
+                            overdueReason: null | string;
+                            unexpected: null | (number);
+                            cbmStatus: null | (number);
+                            loggedBy: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            history: null | string;
+                            mlStatus: null | (number);
+                            followStatusId: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     } & (Record<string, never> | null);
                 };
             };
@@ -28370,6 +28746,18 @@ export interface operations {
                     overdueCount?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
+                    tblCounterType?: {
+                        connect?: {
+                            counterTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintLog?: {
+                        connect?: {
+                            maintLogId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     frequency?: null | (number);
@@ -28377,6 +28765,18 @@ export interface operations {
                     overdueCount?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
+                    tblCounterType?: {
+                        connect?: {
+                            counterTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintLog?: {
+                        connect?: {
+                            maintLogId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
                 "multipart/form-data": {
                     frequency?: null | (number);
@@ -28384,6 +28784,18 @@ export interface operations {
                     overdueCount?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
+                    tblCounterType?: {
+                        connect?: {
+                            counterTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintLog?: {
+                        connect?: {
+                            maintLogId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
             };
         };
@@ -28406,6 +28818,47 @@ export interface operations {
                         lastupdate: null | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCounterType?: null | {
+                            counterTypeId: number;
+                            code: null | string;
+                            name: null | string;
+                            maxDailyValue: null | (number);
+                            type: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintLog?: null | {
+                            maintLogId: number;
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintClassId: null | (number);
+                            functionId: null | (number);
+                            jobDescId: null | (number);
+                            workOrderId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            totalDuration: null | (number);
+                            downTime: null | (number);
+                            dateDone: null | number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            overdueCount: null | (number);
+                            overdueReason: null | string;
+                            unexpected: null | (number);
+                            cbmStatus: null | (number);
+                            loggedBy: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            history: null | string;
+                            mlStatus: null | (number);
+                            followStatusId: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -28442,6 +28895,47 @@ export interface operations {
                         lastupdate: null | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblCounterType?: null | {
+                            counterTypeId: number;
+                            code: null | string;
+                            name: null | string;
+                            maxDailyValue: null | (number);
+                            type: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintLog?: null | {
+                            maintLogId: number;
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintClassId: null | (number);
+                            functionId: null | (number);
+                            jobDescId: null | (number);
+                            workOrderId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            totalDuration: null | (number);
+                            downTime: null | (number);
+                            dateDone: null | number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            overdueCount: null | (number);
+                            overdueReason: null | string;
+                            unexpected: null | (number);
+                            cbmStatus: null | (number);
+                            loggedBy: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            history: null | string;
+                            mlStatus: null | (number);
+                            followStatusId: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -28455,8 +28949,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -28485,8 +28979,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -28709,8 +29203,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -29016,8 +29510,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -29046,8 +29540,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -29153,8 +29647,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -29319,8 +29813,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -29349,8 +29843,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -29787,8 +30281,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -30460,8 +30954,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -30490,8 +30984,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -30928,8 +31422,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -31601,8 +32095,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -31631,8 +32125,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -31675,6 +32169,19 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                            tblLogCounters?: {
+                                logCounterId: number;
+                                maintLogId: null | (number);
+                                counterTypeId: null | (number);
+                                frequency: null | (number);
+                                reportedCount: null | (number);
+                                overdueCount: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
                             tblComponentUnit?: null | {
                                 compId: number;
                                 compTypeId: null | (number);
@@ -31886,6 +32393,22 @@ export interface operations {
                                 deptId: null | (number);
                                 lastUpdate: null | number);
                             };
+                            tblMaintLogFollows?: {
+                                followId: number;
+                                userId: number;
+                                maintLogId: number;
+                                workorderId: number;
+                                isRequest: null | (number);
+                                isWaiting: null | (number);
+                                isUnPlan: null | (number);
+                                followDesc: null | string;
+                                deptId: number;
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                followStatuseId: null | (number);
+                                waitingTime: null | number;
+                                orderId: null | (number);
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -31920,6 +32443,11 @@ export interface operations {
                     lastupdate?: null | number);
                     history?: null | string;
                     mlStatus?: null | (number);
+                    tblLogCounters?: {
+                        connect: {
+                            logCounterId: number;
+                        }[];
+                    };
                     tblComponentUnit?: {
                         connect: {
                             compId: number;
@@ -31974,6 +32502,11 @@ export interface operations {
                         connect: {
                             id: number;
                         };
+                    };
+                    tblMaintLogFollows?: {
+                        connect: {
+                            followId: number;
+                        }[];
                     };
                 };
                 "application/x-www-form-urlencoded": {
@@ -31991,6 +32524,11 @@ export interface operations {
                     lastupdate?: null | number);
                     history?: null | string;
                     mlStatus?: null | (number);
+                    tblLogCounters?: {
+                        connect: {
+                            logCounterId: number;
+                        }[];
+                    };
                     tblComponentUnit?: {
                         connect: {
                             compId: number;
@@ -32045,6 +32583,11 @@ export interface operations {
                         connect: {
                             id: number;
                         };
+                    };
+                    tblMaintLogFollows?: {
+                        connect: {
+                            followId: number;
+                        }[];
                     };
                 };
                 "multipart/form-data": {
@@ -32062,6 +32605,11 @@ export interface operations {
                     lastupdate?: null | number);
                     history?: null | string;
                     mlStatus?: null | (number);
+                    tblLogCounters?: {
+                        connect: {
+                            logCounterId: number;
+                        }[];
+                    };
                     tblComponentUnit?: {
                         connect: {
                             compId: number;
@@ -32116,6 +32664,11 @@ export interface operations {
                         connect: {
                             id: number;
                         };
+                    };
+                    tblMaintLogFollows?: {
+                        connect: {
+                            followId: number;
+                        }[];
                     };
                 };
             };
@@ -32155,6 +32708,19 @@ export interface operations {
                         followStatusId: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblLogCounters?: {
+                            logCounterId: number;
+                            maintLogId: null | (number);
+                            counterTypeId: null | (number);
+                            frequency: null | (number);
+                            reportedCount: null | (number);
+                            overdueCount: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblComponentUnit?: null | {
                             compId: number;
                             compTypeId: null | (number);
@@ -32366,6 +32932,22 @@ export interface operations {
                             deptId: null | (number);
                             lastUpdate: null | number);
                         };
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            userId: number;
+                            maintLogId: number;
+                            workorderId: number;
+                            isRequest: null | (number);
+                            isWaiting: null | (number);
+                            isUnPlan: null | (number);
+                            followDesc: null | string;
+                            deptId: number;
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId: null | (number);
+                            waitingTime: null | number;
+                            orderId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -32379,8 +32961,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -32448,6 +33030,19 @@ export interface operations {
                         followStatusId: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblLogCounters?: {
+                            logCounterId: number;
+                            maintLogId: null | (number);
+                            counterTypeId: null | (number);
+                            frequency: null | (number);
+                            reportedCount: null | (number);
+                            overdueCount: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblComponentUnit?: null | {
                             compId: number;
                             compTypeId: null | (number);
@@ -32659,6 +33254,22 @@ export interface operations {
                             deptId: null | (number);
                             lastUpdate: null | number);
                         };
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            userId: number;
+                            maintLogId: number;
+                            workorderId: number;
+                            isRequest: null | (number);
+                            isWaiting: null | (number);
+                            isUnPlan: null | (number);
+                            followDesc: null | string;
+                            deptId: number;
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId: null | (number);
+                            waitingTime: null | number;
+                            orderId: null | (number);
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -32690,6 +33301,14 @@ export interface operations {
                     lastupdate?: null | number);
                     history?: null | string;
                     mlStatus?: null | (number);
+                    tblLogCounters?: {
+                        connect?: {
+                            logCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblComponentUnit?: {
                         connect?: {
                             compId: number;
@@ -32755,6 +33374,14 @@ export interface operations {
                             id: number;
                         };
                         disconnect?: boolean;
+                    };
+                    tblMaintLogFollows?: {
+                        connect?: {
+                            followId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
                     };
                 };
                 "application/x-www-form-urlencoded": {
@@ -32772,6 +33399,14 @@ export interface operations {
                     lastupdate?: null | number);
                     history?: null | string;
                     mlStatus?: null | (number);
+                    tblLogCounters?: {
+                        connect?: {
+                            logCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblComponentUnit?: {
                         connect?: {
                             compId: number;
@@ -32837,6 +33472,14 @@ export interface operations {
                             id: number;
                         };
                         disconnect?: boolean;
+                    };
+                    tblMaintLogFollows?: {
+                        connect?: {
+                            followId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
                     };
                 };
                 "multipart/form-data": {
@@ -32854,6 +33497,14 @@ export interface operations {
                     lastupdate?: null | number);
                     history?: null | string;
                     mlStatus?: null | (number);
+                    tblLogCounters?: {
+                        connect?: {
+                            logCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblComponentUnit?: {
                         connect?: {
                             compId: number;
@@ -32919,6 +33570,14 @@ export interface operations {
                             id: number;
                         };
                         disconnect?: boolean;
+                    };
+                    tblMaintLogFollows?: {
+                        connect?: {
+                            followId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
                     };
                 };
             };
@@ -32958,6 +33617,19 @@ export interface operations {
                         followStatusId: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblLogCounters?: {
+                            logCounterId: number;
+                            maintLogId: null | (number);
+                            counterTypeId: null | (number);
+                            frequency: null | (number);
+                            reportedCount: null | (number);
+                            overdueCount: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblComponentUnit?: null | {
                             compId: number;
                             compTypeId: null | (number);
@@ -33169,6 +33841,22 @@ export interface operations {
                             deptId: null | (number);
                             lastUpdate: null | number);
                         };
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            userId: number;
+                            maintLogId: number;
+                            workorderId: number;
+                            isRequest: null | (number);
+                            isWaiting: null | (number);
+                            isUnPlan: null | (number);
+                            followDesc: null | string;
+                            deptId: number;
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId: null | (number);
+                            waitingTime: null | number;
+                            orderId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -33221,6 +33909,19 @@ export interface operations {
                         followStatusId: null | (number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblLogCounters?: {
+                            logCounterId: number;
+                            maintLogId: null | (number);
+                            counterTypeId: null | (number);
+                            frequency: null | (number);
+                            reportedCount: null | (number);
+                            overdueCount: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblComponentUnit?: null | {
                             compId: number;
                             compTypeId: null | (number);
@@ -33432,6 +34133,22 @@ export interface operations {
                             deptId: null | (number);
                             lastUpdate: null | number);
                         };
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            userId: number;
+                            maintLogId: number;
+                            workorderId: number;
+                            isRequest: null | (number);
+                            isWaiting: null | (number);
+                            isUnPlan: null | (number);
+                            followDesc: null | string;
+                            deptId: number;
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId: null | (number);
+                            waitingTime: null | number;
+                            orderId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -33445,8 +34162,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -33475,8 +34192,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -33506,6 +34223,108 @@ export interface operations {
                             followStatuseId: null | (number);
                             waitingTime: null | number;
                             orderId: null | (number);
+                            tblFollowStatus?: null | {
+                                followStatusId: number;
+                                fsName: null | string;
+                                fsDesc: null | string;
+                                fsGroup: null | (number);
+                                sortId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                followStatuseId1: null | (number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                                deptId: null | (number);
+                            };
+                            tblMaintLog?: {
+                                maintLogId: number;
+                                maintCauseId: null | (number);
+                                maintTypeId: null | (number);
+                                maintClassId: null | (number);
+                                functionId: null | (number);
+                                jobDescId: null | (number);
+                                workOrderId: null | (number);
+                                compId: null | (number);
+                                roundId: null | (number);
+                                totalDuration: null | (number);
+                                downTime: null | (number);
+                                dateDone: null | number);
+                                frequency: null | (number);
+                                frequencyPeriod: null | (number);
+                                overdueCount: null | (number);
+                                overdueReason: null | string;
+                                unexpected: null | (number);
+                                cbmStatus: null | (number);
+                                loggedBy: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                history: null | string;
+                                mlStatus: null | (number);
+                                followStatusId: null | (number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
+                            tblWorkOrder?: {
+                                workOrderId: number;
+                                compJobId: null | (number);
+                                maintClassId: null | (number);
+                                maintTypeId: null | (number);
+                                maintCauseId: null | (number);
+                                createdBy: null | (number);
+                                issuedBy: null | (number);
+                                plannedBy: null | (number);
+                                issuedDate: null | number);
+                                respDiscId: null | (number);
+                                compId: null | (number);
+                                roundId: null | (number);
+                                parentWorkOrderId: null | (number);
+                                woNo: null | string;
+                                title: null | string;
+                                priority: null | (number);
+                                estTotalDuration: null | (number);
+                                dueDate: null | number);
+                                window: null | (number);
+                                created: null | number);
+                                started: null | number);
+                                completed: null | number);
+                                description: null | string;
+                                filed: null | (number);
+                                unexpected: null | (number);
+                                workOrderStatusId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                reportingMethod: null | (number);
+                                pendingBy: null | (number);
+                                pendTypeId: null | (number);
+                                pendingdate: null | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                                userComment: null | string;
+                            };
+                            users?: {
+                                userId: number;
+                                employeeId: null | (number);
+                                addressId: null | (number);
+                                userGroupId: null | (number);
+                                uUserName: string;
+                                uPassword: string;
+                                uName: null | string;
+                                uTitle: null | string;
+                                uComment1: null | string;
+                                uComment2: null | string;
+                                uDigitalSign: null | string;
+                                uAccountDisabled: null | boolean;
+                                uLogonAttempts: null | (number);
+                                uForcePasswordChange: null | boolean;
+                                uLastLogin: null | number);
+                                exportMarker: null | (number);
+                                uLastUpdated: null | number);
+                                orderId: null | (number);
+                                deptId: null | (number);
+                                lastUpdate: null | number);
+                            };
                         }[];
                         total: number;
                         page: number;
@@ -33533,6 +34352,26 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     waitingTime?: null | number;
+                    tblFollowStatus?: {
+                        connect: {
+                            followStatusId: number;
+                        };
+                    };
+                    tblMaintLog: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblWorkOrder: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    users: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     isRequest?: null | (number);
@@ -33542,6 +34381,26 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     waitingTime?: null | number;
+                    tblFollowStatus?: {
+                        connect: {
+                            followStatusId: number;
+                        };
+                    };
+                    tblMaintLog: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblWorkOrder: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    users: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                 };
                 "multipart/form-data": {
                     isRequest?: null | (number);
@@ -33551,6 +34410,26 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     waitingTime?: null | number;
+                    tblFollowStatus?: {
+                        connect: {
+                            followStatusId: number;
+                        };
+                    };
+                    tblMaintLog: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblWorkOrder: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    users: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                 };
             };
         };
@@ -33576,6 +34455,108 @@ export interface operations {
                         followStatuseId: null | (number);
                         waitingTime: null | number;
                         orderId: null | (number);
+                        tblFollowStatus?: null | {
+                            followStatusId: number;
+                            fsName: null | string;
+                            fsDesc: null | string;
+                            fsGroup: null | (number);
+                            sortId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId1: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            deptId: null | (number);
+                        };
+                        tblMaintLog?: {
+                            maintLogId: number;
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintClassId: null | (number);
+                            functionId: null | (number);
+                            jobDescId: null | (number);
+                            workOrderId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            totalDuration: null | (number);
+                            downTime: null | (number);
+                            dateDone: null | number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            overdueCount: null | (number);
+                            overdueReason: null | string;
+                            unexpected: null | (number);
+                            cbmStatus: null | (number);
+                            loggedBy: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            history: null | string;
+                            mlStatus: null | (number);
+                            followStatusId: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblWorkOrder?: {
+                            workOrderId: number;
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | number);
+                            respDiscId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | number);
+                            window: null | (number);
+                            created: null | number);
+                            started: null | number);
+                            completed: null | number);
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workOrderStatusId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        };
+                        users?: {
+                            userId: number;
+                            employeeId: null | (number);
+                            addressId: null | (number);
+                            userGroupId: null | (number);
+                            uUserName: string;
+                            uPassword: string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | (number);
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | number);
+                            exportMarker: null | (number);
+                            uLastUpdated: null | number);
+                            orderId: null | (number);
+                            deptId: null | (number);
+                            lastUpdate: null | number);
+                        };
                     };
                 };
             };
@@ -33589,8 +34570,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -33645,6 +34626,108 @@ export interface operations {
                         followStatuseId: null | (number);
                         waitingTime: null | number;
                         orderId: null | (number);
+                        tblFollowStatus?: null | {
+                            followStatusId: number;
+                            fsName: null | string;
+                            fsDesc: null | string;
+                            fsGroup: null | (number);
+                            sortId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId1: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            deptId: null | (number);
+                        };
+                        tblMaintLog?: {
+                            maintLogId: number;
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintClassId: null | (number);
+                            functionId: null | (number);
+                            jobDescId: null | (number);
+                            workOrderId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            totalDuration: null | (number);
+                            downTime: null | (number);
+                            dateDone: null | number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            overdueCount: null | (number);
+                            overdueReason: null | string;
+                            unexpected: null | (number);
+                            cbmStatus: null | (number);
+                            loggedBy: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            history: null | string;
+                            mlStatus: null | (number);
+                            followStatusId: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblWorkOrder?: {
+                            workOrderId: number;
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | number);
+                            respDiscId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | number);
+                            window: null | (number);
+                            created: null | number);
+                            started: null | number);
+                            completed: null | number);
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workOrderStatusId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        };
+                        users?: {
+                            userId: number;
+                            employeeId: null | (number);
+                            addressId: null | (number);
+                            userGroupId: null | (number);
+                            uUserName: string;
+                            uPassword: string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | (number);
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | number);
+                            exportMarker: null | (number);
+                            uLastUpdated: null | number);
+                            orderId: null | (number);
+                            deptId: null | (number);
+                            lastUpdate: null | number);
+                        };
                     } & (Record<string, never> | null);
                 };
             };
@@ -33669,6 +34752,27 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     waitingTime?: null | number;
+                    tblFollowStatus?: {
+                        connect?: {
+                            followStatusId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintLog?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblWorkOrder?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    users?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     isRequest?: null | (number);
@@ -33678,6 +34782,27 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     waitingTime?: null | number;
+                    tblFollowStatus?: {
+                        connect?: {
+                            followStatusId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintLog?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblWorkOrder?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    users?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                 };
                 "multipart/form-data": {
                     isRequest?: null | (number);
@@ -33687,6 +34812,27 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     waitingTime?: null | number;
+                    tblFollowStatus?: {
+                        connect?: {
+                            followStatusId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintLog?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblWorkOrder?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    users?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                 };
             };
         };
@@ -33712,6 +34858,108 @@ export interface operations {
                         followStatuseId: null | (number);
                         waitingTime: null | number;
                         orderId: null | (number);
+                        tblFollowStatus?: null | {
+                            followStatusId: number;
+                            fsName: null | string;
+                            fsDesc: null | string;
+                            fsGroup: null | (number);
+                            sortId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId1: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            deptId: null | (number);
+                        };
+                        tblMaintLog?: {
+                            maintLogId: number;
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintClassId: null | (number);
+                            functionId: null | (number);
+                            jobDescId: null | (number);
+                            workOrderId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            totalDuration: null | (number);
+                            downTime: null | (number);
+                            dateDone: null | number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            overdueCount: null | (number);
+                            overdueReason: null | string;
+                            unexpected: null | (number);
+                            cbmStatus: null | (number);
+                            loggedBy: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            history: null | string;
+                            mlStatus: null | (number);
+                            followStatusId: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblWorkOrder?: {
+                            workOrderId: number;
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | number);
+                            respDiscId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | number);
+                            window: null | (number);
+                            created: null | number);
+                            started: null | number);
+                            completed: null | number);
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workOrderStatusId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        };
+                        users?: {
+                            userId: number;
+                            employeeId: null | (number);
+                            addressId: null | (number);
+                            userGroupId: null | (number);
+                            uUserName: string;
+                            uPassword: string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | (number);
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | number);
+                            exportMarker: null | (number);
+                            uLastUpdated: null | number);
+                            orderId: null | (number);
+                            deptId: null | (number);
+                            lastUpdate: null | number);
+                        };
                     };
                 };
             };
@@ -33751,6 +34999,108 @@ export interface operations {
                         followStatuseId: null | (number);
                         waitingTime: null | number;
                         orderId: null | (number);
+                        tblFollowStatus?: null | {
+                            followStatusId: number;
+                            fsName: null | string;
+                            fsDesc: null | string;
+                            fsGroup: null | (number);
+                            sortId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId1: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            deptId: null | (number);
+                        };
+                        tblMaintLog?: {
+                            maintLogId: number;
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintClassId: null | (number);
+                            functionId: null | (number);
+                            jobDescId: null | (number);
+                            workOrderId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            totalDuration: null | (number);
+                            downTime: null | (number);
+                            dateDone: null | number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            overdueCount: null | (number);
+                            overdueReason: null | string;
+                            unexpected: null | (number);
+                            cbmStatus: null | (number);
+                            loggedBy: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            history: null | string;
+                            mlStatus: null | (number);
+                            followStatusId: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblWorkOrder?: {
+                            workOrderId: number;
+                            compJobId: null | (number);
+                            maintClassId: null | (number);
+                            maintTypeId: null | (number);
+                            maintCauseId: null | (number);
+                            createdBy: null | (number);
+                            issuedBy: null | (number);
+                            plannedBy: null | (number);
+                            issuedDate: null | number);
+                            respDiscId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            parentWorkOrderId: null | (number);
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | (number);
+                            estTotalDuration: null | (number);
+                            dueDate: null | number);
+                            window: null | (number);
+                            created: null | number);
+                            started: null | number);
+                            completed: null | number);
+                            description: null | string;
+                            filed: null | (number);
+                            unexpected: null | (number);
+                            workOrderStatusId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            reportingMethod: null | (number);
+                            pendingBy: null | (number);
+                            pendTypeId: null | (number);
+                            pendingdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                            userComment: null | string;
+                        };
+                        users?: {
+                            userId: number;
+                            employeeId: null | (number);
+                            addressId: null | (number);
+                            userGroupId: null | (number);
+                            uUserName: string;
+                            uPassword: string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | (number);
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | number);
+                            exportMarker: null | (number);
+                            uLastUpdated: null | number);
+                            orderId: null | (number);
+                            deptId: null | (number);
+                            lastUpdate: null | number);
+                        };
                     };
                 };
             };
@@ -33764,8 +35114,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -33794,8 +35144,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -33891,8 +35241,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -34045,8 +35395,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -34075,8 +35425,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -34513,8 +35863,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -35186,8 +36536,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -35216,8 +36566,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -35434,8 +36784,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -35735,8 +37085,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -35765,8 +37115,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -35955,8 +37305,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -36250,8 +37600,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -36280,8 +37630,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -36611,8 +37961,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -37125,8 +38475,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -37155,8 +38505,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -37265,8 +38615,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -37434,8 +38784,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -37464,8 +38814,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -37570,8 +38920,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -37736,8 +39086,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -37766,8 +39116,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -38048,8 +39398,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -38457,8 +39807,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -38487,8 +39837,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -38596,8 +39946,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -38765,8 +40115,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -38795,8 +40145,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -39001,8 +40351,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -39290,8 +40640,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -39320,8 +40670,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -39481,8 +40831,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -39713,8 +41063,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -39743,8 +41093,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -39938,8 +41288,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -40239,8 +41589,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -40269,8 +41619,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -40350,6 +41700,22 @@ export interface operations {
                                 followStatusId: null | (number);
                                 orderId: null | (number);
                                 userId: null | (number);
+                            }[];
+                            tblMaintLogFollows?: {
+                                followId: number;
+                                userId: number;
+                                maintLogId: number;
+                                workorderId: number;
+                                isRequest: null | (number);
+                                isWaiting: null | (number);
+                                isUnPlan: null | (number);
+                                followDesc: null | string;
+                                deptId: number;
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                followStatuseId: null | (number);
+                                waitingTime: null | number;
+                                orderId: null | (number);
                             }[];
                             tblCompJob?: null | {
                                 compJobId: number;
@@ -40731,6 +42097,11 @@ export interface operations {
                             maintLogId: number;
                         }[];
                     };
+                    tblMaintLogFollows?: {
+                        connect: {
+                            followId: number;
+                        }[];
+                    };
                     tblCompJob?: {
                         connect: {
                             compJobId: number;
@@ -40835,6 +42206,11 @@ export interface operations {
                             maintLogId: number;
                         }[];
                     };
+                    tblMaintLogFollows?: {
+                        connect: {
+                            followId: number;
+                        }[];
+                    };
                     tblCompJob?: {
                         connect: {
                             compJobId: number;
@@ -40937,6 +42313,11 @@ export interface operations {
                     tblMaintLogs?: {
                         connect: {
                             maintLogId: number;
+                        }[];
+                    };
+                    tblMaintLogFollows?: {
+                        connect: {
+                            followId: number;
                         }[];
                     };
                     tblCompJob?: {
@@ -41089,6 +42470,22 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            userId: number;
+                            maintLogId: number;
+                            workorderId: number;
+                            isRequest: null | (number);
+                            isWaiting: null | (number);
+                            isUnPlan: null | (number);
+                            followDesc: null | string;
+                            deptId: number;
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId: null | (number);
+                            waitingTime: null | number;
+                            orderId: null | (number);
                         }[];
                         tblCompJob?: null | {
                             compJobId: number;
@@ -41436,8 +42833,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -41542,6 +42939,22 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            userId: number;
+                            maintLogId: number;
+                            workorderId: number;
+                            isRequest: null | (number);
+                            isWaiting: null | (number);
+                            isUnPlan: null | (number);
+                            followDesc: null | string;
+                            deptId: number;
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId: null | (number);
+                            waitingTime: null | number;
+                            orderId: null | (number);
                         }[];
                         tblCompJob?: null | {
                             compJobId: number;
@@ -41923,6 +43336,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblMaintLogFollows?: {
+                        connect?: {
+                            followId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblCompJob?: {
                         connect?: {
                             compJobId: number;
@@ -42047,6 +43468,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblMaintLogFollows?: {
+                        connect?: {
+                            followId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblCompJob?: {
                         connect?: {
                             compJobId: number;
@@ -42166,6 +43595,14 @@ export interface operations {
                     tblMaintLogs?: {
                         connect?: {
                             maintLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogFollows?: {
+                        connect?: {
+                            followId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -42338,6 +43775,22 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            userId: number;
+                            maintLogId: number;
+                            workorderId: number;
+                            isRequest: null | (number);
+                            isWaiting: null | (number);
+                            isUnPlan: null | (number);
+                            followDesc: null | string;
+                            deptId: number;
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId: null | (number);
+                            waitingTime: null | number;
+                            orderId: null | (number);
                         }[];
                         tblCompJob?: null | {
                             compJobId: number;
@@ -42762,6 +44215,22 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            userId: number;
+                            maintLogId: number;
+                            workorderId: number;
+                            isRequest: null | (number);
+                            isWaiting: null | (number);
+                            isUnPlan: null | (number);
+                            followDesc: null | string;
+                            deptId: number;
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId: null | (number);
+                            waitingTime: null | number;
+                            orderId: null | (number);
+                        }[];
                         tblCompJob?: null | {
                             compJobId: number;
                             historyLayout: null | (number);
@@ -43108,8 +44577,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -43138,8 +44607,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -43301,8 +44770,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -43560,8 +45029,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -43590,8 +45059,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -43694,8 +45163,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -43857,8 +45326,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -43887,8 +45356,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -44039,8 +45508,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -44262,8 +45731,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -44292,8 +45761,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -44482,8 +45951,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -44750,8 +46219,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -44780,8 +46249,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -44874,6 +46343,22 @@ export interface operations {
                                 followStatusId: null | (number);
                                 orderId: null | (number);
                                 userId: null | (number);
+                            }[];
+                            tblMaintLogFollows?: {
+                                followId: number;
+                                userId: number;
+                                maintLogId: number;
+                                workorderId: number;
+                                isRequest: null | (number);
+                                isWaiting: null | (number);
+                                isUnPlan: null | (number);
+                                followDesc: null | string;
+                                deptId: number;
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                followStatuseId: null | (number);
+                                waitingTime: null | number;
+                                orderId: null | (number);
                             }[];
                             tblWorkOrderTblWorkOrderIssuedByToUsers?: {
                                 workOrderId: number;
@@ -45071,6 +46556,11 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblMaintLogFollows?: {
+                        connect: {
+                            followId: number;
+                        }[];
+                    };
                     tblWorkOrderTblWorkOrderIssuedByToUsers?: {
                         connect: {
                             id: number;
@@ -45117,6 +46607,11 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblMaintLogFollows?: {
+                        connect: {
+                            followId: number;
+                        }[];
+                    };
                     tblWorkOrderTblWorkOrderIssuedByToUsers?: {
                         connect: {
                             id: number;
@@ -45161,6 +46656,11 @@ export interface operations {
                     tblMaintLogTblMaintLogLoggedByToUsers?: {
                         connect: {
                             id: number;
+                        }[];
+                    };
+                    tblMaintLogFollows?: {
+                        connect: {
+                            followId: number;
                         }[];
                     };
                     tblWorkOrderTblWorkOrderIssuedByToUsers?: {
@@ -45271,6 +46771,22 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            userId: number;
+                            maintLogId: number;
+                            workorderId: number;
+                            isRequest: null | (number);
+                            isWaiting: null | (number);
+                            isUnPlan: null | (number);
+                            followDesc: null | string;
+                            deptId: number;
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId: null | (number);
+                            waitingTime: null | number;
+                            orderId: null | (number);
                         }[];
                         tblWorkOrderTblWorkOrderIssuedByToUsers?: {
                             workOrderId: number;
@@ -45437,8 +46953,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -45556,6 +47072,22 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            userId: number;
+                            maintLogId: number;
+                            workorderId: number;
+                            isRequest: null | (number);
+                            isWaiting: null | (number);
+                            isUnPlan: null | (number);
+                            followDesc: null | string;
+                            deptId: number;
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId: null | (number);
+                            waitingTime: null | number;
+                            orderId: null | (number);
                         }[];
                         tblWorkOrderTblWorkOrderIssuedByToUsers?: {
                             workOrderId: number;
@@ -45756,6 +47288,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblMaintLogFollows?: {
+                        connect?: {
+                            followId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkOrderTblWorkOrderIssuedByToUsers?: {
                         connect?: {
                             id: number;
@@ -45820,6 +47360,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblMaintLogFollows?: {
+                        connect?: {
+                            followId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkOrderTblWorkOrderIssuedByToUsers?: {
                         connect?: {
                             id: number;
@@ -45879,6 +47427,14 @@ export interface operations {
                     tblMaintLogTblMaintLogLoggedByToUsers?: {
                         connect?: {
                             id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogFollows?: {
+                        connect?: {
+                            followId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -46004,6 +47560,22 @@ export interface operations {
                             followStatusId: null | (number);
                             orderId: null | (number);
                             userId: null | (number);
+                        }[];
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            userId: number;
+                            maintLogId: number;
+                            workorderId: number;
+                            isRequest: null | (number);
+                            isWaiting: null | (number);
+                            isUnPlan: null | (number);
+                            followDesc: null | string;
+                            deptId: number;
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId: null | (number);
+                            waitingTime: null | number;
+                            orderId: null | (number);
                         }[];
                         tblWorkOrderTblWorkOrderIssuedByToUsers?: {
                             workOrderId: number;
@@ -46260,6 +47832,22 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            userId: number;
+                            maintLogId: number;
+                            workorderId: number;
+                            isRequest: null | (number);
+                            isWaiting: null | (number);
+                            isUnPlan: null | (number);
+                            followDesc: null | string;
+                            deptId: number;
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            followStatuseId: null | (number);
+                            waitingTime: null | number;
+                            orderId: null | (number);
+                        }[];
                         tblWorkOrderTblWorkOrderIssuedByToUsers?: {
                             workOrderId: number;
                             compJobId: null | (number);
@@ -46425,8 +48013,8 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: boolean | string;
-                force?: boolean | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -46624,6 +48212,22 @@ export interface operations {
                                 followStatusId: null | (number);
                                 orderId: null | (number);
                                 userId: null | (number);
+                            }[];
+                            tblMaintLogFollows?: {
+                                followId: number;
+                                userId: number;
+                                maintLogId: number;
+                                workorderId: number;
+                                isRequest: null | (number);
+                                isWaiting: null | (number);
+                                isUnPlan: null | (number);
+                                followDesc: null | string;
+                                deptId: number;
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                followStatuseId: null | (number);
+                                waitingTime: null | number;
+                                orderId: null | (number);
                             }[];
                             tblWorkOrderTblWorkOrderIssuedByToUsers?: {
                                 workOrderId: number;

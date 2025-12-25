@@ -5,7 +5,7 @@ import Inventory from '@mui/icons-material/Inventory'
 import AttachFile from '@mui/icons-material/AttachFile'
 import Straighten from '@mui/icons-material/Straighten'
 
-const TabGeneral = React.lazy(() => import('./steps/StepGeneral'))
+const TabGeneral = React.lazy(() => import('./steps/stepGeneral/StepGeneral'))
 const TabResourceUsed = React.lazy(() => import('./steps/StepResourceUsed'))
 const TabStockUsed = React.lazy(() => import('./steps/StepStockUsed'))
 const TabAttachments = React.lazy(() => import('./steps/StepAttachments'))

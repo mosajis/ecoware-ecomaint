@@ -1,93 +1,106 @@
-import DialogHeader from "./dialog/DialogHeader";
-import CustomizedDataGrid from "./dataGrid/DataGrid";
-import { useEffect, useState, useCallback } from "react";
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import Button from "@mui/material/Button";
+import Dialog from '@mui/material/Dialog'
+import DialogContent from '@mui/material/DialogContent'
+import DialogActions from '@mui/material/DialogActions'
+import Button from '@mui/material/Button'
+import { useEffect, useState, useCallback } from 'react'
 import {
   GridRowId,
   GridRowIdGetter,
   GridRowSelectionModel,
-} from "@mui/x-data-grid";
+} from '@mui/x-data-grid'
+
+import DialogHeader from './dialog/DialogHeader'
+import CustomizedDataGrid from './dataGrid/DataGrid'
 
 export interface SelectModalProps<TItem extends Record<string, any>> {
-  open: boolean;
-  onClose: () => void;
-  title?: string;
+  open: boolean
+  onClose: () => void
+  title?: string
 
-  request: () => Promise<any>; // API real type
-  extractRows?: (data: any) => TItem[]; // extractor
+  request: () => Promise<any> // API call
+  extractRows?: (data: any) => TItem[] // optional extractor
 
-  columns: any[];
-  selectionMode?: "single" | "multiple";
-  onSelect: (selected: TItem[] | TItem | null) => void;
+  columns: any[]
+  selectionMode?: 'single' | 'multiple'
+  onSelect: (selected: TItem | TItem[] | null) => void
 
-  getRowId: GridRowIdGetter<TItem>;
+  getRowId: GridRowIdGetter<TItem>
+  selected?: TItem | TItem[] | null // مقدار اولیه برای edit
 
-  // اضافه‌شده برای ارتفاع و maxWidth
-  height?: number | string;
-  maxWidth?: "xs" | "sm" | "md" | "lg" | "xl" | false;
+  height?: number | string
+  maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false
 }
 
 export function AsyncSelectDialog<TItem extends Record<string, any>>({
   open,
   onClose,
-  title = "Select",
+  title = 'Select',
   request,
   extractRows,
   columns,
   onSelect,
-  selectionMode = "single",
+  selectionMode = 'single',
   getRowId,
+  selected = null,
   height = 600,
-  maxWidth = "md",
+  maxWidth = 'md',
 }: SelectModalProps<TItem>) {
-  const [rows, setRows] = useState<TItem[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [rows, setRows] = useState<TItem[]>([])
+  const [loading, setLoading] = useState(false)
   const [selection, setSelection] = useState<GridRowSelectionModel>({
-    type: "include",
+    type: 'include',
     ids: new Set<GridRowId>(),
-  });
+  })
 
-  // === fetchData function for useEffect and Refresh ===
+  // ---------------- Fetch Data ----------------
   const fetchData = useCallback(async () => {
-    setLoading(true);
-    setSelection({ type: "include", ids: new Set<GridRowId>() });
+    setLoading(true)
+    setSelection({ type: 'include', ids: new Set<GridRowId>() })
 
     try {
-      const data = await request();
-      const items = extractRows ? extractRows(data) : data.items;
-      setRows(Array.isArray(items) ? items : []);
+      const data = await request()
+      const items: TItem[] = extractRows ? extractRows(data) : data.items ?? []
+      setRows(Array.isArray(items) ? items : [])
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  }, [request, extractRows]);
+  }, [request, extractRows])
 
-  // === Load data on open ===
+  // ---------------- Initialize Selection ----------------
   useEffect(() => {
-    if (open) fetchData();
-  }, [open, fetchData]);
+    if (open) {
+      fetchData()
 
-  const handleOk = () => {
-    if (selectionMode === "single") {
-      const selectedId = Array.from(selection.ids)[0];
-      const selected = rows.find((r) => getRowId(r) === selectedId) ?? null;
-      onSelect(selected);
-    } else {
-      const selectedRows = rows.filter((r) => selection.ids.has(getRowId(r)));
-      onSelect(selectedRows);
+      const initialIds = new Set<GridRowId>()
+      if (selectionMode === 'single' && selected && !Array.isArray(selected)) {
+        initialIds.add(getRowId(selected))
+      } else if (selectionMode === 'multiple' && Array.isArray(selected)) {
+        selected.forEach(item => initialIds.add(getRowId(item)))
+      }
+      setSelection({ type: 'include', ids: initialIds })
     }
+  }, [open, fetchData, selected, selectionMode, getRowId])
 
-    onClose();
-  };
+  // ---------------- Handle OK ----------------
+  const handleOk = () => {
+    if (selectionMode === 'single') {
+      const selectedId = Array.from(selection.ids)[0]
+      const selectedItem = rows.find(r => getRowId(r) === selectedId) ?? null
+      onSelect(selectedItem)
+    } else {
+      const selectedItems = rows.filter(r => selection.ids.has(getRowId(r)))
+      onSelect(selectedItems)
+    }
+    onClose()
+  }
 
+  // ---------------- Render ----------------
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth={maxWidth}>
       <DialogContent sx={{ height, p: 1 }}>
         <CustomizedDataGrid
           getRowId={getRowId}
-          onRefreshClick={fetchData} // 🔹 استفاده از fetchData
+          onRefreshClick={fetchData}
           label={title}
           rows={rows}
           columns={columns}
@@ -98,24 +111,24 @@ export function AsyncSelectDialog<TItem extends Record<string, any>>({
           disableDensity
           disableExport
           disableColumns
-          checkboxSelection={selectionMode === "multiple"}
+          checkboxSelection={selectionMode === 'multiple'}
           disableRowSelectionOnClick={false}
           onRowSelectionModelChange={setSelection}
         />
       </DialogContent>
       <DialogActions sx={{ p: 0, m: 1 }}>
         <Button
-          type="submit"
-          variant="contained"
-          color="secondary"
+          type='submit'
+          variant='contained'
+          color='secondary'
           sx={{ flex: 1 }}
           onClick={handleOk}
         >
           Ok
         </Button>
         <Button
-          color="inherit"
-          variant="outlined"
+          color='inherit'
+          variant='outlined'
           sx={{ flex: 1 }}
           onClick={onClose}
         >
@@ -123,5 +136,5 @@ export function AsyncSelectDialog<TItem extends Record<string, any>>({
         </Button>
       </DialogActions>
     </Dialog>
-  );
+  )
 }

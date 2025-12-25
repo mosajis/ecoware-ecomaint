@@ -1,67 +1,67 @@
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import Splitter from "@/shared/components/Splitter";
-import ComponentTypeJobTabs from "./ComponentTypeJobTabs";
-import ComponentTypeJobFormDialog from "./ComponentTypeJobFormDialog";
-import { useCallback, useEffect, useState } from "react";
-import { GridColDef } from "@mui/x-data-grid";
+import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
+import Splitter from '@/shared/components/Splitter'
+import ComponentTypeJobTabs from './ComponentTypeJobTabs'
+import CellBoolean from '@/shared/components/dataGrid/cells/CellBoolean'
+import ComponentTypeJobFormDialog from './ComponentTypeJobFormDialog'
+import { useCallback, useEffect, useState } from 'react'
+import { GridColDef } from '@mui/x-data-grid'
 import {
   tblCompType,
   tblCompTypeJob,
   TypeTblCompTypeJob,
-} from "@/core/api/generated/api";
-import { useMatch, useParams } from "@tanstack/react-router";
-import { maintComponentTypeDetailRoute } from "@/app/routes";
-import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
-import { StatusIcon } from "../../../../shared/components/StatusIcon";
-import { useDataGrid } from "@/shared/hooks/useDataGrid";
+} from '@/core/api/generated/api'
+import { useMatch, useParams } from '@tanstack/react-router'
+import { maintComponentTypeDetailRoute } from '@/app/routes'
+import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
+import { useDataGrid } from '@/shared/hooks/useDataGrid'
 
 export default function ComponentTypeJob() {
-  const { id } = useParams({ from: maintComponentTypeDetailRoute.id });
-  const compTypeId = Number(id);
+  const { id } = useParams({ from: maintComponentTypeDetailRoute.id })
+  const compTypeId = Number(id)
 
-  const match = useMatch({ from: maintComponentTypeDetailRoute.id });
+  const match = useMatch({ from: maintComponentTypeDetailRoute.id })
 
   // State
-  const [compName, setCompName] = useState<string | null>(null);
+  const [compName, setCompName] = useState<string | null>(null)
   const [selectedCompType, setSelectedCompType] = useState<{
-    compTypeId: number;
-    compName: string;
-  } | null>(null);
-  const [openForm, setOpenForm] = useState(false);
-  const [mode, setMode] = useState<"create" | "update">("create");
-  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+    compTypeId: number
+    compName: string
+  } | null>(null)
+  const [openForm, setOpenForm] = useState(false)
+  const [mode, setMode] = useState<'create' | 'update'>('create')
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
 
   // Handlers
   const handleCreate = () => {
-    setSelectedRowId(null);
-    setMode("create");
-    setOpenForm(true);
-  };
+    setSelectedRowId(null)
+    setMode('create')
+    setOpenForm(true)
+  }
 
   const handleEdit = (row: TypeTblCompTypeJob) => {
-    setSelectedRowId(row.compTypeJobId);
-    setMode("update");
-    setOpenForm(true);
-  };
+    setSelectedRowId(row.compTypeJobId)
+    setMode('update')
+    setOpenForm(true)
+  }
 
   // Fetch Component Type info
   const fetchCompType = useCallback(async () => {
-    if (!compTypeId) return;
+    if (!compTypeId) return
     try {
-      const res = await tblCompType.getById(compTypeId);
-      setCompName(res.compName || null);
+      const res = await tblCompType.getById(compTypeId)
+      setCompName(res.compName || null)
       setSelectedCompType({
         compTypeId: res.compTypeId,
-        compName: res.compName || "",
-      });
+        compName: res.compName || '',
+      })
     } catch (error) {
-      console.error("Failed to load component type", error);
+      console.error('Failed to load component type', error)
     }
-  }, [compTypeId]);
+  }, [compTypeId])
 
   useEffect(() => {
-    fetchCompType();
-  }, [fetchCompType]);
+    fetchCompType()
+  }, [fetchCompType])
 
   // DataGrid fetch
   const getAll = useCallback(() => {
@@ -75,116 +75,116 @@ export default function ComponentTypeJob() {
         tblMaintCause: true,
       },
       filter: { compTypeId },
-    });
-  }, [compTypeId]);
+    })
+  }, [compTypeId])
 
   const handleDeleteLogic = (row: any) => {
     // console.log(row);
     // handleDelete(row);
     // logicTblCompTypeJob.effect(row.compTypeJobId, 2);
-  };
+  }
 
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
     getAll,
     tblCompTypeJob.deleteById,
-    "compTypeJobId"
-  );
+    'compTypeJobId'
+  )
   const columns: GridColDef<TypeTblCompTypeJob>[] = [
     {
-      field: "jobCode",
-      headerName: "Code",
+      field: 'jobCode',
+      headerName: 'Code',
       width: 90,
       valueGetter: (v, row) => row?.tblJobDescription?.jobDescCode,
     },
     {
-      field: "jobName",
-      headerName: "Title",
+      field: 'jobName',
+      headerName: 'Title',
       flex: 2.5,
       valueGetter: (v, row) => row?.tblJobDescription?.jobDescTitle,
     },
     {
-      field: "frequency",
-      headerName: "Frequency",
+      field: 'frequency',
+      headerName: 'Frequency',
       flex: 1,
     },
     {
-      field: "frequencyPeriod",
-      headerName: "Period",
+      field: 'frequencyPeriod',
+      headerName: 'Period',
       flex: 1,
       valueGetter: (v, row) => row?.tblPeriod?.name,
     },
     {
-      field: "discipline",
-      headerName: "Discipline",
+      field: 'discipline',
+      headerName: 'Discipline',
       flex: 1,
       valueGetter: (_, row) => row.tblDiscipline?.name,
     },
     {
-      field: "maintClass",
-      headerName: "Mt-Class",
+      field: 'maintClass',
+      headerName: 'Mt-Class',
       flex: 1,
       valueGetter: (_, row) => row.tblMaintClass?.descr,
     },
     {
-      field: "maintType",
-      headerName: "Mt-Type",
+      field: 'maintType',
+      headerName: 'Mt-Type',
       flex: 1,
       valueGetter: (_, row) => row.tblMaintType?.descr,
     },
     {
-      field: "maintCause",
-      headerName: "Mt-Cause",
+      field: 'maintCause',
+      headerName: 'Mt-Cause',
       flex: 1,
       valueGetter: (_, row) => row.tblMaintCause?.descr,
     },
 
     {
-      field: "priority",
-      headerName: "Priority",
+      field: 'priority',
+      headerName: 'Priority',
       flex: 1,
       valueGetter: (_, row) => row.priority,
     },
     {
-      field: "window",
-      headerName: "Window",
+      field: 'window',
+      headerName: 'Window',
       flex: 1,
     },
     {
-      field: "planningMethod",
-      headerName: "Method",
+      field: 'planningMethod',
+      headerName: 'Method',
       flex: 1,
-      valueGetter: (_, row) => (row.planningMethod ? "Fixed" : "Vairable"),
+      valueGetter: (_, row) => (row.planningMethod ? 'Fixed' : 'Vairable'),
     },
     {
-      field: "statusNone",
-      headerName: "St-None",
+      field: 'statusNone',
+      headerName: 'St-None',
       flex: 1,
-      renderCell: ({ row }) => <StatusIcon status={row.statusNone} />,
+      renderCell: ({ row }) => <CellBoolean status={row.statusNone} />,
     },
     {
-      field: "statusInUse",
-      headerName: "St-InUse",
+      field: 'statusInUse',
+      headerName: 'St-InUse',
       flex: 1,
-      renderCell: ({ row }) => <StatusIcon status={row.statusInUse} />,
+      renderCell: ({ row }) => <CellBoolean status={row.statusInUse} />,
     },
     {
-      field: "statusAvailable",
-      headerName: "St-Available",
+      field: 'statusAvailable',
+      headerName: 'St-Available',
       flex: 1,
-      renderCell: ({ row }) => <StatusIcon status={row.statusAvailable} />,
+      renderCell: ({ row }) => <CellBoolean status={row.statusAvailable} />,
     },
     {
-      field: "statusRepair",
-      headerName: "St-Repair",
+      field: 'statusRepair',
+      headerName: 'St-Repair',
       flex: 1,
-      renderCell: ({ row }) => <StatusIcon status={row.statusRepair} />,
+      renderCell: ({ row }) => <CellBoolean status={row.statusRepair} />,
     },
 
     dataGridActionColumn({
       onEdit: handleEdit,
       onDelete: handleDeleteLogic,
     }),
-  ];
+  ]
 
   return (
     <>
@@ -195,10 +195,10 @@ export default function ComponentTypeJob() {
           loading={loading}
           onAddClick={handleCreate}
           // onRowDoubleClick={handleEdit}
-          label="Component Type Job"
+          label='Component Type Job'
           showToolbar
           onRefreshClick={handleRefresh}
-          getRowId={(row) => row.compTypeJobId}
+          getRowId={row => row.compTypeJobId}
         />
         <ComponentTypeJobTabs />
       </Splitter>
@@ -214,5 +214,5 @@ export default function ComponentTypeJob() {
         />
       )}
     </>
-  );
+  )
 }

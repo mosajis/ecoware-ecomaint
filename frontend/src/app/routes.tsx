@@ -80,9 +80,6 @@ const PageStockItem = lazy(() => import('@/pages/stock/stockItem/StockItem'))
 const PageStockType = lazy(() => import('@/pages/stock/stockType/StockType'))
 const PageStockUsed = lazy(() => import('@/pages/stock/stockUsed/StockUsed'))
 const PageUsers = lazy(() => import('@/pages/users/Users'))
-const PageReportWork = lazy(
-  () => import('@/pages/maintenance/reportWork/ReportWork')
-)
 const PageCounterUpdate = lazy(
   () => import('@/pages/maintenance/counterUpdate/CountersUpdate')
 )
@@ -392,13 +389,6 @@ export const usersRoute = createRoute({
   beforeLoad: () => ({ breadcrumb: 'Users' }),
 })
 
-export const maintReportWork = createRoute({
-  getParentRoute: () => protectedRoute,
-  path: '/maintenance/report-work',
-  component: () => <LazyComponent Component={PageReportWork} />,
-  beforeLoad: () => ({ breadcrumb: 'Report Work' }),
-})
-
 // --- Stock ---------------------------
 export const ReportRoute = createRoute({
   getParentRoute: () => protectedRoute,
@@ -473,7 +463,6 @@ export const routeTree = rootRoute.addChildren([
     maintMeasurePointsLogsRoute,
     maintMeasureCountersLogRoute,
     maintMaintLogRoute,
-    maintReportWork,
     maintCounterUpdateRoute,
     usersRoute,
 

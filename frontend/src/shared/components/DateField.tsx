@@ -1,7 +1,9 @@
 import React from 'react'
 import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers'
 import { CalendarToday, AccessTime, Event } from '@mui/icons-material'
-import { DateTimeType } from '@/const'
+import { DATE_FORMATS, DateTimeType } from '@/const'
+import { useAtomValue } from 'jotai'
+import { atomLanguage } from '../atoms/general.atom'
 
 interface DateFieldProps {
   label: string
@@ -9,6 +11,7 @@ interface DateFieldProps {
   disabled?: boolean
   type?: DateTimeType
 }
+
 const DateField: React.FC<DateFieldProps> = ({
   label,
   field,
@@ -16,6 +19,9 @@ const DateField: React.FC<DateFieldProps> = ({
   type = 'DATE',
   ...restProps
 }) => {
+  const language = useAtomValue(atomLanguage)
+  const locale = language === 'fa' ? 'FA' : 'EN'
+
   const dateValue = field.value ? new Date(field.value) : null
 
   const handleChange = (newValue: Date | null) => {
@@ -41,6 +47,8 @@ const DateField: React.FC<DateFieldProps> = ({
       ? DateTimePicker
       : DatePicker
 
+  const format = DATE_FORMATS[locale][type]
+
   return (
     <Picker
       {...restProps}
@@ -59,6 +67,7 @@ const DateField: React.FC<DateFieldProps> = ({
       timeSteps={
         type === 'TIME' || type === 'DATETIME' ? { minutes: 1 } : undefined
       }
+      format={format}
     />
   )
 }

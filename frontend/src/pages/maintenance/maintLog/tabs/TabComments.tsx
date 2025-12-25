@@ -1,7 +1,21 @@
-import React from "react";
+import { TypeTblMaintLog } from '@/core/api/generated/api'
+import Editor from '@/shared/components/Editor'
 
-const TabComments = () => {
-  return <div>TabComments</div>;
-};
+type props = {
+  selected: TypeTblMaintLog
+  label?: string
+}
 
-export default TabComments;
+const TabOverDueHistory = (props: props) => {
+  const { label, selected } = props
+
+  return (
+    <Editor
+      label={label || 'OverDue Reason'}
+      initValue={selected?.overdueReason}
+      readOnly
+    />
+  )
+}
+
+export default TabOverDueHistory

@@ -1,57 +1,84 @@
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { useState } from "react";
-import TextField from "@mui/material/TextField";
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
+import { JSX, useState } from 'react'
+import TextField from '@mui/material/TextField'
 
-import { AsyncSelectDialog } from "./AsyncSelectDialog";
-import type { GridRowId } from "@mui/x-data-grid";
-export type AsyncSelectFieldProps<TItem extends Record<string, any>> = {
-  label?: string;
-  placeholder?: string;
-  value?: TItem | TItem[] | null;
-  disabled?: boolean;
-  selectionMode?: "single" | "multiple";
-  columns: any[];
-  error?: boolean;
-  helperText?: string;
+import { AsyncSelectDialog } from './AsyncSelectDialog'
+import type { GridRowId } from '@mui/x-data-grid'
 
-  request: () => Promise<any>;
-  extractRows?: (data: any) => TItem[];
+// ---------------- Base Props ----------------
+type BaseAsyncSelectFieldProps<TItem extends Record<string, any>> = {
+  label?: string
+  placeholder?: string
+  disabled?: boolean
+  columns: any[]
+  error?: boolean
+  helperText?: string
 
-  getRowId: (row: TItem) => GridRowId;
-  getOptionLabel?: (item: TItem) => string | null | undefined;
-  onChange: (value: TItem | TItem[] | null) => void;
+  request: () => Promise<any>
+  extractRows?: (data: any) => TItem[]
 
-  dialogHeight?: number | string;
-  dialogMaxWidth?: "xs" | "sm" | "md" | "lg" | "xl" | false;
-};
+  getRowId: (row: TItem) => GridRowId
+  getOptionLabel?: (item: TItem) => string | null | undefined
+
+  dialogHeight?: number | string
+  dialogMaxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false
+}
+
+// ---------------- Single / Multiple Props ----------------
+type AsyncSelectSingleProps<TItem extends Record<string, any>> =
+  BaseAsyncSelectFieldProps<TItem> & {
+    selectionMode?: 'single' // default
+    value?: TItem | null
+    onChange: (value: TItem | null) => void
+  }
+
+type AsyncSelectMultipleProps<TItem extends Record<string, any>> =
+  BaseAsyncSelectFieldProps<TItem> & {
+    selectionMode: 'multiple'
+    value?: TItem[] | null
+    onChange: (value: TItem[] | null) => void
+  }
+
+export type AsyncSelectFieldProps<TItem extends Record<string, any>> =
+  | AsyncSelectSingleProps<TItem>
+  | AsyncSelectMultipleProps<TItem>
 
 export function AsyncSelectField<TItem extends Record<string, any>>({
   label,
   placeholder,
   value,
   disabled = false,
-  selectionMode = "single",
+  selectionMode = 'single',
   request,
-  extractRows = (data) => data.items ?? [],
+  extractRows = data => data.items ?? [],
   columns,
   getRowId,
   onChange,
   error,
   helperText,
-  getOptionLabel = (item) => item?.name ?? Object.values(item)[1] ?? "",
+  getOptionLabel = item => item?.name ?? Object.values(item)[1] ?? '',
   dialogHeight = 600,
-  dialogMaxWidth = "md",
+  dialogMaxWidth = 'sm',
 }: AsyncSelectFieldProps<TItem>) {
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false)
 
   const displayValue =
-    selectionMode === "single"
+    selectionMode === 'single'
       ? value
         ? getOptionLabel(value as TItem)
-        : ""
+        : ''
       : Array.isArray(value)
-        ? value.map((v) => getOptionLabel(v)).join(", ")
-        : "";
+      ? value.map(v => getOptionLabel(v)).join(', ')
+      : ''
+
+  const handleSelect = (selected: TItem | TItem[] | null) => {
+    if (selectionMode === 'multiple') {
+      ;(onChange as (v: TItem[] | null) => void)(selected as TItem[] | null)
+    } else {
+      ;(onChange as (v: TItem | null) => void)(selected as TItem | null)
+    }
+    setDialogOpen(false)
+  }
 
   return (
     <>
@@ -59,15 +86,13 @@ export function AsyncSelectField<TItem extends Record<string, any>>({
         label={label}
         value={displayValue}
         placeholder={placeholder}
-        size="small"
+        size='small'
         fullWidth
         disabled={disabled}
         onClick={() => !disabled && setDialogOpen(true)}
         error={error}
         helperText={helperText}
-        slotProps={{
-          input: { endAdornment: <MoreHorizIcon /> },
-        }}
+        InputProps={{ endAdornment: <MoreHorizIcon /> }}
       />
 
       <AsyncSelectDialog<TItem>
@@ -75,17 +100,15 @@ export function AsyncSelectField<TItem extends Record<string, any>>({
         onClose={() => setDialogOpen(false)}
         title={label}
         request={request}
+        selected={value}
         extractRows={extractRows}
         columns={columns}
         selectionMode={selectionMode}
         getRowId={getRowId}
-        onSelect={(selected) => {
-          onChange(selected);
-          setDialogOpen(false);
-        }}
+        onSelect={handleSelect}
         height={dialogHeight}
         maxWidth={dialogMaxWidth}
       />
     </>
-  );
+  )
 }
