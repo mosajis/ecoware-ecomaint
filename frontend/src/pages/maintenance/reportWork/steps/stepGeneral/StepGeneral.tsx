@@ -86,7 +86,7 @@ const TabGeneral = () => {
 
     setInitalData(prev => ({
       ...prev,
-      maintLog: savedRecord,
+      maintLog: { ...prev.maintLog, ...savedRecord },
     }))
 
     return savedRecord
@@ -197,14 +197,15 @@ const TabGeneral = () => {
           render={({ field }) => (
             <Editor
               label='History'
-              initValue={JSON.stringify(initalData)}
+              autoSave={false}
+              initValue={initalData.maintLog?.history}
               {...field}
             />
           )}
         />
         <Editor
           label='Job Description'
-          initValue={initalData.workOrder?.compJobId?.toString() || '--'}
+          initValue={initalData.maintLog?.tblJobDescription?.jobDesc || '--'}
           readOnly
         />
       </Box>

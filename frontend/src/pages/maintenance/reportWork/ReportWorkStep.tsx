@@ -61,7 +61,6 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
     setInitData({
       componentUnit: componentUnit,
       maintLog: null,
-      workOrder: null,
     })
   }
 
@@ -77,7 +76,7 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
         <Box display={'grid'} gap={1.5} gridTemplateColumns={'1fr 1fr'}>
           <AsyncSelectField
             label='Component'
-            disabled={!!initalData.maintLog || !!initalData.workOrder}
+            disabled={!!initalData.maintLog}
             request={tblComponentUnit.getAll}
             getOptionLabel={row => row.compNo}
             value={initalData.componentUnit}
@@ -95,7 +94,8 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
             fullWidth
             size='small'
             label='Job Title'
-            value={initalData.workOrder?.title || '--'}
+            disabled
+            value={initalData.maintLog?.tblWorkOrder?.title || '--'}
             slotProps={{
               input: { readOnly: true },
               inputLabel: { shrink: true },

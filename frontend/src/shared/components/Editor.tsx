@@ -68,7 +68,9 @@ const EditorToolbar = memo(
     autoSaveEnabled,
     autoSaveStatus,
     label,
+    onChange,
   }: {
+    onChange: any
     label?: string
     onSave?: () => void
     disabled: boolean
@@ -135,7 +137,7 @@ const EditorToolbar = memo(
           <BtnRedo style={{ color: mode === 'light' ? '#333' : 'white' }} />
 
           {/* Right side: autosave + manual save */}
-          {!readOnly && (
+          {!readOnly && !onChange && (
             <>
               <div style={dividerStyle(theme)} />
               <div
@@ -347,6 +349,7 @@ function AppEditor({
     >
       <EditorToolbar
         label={label}
+        onChange={handleChange}
         onSave={handleSave}
         disabled={!changed || disabled}
         loading={loading}
