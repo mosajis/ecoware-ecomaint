@@ -1,8 +1,8 @@
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { useMemo } from "react";
-import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { formatDateTime } from "@/core/api/helper";
+import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
+import { useMemo } from 'react'
+import { GridColDef } from '@mui/x-data-grid'
+import { useDataGrid } from '@/shared/hooks/useDataGrid'
+import { formatDateTime } from '@/core/api/helper'
 
 const Users = () => {
   //   // === useDataGrid ===
@@ -16,55 +16,52 @@ const Users = () => {
   const columns = useMemo<GridColDef<any>[]>(
     () => [
       {
-        field: "group",
-        headerName: "Group",
+        field: 'group',
+        headerName: 'Group',
         width: 140,
         valueGetter: (_, row) => row?.tblGroup?.name,
       },
       {
-        field: "name",
-        headerName: "Name",
+        field: 'name',
+        headerName: 'Name',
         width: 160,
-        valueGetter: (_, row) => row?.name,
       },
       {
-        field: "username",
-        headerName: "Username",
+        field: 'username',
+        headerName: 'Username',
         width: 140,
         valueGetter: (_, row) => row?.username,
       },
       {
-        field: "title",
-        headerName: "Title",
+        field: 'title',
+        headerName: 'Title',
         width: 160,
-        valueGetter: (_, row) => row?.title,
       },
       {
-        field: "lastLogin",
-        headerName: "Last Login",
+        field: 'lastLogin',
+        headerName: 'Last Login',
         width: 160,
-        valueFormatter: (value) => (value ? formatDateTime(value) : ""),
+        valueFormatter: value => (value ? formatDateTime(value) : ''),
       },
       {
-        field: "forceChangePassword",
-        headerName: "Force Change Password",
+        field: 'forceChangePassword',
+        headerName: 'Force Change Password',
         width: 190,
-        type: "boolean",
-        valueGetter: (_, row) => row?.forceChangePassword,
+        type: 'boolean',
       },
       {
-        field: "positionName",
-        headerName: "Position Name",
+        field: 'positionName',
+        headerName: 'Position Name',
         width: 160,
         valueGetter: (_, row) => row?.tblPosition?.name,
       },
     ],
     []
-  );
+  )
 
   return (
     <CustomizedDataGrid
-      label="Users"
+      label='Users'
       showToolbar
       //   onRefreshClick={handleRefresh}
       rows={[]}
@@ -72,7 +69,7 @@ const Users = () => {
       //   loading={loading}
       //   getRowId={(row) => row.userId}
     />
-  );
-};
+  )
+}
 
-export default Users;
+export default Users

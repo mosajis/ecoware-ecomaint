@@ -6,7 +6,9 @@ import AttachFile from '@mui/icons-material/AttachFile'
 import Straighten from '@mui/icons-material/Straighten'
 
 const TabGeneral = React.lazy(() => import('./steps/stepGeneral/StepGeneral'))
-const TabResourceUsed = React.lazy(() => import('./steps/StepResourceUsed'))
+const TabResourceUsed = React.lazy(
+  () => import('./steps/stepResourceUsed/StepResourceUsed')
+)
 const TabStockUsed = React.lazy(() => import('./steps/StepStockUsed'))
 const TabAttachments = React.lazy(() => import('./steps/StepAttachments'))
 const TabMeasurePoints = React.lazy(() => import('./steps/StepMeasurePoints'))
