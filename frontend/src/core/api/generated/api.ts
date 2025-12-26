@@ -939,40 +939,40 @@ export const tblRoundCompJob = {
     api.delete<DynamicResponse<'deleteTblRoundCompJob'>>('/tblRoundCompJob', { params: stringifyQuery(query) }),
 };
 
-export type TypeTblSpareType = DynamicResponse<'getTblSpareType'>['items'][0];
-export const tblSpareType = {
-  getAll: (query?: DynamicQuery<'getTblSpareType'>) =>
-    api.get<DynamicResponse<'getTblSpareType'>>('/tblSpareType', { params: stringifyQuery(query) }),
-  getById: (id: number, query?: DynamicQuery<'getTblSpareTypeByPartTypeId'>) =>
-    api.get<DynamicResponse<'getTblSpareTypeByPartTypeId'>>(`/tblSpareType/${id}`, { params: stringifyQuery(query) }),
-  count: (query?: DynamicQuery<'getTblSpareTypeCount'>) =>
-    api.get<DynamicResponse<'getTblSpareTypeCount'>>('/tblSpareType/count', { params: stringifyQuery(query) }),
-  create: (data: DynamicCreate<'postTblSpareType'>) =>
-    api.post<DynamicResponse<'postTblSpareType'>>('/tblSpareType', { data }),
-  update: (id: number, data: DynamicUpdate<'putTblSpareTypeByPartTypeId'>) =>
-    api.put<DynamicResponse<'putTblSpareTypeByPartTypeId'>>(`/tblSpareType/${id}`, { data }),
-  deleteById: (id: number, query?: DynamicQuery<'deleteTblSpareTypeByPartTypeId'>) =>
-    api.delete<DynamicResponse<'deleteTblSpareTypeByPartTypeId'>>(`/tblSpareType/${id}`, { params: stringifyQuery(query) }),
-  deleteAll: (query?: DynamicQuery<'deleteTblSpareType'>) =>
-    api.delete<DynamicResponse<'deleteTblSpareType'>>('/tblSpareType', { params: stringifyQuery(query) }),
+export type TypeTblStockItem = DynamicResponse<'getTblStockItem'>['items'][0];
+export const tblStockItem = {
+  getAll: (query?: DynamicQuery<'getTblStockItem'>) =>
+    api.get<DynamicResponse<'getTblStockItem'>>('/tblStockItem', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblStockItemByStockItemId'>) =>
+    api.get<DynamicResponse<'getTblStockItemByStockItemId'>>(`/tblStockItem/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblStockItemCount'>) =>
+    api.get<DynamicResponse<'getTblStockItemCount'>>('/tblStockItem/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblStockItem'>) =>
+    api.post<DynamicResponse<'postTblStockItem'>>('/tblStockItem', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblStockItemByStockItemId'>) =>
+    api.put<DynamicResponse<'putTblStockItemByStockItemId'>>(`/tblStockItem/${id}`, { data }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblStockItemByStockItemId'>) =>
+    api.delete<DynamicResponse<'deleteTblStockItemByStockItemId'>>(`/tblStockItem/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblStockItem'>) =>
+    api.delete<DynamicResponse<'deleteTblStockItem'>>('/tblStockItem', { params: stringifyQuery(query) }),
 };
 
-export type TypeTblSpareUnit = DynamicResponse<'getTblSpareUnit'>['items'][0];
-export const tblSpareUnit = {
-  getAll: (query?: DynamicQuery<'getTblSpareUnit'>) =>
-    api.get<DynamicResponse<'getTblSpareUnit'>>('/tblSpareUnit', { params: stringifyQuery(query) }),
-  getById: (id: number, query?: DynamicQuery<'getTblSpareUnitByPartId'>) =>
-    api.get<DynamicResponse<'getTblSpareUnitByPartId'>>(`/tblSpareUnit/${id}`, { params: stringifyQuery(query) }),
-  count: (query?: DynamicQuery<'getTblSpareUnitCount'>) =>
-    api.get<DynamicResponse<'getTblSpareUnitCount'>>('/tblSpareUnit/count', { params: stringifyQuery(query) }),
-  create: (data: DynamicCreate<'postTblSpareUnit'>) =>
-    api.post<DynamicResponse<'postTblSpareUnit'>>('/tblSpareUnit', { data }),
-  update: (id: number, data: DynamicUpdate<'putTblSpareUnitByPartId'>) =>
-    api.put<DynamicResponse<'putTblSpareUnitByPartId'>>(`/tblSpareUnit/${id}`, { data }),
-  deleteById: (id: number, query?: DynamicQuery<'deleteTblSpareUnitByPartId'>) =>
-    api.delete<DynamicResponse<'deleteTblSpareUnitByPartId'>>(`/tblSpareUnit/${id}`, { params: stringifyQuery(query) }),
-  deleteAll: (query?: DynamicQuery<'deleteTblSpareUnit'>) =>
-    api.delete<DynamicResponse<'deleteTblSpareUnit'>>('/tblSpareUnit', { params: stringifyQuery(query) }),
+export type TypeTblStockType = DynamicResponse<'getTblStockType'>['items'][0];
+export const tblStockType = {
+  getAll: (query?: DynamicQuery<'getTblStockType'>) =>
+    api.get<DynamicResponse<'getTblStockType'>>('/tblStockType', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblStockTypeByStockTypeId'>) =>
+    api.get<DynamicResponse<'getTblStockTypeByStockTypeId'>>(`/tblStockType/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblStockTypeCount'>) =>
+    api.get<DynamicResponse<'getTblStockTypeCount'>>('/tblStockType/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblStockType'>) =>
+    api.post<DynamicResponse<'postTblStockType'>>('/tblStockType', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblStockTypeByStockTypeId'>) =>
+    api.put<DynamicResponse<'putTblStockTypeByStockTypeId'>>(`/tblStockType/${id}`, { data }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblStockTypeByStockTypeId'>) =>
+    api.delete<DynamicResponse<'deleteTblStockTypeByStockTypeId'>>(`/tblStockType/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblStockType'>) =>
+    api.delete<DynamicResponse<'deleteTblStockType'>>('/tblStockType', { params: stringifyQuery(query) }),
 };
 
 export type TypeTblUnit = DynamicResponse<'getTblUnit'>['items'][0];

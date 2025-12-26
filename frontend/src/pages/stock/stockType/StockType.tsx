@@ -1,93 +1,113 @@
 import Splitter from '@/shared/components/Splitter'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import { GridColDef } from '@mui/x-data-grid'
-import { useCallback, useMemo, useState } from 'react'
+import StockTypeFormDialog from './StockTypeUpsert'
+import CustomizedTree from '@/shared/components/tree/CustomeTree'
+import { useState, useCallback } from 'react'
+import { tblStockType, TypeTblStockType } from '@/core/api/generated/api'
 import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
-import { tblSpareType, TypeTblSpareType } from '@/core/api/generated/api'
-import TabsComponent from './StockTypeTabs'
+import { GridColDef } from '@mui/x-data-grid'
+import { useDataTree } from '@/shared/hooks/useDataTree'
 
 export default function PageStockType() {
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
-  const [selected, setSelected] = useState<TypeTblSpareType | null>(null)
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
 
-  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
-    tblSpareType.getAll,
-    tblSpareType.deleteById,
-    'partTypeId'
+  // === Mapping Transformer ===
+  const mapper = useCallback(
+    (row: TypeTblStockType) => ({
+      id: row.stockTypeId.toString(),
+      label: row.name ?? '',
+      parentId: row.parentStockTypeId?.toString() ?? null,
+      data: row,
+    }),
+    []
+  )
+
+  // === useDataTree ===
+  const {
+    rows,
+    treeItems,
+    loading,
+    handleDelete,
+    handleFormSuccess,
+    handleRefresh,
+  } = useDataTree(
+    tblStockType.getAll,
+    tblStockType.deleteById,
+    'stockTypeId',
+    mapper
   )
 
   // === Handlers ===
-  const handleCreate = useCallback(() => {
-    setSelected(null)
+  const handleCreate = () => {
+    setSelectedRowId(null)
     setMode('create')
     setOpenForm(true)
-  }, [])
+  }
 
-  const handleEdit = useCallback((row: TypeTblSpareType) => {
-    setSelected(row)
+  const handleEdit = (row: TypeTblStockType) => {
+    setSelectedRowId(row.stockTypeId)
     setMode('update')
     setOpenForm(true)
-  }, [])
+  }
 
   // === Columns ===
-  const columns: GridColDef<TypeTblSpareType>[] = useMemo(
-    () => [
-      { field: 'partName', headerName: 'Part Name', width: 120 },
-      { field: 'makerRef', headerName: 'Maker Ref', flex: 2 },
-      {
-        field: 'MESC',
-        headerName: 'MESC (not set)',
-        flex: 1,
-        valueGetter: (value, row) => row?.tblJobClass?.name,
-      },
-      { field: 'extraNo', headerName: 'Extra No', flex: 1 },
-      { field: 'changeReason', headerName: 'Unit Name (not set)', flex: 1 },
-      { field: 'notes', headerName: 'Notes', flex: 1 },
-      { field: 'description', headerName: 'Description (not set)', flex: 1 },
-      { field: 'farsiDescription', headerName: 'Farsi Desc', flex: 1 },
-      dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
-    ],
-    [handleEdit, handleDelete]
-  )
-
-  // === SAVE DESCRIPTION ===
-  const handleSaveDescription = async (newValue: string) => {
-    // if (!selected) return
-    // await tblJobDescription.update(selected.jobDescId, {
-    //   jobDesc: newValue,
-    // })
-    // handleRefresh()
-  }
-
-  const handleRowClick = (params: any) => {
-    // setSelected(params.row)
-    // setHtml(params.row.jobDesc || '')
-  }
+  const columns: GridColDef<TypeTblStockType>[] = [
+    { field: 'no', headerName: 'No', width: 80 },
+    { field: 'name', headerName: 'Name', flex: 1 },
+    {
+      field: 'deptId',
+      headerName: 'Department ID',
+      width: 120,
+    },
+    {
+      field: 'orderId',
+      headerName: 'Order',
+      width: 80,
+    },
+    dataGridActionColumn({
+      onEdit: handleEdit,
+      onDelete: handleDelete,
+    }),
+  ]
 
   return (
     <>
-      <Splitter
-        horizontal
-        initialPrimarySize='50%'
-        resetOnDoubleClick
-        minPrimarySize='20%'
-        minSecondarySize='20%'
-      >
-        <CustomizedDataGrid
-          label='Stock Type'
-          getRowId={row => row.partTypeId}
+      <Splitter>
+        {/* === TREE VIEW === */}
+        <CustomizedTree
+          onRefresh={handleRefresh}
+          label='Tree View'
+          items={treeItems}
           loading={loading}
+          getRowId={row => row.stockTypeId}
           onAddClick={handleCreate}
-          rows={rows}
-          onRefreshClick={handleRefresh}
-          columns={columns}
-          showToolbar
-          onRowClick={handleRowClick}
+          onEditClick={handleEdit}
+          onDeleteClick={handleDelete}
         />
-        <TabsComponent />
+
+        {/* === GRID VIEW === */}
+        <CustomizedDataGrid
+          showToolbar
+          label='List View'
+          loading={loading}
+          rows={rows}
+          columns={columns}
+          onRefreshClick={handleRefresh}
+          onAddClick={handleCreate}
+          getRowId={row => row.stockTypeId}
+        />
       </Splitter>
+
+      {/* === FORM === */}
+      <StockTypeFormDialog
+        open={openForm}
+        mode={mode}
+        recordId={selectedRowId}
+        onClose={() => setOpenForm(false)}
+        onSuccess={handleFormSuccess}
+      />
     </>
   )
 }

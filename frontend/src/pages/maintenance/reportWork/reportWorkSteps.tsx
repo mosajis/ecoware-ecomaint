@@ -5,13 +5,13 @@ import Inventory from '@mui/icons-material/Inventory'
 import AttachFile from '@mui/icons-material/AttachFile'
 import Straighten from '@mui/icons-material/Straighten'
 
-const TabGeneral = React.lazy(() => import('./steps/stepGeneral/StepGeneral'))
-const TabResourceUsed = React.lazy(
+const General = React.lazy(() => import('./steps/stepGeneral/StepGeneral'))
+const StockUsed = React.lazy(() => import('./steps/StepStockUsed'))
+const Attachments = React.lazy(() => import('./steps/StepAttachments'))
+const MeasurePoints = React.lazy(() => import('./steps/StepMeasurePoints'))
+const ResourceUsed = React.lazy(
   () => import('./steps/stepResourceUsed/StepResourceUsed')
 )
-const TabStockUsed = React.lazy(() => import('./steps/StepStockUsed'))
-const TabAttachments = React.lazy(() => import('./steps/StepAttachments'))
-const TabMeasurePoints = React.lazy(() => import('./steps/StepMeasurePoints'))
 
 export type ReportWorkStep = {
   label: string
@@ -23,14 +23,14 @@ export const reportWorkSteps: ReportWorkStep[] = [
   {
     label: 'General',
     icon: <AccountTree />,
-    component: TabGeneral,
+    component: General,
   },
-  { label: 'Resource Used', icon: <Build />, component: TabResourceUsed },
-  { label: 'Stock Used', icon: <Inventory />, component: TabStockUsed },
-  { label: 'Attachments', icon: <AttachFile />, component: TabAttachments },
+  { label: 'Resource Used', icon: <Build />, component: ResourceUsed },
+  { label: 'Stock Used', icon: <Inventory />, component: StockUsed },
+  { label: 'Attachments', icon: <AttachFile />, component: Attachments },
   {
     label: 'Measure Points',
     icon: <Straighten />,
-    component: TabMeasurePoints,
+    component: MeasurePoints,
   },
 ]

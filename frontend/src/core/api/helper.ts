@@ -21,7 +21,7 @@ export function buildRelation(
 
 export function formatDateTime(
   dateTime: string | Date | number,
-  type: DateTimeType = 'DATE',
+  type: DateTimeType = 'DATETIME',
   isJalali?: boolean,
   pattern?: string
 ): string {

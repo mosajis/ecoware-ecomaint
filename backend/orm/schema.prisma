@@ -627,70 +627,23 @@ model TblDiscipline {
 }
 
 model TblEmployee {
-  employeeId      Int            @id(map: "PK_tblEmployee") @default(dbgenerated("NEXT VALUE FOR [Seq_Employee]"), map: "DF_EmployeeID") @map("EmployeeID")
-  layoutId        Int?           @map("LayoutID")
-  code            String?        @map("Code") @db.NVarChar(10)
-  lastName        String?        @map("LastName") @db.NVarChar(40)
-  firstName       String?        @map("FirstName") @db.NVarChar(40)
-  available       Int?           @map("Available")
-  currencyCode    String?        @map("CurrencyCode") @db.NVarChar(3)
-  discId          Int?           @map("DiscID")
-  addressId       Int?           @map("AddressID")
-  userDefText1    String?        @map("UserDefText1") @db.NVarChar(10)
-  userDefText2    String?        @map("UserDefText2") @db.NVarChar(50)
-  userDefText3    String?        @map("UserDefText3") @db.NVarChar(50)
-  userDefDate1    DateTime?      @map("UserDefDate1") @db.DateTime
-  userDefDate2    DateTime?      @map("UserDefDate2") @db.DateTime
-  userDefInt      Int?           @map("UserDefInt")
-  salary1         Int?           @map("Salary1")
-  salary2         Int?           @map("Salary2")
-  salary3         Int?           @map("Salary3")
-  salary4         Int?           @map("Salary4")
-  bonus1          Int?           @map("Bonus1")
-  bonus2          Int?           @map("Bonus2")
-  bonus3          Int?           @map("Bonus3")
-  bonus4          Int?           @map("Bonus4")
-  notes           String?        @map("Notes") @db.NVarChar(300)
-  hiredOnBoard    Int?           @map("HiredOnBoard")
-  empShortName    String?        @map("EmpShortName") @db.NVarChar(15)
-  middleName      String?        @map("MiddleName") @db.NVarChar(40)
-  callingName     String?        @map("CallingName") @db.NVarChar(40)
-  maidenName      String?        @map("MaidenName") @db.NVarChar(40)
-  empNameTitleId  Int?           @map("EmpNameTitleID")
-  empNameSuffixId Int?           @map("EmpNameSuffixID")
-  initials        String?        @map("Initials") @db.NVarChar(8)
-  empSex          Int?           @map("EmpSex")
-  empDateOfBirth  DateTime?      @map("EmpDateOfBirth") @db.DateTime
-  empPlaceOfBirth String?        @map("EmpPlaceOfBirth") @db.NVarChar(30)
-  nationality     Int?           @map("Nationality")
-  empPension      Int?           @map("EmpPension")
-  empPersonId     String?        @map("EmpPersonID") @db.NVarChar(15)
-  empIdent        String?        @map("EmpIdent") @db.NVarChar(15)
-  empIdent2       String?        @map("EmpIdent2") @db.NVarChar(18)
-  stafNumber      String?        @map("StafNumber") @db.NVarChar(18)
-  payrollFlag     Int?           @map("PayrollFlag")
-  period          Int?           @map("Period")
-  periodYear      Int?           @map("PeriodYear")
-  maritalStatusId Int?           @map("MaritalStatusID")
-  tradeUnionId1   Int?           @map("TradeUnionID1")
-  tradeUnionId2   Int?           @map("TradeUnionID2")
-  empTitle        String?        @map("EmpTitle") @db.NVarChar(18)
-  wageDesc        Int?           @map("WageDesc")
-  dateOfDeath     DateTime?      @map("DateOfDeath") @db.DateTime
-  dateOfMar       DateTime?      @map("DateOfMar") @db.DateTime
-  employeeTypeId  Int?           @map("EmployeeTypeID")
-  rankId          Int?           @map("RankID")
-  profileId       Int?           @map("ProfileID")
-  catId           Int?           @map("CatID")
-  hideFlag        Int?           @map("HideFlag")
-  exportSite      Int?           @map("ExportSite")
-  deptId          Int?           @map("DeptID")
-  exportMarker    Int?           @map("ExportMarker")
-  lastupdate      DateTime?      @db.DateTime
-  orderId         Int?           @map("OrderID")
-  userId          Int?           @map("UserID")
-  tblAddress      TblAddress?    @relation(fields: [addressId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblEmployee_tblAddress")
-  tblDiscipline   TblDiscipline? @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblEmployee_tblDiscipline")
+  employeeId    Int            @id(map: "PK_tblEmployee") @default(dbgenerated("NEXT VALUE FOR [Seq_Employee]"), map: "DF_EmployeeID") @map("EmployeeID")
+  code          String?        @map("Code") @db.NVarChar(10)
+  lastName      String?        @map("LastName") @db.NVarChar(40)
+  firstName     String?        @map("FirstName") @db.NVarChar(40)
+  available     Int?           @map("Available")
+  discId        Int?           @map("DiscID")
+  addressId     Int?           @map("AddressID")
+  notes         String?        @map("Notes") @db.NVarChar(300)
+  initials      String?        @map("Initials") @db.NVarChar(8)
+  empTitle      String?        @map("EmpTitle") @db.NVarChar(18)
+  deptId        Int?           @map("DeptID")
+  exportMarker  Int?           @map("ExportMarker")
+  lastupdate    DateTime?      @db.DateTime
+  orderId       Int?           @map("OrderID")
+  userId        Int?           @map("UserID")
+  tblAddress    TblAddress?    @relation(fields: [addressId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblEmployee_tblAddress")
+  tblDiscipline TblDiscipline? @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblEmployee_tblDiscipline")
 
   @@map("tblEmployee")
   @@schema("dbo")
@@ -1059,6 +1012,7 @@ model TblMaintLog {
   usersTblMaintLogUserIdToUsers   Users?              @relation("tblMaintLog_UserIDToUsers", fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_Users")
   usersTblMaintLogLoggedByToUsers Users?              @relation("tblMaintLog_LoggedByToUsers", fields: [loggedBy], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_Users1")
   tblMaintLogFollows              TblMaintLogFollow[]
+  tblMaintLogStocks               TblMaintLogStocks[]
 
   @@index([compId], map: "MI_tblmaintlog_CompID")
   @@index([dateDone], map: "MI_tblmaintlog_DateDone")
@@ -1073,22 +1027,6 @@ model TblMaintLog {
   @@index([lastupdate], map: "Ml_LastUpdated_Ix")
   @@index([roundId], map: "ML_RoundId_Ix")
   @@map("tblMaintLog")
-  @@schema("dbo")
-}
-
-model TblMaintLogStocks {
-  maintLogStockId Int       @id(map: "PK_tblMaintLog_Stocks") @map("MaintLogStockId")
-  maintLogId      Int       @map("MaintLogId")
-  stockId         Int       @map("StockId")
-  deptId          Int       @map("DeptId")
-  exportMaker     Int?      @map("ExportMaker")
-  stockCount      Float?    @map("StockCount")
-  orderId         Int?      @map("OrderID")
-  userId          Int?      @map("UserID")
-  exportMarker    Int?      @map("ExportMarker")
-  lastupdate      DateTime? @db.DateTime
-
-  @@map("tblMaintLog_Stocks")
   @@schema("dbo")
 }
 
@@ -1116,6 +1054,24 @@ model TblMaintLogFollow {
   @@index([maintLogId, followStatuseId], map: "MLF_MainAndFollowStatusId_Ix")
   @@index([maintLogId], map: "MLF_MaintLogId_Ix")
   @@map("tblMaintLogFollow")
+  @@schema("dbo")
+}
+
+model TblMaintLogStocks {
+  maintLogStockId Int          @id(map: "PK_tblMaintLog_Stocks") @map("MaintLogStockID")
+  maintLogId      Int          @map("MaintLogID")
+  stockItemId     Int          @map("StockItemID")
+  deptId          Int          @map("DeptId")
+  exportMaker     Int?         @map("ExportMaker")
+  stockCount      Float?       @map("StockCount")
+  orderId         Int?         @map("OrderID")
+  userId          Int?         @map("UserID")
+  exportMarker    Int?         @map("ExportMarker")
+  lastupdate      DateTime?    @db.DateTime
+  tblMaintLog     TblMaintLog  @relation(fields: [maintLogId], references: [maintLogId], onUpdate: NoAction, map: "FK_tblMaintLogStocks_tblMaintLog")
+  tblStockItem    TblStockItem @relation(fields: [stockItemId], references: [stockItemId], onUpdate: NoAction, map: "FK_tblMaintLogStocks_tblStockItem")
+
+  @@map("tblMaintLogStocks")
   @@schema("dbo")
 }
 
@@ -1304,75 +1260,32 @@ model TblRoundCompJob {
   @@schema("dbo")
 }
 
-model TblSpareType {
-  partTypeId        Int       @id(map: "PK_tblSpareType") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareType]"), map: "DF_PartTypeID") @map("PartTypeID")
-  parentPartTypeId  Int?      @map("ParentPartTypeID")
-  stockClassId      Int?      @map("StockClassID")
-  layoutId          Int?      @map("LayoutID")
-  stockUnitId       Int?      @map("StockUnitID")
-  makerId           Int?      @map("MakerID")
-  makerRef          String?   @map("MakerRef") @db.NVarChar(200)
-  partName          String?   @map("PartName") @db.NVarChar(200)
-  primaryVendorId   Int?      @map("PrimaryVendorID")
-  partTypeNo        String?   @map("PartTypeNo") @db.NVarChar(200)
-  extraNo           String?   @map("ExtraNo") @db.NVarChar(200)
-  dwgRef            String?   @map("DwgRef") @db.NVarChar(200)
-  dwgNo             String?   @map("DwgNo") @db.NVarChar(200)
-  userDefVal1       Int?      @map("UserDefVal1")
-  userDefVal2       Int?      @map("UserDefVal2")
-  userDefVal3       Int?      @map("UserDefVal3")
-  userDefMarPol     Int?      @map("UserDefMarPol")
-  userDefImoNo      String?   @map("UserDefImoNo") @db.NVarChar(200)
-  perishable        Int?      @map("Perishable")
-  asset             Int?      @map("Asset")
-  notes             String?   @map("Notes") @db.NVarChar(300)
-  userTableId       Int?      @map("UserTableID")
-  oldLastPurchCurr  String?   @map("OldLastPurchCurr") @db.NVarChar(3)
-  oldLastPurchPrice Int?      @map("OldLastPurchPrice")
-  oldLastPurchDate  DateTime? @map("OldLastPurchDate") @db.DateTime
-  oldPriceClassId   Int?      @map("OldPriceClassID")
-  deptId            Int?      @map("DeptID")
-  exportMarker      Int?      @map("ExportMarker")
-  lastupdate        DateTime? @db.DateTime
-  userDefText3      String?   @map("UserDefText3") @db.NVarChar(300)
-  itemStatus        Int?      @map("ItemStatus")
-  replacedById      Int?      @map("ReplacedByID")
-  standardCode      String?   @map("STANDARD_CODE") @db.NVarChar(300)
-  farsiDescription  String?   @map("FARSI_DESCRIPTION") @db.NVarChar(300)
-  orderId           Int?      @map("OrderID")
-  userId            Int?      @map("UserID")
+model TblStockItem {
+  stockItemId       Int                 @id(map: "PK_tblSpareUnit") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareUnit]"), map: "DF_PartID") @map("StockItemID")
+  stockTypeId       Int?                @map("StockTypeID")
+  deptId            Int?                @map("DeptID")
+  lastupdate        DateTime?           @db.DateTime
+  tblMaintLogStocks TblMaintLogStocks[]
+  tblStockType      TblStockType?       @relation(fields: [stockTypeId], references: [stockTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblStockItem_tblStockType")
 
-  @@map("tblSpareType")
+  @@map("tblStockItem")
   @@schema("dbo")
 }
 
-model TblSpareUnit {
-  partId            Int       @id(map: "PK_tblSpareUnit") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareUnit]"), map: "DF_PartID") @map("PartID")
-  partTypeId        Int?      @map("PartTypeID")
-  defaultLocationId Int?      @map("DefaultLocationID")
-  locationDetail    String?   @map("LocationDetail") @db.NVarChar(200)
-  stockMax          Int?      @map("StockMax")
-  stockMin          Int?      @map("StockMin")
-  reorderLevel      Int?      @map("ReorderLevel")
-  reorderQuantity   Int?      @map("ReorderQuantity")
-  avgPriceCurr      String?   @map("AvgPriceCurr") @db.NVarChar(3)
-  avgPrice          Int?      @map("AvgPrice")
-  noRequisitioned   Int?      @map("NoRequisitioned")
-  medianSupplyTime  Int?      @map("MedianSupplyTime")
-  wantedForComp     Int?      @map("WantedForComp")
-  stockedItem       Int?      @map("StockedItem")
-  criticality       Int?      @map("Criticality")
-  layoutId          Int?      @map("LayoutID")
-  notes             String?   @map("Notes") @db.NVarChar(300)
-  userTableId       Int?      @map("UserTableID")
-  deptId            Int?      @map("DeptID")
-  exportMarker      Int?      @map("ExportMarker")
-  lastupdate        DateTime? @db.DateTime
-  itemStatus        Int?      @map("ItemStatus")
-  orderId           Int?      @map("OrderID")
-  userId            Int?      @map("UserID")
+model TblStockType {
+  stockTypeId        Int            @id(map: "PK_tblSpareType") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareType]"), map: "DF_PartTypeID") @map("StockTypeID")
+  parentStockTypeId  Int?           @map("ParentStockTypeID")
+  name               String?        @db.NVarChar(200)
+  no                 String?        @db.NVarChar(200)
+  deptId             Int?           @map("DeptID")
+  exportMarker       Int?           @map("ExportMarker")
+  lastupdate         DateTime?      @db.DateTime
+  orderId            Int?           @map("OrderID")
+  tblStockItems      TblStockItem[]
+  tblStockType       TblStockType?  @relation("tblStockTypeTotblStockType", fields: [parentStockTypeId], references: [stockTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblStockType_tblStockType")
+  otherTblStockTypes TblStockType[] @relation("tblStockTypeTotblStockType")
 
-  @@map("tblSpareUnit")
+  @@map("tblStockType")
   @@schema("dbo")
 }
 

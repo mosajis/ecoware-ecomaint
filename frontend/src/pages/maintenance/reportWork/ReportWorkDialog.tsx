@@ -1,24 +1,16 @@
 import Dialog from '@mui/material/Dialog'
 import Spinner from '@/shared/components/Spinner'
 import DialogHeader from '@/shared/components/dialog/DialogHeader'
+import Box from '@mui/material/Box'
 import { Suspense, useEffect, useState } from 'react'
 import { reportWorkSteps } from './reportWorkSteps'
-import { useAtom } from 'jotai'
+import { useAtomValue, useSetAtom } from 'jotai'
 import { atomActiveStep, atomInitalData } from './ReportWorkAtom'
-import { Box } from '@mui/material'
-import {
-  tblComponentUnit,
-  tblMaintCause,
-  tblMaintClass,
-  tblMaintLog,
-  tblMaintType,
-} from '@/core/api/generated/api'
+import { tblComponentUnit, tblMaintLog } from '@/core/api/generated/api'
 
 type Props = {
   open: boolean
   onClose: () => void
-  loading?: boolean
-  disabled?: boolean
   componentUnitId?: number
   maintLogId?: number
 }
@@ -26,14 +18,13 @@ type Props = {
 const ReportWorkDialog = ({
   open,
   onClose,
-  loading = false,
-  disabled = false,
   componentUnitId,
   maintLogId,
 }: Props) => {
-  const [activeStep, setActiveStep] = useAtom(atomActiveStep)
-  const [initData, setInitData] = useAtom(atomInitalData)
   const [isLoading, setIsLoading] = useState(false)
+
+  const activeStep = useAtomValue(atomActiveStep)
+  const setInitData = useSetAtom(atomInitalData)
 
   const StepComponent = reportWorkSteps[activeStep].component
 
@@ -82,8 +73,7 @@ const ReportWorkDialog = ({
       <DialogHeader
         title='Report Work'
         onClose={onClose}
-        loading={loading || isLoading}
-        disabled={disabled || isLoading}
+        loading={isLoading || isLoading}
       />
       <Box height={'650px'} display='flex' flexDirection='column'>
         {isLoading ? (

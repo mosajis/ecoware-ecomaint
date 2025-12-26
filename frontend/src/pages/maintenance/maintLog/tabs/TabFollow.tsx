@@ -15,6 +15,8 @@ type props = {
   label?: string
 }
 
+// follow status
+// maintLogFollow
 const TabFollow = (props: props) => {
   const { label, selected } = props
 

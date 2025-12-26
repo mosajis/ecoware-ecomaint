@@ -2826,7 +2826,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/tblSpareType/": {
+    "/tblStockItem/": {
         parameters: {
             query?: never;
             header?: never;
@@ -2834,18 +2834,18 @@ export interface paths {
             cookie?: never;
         };
         /** Get all */
-        get: operations["getTblSpareType"];
+        get: operations["getTblStockItem"];
         put?: never;
         /** Create */
-        post: operations["postTblSpareType"];
+        post: operations["postTblStockItem"];
         /** Delete all */
-        delete: operations["deleteTblSpareType"];
+        delete: operations["deleteTblStockItem"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/tblSpareType/{partTypeId}": {
+    "/tblStockItem/{stockItemId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -2853,18 +2853,18 @@ export interface paths {
             cookie?: never;
         };
         /** Get one */
-        get: operations["getTblSpareTypeByPartTypeId"];
+        get: operations["getTblStockItemByStockItemId"];
         /** Update */
-        put: operations["putTblSpareTypeByPartTypeId"];
+        put: operations["putTblStockItemByStockItemId"];
         post?: never;
         /** Delete one */
-        delete: operations["deleteTblSpareTypeByPartTypeId"];
+        delete: operations["deleteTblStockItemByStockItemId"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/tblSpareType/count": {
+    "/tblStockItem/count": {
         parameters: {
             query?: never;
             header?: never;
@@ -2872,7 +2872,7 @@ export interface paths {
             cookie?: never;
         };
         /** Count */
-        get: operations["getTblSpareTypeCount"];
+        get: operations["getTblStockItemCount"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2881,7 +2881,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/tblSpareUnit/": {
+    "/tblStockType/": {
         parameters: {
             query?: never;
             header?: never;
@@ -2889,18 +2889,18 @@ export interface paths {
             cookie?: never;
         };
         /** Get all */
-        get: operations["getTblSpareUnit"];
+        get: operations["getTblStockType"];
         put?: never;
         /** Create */
-        post: operations["postTblSpareUnit"];
+        post: operations["postTblStockType"];
         /** Delete all */
-        delete: operations["deleteTblSpareUnit"];
+        delete: operations["deleteTblStockType"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/tblSpareUnit/{partId}": {
+    "/tblStockType/{stockTypeId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -2908,18 +2908,18 @@ export interface paths {
             cookie?: never;
         };
         /** Get one */
-        get: operations["getTblSpareUnitByPartId"];
+        get: operations["getTblStockTypeByStockTypeId"];
         /** Update */
-        put: operations["putTblSpareUnitByPartId"];
+        put: operations["putTblStockTypeByStockTypeId"];
         post?: never;
         /** Delete one */
-        delete: operations["deleteTblSpareUnitByPartId"];
+        delete: operations["deleteTblStockTypeByStockTypeId"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/tblSpareUnit/count": {
+    "/tblStockType/count": {
         parameters: {
             query?: never;
             header?: never;
@@ -2927,7 +2927,7 @@ export interface paths {
             cookie?: never;
         };
         /** Count */
-        get: operations["getTblSpareUnitCount"];
+        get: operations["getTblStockTypeCount"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3766,62 +3766,15 @@ export interface operations {
                             }[];
                             tblEmployees?: {
                                 employeeId: number;
-                                layoutId: null | (number);
                                 code: null | string;
                                 lastName: null | string;
                                 firstName: null | string;
                                 available: null | (number);
-                                currencyCode: null | string;
                                 discId: null | (number);
                                 addressId: null | (number);
-                                userDefText1: null | string;
-                                userDefText2: null | string;
-                                userDefText3: null | string;
-                                userDefDate1: null | number);
-                                userDefDate2: null | number);
-                                userDefInt: null | (number);
-                                salary1: null | (number);
-                                salary2: null | (number);
-                                salary3: null | (number);
-                                salary4: null | (number);
-                                bonus1: null | (number);
-                                bonus2: null | (number);
-                                bonus3: null | (number);
-                                bonus4: null | (number);
                                 notes: null | string;
-                                hiredOnBoard: null | (number);
-                                empShortName: null | string;
-                                middleName: null | string;
-                                callingName: null | string;
-                                maidenName: null | string;
-                                empNameTitleId: null | (number);
-                                empNameSuffixId: null | (number);
                                 initials: null | string;
-                                empSex: null | (number);
-                                empDateOfBirth: null | number);
-                                empPlaceOfBirth: null | string;
-                                nationality: null | (number);
-                                empPension: null | (number);
-                                empPersonId: null | string;
-                                empIdent: null | string;
-                                empIdent2: null | string;
-                                stafNumber: null | string;
-                                payrollFlag: null | (number);
-                                period: null | (number);
-                                periodYear: null | (number);
-                                maritalStatusId: null | (number);
-                                tradeUnionId1: null | (number);
-                                tradeUnionId2: null | (number);
                                 empTitle: null | string;
-                                wageDesc: null | (number);
-                                dateOfDeath: null | number);
-                                dateOfMar: null | number);
-                                employeeTypeId: null | (number);
-                                rankId: null | (number);
-                                profileId: null | (number);
-                                catId: null | (number);
-                                hideFlag: null | (number);
-                                exportSite: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | number);
@@ -4018,62 +3971,15 @@ export interface operations {
                         }[];
                         tblEmployees?: {
                             employeeId: number;
-                            layoutId: null | (number);
                             code: null | string;
                             lastName: null | string;
                             firstName: null | string;
                             available: null | (number);
-                            currencyCode: null | string;
                             discId: null | (number);
                             addressId: null | (number);
-                            userDefText1: null | string;
-                            userDefText2: null | string;
-                            userDefText3: null | string;
-                            userDefDate1: null | number);
-                            userDefDate2: null | number);
-                            userDefInt: null | (number);
-                            salary1: null | (number);
-                            salary2: null | (number);
-                            salary3: null | (number);
-                            salary4: null | (number);
-                            bonus1: null | (number);
-                            bonus2: null | (number);
-                            bonus3: null | (number);
-                            bonus4: null | (number);
                             notes: null | string;
-                            hiredOnBoard: null | (number);
-                            empShortName: null | string;
-                            middleName: null | string;
-                            callingName: null | string;
-                            maidenName: null | string;
-                            empNameTitleId: null | (number);
-                            empNameSuffixId: null | (number);
                             initials: null | string;
-                            empSex: null | (number);
-                            empDateOfBirth: null | number);
-                            empPlaceOfBirth: null | string;
-                            nationality: null | (number);
-                            empPension: null | (number);
-                            empPersonId: null | string;
-                            empIdent: null | string;
-                            empIdent2: null | string;
-                            stafNumber: null | string;
-                            payrollFlag: null | (number);
-                            period: null | (number);
-                            periodYear: null | (number);
-                            maritalStatusId: null | (number);
-                            tradeUnionId1: null | (number);
-                            tradeUnionId2: null | (number);
                             empTitle: null | string;
-                            wageDesc: null | (number);
-                            dateOfDeath: null | number);
-                            dateOfMar: null | number);
-                            employeeTypeId: null | (number);
-                            rankId: null | (number);
-                            profileId: null | (number);
-                            catId: null | (number);
-                            hideFlag: null | (number);
-                            exportSite: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | number);
@@ -4209,62 +4115,15 @@ export interface operations {
                         }[];
                         tblEmployees?: {
                             employeeId: number;
-                            layoutId: null | (number);
                             code: null | string;
                             lastName: null | string;
                             firstName: null | string;
                             available: null | (number);
-                            currencyCode: null | string;
                             discId: null | (number);
                             addressId: null | (number);
-                            userDefText1: null | string;
-                            userDefText2: null | string;
-                            userDefText3: null | string;
-                            userDefDate1: null | number);
-                            userDefDate2: null | number);
-                            userDefInt: null | (number);
-                            salary1: null | (number);
-                            salary2: null | (number);
-                            salary3: null | (number);
-                            salary4: null | (number);
-                            bonus1: null | (number);
-                            bonus2: null | (number);
-                            bonus3: null | (number);
-                            bonus4: null | (number);
                             notes: null | string;
-                            hiredOnBoard: null | (number);
-                            empShortName: null | string;
-                            middleName: null | string;
-                            callingName: null | string;
-                            maidenName: null | string;
-                            empNameTitleId: null | (number);
-                            empNameSuffixId: null | (number);
                             initials: null | string;
-                            empSex: null | (number);
-                            empDateOfBirth: null | number);
-                            empPlaceOfBirth: null | string;
-                            nationality: null | (number);
-                            empPension: null | (number);
-                            empPersonId: null | string;
-                            empIdent: null | string;
-                            empIdent2: null | string;
-                            stafNumber: null | string;
-                            payrollFlag: null | (number);
-                            period: null | (number);
-                            periodYear: null | (number);
-                            maritalStatusId: null | (number);
-                            tradeUnionId1: null | (number);
-                            tradeUnionId2: null | (number);
                             empTitle: null | string;
-                            wageDesc: null | (number);
-                            dateOfDeath: null | number);
-                            dateOfMar: null | number);
-                            employeeTypeId: null | (number);
-                            rankId: null | (number);
-                            profileId: null | (number);
-                            catId: null | (number);
-                            hideFlag: null | (number);
-                            exportSite: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | number);
@@ -4485,62 +4344,15 @@ export interface operations {
                         }[];
                         tblEmployees?: {
                             employeeId: number;
-                            layoutId: null | (number);
                             code: null | string;
                             lastName: null | string;
                             firstName: null | string;
                             available: null | (number);
-                            currencyCode: null | string;
                             discId: null | (number);
                             addressId: null | (number);
-                            userDefText1: null | string;
-                            userDefText2: null | string;
-                            userDefText3: null | string;
-                            userDefDate1: null | number);
-                            userDefDate2: null | number);
-                            userDefInt: null | (number);
-                            salary1: null | (number);
-                            salary2: null | (number);
-                            salary3: null | (number);
-                            salary4: null | (number);
-                            bonus1: null | (number);
-                            bonus2: null | (number);
-                            bonus3: null | (number);
-                            bonus4: null | (number);
                             notes: null | string;
-                            hiredOnBoard: null | (number);
-                            empShortName: null | string;
-                            middleName: null | string;
-                            callingName: null | string;
-                            maidenName: null | string;
-                            empNameTitleId: null | (number);
-                            empNameSuffixId: null | (number);
                             initials: null | string;
-                            empSex: null | (number);
-                            empDateOfBirth: null | number);
-                            empPlaceOfBirth: null | string;
-                            nationality: null | (number);
-                            empPension: null | (number);
-                            empPersonId: null | string;
-                            empIdent: null | string;
-                            empIdent2: null | string;
-                            stafNumber: null | string;
-                            payrollFlag: null | (number);
-                            period: null | (number);
-                            periodYear: null | (number);
-                            maritalStatusId: null | (number);
-                            tradeUnionId1: null | (number);
-                            tradeUnionId2: null | (number);
                             empTitle: null | string;
-                            wageDesc: null | (number);
-                            dateOfDeath: null | number);
-                            dateOfMar: null | number);
-                            employeeTypeId: null | (number);
-                            rankId: null | (number);
-                            profileId: null | (number);
-                            catId: null | (number);
-                            hideFlag: null | (number);
-                            exportSite: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | number);
@@ -4646,62 +4458,15 @@ export interface operations {
                         }[];
                         tblEmployees?: {
                             employeeId: number;
-                            layoutId: null | (number);
                             code: null | string;
                             lastName: null | string;
                             firstName: null | string;
                             available: null | (number);
-                            currencyCode: null | string;
                             discId: null | (number);
                             addressId: null | (number);
-                            userDefText1: null | string;
-                            userDefText2: null | string;
-                            userDefText3: null | string;
-                            userDefDate1: null | number);
-                            userDefDate2: null | number);
-                            userDefInt: null | (number);
-                            salary1: null | (number);
-                            salary2: null | (number);
-                            salary3: null | (number);
-                            salary4: null | (number);
-                            bonus1: null | (number);
-                            bonus2: null | (number);
-                            bonus3: null | (number);
-                            bonus4: null | (number);
                             notes: null | string;
-                            hiredOnBoard: null | (number);
-                            empShortName: null | string;
-                            middleName: null | string;
-                            callingName: null | string;
-                            maidenName: null | string;
-                            empNameTitleId: null | (number);
-                            empNameSuffixId: null | (number);
                             initials: null | string;
-                            empSex: null | (number);
-                            empDateOfBirth: null | number);
-                            empPlaceOfBirth: null | string;
-                            nationality: null | (number);
-                            empPension: null | (number);
-                            empPersonId: null | string;
-                            empIdent: null | string;
-                            empIdent2: null | string;
-                            stafNumber: null | string;
-                            payrollFlag: null | (number);
-                            period: null | (number);
-                            periodYear: null | (number);
-                            maritalStatusId: null | (number);
-                            tradeUnionId1: null | (number);
-                            tradeUnionId2: null | (number);
                             empTitle: null | string;
-                            wageDesc: null | (number);
-                            dateOfDeath: null | number);
-                            dateOfMar: null | number);
-                            employeeTypeId: null | (number);
-                            rankId: null | (number);
-                            profileId: null | (number);
-                            catId: null | (number);
-                            hideFlag: null | (number);
-                            exportSite: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | number);
@@ -20593,62 +20358,15 @@ export interface operations {
                             }[];
                             tblEmployees?: {
                                 employeeId: number;
-                                layoutId: null | (number);
                                 code: null | string;
                                 lastName: null | string;
                                 firstName: null | string;
                                 available: null | (number);
-                                currencyCode: null | string;
                                 discId: null | (number);
                                 addressId: null | (number);
-                                userDefText1: null | string;
-                                userDefText2: null | string;
-                                userDefText3: null | string;
-                                userDefDate1: null | number);
-                                userDefDate2: null | number);
-                                userDefInt: null | (number);
-                                salary1: null | (number);
-                                salary2: null | (number);
-                                salary3: null | (number);
-                                salary4: null | (number);
-                                bonus1: null | (number);
-                                bonus2: null | (number);
-                                bonus3: null | (number);
-                                bonus4: null | (number);
                                 notes: null | string;
-                                hiredOnBoard: null | (number);
-                                empShortName: null | string;
-                                middleName: null | string;
-                                callingName: null | string;
-                                maidenName: null | string;
-                                empNameTitleId: null | (number);
-                                empNameSuffixId: null | (number);
                                 initials: null | string;
-                                empSex: null | (number);
-                                empDateOfBirth: null | number);
-                                empPlaceOfBirth: null | string;
-                                nationality: null | (number);
-                                empPension: null | (number);
-                                empPersonId: null | string;
-                                empIdent: null | string;
-                                empIdent2: null | string;
-                                stafNumber: null | string;
-                                payrollFlag: null | (number);
-                                period: null | (number);
-                                periodYear: null | (number);
-                                maritalStatusId: null | (number);
-                                tradeUnionId1: null | (number);
-                                tradeUnionId2: null | (number);
                                 empTitle: null | string;
-                                wageDesc: null | (number);
-                                dateOfDeath: null | number);
-                                dateOfMar: null | number);
-                                employeeTypeId: null | (number);
-                                rankId: null | (number);
-                                profileId: null | (number);
-                                catId: null | (number);
-                                hideFlag: null | (number);
-                                exportSite: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | number);
@@ -20893,62 +20611,15 @@ export interface operations {
                         }[];
                         tblEmployees?: {
                             employeeId: number;
-                            layoutId: null | (number);
                             code: null | string;
                             lastName: null | string;
                             firstName: null | string;
                             available: null | (number);
-                            currencyCode: null | string;
                             discId: null | (number);
                             addressId: null | (number);
-                            userDefText1: null | string;
-                            userDefText2: null | string;
-                            userDefText3: null | string;
-                            userDefDate1: null | number);
-                            userDefDate2: null | number);
-                            userDefInt: null | (number);
-                            salary1: null | (number);
-                            salary2: null | (number);
-                            salary3: null | (number);
-                            salary4: null | (number);
-                            bonus1: null | (number);
-                            bonus2: null | (number);
-                            bonus3: null | (number);
-                            bonus4: null | (number);
                             notes: null | string;
-                            hiredOnBoard: null | (number);
-                            empShortName: null | string;
-                            middleName: null | string;
-                            callingName: null | string;
-                            maidenName: null | string;
-                            empNameTitleId: null | (number);
-                            empNameSuffixId: null | (number);
                             initials: null | string;
-                            empSex: null | (number);
-                            empDateOfBirth: null | number);
-                            empPlaceOfBirth: null | string;
-                            nationality: null | (number);
-                            empPension: null | (number);
-                            empPersonId: null | string;
-                            empIdent: null | string;
-                            empIdent2: null | string;
-                            stafNumber: null | string;
-                            payrollFlag: null | (number);
-                            period: null | (number);
-                            periodYear: null | (number);
-                            maritalStatusId: null | (number);
-                            tradeUnionId1: null | (number);
-                            tradeUnionId2: null | (number);
                             empTitle: null | string;
-                            wageDesc: null | (number);
-                            dateOfDeath: null | number);
-                            dateOfMar: null | number);
-                            employeeTypeId: null | (number);
-                            rankId: null | (number);
-                            profileId: null | (number);
-                            catId: null | (number);
-                            hideFlag: null | (number);
-                            exportSite: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | number);
@@ -21138,62 +20809,15 @@ export interface operations {
                         }[];
                         tblEmployees?: {
                             employeeId: number;
-                            layoutId: null | (number);
                             code: null | string;
                             lastName: null | string;
                             firstName: null | string;
                             available: null | (number);
-                            currencyCode: null | string;
                             discId: null | (number);
                             addressId: null | (number);
-                            userDefText1: null | string;
-                            userDefText2: null | string;
-                            userDefText3: null | string;
-                            userDefDate1: null | number);
-                            userDefDate2: null | number);
-                            userDefInt: null | (number);
-                            salary1: null | (number);
-                            salary2: null | (number);
-                            salary3: null | (number);
-                            salary4: null | (number);
-                            bonus1: null | (number);
-                            bonus2: null | (number);
-                            bonus3: null | (number);
-                            bonus4: null | (number);
                             notes: null | string;
-                            hiredOnBoard: null | (number);
-                            empShortName: null | string;
-                            middleName: null | string;
-                            callingName: null | string;
-                            maidenName: null | string;
-                            empNameTitleId: null | (number);
-                            empNameSuffixId: null | (number);
                             initials: null | string;
-                            empSex: null | (number);
-                            empDateOfBirth: null | number);
-                            empPlaceOfBirth: null | string;
-                            nationality: null | (number);
-                            empPension: null | (number);
-                            empPersonId: null | string;
-                            empIdent: null | string;
-                            empIdent2: null | string;
-                            stafNumber: null | string;
-                            payrollFlag: null | (number);
-                            period: null | (number);
-                            periodYear: null | (number);
-                            maritalStatusId: null | (number);
-                            tradeUnionId1: null | (number);
-                            tradeUnionId2: null | (number);
                             empTitle: null | string;
-                            wageDesc: null | (number);
-                            dateOfDeath: null | number);
-                            dateOfMar: null | number);
-                            employeeTypeId: null | (number);
-                            rankId: null | (number);
-                            profileId: null | (number);
-                            catId: null | (number);
-                            hideFlag: null | (number);
-                            exportSite: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | number);
@@ -21471,62 +21095,15 @@ export interface operations {
                         }[];
                         tblEmployees?: {
                             employeeId: number;
-                            layoutId: null | (number);
                             code: null | string;
                             lastName: null | string;
                             firstName: null | string;
                             available: null | (number);
-                            currencyCode: null | string;
                             discId: null | (number);
                             addressId: null | (number);
-                            userDefText1: null | string;
-                            userDefText2: null | string;
-                            userDefText3: null | string;
-                            userDefDate1: null | number);
-                            userDefDate2: null | number);
-                            userDefInt: null | (number);
-                            salary1: null | (number);
-                            salary2: null | (number);
-                            salary3: null | (number);
-                            salary4: null | (number);
-                            bonus1: null | (number);
-                            bonus2: null | (number);
-                            bonus3: null | (number);
-                            bonus4: null | (number);
                             notes: null | string;
-                            hiredOnBoard: null | (number);
-                            empShortName: null | string;
-                            middleName: null | string;
-                            callingName: null | string;
-                            maidenName: null | string;
-                            empNameTitleId: null | (number);
-                            empNameSuffixId: null | (number);
                             initials: null | string;
-                            empSex: null | (number);
-                            empDateOfBirth: null | number);
-                            empPlaceOfBirth: null | string;
-                            nationality: null | (number);
-                            empPension: null | (number);
-                            empPersonId: null | string;
-                            empIdent: null | string;
-                            empIdent2: null | string;
-                            stafNumber: null | string;
-                            payrollFlag: null | (number);
-                            period: null | (number);
-                            periodYear: null | (number);
-                            maritalStatusId: null | (number);
-                            tradeUnionId1: null | (number);
-                            tradeUnionId2: null | (number);
                             empTitle: null | string;
-                            wageDesc: null | (number);
-                            dateOfDeath: null | number);
-                            dateOfMar: null | number);
-                            employeeTypeId: null | (number);
-                            rankId: null | (number);
-                            profileId: null | (number);
-                            catId: null | (number);
-                            hideFlag: null | (number);
-                            exportSite: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | number);
@@ -21686,62 +21263,15 @@ export interface operations {
                         }[];
                         tblEmployees?: {
                             employeeId: number;
-                            layoutId: null | (number);
                             code: null | string;
                             lastName: null | string;
                             firstName: null | string;
                             available: null | (number);
-                            currencyCode: null | string;
                             discId: null | (number);
                             addressId: null | (number);
-                            userDefText1: null | string;
-                            userDefText2: null | string;
-                            userDefText3: null | string;
-                            userDefDate1: null | number);
-                            userDefDate2: null | number);
-                            userDefInt: null | (number);
-                            salary1: null | (number);
-                            salary2: null | (number);
-                            salary3: null | (number);
-                            salary4: null | (number);
-                            bonus1: null | (number);
-                            bonus2: null | (number);
-                            bonus3: null | (number);
-                            bonus4: null | (number);
                             notes: null | string;
-                            hiredOnBoard: null | (number);
-                            empShortName: null | string;
-                            middleName: null | string;
-                            callingName: null | string;
-                            maidenName: null | string;
-                            empNameTitleId: null | (number);
-                            empNameSuffixId: null | (number);
                             initials: null | string;
-                            empSex: null | (number);
-                            empDateOfBirth: null | number);
-                            empPlaceOfBirth: null | string;
-                            nationality: null | (number);
-                            empPension: null | (number);
-                            empPersonId: null | string;
-                            empIdent: null | string;
-                            empIdent2: null | string;
-                            stafNumber: null | string;
-                            payrollFlag: null | (number);
-                            period: null | (number);
-                            periodYear: null | (number);
-                            maritalStatusId: null | (number);
-                            tradeUnionId1: null | (number);
-                            tradeUnionId2: null | (number);
                             empTitle: null | string;
-                            wageDesc: null | (number);
-                            dateOfDeath: null | number);
-                            dateOfMar: null | number);
-                            employeeTypeId: null | (number);
-                            rankId: null | (number);
-                            profileId: null | (number);
-                            catId: null | (number);
-                            hideFlag: null | (number);
-                            exportSite: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | number);
@@ -21847,62 +21377,15 @@ export interface operations {
                     "application/json": {
                         items: {
                             employeeId: number;
-                            layoutId: null | (number);
                             code: null | string;
                             lastName: null | string;
                             firstName: null | string;
                             available: null | (number);
-                            currencyCode: null | string;
                             discId: null | (number);
                             addressId: null | (number);
-                            userDefText1: null | string;
-                            userDefText2: null | string;
-                            userDefText3: null | string;
-                            userDefDate1: null | number);
-                            userDefDate2: null | number);
-                            userDefInt: null | (number);
-                            salary1: null | (number);
-                            salary2: null | (number);
-                            salary3: null | (number);
-                            salary4: null | (number);
-                            bonus1: null | (number);
-                            bonus2: null | (number);
-                            bonus3: null | (number);
-                            bonus4: null | (number);
                             notes: null | string;
-                            hiredOnBoard: null | (number);
-                            empShortName: null | string;
-                            middleName: null | string;
-                            callingName: null | string;
-                            maidenName: null | string;
-                            empNameTitleId: null | (number);
-                            empNameSuffixId: null | (number);
                             initials: null | string;
-                            empSex: null | (number);
-                            empDateOfBirth: null | number);
-                            empPlaceOfBirth: null | string;
-                            nationality: null | (number);
-                            empPension: null | (number);
-                            empPersonId: null | string;
-                            empIdent: null | string;
-                            empIdent2: null | string;
-                            stafNumber: null | string;
-                            payrollFlag: null | (number);
-                            period: null | (number);
-                            periodYear: null | (number);
-                            maritalStatusId: null | (number);
-                            tradeUnionId1: null | (number);
-                            tradeUnionId2: null | (number);
                             empTitle: null | string;
-                            wageDesc: null | (number);
-                            dateOfDeath: null | number);
-                            dateOfMar: null | number);
-                            employeeTypeId: null | (number);
-                            rankId: null | (number);
-                            profileId: null | (number);
-                            catId: null | (number);
-                            hideFlag: null | (number);
-                            exportSite: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | number);
@@ -21960,47 +21443,9 @@ export interface operations {
                     lastName?: null | string;
                     firstName?: null | string;
                     available?: null | (number);
-                    currencyCode?: null | string;
-                    userDefText1?: null | string;
-                    userDefText2?: null | string;
-                    userDefText3?: null | string;
-                    userDefDate1?: null | number);
-                    userDefDate2?: null | number);
-                    userDefInt?: null | (number);
-                    salary1?: null | (number);
-                    salary2?: null | (number);
-                    salary3?: null | (number);
-                    salary4?: null | (number);
-                    bonus1?: null | (number);
-                    bonus2?: null | (number);
-                    bonus3?: null | (number);
-                    bonus4?: null | (number);
                     notes?: null | string;
-                    hiredOnBoard?: null | (number);
-                    empShortName?: null | string;
-                    middleName?: null | string;
-                    callingName?: null | string;
-                    maidenName?: null | string;
                     initials?: null | string;
-                    empSex?: null | (number);
-                    empDateOfBirth?: null | number);
-                    empPlaceOfBirth?: null | string;
-                    nationality?: null | (number);
-                    empPension?: null | (number);
-                    empIdent?: null | string;
-                    empIdent2?: null | string;
-                    stafNumber?: null | string;
-                    payrollFlag?: null | (number);
-                    period?: null | (number);
-                    periodYear?: null | (number);
-                    tradeUnionId1?: null | (number);
-                    tradeUnionId2?: null | (number);
                     empTitle?: null | string;
-                    wageDesc?: null | (number);
-                    dateOfDeath?: null | number);
-                    dateOfMar?: null | number);
-                    hideFlag?: null | (number);
-                    exportSite?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     tblAddress?: {
@@ -22019,47 +21464,9 @@ export interface operations {
                     lastName?: null | string;
                     firstName?: null | string;
                     available?: null | (number);
-                    currencyCode?: null | string;
-                    userDefText1?: null | string;
-                    userDefText2?: null | string;
-                    userDefText3?: null | string;
-                    userDefDate1?: null | number);
-                    userDefDate2?: null | number);
-                    userDefInt?: null | (number);
-                    salary1?: null | (number);
-                    salary2?: null | (number);
-                    salary3?: null | (number);
-                    salary4?: null | (number);
-                    bonus1?: null | (number);
-                    bonus2?: null | (number);
-                    bonus3?: null | (number);
-                    bonus4?: null | (number);
                     notes?: null | string;
-                    hiredOnBoard?: null | (number);
-                    empShortName?: null | string;
-                    middleName?: null | string;
-                    callingName?: null | string;
-                    maidenName?: null | string;
                     initials?: null | string;
-                    empSex?: null | (number);
-                    empDateOfBirth?: null | number);
-                    empPlaceOfBirth?: null | string;
-                    nationality?: null | (number);
-                    empPension?: null | (number);
-                    empIdent?: null | string;
-                    empIdent2?: null | string;
-                    stafNumber?: null | string;
-                    payrollFlag?: null | (number);
-                    period?: null | (number);
-                    periodYear?: null | (number);
-                    tradeUnionId1?: null | (number);
-                    tradeUnionId2?: null | (number);
                     empTitle?: null | string;
-                    wageDesc?: null | (number);
-                    dateOfDeath?: null | number);
-                    dateOfMar?: null | number);
-                    hideFlag?: null | (number);
-                    exportSite?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     tblAddress?: {
@@ -22078,47 +21485,9 @@ export interface operations {
                     lastName?: null | string;
                     firstName?: null | string;
                     available?: null | (number);
-                    currencyCode?: null | string;
-                    userDefText1?: null | string;
-                    userDefText2?: null | string;
-                    userDefText3?: null | string;
-                    userDefDate1?: null | number);
-                    userDefDate2?: null | number);
-                    userDefInt?: null | (number);
-                    salary1?: null | (number);
-                    salary2?: null | (number);
-                    salary3?: null | (number);
-                    salary4?: null | (number);
-                    bonus1?: null | (number);
-                    bonus2?: null | (number);
-                    bonus3?: null | (number);
-                    bonus4?: null | (number);
                     notes?: null | string;
-                    hiredOnBoard?: null | (number);
-                    empShortName?: null | string;
-                    middleName?: null | string;
-                    callingName?: null | string;
-                    maidenName?: null | string;
                     initials?: null | string;
-                    empSex?: null | (number);
-                    empDateOfBirth?: null | number);
-                    empPlaceOfBirth?: null | string;
-                    nationality?: null | (number);
-                    empPension?: null | (number);
-                    empIdent?: null | string;
-                    empIdent2?: null | string;
-                    stafNumber?: null | string;
-                    payrollFlag?: null | (number);
-                    period?: null | (number);
-                    periodYear?: null | (number);
-                    tradeUnionId1?: null | (number);
-                    tradeUnionId2?: null | (number);
                     empTitle?: null | string;
-                    wageDesc?: null | (number);
-                    dateOfDeath?: null | number);
-                    dateOfMar?: null | number);
-                    hideFlag?: null | (number);
-                    exportSite?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     tblAddress?: {
@@ -22143,62 +21512,15 @@ export interface operations {
                 content: {
                     "application/json": {
                         employeeId: number;
-                        layoutId: null | (number);
                         code: null | string;
                         lastName: null | string;
                         firstName: null | string;
                         available: null | (number);
-                        currencyCode: null | string;
                         discId: null | (number);
                         addressId: null | (number);
-                        userDefText1: null | string;
-                        userDefText2: null | string;
-                        userDefText3: null | string;
-                        userDefDate1: null | number);
-                        userDefDate2: null | number);
-                        userDefInt: null | (number);
-                        salary1: null | (number);
-                        salary2: null | (number);
-                        salary3: null | (number);
-                        salary4: null | (number);
-                        bonus1: null | (number);
-                        bonus2: null | (number);
-                        bonus3: null | (number);
-                        bonus4: null | (number);
                         notes: null | string;
-                        hiredOnBoard: null | (number);
-                        empShortName: null | string;
-                        middleName: null | string;
-                        callingName: null | string;
-                        maidenName: null | string;
-                        empNameTitleId: null | (number);
-                        empNameSuffixId: null | (number);
                         initials: null | string;
-                        empSex: null | (number);
-                        empDateOfBirth: null | number);
-                        empPlaceOfBirth: null | string;
-                        nationality: null | (number);
-                        empPension: null | (number);
-                        empPersonId: null | string;
-                        empIdent: null | string;
-                        empIdent2: null | string;
-                        stafNumber: null | string;
-                        payrollFlag: null | (number);
-                        period: null | (number);
-                        periodYear: null | (number);
-                        maritalStatusId: null | (number);
-                        tradeUnionId1: null | (number);
-                        tradeUnionId2: null | (number);
                         empTitle: null | string;
-                        wageDesc: null | (number);
-                        dateOfDeath: null | number);
-                        dateOfMar: null | number);
-                        employeeTypeId: null | (number);
-                        rankId: null | (number);
-                        profileId: null | (number);
-                        catId: null | (number);
-                        hideFlag: null | (number);
-                        exportSite: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | number);
@@ -22288,62 +21610,15 @@ export interface operations {
                 content: {
                     "application/json": {
                         employeeId: number;
-                        layoutId: null | (number);
                         code: null | string;
                         lastName: null | string;
                         firstName: null | string;
                         available: null | (number);
-                        currencyCode: null | string;
                         discId: null | (number);
                         addressId: null | (number);
-                        userDefText1: null | string;
-                        userDefText2: null | string;
-                        userDefText3: null | string;
-                        userDefDate1: null | number);
-                        userDefDate2: null | number);
-                        userDefInt: null | (number);
-                        salary1: null | (number);
-                        salary2: null | (number);
-                        salary3: null | (number);
-                        salary4: null | (number);
-                        bonus1: null | (number);
-                        bonus2: null | (number);
-                        bonus3: null | (number);
-                        bonus4: null | (number);
                         notes: null | string;
-                        hiredOnBoard: null | (number);
-                        empShortName: null | string;
-                        middleName: null | string;
-                        callingName: null | string;
-                        maidenName: null | string;
-                        empNameTitleId: null | (number);
-                        empNameSuffixId: null | (number);
                         initials: null | string;
-                        empSex: null | (number);
-                        empDateOfBirth: null | number);
-                        empPlaceOfBirth: null | string;
-                        nationality: null | (number);
-                        empPension: null | (number);
-                        empPersonId: null | string;
-                        empIdent: null | string;
-                        empIdent2: null | string;
-                        stafNumber: null | string;
-                        payrollFlag: null | (number);
-                        period: null | (number);
-                        periodYear: null | (number);
-                        maritalStatusId: null | (number);
-                        tradeUnionId1: null | (number);
-                        tradeUnionId2: null | (number);
                         empTitle: null | string;
-                        wageDesc: null | (number);
-                        dateOfDeath: null | number);
-                        dateOfMar: null | number);
-                        employeeTypeId: null | (number);
-                        rankId: null | (number);
-                        profileId: null | (number);
-                        catId: null | (number);
-                        hideFlag: null | (number);
-                        exportSite: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | number);
@@ -22398,47 +21673,9 @@ export interface operations {
                     lastName?: null | string;
                     firstName?: null | string;
                     available?: null | (number);
-                    currencyCode?: null | string;
-                    userDefText1?: null | string;
-                    userDefText2?: null | string;
-                    userDefText3?: null | string;
-                    userDefDate1?: null | number);
-                    userDefDate2?: null | number);
-                    userDefInt?: null | (number);
-                    salary1?: null | (number);
-                    salary2?: null | (number);
-                    salary3?: null | (number);
-                    salary4?: null | (number);
-                    bonus1?: null | (number);
-                    bonus2?: null | (number);
-                    bonus3?: null | (number);
-                    bonus4?: null | (number);
                     notes?: null | string;
-                    hiredOnBoard?: null | (number);
-                    empShortName?: null | string;
-                    middleName?: null | string;
-                    callingName?: null | string;
-                    maidenName?: null | string;
                     initials?: null | string;
-                    empSex?: null | (number);
-                    empDateOfBirth?: null | number);
-                    empPlaceOfBirth?: null | string;
-                    nationality?: null | (number);
-                    empPension?: null | (number);
-                    empIdent?: null | string;
-                    empIdent2?: null | string;
-                    stafNumber?: null | string;
-                    payrollFlag?: null | (number);
-                    period?: null | (number);
-                    periodYear?: null | (number);
-                    tradeUnionId1?: null | (number);
-                    tradeUnionId2?: null | (number);
                     empTitle?: null | string;
-                    wageDesc?: null | (number);
-                    dateOfDeath?: null | number);
-                    dateOfMar?: null | number);
-                    hideFlag?: null | (number);
-                    exportSite?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     tblAddress?: {
@@ -22459,47 +21696,9 @@ export interface operations {
                     lastName?: null | string;
                     firstName?: null | string;
                     available?: null | (number);
-                    currencyCode?: null | string;
-                    userDefText1?: null | string;
-                    userDefText2?: null | string;
-                    userDefText3?: null | string;
-                    userDefDate1?: null | number);
-                    userDefDate2?: null | number);
-                    userDefInt?: null | (number);
-                    salary1?: null | (number);
-                    salary2?: null | (number);
-                    salary3?: null | (number);
-                    salary4?: null | (number);
-                    bonus1?: null | (number);
-                    bonus2?: null | (number);
-                    bonus3?: null | (number);
-                    bonus4?: null | (number);
                     notes?: null | string;
-                    hiredOnBoard?: null | (number);
-                    empShortName?: null | string;
-                    middleName?: null | string;
-                    callingName?: null | string;
-                    maidenName?: null | string;
                     initials?: null | string;
-                    empSex?: null | (number);
-                    empDateOfBirth?: null | number);
-                    empPlaceOfBirth?: null | string;
-                    nationality?: null | (number);
-                    empPension?: null | (number);
-                    empIdent?: null | string;
-                    empIdent2?: null | string;
-                    stafNumber?: null | string;
-                    payrollFlag?: null | (number);
-                    period?: null | (number);
-                    periodYear?: null | (number);
-                    tradeUnionId1?: null | (number);
-                    tradeUnionId2?: null | (number);
                     empTitle?: null | string;
-                    wageDesc?: null | (number);
-                    dateOfDeath?: null | number);
-                    dateOfMar?: null | number);
-                    hideFlag?: null | (number);
-                    exportSite?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     tblAddress?: {
@@ -22520,47 +21719,9 @@ export interface operations {
                     lastName?: null | string;
                     firstName?: null | string;
                     available?: null | (number);
-                    currencyCode?: null | string;
-                    userDefText1?: null | string;
-                    userDefText2?: null | string;
-                    userDefText3?: null | string;
-                    userDefDate1?: null | number);
-                    userDefDate2?: null | number);
-                    userDefInt?: null | (number);
-                    salary1?: null | (number);
-                    salary2?: null | (number);
-                    salary3?: null | (number);
-                    salary4?: null | (number);
-                    bonus1?: null | (number);
-                    bonus2?: null | (number);
-                    bonus3?: null | (number);
-                    bonus4?: null | (number);
                     notes?: null | string;
-                    hiredOnBoard?: null | (number);
-                    empShortName?: null | string;
-                    middleName?: null | string;
-                    callingName?: null | string;
-                    maidenName?: null | string;
                     initials?: null | string;
-                    empSex?: null | (number);
-                    empDateOfBirth?: null | number);
-                    empPlaceOfBirth?: null | string;
-                    nationality?: null | (number);
-                    empPension?: null | (number);
-                    empIdent?: null | string;
-                    empIdent2?: null | string;
-                    stafNumber?: null | string;
-                    payrollFlag?: null | (number);
-                    period?: null | (number);
-                    periodYear?: null | (number);
-                    tradeUnionId1?: null | (number);
-                    tradeUnionId2?: null | (number);
                     empTitle?: null | string;
-                    wageDesc?: null | (number);
-                    dateOfDeath?: null | number);
-                    dateOfMar?: null | number);
-                    hideFlag?: null | (number);
-                    exportSite?: null | (number);
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     tblAddress?: {
@@ -22587,62 +21748,15 @@ export interface operations {
                 content: {
                     "application/json": {
                         employeeId: number;
-                        layoutId: null | (number);
                         code: null | string;
                         lastName: null | string;
                         firstName: null | string;
                         available: null | (number);
-                        currencyCode: null | string;
                         discId: null | (number);
                         addressId: null | (number);
-                        userDefText1: null | string;
-                        userDefText2: null | string;
-                        userDefText3: null | string;
-                        userDefDate1: null | number);
-                        userDefDate2: null | number);
-                        userDefInt: null | (number);
-                        salary1: null | (number);
-                        salary2: null | (number);
-                        salary3: null | (number);
-                        salary4: null | (number);
-                        bonus1: null | (number);
-                        bonus2: null | (number);
-                        bonus3: null | (number);
-                        bonus4: null | (number);
                         notes: null | string;
-                        hiredOnBoard: null | (number);
-                        empShortName: null | string;
-                        middleName: null | string;
-                        callingName: null | string;
-                        maidenName: null | string;
-                        empNameTitleId: null | (number);
-                        empNameSuffixId: null | (number);
                         initials: null | string;
-                        empSex: null | (number);
-                        empDateOfBirth: null | number);
-                        empPlaceOfBirth: null | string;
-                        nationality: null | (number);
-                        empPension: null | (number);
-                        empPersonId: null | string;
-                        empIdent: null | string;
-                        empIdent2: null | string;
-                        stafNumber: null | string;
-                        payrollFlag: null | (number);
-                        period: null | (number);
-                        periodYear: null | (number);
-                        maritalStatusId: null | (number);
-                        tradeUnionId1: null | (number);
-                        tradeUnionId2: null | (number);
                         empTitle: null | string;
-                        wageDesc: null | (number);
-                        dateOfDeath: null | number);
-                        dateOfMar: null | number);
-                        employeeTypeId: null | (number);
-                        rankId: null | (number);
-                        profileId: null | (number);
-                        catId: null | (number);
-                        hideFlag: null | (number);
-                        exportSite: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | number);
@@ -22702,62 +21816,15 @@ export interface operations {
                 content: {
                     "application/json": {
                         employeeId: number;
-                        layoutId: null | (number);
                         code: null | string;
                         lastName: null | string;
                         firstName: null | string;
                         available: null | (number);
-                        currencyCode: null | string;
                         discId: null | (number);
                         addressId: null | (number);
-                        userDefText1: null | string;
-                        userDefText2: null | string;
-                        userDefText3: null | string;
-                        userDefDate1: null | number);
-                        userDefDate2: null | number);
-                        userDefInt: null | (number);
-                        salary1: null | (number);
-                        salary2: null | (number);
-                        salary3: null | (number);
-                        salary4: null | (number);
-                        bonus1: null | (number);
-                        bonus2: null | (number);
-                        bonus3: null | (number);
-                        bonus4: null | (number);
                         notes: null | string;
-                        hiredOnBoard: null | (number);
-                        empShortName: null | string;
-                        middleName: null | string;
-                        callingName: null | string;
-                        maidenName: null | string;
-                        empNameTitleId: null | (number);
-                        empNameSuffixId: null | (number);
                         initials: null | string;
-                        empSex: null | (number);
-                        empDateOfBirth: null | number);
-                        empPlaceOfBirth: null | string;
-                        nationality: null | (number);
-                        empPension: null | (number);
-                        empPersonId: null | string;
-                        empIdent: null | string;
-                        empIdent2: null | string;
-                        stafNumber: null | string;
-                        payrollFlag: null | (number);
-                        period: null | (number);
-                        periodYear: null | (number);
-                        maritalStatusId: null | (number);
-                        tradeUnionId1: null | (number);
-                        tradeUnionId2: null | (number);
                         empTitle: null | string;
-                        wageDesc: null | (number);
-                        dateOfDeath: null | number);
-                        dateOfMar: null | number);
-                        employeeTypeId: null | (number);
-                        rankId: null | (number);
-                        profileId: null | (number);
-                        catId: null | (number);
-                        hideFlag: null | (number);
-                        exportSite: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | number);
@@ -32409,6 +31476,18 @@ export interface operations {
                                 waitingTime: null | number;
                                 orderId: null | (number);
                             }[];
+                            tblMaintLogStocks?: {
+                                maintLogStockId: number;
+                                maintLogId: number;
+                                stockItemId: number;
+                                deptId: number;
+                                exportMaker: null | (number);
+                                stockCount: null | number;
+                                orderId: null | (number);
+                                userId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -32508,6 +31587,11 @@ export interface operations {
                             followId: number;
                         }[];
                     };
+                    tblMaintLogStocks?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     totalDuration?: null | (number);
@@ -32589,6 +31673,11 @@ export interface operations {
                             followId: number;
                         }[];
                     };
+                    tblMaintLogStocks?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     totalDuration?: null | (number);
@@ -32668,6 +31757,11 @@ export interface operations {
                     tblMaintLogFollows?: {
                         connect: {
                             followId: number;
+                        }[];
+                    };
+                    tblMaintLogStocks?: {
+                        connect: {
+                            id: number;
                         }[];
                     };
                 };
@@ -32947,6 +32041,18 @@ export interface operations {
                             followStatuseId: null | (number);
                             waitingTime: null | number;
                             orderId: null | (number);
+                        }[];
+                        tblMaintLogStocks?: {
+                            maintLogStockId: number;
+                            maintLogId: number;
+                            stockItemId: number;
+                            deptId: number;
+                            exportMaker: null | (number);
+                            stockCount: null | number;
+                            orderId: null | (number);
+                            userId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
                         }[];
                     };
                 };
@@ -33270,6 +32376,18 @@ export interface operations {
                             waitingTime: null | number;
                             orderId: null | (number);
                         }[];
+                        tblMaintLogStocks?: {
+                            maintLogStockId: number;
+                            maintLogId: number;
+                            stockItemId: number;
+                            deptId: number;
+                            exportMaker: null | (number);
+                            stockCount: null | number;
+                            orderId: null | (number);
+                            userId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -33383,6 +32501,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblMaintLogStocks?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     totalDuration?: null | (number);
@@ -33481,6 +32607,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblMaintLogStocks?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     totalDuration?: null | (number);
@@ -33574,6 +32708,14 @@ export interface operations {
                     tblMaintLogFollows?: {
                         connect?: {
                             followId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogStocks?: {
+                        connect?: {
+                            id: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -33856,6 +32998,18 @@ export interface operations {
                             followStatuseId: null | (number);
                             waitingTime: null | number;
                             orderId: null | (number);
+                        }[];
+                        tblMaintLogStocks?: {
+                            maintLogStockId: number;
+                            maintLogId: number;
+                            stockItemId: number;
+                            deptId: number;
+                            exportMaker: null | (number);
+                            stockCount: null | number;
+                            orderId: null | (number);
+                            userId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
                         }[];
                     };
                 };
@@ -34148,6 +33302,18 @@ export interface operations {
                             followStatuseId: null | (number);
                             waitingTime: null | number;
                             orderId: null | (number);
+                        }[];
+                        tblMaintLogStocks?: {
+                            maintLogStockId: number;
+                            maintLogId: number;
+                            stockItemId: number;
+                            deptId: number;
+                            exportMaker: null | (number);
+                            stockCount: null | number;
+                            orderId: null | (number);
+                            userId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
                         }[];
                     };
                 };
@@ -35163,7 +34329,7 @@ export interface operations {
                         items: {
                             maintLogStockId: number;
                             maintLogId: number;
-                            stockId: number;
+                            stockItemId: number;
                             deptId: number;
                             exportMaker: null | (number);
                             stockCount: null | number;
@@ -35171,6 +34337,41 @@ export interface operations {
                             userId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | number);
+                            tblMaintLog?: {
+                                maintLogId: number;
+                                maintCauseId: null | (number);
+                                maintTypeId: null | (number);
+                                maintClassId: null | (number);
+                                functionId: null | (number);
+                                jobDescId: null | (number);
+                                workOrderId: null | (number);
+                                compId: null | (number);
+                                roundId: null | (number);
+                                totalDuration: null | (number);
+                                downTime: null | (number);
+                                dateDone: null | number);
+                                frequency: null | (number);
+                                frequencyPeriod: null | (number);
+                                overdueCount: null | (number);
+                                overdueReason: null | string;
+                                unexpected: null | (number);
+                                cbmStatus: null | (number);
+                                loggedBy: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                history: null | string;
+                                mlStatus: null | (number);
+                                followStatusId: null | (number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
+                            tblStockItem?: {
+                                stockItemId: number;
+                                stockTypeId: null | (number);
+                                deptId: null | (number);
+                                lastupdate: null | number);
+                            };
                         }[];
                         total: number;
                         page: number;
@@ -35195,18 +34396,48 @@ export interface operations {
                     stockCount?: null | number;
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
+                    tblMaintLog: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblStockItem: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     exportMaker?: null | (number);
                     stockCount?: null | number;
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
+                    tblMaintLog: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblStockItem: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                 };
                 "multipart/form-data": {
                     exportMaker?: null | (number);
                     stockCount?: null | number;
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
+                    tblMaintLog: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblStockItem: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                 };
             };
         };
@@ -35220,7 +34451,7 @@ export interface operations {
                     "application/json": {
                         maintLogStockId: number;
                         maintLogId: number;
-                        stockId: number;
+                        stockItemId: number;
                         deptId: number;
                         exportMaker: null | (number);
                         stockCount: null | number;
@@ -35228,6 +34459,41 @@ export interface operations {
                         userId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | number);
+                        tblMaintLog?: {
+                            maintLogId: number;
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintClassId: null | (number);
+                            functionId: null | (number);
+                            jobDescId: null | (number);
+                            workOrderId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            totalDuration: null | (number);
+                            downTime: null | (number);
+                            dateDone: null | number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            overdueCount: null | (number);
+                            overdueReason: null | string;
+                            unexpected: null | (number);
+                            cbmStatus: null | (number);
+                            loggedBy: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            history: null | string;
+                            mlStatus: null | (number);
+                            followStatusId: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblStockItem?: {
+                            stockItemId: number;
+                            stockTypeId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                        };
                     };
                 };
             };
@@ -35285,7 +34551,7 @@ export interface operations {
                     "application/json": {
                         maintLogStockId: number;
                         maintLogId: number;
-                        stockId: number;
+                        stockItemId: number;
                         deptId: number;
                         exportMaker: null | (number);
                         stockCount: null | number;
@@ -35293,6 +34559,41 @@ export interface operations {
                         userId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | number);
+                        tblMaintLog?: {
+                            maintLogId: number;
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintClassId: null | (number);
+                            functionId: null | (number);
+                            jobDescId: null | (number);
+                            workOrderId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            totalDuration: null | (number);
+                            downTime: null | (number);
+                            dateDone: null | number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            overdueCount: null | (number);
+                            overdueReason: null | string;
+                            unexpected: null | (number);
+                            cbmStatus: null | (number);
+                            loggedBy: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            history: null | string;
+                            mlStatus: null | (number);
+                            followStatusId: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblStockItem?: {
+                            stockItemId: number;
+                            stockTypeId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                        };
                     } & (Record<string, never> | null);
                 };
             };
@@ -35314,18 +34615,48 @@ export interface operations {
                     stockCount?: null | number;
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
+                    tblMaintLog?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblStockItem?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     exportMaker?: null | (number);
                     stockCount?: null | number;
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
+                    tblMaintLog?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblStockItem?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                 };
                 "multipart/form-data": {
                     exportMaker?: null | (number);
                     stockCount?: null | number;
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
+                    tblMaintLog?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblStockItem?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                 };
             };
         };
@@ -35339,7 +34670,7 @@ export interface operations {
                     "application/json": {
                         maintLogStockId: number;
                         maintLogId: number;
-                        stockId: number;
+                        stockItemId: number;
                         deptId: number;
                         exportMaker: null | (number);
                         stockCount: null | number;
@@ -35347,6 +34678,41 @@ export interface operations {
                         userId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | number);
+                        tblMaintLog?: {
+                            maintLogId: number;
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintClassId: null | (number);
+                            functionId: null | (number);
+                            jobDescId: null | (number);
+                            workOrderId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            totalDuration: null | (number);
+                            downTime: null | (number);
+                            dateDone: null | number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            overdueCount: null | (number);
+                            overdueReason: null | string;
+                            unexpected: null | (number);
+                            cbmStatus: null | (number);
+                            loggedBy: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            history: null | string;
+                            mlStatus: null | (number);
+                            followStatusId: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblStockItem?: {
+                            stockItemId: number;
+                            stockTypeId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                        };
                     };
                 };
             };
@@ -35374,7 +34740,7 @@ export interface operations {
                     "application/json": {
                         maintLogStockId: number;
                         maintLogId: number;
-                        stockId: number;
+                        stockItemId: number;
                         deptId: number;
                         exportMaker: null | (number);
                         stockCount: null | number;
@@ -35382,6 +34748,41 @@ export interface operations {
                         userId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | number);
+                        tblMaintLog?: {
+                            maintLogId: number;
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintClassId: null | (number);
+                            functionId: null | (number);
+                            jobDescId: null | (number);
+                            workOrderId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            totalDuration: null | (number);
+                            downTime: null | (number);
+                            dateDone: null | number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            overdueCount: null | (number);
+                            overdueReason: null | string;
+                            unexpected: null | (number);
+                            cbmStatus: null | (number);
+                            loggedBy: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            history: null | string;
+                            mlStatus: null | (number);
+                            followStatusId: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblStockItem?: {
+                            stockItemId: number;
+                            stockTypeId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                        };
                     };
                 };
             };
@@ -40137,7 +39538,7 @@ export interface operations {
             };
         };
     };
-    getTblSpareType: {
+    getTblStockItem: {
         parameters: {
             query?: {
                 page?: number;
@@ -40162,42 +39563,32 @@ export interface operations {
                 content: {
                     "application/json": {
                         items: {
-                            partTypeId: number;
-                            parentPartTypeId: null | (number);
-                            stockClassId: null | (number);
-                            layoutId: null | (number);
-                            stockUnitId: null | (number);
-                            makerId: null | (number);
-                            makerRef: null | string;
-                            partName: null | string;
-                            primaryVendorId: null | (number);
-                            partTypeNo: null | string;
-                            extraNo: null | string;
-                            dwgRef: null | string;
-                            dwgNo: null | string;
-                            userDefVal1: null | (number);
-                            userDefVal2: null | (number);
-                            userDefVal3: null | (number);
-                            userDefMarPol: null | (number);
-                            userDefImoNo: null | string;
-                            perishable: null | (number);
-                            asset: null | (number);
-                            notes: null | string;
-                            userTableId: null | (number);
-                            oldLastPurchCurr: null | string;
-                            oldLastPurchPrice: null | (number);
-                            oldLastPurchDate: null | number);
-                            oldPriceClassId: null | (number);
+                            stockItemId: number;
+                            stockTypeId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            userDefText3: null | string;
-                            itemStatus: null | (number);
-                            replacedById: null | (number);
-                            standardCode: null | string;
-                            farsiDescription: null | string;
-                            orderId: null | (number);
-                            userId: null | (number);
+                            tblMaintLogStocks?: {
+                                maintLogStockId: number;
+                                maintLogId: number;
+                                stockItemId: number;
+                                deptId: number;
+                                exportMaker: null | (number);
+                                stockCount: null | number;
+                                orderId: null | (number);
+                                userId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                            }[];
+                            tblStockType?: null | {
+                                stockTypeId: number;
+                                parentStockTypeId: null | (number);
+                                name: null | string;
+                                no: null | string;
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                orderId: null | (number);
+                            };
                         }[];
                         total: number;
                         page: number;
@@ -40208,7 +39599,7 @@ export interface operations {
             };
         };
     };
-    postTblSpareType: {
+    postTblStockItem: {
         parameters: {
             query?: never;
             header?: never;
@@ -40218,79 +39609,43 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    makerRef?: null | string;
-                    partName?: null | string;
-                    partTypeNo?: null | string;
-                    extraNo?: null | string;
-                    dwgRef?: null | string;
-                    dwgNo?: null | string;
-                    userDefVal1?: null | (number);
-                    userDefVal2?: null | (number);
-                    userDefVal3?: null | (number);
-                    userDefMarPol?: null | (number);
-                    userDefImoNo?: null | string;
-                    perishable?: null | (number);
-                    asset?: null | (number);
-                    notes?: null | string;
-                    oldLastPurchCurr?: null | string;
-                    oldLastPurchPrice?: null | (number);
-                    oldLastPurchDate?: null | number);
-                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    userDefText3?: null | string;
-                    itemStatus?: null | (number);
-                    standardCode?: null | string;
-                    farsiDescription?: null | string;
+                    tblMaintLogStocks?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
+                    tblStockType?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                 };
                 "application/x-www-form-urlencoded": {
-                    makerRef?: null | string;
-                    partName?: null | string;
-                    partTypeNo?: null | string;
-                    extraNo?: null | string;
-                    dwgRef?: null | string;
-                    dwgNo?: null | string;
-                    userDefVal1?: null | (number);
-                    userDefVal2?: null | (number);
-                    userDefVal3?: null | (number);
-                    userDefMarPol?: null | (number);
-                    userDefImoNo?: null | string;
-                    perishable?: null | (number);
-                    asset?: null | (number);
-                    notes?: null | string;
-                    oldLastPurchCurr?: null | string;
-                    oldLastPurchPrice?: null | (number);
-                    oldLastPurchDate?: null | number);
-                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    userDefText3?: null | string;
-                    itemStatus?: null | (number);
-                    standardCode?: null | string;
-                    farsiDescription?: null | string;
+                    tblMaintLogStocks?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
+                    tblStockType?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                 };
                 "multipart/form-data": {
-                    makerRef?: null | string;
-                    partName?: null | string;
-                    partTypeNo?: null | string;
-                    extraNo?: null | string;
-                    dwgRef?: null | string;
-                    dwgNo?: null | string;
-                    userDefVal1?: null | (number);
-                    userDefVal2?: null | (number);
-                    userDefVal3?: null | (number);
-                    userDefMarPol?: null | (number);
-                    userDefImoNo?: null | string;
-                    perishable?: null | (number);
-                    asset?: null | (number);
-                    notes?: null | string;
-                    oldLastPurchCurr?: null | string;
-                    oldLastPurchPrice?: null | (number);
-                    oldLastPurchDate?: null | number);
-                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    userDefText3?: null | string;
-                    itemStatus?: null | (number);
-                    standardCode?: null | string;
-                    farsiDescription?: null | string;
+                    tblMaintLogStocks?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
+                    tblStockType?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                 };
             };
         };
@@ -40302,48 +39657,38 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        partTypeId: number;
-                        parentPartTypeId: null | (number);
-                        stockClassId: null | (number);
-                        layoutId: null | (number);
-                        stockUnitId: null | (number);
-                        makerId: null | (number);
-                        makerRef: null | string;
-                        partName: null | string;
-                        primaryVendorId: null | (number);
-                        partTypeNo: null | string;
-                        extraNo: null | string;
-                        dwgRef: null | string;
-                        dwgNo: null | string;
-                        userDefVal1: null | (number);
-                        userDefVal2: null | (number);
-                        userDefVal3: null | (number);
-                        userDefMarPol: null | (number);
-                        userDefImoNo: null | string;
-                        perishable: null | (number);
-                        asset: null | (number);
-                        notes: null | string;
-                        userTableId: null | (number);
-                        oldLastPurchCurr: null | string;
-                        oldLastPurchPrice: null | (number);
-                        oldLastPurchDate: null | number);
-                        oldPriceClassId: null | (number);
+                        stockItemId: number;
+                        stockTypeId: null | (number);
                         deptId: null | (number);
-                        exportMarker: null | (number);
                         lastupdate: null | number);
-                        userDefText3: null | string;
-                        itemStatus: null | (number);
-                        replacedById: null | (number);
-                        standardCode: null | string;
-                        farsiDescription: null | string;
-                        orderId: null | (number);
-                        userId: null | (number);
+                        tblMaintLogStocks?: {
+                            maintLogStockId: number;
+                            maintLogId: number;
+                            stockItemId: number;
+                            deptId: number;
+                            exportMaker: null | (number);
+                            stockCount: null | number;
+                            orderId: null | (number);
+                            userId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                        }[];
+                        tblStockType?: null | {
+                            stockTypeId: number;
+                            parentStockTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                        };
                     };
                 };
             };
         };
     };
-    deleteTblSpareType: {
+    deleteTblStockItem: {
         parameters: {
             query?: {
                 page?: number;
@@ -40373,14 +39718,14 @@ export interface operations {
             };
         };
     };
-    getTblSpareTypeByPartTypeId: {
+    getTblStockItemByStockItemId: {
         parameters: {
             query?: {
                 include?: string;
             };
             header?: never;
             path: {
-                partTypeId: number;
+                stockItemId: number;
             };
             cookie?: never;
         };
@@ -40393,132 +39738,98 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        partTypeId: number;
-                        parentPartTypeId: null | (number);
-                        stockClassId: null | (number);
-                        layoutId: null | (number);
-                        stockUnitId: null | (number);
-                        makerId: null | (number);
-                        makerRef: null | string;
-                        partName: null | string;
-                        primaryVendorId: null | (number);
-                        partTypeNo: null | string;
-                        extraNo: null | string;
-                        dwgRef: null | string;
-                        dwgNo: null | string;
-                        userDefVal1: null | (number);
-                        userDefVal2: null | (number);
-                        userDefVal3: null | (number);
-                        userDefMarPol: null | (number);
-                        userDefImoNo: null | string;
-                        perishable: null | (number);
-                        asset: null | (number);
-                        notes: null | string;
-                        userTableId: null | (number);
-                        oldLastPurchCurr: null | string;
-                        oldLastPurchPrice: null | (number);
-                        oldLastPurchDate: null | number);
-                        oldPriceClassId: null | (number);
+                        stockItemId: number;
+                        stockTypeId: null | (number);
                         deptId: null | (number);
-                        exportMarker: null | (number);
                         lastupdate: null | number);
-                        userDefText3: null | string;
-                        itemStatus: null | (number);
-                        replacedById: null | (number);
-                        standardCode: null | string;
-                        farsiDescription: null | string;
-                        orderId: null | (number);
-                        userId: null | (number);
+                        tblMaintLogStocks?: {
+                            maintLogStockId: number;
+                            maintLogId: number;
+                            stockItemId: number;
+                            deptId: number;
+                            exportMaker: null | (number);
+                            stockCount: null | number;
+                            orderId: null | (number);
+                            userId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                        }[];
+                        tblStockType?: null | {
+                            stockTypeId: number;
+                            parentStockTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                        };
                     } & (Record<string, never> | null);
                 };
             };
         };
     };
-    putTblSpareTypeByPartTypeId: {
+    putTblStockItemByStockItemId: {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                partTypeId: number;
+                stockItemId: number;
             };
             cookie?: never;
         };
         requestBody: {
             content: {
                 "application/json": {
-                    makerRef?: null | string;
-                    partName?: null | string;
-                    partTypeNo?: null | string;
-                    extraNo?: null | string;
-                    dwgRef?: null | string;
-                    dwgNo?: null | string;
-                    userDefVal1?: null | (number);
-                    userDefVal2?: null | (number);
-                    userDefVal3?: null | (number);
-                    userDefMarPol?: null | (number);
-                    userDefImoNo?: null | string;
-                    perishable?: null | (number);
-                    asset?: null | (number);
-                    notes?: null | string;
-                    oldLastPurchCurr?: null | string;
-                    oldLastPurchPrice?: null | (number);
-                    oldLastPurchDate?: null | number);
-                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    userDefText3?: null | string;
-                    itemStatus?: null | (number);
-                    standardCode?: null | string;
-                    farsiDescription?: null | string;
+                    tblMaintLogStocks?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblStockType?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
                 "application/x-www-form-urlencoded": {
-                    makerRef?: null | string;
-                    partName?: null | string;
-                    partTypeNo?: null | string;
-                    extraNo?: null | string;
-                    dwgRef?: null | string;
-                    dwgNo?: null | string;
-                    userDefVal1?: null | (number);
-                    userDefVal2?: null | (number);
-                    userDefVal3?: null | (number);
-                    userDefMarPol?: null | (number);
-                    userDefImoNo?: null | string;
-                    perishable?: null | (number);
-                    asset?: null | (number);
-                    notes?: null | string;
-                    oldLastPurchCurr?: null | string;
-                    oldLastPurchPrice?: null | (number);
-                    oldLastPurchDate?: null | number);
-                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    userDefText3?: null | string;
-                    itemStatus?: null | (number);
-                    standardCode?: null | string;
-                    farsiDescription?: null | string;
+                    tblMaintLogStocks?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblStockType?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
                 "multipart/form-data": {
-                    makerRef?: null | string;
-                    partName?: null | string;
-                    partTypeNo?: null | string;
-                    extraNo?: null | string;
-                    dwgRef?: null | string;
-                    dwgNo?: null | string;
-                    userDefVal1?: null | (number);
-                    userDefVal2?: null | (number);
-                    userDefVal3?: null | (number);
-                    userDefMarPol?: null | (number);
-                    userDefImoNo?: null | string;
-                    perishable?: null | (number);
-                    asset?: null | (number);
-                    notes?: null | string;
-                    oldLastPurchCurr?: null | string;
-                    oldLastPurchPrice?: null | (number);
-                    oldLastPurchDate?: null | number);
-                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    userDefText3?: null | string;
-                    itemStatus?: null | (number);
-                    standardCode?: null | string;
-                    farsiDescription?: null | string;
+                    tblMaintLogStocks?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblStockType?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
             };
         };
@@ -40530,55 +39841,45 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        partTypeId: number;
-                        parentPartTypeId: null | (number);
-                        stockClassId: null | (number);
-                        layoutId: null | (number);
-                        stockUnitId: null | (number);
-                        makerId: null | (number);
-                        makerRef: null | string;
-                        partName: null | string;
-                        primaryVendorId: null | (number);
-                        partTypeNo: null | string;
-                        extraNo: null | string;
-                        dwgRef: null | string;
-                        dwgNo: null | string;
-                        userDefVal1: null | (number);
-                        userDefVal2: null | (number);
-                        userDefVal3: null | (number);
-                        userDefMarPol: null | (number);
-                        userDefImoNo: null | string;
-                        perishable: null | (number);
-                        asset: null | (number);
-                        notes: null | string;
-                        userTableId: null | (number);
-                        oldLastPurchCurr: null | string;
-                        oldLastPurchPrice: null | (number);
-                        oldLastPurchDate: null | number);
-                        oldPriceClassId: null | (number);
+                        stockItemId: number;
+                        stockTypeId: null | (number);
                         deptId: null | (number);
-                        exportMarker: null | (number);
                         lastupdate: null | number);
-                        userDefText3: null | string;
-                        itemStatus: null | (number);
-                        replacedById: null | (number);
-                        standardCode: null | string;
-                        farsiDescription: null | string;
-                        orderId: null | (number);
-                        userId: null | (number);
+                        tblMaintLogStocks?: {
+                            maintLogStockId: number;
+                            maintLogId: number;
+                            stockItemId: number;
+                            deptId: number;
+                            exportMaker: null | (number);
+                            stockCount: null | number;
+                            orderId: null | (number);
+                            userId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                        }[];
+                        tblStockType?: null | {
+                            stockTypeId: number;
+                            parentStockTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                        };
                     };
                 };
             };
         };
     };
-    deleteTblSpareTypeByPartTypeId: {
+    deleteTblStockItemByStockItemId: {
         parameters: {
             query?: {
                 force?: boolean;
             };
             header?: never;
             path: {
-                partTypeId: number;
+                stockItemId: number;
             };
             cookie?: never;
         };
@@ -40591,48 +39892,38 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        partTypeId: number;
-                        parentPartTypeId: null | (number);
-                        stockClassId: null | (number);
-                        layoutId: null | (number);
-                        stockUnitId: null | (number);
-                        makerId: null | (number);
-                        makerRef: null | string;
-                        partName: null | string;
-                        primaryVendorId: null | (number);
-                        partTypeNo: null | string;
-                        extraNo: null | string;
-                        dwgRef: null | string;
-                        dwgNo: null | string;
-                        userDefVal1: null | (number);
-                        userDefVal2: null | (number);
-                        userDefVal3: null | (number);
-                        userDefMarPol: null | (number);
-                        userDefImoNo: null | string;
-                        perishable: null | (number);
-                        asset: null | (number);
-                        notes: null | string;
-                        userTableId: null | (number);
-                        oldLastPurchCurr: null | string;
-                        oldLastPurchPrice: null | (number);
-                        oldLastPurchDate: null | number);
-                        oldPriceClassId: null | (number);
+                        stockItemId: number;
+                        stockTypeId: null | (number);
                         deptId: null | (number);
-                        exportMarker: null | (number);
                         lastupdate: null | number);
-                        userDefText3: null | string;
-                        itemStatus: null | (number);
-                        replacedById: null | (number);
-                        standardCode: null | string;
-                        farsiDescription: null | string;
-                        orderId: null | (number);
-                        userId: null | (number);
+                        tblMaintLogStocks?: {
+                            maintLogStockId: number;
+                            maintLogId: number;
+                            stockItemId: number;
+                            deptId: number;
+                            exportMaker: null | (number);
+                            stockCount: null | number;
+                            orderId: null | (number);
+                            userId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                        }[];
+                        tblStockType?: null | {
+                            stockTypeId: number;
+                            parentStockTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                        };
                     };
                 };
             };
         };
     };
-    getTblSpareTypeCount: {
+    getTblStockItemCount: {
         parameters: {
             query?: {
                 page?: number;
@@ -40662,7 +39953,7 @@ export interface operations {
             };
         };
     };
-    getTblSpareUnit: {
+    getTblStockType: {
         parameters: {
             query?: {
                 page?: number;
@@ -40687,30 +39978,40 @@ export interface operations {
                 content: {
                     "application/json": {
                         items: {
-                            partId: number;
-                            partTypeId: null | (number);
-                            defaultLocationId: null | (number);
-                            locationDetail: null | string;
-                            stockMax: null | (number);
-                            stockMin: null | (number);
-                            reorderLevel: null | (number);
-                            reorderQuantity: null | (number);
-                            avgPriceCurr: null | string;
-                            avgPrice: null | (number);
-                            noRequisitioned: null | (number);
-                            medianSupplyTime: null | (number);
-                            wantedForComp: null | (number);
-                            stockedItem: null | (number);
-                            criticality: null | (number);
-                            layoutId: null | (number);
-                            notes: null | string;
-                            userTableId: null | (number);
+                            stockTypeId: number;
+                            parentStockTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | number);
-                            itemStatus: null | (number);
                             orderId: null | (number);
-                            userId: null | (number);
+                            tblStockItems?: {
+                                stockItemId: number;
+                                stockTypeId: null | (number);
+                                deptId: null | (number);
+                                lastupdate: null | number);
+                            }[];
+                            tblStockType?: null | {
+                                stockTypeId: number;
+                                parentStockTypeId: null | (number);
+                                name: null | string;
+                                no: null | string;
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                orderId: null | (number);
+                            };
+                            otherTblStockTypes?: {
+                                stockTypeId: number;
+                                parentStockTypeId: null | (number);
+                                name: null | string;
+                                no: null | string;
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                orderId: null | (number);
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -40721,7 +40022,7 @@ export interface operations {
             };
         };
     };
-    postTblSpareUnit: {
+    postTblStockType: {
         parameters: {
             query?: never;
             header?: never;
@@ -40731,58 +40032,67 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    locationDetail?: null | string;
-                    stockMax?: null | (number);
-                    stockMin?: null | (number);
-                    reorderLevel?: null | (number);
-                    reorderQuantity?: null | (number);
-                    avgPriceCurr?: null | string;
-                    avgPrice?: null | (number);
-                    noRequisitioned?: null | (number);
-                    medianSupplyTime?: null | (number);
-                    wantedForComp?: null | (number);
-                    stockedItem?: null | (number);
-                    criticality?: null | (number);
-                    notes?: null | string;
+                    name?: null | string;
+                    no?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    itemStatus?: null | (number);
+                    tblStockItems?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
+                    tblStockType?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    otherTblStockTypes?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
-                    locationDetail?: null | string;
-                    stockMax?: null | (number);
-                    stockMin?: null | (number);
-                    reorderLevel?: null | (number);
-                    reorderQuantity?: null | (number);
-                    avgPriceCurr?: null | string;
-                    avgPrice?: null | (number);
-                    noRequisitioned?: null | (number);
-                    medianSupplyTime?: null | (number);
-                    wantedForComp?: null | (number);
-                    stockedItem?: null | (number);
-                    criticality?: null | (number);
-                    notes?: null | string;
+                    name?: null | string;
+                    no?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    itemStatus?: null | (number);
+                    tblStockItems?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
+                    tblStockType?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    otherTblStockTypes?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
-                    locationDetail?: null | string;
-                    stockMax?: null | (number);
-                    stockMin?: null | (number);
-                    reorderLevel?: null | (number);
-                    reorderQuantity?: null | (number);
-                    avgPriceCurr?: null | string;
-                    avgPrice?: null | (number);
-                    noRequisitioned?: null | (number);
-                    medianSupplyTime?: null | (number);
-                    wantedForComp?: null | (number);
-                    stockedItem?: null | (number);
-                    criticality?: null | (number);
-                    notes?: null | string;
+                    name?: null | string;
+                    no?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    itemStatus?: null | (number);
+                    tblStockItems?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
+                    tblStockType?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    otherTblStockTypes?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                 };
             };
         };
@@ -40794,36 +40104,46 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        partId: number;
-                        partTypeId: null | (number);
-                        defaultLocationId: null | (number);
-                        locationDetail: null | string;
-                        stockMax: null | (number);
-                        stockMin: null | (number);
-                        reorderLevel: null | (number);
-                        reorderQuantity: null | (number);
-                        avgPriceCurr: null | string;
-                        avgPrice: null | (number);
-                        noRequisitioned: null | (number);
-                        medianSupplyTime: null | (number);
-                        wantedForComp: null | (number);
-                        stockedItem: null | (number);
-                        criticality: null | (number);
-                        layoutId: null | (number);
-                        notes: null | string;
-                        userTableId: null | (number);
+                        stockTypeId: number;
+                        parentStockTypeId: null | (number);
+                        name: null | string;
+                        no: null | string;
                         deptId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | number);
-                        itemStatus: null | (number);
                         orderId: null | (number);
-                        userId: null | (number);
+                        tblStockItems?: {
+                            stockItemId: number;
+                            stockTypeId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                        }[];
+                        tblStockType?: null | {
+                            stockTypeId: number;
+                            parentStockTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                        };
+                        otherTblStockTypes?: {
+                            stockTypeId: number;
+                            parentStockTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                        }[];
                     };
                 };
             };
         };
     };
-    deleteTblSpareUnit: {
+    deleteTblStockType: {
         parameters: {
             query?: {
                 page?: number;
@@ -40853,14 +40173,14 @@ export interface operations {
             };
         };
     };
-    getTblSpareUnitByPartId: {
+    getTblStockTypeByStockTypeId: {
         parameters: {
             query?: {
                 include?: string;
             };
             header?: never;
             path: {
-                partId: number;
+                stockTypeId: number;
             };
             cookie?: never;
         };
@@ -40873,99 +40193,139 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        partId: number;
-                        partTypeId: null | (number);
-                        defaultLocationId: null | (number);
-                        locationDetail: null | string;
-                        stockMax: null | (number);
-                        stockMin: null | (number);
-                        reorderLevel: null | (number);
-                        reorderQuantity: null | (number);
-                        avgPriceCurr: null | string;
-                        avgPrice: null | (number);
-                        noRequisitioned: null | (number);
-                        medianSupplyTime: null | (number);
-                        wantedForComp: null | (number);
-                        stockedItem: null | (number);
-                        criticality: null | (number);
-                        layoutId: null | (number);
-                        notes: null | string;
-                        userTableId: null | (number);
+                        stockTypeId: number;
+                        parentStockTypeId: null | (number);
+                        name: null | string;
+                        no: null | string;
                         deptId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | number);
-                        itemStatus: null | (number);
                         orderId: null | (number);
-                        userId: null | (number);
+                        tblStockItems?: {
+                            stockItemId: number;
+                            stockTypeId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                        }[];
+                        tblStockType?: null | {
+                            stockTypeId: number;
+                            parentStockTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                        };
+                        otherTblStockTypes?: {
+                            stockTypeId: number;
+                            parentStockTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
         };
     };
-    putTblSpareUnitByPartId: {
+    putTblStockTypeByStockTypeId: {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                partId: number;
+                stockTypeId: number;
             };
             cookie?: never;
         };
         requestBody: {
             content: {
                 "application/json": {
-                    locationDetail?: null | string;
-                    stockMax?: null | (number);
-                    stockMin?: null | (number);
-                    reorderLevel?: null | (number);
-                    reorderQuantity?: null | (number);
-                    avgPriceCurr?: null | string;
-                    avgPrice?: null | (number);
-                    noRequisitioned?: null | (number);
-                    medianSupplyTime?: null | (number);
-                    wantedForComp?: null | (number);
-                    stockedItem?: null | (number);
-                    criticality?: null | (number);
-                    notes?: null | string;
+                    name?: null | string;
+                    no?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    itemStatus?: null | (number);
+                    tblStockItems?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblStockType?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblStockTypes?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
-                    locationDetail?: null | string;
-                    stockMax?: null | (number);
-                    stockMin?: null | (number);
-                    reorderLevel?: null | (number);
-                    reorderQuantity?: null | (number);
-                    avgPriceCurr?: null | string;
-                    avgPrice?: null | (number);
-                    noRequisitioned?: null | (number);
-                    medianSupplyTime?: null | (number);
-                    wantedForComp?: null | (number);
-                    stockedItem?: null | (number);
-                    criticality?: null | (number);
-                    notes?: null | string;
+                    name?: null | string;
+                    no?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    itemStatus?: null | (number);
+                    tblStockItems?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblStockType?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblStockTypes?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
-                    locationDetail?: null | string;
-                    stockMax?: null | (number);
-                    stockMin?: null | (number);
-                    reorderLevel?: null | (number);
-                    reorderQuantity?: null | (number);
-                    avgPriceCurr?: null | string;
-                    avgPrice?: null | (number);
-                    noRequisitioned?: null | (number);
-                    medianSupplyTime?: null | (number);
-                    wantedForComp?: null | (number);
-                    stockedItem?: null | (number);
-                    criticality?: null | (number);
-                    notes?: null | string;
+                    name?: null | string;
+                    no?: null | string;
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    itemStatus?: null | (number);
+                    tblStockItems?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblStockType?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblStockTypes?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
             };
         };
@@ -40977,43 +40337,53 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        partId: number;
-                        partTypeId: null | (number);
-                        defaultLocationId: null | (number);
-                        locationDetail: null | string;
-                        stockMax: null | (number);
-                        stockMin: null | (number);
-                        reorderLevel: null | (number);
-                        reorderQuantity: null | (number);
-                        avgPriceCurr: null | string;
-                        avgPrice: null | (number);
-                        noRequisitioned: null | (number);
-                        medianSupplyTime: null | (number);
-                        wantedForComp: null | (number);
-                        stockedItem: null | (number);
-                        criticality: null | (number);
-                        layoutId: null | (number);
-                        notes: null | string;
-                        userTableId: null | (number);
+                        stockTypeId: number;
+                        parentStockTypeId: null | (number);
+                        name: null | string;
+                        no: null | string;
                         deptId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | number);
-                        itemStatus: null | (number);
                         orderId: null | (number);
-                        userId: null | (number);
+                        tblStockItems?: {
+                            stockItemId: number;
+                            stockTypeId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                        }[];
+                        tblStockType?: null | {
+                            stockTypeId: number;
+                            parentStockTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                        };
+                        otherTblStockTypes?: {
+                            stockTypeId: number;
+                            parentStockTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                        }[];
                     };
                 };
             };
         };
     };
-    deleteTblSpareUnitByPartId: {
+    deleteTblStockTypeByStockTypeId: {
         parameters: {
             query?: {
                 force?: boolean;
             };
             header?: never;
             path: {
-                partId: number;
+                stockTypeId: number;
             };
             cookie?: never;
         };
@@ -41026,36 +40396,46 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        partId: number;
-                        partTypeId: null | (number);
-                        defaultLocationId: null | (number);
-                        locationDetail: null | string;
-                        stockMax: null | (number);
-                        stockMin: null | (number);
-                        reorderLevel: null | (number);
-                        reorderQuantity: null | (number);
-                        avgPriceCurr: null | string;
-                        avgPrice: null | (number);
-                        noRequisitioned: null | (number);
-                        medianSupplyTime: null | (number);
-                        wantedForComp: null | (number);
-                        stockedItem: null | (number);
-                        criticality: null | (number);
-                        layoutId: null | (number);
-                        notes: null | string;
-                        userTableId: null | (number);
+                        stockTypeId: number;
+                        parentStockTypeId: null | (number);
+                        name: null | string;
+                        no: null | string;
                         deptId: null | (number);
                         exportMarker: null | (number);
                         lastupdate: null | number);
-                        itemStatus: null | (number);
                         orderId: null | (number);
-                        userId: null | (number);
+                        tblStockItems?: {
+                            stockItemId: number;
+                            stockTypeId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                        }[];
+                        tblStockType?: null | {
+                            stockTypeId: number;
+                            parentStockTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                        };
+                        otherTblStockTypes?: {
+                            stockTypeId: number;
+                            parentStockTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                        }[];
                     };
                 };
             };
         };
     };
-    getTblSpareUnitCount: {
+    getTblStockTypeCount: {
         parameters: {
             query?: {
                 page?: number;
