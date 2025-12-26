@@ -26,7 +26,6 @@ const TabResourceUsed = lazy(() => import('./tabs/TabResourceUsed'))
 const TabLogCounter = lazy(() => import('./tabs/TabLogCounter'))
 const TabMeasurePoint = lazy(() => import('./tabs/TabMeasurePoint'))
 const TabWorkOrders = lazy(() => import('./tabs/TabWorkOrders'))
-const TabLogs = lazy(() => import('./tabs/TabLogs'))
 const TabComments = lazy(() => import('./tabs/TabComments'))
 const TabCompAttach = lazy(() => import('./tabs/TabCompAttach'))
 const TabAttachment = lazy(() => import('./tabs/TabAttachment'))
@@ -45,7 +44,6 @@ const tabs: ReusableTabItem[] = [
   { label: 'Log Counter', icon: <Speed />, component: TabLogCounter },
   { label: 'Measure Point', icon: <Straighten />, component: TabMeasurePoint },
   { label: 'WorkOrders', icon: <Work />, component: TabWorkOrders },
-  { label: 'Logs', icon: <Timeline />, component: TabLogs },
   {
     label: 'Comment (OverDue Rea.)',
     icon: <Comment />,

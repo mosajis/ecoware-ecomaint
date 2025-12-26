@@ -51,7 +51,7 @@ const TabWorkOrder = ({ selected, label }: Props) => {
     getAll,
     tblWorkOrder.deleteAll,
     'workOrderId',
-    !!selected.maintLogId
+    !!selected?.maintLogId
   )
 
   const columns = useMemo<GridColDef<TypeTblWorkOrderWithRels>[]>(

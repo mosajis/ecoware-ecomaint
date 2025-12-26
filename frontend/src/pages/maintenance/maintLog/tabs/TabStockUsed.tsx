@@ -15,7 +15,7 @@ type Props = {
 }
 
 const TabStockUsed = (props: Props) => {
-  const { selected } = props
+  const { selected, label } = props
 
   const getAll = useCallback(() => {
     return tblMaintLogStocks.getAll({
@@ -41,15 +41,27 @@ const TabStockUsed = (props: Props) => {
   )
 
   const columns: GridColDef<TypeTblMaintLogStocks>[] = [
-    { field: 'stockNo', headerName: 'Extra No', flex: 1 },
-    { field: 'stockName', headerName: 'Stock Name', flex: 1 },
+    {
+      field: 'stockNo',
+      headerName: 'Extra No',
+      width: 100,
+      // @ts-ignore
+      valueGetter: (_, row) => row.tblStockItem.tblStockType.no,
+    },
+    {
+      field: 'stockName',
+      headerName: 'Stock Name',
+      flex: 1,
+      // @ts-ignore
+      valueGetter: (_, row) => row.tblStockItem.tblStockType.name,
+    },
   ]
 
   return (
     <CustomizedDataGrid
       showToolbar
       loading={loading}
-      label='Stock Used (not set)'
+      label={label || 'Stock Used'}
       rows={rows}
       getRowId={row => row.maintLogStockId}
       columns={columns}

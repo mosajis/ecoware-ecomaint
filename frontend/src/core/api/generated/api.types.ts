@@ -20373,6 +20373,18 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
+                            tblLogDisciplines?: {
+                                logDiscId: number;
+                                maintLogId: null | (number);
+                                employeeId: null | (number);
+                                discId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                timeSpent: null | (number);
+                                lastupdate: null | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
                                 compJobId: null | (number);
@@ -20451,6 +20463,11 @@ export interface operations {
                             employeeId: number;
                         }[];
                     };
+                    tblLogDisciplines?: {
+                        connect: {
+                            logDiscId: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect: {
                             workOrderId: number;
@@ -20478,6 +20495,11 @@ export interface operations {
                             employeeId: number;
                         }[];
                     };
+                    tblLogDisciplines?: {
+                        connect: {
+                            logDiscId: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect: {
                             workOrderId: number;
@@ -20503,6 +20525,11 @@ export interface operations {
                     tblEmployees?: {
                         connect: {
                             employeeId: number;
+                        }[];
+                    };
+                    tblLogDisciplines?: {
+                        connect: {
+                            logDiscId: number;
                         }[];
                     };
                     tblWorkOrders?: {
@@ -20622,6 +20649,18 @@ export interface operations {
                             empTitle: null | string;
                             deptId: null | (number);
                             exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblLogDisciplines?: {
+                            logDiscId: number;
+                            maintLogId: null | (number);
+                            employeeId: null | (number);
+                            discId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
@@ -20824,6 +20863,18 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblLogDisciplines?: {
+                            logDiscId: number;
+                            maintLogId: null | (number);
+                            employeeId: null | (number);
+                            discId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            timeSpent: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblWorkOrders?: {
                             workOrderId: number;
                             compJobId: null | (number);
@@ -20908,6 +20959,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblLogDisciplines?: {
+                        connect?: {
+                            logDiscId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect?: {
                             workOrderId: number;
@@ -20947,6 +21006,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblLogDisciplines?: {
+                        connect?: {
+                            logDiscId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect?: {
                             workOrderId: number;
@@ -20981,6 +21048,14 @@ export interface operations {
                     tblEmployees?: {
                         connect?: {
                             employeeId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblLogDisciplines?: {
+                        connect?: {
+                            logDiscId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -21106,6 +21181,18 @@ export interface operations {
                             empTitle: null | string;
                             deptId: null | (number);
                             exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblLogDisciplines?: {
+                            logDiscId: number;
+                            maintLogId: null | (number);
+                            employeeId: null | (number);
+                            discId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
@@ -21278,6 +21365,18 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblLogDisciplines?: {
+                            logDiscId: number;
+                            maintLogId: null | (number);
+                            employeeId: null | (number);
+                            discId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            timeSpent: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblWorkOrders?: {
                             workOrderId: number;
                             compJobId: null | (number);
@@ -21419,6 +21518,18 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             };
+                            tblLogDisciplines?: {
+                                logDiscId: number;
+                                maintLogId: null | (number);
+                                employeeId: null | (number);
+                                discId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                timeSpent: null | (number);
+                                lastupdate: null | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -21458,6 +21569,11 @@ export interface operations {
                             discId: number;
                         };
                     };
+                    tblLogDisciplines?: {
+                        connect: {
+                            logDiscId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     code?: null | string;
@@ -21479,6 +21595,11 @@ export interface operations {
                             discId: number;
                         };
                     };
+                    tblLogDisciplines?: {
+                        connect: {
+                            logDiscId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     code?: null | string;
@@ -21499,6 +21620,11 @@ export interface operations {
                         connect: {
                             discId: number;
                         };
+                    };
+                    tblLogDisciplines?: {
+                        connect: {
+                            logDiscId: number;
+                        }[];
                     };
                 };
             };
@@ -21554,6 +21680,18 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         };
+                        tblLogDisciplines?: {
+                            logDiscId: number;
+                            maintLogId: null | (number);
+                            employeeId: null | (number);
+                            discId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            timeSpent: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -21652,6 +21790,18 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         };
+                        tblLogDisciplines?: {
+                            logDiscId: number;
+                            maintLogId: null | (number);
+                            employeeId: null | (number);
+                            discId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            timeSpent: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     } & (Record<string, never> | null);
                 };
             };
@@ -21690,6 +21840,14 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblLogDisciplines?: {
+                        connect?: {
+                            logDiscId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     code?: null | string;
@@ -21713,6 +21871,14 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblLogDisciplines?: {
+                        connect?: {
+                            logDiscId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     code?: null | string;
@@ -21735,6 +21901,14 @@ export interface operations {
                             discId: number;
                         };
                         disconnect?: boolean;
+                    };
+                    tblLogDisciplines?: {
+                        connect?: {
+                            logDiscId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
                     };
                 };
             };
@@ -21790,6 +21964,18 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         };
+                        tblLogDisciplines?: {
+                            logDiscId: number;
+                            maintLogId: null | (number);
+                            employeeId: null | (number);
+                            discId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            timeSpent: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -21858,6 +22044,18 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         };
+                        tblLogDisciplines?: {
+                            logDiscId: number;
+                            maintLogId: null | (number);
+                            employeeId: null | (number);
+                            discId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            timeSpent: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                     };
                 };
             };
@@ -28067,38 +28265,70 @@ export interface operations {
                             maintLogId: null | (number);
                             employeeId: null | (number);
                             discId: null | (number);
-                            currencyCode: null | string;
-                            transCodeId01: null | (number);
-                            transCodeId02: null | (number);
-                            transCodeId03: null | (number);
-                            transCodeId04: null | (number);
-                            transCodeId05: null | (number);
-                            transCodeId06: null | (number);
-                            transCodeId07: null | (number);
-                            transCodeId08: null | (number);
-                            transCodeId09: null | (number);
-                            transCodeId10: null | (number);
-                            logRate1: null | (number);
-                            logRate2: null | (number);
-                            logRate3: null | (number);
-                            logRate4: null | (number);
-                            logBonus1: null | (number);
-                            logBonus2: null | (number);
-                            logBonus3: null | (number);
-                            logBonus4: null | (number);
-                            rate1Hours: null | number;
-                            rate2Hours: null | number;
-                            rate3Hours: null | number;
-                            rate4Hours: null | number;
-                            bonus1Hours: null | (number);
-                            bonus2Hours: null | (number);
-                            bonus3Hours: null | (number);
-                            bonus4Hours: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
+                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            tblDiscipline?: null | {
+                                discId: number;
+                                code: null | string;
+                                name: null | string;
+                                externalDisc: null | (number);
+                                parentDiscId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
+                            tblEmployee?: null | {
+                                employeeId: number;
+                                code: null | string;
+                                lastName: null | string;
+                                firstName: null | string;
+                                available: null | (number);
+                                discId: null | (number);
+                                addressId: null | (number);
+                                notes: null | string;
+                                initials: null | string;
+                                empTitle: null | string;
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
+                            tblMaintLog?: null | {
+                                maintLogId: number;
+                                maintCauseId: null | (number);
+                                maintTypeId: null | (number);
+                                maintClassId: null | (number);
+                                functionId: null | (number);
+                                jobDescId: null | (number);
+                                workOrderId: null | (number);
+                                compId: null | (number);
+                                roundId: null | (number);
+                                totalDuration: null | (number);
+                                downTime: null | (number);
+                                dateDone: null | number);
+                                frequency: null | (number);
+                                frequencyPeriod: null | (number);
+                                overdueCount: null | (number);
+                                overdueReason: null | string;
+                                unexpected: null | (number);
+                                cbmStatus: null | (number);
+                                loggedBy: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                history: null | string;
+                                mlStatus: null | (number);
+                                followStatusId: null | (number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
                         }[];
                         total: number;
                         page: number;
@@ -28119,97 +28349,64 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    currencyCode?: null | string;
-                    transCodeId01?: null | (number);
-                    transCodeId02?: null | (number);
-                    transCodeId03?: null | (number);
-                    transCodeId04?: null | (number);
-                    transCodeId05?: null | (number);
-                    transCodeId06?: null | (number);
-                    transCodeId07?: null | (number);
-                    transCodeId08?: null | (number);
-                    transCodeId09?: null | (number);
-                    transCodeId10?: null | (number);
-                    logRate1?: null | (number);
-                    logRate2?: null | (number);
-                    logRate3?: null | (number);
-                    logRate4?: null | (number);
-                    logBonus1?: null | (number);
-                    logBonus2?: null | (number);
-                    logBonus3?: null | (number);
-                    logBonus4?: null | (number);
-                    rate1Hours?: null | number;
-                    rate2Hours?: null | number;
-                    rate3Hours?: null | number;
-                    rate4Hours?: null | number;
-                    bonus1Hours?: null | (number);
-                    bonus2Hours?: null | (number);
-                    bonus3Hours?: null | (number);
-                    bonus4Hours?: null | (number);
                     exportMarker?: null | (number);
+                    timeSpent?: null | (number);
                     lastupdate?: null | number);
+                    tblDiscipline?: {
+                        connect: {
+                            discId: number;
+                        };
+                    };
+                    tblEmployee?: {
+                        connect: {
+                            employeeId: number;
+                        };
+                    };
+                    tblMaintLog?: {
+                        connect: {
+                            maintLogId: number;
+                        };
+                    };
                 };
                 "application/x-www-form-urlencoded": {
-                    currencyCode?: null | string;
-                    transCodeId01?: null | (number);
-                    transCodeId02?: null | (number);
-                    transCodeId03?: null | (number);
-                    transCodeId04?: null | (number);
-                    transCodeId05?: null | (number);
-                    transCodeId06?: null | (number);
-                    transCodeId07?: null | (number);
-                    transCodeId08?: null | (number);
-                    transCodeId09?: null | (number);
-                    transCodeId10?: null | (number);
-                    logRate1?: null | (number);
-                    logRate2?: null | (number);
-                    logRate3?: null | (number);
-                    logRate4?: null | (number);
-                    logBonus1?: null | (number);
-                    logBonus2?: null | (number);
-                    logBonus3?: null | (number);
-                    logBonus4?: null | (number);
-                    rate1Hours?: null | number;
-                    rate2Hours?: null | number;
-                    rate3Hours?: null | number;
-                    rate4Hours?: null | number;
-                    bonus1Hours?: null | (number);
-                    bonus2Hours?: null | (number);
-                    bonus3Hours?: null | (number);
-                    bonus4Hours?: null | (number);
                     exportMarker?: null | (number);
+                    timeSpent?: null | (number);
                     lastupdate?: null | number);
+                    tblDiscipline?: {
+                        connect: {
+                            discId: number;
+                        };
+                    };
+                    tblEmployee?: {
+                        connect: {
+                            employeeId: number;
+                        };
+                    };
+                    tblMaintLog?: {
+                        connect: {
+                            maintLogId: number;
+                        };
+                    };
                 };
                 "multipart/form-data": {
-                    currencyCode?: null | string;
-                    transCodeId01?: null | (number);
-                    transCodeId02?: null | (number);
-                    transCodeId03?: null | (number);
-                    transCodeId04?: null | (number);
-                    transCodeId05?: null | (number);
-                    transCodeId06?: null | (number);
-                    transCodeId07?: null | (number);
-                    transCodeId08?: null | (number);
-                    transCodeId09?: null | (number);
-                    transCodeId10?: null | (number);
-                    logRate1?: null | (number);
-                    logRate2?: null | (number);
-                    logRate3?: null | (number);
-                    logRate4?: null | (number);
-                    logBonus1?: null | (number);
-                    logBonus2?: null | (number);
-                    logBonus3?: null | (number);
-                    logBonus4?: null | (number);
-                    rate1Hours?: null | number;
-                    rate2Hours?: null | number;
-                    rate3Hours?: null | number;
-                    rate4Hours?: null | number;
-                    bonus1Hours?: null | (number);
-                    bonus2Hours?: null | (number);
-                    bonus3Hours?: null | (number);
-                    bonus4Hours?: null | (number);
                     exportMarker?: null | (number);
+                    timeSpent?: null | (number);
                     lastupdate?: null | number);
+                    tblDiscipline?: {
+                        connect: {
+                            discId: number;
+                        };
+                    };
+                    tblEmployee?: {
+                        connect: {
+                            employeeId: number;
+                        };
+                    };
+                    tblMaintLog?: {
+                        connect: {
+                            maintLogId: number;
+                        };
+                    };
                 };
             };
         };
@@ -28225,38 +28422,70 @@ export interface operations {
                         maintLogId: null | (number);
                         employeeId: null | (number);
                         discId: null | (number);
-                        currencyCode: null | string;
-                        transCodeId01: null | (number);
-                        transCodeId02: null | (number);
-                        transCodeId03: null | (number);
-                        transCodeId04: null | (number);
-                        transCodeId05: null | (number);
-                        transCodeId06: null | (number);
-                        transCodeId07: null | (number);
-                        transCodeId08: null | (number);
-                        transCodeId09: null | (number);
-                        transCodeId10: null | (number);
-                        logRate1: null | (number);
-                        logRate2: null | (number);
-                        logRate3: null | (number);
-                        logRate4: null | (number);
-                        logBonus1: null | (number);
-                        logBonus2: null | (number);
-                        logBonus3: null | (number);
-                        logBonus4: null | (number);
-                        rate1Hours: null | number;
-                        rate2Hours: null | number;
-                        rate3Hours: null | number;
-                        rate4Hours: null | number;
-                        bonus1Hours: null | (number);
-                        bonus2Hours: null | (number);
-                        bonus3Hours: null | (number);
-                        bonus4Hours: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
+                        timeSpent: null | (number);
                         lastupdate: null | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblDiscipline?: null | {
+                            discId: number;
+                            code: null | string;
+                            name: null | string;
+                            externalDisc: null | (number);
+                            parentDiscId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblEmployee?: null | {
+                            employeeId: number;
+                            code: null | string;
+                            lastName: null | string;
+                            firstName: null | string;
+                            available: null | (number);
+                            discId: null | (number);
+                            addressId: null | (number);
+                            notes: null | string;
+                            initials: null | string;
+                            empTitle: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintLog?: null | {
+                            maintLogId: number;
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintClassId: null | (number);
+                            functionId: null | (number);
+                            jobDescId: null | (number);
+                            workOrderId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            totalDuration: null | (number);
+                            downTime: null | (number);
+                            dateDone: null | number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            overdueCount: null | (number);
+                            overdueReason: null | string;
+                            unexpected: null | (number);
+                            cbmStatus: null | (number);
+                            loggedBy: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            history: null | string;
+                            mlStatus: null | (number);
+                            followStatusId: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -28316,38 +28545,70 @@ export interface operations {
                         maintLogId: null | (number);
                         employeeId: null | (number);
                         discId: null | (number);
-                        currencyCode: null | string;
-                        transCodeId01: null | (number);
-                        transCodeId02: null | (number);
-                        transCodeId03: null | (number);
-                        transCodeId04: null | (number);
-                        transCodeId05: null | (number);
-                        transCodeId06: null | (number);
-                        transCodeId07: null | (number);
-                        transCodeId08: null | (number);
-                        transCodeId09: null | (number);
-                        transCodeId10: null | (number);
-                        logRate1: null | (number);
-                        logRate2: null | (number);
-                        logRate3: null | (number);
-                        logRate4: null | (number);
-                        logBonus1: null | (number);
-                        logBonus2: null | (number);
-                        logBonus3: null | (number);
-                        logBonus4: null | (number);
-                        rate1Hours: null | number;
-                        rate2Hours: null | number;
-                        rate3Hours: null | number;
-                        rate4Hours: null | number;
-                        bonus1Hours: null | (number);
-                        bonus2Hours: null | (number);
-                        bonus3Hours: null | (number);
-                        bonus4Hours: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
+                        timeSpent: null | (number);
                         lastupdate: null | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblDiscipline?: null | {
+                            discId: number;
+                            code: null | string;
+                            name: null | string;
+                            externalDisc: null | (number);
+                            parentDiscId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblEmployee?: null | {
+                            employeeId: number;
+                            code: null | string;
+                            lastName: null | string;
+                            firstName: null | string;
+                            available: null | (number);
+                            discId: null | (number);
+                            addressId: null | (number);
+                            notes: null | string;
+                            initials: null | string;
+                            empTitle: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintLog?: null | {
+                            maintLogId: number;
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintClassId: null | (number);
+                            functionId: null | (number);
+                            jobDescId: null | (number);
+                            workOrderId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            totalDuration: null | (number);
+                            downTime: null | (number);
+                            dateDone: null | number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            overdueCount: null | (number);
+                            overdueReason: null | string;
+                            unexpected: null | (number);
+                            cbmStatus: null | (number);
+                            loggedBy: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            history: null | string;
+                            mlStatus: null | (number);
+                            followStatusId: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     } & (Record<string, never> | null);
                 };
             };
@@ -28365,97 +28626,73 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    currencyCode?: null | string;
-                    transCodeId01?: null | (number);
-                    transCodeId02?: null | (number);
-                    transCodeId03?: null | (number);
-                    transCodeId04?: null | (number);
-                    transCodeId05?: null | (number);
-                    transCodeId06?: null | (number);
-                    transCodeId07?: null | (number);
-                    transCodeId08?: null | (number);
-                    transCodeId09?: null | (number);
-                    transCodeId10?: null | (number);
-                    logRate1?: null | (number);
-                    logRate2?: null | (number);
-                    logRate3?: null | (number);
-                    logRate4?: null | (number);
-                    logBonus1?: null | (number);
-                    logBonus2?: null | (number);
-                    logBonus3?: null | (number);
-                    logBonus4?: null | (number);
-                    rate1Hours?: null | number;
-                    rate2Hours?: null | number;
-                    rate3Hours?: null | number;
-                    rate4Hours?: null | number;
-                    bonus1Hours?: null | (number);
-                    bonus2Hours?: null | (number);
-                    bonus3Hours?: null | (number);
-                    bonus4Hours?: null | (number);
                     exportMarker?: null | (number);
+                    timeSpent?: null | (number);
                     lastupdate?: null | number);
+                    tblDiscipline?: {
+                        connect?: {
+                            discId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblEmployee?: {
+                        connect?: {
+                            employeeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintLog?: {
+                        connect?: {
+                            maintLogId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
                 "application/x-www-form-urlencoded": {
-                    currencyCode?: null | string;
-                    transCodeId01?: null | (number);
-                    transCodeId02?: null | (number);
-                    transCodeId03?: null | (number);
-                    transCodeId04?: null | (number);
-                    transCodeId05?: null | (number);
-                    transCodeId06?: null | (number);
-                    transCodeId07?: null | (number);
-                    transCodeId08?: null | (number);
-                    transCodeId09?: null | (number);
-                    transCodeId10?: null | (number);
-                    logRate1?: null | (number);
-                    logRate2?: null | (number);
-                    logRate3?: null | (number);
-                    logRate4?: null | (number);
-                    logBonus1?: null | (number);
-                    logBonus2?: null | (number);
-                    logBonus3?: null | (number);
-                    logBonus4?: null | (number);
-                    rate1Hours?: null | number;
-                    rate2Hours?: null | number;
-                    rate3Hours?: null | number;
-                    rate4Hours?: null | number;
-                    bonus1Hours?: null | (number);
-                    bonus2Hours?: null | (number);
-                    bonus3Hours?: null | (number);
-                    bonus4Hours?: null | (number);
                     exportMarker?: null | (number);
+                    timeSpent?: null | (number);
                     lastupdate?: null | number);
+                    tblDiscipline?: {
+                        connect?: {
+                            discId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblEmployee?: {
+                        connect?: {
+                            employeeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintLog?: {
+                        connect?: {
+                            maintLogId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
                 "multipart/form-data": {
-                    currencyCode?: null | string;
-                    transCodeId01?: null | (number);
-                    transCodeId02?: null | (number);
-                    transCodeId03?: null | (number);
-                    transCodeId04?: null | (number);
-                    transCodeId05?: null | (number);
-                    transCodeId06?: null | (number);
-                    transCodeId07?: null | (number);
-                    transCodeId08?: null | (number);
-                    transCodeId09?: null | (number);
-                    transCodeId10?: null | (number);
-                    logRate1?: null | (number);
-                    logRate2?: null | (number);
-                    logRate3?: null | (number);
-                    logRate4?: null | (number);
-                    logBonus1?: null | (number);
-                    logBonus2?: null | (number);
-                    logBonus3?: null | (number);
-                    logBonus4?: null | (number);
-                    rate1Hours?: null | number;
-                    rate2Hours?: null | number;
-                    rate3Hours?: null | number;
-                    rate4Hours?: null | number;
-                    bonus1Hours?: null | (number);
-                    bonus2Hours?: null | (number);
-                    bonus3Hours?: null | (number);
-                    bonus4Hours?: null | (number);
                     exportMarker?: null | (number);
+                    timeSpent?: null | (number);
                     lastupdate?: null | number);
+                    tblDiscipline?: {
+                        connect?: {
+                            discId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblEmployee?: {
+                        connect?: {
+                            employeeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblMaintLog?: {
+                        connect?: {
+                            maintLogId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
             };
         };
@@ -28471,38 +28708,70 @@ export interface operations {
                         maintLogId: null | (number);
                         employeeId: null | (number);
                         discId: null | (number);
-                        currencyCode: null | string;
-                        transCodeId01: null | (number);
-                        transCodeId02: null | (number);
-                        transCodeId03: null | (number);
-                        transCodeId04: null | (number);
-                        transCodeId05: null | (number);
-                        transCodeId06: null | (number);
-                        transCodeId07: null | (number);
-                        transCodeId08: null | (number);
-                        transCodeId09: null | (number);
-                        transCodeId10: null | (number);
-                        logRate1: null | (number);
-                        logRate2: null | (number);
-                        logRate3: null | (number);
-                        logRate4: null | (number);
-                        logBonus1: null | (number);
-                        logBonus2: null | (number);
-                        logBonus3: null | (number);
-                        logBonus4: null | (number);
-                        rate1Hours: null | number;
-                        rate2Hours: null | number;
-                        rate3Hours: null | number;
-                        rate4Hours: null | number;
-                        bonus1Hours: null | (number);
-                        bonus2Hours: null | (number);
-                        bonus3Hours: null | (number);
-                        bonus4Hours: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
+                        timeSpent: null | (number);
                         lastupdate: null | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblDiscipline?: null | {
+                            discId: number;
+                            code: null | string;
+                            name: null | string;
+                            externalDisc: null | (number);
+                            parentDiscId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblEmployee?: null | {
+                            employeeId: number;
+                            code: null | string;
+                            lastName: null | string;
+                            firstName: null | string;
+                            available: null | (number);
+                            discId: null | (number);
+                            addressId: null | (number);
+                            notes: null | string;
+                            initials: null | string;
+                            empTitle: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintLog?: null | {
+                            maintLogId: number;
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintClassId: null | (number);
+                            functionId: null | (number);
+                            jobDescId: null | (number);
+                            workOrderId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            totalDuration: null | (number);
+                            downTime: null | (number);
+                            dateDone: null | number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            overdueCount: null | (number);
+                            overdueReason: null | string;
+                            unexpected: null | (number);
+                            cbmStatus: null | (number);
+                            loggedBy: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            history: null | string;
+                            mlStatus: null | (number);
+                            followStatusId: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -28532,38 +28801,70 @@ export interface operations {
                         maintLogId: null | (number);
                         employeeId: null | (number);
                         discId: null | (number);
-                        currencyCode: null | string;
-                        transCodeId01: null | (number);
-                        transCodeId02: null | (number);
-                        transCodeId03: null | (number);
-                        transCodeId04: null | (number);
-                        transCodeId05: null | (number);
-                        transCodeId06: null | (number);
-                        transCodeId07: null | (number);
-                        transCodeId08: null | (number);
-                        transCodeId09: null | (number);
-                        transCodeId10: null | (number);
-                        logRate1: null | (number);
-                        logRate2: null | (number);
-                        logRate3: null | (number);
-                        logRate4: null | (number);
-                        logBonus1: null | (number);
-                        logBonus2: null | (number);
-                        logBonus3: null | (number);
-                        logBonus4: null | (number);
-                        rate1Hours: null | number;
-                        rate2Hours: null | number;
-                        rate3Hours: null | number;
-                        rate4Hours: null | number;
-                        bonus1Hours: null | (number);
-                        bonus2Hours: null | (number);
-                        bonus3Hours: null | (number);
-                        bonus4Hours: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
+                        timeSpent: null | (number);
                         lastupdate: null | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        tblDiscipline?: null | {
+                            discId: number;
+                            code: null | string;
+                            name: null | string;
+                            externalDisc: null | (number);
+                            parentDiscId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblEmployee?: null | {
+                            employeeId: number;
+                            code: null | string;
+                            lastName: null | string;
+                            firstName: null | string;
+                            available: null | (number);
+                            discId: null | (number);
+                            addressId: null | (number);
+                            notes: null | string;
+                            initials: null | string;
+                            empTitle: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        tblMaintLog?: null | {
+                            maintLogId: number;
+                            maintCauseId: null | (number);
+                            maintTypeId: null | (number);
+                            maintClassId: null | (number);
+                            functionId: null | (number);
+                            jobDescId: null | (number);
+                            workOrderId: null | (number);
+                            compId: null | (number);
+                            roundId: null | (number);
+                            totalDuration: null | (number);
+                            downTime: null | (number);
+                            dateDone: null | number);
+                            frequency: null | (number);
+                            frequencyPeriod: null | (number);
+                            overdueCount: null | (number);
+                            overdueReason: null | string;
+                            unexpected: null | (number);
+                            cbmStatus: null | (number);
+                            loggedBy: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            history: null | string;
+                            mlStatus: null | (number);
+                            followStatusId: null | (number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
                     };
                 };
             };
@@ -31249,6 +31550,18 @@ export interface operations {
                                 orderId: null | (number);
                                 userId: null | (number);
                             }[];
+                            tblLogDisciplines?: {
+                                logDiscId: number;
+                                maintLogId: null | (number);
+                                employeeId: null | (number);
+                                discId: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                timeSpent: null | (number);
+                                lastupdate: null | number);
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
                             tblComponentUnit?: null | {
                                 compId: number;
                                 compTypeId: null | (number);
@@ -31527,6 +31840,11 @@ export interface operations {
                             logCounterId: number;
                         }[];
                     };
+                    tblLogDisciplines?: {
+                        connect: {
+                            logDiscId: number;
+                        }[];
+                    };
                     tblComponentUnit?: {
                         connect: {
                             compId: number;
@@ -31589,7 +31907,7 @@ export interface operations {
                     };
                     tblMaintLogStocks?: {
                         connect: {
-                            id: number;
+                            maintLogStockId: number;
                         }[];
                     };
                 };
@@ -31613,6 +31931,11 @@ export interface operations {
                             logCounterId: number;
                         }[];
                     };
+                    tblLogDisciplines?: {
+                        connect: {
+                            logDiscId: number;
+                        }[];
+                    };
                     tblComponentUnit?: {
                         connect: {
                             compId: number;
@@ -31675,7 +31998,7 @@ export interface operations {
                     };
                     tblMaintLogStocks?: {
                         connect: {
-                            id: number;
+                            maintLogStockId: number;
                         }[];
                     };
                 };
@@ -31699,6 +32022,11 @@ export interface operations {
                             logCounterId: number;
                         }[];
                     };
+                    tblLogDisciplines?: {
+                        connect: {
+                            logDiscId: number;
+                        }[];
+                    };
                     tblComponentUnit?: {
                         connect: {
                             compId: number;
@@ -31761,7 +32089,7 @@ export interface operations {
                     };
                     tblMaintLogStocks?: {
                         connect: {
-                            id: number;
+                            maintLogStockId: number;
                         }[];
                     };
                 };
@@ -31811,6 +32139,18 @@ export interface operations {
                             overdueCount: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblLogDisciplines?: {
+                            logDiscId: number;
+                            maintLogId: null | (number);
+                            employeeId: null | (number);
+                            discId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
@@ -32149,6 +32489,18 @@ export interface operations {
                             orderId: null | (number);
                             userId: null | (number);
                         }[];
+                        tblLogDisciplines?: {
+                            logDiscId: number;
+                            maintLogId: null | (number);
+                            employeeId: null | (number);
+                            discId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            timeSpent: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblComponentUnit?: null | {
                             compId: number;
                             compTypeId: null | (number);
@@ -32427,6 +32779,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblLogDisciplines?: {
+                        connect?: {
+                            logDiscId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblComponentUnit?: {
                         connect?: {
                             compId: number;
@@ -32503,7 +32863,7 @@ export interface operations {
                     };
                     tblMaintLogStocks?: {
                         connect?: {
-                            id: number;
+                            maintLogStockId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -32533,6 +32893,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblLogDisciplines?: {
+                        connect?: {
+                            logDiscId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblComponentUnit?: {
                         connect?: {
                             compId: number;
@@ -32609,7 +32977,7 @@ export interface operations {
                     };
                     tblMaintLogStocks?: {
                         connect?: {
-                            id: number;
+                            maintLogStockId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -32639,6 +33007,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblLogDisciplines?: {
+                        connect?: {
+                            logDiscId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblComponentUnit?: {
                         connect?: {
                             compId: number;
@@ -32715,7 +33091,7 @@ export interface operations {
                     };
                     tblMaintLogStocks?: {
                         connect?: {
-                            id: number;
+                            maintLogStockId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -32768,6 +33144,18 @@ export interface operations {
                             overdueCount: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblLogDisciplines?: {
+                            logDiscId: number;
+                            maintLogId: null | (number);
+                            employeeId: null | (number);
+                            discId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
@@ -33072,6 +33460,18 @@ export interface operations {
                             overdueCount: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
+                        tblLogDisciplines?: {
+                            logDiscId: number;
+                            maintLogId: null | (number);
+                            employeeId: null | (number);
+                            discId: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
@@ -39612,12 +40012,12 @@ export interface operations {
                     lastupdate?: null | number);
                     tblMaintLogStocks?: {
                         connect: {
-                            id: number;
+                            maintLogStockId: number;
                         }[];
                     };
                     tblStockType?: {
                         connect: {
-                            id: number;
+                            stockTypeId: number;
                         };
                     };
                 };
@@ -39625,12 +40025,12 @@ export interface operations {
                     lastupdate?: null | number);
                     tblMaintLogStocks?: {
                         connect: {
-                            id: number;
+                            maintLogStockId: number;
                         }[];
                     };
                     tblStockType?: {
                         connect: {
-                            id: number;
+                            stockTypeId: number;
                         };
                     };
                 };
@@ -39638,12 +40038,12 @@ export interface operations {
                     lastupdate?: null | number);
                     tblMaintLogStocks?: {
                         connect: {
-                            id: number;
+                            maintLogStockId: number;
                         }[];
                     };
                     tblStockType?: {
                         connect: {
-                            id: number;
+                            stockTypeId: number;
                         };
                     };
                 };
@@ -39784,7 +40184,7 @@ export interface operations {
                     lastupdate?: null | number);
                     tblMaintLogStocks?: {
                         connect?: {
-                            id: number;
+                            maintLogStockId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -39792,7 +40192,7 @@ export interface operations {
                     };
                     tblStockType?: {
                         connect?: {
-                            id: number;
+                            stockTypeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -39801,7 +40201,7 @@ export interface operations {
                     lastupdate?: null | number);
                     tblMaintLogStocks?: {
                         connect?: {
-                            id: number;
+                            maintLogStockId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -39809,7 +40209,7 @@ export interface operations {
                     };
                     tblStockType?: {
                         connect?: {
-                            id: number;
+                            stockTypeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -39818,7 +40218,7 @@ export interface operations {
                     lastupdate?: null | number);
                     tblMaintLogStocks?: {
                         connect?: {
-                            id: number;
+                            maintLogStockId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -39826,7 +40226,7 @@ export interface operations {
                     };
                     tblStockType?: {
                         connect?: {
-                            id: number;
+                            stockTypeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -40038,12 +40438,12 @@ export interface operations {
                     lastupdate?: null | number);
                     tblStockItems?: {
                         connect: {
-                            id: number;
+                            stockItemId: number;
                         }[];
                     };
                     tblStockType?: {
                         connect: {
-                            id: number;
+                            stockTypeId: number;
                         };
                     };
                     otherTblStockTypes?: {
@@ -40059,12 +40459,12 @@ export interface operations {
                     lastupdate?: null | number);
                     tblStockItems?: {
                         connect: {
-                            id: number;
+                            stockItemId: number;
                         }[];
                     };
                     tblStockType?: {
                         connect: {
-                            id: number;
+                            stockTypeId: number;
                         };
                     };
                     otherTblStockTypes?: {
@@ -40080,12 +40480,12 @@ export interface operations {
                     lastupdate?: null | number);
                     tblStockItems?: {
                         connect: {
-                            id: number;
+                            stockItemId: number;
                         }[];
                     };
                     tblStockType?: {
                         connect: {
-                            id: number;
+                            stockTypeId: number;
                         };
                     };
                     otherTblStockTypes?: {
@@ -40250,7 +40650,7 @@ export interface operations {
                     lastupdate?: null | number);
                     tblStockItems?: {
                         connect?: {
-                            id: number;
+                            stockItemId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -40258,7 +40658,7 @@ export interface operations {
                     };
                     tblStockType?: {
                         connect?: {
-                            id: number;
+                            stockTypeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -40278,7 +40678,7 @@ export interface operations {
                     lastupdate?: null | number);
                     tblStockItems?: {
                         connect?: {
-                            id: number;
+                            stockItemId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -40286,7 +40686,7 @@ export interface operations {
                     };
                     tblStockType?: {
                         connect?: {
-                            id: number;
+                            stockTypeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -40306,7 +40706,7 @@ export interface operations {
                     lastupdate?: null | number);
                     tblStockItems?: {
                         connect?: {
-                            id: number;
+                            stockItemId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -40314,7 +40714,7 @@ export interface operations {
                     };
                     tblStockType?: {
                         connect?: {
-                            id: number;
+                            stockTypeId: number;
                         };
                         disconnect?: boolean;
                     };

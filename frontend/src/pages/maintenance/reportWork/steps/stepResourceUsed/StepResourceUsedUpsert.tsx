@@ -1,42 +1,49 @@
 import * as z from 'zod'
-import FormDialog from '@/shared/components/formDialog/FormDialog'
 import { memo, useEffect, useState, useCallback } from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { tblEmployee, TypeTblEmployee } from '@/core/api/generated/api'
+
+import FormDialog from '@/shared/components/formDialog/FormDialog'
 import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
 import NumberField from '@/shared/components/NumberField'
 
-// === Validation Schema ===
+import {
+  tblEmployee,
+  tblLogDiscipline,
+  TypeTblEmployee,
+  TypeTblLogDiscipline,
+} from '@/core/api/generated/api'
+import { buildRelation } from '@/core/api/helper'
+import { useAtomValue } from 'jotai'
+import { atomInitalData } from '../../ReportWorkAtom'
+
+/* =========================
+   Schema
+========================= */
 const schema = z.object({
-  employee: z
+  employee: z.custom<TypeTblEmployee>().nullable(),
+  disipline: z
     .object({
-      employeeId: z.number(),
-      firstName: z.string().nullable().optional(),
-      lastName: z.string().nullable().optional(),
-      tblDiscipline: z
-        .object({
-          discId: z.number(),
-          name: z.string().nullable().optional(),
-        })
-        .nullable()
-        .optional(),
+      discId: z.number(),
+      name: z.string().nullable().optional(),
     })
     .nullable(),
-  discipline: z.string().nullable().optional(),
   timeSpent: z.number().min(0, 'Time spent must be greater than 0'),
 })
 
 export type StepResourceUsedFormValues = z.infer<typeof schema>
 
+/* =========================
+   Props
+========================= */
 type Props = {
   open: boolean
   mode: 'create' | 'update'
   recordId?: number | null
   onClose: () => void
-  onSuccess: (data: StepResourceUsedFormValues) => void
+  onSuccess: (data: TypeTblLogDiscipline) => void
 }
 
 function StepResourceUsedFormDialog({
@@ -48,38 +55,48 @@ function StepResourceUsedFormDialog({
 }: Props) {
   const [loadingInitial, setLoadingInitial] = useState(false)
   const [submitting, setSubmitting] = useState(false)
-  const [selectedEmployee, setSelectedEmployee] =
-    useState<TypeTblEmployee | null>(null)
+  const { maintLog } = useAtomValue(atomInitalData)
+
+  const maintLogId = maintLog?.maintLogId
 
   const defaultValues: StepResourceUsedFormValues = {
     employee: null,
-    discipline: null,
+    disipline: null,
     timeSpent: 0,
   }
 
-  const { control, handleSubmit, reset, watch } =
+  const { control, handleSubmit, reset, setValue } =
     useForm<StepResourceUsedFormValues>({
       resolver: zodResolver(schema),
       defaultValues,
     })
 
-  const employeeValue = watch('employee')
+  const isDisabled = loadingInitial || submitting
 
-  // === Load record in edit mode ===
+  /* =========================
+     Load (Edit mode)
+  ========================= */
   const fetchData = useCallback(async () => {
     if (mode !== 'update' || !recordId) {
       reset(defaultValues)
-      setSelectedEmployee(null)
       return
     }
 
     setLoadingInitial(true)
 
     try {
-      // در اینجا می‌تونی از API بخونی اگر نیاز باشه
-      // فعلا فقط default set می‌کنیم
-      reset(defaultValues)
-      setSelectedEmployee(null)
+      const res = await tblLogDiscipline.getById(recordId, {
+        include: {
+          tblEmployee: true,
+          tblDiscipline: true,
+        },
+      })
+
+      reset({
+        employee: res.tblEmployee ?? null,
+        disipline: res.tblDiscipline ?? null,
+        timeSpent: res.timeSpent ?? 0,
+      })
     } finally {
       setLoadingInitial(false)
     }
@@ -89,52 +106,60 @@ function StepResourceUsedFormDialog({
     if (open) fetchData()
   }, [open, fetchData])
 
-  // === Update discipline display when employee changes ===
-  useEffect(() => {
-    if (employeeValue?.tblDiscipline) {
-      // نمایش نام discipline بر اساس انتخاب شده
-    }
-  }, [employeeValue])
-
-  const isDisabled = loadingInitial || submitting
-
-  // === Submit Handler ===
+  /* =========================
+     Submit
+  ========================= */
   const handleFormSubmit = useCallback(
     async (values: StepResourceUsedFormValues) => {
       const parsed = schema.safeParse(values)
-      if (!parsed.success) return
+      if (!parsed.success || !maintLogId) return
 
       try {
         setSubmitting(true)
 
-        // ===== API CALL SECTION =====
-        // TODO: درخواست را برای ایجاد (POST) یا به‌روزرسانی (PUT) تنظیم کنید
-        /*
-        if (mode === "create") {
-          // POST Request
-          const result = await tblStepResourceUsed.create({
-            employeeId: parsed.data.employee?.employeeId,
-            timeSpent: parsed.data.timeSpent,
-            // سایر فیلدها...
-          });
-        } else {
-          // PUT Request
-          const result = await tblStepResourceUsed.update(recordId!, {
-            employeeId: parsed.data.employee?.employeeId,
-            timeSpent: parsed.data.timeSpent,
-            // سایر فیلدها...
-          });
-        }
-        */
+        const employeeRelation = buildRelation(
+          'tblEmployee',
+          'employeeId',
+          parsed.data.employee?.employeeId ?? null
+        )
 
-        // فعلا فقط داده‌ها رو بفرست
-        onSuccess(values)
+        const disciplineRelation = buildRelation(
+          'tblDiscipline',
+          'discId',
+          parsed.data.disipline?.discId ?? null
+        )
+
+        const maintLogRelation = buildRelation(
+          'tblMaintLog',
+          'maintLogId',
+          maintLogId
+        )
+
+        let result: TypeTblLogDiscipline
+
+        if (mode === 'create') {
+          result = await tblLogDiscipline.create({
+            timeSpent: parsed.data.timeSpent,
+            ...employeeRelation,
+            ...disciplineRelation,
+            ...maintLogRelation,
+          })
+        } else {
+          result = await tblLogDiscipline.update(recordId!, {
+            timeSpent: parsed.data.timeSpent,
+            ...employeeRelation,
+            ...disciplineRelation,
+            ...maintLogRelation,
+          })
+        }
+
+        onSuccess(result)
         onClose()
       } finally {
         setSubmitting(false)
       }
     },
-    [mode, recordId, onSuccess, onClose]
+    [mode, recordId, maintLogId, onClose, onSuccess]
   )
 
   return (
@@ -150,39 +175,41 @@ function StepResourceUsedFormDialog({
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display='grid' gridTemplateColumns='repeat(1, 1fr)' gap={1.5}>
-        {/* Employee Select - Required */}
+      <Box display='grid' gridTemplateColumns='1fr' gap={1.5}>
+        {/* ================= Employee ================= */}
         <Controller
           name='employee'
           control={control}
-          rules={{
-            required: 'Employee is required',
-          }}
+          rules={{ required: 'Employee is required' }}
           render={({ field, fieldState }) => (
-            <AsyncSelectField
+            <AsyncSelectField<TypeTblEmployee>
               dialogMaxWidth='sm'
               label='Employee *'
               selectionMode='single'
               value={field.value}
+              getOptionLabel={row => row.firstName + ' ' + row.lastName}
               request={() =>
                 tblEmployee.getAll({
                   include: { tblDiscipline: true },
                 })
               }
               columns={[
-                {
-                  field: 'firstName',
-                  headerName: 'First Name',
-                  flex: 1,
-                },
-                {
-                  field: 'lastName',
-                  headerName: 'Last Name',
-                  flex: 1,
-                },
+                { field: 'firstName', headerName: 'First Name', flex: 1 },
+                { field: 'lastName', headerName: 'Last Name', flex: 1 },
               ]}
               getRowId={row => row.employeeId}
-              onChange={field.onChange}
+              onChange={value => {
+                field.onChange(value)
+                setValue(
+                  'disipline',
+                  value?.tblDiscipline
+                    ? {
+                        discId: value.tblDiscipline.discId,
+                        name: value.tblDiscipline.name,
+                      }
+                    : null
+                )
+              }}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}
@@ -190,37 +217,34 @@ function StepResourceUsedFormDialog({
           )}
         />
 
-        {/* Discipline Display - Read Only */}
+        {/* ================= Discipline ================= */}
         <Controller
-          name='discipline'
+          name='disipline'
           control={control}
           render={({ field }) => (
             <TextField
-              {...field}
               label='Discipline'
               size='small'
-              disabled={true}
-              value={employeeValue?.tblDiscipline?.name || ''}
+              disabled
+              value={field.value?.name ?? ''}
             />
           )}
         />
 
-        {/* Time Spent - Required */}
+        {/* ================= Time Spent ================= */}
         <Controller
           name='timeSpent'
           control={control}
-          rules={{
-            required: 'Time spent is required',
-          }}
+          rules={{ required: 'Time spent is required' }}
           render={({ field, fieldState }) => (
             <NumberField
               {...field}
               label='Time Spent (Hours) *'
               size='small'
+              value={field.value ?? 0}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}
-              value={field.value ?? 0}
               onChange={value => field.onChange(value)}
             />
           )}

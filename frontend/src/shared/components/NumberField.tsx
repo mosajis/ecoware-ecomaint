@@ -31,6 +31,7 @@ const NumberField = ({
   return (
     <TextField
       {...restProps}
+      size='small'
       label={label}
       type='number'
       value={resolvedValue ?? ''}

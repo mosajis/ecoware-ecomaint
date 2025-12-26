@@ -7,10 +7,9 @@ import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActio
 import { GridColDef } from '@mui/x-data-grid'
 import { atomInitalData } from '../../ReportWorkAtom'
 import {
-  tblDiscipline,
-  tblEmployee,
+  tblLogDiscipline,
   TypeTblEmployee,
-  users,
+  TypeTblLogDiscipline,
 } from '@/core/api/generated/api'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 
@@ -27,36 +26,45 @@ const TabResourceUsed = () => {
     setOpenForm(true)
   }
 
-  const handleEdit = (row: TypeTblEmployee) => {
-    setSelectedRowId(row.employeeId)
+  const handleEdit = (row: TypeTblLogDiscipline) => {
+    setSelectedRowId(row.logDiscId)
     setMode('update')
     setOpenForm(true)
   }
 
   const getAll = useCallback(() => {
-    return tblEmployee.getAll({
-      include: { tblDiscipline: true },
+    return tblLogDiscipline.getAll({
+      filter: {
+        maintLogId: initData.maintLog?.maintLogId,
+      },
+      include: { tblDiscipline: true, tblEmployee: true },
     })
-  }, [])
+  }, [initData.maintLog?.maintLogId])
 
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
     getAll,
-    tblEmployee.deleteById,
-    'employeeId'
+    tblLogDiscipline.deleteById,
+    'logDiscId'
   )
 
-  const handleFormSuccess = (newRow: TypeTblEmployee) => {
+  const handleFormSuccess = () => {
     setOpenForm(false)
     handleRefresh()
   }
 
   // === Columns ===
-  const columns: GridColDef<TypeTblEmployee>[] = [
+  const columns: GridColDef<TypeTblLogDiscipline>[] = [
     {
-      field: 'lastName',
+      field: 'logDiscId',
+      headerName: 'Id',
+      flex: 1,
+    },
+    {
+      field: 'name',
       headerName: 'Resource Name',
       flex: 1,
-      valueGetter: (_, row) => `${row.firstName} ${row.lastName}`,
+      valueGetter: (_, row) =>
+        `${row?.tblEmployee?.firstName} ${row?.tblEmployee?.lastName}`,
     },
     {
       field: 'discipline',
@@ -86,19 +94,18 @@ const TabResourceUsed = () => {
           rows={rows}
           columns={columns}
           onAddClick={handleCreate}
-          getRowId={row => row.employeeId}
-        />
-        <StepResourceUsedUpsert
-          open={openForm}
-          mode={mode}
-          recordId={selectedRowId}
-          onClose={() => setOpenForm(false)}
-          // onSuccess={handleFormSuccess}
-          onSuccess={() => {}}
+          getRowId={row => row.logDiscId}
         />
       </ReportWorkStep>
 
       {/* === FORM === */}
+      <StepResourceUsedUpsert
+        open={openForm}
+        mode={mode}
+        recordId={selectedRowId}
+        onClose={() => setOpenForm(false)}
+        onSuccess={handleFormSuccess}
+      />
     </>
   )
 }

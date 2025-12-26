@@ -14,6 +14,7 @@ import { GridColDef } from '@mui/x-data-grid'
 import { useCallback, useMemo, useState } from 'react'
 import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { formatDateTime } from '@/core/api/helper'
+import CellBoolean from '@/shared/components/dataGrid/cells/CellBoolean'
 
 export default function PageMaintLog() {
   const [openDialogReportWork, setOpenDialogReportWork] = useState(false)
@@ -65,6 +66,7 @@ export default function PageMaintLog() {
       {
         field: 'jobCode',
         headerName: 'JobCode',
+        width: 100,
         valueGetter: (_, row) => row.tblJobDescription?.jobDescCode ?? '',
       },
       {
@@ -76,7 +78,7 @@ export default function PageMaintLog() {
       {
         field: 'dateDone',
         headerName: 'DateDone',
-        flex: 1,
+        width: 130,
         valueFormatter: value => (value ? formatDateTime(value) : ''),
       },
       // {
@@ -147,8 +149,7 @@ export default function PageMaintLog() {
       {
         field: 'unplanned',
         headerName: 'Unplanned',
-
-        valueGetter: (_, row) => (row.unexpected ? 'Yes' : 'No'),
+        renderCell: ({ row }) => <CellBoolean status={row.unexpected} />,
       },
 
       dataGridActionColumn({ onDelete: handleDelete, onEdit: handleEdit }),
