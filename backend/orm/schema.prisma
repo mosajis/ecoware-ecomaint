@@ -884,10 +884,10 @@ model TblLogDiscipline {
   discId        Int?           @map("DiscID")
   deptId        Int?           @map("DeptID")
   exportMarker  Int?           @map("ExportMarker")
-  timeSpent     Int?           @map("TimeSpent")
   lastupdate    DateTime?      @db.DateTime
   orderId       Int?           @map("OrderID")
   userId        Int?           @map("UserID")
+  timeSpent     Int?           @map("TimeSpent")
   tblDiscipline TblDiscipline? @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLogDiscipline_tblDiscipline")
   tblEmployee   TblEmployee?   @relation(fields: [employeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLogDiscipline_tblEmployee")
   tblMaintLog   TblMaintLog?   @relation(fields: [maintLogId], references: [maintLogId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLogDiscipline_tblMaintLog")

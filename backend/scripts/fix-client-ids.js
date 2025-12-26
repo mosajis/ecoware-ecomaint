@@ -43,7 +43,7 @@ const TablePKs = {
   TblMaintCause: 'MaintCauseID',
   TblMaintClass: 'MaintClassID',
   TblMaintLog: 'MaintLogID',
-  TblMaintLogStocks: 'MaintLogStockId',
+  TblMaintLogStocks: 'MaintLogStockID',
   TblMaintLogFollow: 'FollowID',
   TblMaintType: 'MaintTypeID',
   TblOilSamplingLog: 'OilSamplingLogID',

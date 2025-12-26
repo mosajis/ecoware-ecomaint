@@ -20380,10 +20380,10 @@ export interface operations {
                                 discId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
-                                timeSpent: null | (number);
                                 lastupdate: null | number);
                                 orderId: null | (number);
                                 userId: null | (number);
+                                timeSpent: null | (number);
                             }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
@@ -20660,10 +20660,10 @@ export interface operations {
                             discId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
-                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            timeSpent: null | (number);
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -20870,10 +20870,10 @@ export interface operations {
                             discId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
-                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            timeSpent: null | (number);
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -21192,10 +21192,10 @@ export interface operations {
                             discId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
-                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            timeSpent: null | (number);
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -21372,10 +21372,10 @@ export interface operations {
                             discId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
-                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            timeSpent: null | (number);
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -21525,10 +21525,10 @@ export interface operations {
                                 discId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
-                                timeSpent: null | (number);
                                 lastupdate: null | number);
                                 orderId: null | (number);
                                 userId: null | (number);
+                                timeSpent: null | (number);
                             }[];
                         }[];
                         total: number;
@@ -21687,10 +21687,10 @@ export interface operations {
                             discId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
-                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            timeSpent: null | (number);
                         }[];
                     };
                 };
@@ -21797,10 +21797,10 @@ export interface operations {
                             discId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
-                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            timeSpent: null | (number);
                         }[];
                     } & (Record<string, never> | null);
                 };
@@ -21971,10 +21971,10 @@ export interface operations {
                             discId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
-                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            timeSpent: null | (number);
                         }[];
                     };
                 };
@@ -22051,10 +22051,10 @@ export interface operations {
                             discId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
-                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            timeSpent: null | (number);
                         }[];
                     };
                 };
@@ -28267,10 +28267,10 @@ export interface operations {
                             discId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
-                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            timeSpent: null | (number);
                             tblDiscipline?: null | {
                                 discId: number;
                                 code: null | string;
@@ -28350,8 +28350,8 @@ export interface operations {
             content: {
                 "application/json": {
                     exportMarker?: null | (number);
-                    timeSpent?: null | (number);
                     lastupdate?: null | number);
+                    timeSpent?: null | (number);
                     tblDiscipline?: {
                         connect: {
                             discId: number;
@@ -28370,8 +28370,8 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     exportMarker?: null | (number);
-                    timeSpent?: null | (number);
                     lastupdate?: null | number);
+                    timeSpent?: null | (number);
                     tblDiscipline?: {
                         connect: {
                             discId: number;
@@ -28390,8 +28390,8 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     exportMarker?: null | (number);
-                    timeSpent?: null | (number);
                     lastupdate?: null | number);
+                    timeSpent?: null | (number);
                     tblDiscipline?: {
                         connect: {
                             discId: number;
@@ -28424,10 +28424,10 @@ export interface operations {
                         discId: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
-                        timeSpent: null | (number);
                         lastupdate: null | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        timeSpent: null | (number);
                         tblDiscipline?: null | {
                             discId: number;
                             code: null | string;
@@ -28547,10 +28547,10 @@ export interface operations {
                         discId: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
-                        timeSpent: null | (number);
                         lastupdate: null | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        timeSpent: null | (number);
                         tblDiscipline?: null | {
                             discId: number;
                             code: null | string;
@@ -28627,8 +28627,8 @@ export interface operations {
             content: {
                 "application/json": {
                     exportMarker?: null | (number);
-                    timeSpent?: null | (number);
                     lastupdate?: null | number);
+                    timeSpent?: null | (number);
                     tblDiscipline?: {
                         connect?: {
                             discId: number;
@@ -28650,8 +28650,8 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     exportMarker?: null | (number);
-                    timeSpent?: null | (number);
                     lastupdate?: null | number);
+                    timeSpent?: null | (number);
                     tblDiscipline?: {
                         connect?: {
                             discId: number;
@@ -28673,8 +28673,8 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     exportMarker?: null | (number);
-                    timeSpent?: null | (number);
                     lastupdate?: null | number);
+                    timeSpent?: null | (number);
                     tblDiscipline?: {
                         connect?: {
                             discId: number;
@@ -28710,10 +28710,10 @@ export interface operations {
                         discId: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
-                        timeSpent: null | (number);
                         lastupdate: null | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        timeSpent: null | (number);
                         tblDiscipline?: null | {
                             discId: number;
                             code: null | string;
@@ -28803,10 +28803,10 @@ export interface operations {
                         discId: null | (number);
                         deptId: null | (number);
                         exportMarker: null | (number);
-                        timeSpent: null | (number);
                         lastupdate: null | number);
                         orderId: null | (number);
                         userId: null | (number);
+                        timeSpent: null | (number);
                         tblDiscipline?: null | {
                             discId: number;
                             code: null | string;
@@ -31557,10 +31557,10 @@ export interface operations {
                                 discId: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
-                                timeSpent: null | (number);
                                 lastupdate: null | number);
                                 orderId: null | (number);
                                 userId: null | (number);
+                                timeSpent: null | (number);
                             }[];
                             tblComponentUnit?: null | {
                                 compId: number;
@@ -32150,10 +32150,10 @@ export interface operations {
                             discId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
-                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            timeSpent: null | (number);
                         }[];
                         tblComponentUnit?: null | {
                             compId: number;
@@ -32496,10 +32496,10 @@ export interface operations {
                             discId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
-                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            timeSpent: null | (number);
                         }[];
                         tblComponentUnit?: null | {
                             compId: number;
@@ -33155,10 +33155,10 @@ export interface operations {
                             discId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
-                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            timeSpent: null | (number);
                         }[];
                         tblComponentUnit?: null | {
                             compId: number;
@@ -33471,10 +33471,10 @@ export interface operations {
                             discId: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
-                            timeSpent: null | (number);
                             lastupdate: null | number);
                             orderId: null | (number);
                             userId: null | (number);
+                            timeSpent: null | (number);
                         }[];
                         tblComponentUnit?: null | {
                             compId: number;
