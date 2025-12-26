@@ -1,5 +1,5 @@
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import ReportWorkStep from '../ReportWorkStep'
+import ReportWorkStep from '../../ReportWorkStep'
 
 const TabStockUsed = () => {
   const columns = [

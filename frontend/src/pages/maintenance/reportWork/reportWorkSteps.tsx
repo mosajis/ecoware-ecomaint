@@ -6,7 +6,9 @@ import AttachFile from '@mui/icons-material/AttachFile'
 import Straighten from '@mui/icons-material/Straighten'
 
 const General = React.lazy(() => import('./steps/stepGeneral/StepGeneral'))
-const StockUsed = React.lazy(() => import('./steps/StepStockUsed'))
+const StockUsed = React.lazy(
+  () => import('./steps/stepStockUsed/StepStockUsed')
+)
 const Attachments = React.lazy(() => import('./steps/StepAttachments'))
 const MeasurePoints = React.lazy(() => import('./steps/StepMeasurePoints'))
 const ResourceUsed = React.lazy(
