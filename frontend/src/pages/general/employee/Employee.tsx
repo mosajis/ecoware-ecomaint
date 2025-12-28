@@ -71,6 +71,7 @@ export default function PageEmployee() {
       <CustomizedDataGrid
         loading={loading}
         showToolbar
+        disableRowNumber
         label='Employee'
         rows={rows}
         columns={columns}

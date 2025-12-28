@@ -36944,6 +36944,32 @@ export interface operations {
                             description: null | string;
                             orderId: null | (number);
                             userId: null | (number);
+                            tblPendingType?: null | {
+                                pendTypeId: number;
+                                parentId: null | (number);
+                                groupId: null | (number);
+                                pendTypeName: string;
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                sortId: null | (number);
+                                description: null | string;
+                                orderId: null | (number);
+                                userId: null | (number);
+                            };
+                            otherTblPendingTypes?: {
+                                pendTypeId: number;
+                                parentId: null | (number);
+                                groupId: null | (number);
+                                pendTypeName: string;
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                sortId: null | (number);
+                                description: null | string;
+                                orderId: null | (number);
+                                userId: null | (number);
+                            }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
                                 compJobId: null | (number);
@@ -37006,6 +37032,16 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     description?: null | string;
+                    tblPendingType?: {
+                        connect: {
+                            pendTypeId: number;
+                        };
+                    };
+                    otherTblPendingTypes?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect: {
                             workOrderId: number;
@@ -37017,6 +37053,16 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     description?: null | string;
+                    tblPendingType?: {
+                        connect: {
+                            pendTypeId: number;
+                        };
+                    };
+                    otherTblPendingTypes?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect: {
                             workOrderId: number;
@@ -37028,6 +37074,16 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     description?: null | string;
+                    tblPendingType?: {
+                        connect: {
+                            pendTypeId: number;
+                        };
+                    };
+                    otherTblPendingTypes?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect: {
                             workOrderId: number;
@@ -37055,6 +37111,32 @@ export interface operations {
                         description: null | string;
                         orderId: null | (number);
                         userId: null | (number);
+                        tblPendingType?: null | {
+                            pendTypeId: number;
+                            parentId: null | (number);
+                            groupId: null | (number);
+                            pendTypeName: string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            sortId: null | (number);
+                            description: null | string;
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        otherTblPendingTypes?: {
+                            pendTypeId: number;
+                            parentId: null | (number);
+                            groupId: null | (number);
+                            pendTypeName: string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            sortId: null | (number);
+                            description: null | string;
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblWorkOrders?: {
                             workOrderId: number;
                             compJobId: null | (number);
@@ -37159,6 +37241,32 @@ export interface operations {
                         description: null | string;
                         orderId: null | (number);
                         userId: null | (number);
+                        tblPendingType?: null | {
+                            pendTypeId: number;
+                            parentId: null | (number);
+                            groupId: null | (number);
+                            pendTypeName: string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            sortId: null | (number);
+                            description: null | string;
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        otherTblPendingTypes?: {
+                            pendTypeId: number;
+                            parentId: null | (number);
+                            groupId: null | (number);
+                            pendTypeName: string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            sortId: null | (number);
+                            description: null | string;
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblWorkOrders?: {
                             workOrderId: number;
                             compJobId: null | (number);
@@ -37218,6 +37326,20 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     description?: null | string;
+                    tblPendingType?: {
+                        connect?: {
+                            pendTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblPendingTypes?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect?: {
                             workOrderId: number;
@@ -37232,6 +37354,20 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     description?: null | string;
+                    tblPendingType?: {
+                        connect?: {
+                            pendTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblPendingTypes?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect?: {
                             workOrderId: number;
@@ -37246,6 +37382,20 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     description?: null | string;
+                    tblPendingType?: {
+                        connect?: {
+                            pendTypeId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblPendingTypes?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect?: {
                             workOrderId: number;
@@ -37276,6 +37426,32 @@ export interface operations {
                         description: null | string;
                         orderId: null | (number);
                         userId: null | (number);
+                        tblPendingType?: null | {
+                            pendTypeId: number;
+                            parentId: null | (number);
+                            groupId: null | (number);
+                            pendTypeName: string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            sortId: null | (number);
+                            description: null | string;
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        otherTblPendingTypes?: {
+                            pendTypeId: number;
+                            parentId: null | (number);
+                            groupId: null | (number);
+                            pendTypeName: string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            sortId: null | (number);
+                            description: null | string;
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblWorkOrders?: {
                             workOrderId: number;
                             compJobId: null | (number);
@@ -37350,6 +37526,32 @@ export interface operations {
                         description: null | string;
                         orderId: null | (number);
                         userId: null | (number);
+                        tblPendingType?: null | {
+                            pendTypeId: number;
+                            parentId: null | (number);
+                            groupId: null | (number);
+                            pendTypeName: string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            sortId: null | (number);
+                            description: null | string;
+                            orderId: null | (number);
+                            userId: null | (number);
+                        };
+                        otherTblPendingTypes?: {
+                            pendTypeId: number;
+                            parentId: null | (number);
+                            groupId: null | (number);
+                            pendTypeName: string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            sortId: null | (number);
+                            description: null | string;
+                            orderId: null | (number);
+                            userId: null | (number);
+                        }[];
                         tblWorkOrders?: {
                             workOrderId: number;
                             compJobId: null | (number);

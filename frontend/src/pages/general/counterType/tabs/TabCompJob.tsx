@@ -1,60 +1,61 @@
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { useCallback } from "react";
-import { GridColDef } from "@mui/x-data-grid/";
+import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
+import { useCallback } from 'react'
+import { GridColDef } from '@mui/x-data-grid/'
 import {
   tblCompCounter,
   tblCompJobCounter,
   TypeTblCompJobCounter,
-} from "@/core/api/generated/api";
-import { useDataGrid } from "@/shared/hooks/useDataGrid";
+} from '@/core/api/generated/api'
+import { useDataGrid } from '@/shared/hooks/useDataGrid'
 
 interface TabCompJobCounterProps {
-  counterTypeId: number | null | undefined;
-  label?: string | null;
+  counterTypeId: number | null | undefined
+  label?: string | null
 }
 
 const columns: GridColDef<TypeTblCompJobCounter>[] = [
   {
-    field: "jobDesc",
-    headerName: "Job Description",
+    field: 'jobDesc',
+    headerName: 'Job Description',
     flex: 1,
     // @ts-ignore
     valueGetter: (_, row) => row.tblCompJob?.tblJobDescription.jobDescTitle,
   },
   {
-    field: "maintType",
-    headerName: "Maint Type (set Rrel)",
-    flex: 1,
-    valueGetter: (_, row) => row.tblCompJob?.maintTypeId,
+    field: 'maintType',
+    headerName: 'Maint Type',
+    width: 120,
+    // @ts-ignore
+    valueGetter: (_, row) => row.tblCompJob?.tblMaintType?.descr,
   },
   {
-    field: "frequency",
-    headerName: "Frequency",
-    flex: 1,
+    field: 'frequency',
+    headerName: 'Frequency',
+    width: 120,
     valueGetter: (_, row) => row.frequency,
   },
   {
-    field: "lastDoneCount",
-    headerName: "Last Done Count",
-    flex: 1,
+    field: 'lastDoneCount',
+    headerName: 'Last Done Count',
+    width: 120,
     valueGetter: (_, row) => row.lastDoneCount,
   },
   {
-    field: "nextDueCount",
-    headerName: "Next Due Count",
-    flex: 1,
+    field: 'nextDueCount',
+    headerName: 'Next Due Count',
+    width: 120,
     valueGetter: (_, row) => row.nextDueCount,
   },
   {
-    field: "window",
-    headerName: "Window",
-    flex: 1,
+    field: 'window',
+    headerName: 'Window',
+    width: 120,
     valueGetter: (_, row) => row.window,
   },
-];
+]
 
 export default function TabCompJobCounter(props: TabCompJobCounterProps) {
-  const { counterTypeId, label } = props;
+  const { counterTypeId, label } = props
 
   if (!counterTypeId) {
     return (
@@ -62,10 +63,10 @@ export default function TabCompJobCounter(props: TabCompJobCounterProps) {
         rows={[]}
         columns={columns}
         loading={false}
-        label="Job Counters"
+        label='Job Counters'
         showToolbar
       />
-    );
+    )
   }
 
   // const getAll = useCallback(async () => {
@@ -105,17 +106,18 @@ export default function TabCompJobCounter(props: TabCompJobCounterProps) {
         tblCompJob: {
           include: {
             tblJobDescription: true,
+            tblMaintType: true,
           },
         },
       },
-    });
-  }, [counterTypeId]);
+    })
+  }, [counterTypeId])
 
   const { rows, loading, fetchData } = useDataGrid(
     getAll,
     tblCompJobCounter.deleteById,
-    "compJobCounterId"
-  );
+    'compJobCounterId'
+  )
 
   return (
     <CustomizedDataGrid
@@ -125,7 +127,7 @@ export default function TabCompJobCounter(props: TabCompJobCounterProps) {
       label={label || undefined}
       showToolbar
       onRefreshClick={fetchData}
-      getRowId={(row) => row.compJobCounterId}
+      getRowId={row => row.compJobCounterId}
     />
-  );
+  )
 }

@@ -28,6 +28,7 @@ export default function PageMaintClass() {
 
   const typeColumns: GridColDef<TypeTblMaintType>[] = [
     { field: 'descr', headerName: 'Description', flex: 1 },
+    { field: 'orderNo', headerName: 'Order No', width: 120 },
     dataGridActionColumn({
       onEdit: row => openTypeForm('update', row.maintTypeId),
       onDelete: handleDeleteType,
@@ -58,6 +59,7 @@ export default function PageMaintClass() {
 
   const classColumns: GridColDef<TypeTblMaintClass>[] = [
     { field: 'descr', headerName: 'Description', flex: 1 },
+    { field: 'orderNo', headerName: 'Order No', width: 120 },
     dataGridActionColumn({
       onEdit: row => openClassForm('update', row.maintClassId),
       onDelete: handleDeleteClass,
@@ -93,6 +95,7 @@ export default function PageMaintClass() {
 
   const causeColumns: GridColDef<TypeTblMaintCause>[] = [
     { field: 'descr', headerName: 'Description', flex: 1 },
+    { field: 'orderNo', headerName: 'Order No', width: 120 },
     dataGridActionColumn({
       onEdit: row => openCauseForm('update', row.maintCauseId),
       onDelete: handleDeleteCause,
@@ -116,26 +119,26 @@ export default function PageMaintClass() {
     <>
       <Splitter initialPrimarySize='34%'>
         <CustomizedDataGrid
-          label='Maint Type'
+          label='Maint Class'
           showToolbar
-          rows={typeRows}
-          columns={typeColumns}
-          loading={loadingType}
-          onAddClick={() => openTypeForm('create')}
-          onRefreshClick={refreshType}
-          getRowId={row => row.maintTypeId}
+          rows={classRows}
+          columns={classColumns}
+          loading={loadingClass}
+          onAddClick={() => openClassForm('create')}
+          onRefreshClick={refreshClass}
+          getRowId={row => row.maintClassId}
         />
 
         <Splitter initialPrimarySize='50%'>
           <CustomizedDataGrid
-            label='Maint Class'
+            label='Maint Type'
             showToolbar
-            rows={classRows}
-            columns={classColumns}
-            loading={loadingClass}
-            onAddClick={() => openClassForm('create')}
-            onRefreshClick={refreshClass}
-            getRowId={row => row.maintClassId}
+            rows={typeRows}
+            columns={typeColumns}
+            loading={loadingType}
+            onAddClick={() => openTypeForm('create')}
+            onRefreshClick={refreshType}
+            getRowId={row => row.maintTypeId}
           />
 
           <CustomizedDataGrid

@@ -35,8 +35,9 @@ export default function PageFollowStatus() {
   // === Columns ===
   const columns = useMemo<GridColDef<TypeTblFollowStatus>[]>(
     () => [
-      { field: 'fsName', headerName: 'Name', flex: 2 },
-      { field: 'fsDesc', headerName: 'Description', flex: 3 },
+      { field: 'fsName', headerName: 'Name', flex: 1 },
+      { field: 'fsDesc', headerName: 'Description', flex: 2 },
+      { field: 'orderNo', headerName: 'Order No', width: 120 },
       dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
     ],
     [handleEdit, handleDelete]

@@ -56,6 +56,7 @@ export default function PageLocation() {
   const columns: GridColDef<TypeTblLocation>[] = [
     { field: 'locationCode', headerName: 'Code', width: 60 },
     { field: 'name', headerName: 'Name', flex: 1 },
+    { field: 'orderId', headerName: 'Order No', width: 100 },
     dataGridActionColumn({
       onEdit: handleEdit,
       onDelete: handleDelete,
@@ -80,6 +81,7 @@ export default function PageLocation() {
         {/* === GRID VIEW === */}
         <CustomizedDataGrid
           showToolbar
+          disableRowNumber
           label='List View'
           loading={loading}
           rows={rows}

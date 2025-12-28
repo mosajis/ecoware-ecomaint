@@ -39,12 +39,21 @@ export default function PageCounterType() {
 
   return (
     <>
-      <Splitter initialPrimarySize='30%'>
+      <Splitter initialPrimarySize='35%'>
         {/* Left Grid */}
         <CustomizedDataGrid
           rows={counterTypes}
           columns={[
             { field: 'name', headerName: 'Name', flex: 1 },
+
+            {
+              field: 'type',
+              headerName: 'Type',
+              width: 130,
+              valueGetter: (_, row) =>
+                row.type === 3 ? 'Measure Point' : 'Counter',
+            },
+            { field: 'orderId', headerName: 'Order No', width: 100 },
             dataGridActionColumn({
               onEdit: handleEdit,
               onDelete: deleteCounterType,

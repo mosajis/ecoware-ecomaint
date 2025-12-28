@@ -59,13 +59,13 @@ export const menuContentItems: {
   path?: string
 }[] = [
   {
-    title: 'Dashboard',
+    title: 'Dashboard (x)',
     icon: <DashboardRoundedIcon />,
     items: [],
     path: '/dashboard',
   },
   {
-    title: 'General',
+    title: 'General (x)',
     icon: <CategoryRoundedIcon />,
     items: [
       {
@@ -100,7 +100,7 @@ export const menuContentItems: {
       },
 
       {
-        text: 'Maint Class',
+        text: 'Maint Class +',
         icon: <PrecisionManufacturingRoundedIcon />,
         id: 'general:maint-class',
         path: '/general/maint-class',
@@ -113,19 +113,19 @@ export const menuContentItems: {
         path: '/general/follow-status',
       },
       {
-        text: 'Pending Type',
+        text: 'Pending Type (x)',
         icon: <HourglassEmptyRoundedIcon />,
         id: 'general:pendingType',
         path: '/general/pending-type',
       },
       {
-        text: 'Job Class',
+        text: 'Job Class (x)',
         icon: <WorkHistoryRoundedIcon />,
         id: 'general:jobClass',
         path: '/general/job-class',
       },
       {
-        text: 'Job Description',
+        text: 'Job Description (x)',
         icon: <DescriptionRoundedIcon />,
         id: 'general:jobDescription',
         path: '/general/job-description',
@@ -133,23 +133,23 @@ export const menuContentItems: {
     ],
   },
   {
-    title: 'Maintenance',
+    title: 'Maintenance (x)',
     icon: <BuildRoundedIcon />,
     items: [
       {
-        text: 'Function',
+        text: 'Function (x)',
         icon: <SettingsRoundedIcon />,
         id: 'maint:function',
         path: '/maintenance/function',
         children: [
           {
-            text: 'Tree View',
+            text: 'Tree View (x)',
             id: 'maint:Function:tree',
             path: '/maintenance/function/tree-view',
             icon: <BulletIcon />,
           },
           {
-            text: 'List View',
+            text: 'List View (x)',
             id: 'maint:Function:list',
             path: '/maintenance/function',
             icon: <BulletIcon />,
@@ -157,19 +157,19 @@ export const menuContentItems: {
         ],
       },
       {
-        text: 'Component Unit',
+        text: 'Component Unit (x)',
         icon: <Inventory2RoundedIcon />,
         id: 'maint:componentUnit:component',
         path: '/maintenance/component-unit',
         children: [
           {
-            text: 'Tree View',
+            text: 'Tree View (x)',
             id: 'maint:componentUnit:tree',
             path: '/maintenance/component-unit/tree-view',
             icon: <BulletIcon />,
           },
           {
-            text: 'List View',
+            text: 'List View (x)',
             id: 'maint:componentUnit:list',
             path: '/maintenance/component-unit',
             icon: <BulletIcon />,
@@ -177,19 +177,19 @@ export const menuContentItems: {
         ],
       },
       {
-        text: 'Component Type',
+        text: 'Component Type (x)',
         icon: <PrecisionManufacturingRoundedIcon />,
         id: 'maint:componentType',
         path: '/maintenance/component-type',
         children: [
           {
-            text: 'Tree View',
+            text: 'Tree View (x)',
             id: 'maint:componentType:tree',
             path: '/maintenance/component-type/tree-view',
             icon: <BulletIcon />,
           },
           {
-            text: 'List View',
+            text: 'List View (x)',
             id: 'maint:componentType:list',
             path: '/maintenance/component-type',
             icon: <BulletIcon />,
@@ -197,19 +197,19 @@ export const menuContentItems: {
         ],
       },
       {
-        text: 'Component Job',
+        text: 'Component Job (x)',
         icon: <BuildRoundedIcon />,
         id: 'maint:componentType:componentJob',
         path: '/maintenance/component-job',
       },
       {
-        text: 'Work Order',
+        text: 'Work Order (x)',
         icon: <AssignmentRoundedIcon />,
         id: 'maint:workOrder',
         path: '/maintenance/work-order',
       },
       {
-        text: 'Round',
+        text: 'Round (x)',
         icon: <LoopRoundedIcon />,
         id: 'maint:round',
         path: '/maintenance/round',
@@ -227,31 +227,31 @@ export const menuContentItems: {
         path: '/maintenance/component-trigger',
       },
       {
-        text: 'Counter Update',
+        text: 'Counter Update (x)',
         icon: <UpdateRoundedIcon />,
         id: 'maint:updateCounter',
         path: '/maintenance/update-counter',
       },
       {
-        text: 'Counter Logs',
+        text: 'Counter Logs (x)',
         icon: <HistoryRoundedIcon />,
         id: 'maint:counterLog',
         path: '/maintenance/counters-log',
       },
       {
-        text: 'Measure Points',
+        text: 'Measure Points (x)',
         icon: <ExploreRoundedIcon />,
         id: 'maint:measurePoints',
         path: '/maintenance/measure-points',
       },
       {
-        text: 'Measure Points Logs',
+        text: 'Measure Points Logs (x)',
         icon: <ListAltRoundedIcon />,
         id: 'maint:measurePointsLogs',
         path: '/maintenance/measure-points-logs',
       },
       {
-        text: 'Maint Log',
+        text: 'Maint Log (x)',
         icon: <ArticleRoundedIcon />,
         id: 'maint:maintLog',
         path: '/maintenance/maint-log',
@@ -260,23 +260,23 @@ export const menuContentItems: {
   },
 
   {
-    title: 'Stock',
+    title: 'Stock (x)',
     icon: <Inventory2RoundedIcon />,
     items: [
       {
-        text: 'Stock Type',
+        text: 'Stock Type (x)',
         icon: <CategoryRoundedIcon />,
         id: 'stock:type',
         path: '/stock/type',
       },
       {
-        text: 'Stock Item',
+        text: 'Stock Item (x)',
         icon: <Inventory2RoundedIcon />,
         id: 'stock:item',
         path: '/stock/item',
       },
       {
-        text: 'Stock Used',
+        text: 'Stock Used (x)',
         icon: <Inventory2RoundedIcon />,
         id: 'stock:stock-used',
         path: '/stock/used',
@@ -284,35 +284,40 @@ export const menuContentItems: {
     ],
   },
   {
-    title: 'Report',
+    title: 'Report (x)',
     icon: <AssessmentRoundedIcon />,
     path: '/report',
     items: [
       {
-        text: 'Daily Report',
+        text: 'Daily Report (x)',
         icon: <TodayRoundedIcon />,
         id: 'report:daily',
         path: '/report/daily',
       },
       {
-        text: 'Failure Report',
+        text: 'Failure Report (x)',
         icon: <ReportProblemRoundedIcon />,
         id: 'report:failure',
         path: '/report/failure',
       },
       {
-        text: 'Job Report',
+        text: 'Job Report (x)',
         icon: <WorkRoundedIcon />,
         id: 'report:job',
         path: '/report/job',
       },
       {
-        text: 'Monthly Report',
+        text: 'Monthly Report (x)',
         icon: <CalendarMonthRoundedIcon />,
         id: 'report:monthly',
         path: '/report/monthly',
       },
     ],
   },
-  { title: 'Users', icon: <PeopleRoundedIcon />, items: [], path: '/users' },
+  {
+    title: 'Users (x)',
+    icon: <PeopleRoundedIcon />,
+    items: [],
+    path: '/users',
+  },
 ]

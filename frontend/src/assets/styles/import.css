@@ -22,6 +22,6 @@ body,
   background: #e0e0e07d !important;
 }
 
-.rsw-btn[data-active="true"] {
+.rsw-btn[data-active='true'] {
   background: #e0e0e07d !important;
 }

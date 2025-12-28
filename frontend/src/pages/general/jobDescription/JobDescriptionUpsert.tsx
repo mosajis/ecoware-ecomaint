@@ -16,7 +16,7 @@ import {
 // === Validation Schema ===
 const schema = z.object({
   jobDescCode: z.string().optional().nullable(),
-  jobDesc: z.string().min(1, 'Job Description is required'),
+  jobDescTitle: z.string().min(1, 'Job Description is required'),
   jobClassId: z
     .object({
       jobClassId: z.number(),
@@ -49,7 +49,7 @@ function JobDescriptionUpsert({
 
   const defaultValues: JobDescriptionFormValues = {
     jobDescCode: '',
-    jobDesc: '',
+    jobDescTitle: '',
     jobClassId: null,
     changeReason: '',
   }
@@ -74,7 +74,7 @@ function JobDescriptionUpsert({
 
       reset({
         jobDescCode: res?.jobDescCode ?? '',
-        jobDesc: res?.jobDesc ?? '',
+        jobDescTitle: res?.jobDescTitle ?? '',
         jobClassId: res?.tblJobClass
           ? {
               jobClassId: res.tblJobClass.jobClassId,
@@ -114,14 +114,14 @@ function JobDescriptionUpsert({
         if (mode === 'create') {
           result = await tblJobDescription.create({
             jobDescCode: parsed.data.jobDescCode ?? '',
-            jobDesc: parsed.data.jobDesc,
+            jobDescTitle: parsed.data.jobDescTitle,
             changeReason: parsed.data.changeReason ?? '',
             ...jobClassRelation,
           })
         } else {
           result = await tblJobDescription.update(recordId!, {
             jobDescCode: parsed.data.jobDescCode ?? '',
-            jobDesc: parsed.data.jobDesc,
+            jobDescTitle: parsed.data.jobDescTitle,
             changeReason: parsed.data.changeReason ?? '',
             ...jobClassRelation,
           })
@@ -164,12 +164,12 @@ function JobDescriptionUpsert({
 
         {/* Job Description */}
         <Controller
-          name='jobDesc'
+          name='jobDescTitle'
           control={control}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              label='Job Description *'
+              label='Job Title *'
               size='small'
               error={!!fieldState.error}
               helperText={fieldState.error?.message}

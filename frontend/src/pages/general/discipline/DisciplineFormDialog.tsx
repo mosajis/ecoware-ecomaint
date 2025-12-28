@@ -1,27 +1,27 @@
-import { memo, useEffect, useMemo, useState, useCallback } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import FormDialog from "@/shared/components/formDialog/FormDialog";
-import { tblDiscipline, TypeTblDiscipline } from "@/core/api/generated/api";
+import { memo, useEffect, useMemo, useState, useCallback } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
+import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
+import TextField from '@mui/material/TextField'
+import FormDialog from '@/shared/components/formDialog/FormDialog'
+import { tblDiscipline, TypeTblDiscipline } from '@/core/api/generated/api'
 
 // === Validation Schema ===
 const schema = z.object({
-  name: z.string().min(1, "Name is required").nullable(),
-});
+  name: z.string().min(1, 'Name is required').nullable(),
+})
 
-export type DisciplineFormValues = z.infer<typeof schema>;
+export type DisciplineFormValues = z.infer<typeof schema>
 
 type Props = {
-  open: boolean;
-  mode: "create" | "update";
-  recordId?: number | null;
-  onClose: () => void;
-  onSuccess: (data: TypeTblDiscipline) => void;
-};
+  open: boolean
+  mode: 'create' | 'update'
+  recordId?: number | null
+  onClose: () => void
+  onSuccess: (data: TypeTblDiscipline) => void
+}
 
 function DisciplineFormDialog({
   open,
@@ -30,10 +30,10 @@ function DisciplineFormDialog({
   onClose,
   onSuccess,
 }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+  const [loadingInitial, setLoadingInitial] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
-  const defaultValues: DisciplineFormValues = useMemo(() => ({ name: "" }), []);
+  const defaultValues: DisciplineFormValues = useMemo(() => ({ name: '' }), [])
 
   const {
     control,
@@ -43,83 +43,83 @@ function DisciplineFormDialog({
   } = useForm<DisciplineFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
-  });
+  })
 
   // === Fetch data for update mode
   const fetchData = useCallback(async () => {
-    if (mode === "update" && recordId) {
-      setLoadingInitial(true);
+    if (mode === 'update' && recordId) {
+      setLoadingInitial(true)
       try {
-        const res = await tblDiscipline.getById(recordId);
-        reset({ name: res?.name ?? "" }); // map null to empty string
+        const res = await tblDiscipline.getById(recordId)
+        reset({ name: res?.name ?? '' }) // map null to empty string
       } catch (err) {
-        console.error("Failed to fetch discipline", err);
-        reset(defaultValues);
+        console.error('Failed to fetch discipline', err)
+        reset(defaultValues)
       } finally {
-        setLoadingInitial(false);
+        setLoadingInitial(false)
       }
     } else {
-      reset(defaultValues);
+      reset(defaultValues)
     }
-  }, [mode, recordId, reset, defaultValues]);
+  }, [mode, recordId, reset, defaultValues])
 
   useEffect(() => {
-    if (open) fetchData();
-  }, [open, fetchData]);
+    if (open) fetchData()
+  }, [open, fetchData])
 
-  const isDisabled = loadingInitial || submitting;
+  const isDisabled = loadingInitial || submitting
 
   const handleFormSubmit = useCallback(
     async (values: DisciplineFormValues) => {
-      setSubmitting(true);
+      setSubmitting(true)
       try {
-        let result: TypeTblDiscipline;
-        if (mode === "create") {
-          result = await tblDiscipline.create(values);
-        } else if (mode === "update" && recordId) {
-          result = await tblDiscipline.update(recordId, values);
+        let result: TypeTblDiscipline
+        if (mode === 'create') {
+          result = await tblDiscipline.create(values)
+        } else if (mode === 'update' && recordId) {
+          result = await tblDiscipline.update(recordId, values)
         } else {
-          return;
+          return
         }
-        onSuccess(result);
-        onClose();
+        onSuccess(result)
+        onClose()
       } catch (err) {
-        console.error("Submit failed", err);
+        console.error('Submit failed', err)
       } finally {
-        setSubmitting(false);
+        setSubmitting(false)
       }
     },
     [mode, recordId, onSuccess, onClose]
-  );
+  )
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === "create" ? "Create Discipline" : "Edit Discipline"}
+      title={mode === 'create' ? 'Create Discipline' : 'Edit Discipline'}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1.5}>
+      <Box gap={1.5}>
         <Controller
-          name="name"
+          name='name'
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label="Name *"
-              size="small"
+              label='Name *'
+              size='small'
               error={!!errors.name}
               helperText={errors.name?.message}
               disabled={isDisabled}
-              sx={{ gridColumn: "span 4" }}
+              sx={{ width: '100%', marginTop: '10px', marginBottom: '15px' }}
             />
           )}
         />
       </Box>
     </FormDialog>
-  );
+  )
 }
 
-export default memo(DisciplineFormDialog);
+export default memo(DisciplineFormDialog)

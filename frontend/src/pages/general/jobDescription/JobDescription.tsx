@@ -13,7 +13,6 @@ import {
 } from '@/core/api/generated/api'
 
 export default function PageJobDescription() {
-  const [html, setHtml] = useState('')
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
   const [selected, setSelected] = useState<TypeTblJobDescription | null>(null)
@@ -35,7 +34,7 @@ export default function PageJobDescription() {
   const handleCreate = useCallback(() => {
     setSelected(null)
     setMode('create')
-    setHtml('')
+
     setOpenForm(true)
   }, [])
 
@@ -62,59 +61,25 @@ export default function PageJobDescription() {
     [handleEdit, handleDelete]
   )
 
-  // === SAVE DESCRIPTION ===
-  const handleSaveDescription = async (newValue: string) => {
-    if (!selected) return
-
-    await tblJobDescription.update(selected.jobDescId, {
-      jobDesc: newValue,
-    })
-
-    handleRefresh()
-  }
-
   const handleRowClick = (params: any) => {
     setSelected(params.row)
-    setHtml(params.row.jobDesc || '')
   }
-
-  // Fix Job Description Spillter size (increase editor width)
 
   return (
     <>
-      <Splitter
-        horizontal
-        initialPrimarySize='50%'
-        resetOnDoubleClick
-        minPrimarySize='20%'
-        minSecondarySize='20%'
-      >
-        <Splitter
-          horizontal={false}
-          initialPrimarySize='50%'
-          resetOnDoubleClick
-          minPrimarySize='30%'
-          minSecondarySize='25%'
-        >
-          <CustomizedDataGrid
-            label='Job Description'
-            getRowId={row => row.jobDescId}
-            loading={loading}
-            onAddClick={handleCreate}
-            rows={rows}
-            onRefreshClick={handleRefresh}
-            columns={columns}
-            showToolbar
-            onRowClick={handleRowClick}
-          />
-
-          <AppEditor
-            label='Description'
-            autoSave
-            initValue={html}
-            onSave={handleSaveDescription}
-          />
-        </Splitter>
+      <Splitter initialPrimarySize='45%' resetOnDoubleClick>
+        <CustomizedDataGrid
+          label='Job Description'
+          getRowId={row => row.jobDescId}
+          loading={loading}
+          disableRowNumber
+          onAddClick={handleCreate}
+          rows={rows}
+          onRefreshClick={handleRefresh}
+          columns={columns}
+          showToolbar
+          onRowClick={handleRowClick}
+        />
 
         <JobDescriptionTabs
           label={selected?.jobDescTitle}

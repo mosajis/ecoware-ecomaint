@@ -352,6 +352,7 @@ function AppEditor({
       disabled={disabled || readOnly}
       containerProps={{
         style: {
+          fontFamily: 'tahoma',
           border: `1px solid ${(theme.vars || theme).palette.divider}`,
           ...mergedStyle,
         },

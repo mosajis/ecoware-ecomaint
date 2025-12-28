@@ -92,11 +92,6 @@ export default function PageStockUsed() {
       field: 'isUnplanned',
       headerName: 'Is Unplanned',
       width: 120,
-      type: 'boolean',
-      renderCell: params => {
-        const value = params.row.tblMaintLog?.unexpected
-        return <CellBoolean status={value} />
-      },
     },
     {
       field: 'stockCount',

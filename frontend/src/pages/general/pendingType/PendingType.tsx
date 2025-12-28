@@ -11,8 +11,15 @@ export default function PagePendingType() {
   const [mode, setMode] = useState<'create' | 'update'>('create')
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
 
+  const getAll = useCallback(() => {
+    return tblPendingType.getAll({
+      include: {
+        tblPendingType: true,
+      },
+    })
+  }, [])
   const { rows, loading, handleRefresh, handleDelete, handleFormSuccess } =
-    useDataGrid(tblPendingType.getAll, tblPendingType.deleteById, 'pendTypeId')
+    useDataGrid(getAll, tblPendingType.deleteById, 'pendTypeId')
 
   const handleCreate = useCallback(() => {
     setSelectedRowId(null)
@@ -29,7 +36,14 @@ export default function PagePendingType() {
   const columns: GridColDef<TypeTblPendingType>[] = useMemo(
     () => [
       { field: 'pendTypeName', headerName: 'Name', flex: 2 },
+      {
+        field: 'parent',
+        headerName: 'Parent',
+        flex: 1,
+        valueGetter: (_, row) => row?.tblPendingType?.pendTypeName,
+      },
       { field: 'description', headerName: 'Description', flex: 2 },
+      { field: 'orderNo', headerName: 'Order No', width: 120 },
       dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
     ],
     [handleEdit, handleDelete]

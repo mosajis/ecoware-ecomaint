@@ -14,13 +14,19 @@ const TabAttachment = lazy(() => import('./tabs/TabAttachment'))
 const TabComponentUnit = lazy(() => import('./tabs/TabComponentUnit'))
 const TabTriggers = lazy(() => import('./tabs/TabTriggers'))
 const TabRevision = lazy(() => import('./tabs/TabRevision'))
+const TabJobDescription = lazy(() => import('./tabs/TabJobDescription'))
 
 // Define tabs in reusable format
 const JobDescTabs: ReusableTabItem[] = [
+  {
+    label: 'Description',
+    icon: <CheckCircle />,
+    component: TabJobDescription,
+  },
   { label: 'MaintLog', icon: <CheckCircle />, component: TabMaintLog },
   { label: 'Component Unit', icon: <Build />, component: TabComponentUnit },
   { label: 'Triggers (not set)', icon: <Tune />, component: TabTriggers },
-  { label: 'Revision (not set)', icon: <AddBox />, component: TabRevision },
+  // { label: 'Revision (not set)', icon: <AddBox />, component: TabRevision },
   { label: 'Attachment', icon: <AttachFile />, component: TabAttachment },
 ]
 

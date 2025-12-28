@@ -3,17 +3,17 @@ import { GridColDef } from '@mui/x-data-grid'
 import { useCallback, useMemo, useState } from 'react'
 import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
-import { tblSpareType, TypeTblSpareType } from '@/core/api/generated/api'
+import { tblStockType, TypeTblStockType } from '@/core/api/generated/api'
 
 export default function PageReportDaily() {
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
-  const [selected, setSelected] = useState<TypeTblSpareType | null>(null)
+  const [selected, setSelected] = useState<TypeTblStockType | null>(null)
 
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
-    tblSpareType.getAll,
-    tblSpareType.deleteById,
-    'partTypeId'
+    tblStockType.getAll,
+    tblStockType.deleteById,
+    'stockTypeId'
   )
 
   // === Handlers ===
@@ -23,14 +23,14 @@ export default function PageReportDaily() {
     setOpenForm(true)
   }, [])
 
-  const handleEdit = useCallback((row: TypeTblSpareType) => {
+  const handleEdit = useCallback((row: TypeTblStockType) => {
     setSelected(row)
     setMode('update')
     setOpenForm(true)
   }, [])
 
   // === Columns ===
-  const columns: GridColDef<TypeTblSpareType>[] = useMemo(
+  const columns: GridColDef<TypeTblStockType>[] = useMemo(
     () => [
       { field: 'partName', headerName: 'Number', width: 120 },
       { field: 'makerRef', headerName: 'Comp No', flex: 2 },
@@ -70,7 +70,7 @@ export default function PageReportDaily() {
   return (
     <CustomizedDataGrid
       label='Daily Report'
-      getRowId={row => row.partTypeId}
+      getRowId={row => row.stockTypeId}
       loading={loading}
       onAddClick={handleCreate}
       rows={rows}

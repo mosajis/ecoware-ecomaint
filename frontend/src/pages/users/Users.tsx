@@ -3,14 +3,15 @@ import { useMemo } from 'react'
 import { GridColDef } from '@mui/x-data-grid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 import { formatDateTime } from '@/core/api/helper'
+import { TypeUsers, users } from '@/core/api/generated/api'
 
 const Users = () => {
-  //   // === useDataGrid ===
-  //   const { rows, loading, handleRefresh } = useDataGrid<TypeTblUsers>(
-  //     tblUser,
-  //     tblUsers.deleteById, // استفاده نمی‌شود ولی hook نیاز دارد
-  //     "userId"
-  //   );
+  //   === useDataGrid ===
+  const { rows, loading, handleRefresh } = useDataGrid<TypeUsers>(
+    users.getAll,
+    users.deleteById,
+    'userId'
+  )
 
   // === Columns ===
   const columns = useMemo<GridColDef<any>[]>(
@@ -27,10 +28,9 @@ const Users = () => {
         width: 160,
       },
       {
-        field: 'username',
+        field: 'uUserName',
         headerName: 'Username',
         width: 140,
-        valueGetter: (_, row) => row?.username,
       },
       {
         field: 'title',
@@ -63,11 +63,11 @@ const Users = () => {
     <CustomizedDataGrid
       label='Users'
       showToolbar
-      //   onRefreshClick={handleRefresh}
-      rows={[]}
+      onRefreshClick={handleRefresh}
+      rows={rows}
       columns={columns}
-      //   loading={loading}
-      //   getRowId={(row) => row.userId}
+      loading={loading}
+      getRowId={row => row.userId}
     />
   )
 }

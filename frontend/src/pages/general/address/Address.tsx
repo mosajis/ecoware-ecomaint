@@ -48,6 +48,7 @@ export default function PageAddress() {
       <CustomizedDataGrid
         label='Address'
         showToolbar
+        disableRowNumber
         onAddClick={handleCreate}
         onRefreshClick={handleRefresh}
         rows={rows}
