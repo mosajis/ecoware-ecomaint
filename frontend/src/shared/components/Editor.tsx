@@ -1,4 +1,10 @@
-import { alpha, Typography, useColorScheme, useTheme } from '@mui/material'
+import {
+  alpha,
+  LinearProgress,
+  Typography,
+  useColorScheme,
+  useTheme,
+} from '@mui/material'
 import React, {
   useCallback,
   memo,
@@ -35,6 +41,7 @@ interface AppEditorProps {
   autoSave?: boolean
   autoSaveDelay?: number
   label?: string
+  loading?: boolean
 }
 
 // ======================================================
@@ -235,13 +242,14 @@ function AppEditor({
   autoSave = true,
   autoSaveDelay = 2000,
   label,
+  loading = false,
 }: AppEditorProps) {
   const theme = useTheme()
 
   const [value, setValue] = useState('')
   const [initial, setInitial] = useState('')
   const [changed, setChanged] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [_loading, setLoading] = useState(false)
 
   const [autoSaveStatus, setAutoSaveStatus] = useState<
     'idle' | 'saving' | 'saved'
@@ -251,6 +259,7 @@ function AppEditor({
 
   // Sync initial value
   useEffect(() => {
+    setLoading(loading)
     setValue(initValue || '')
     setInitial(initValue || '')
     setChanged(false)
@@ -358,6 +367,7 @@ function AppEditor({
         autoSaveEnabled={autoSave}
         autoSaveStatus={autoSaveStatus}
       />
+      {loading && <LinearProgress />}
     </Editor>
   )
 }
