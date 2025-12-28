@@ -1,13 +1,23 @@
-import Editor from "@/shared/components/Editor";
-import Box from "@mui/material/Box";
+import Editor from '@/shared/components/Editor'
 
 interface TabDetailsProps {
-  functionId?: number | null;
-  label?: string | null;
+  functionId?: number | null
+  label?: string | null
 }
 
 const TabDetails = (props: TabDetailsProps) => {
-  return <Editor />;
-};
+  const { label, functionId } = props
 
-export default TabDetails;
+  const handleSave = () => {}
+
+  return (
+    <Editor
+      label={label || 'Details'}
+      autoSave
+      initValue={''}
+      onSave={handleSave}
+    />
+  )
+}
+
+export default TabDetails

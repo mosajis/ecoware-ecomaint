@@ -20,8 +20,8 @@ const JobDescTabs: ReusableTabItem[] = [
   { label: 'MaintLog', icon: <CheckCircle />, component: TabMaintLog },
   { label: 'Component Unit', icon: <Build />, component: TabComponentUnit },
   { label: 'Triggers (not set)', icon: <Tune />, component: TabTriggers },
-  { label: 'Attachment', icon: <AttachFile />, component: TabAttachment },
   { label: 'Revision (not set)', icon: <AddBox />, component: TabRevision },
+  { label: 'Attachment', icon: <AttachFile />, component: TabAttachment },
 ]
 
 type Props = {
