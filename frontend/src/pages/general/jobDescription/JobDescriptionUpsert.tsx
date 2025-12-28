@@ -1,22 +1,22 @@
-import * as z from "zod";
-import FormDialog from "@/shared/components/formDialog/FormDialog";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { memo, useEffect, useState, useCallback } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
-import { buildRelation } from "@/core/api/helper";
+import * as z from 'zod'
+import FormDialog from '@/shared/components/formDialog/FormDialog'
+import Box from '@mui/material/Box'
+import TextField from '@mui/material/TextField'
+import { memo, useEffect, useState, useCallback } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
+import { buildRelation } from '@/core/api/helper'
 import {
   tblJobDescription,
   tblJobClass,
   TypeTblJobDescription,
-} from "@/core/api/generated/api";
+} from '@/core/api/generated/api'
 
 // === Validation Schema ===
 const schema = z.object({
   jobDescCode: z.string().optional().nullable(),
-  jobDesc: z.string().min(1, "Job Description is required"),
+  jobDesc: z.string().min(1, 'Job Description is required'),
   jobClassId: z
     .object({
       jobClassId: z.number(),
@@ -25,138 +25,138 @@ const schema = z.object({
     .nullable()
     .optional(),
   changeReason: z.string().optional().nullable(),
-});
+})
 
-export type JobDescriptionFormValues = z.infer<typeof schema>;
+export type JobDescriptionFormValues = z.infer<typeof schema>
 
 type Props = {
-  open: boolean;
-  mode: "create" | "update";
-  recordId?: number | null;
-  onClose: () => void;
-  onSuccess: (data: TypeTblJobDescription) => void;
-};
+  open: boolean
+  mode: 'create' | 'update'
+  recordId?: number | null
+  onClose: () => void
+  onSuccess: (data: TypeTblJobDescription) => void
+}
 
-function JobDescriptionFormDialog({
+function JobDescriptionUpsert({
   open,
   mode,
   recordId,
   onClose,
   onSuccess,
 }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+  const [loadingInitial, setLoadingInitial] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
   const defaultValues: JobDescriptionFormValues = {
-    jobDescCode: "",
-    jobDesc: "",
+    jobDescCode: '',
+    jobDesc: '',
     jobClassId: null,
-    changeReason: "",
-  };
+    changeReason: '',
+  }
 
   const { control, handleSubmit, reset } = useForm<JobDescriptionFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
-  });
+  })
 
   // === Load record in edit mode ===
   const fetchData = useCallback(async () => {
-    if (mode !== "update" || !recordId) {
-      reset(defaultValues);
-      return;
+    if (mode !== 'update' || !recordId) {
+      reset(defaultValues)
+      return
     }
 
-    setLoadingInitial(true);
+    setLoadingInitial(true)
     try {
       const res = await tblJobDescription.getById(recordId, {
         include: { tblJobClass: true },
-      });
+      })
 
       reset({
-        jobDescCode: res?.jobDescCode ?? "",
-        jobDesc: res?.jobDesc ?? "",
+        jobDescCode: res?.jobDescCode ?? '',
+        jobDesc: res?.jobDesc ?? '',
         jobClassId: res?.tblJobClass
           ? {
               jobClassId: res.tblJobClass.jobClassId,
               name: res.tblJobClass.name,
             }
           : null,
-        changeReason: res?.changeReason ?? "",
-      });
+        changeReason: res?.changeReason ?? '',
+      })
     } finally {
-      setLoadingInitial(false);
+      setLoadingInitial(false)
     }
-  }, [mode, recordId, reset]);
+  }, [mode, recordId, reset])
 
   useEffect(() => {
-    if (open) fetchData();
-  }, [open, fetchData]);
+    if (open) fetchData()
+  }, [open, fetchData])
 
-  const isDisabled = loadingInitial || submitting;
+  const isDisabled = loadingInitial || submitting
 
   // === Submit Handler ===
   const handleFormSubmit = useCallback(
     async (values: JobDescriptionFormValues) => {
-      const parsed = schema.safeParse(values);
-      if (!parsed.success) return;
+      const parsed = schema.safeParse(values)
+      if (!parsed.success) return
 
       try {
-        setSubmitting(true);
+        setSubmitting(true)
 
         const jobClassRelation = buildRelation(
-          "tblJobClass",
-          "jobClassId",
+          'tblJobClass',
+          'jobClassId',
           parsed.data.jobClassId?.jobClassId
-        );
+        )
 
-        let result: TypeTblJobDescription;
+        let result: TypeTblJobDescription
 
-        if (mode === "create") {
+        if (mode === 'create') {
           result = await tblJobDescription.create({
-            jobDescCode: parsed.data.jobDescCode ?? "",
+            jobDescCode: parsed.data.jobDescCode ?? '',
             jobDesc: parsed.data.jobDesc,
-            changeReason: parsed.data.changeReason ?? "",
+            changeReason: parsed.data.changeReason ?? '',
             ...jobClassRelation,
-          });
+          })
         } else {
           result = await tblJobDescription.update(recordId!, {
-            jobDescCode: parsed.data.jobDescCode ?? "",
+            jobDescCode: parsed.data.jobDescCode ?? '',
             jobDesc: parsed.data.jobDesc,
-            changeReason: parsed.data.changeReason ?? "",
+            changeReason: parsed.data.changeReason ?? '',
             ...jobClassRelation,
-          });
+          })
         }
 
-        onSuccess(result);
-        onClose();
+        onSuccess(result)
+        onClose()
       } finally {
-        setSubmitting(false);
+        setSubmitting(false)
       }
     },
     [mode, recordId, onSuccess, onClose]
-  );
+  )
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
       title={
-        mode === "create" ? "Create Job Description" : "Edit Job Description"
+        mode === 'create' ? 'Create Job Description' : 'Edit Job Description'
       }
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display="grid" gridTemplateColumns="repeat(1, 1fr)" gap={1.5}>
+      <Box display='grid' gridTemplateColumns='repeat(1, 1fr)' gap={1.5}>
         {/* Code */}
         <Controller
-          name="jobDescCode"
+          name='jobDescCode'
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label="Code"
-              size="small"
+              label='Code'
+              size='small'
               disabled={isDisabled}
             />
           )}
@@ -164,13 +164,13 @@ function JobDescriptionFormDialog({
 
         {/* Job Description */}
         <Controller
-          name="jobDesc"
+          name='jobDesc'
           control={control}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              label="Job Description *"
-              size="small"
+              label='Job Description *'
+              size='small'
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}
@@ -180,40 +180,40 @@ function JobDescriptionFormDialog({
 
         {/* Job Class */}
         <Controller
-          name="jobClassId"
+          name='jobClassId'
           control={control}
           render={({ field, fieldState }) => (
             <AsyncSelectField
-              label="Job Class"
-              selectionMode="single"
+              label='Job Class'
+              selectionMode='single'
               value={field.value}
               request={tblJobClass.getAll}
-              columns={[{ field: "name", headerName: "Name", flex: 1 }]}
-              getRowId={(row) => row.jobClassId}
+              columns={[{ field: 'name', headerName: 'Name', flex: 1 }]}
+              getRowId={row => row.jobClassId}
               onChange={field.onChange}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
-              dialogMaxWidth="sm"
+              dialogMaxWidth='sm'
             />
           )}
         />
 
         {/* Change Reason */}
         <Controller
-          name="changeReason"
+          name='changeReason'
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label="Change Reason"
-              size="small"
+              label='Change Reason'
+              size='small'
               disabled={isDisabled}
             />
           )}
         />
       </Box>
     </FormDialog>
-  );
+  )
 }
 
-export default memo(JobDescriptionFormDialog);
+export default memo(JobDescriptionUpsert)

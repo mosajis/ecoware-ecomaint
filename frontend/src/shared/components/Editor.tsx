@@ -135,79 +135,80 @@ const EditorToolbar = memo(
 
           <BtnUndo style={{ color: mode === 'light' ? '#333' : 'white' }} />
           <BtnRedo style={{ color: mode === 'light' ? '#333' : 'white' }} />
-
           {/* Right side: autosave + manual save */}
-          {!readOnly && !onChange && (
-            <>
-              <div style={dividerStyle(theme)} />
-              <div
-                style={{ display: 'flex', gap: '8px', alignItems: 'center' }}
-              >
-                {autoSaveEnabled && (
-                  <div
-                    style={{
-                      fontSize: '12px',
-                      opacity: 0.7,
-                      display: 'flex',
-                      gap: '4px',
-                    }}
-                  >
-                    {autoSaveStatus === 'saving' && (
-                      <span
-                        style={{
-                          width: '10px',
-                          height: '10px',
-                          borderRadius: '50%',
-                          border: '2px solid currentColor',
-                          borderTop: '2px solid transparent',
-                          animation: 'spin .7s linear infinite',
-                        }}
-                      />
-                    )}
-                    {autoSaveStatus === 'saved' && <span>✓</span>}
-                    {autoSaveStatus === 'idle' && <span>●</span>}
-                    <span>Auto-save</span>
-                  </div>
-                )}
+          {(!readOnly && !onChange) ||
+            (autoSaveEnabled && (
+              <>
+                <div style={dividerStyle(theme)} />
+                <div
+                  style={{ display: 'flex', gap: '8px', alignItems: 'center' }}
+                >
+                  {autoSaveEnabled && (
+                    <div
+                      style={{
+                        fontSize: '12px',
+                        opacity: 0.7,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                      }}
+                    >
+                      {autoSaveStatus === 'saving' && (
+                        <span
+                          style={{
+                            width: '10px',
+                            height: '10px',
+                            borderRadius: '50%',
+                            border: '2px solid currentColor',
+                            borderTop: '2px solid transparent',
+                            animation: 'spin .7s linear infinite',
+                          }}
+                        />
+                      )}
+                      {autoSaveStatus === 'saved' && <span>✓</span>}
+                      {autoSaveStatus === 'idle' && <span>●</span>}
+                      <span>Auto-save</span>
+                    </div>
+                  )}
 
-                {!autoSaveEnabled && (
-                  <button
-                    onClick={onSave}
-                    disabled={disabled || loading}
-                    style={saveBtnStyle}
-                    title={
-                      loading ? 'Saving...' : disabled ? 'No changes' : 'Save'
-                    }
-                    onMouseEnter={e =>
-                      !disabled &&
-                      !loading &&
-                      (e.currentTarget.style.backgroundColor =
-                        rightBtnColors.bgHover)
-                    }
-                    onMouseLeave={e =>
-                      (e.currentTarget.style.backgroundColor =
-                        rightBtnColors.bg)
-                    }
-                  >
-                    {loading ? (
-                      <span
-                        style={{
-                          width: '14px',
-                          height: '14px',
-                          borderRadius: '50%',
-                          border: '2px solid currentColor',
-                          borderTop: '2px solid transparent',
-                          animation: 'spin .7s linear infinite',
-                        }}
-                      />
-                    ) : (
-                      '✓ Save'
-                    )}
-                  </button>
-                )}
-              </div>
-            </>
-          )}
+                  {!autoSaveEnabled && (
+                    <button
+                      onClick={onSave}
+                      disabled={disabled || loading}
+                      style={saveBtnStyle}
+                      title={
+                        loading ? 'Saving...' : disabled ? 'No changes' : 'Save'
+                      }
+                      onMouseEnter={e =>
+                        !disabled &&
+                        !loading &&
+                        (e.currentTarget.style.backgroundColor =
+                          rightBtnColors.bgHover)
+                      }
+                      onMouseLeave={e =>
+                        (e.currentTarget.style.backgroundColor =
+                          rightBtnColors.bg)
+                      }
+                    >
+                      {loading ? (
+                        <span
+                          style={{
+                            width: '14px',
+                            height: '14px',
+                            borderRadius: '50%',
+                            border: '2px solid currentColor',
+                            borderTop: '2px solid transparent',
+                            animation: 'spin .7s linear infinite',
+                          }}
+                        />
+                      ) : (
+                        '✓ Save'
+                      )}
+                    </button>
+                  )}
+                </div>
+              </>
+            ))}
         </div>
 
         <style>

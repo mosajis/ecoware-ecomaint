@@ -1,11 +1,12 @@
-import MaintClassFormDialog from "./MaintClassFormDialog.js";
-import MaintTypeFormDialog from "./MaintTypeFormDialog.js";
-import MaintCauseFormDialog from "./MaintCauseFormDialog.js";
-import Splitter from "@/shared/components/Splitter";
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { useState, useCallback } from "react";
-import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
-import { GridColDef } from "@mui/x-data-grid";
+import MaintClassFormDialog from './MaintClassUpsert.js'
+import MaintTypeFormDialog from './MaintTypeUpsert.js'
+import MaintCauseFormDialog from './MaintCauseUpsert.js'
+import Splitter from '@/shared/components/Splitter'
+import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
+import { useState, useCallback } from 'react'
+import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
+import { GridColDef } from '@mui/x-data-grid'
+import { useDataGrid } from '@/shared/hooks/useDataGrid.js'
 import {
   tblMaintType,
   tblMaintClass,
@@ -13,8 +14,7 @@ import {
   TypeTblMaintCause,
   TypeTblMaintType,
   TypeTblMaintClass,
-} from "@/core/api/generated/api";
-import { useDataGrid } from "@/shared/hooks/useDataGrid.js";
+} from '@/core/api/generated/api'
 
 export default function PageMaintClass() {
   // ---------------- Maint Type ----------------
@@ -24,25 +24,25 @@ export default function PageMaintClass() {
     handleDelete: handleDeleteType,
     handleFormSuccess: handleTypeSuccess,
     handleRefresh: refreshType,
-  } = useDataGrid(tblMaintType.getAll, tblMaintType.deleteById, "maintTypeId");
+  } = useDataGrid(tblMaintType.getAll, tblMaintType.deleteById, 'maintTypeId')
 
   const typeColumns: GridColDef<TypeTblMaintType>[] = [
-    { field: "descr", headerName: "Description", flex: 1 },
+    { field: 'descr', headerName: 'Description', flex: 1 },
     dataGridActionColumn({
-      onEdit: (row) => openTypeForm("update", row.maintTypeId),
+      onEdit: row => openTypeForm('update', row.maintTypeId),
       onDelete: handleDeleteType,
     }),
-  ];
+  ]
 
-  const [openType, setOpenType] = useState(false);
-  const [modeType, setModeType] = useState<"create" | "update">("create");
-  const [selectedTypeId, setSelectedTypeId] = useState<number | null>(null);
+  const [openType, setOpenType] = useState(false)
+  const [modeType, setModeType] = useState<'create' | 'update'>('create')
+  const [selectedTypeId, setSelectedTypeId] = useState<number | null>(null)
 
-  const openTypeForm = useCallback((mode: "create" | "update", id?: number) => {
-    setModeType(mode);
-    setSelectedTypeId(id ?? null);
-    setOpenType(true);
-  }, []);
+  const openTypeForm = useCallback((mode: 'create' | 'update', id?: number) => {
+    setModeType(mode)
+    setSelectedTypeId(id ?? null)
+    setOpenType(true)
+  }, [])
 
   const {
     rows: classRows,
@@ -53,29 +53,29 @@ export default function PageMaintClass() {
   } = useDataGrid(
     tblMaintClass.getAll,
     tblMaintClass.deleteById,
-    "maintClassId"
-  );
+    'maintClassId'
+  )
 
   const classColumns: GridColDef<TypeTblMaintClass>[] = [
-    { field: "descr", headerName: "Description", flex: 1 },
+    { field: 'descr', headerName: 'Description', flex: 1 },
     dataGridActionColumn({
-      onEdit: (row) => openClassForm("update", row.maintClassId),
+      onEdit: row => openClassForm('update', row.maintClassId),
       onDelete: handleDeleteClass,
     }),
-  ];
+  ]
 
-  const [openClass, setOpenClass] = useState(false);
-  const [modeClass, setModeClass] = useState<"create" | "update">("create");
-  const [selectedClassId, setSelectedClassId] = useState<number | null>(null);
+  const [openClass, setOpenClass] = useState(false)
+  const [modeClass, setModeClass] = useState<'create' | 'update'>('create')
+  const [selectedClassId, setSelectedClassId] = useState<number | null>(null)
 
   const openClassForm = useCallback(
-    (mode: "create" | "update", id?: number) => {
-      setModeClass(mode);
-      setSelectedClassId(id ?? null);
-      setOpenClass(true);
+    (mode: 'create' | 'update', id?: number) => {
+      setModeClass(mode)
+      setSelectedClassId(id ?? null)
+      setOpenClass(true)
     },
     []
-  );
+  )
 
   // ---------------- Maint Cause ----------------
 
@@ -88,65 +88,65 @@ export default function PageMaintClass() {
   } = useDataGrid(
     tblMaintCause.getAll,
     tblMaintCause.deleteById,
-    "maintCauseId"
-  );
+    'maintCauseId'
+  )
 
   const causeColumns: GridColDef<TypeTblMaintCause>[] = [
-    { field: "descr", headerName: "Description", flex: 1 },
+    { field: 'descr', headerName: 'Description', flex: 1 },
     dataGridActionColumn({
-      onEdit: (row) => openCauseForm("update", row.maintCauseId),
+      onEdit: row => openCauseForm('update', row.maintCauseId),
       onDelete: handleDeleteCause,
     }),
-  ];
+  ]
 
-  const [openCause, setOpenCause] = useState(false);
-  const [modeCause, setModeCause] = useState<"create" | "update">("create");
-  const [selectedCauseId, setSelectedCauseId] = useState<number | null>(null);
+  const [openCause, setOpenCause] = useState(false)
+  const [modeCause, setModeCause] = useState<'create' | 'update'>('create')
+  const [selectedCauseId, setSelectedCauseId] = useState<number | null>(null)
 
   const openCauseForm = useCallback(
-    (mode: "create" | "update", id?: number) => {
-      setModeCause(mode);
-      setSelectedCauseId(id ?? null);
-      setOpenCause(true);
+    (mode: 'create' | 'update', id?: number) => {
+      setModeCause(mode)
+      setSelectedCauseId(id ?? null)
+      setOpenCause(true)
     },
     []
-  );
+  )
 
   return (
     <>
-      <Splitter initialPrimarySize="34%">
+      <Splitter initialPrimarySize='34%'>
         <CustomizedDataGrid
-          label="Maint Type"
+          label='Maint Type'
           showToolbar
           rows={typeRows}
           columns={typeColumns}
           loading={loadingType}
-          onAddClick={() => openTypeForm("create")}
+          onAddClick={() => openTypeForm('create')}
           onRefreshClick={refreshType}
-          getRowId={(row) => row.maintTypeId}
+          getRowId={row => row.maintTypeId}
         />
 
-        <Splitter initialPrimarySize="50%">
+        <Splitter initialPrimarySize='50%'>
           <CustomizedDataGrid
-            label="Maint Class"
+            label='Maint Class'
             showToolbar
             rows={classRows}
             columns={classColumns}
             loading={loadingClass}
-            onAddClick={() => openClassForm("create")}
+            onAddClick={() => openClassForm('create')}
             onRefreshClick={refreshClass}
-            getRowId={(row) => row.maintClassId}
+            getRowId={row => row.maintClassId}
           />
 
           <CustomizedDataGrid
-            label="Maint Cause"
+            label='Maint Cause'
             showToolbar
             rows={causeRows}
             columns={causeColumns}
             loading={loadingCause}
-            onAddClick={() => openCauseForm("create")}
+            onAddClick={() => openCauseForm('create')}
             onRefreshClick={refreshCause}
-            getRowId={(row) => row.maintCauseId}
+            getRowId={row => row.maintCauseId}
           />
         </Splitter>
       </Splitter>
@@ -175,5 +175,5 @@ export default function PageMaintClass() {
         onSuccess={handleCauseSuccess}
       />
     </>
-  );
+  )
 }

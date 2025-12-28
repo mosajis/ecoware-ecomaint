@@ -1,7 +1,7 @@
 import Splitter from '@/shared/components/Splitter'
 import AppEditor from '@/shared/components/Editor'
+import JobDescriptionUpsert from './JobDescriptionUpsert'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import JobDescriptionFormDialog from './JobDescriptionFormDialog'
 import { GridColDef } from '@mui/x-data-grid'
 import { useCallback, useMemo, useState } from 'react'
 import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
@@ -91,7 +91,7 @@ export default function PageJobDescription() {
       >
         <Splitter
           horizontal={false}
-          initialPrimarySize='65%'
+          initialPrimarySize='50%'
           resetOnDoubleClick
           minPrimarySize='30%'
           minSecondarySize='25%'
@@ -110,7 +110,7 @@ export default function PageJobDescription() {
 
           <AppEditor
             label='Description'
-            key={selected?.jobDescId}
+            autoSave
             initValue={html}
             onSave={handleSaveDescription}
           />
@@ -122,7 +122,7 @@ export default function PageJobDescription() {
         />
       </Splitter>
 
-      <JobDescriptionFormDialog
+      <JobDescriptionUpsert
         open={openForm}
         mode={mode}
         recordId={selected?.jobDescId}

@@ -1,16 +1,16 @@
-import Splitter from "@/shared/components/Splitter";
-import CounterTypeFormDialog from "./CounterTypeFormDialog";
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import CounterTypeTabs from "./CounterTypeTabs";
-import { useState, useCallback } from "react";
-import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
-import { tblCounterType, TypeTblCounterType } from "@/core/api/generated/api";
-import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import Splitter from '@/shared/components/Splitter'
+import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
+import CounterTypeTabs from './CounterTypeTabs'
+import CounterTypeUpsert from './CounterTypeUpsert'
+import { useState, useCallback } from 'react'
+import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
+import { tblCounterType, TypeTblCounterType } from '@/core/api/generated/api'
+import { useDataGrid } from '@/shared/hooks/useDataGrid'
 
 export default function PageCounterType() {
-  const [openForm, setOpenForm] = useState(false);
-  const [mode, setMode] = useState<"create" | "update">("create");
-  const [selected, setSelected] = useState<TypeTblCounterType | null>(null);
+  const [openForm, setOpenForm] = useState(false)
+  const [mode, setMode] = useState<'create' | 'update'>('create')
+  const [selected, setSelected] = useState<TypeTblCounterType | null>(null)
 
   const {
     rows: counterTypes,
@@ -21,46 +21,46 @@ export default function PageCounterType() {
   } = useDataGrid(
     tblCounterType.getAll,
     tblCounterType.deleteById,
-    "counterTypeId"
-  );
+    'counterTypeId'
+  )
 
   // Handlers
   const handleCreate = useCallback(() => {
-    setSelected(null);
-    setMode("create");
-    setOpenForm(true);
-  }, []);
+    setSelected(null)
+    setMode('create')
+    setOpenForm(true)
+  }, [])
 
   const handleEdit = useCallback((row: TypeTblCounterType) => {
-    setSelected(row);
-    setMode("update");
-    setOpenForm(true);
-  }, []);
+    setSelected(row)
+    setMode('update')
+    setOpenForm(true)
+  }, [])
 
   return (
     <>
-      <Splitter initialPrimarySize="30%">
+      <Splitter initialPrimarySize='30%'>
         {/* Left Grid */}
         <CustomizedDataGrid
           rows={counterTypes}
           columns={[
-            { field: "name", headerName: "Name", flex: 1 },
+            { field: 'name', headerName: 'Name', flex: 1 },
             dataGridActionColumn({
               onEdit: handleEdit,
               onDelete: deleteCounterType,
             }),
           ]}
           loading={loadingCounterTypes}
-          label="Counter Type"
+          label='Counter Type'
           showToolbar
           disableDensity
           disableColumns
           disableExport
           onAddClick={handleCreate}
           onRefreshClick={handleRefresh}
-          getRowId={(row) => row.counterTypeId}
+          getRowId={row => row.counterTypeId}
           rowSelection
-          onRowClick={(params) => setSelected(params.row)}
+          onRowClick={params => setSelected(params.row)}
         />
 
         <CounterTypeTabs
@@ -68,16 +68,16 @@ export default function PageCounterType() {
           label={selected?.name}
         />
       </Splitter>
-      <CounterTypeFormDialog
+      <CounterTypeUpsert
         open={openForm}
         mode={mode}
         recordId={selected?.counterTypeId}
         onClose={() => setOpenForm(false)}
-        onSuccess={(record) => {
-          counterTypeFormSuccess(record);
-          setOpenForm(false);
+        onSuccess={record => {
+          counterTypeFormSuccess(record)
+          setOpenForm(false)
         }}
       />
     </>
-  );
+  )
 }
