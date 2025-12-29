@@ -1,4 +1,4 @@
-import ComponentTypeFormDialog from './ComponentTypeFormDialog'
+import ComponentTypeFormDialog from './ComponentTypeUpsert'
 import TabsComponent from './ComponentTypeTabs'
 import Splitter from '@/shared/components/Splitter'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
@@ -63,25 +63,9 @@ export default function PageComponentTypeTree() {
     mapper
   )
 
-  const columns = useMemo<GridColDef<TypeTblCompType>[]>(
-    () => [
-      { field: 'compTypeNo', headerName: 'CompTypeNo', flex: 1 },
-      { field: 'compName', headerName: 'CompTypeName', flex: 1 },
-      { field: 'model', headerName: 'Model', flex: 1 },
-      {
-        field: 'maker',
-        headerName: 'Maker',
-        flex: 1,
-        valueGetter: (value, row) => row.tblAddress?.name,
-      },
-      dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
-    ],
-    [handleEdit, handleDelete]
-  )
-
   return (
     <>
-      <Splitter>
+      <Splitter initialPrimarySize='35%'>
         <CustomizedTree
           onRefresh={handleRefresh}
           label='Tree View'

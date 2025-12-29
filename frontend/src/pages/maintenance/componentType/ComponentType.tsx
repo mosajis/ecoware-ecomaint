@@ -1,4 +1,4 @@
-import ComponentTypeFormDialog from './ComponentTypeFormDialog'
+import ComponentTypeFormDialog from './ComponentTypeUpsert'
 import TabsComponent from './ComponentTypeTabs'
 import Splitter from '@/shared/components/Splitter'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'

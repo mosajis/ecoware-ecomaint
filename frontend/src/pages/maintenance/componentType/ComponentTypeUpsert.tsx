@@ -1,8 +1,10 @@
 import * as z from 'zod'
 import FormDialog from '@/shared/components/formDialog/FormDialog'
-import { memo, useEffect, useState, useCallback } from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
+import { memo, useEffect, useState, useCallback } from 'react'
+import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
+import { buildRelation } from '@/core/api/helper'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -10,8 +12,6 @@ import {
   tblAddress,
   type TypeTblCompType,
 } from '@/core/api/generated/api'
-import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
-import { buildRelation } from '@/core/api/helper'
 
 // =======================
 // VALIDATION SCHEMA
@@ -51,7 +51,7 @@ type Props = {
   onSuccess: (data: TypeTblCompType) => void
 }
 
-function ComponentTypeFormDialog({
+function ComponentTypeUpsert({
   open,
   mode,
   recordId,
@@ -272,4 +272,4 @@ function ComponentTypeFormDialog({
   )
 }
 
-export default memo(ComponentTypeFormDialog)
+export default memo(ComponentTypeUpsert)
