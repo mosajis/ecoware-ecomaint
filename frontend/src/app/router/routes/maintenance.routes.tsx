@@ -3,6 +3,7 @@ import { createRoute, Outlet } from '@tanstack/react-router'
 import { protectedRoute } from './protected.routes'
 import { LazyRoute } from './_components/lazyRoute'
 import ComponentTypeJob from '@/pages/maintenance/componentType/pages/ComponentTypeJob'
+import { createDetailRoute } from './_components/DetailRoute'
 
 // --- Lazy pages ---
 export const PageFunction = lazy(
@@ -17,12 +18,13 @@ export const PageComponentUnitList = lazy(
 export const PageComponentUnitTree = lazy(
   () => import('@/pages/maintenance/componentUnit/ComponentUnitTree')
 )
-export const PageComponentTypeList = lazy(
+export const PageComponentType = lazy(
   () => import('@/pages/maintenance/componentType/ComponentType')
 )
-export const PageComponentTypeTree = lazy(
-  () => import('@/pages/maintenance/componentType/ComponentTypeTree')
+export const PageComponentTypeDetail = lazy(
+  () => import('@/pages/maintenance/componentType/ComponentTypeDetail')
 )
+
 export const PageComponentTypeJob = lazy(
   () => import('@/pages/maintenance/componentType/pages/ComponentTypeJob')
 )
@@ -98,28 +100,48 @@ export const routeComponentUnitTree = createRoute({
   beforeLoad: () => ({ breadcrumb: 'Tree View' }),
 })
 routeComponentUnit.addChildren([routeComponentUnitList, routeComponentUnitTree])
-
 export const routeComponentType = createRoute({
   getParentRoute: () => routeMaintenance,
   path: 'component-type',
-  component: () => <Outlet />,
-  beforeLoad: () => ({ breadcrumb: 'Component Type' }),
+  component: Outlet,
+  beforeLoad: () => ({
+    breadcrumb: 'Component Type',
+  }),
 })
 
+// مسیر لیست Component Type
 export const routeComponentTypeList = createRoute({
   getParentRoute: () => routeComponentType,
-  path: 'list-view',
-  component: () => <LazyRoute Component={PageComponentTypeList} />,
-  beforeLoad: () => ({ breadcrumb: 'List View' }),
+  path: '/',
+  beforeLoad: () => ({
+    breadcrumb: 'List',
+  }),
+  component: () => <LazyRoute Component={PageComponentType} />,
 })
 
+export const routeComponentTypeDetail = createDetailRoute({
+  parent: routeComponentType,
+  path: '/$id',
+  Component: Outlet,
+})
+export const routeComponentTypeDetailPage = createRoute({
+  getParentRoute: () => routeComponentTypeDetail,
+  path: '/',
+  beforeLoad: () => ({
+    breadcrumb: 'View',
+  }),
+  component: () => <LazyRoute Component={PageComponentTypeDetail} />,
+})
+
+// مسیر نهایی Job
 export const routeComponentTypeJob = createRoute({
-  getParentRoute: () => routeComponentType,
-  path: 'list-view/$id/job',
-  component: () => <LazyRoute Component={ComponentTypeJob} />,
-  beforeLoad: () => ({ breadcrumb: 'jobs' }),
+  getParentRoute: () => routeComponentTypeDetail,
+  path: 'job',
+  beforeLoad: () => ({
+    breadcrumb: 'Job',
+  }),
+  component: () => <LazyRoute Component={PageComponentTypeJob} />,
 })
-
 // --- Component Job ---
 export const routeComponentJob = createRoute({
   getParentRoute: () => routeMaintenance,
@@ -180,14 +202,17 @@ export const routeCounterUpdate = createRoute({
   beforeLoad: () => ({ breadcrumb: 'Update Counter' }),
 })
 
-// --- Component Type routes ---
-routeComponentType.addChildren([routeComponentTypeList, routeComponentTypeJob])
-
 // --- Maintenance root ---
 export const maintenanceRoutesTree = routeMaintenance.addChildren([
   routeFunction,
   routeComponentUnit,
-  routeComponentType,
+  routeComponentType.addChildren([
+    routeComponentTypeList,
+    routeComponentTypeDetail.addChildren([
+      routeComponentTypeDetailPage,
+      routeComponentTypeJob,
+    ]),
+  ]),
   routeComponentJob,
   routeWorkOrder,
   routeRound,

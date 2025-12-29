@@ -2,7 +2,7 @@ import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import { useCallback, useMemo, useState } from 'react'
 import { tblCompTypeJob, TypeTblCompTypeJob } from '@/core/api/generated/api'
 import { GridColDef } from '@mui/x-data-grid'
-import { useNavigate } from '@tanstack/react-router'
+import { useNavigate, useSearch } from '@tanstack/react-router'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 
 // === Columns ===
@@ -43,10 +43,13 @@ const TabJob = ({ selected, label }: Props) => {
   // ===== Dialog State =====
   const navigate = useNavigate()
 
+  const allSearch = useSearch({ strict: false })
+
   const handleCreate = () => {
     if (!selected) return
     navigate({
-      to: location.pathname + `/${selected}/job`,
+      to: location.pathname + `/job`,
+      search: allSearch,
     })
   }
 

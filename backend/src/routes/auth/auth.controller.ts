@@ -1,46 +1,46 @@
-import Elysia, { t } from "elysia";
-import { jwt } from "@elysiajs/jwt";
-import { ServiceUsers } from "../crud/users.controller";
-import { AuthService } from "./auth.service";
-import { buildResponseSchema } from "@/utils/base.schema";
-import { Users, UsersPlain } from "orm/generated/prismabox/Users";
+import Elysia, { t } from 'elysia'
+import { jwt } from '@elysiajs/jwt'
+import { ServiceUsers } from '../crud/users.controller'
+import { AuthService } from './auth.service'
+import { buildResponseSchema } from '@/utils/base.schema'
+import { Users, UsersPlain } from 'orm/generated/prismabox/Users'
 
-const authService = new AuthService();
+const authService = new AuthService()
 
-export const UsersSafePlain = t.Omit(UsersPlain, ["uPassword"]);
+export const UsersSafePlain = t.Omit(UsersPlain, ['uPassword'])
 
-export const ControllerAuth = new Elysia().group("/auth", (app) =>
+export const ControllerAuth = new Elysia().group('/auth', app =>
   app
     .use(
       jwt({
-        name: "jwt",
-        secret: "Fischl von Luftschloss Narfidort",
+        name: 'jwt',
+        secret: 'Fischl von Luftschloss Narfidort',
       })
     )
     // 🔐 Login
     .post(
-      "/login",
+      '/login',
       async ({ jwt, body, set }) => {
-        const { username, password } = body;
+        const { username, password } = body
 
         const user = await authService.validateUser({
           username: username,
           password,
-        });
+        })
 
         if (!user) {
-          set.status = 401;
+          set.status = 401
           return {
-            status: "error",
-            message: "username or password is incorrect",
-          };
+            status: 'error',
+            message: 'username or password is incorrect',
+          }
         }
 
         // Update last login
         // await ServiceUsers.update(user.userId, { lastLoginDatetime: new Date() });
 
-        const result = await authService.login(user, jwt.sign);
-        return result;
+        const result = await authService.login(user, jwt.sign)
+        return result
       },
       {
         body: t.Object({
@@ -56,25 +56,25 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
           }),
         ]),
         detail: {
-          tags: ["auth"],
-          summary: "Login",
+          tags: ['auth'],
+          summary: 'Login',
         },
       }
     )
 
     // 👤 Register
     .post(
-      "/register",
+      '/register',
       async ({ body, set }) => {
         try {
-          await authService.register(body);
-          return {};
+          await authService.register(body)
+          return {}
         } catch (e: any) {
-          set.status = 400;
+          set.status = 400
           return {
-            status: "error",
-            message: e.message || "Registration failed",
-          };
+            status: 'error',
+            message: e.message || 'Registration failed',
+          }
         }
       },
       {
@@ -84,67 +84,67 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
         }),
         response: t.Object({}),
         detail: {
-          tags: ["auth"],
-          summary: "Register",
+          tags: ['auth'],
+          summary: 'Register',
         },
       }
     )
 
     // 🚪 Logout
     .post(
-      "/logout",
+      '/logout',
       async () => {
-        return { success: true };
+        return { success: true }
       },
       {
         response: t.Object({
           success: t.Boolean(),
         }),
         detail: {
-          tags: ["auth"],
-          summary: "Logout",
+          tags: ['auth'],
+          summary: 'Logout',
         },
       }
     )
 
     // ✅ Auth check
     .get(
-      "/authorization",
+      '/authorization',
       async ({ jwt, headers, set }) => {
-        const authHeader = headers["authorization"];
-        const token = authHeader?.split(" ")[1];
+        const authHeader = headers['authorization']
+        const token = authHeader?.split(' ')[1]
 
         if (!token) {
-          set.status = 401;
+          set.status = 401
           return {
             authorized: false,
             user: null,
-            message: "Authorization token missing",
-          };
+            message: 'Authorization token missing',
+          }
         }
 
-        const payload = await jwt.verify(token);
+        const payload = await jwt.verify(token)
 
         if (!payload || !payload.username) {
-          set.status = 401;
+          set.status = 401
           return {
             authorized: false,
             user: null,
-            message: "Invalid or expired token",
-          };
+            message: 'Invalid or expired token',
+          }
         }
 
-        const username = String(payload.username);
-        const user = await ServiceUsers.findOne({ uUserName: username });
+        const username = String(payload.username)
+        const user = await ServiceUsers.findOne({ uUserName: username })
 
         if (!user) {
           return {
             authorized: true,
             user: null,
-          };
+          }
         }
 
-        const { password, ...safeUser } = user;
+        const { password, ...safeUser } = user
 
         return {
           authorized: true,
@@ -152,7 +152,7 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
             ...safeUser,
             lastLoginDatetime: safeUser.lastLoginDatetime,
           },
-        };
+        }
       },
       {
         response: t.Object({
@@ -160,9 +160,9 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
           user: t.Nullable(buildResponseSchema(UsersSafePlain, Users)),
         }),
         detail: {
-          tags: ["auth"],
-          summary: "Get authorized user from token",
+          tags: ['auth'],
+          summary: 'Get authorized user from token',
         },
       }
     )
-);
+)

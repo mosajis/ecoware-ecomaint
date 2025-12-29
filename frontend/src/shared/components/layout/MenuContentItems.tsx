@@ -181,20 +181,6 @@ export const menuContentItems: {
         icon: <PrecisionManufacturingRoundedIcon />,
         id: 'maint:componentType',
         path: '/maintenance/component-type',
-        children: [
-          {
-            text: 'Tree View (x)',
-            id: 'maint:componentType:tree',
-            path: '/maintenance/component-type/tree-view',
-            icon: <BulletIcon />,
-          },
-          {
-            text: 'List View (x)',
-            id: 'maint:componentType:list',
-            path: '/maintenance/component-type/list-view',
-            icon: <BulletIcon />,
-          },
-        ],
       },
       {
         text: 'Component Job (x)',

@@ -62,7 +62,6 @@ export async function effectCompTypeJobChange({
       case 0: {
         /**
          * فقط برای CompIDهایی که Job ندارند INSERT می‌کنیم
-         * (بر اساس Unique واقعی دیتابیس)
          */
         const existing = await tx.tblCompJob.findMany({
           where: {
@@ -144,16 +143,12 @@ export async function effectCompTypeJobChange({
         return { status: 'OK', message: 'Update complete.' }
       }
 
-      // ================= SOFT DELETE =================
+      // ================= HARD DELETE =================
       case 2: {
-        await tx.tblCompJob.updateMany({
+        await tx.tblCompJob.deleteMany({
           where: {
             jobDescId,
             compId: { in: compIds },
-          },
-          data: {
-            exportMarker: 3,
-            lastupdate: new Date(),
           },
         })
 

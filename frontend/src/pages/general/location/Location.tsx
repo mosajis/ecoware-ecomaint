@@ -65,7 +65,7 @@ export default function PageLocation() {
 
   return (
     <>
-      <Splitter>
+      <Splitter initialPrimarySize='35%'>
         {/* === TREE VIEW === */}
         <CustomizedTree
           onRefresh={handleRefresh}

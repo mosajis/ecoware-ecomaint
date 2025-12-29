@@ -138,6 +138,14 @@ export default function CustomizedTree<T = any>({
     setExpandedItems(matches)
   }, [searchText, filteredTree, getNodeId])
 
+  useEffect(() => {
+    if (items.length === 0) return
+
+    setExpandedItems(prev =>
+      prev.length === 0 ? items.map(node => getNodeId(node)) : prev
+    )
+  }, [items, getNodeId])
+
   // Handle selection change
   const handleSelectionChange = useCallback(
     (_e: any, nodeIds: string | string[] | null) => {
