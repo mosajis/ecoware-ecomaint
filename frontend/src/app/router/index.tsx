@@ -1,21 +1,8 @@
-import { createRoute } from '@tanstack/react-router'
-import { redirect } from '@tanstack/react-router'
-import { protectedRoute } from './protected.routes'
-import { AuthLoginRoute } from './auth.routes'
-import { rootRoute } from './_rootRoute'
+import { RouterProvider, createRouter } from '@tanstack/react-router'
+import { routesTree } from './routes'
 
-// --- Index redirect "/" → "/dashboard" ---
-export const indexRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/',
-  beforeLoad: async () => {
-    throw redirect({ to: '/dashboard' })
-  },
-})
+const router = createRouter({ routeTree: routesTree })
 
-// --- Route Tree ---
-export const routeTree = rootRoute.addChildren([
-  indexRoute,
-  AuthLoginRoute,
-  protectedRoute,
-])
+export default function AppRouter() {
+  return <RouterProvider router={router} />
+}

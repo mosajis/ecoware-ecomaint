@@ -4,7 +4,7 @@ import AppLayout from '@/shared/components/layout/AppLayout'
 import AppAuthorization from '@/shared/components/AppAthorization'
 import { LOCAL_STORAGE } from '@/const'
 import { NotFound } from '@/pages/NotFound'
-import { rootRoute } from './_rootRoute'
+import { rootRoute } from './_components/rootRoute'
 
 // --- Protected Route ---
 export const protectedRoute = createRoute({
@@ -14,7 +14,6 @@ export const protectedRoute = createRoute({
   component: () => (
     <AppAuthorization>
       <AppLayout />
-      <Outlet /> {/* children route ها اینجا رندر می‌شوند */}
     </AppAuthorization>
   ),
   notFoundComponent: NotFound,

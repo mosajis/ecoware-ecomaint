@@ -1,20 +1,37 @@
 import { createRoute, Outlet } from '@tanstack/react-router'
-import { LazyRoute } from './_lazyRoute'
+import { LazyRoute } from './_components/lazyRoute'
 import { protectedRoute } from './protected.routes'
+import { lazy } from 'react'
 
 // --- Lazy pages ---
-const PageAddress = () => import('@/pages/general/address/Address')
-const PageLocation = () => import('@/pages/general/location/Location')
-const PageEmployee = () => import('@/pages/general/employee/Employee')
-const PageDiscipline = () => import('@/pages/general/discipline/Discipline')
-const PageCounterType = () => import('@/pages/general/counterType/CounterType')
-const PageMaintClass = () => import('@/pages/general/maintClass/MaintClass')
-const PageFollowStatus = () =>
-  import('@/pages/general/followStatus/FollowStatus')
-const PagePendingType = () => import('@/pages/general/pendingType/PendingType')
-const PageJobClass = () => import('@/pages/general/jobClass/JobClass')
-const PageJobDescription = () =>
-  import('@/pages/general/jobDescription/JobDescription')
+export const PageAddress = lazy(() => import('@/pages/general/address/Address'))
+export const PageLocation = lazy(
+  () => import('@/pages/general/location/Location')
+)
+export const PageEmployee = lazy(
+  () => import('@/pages/general/employee/Employee')
+)
+export const PageDiscipline = lazy(
+  () => import('@/pages/general/discipline/Discipline')
+)
+export const PageCounterType = lazy(
+  () => import('@/pages/general/counterType/CounterType')
+)
+export const PageMaintClass = lazy(
+  () => import('@/pages/general/maintClass/MaintClass')
+)
+export const PageFollowStatus = lazy(
+  () => import('@/pages/general/followStatus/FollowStatus')
+)
+export const PagePendingType = lazy(
+  () => import('@/pages/general/pendingType/PendingType')
+)
+export const PageJobClass = lazy(
+  () => import('@/pages/general/jobClass/JobClass')
+)
+export const PageJobDescription = lazy(
+  () => import('@/pages/general/jobDescription/JobDescription')
+)
 
 // --- General parent route ---
 export const generalRoute = createRoute({

@@ -171,7 +171,7 @@ export const menuContentItems: {
           {
             text: 'List View (x)',
             id: 'maint:componentUnit:list',
-            path: '/maintenance/component-unit',
+            path: '/maintenance/component-unit/list-view',
             icon: <BulletIcon />,
           },
         ],

@@ -1,22 +1,21 @@
-import { PrismaClient } from "orm/generated/prisma";
+import { PrismaClient } from 'orm/generated/prisma'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
 export async function effectCompTypeJobChange({
   compTypeJobId,
   operation,
 }: {
-  compTypeJobId: number;
-  operation: 0 | 1 | 2;
+  compTypeJobId: number
+  operation: 0 | 1 | 2
 }) {
-  return prisma.$transaction(async (tx) => {
-    // 1) دریافت اطلاعات CompTypeJob
-    const compTypeJob = await tx.tblCompTypeJob.findUnique({
+  return prisma.$transaction(async tx => {
+    const ctj = await tx.tblCompTypeJob.findUnique({
       where: { compTypeJobId },
-    });
+    })
 
-    if (!compTypeJob) {
-      throw new Error("CompTypeJob not found.");
+    if (!ctj) {
+      throw new Error('CompTypeJob not found.')
     }
 
     const {
@@ -40,61 +39,83 @@ export async function effectCompTypeJobChange({
       statusInUse,
       statusAvailable,
       statusRepair,
-    } = compTypeJob;
+    } = ctj
 
-    // پیدا کردن Unitهای مرتبط با این CompType
+    if (!compTypeId || !jobDescId) {
+      throw new Error('Invalid CompTypeJob data.')
+    }
+
+    // 2) Units
     const units = await tx.tblComponentUnit.findMany({
       where: { compTypeId },
       select: { compId: true },
-    });
+    })
 
-    const existingJobs = await tx.tblCompJob.findMany({
-      where: { jobDescId, compId: { in: units.map((u) => u.compId) } },
-      select: { compId: true },
-    });
+    if (!units.length) {
+      return { status: 'OK', message: 'No component units found.' }
+    }
 
-    const existingUnitIds = new Set(existingJobs.map((j) => j.compId));
+    const compIds = units.map(u => u.compId)
 
     switch (operation) {
-      // ------------------- INSERT -------------------
-      case 0:
-        for (const unit of units) {
-          if (!existingUnitIds.has(unit.compId)) {
-            await tx.tblCompJob.create({
-              data: {
-                compId: unit.compId,
-                jobDescId,
-                discId,
-                frequency,
-                frequencyPeriod,
-                jobConditionId,
-                planningMethod,
-                window,
-                outputFormat,
-                active,
-                mandatoryResource,
-                deptId,
-                exportMarker: 1,
-                priority,
-                maintClassId,
-                maintCauseId,
-                maintTypeId,
-                statusNone,
-                statusInUse,
-                statusAvailable,
-                statusRepair,
-              },
-            });
-          }
-        }
-        return { status: "OK", message: "Insert complete." };
+      // ================= INSERT =================
+      case 0: {
+        /**
+         * فقط برای CompIDهایی که Job ندارند INSERT می‌کنیم
+         * (بر اساس Unique واقعی دیتابیس)
+         */
+        const existing = await tx.tblCompJob.findMany({
+          where: {
+            jobDescId,
+            compId: { in: compIds },
+          },
+          select: { compId: true },
+        })
 
-      // ------------------- UPDATE -------------------
-      case 1:
+        const existingSet = new Set(existing.map(e => e.compId))
+
+        const data = compIds
+          .filter(compId => !existingSet.has(compId))
+          .map(compId => ({
+            compId,
+            jobDescId,
+            discId,
+            frequency,
+            frequencyPeriod,
+            jobConditionId,
+            planningMethod,
+            window,
+            outputFormat,
+            active,
+            mandatoryResource,
+            deptId,
+            exportMarker: 1,
+            priority,
+            maintClassId,
+            maintCauseId,
+            maintTypeId,
+            statusNone,
+            statusInUse,
+            statusAvailable,
+            statusRepair,
+          }))
+
+        if (data.length) {
+          await tx.tblCompJob.createMany({ data })
+        }
+
+        return {
+          status: 'OK',
+          message: `Inserted ${data.length} CompJob records.`,
+        }
+      }
+
+      // ================= UPDATE =================
+      case 1: {
         await tx.tblCompJob.updateMany({
           where: {
             jobDescId,
-            compId: { in: units.map((u) => u.compId) },
+            compId: { in: compIds },
           },
           data: {
             discId,
@@ -118,25 +139,29 @@ export async function effectCompTypeJobChange({
             statusRepair,
             lastupdate: new Date(),
           },
-        });
-        return { status: "OK", message: "Update complete." };
+        })
 
-      // ------------------- SOFT DELETE -------------------
-      case 2:
+        return { status: 'OK', message: 'Update complete.' }
+      }
+
+      // ================= SOFT DELETE =================
+      case 2: {
         await tx.tblCompJob.updateMany({
           where: {
             jobDescId,
-            compId: { in: units.map((u) => u.compId) },
+            compId: { in: compIds },
           },
           data: {
             exportMarker: 3,
             lastupdate: new Date(),
           },
-        });
-        return { status: "OK", message: "Delete complete (soft-delete)." };
+        })
+
+        return { status: 'OK', message: 'Soft delete complete.' }
+      }
 
       default:
-        throw new Error("Invalid operation.");
+        throw new Error('Invalid operation.')
     }
-  });
+  })
 }

@@ -547,7 +547,7 @@ function ComponentTypeJobFormDialog({
         </BorderedBox>
 
         {/* Advanced Options */}
-        <BorderedBox label='Advanced Option' mt={2}>
+        <BorderedBox label='Advanced Option' mt={2} direction='row'>
           <Box>
             <Controller
               name='active'
