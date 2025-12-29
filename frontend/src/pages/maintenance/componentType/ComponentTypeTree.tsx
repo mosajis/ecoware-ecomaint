@@ -10,29 +10,18 @@ import CustomizedTree from '@/shared/components/tree/CustomeTree'
 import { useDataTree } from '@/shared/hooks/useDataTree'
 
 export default function PageComponentTypeTree() {
-  const [selectedRowId, setSelectedRowId] = useState<null | number>(null)
-  const [selectedCompTypeId, setSelectedCompTypeId] = useState<number | null>(
-    null
-  )
+  const [selectedRow, setSelectedRow] = useState<null | TypeTblCompType>(null)
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
 
-  const getAll = useCallback(() => {
-    return tblCompType.getAll({
-      include: {
-        tblAddress: true,
-      },
-    })
-  }, [])
-
   const handleCreate = useCallback(() => {
-    setSelectedRowId(null)
+    setSelectedRow(null)
     setMode('create')
     setOpenForm(true)
   }, [])
 
   const handleEdit = useCallback((row: TypeTblCompType) => {
-    setSelectedRowId(row.compTypeId)
+    setSelectedRow(row)
     setMode('update')
     setOpenForm(true)
   }, [])
@@ -49,19 +38,22 @@ export default function PageComponentTypeTree() {
   )
 
   // === useDataTree ===
-  const {
-    rows,
-    treeItems,
-    loading,
-    handleDelete,
-    handleFormSuccess,
-    handleRefresh,
-  } = useDataTree(
-    tblCompType.getAll,
-    tblCompType.deleteById,
-    'compTypeId',
-    mapper
-  )
+  const { treeItems, loading, handleDelete, handleFormSuccess, handleRefresh } =
+    useDataTree(
+      tblCompType.getAll,
+      tblCompType.deleteById,
+      'compTypeId',
+      mapper
+    )
+
+  const handleSelectTreeItem = (
+    selectedData: TypeTblCompType[],
+    selectedIds: string[]
+  ) => {
+    // const item = selectedData[0]
+    // if (!item) return
+    // setSelectedRow(item)
+  }
 
   return (
     <>
@@ -69,6 +61,8 @@ export default function PageComponentTypeTree() {
         <CustomizedTree
           onRefresh={handleRefresh}
           label='Tree View'
+          multiSelect={false}
+          onSelectionChange={handleSelectTreeItem}
           items={treeItems}
           loading={loading}
           getRowId={row => row.compTypeId}
@@ -76,13 +70,16 @@ export default function PageComponentTypeTree() {
           onEditClick={handleEdit}
           onDeleteClick={handleDelete}
         />
-        <TabsComponent selectedCompTypeId={selectedCompTypeId} />
+        <TabsComponent
+          label={selectedRow?.compTypeNo}
+          selectedCompTypeId={selectedRow?.compTypeId}
+        />
       </Splitter>
 
       <ComponentTypeFormDialog
         open={openForm}
         mode={mode}
-        recordId={selectedRowId}
+        recordId={selectedRow?.compTypeId}
         onClose={() => setOpenForm(false)}
         onSuccess={record => {
           handleFormSuccess(record)

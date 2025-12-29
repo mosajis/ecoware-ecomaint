@@ -1,40 +1,40 @@
-import { Split } from "@geoffcox/react-splitter";
-import { useTheme } from "@mui/material/styles";
-import { ReactNode } from "react";
+import { Split } from '@geoffcox/react-splitter'
+import { useTheme } from '@mui/material/styles'
+import { ReactNode } from 'react'
 
 interface SplitterProps {
-  children: ReactNode[];
-  horizontal?: boolean;
-  initialPrimarySize?: string;
-  resetOnDoubleClick?: boolean;
-  minPrimarySize?: string;
-  minSecondarySize?: string;
-  splitterSize?: string;
+  children: ReactNode[]
+  horizontal?: boolean
+  initialPrimarySize?: string
+  resetOnDoubleClick?: boolean
+  minPrimarySize?: string
+  minSecondarySize?: string
+  splitterSize?: string
 }
 
 const Splitter = ({
   children,
   horizontal = false,
-  initialPrimarySize = "50%",
+  initialPrimarySize = '50%',
   resetOnDoubleClick = false,
   minPrimarySize,
   minSecondarySize,
   splitterSize,
   ...rest
 }: SplitterProps) => {
-  const theme = useTheme();
+  const theme = useTheme()
 
   const colors = {
-    color: theme.palette.divider, // حالت معمولی
-    hover: theme.palette.text.secondary, // وقتی موس روشه
-    drag: theme.palette.primary.main, // موقع درگ
-  };
+    color: theme.palette.divider,
+    hover: theme.palette.text.secondary,
+    drag: theme.palette.primary.main,
+  }
 
   return (
     <Split
+      resetOnDoubleClick={true}
       horizontal={horizontal}
       initialPrimarySize={initialPrimarySize}
-      resetOnDoubleClick={resetOnDoubleClick}
       minPrimarySize={minPrimarySize}
       minSecondarySize={minSecondarySize}
       splitterSize={splitterSize}
@@ -43,7 +43,7 @@ const Splitter = ({
     >
       {children}
     </Split>
-  );
-};
+  )
+}
 
-export default Splitter;
+export default Splitter

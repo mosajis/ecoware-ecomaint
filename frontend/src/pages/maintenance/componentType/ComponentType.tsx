@@ -1,4 +1,4 @@
-import ComponentTypeFormDialog from './ComponentTypeUpsert'
+import ComponentTypeUpsert from './ComponentTypeUpsert'
 import TabsComponent from './ComponentTypeTabs'
 import Splitter from '@/shared/components/Splitter'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
@@ -9,10 +9,7 @@ import { type GridColDef } from '@mui/x-data-grid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 
 export default function PageComponentTypeList() {
-  const [selectedRowId, setSelectedRowId] = useState<null | number>(null)
-  const [selectedCompTypeId, setSelectedCompTypeId] = useState<number | null>(
-    null
-  )
+  const [selectedRow, setSelectedRow] = useState<null | TypeTblCompType>(null)
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
 
@@ -28,20 +25,20 @@ export default function PageComponentTypeList() {
     useDataGrid(getAll, tblCompType.deleteById, 'compTypeId')
 
   const handleCreate = useCallback(() => {
-    setSelectedRowId(null)
+    setSelectedRow(null)
     setMode('create')
     setOpenForm(true)
   }, [])
 
   const handleEdit = useCallback((row: TypeTblCompType) => {
-    setSelectedRowId(row.compTypeId)
+    setSelectedRow(row)
     setMode('update')
     setOpenForm(true)
   }, [])
 
   const columns = useMemo<GridColDef<TypeTblCompType>[]>(
     () => [
-      { field: 'compTypeNo', headerName: 'CompTypeNo', flex: 1 },
+      { field: 'compTypeNo', headerName: 'CompTypeNo', width: 120 },
       { field: 'compName', headerName: 'CompTypeName', flex: 1 },
       { field: 'model', headerName: 'Model', flex: 1 },
       {
@@ -69,16 +66,19 @@ export default function PageComponentTypeList() {
           getRowId={row => row.compTypeId}
           disableDensity
           disableRowNumber
-          onRowClick={params => setSelectedCompTypeId(params.row.compTypeId)}
+          onRowClick={params => setSelectedRow(params.row)}
         />
 
-        <TabsComponent selectedCompTypeId={selectedCompTypeId} />
+        <TabsComponent
+          label={selectedRow?.compName}
+          selectedCompTypeId={selectedRow?.compTypeId}
+        />
       </Splitter>
 
-      <ComponentTypeFormDialog
+      <ComponentTypeUpsert
         open={openForm}
         mode={mode}
-        recordId={selectedRowId}
+        recordId={selectedRow?.compTypeId}
         onClose={() => setOpenForm(false)}
         onSuccess={record => {
           handleFormSuccess(record)

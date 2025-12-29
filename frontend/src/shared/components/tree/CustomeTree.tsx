@@ -1,26 +1,28 @@
-import { useState, useMemo, useCallback, ReactNode, useEffect } from "react";
-import CustomTreeItem from "./CustomeTreeItem";
-import TreeToolbar from "./TreeToolbar";
-import ConfirmDialog from "@/shared/components/ConfirmDialog";
-import Box from "@mui/material/Box";
-import LinearProgress from "@mui/material/LinearProgress";
+import { useState, useMemo, useCallback, ReactNode, useEffect } from 'react'
+import CustomTreeItem from './CustomeTreeItem'
+import TreeToolbar from './TreeToolbar'
+import ConfirmDialog from '@/shared/components/ConfirmDialog'
+import Box from '@mui/material/Box'
+import LinearProgress from '@mui/material/LinearProgress'
 import {
   RichTreeView,
   TreeViewBaseItem,
   type RichTreeViewProps,
-} from "@mui/x-tree-view";
+} from '@mui/x-tree-view'
 
 interface CustomizedTreeProps<T = any> {
-  label?: string;
-  loading?: boolean;
-  onRefresh?: () => void;
-  toolbarActions?: ReactNode;
-  onAddClick?: () => void;
-  onEditClick?: (row: T) => void;
-  onDeleteClick?: (row: T) => void;
-  getRowId?: (row: T) => string | number;
-  items?: (TreeViewBaseItem & { data?: T })[];
-  [key: string]: any;
+  label?: string
+  loading?: boolean
+  onRefresh?: () => void
+  toolbarActions?: ReactNode
+  onAddClick?: () => void
+  onEditClick?: (row: T) => void
+  onDeleteClick?: (row: T) => void
+  onSelectionChange?: (selectedItems: T[], selectedIds: string[]) => void
+  getRowId?: (row: T) => string | number
+  items?: (TreeViewBaseItem & { data?: T })[]
+  multiSelect?: boolean
+  [key: string]: any
 }
 
 export default function CustomizedTree<T = any>({
@@ -32,118 +34,146 @@ export default function CustomizedTree<T = any>({
   onAddClick,
   onEditClick,
   onDeleteClick,
+  onSelectionChange,
   getRowId,
+  multiSelect = false,
   ...other
 }: CustomizedTreeProps<T>) {
-  const [searchText, setSearchText] = useState("");
-  const [confirmOpen, setConfirmOpen] = useState(false);
-  const [deleteTarget, setDeleteTarget] = useState<T | null>(null);
+  const [searchText, setSearchText] = useState('')
+  const [confirmOpen, setConfirmOpen] = useState(false)
+  const [deleteTarget, setDeleteTarget] = useState<T | null>(null)
+  const [selectedIds, setSelectedIds] = useState<string[]>([])
 
   // Helper تابع برای گرفتن ID از نود
   const getNodeId = useCallback(
     (node: TreeViewBaseItem & { data?: T }): string => {
       if (node.data && getRowId) {
-        return String(getRowId(node.data));
+        return String(getRowId(node.data))
       }
-      return String(node.id);
+      return String(node.id)
     },
     [getRowId]
-  );
+  )
 
   const filterNode = useCallback(
     (
       node: TreeViewBaseItem & { data?: T }
     ): (TreeViewBaseItem & { data?: T }) | null => {
-      const match = node.label.toLowerCase().includes(searchText.toLowerCase());
+      const match = node.label.toLowerCase().includes(searchText.toLowerCase())
       if (!node.children || node.children.length === 0)
-        return match ? { ...node } : null;
+        return match ? { ...node } : null
       const filteredChildren = node.children
         .map(filterNode)
-        .filter(Boolean) as (TreeViewBaseItem & { data?: T })[];
+        .filter(Boolean) as (TreeViewBaseItem & { data?: T })[]
       return filteredChildren.length > 0 || match
         ? { ...node, children: filteredChildren }
-        : null;
+        : null
     },
     [searchText]
-  );
+  )
 
   const filteredTree = useMemo(
     () =>
       items.map(filterNode).filter(Boolean) as (TreeViewBaseItem & {
-        data?: T;
+        data?: T
       })[],
     [items, filterNode]
-  );
+  )
 
   // ساخت Map برای دسترسی سریع به نودها با ID
   const flatNodes = useMemo(() => {
-    const map = new Map<string, TreeViewBaseItem & { data?: T }>();
+    const map = new Map<string, TreeViewBaseItem & { data?: T }>()
     const walk = (node: TreeViewBaseItem & { data?: T }) => {
-      const id = getNodeId(node);
-      map.set(id, node);
-      node.children?.forEach(walk);
-    };
-    filteredTree.forEach(walk);
-    return map;
-  }, [filteredTree, getNodeId]);
+      const id = getNodeId(node)
+      map.set(id, node)
+      node.children?.forEach(walk)
+    }
+    filteredTree.forEach(walk)
+    return map
+  }, [filteredTree, getNodeId])
 
   const handleConfirmDelete = useCallback(() => {
     if (deleteTarget && onDeleteClick) {
-      onDeleteClick(deleteTarget);
+      onDeleteClick(deleteTarget)
     }
-    setConfirmOpen(false);
-    setDeleteTarget(null);
-  }, [deleteTarget, onDeleteClick]);
+    setConfirmOpen(false)
+    setDeleteTarget(null)
+  }, [deleteTarget, onDeleteClick])
 
   const handleCancelDelete = useCallback(() => {
-    setConfirmOpen(false);
-    setDeleteTarget(null);
-  }, []);
+    setConfirmOpen(false)
+    setDeleteTarget(null)
+  }, [])
 
   // Expand management
-  const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const [expandedItems, setExpandedItems] = useState<string[]>([])
 
   const allIds = useMemo(() => {
-    const result: string[] = [];
+    const result: string[] = []
     const walk = (node: TreeViewBaseItem & { data?: T }) => {
-      result.push(getNodeId(node));
-      node.children?.forEach(walk);
-    };
-    filteredTree.forEach(walk);
-    return result;
-  }, [filteredTree, getNodeId]);
+      result.push(getNodeId(node))
+      node.children?.forEach(walk)
+    }
+    filteredTree.forEach(walk)
+    return result
+  }, [filteredTree, getNodeId])
 
-  const handleExpandAll = useCallback(() => setExpandedItems(allIds), [allIds]);
-  const handleCollapseAll = useCallback(() => setExpandedItems([]), []);
+  const handleExpandAll = useCallback(() => setExpandedItems(allIds), [allIds])
+  const handleCollapseAll = useCallback(() => setExpandedItems([]), [])
   const onExpandedChange = useCallback(
     (_e: any, ids: string[]) => setExpandedItems(ids),
     []
-  );
+  )
 
   useEffect(() => {
-    if (!searchText) return;
-    const matches: string[] = [];
+    if (!searchText) return
+    const matches: string[] = []
     const walk = (node: TreeViewBaseItem & { data?: T }) => {
       if (node.label.toLowerCase().includes(searchText.toLowerCase())) {
-        matches.push(getNodeId(node));
+        matches.push(getNodeId(node))
       }
-      node.children?.forEach(walk);
-    };
-    filteredTree.forEach(walk);
-    setExpandedItems(matches);
-  }, [searchText, filteredTree, getNodeId]);
+      node.children?.forEach(walk)
+    }
+    filteredTree.forEach(walk)
+    setExpandedItems(matches)
+  }, [searchText, filteredTree, getNodeId])
+
+  // Handle selection change
+  const handleSelectionChange = useCallback(
+    (_e: any, nodeIds: string | string[] | null) => {
+      const ids = Array.isArray(nodeIds) ? nodeIds : nodeIds ? [nodeIds] : []
+
+      if (!multiSelect && ids.length > 1) {
+        const newIds = [ids[ids.length - 1]]
+        setSelectedIds(newIds)
+
+        const selectedData = newIds
+          .map(id => flatNodes.get(id)?.data)
+          .filter(Boolean) as T[]
+        onSelectionChange?.(selectedData, newIds)
+      } else {
+        setSelectedIds(ids)
+
+        const selectedData = ids
+          .map(id => flatNodes.get(id)?.data)
+          .filter(Boolean) as T[]
+        onSelectionChange?.(selectedData, ids)
+      }
+    },
+    [flatNodes, multiSelect, onSelectionChange]
+  )
 
   return (
     <>
       <Box
         sx={{
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
           border: 1,
-          borderColor: "divider",
+          borderColor: 'divider',
           borderRadius: 1,
-          overflow: "hidden",
+          overflow: 'hidden',
         }}
       >
         <TreeToolbar
@@ -158,10 +188,10 @@ export default function CustomizedTree<T = any>({
 
         {loading && <LinearProgress />}
 
-        <Box sx={{ flex: 1, overflow: "auto" }}>
+        <Box sx={{ flex: 1, overflow: 'auto' }}>
           {filteredTree.length > 0 ? (
             <RichTreeView
-              items={filteredTree.map((node) => ({
+              items={filteredTree.map(node => ({
                 ...node,
                 id: getNodeId(node),
               }))}
@@ -170,16 +200,16 @@ export default function CustomizedTree<T = any>({
                   <CustomTreeItem
                     {...props}
                     onEditClick={(id: string) => {
-                      const node = flatNodes.get(id);
+                      const node = flatNodes.get(id)
                       if (node?.data) {
-                        onEditClick?.(node.data);
+                        onEditClick?.(node.data)
                       }
                     }}
                     onDeleteClick={(id: string) => {
-                      const node = flatNodes.get(id);
+                      const node = flatNodes.get(id)
                       if (node?.data) {
-                        setDeleteTarget(node.data);
-                        setConfirmOpen(true);
+                        setDeleteTarget(node.data)
+                        setConfirmOpen(true)
                       }
                     }}
                   />
@@ -187,10 +217,13 @@ export default function CustomizedTree<T = any>({
               }}
               expandedItems={expandedItems}
               onExpandedItemsChange={onExpandedChange}
+              selectedItems={selectedIds}
+              onSelectedItemsChange={handleSelectionChange}
+              multiSelect={multiSelect}
               {...other}
             />
           ) : (
-            <Box textAlign="center" p={2} color="text.secondary">
+            <Box textAlign='center' p={2} color='text.secondary'>
               NotFound
             </Box>
           )}
@@ -201,9 +234,9 @@ export default function CustomizedTree<T = any>({
         open={confirmOpen}
         onCancel={handleCancelDelete}
         onConfirm={handleConfirmDelete}
-        title="Delete Item"
-        message="Are you sure you want to delete this item?"
+        title='Delete Item'
+        message='Are you sure you want to delete this item?'
       />
     </>
-  );
+  )
 }

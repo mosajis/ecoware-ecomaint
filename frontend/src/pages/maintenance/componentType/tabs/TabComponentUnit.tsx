@@ -1,5 +1,5 @@
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 import { GridColDef } from '@mui/x-data-grid'
 import {
@@ -7,64 +7,74 @@ import {
   TypeTblComponentUnit,
 } from '@/core/api/generated/api'
 
+// === Columns ===
+const columns: GridColDef<TypeTblComponentUnit>[] = [
+  {
+    field: 'typeNo',
+    headerName: 'Type No',
+    width: 80,
+    valueGetter: (v, row) => row?.tblCompType?.compTypeNo,
+  },
+  {
+    field: 'compName',
+    headerName: 'Comp Name',
+    width: 200,
+    valueGetter: (v, row) => row?.tblCompType?.compName,
+  },
+  {
+    field: 'compNo',
+    headerName: 'Comp No',
+    flex: 1,
+  },
+
+  {
+    field: 'location',
+    headerName: 'Location',
+    flex: 1,
+    valueGetter: (v, row) => row.tblLocation?.name,
+  },
+  {
+    field: 'serialNo',
+    headerName: 'Serial',
+    width: 100,
+  },
+]
+
 type Props = {
   selected?: number | null
+  label?: string
 }
 
-const TabComponentUnit = ({ selected }: Props) => {
+const TabComponentUnit = ({ selected, label }: Props) => {
   // === getAll callback ===
   const getAll = useCallback(() => {
     return tblComponentUnit.getAll({
       filter: {
         compTypeId: selected,
       },
+      include: {
+        tblLocation: true,
+        tblCompType: true,
+      },
     })
   }, [selected])
 
   // === useDataGrid ===
-  const { rows, loading, fetchData, handleDelete } = useDataGrid(
+  const { rows, loading, fetchData } = useDataGrid(
     getAll,
     tblComponentUnit.deleteById,
-    'compId'
-  )
-
-  // === Columns ===
-  const columns = useMemo<GridColDef<TypeTblComponentUnit>[]>(
-    () => [
-      {
-        field: 'compNo',
-        headerName: 'Comp Name',
-        flex: 1,
-        valueGetter: (v, row) => row.compNo || '',
-      },
-      {
-        field: 'compTypeId',
-        headerName: 'Comp Type',
-        flex: 1,
-      },
-      {
-        field: 'location',
-        headerName: 'Location',
-        flex: 1,
-        valueGetter: (v, row) => row.userDefText1 || '',
-      },
-      {
-        field: 'serialNo',
-        headerName: 'Serial',
-        flex: 1,
-        valueGetter: (v, row) => row.serialNo || '',
-      },
-    ],
-    []
+    'compId',
+    !!selected
   )
 
   return (
     <CustomizedDataGrid
-      label='Component Unit'
+      label={label || 'Component'}
       rows={rows}
       columns={columns}
       loading={loading}
       showToolbar
+      disableRowNumber
       onRefreshClick={fetchData}
       getRowId={row => row.compId}
     />

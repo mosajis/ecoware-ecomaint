@@ -68,15 +68,16 @@ const tabs: ReusableTabItem[] = [
 
 type Props = {
   selectedCompTypeId?: number | undefined | null
+  label?: string | undefined | null
 }
 
-const ComponentTypeTabs = ({ selectedCompTypeId }: Props) => {
+const ComponentTypeTabs = ({ selectedCompTypeId, label }: Props) => {
   return (
     <TabsContainer
       tabs={tabs}
       queryParamKey='tab'
       fillHeight={true}
-      tabProps={{ selected: selectedCompTypeId }}
+      tabProps={{ selected: selectedCompTypeId, label }}
     />
   )
 }
