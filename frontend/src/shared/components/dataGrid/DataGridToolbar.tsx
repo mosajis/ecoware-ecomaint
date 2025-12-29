@@ -1,36 +1,36 @@
-import { Toolbar } from "@mui/x-data-grid";
-import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import AddIcon from "@mui/icons-material/Add";
-import RefreshIcon from "@mui/icons-material/Refresh";
-import ToolbarButton from "./toolbar/ToolbarButton";
-import ButtonDensity from "./toolbar/ButtonDensity";
-import ButtonExport from "./toolbar/ButtonExport";
-import ButtonColumns from "./toolbar/ButtonColumns";
-import ButtonFilters from "./toolbar/ButtonFilter";
-import ButtonSearch from "./toolbar/ButtonSearch";
-import Typography from "@mui/material/Typography";
-import LinearProgress from "@mui/material/LinearProgress";
+import { Toolbar } from '@mui/x-data-grid'
+import { useTheme } from '@mui/material/styles'
+import Box from '@mui/material/Box'
+import AddIcon from '@mui/icons-material/Add'
+import RefreshIcon from '@mui/icons-material/Refresh'
+import ToolbarButton from './toolbar/ToolbarButton'
+import ButtonDensity from './toolbar/ButtonDensity'
+import ButtonExport from './toolbar/ButtonExport'
+import ButtonColumns from './toolbar/ButtonColumns'
+import ButtonFilters from './toolbar/ButtonFilter'
+import ButtonSearch from './toolbar/ButtonSearch'
+import Typography from '@mui/material/Typography'
+import LinearProgress from '@mui/material/LinearProgress'
 
 interface DataGridToolbarProps {
-  label: string;
-  loading?: boolean;
-  onAddClick?: () => void;
-  onRefreshClick?: () => void;
+  label: string
+  loading?: boolean
+  onAddClick?: () => void
+  onRefreshClick?: () => void
 
-  disableSearch?: boolean;
-  disableDensity?: boolean;
-  disableExport?: boolean;
-  disableColumns?: boolean;
-  disableFilters?: boolean;
-  disableAdd?: boolean;
-  disableRefresh?: boolean;
+  disableSearch?: boolean
+  disableDensity?: boolean
+  disableExport?: boolean
+  disableColumns?: boolean
+  disableFilters?: boolean
+  disableAdd?: boolean
+  disableRefresh?: boolean
 
-  children?: React.ReactNode;
+  children?: React.ReactNode
 }
 
 export default function DataGridToolbar(props: DataGridToolbarProps) {
-  const theme = useTheme();
+  const theme = useTheme()
 
   const {
     label,
@@ -45,39 +45,40 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
     disableAdd,
     disableRefresh,
     children,
-  } = props;
+  } = props
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: '100%' }}>
       <Toolbar
         style={{
-          display: "flex",
-          height: "47px",
-          minHeight: "47px",
-          paddingLeft: ".5rem",
-          justifyContent: "space-between",
+          display: 'flex',
+          height: '45px',
+          minHeight: '45px',
+          paddingLeft: '.5rem',
+          paddingRight: '.2rem',
+          justifyContent: 'space-between',
           borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
         }}
       >
-        <Box display={"flex"} alignItems={"center"} gap={2}>
-          <Typography fontWeight="bold">{label}</Typography>
+        <Box display={'flex'} alignItems={'center'} gap={2}>
+          <Typography fontWeight='bold'>{label}</Typography>
 
           {children}
         </Box>
 
-        <Box display="flex" gap={0.5}>
+        <Box display='flex' gap={0.5}>
           {!disableSearch && <ButtonSearch />}
           {!disableDensity && <ButtonDensity />}
           {!disableExport && <ButtonExport />}
           {!disableColumns && <ButtonColumns />}
           {!disableFilters && <ButtonFilters />}
           {!disableRefresh && onRefreshClick && (
-            <ToolbarButton title="Refresh" onClick={onRefreshClick}>
+            <ToolbarButton title='Refresh' onClick={onRefreshClick}>
               <RefreshIcon />
             </ToolbarButton>
           )}
           {!disableAdd && onAddClick && (
-            <ToolbarButton title="Add" onClick={onAddClick}>
+            <ToolbarButton title='Add' onClick={onAddClick}>
               <AddIcon />
             </ToolbarButton>
           )}
@@ -86,5 +87,5 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
 
       {loading && <LinearProgress />}
     </Box>
-  );
+  )
 }

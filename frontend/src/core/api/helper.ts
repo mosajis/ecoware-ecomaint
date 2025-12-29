@@ -2,6 +2,7 @@ import { format as formatGregorian } from 'date-fns'
 import { format as formatJalali } from 'date-fns-jalali'
 import { TypeTblWorkOrder } from './generated/api'
 import { DATE_FORMATS, DateTimeType } from '@/const'
+import * as z from 'zod'
 
 export function buildRelation(
   relationName: string,
@@ -75,3 +76,9 @@ export const calculateOverdue = (row: TypeTblWorkOrder) => {
 }
 
 export const val = (v?: string | number | null) => v ?? '-'
+
+export const requiredStringField = (fieldName: string = 'This field') =>
+  z
+    .string()
+    .nonempty(`${fieldName} is required`)
+    .refine(val => val.trim().length > 0, `${fieldName} cannot be empty spaces`)

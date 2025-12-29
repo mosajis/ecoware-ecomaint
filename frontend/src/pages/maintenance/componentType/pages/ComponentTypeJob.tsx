@@ -8,12 +8,12 @@ import { GridColDef } from '@mui/x-data-grid'
 import { useMatch, useParams } from '@tanstack/react-router'
 import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
-import { routeComponentTypeJob } from '@/app/router/routes/maintenance.routes'
 import {
   tblCompType,
   tblCompTypeJob,
   TypeTblCompTypeJob,
 } from '@/core/api/generated/api'
+import { routeComponentTypeJob } from '../ComponentTypeRoutes'
 
 export default function ComponentTypeJob() {
   const { id } = useParams({ from: routeComponentTypeJob.id })

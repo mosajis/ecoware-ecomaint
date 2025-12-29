@@ -20,6 +20,7 @@ interface CustomizedTreeProps<T = any> {
   onDeleteClick?: (row: T) => void
   onSelectionChange?: (selectedItems: T[], selectedIds: string[]) => void
   getRowId?: (row: T) => string | number
+  onDoubleClick?: (row: T) => void
   items?: (TreeViewBaseItem & { data?: T })[]
   multiSelect?: boolean
   [key: string]: any
@@ -35,6 +36,7 @@ export default function CustomizedTree<T = any>({
   onEditClick,
   onDeleteClick,
   onSelectionChange,
+  onDoubleClick,
   getRowId,
   multiSelect = false,
   ...other
@@ -212,6 +214,13 @@ export default function CustomizedTree<T = any>({
                       if (node?.data) {
                         onEditClick?.(node.data)
                       }
+                    }}
+                    onDoubleClick={(id: string) => {
+                      // const node = flatNodes.get(id)
+                      // if (node?.data) {
+                      //   onDoubleClick?.(node.data)
+                      // }
+                      alert('asd')
                     }}
                     onDeleteClick={(id: string) => {
                       const node = flatNodes.get(id)

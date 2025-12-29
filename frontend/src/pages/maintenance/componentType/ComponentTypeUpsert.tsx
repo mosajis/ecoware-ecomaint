@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import { memo, useEffect, useState, useCallback } from 'react'
 import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
-import { buildRelation } from '@/core/api/helper'
+import { buildRelation, requiredStringField } from '@/core/api/helper'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -17,9 +17,9 @@ import {
 // VALIDATION SCHEMA
 // =======================
 const schema = z.object({
-  compTypeNo: z.string(),
-  compName: z.string(),
-  compType: z.string(),
+  compTypeNo: requiredStringField(),
+  compName: requiredStringField(),
+  compType: requiredStringField(),
 
   maker: z
     .object({
@@ -92,6 +92,8 @@ function ComponentTypeUpsert({
           tblCompType: true, // parent type
         },
       })
+
+      console.log(tblCompType)
 
       reset({
         compTypeNo: res?.compTypeNo ?? '',
@@ -187,7 +189,7 @@ function ComponentTypeUpsert({
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              label='Code'
+              label='Code *'
               size='small'
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -202,7 +204,7 @@ function ComponentTypeUpsert({
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              label='Name'
+              label='Name *'
               size='small'
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -217,7 +219,7 @@ function ComponentTypeUpsert({
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              label='Type'
+              label='Type *'
               size='small'
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -256,6 +258,7 @@ function ComponentTypeUpsert({
               dialogMaxWidth='sm'
               label='Parent '
               selectionMode='single'
+              getOptionLabel={row => row.compName}
               value={field.value}
               request={tblCompType.getAll}
               columns={[{ field: 'compName', headerName: 'Name', flex: 1 }]}

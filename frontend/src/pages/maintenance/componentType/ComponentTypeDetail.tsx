@@ -1,5 +1,5 @@
+import { routeComponentTypeDetail } from './ComponentTypeRoutes'
 import ComponentTypeTabs from './ComponentTypeTabs'
-import { routeComponentTypeDetail } from '@/app/router/routes/maintenance.routes'
 
 const ComponentTypeDetail = () => {
   const { id } = routeComponentTypeDetail.useParams()
