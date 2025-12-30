@@ -1,16 +1,18 @@
+import * as z from 'zod'
+import Box from '@mui/material/Box'
+import TextField from '@mui/material/TextField'
+import FormDialog from '@/shared/components/formDialog/FormDialog'
 import { memo, useEffect, useMemo, useState, useCallback } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
-import TextField from '@mui/material/TextField'
-import FormDialog from '@/shared/components/formDialog/FormDialog'
 import { tblDiscipline, TypeTblDiscipline } from '@/core/api/generated/api'
+import { requiredStringField } from '@/core/api/helper'
+import NumberField from '@/shared/components/NumberField'
 
 // === Validation Schema ===
 const schema = z.object({
-  name: z.string().min(1, 'Name is required').nullable(),
+  name: requiredStringField(),
+  orderNo: z.number().nullable(),
 })
 
 export type DisciplineFormValues = z.infer<typeof schema>
@@ -23,17 +25,14 @@ type Props = {
   onSuccess: (data: TypeTblDiscipline) => void
 }
 
-function DisciplineFormDialog({
-  open,
-  mode,
-  recordId,
-  onClose,
-  onSuccess,
-}: Props) {
+function DisciplineUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
   const [loadingInitial, setLoadingInitial] = useState(false)
   const [submitting, setSubmitting] = useState(false)
 
-  const defaultValues: DisciplineFormValues = useMemo(() => ({ name: '' }), [])
+  const defaultValues: DisciplineFormValues = useMemo(
+    () => ({ name: '', orderNo: null }),
+    []
+  )
 
   const {
     control,
@@ -51,7 +50,7 @@ function DisciplineFormDialog({
       setLoadingInitial(true)
       try {
         const res = await tblDiscipline.getById(recordId)
-        reset({ name: res?.name ?? '' }) // map null to empty string
+        reset({ name: res?.name ?? '', orderNo: res?.orderNo }) // map null to empty string
       } catch (err) {
         console.error('Failed to fetch discipline', err)
         reset(defaultValues)
@@ -101,7 +100,7 @@ function DisciplineFormDialog({
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box gap={1.5}>
+      <Box gap={1.5} display={'flex'} flexDirection={'column'}>
         <Controller
           name='name'
           control={control}
@@ -113,7 +112,22 @@ function DisciplineFormDialog({
               error={!!errors.name}
               helperText={errors.name?.message}
               disabled={isDisabled}
-              sx={{ width: '100%', marginTop: '10px', marginBottom: '15px' }}
+              sx={{ width: '100%' }}
+            />
+          )}
+        />
+        <Controller
+          name='orderNo'
+          control={control}
+          render={({ field }) => (
+            <NumberField
+              {...field}
+              label='Order No'
+              size='small'
+              error={!!errors.orderNo}
+              helperText={errors.orderNo?.message}
+              disabled={isDisabled}
+              sx={{ width: '30%' }}
             />
           )}
         />
@@ -122,4 +136,4 @@ function DisciplineFormDialog({
   )
 }
 
-export default memo(DisciplineFormDialog)
+export default memo(DisciplineUpsert)

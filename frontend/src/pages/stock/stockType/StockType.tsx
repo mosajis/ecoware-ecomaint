@@ -62,8 +62,8 @@ export default function PageStockType() {
       width: 120,
     },
     {
-      field: 'orderId',
-      headerName: 'Order',
+      field: 'orderNo',
+      headerName: 'Order No',
       width: 80,
     },
     dataGridActionColumn({

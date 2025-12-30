@@ -28,7 +28,7 @@ export default function PageMaintClass() {
 
   const typeColumns: GridColDef<TypeTblMaintType>[] = [
     { field: 'descr', headerName: 'Description', flex: 1 },
-    { field: 'orderNo', headerName: 'Order No', width: 120 },
+    { field: 'orderNo', headerName: 'Order No', width: 100 },
     dataGridActionColumn({
       onEdit: row => openTypeForm('update', row.maintTypeId),
       onDelete: handleDeleteType,
@@ -59,7 +59,7 @@ export default function PageMaintClass() {
 
   const classColumns: GridColDef<TypeTblMaintClass>[] = [
     { field: 'descr', headerName: 'Description', flex: 1 },
-    { field: 'orderNo', headerName: 'Order No', width: 120 },
+    { field: 'orderNo', headerName: 'Order No', width: 100 },
     dataGridActionColumn({
       onEdit: row => openClassForm('update', row.maintClassId),
       onDelete: handleDeleteClass,
@@ -95,7 +95,7 @@ export default function PageMaintClass() {
 
   const causeColumns: GridColDef<TypeTblMaintCause>[] = [
     { field: 'descr', headerName: 'Description', flex: 1 },
-    { field: 'orderNo', headerName: 'Order No', width: 120 },
+    { field: 'orderNo', headerName: 'Order No', width: 100 },
     dataGridActionColumn({
       onEdit: row => openCauseForm('update', row.maintCauseId),
       onDelete: handleDeleteCause,

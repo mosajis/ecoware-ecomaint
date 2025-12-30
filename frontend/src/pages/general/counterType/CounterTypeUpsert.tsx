@@ -1,18 +1,21 @@
 import * as z from 'zod'
 import FormDialog from '@/shared/components/formDialog/FormDialog'
-import { memo, useEffect, useState, useCallback, useMemo } from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import Box from '@mui/material/Box'
 import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
+import { memo, useEffect, useState, useCallback, useMemo } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { tblCounterType, TypeTblCounterType } from '@/core/api/generated/api'
+import { requiredStringField } from '@/core/api/helper'
+import NumberField from '@/shared/components/NumberField'
 
 // === Zod schema ===
 const schema = z.object({
-  code: z.string().nullable(),
-  name: z.string().min(1, 'Name is required').nullable(),
-  type: z.number().nullable(),
+  code: requiredStringField(),
+  name: requiredStringField(),
+  type: z.number(),
+  orderNo: z.number().nullable(),
 })
 
 export type CounterTypeFormValues = z.infer<typeof schema>
@@ -39,7 +42,8 @@ function CounterTypeUpsert({
     () => ({
       code: '',
       name: '',
-      type: null,
+      type: 0,
+      orderNo: null,
     }),
     []
   )
@@ -64,7 +68,8 @@ function CounterTypeUpsert({
           reset({
             code: res.code ?? '',
             name: res.name ?? '',
-            type: res.type ?? null,
+            type: res.type ?? 0,
+            orderNo: res.type ?? 0,
           })
         }
       } catch (err) {
@@ -123,7 +128,7 @@ function CounterTypeUpsert({
           render={({ field }) => (
             <TextField
               {...field}
-              label='Code'
+              label='Code *'
               size='small'
               error={!!errors.code}
               helperText={errors.code?.message}
@@ -147,13 +152,27 @@ function CounterTypeUpsert({
           )}
         />
         <Controller
+          name='orderNo'
+          control={control}
+          render={({ field }) => (
+            <NumberField
+              {...field}
+              label='Order No'
+              size='small'
+              error={!!errors.orderNo}
+              helperText={errors.orderNo?.message}
+              disabled={isDisabled}
+            />
+          )}
+        />
+        <Controller
           name='type'
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
               select
-              label='Type'
+              label='Type *'
               size='small'
               disabled={isDisabled}
               sx={{ width: '50%' }}

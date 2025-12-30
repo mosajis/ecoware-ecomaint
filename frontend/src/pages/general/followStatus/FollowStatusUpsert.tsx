@@ -6,11 +6,14 @@ import { memo, useEffect, useMemo, useState, useCallback } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { tblFollowStatus, TypeTblFollowStatus } from '@/core/api/generated/api'
+import { requiredStringField } from '@/core/api/helper'
+import NumberField from '@/shared/components/NumberField'
 
 // === Validation Schema ===
 const schema = z.object({
-  fsName: z.string().min(1, 'Name is required').nullable(),
+  fsName: requiredStringField(),
   fsDesc: z.string().nullable(),
+  orderNo: z.number().nullable(),
 })
 
 export type FollowStatusFormValues = z.infer<typeof schema>
@@ -37,6 +40,7 @@ function FollowStatusUpsert({
     () => ({
       fsName: '',
       fsDesc: '',
+      orderNo: null,
     }),
     []
   )
@@ -60,6 +64,7 @@ function FollowStatusUpsert({
         reset({
           fsName: res?.fsName ?? '',
           fsDesc: res?.fsDesc ?? '',
+          orderNo: res.orderNo,
         })
       } catch (err) {
         console.error('Failed to fetch FollowStatus', err)
@@ -139,6 +144,20 @@ function FollowStatusUpsert({
               helperText={errors.fsDesc?.message}
               disabled={isDisabled}
               sx={{ gridColumn: 'span 4' }}
+            />
+          )}
+        />
+        <Controller
+          name='orderNo'
+          control={control}
+          render={({ field }) => (
+            <NumberField
+              {...field}
+              label='Order No'
+              size='small'
+              error={!!errors.orderNo}
+              helperText={errors.orderNo?.message}
+              disabled={isDisabled}
             />
           )}
         />

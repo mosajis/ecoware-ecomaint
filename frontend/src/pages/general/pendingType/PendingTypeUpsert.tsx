@@ -5,11 +5,22 @@ import * as z from 'zod'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import FormDialog from '@/shared/components/formDialog/FormDialog'
+import NumberField from '@/shared/components/NumberField'
 import { tblPendingType, TypeTblPendingType } from '@/core/api/generated/api'
+import { buildRelation, requiredStringField } from '@/core/api/helper'
+import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
 
 const schema = z.object({
-  pendTypeName: z.string().min(1, 'Name is required').nullable(),
+  pendTypeName: requiredStringField(),
   description: z.string().nullable(),
+  orderNo: z.number().nullable(),
+  parentPendingTypeId: z
+    .object({
+      pendTypeId: z.number(),
+      pendTypeName: z.string().nullable().optional(),
+    })
+    .nullable()
+    .optional(),
 })
 
 export type PendingTypeFormValues = z.infer<typeof schema>
@@ -31,13 +42,15 @@ function PendingTypeUpsert({
 }: Props) {
   const [loadingInitial, setLoadingInitial] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [parentPending, setParentPending] = useState<TypeTblPendingType | null>(
+    null
+  )
 
   const defaultValues: PendingTypeFormValues = useMemo(
     () => ({
       pendTypeName: '',
-      groupId: null,
-      sortId: null,
       description: '',
+      orderNo: null,
     }),
     []
   )
@@ -60,7 +73,15 @@ function PendingTypeUpsert({
         reset({
           pendTypeName: res?.pendTypeName ?? '',
           description: res?.description ?? '',
+          orderNo: res?.orderNo ?? null,
+          parentPendingTypeId: res?.tblPendingType ?? null,
         })
+
+        if (res?.tblPendingType) {
+          setParentPending(res.tblPendingType)
+        } else {
+          setParentPending(null)
+        }
       } catch (err) {
         console.error('Failed to fetch Pending Type', err)
         reset(defaultValues)
@@ -69,6 +90,7 @@ function PendingTypeUpsert({
       }
     } else {
       reset(defaultValues)
+      setParentPending(null)
     }
   }, [mode, recordId, reset, defaultValues])
 
@@ -85,6 +107,7 @@ function PendingTypeUpsert({
         const payload = {
           pendTypeName: values.pendTypeName ?? '',
           description: values.description ?? '',
+          orderNo: values.orderNo,
         }
 
         let result: TypeTblPendingType
@@ -117,6 +140,7 @@ function PendingTypeUpsert({
       onSubmit={handleSubmit(handleFormSubmit)}
     >
       <Box display='grid' gridTemplateColumns='repeat(4, 1fr)' gap={1.5}>
+        {/* Name */}
         <Controller
           name='pendTypeName'
           control={control}
@@ -132,6 +156,8 @@ function PendingTypeUpsert({
             />
           )}
         />
+
+        {/* Description */}
         <Controller
           name='description'
           control={control}
@@ -141,7 +167,23 @@ function PendingTypeUpsert({
               label='Description'
               size='small'
               disabled={isDisabled}
-              sx={{ gridColumn: 'span 4' }}
+              sx={{ gridColumn: 'span 3' }}
+            />
+          )}
+        />
+        {/* Order No */}
+        <Controller
+          name='orderNo'
+          control={control}
+          render={({ field, fieldState }) => (
+            <NumberField
+              {...field}
+              sx={{ gridColumn: 'span 1' }}
+              label='Order No'
+              size='small'
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
+              disabled={isDisabled}
             />
           )}
         />

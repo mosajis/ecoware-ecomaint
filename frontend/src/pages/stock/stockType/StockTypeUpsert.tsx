@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { tblStockType, TypeTblStockType } from '@/core/api/generated/api'
 import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
 import { buildRelation } from '@/core/api/helper'
+import NumberField from '@/shared/components/NumberField'
 
 // === Validation Schema ===
 const schema = z.object({
@@ -21,7 +22,7 @@ const schema = z.object({
     .nullable()
     .optional(),
   deptId: z.number().nullable().optional(),
-  orderId: z.number().nullable().optional(),
+  orderNo: z.number().nullable(),
 })
 
 export type StockTypeFormValues = z.infer<typeof schema>
@@ -52,7 +53,7 @@ function StockTypeFormDialog({
     no: '',
     parentStockTypeId: null,
     deptId: null,
-    orderId: null,
+    orderNo: null,
   }
 
   const { control, handleSubmit, reset } = useForm<StockTypeFormValues>({
@@ -80,7 +81,7 @@ function StockTypeFormDialog({
         no: res?.no ?? '',
         parentStockTypeId: res?.tblStockType ?? null,
         deptId: res?.deptId ?? null,
-        orderId: res?.orderId ?? null,
+        orderNo: res?.orderId,
       })
 
       // نمایش parent
@@ -236,22 +237,15 @@ function StockTypeFormDialog({
 
         {/* Order */}
         <Controller
-          name='orderId'
+          name='orderNo'
           control={control}
           render={({ field }) => (
-            <TextField
+            <NumberField
               {...field}
               label='Order'
               sx={{ width: '50%' }}
-              type='number'
               size='small'
               disabled={isDisabled}
-              value={field.value ?? ''}
-              onChange={e =>
-                field.onChange(
-                  e.target.value === '' ? null : Number(e.target.value)
-                )
-              }
             />
           )}
         />

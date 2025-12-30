@@ -12,11 +12,7 @@ export default function PagePendingType() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
 
   const getAll = useCallback(() => {
-    return tblPendingType.getAll({
-      include: {
-        tblPendingType: true,
-      },
-    })
+    return tblPendingType.getAll()
   }, [])
   const { rows, loading, handleRefresh, handleDelete, handleFormSuccess } =
     useDataGrid(getAll, tblPendingType.deleteById, 'pendTypeId')

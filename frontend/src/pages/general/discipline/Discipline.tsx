@@ -1,50 +1,51 @@
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import DisciplineFormDialog from "./DisciplineFormDialog";
-import { useState, useCallback } from "react";
-import { tblDiscipline, TypeTblDiscipline } from "@/core/api/generated/api";
-import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
-import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
+import DisciplineFormDialog from './DisciplineUpsert'
+import { useState, useCallback } from 'react'
+import { tblDiscipline, TypeTblDiscipline } from '@/core/api/generated/api'
+import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
+import { GridColDef } from '@mui/x-data-grid'
+import { useDataGrid } from '@/shared/hooks/useDataGrid'
 
 export default function PageDiscipline() {
-  const [openForm, setOpenForm] = useState(false);
-  const [mode, setMode] = useState<"create" | "update">("create");
-  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+  const [openForm, setOpenForm] = useState(false)
+  const [mode, setMode] = useState<'create' | 'update'>('create')
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
 
   // === Hook ===
   const { rows, loading, handleDelete, handleFormSuccess, handleRefresh } =
-    useDataGrid(tblDiscipline.getAll, tblDiscipline.deleteById, "discId");
+    useDataGrid(tblDiscipline.getAll, tblDiscipline.deleteById, 'discId')
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
-    setSelectedRowId(null);
-    setMode("create");
-    setOpenForm(true);
-  }, []);
+    setSelectedRowId(null)
+    setMode('create')
+    setOpenForm(true)
+  }, [])
 
   const handleEdit = useCallback((row: TypeTblDiscipline) => {
-    setSelectedRowId(row.discId);
-    setMode("update");
-    setOpenForm(true);
-  }, []);
+    setSelectedRowId(row.discId)
+    setMode('update')
+    setOpenForm(true)
+  }, [])
 
   // === Columns ===
   const columns: GridColDef<TypeTblDiscipline>[] = [
-    { field: "name", headerName: "Name", flex: 1 },
+    { field: 'name', headerName: 'Name', flex: 1 },
+    { field: 'orderNo', headerName: 'Order No', width: 100 },
     dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
-  ];
+  ]
 
   return (
     <>
       <CustomizedDataGrid
         loading={loading}
         showToolbar
-        label="Discipline"
+        label='Discipline'
         rows={rows}
         columns={columns}
         onAddClick={handleCreate}
         onRefreshClick={handleRefresh}
-        getRowId={(row) => row.discId}
+        getRowId={row => row.discId}
       />
 
       <DisciplineFormDialog
@@ -52,8 +53,8 @@ export default function PageDiscipline() {
         mode={mode}
         recordId={selectedRowId}
         onClose={() => setOpenForm(false)}
-        onSuccess={handleFormSuccess}
+        onSuccess={handleRefresh}
       />
     </>
-  );
+  )
 }

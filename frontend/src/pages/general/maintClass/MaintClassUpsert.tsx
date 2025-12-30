@@ -1,14 +1,17 @@
-import { memo, useEffect, useMemo, useState, useCallback } from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import FormDialog from '@/shared/components/formDialog/FormDialog'
+import { memo, useEffect, useMemo, useState, useCallback } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { tblMaintClass, TypeTblMaintClass } from '@/core/api/generated/api'
+import { requiredStringField } from '@/core/api/helper'
+import NumberField from '@/shared/components/NumberField'
 
 const schema = z.object({
-  description: z.string().min(1, 'Description is required').nullable(),
+  description: requiredStringField(),
+  orderNo: z.number().nullable(),
 })
 
 export type MaintClassFormValues = z.infer<typeof schema>
@@ -26,7 +29,7 @@ function MaintClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
   const [submitting, setSubmitting] = useState(false)
 
   const defaultValues: MaintClassFormValues = useMemo(
-    () => ({ description: '' }),
+    () => ({ description: '', orderNo: null }),
     []
   )
 
@@ -45,7 +48,7 @@ function MaintClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
       setLoadingInitial(true)
       try {
         const res = await tblMaintClass.getById(recordId)
-        reset({ description: res?.descr ?? '' })
+        reset({ description: res?.descr ?? '', orderNo: res.orderNo })
       } catch (err) {
         console.error('Failed to fetch MaintClass', err)
         reset(defaultValues)
@@ -71,10 +74,12 @@ function MaintClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         if (mode === 'create') {
           result = await tblMaintClass.create({
             descr: values.description,
+            orderNo: values.orderNo,
           })
         } else if (mode === 'update' && recordId) {
           result = await tblMaintClass.update(recordId, {
             descr: values.description,
+            orderNo: values.orderNo,
           })
         } else {
           return
@@ -112,6 +117,20 @@ function MaintClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               helperText={errors.description?.message}
               disabled={isDisabled}
               sx={{ gridColumn: 'span 4' }}
+            />
+          )}
+        />
+        <Controller
+          name='orderNo'
+          control={control}
+          render={({ field }) => (
+            <NumberField
+              {...field}
+              label='Order No'
+              size='small'
+              error={!!errors.orderNo}
+              helperText={errors.orderNo?.message}
+              disabled={isDisabled}
             />
           )}
         />

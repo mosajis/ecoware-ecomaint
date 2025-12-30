@@ -38,7 +38,7 @@ export default function PageAddress() {
       { field: 'phone', headerName: 'Phone', flex: 2 },
       { field: 'contact', headerName: 'Contact Person', flex: 1 },
       { field: 'eMail', headerName: 'Email', flex: 1 },
-      { field: 'orderNo', headerName: 'Order No', width: 80 },
+      { field: 'orderNo', headerName: 'Order No', width: 100 },
       dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
     ],
     [handleEdit, handleDelete]

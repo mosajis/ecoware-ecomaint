@@ -33,7 +33,7 @@ export default function PageJobClass() {
     () => [
       { field: 'code', headerName: 'Code', width: 60 },
       { field: 'name', headerName: 'Name', flex: 1 },
-      { field: 'orderNo', headerName: 'Order No', width: 120 },
+      { field: 'orderNo', headerName: 'Order No', width: 100 },
       dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
     ],
     [handleEdit, handleDelete]

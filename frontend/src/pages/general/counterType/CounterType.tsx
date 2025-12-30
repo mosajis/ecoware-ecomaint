@@ -53,7 +53,7 @@ export default function PageCounterType() {
               valueGetter: (_, row) =>
                 row.type === 3 ? 'Measure Point' : 'Counter',
             },
-            { field: 'orderId', headerName: 'Order No', width: 100 },
+            { field: 'orderNo', headerName: 'Order No', width: 100 },
             dataGridActionColumn({
               onEdit: handleEdit,
               onDelete: deleteCounterType,

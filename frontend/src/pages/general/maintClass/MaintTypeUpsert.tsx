@@ -6,9 +6,12 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import FormDialog from '@/shared/components/formDialog/FormDialog'
 import { tblMaintType, TypeTblMaintType } from '@/core/api/generated/api'
+import { requiredStringField } from '@/core/api/helper'
+import NumberField from '@/shared/components/NumberField'
 
 const schema = z.object({
-  description: z.string().min(1, 'Description is required').nullable(),
+  description: requiredStringField(),
+  orderNo: z.number().nullable(),
 })
 
 export type MaintTypeFormValues = z.infer<typeof schema>
@@ -26,7 +29,7 @@ function MaintTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
   const [submitting, setSubmitting] = useState(false)
 
   const defaultValues: MaintTypeFormValues = useMemo(
-    () => ({ description: '' }),
+    () => ({ description: '', orderNo: null }),
     []
   )
 
@@ -45,7 +48,7 @@ function MaintTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
       setLoadingInitial(true)
       try {
         const res = await tblMaintType.getById(recordId)
-        reset({ description: res?.descr ?? '' })
+        reset({ description: res?.descr ?? '', orderNo: res.orderNo })
       } catch (err) {
         console.error('Failed to fetch MaintType', err)
         reset(defaultValues)
@@ -71,10 +74,12 @@ function MaintTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         if (mode === 'create') {
           result = await tblMaintType.create({
             descr: values.description,
+            orderNo: values.orderNo,
           })
         } else if (mode === 'update' && recordId) {
           result = await tblMaintType.update(recordId, {
             descr: values.description,
+            orderNo: values.orderNo,
           })
         } else {
           return
@@ -112,6 +117,20 @@ function MaintTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               helperText={errors.description?.message}
               disabled={isDisabled}
               sx={{ gridColumn: 'span 4' }}
+            />
+          )}
+        />
+        <Controller
+          name='orderNo'
+          control={control}
+          render={({ field }) => (
+            <NumberField
+              {...field}
+              label='Order No'
+              size='small'
+              error={!!errors.orderNo}
+              helperText={errors.orderNo?.message}
+              disabled={isDisabled}
             />
           )}
         />
