@@ -1,4 +1,3 @@
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded'
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded'
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded'
 import BusinessRoundedIcon from '@mui/icons-material/BusinessRounded'
@@ -13,7 +12,6 @@ import PrecisionManufacturingRoundedIcon from '@mui/icons-material/PrecisionManu
 import ArticleRoundedIcon from '@mui/icons-material/ArticleRounded'
 import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded'
 import LoopRoundedIcon from '@mui/icons-material/LoopRounded'
-import WarningAmberRoundedIcon from '@mui/icons-material/WarningAmberRounded'
 import PostAddRoundedIcon from '@mui/icons-material/PostAddRounded'
 import FlashOnRoundedIcon from '@mui/icons-material/FlashOnRounded'
 import UpdateRoundedIcon from '@mui/icons-material/UpdateRounded'
@@ -65,7 +63,7 @@ export const menuContentItems: {
     path: '/dashboard',
   },
   {
-    title: 'General (x)',
+    title: 'General',
     icon: <CategoryRoundedIcon />,
     items: [
       {
@@ -113,19 +111,19 @@ export const menuContentItems: {
         path: '/general/follow-status',
       },
       {
-        text: 'Pending Type (x)',
+        text: 'Pending Type',
         icon: <HourglassEmptyRoundedIcon />,
         id: 'general:pendingType',
         path: '/general/pending-type',
       },
       {
-        text: 'Job Class (x)',
+        text: 'Job Class',
         icon: <WorkHistoryRoundedIcon />,
         id: 'general:jobClass',
         path: '/general/job-class',
       },
       {
-        text: 'Job Description (x)',
+        text: 'Job Description',
         icon: <DescriptionRoundedIcon />,
         id: 'general:jobDescription',
         path: '/general/job-description',

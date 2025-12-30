@@ -6,11 +6,14 @@ import { memo, useEffect, useState, useCallback, useMemo } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { tblJobClass, TypeTblJobClass } from '@/core/api/generated/api'
+import { requiredStringField } from '@/core/api/helper'
+import NumberField from '@/shared/components/NumberField'
 
 // === Validation Schema ===
 const schema = z.object({
-  code: z.string().nullable(),
-  name: z.string().min(1, 'Name is required').nullable(),
+  code: requiredStringField(),
+  name: requiredStringField(),
+  orderNo: z.number().nullable(),
 })
 
 export type JobClassFormValues = z.infer<typeof schema>
@@ -32,6 +35,7 @@ function JobClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
     () => ({
       code: '',
       name: '',
+      orderNo: null,
     }),
     []
   )
@@ -56,6 +60,7 @@ function JobClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           reset({
             code: res.code ?? '',
             name: res.name ?? '',
+            orderNo: res.orderNo,
           })
         }
       } catch (err) {
@@ -115,7 +120,7 @@ function JobClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           render={({ field }) => (
             <TextField
               {...field}
-              label='Code'
+              label='Code *'
               size='small'
               error={!!errors.code}
               helperText={errors.code?.message}
@@ -137,6 +142,20 @@ function JobClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               helperText={errors.name?.message}
               disabled={isDisabled}
               sx={{ gridColumn: 'span 2' }}
+            />
+          )}
+        />
+        <Controller
+          name='orderNo'
+          control={control}
+          render={({ field }) => (
+            <NumberField
+              {...field}
+              label='Order No'
+              size='small'
+              error={!!errors.orderNo}
+              helperText={errors.orderNo?.message}
+              disabled={isDisabled}
             />
           )}
         />
