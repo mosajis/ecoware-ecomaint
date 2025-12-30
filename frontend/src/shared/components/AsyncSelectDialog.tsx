@@ -1,5 +1,6 @@
 import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
+import CustomizedDataGrid from './dataGrid/DataGrid'
 import DialogActions from '@mui/material/DialogActions'
 import Button from '@mui/material/Button'
 import { useEffect, useState, useCallback } from 'react'
@@ -8,9 +9,6 @@ import {
   GridRowIdGetter,
   GridRowSelectionModel,
 } from '@mui/x-data-grid'
-
-import DialogHeader from './dialog/DialogHeader'
-import CustomizedDataGrid from './dataGrid/DataGrid'
 
 export interface SelectModalProps<TItem extends Record<string, any>> {
   open: boolean
@@ -55,7 +53,6 @@ export function AsyncSelectDialog<TItem extends Record<string, any>>({
   // ---------------- Fetch Data ----------------
   const fetchData = useCallback(async () => {
     setLoading(true)
-    setSelection({ type: 'include', ids: new Set<GridRowId>() })
 
     try {
       const data = await request()
@@ -70,16 +67,18 @@ export function AsyncSelectDialog<TItem extends Record<string, any>>({
   useEffect(() => {
     if (open) {
       fetchData()
-
-      const initialIds = new Set<GridRowId>()
-      if (selectionMode === 'single' && selected && !Array.isArray(selected)) {
-        initialIds.add(getRowId(selected))
-      } else if (selectionMode === 'multiple' && Array.isArray(selected)) {
-        selected.forEach(item => initialIds.add(getRowId(item)))
-      }
-      setSelection({ type: 'include', ids: initialIds })
     }
-  }, [open, fetchData, selected, selectionMode, getRowId])
+  }, [open, fetchData])
+
+  useEffect(() => {
+    const initialIds = new Set<GridRowId>()
+    if (selectionMode === 'single' && selected && !Array.isArray(selected)) {
+      initialIds.add(getRowId(selected))
+    } else if (selectionMode === 'multiple' && Array.isArray(selected)) {
+      selected.forEach(item => initialIds.add(getRowId(item)))
+    }
+    setSelection({ type: 'include', ids: initialIds })
+  }, [selected, selectionMode, getRowId])
 
   // ---------------- Handle OK ----------------
   const handleOk = () => {
@@ -92,6 +91,22 @@ export function AsyncSelectDialog<TItem extends Record<string, any>>({
       onSelect(selectedItems)
     }
     onClose()
+  }
+
+  // ---------------- Handle Double Click ----------------
+  const handleRowDoubleClick = ({ row }: { row: TItem }) => {
+    const rowId = getRowId(row)
+    const newSelection = {
+      type: 'include' as const,
+      ids: new Set<GridRowId>([rowId]),
+    }
+    setSelection(newSelection)
+
+    // اگر single selection است، فوری اوکی کن
+    if (selectionMode === 'single') {
+      onSelect(row)
+      onClose()
+    }
   }
 
   // ---------------- Render ----------------
@@ -114,6 +129,7 @@ export function AsyncSelectDialog<TItem extends Record<string, any>>({
           checkboxSelection={selectionMode === 'multiple'}
           disableRowSelectionOnClick={false}
           onRowSelectionModelChange={setSelection}
+          onRowDoubleClick={handleRowDoubleClick}
         />
       </DialogContent>
       <DialogActions sx={{ p: 0, m: 1 }}>

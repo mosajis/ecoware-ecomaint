@@ -1,22 +1,24 @@
-import { memo, useEffect, useMemo, useState, useCallback } from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
 import FormDialog from '@/shared/components/formDialog/FormDialog'
+import { memo, useEffect, useMemo, useState, useCallback } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { tblAddress, TypeTblAddress } from '@/core/api/generated/api'
+import { requiredStringField } from '@/core/api/helper'
+import NumberField from '@/shared/components/NumberField'
 
 // === Validation Schema with Zod ===
 const schema = z.object({
-  code: z.string().nullable(),
-  name: z.string().min(1, 'Name is required'),
+  code: requiredStringField(),
+  name: requiredStringField(),
   address1: z.string().nullable(),
   address2: z.string().nullable(),
   phone: z.string().nullable(),
   eMail: z.string().nullable(),
   contact: z.string().nullable(),
+  orderNo: z.number().nullable(),
 })
 
 export type AddressFormValues = z.infer<typeof schema>
@@ -42,6 +44,7 @@ function AddressUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
       phone: '',
       eMail: '',
       contact: '',
+      orderNo: null,
     }),
     []
   )
@@ -71,6 +74,7 @@ function AddressUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
             phone: res.phone ?? '',
             eMail: res.eMail ?? '',
             contact: res.contact ?? '',
+            orderNo: res.orderNo,
           })
         }
       } catch (err) {
@@ -130,7 +134,7 @@ function AddressUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           render={({ field }) => (
             <TextField
               {...field}
-              label='Code'
+              label='Code *'
               size='small'
               error={!!errors.code}
               helperText={errors.code?.message}
@@ -230,6 +234,21 @@ function AddressUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               size='small'
               error={!!errors.eMail}
               helperText={errors.eMail?.message}
+              disabled={isDisabled}
+              sx={{ gridColumn: 'span 2' }}
+            />
+          )}
+        />
+        <Controller
+          name='orderNo'
+          control={control}
+          render={({ field }) => (
+            <NumberField
+              {...field}
+              label='Order No'
+              size='small'
+              error={!!errors.orderNo}
+              helperText={errors.orderNo?.message}
               disabled={isDisabled}
               sx={{ gridColumn: 'span 2' }}
             />

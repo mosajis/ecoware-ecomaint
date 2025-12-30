@@ -59,7 +59,7 @@ export default function PageEmployee() {
       flex: 1,
       valueGetter: (v, row) => row.tblDiscipline?.name,
     },
-    { field: 'available', headerName: 'Hrs Avail/Week', width: 150 },
+    { field: 'orderNo', headerName: 'Order No', width: 80 },
     dataGridActionColumn({
       onEdit: handleEdit,
       onDelete: handleDelete,

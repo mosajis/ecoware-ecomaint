@@ -8,12 +8,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { tblLocation, TypeTblLocation } from '@/core/api/generated/api'
 import { AsyncSelectDialog } from '@/shared/components/AsyncSelectDialog'
 import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
-import { buildRelation } from '@/core/api/helper'
+import { buildRelation, requiredStringField } from '@/core/api/helper'
+import NumberField from '@/shared/components/NumberField'
 
 // === Validation Schema ===
 const schema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  locationCode: z.string(),
+  name: requiredStringField(),
+  locationCode: requiredStringField(),
+  orderNo: z.number().nullable(),
   parentLocationId: z
     .object({
       locationId: z.number(),
@@ -21,7 +23,6 @@ const schema = z.object({
     })
     .nullable()
     .optional(),
-  orderId: z.number().nullable().optional(),
 })
 
 export type LocationFormValues = z.infer<typeof schema>
@@ -46,7 +47,7 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
     name: '',
     locationCode: '',
     parentLocationId: null,
-    orderId: null,
+    orderNo: null,
   }
 
   const { control, handleSubmit, reset, watch } = useForm<LocationFormValues>({
@@ -73,7 +74,7 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         name: res?.name ?? '',
         locationCode: res?.locationCode ?? '',
         parentLocationId: res?.tblLocation ?? null,
-        orderId: res?.orderId ?? null,
+        orderNo: res?.orderNo ?? null,
       })
 
       // نمایش parent
@@ -116,12 +117,14 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
         if (mode === 'create') {
           result = await tblLocation.create({
+            orderNo: parsed.data.orderNo,
             name: parsed.data.name,
             locationCode: parsed.data.locationCode,
             ...parentRelation,
           })
         } else {
           result = await tblLocation.update(recordId!, {
+            orderNo: parsed.data.orderNo,
             name: parsed.data.name,
             locationCode: parsed.data.locationCode,
             ...parentRelation,
@@ -155,7 +158,7 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
             <TextField
               sx={{ width: '75%' }}
               {...field}
-              label='Code'
+              label='Code *'
               size='small'
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -189,7 +192,7 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               dialogMaxWidth='sm'
               label='Parent Location'
               selectionMode='single'
-              value={field.value} // رکورد کامل
+              value={field.value}
               request={tblLocation.getAll}
               columns={[{ field: 'name', headerName: 'Name', flex: 1 }]}
               getRowId={row => row.locationId}
@@ -202,28 +205,19 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
         {/* Order */}
         <Controller
-          name='orderId'
+          name='orderNo'
           control={control}
           render={({ field }) => (
-            <TextField
+            <NumberField
               {...field}
-              label='Order'
+              label='Order No'
               sx={{ width: '50%' }}
-              type='number'
               size='small'
               disabled={isDisabled}
-              value={field.value ?? ''}
-              onChange={e =>
-                field.onChange(
-                  e.target.value === '' ? null : Number(e.target.value)
-                )
-              }
             />
           )}
         />
       </Box>
-
-      {/* Dialog Select */}
     </FormDialog>
   )
 }

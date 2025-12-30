@@ -1,25 +1,26 @@
 import * as z from 'zod'
 import AsyncSelect from '@/shared/components/AsyncSelect'
 import FormDialog from '@/shared/components/formDialog/FormDialog'
+import Box from '@mui/material/Box'
+import TextField from '@mui/material/TextField'
+import NumberField from '@/shared/components/NumberField'
 import { memo, useEffect, useMemo, useState, useCallback } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
+import { buildRelation, requiredStringField } from '@/core/api/helper'
+import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
 import {
   tblAddress,
   tblDiscipline,
   tblEmployee,
   TypeTblEmployee,
 } from '@/core/api/generated/api'
-import { buildRelation } from '@/core/api/helper'
-import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
 
 // === Validation Schema ===
 export const schema = z.object({
-  code: z.string().nullable(),
-  lastName: z.string().min(1, 'Last Name is required').nullable(),
-  firstName: z.string().min(1, 'First Name is required').nullable(),
+  code: requiredStringField(),
+  lastName: requiredStringField(),
+  firstName: requiredStringField(),
 
   address: z
     .object({
@@ -33,9 +34,12 @@ export const schema = z.object({
       id: z.number(),
       label: z.string(),
     })
-    .nullable(),
+    .nullable()
+    .refine(val => val !== null, {
+      message: 'Discipline is required',
+    }),
 
-  hrsAvailWeek: z.number().nullable(),
+  orderNo: z.number().nullable(),
 })
 
 export type EmployeeFormValues = z.infer<typeof schema>
@@ -59,7 +63,7 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
       firstName: '',
       address: null,
       discipline: null,
-      hrsAvailWeek: null,
+      orderNo: null,
     }),
     []
   )
@@ -101,7 +105,7 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
                 }
               : null,
 
-            hrsAvailWeek: res.available ?? null,
+            orderNo: res.orderNo ?? null,
           })
         }
       } finally {
@@ -128,7 +132,7 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           code: values.code ?? null,
           lastName: values.lastName ?? '',
           firstName: values.firstName ?? '',
-          available: values.hrsAvailWeek ?? 0,
+          orderNo: values.orderNo,
 
           // Relation
           ...buildRelation(
@@ -178,7 +182,7 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
             <TextField
               {...field}
               sx={{ width: '70%' }}
-              label='Code'
+              label='Code *'
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               size='small'
@@ -242,35 +246,36 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           )}
         />
         {/* Discipline (30%) */}
-        <AsyncSelect
+        <Controller
           name='discipline'
           control={control}
-          label='Discipline'
-          disabled={isDisabled}
-          apiCall={() => tblDiscipline.getAll().then(res => res.items)}
-          mapper={d => ({
-            id: d.discId!,
-            label: d.name ?? '',
-          })}
+          render={({ field, fieldState }) => (
+            <AsyncSelect
+              name='discipline'
+              control={control}
+              label='Discipline *'
+              disabled={isDisabled}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
+              apiCall={() => tblDiscipline.getAll().then(res => res.items)}
+              mapper={d => ({
+                id: d.discId!,
+                label: d.name ?? '',
+              })}
+            />
+          )}
         />
 
         <Controller
-          name='hrsAvailWeek'
+          name='orderNo'
           control={control}
           render={({ field }) => (
-            <TextField
+            <NumberField
               {...field}
               sx={{ width: '50%' }}
-              label='Hrs Avail Week'
-              type='number'
+              label='Order No'
               size='small'
               disabled={isDisabled}
-              value={field.value ?? ''}
-              onChange={e =>
-                field.onChange(
-                  e.target.value === '' ? null : Number(e.target.value)
-                )
-              }
             />
           )}
         />
