@@ -41,7 +41,7 @@ const Providers = ({ children }: ProvidersProps) => {
         </AppTheme>
       </LocalizationWrapper>
 
-      <Toaster />
+      <Toaster position='bottom-center' richColors />
     </JotaiProvider>
   )
 }

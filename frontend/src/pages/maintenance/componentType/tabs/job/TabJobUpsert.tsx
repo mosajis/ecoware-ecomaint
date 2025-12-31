@@ -12,7 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
 import { BorderedBox } from '@/shared/components/BorderedBox'
 import { buildRelation } from '@/core/api/helper'
-import { logicTblCompTypeJob } from './ComponentTypeJob.logic'
+import { logicTblCompTypeJob } from './TabJobEffect'
 import {
   tblCompTypeJob,
   tblJobDescription,
@@ -131,7 +131,7 @@ const DEFAULT_VALUES: JobFormValues = {
   mandatoryHistory: false,
 }
 
-function ComponentTypeJobFormDialog({
+function ComponentTypeJobUpsert({
   open,
   mode,
   recordId,
@@ -576,4 +576,4 @@ function ComponentTypeJobFormDialog({
   )
 }
 
-export default memo(ComponentTypeJobFormDialog)
+export default memo(ComponentTypeJobUpsert)

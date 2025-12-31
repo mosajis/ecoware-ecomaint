@@ -283,7 +283,7 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <Box sx={{ p: 3, bgcolor: '#f5f5f5', minHeight: '100vh' }}>
+    <Box>
       <Box mb={5}>
         <Typography variant='h4' fontWeight={700} mb={1}>
           Work Order Dashboard

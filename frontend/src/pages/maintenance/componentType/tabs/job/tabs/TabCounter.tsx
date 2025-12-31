@@ -1,20 +1,18 @@
-import { useCallback, useMemo } from 'react'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import {
-  tblCompTypeCounter,
-  TypeTblCompType,
-  TypeTblCompTypeCounter,
-} from '@/core/api/generated/api'
+import { useCallback, useMemo } from 'react'
 import { GridColDef } from '@mui/x-data-grid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
+import {
+  tblCompTypeCounter,
+  TypeTblCompTypeCounter,
+  TypeTblCompTypeJob,
+} from '@/core/api/generated/api'
 
 type Props = {
-  compType?: TypeTblCompType | null
-  label?: string
+  compTypeJob?: TypeTblCompTypeJob | null
 }
 
-const TabCounter = ({ compType, label }: Props) => {
-  const compTypeId = compType?.compTypeId
+const TabCounter = ({ compTypeJob }: Props) => {
   // === getAll callback ===
   const getAll = useCallback(() => {
     return tblCompTypeCounter.getAll({
@@ -23,17 +21,17 @@ const TabCounter = ({ compType, label }: Props) => {
         tblCompTypeJobCounters: true,
       },
       filter: {
-        compTypeId: compTypeId,
+        compTypeId: compTypeJob?.compTypeId,
       },
     })
-  }, [compTypeId])
+  }, [compTypeJob?.compTypeId])
 
   // === useDataGrid ===
-  const { rows, loading, fetchData, handleDelete } = useDataGrid(
+  const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
     tblCompTypeCounter.deleteById,
     'compTypeCounterId',
-    !!compTypeId
+    !!compTypeJob?.compTypeJobId
   )
 
   // === Columns ===
@@ -51,13 +49,13 @@ const TabCounter = ({ compType, label }: Props) => {
 
   return (
     <CustomizedDataGrid
-      label={label || 'Counter'}
+      label='Counter'
       rows={rows}
       columns={columns}
       loading={loading}
       showToolbar
-      onRefreshClick={fetchData}
-      getRowId={row => row.compTypeCounterId}
+      onRefreshClick={handleRefresh}
+      getRowId={row => row.compTypeJobId}
     />
   )
 }

@@ -2,11 +2,12 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import DataGridActionsButton from '../dataGrid/DataGridActionsButton'
 import { getDesignTokens } from '@/shared/theme/themePrimitives'
 import { styled, useColorScheme } from '@mui/material/styles'
 import { TreeItem, treeItemClasses, type TreeItemProps } from '@mui/x-tree-view'
-import DataGridActionsButton from '../dataGrid/DataGridActionsButton'
 import { memo } from 'react'
+import { useDoubleClick } from '@/shared/hooks/useDoubleClick'
 
 export const StyledTreeItem = styled(TreeItem)(({ theme }) => {
   const { mode } = useColorScheme()
@@ -53,6 +54,7 @@ interface CustomLabelProps {
   id: string
   onEditClick?: (id: string) => void
   onDeleteClick?: (id: string) => void
+  onDoubleClick?: (id: string) => void
 }
 
 const CustomLabel = memo(
@@ -61,7 +63,15 @@ const CustomLabel = memo(
     id,
     onEditClick,
     onDeleteClick,
+    onDoubleClick,
   }: CustomLabelProps) {
+    const { onClick } = useDoubleClick({
+      onDoubleClick: () => {
+        onDoubleClick?.(id)
+      },
+      delay: 300,
+    })
+
     return (
       <Box
         sx={{
@@ -69,6 +79,7 @@ const CustomLabel = memo(
           alignItems: 'center',
           justifyContent: 'space-between',
         }}
+        onClick={onClick}
       >
         <Typography sx={{ flex: 1 }}>{label}</Typography>
 
@@ -98,21 +109,23 @@ const CustomLabel = memo(
       </Box>
     )
   },
-  // جلوگیری از رندرهای اضافی
   (prev, next) =>
     prev.label === next.label &&
     prev.id === next.id &&
     prev.onEditClick === next.onEditClick &&
-    prev.onDeleteClick === next.onDeleteClick
+    prev.onDeleteClick === next.onDeleteClick &&
+    prev.onDoubleClick === next.onDoubleClick
 )
 
 function CustomTreeItemBase(
   props: TreeItemProps & {
     onEditClick?: (id: string) => void
     onDeleteClick?: (id: string) => void
+    onDoubleClick?: (id: string) => void
   }
 ) {
-  const { itemId, label, onEditClick, onDeleteClick, ...other } = props
+  const { itemId, label, onEditClick, onDeleteClick, onDoubleClick, ...other } =
+    props
 
   return (
     <StyledTreeItem
@@ -123,6 +136,7 @@ function CustomTreeItemBase(
           label={label as string}
           onEditClick={onEditClick}
           onDeleteClick={onDeleteClick}
+          onDoubleClick={onDoubleClick}
         />
       }
       {...other}

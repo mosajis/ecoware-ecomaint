@@ -1,42 +1,85 @@
 import { lazy } from 'react'
-import AccountTree from '@mui/icons-material/AccountTree'
-import BarChart from '@mui/icons-material/BarChart'
-import ContentCopy from '@mui/icons-material/ContentCopy'
+import AccountTreeIcon from '@mui/icons-material/AccountTree'
+import BarChartIcon from '@mui/icons-material/BarChart'
+import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing'
+import AttachFileIcon from '@mui/icons-material/AttachFile'
+import InventoryIcon from '@mui/icons-material/Inventory'
+import StraightenIcon from '@mui/icons-material/Straighten'
+
 import TabsContainer, {
   ReusableTabItem,
 } from '@/shared/components/TabsContainer'
+import { TypeTblCompType } from '@/core/api/generated/api'
 
-// Lazy imports
+// ===== Lazy Tabs =====
 const TabJob = lazy(
-  () => import('@/pages/maintenance/componentType/tabs/TabJob')
+  () => import('@/pages/maintenance/componentType/tabs/job/TabJob')
 )
+
 const TabCounter = lazy(
   () => import('@/pages/maintenance/componentType/tabs/TabCounter')
 )
+
 const TabComponentUnit = lazy(
   () => import('@/pages/maintenance/componentType/tabs/TabComponentUnit')
 )
 
-// Define tabs using the reusable format
+const TabAttachment = lazy(
+  () => import('@/pages/maintenance/componentType/tabs/TabAttachment')
+)
+
+const TabMeasure = lazy(
+  () => import('@/pages/maintenance/componentType/tabs/TabMeasures')
+)
+
+// ===== Tabs Config =====
 const tabs: ReusableTabItem[] = [
-  { label: 'Component', icon: <ContentCopy />, component: TabComponentUnit },
-  { label: 'Job', icon: <AccountTree />, component: TabJob },
-  { label: 'Counter', icon: <BarChart />, component: TabCounter },
+  {
+    label: 'Jobs',
+    icon: <AccountTreeIcon />,
+    component: TabJob,
+  },
+  {
+    label: 'Counters',
+    icon: <BarChartIcon />,
+    component: TabCounter,
+  },
+  {
+    label: 'Components',
+    icon: <PrecisionManufacturingIcon />,
+    component: TabComponentUnit,
+  },
+  {
+    label: 'Measures',
+    icon: <StraightenIcon />,
+    component: TabMeasure,
+  },
+
+  {
+    label: 'Attachments',
+    icon: <AttachFileIcon />,
+    component: TabAttachment,
+  },
 ]
 
+// ===== Props =====
 type Props = {
-  compTypeId?: number | undefined | null
-  label?: string | undefined | null
+  compType?: TypeTblCompType | null
+  label?: string | null
 }
 
-const ComponentTypeTabs = ({ compTypeId, label }: Props) => {
+// ===== Component =====
+const ComponentTypeTabs = ({ compType, label }: Props) => {
   return (
     <TabsContainer
       persistInUrl
       tabs={tabs}
       queryParamKey='tab'
-      fillHeight={true}
-      tabProps={{ selected: compTypeId, label }}
+      fillHeight
+      tabProps={{
+        compType,
+        label,
+      }}
     />
   )
 }

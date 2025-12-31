@@ -1,4 +1,3 @@
-import { useState, useMemo, useCallback, ReactNode, useEffect } from 'react'
 import CustomTreeItem from './CustomeTreeItem'
 import TreeToolbar from './TreeToolbar'
 import ConfirmDialog from '@/shared/components/ConfirmDialog'
@@ -9,6 +8,7 @@ import {
   TreeViewBaseItem,
   type RichTreeViewProps,
 } from '@mui/x-tree-view'
+import { useState, useMemo, useCallback, ReactNode, useEffect } from 'react'
 
 interface CustomizedTreeProps<T = any> {
   label?: string
@@ -215,18 +215,17 @@ export default function CustomizedTree<T = any>({
                         onEditClick?.(node.data)
                       }
                     }}
-                    onDoubleClick={(id: string) => {
-                      // const node = flatNodes.get(id)
-                      // if (node?.data) {
-                      //   onDoubleClick?.(node.data)
-                      // }
-                      alert('asd')
-                    }}
                     onDeleteClick={(id: string) => {
                       const node = flatNodes.get(id)
                       if (node?.data) {
                         setDeleteTarget(node.data)
                         setConfirmOpen(true)
+                      }
+                    }}
+                    onDoubleClick={(id: string) => {
+                      const node = flatNodes.get(id)
+                      if (node?.data && onDoubleClick) {
+                        onDoubleClick(node.data)
                       }
                     }}
                   />

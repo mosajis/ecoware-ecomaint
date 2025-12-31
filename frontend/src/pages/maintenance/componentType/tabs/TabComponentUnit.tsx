@@ -5,6 +5,7 @@ import { GridColDef } from '@mui/x-data-grid'
 import {
   tblComponentUnit,
   TypeTblComponentUnit,
+  TypeTblCompType,
 } from '@/core/api/generated/api'
 
 // === Columns ===
@@ -41,30 +42,32 @@ const columns: GridColDef<TypeTblComponentUnit>[] = [
 ]
 
 type Props = {
-  selected?: number | null
+  compType?: TypeTblCompType | null
   label?: string
 }
 
-const TabComponentUnit = ({ selected, label }: Props) => {
+const TabComponentUnit = ({ compType, label }: Props) => {
+  const compTypeId = compType?.compTypeId
+
   // === getAll callback ===
   const getAll = useCallback(() => {
     return tblComponentUnit.getAll({
       filter: {
-        compTypeId: selected,
+        compTypeId: compTypeId,
       },
       include: {
         tblLocation: true,
         tblCompType: true,
       },
     })
-  }, [selected])
+  }, [compTypeId])
 
   // === useDataGrid ===
   const { rows, loading, fetchData } = useDataGrid(
     getAll,
     tblComponentUnit.deleteById,
     'compId',
-    !!selected
+    !!compTypeId
   )
 
   return (

@@ -9,6 +9,7 @@ import { useDataTree } from '@/shared/hooks/useDataTree'
 import { useRouter } from '@tanstack/react-router'
 import { routeComponentTypeDetail } from './ComponentTypeRoutes'
 import { type GridColDef } from '@mui/x-data-grid'
+import { Box } from '@mui/material'
 
 export default function PageComponentTypeList() {
   const [selectedRow, setSelectedRow] = useState<null | TypeTblCompType>(null)
@@ -103,7 +104,6 @@ export default function PageComponentTypeList() {
           disableRowNumber
           disableRowSelectionOnClick
           onRowDoubleClick={({ row }) => handleDoubleClick(row)}
-          // onRowClick={params => setSelectedRow(params.row)}
         />
       </Splitter>
 

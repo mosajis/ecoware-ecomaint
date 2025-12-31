@@ -4,36 +4,33 @@ import { GridColDef } from '@mui/x-data-grid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 import {
   tblCompTypeMeasurePoint,
-  TypeTblCompType,
   type TypeTblCompTypeMeasurePoint,
 } from '@/core/api/generated/api'
 
 type Props = {
-  compType?: TypeTblCompType | null
-  label?: string
+  selected?: number | null
 }
 
-const TabMeasuresPage = ({ compType, label }: Props) => {
-  const compTypeId = compType?.compTypeId
+const TabMeasuresPage = ({ selected }: Props) => {
   // === getAll callback ===
   const getAll = useCallback(() => {
     return tblCompTypeMeasurePoint.getAll({
       filter: {
-        compTypeId: compTypeId,
+        compTypeId: selected,
       },
       include: {
         tblUnit: true,
         tblCounterType: true,
       },
     })
-  }, [compTypeId])
+  }, [selected])
 
   // === useDataGrid ===
   const { rows, loading, fetchData, handleDelete } = useDataGrid(
     getAll,
     tblCompTypeMeasurePoint.deleteById,
     'compTypeMeasurePointId',
-    !!compTypeId
+    !!selected
   )
 
   // === Columns ===
@@ -74,7 +71,7 @@ const TabMeasuresPage = ({ compType, label }: Props) => {
 
   return (
     <CustomizedDataGrid
-      label={label || 'Measures'}
+      label='Measures'
       rows={rows}
       columns={columns}
       loading={loading}
