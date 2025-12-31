@@ -17,7 +17,7 @@ const columns: GridColDef<TypeTblComponentUnit>[] = [
   },
   {
     field: 'compTypeNo',
-    headerName: 'Comp Type No',
+    headerName: 'CompType No',
     width: 120,
     valueGetter: (_, row) => row.tblCompType?.compTypeNo,
   },

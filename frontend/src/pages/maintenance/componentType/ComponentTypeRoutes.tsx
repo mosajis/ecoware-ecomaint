@@ -11,10 +11,6 @@ export const PageComponentTypeDetail = lazy(
   () => import('@/pages/maintenance/componentType/ComponentTypeDetail')
 )
 
-// export const PageComponentTypeJob = lazy(
-//   () => import('@/pages/maintenance/componentType/pages/ComponentTypeJob')
-// )
-
 export const routeComponentType = createRoute({
   getParentRoute: () => routeMaintenance,
   path: 'component-type',
@@ -23,40 +19,23 @@ export const routeComponentType = createRoute({
     breadcrumb: 'Component Type',
   }),
 })
+
 export const routeComponentTypeList = createRoute({
   getParentRoute: () => routeComponentType,
   path: '/',
+  component: () => <LazyRoute Component={PageComponentType} />,
   beforeLoad: () => ({
     breadcrumb: 'List',
   }),
-  component: () => <LazyRoute Component={PageComponentType} />,
 })
+
 export const routeComponentTypeDetail = createDetailRoute({
   parent: routeComponentType,
   path: '/$id',
-  Component: Outlet,
+  Component: () => <LazyRoute Component={PageComponentTypeDetail} />,
 })
-export const routeComponentTypeDetailPage = createRoute({
-  getParentRoute: () => routeComponentTypeDetail,
-  path: '/',
-  beforeLoad: () => ({
-    breadcrumb: 'View',
-  }),
-  component: () => <LazyRoute Component={PageComponentTypeDetail} />,
-})
-// export const routeComponentTypeJob = createRoute({
-//   getParentRoute: () => routeComponentTypeDetail,
-//   path: 'job',
-//   beforeLoad: () => ({
-//     breadcrumb: 'Job',
-//   }),
-//   component: () => <LazyRoute Component={PageComponentTypeJob} />,
-// })
 
 routeComponentType.addChildren([
   routeComponentTypeList,
-  routeComponentTypeDetail.addChildren([
-    routeComponentTypeDetailPage,
-    // routeComponentTypeJob,
-  ]),
+  routeComponentTypeDetail,
 ])

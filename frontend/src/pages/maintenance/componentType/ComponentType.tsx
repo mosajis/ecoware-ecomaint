@@ -16,8 +16,6 @@ export default function PageComponentTypeList() {
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
 
-  const router = useRouter()
-
   const mapper = useCallback(
     (row: TypeTblCompType) => ({
       id: row.compTypeId.toString(),
@@ -59,12 +57,14 @@ export default function PageComponentTypeList() {
       { field: 'compTypeNo', headerName: 'CompTypeNo', width: 120 },
       { field: 'compName', headerName: 'CompTypeName', flex: 1 },
       { field: 'model', headerName: 'Model', width: 200 },
+      { field: 'orderNo', headerName: 'OrderNo', width: 100 },
 
       dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
     ],
     [handleEdit, handleDelete]
   )
 
+  const router = useRouter()
   const handleDoubleClick = (row: TypeTblCompType) => {
     router.navigate({
       to: routeComponentTypeDetail.to,

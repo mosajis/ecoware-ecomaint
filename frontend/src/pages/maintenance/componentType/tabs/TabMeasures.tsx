@@ -68,6 +68,11 @@ const TabMeasuresPage = ({ compType, label }: Props) => {
         headerName: 'Max Value',
         flex: 1,
       },
+      {
+        field: 'orderNo',
+        headerName: 'Order No',
+        width: 100,
+      },
     ],
     []
   )

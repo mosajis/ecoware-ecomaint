@@ -13,9 +13,17 @@ const TabJobDescription = lazy(() => import('./tabs/TabJobDescription'))
 
 // Define tabs using the reusable format
 const tabs: ReusableTabItem[] = [
-  { label: 'JobDescription', icon: <BarChart />, component: TabJobDescription },
-  { label: 'Counter (Check)', icon: <BarChart />, component: TabCounter },
-  { label: 'Measure (Check)', icon: <EditNoteIcon />, component: TabMeasures },
+  {
+    label: 'Job Description',
+    icon: <BarChart />,
+    component: TabJobDescription,
+  },
+  { label: 'Job Counter', icon: <BarChart />, component: TabCounter },
+  {
+    label: 'Job Measure Points',
+    icon: <EditNoteIcon />,
+    component: TabMeasures,
+  },
 ]
 
 type Props = {

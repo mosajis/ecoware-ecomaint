@@ -41,7 +41,7 @@ export default function PageCounterUpdate() {
   const columns: GridColDef<TypeTblJobDescription>[] = useMemo(
     () => [
       { field: 'jobDescCode', headerName: 'Component Number', width: 120 },
-      { field: 'jobDescTitle', headerName: 'Comp Type Name', flex: 2 },
+      { field: 'jobDescTitle', headerName: 'CompType Name', flex: 2 },
       {
         field: 'jobClass',
         headerName: 'Counter Type',

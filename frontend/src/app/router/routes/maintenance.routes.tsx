@@ -3,6 +3,8 @@ import { createRoute, Outlet } from '@tanstack/react-router'
 import { protectedRoute } from './protected.routes'
 import { LazyRoute } from './_components/lazyRoute'
 import { routeComponentType } from '@/pages/maintenance/componentType/ComponentTypeRoutes'
+import { routeComponentUnit } from '@/pages/maintenance/componentUnit/ComponentUnitRoutes'
+import { NotFound } from '@/pages/NotFound'
 
 // --- Lazy pages ---
 export const PageFunction = lazy(
@@ -11,12 +13,7 @@ export const PageFunction = lazy(
 export const PageFunctionTree = lazy(
   () => import('@/pages/maintenance/function/FunctionTree')
 )
-export const PageComponentUnitList = lazy(
-  () => import('@/pages/maintenance/componentUnit/ComponentUnit')
-)
-export const PageComponentUnitTree = lazy(
-  () => import('@/pages/maintenance/componentUnit/ComponentUnitTree')
-)
+
 export const PageComponentJob = lazy(
   () => import('@/pages/maintenance/componentJob/ComponentJob')
 )
@@ -42,6 +39,7 @@ export const PageCounterUpdate = lazy(
 
 // --- Maintenance root ---
 export const routeMaintenance = createRoute({
+  notFoundComponent: () => <NotFound />,
   getParentRoute: () => protectedRoute,
   path: 'maintenance',
   component: () => <Outlet />,
@@ -68,27 +66,6 @@ export const routeFunctionTree = createRoute({
   beforeLoad: () => ({ breadcrumb: 'Tree View' }),
 })
 routeFunction.addChildren([routeFunctionList, routeFunctionTree])
-
-// --- Component Unit ---
-export const routeComponentUnit = createRoute({
-  getParentRoute: () => routeMaintenance,
-  path: 'component-unit',
-  component: () => <Outlet />,
-  beforeLoad: () => ({ breadcrumb: 'Component Unit' }),
-})
-export const routeComponentUnitList = createRoute({
-  getParentRoute: () => routeComponentUnit,
-  path: 'list-view',
-  component: () => <LazyRoute Component={PageComponentUnitList} />,
-  beforeLoad: () => ({ breadcrumb: 'List View' }),
-})
-export const routeComponentUnitTree = createRoute({
-  getParentRoute: () => routeComponentUnit,
-  path: 'tree-view',
-  component: () => <LazyRoute Component={PageComponentUnitTree} />,
-  beforeLoad: () => ({ breadcrumb: 'Tree View' }),
-})
-routeComponentUnit.addChildren([routeComponentUnitList, routeComponentUnitTree])
 
 // --- Work Order ---
 export const routeWorkOrder = createRoute({

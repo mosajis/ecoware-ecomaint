@@ -3,7 +3,7 @@ import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 import { GridColDef } from '@mui/x-data-grid'
 import {
-  tblDiscipline,
+  tblCompJob,
   tblJobDescription,
   TypeTblComponentUnit,
   TypeTblJobDescription,
@@ -19,10 +19,10 @@ const TabJob = ({ componentUnit, label }: TabJobProps) => {
   // const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
   const getAll = useCallback(() => {
-    return tblJobDescription.getAll({
+    return tblCompJob.getAll({
       include: {
-        // tblDiscipline: true,
-        // tblPeriod: true,
+        tblDiscipline: true,
+        tblPeriod: true,
       },
     })
   }, [componentUnit?.compId])

@@ -19,7 +19,7 @@ const TabDetails = ({ label, componentUnit }: TabDetailsProps) => {
 
   return (
     <Editor
-      readOnly={!!componentUnit?.compId}
+      readOnly={!componentUnit?.compId}
       label={label || 'Details'}
       initValue={data?.notes}
       autoSave

@@ -4,9 +4,11 @@ import { GridColDef } from '@mui/x-data-grid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 import {
   tblCompTypeCounter,
+  tblCompTypeJobCounter,
   TypeTblCompTypeCounter,
   TypeTblCompTypeJob,
 } from '@/core/api/generated/api'
+import { Box } from '@mui/material'
 
 type Props = {
   compTypeJob?: TypeTblCompTypeJob | null
@@ -15,22 +17,25 @@ type Props = {
 const TabCounter = ({ compTypeJob }: Props) => {
   // === getAll callback ===
   const getAll = useCallback(() => {
-    return tblCompTypeCounter.getAll({
+    return tblCompTypeJobCounter.getAll({
       include: {
-        tblCounterType: true,
-        tblCompTypeJobCounters: true,
+        tblCompTypeCounter: {
+          include: {
+            tblCounterType: true,
+          },
+        },
       },
       filter: {
-        compTypeId: compTypeJob?.compTypeId,
+        compTypeJobId: compTypeJob?.compTypeJobId,
       },
     })
-  }, [compTypeJob?.compTypeId])
+  }, [compTypeJob?.compTypeJobId])
 
   // === useDataGrid ===
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
-    tblCompTypeCounter.deleteById,
-    'compTypeCounterId',
+    tblCompTypeJobCounter.deleteById,
+    'compTypeJobCounterId',
     !!compTypeJob?.compTypeJobId
   )
 
@@ -41,7 +46,18 @@ const TabCounter = ({ compTypeJob }: Props) => {
         field: 'counterType',
         headerName: 'Counter Type',
         flex: 1,
-        valueGetter: (v, row) => row.tblCounterType?.name || '',
+        //@ts-ignore
+        valueGetter: (v, row) => row?.tblCompTypeCounter?.tblCounterType?.name,
+      },
+      {
+        field: 'frequency',
+        headerName: 'Frequency',
+        flex: 1,
+      },
+      {
+        field: 'window',
+        headerName: 'Window',
+        flex: 1,
       },
     ],
     []
@@ -49,13 +65,15 @@ const TabCounter = ({ compTypeJob }: Props) => {
 
   return (
     <CustomizedDataGrid
-      label='Counter'
+      label={
+        compTypeJob?.tblJobDescription?.jobDescTitle || 'CompType Job Counter'
+      }
       rows={rows}
       columns={columns}
       loading={loading}
       showToolbar
       onRefreshClick={handleRefresh}
-      getRowId={row => row.compTypeJobId}
+      getRowId={row => row.compTypeJobCounterId}
     />
   )
 }

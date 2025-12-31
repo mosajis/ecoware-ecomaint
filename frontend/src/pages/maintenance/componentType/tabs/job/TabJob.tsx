@@ -85,19 +85,19 @@ const TabJob = ({ compType, label }: Props) => {
     },
     {
       field: 'maintClass',
-      headerName: 'Mt-Class',
+      headerName: 'MaintClass',
       flex: 1,
       valueGetter: (_, row) => row.tblMaintClass?.descr,
     },
     {
       field: 'maintType',
-      headerName: 'Mt-Type',
+      headerName: 'MaintType',
       flex: 1,
       valueGetter: (_, row) => row.tblMaintType?.descr,
     },
     {
       field: 'maintCause',
-      headerName: 'Mt-Cause',
+      headerName: 'MaintCause',
       flex: 1,
       valueGetter: (_, row) => row.tblMaintCause?.descr,
     },
@@ -144,11 +144,11 @@ const TabJob = ({ compType, label }: Props) => {
       renderCell: ({ row }) => <CellBoolean status={row.statusRepair} />,
     },
 
-    {
-      field: 'orderNo',
-      headerName: 'Order No',
-      width: 100,
-    },
+    // {
+    //   field: 'orderNo',
+    //   headerName: 'Order No',
+    //   width: 100,
+    // },
 
     dataGridActionColumn({
       onEdit: onEdit,
@@ -252,7 +252,7 @@ const TabJob = ({ compType, label }: Props) => {
           />
         }
         title='Apply Changes'
-        message='Apply all changes to related components?'
+        message='Are you sure apply all changes to related components?'
         confirmText='Yes'
         cancelText='No'
         confirmColor='primary'

@@ -159,20 +159,6 @@ export const menuContentItems: {
         icon: <Inventory2RoundedIcon />,
         id: 'maint:componentUnit:component',
         path: '/maintenance/component-unit',
-        children: [
-          {
-            text: 'Tree View (x)',
-            id: 'maint:componentUnit:tree',
-            path: '/maintenance/component-unit/tree-view',
-            icon: <BulletIcon />,
-          },
-          {
-            text: 'List View (x)',
-            id: 'maint:componentUnit:list',
-            path: '/maintenance/component-unit/list-view',
-            icon: <BulletIcon />,
-          },
-        ],
       },
       {
         text: 'Component Type (x)',

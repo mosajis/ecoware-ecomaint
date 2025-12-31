@@ -19,7 +19,7 @@ import { TypeTblComponentUnit } from '@/core/api/generated/api'
 
 // Lazy imports
 const TabDetails = lazy(() => import('./tabs/TabDetails'))
-const TabJob = lazy(() => import('./tabs/TabJob'))
+const TabJob = lazy(() => import('./tabs/tabJob/TabJob'))
 const TabCounter = lazy(() => import('./tabs/TabCounter'))
 const TabWorkOrder = lazy(() => import('./tabs/TabWorkOrder'))
 const TabMaintLog = lazy(() => import('./tabs/TabMaintLog'))
@@ -44,18 +44,19 @@ const tabs: ReusableTabItem[] = [
   { label: 'Counter', icon: <BarChart />, component: TabCounter },
   { label: 'Work Order', icon: <ContentCopy />, component: TabWorkOrder },
   { label: 'Maint Log', icon: <DoneAll />, component: TabMaintLog },
-  { label: 'Attachment', icon: <AttachFile />, component: TabAttachment },
-  { label: 'Job Attachment', icon: <AddBox />, component: TabJobAttachment },
   { label: 'Failure Report', icon: <BugReport />, component: TabFailureReport },
   { label: 'Performed', icon: <CheckCircle />, component: TabPerformed },
   { label: 'Part', icon: <Build />, component: TabPart },
   { label: 'Measures', icon: <Tune />, component: TabMeasures },
   { label: 'Oil Info', icon: <ColorLens />, component: TabOilInfo },
   { label: 'Stock Used', icon: <StackedLineChart />, component: TabStockUsed },
+  { label: 'Attachment', icon: <AttachFile />, component: TabAttachment },
+  { label: 'Job Attachment', icon: <AddBox />, component: TabJobAttachment },
 ]
 
 const ComponentUnitTabs = (props: Props) => {
   const { label, componentUnit } = props
+
   return (
     <TabsContainer
       tabs={tabs}

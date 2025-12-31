@@ -1,35 +1,35 @@
-import React, { useCallback } from "react";
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import React, { useCallback } from 'react'
+import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import {
   tblCompTypeCounter,
   TypeTblCompTypeCounter,
-} from "@/core/api/generated/api";
-import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "@/shared/hooks/useDataGrid";
+} from '@/core/api/generated/api'
+import { GridColDef } from '@mui/x-data-grid'
+import { useDataGrid } from '@/shared/hooks/useDataGrid'
 
 interface TabCompTypeCounterProps {
-  counterTypeId: number | null | undefined;
-  label?: string | null;
+  counterTypeId: number | null | undefined
+  label?: string | null
 }
 
 // ---- Columns (مطابق نیاز میتونی تغییر بدی) ----
 const columns: GridColDef<TypeTblCompTypeCounter>[] = [
   {
-    field: "code",
-    headerName: "Code",
+    field: 'code',
+    headerName: 'Code',
     width: 120,
     valueGetter: (_, row) => row.tblCompType?.compTypeNo,
   },
   {
-    field: "name",
-    headerName: "Name",
+    field: 'name',
+    headerName: 'Name',
     flex: 1,
     valueGetter: (_, row) => row?.tblCompType?.compName,
   },
-];
+]
 
 export default function TabCompTypeCounter(props: TabCompTypeCounterProps) {
-  const { counterTypeId, label } = props;
+  const { counterTypeId, label } = props
 
   // اگر مقدار نداشت جدول خالی نمایش بده
   if (!counterTypeId) {
@@ -38,24 +38,24 @@ export default function TabCompTypeCounter(props: TabCompTypeCounterProps) {
         rows={[]}
         columns={columns}
         loading={false}
-        label="Comp Type Counter"
+        label='CompType Counter'
         showToolbar
       />
-    );
+    )
   }
 
   const getAll = useCallback(() => {
     return tblCompTypeCounter.getAll({
       filter: { counterTypeId },
       include: { tblCompType: true },
-    });
-  }, [counterTypeId]);
+    })
+  }, [counterTypeId])
 
   const { rows, loading, fetchData } = useDataGrid(
     getAll,
     tblCompTypeCounter.deleteById,
-    "compTypeCounterId"
-  );
+    'compTypeCounterId'
+  )
 
   return (
     <CustomizedDataGrid
@@ -65,7 +65,7 @@ export default function TabCompTypeCounter(props: TabCompTypeCounterProps) {
       label={label || undefined}
       showToolbar
       onRefreshClick={fetchData}
-      getRowId={(row) => row.compTypeCounterId}
+      getRowId={row => row.compTypeCounterId}
     />
-  );
+  )
 }

@@ -3,34 +3,43 @@ import { useCallback, useMemo } from 'react'
 import { GridColDef } from '@mui/x-data-grid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 import {
+  tblCompTypeJobMeasurePoint,
   tblCompTypeMeasurePoint,
+  tblCounterType,
+  TypeTblCompTypeJob,
+  TypeTblCompTypeJobMeasurePoint,
   type TypeTblCompTypeMeasurePoint,
 } from '@/core/api/generated/api'
 
 type Props = {
-  selected?: number | null
+  compTypeJob?: TypeTblCompTypeJob | null
 }
 
-const TabMeasuresPage = ({ selected }: Props) => {
+const TabMeasuresPage = ({ compTypeJob }: Props) => {
   // === getAll callback ===
+
   const getAll = useCallback(() => {
-    return tblCompTypeMeasurePoint.getAll({
-      filter: {
-        compTypeId: selected,
-      },
+    return tblCompTypeJobMeasurePoint.getAll({
       include: {
-        tblUnit: true,
-        tblCounterType: true,
+        tblCompTypeMeasurePoint: {
+          include: {
+            tblUnit: true,
+            tblCounterType: true,
+          },
+        },
+      },
+      filter: {
+        compTypeJobId: compTypeJob?.compTypeJobId,
       },
     })
-  }, [selected])
+  }, [compTypeJob?.compTypeJobId])
 
   // === useDataGrid ===
   const { rows, loading, fetchData, handleDelete } = useDataGrid(
     getAll,
     tblCompTypeMeasurePoint.deleteById,
     'compTypeMeasurePointId',
-    !!selected
+    !!compTypeJob
   )
 
   // === Columns ===
@@ -40,28 +49,36 @@ const TabMeasuresPage = ({ selected }: Props) => {
         field: 'measureName',
         headerName: 'Measure Name',
         flex: 1,
-        valueGetter: (v, row) => row?.tblCounterType?.name,
+        // @ts-ignore
+        // @ts-ignore
+        valueGetter: (v, row) =>
+          // @ts-ignore
+          row?.tblCompTypeMeasurePoint?.tblCounterType?.name,
       },
       {
         field: 'unitName',
         headerName: 'Unit Name',
         flex: 1,
-        valueGetter: (v, row) => row?.tblUnit?.name,
+        // @ts-ignore
+
+        valueGetter: (v, row) => row?.tblCompTypeMeasurePoint?.tblUnit?.name,
       },
       {
         field: 'unitDescription',
         headerName: 'Unit Description',
         flex: 1,
-        valueGetter: (v, row) => row?.tblUnit?.description,
+        // @ts-ignore
+        valueGetter: (v, row) =>
+          // @ts-ignore
+          row?.tblCompTypeMeasurePoint?.tblUnit?.description,
       },
-      { field: 'setValue', headerName: 'Set Value', flex: 1 },
       {
-        field: 'operationalMinValue',
+        field: 'minValue',
         headerName: 'Min Value',
         flex: 1,
       },
       {
-        field: 'operationalMaxValue',
+        field: 'maxValue',
         headerName: 'Max Value',
         flex: 1,
       },
@@ -71,7 +88,7 @@ const TabMeasuresPage = ({ selected }: Props) => {
 
   return (
     <CustomizedDataGrid
-      label='Measures'
+      label={compTypeJob?.tblJobDescription?.jobDescTitle || 'Measures'}
       rows={rows}
       columns={columns}
       loading={loading}

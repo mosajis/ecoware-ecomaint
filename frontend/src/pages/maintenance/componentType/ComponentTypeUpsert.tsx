@@ -12,6 +12,7 @@ import {
   tblAddress,
   type TypeTblCompType,
 } from '@/core/api/generated/api'
+import NumberField from '@/shared/components/NumberField'
 
 // =======================
 // VALIDATION SCHEMA
@@ -20,19 +21,18 @@ const schema = z.object({
   compTypeNo: requiredStringField(),
   compName: requiredStringField(),
   compType: requiredStringField(),
-
-  maker: z
-    .object({
-      addressId: z.number(),
-      name: z.string().nullable().optional(),
-    })
-    .nullable()
-    .optional(),
-
+  orderNo: z.number().nullable(),
   tblCompType: z
     .object({
       compTypeId: z.number(),
       compName: z.string().nullable().optional(),
+    })
+    .nullable()
+    .optional(),
+  maker: z
+    .object({
+      addressId: z.number(),
+      name: z.string().nullable().optional(),
     })
     .nullable()
     .optional(),
@@ -67,6 +67,7 @@ function ComponentTypeUpsert({
     compType: '',
     maker: null,
     tblCompType: null,
+    orderNo: null,
   }
 
   const { control, handleSubmit, reset } = useForm<CompTypeFormValues>({
@@ -89,19 +90,16 @@ function ComponentTypeUpsert({
       const res = await tblCompType.getById(recordId, {
         include: {
           tblAddress: true,
-          tblCompType: true, // parent type
+          tblCompType: true,
         },
       })
-
-      console.log(tblCompType)
 
       reset({
         compTypeNo: res?.compTypeNo ?? '',
         compName: res?.compName ?? '',
         compType: res?.compType ?? '',
+        orderNo: res?.orderNo ?? null,
         maker: res?.tblAddress ?? null,
-
-        // 🎯 FIX: Normalize parent type to avoid recursive structure
         tblCompType: res?.tblCompType
           ? {
               compTypeId: res.tblCompType.compTypeId,
@@ -136,17 +134,16 @@ function ComponentTypeUpsert({
           'addressId',
           parsed.data.maker?.addressId
         )
-
         const parentRel = buildRelation(
           'tblCompType',
           'compTypeId',
           parsed.data.tblCompType?.compTypeId
         )
-
         const payload = {
           compTypeNo: parsed.data.compTypeNo,
           compName: parsed.data.compName,
           compType: parsed.data.compType,
+          orderNo: parsed.data.orderNo,
           ...makerRel,
           ...parentRel,
         }
@@ -248,8 +245,6 @@ function ComponentTypeUpsert({
             />
           )}
         />
-
-        {/* Parent Component Type */}
         <Controller
           name='tblCompType'
           control={control}
@@ -264,6 +259,21 @@ function ComponentTypeUpsert({
               columns={[{ field: 'compName', headerName: 'Name', flex: 1 }]}
               getRowId={row => row.compTypeId}
               onChange={field.onChange}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
+              disabled={isDisabled}
+            />
+          )}
+        />
+
+        <Controller
+          name='orderNo'
+          control={control}
+          render={({ field, fieldState }) => (
+            <NumberField
+              {...field}
+              label='Order No '
+              size='small'
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}

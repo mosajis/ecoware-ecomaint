@@ -40,21 +40,21 @@ const tabs: ReusableTabItem[] = [
     component: TabJob,
   },
   {
-    label: 'Counters',
+    label: 'Counter Crud',
     icon: <BarChartIcon />,
     component: TabCounter,
+  },
+
+  {
+    label: 'Measure Point Crud',
+    icon: <StraightenIcon />,
+    component: TabMeasure,
   },
   {
     label: 'Components',
     icon: <PrecisionManufacturingIcon />,
     component: TabComponentUnit,
   },
-  {
-    label: 'Measures',
-    icon: <StraightenIcon />,
-    component: TabMeasure,
-  },
-
   {
     label: 'Attachments',
     icon: <AttachFileIcon />,

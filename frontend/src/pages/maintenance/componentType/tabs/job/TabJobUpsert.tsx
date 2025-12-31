@@ -271,12 +271,12 @@ function ComponentTypeJobUpsert({
       maxWidth='md'
       open={open}
       onClose={onClose}
-      title={mode === 'create' ? 'Comp Type Job' : 'Edit Comp Type Job'}
+      title={mode === 'create' ? 'CompType Job' : 'Edit CompType Job'}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display='flex' flexDirection='column' gap={1.5}>
+      <Box display='flex' flexDirection='column' gap={2}>
         {/* Component Type */}
         <TextField
           label='Component Type'
@@ -476,7 +476,7 @@ function ComponentTypeJobUpsert({
 
       {/* Status Checkboxes */}
       <BorderedBox label='Component Status' mt={2} width='80%'>
-        <Box display='flex'>
+        <Box display='flex' gap={2}>
           <Controller
             name='statusNone'
             control={control}
