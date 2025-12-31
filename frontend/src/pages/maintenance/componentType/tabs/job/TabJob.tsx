@@ -2,7 +2,7 @@ import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import Splitter from '@/shared/components/Splitter'
 import Tabs from './TabJobTabs'
 import CellBoolean from '@/shared/components/dataGrid/cells/CellBoolean'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import {
   tblCompTypeJob,
   TypeTblCompType,
@@ -12,6 +12,10 @@ import { GridColDef } from '@mui/x-data-grid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import ComponentTypeJobUpsert from './TabJobUpsert'
+import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges'
+import ConfirmDialog from '@/shared/components/ConfirmDialog'
+import { logicTblCompTypeJob } from './TabJobEffect'
+import { toast } from 'sonner'
 
 // === Columns ===
 type Props = {
@@ -21,6 +25,10 @@ type Props = {
 
 const TabJob = ({ compType, label }: Props) => {
   const compTypeId = compType?.compTypeId
+
+  const [confirmOpen, setConfirmOpen] = useState(false)
+  const [effectJobId, setEffectJobId] = useState<number | null>(null)
+  const [effectOperation, setEffectOperation] = useState<0 | 1 | 2 | null>(null)
 
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
@@ -34,16 +42,15 @@ const TabJob = ({ compType, label }: Props) => {
     setOpenForm(true)
   }
 
-  const onDelete = (row: TypeTblCompTypeJob) => {
-    handleDelete(row)
-    // logicTblCompTypeJob.effect(row.compTypeJobId, 2);
+  const onDelete = async (row: TypeTblCompTypeJob) => {
+    await handleDelete(row)
+    handleSuccess(row, true)
   }
 
   const onEdit = (row: TypeTblCompTypeJob) => {
     setSelectedRow(row)
     setMode('update')
     setOpenForm(true)
-    // logicTblCompTypeJob.effect(row.compTypeJobId, 2);
   }
 
   const columns: GridColDef<TypeTblCompTypeJob>[] = [
@@ -137,6 +144,12 @@ const TabJob = ({ compType, label }: Props) => {
       renderCell: ({ row }) => <CellBoolean status={row.statusRepair} />,
     },
 
+    {
+      field: 'orderNo',
+      headerName: 'Order No',
+      width: 100,
+    },
+
     dataGridActionColumn({
       onEdit: onEdit,
       onDelete: onDelete,
@@ -170,6 +183,35 @@ const TabJob = ({ compType, label }: Props) => {
     setSelectedRow(row)
   }
 
+  const handleSuccess = (
+    data: TypeTblCompTypeJob,
+    isDelete: boolean = false
+  ) => {
+    setEffectJobId(data.compTypeJobId)
+    setEffectOperation(isDelete ? 2 : mode === 'create' ? 0 : 1)
+    setConfirmOpen(true)
+  }
+
+  const closeConfirmDialog = () => {
+    setConfirmOpen(false)
+    handleRefresh()
+  }
+
+  const handleApplyEffect = async () => {
+    if (!effectJobId || effectOperation === null) return
+
+    try {
+      await logicTblCompTypeJob.effect(effectJobId, effectOperation)
+      closeConfirmDialog()
+    } catch (err: any) {
+      toast.error(
+        err?.response?.data?.message ||
+          'Failed to apply changes to related components'
+      )
+      throw err
+    }
+  }
+
   return (
     <>
       <Splitter horizontal initialPrimarySize='65%'>
@@ -191,14 +233,31 @@ const TabJob = ({ compType, label }: Props) => {
 
       <ComponentTypeJobUpsert
         open={openForm}
-        mode={mode}
+        mode={mode as any}
         recordId={selectedRow?.compTypeJobId}
         compType={{
           compName: compType?.compName || '',
           compTypeId: compType?.compTypeId || 0,
         }}
         onClose={() => setOpenForm(false)}
-        onSuccess={handleRefresh}
+        onSuccess={handleSuccess}
+      />
+      <ConfirmDialog
+        open={confirmOpen}
+        icon={
+          <PublishedWithChangesIcon
+            sx={{
+              fontSize: '3rem',
+            }}
+          />
+        }
+        title='Apply Changes'
+        message='Apply all changes to related components?'
+        confirmText='Yes'
+        cancelText='No'
+        confirmColor='primary'
+        onConfirm={handleApplyEffect}
+        onCancel={closeConfirmDialog}
       />
     </>
   )

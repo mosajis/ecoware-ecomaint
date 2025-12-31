@@ -81,7 +81,7 @@ function StockTypeFormDialog({
         no: res?.no ?? '',
         parentStockTypeId: res?.tblStockType ?? null,
         deptId: res?.deptId ?? null,
-        orderNo: res?.orderId,
+        orderNo: res?.orderNo,
       })
 
       // نمایش parent

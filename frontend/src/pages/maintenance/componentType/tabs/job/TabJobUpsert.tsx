@@ -253,10 +253,8 @@ function ComponentTypeJobUpsert({
 
         if (mode === 'create') {
           result = await tblCompTypeJob.create(body)
-          logicTblCompTypeJob.effect(result.compTypeJobId, 0)
         } else {
           result = await tblCompTypeJob.update(recordId!, body)
-          logicTblCompTypeJob.effect(result.compTypeJobId, 1)
         }
 
         onSuccess(result)
