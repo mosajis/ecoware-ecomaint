@@ -1,22 +1,22 @@
-import JobCounterUpsert from './TabCounterUpsert'
+import CounterUpsert from './TabCounterUpsert'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import { useCallback, useMemo, useState } from 'react'
 import { GridColDef } from '@mui/x-data-grid'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
+import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import {
-  tblCompTypeJobCounter,
-  TypeTblCompTypeJob,
-  TypeTblCompTypeJobCounter,
+  tblCompTypeCounter,
+  TypeTblCompType,
+  TypeTblCompTypeCounter,
 } from '@/core/api/generated/api'
 
 type Props = {
-  compTypeJob?: TypeTblCompTypeJob | null
+  compType?: TypeTblCompType | null
+  label?: string
 }
 
-const TabCounter = ({ compTypeJob }: Props) => {
-  const compTypeJobId = compTypeJob?.compTypeJobId
-  const compTypeId = compTypeJob?.compTypeId
+const TabCounter = ({ compType, label }: Props) => {
+  const compTypeId = compType?.compTypeId
 
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
@@ -24,27 +24,24 @@ const TabCounter = ({ compTypeJob }: Props) => {
 
   // === getAll ===
   const getAll = useCallback(() => {
-    return tblCompTypeJobCounter.getAll({
+    return tblCompTypeCounter.getAll({
       include: {
-        tblCompTypeCounter: {
-          include: {
-            tblCounterType: true,
-          },
-        },
+        tblCounterType: true,
+        tblCompTypeJobCounters: true,
       },
       filter: {
-        compTypeJobId,
+        compTypeId,
       },
     })
-  }, [compTypeJobId])
+  }, [compTypeId])
 
   // === useDataGrid ===
   const { rows, loading, handleDelete, handleRefresh, handleFormSuccess } =
     useDataGrid(
       getAll,
-      tblCompTypeJobCounter.deleteById,
-      'compTypeJobCounterId',
-      !!compTypeJobId
+      tblCompTypeCounter.deleteById,
+      'compTypeCounterId',
+      !!compTypeId
     )
 
   // === Handlers ===
@@ -54,38 +51,31 @@ const TabCounter = ({ compTypeJob }: Props) => {
     setOpenForm(true)
   }
 
-  const handleEdit = (row: TypeTblCompTypeJobCounter) => {
-    setSelectedId(row.compTypeJobCounterId)
+  const handleEdit = (row: TypeTblCompTypeCounter) => {
+    setSelectedId(row.compTypeCounterId)
     setMode('update')
     setOpenForm(true)
   }
 
   // === Columns ===
-  const columns = useMemo<GridColDef<TypeTblCompTypeJobCounter>[]>(
+  const columns = useMemo<GridColDef<TypeTblCompTypeCounter>[]>(
     () => [
       {
         field: 'counterType',
         headerName: 'Counter Type',
         flex: 1,
-        valueGetter: (_, row) =>
-          // @ts-ignore
-          row.tblCompTypeCounter?.tblCounterType?.name,
+        valueGetter: (_, row) => row.tblCounterType?.name || '',
       },
-      { field: 'frequency', headerName: 'Frequency', width: 120 },
-      { field: 'window', headerName: 'Window', width: 120 },
       {
-        field: 'showInAlert',
-        headerName: 'Alert',
+        field: 'averageCountRate',
+        headerName: 'Avg Rate',
+        width: 120,
+      },
+      {
+        field: 'orderNo',
+        headerName: 'Order',
         width: 90,
-        type: 'boolean',
       },
-      {
-        field: 'updateByFunction',
-        headerName: 'By Func',
-        width: 110,
-        type: 'boolean',
-      },
-      { field: 'orderNo', headerName: 'Order', width: 80 },
       dataGridActionColumn({
         onEdit: handleEdit,
         onDelete: handleDelete,
@@ -97,26 +87,22 @@ const TabCounter = ({ compTypeJob }: Props) => {
   return (
     <>
       <CustomizedDataGrid
-        label={
-          compTypeJob?.tblJobDescription?.jobDescTitle || 'CompType Job Counter'
-        }
+        label={label || 'Counter'}
         rows={rows}
         columns={columns}
         loading={loading}
         showToolbar
-        disableRowSelectionOnClick
         onRefreshClick={handleRefresh}
         onAddClick={handleCreate}
-        getRowId={row => row.compTypeJobCounterId}
+        getRowId={row => row.compTypeCounterId}
       />
 
       {/* === UPSERT === */}
-      {compTypeJobId && compTypeId && (
-        <JobCounterUpsert
+      {compTypeId && (
+        <CounterUpsert
           open={openForm}
           mode={mode}
           recordId={selectedId}
-          compTypeJobId={compTypeJobId}
           compTypeId={compTypeId}
           onClose={() => setOpenForm(false)}
           onSuccess={handleRefresh}

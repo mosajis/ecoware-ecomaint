@@ -7,9 +7,7 @@ import AddBox from '@mui/icons-material/AddBox'
 import AttachFile from '@mui/icons-material/AttachFile'
 import BarChart from '@mui/icons-material/BarChart'
 import BugReport from '@mui/icons-material/BugReport'
-import Build from '@mui/icons-material/Build'
 import CheckCircle from '@mui/icons-material/CheckCircle'
-import ColorLens from '@mui/icons-material/ColorLens'
 import ContentCopy from '@mui/icons-material/ContentCopy'
 import Description from '@mui/icons-material/Description'
 import DoneAll from '@mui/icons-material/DoneAll'
@@ -27,9 +25,7 @@ const TabAttachment = lazy(() => import('./tabs/TabAttachment'))
 const TabJobAttachment = lazy(() => import('./tabs/TabJobAttachment'))
 const TabFailureReport = lazy(() => import('./tabs/TabFailureReport'))
 const TabPerformed = lazy(() => import('./tabs/TabPerformed'))
-const TabPart = lazy(() => import('./tabs/TabPart'))
 const TabMeasures = lazy(() => import('./tabs/TabMeasures'))
-const TabOilInfo = lazy(() => import('./tabs/TabOilInfo'))
 const TabStockUsed = lazy(() => import('./tabs/TabStockUsed'))
 
 type Props = {
@@ -40,15 +36,15 @@ type Props = {
 // Define tabs
 const tabs: ReusableTabItem[] = [
   { label: 'Details', icon: <Description />, component: TabDetails },
-  { label: 'Job', icon: <AccountTree />, component: TabJob },
-  { label: 'Counter', icon: <BarChart />, component: TabCounter },
+  { label: 'Job crud', icon: <AccountTree />, component: TabJob },
+  { label: 'Counter crud * ', icon: <BarChart />, component: TabCounter },
+  { label: 'Measure Point crud *', icon: <Tune />, component: TabMeasures },
+  { label: 'Failure Report', icon: <BugReport />, component: TabFailureReport },
   { label: 'Work Order', icon: <ContentCopy />, component: TabWorkOrder },
   { label: 'Maint Log', icon: <DoneAll />, component: TabMaintLog },
-  { label: 'Failure Report', icon: <BugReport />, component: TabFailureReport },
-  { label: 'Performed', icon: <CheckCircle />, component: TabPerformed },
-  { label: 'Part', icon: <Build />, component: TabPart },
-  { label: 'Measures', icon: <Tune />, component: TabMeasures },
-  { label: 'Oil Info', icon: <ColorLens />, component: TabOilInfo },
+  { label: 'Function', icon: <CheckCircle />, component: TabPerformed },
+  // { label: 'Part crud', icon: <Build />, component: TabPart },
+  // { label: 'Oil Info crud', icon: <ColorLens />, component: TabOilInfo },
   { label: 'Stock Used', icon: <StackedLineChart />, component: TabStockUsed },
   { label: 'Attachment', icon: <AttachFile />, component: TabAttachment },
   { label: 'Job Attachment', icon: <AddBox />, component: TabJobAttachment },

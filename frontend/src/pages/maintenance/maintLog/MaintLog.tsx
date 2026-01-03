@@ -14,7 +14,6 @@ import { GridColDef } from '@mui/x-data-grid'
 import { useCallback, useMemo, useState } from 'react'
 import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { formatDateTime } from '@/core/api/helper'
-import CellBoolean from '@/shared/components/dataGrid/cells/CellBoolean'
 
 export default function PageMaintLog() {
   const [openDialogReportWork, setOpenDialogReportWork] = useState(false)
@@ -149,7 +148,7 @@ export default function PageMaintLog() {
       {
         field: 'unplanned',
         headerName: 'Unplanned',
-        renderCell: ({ row }) => <CellBoolean status={row.unexpected} />,
+        type: 'boolean',
       },
 
       dataGridActionColumn({ onDelete: handleDelete, onEdit: handleEdit }),

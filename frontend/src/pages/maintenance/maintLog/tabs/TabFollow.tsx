@@ -8,7 +8,6 @@ import {
 import { GridColDef } from '@mui/x-data-grid'
 import { useCallback } from 'react'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
-import CellBoolean from '@/shared/components/dataGrid/cells/CellBoolean'
 
 type props = {
   selected: TypeTblMaintLog
@@ -35,13 +34,13 @@ const TabFollow = (props: props) => {
       field: 'isRequest',
       headerName: 'Is Request',
       flex: 1,
-      renderCell: ({ row }) => <CellBoolean status={row.isRequest} />,
+      type: 'boolean',
     },
     {
       field: 'isUnPlan',
       headerName: 'Unplanned',
       flex: 1,
-      renderCell: ({ row }) => <CellBoolean status={row.isUnPlan} />,
+      type: 'boolean',
     },
     { field: 'waitingTime', headerName: 'Waiting (Minutes)', flex: 1 },
     { field: 'followDate', headerName: 'Follow Date (not set)', flex: 1 },

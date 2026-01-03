@@ -1,21 +1,20 @@
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import Splitter from '@/shared/components/Splitter'
 import Tabs from './TabJobTabs'
-import CellBoolean from '@/shared/components/dataGrid/cells/CellBoolean'
-import { useCallback, useEffect, useState } from 'react'
+import ComponentTypeJobUpsert from './TabJobUpsert'
+import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges'
+import ConfirmDialog from '@/shared/components/ConfirmDialog'
+import { toast } from 'sonner'
+import { GridColDef } from '@mui/x-data-grid'
+import { useDataGrid } from '@/shared/hooks/useDataGrid'
+import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
+import { logicTblCompTypeJob } from './TabJobEffect'
+import { useCallback, useState } from 'react'
 import {
   tblCompTypeJob,
   TypeTblCompType,
   TypeTblCompTypeJob,
 } from '@/core/api/generated/api'
-import { GridColDef } from '@mui/x-data-grid'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
-import ComponentTypeJobUpsert from './TabJobUpsert'
-import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges'
-import ConfirmDialog from '@/shared/components/ConfirmDialog'
-import { logicTblCompTypeJob } from './TabJobEffect'
-import { toast } from 'sonner'
 
 // === Columns ===
 type Props = {
@@ -123,25 +122,25 @@ const TabJob = ({ compType, label }: Props) => {
       field: 'statusNone',
       headerName: 'St-None',
       width: 85,
-      renderCell: ({ row }) => <CellBoolean status={row.statusNone} />,
+      type: 'boolean',
     },
     {
       field: 'statusInUse',
       headerName: 'St-InUse',
       width: 85,
-      renderCell: ({ row }) => <CellBoolean status={row.statusInUse} />,
+      type: 'boolean',
     },
     {
       field: 'statusAvailable',
       headerName: 'St-Available',
       width: 85,
-      renderCell: ({ row }) => <CellBoolean status={row.statusAvailable} />,
+      type: 'boolean',
     },
     {
       field: 'statusRepair',
       headerName: 'St-Repair',
       width: 85,
-      renderCell: ({ row }) => <CellBoolean status={row.statusRepair} />,
+      type: 'boolean',
     },
 
     // {
@@ -214,7 +213,7 @@ const TabJob = ({ compType, label }: Props) => {
 
   return (
     <>
-      <Splitter horizontal initialPrimarySize='65%'>
+      <Splitter horizontal initialPrimarySize='55%'>
         <CustomizedDataGrid
           label={label || 'Job'}
           rows={rows}

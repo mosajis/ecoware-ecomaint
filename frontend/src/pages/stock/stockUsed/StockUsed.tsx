@@ -1,5 +1,4 @@
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import CellBoolean from '@/shared/components/dataGrid/cells/CellBoolean'
 import { GridColDef } from '@mui/x-data-grid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 import { useCallback } from 'react'
