@@ -299,6 +299,10 @@ model TblComponentUnit {
   isCritical      Int?             @map("IsCritical") @db.TinyInt
   orderNo         Int?             @map("OrderNo")
   userId          Int?             @map("UserID")
+  model           String?          @db.NVarChar(500)
+  comment1        String?          @db.NVarChar(500)
+  comment2        String?          @db.NVarChar(500)
+  comment3        String?          @db.NVarChar(500)
   tblCompCounters TblCompCounter[]
   tblCompJobs     TblCompJob[]
   tblAddress      TblAddress?      @relation(fields: [vendorId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblAddress")
@@ -370,25 +374,26 @@ model TblCompStatusLog {
 }
 
 model TblCompType {
-  compTypeId          Int                  @id(map: "PK_tblComponentType") @default(dbgenerated("NEXT VALUE FOR [Seq_CompType]"), map: "DF_CompTypeID") @map("CompTypeID")
-  parentCompTypeId    Int?                 @map("ParentCompTypeID")
-  compTypeNo          String?              @map("CompTypeNo") @db.NVarChar(80)
-  compName            String?              @map("CompName") @db.NVarChar(80)
-  compType            String?              @map("CompType") @db.NVarChar(80)
-  compTypeModel       String?              @map("CompTypeModel") @db.NVarChar(80)
-  makerId             Int?                 @map("MakerID")
-  notes               String?              @map("Notes") @db.NVarChar(500)
-  deptId              Int?                 @map("DeptID")
-  exportMarker        Int?                 @map("ExportMarker")
-  lastupdate          DateTime?            @db.DateTime
-  orderNo             Int?                 @map("OrderNo")
-  userId              Int?                 @map("UserID")
-  tblComponentUnits   TblComponentUnit[]
-  tblAddress          TblAddress?          @relation(fields: [makerId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompType_tblAddress")
-  tblCompType         TblCompType?         @relation("tblCompTypeTotblCompType", fields: [parentCompTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompType_tblCompType")
-  otherTblCompTypes   TblCompType[]        @relation("tblCompTypeTotblCompType")
-  tblCompTypeCounters TblCompTypeCounter[]
-  tblCompTypeJobs     TblCompTypeJob[]
+  compTypeId               Int                       @id(map: "PK_tblComponentType") @default(dbgenerated("NEXT VALUE FOR [Seq_CompType]"), map: "DF_CompTypeID") @map("CompTypeID")
+  parentCompTypeId         Int?                      @map("ParentCompTypeID")
+  compTypeNo               String?                   @map("CompTypeNo") @db.NVarChar(80)
+  compName                 String?                   @map("CompName") @db.NVarChar(80)
+  compType                 String?                   @map("CompType") @db.NVarChar(80)
+  compTypeModel            String?                   @map("CompTypeModel") @db.NVarChar(80)
+  makerId                  Int?                      @map("MakerID")
+  notes                    String?                   @map("Notes") @db.NVarChar(500)
+  deptId                   Int?                      @map("DeptID")
+  exportMarker             Int?                      @map("ExportMarker")
+  lastupdate               DateTime?                 @db.DateTime
+  orderNo                  Int?                      @map("OrderNo")
+  userId                   Int?                      @map("UserID")
+  tblComponentUnits        TblComponentUnit[]
+  tblAddress               TblAddress?               @relation(fields: [makerId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompType_tblAddress")
+  tblCompType              TblCompType?              @relation("tblCompTypeTotblCompType", fields: [parentCompTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompType_tblCompType")
+  otherTblCompTypes        TblCompType[]             @relation("tblCompTypeTotblCompType")
+  tblCompTypeCounters      TblCompTypeCounter[]
+  tblCompTypeJobs          TblCompTypeJob[]
+  tblCompTypeMeasurePoints TblCompTypeMeasurePoint[]
 
   @@map("tblCompType")
   @@schema("dbo")
@@ -529,6 +534,7 @@ model TblCompTypeMeasurePoint {
   orderNo                     Int?                         @map("OrderNo")
   userId                      Int?                         @map("UserID")
   tblCompTypeJobMeasurePoints TblCompTypeJobMeasurePoint[]
+  tblCompType                 TblCompType?                 @relation(fields: [compTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeMeasurePoint_tblCompType")
   tblCounterType              TblCounterType?              @relation(fields: [counterTypeId], references: [counterTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeMeasurePoint_tblCounterType")
   tblUnit                     TblUnit?                     @relation(fields: [unitId], references: [unitId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeMeasurePoint_tblUnit")
 
