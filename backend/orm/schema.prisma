@@ -382,7 +382,6 @@ model TblCompType {
   compTypeNo               String?                   @map("CompTypeNo") @db.NVarChar(80)
   compName                 String?                   @map("CompName") @db.NVarChar(80)
   compType                 String?                   @map("CompType") @db.NVarChar(80)
-  compTypeModel            String?                   @map("CompTypeModel") @db.NVarChar(80)
   makerId                  Int?                      @map("MakerID")
   notes                    String?                   @map("Notes") @db.NVarChar(500)
   deptId                   Int?                      @map("DeptID")

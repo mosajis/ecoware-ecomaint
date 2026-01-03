@@ -19,7 +19,7 @@ const schema = z.object({
     counterTypeId: z.number(),
     name: z.string().optional().nullable(),
   }),
-  averageCountRate: z.number().nullable(),
+
   orderNo: z.number().nullable(),
 })
 
@@ -47,7 +47,6 @@ function CounterUpsert({
 
   const defaultValues: FormValues = {
     counterType: null as any,
-    averageCountRate: null,
     orderNo: null,
   }
 
@@ -71,7 +70,7 @@ function CounterUpsert({
 
       reset({
         counterType: { ...res.tblCounterType },
-        averageCountRate: res.averageCountRate ?? null,
+
         orderNo: res.orderNo ?? null,
       })
     } finally {
@@ -105,7 +104,6 @@ function CounterUpsert({
         )
 
         const payload = {
-          averageCountRate: parsed.data.averageCountRate,
           orderNo: parsed.data.orderNo,
           ...counterTypeRelation,
           ...compTypeRelation,
@@ -147,21 +145,12 @@ function CounterUpsert({
               label='Counter Type *'
               value={field.value}
               onChange={field.onChange}
-              request={tblCounterType.getAll} // filter type = 0
+              request={() => tblCounterType.getAll({ filter: { type: 0 } })}
               columns={[{ field: 'name', headerName: 'Name', flex: 1 }]}
               getRowId={row => row.counterTypeId}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
-          )}
-        />
-
-        {/* Average */}
-        <Controller
-          name='averageCountRate'
-          control={control}
-          render={({ field }) => (
-            <NumberField {...field} label='Average Count Rate' size='small' />
           )}
         />
 

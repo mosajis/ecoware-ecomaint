@@ -54,9 +54,9 @@ export default function PageComponentTypeList() {
 
   const columns = useMemo<GridColDef<TypeTblCompType>[]>(
     () => [
-      { field: 'compTypeNo', headerName: 'CompTypeNo', width: 120 },
-      { field: 'compName', headerName: 'CompTypeName', flex: 1 },
-      { field: 'model', headerName: 'Model', width: 200 },
+      { field: 'compTypeNo', headerName: 'Code', width: 120 },
+      { field: 'compName', headerName: 'Name', flex: 1 },
+      { field: 'compType', headerName: 'Model/Type', width: 200 },
       { field: 'orderNo', headerName: 'OrderNo', width: 100 },
 
       dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),

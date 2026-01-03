@@ -24,9 +24,9 @@ export default function PageComponentUnit() {
     return tblComponentUnit.getAll({
       paginate: false,
       include: {
-        // tblCompType: true,
-        // tblCompStatus: true,
-        // tblLocation: true,
+        tblCompType: true,
+        tblCompStatus: true,
+        tblLocation: true,
       },
     })
   }, [])
@@ -89,16 +89,11 @@ export default function PageComponentUnit() {
       { field: 'compNo', headerName: 'Component No', width: 300 },
       {
         field: 'compType',
-        headerName: 'Type',
+        headerName: 'Component Type Model',
         flex: 1,
         valueGetter: (_, row) => row.tblCompType?.compType,
       },
-      {
-        field: 'compTypeNo',
-        headerName: 'TypeNo',
-        flex: 1,
-        valueGetter: (_, row) => row.tblCompType?.compTypeNo,
-      },
+      { field: 'model', headerName: 'Model/Type', flex: 1 },
       {
         field: 'locationId',
         headerName: 'Location',
@@ -106,7 +101,6 @@ export default function PageComponentUnit() {
         valueGetter: (_, row) => row.tblLocation?.name ?? '',
       },
       { field: 'serialNo', headerName: 'Serial No', flex: 1 },
-      { field: 'model', headerName: 'Model', flex: 1 },
       {
         field: 'statusId',
         headerName: 'Status',
@@ -138,7 +132,7 @@ export default function PageComponentUnit() {
 
   return (
     <>
-      <Splitter initialPrimarySize='30%'>
+      <Splitter initialPrimarySize='1%'>
         {/* <CustomizedTree
           label='Component Unit Tree'
           items={treeItems}

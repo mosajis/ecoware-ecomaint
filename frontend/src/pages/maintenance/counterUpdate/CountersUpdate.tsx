@@ -50,7 +50,7 @@ export default function PageCounterUpdate() {
       },
       { field: 'changeReason', headerName: 'Start Date', flex: 1 },
       { field: 'changeReason', headerName: 'Start Value', flex: 1 },
-      { field: 'changeReason', headerName: 'Average Count Rate', flex: 1 },
+
       { field: 'changeReason', headerName: 'Currnet Date', flex: 1 },
       { field: 'changeReason', headerName: 'Currnet Value', flex: 1 },
       dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),

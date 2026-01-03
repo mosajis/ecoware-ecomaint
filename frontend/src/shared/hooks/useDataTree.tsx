@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react'
-import { TreeViewBaseItem } from '@mui/x-tree-view'
 import { toast } from 'sonner'
 
 export type QueryParams = {
@@ -12,10 +11,12 @@ export type QueryParams = {
   force?: boolean
 }
 
-export type TreeNode<T> = TreeViewBaseItem & {
+export type TreeNodeData<T> = {
+  id: string
   parentId: string | null
-  children?: TreeNode<T>[]
+  label: string
   data?: T
+  children?: TreeNodeData<T>[]
 }
 
 export function useDataTree<
@@ -27,55 +28,27 @@ export function useDataTree<
   getAll: GetAllFn,
   deleteById: DeleteFn,
   keyId: K,
-  mapper: (row: T) => TreeNode<T>
+  mapper: (row: T) => TreeNodeData<T>
 ) {
   const [rows, setRows] = useState<T[]>([])
-  const [treeItems, setTreeItems] = useState<TreeNode<T>[]>([])
+  const [treeData, setTreeData] = useState<TreeNodeData<T>[]>([])
+  const [selectedIds, setSelectedIds] = useState<string[]>([])
+  const [expandedIds, setExpandedIds] = useState<string[]>([])
+  const [checkedIds, setCheckedIds] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
 
   const getIdValue = useCallback((row: T) => row[keyId] as any, [keyId])
-
-  const buildTree = useCallback((nodes: TreeNode<T>[]) => {
-    const map = new Map<string, TreeNode<T>>()
-    nodes.forEach(n => map.set(n.id.toString(), { ...n, children: [] }))
-
-    const roots: TreeNode<T>[] = []
-    map.forEach(node => {
-      const parentId = node.parentId?.toString() ?? null
-
-      if (parentId && map.has(parentId)) {
-        ;(map.get(parentId)!.children ||= []).push(node)
-      } else {
-        roots.push(node)
-      }
-    })
-
-    return roots
-  }, [])
-
-  const flattenTree = useCallback((nodes: TreeNode<T>[]): TreeNode<T>[] => {
-    return nodes.reduce<TreeNode<T>[]>((acc, n) => {
-      const { children, ...rest } = n
-      return [
-        ...acc,
-        rest as TreeNode<T>,
-        ...(children ? flattenTree(children) : []),
-      ]
-    }, [])
-  }, [])
 
   const fetchData = useCallback(
     async (params?: QueryParams) => {
       setLoading(true)
       try {
-        const res = await getAll({
-          ...params,
-        })
-
+        const res = await getAll({ ...params })
         setRows(res.items)
 
+        // Map data to tree nodes and update treeData
         const nodes = res.items.map(mapper)
-        setTreeItems(buildTree(nodes))
+        setTreeData(nodes)
       } catch (error) {
         const message =
           error instanceof Error ? error.message : 'Failed to load data'
@@ -84,7 +57,7 @@ export function useDataTree<
         setLoading(false)
       }
     },
-    [getAll, mapper, buildTree]
+    [getAll, mapper, toast]
   )
 
   const handleDelete = useCallback(
@@ -94,18 +67,10 @@ export function useDataTree<
 
       try {
         await deleteById(id)
-
         setRows(prev => prev.filter(r => getIdValue(r) !== id))
 
-        const removeFromTree = (nodes: TreeNode<T>[]): TreeNode<T>[] =>
-          nodes
-            .filter(n => n.id !== id.toString())
-            .map(n => ({
-              ...n,
-              children: n.children ? removeFromTree(n.children) : [],
-            }))
-
-        setTreeItems(prev => removeFromTree(prev))
+        // Remove node from treeData
+        setTreeData(prev => prev.filter(node => node.id !== id.toString()))
       } catch (error) {
         const message =
           error instanceof Error ? error.message : 'Failed to delete'
@@ -114,7 +79,7 @@ export function useDataTree<
         setLoading(false)
       }
     },
-    [deleteById, getIdValue]
+    [deleteById, getIdValue, toast]
   )
 
   const handleFormSuccess = useCallback(
@@ -123,6 +88,7 @@ export function useDataTree<
       try {
         const id = getIdValue(updatedRecord)
 
+        // Update rows and tree data
         setRows(prev => {
           const exists = prev.some(r => getIdValue(r) === id)
           return exists
@@ -130,15 +96,14 @@ export function useDataTree<
             : [updatedRecord, ...prev]
         })
 
-        setTreeItems(prev => {
-          const flat = flattenTree(prev)
-          const idx = flat.findIndex(n => n.id === id.toString())
+        setTreeData(prev => {
+          const idx = prev.findIndex(n => n.id === id.toString())
           const newNode = mapper(updatedRecord)
 
-          if (idx > -1) flat[idx] = newNode
-          else flat.unshift(newNode)
+          if (idx > -1) prev[idx] = newNode
+          else prev.unshift(newNode)
 
-          return buildTree(flat)
+          return prev
         })
       } catch (error) {
         const message =
@@ -148,8 +113,20 @@ export function useDataTree<
         setLoading(false)
       }
     },
-    [mapper, getIdValue, flattenTree, buildTree]
+    [mapper, getIdValue, toast]
   )
+
+  const handleNodeToggle = useCallback((ids: string[]) => {
+    setExpandedIds(ids)
+  }, [])
+
+  const handleNodeSelect = useCallback((ids: string[]) => {
+    setSelectedIds(ids)
+  }, [])
+
+  const handleNodeCheck = useCallback((ids: string[]) => {
+    setCheckedIds(ids)
+  }, [])
 
   const handleRefresh = useCallback(() => {
     fetchData()
@@ -161,11 +138,17 @@ export function useDataTree<
 
   return {
     rows,
-    treeItems,
+    treeData,
+    selectedIds,
+    expandedIds,
+    checkedIds,
     loading,
     fetchData,
     handleDelete,
     handleFormSuccess,
+    handleNodeToggle,
+    handleNodeSelect,
+    handleNodeCheck,
     handleRefresh,
   }
 }

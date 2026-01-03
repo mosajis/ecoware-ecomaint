@@ -168,7 +168,7 @@ function MeasurePointUpsert({
               label='Measure *'
               value={field.value}
               onChange={field.onChange}
-              request={tblCounterType.getAll}
+              request={() => tblCounterType.getAll({ filter: { type: 3 } })}
               columns={[{ field: 'name', headerName: 'Name', flex: 1 }]}
               getRowId={row => row.counterTypeId}
               error={!!fieldState.error}
