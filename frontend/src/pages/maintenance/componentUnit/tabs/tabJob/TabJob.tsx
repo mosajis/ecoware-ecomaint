@@ -5,6 +5,8 @@ import { GridColDef } from '@mui/x-data-grid'
 import {
   tblCompJob,
   tblJobDescription,
+  tblRound,
+  TypeTblCompJob,
   TypeTblComponentUnit,
   TypeTblJobDescription,
 } from '@/core/api/generated/api'
@@ -20,7 +22,11 @@ const TabJob = ({ componentUnit, label }: TabJobProps) => {
 
   const getAll = useCallback(() => {
     return tblCompJob.getAll({
+      filter: {
+        compId: componentUnit?.compId,
+      },
       include: {
+        tblJobDescription: true,
         tblDiscipline: true,
         tblPeriod: true,
       },
@@ -47,31 +53,41 @@ const TabJob = ({ componentUnit, label }: TabJobProps) => {
   }, [])
 
   // --- Columns ---
-  const columns = useMemo<GridColDef<TypeTblJobDescription>[]>(
+  const columns = useMemo<GridColDef<TypeTblCompJob>[]>(
     () => [
-      { field: 'jobDescCode', headerName: 'Code', width: 100 },
-      { field: 'jobDescTitle', headerName: 'Job Title', flex: 1 },
+      {
+        field: 'jobDescCode',
+        headerName: 'Code',
+        width: 100,
+        valueGetter: (_, row) => row.tblJobDescription?.jobDescCode,
+      },
+      {
+        field: 'jobDescTitle',
+        headerName: 'Job Title',
+        flex: 1,
+        valueGetter: (_, row) => row.tblJobDescription?.jobDescTitle,
+      },
       {
         field: 'discipline',
         headerName: 'Discipline (not set)',
         flex: 1,
-        // valueGetter: (_, row) => row.tbl?.name ?? "",
+        valueGetter: (_, row) => row.tblDiscipline?.name,
       },
-      { field: 'frequency', headerName: 'Frequency (not set)', width: 120 },
+      { field: 'frequency', headerName: 'Frequency', width: 120 },
       {
         field: 'tblPeriod',
         headerName: 'Frequency Period',
         width: 150,
-        // valueGetter: (_, row) => row.tblPeriod?.name ?? '',
+        valueGetter: (_, row) => row.tblPeriod?.name,
       },
-      { field: 'lastDone', headerName: 'Last Done (not set)', width: 150 },
+      { field: 'lastDone', headerName: 'Last Done', width: 150 },
       {
         field: 'nextDueDate',
-        headerName: 'Next Due Date (not set)',
+        headerName: 'Next DueDate',
         width: 150,
       },
-      { field: 'round', headerName: 'Round (not set)', width: 150 },
-      { field: 'roundTitle', headerName: 'Round Title (not set)', width: 150 },
+      // { field: 'round', headerName: 'Round (not set)', width: 150,  valueGetter: (_, row) => row.tbl?.name,},
+      // { field: 'roundTitle', headerName: 'Round Title (not set)', width: 150 },
     ],
     [handleEdit, handleDelete]
   )
@@ -83,6 +99,7 @@ const TabJob = ({ componentUnit, label }: TabJobProps) => {
         showToolbar
         rows={rows}
         columns={columns}
+        disableRowNumber
         loading={loading}
         onRefreshClick={handleRefresh}
         onAddClick={handleAdd}

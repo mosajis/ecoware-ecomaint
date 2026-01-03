@@ -24,7 +24,7 @@
     "elysia": "latest",
     "lodash": "^4.17.21",
     "mssql": "^12.2.0",
-    "zod": "^4.2.1"
+    "zod": "^4.3.4"
   },
   "devDependencies": {
     "@prisma/client": "^6.19.0",

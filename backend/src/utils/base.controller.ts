@@ -155,7 +155,10 @@ export class BaseController<Model extends Record<string, any>> {
           query: t.Object({
             include: t.Optional(t.String()),
           }),
-          response: t.Union([responseSchema, t.Any()]),
+          response: t.Intersect([
+            responseSchema,
+            t.Object({}, { nullable: true }),
+          ]),
         }
       )
     }

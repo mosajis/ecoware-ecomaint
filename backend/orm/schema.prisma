@@ -284,34 +284,37 @@ model TblCompOilInfo {
 }
 
 model TblComponentUnit {
-  compId          Int              @id(map: "PK_tblComponentUnit") @default(dbgenerated("NEXT VALUE FOR [Seq_ComponentUnit]"), map: "DF_CompID") @map("CompID")
-  compTypeId      Int?             @map("CompTypeID")
-  locationId      Int?             @map("LocationID")
-  parentCompId    Int?             @map("ParentCompID")
-  vendorId        Int?             @map("VendorID")
-  compNo          String?          @unique(map: "NonClusteredIndex-20251229-232627") @map("CompNo") @db.NVarChar(90)
-  serialNo        String?          @map("SerialNo") @db.NVarChar(80)
-  statusId        Int?             @map("StatusID")
-  notes           String?          @map("Notes") @db.NVarChar(300)
-  deptId          Int?             @map("DeptID")
-  exportMarker    Int?             @map("ExportMarker")
-  lastupdate      DateTime?        @db.DateTime
-  isCritical      Int?             @map("IsCritical") @db.TinyInt
-  orderNo         Int?             @map("OrderNo")
-  userId          Int?             @map("UserID")
-  model           String?          @db.NVarChar(500)
-  comment1        String?          @db.NVarChar(500)
-  comment2        String?          @db.NVarChar(500)
-  comment3        String?          @db.NVarChar(500)
-  tblCompCounters TblCompCounter[]
-  tblCompJobs     TblCompJob[]
-  tblAddress      TblAddress?      @relation(fields: [vendorId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblAddress")
-  tblCompStatus   TblCompStatus?   @relation(fields: [statusId], references: [compStatusId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblCompStatus")
-  tblCompType     TblCompType?     @relation(fields: [compTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblCompType")
-  tblLocation     TblLocation?     @relation(fields: [locationId], references: [locationId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblLocation")
-  tblFunctions    TblFunctions[]
-  tblMaintLogs    TblMaintLog[]
-  tblWorkOrders   TblWorkOrder[]
+  compId                 Int                @id(map: "PK_tblComponentUnit") @default(dbgenerated("NEXT VALUE FOR [Seq_ComponentUnit]"), map: "DF_CompID") @map("CompID")
+  compTypeId             Int?               @map("CompTypeID")
+  locationId             Int?               @map("LocationID")
+  parentCompId           Int?               @map("ParentCompID")
+  vendorId               Int?               @map("VendorID")
+  compNo                 String?            @unique(map: "NonClusteredIndex-20251229-232627") @map("CompNo") @db.NVarChar(90)
+  serialNo               String?            @map("SerialNo") @db.NVarChar(80)
+  statusId               Int?               @map("StatusID")
+  notes                  String?            @map("Notes") @db.NVarChar(300)
+  deptId                 Int?               @map("DeptID")
+  exportMarker           Int?               @map("ExportMarker")
+  lastupdate             DateTime?          @db.DateTime
+  isCritical             Int?               @map("IsCritical") @db.TinyInt
+  orderNo                Int?               @map("OrderNo")
+  userId                 Int?               @map("UserID")
+  model                  String?            @db.NVarChar(100)
+  comment1               String?            @db.NVarChar(500)
+  comment2               String?            @db.NVarChar(500)
+  assetNo                String?            @map("AssetNo") @db.NVarChar(100)
+  comment3               String?            @db.NVarChar(500)
+  tblCompCounters        TblCompCounter[]
+  tblCompJobs            TblCompJob[]
+  tblAddress             TblAddress?        @relation(fields: [vendorId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblAddress")
+  tblComponentUnit       TblComponentUnit?  @relation("tblComponentUnitTotblComponentUnit", fields: [parentCompId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblComponentUnit")
+  otherTblComponentUnits TblComponentUnit[] @relation("tblComponentUnitTotblComponentUnit")
+  tblCompStatus          TblCompStatus?     @relation(fields: [statusId], references: [compStatusId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblCompStatus")
+  tblCompType            TblCompType?       @relation(fields: [compTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblCompType")
+  tblLocation            TblLocation?       @relation(fields: [locationId], references: [locationId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblLocation")
+  tblFunctions           TblFunctions[]
+  tblMaintLogs           TblMaintLog[]
+  tblWorkOrders          TblWorkOrder[]
 
   @@index([compTypeId], map: "CU_CompTypeId_IX")
   @@index([locationId], map: "CU_LocationID_ix")

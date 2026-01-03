@@ -1,6 +1,7 @@
 import Splitter from '@/shared/components/Splitter'
 import CustomizedTree from '@/shared/components/tree/CustomeTree'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
+import ComponentUnitUpsert from './ComponentUnitUpsert'
 import { GridColDef } from '@mui/x-data-grid'
 import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { useCallback, useMemo, useState } from 'react'
@@ -9,9 +10,9 @@ import {
   tblComponentUnit,
   TypeTblComponentUnit,
 } from '@/core/api/generated/api'
-import ComponentUnitUpsert from './ComponentUnitUpsert'
 import { useRouter } from '@tanstack/react-router'
 import { routeComponentUnitDetail } from './ComponentUnitRoutes'
+import { useDataGrid } from '@/shared/hooks/useDataGrid'
 
 export default function PageComponentUnit() {
   const [selected, setSelected] = useState<TypeTblComponentUnit | null>(null)
@@ -21,11 +22,11 @@ export default function PageComponentUnit() {
   // === Stable callbacks ===
   const getAll = useCallback(() => {
     return tblComponentUnit.getAll({
-      paginate: true,
+      paginate: false,
       include: {
-        tblCompType: true,
-        tblCompStatus: true,
-        tblLocation: true,
+        // tblCompType: true,
+        // tblCompStatus: true,
+        // tblLocation: true,
       },
     })
   }, [])
@@ -40,11 +41,10 @@ export default function PageComponentUnit() {
     []
   )
 
-  const { rows, treeItems, loading, handleDelete, handleRefresh } = useDataTree(
+  const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
     tblComponentUnit.deleteById,
-    'compId',
-    mapper
+    'compId'
   )
 
   // ✅ memoized
@@ -139,7 +139,7 @@ export default function PageComponentUnit() {
   return (
     <>
       <Splitter initialPrimarySize='30%'>
-        <CustomizedTree
+        {/* <CustomizedTree
           label='Component Unit Tree'
           items={treeItems}
           loading={loading}
@@ -148,8 +148,8 @@ export default function PageComponentUnit() {
           onAddClick={handleCreate}
           onEditClick={handleEdit}
           onDeleteClick={handleDelete}
-        />
-
+        /> */}
+        tree
         <CustomizedDataGrid
           getRowId={getRowId}
           label='Component Unit'

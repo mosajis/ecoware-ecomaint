@@ -157,7 +157,7 @@ export const ControllerAuth = new Elysia().group('/auth', app =>
       {
         response: t.Object({
           authorized: t.Boolean(),
-          user: t.Nullable(buildResponseSchema(UsersSafePlain, Users)),
+          user: t.Any(),
         }),
         detail: {
           tags: ['auth'],

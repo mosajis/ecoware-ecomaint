@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import { memo, useEffect, useState, useCallback, useMemo } from 'react'
+import { memo, useEffect, useState, useCallback } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
@@ -16,10 +16,9 @@ import {
   tblLocation,
   tblCompStatus,
   TypeTblComponentUnit,
-  tblAddress,
 } from '@/core/api/generated/api'
+import NumberField from '@/shared/components/NumberField'
 
-// ========= Schema =========
 const schema = z.object({
   compType: z
     .object({
@@ -28,7 +27,6 @@ const schema = z.object({
     })
     .nullable()
     .optional(),
-
   location: z
     .object({
       locationId: z.number(),
@@ -36,7 +34,6 @@ const schema = z.object({
     })
     .nullable()
     .optional(),
-
   parentComp: z
     .object({
       compId: z.number(),
@@ -44,7 +41,6 @@ const schema = z.object({
     })
     .nullable()
     .optional(),
-
   vendor: z
     .object({
       vendorId: z.number(),
@@ -52,7 +48,6 @@ const schema = z.object({
     })
     .nullable()
     .optional(),
-
   status: z
     .object({
       compStatusId: z.number(),
@@ -60,9 +55,12 @@ const schema = z.object({
     })
     .nullable()
     .optional(),
-
   compNo: z.string().min(1, 'Component No is required'),
   serialNo: z.string().nullable().optional(),
+  assetNo: z.string().nullable().optional(),
+  comment1: z.string().nullable().optional(),
+  comment2: z.string().nullable().optional(),
+  comment3: z.string().nullable().optional(),
   isCritical: z.boolean().nullable().optional(),
   orderNo: z.number().nullable().optional(),
 })
@@ -85,6 +83,10 @@ const DEFAULT_VALUES: ComponentUnitFormValues = {
   status: null,
   compNo: '',
   serialNo: null,
+  assetNo: null,
+  comment1: null,
+  comment2: null,
+  comment3: null,
   isCritical: false,
   orderNo: null,
 }
@@ -99,12 +101,12 @@ function ComponentUnitUpsert({
   const [loadingInitial, setLoadingInitial] = useState(false)
   const [submitting, setSubmitting] = useState(false)
 
-  const { control, handleSubmit, reset } = useForm<ComponentUnitFormValues>({
-    resolver: zodResolver(schema),
-    defaultValues: DEFAULT_VALUES,
-  })
+  const { control, handleSubmit, reset, setValue } =
+    useForm<ComponentUnitFormValues>({
+      resolver: zodResolver(schema),
+      defaultValues: DEFAULT_VALUES,
+    })
 
-  // ===== Load data in edit mode =====
   const fetchData = useCallback(async () => {
     if (mode !== 'update' || !recordId) {
       reset(DEFAULT_VALUES)
@@ -118,33 +120,45 @@ function ComponentUnitUpsert({
           tblCompType: true,
           tblLocation: true,
           tblCompStatus: true,
-          tblAddress: true,
+          tblComponentUnit: true,
         },
       })
 
+      console.log(res)
       reset({
-        compType: res?.tblCompType
+        compType: res.tblCompType
           ? {
               compTypeId: res.tblCompType.compTypeId,
               compName: res.tblCompType.compName,
             }
           : null,
-        location: res?.tblLocation
+        location: res.tblLocation
           ? {
               locationId: res.tblLocation.locationId,
               name: res.tblLocation.name,
             }
           : null,
-        status: res?.tblCompStatus
+        //@ts-ignore
+        parentComp: res.tblComponentUnit
+          ? {
+              compId: res.tblComponentUnit?.compId,
+              compNo: res.tblComponentUnit?.compNo ?? null,
+            }
+          : null,
+        status: res.tblCompStatus
           ? {
               compStatusId: res.tblCompStatus.compStatusId,
               compStatusName: res.tblCompStatus.compStatusName,
             }
           : null,
-        compNo: res?.compNo ?? '',
-        serialNo: res?.serialNo ?? null,
-        isCritical: !!res?.isCritical,
-        orderNo: res?.orderNo ?? null,
+        compNo: res.compNo ?? '',
+        serialNo: res.serialNo ?? null,
+        assetNo: res.assetNo ?? null,
+        comment1: res.comment1 ?? null,
+        comment2: res.comment2 ?? null,
+        comment3: res.comment3 ?? null,
+        isCritical: !!res.isCritical,
+        orderNo: res.orderNo ?? null,
       })
     } finally {
       setLoadingInitial(false)
@@ -157,7 +171,6 @@ function ComponentUnitUpsert({
 
   const isDisabled = loadingInitial || submitting
 
-  // ========= Submit Handler =========
   const handleFormSubmit = useCallback(
     async (values: ComponentUnitFormValues) => {
       const parsed = schema.safeParse(values)
@@ -171,6 +184,10 @@ function ComponentUnitUpsert({
         const body = {
           compNo: v.compNo,
           serialNo: v.serialNo ?? null,
+          assetNo: v.assetNo ?? null,
+          comment1: v.comment1 ?? null,
+          comment2: v.comment2 ?? null,
+          comment3: v.comment3 ?? null,
           isCritical: v.isCritical ? 1 : 0,
           orderNo: v.orderNo ?? null,
           ...buildRelation('tblCompType', 'compTypeId', v.compType?.compTypeId),
@@ -180,7 +197,8 @@ function ComponentUnitUpsert({
             'compStatusId',
             v.status?.compStatusId
           ),
-          ...buildRelation('tblVendor', 'vendorId', v.vendor?.vendorId),
+          ...buildRelation('tblAddress', 'vendorId', v.vendor?.vendorId),
+          ...buildRelation('tblComponentUnit', 'compId', v.parentComp?.compId),
         }
 
         let result: TypeTblComponentUnit
@@ -210,7 +228,7 @@ function ComponentUnitUpsert({
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display='flex' flexDirection='column' gap={1.5}>
+      <Box display='flex' flexDirection='column' gap={2}>
         {/* Component No */}
         <Controller
           name='compNo'
@@ -233,22 +251,19 @@ function ComponentUnitUpsert({
           name='compType'
           control={control}
           render={({ field }) => (
-            <Box width='60%'>
-              <AsyncSelectField
-                dialogMaxWidth='sm'
-                label='Component Type'
-                getOptionLabel={row => row.compName}
-                value={field.value}
-                selectionMode='single'
-                request={tblCompType.getAll}
-                columns={[
-                  { field: 'compName', headerName: 'Name', flex: 1 },
-                  { field: 'compTypeNo', headerName: 'Type No', flex: 1 },
-                ]}
-                getRowId={row => row.compTypeId}
-                onChange={field.onChange}
-              />
-            </Box>
+            <AsyncSelectField
+              label='Component Type'
+              getOptionLabel={row => row.compName}
+              value={field.value}
+              selectionMode='single'
+              request={tblCompType.getAll}
+              columns={[
+                { field: 'compName', headerName: 'Name', flex: 1 },
+                { field: 'compTypeNo', headerName: 'Type No', flex: 1 },
+              ]}
+              getRowId={row => row.compTypeId}
+              onChange={field.onChange}
+            />
           )}
         />
 
@@ -257,45 +272,42 @@ function ComponentUnitUpsert({
           name='location'
           control={control}
           render={({ field }) => (
-            <Box width='60%'>
-              <AsyncSelectField
-                dialogMaxWidth='sm'
-                label='Location'
-                getOptionLabel={row => row.name}
-                value={field.value}
-                selectionMode='single'
-                request={tblLocation.getAll}
-                columns={[
-                  { field: 'name', headerName: 'Name', flex: 1 },
-                  { field: 'locationCode', headerName: 'Code', flex: 1 },
-                ]}
-                getRowId={row => row.locationId}
-                onChange={field.onChange}
-              />
-            </Box>
+            <AsyncSelectField
+              label='Location'
+              getOptionLabel={row => row.name}
+              value={field.value}
+              selectionMode='single'
+              request={tblLocation.getAll}
+              columns={[
+                { field: 'name', headerName: 'Name', flex: 1 },
+                { field: 'locationCode', headerName: 'Location Code', flex: 1 },
+              ]}
+              getRowId={row => row.locationId}
+              onChange={field.onChange}
+            />
           )}
         />
 
-        {/* Status */}
+        {/* Parent Component */}
         <Controller
-          name='status'
+          name='parentComp'
           control={control}
-          render={({ field }) => (
-            <Box width='60%'>
-              <AsyncSelectField
-                dialogMaxWidth='sm'
-                label='Status'
-                getOptionLabel={row => row.compStatusName}
-                value={field.value}
-                selectionMode='single'
-                request={tblCompStatus.getAll}
-                columns={[
-                  { field: 'compStatusName', headerName: 'Status', flex: 1 },
-                ]}
-                getRowId={row => row.compStatusId}
-                onChange={field.onChange}
-              />
-            </Box>
+          render={({ field, fieldState }) => (
+            <AsyncSelectField
+              label='Parent Component'
+              getOptionLabel={row => row.compNo ?? ''}
+              value={field.value}
+              selectionMode='single'
+              request={tblComponentUnit.getAll} // درخواست مشابه برای اجزای والد
+              columns={[
+                { field: 'compNo', headerName: 'Comp No', flex: 1 },
+                { field: 'compName', headerName: 'Name', flex: 1 },
+              ]}
+              getRowId={row => row.compId} // شناسه برای هر ردیف
+              onChange={field.onChange}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
+            />
           )}
         />
 
@@ -310,70 +322,103 @@ function ComponentUnitUpsert({
               size='small'
               fullWidth
               disabled={isDisabled}
-              value={field.value ?? ''}
             />
           )}
         />
 
-        {/* Vendor
+        {/* Asset No */}
         <Controller
-          name='vendor'
+          name='assetNo'
           control={control}
           render={({ field }) => (
-            <Box width='60%'>
-              <AsyncSelectField
-                dialogMaxWidth='sm'
-                label='Vendor'
-                getOptionLabel={row => row.}
-                value={field.value}
-                selectionMode='single'
-                request={tblAddress.getAll}
-                columns={[
-                  { field: 'name', headerName: 'Vendor Name', flex: 1 },
-                ]}
-                getRowId={row => row.vendorId}
-                onChange={field.onChange}
-              />
-            </Box>
+            <TextField
+              {...field}
+              label='Asset No'
+              size='small'
+              fullWidth
+              disabled={isDisabled}
+            />
           )}
-        /> */}
+        />
+
+        {/* Comment1 */}
+        <Controller
+          name='comment1'
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label='Comment 1'
+              size='small'
+              fullWidth
+              disabled={isDisabled}
+            />
+          )}
+        />
+
+        {/* Comment2 */}
+        <Controller
+          name='comment2'
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label='Comment 2'
+              size='small'
+              fullWidth
+              disabled={isDisabled}
+            />
+          )}
+        />
+
+        {/* Comment3 */}
+        <Controller
+          name='comment3'
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label='Comment 3'
+              size='small'
+              fullWidth
+              disabled={isDisabled}
+            />
+          )}
+        />
+
+        {/* Is Critical */}
+        <Controller
+          name='isCritical'
+          control={control}
+          render={({ field }) => (
+            <FormControlLabel
+              control={
+                <Checkbox
+                  {...field}
+                  checked={field.value ?? false}
+                  disabled={isDisabled}
+                />
+              }
+              label='Critical'
+            />
+          )}
+        />
 
         {/* Order No */}
         <Controller
           name='orderNo'
           control={control}
           render={({ field }) => (
-            <TextField
+            <NumberField
               {...field}
-              type='number'
               label='Order No'
-              fullWidth
               size='small'
+              fullWidth
               disabled={isDisabled}
-              value={field.value ?? ''}
-              onChange={e =>
-                field.onChange(
-                  e.target.value === '' ? null : Number(e.target.value)
-                )
-              }
             />
           )}
         />
       </Box>
-
-      {/* Bottom Section - Advanced Options */}
-      <BorderedBox label='Advanced Options' mt={2}>
-        <Controller
-          name='isCritical'
-          control={control}
-          render={({ field }) => (
-            <FormControlLabel
-              control={<Checkbox {...field} checked={!!field.value} />}
-              label='Is Critical'
-            />
-          )}
-        />
-      </BorderedBox>
     </FormDialog>
   )
 }
