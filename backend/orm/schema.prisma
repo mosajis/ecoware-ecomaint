@@ -61,8 +61,8 @@ model TblAttachment {
   path                          String?                        @map("Path") @db.NVarChar(500)
   size                          Int?                           @map("Size")
   isUserAttachment              Boolean                        @map("IsUserAttachment")
-  createdAt                     DateTime                       @map("CreatedAt")
   createdUserId                 Int                            @map("CreatedUserId")
+  createdAt                     DateTime                       @default(now()) @map("created_at")
   tblAttachmentType             TblAttachmentType?             @relation(fields: [attachmentTypeId], references: [attachmentTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblAttachment_tblAttachmentType")
   users                         Users                          @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblAttachment_Users")
   tblComponentUnitAttachments   TblComponentUnitAttachment[]
@@ -79,8 +79,8 @@ model TblAttachmentType {
   attachmentTypeId Int             @id(map: "PK_tblAttachmentType1") @default(dbgenerated("NEXT VALUE FOR [Seq_AttachmentType]"), map: "DF_AttachmentTypeID") @map("AttachmentTypeID")
   name             String          @map("Name") @db.NVarChar(50)
   abbreviation     String          @map("Abbreviation") @db.NVarChar(50)
-  createdAt        DateTime        @map("Created_at")
   createdBy        Int             @map("Created_By")
+  createdAt        DateTime        @default(now()) @map("created_at")
   tblAttachments   TblAttachment[]
   users            Users           @relation(fields: [createdBy], references: [userId], onUpdate: NoAction, map: "FK_tblAttachmentType_Users")
 
@@ -102,7 +102,7 @@ model TblCompCounter {
   zeroedDate         DateTime?           @map("ZeroedDate") @db.DateTime
   averageCountRate   Int?                @map("AverageCountRate")
   useCalcAverage     Int?                @map("UseCalcAverage")
-  deptId             Int                 @map("DeptID")
+  deptId             Int?                @map("DeptID")
   exportMarker       Int?                @map("ExportMarker")
   lastupdate         DateTime?           @db.DateTime
   orderNo            Int?                @map("OrderNo")
@@ -274,6 +274,7 @@ model TblCompMeasurePoint {
   orderNo                 Int?                     @map("OrderNo")
   userId                  Int?                     @map("UserID")
   tblCompJobMeasurePoints TblCompJobMeasurePoint[]
+  tblComponentUnit        TblComponentUnit?        @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompMeasurePoint_tblComponentUnit")
   tblCounterType          TblCounterType?          @relation(fields: [counterTypeId], references: [counterTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompMeasurePoint_tblCounterType")
   tblUnit                 TblUnit?                 @relation(fields: [unitId], references: [unitId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompMeasurePoint_tblUnit")
 
@@ -341,6 +342,7 @@ model TblComponentUnit {
   comment3                    String?                      @db.NVarChar(500)
   tblCompCounters             TblCompCounter[]
   tblCompJobs                 TblCompJob[]
+  tblCompMeasurePoints        TblCompMeasurePoint[]
   tblAddress                  TblAddress?                  @relation(fields: [vendorId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblAddress")
   tblComponentUnit            TblComponentUnit?            @relation("tblComponentUnitTotblComponentUnit", fields: [parentCompId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblComponentUnit")
   otherTblComponentUnits      TblComponentUnit[]           @relation("tblComponentUnitTotblComponentUnit")
@@ -364,8 +366,8 @@ model TblComponentUnitAttachment {
   compId                    Int              @map("CompId")
   attachmentId              Int              @map("AttachmentId")
   orderNo                   Int?             @map("OrderNo")
-  createdAt                 DateTime         @map("CreatedAt")
   createdUserId             Int              @map("CreatedUserId")
+  createdAt                 DateTime         @default(now()) @map("created_at")
   tblAttachment             TblAttachment    @relation(fields: [attachmentId], references: [attachmentId], onUpdate: NoAction, map: "FK_tblComponentUnitAttachment_tblAttachment")
   tblComponentUnit          TblComponentUnit @relation(fields: [compId], references: [compId], onUpdate: NoAction, map: "FK_tblComponentUnitAttachment_tblComponentUnit")
   users                     Users            @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblComponentUnitAttachment_Users")
@@ -459,8 +461,8 @@ model TblCompTypeAttachment {
   compTypeId           Int           @map("CompTypeId")
   attachmentId         Int           @map("AttachmentId")
   orderNo              Int?          @map("OrderNo")
-  createdAt            DateTime      @map("CreatedAt")
   createdUserId        Int           @map("CreatedUserId")
+  createdAt            DateTime      @default(now()) @map("created_at")
   tblAttachment        TblAttachment @relation(fields: [attachmentId], references: [attachmentId], onUpdate: NoAction, map: "FK_tblCompTypeAttachment_tblAttachment")
   tblCompType          TblCompType   @relation(fields: [compTypeId], references: [compTypeId], onUpdate: NoAction, map: "FK_tblCompTypeAttachment_tblCompType")
   users                Users         @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblCompTypeAttachment_Users")
@@ -704,8 +706,8 @@ model TblFailureReportAttachment {
   failureReportId           Int               @map("FailureReportId")
   attachmentId              Int               @map("AttachmentId")
   orderNo                   Int?              @map("OrderNo")
-  createdAt                 DateTime          @map("CreatedAt")
   createdUserId             Int               @map("CreatedUserId")
+  createdAt                 DateTime          @default(now()) @map("created_at")
   tblAttachment             TblAttachment     @relation(fields: [attachmentId], references: [attachmentId], onUpdate: NoAction, map: "FK_tblFailureReportAttachment_tblAttachment")
   tblFailureReports         TblFailureReports @relation(fields: [failureReportId], references: [failureReportId], onUpdate: NoAction, map: "FK_tblFailureReportAttachment_tblFailureReports")
   users                     Users             @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblFailureReportAttachment_Users")
@@ -852,8 +854,8 @@ model TblJobDescriptionAttachment {
   jobDescId                  Int               @map("JobDescId")
   attachmentId               Int               @map("AttachmentId")
   orderNo                    Int?              @map("OrderNo")
-  createdAt                  DateTime          @map("CreatedAt")
   createdUserId              Int               @map("CreatedUserId")
+  createdAt                  DateTime          @default(now()) @map("created_at")
   tblAttachment              TblAttachment     @relation(fields: [attachmentId], references: [attachmentId], onUpdate: NoAction, map: "FK_tblJobDescriptionAttachment_tblAttachment")
   tblJobDescription          TblJobDescription @relation(fields: [jobDescId], references: [jobDescId], onUpdate: NoAction, map: "FK_tblJobDescriptionAttachment_tblJobDescription")
   users                      Users             @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblJobDescriptionAttachment_Users")
@@ -1086,8 +1088,8 @@ model TblMaintLogAttachment {
   maintLogId           Int      @map("MaintLogId")
   attachmentId         Int      @map("AttachmentId")
   orderNo              Int?     @map("OrderNo")
-  createdAt            DateTime @map("CreatedAt")
   createdUserId        Int      @map("CreatedUserId")
+  createdAt            DateTime @default(now()) @map("created_at")
 
   @@map("tblMaintLogAttachment")
   @@schema("dbo")
@@ -1550,8 +1552,8 @@ model TblWorkShopRequestAttachment {
   wShopRequestId           Int                @map("WShopRequestId")
   attachmentId             Int                @map("AttachmentId")
   orderNo                  Int?               @map("OrderNo")
-  createdAt                DateTime           @map("CreatedAt")
   createdUserId            Int                @map("CreatedUserId")
+  createdAt                DateTime           @default(now()) @map("created_at")
   tblAttachment            TblAttachment      @relation(fields: [attachmentId], references: [attachmentId], onUpdate: NoAction, map: "FK_tblWorkShopRequestAttachment_tblAttachment")
   tblWorkShopRequest       TblWorkShopRequest @relation(fields: [wShopRequestId], references: [wShopRequestId], onUpdate: NoAction, map: "FK_tblWorkShopRequestAttachment_tblWorkShopRequest")
   users                    Users              @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblWorkShopRequestAttachment_Users")

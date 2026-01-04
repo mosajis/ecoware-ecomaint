@@ -91,6 +91,9 @@ function pull() {
  */
 function push() {
   runCommand(`prisma db push --schema=${SCHEMA}`, 'Push Database')
+  fixTimestamps()
+  format()
+  generate()
 }
 
 /**

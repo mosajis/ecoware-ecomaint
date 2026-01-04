@@ -17,15 +17,15 @@ import { TypeTblComponentUnit } from '@/core/api/generated/api'
 
 // Lazy imports
 const TabDetails = lazy(() => import('./tabs/TabDetails'))
-const TabJob = lazy(() => import('./tabs/tabJob/TabJob'))
-const TabCounter = lazy(() => import('./tabs/TabCounter'))
+const TabJob = lazy(() => import('./tabs/job/TabJob'))
+const TabCounter = lazy(() => import('./tabs/counter/TabCounter'))
 const TabWorkOrder = lazy(() => import('./tabs/TabWorkOrder'))
 const TabMaintLog = lazy(() => import('./tabs/TabMaintLog'))
 const TabAttachment = lazy(() => import('./tabs/TabAttachment'))
 const TabJobAttachment = lazy(() => import('./tabs/TabJobAttachment'))
 const TabFailureReport = lazy(() => import('./tabs/TabFailureReport'))
 const TabPerformed = lazy(() => import('./tabs/TabPerformed'))
-const TabMeasures = lazy(() => import('./tabs/TabMeasures'))
+const TabMeasures = lazy(() => import('./tabs/measures/TabMeasures'))
 const TabStockUsed = lazy(() => import('./tabs/TabStockUsed'))
 
 type Props = {
@@ -37,8 +37,8 @@ type Props = {
 const tabs: ReusableTabItem[] = [
   { label: 'Job', icon: <AccountTree />, component: TabJob },
   { label: 'Details', icon: <Description />, component: TabDetails },
-  { label: 'Counter crud * ', icon: <BarChart />, component: TabCounter },
-  { label: 'Measure Point crud *', icon: <Tune />, component: TabMeasures },
+  { label: 'Counter', icon: <BarChart />, component: TabCounter },
+  { label: 'Measure Point', icon: <Tune />, component: TabMeasures },
   { label: 'Failure Report', icon: <BugReport />, component: TabFailureReport },
   { label: 'Work Order', icon: <ContentCopy />, component: TabWorkOrder },
   { label: 'Maint Log', icon: <DoneAll />, component: TabMaintLog },

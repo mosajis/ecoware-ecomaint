@@ -5,7 +5,6 @@ import ComponentUnitUpsert from './ComponentUnitUpsert'
 import { GridColDef } from '@mui/x-data-grid'
 import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { useCallback, useMemo, useState } from 'react'
-import { useDataTree } from '@/shared/hooks/useDataTree'
 import {
   tblComponentUnit,
   TypeTblComponentUnit,
