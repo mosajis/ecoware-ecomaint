@@ -1,6 +1,6 @@
 import Splitter from '@/shared/components/Splitter'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import CustomizedTree from '@/shared/components/tree/CustomeTree'
+import CustomizedTree from '@/shared/components/tree/Tree'
 import LocationUpsert from './LocationUpsert'
 import { useState, useCallback } from 'react'
 import { tblLocation, TypeTblLocation } from '@/core/api/generated/api'

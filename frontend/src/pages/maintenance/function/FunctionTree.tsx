@@ -1,5 +1,5 @@
 import Splitter from '@/shared/components/Splitter'
-import CustomizedTree from '@/shared/components/tree/CustomeTree'
+import CustomizedTree from '@/shared/components/tree/Tree'
 import FunctionFormDialog from './FunctionUpsert'
 import TabsComponent from './FunctionTabs'
 

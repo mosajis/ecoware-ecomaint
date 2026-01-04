@@ -1,7 +1,6 @@
-import Box from '@mui/material/Box'
 import DataGridToolbar from './DataGridToolbar'
 import {
-  DataGrid,
+  DataGrid as MuiDataGrid,
   type DataGridProps,
   type GridColDef,
   type GridSlotsComponent,
@@ -37,7 +36,7 @@ interface CustomizedDataGridProps extends DataGridProps {
   toolbarChildren?: React.ReactNode
 }
 
-export default function CustomizedDataGrid({
+export default function DataGrid({
   rows,
   columns = [],
   initialState,
@@ -115,7 +114,7 @@ export default function CustomizedDataGrid({
   )
 
   return (
-    <DataGrid
+    <MuiDataGrid
       rows={indexedRows}
       columns={columnsWithRowNumber}
       initialState={mergedInitialState}

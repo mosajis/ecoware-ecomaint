@@ -1,5 +1,5 @@
 import Splitter from '@/shared/components/Splitter'
-import CustomizedTree from '@/shared/components/tree/CustomeTree'
+import CustomizedTree from '@/shared/components/tree/Tree'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import ComponentUnitUpsert from './ComponentUnitUpsert'
 import { GridColDef } from '@mui/x-data-grid'

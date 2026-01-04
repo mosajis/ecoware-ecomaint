@@ -12,6 +12,9 @@ import {
   tblCompTypeJobCounter,
   tblCompTypeCounter,
   TypeTblCompTypeJobCounter,
+  TypeTblCompTypeJob,
+  tblCompJob,
+  tblComponentUnit,
 } from '@/core/api/generated/api'
 import { buildRelation } from '@/core/api/helper'
 
@@ -35,6 +38,7 @@ type Props = {
   recordId?: number | null
   compTypeJobId: number
   compTypeId: number
+  compTypeJob?: TypeTblCompTypeJob | null
   onClose: () => void
   onSuccess: (data: TypeTblCompTypeJobCounter) => void
 }
@@ -45,6 +49,7 @@ function JobCounterUpsert({
   recordId,
   compTypeJobId,
   compTypeId,
+  compTypeJob,
   onClose,
   onSuccess,
 }: Props) {
@@ -126,6 +131,22 @@ function JobCounterUpsert({
 
         if (mode === 'create') {
           result = await tblCompTypeJobCounter.create(payload)
+          // const jobDescId = compTypeJob?.jobDescId
+          // const compTypeId = compTypeJob?.compTypeId
+
+          // const units = await tblComponentUnit.getAll({
+          //   filter: {
+          //     compTypeId: compTypeId
+          //   }
+          // })
+
+          // const compIds = units.items.map(u => u.compId)
+
+          // tblCompJob.getAll({
+          //   filter: {
+          //     jobDescId: jobDescId,
+          //   },
+          // })
         } else {
           result = await tblCompTypeJobCounter.update(recordId!, payload)
         }

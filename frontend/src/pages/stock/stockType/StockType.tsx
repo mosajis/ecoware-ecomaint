@@ -1,7 +1,7 @@
 import Splitter from '@/shared/components/Splitter'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import StockTypeFormDialog from './StockTypeUpsert'
-import CustomizedTree from '@/shared/components/tree/CustomeTree'
+import CustomizedTree from '@/shared/components/tree/Tree'
 import { useState, useCallback } from 'react'
 import { tblStockType, TypeTblStockType } from '@/core/api/generated/api'
 import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'

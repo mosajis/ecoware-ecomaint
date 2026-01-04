@@ -116,6 +116,7 @@ const TabCounter = ({ compTypeJob }: Props) => {
           open={openForm}
           mode={mode}
           recordId={selectedId}
+          compTypeJob={compTypeJob}
           compTypeJobId={compTypeJobId}
           compTypeId={compTypeId}
           onClose={() => setOpenForm(false)}

@@ -1,7 +1,7 @@
 import Splitter from '@/shared/components/Splitter'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import StockItemFormDialog from './StockItemUpsert'
-import CustomizedTree from '@/shared/components/tree/CustomeTree'
+import CustomizedTree from '@/shared/components/tree/Tree'
 import { useState, useCallback } from 'react'
 import {
   tblStockItem,
