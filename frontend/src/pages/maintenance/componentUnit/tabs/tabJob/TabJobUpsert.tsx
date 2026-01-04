@@ -6,6 +6,7 @@ import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import RadioGroup from '@mui/material/RadioGroup'
 import Radio from '@mui/material/Radio'
+import DateField from '@/shared/components/DateField'
 import { memo, useEffect, useState, useCallback, useMemo } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -22,7 +23,6 @@ import {
   tblPeriod,
   TypeTblCompJob,
 } from '@/core/api/generated/api'
-import DateField from '@/shared/components/DateField'
 
 /* ================= Schema ================= */
 
@@ -466,22 +466,24 @@ function ComponentJobUpsert({
             )}
           />
         </Box>
-      </Box>
 
-      <Controller
-        name='lastDone'
-        control={control}
-        render={({ field }) => (
-          <DateField label='Last Done' field={field} type='DATETIME' />
-        )}
-      />
-      <Controller
-        name='nextDueDate'
-        control={control}
-        render={({ field }) => (
-          <DateField label='Next Due Date' field={field} type='DATETIME' />
-        )}
-      />
+        <Box display={'flex'} gap={2}>
+          <Controller
+            name='lastDone'
+            control={control}
+            render={({ field }) => (
+              <DateField label='Last Done' field={field} type='DATETIME' />
+            )}
+          />
+          <Controller
+            name='nextDueDate'
+            control={control}
+            render={({ field }) => (
+              <DateField label='Next Due Date' field={field} type='DATETIME' />
+            )}
+          />
+        </Box>
+      </Box>
 
       {/* Status */}
       <BorderedBox label='Component Status' mt={2} width='80%'>

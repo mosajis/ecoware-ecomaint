@@ -1,6 +1,4 @@
-// utils/base.controller.ts
 import { Elysia, t } from 'elysia'
-import { type Static } from '@sinclair/typebox'
 import { BaseService } from './base.service'
 
 const querySchema = t.Object({
@@ -115,7 +113,7 @@ export class BaseController<Model extends Record<string, any>> {
           detail: { summary: 'Get all' },
           query: querySchema,
           response: t.Object({
-            items: t.Union([t.Array(responseSchema), t.Any()]),
+            items: t.Array(responseSchema),
             total: t.Integer(),
             page: t.Integer(),
             perPage: t.Integer(),
@@ -155,10 +153,7 @@ export class BaseController<Model extends Record<string, any>> {
           query: t.Object({
             include: t.Optional(t.String()),
           }),
-          response: t.Intersect([
-            responseSchema,
-            t.Object({}, { nullable: true }),
-          ]),
+          response: responseSchema,
         }
       )
     }
