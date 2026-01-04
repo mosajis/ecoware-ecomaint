@@ -6,7 +6,6 @@ import ComponentTypeUpsert from './ComponentTypeUpsert'
 import { useCallback, useMemo, useState } from 'react'
 import { useRouter } from '@tanstack/react-router'
 import { GridColDef } from '@mui/x-data-grid'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { tblCompType, TypeTblCompType } from '@/core/api/generated/api'
 import { routeComponentTypeDetail } from './ComponentTypeRoutes'
 import { useCustomizedTree } from '@/shared/hooks/useDataTree'
@@ -27,11 +26,10 @@ export default function PageComponentTypeList() {
   const router = useRouter()
 
   const [selectedRow, setSelectedRow] = useState<TypeTblCompType | null>(null)
+  const [selectedId, setSelectedId] = useState<string | null>(null) // <-- مشترک
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
-  const [selectedTreeIds, setSelectedTreeIds] = useState<string[]>(['20000000'])
 
-  /* ---- Data Tree Hook ---- */
   const {
     rows,
     treeItems,
@@ -47,7 +45,6 @@ export default function PageComponentTypeList() {
     mapper: mapComponentType,
   })
 
-  /* ---- Grid Columns ---- */
   const columns = useMemo<GridColDef<TypeTblCompType>[]>(
     () => [
       { field: 'compTypeNo', headerName: 'Code', width: 120 },
@@ -58,16 +55,11 @@ export default function PageComponentTypeList() {
     [handleDelete]
   )
 
-  /* ---- Handlers ---- */
   const handleAddClick = useCallback(() => {
     setSelectedRow(null)
+    setSelectedId(null)
     setMode('create')
     setOpenForm(true)
-  }, [])
-
-  const handleTreeSelection = useCallback((ids: string[]) => {
-    console.log(ids)
-    setSelectedTreeIds(ids)
   }, [])
 
   const handleDoubleClick = useCallback(
@@ -89,7 +81,23 @@ export default function PageComponentTypeList() {
     [onFormSuccess]
   )
 
-  /* ---- Render ---- */
+  /* ---- انتخاب بین Tree و Grid ---- */
+  const handleTreeSelect = useCallback(
+    (selectedIds: string[]) => {
+      const id = selectedIds[0] ?? null
+      setSelectedId(id)
+
+      const row = rows.find(r => r.compTypeId.toString() === id)
+      if (row) setSelectedRow(row)
+    },
+    [rows]
+  )
+
+  const handleGridSelect = useCallback((row: TypeTblCompType) => {
+    setSelectedId(row.compTypeId.toString())
+    setSelectedRow(row)
+  }, [])
+
   return (
     <>
       <Splitter initialPrimarySize='30%'>
@@ -99,28 +107,23 @@ export default function PageComponentTypeList() {
           loading={loading}
           onRefresh={handleRefresh}
           onAddClick={handleAddClick}
-          selectedIds={selectedTreeIds}
-          onSelect={handleTreeSelection}
           onDoubleClick={handleDoubleClick}
-          autoExpandSearch
+          onSelect={handleTreeSelect}
         />
-        <div>
-          {JSON.stringify(selectedTreeIds)}
-          <DataGrid
-            label='List View'
-            showToolbar
-            rows={rows}
-            columns={columns}
-            loading={loading}
-            getRowId={row => row.compTypeId}
-            disableDensity
-            disableRowNumber
-            disableRowSelectionOnClick
-            onAddClick={handleAddClick}
-            onRefreshClick={handleRefresh}
-            onRowDoubleClick={({ row }) => handleDoubleClick(row)}
-          />
-        </div>
+        <DataGrid
+          label='List View'
+          showToolbar
+          rows={rows}
+          columns={columns}
+          loading={loading}
+          getRowId={row => row.compTypeId}
+          disableDensity
+          disableRowNumber
+          onAddClick={handleAddClick}
+          onRefreshClick={handleRefresh}
+          onRowClick={({ row }) => handleGridSelect(row)}
+          onRowDoubleClick={({ row }) => handleDoubleClick(row)}
+        />
       </Splitter>
 
       <ComponentTypeUpsert

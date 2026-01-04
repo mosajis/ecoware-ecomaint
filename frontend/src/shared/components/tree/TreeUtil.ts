@@ -162,3 +162,34 @@ export function getSelectedData<T>(
     .map(id => dataMap.get(id))
     .filter((item): item is T => item !== undefined)
 }
+export function getParentIds<T>(
+  nodes: TreeNode<T>[],
+  targetId: string
+): string[] {
+  const parentIds: string[] = []
+
+  const findWithParents = (
+    nodeList: TreeNode<T>[],
+    targetId: string,
+    parents: string[] = []
+  ): boolean => {
+    for (const node of nodeList) {
+      const currentParents = [...parents, node.id]
+
+      if (node.id === targetId) {
+        parentIds.push(...parents) // فقط والدها بدون خودش
+        return true
+      }
+
+      if (node.children) {
+        if (findWithParents(node.children, targetId, currentParents)) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
+  findWithParents(nodes, targetId)
+  return parentIds
+}

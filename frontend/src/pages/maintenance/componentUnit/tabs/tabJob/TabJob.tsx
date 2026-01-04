@@ -1,15 +1,15 @@
-import { useMemo, useCallback } from 'react'
+import CellDateTime from '@/shared/components/dataGrid/cells/CellDateTime'
+import ComponentJobUpsert from './TabJobUpsert'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
+import { useMemo, useCallback, useState } from 'react'
 import { GridColDef } from '@mui/x-data-grid'
 import {
   tblCompJob,
-  tblJobDescription,
-  tblRound,
   TypeTblCompJob,
   TypeTblComponentUnit,
-  TypeTblJobDescription,
 } from '@/core/api/generated/api'
+import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 
 interface TabJobProps {
   componentUnit?: TypeTblComponentUnit | null
@@ -17,93 +17,196 @@ interface TabJobProps {
 }
 
 const TabJob = ({ componentUnit, label }: TabJobProps) => {
-  // const [openForm, setOpenForm] = useState(false);
-  // const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+  const compId = componentUnit?.compId
+
+  const [openForm, setOpenForm] = useState(false)
+  const [mode, setMode] = useState<'create' | 'update'>('create')
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
+
+  /* ================= Data ================= */
 
   const getAll = useCallback(() => {
     return tblCompJob.getAll({
-      filter: {
-        compId: componentUnit?.compId,
-      },
+      filter: { compId },
       include: {
         tblJobDescription: true,
         tblDiscipline: true,
         tblPeriod: true,
+        tblMaintCause: true,
+        tblMaintClass: true,
+        tblMaintType: true,
       },
     })
-  }, [componentUnit?.compId])
-  // --- useDataGrid ---
-  const { rows, loading, handleRefresh, handleDelete, handleFormSuccess } =
-    useDataGrid(
-      getAll,
-      tblJobDescription.deleteById,
-      'jobDescId',
-      !!componentUnit?.compId
-    )
+  }, [compId])
 
-  // --- Handlers ---
+  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
+    getAll,
+    tblCompJob.deleteById,
+    'compJobId',
+    !!compId
+  )
+
+  /* ================= Handlers ================= */
+
   const handleAdd = useCallback(() => {
-    // setSelectedRowId(null);
-    // setOpenForm(true);
+    setSelectedRowId(null)
+    setMode('create')
+    setOpenForm(true)
   }, [])
 
-  const handleEdit = useCallback((row: TypeTblJobDescription) => {
-    // setSelectedRowId(row.jobDescriptionId);
-    // setOpenForm(true);
+  const handleEdit = useCallback((row: TypeTblCompJob) => {
+    setSelectedRowId(row.compJobId)
+    setMode('update')
+    setOpenForm(true)
   }, [])
 
-  // --- Columns ---
+  const handleDeleteRow = useCallback(
+    async (row: TypeTblCompJob) => {
+      await handleDelete(row)
+    },
+    [handleDelete]
+  )
+
+  const handleSuccess = useCallback(() => {
+    setOpenForm(false)
+    handleRefresh()
+  }, [handleRefresh])
+
+  /* ================= Columns ================= */
+
   const columns = useMemo<GridColDef<TypeTblCompJob>[]>(
     () => [
       {
-        field: 'jobDescCode',
+        field: 'jobCode',
         headerName: 'Code',
-        width: 100,
+        width: 90,
         valueGetter: (_, row) => row.tblJobDescription?.jobDescCode,
       },
       {
-        field: 'jobDescTitle',
-        headerName: 'Job Title',
-        flex: 1,
+        field: 'jobName',
+        headerName: 'Title',
+        flex: 2.5,
         valueGetter: (_, row) => row.tblJobDescription?.jobDescTitle,
       },
       {
+        field: 'frequency',
+        headerName: 'Frequency',
+        width: 90,
+      },
+      {
+        field: 'frequencyPeriod',
+        headerName: 'Period',
+        width: 70,
+        valueGetter: (_, row) => row.tblPeriod?.name,
+      },
+      {
         field: 'discipline',
-        headerName: 'Discipline (not set)',
+        headerName: 'Discipline',
         flex: 1,
         valueGetter: (_, row) => row.tblDiscipline?.name,
       },
-      { field: 'frequency', headerName: 'Frequency', width: 120 },
       {
-        field: 'tblPeriod',
-        headerName: 'Frequency Period',
-        width: 150,
-        valueGetter: (_, row) => row.tblPeriod?.name,
+        field: 'maintClass',
+        headerName: 'MaintClass',
+        flex: 1,
+        valueGetter: (_, row) => row.tblMaintClass?.descr,
       },
-      { field: 'lastDone', headerName: 'Last Done', width: 150 },
+      {
+        field: 'maintType',
+        headerName: 'MaintType',
+        flex: 1,
+        valueGetter: (_, row) => row.tblMaintType?.descr,
+      },
+      {
+        field: 'maintCause',
+        headerName: 'MaintCause',
+        flex: 1,
+        valueGetter: (_, row) => row.tblMaintCause?.descr,
+      },
+      {
+        field: 'priority',
+        headerName: 'Priority',
+        width: 75,
+      },
+      {
+        field: 'window',
+        headerName: 'Window',
+        width: 75,
+      },
+      {
+        field: 'planningMethod',
+        headerName: 'Method',
+        width: 85,
+        valueGetter: (_, row) => (row.planningMethod ? 'Fixed' : 'Variable'),
+      },
+      {
+        field: 'statusNone',
+        headerName: 'St-None',
+        width: 85,
+        type: 'boolean',
+      },
+      {
+        field: 'statusInUse',
+        headerName: 'St-InUse',
+        width: 85,
+        type: 'boolean',
+      },
+      {
+        field: 'statusAvailable',
+        headerName: 'St-Available',
+        width: 85,
+        type: 'boolean',
+      },
+      {
+        field: 'statusRepair',
+        headerName: 'St-Repair',
+        width: 85,
+        type: 'boolean',
+      },
+      {
+        field: 'lastDone',
+        headerName: 'Last Done',
+        width: 150,
+        renderCell: ({ value }) => <CellDateTime value={value} />,
+      },
       {
         field: 'nextDueDate',
-        headerName: 'Next DueDate',
+        headerName: 'Next Due Date',
         width: 150,
+        renderCell: ({ value }) => <CellDateTime value={value} />,
       },
-      // { field: 'round', headerName: 'Round (not set)', width: 150,  valueGetter: (_, row) => row.tbl?.name,},
-      // { field: 'roundTitle', headerName: 'Round Title (not set)', width: 150 },
+      dataGridActionColumn({
+        onEdit: handleEdit,
+        onDelete: handleDeleteRow,
+      }),
     ],
-    [handleEdit, handleDelete]
+    [handleEdit, handleDeleteRow]
   )
+
+  /* ================= Render ================= */
 
   return (
     <>
       <CustomizedDataGrid
-        label={label ?? 'Job List'}
+        label={label ?? 'Component Jobs'}
         showToolbar
         rows={rows}
         columns={columns}
-        disableRowNumber
         loading={loading}
+        disableRowNumber
+        getRowId={row => row.compJobId}
         onRefreshClick={handleRefresh}
         onAddClick={handleAdd}
-        getRowId={row => row.jobDescId}
+        disableRowSelectionOnClick
+      />
+
+      <ComponentJobUpsert
+        open={openForm}
+        mode={mode}
+        recordId={selectedRowId}
+        compId={compId!}
+        onClose={() => setOpenForm(false)}
+        onSuccess={handleSuccess}
       />
     </>
   )

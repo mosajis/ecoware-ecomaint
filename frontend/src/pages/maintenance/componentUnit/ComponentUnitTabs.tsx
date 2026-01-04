@@ -35,7 +35,7 @@ type Props = {
 
 // Define tabs
 const tabs: ReusableTabItem[] = [
-  { label: 'Job crud', icon: <AccountTree />, component: TabJob },
+  { label: 'Job', icon: <AccountTree />, component: TabJob },
   { label: 'Details', icon: <Description />, component: TabDetails },
   { label: 'Counter crud * ', icon: <BarChart />, component: TabCounter },
   { label: 'Measure Point crud *', icon: <Tune />, component: TabMeasures },

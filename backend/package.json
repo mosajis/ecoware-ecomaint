@@ -2,14 +2,7 @@
   "name": "ecomaint-backend",
   "version": "1.0.50",
   "scripts": {
-    "prisma:generate": "prisma generate --schema=./orm/schema.prisma && bun run prisma:fix-client-ids",
-    "prisma:pull": "prisma db pull --schema=./orm/schema.prisma --force && bun run prisma:fix-schema-timestamps && bun run prisma:fix-schema-sequences && prisma-case-format --file ./orm/schema.prisma -p && bun run prisma:format && bun run prisma:generate && bun run prisma:push",
-    "prisma:push": "prisma db push --schema=./orm/schema.prisma && bun run prisma:generate",
-    "prisma:format": "prisma format --schema=./orm/schema.prisma",
-    "prisma:studio": "prisma studio --schema=./orm/schema.prisma",
-    "prisma:fix-schema-timestamps": "bun run ./scripts/fix-schema-timestamps.js",
-    "prisma:fix-schema-sequences": "bun run ./scripts/fix-schema-sequences.js",
-    "prisma:fix-client-ids": "bun run ./scripts/fix-client-ids.js",
+    "prisma": "bun run scripts/prisma.js",
     "generate:api": "bun scripts/generate-api.js",
     "dev": "bun run --watch src/main.ts",
     "build": "bun run ./scripts/build.js"
@@ -36,5 +29,5 @@
     "prisma-case-format": "^2.2.1",
     "ts-morph": "^27.0.2"
   },
-  "module": "src/mian.ts"
+  "module": "src/main.ts"
 }

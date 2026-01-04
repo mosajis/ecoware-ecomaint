@@ -53,6 +53,41 @@ model TblAddress {
   @@schema("dbo")
 }
 
+model TblAttachment {
+  attachmentId                  Int                            @id(map: "PK_tblAttachment") @default(dbgenerated("NEXT VALUE FOR [Seq_Attachment]"), map: "DF_AttachmentID") @map("AttachmentID")
+  title                         String?                        @map("Title") @db.NVarChar(100)
+  fileName                      String                         @map("FileName") @db.NVarChar(100)
+  attachmentTypeId              Int?                           @map("AttachmentTypeId")
+  path                          String?                        @map("Path") @db.NVarChar(500)
+  size                          Int?                           @map("Size")
+  isUserAttachment              Boolean                        @map("IsUserAttachment")
+  createdAt                     DateTime                       @map("CreatedAt")
+  createdUserId                 Int                            @map("CreatedUserId")
+  tblAttachmentType             TblAttachmentType?             @relation(fields: [attachmentTypeId], references: [attachmentTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblAttachment_tblAttachmentType")
+  users                         Users                          @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblAttachment_Users")
+  tblComponentUnitAttachments   TblComponentUnitAttachment[]
+  tblCompTypeAttachments        TblCompTypeAttachment[]
+  tblFailureReportAttachments   TblFailureReportAttachment[]
+  tblJobDescriptionAttachments  TblJobDescriptionAttachment[]
+  tblWorkShopRequestAttachments TblWorkShopRequestAttachment[]
+
+  @@map("tblAttachment")
+  @@schema("dbo")
+}
+
+model TblAttachmentType {
+  attachmentTypeId Int             @id(map: "PK_tblAttachmentType1") @default(dbgenerated("NEXT VALUE FOR [Seq_AttachmentType]"), map: "DF_AttachmentTypeID") @map("AttachmentTypeID")
+  name             String          @map("Name") @db.NVarChar(50)
+  abbreviation     String          @map("Abbreviation") @db.NVarChar(50)
+  createdAt        DateTime        @map("Created_at")
+  createdBy        Int             @map("Created_By")
+  tblAttachments   TblAttachment[]
+  users            Users           @relation(fields: [createdBy], references: [userId], onUpdate: NoAction, map: "FK_tblAttachmentType_Users")
+
+  @@map("tblAttachmentType")
+  @@schema("dbo")
+}
+
 model TblCompCounter {
   compCounterId      Int                 @id(clustered: false, map: "PK_tblCompCounter") @default(dbgenerated("NEXT VALUE FOR [Seq_CompCounter]"), map: "DF_CompCounterID") @map("CompCounterID")
   compId             Int?                @map("CompID")
@@ -284,42 +319,58 @@ model TblCompOilInfo {
 }
 
 model TblComponentUnit {
-  compId                 Int                @id(map: "PK_tblComponentUnit") @default(dbgenerated("NEXT VALUE FOR [Seq_ComponentUnit]"), map: "DF_CompID") @map("CompID")
-  compTypeId             Int?               @map("CompTypeID")
-  locationId             Int?               @map("LocationID")
-  parentCompId           Int?               @map("ParentCompID")
-  vendorId               Int?               @map("VendorID")
-  compNo                 String?            @unique(map: "NonClusteredIndex-20251229-232627") @map("CompNo") @db.NVarChar(90)
-  serialNo               String?            @map("SerialNo") @db.NVarChar(80)
-  statusId               Int?               @map("StatusID")
-  notes                  String?            @map("Notes") @db.NVarChar(300)
-  deptId                 Int?               @map("DeptID")
-  exportMarker           Int?               @map("ExportMarker")
-  lastupdate             DateTime?          @db.DateTime
-  isCritical             Int?               @map("IsCritical") @db.TinyInt
-  orderNo                Int?               @map("OrderNo")
-  userId                 Int?               @map("UserID")
-  model                  String?            @db.NVarChar(100)
-  comment1               String?            @db.NVarChar(500)
-  comment2               String?            @db.NVarChar(500)
-  assetNo                String?            @map("AssetNo") @db.NVarChar(100)
-  comment3               String?            @db.NVarChar(500)
-  tblCompCounters        TblCompCounter[]
-  tblCompJobs            TblCompJob[]
-  tblAddress             TblAddress?        @relation(fields: [vendorId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblAddress")
-  tblComponentUnit       TblComponentUnit?  @relation("tblComponentUnitTotblComponentUnit", fields: [parentCompId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblComponentUnit")
-  otherTblComponentUnits TblComponentUnit[] @relation("tblComponentUnitTotblComponentUnit")
-  tblCompStatus          TblCompStatus?     @relation(fields: [statusId], references: [compStatusId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblCompStatus")
-  tblCompType            TblCompType?       @relation(fields: [compTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblCompType")
-  tblLocation            TblLocation?       @relation(fields: [locationId], references: [locationId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblLocation")
-  tblFunctions           TblFunctions[]
-  tblMaintLogs           TblMaintLog[]
-  tblWorkOrders          TblWorkOrder[]
+  compId                      Int                          @id(map: "PK_tblComponentUnit") @default(dbgenerated("NEXT VALUE FOR [Seq_ComponentUnit]"), map: "DF_CompID") @map("CompID")
+  compTypeId                  Int?                         @map("CompTypeID")
+  locationId                  Int?                         @map("LocationID")
+  parentCompId                Int?                         @map("ParentCompID")
+  vendorId                    Int?                         @map("VendorID")
+  compNo                      String?                      @unique(map: "NonClusteredIndex-20251229-232627") @map("CompNo") @db.NVarChar(90)
+  serialNo                    String?                      @map("SerialNo") @db.NVarChar(80)
+  statusId                    Int?                         @map("StatusID")
+  notes                       String?                      @map("Notes") @db.NVarChar(300)
+  deptId                      Int?                         @map("DeptID")
+  exportMarker                Int?                         @map("ExportMarker")
+  lastupdate                  DateTime?                    @db.DateTime
+  isCritical                  Int?                         @map("IsCritical") @db.TinyInt
+  orderNo                     Int?                         @map("OrderNo")
+  userId                      Int?                         @map("UserID")
+  model                       String?                      @db.NVarChar(100)
+  comment1                    String?                      @db.NVarChar(500)
+  comment2                    String?                      @db.NVarChar(500)
+  assetNo                     String?                      @map("AssetNo") @db.NVarChar(100)
+  comment3                    String?                      @db.NVarChar(500)
+  tblCompCounters             TblCompCounter[]
+  tblCompJobs                 TblCompJob[]
+  tblAddress                  TblAddress?                  @relation(fields: [vendorId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblAddress")
+  tblComponentUnit            TblComponentUnit?            @relation("tblComponentUnitTotblComponentUnit", fields: [parentCompId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblComponentUnit")
+  otherTblComponentUnits      TblComponentUnit[]           @relation("tblComponentUnitTotblComponentUnit")
+  tblCompStatus               TblCompStatus?               @relation(fields: [statusId], references: [compStatusId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblCompStatus")
+  tblCompType                 TblCompType?                 @relation(fields: [compTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblCompType")
+  tblLocation                 TblLocation?                 @relation(fields: [locationId], references: [locationId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblLocation")
+  tblComponentUnitAttachments TblComponentUnitAttachment[]
+  tblFunctions                TblFunctions[]
+  tblMaintLogs                TblMaintLog[]
+  tblWorkOrders               TblWorkOrder[]
 
   @@index([compTypeId], map: "CU_CompTypeId_IX")
   @@index([locationId], map: "CU_LocationID_ix")
   @@index([statusId], map: "CU_StatusID_Ix")
   @@map("tblComponentUnit")
+  @@schema("dbo")
+}
+
+model TblComponentUnitAttachment {
+  componentUnitAttachmentId Int              @id(map: "PK_tblComponentUnitAttachment") @default(dbgenerated("NEXT VALUE FOR [Seq_ComponentUnitAttachment]"), map: "DF_ComponentUnitAttachmentID") @map("ComponentUnitAttachmentID")
+  compId                    Int              @map("CompId")
+  attachmentId              Int              @map("AttachmentId")
+  orderNo                   Int?             @map("OrderNo")
+  createdAt                 DateTime         @map("CreatedAt")
+  createdUserId             Int              @map("CreatedUserId")
+  tblAttachment             TblAttachment    @relation(fields: [attachmentId], references: [attachmentId], onUpdate: NoAction, map: "FK_tblComponentUnitAttachment_tblAttachment")
+  tblComponentUnit          TblComponentUnit @relation(fields: [compId], references: [compId], onUpdate: NoAction, map: "FK_tblComponentUnitAttachment_tblComponentUnit")
+  users                     Users            @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblComponentUnitAttachment_Users")
+
+  @@map("tblComponentUnitAttachment")
   @@schema("dbo")
 }
 
@@ -382,6 +433,7 @@ model TblCompType {
   compTypeNo               String?                   @map("CompTypeNo") @db.NVarChar(80)
   compName                 String?                   @map("CompName") @db.NVarChar(80)
   compType                 String?                   @map("CompType") @db.NVarChar(80)
+  compTypeModel            String?                   @map("CompTypeModel") @db.NVarChar(80)
   makerId                  Int?                      @map("MakerID")
   notes                    String?                   @map("Notes") @db.NVarChar(500)
   deptId                   Int?                      @map("DeptID")
@@ -393,11 +445,27 @@ model TblCompType {
   tblAddress               TblAddress?               @relation(fields: [makerId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompType_tblAddress")
   tblCompType              TblCompType?              @relation("tblCompTypeTotblCompType", fields: [parentCompTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompType_tblCompType")
   otherTblCompTypes        TblCompType[]             @relation("tblCompTypeTotblCompType")
+  tblCompTypeAttachments   TblCompTypeAttachment[]
   tblCompTypeCounters      TblCompTypeCounter[]
   tblCompTypeJobs          TblCompTypeJob[]
   tblCompTypeMeasurePoints TblCompTypeMeasurePoint[]
 
   @@map("tblCompType")
+  @@schema("dbo")
+}
+
+model TblCompTypeAttachment {
+  compTypeAttachmentId Int           @id(map: "PK_tblCompTypeAttachment") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeAttachment]"), map: "DF_CompTypeAttachmentID") @map("CompTypeAttachmentID")
+  compTypeId           Int           @map("CompTypeId")
+  attachmentId         Int           @map("AttachmentId")
+  orderNo              Int?          @map("OrderNo")
+  createdAt            DateTime      @map("CreatedAt")
+  createdUserId        Int           @map("CreatedUserId")
+  tblAttachment        TblAttachment @relation(fields: [attachmentId], references: [attachmentId], onUpdate: NoAction, map: "FK_tblCompTypeAttachment_tblAttachment")
+  tblCompType          TblCompType   @relation(fields: [compTypeId], references: [compTypeId], onUpdate: NoAction, map: "FK_tblCompTypeAttachment_tblCompType")
+  users                Users         @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblCompTypeAttachment_Users")
+
+  @@map("tblCompTypeAttachment")
   @@schema("dbo")
 }
 
@@ -631,32 +699,48 @@ model TblEmployee {
   @@schema("dbo")
 }
 
+model TblFailureReportAttachment {
+  failureReportAttachmentId Int               @id(map: "PK_tblFailureReportAttachment") @default(dbgenerated("NEXT VALUE FOR [Seq_FailureReportAttachment]"), map: "DF_FailureReportAttachmentID") @map("FailureReportAttachmentID")
+  failureReportId           Int               @map("FailureReportId")
+  attachmentId              Int               @map("AttachmentId")
+  orderNo                   Int?              @map("OrderNo")
+  createdAt                 DateTime          @map("CreatedAt")
+  createdUserId             Int               @map("CreatedUserId")
+  tblAttachment             TblAttachment     @relation(fields: [attachmentId], references: [attachmentId], onUpdate: NoAction, map: "FK_tblFailureReportAttachment_tblAttachment")
+  tblFailureReports         TblFailureReports @relation(fields: [failureReportId], references: [failureReportId], onUpdate: NoAction, map: "FK_tblFailureReportAttachment_tblFailureReports")
+  users                     Users             @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblFailureReportAttachment_Users")
+
+  @@map("tblFailureReportAttachment")
+  @@schema("dbo")
+}
+
 model TblFailureReports {
-  failureReportId   Int       @id(map: "PK_tblFailureReports") @default(dbgenerated("NEXT VALUE FOR [Seq_FailureReports]"), map: "DF_FailureReportId") @map("FailureReportId")
-  compId            Int?      @map("CompID")
-  discId            Int?      @map("DiscID")
-  maintLogId        Int?      @map("MaintLogID")
-  failureReportDate DateTime? @map("FailureReportDate") @db.DateTime
-  failureDateTime   DateTime? @map("FailureDateTime") @db.DateTime
-  waitDateTime      DateTime? @map("WaitDateTime") @db.DateTime
-  totalWait         Int?      @map("TotalWait")
-  title             String?   @map("Title") @db.NVarChar(500)
-  failureDesc       String?   @map("FailureDesc") @db.NVarChar(300)
-  failureCause      String?   @map("FailureCause") @db.NVarChar(300)
-  actionDesc        String?   @map("ActionDesc") @db.NVarChar(300)
-  nextAction        String?   @map("NextAction") @db.NVarChar(300)
-  loggedBy          Int?      @map("LoggedBy")
-  deptId            Int?      @map("DeptID")
-  exportMarker      Int?      @map("ExportMarker")
-  lastupdate        DateTime? @db.DateTime
-  approvedby        Int?      @map("Approvedby")
-  stateDateTime     DateTime? @map("StateDateTime") @db.DateTime
-  stateCode         Int?      @map("StateCode") @db.TinyInt
-  closedBy          Int?      @map("ClosedBy")
-  closedDateTime    DateTime? @map("ClosedDateTime") @db.DateTime
-  failureNumber     Int?      @map("FailureNumber")
-  orderNo           Int?      @map("OrderNo")
-  userId            Int?      @map("UserID")
+  failureReportId             Int                          @id(map: "PK_tblFailureReports") @default(dbgenerated("NEXT VALUE FOR [Seq_FailureReports]"), map: "DF_FailureReportId") @map("FailureReportId")
+  compId                      Int?                         @map("CompID")
+  discId                      Int?                         @map("DiscID")
+  maintLogId                  Int?                         @map("MaintLogID")
+  failureReportDate           DateTime?                    @map("FailureReportDate") @db.DateTime
+  failureDateTime             DateTime?                    @map("FailureDateTime") @db.DateTime
+  waitDateTime                DateTime?                    @map("WaitDateTime") @db.DateTime
+  totalWait                   Int?                         @map("TotalWait")
+  title                       String?                      @map("Title") @db.NVarChar(500)
+  failureDesc                 String?                      @map("FailureDesc") @db.NVarChar(300)
+  failureCause                String?                      @map("FailureCause") @db.NVarChar(300)
+  actionDesc                  String?                      @map("ActionDesc") @db.NVarChar(300)
+  nextAction                  String?                      @map("NextAction") @db.NVarChar(300)
+  loggedBy                    Int?                         @map("LoggedBy")
+  deptId                      Int?                         @map("DeptID")
+  exportMarker                Int?                         @map("ExportMarker")
+  lastupdate                  DateTime?                    @db.DateTime
+  approvedby                  Int?                         @map("Approvedby")
+  stateDateTime               DateTime?                    @map("StateDateTime") @db.DateTime
+  stateCode                   Int?                         @map("StateCode") @db.TinyInt
+  closedBy                    Int?                         @map("ClosedBy")
+  closedDateTime              DateTime?                    @map("ClosedDateTime") @db.DateTime
+  failureNumber               Int?                         @map("FailureNumber")
+  orderNo                     Int?                         @map("OrderNo")
+  userId                      Int?                         @map("UserID")
+  tblFailureReportAttachments TblFailureReportAttachment[]
 
   @@index([compId], map: "FR_CompId_Ix")
   @@map("tblFailureReports")
@@ -732,33 +816,49 @@ model TblJobClass {
 }
 
 model TblJobDescription {
-  jobDescId            Int              @id(map: "PK_tblJobDescription") @default(dbgenerated("NEXT VALUE FOR [Seq_JobDescription]"), map: "DF_JobDescID") @map("JobDescID")
-  layoutId             Int?             @map("LayoutID")
-  jobClassId           Int?             @map("JobClassID")
-  jobDescCode          String?          @map("JobDescCode") @db.NVarChar(300)
-  jobDescTitle         String?          @map("JobDescTitle") @db.NVarChar(250)
-  jobDesc              String?          @map("JobDesc") @db.NVarChar(300)
-  revision             String?          @map("Revision") @db.NVarChar(30)
-  changeReason         String?          @map("ChangeReason") @db.NVarChar(255)
-  status               Int?             @map("Status")
-  oldRevisionJobDescId Int?             @map("OldRevisionJobDescID")
-  copiedFromJobDescId  Int?             @map("CopiedFromJobDescID")
-  createdDate          DateTime?        @map("CreatedDate") @db.DateTime
-  createdBy            Int?             @map("CreatedBy")
-  approvedDate         DateTime?        @map("ApprovedDate") @db.DateTime
-  approvedBy           Int?             @map("ApprovedBy")
-  applicationId        Int?             @map("ApplicationID")
-  deptId               Int?             @map("DeptID")
-  exportMarker         Int?             @map("ExportMarker")
-  lastupdate           DateTime?        @db.DateTime
-  orderNo              Int?             @map("OrderNo")
-  userId               Int?             @map("UserID")
-  tblCompJobs          TblCompJob[]
-  tblCompTypeJobs      TblCompTypeJob[]
-  tblJobClass          TblJobClass?     @relation(fields: [jobClassId], references: [jobClassId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblJobDescription_tblJobClass1")
-  tblMaintLogs         TblMaintLog[]
+  jobDescId                    Int                           @id(map: "PK_tblJobDescription") @default(dbgenerated("NEXT VALUE FOR [Seq_JobDescription]"), map: "DF_JobDescID") @map("JobDescID")
+  layoutId                     Int?                          @map("LayoutID")
+  jobClassId                   Int?                          @map("JobClassID")
+  jobDescCode                  String?                       @map("JobDescCode") @db.NVarChar(300)
+  jobDescTitle                 String?                       @map("JobDescTitle") @db.NVarChar(250)
+  jobDesc                      String?                       @map("JobDesc") @db.NVarChar(300)
+  revision                     String?                       @map("Revision") @db.NVarChar(30)
+  changeReason                 String?                       @map("ChangeReason") @db.NVarChar(255)
+  status                       Int?                          @map("Status")
+  oldRevisionJobDescId         Int?                          @map("OldRevisionJobDescID")
+  copiedFromJobDescId          Int?                          @map("CopiedFromJobDescID")
+  createdDate                  DateTime?                     @map("CreatedDate") @db.DateTime
+  createdBy                    Int?                          @map("CreatedBy")
+  approvedDate                 DateTime?                     @map("ApprovedDate") @db.DateTime
+  approvedBy                   Int?                          @map("ApprovedBy")
+  applicationId                Int?                          @map("ApplicationID")
+  deptId                       Int?                          @map("DeptID")
+  exportMarker                 Int?                          @map("ExportMarker")
+  lastupdate                   DateTime?                     @db.DateTime
+  orderNo                      Int?                          @map("OrderNo")
+  userId                       Int?                          @map("UserID")
+  tblCompJobs                  TblCompJob[]
+  tblCompTypeJobs              TblCompTypeJob[]
+  tblJobClass                  TblJobClass?                  @relation(fields: [jobClassId], references: [jobClassId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblJobDescription_tblJobClass1")
+  tblJobDescriptionAttachments TblJobDescriptionAttachment[]
+  tblMaintLogs                 TblMaintLog[]
 
   @@map("tblJobDescription")
+  @@schema("dbo")
+}
+
+model TblJobDescriptionAttachment {
+  jobDescriptionAttachmentId Int               @id(map: "PK_tblJobDescriptionAttachment") @default(dbgenerated("NEXT VALUE FOR [Seq_JobDescriptionAttachment]"), map: "DF_JobDescriptionAttachmentID") @map("JobDescriptionAttachmentID")
+  jobDescId                  Int               @map("JobDescId")
+  attachmentId               Int               @map("AttachmentId")
+  orderNo                    Int?              @map("OrderNo")
+  createdAt                  DateTime          @map("CreatedAt")
+  createdUserId              Int               @map("CreatedUserId")
+  tblAttachment              TblAttachment     @relation(fields: [attachmentId], references: [attachmentId], onUpdate: NoAction, map: "FK_tblJobDescriptionAttachment_tblAttachment")
+  tblJobDescription          TblJobDescription @relation(fields: [jobDescId], references: [jobDescId], onUpdate: NoAction, map: "FK_tblJobDescriptionAttachment_tblJobDescription")
+  users                      Users             @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblJobDescriptionAttachment_Users")
+
+  @@map("tblJobDescriptionAttachment")
   @@schema("dbo")
 }
 
@@ -978,6 +1078,18 @@ model TblMaintLog {
   @@index([lastupdate], map: "Ml_LastUpdated_Ix")
   @@index([roundId], map: "ML_RoundId_Ix")
   @@map("tblMaintLog")
+  @@schema("dbo")
+}
+
+model TblMaintLogAttachment {
+  maintLogAttachmentId Int      @id(map: "PK_tblMaintLogAttachment") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintLogAttachment]"), map: "DF_MaintLogAttachmentID") @map("MaintLogAttachmentID")
+  maintLogId           Int      @map("MaintLogId")
+  attachmentId         Int      @map("AttachmentId")
+  orderNo              Int?     @map("OrderNo")
+  createdAt            DateTime @map("CreatedAt")
+  createdUserId        Int      @map("CreatedUserId")
+
+  @@map("tblMaintLogAttachment")
   @@schema("dbo")
 }
 
@@ -1396,70 +1508,93 @@ model TblWorkShopDone {
 }
 
 model TblWorkShopRequest {
-  wShopRequestId         Int       @id(map: "PK_tblWorkShopRequest") @map("WShopRequestID")
-  rigName                String?   @map("RigName") @db.NVarChar(200)
-  jobOrderType           Int?      @map("JobOrderType")
-  wShopRequestNo         Int?      @map("WShopRequestNO")
-  jobOrderNo             String?   @map("JobOrderNO") @db.NVarChar(50)
-  awardingDate           DateTime? @map("AwardingDate") @db.DateTime
-  requestDate            DateTime? @map("RequestDate") @db.DateTime
-  compDescGroup          String?   @map("CompDescGroup") @db.NVarChar(300)
-  secondaryCompDescGroup String?   @map("SecondaryCompDescGroup") @db.NVarChar(300)
-  model                  String?   @map("Model") @db.NVarChar(300)
-  serialNo               String?   @map("SerialNo") @db.NVarChar(300)
-  assetNo                String?   @map("AssetNo") @db.NVarChar(300)
-  locationDescGroup      String?   @map("LocationDescGroup") @db.NVarChar(300)
-  descRepairRequest      String?   @map("DescRepairRequest") @db.NVarChar(300)
-  personInChargeId       Int?      @map("PersonInChargeID")
-  personInChargeApproved Boolean?  @map("PersonInChargeApproved")
-  supervisorId           Int?      @map("SupervisorID")
-  supervisorApproved     Boolean?  @map("SupervisorApproved")
-  bargeMasterId          Int?      @map("BargeMasterID")
-  bargeMasterApproved    Boolean?  @map("BargeMasterApproved")
-  rigManagerId           Int?      @map("RigManagerID")
-  rigManagerApproved     Boolean?  @map("RigManagerApproved")
-  bargeMasterComment     String?   @map("BargeMasterComment") @db.NVarChar(300)
-  rigManagerComment      String?   @map("RigManagerComment") @db.NVarChar(300)
-  addressId              Int?      @map("AddressID")
-  workShopTypeId         Int?      @map("WorkShopTypeID")
-  orderNo                Int?      @map("OrderNo")
-  userId                 Int?      @map("UserID")
-  deptId                 Int?      @map("DeptID")
-  exportMarker           Int?      @map("ExportMarker")
-  lastupdate             DateTime? @db.DateTime
+  wShopRequestId                Int                            @id(map: "PK_tblWorkShopRequest") @map("WShopRequestID")
+  rigName                       String?                        @map("RigName") @db.NVarChar(200)
+  jobOrderType                  Int?                           @map("JobOrderType")
+  wShopRequestNo                Int?                           @map("WShopRequestNO")
+  jobOrderNo                    String?                        @map("JobOrderNO") @db.NVarChar(50)
+  awardingDate                  DateTime?                      @map("AwardingDate") @db.DateTime
+  requestDate                   DateTime?                      @map("RequestDate") @db.DateTime
+  compDescGroup                 String?                        @map("CompDescGroup") @db.NVarChar(300)
+  secondaryCompDescGroup        String?                        @map("SecondaryCompDescGroup") @db.NVarChar(300)
+  model                         String?                        @map("Model") @db.NVarChar(300)
+  serialNo                      String?                        @map("SerialNo") @db.NVarChar(300)
+  assetNo                       String?                        @map("AssetNo") @db.NVarChar(300)
+  locationDescGroup             String?                        @map("LocationDescGroup") @db.NVarChar(300)
+  descRepairRequest             String?                        @map("DescRepairRequest") @db.NVarChar(300)
+  personInChargeId              Int?                           @map("PersonInChargeID")
+  personInChargeApproved        Boolean?                       @map("PersonInChargeApproved")
+  supervisorId                  Int?                           @map("SupervisorID")
+  supervisorApproved            Boolean?                       @map("SupervisorApproved")
+  bargeMasterId                 Int?                           @map("BargeMasterID")
+  bargeMasterApproved           Boolean?                       @map("BargeMasterApproved")
+  rigManagerId                  Int?                           @map("RigManagerID")
+  rigManagerApproved            Boolean?                       @map("RigManagerApproved")
+  bargeMasterComment            String?                        @map("BargeMasterComment") @db.NVarChar(300)
+  rigManagerComment             String?                        @map("RigManagerComment") @db.NVarChar(300)
+  addressId                     Int?                           @map("AddressID")
+  workShopTypeId                Int?                           @map("WorkShopTypeID")
+  orderNo                       Int?                           @map("OrderNo")
+  userId                        Int?                           @map("UserID")
+  deptId                        Int?                           @map("DeptID")
+  exportMarker                  Int?                           @map("ExportMarker")
+  lastupdate                    DateTime?                      @db.DateTime
+  tblWorkShopRequestAttachments TblWorkShopRequestAttachment[]
 
   @@map("tblWorkShopRequest")
   @@schema("dbo")
 }
 
+model TblWorkShopRequestAttachment {
+  wShopRequestAttachmentId Int                @id(map: "PK_tblWorkShopRequestAttachment") @default(dbgenerated("NEXT VALUE FOR [Seq_WorkShopRequestAttachment]"), map: "DF_WShopRequestAttachmentID") @map("WShopRequestAttachmentID")
+  wShopRequestId           Int                @map("WShopRequestId")
+  attachmentId             Int                @map("AttachmentId")
+  orderNo                  Int?               @map("OrderNo")
+  createdAt                DateTime           @map("CreatedAt")
+  createdUserId            Int                @map("CreatedUserId")
+  tblAttachment            TblAttachment      @relation(fields: [attachmentId], references: [attachmentId], onUpdate: NoAction, map: "FK_tblWorkShopRequestAttachment_tblAttachment")
+  tblWorkShopRequest       TblWorkShopRequest @relation(fields: [wShopRequestId], references: [wShopRequestId], onUpdate: NoAction, map: "FK_tblWorkShopRequestAttachment_tblWorkShopRequest")
+  users                    Users              @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblWorkShopRequestAttachment_Users")
+
+  @@map("tblWorkShopRequestAttachment")
+  @@schema("dbo")
+}
+
 model Users {
-  userId                                   Int                 @id(map: "PK_tblAmosUser") @map("UserID")
-  employeeId                               Int?                @map("EmployeeID")
-  addressId                                Int?                @map("AddressID")
-  userGroupId                              Int?                @map("UserGroupId")
-  uUserName                                String              @db.NVarChar(30)
-  uPassword                                String              @db.NVarChar(257)
-  uName                                    String?             @db.NVarChar(40)
-  uTitle                                   String?             @db.NVarChar(40)
-  uComment1                                String?             @db.NVarChar(40)
-  uComment2                                String?             @db.NVarChar(40)
-  uDigitalSign                             String?             @db.NVarChar(40)
+  userId                                   Int                            @id(map: "PK_tblAmosUser") @map("UserID")
+  employeeId                               Int?                           @map("EmployeeID")
+  addressId                                Int?                           @map("AddressID")
+  userGroupId                              Int?                           @map("UserGroupId")
+  uUserName                                String                         @db.NVarChar(30)
+  uPassword                                String                         @db.NVarChar(257)
+  uName                                    String?                        @db.NVarChar(40)
+  uTitle                                   String?                        @db.NVarChar(40)
+  uComment1                                String?                        @db.NVarChar(40)
+  uComment2                                String?                        @db.NVarChar(40)
+  uDigitalSign                             String?                        @db.NVarChar(40)
   uAccountDisabled                         Boolean?
-  uLogonAttempts                           Int?                @db.SmallInt
+  uLogonAttempts                           Int?                           @db.SmallInt
   uForcePasswordChange                     Boolean?
-  uLastLogin                               DateTime?           @db.DateTime
-  exportMarker                             Int?                @map("ExportMarker")
-  uLastUpdated                             DateTime?           @db.DateTime
-  orderNo                                  Int?                @map("OrderNo")
-  deptId                                   Int?                @map("DeptID")
-  lastUpdate                               DateTime?           @map("LastUpdate") @db.DateTime
-  tblMaintLogTblMaintLogUserIdToUsers      TblMaintLog[]       @relation("tblMaintLog_UserIDToUsers")
-  tblMaintLogTblMaintLogLoggedByToUsers    TblMaintLog[]       @relation("tblMaintLog_LoggedByToUsers")
+  uLastLogin                               DateTime?                      @db.DateTime
+  exportMarker                             Int?                           @map("ExportMarker")
+  uLastUpdated                             DateTime?                      @db.DateTime
+  orderNo                                  Int?                           @map("OrderNo")
+  deptId                                   Int?                           @map("DeptID")
+  lastUpdate                               DateTime?                      @map("LastUpdate") @db.DateTime
+  tblAttachments                           TblAttachment[]
+  tblAttachmentTypes                       TblAttachmentType[]
+  tblComponentUnitAttachments              TblComponentUnitAttachment[]
+  tblCompTypeAttachments                   TblCompTypeAttachment[]
+  tblFailureReportAttachments              TblFailureReportAttachment[]
+  tblJobDescriptionAttachments             TblJobDescriptionAttachment[]
+  tblMaintLogTblMaintLogUserIdToUsers      TblMaintLog[]                  @relation("tblMaintLog_UserIDToUsers")
+  tblMaintLogTblMaintLogLoggedByToUsers    TblMaintLog[]                  @relation("tblMaintLog_LoggedByToUsers")
   tblMaintLogFollows                       TblMaintLogFollow[]
-  tblWorkOrderTblWorkOrderIssuedByToUsers  TblWorkOrder[]      @relation("tblWorkOrder_IssuedByToUsers")
-  tblWorkOrderTblWorkOrderPlannedByToUsers TblWorkOrder[]      @relation("tblWorkOrder_PlannedByToUsers")
-  tblWorkOrderTblWorkOrderCreatedByToUsers TblWorkOrder[]      @relation("tblWorkOrder_CreatedByToUsers")
-  tblWorkOrderTblWorkOrderPendingByToUsers TblWorkOrder[]      @relation("tblWorkOrder_PendingByToUsers")
+  tblWorkOrderTblWorkOrderIssuedByToUsers  TblWorkOrder[]                 @relation("tblWorkOrder_IssuedByToUsers")
+  tblWorkOrderTblWorkOrderPlannedByToUsers TblWorkOrder[]                 @relation("tblWorkOrder_PlannedByToUsers")
+  tblWorkOrderTblWorkOrderCreatedByToUsers TblWorkOrder[]                 @relation("tblWorkOrder_CreatedByToUsers")
+  tblWorkOrderTblWorkOrderPendingByToUsers TblWorkOrder[]                 @relation("tblWorkOrder_PendingByToUsers")
+  tblWorkShopRequestAttachments            TblWorkShopRequestAttachment[]
 
   @@schema("pms_membership")
 }

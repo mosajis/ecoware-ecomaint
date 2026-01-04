@@ -1,8 +1,13 @@
-const fs = require('fs')
-const path = require('path')
-const _ = require('lodash')
+#!/usr/bin/env bun
+import fs from 'fs'
+import path from 'path'
+import _ from 'lodash'
+import { fileURLToPath } from 'url'
 
-const TablePKs = {
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+// Mapping of table names to their primary keys
+const TABLE_PKS = {
   TblAddress: 'AddressID',
   TblCompCounter: 'CompCounterID',
   TblCompCounterLog: 'CompCounterLogID',
@@ -64,100 +69,132 @@ const TablePKs = {
   Users: 'UserID',
 }
 
-const prismaboxDir = path.resolve('./orm/generated/prismabox')
-const maxDepth = 5 // حداکثر depth برای nested relations
+const PRISMABOX_DIR = path.resolve('./orm/generated/prismabox')
+const MAX_DEPTH = 5 // Maximum depth for nested relations
 
 let fixedCount = 0
-let modelCache = {} // کش برای relations هر model
+const modelCache = {} // Cache for model relations
 
-// ساخت reverse mapping
+/**
+ * Log utility with timestamps
+ */
+function log(message, type = 'info') {
+  const timestamp = new Date().toLocaleTimeString('en-US')
+  const icons = {
+    info: 'ℹ️',
+    success: '✅',
+    warn: '⚠️',
+    error: '❌',
+  }
+
+  console.log(`${icons[type]} [${timestamp}] ${message}`)
+}
+
+/**
+ * Build reverse mapping from field names to primary keys
+ * @returns {Object} Field name to PK camelCase map
+ */
 function buildFieldToPKMap() {
   const map = {}
-  for (const [tableName, pk] of Object.entries(TablePKs)) {
+
+  for (const [tableName, pk] of Object.entries(TABLE_PKS)) {
     const fieldNameBase = tableName.charAt(0).toLowerCase() + tableName.slice(1)
     map[fieldNameBase] = _.camelCase(pk)
+
+    // Add plural form if not already plural
     if (!fieldNameBase.endsWith('s')) {
       map[fieldNameBase + 's'] = _.camelCase(pk)
     }
   }
+
   return map
 }
 
-// استخراج relations از یک model
-function extractRelationsFromFile(filePath) {
+/**
+ * Extract relation fields from a file
+ * @param {string} filePath - Path to the file
+ * @returns {Array} Array of relation field names
+ */
+function extractRelationFields(filePath) {
   try {
     const content = fs.readFileSync(filePath, 'utf-8')
-    const relations = []
-
-    // پیدا کردن export const XXXRelations یا XXXInputCreate و XXXInputUpdate
-    const relationMatches = content.match(
-      /tbl[A-Za-z_]+:\s*(?:t\.Partial\s*\()?(?:t\.Optional\s*\()?(?:t\.Array\s*\()?t\.Object\s*\(/g
+    const matches = content.match(
+      /(?:tbl[A-Za-z_]+):\s*(?:t\.(?:Array|Optional|Partial)\s*\()?\s*t\.Object\s*\(/g
     )
 
-    if (relationMatches) {
-      const fields = relationMatches
-        .map(m => {
-          const fieldMatch = m.match(/tbl[A-Za-z_]+/)
-          return fieldMatch ? fieldMatch[0] : null
-        })
-        .filter(Boolean)
+    if (!matches) return []
 
-      return [...new Set(fields)]
-    }
+    const fields = matches
+      .map(m => {
+        const fieldMatch = m.match(/tbl[A-Za-z_]+/)
+        return fieldMatch ? fieldMatch[0] : null
+      })
+      .filter(Boolean)
 
-    return relations
-  } catch (e) {
+    return [...new Set(fields)]
+  } catch (error) {
     return []
   }
 }
 
-// پیدا کردن فایل برای یک model
-function findModelFile(modelName) {
+/**
+ * Find model file by table name
+ * @param {string} tableName - Table name (PascalCase)
+ * @returns {string|null} File path or null
+ */
+function findModelFile(tableName) {
   try {
-    const filename = `${modelName}.ts`
-    const filePath = path.join(prismaboxDir, filename)
-    if (fs.existsSync(filePath)) {
-      return filePath
-    }
-  } catch (e) {
-    // silent
+    const filePath = path.join(PRISMABOX_DIR, `${tableName}.ts`)
+    return fs.existsSync(filePath) ? filePath : null
+  } catch (error) {
+    return null
   }
-  return null
 }
 
-// تبدیل field name به table name و بعد به file path
+/**
+ * Convert field name (tblXxx) to table name (TblXxx)
+ * @param {string} fieldName - Field name with 'tbl' prefix
+ * @returns {string} Table name with 'Tbl' prefix
+ */
 function fieldToTableName(fieldName) {
-  let tableName = fieldName.substring(3) // حذف "tbl"
+  let tableName = fieldName.substring(3) // Remove "tbl" prefix
+
+  // Remove plural suffix
   if (tableName.endsWith('es')) {
     tableName = tableName.slice(0, -2)
   } else if (tableName.endsWith('s')) {
     tableName = tableName.slice(0, -1)
   }
+
   return 'Tbl' + tableName
 }
 
-// ساخت nested relation patterns
+/**
+ * Build nested relation patterns for deep relations
+ * @param {string} fieldName - Field name
+ * @param {string} pkCamelCase - Primary key in camelCase
+ * @param {number} depth - Current recursion depth
+ * @param {Set} visited - Already visited fields
+ * @returns {Array} Array of nested patterns
+ */
 function buildNestedPatterns(
   fieldName,
   pkCamelCase,
   depth = 0,
   visited = new Set()
 ) {
-  if (depth >= maxDepth || visited.has(fieldName)) {
+  if (depth >= MAX_DEPTH || visited.has(fieldName)) {
     return []
   }
 
   visited.add(fieldName)
 
-  // اگر الان در کش هست
+  // Load relations from cache or file
   if (!modelCache[fieldName]) {
     const tableName = fieldToTableName(fieldName)
     const modelFile = findModelFile(tableName)
-    if (modelFile) {
-      modelCache[fieldName] = extractRelationsFromFile(modelFile)
-    } else {
-      modelCache[fieldName] = []
-    }
+
+    modelCache[fieldName] = modelFile ? extractRelationFields(modelFile) : []
   }
 
   const nestedRelations = modelCache[fieldName]
@@ -165,12 +202,12 @@ function buildNestedPatterns(
 
   for (const nestedField of nestedRelations) {
     const nestedTableName = fieldToTableName(nestedField)
-    const nestedPK = TablePKs[nestedTableName]
+    const nestedPK = TABLE_PKS[nestedTableName]
+
     if (!nestedPK) continue
 
     const nestedPKCamelCase = _.camelCase(nestedPK)
 
-    // Pattern برای connect nested
     patterns.push({
       fieldName,
       nestedField,
@@ -178,55 +215,45 @@ function buildNestedPatterns(
       nestedPKCamelCase,
     })
 
-    // Recursive برای سطح بعدی
+    // Recursively build deeper patterns
     const deeperPatterns = buildNestedPatterns(
       nestedField,
       nestedPKCamelCase,
       depth + 1,
       new Set(visited)
     )
+
     patterns.push(...deeperPatterns)
   }
 
   return patterns
 }
 
-// استخراج relation fields از فایل
-function extractRelationFields(content) {
-  const matches = content.match(
-    /(?:tbl[A-Za-z_]+):\s*(?:t\.(?:Array|Optional|Partial)\s*\()?\s*t\.Object\s*\(/g
-  )
-  if (!matches) return []
-
-  const fields = matches
-    .map(m => {
-      const fieldMatch = m.match(/tbl[A-Za-z_]+/)
-      return fieldMatch ? fieldMatch[0] : null
-    })
-    .filter(Boolean)
-
-  return [...new Set(fields)]
-}
-
+/**
+ * Fix client IDs in a file - replace 'id' with correct primary key names
+ * @param {string} filePath - Path to file to fix
+ * @param {Object} fieldToPKMap - Map of field names to PK names
+ */
 function fixFile(filePath, fieldToPKMap) {
   let content = fs.readFileSync(filePath, 'utf-8')
   const original = content
 
-  const relationFields = extractRelationFields(content)
+  const relationFields = extractRelationFields(filePath)
 
   if (relationFields.length === 0) {
     return
   }
 
-  // اول: اصلاح PK های سطح اول
+  // Fix first-level PK references
   for (const fieldName of relationFields) {
     const pkCamelCase = fieldToPKMap[fieldName]
 
     if (!pkCamelCase) {
-      console.warn(`⚠️  cannot find: ${fieldName}`)
+      log(`Cannot find PK mapping for: ${fieldName}`, 'warn')
       continue
     }
 
+    // Regex patterns for connect/disconnect operations
     const patterns = [
       {
         regex: new RegExp(
@@ -263,7 +290,7 @@ function fixFile(filePath, fieldToPKMap) {
     }
   }
 
-  // دوم: اصلاح nested relations (سطح‌های عمیق‌تر)
+  // Fix nested relation references
   for (const fieldName of relationFields) {
     const pkCamelCase = fieldToPKMap[fieldName]
     if (!pkCamelCase) continue
@@ -271,7 +298,6 @@ function fixFile(filePath, fieldToPKMap) {
     const nestedPatterns = buildNestedPatterns(fieldName, pkCamelCase)
 
     for (const nested of nestedPatterns) {
-      // Pattern برای nested connect
       const nestedConnectRegex = new RegExp(
         `(${nested.fieldName}\\s*:[^}]*?\\{\\s*[^}]*?id\\s*:\\s*[^,}]+,\\s*${nested.nestedField}\\s*:\\s*\\{\\s*connect\\s*:\\s*t\\.(?:Array\\s*\\(\\s*)?t\\.Object\\s*\\(\\s*\\{\\s*)id(\\s*:)`,
         'g'
@@ -284,30 +310,56 @@ function fixFile(filePath, fieldToPKMap) {
     }
   }
 
+  // Write if changed
   if (content !== original) {
     fixedCount++
     fs.writeFileSync(filePath, content, 'utf-8')
-    console.log(`✅ fixed: ${path.basename(filePath)}`)
+    log(`Fixed: ${path.basename(filePath)}`, 'success')
   }
 }
 
-function walk(dir, fieldToPKMap) {
+/**
+ * Recursively walk directory and fix all TypeScript files
+ * @param {string} dir - Directory to walk
+ * @param {Object} fieldToPKMap - Map of field names to PK names
+ */
+function walkDirectory(dir, fieldToPKMap) {
   const entries = fs.readdirSync(dir, { withFileTypes: true })
 
-  for (const e of entries) {
-    const full = path.join(dir, e.name)
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name)
 
-    if (e.isDirectory()) {
-      walk(full, fieldToPKMap)
+    if (entry.isDirectory()) {
+      walkDirectory(fullPath, fieldToPKMap)
       continue
     }
 
-    if (!e.name.endsWith('.ts')) continue
-
-    fixFile(full, fieldToPKMap)
+    if (entry.name.endsWith('.ts')) {
+      fixFile(fullPath, fieldToPKMap)
+    }
   }
 }
 
-const fieldToPKMap = buildFieldToPKMap()
-walk(prismaboxDir, fieldToPKMap)
-console.log(`\n🎉 Done. Updated ${fixedCount} files.`)
+/**
+ * Main function
+ */
+function main() {
+  try {
+    log(`Scanning directory: ${PRISMABOX_DIR}`)
+
+    if (!fs.existsSync(PRISMABOX_DIR)) {
+      log(`Directory not found: ${PRISMABOX_DIR}`, 'error')
+      process.exit(1)
+    }
+
+    const fieldToPKMap = buildFieldToPKMap()
+    walkDirectory(PRISMABOX_DIR, fieldToPKMap)
+
+    log(`Completed! Fixed ${fixedCount} files`, 'success')
+  } catch (error) {
+    log(`Error: ${error.message}`, 'error')
+    process.exit(1)
+  }
+}
+
+main()

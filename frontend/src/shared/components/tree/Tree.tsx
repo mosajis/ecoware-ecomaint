@@ -32,32 +32,6 @@ export interface CustomizedTreeProps<T = any> extends Partial<RsTreeProps> {
   onDoubleClick?: (row: T) => void
   items: TreeNode<T>[]
   searchDebounceMs?: number
-  selectedIds?: string[] // ✅ Add this
-}
-
-/* ---- Helper: Get all parent IDs for expanded nodes ---- */
-function getAllParentIds(
-  items: TreeNode[],
-  selectedIds: string[]
-): Set<string> {
-  const parentIds = new Set<string>()
-  const selectedSet = new Set(selectedIds)
-
-  const findParents = (nodes: TreeNode[], parentId?: string) => {
-    for (const node of nodes) {
-      if (selectedSet.has(node.id)) {
-        // اگر این node انتخاب شده، تمام parent‌های آن را expand کن
-        if (parentId) parentIds.add(parentId)
-      }
-
-      if (node.children?.length) {
-        findParents(node.children, node.id)
-      }
-    }
-  }
-
-  findParents(items)
-  return parentIds
 }
 
 /* ---- Main Component ---- */
@@ -71,13 +45,11 @@ export default function Tree<T = any>({
   onDoubleClick,
   items,
   searchDebounceMs = 300,
-  selectedIds, // ✅ Add this
   ...rsTreeProps
 }: CustomizedTreeProps<T>) {
   const [searchText, setSearchText] = useState('')
   const [debouncedSearchText, setDebouncedSearchText] = useState('')
   const [height, setHeight] = useState(0)
-  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set())
 
   const containerRef = useRef<HTMLDivElement>(null)
   const debouncedSearch = useRef(
@@ -85,17 +57,10 @@ export default function Tree<T = any>({
   )
   const onSelectionChangeRef = useRef(onSelectionChange)
 
+  // ✅ Keep callback ref up to date without causing re-renders
   useEffect(() => {
     onSelectionChangeRef.current = onSelectionChange
   }, [onSelectionChange])
-
-  // ✅ وقتی selectedIds تغییر می‌کند، parent nodes را expand کن
-  useEffect(() => {
-    if (selectedIds?.length) {
-      const parentIds = getAllParentIds(items, selectedIds)
-      setExpandedIds(parentIds)
-    }
-  }, [selectedIds, items])
 
   const handleSearch = useCallback((text: string) => {
     setSearchText(text)
@@ -150,8 +115,8 @@ export default function Tree<T = any>({
           showTreeLines
           data={filteredTree as any}
           height={height}
-          showIcons
-          expandedIds={Array.from(expandedIds)} // ✅ Pass expanded IDs
+          showIcons={false}
+          virtualizeEnabled={false}
           {...rsTreeProps}
         />
       </Box>

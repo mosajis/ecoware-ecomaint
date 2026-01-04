@@ -1,5 +1,7 @@
 export { default as ControllerSysdiagrams } from "./sysdiagrams.controller";
 export { default as ControllerTblAddress } from "./tblAddress.controller";
+export { default as ControllerTblAttachment } from "./tblAttachment.controller";
+export { default as ControllerTblAttachmentType } from "./tblAttachmentType.controller";
 export { default as ControllerTblCompCounter } from "./tblCompCounter.controller";
 export { default as ControllerTblCompCounterLog } from "./tblCompCounterLog.controller";
 export { default as ControllerTblCompJob } from "./tblCompJob.controller";
@@ -10,10 +12,12 @@ export { default as ControllerTblCompMeasurePoint } from "./tblCompMeasurePoint.
 export { default as ControllerTblCompMeasurePointLog } from "./tblCompMeasurePointLog.controller";
 export { default as ControllerTblCompOilInfo } from "./tblCompOilInfo.controller";
 export { default as ControllerTblComponentUnit } from "./tblComponentUnit.controller";
+export { default as ControllerTblComponentUnitAttachment } from "./tblComponentUnitAttachment.controller";
 export { default as ControllerTblCompSpare } from "./tblCompSpare.controller";
 export { default as ControllerTblCompStatus } from "./tblCompStatus.controller";
 export { default as ControllerTblCompStatusLog } from "./tblCompStatusLog.controller";
 export { default as ControllerTblCompType } from "./tblCompType.controller";
+export { default as ControllerTblCompTypeAttachment } from "./tblCompTypeAttachment.controller";
 export { default as ControllerTblCompTypeCounter } from "./tblCompTypeCounter.controller";
 export { default as ControllerTblCompTypeJob } from "./tblCompTypeJob.controller";
 export { default as ControllerTblCompTypeJobCounter } from "./tblCompTypeJobCounter.controller";
@@ -24,11 +28,13 @@ export { default as ControllerTblCounterType } from "./tblCounterType.controller
 export { default as ControllerTblDepartment } from "./tblDepartment.controller";
 export { default as ControllerTblDiscipline } from "./tblDiscipline.controller";
 export { default as ControllerTblEmployee } from "./tblEmployee.controller";
+export { default as ControllerTblFailureReportAttachment } from "./tblFailureReportAttachment.controller";
 export { default as ControllerTblFailureReports } from "./tblFailureReports.controller";
 export { default as ControllerTblFollowStatus } from "./tblFollowStatus.controller";
 export { default as ControllerTblFunctions } from "./tblFunctions.controller";
 export { default as ControllerTblJobClass } from "./tblJobClass.controller";
 export { default as ControllerTblJobDescription } from "./tblJobDescription.controller";
+export { default as ControllerTblJobDescriptionAttachment } from "./tblJobDescriptionAttachment.controller";
 export { default as ControllerTblJobTrigger } from "./tblJobTrigger.controller";
 export { default as ControllerTblJobTriggerLog } from "./tblJobTriggerLog.controller";
 export { default as ControllerTblJobVersion } from "./tblJobVersion.controller";
@@ -39,6 +45,7 @@ export { default as ControllerTblLoginAudit } from "./tblLoginAudit.controller";
 export { default as ControllerTblMaintCause } from "./tblMaintCause.controller";
 export { default as ControllerTblMaintClass } from "./tblMaintClass.controller";
 export { default as ControllerTblMaintLog } from "./tblMaintLog.controller";
+export { default as ControllerTblMaintLogAttachment } from "./tblMaintLogAttachment.controller";
 export { default as ControllerTblMaintLogFollow } from "./tblMaintLogFollow.controller";
 export { default as ControllerTblMaintLogStocks } from "./tblMaintLogStocks.controller";
 export { default as ControllerTblMaintType } from "./tblMaintType.controller";
@@ -57,4 +64,5 @@ export { default as ControllerTblWorkOrderStatus } from "./tblWorkOrderStatus.co
 export { default as ControllerTblWorkShopComponent } from "./tblWorkShopComponent.controller";
 export { default as ControllerTblWorkShopDone } from "./tblWorkShopDone.controller";
 export { default as ControllerTblWorkShopRequest } from "./tblWorkShopRequest.controller";
+export { default as ControllerTblWorkShopRequestAttachment } from "./tblWorkShopRequestAttachment.controller";
 export { default as ControllerUsers } from "./users.controller";
