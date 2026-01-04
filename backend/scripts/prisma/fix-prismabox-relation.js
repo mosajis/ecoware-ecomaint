@@ -1,10 +1,7 @@
-#!/usr/bin/env bun
-import fs from 'fs'
-import path from 'path'
-import _ from 'lodash'
-import { fileURLToPath } from 'url'
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
+#!/usr/bin/env node
+const fs = require('fs')
+const path = require('path')
+const _ = require('lodash')
 
 // Mapping of table names to their primary keys
 const TABLE_PKS = {
@@ -70,10 +67,10 @@ const TABLE_PKS = {
 }
 
 const PRISMABOX_DIR = path.resolve('./orm/generated/prismabox')
-const MAX_DEPTH = 5 // Maximum depth for nested relations
+const MAX_DEPTH = 5
 
 let fixedCount = 0
-const modelCache = {} // Cache for model relations
+const modelCache = {}
 
 /**
  * Log utility with timestamps
@@ -92,7 +89,6 @@ function log(message, type = 'info') {
 
 /**
  * Build reverse mapping from field names to primary keys
- * @returns {Object} Field name to PK camelCase map
  */
 function buildFieldToPKMap() {
   const map = {}
@@ -101,7 +97,6 @@ function buildFieldToPKMap() {
     const fieldNameBase = tableName.charAt(0).toLowerCase() + tableName.slice(1)
     map[fieldNameBase] = _.camelCase(pk)
 
-    // Add plural form if not already plural
     if (!fieldNameBase.endsWith('s')) {
       map[fieldNameBase + 's'] = _.camelCase(pk)
     }
@@ -112,8 +107,6 @@ function buildFieldToPKMap() {
 
 /**
  * Extract relation fields from a file
- * @param {string} filePath - Path to the file
- * @returns {Array} Array of relation field names
  */
 function extractRelationFields(filePath) {
   try {
@@ -139,8 +132,6 @@ function extractRelationFields(filePath) {
 
 /**
  * Find model file by table name
- * @param {string} tableName - Table name (PascalCase)
- * @returns {string|null} File path or null
  */
 function findModelFile(tableName) {
   try {
@@ -153,13 +144,10 @@ function findModelFile(tableName) {
 
 /**
  * Convert field name (tblXxx) to table name (TblXxx)
- * @param {string} fieldName - Field name with 'tbl' prefix
- * @returns {string} Table name with 'Tbl' prefix
  */
 function fieldToTableName(fieldName) {
-  let tableName = fieldName.substring(3) // Remove "tbl" prefix
+  let tableName = fieldName.substring(3)
 
-  // Remove plural suffix
   if (tableName.endsWith('es')) {
     tableName = tableName.slice(0, -2)
   } else if (tableName.endsWith('s')) {
@@ -171,11 +159,6 @@ function fieldToTableName(fieldName) {
 
 /**
  * Build nested relation patterns for deep relations
- * @param {string} fieldName - Field name
- * @param {string} pkCamelCase - Primary key in camelCase
- * @param {number} depth - Current recursion depth
- * @param {Set} visited - Already visited fields
- * @returns {Array} Array of nested patterns
  */
 function buildNestedPatterns(
   fieldName,
@@ -189,7 +172,6 @@ function buildNestedPatterns(
 
   visited.add(fieldName)
 
-  // Load relations from cache or file
   if (!modelCache[fieldName]) {
     const tableName = fieldToTableName(fieldName)
     const modelFile = findModelFile(tableName)
@@ -215,7 +197,6 @@ function buildNestedPatterns(
       nestedPKCamelCase,
     })
 
-    // Recursively build deeper patterns
     const deeperPatterns = buildNestedPatterns(
       nestedField,
       nestedPKCamelCase,
@@ -230,9 +211,7 @@ function buildNestedPatterns(
 }
 
 /**
- * Fix client IDs in a file - replace 'id' with correct primary key names
- * @param {string} filePath - Path to file to fix
- * @param {Object} fieldToPKMap - Map of field names to PK names
+ * Fix client IDs in a file
  */
 function fixFile(filePath, fieldToPKMap) {
   let content = fs.readFileSync(filePath, 'utf-8')
@@ -253,7 +232,6 @@ function fixFile(filePath, fieldToPKMap) {
       continue
     }
 
-    // Regex patterns for connect/disconnect operations
     const patterns = [
       {
         regex: new RegExp(
@@ -310,18 +288,14 @@ function fixFile(filePath, fieldToPKMap) {
     }
   }
 
-  // Write if changed
   if (content !== original) {
     fixedCount++
     fs.writeFileSync(filePath, content, 'utf-8')
-    log(`Fixed: ${path.basename(filePath)}`, 'success')
   }
 }
 
 /**
  * Recursively walk directory and fix all TypeScript files
- * @param {string} dir - Directory to walk
- * @param {Object} fieldToPKMap - Map of field names to PK names
  */
 function walkDirectory(dir, fieldToPKMap) {
   const entries = fs.readdirSync(dir, { withFileTypes: true })
@@ -345,17 +319,13 @@ function walkDirectory(dir, fieldToPKMap) {
  */
 function main() {
   try {
-    log(`Scanning directory: ${PRISMABOX_DIR}`)
-
     if (!fs.existsSync(PRISMABOX_DIR)) {
-      log(`Directory not found: ${PRISMABOX_DIR}`, 'error')
+      log(`Error: Directory not found: ${PRISMABOX_DIR}`, 'error')
       process.exit(1)
     }
 
     const fieldToPKMap = buildFieldToPKMap()
     walkDirectory(PRISMABOX_DIR, fieldToPKMap)
-
-    log(`Completed! Fixed ${fixedCount} files`, 'success')
   } catch (error) {
     log(`Error: ${error.message}`, 'error')
     process.exit(1)

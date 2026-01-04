@@ -2,8 +2,7 @@
   "name": "ecomaint-backend",
   "version": "1.0.50",
   "scripts": {
-    "prisma": "bun run scripts/prisma.js",
-    "generate:api": "bun scripts/generate-api.js",
+    "prisma": "bun run scripts/prisma/prisma.js",
     "dev": "bun run --watch src/main.ts",
     "build": "bun run ./scripts/build.js"
   },

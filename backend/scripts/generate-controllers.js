@@ -1,46 +1,42 @@
-const fs = require("fs");
-const path = require("path");
-const { getDMMF } = require("@prisma/internals");
+#!/usr/bin/env node
+const fs = require('fs')
+const path = require('path')
+const { getDMMF } = require('@prisma/internals')
 
-const schemaPath = path.resolve("./orm/schema.prisma");
-const outputPath = path.resolve("./src/routes/crud");
+const schemaPath = path.resolve('./orm/schema.prisma')
+const outputPath = path.resolve('./src/routes/crud')
 
-const excludeModels = ["getSysdiagrams", "sysdiagrams"];
+// Models to exclude from controller generation
+const excludeModels = ['getSysdiagrams', 'sysdiagrams']
 
+/**
+ * Convert PascalCase to camelCase
+ * @param {string} name - PascalCase string
+ * @returns {string} camelCase string
+ */
 function camelCase(name) {
-  return name.charAt(0).toLowerCase() + name.slice(1);
+  return name.charAt(0).toLowerCase() + name.slice(1)
 }
 
-async function main() {
-  const schema = fs.readFileSync(schemaPath, "utf-8");
-  const dmmf = await getDMMF({ datamodel: schema });
+/**
+ * Convert camelCase to PascalCase
+ * @param {string} name - camelCase string
+ * @returns {string} PascalCase string
+ */
+function pascalCase(name) {
+  return name.charAt(0).toUpperCase() + name.slice(1)
+}
 
-  if (!fs.existsSync(outputPath)) fs.mkdirSync(outputPath, { recursive: true });
+/**
+ * Generate CRUD controller template
+ * @param {string} modelName - Model name in PascalCase
+ * @param {string} primaryKey - Primary key field name
+ * @returns {string} Controller code
+ */
+function generateControllerTemplate(modelName, primaryKey) {
+  const camel = camelCase(modelName)
 
-  const models = dmmf.datamodel.models
-    .map((m) => m.name)
-    .filter((m) => !excludeModels.includes(m));
-
-  const exportedFiles = [];
-
-  for (const modelName of models) {
-    const camel = camelCase(modelName);
-    const fileName = `${camel}.controller.ts`;
-    const filePath = path.join(outputPath, fileName);
-
-    exportedFiles.push(fileName.replace(/\.ts$/, "")); // جمع‌آوری برای index.ts
-
-    if (fs.existsSync(filePath)) {
-      console.log(`⚠️  Skipped (already exists): ${fileName}`);
-      continue;
-    }
-
-    // پیدا کردن primary key از DMMF
-    const model = dmmf.datamodel.models.find((m) => m.name === modelName);
-    const primaryField = model.fields.find((f) => f.isId);
-    const primaryKey = primaryField ? primaryField.name : "id"; // اگر نبود id فرضی بگذار
-
-    const content = `import { BaseController } from "@/utils/base.controller";
+  return `import { BaseController } from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
 import { PrismaClient } from "orm/generated/prisma";
 import {
@@ -57,7 +53,7 @@ export const Service${modelName} = new BaseService(prisma.${camel});
 const Controller${modelName} = new BaseController({
   prefix: "/${camel}",
   swagger: {
-    tags: ["${camel}"],
+    tags: ["${camelCase(modelName)}"],
   },
   primaryKey: "${primaryKey}",
   service: Service${modelName},
@@ -66,30 +62,83 @@ const Controller${modelName} = new BaseController({
   responseSchema: buildResponseSchema(${modelName}Plain, ${modelName}),
 }).app;
 
-export default Controller${modelName}
-`;
-
-    fs.writeFileSync(filePath, content, "utf-8");
-    console.log(`✅ Created: ${fileName}`);
-  }
-
-  const indexContent = exportedFiles
-    .map((fileName) => {
-      // تبدیل camelCase به PascalCase برای نام کنترلر
-      const base = fileName.replace(".controller", "");
-      const pascal = base.charAt(0).toUpperCase() + base.slice(1);
-      return `export { default as Controller${pascal} } from "./${fileName}";`;
-    })
-    .join("\n");
-
-  const indexPath = path.join(outputPath, "index.ts");
-  fs.writeFileSync(indexPath, indexContent, "utf-8");
-
-  console.log("✨ CRUD controller generation complete!");
-  console.log("📦 index.ts generated successfully!");
+export default Controller${modelName};
+`
 }
 
-main().catch((err) => {
-  console.error("❌ Error generating CRUD controllers:", err);
-  process.exit(1);
-});
+/**
+ * Log utility with timestamps
+ */
+function log(message, type = 'info') {
+  const timestamp = new Date().toLocaleTimeString('en-US')
+  const icons = {
+    info: 'ℹ️',
+    success: '✅',
+    skip: '⚠️',
+    error: '❌',
+  }
+
+  console.log(`${icons[type]} [${timestamp}] ${message}`)
+}
+
+/**
+ * Main controller generation function
+ */
+async function main() {
+  try {
+    // Read and parse Prisma schema
+    const schema = fs.readFileSync(schemaPath, 'utf-8')
+    const dmmf = await getDMMF({ datamodel: schema })
+
+    // Create output directory
+    if (!fs.existsSync(outputPath)) {
+      fs.mkdirSync(outputPath, { recursive: true })
+    }
+
+    // Get all models excluding specified ones
+    const models = dmmf.datamodel.models
+      .map(m => m.name)
+      .filter(m => !excludeModels.includes(m))
+
+    const generatedFiles = []
+
+    // Generate controller for each model
+    for (const modelName of models) {
+      const camel = camelCase(modelName)
+      const fileName = `${camel}.controller.ts`
+      const filePath = path.join(outputPath, fileName)
+
+      generatedFiles.push(camel)
+
+      // Skip if file already exists
+      if (fs.existsSync(filePath)) {
+        continue
+      }
+
+      // Find primary key from DMMF
+      const model = dmmf.datamodel.models.find(m => m.name === modelName)
+      const primaryField = model.fields.find(f => f.isId)
+      const primaryKey = primaryField ? primaryField.name : 'id'
+
+      // Generate and write controller file
+      const content = generateControllerTemplate(modelName, primaryKey)
+      fs.writeFileSync(filePath, content, 'utf-8')
+    }
+
+    // Generate index.ts with all exports
+    const indexContent = generatedFiles
+      .map(fileName => {
+        const pascal = pascalCase(fileName)
+        return `export { default as Controller${pascal} } from "./${fileName}.controller";`
+      })
+      .join('\n')
+
+    const indexPath = path.join(outputPath, 'index.ts')
+    fs.writeFileSync(indexPath, indexContent, 'utf-8')
+  } catch (error) {
+    log(`Error generating controllers: ${error.message}`, 'error')
+    process.exit(1)
+  }
+}
+
+main()

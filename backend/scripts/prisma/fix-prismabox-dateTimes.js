@@ -1,13 +1,33 @@
+#!/usr/bin/env node
 const fs = require('fs')
 const path = require('path')
 
-// Read prisma schema and extract DateTime fields
+const schemaPath = path.resolve('./orm/schema.prisma')
+const prismaboxDir = path.resolve('./orm/generated/prismabox')
+
+/**
+ * Log utility with timestamps
+ */
+function log(message, type = 'info') {
+  const timestamp = new Date().toLocaleTimeString('en-US')
+  const icons = {
+    info: 'ℹ️',
+    success: '✅',
+    warn: '⚠️',
+    error: '❌',
+  }
+
+  console.log(`${icons[type]} [${timestamp}] ${message}`)
+}
+
+/**
+ * Extract DateTime field names from Prisma schema
+ */
 function extractDateTimeFields(schemaPath) {
   try {
     const content = fs.readFileSync(schemaPath, 'utf-8')
     const dateTimeFields = new Set()
 
-    // Find all DateTime fields in models
     const dateTimeMatches = content.matchAll(/(\w+)\s+DateTime/g)
 
     for (const match of dateTimeMatches) {
@@ -15,17 +35,17 @@ function extractDateTimeFields(schemaPath) {
     }
 
     return Array.from(dateTimeFields)
-  } catch (e) {
-    console.error('❌ Error reading prisma schema:', e.message)
+  } catch (error) {
+    log(`Error reading schema: ${error.message}`, 'error')
     return []
   }
 }
 
-// Fix generated files to convert t.Date() to t.String() for DateTime fields
+/**
+ * Fix generated files to convert t.Date() to t.String() for DateTime fields
+ */
 function fixDateTimeInGeneratedFiles(generatedDir, dateTimeFields) {
   let fixedCount = 0
-
-  console.log(`📋 Found DateTime fields: ${dateTimeFields.join(', ')}\n`)
 
   function walkDir(dir) {
     const entries = fs.readdirSync(dir, { withFileTypes: true })
@@ -90,7 +110,6 @@ function fixDateTimeInGeneratedFiles(generatedDir, dateTimeFields) {
       if (hasChanges && content !== original) {
         fixedCount++
         fs.writeFileSync(fullPath, content, 'utf-8')
-        console.log(`✅ Fixed: ${path.basename(fullPath)}`)
       }
     }
   }
@@ -99,26 +118,32 @@ function fixDateTimeInGeneratedFiles(generatedDir, dateTimeFields) {
   return fixedCount
 }
 
-// Run
-const prismaSchemaPath = path.resolve('./orm/schema.prisma')
-const generatedDir = path.resolve('./orm/generated/prismabox')
+/**
+ * Main function
+ */
+function main() {
+  try {
+    if (!fs.existsSync(schemaPath)) {
+      log(`Error: Schema file not found: ${schemaPath}`, 'error')
+      process.exit(1)
+    }
 
-console.log('🔍 Checking DateTime fields in schema...\n')
+    const dateTimeFields = extractDateTimeFields(schemaPath)
 
-const dateTimeFields = extractDateTimeFields(prismaSchemaPath)
+    if (dateTimeFields.length === 0) {
+      process.exit(0)
+    }
 
-if (dateTimeFields.length === 0) {
-  console.log('⚠️  No DateTime fields found')
-  process.exit(1)
+    if (!fs.existsSync(prismaboxDir)) {
+      log(`Error: Directory not found: ${prismaboxDir}`, 'error')
+      process.exit(1)
+    }
+
+    fixDateTimeInGeneratedFiles(prismaboxDir, dateTimeFields)
+  } catch (error) {
+    log(`Error: ${error.message}`, 'error')
+    process.exit(1)
+  }
 }
 
-if (!fs.existsSync(generatedDir)) {
-  console.error(`❌ Directory not found: ${generatedDir}`)
-  process.exit(1)
-}
-
-console.log('🔧 Fixing generated files...\n')
-
-const fixedCount = fixDateTimeInGeneratedFiles(generatedDir, dateTimeFields)
-
-console.log(`\n🎉 Done. Fixed ${fixedCount} files.`)
+main()
