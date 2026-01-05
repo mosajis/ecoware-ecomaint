@@ -45,3 +45,16 @@
 build/**
 backend/public/**
 frontend/dist-stats.html
+
+# 📁 Upload directories (ignore actual files, keep structure with .gitkeep)
+/uploads/**
+!/uploads/.gitkeep
+!/uploads/attachments/.gitkeep
+
+# Optional: Ignore all but keep the directory structure
+/uploads/*
+!/uploads/attachments/
+/uploads/attachments/*
+!/uploads/attachments/.gitkeep
+backend/uploads/**
+backend/uploads/*

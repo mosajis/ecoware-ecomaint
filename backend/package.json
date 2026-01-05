@@ -16,12 +16,14 @@
     "elysia": "latest",
     "lodash": "^4.17.21",
     "mssql": "^12.2.0",
+    "uuid": "^13.0.0",
     "zod": "^4.3.4"
   },
   "devDependencies": {
     "@prisma/client": "^6.19.0",
     "@types/bcrypt": "^6.0.0",
     "@types/mssql": "^9.1.8",
+    "@types/uuid": "^11.0.0",
     "bun-types": "latest",
     "prisma": "^6.16.2",
     "prismabox": "^1.1.26",

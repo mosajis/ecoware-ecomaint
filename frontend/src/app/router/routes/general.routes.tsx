@@ -4,6 +4,9 @@ import { protectedRoute } from './protected.routes'
 import { lazy } from 'react'
 
 // --- Lazy pages ---
+export const PageAttachment = lazy(
+  () => import('@/pages/general/attachment/Attachment')
+)
 export const PageAddress = lazy(() => import('@/pages/general/address/Address'))
 export const PageLocation = lazy(
   () => import('@/pages/general/location/Location')
@@ -42,6 +45,12 @@ export const generalRoute = createRoute({
 })
 
 // --- General children ---
+export const generalAttachmentRoute = createRoute({
+  getParentRoute: () => generalRoute,
+  path: 'attachment',
+  component: () => <LazyRoute Component={PageAttachment} />,
+  beforeLoad: () => ({ breadcrumb: 'Attachment' }),
+})
 export const generalAddressRoute = createRoute({
   getParentRoute: () => generalRoute,
   path: 'address',
@@ -114,6 +123,7 @@ export const generalJobDescriptionRoute = createRoute({
 
 // --- Add all children to parent ---
 export const generalRouteTree = generalRoute.addChildren([
+  generalAttachmentRoute,
   generalAddressRoute,
   generalLocationRoute,
   generalEmployeeRoute,

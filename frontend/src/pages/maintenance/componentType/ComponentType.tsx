@@ -9,42 +9,24 @@ import { GridColDef } from '@mui/x-data-grid'
 import { tblCompType, TypeTblCompType } from '@/core/api/generated/api'
 import { routeComponentTypeDetail } from './ComponentTypeRoutes'
 import { useCustomizedTree } from '@/shared/hooks/useDataTree'
-import { TreeNode } from '@/shared/components/tree/treeUtil'
+import { TreeItem } from 'react-complex-tree'
+import { useDataGrid } from '@/shared/hooks/useDataGrid'
 
-/* ---- Mapper ---- */
-const mapComponentType = (
-  item: TypeTblCompType
-): Omit<TreeNode<TypeTblCompType>, 'children'> => ({
-  id: item.compTypeId.toString(),
-  text: item.compName ?? '',
-  label: item.compName ?? '',
-  data: item,
-})
-
-/* ---- Main Component ---- */
 export default function PageComponentTypeList() {
   const router = useRouter()
 
   const [selectedRow, setSelectedRow] = useState<TypeTblCompType | null>(null)
-  const [selectedId, setSelectedId] = useState<string | null>(null) // <-- مشترک
+  const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
 
-  const {
-    rows,
-    treeItems,
-    loading,
-    handleDelete,
-    handleFormSuccess: onFormSuccess,
-    handleRefresh,
-  } = useCustomizedTree<TypeTblCompType>({
-    getAll: tblCompType.getAll,
-    deleteById: tblCompType.deleteById,
-    keyId: 'compTypeId',
-    parentKeyId: 'parentCompTypeId',
-    mapper: mapComponentType,
-  })
+  const { rows, loading } = useDataGrid<TypeTblCompType>(
+    tblCompType.getAll,
+    tblCompType.deleteById,
+    'compTypeId'
+  )
 
+  /* ---- Grid Columns ---- */
   const columns = useMemo<GridColDef<TypeTblCompType>[]>(
     () => [
       { field: 'compTypeNo', headerName: 'Code', width: 120 },
@@ -52,12 +34,13 @@ export default function PageComponentTypeList() {
       { field: 'compType', headerName: 'Model/Type', width: 200 },
       { field: 'orderNo', headerName: 'OrderNo', width: 100 },
     ],
-    [handleDelete]
+    []
   )
 
+  /* ---- Actions ---- */
   const handleAddClick = useCallback(() => {
     setSelectedRow(null)
-    setSelectedId(null)
+    setSelectedIds([])
     setMode('create')
     setOpenForm(true)
   }, [])
@@ -73,65 +56,37 @@ export default function PageComponentTypeList() {
     [router]
   )
 
-  const handleFormClose = useCallback(
-    (updatedRecord: TypeTblCompType) => {
-      onFormSuccess(updatedRecord)
-      setOpenForm(false)
-    },
-    [onFormSuccess]
-  )
-
-  /* ---- انتخاب بین Tree و Grid ---- */
-  const handleTreeSelect = useCallback(
-    (selectedIds: string[]) => {
-      const id = selectedIds[0] ?? null
-      setSelectedId(id)
-
-      const row = rows.find(r => r.compTypeId.toString() === id)
-      if (row) setSelectedRow(row)
-    },
-    [rows]
-  )
-
-  const handleGridSelect = useCallback((row: TypeTblCompType) => {
-    setSelectedId(row.compTypeId.toString())
-    setSelectedRow(row)
-  }, [])
-
   return (
     <>
-      <Splitter initialPrimarySize='30%'>
-        <Tree<TypeTblCompType>
-          label='Tree View'
+      {/* <Splitter initialPrimarySize='30%'> */}
+      <DataGrid
+        label='List View'
+        showToolbar
+        rows={rows}
+        columns={columns}
+        loading={loading}
+        getRowId={row => row.compTypeId}
+        disableDensity
+        disableRowNumber
+        onAddClick={handleAddClick}
+        onRowDoubleClick={({ row }) => handleDoubleClick(row)}
+      />
+      {/* <Tree
           items={treeItems}
-          loading={loading}
-          onRefresh={handleRefresh}
-          onAddClick={handleAddClick}
+          onSelectionChange={handleTreeSelection}
           onDoubleClick={handleDoubleClick}
-          onSelect={handleTreeSelect}
-        />
-        <DataGrid
-          label='List View'
-          showToolbar
-          rows={rows}
-          columns={columns}
-          loading={loading}
-          getRowId={row => row.compTypeId}
-          disableDensity
-          disableRowNumber
           onAddClick={handleAddClick}
-          onRefreshClick={handleRefresh}
-          onRowClick={({ row }) => handleGridSelect(row)}
-          onRowDoubleClick={({ row }) => handleDoubleClick(row)}
         />
-      </Splitter>
+
+        */}
+      {/* </Splitter> */}
 
       <ComponentTypeUpsert
         open={openForm}
         mode={mode}
         recordId={selectedRow?.compTypeId}
         onClose={() => setOpenForm(false)}
-        onSuccess={handleFormClose}
+        onSuccess={() => {}}
       />
     </>
   )

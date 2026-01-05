@@ -52,6 +52,42 @@ export const tblAddress = {
     api.delete<DynamicResponse<'deleteTblAddress'>>('/tblAddress', { params: stringifyQuery(query) }),
 };
 
+export type TypeTblAttachment = DynamicResponse<'getTblAttachment'>['items'][0];
+export const tblAttachment = {
+  getAll: (query?: DynamicQuery<'getTblAttachment'>) =>
+    api.get<DynamicResponse<'getTblAttachment'>>('/tblAttachment', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblAttachmentByAttachmentId'>) =>
+    api.get<DynamicResponse<'getTblAttachmentByAttachmentId'>>(`/tblAttachment/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblAttachmentCount'>) =>
+    api.get<DynamicResponse<'getTblAttachmentCount'>>('/tblAttachment/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblAttachment'>) =>
+    api.post<DynamicResponse<'postTblAttachment'>>('/tblAttachment', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblAttachmentByAttachmentId'>) =>
+    api.put<DynamicResponse<'putTblAttachmentByAttachmentId'>>(`/tblAttachment/${id}`, { data }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblAttachmentByAttachmentId'>) =>
+    api.delete<DynamicResponse<'deleteTblAttachmentByAttachmentId'>>(`/tblAttachment/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblAttachment'>) =>
+    api.delete<DynamicResponse<'deleteTblAttachment'>>('/tblAttachment', { params: stringifyQuery(query) }),
+};
+
+export type TypeTblAttachmentType = DynamicResponse<'getTblAttachmentType'>['items'][0];
+export const tblAttachmentType = {
+  getAll: (query?: DynamicQuery<'getTblAttachmentType'>) =>
+    api.get<DynamicResponse<'getTblAttachmentType'>>('/tblAttachmentType', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblAttachmentTypeByAttachmentTypeId'>) =>
+    api.get<DynamicResponse<'getTblAttachmentTypeByAttachmentTypeId'>>(`/tblAttachmentType/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblAttachmentTypeCount'>) =>
+    api.get<DynamicResponse<'getTblAttachmentTypeCount'>>('/tblAttachmentType/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblAttachmentType'>) =>
+    api.post<DynamicResponse<'postTblAttachmentType'>>('/tblAttachmentType', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblAttachmentTypeByAttachmentTypeId'>) =>
+    api.put<DynamicResponse<'putTblAttachmentTypeByAttachmentTypeId'>>(`/tblAttachmentType/${id}`, { data }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblAttachmentTypeByAttachmentTypeId'>) =>
+    api.delete<DynamicResponse<'deleteTblAttachmentTypeByAttachmentTypeId'>>(`/tblAttachmentType/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblAttachmentType'>) =>
+    api.delete<DynamicResponse<'deleteTblAttachmentType'>>('/tblAttachmentType', { params: stringifyQuery(query) }),
+};
+
 export type TypeTblCompCounter = DynamicResponse<'getTblCompCounter'>['items'][0];
 export const tblCompCounter = {
   getAll: (query?: DynamicQuery<'getTblCompCounter'>) =>
@@ -286,6 +322,24 @@ export const tblCompType = {
     api.delete<DynamicResponse<'deleteTblCompType'>>('/tblCompType', { params: stringifyQuery(query) }),
 };
 
+export type TypeTblCompTypeAttachment = DynamicResponse<'getTblCompTypeAttachment'>['items'][0];
+export const tblCompTypeAttachment = {
+  getAll: (query?: DynamicQuery<'getTblCompTypeAttachment'>) =>
+    api.get<DynamicResponse<'getTblCompTypeAttachment'>>('/tblCompTypeAttachment', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblCompTypeAttachmentByCompTypeAttachmentId'>) =>
+    api.get<DynamicResponse<'getTblCompTypeAttachmentByCompTypeAttachmentId'>>(`/tblCompTypeAttachment/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblCompTypeAttachmentCount'>) =>
+    api.get<DynamicResponse<'getTblCompTypeAttachmentCount'>>('/tblCompTypeAttachment/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblCompTypeAttachment'>) =>
+    api.post<DynamicResponse<'postTblCompTypeAttachment'>>('/tblCompTypeAttachment', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblCompTypeAttachmentByCompTypeAttachmentId'>) =>
+    api.put<DynamicResponse<'putTblCompTypeAttachmentByCompTypeAttachmentId'>>(`/tblCompTypeAttachment/${id}`, { data }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblCompTypeAttachmentByCompTypeAttachmentId'>) =>
+    api.delete<DynamicResponse<'deleteTblCompTypeAttachmentByCompTypeAttachmentId'>>(`/tblCompTypeAttachment/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblCompTypeAttachment'>) =>
+    api.delete<DynamicResponse<'deleteTblCompTypeAttachment'>>('/tblCompTypeAttachment', { params: stringifyQuery(query) }),
+};
+
 export type TypeTblCompTypeCounter = DynamicResponse<'getTblCompTypeCounter'>['items'][0];
 export const tblCompTypeCounter = {
   getAll: (query?: DynamicQuery<'getTblCompTypeCounter'>) =>
@@ -417,6 +471,24 @@ export const tblComponentUnit = {
     api.delete<DynamicResponse<'deleteTblComponentUnit'>>('/tblComponentUnit', { params: stringifyQuery(query) }),
 };
 
+export type TypeTblComponentUnitAttachment = DynamicResponse<'getTblComponentUnitAttachment'>['items'][0];
+export const tblComponentUnitAttachment = {
+  getAll: (query?: DynamicQuery<'getTblComponentUnitAttachment'>) =>
+    api.get<DynamicResponse<'getTblComponentUnitAttachment'>>('/tblComponentUnitAttachment', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblComponentUnitAttachmentByComponentUnitAttachmentId'>) =>
+    api.get<DynamicResponse<'getTblComponentUnitAttachmentByComponentUnitAttachmentId'>>(`/tblComponentUnitAttachment/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblComponentUnitAttachmentCount'>) =>
+    api.get<DynamicResponse<'getTblComponentUnitAttachmentCount'>>('/tblComponentUnitAttachment/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblComponentUnitAttachment'>) =>
+    api.post<DynamicResponse<'postTblComponentUnitAttachment'>>('/tblComponentUnitAttachment', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblComponentUnitAttachmentByComponentUnitAttachmentId'>) =>
+    api.put<DynamicResponse<'putTblComponentUnitAttachmentByComponentUnitAttachmentId'>>(`/tblComponentUnitAttachment/${id}`, { data }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblComponentUnitAttachmentByComponentUnitAttachmentId'>) =>
+    api.delete<DynamicResponse<'deleteTblComponentUnitAttachmentByComponentUnitAttachmentId'>>(`/tblComponentUnitAttachment/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblComponentUnitAttachment'>) =>
+    api.delete<DynamicResponse<'deleteTblComponentUnitAttachment'>>('/tblComponentUnitAttachment', { params: stringifyQuery(query) }),
+};
+
 export type TypeTblCounterType = DynamicResponse<'getTblCounterType'>['items'][0];
 export const tblCounterType = {
   getAll: (query?: DynamicQuery<'getTblCounterType'>) =>
@@ -487,6 +559,24 @@ export const tblEmployee = {
     api.delete<DynamicResponse<'deleteTblEmployeeByEmployeeId'>>(`/tblEmployee/${id}`, { params: stringifyQuery(query) }),
   deleteAll: (query?: DynamicQuery<'deleteTblEmployee'>) =>
     api.delete<DynamicResponse<'deleteTblEmployee'>>('/tblEmployee', { params: stringifyQuery(query) }),
+};
+
+export type TypeTblFailureReportAttachment = DynamicResponse<'getTblFailureReportAttachment'>['items'][0];
+export const tblFailureReportAttachment = {
+  getAll: (query?: DynamicQuery<'getTblFailureReportAttachment'>) =>
+    api.get<DynamicResponse<'getTblFailureReportAttachment'>>('/tblFailureReportAttachment', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblFailureReportAttachmentByFailureReportAttachmentId'>) =>
+    api.get<DynamicResponse<'getTblFailureReportAttachmentByFailureReportAttachmentId'>>(`/tblFailureReportAttachment/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblFailureReportAttachmentCount'>) =>
+    api.get<DynamicResponse<'getTblFailureReportAttachmentCount'>>('/tblFailureReportAttachment/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblFailureReportAttachment'>) =>
+    api.post<DynamicResponse<'postTblFailureReportAttachment'>>('/tblFailureReportAttachment', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblFailureReportAttachmentByFailureReportAttachmentId'>) =>
+    api.put<DynamicResponse<'putTblFailureReportAttachmentByFailureReportAttachmentId'>>(`/tblFailureReportAttachment/${id}`, { data }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblFailureReportAttachmentByFailureReportAttachmentId'>) =>
+    api.delete<DynamicResponse<'deleteTblFailureReportAttachmentByFailureReportAttachmentId'>>(`/tblFailureReportAttachment/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblFailureReportAttachment'>) =>
+    api.delete<DynamicResponse<'deleteTblFailureReportAttachment'>>('/tblFailureReportAttachment', { params: stringifyQuery(query) }),
 };
 
 export type TypeTblFailureReports = DynamicResponse<'getTblFailureReports'>['items'][0];
@@ -577,6 +667,24 @@ export const tblJobDescription = {
     api.delete<DynamicResponse<'deleteTblJobDescriptionByJobDescId'>>(`/tblJobDescription/${id}`, { params: stringifyQuery(query) }),
   deleteAll: (query?: DynamicQuery<'deleteTblJobDescription'>) =>
     api.delete<DynamicResponse<'deleteTblJobDescription'>>('/tblJobDescription', { params: stringifyQuery(query) }),
+};
+
+export type TypeTblJobDescriptionAttachment = DynamicResponse<'getTblJobDescriptionAttachment'>['items'][0];
+export const tblJobDescriptionAttachment = {
+  getAll: (query?: DynamicQuery<'getTblJobDescriptionAttachment'>) =>
+    api.get<DynamicResponse<'getTblJobDescriptionAttachment'>>('/tblJobDescriptionAttachment', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblJobDescriptionAttachmentByJobDescriptionAttachmentId'>) =>
+    api.get<DynamicResponse<'getTblJobDescriptionAttachmentByJobDescriptionAttachmentId'>>(`/tblJobDescriptionAttachment/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblJobDescriptionAttachmentCount'>) =>
+    api.get<DynamicResponse<'getTblJobDescriptionAttachmentCount'>>('/tblJobDescriptionAttachment/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblJobDescriptionAttachment'>) =>
+    api.post<DynamicResponse<'postTblJobDescriptionAttachment'>>('/tblJobDescriptionAttachment', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblJobDescriptionAttachmentByJobDescriptionAttachmentId'>) =>
+    api.put<DynamicResponse<'putTblJobDescriptionAttachmentByJobDescriptionAttachmentId'>>(`/tblJobDescriptionAttachment/${id}`, { data }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblJobDescriptionAttachmentByJobDescriptionAttachmentId'>) =>
+    api.delete<DynamicResponse<'deleteTblJobDescriptionAttachmentByJobDescriptionAttachmentId'>>(`/tblJobDescriptionAttachment/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblJobDescriptionAttachment'>) =>
+    api.delete<DynamicResponse<'deleteTblJobDescriptionAttachment'>>('/tblJobDescriptionAttachment', { params: stringifyQuery(query) }),
 };
 
 export type TypeTblJobTrigger = DynamicResponse<'getTblJobTrigger'>['items'][0];
@@ -757,6 +865,24 @@ export const tblMaintLog = {
     api.delete<DynamicResponse<'deleteTblMaintLogByMaintLogId'>>(`/tblMaintLog/${id}`, { params: stringifyQuery(query) }),
   deleteAll: (query?: DynamicQuery<'deleteTblMaintLog'>) =>
     api.delete<DynamicResponse<'deleteTblMaintLog'>>('/tblMaintLog', { params: stringifyQuery(query) }),
+};
+
+export type TypeTblMaintLogAttachment = DynamicResponse<'getTblMaintLogAttachment'>['items'][0];
+export const tblMaintLogAttachment = {
+  getAll: (query?: DynamicQuery<'getTblMaintLogAttachment'>) =>
+    api.get<DynamicResponse<'getTblMaintLogAttachment'>>('/tblMaintLogAttachment', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblMaintLogAttachmentByMaintLogAttachmentId'>) =>
+    api.get<DynamicResponse<'getTblMaintLogAttachmentByMaintLogAttachmentId'>>(`/tblMaintLogAttachment/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblMaintLogAttachmentCount'>) =>
+    api.get<DynamicResponse<'getTblMaintLogAttachmentCount'>>('/tblMaintLogAttachment/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblMaintLogAttachment'>) =>
+    api.post<DynamicResponse<'postTblMaintLogAttachment'>>('/tblMaintLogAttachment', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblMaintLogAttachmentByMaintLogAttachmentId'>) =>
+    api.put<DynamicResponse<'putTblMaintLogAttachmentByMaintLogAttachmentId'>>(`/tblMaintLogAttachment/${id}`, { data }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblMaintLogAttachmentByMaintLogAttachmentId'>) =>
+    api.delete<DynamicResponse<'deleteTblMaintLogAttachmentByMaintLogAttachmentId'>>(`/tblMaintLogAttachment/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblMaintLogAttachment'>) =>
+    api.delete<DynamicResponse<'deleteTblMaintLogAttachment'>>('/tblMaintLogAttachment', { params: stringifyQuery(query) }),
 };
 
 export type TypeTblMaintLogFollow = DynamicResponse<'getTblMaintLogFollow'>['items'][0];
@@ -1081,6 +1207,24 @@ export const tblWorkShopRequest = {
     api.delete<DynamicResponse<'deleteTblWorkShopRequestByWShopRequestId'>>(`/tblWorkShopRequest/${id}`, { params: stringifyQuery(query) }),
   deleteAll: (query?: DynamicQuery<'deleteTblWorkShopRequest'>) =>
     api.delete<DynamicResponse<'deleteTblWorkShopRequest'>>('/tblWorkShopRequest', { params: stringifyQuery(query) }),
+};
+
+export type TypeTblWorkShopRequestAttachment = DynamicResponse<'getTblWorkShopRequestAttachment'>['items'][0];
+export const tblWorkShopRequestAttachment = {
+  getAll: (query?: DynamicQuery<'getTblWorkShopRequestAttachment'>) =>
+    api.get<DynamicResponse<'getTblWorkShopRequestAttachment'>>('/tblWorkShopRequestAttachment', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblWorkShopRequestAttachmentByWShopRequestAttachmentId'>) =>
+    api.get<DynamicResponse<'getTblWorkShopRequestAttachmentByWShopRequestAttachmentId'>>(`/tblWorkShopRequestAttachment/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblWorkShopRequestAttachmentCount'>) =>
+    api.get<DynamicResponse<'getTblWorkShopRequestAttachmentCount'>>('/tblWorkShopRequestAttachment/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblWorkShopRequestAttachment'>) =>
+    api.post<DynamicResponse<'postTblWorkShopRequestAttachment'>>('/tblWorkShopRequestAttachment', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblWorkShopRequestAttachmentByWShopRequestAttachmentId'>) =>
+    api.put<DynamicResponse<'putTblWorkShopRequestAttachmentByWShopRequestAttachmentId'>>(`/tblWorkShopRequestAttachment/${id}`, { data }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblWorkShopRequestAttachmentByWShopRequestAttachmentId'>) =>
+    api.delete<DynamicResponse<'deleteTblWorkShopRequestAttachmentByWShopRequestAttachmentId'>>(`/tblWorkShopRequestAttachment/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblWorkShopRequestAttachment'>) =>
+    api.delete<DynamicResponse<'deleteTblWorkShopRequestAttachment'>>('/tblWorkShopRequestAttachment', { params: stringifyQuery(query) }),
 };
 
 export type TypeUsers = DynamicResponse<'getUsers'>['items'][0];

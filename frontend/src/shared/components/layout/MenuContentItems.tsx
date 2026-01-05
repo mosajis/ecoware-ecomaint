@@ -27,6 +27,7 @@ import TodayRoundedIcon from '@mui/icons-material/TodayRounded'
 import ReportProblemRoundedIcon from '@mui/icons-material/ReportProblemRounded'
 import WorkRoundedIcon from '@mui/icons-material/WorkRounded'
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded'
+import { Upload } from '@mui/icons-material'
 
 const BulletIcon = () => (
   <Box
@@ -66,6 +67,12 @@ export const menuContentItems: {
     title: 'General',
     icon: <CategoryRoundedIcon />,
     items: [
+      {
+        text: 'Attachment',
+        icon: <Upload />,
+        id: 'general:attachment',
+        path: '/general/attachment',
+      },
       {
         text: 'Address',
         icon: <LocationOnRoundedIcon />,

@@ -6,6 +6,7 @@ const _ = require('lodash')
 // Mapping of table names to their primary keys
 const TABLE_PKS = {
   TblAddress: 'AddressID',
+  TblAttachment: 'AttachmentID',
   TblCompCounter: 'CompCounterID',
   TblCompCounterLog: 'CompCounterLogID',
   TblCompJob: 'CompJobID',

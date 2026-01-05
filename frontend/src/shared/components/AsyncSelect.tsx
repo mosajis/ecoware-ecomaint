@@ -1,124 +1,184 @@
 import debounce from 'lodash-es/debounce'
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef, useEffect, ReactNode } from 'react'
 import { Controller, Control } from 'react-hook-form'
-import CircularProgress from '@mui/material/CircularProgress'
+import Autocomplete from '@mui/material/Autocomplete'
 import TextField from '@mui/material/TextField'
-import Autocomplete, {
-  AutocompleteRenderInputParams,
-} from '@mui/material/Autocomplete'
+import CircularProgress from '@mui/material/CircularProgress'
 
-export interface AsyncSelectOption {
-  id: number | string
-  label: string
-}
+export type SelectionMode = 'single' | 'multiple'
 
-interface AsyncSelectProps<T> {
-  name: string
-  control: Control<any>
+export interface AsyncSelectProps<T> {
+  // RHF
+  name?: string
+  control?: Control<any>
+
+  // UI
   label?: string
+  placeholder?: string
   disabled?: boolean
-  multiple?: boolean
-  apiCall: () => Promise<T[]>
-  mapper: (item: T) => AsyncSelectOption
   sx?: any
 
+  // Behavior
+  selectionMode?: SelectionMode
+
+  // Data
+  request: () => Promise<any>
+  extractRows?: (data: any) => T[]
+
+  // Mapping
+  getOptionLabel?: (row: T) => string
+
+  // Controlled mode - حالا value خود آبجکت است
+  value?: T | T[] | null
+  onChange?: (value: T | T[] | null) => void
+
+  // Edit mode support - گزینه‌های اولیه (مثلاً برای ویرایش)
+  initialOptions?: T[]
+
+  // Validation
   error?: boolean
-  helperText?: string
+  helperText?: ReactNode
 }
 
 export default function AsyncSelect<T>({
   name,
   control,
+
   label,
-  disabled,
-  multiple = false,
-  apiCall,
-  mapper,
+  placeholder,
+  disabled = false,
   sx,
+
+  selectionMode = 'single',
+
+  request,
+  extractRows = (data: any) => data?.items ?? [],
+
+  getOptionLabel = (row: any) => row?.label ?? String(row),
+
+  value,
+  onChange,
+
+  initialOptions = [],
+
   error,
   helperText,
 }: AsyncSelectProps<T>) {
-  const [options, setOptions] = useState<AsyncSelectOption[]>([])
+  const multiple = selectionMode === 'multiple'
+
+  const [options, setOptions] = useState<T[]>(initialOptions)
   const [inputValue, setInputValue] = useState('')
   const [loading, setLoading] = useState(false)
-  const loadedOnceRef = useRef(false) // ✅ track if loaded once
 
-  // Debounced load function for search
+  const loadedOnceRef = useRef(false)
+
+  // ===============================
+  // Load options (debounced)
+  // ===============================
   const loadOptions = useCallback(
-    debounce(async (query: string) => {
+    debounce(async (query?: string) => {
       setLoading(true)
       try {
-        const items = await apiCall()
-        const mapped = items
-          .map(mapper)
-          .filter(
-            o => !query || o.label.toLowerCase().includes(query.toLowerCase())
-          )
-        setOptions(mapped)
+        const res = await request()
+        const rows = extractRows(res)
+        setOptions(rows)
       } finally {
         setLoading(false)
       }
     }, 300),
-    [apiCall, mapper]
+    [request, extractRows]
   )
 
+  // ===============================
+  // Merge initial options (برای حالت ویرایش)
+  // ===============================
+  useEffect(() => {
+    if (initialOptions.length > 0) {
+      setOptions(prev => {
+        const map = new Map()
+        prev.forEach(o => map.set(o, o))
+        initialOptions.forEach(o => map.set(o, o))
+        return Array.from(map.values())
+      })
+    }
+  }, [initialOptions])
+
+  // ===============================
+  // Open handler - اولین بار بدون query لود می‌کند
+  // ===============================
   const handleOpen = () => {
-    // فقط دفعه اول باز شدن
     if (!loadedOnceRef.current) {
       loadOptions('')
       loadedOnceRef.current = true
     }
   }
 
-  return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field }) => (
-        <Autocomplete
-          multiple={multiple}
-          options={options}
-          value={field.value || (multiple ? [] : null)}
-          getOptionLabel={option => option.label}
-          onChange={(_, value) => field.onChange(value)}
-          inputValue={inputValue}
-          onInputChange={(_, value, reason) => {
-            setInputValue(value)
-            if (reason === 'input') loadOptions(value) // فقط وقتی کاربر تایپ می‌کنه
-          }}
-          disabled={disabled}
-          loading={loading}
-          onOpen={handleOpen}
-          isOptionEqualToValue={(option, value) => option.id === value.id}
-          renderInput={(params: AutocompleteRenderInputParams) => (
-            <TextField
-              {...params}
-              label={label}
-              size='small'
-              error={error}
-              helperText={helperText}
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {loading && <CircularProgress color='inherit' size={20} />}
-                    {params.InputProps.endAdornment}
-                  </>
-                ),
-              }}
-            />
-          )}
-          sx={{
-            '& .MuiAutocomplete-endAdornment .MuiIconButton-root': {
-              backgroundColor: 'transparent',
-              '&:hover': {
-                backgroundColor: 'transparent',
-              },
-            },
-            ...sx,
+  // ===============================
+  // Change handler - مستقیماً آبجکت را پاس می‌دهد
+  // ===============================
+  const handleChange = (
+    selected: T | T[] | null,
+    fieldOnChange?: (value: any) => void
+  ) => {
+    fieldOnChange?.(selected)
+    onChange?.(selected)
+  }
+
+  // ===============================
+  // Core render
+  // ===============================
+  const renderAutocomplete = (field?: any) => (
+    <Autocomplete<T, boolean, false, false>
+      multiple={multiple}
+      options={options}
+      value={field?.value ?? value ?? (multiple ? [] : null)}
+      getOptionLabel={getOptionLabel}
+      isOptionEqualToValue={(option, val) => option === val}
+      onChange={(_, v) => handleChange(v, field?.onChange)}
+      inputValue={inputValue}
+      onInputChange={(_, newInputValue, reason) => {
+        setInputValue(newInputValue)
+        if (reason === 'input') {
+          loadOptions(newInputValue)
+        }
+      }}
+      onOpen={handleOpen}
+      loading={loading}
+      disabled={disabled}
+      renderInput={params => (
+        <TextField
+          {...params}
+          label={label}
+          placeholder={placeholder}
+          size='small'
+          error={error}
+          helperText={helperText}
+          InputProps={{
+            ...params.InputProps,
+            endAdornment: (
+              <>
+                {loading && <CircularProgress size={20} color='inherit' />}
+                {params.InputProps.endAdornment}
+              </>
+            ),
           }}
         />
       )}
+      sx={sx}
     />
   )
+
+  // RHF mode
+  if (control && name) {
+    return (
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => renderAutocomplete(field)}
+      />
+    )
+  }
+
+  // Controlled mode
+  return renderAutocomplete()
 }
