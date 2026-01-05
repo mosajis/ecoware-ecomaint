@@ -2,19 +2,17 @@ import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import AttachmentUpsert from './AttachmentUpsert'
 import CellFileSize from '@/shared/components/dataGrid/cells/CellFileSize'
 import CellDateTime from '@/shared/components/dataGrid/cells/CellDateTime'
+import CellDownload from '@/shared/components/dataGrid/cells/CellDownload'
+import { type GridColDef } from '@mui/x-data-grid'
 import { useCallback, useMemo, useState } from 'react'
-import {
-  tblAttachment,
-  tblAttachmentType,
-  TypeTblAttachment,
-} from '@/core/api/generated/api'
 import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
-import { type GridColDef } from '@mui/x-data-grid'
-import CellDownload from '@/shared/components/dataGrid/cells/CellDownload'
+import { tblAttachment, TypeTblAttachment } from '@/core/api/generated/api'
 
 export default function PageAttachment() {
-  const [selectedRowId, setSelectedRowId] = useState<null | number>(null)
+  const [selectedRowId, setSelectedRowId] = useState<undefined | number>(
+    undefined
+  )
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
 
@@ -28,7 +26,7 @@ export default function PageAttachment() {
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
-    setSelectedRowId(null)
+    setSelectedRowId(undefined)
     setMode('create')
     setOpenForm(true)
   }, [])
@@ -100,10 +98,7 @@ export default function PageAttachment() {
         mode={mode}
         recordId={selectedRowId}
         onClose={() => setOpenForm(false)}
-        onSuccess={record => {
-          handleFormSuccess(record)
-          setOpenForm(false)
-        }}
+        onSuccess={handleRefresh}
       />
     </>
   )

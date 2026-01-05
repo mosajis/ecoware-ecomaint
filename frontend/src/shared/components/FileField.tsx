@@ -270,6 +270,7 @@ const FileField = React.forwardRef<HTMLInputElement, FileFieldProps>(
       fontSize: '12px',
       color: error ? '#dc2626' : '#6b7280',
       marginTop: '6px',
+      marginBottom: '0',
     }
 
     return (

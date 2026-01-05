@@ -2,30 +2,29 @@ import * as z from 'zod'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import FormDialog from '@/shared/components/formDialog/FormDialog'
-import { memo, useEffect, useMemo, useCallback, useState } from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import FormControlLabel from '@mui/material/FormControlLabel'
 import Switch from '@mui/material/Switch'
 import FileField from '@/shared/components/FileField'
 import AsyncSelect from '@/shared/components/AsyncSelect'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import { memo, useEffect, useMemo, useCallback, useState } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { createAttachment } from './attachmentService'
 import {
   tblAttachment,
   TypeTblAttachment,
   tblAttachmentType,
-  TypeTblAttachmentType,
 } from '@/core/api/generated/api'
-import { createAttachment } from './attachmentService'
 
 // === Validation Schema with Zod ===
 const schema = z.object({
   title: z.string().min(1, { message: 'Title is required' }),
   attachmentType: z
     .object({
-      id: z.number(),
+      attachmentTypeId: z.number(),
       name: z.string(),
     })
-    .refine(val => val.id > 0, { message: 'Attachment Type is required' }),
+    .nullable(),
   isUserAttachment: z.boolean(),
   file: z.instanceof(File, { message: 'File is required' }),
 })
@@ -46,9 +45,9 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
   const defaultValues: AttachmentFormValues = useMemo(
     () => ({
       title: '',
-      attachmentType: { id: 0, name: '' },
+      attachmentType: null,
       isUserAttachment: true,
-      file: new File([], ''), // فایل خالی موقت
+      file: new File([], ''),
     }),
     []
   )
@@ -69,11 +68,21 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
   const selectedFile = watch('file')
 
   useEffect(() => {
-    if (selectedFile?.name) {
-      const currentTitle = watch('title')
-      if (!currentTitle?.trim()) {
-        setValue('title', selectedFile.name)
-      }
+    const fileName = selectedFile?.name?.trim()
+
+    if (!fileName) {
+      setValue('title', '')
+      return
+    }
+
+    const lastDotIndex = fileName.lastIndexOf('.')
+    const nameWithoutExtension =
+      lastDotIndex === -1 ? fileName : fileName.substring(0, lastDotIndex)
+
+    const currentTitle = watch('title')
+
+    if (!currentTitle?.trim()) {
+      setValue('title', nameWithoutExtension)
     }
   }, [selectedFile, setValue, watch])
 
@@ -90,10 +99,10 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
             title: res.title ?? '',
             attachmentType: res.tblAttachmentType
               ? {
-                  id: res.tblAttachmentType.attachmentTypeId,
+                  attachmentTypeId: res.tblAttachmentType.attachmentTypeId,
                   name: res.tblAttachmentType.name ?? '',
                 }
-              : { id: 0, name: '' },
+              : { attachmentTypeId: 0, name: '' },
             isUserAttachment: res.isUserAttachment ?? true,
             file: new File([], ''), // در update، فایل جدید آپلود می‌شه
           })
@@ -119,10 +128,10 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
       try {
         const payload = {
           title: values.title,
-          attachmentTypeId: values.attachmentType.id,
+          attachmentTypeId: values?.attachmentType?.attachmentTypeId || 0,
           isUserAttachment: values.isUserAttachment,
           file: values.file,
-          createdUserId: 1, // یا از context بگیرید
+          createdUserId: 1,
         }
 
         let result: TypeTblAttachment | undefined
@@ -157,7 +166,6 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
       onSubmit={handleSubmit(handleFormSubmit)}
     >
       <Box display='flex' flexDirection='column' gap={2}>
-        {JSON.stringify(errors)}
         {/* آپلود فایل */}
         <Controller
           name='file'
@@ -191,7 +199,6 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
             />
           )}
         />
-
         {/* نوع پیوست */}
         <Controller
           name='attachmentType'
@@ -199,6 +206,8 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           render={({ field, fieldState }) => (
             <AsyncSelect
               {...field}
+              value={field.value}
+              onChange={field.onChange}
               label='Attachment Type *'
               request={tblAttachmentType.getAll}
               getOptionLabel={row => row.name}
