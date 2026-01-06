@@ -7,6 +7,13 @@ const _ = require('lodash')
 const TABLE_PKS = {
   TblAddress: 'AddressID',
   TblAttachment: 'AttachmentID',
+  TblAttachmentType: 'AttachmentTypeID',
+  TblComponentUnitAttachment: 'ComponentUnitAttachmentID',
+  TblCompTypeAttachment: 'CompTypeAttachmentID',
+  TblFailureReportAttachment: 'FailureReportAttachmentID',
+  TblJobDescriptionAttachment: 'JobDescriptionAttachmentID',
+  TblMaintLogAttachment: 'MaintLogAttachmentID',
+  TblWorkShopRequestAttachment: 'WShopRequestAttachmentID',
   TblCompCounter: 'CompCounterID',
   TblCompCounterLog: 'CompCounterLogID',
   TblCompJob: 'CompJobID',
@@ -64,7 +71,7 @@ const TABLE_PKS = {
   TblWorkShopComponent: 'WShopCompID',
   TblWorkShopDone: 'WShopDoneID',
   TblWorkShopRequest: 'WShopRequestID',
-  Users: 'UserID',
+  TblUsers: 'UserID',
 }
 
 const PRISMABOX_DIR = path.resolve('./orm/generated/prismabox')
@@ -262,6 +269,14 @@ function fixFile(filePath, fieldToPKMap) {
         ),
         replacement: `$1${pkCamelCase}$2`,
       },
+      // NEW: Fix for RelationsInputCreate and RelationsInputUpdate
+      {
+        regex: new RegExp(
+          `(${fieldName}\\s*:\\s*t\\.Object\\s*\\(\\s*\\{\\s*connect\\s*:\\s*t\\.Object\\s*\\(\\s*\\{\\s*)id(\\s*:)`,
+          'g'
+        ),
+        replacement: `$1${pkCamelCase}$2`,
+      },
     ]
 
     for (const pattern of patterns) {
@@ -292,6 +307,7 @@ function fixFile(filePath, fieldToPKMap) {
   if (content !== original) {
     fixedCount++
     fs.writeFileSync(filePath, content, 'utf-8')
+    log(`Fixed: ${path.basename(filePath)}`, 'success')
   }
 }
 
@@ -320,6 +336,8 @@ function walkDirectory(dir, fieldToPKMap) {
  */
 function main() {
   try {
+    log('Starting client ID fixer...', 'info')
+
     if (!fs.existsSync(PRISMABOX_DIR)) {
       log(`Error: Directory not found: ${PRISMABOX_DIR}`, 'error')
       process.exit(1)
@@ -327,6 +345,8 @@ function main() {
 
     const fieldToPKMap = buildFieldToPKMap()
     walkDirectory(PRISMABOX_DIR, fieldToPKMap)
+
+    log(`Completed! Fixed ${fixedCount} files.`, 'success')
   } catch (error) {
     log(`Error: ${error.message}`, 'error')
     process.exit(1)

@@ -9,7 +9,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import { memo, useEffect, useMemo, useCallback, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { createAttachment } from './attachmentService'
+import { createAttachment } from './AttachmentService'
 import {
   tblAttachment,
   TypeTblAttachment,

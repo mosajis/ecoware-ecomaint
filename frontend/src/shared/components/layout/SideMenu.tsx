@@ -82,7 +82,7 @@ export default function SideMenu() {
         </Avatar>
 
         <Box sx={{ mr: 'auto' }}>
-          <Typography variant='body2' sx={{ fontWeight: 500 }}>
+          <Typography variant='body2' fontWeight={'bold'}>
             {auth.user?.uUserName}
           </Typography>
           <Typography variant='caption' sx={{ color: 'text.secondary' }}>

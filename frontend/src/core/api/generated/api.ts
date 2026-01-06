@@ -957,6 +957,24 @@ export const tblOilSamplingLog = {
     api.delete<DynamicResponse<'deleteTblOilSamplingLog'>>('/tblOilSamplingLog', { params: stringifyQuery(query) }),
 };
 
+export type TypeTblParameters = DynamicResponse<'getTblParameters'>['items'][0];
+export const tblParameters = {
+  getAll: (query?: DynamicQuery<'getTblParameters'>) =>
+    api.get<DynamicResponse<'getTblParameters'>>('/tblParameters', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblParametersByParameterId'>) =>
+    api.get<DynamicResponse<'getTblParametersByParameterId'>>(`/tblParameters/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblParametersCount'>) =>
+    api.get<DynamicResponse<'getTblParametersCount'>>('/tblParameters/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblParameters'>) =>
+    api.post<DynamicResponse<'postTblParameters'>>('/tblParameters', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblParametersByParameterId'>) =>
+    api.put<DynamicResponse<'putTblParametersByParameterId'>>(`/tblParameters/${id}`, { data }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblParametersByParameterId'>) =>
+    api.delete<DynamicResponse<'deleteTblParametersByParameterId'>>(`/tblParameters/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblParameters'>) =>
+    api.delete<DynamicResponse<'deleteTblParameters'>>('/tblParameters', { params: stringifyQuery(query) }),
+};
+
 export type TypeTblPendingType = DynamicResponse<'getTblPendingType'>['items'][0];
 export const tblPendingType = {
   getAll: (query?: DynamicQuery<'getTblPendingType'>) =>
@@ -1119,6 +1137,24 @@ export const tblUnit = {
     api.delete<DynamicResponse<'deleteTblUnit'>>('/tblUnit', { params: stringifyQuery(query) }),
 };
 
+export type TypeTblUsers = DynamicResponse<'getTblUsers'>['items'][0];
+export const tblUsers = {
+  getAll: (query?: DynamicQuery<'getTblUsers'>) =>
+    api.get<DynamicResponse<'getTblUsers'>>('/tblUsers', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblUsersByUserId'>) =>
+    api.get<DynamicResponse<'getTblUsersByUserId'>>(`/tblUsers/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblUsersCount'>) =>
+    api.get<DynamicResponse<'getTblUsersCount'>>('/tblUsers/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblUsers'>) =>
+    api.post<DynamicResponse<'postTblUsers'>>('/tblUsers', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblUsersByUserId'>) =>
+    api.put<DynamicResponse<'putTblUsersByUserId'>>(`/tblUsers/${id}`, { data }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblUsersByUserId'>) =>
+    api.delete<DynamicResponse<'deleteTblUsersByUserId'>>(`/tblUsers/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblUsers'>) =>
+    api.delete<DynamicResponse<'deleteTblUsers'>>('/tblUsers', { params: stringifyQuery(query) }),
+};
+
 export type TypeTblWorkOrder = DynamicResponse<'getTblWorkOrder'>['items'][0];
 export const tblWorkOrder = {
   getAll: (query?: DynamicQuery<'getTblWorkOrder'>) =>
@@ -1225,23 +1261,5 @@ export const tblWorkShopRequestAttachment = {
     api.delete<DynamicResponse<'deleteTblWorkShopRequestAttachmentByWShopRequestAttachmentId'>>(`/tblWorkShopRequestAttachment/${id}`, { params: stringifyQuery(query) }),
   deleteAll: (query?: DynamicQuery<'deleteTblWorkShopRequestAttachment'>) =>
     api.delete<DynamicResponse<'deleteTblWorkShopRequestAttachment'>>('/tblWorkShopRequestAttachment', { params: stringifyQuery(query) }),
-};
-
-export type TypeUsers = DynamicResponse<'getUsers'>['items'][0];
-export const users = {
-  getAll: (query?: DynamicQuery<'getUsers'>) =>
-    api.get<DynamicResponse<'getUsers'>>('/users', { params: stringifyQuery(query) }),
-  getById: (id: number, query?: DynamicQuery<'getUsersByUserId'>) =>
-    api.get<DynamicResponse<'getUsersByUserId'>>(`/users/${id}`, { params: stringifyQuery(query) }),
-  count: (query?: DynamicQuery<'getUsersCount'>) =>
-    api.get<DynamicResponse<'getUsersCount'>>('/users/count', { params: stringifyQuery(query) }),
-  create: (data: DynamicCreate<'postUsers'>) =>
-    api.post<DynamicResponse<'postUsers'>>('/users', { data }),
-  update: (id: number, data: DynamicUpdate<'putUsersByUserId'>) =>
-    api.put<DynamicResponse<'putUsersByUserId'>>(`/users/${id}`, { data }),
-  deleteById: (id: number, query?: DynamicQuery<'deleteUsersByUserId'>) =>
-    api.delete<DynamicResponse<'deleteUsersByUserId'>>(`/users/${id}`, { params: stringifyQuery(query) }),
-  deleteAll: (query?: DynamicQuery<'deleteUsers'>) =>
-    api.delete<DynamicResponse<'deleteUsers'>>('/users', { params: stringifyQuery(query) }),
 };
 

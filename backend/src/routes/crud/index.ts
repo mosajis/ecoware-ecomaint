@@ -50,6 +50,7 @@ export { default as ControllerTblMaintLogFollow } from "./tblMaintLogFollow.cont
 export { default as ControllerTblMaintLogStocks } from "./tblMaintLogStocks.controller";
 export { default as ControllerTblMaintType } from "./tblMaintType.controller";
 export { default as ControllerTblOilSamplingLog } from "./tblOilSamplingLog.controller";
+export { default as ControllerTblParameters } from "./tblParameters.controller";
 export { default as ControllerTblPendingType } from "./tblPendingType.controller";
 export { default as ControllerTblPeriod } from "./tblPeriod.controller";
 export { default as ControllerTblReScheduleLog } from "./tblReScheduleLog.controller";
@@ -59,10 +60,10 @@ export { default as ControllerTblRoundCompJob } from "./tblRoundCompJob.controll
 export { default as ControllerTblStockItem } from "./tblStockItem.controller";
 export { default as ControllerTblStockType } from "./tblStockType.controller";
 export { default as ControllerTblUnit } from "./tblUnit.controller";
+export { default as ControllerTblUsers } from "./tblUsers.controller";
 export { default as ControllerTblWorkOrder } from "./tblWorkOrder.controller";
 export { default as ControllerTblWorkOrderStatus } from "./tblWorkOrderStatus.controller";
 export { default as ControllerTblWorkShopComponent } from "./tblWorkShopComponent.controller";
 export { default as ControllerTblWorkShopDone } from "./tblWorkShopDone.controller";
 export { default as ControllerTblWorkShopRequest } from "./tblWorkShopRequest.controller";
 export { default as ControllerTblWorkShopRequestAttachment } from "./tblWorkShopRequestAttachment.controller";
-export { default as ControllerUsers } from "./users.controller";

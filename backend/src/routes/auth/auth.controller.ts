@@ -1,20 +1,20 @@
 import Elysia, { t } from 'elysia'
 import { jwt } from '@elysiajs/jwt'
-import { ServiceUsers } from '../crud/users.controller'
 import { AuthService } from './auth.service'
-import { buildResponseSchema } from '@/utils/base.schema'
-import { Users, UsersPlain } from 'orm/generated/prismabox/Users'
+import { TblUsersPlain } from 'orm/generated/prismabox/TblUsers'
+import { ServiceTblUsers } from '../crud/tblUsers.controller'
 
 const authService = new AuthService()
 
-export const UsersSafePlain = t.Omit(UsersPlain, ['uPassword'])
+export const UsersSafePlain = t.Omit(TblUsersPlain, ['uPassword'])
 
 export const ControllerAuth = new Elysia().group('/auth', app =>
   app
     .use(
       jwt({
         name: 'jwt',
-        secret: 'Fischl von Luftschloss Narfidort',
+        secret: process.env['JWT_SECRET'] || '',
+        exp: '1d',
       })
     )
     // 🔐 Login
@@ -135,30 +135,36 @@ export const ControllerAuth = new Elysia().group('/auth', app =>
         }
 
         const username = String(payload.username)
-        const user = await ServiceUsers.findOne({ uUserName: username })
+        const user = await ServiceTblUsers.findOne({ uUserName: username })
 
         if (!user) {
+          // token is valid but user not found
           return {
-            authorized: true,
+            authorized: false,
             user: null,
+            message: 'User not found',
           }
         }
 
-        const { password, ...safeUser } = user
-
+        // token valid and user exists
+        const { uPassword, ...safeUser } = user
         return {
           authorized: true,
-          user: {
-            ...safeUser,
-            lastLoginDatetime: safeUser.lastLoginDatetime,
-          },
+          user: safeUser, // Matches UsersSafePlain
         }
       },
       {
-        response: t.Object({
-          authorized: t.Boolean(),
-          user: t.Any(),
-        }),
+        response: t.Union([
+          t.Object({
+            authorized: t.Literal(false),
+            user: t.Null(),
+            message: t.String(),
+          }),
+          t.Object({
+            authorized: t.Literal(true),
+            user: UsersSafePlain,
+          }),
+        ]),
         detail: {
           tags: ['auth'],
           summary: 'Get authorized user from token',

@@ -10,7 +10,7 @@ import AddBox from '@mui/icons-material/AddBox'
 
 // Lazy-loaded tab components
 const TabMaintLog = lazy(() => import('./tabs/TabMaintLog'))
-const TabAttachment = lazy(() => import('./tabs/TabAttachment'))
+const TabAttachment = lazy(() => import('./tabs/tabAttachment/TabAttachment'))
 const TabComponentUnit = lazy(() => import('./tabs/TabComponentUnit'))
 const TabTriggers = lazy(() => import('./tabs/TabTriggers'))
 const TabRevision = lazy(() => import('./tabs/TabRevision'))

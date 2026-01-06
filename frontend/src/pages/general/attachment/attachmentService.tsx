@@ -41,38 +41,6 @@ export async function createAttachment(
   }
 }
 
-export async function downloadAttachment(attachmentId: number): Promise<void> {
-  const response = await fetch(`/tblAttachment/${attachmentId}/download`, {
-    method: 'GET',
-  })
-
-  if (!response.ok) {
-    const errorText = 'Download failed'
-
-    toast.error(errorText)
-
-    throw new Error(errorText)
-  }
-
-  const blob = await response.blob()
-
-  const contentDisposition = response.headers.get('content-disposition')
-  let fileName = 'download-file'
-
-  if (contentDisposition) {
-    const match = contentDisposition.match(/filename="?(.+)"?/)
-    if (match?.[1]) {
-      fileName = decodeURIComponent(match[1])
-    }
-  }
-
-  const url = window.URL.createObjectURL(blob)
-  const a = document.createElement('a')
-  a.href = url
-  a.download = fileName
-  document.body.appendChild(a)
-  a.click()
-
-  a.remove()
-  window.URL.revokeObjectURL(url)
+export function downloadAttachment(id: number) {
+  window.open(`http://localhost:5273/tblAttachment/${id}/download`, '_blank')
 }
