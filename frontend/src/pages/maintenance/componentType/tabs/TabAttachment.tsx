@@ -1,7 +1,26 @@
-import React from 'react'
+import AttachmentMap from '@/shared/tabs/attachmentMap/AttachmentMap'
+import { memo } from 'react'
+import {
+  tblCompTypeAttachment,
+  TypeTblCompType,
+} from '@/core/api/generated/api'
 
-const TabAttachment = () => {
-  return <div>TabAttachment</div>
+type Props = {
+  compType?: TypeTblCompType | null
+  label?: string
 }
 
-export default TabAttachment
+export function TabCompTypeAttachment({ compType }: Props) {
+  return (
+    <AttachmentMap
+      filterId={compType?.compTypeId}
+      filterKey='compTypeId'
+      relName='tblCompType'
+      tableId='compTypeAttachmentId'
+      label='Attachments'
+      mapService={tblCompTypeAttachment}
+    />
+  )
+}
+
+export default memo(TabCompTypeAttachment)

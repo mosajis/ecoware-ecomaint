@@ -47,7 +47,11 @@ const tabs: ReusableTabItem[] = [
   // { label: 'Oil Info crud', icon: <ColorLens />, component: TabOilInfo },
   { label: 'Stock Used', icon: <StackedLineChart />, component: TabStockUsed },
   { label: 'Attachment', icon: <AttachFile />, component: TabAttachment },
-  { label: 'Job Attachment', icon: <AddBox />, component: TabJobAttachment },
+  {
+    label: 'Job Attachment (Check)',
+    icon: <AddBox />,
+    component: TabJobAttachment,
+  },
 ]
 
 const ComponentUnitTabs = (props: Props) => {

@@ -17,7 +17,6 @@ const TabJob = lazy(() => import('./tabs/TabJob'))
 const TabCounter = lazy(() => import('./tabs/TabCounter'))
 const TabWorkOrder = lazy(() => import('./tabs/TabWorkOrder'))
 const TabMaintLog = lazy(() => import('./tabs/TabMaintLog'))
-const TabAttachment = lazy(() => import('./tabs/TabAttachment'))
 const TabFailureReport = lazy(() => import('./tabs/TabFailureReport'))
 const TabRotationLog = lazy(() => import('./tabs/TabRotationLog'))
 
@@ -42,7 +41,6 @@ const tabs: ReusableTabItem[] = [
     icon: <BugReport />,
     component: TabFailureReport,
   },
-  { label: 'Attachment', icon: <AttachFile />, component: TabAttachment },
 ]
 
 type Props = {

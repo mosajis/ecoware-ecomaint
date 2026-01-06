@@ -1,10 +1,26 @@
-interface TabAttachmentProps {
-  compUnitId?: number | null;
-  label?: string | null;
+import AttachmentMap from '@/shared/tabs/attachmentMap/AttachmentMap'
+import { memo } from 'react'
+import {
+  tblComponentUnitAttachment,
+  TypeTblComponentUnit,
+} from '@/core/api/generated/api'
+
+interface Props {
+  componentUnit?: TypeTblComponentUnit | null
+  label?: string | null
 }
 
-const TabAttachment = (props: TabAttachmentProps) => {
-  return <div>TabAttachment</div>;
-};
+export function TabComponentUnitAttachment({ componentUnit }: Props) {
+  return (
+    <AttachmentMap
+      filterId={componentUnit?.compId}
+      filterKey='compId'
+      relName='tblComponentUnit'
+      tableId='componentUnitAttachmentId'
+      label='Attachments'
+      mapService={tblComponentUnitAttachment}
+    />
+  )
+}
 
-export default TabAttachment;
+export default memo(TabComponentUnitAttachment)

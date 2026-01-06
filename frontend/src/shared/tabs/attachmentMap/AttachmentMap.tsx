@@ -67,7 +67,7 @@ function AttachmentMap<T = any>({
     <>
       <DataGrid
         label={label}
-        showToolbar
+        showToolbar={!!filterId}
         disableRowNumber
         onAddClick={handleCreate}
         onRefreshClick={handleRefresh}

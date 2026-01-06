@@ -4,7 +4,16 @@ import ReportWorkStep from '../ReportWorkStep'
 const TabAttachments: React.FC = () => {
   return (
     <ReportWorkStep>
-      <div></div>
+      attachments
+      {/*  funcking Check */}
+      {/* <AttachmentMap
+           filterId={compType?.compTypeId}
+           filterKey='compTypeId'
+           relName='tblCompType'
+           tableId='compTypeAttachmentId'
+           label='Attachments'
+           mapService={tblCompTypeAttachment}
+         /> */}
     </ReportWorkStep>
   )
 }
