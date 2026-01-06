@@ -5,8 +5,12 @@ import Tab from '@mui/material/Tab'
 import FormDialog from '@/shared/components/formDialog/FormDialog'
 import ExistingAttachmentTab from './tabs/TabExisting'
 import NewAttachmentTab from './tabs/TabNew'
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+import UploadIcon from '@mui/icons-material/Upload'
 import { useAttachmentForm } from './useAttachmentForm'
 import { BaseAttachmentUpsertProps } from './AttachmentType'
+import { Add, Check } from '@mui/icons-material'
 
 function AttachmentMapUpsert<T = any>({
   open,
@@ -49,16 +53,29 @@ function AttachmentMapUpsert<T = any>({
           : newForm.handleSubmit(handleNewSubmit)
       }
     >
-      <Box height='400px'>
+      <Box height='500px'>
         <Tabs
-          value={activeTab === 'existing' ? 0 : 1}
+          value={activeTab === 'existing' ? 1 : 0}
           onChange={(_, newValue) =>
-            setActiveTab(newValue === 0 ? 'existing' : 'new')
+            setActiveTab(newValue === 1 ? 'existing' : 'new')
           }
-          sx={{ borderBottom: 1, borderColor: 'divider', mb: 1 }}
+          sx={{
+            borderBottom: 1,
+            borderColor: 'divider',
+            mb: 1,
+            bgcolor: 'white',
+          }}
         >
-          <Tab label='Select Existing Attachment' />
-          <Tab label='Upload New Attachment' />
+          <Tab
+            label='New Attachment'
+            icon={<UploadIcon fontSize='small' />}
+            iconPosition='start'
+          />
+          <Tab
+            label='Add Attachment'
+            icon={<PlaylistAddCheckIcon />}
+            iconPosition='start'
+          />
         </Tabs>
 
         {activeTab === 'existing' && (

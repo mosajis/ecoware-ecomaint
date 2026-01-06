@@ -1,10 +1,10 @@
-import { memo } from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
-import Switch from '@mui/material/Switch'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FileField from '@/shared/components/FileField'
 import AsyncSelect from '@/shared/components/AsyncSelect'
+import Checkbox from '@mui/material/Checkbox'
+import { memo } from 'react'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { tblAttachmentType } from '@/core/api/generated/api'
 import { NewAttachmentFormValues } from '../AttachmentType'
@@ -72,8 +72,10 @@ function NewAttachmentTab({ form, disabled }: NewAttachmentTabProps) {
         control={form.control}
         render={({ field }) => (
           <FormControlLabel
+            sx={{ margin: 0 }}
             control={
-              <Switch
+              <Checkbox
+                size='small'
                 checked={field.value}
                 onChange={field.onChange}
                 disabled={disabled}

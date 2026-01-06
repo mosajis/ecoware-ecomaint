@@ -8,42 +8,40 @@ import { BaseAttachmentGridProps, MapRelationConfig } from './AttachmentType'
 import { type GridColDef } from '@mui/x-data-grid'
 
 function AttachmentMap<T = any>({
-  parentId,
-  parentIdField,
-  mapService,
-  mapIdField,
+  filterId,
+  filterKey,
+  relName,
+  tableId,
   label = 'Attachments',
+  mapService,
 }: BaseAttachmentGridProps<T>) {
-  const [selectedRowId, setSelectedRowId] = useState<number | undefined>(
-    undefined
-  )
   const [openForm, setOpenForm] = useState(false)
 
-  const getAll = useCallback(
-    () =>
-      mapService.getAll({
-        filter: {
-          [parentIdField]: parentId,
-        },
-        include: {
-          tblAttachment: {
-            include: {
-              tblAttachmentType: true,
-            },
+  const getAll = useCallback(() => {
+    if (!filterId) return Promise.resolve({ items: [] })
+
+    return mapService.getAll({
+      filter: {
+        [filterKey]: filterId,
+      },
+      include: {
+        tblAttachment: {
+          include: {
+            tblAttachmentType: true,
           },
         },
-      }),
-    [parentId, parentIdField, mapService]
-  )
+      },
+    })
+  }, [filterId, filterKey, mapService])
 
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
     mapService.deleteById,
-    mapIdField as any
+    tableId as any,
+    !!filterId
   )
 
   const handleCreate = useCallback(() => {
-    setSelectedRowId(undefined)
     setOpenForm(true)
   }, [])
 
@@ -57,16 +55,13 @@ function AttachmentMap<T = any>({
 
   const relationConfig: MapRelationConfig = useMemo(
     () => ({
-      parentField: parentIdField.replace('Id', ''),
-      parentId: parentId ?? 0,
+      filterId,
+      filterKey,
+      relName,
       attachmentField: 'tblAttachment',
     }),
-    [parentIdField, parentId]
+    [filterKey, filterId]
   )
-
-  if (!parentId) {
-    return null
-  }
 
   return (
     <>
@@ -79,7 +74,7 @@ function AttachmentMap<T = any>({
         rows={rows}
         columns={columns}
         loading={loading}
-        getRowId={row => row[mapIdField]}
+        getRowId={row => row[tableId]}
       />
 
       <AttachmentMapUpsert<T>

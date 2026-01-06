@@ -19,8 +19,9 @@ export interface NewAttachmentFormValues {
 }
 
 export interface MapRelationConfig {
-  parentField: string
-  parentId: number
+  filterId?: number | null
+  filterKey: string
+  relName: string
   attachmentField: string
 }
 
@@ -31,7 +32,7 @@ export interface AttachmentMapService<T = any> {
 export interface AttachmentMapService<T = any> {
   create: (payload: any) => Promise<T>
   getAll: (params?: any) => Promise<{ items: T[] }>
-  deleteById: (id: number) => Promise<void>
+  deleteById: (id: number) => Promise<T>
 }
 
 export interface BaseAttachmentUpsertProps<T = any> {
@@ -43,9 +44,10 @@ export interface BaseAttachmentUpsertProps<T = any> {
 }
 
 export interface BaseAttachmentGridProps<T = any> {
-  parentId: number | null | undefined
-  parentIdField: string
-  mapService: AttachmentMapService<T>
-  mapIdField: string
+  filterId?: number | null
+  filterKey: string
+  relName: string
+  tableId: string
   label?: string
+  mapService: AttachmentMapService<T>
 }

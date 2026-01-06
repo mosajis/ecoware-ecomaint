@@ -68,12 +68,6 @@ export const menuContentItems: {
     icon: <CategoryRoundedIcon />,
     items: [
       {
-        text: 'Attachment',
-        icon: <Upload />,
-        id: 'general:attachment',
-        path: '/general/attachment',
-      },
-      {
         text: 'Address',
         icon: <LocationOnRoundedIcon />,
         id: 'general:address',
@@ -134,6 +128,12 @@ export const menuContentItems: {
         icon: <DescriptionRoundedIcon />,
         id: 'general:jobDescription',
         path: '/general/job-description',
+      },
+      {
+        text: 'Attachment',
+        icon: <Upload />,
+        id: 'general:attachment',
+        path: '/general/attachment',
       },
     ],
   },

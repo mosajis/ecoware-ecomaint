@@ -852,7 +852,8 @@ export const inputsCustomizations: Components<Theme> = {
     },
     styleOverrides: {
       root: ({ theme }) => ({
-        margin: 10,
+        margin: 0,
+        marginRight: 10,
         height: 16,
         width: 16,
         borderRadius: 5,

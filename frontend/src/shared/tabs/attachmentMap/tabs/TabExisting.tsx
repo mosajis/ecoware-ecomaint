@@ -18,7 +18,12 @@ function TabAttachmentExisting({
   onSelectionChange,
 }: ExistingAttachmentTabProps) {
   return (
-    <Box display='flex' flexDirection='column' gap={2} height='350px'>
+    <Box
+      display='flex'
+      flexDirection='column'
+      gap={2}
+      height='calc(100% - 40px)'
+    >
       <DataGrid
         rows={attachments}
         columns={attachmentColumns}
@@ -37,7 +42,6 @@ function TabAttachmentExisting({
         initialState={{
           pagination: { paginationModel: { pageSize: 10 } },
         }}
-        sx={{ height: 400 }}
       />
     </Box>
   )

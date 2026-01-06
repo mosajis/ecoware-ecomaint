@@ -33,7 +33,7 @@ export function useAttachmentForm<T>({
   onSuccess,
   onClose,
 }: UseAttachmentFormProps<T>) {
-  const [activeTab, setActiveTab] = useState<AttachmentFormMode>('existing')
+  const [activeTab, setActiveTab] = useState<AttachmentFormMode>('new')
   const [submitting, setSubmitting] = useState(false)
   const [selectedAttachmentId, setSelectedAttachmentId] = useState<
     number | null
@@ -125,9 +125,9 @@ export function useAttachmentForm<T>({
         const mapPayload = {
           orderNo: 0,
           ...buildRelation(
-            relationConfig.parentField,
-            relationConfig.parentField + 'Id',
-            relationConfig.parentId
+            relationConfig.relName,
+            relationConfig.filterKey,
+            relationConfig.filterId
           ),
           ...buildRelation(
             relationConfig.attachmentField,
@@ -178,9 +178,9 @@ export function useAttachmentForm<T>({
         const mapPayload = {
           orderNo: 0,
           ...buildRelation(
-            relationConfig.parentField,
-            relationConfig.parentField + 'Id',
-            relationConfig.parentId
+            relationConfig.relName,
+            relationConfig.filterKey,
+            relationConfig.filterId
           ),
           ...buildRelation(
             relationConfig.attachmentField,
