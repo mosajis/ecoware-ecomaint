@@ -1,4 +1,4 @@
-import Splitter from '@/shared/components/Splitter'
+import Splitter from '@/shared/components/Splitter/Splitter'
 import AppEditor from '@/shared/components/Editor'
 import JobDescriptionUpsert from './JobDescriptionUpsert'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'

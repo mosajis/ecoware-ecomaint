@@ -1,15 +1,15 @@
 import { useTree } from '@headless-tree/react'
-import { TreeDataMapper } from '@/shared/hooks/useDataTree'
-import { Box } from '@mui/material'
+import { useEffect, useMemo, useCallback } from 'react'
 import {
   syncDataLoaderFeature,
   selectionFeature,
   hotkeysCoreFeature,
-  SetStateFn,
   TreeState,
 } from '@headless-tree/core'
 import TreeHeader from './TreeHeader'
 import TreeContent from './TreeContent'
+import { TreeDataMapper } from '@/shared/hooks/useDataTree'
+import './tree.css'
 
 interface GenericTreeProps<T> {
   label?: string
@@ -20,7 +20,6 @@ interface GenericTreeProps<T> {
   onAdd?: () => void
   onRefresh?: () => void
   loading?: boolean
-
   initialState?: Partial<TreeState<T>> | undefined
 }
 
@@ -37,64 +36,72 @@ export function GenericTree<T>({
 }: GenericTreeProps<T>) {
   const { itemsMap, childrenMap, rootIds } = data
 
-  const tree = !loading
-    ? useTree<T>({
-        rootItemId: 'root',
-        initialState,
-        getItemName: item => getItemName(item.getItemData()),
-        isItemFolder: item => {
-          const id = getItemId(item.getItemData())
-          return (childrenMap.get(Number(id))?.length ?? 0) > 0
+  // کش کردن tree config
+  const treeConfig = useMemo(
+    () => ({
+      rootItemId: 'root',
+      initialState,
+      getItemName: (item: any) => getItemName(item.getItemData()),
+      isItemFolder: (item: any) => {
+        const id = getItemId(item.getItemData())
+        return (childrenMap.get(Number(id))?.length ?? 0) > 0
+      },
+      dataLoader: {
+        getItem: (itemId: string | number) => {
+          if (itemId === 'root') return {} as T
+          const id = Number(itemId)
+          const item = itemsMap.get(id)
+          if (!item) throw new Error(`Tree item not found: ${itemId}`)
+          return item
         },
-        dataLoader: {
-          getItem: itemId => {
-            if (itemId === 'root') return {} as T
-            const id = Number(itemId)
-            const item = itemsMap.get(id)
-            if (!item) throw new Error(`Tree item not found: ${itemId}`)
-            return item
-          },
-          getChildren: itemId => {
-            if (itemId === 'root') return rootIds.map(id => String(id))
-            const id = Number(itemId)
-            return (childrenMap.get(id) || []).map(childId => String(childId))
-          },
+        getChildren: (itemId: string | number) => {
+          if (itemId === 'root') return rootIds.map(id => String(id))
+          const id = Number(itemId)
+          return (childrenMap.get(id) || []).map(childId => String(childId))
         },
-        features: [syncDataLoaderFeature, selectionFeature, hotkeysCoreFeature],
-        indent: 20,
-      })
-    : null
+      },
+      features: [syncDataLoaderFeature, selectionFeature, hotkeysCoreFeature],
+      indent: 20,
+    }),
+    [itemsMap, childrenMap, rootIds, initialState, getItemName, getItemId]
+  )
+
+  const tree = useTree(treeConfig)
+
+  useEffect(() => {
+    tree.rebuildTree()
+  }, [itemsMap, childrenMap, rootIds, tree])
+
+  const handleExpandAll = useCallback(() => {
+    const items = tree.getItems()
+    for (let i = 0, len = items.length; i < len; i++) {
+      items[i].expand()
+    }
+  }, [tree])
+
+  const handleCollapseAll = useCallback(() => {
+    const items = tree.getItems()
+    for (let i = 0, len = items.length; i < len; i++) {
+      items[i].collapse()
+    }
+  }, [tree])
 
   return (
-    <Box
-      sx={{
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        border: 1,
-        borderColor: 'divider',
-        borderRadius: 1,
-        overflow: 'hidden',
-      }}
-    >
+    <div className='tree-container'>
       <TreeHeader
         label={label || 'Tree View'}
-        loading={loading}
+        onExpandAll={handleExpandAll}
+        onCollapseAll={handleCollapseAll}
         onAdd={onAdd}
         onRefresh={onRefresh}
-        onExpandAll={() => tree && tree.getItems().forEach(i => i.expand())}
-        onCollapseAll={() => tree && tree.getItems().forEach(i => i.collapse())}
       />
-
-      {!loading && tree && (
-        <TreeContent
-          tree={tree}
-          getItemName={getItemName}
-          getItemId={getItemId}
-          onItemSelect={onItemSelect}
-          rootIds={rootIds}
-        />
-      )}
-    </Box>
+      <TreeContent
+        tree={tree}
+        getItemName={getItemName}
+        getItemId={getItemId}
+        onItemSelect={onItemSelect}
+        rootIds={rootIds}
+      />
+    </div>
   )
 }

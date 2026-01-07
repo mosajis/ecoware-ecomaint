@@ -1,4 +1,4 @@
-import Splitter from '@/shared/components/Splitter'
+import Splitter from '@/shared/components/Splitter/Splitter'
 import DataGrid from '@/shared/components/dataGrid/DataGrid'
 import Tree from '@/shared/components/tree/Tree'
 import ComponentTypeUpsert from './ComponentTypeUpsert'

@@ -1,6 +1,6 @@
 import ReportPrintDialog from './WorkOrderDialogReport'
 import WorkOrderActionBar from './WorkOrderActions'
-import Splitter from '@/shared/components/Splitter'
+import Splitter from '@/shared/components/Splitter/Splitter'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import TabsComponent from './WorkOrderTabs'
 import StatusChip from './customCell/Status'

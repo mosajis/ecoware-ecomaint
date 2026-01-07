@@ -1,4 +1,4 @@
-import Splitter from '@/shared/components/Splitter'
+import Splitter from '@/shared/components/Splitter/Splitter'
 import Editor from '@/shared/components/Editor'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import { useState, useCallback, useMemo } from 'react'

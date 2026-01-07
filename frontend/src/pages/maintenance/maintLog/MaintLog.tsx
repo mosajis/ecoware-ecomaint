@@ -1,6 +1,6 @@
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import TabsComponent from './MaintLogTabs'
-import Splitter from '@/shared/components/Splitter'
+import Splitter from '@/shared/components/Splitter/Splitter'
 import ReportWorkDialog from '../reportWork/ReportWorkDialog'
 import {
   tblMaintCause,

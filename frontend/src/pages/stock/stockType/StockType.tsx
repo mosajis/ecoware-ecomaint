@@ -1,4 +1,4 @@
-import Splitter from '@/shared/components/Splitter'
+import Splitter from '@/shared/components/Splitter/Splitter'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import StockTypeFormDialog from './StockTypeUpsert'
 import CustomizedTree from '@/shared/components/tree/Tree'

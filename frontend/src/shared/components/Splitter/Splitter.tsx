@@ -2,6 +2,8 @@ import { Split } from '@geoffcox/react-splitter'
 import { useTheme } from '@mui/material/styles'
 import { ReactNode } from 'react'
 
+import './Splitter.css'
+
 interface SplitterProps {
   children: ReactNode[]
   horizontal?: boolean

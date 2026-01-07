@@ -1,4 +1,4 @@
-import Splitter from '@/shared/components/Splitter'
+import Splitter from '@/shared/components/Splitter/Splitter'
 import TabsComponent from './FunctionTabs'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import FunctionUpsert from './FunctionUpsert'

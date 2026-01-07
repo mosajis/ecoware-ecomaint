@@ -1,7 +1,7 @@
 import MaintClassFormDialog from './MaintClassUpsert.js'
 import MaintTypeFormDialog from './MaintTypeUpsert.js'
 import MaintCauseFormDialog from './MaintCauseUpsert.js'
-import Splitter from '@/shared/components/Splitter'
+import Splitter from '@/shared/components/Splitter/Splitter.js'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import { useState, useCallback } from 'react'
 import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'

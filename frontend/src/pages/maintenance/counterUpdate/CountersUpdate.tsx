@@ -1,4 +1,4 @@
-import Splitter from '@/shared/components/Splitter'
+import Splitter from '@/shared/components/Splitter/Splitter'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import { GridColDef } from '@mui/x-data-grid'
 import { useCallback, useMemo, useState } from 'react'

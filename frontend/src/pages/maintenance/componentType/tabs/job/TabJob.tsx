@@ -1,5 +1,5 @@
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import Splitter from '@/shared/components/Splitter'
+import Splitter from '@/shared/components/Splitter/Splitter'
 import Tabs from './TabJobTabs'
 import ComponentTypeJobUpsert from './TabJobUpsert'
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges'

@@ -13,25 +13,29 @@ export function mapToTree<T extends Record<string, any>>(
   const childrenMap = new Map<number, number[]>()
   const rootIds: number[] = []
 
-  items.forEach(item => {
-    const id = Number(item[idKey])
-    itemsMap.set(id, item)
-  })
-
-  items.forEach(item => {
+  // تنها یک حلقه - بهینه‌سازی از O(2n) به O(n)
+  for (let i = 0, len = items.length; i < len; i++) {
+    const item = items[i]
     const id = Number(item[idKey])
     const parentRaw = item[parentKey]
+
+    itemsMap.set(id, item)
+
+    // بهینه‌سازی: چک کردن null/undefined در یک شرط
     const parentId =
       parentRaw === null || parentRaw === undefined ? 0 : Number(parentRaw)
 
     if (parentId === 0) {
       rootIds.push(id)
     } else {
-      const children = childrenMap.get(parentId) || []
-      children.push(id)
-      childrenMap.set(parentId, children)
+      // بهینه‌سازی: استفاده از has() برای جلوگیری از ساخت آرایه موقت
+      if (!childrenMap.has(parentId)) {
+        childrenMap.set(parentId, [id])
+      } else {
+        childrenMap.get(parentId)!.push(id)
+      }
     }
-  })
+  }
 
   childrenMap.set(0, rootIds)
 

@@ -1,11 +1,11 @@
-import Splitter from '@/shared/components/Splitter'
+import Splitter from '@/shared/components/Splitter/Splitter'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import LocationUpsert from './LocationUpsert'
-import { useMemo, useState } from 'react'
 import { tblLocation, TypeTblLocation } from '@/core/api/generated/api'
 import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
-import { GridColDef, GridRowId, GridRowSelectionModel } from '@mui/x-data-grid'
+import { GridColDef } from '@mui/x-data-grid'
 import { useTreeData } from '@/shared/hooks/useDataTree'
+import { useState, useCallback, useMemo } from 'react'
 import { GenericTree } from '@/shared/components/tree/Tree'
 import { mapToTree } from '@/shared/components/tree/TreeUtil'
 
@@ -19,36 +19,43 @@ export default function PageLocation() {
     mapper: items => mapToTree(items, 'locationId', 'parentLocationId'),
   })
 
-  const handleTreeItemSelect = () => {}
-  // =========================
-  // Handlers
-  // =========================
-  const handleCreate = () => {
+  const handleTreeItemSelect = useCallback(() => {
+    // Implementation
+  }, [])
+
+  const handleCreate = useCallback(() => {
     setSelectedRowId(null)
     setMode('create')
     setOpenForm(true)
-  }
+  }, [])
 
-  const handleEdit = (row: TypeTblLocation) => {
+  const handleEdit = useCallback((row: TypeTblLocation) => {
     setSelectedRowId(row.locationId)
     setMode('update')
     setOpenForm(true)
-  }
+  }, [])
 
-  const handleFormSuccess = () => {
+  const handleFormSuccess = useCallback(() => {
     setOpenForm(false)
     refetch()
-  }
+  }, [refetch])
 
-  const columns: GridColDef<TypeTblLocation>[] = [
-    { field: 'name', headerName: 'Name', flex: 1 },
-    { field: 'parentLocationId', headerName: 'Parent ID', width: 100 },
-    dataGridActionColumn({
-      onEdit: handleEdit,
-      onDelete: () => {},
-    }),
-  ]
+  // ✅ 3. Memoize columns
+  const columns: GridColDef<TypeTblLocation>[] = useMemo(
+    () => [
+      { field: 'name', headerName: 'Name', flex: 1 },
+      { field: 'parentLocationId', headerName: 'Parent ID', width: 100 },
+      dataGridActionColumn({
+        onEdit: handleEdit,
+        onDelete: () => {
+          // TODO: implement delete with refetch
+        },
+      }),
+    ],
+    [handleEdit]
+  )
 
+  console.log(dataTreeItems)
   return (
     <>
       <Splitter initialPrimarySize='35%'>

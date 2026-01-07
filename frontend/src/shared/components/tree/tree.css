@@ -1,0 +1,244 @@
+.tree-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+  border-color: var(--template-palette-divider);
+  border-radius: var(--template-shape-borderRadius);
+  overflow: hidden;
+  color: var(--template-palette-text-primary);
+  background-color: var(--template-palette-background-paper);
+}
+
+.tree {
+  flex: 1;
+  overflow: auto;
+}
+
+.tree button[role='treeitem'] {
+  display: flex;
+  background: transparent;
+  border: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  color: inherit;
+}
+
+/* خطوط عمودی برای تمام levels */
+.tree button[role='treeitem']::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 5px;
+  width: 1px;
+  background-color: var(--template-palette-divider);
+  box-shadow: 20px 0 0 var(--template-palette-divider),
+    40px 0 0 var(--template-palette-divider),
+    60px 0 0 var(--template-palette-divider),
+    80px 0 0 var(--template-palette-divider),
+    100px 0 0 var(--template-palette-divider),
+    120px 0 0 var(--template-palette-divider),
+    140px 0 0 var(--template-palette-divider),
+    160px 0 0 var(--template-palette-divider),
+    180px 0 0 var(--template-palette-divider),
+    200px 0 0 var(--template-palette-divider),
+    220px 0 0 var(--template-palette-divider),
+    240px 0 0 var(--template-palette-divider),
+    260px 0 0 var(--template-palette-divider),
+    280px 0 0 var(--template-palette-divider),
+    300px 0 0 var(--template-palette-divider);
+}
+
+/* خط افقی */
+.tree button[role='treeitem']::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc((var(--tree-level) - 1) * 20px + 5px);
+  width: 15px;
+  height: 1px;
+  background-color: var(--template-palette-divider);
+}
+
+/* حذف خط عمودی برای آخرین child در هر level */
+.tree button[role='treeitem']:last-child::before {
+  height: 50%;
+}
+
+/* حذف خطوط برای root items */
+.tree button[role='treeitem'][aria-level='1']::before,
+.tree button[role='treeitem'][aria-level='1']::after {
+  display: none;
+}
+
+.treeitem {
+  width: 100%;
+  text-align: left;
+  background-color: var(--template-palette-background-paper);
+  color: var(--template-palette-text-primary);
+  padding: 6px 10px;
+  position: relative;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.treeitem:hover {
+  background-color: var(--template-palette-action-hover);
+}
+
+.renaming-item {
+  background-color: var(--template-palette-action-hover);
+  margin-bottom: 2px;
+  border-radius: 8px;
+  padding: 4px 10px 5px 24px;
+}
+
+.renaming-item input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: var(--template-palette-text-primary);
+}
+
+.tree button[role='treeitem']:focus {
+  outline: none;
+}
+
+.treeitem.selected {
+  background-color: var(--template-palette-action-selected);
+}
+
+button:focus-visible .treeitem.focused,
+.treeitem.searchmatch.focused {
+  outline: 2px solid var(--template-palette-primary-main);
+}
+
+.treeitem.searchmatch {
+  background-color: var(--template-palette-info-light);
+}
+
+.treeitem.folder:before {
+  content: url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTYgMTYiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDE2IDE2IiB4bWw6c3BhY2U9InByZXNlcnZlIj48Zz48Zz48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTQuNjQ2IDEuNjQ2YS41LjUgMCAwIDEgLjcwOCAwbDYgNmEuNS41IDAgMCAxIDAgLjcwOGwtNiA2YS41LjUgMCAwIDEtLjcwOC0uNzA4TDEwLjI5MyA4IDQuNjQ2IDIuMzU0YS41LjUgMCAwIDEgMC0uNzA4eiIgY2xhc3M9InJjdC10cmVlLWl0ZW0tYXJyb3ctcGF0aCI+PC9wYXRoPjwvZz48L2c+PC9zdmc+);
+  width: 10px;
+  display: inline-block;
+  z-index: 1;
+  margin-right: 4px;
+  transition: transform 0.1s ease-in-out;
+  position: relative;
+  opacity: 0.7;
+}
+
+.treeitem.folder.expanded:before {
+  transform: rotate(90deg);
+}
+
+.treeitem:not(.folder) {
+  padding-left: 24px;
+}
+
+.treeitem.selected:after {
+  content: ' ';
+  position: absolute;
+  top: 5px;
+  left: -2px;
+  height: 16px;
+  width: 4px;
+  background-color: var(--template-palette-primary-main);
+  border-radius: 99px;
+  z-index: 2;
+}
+
+.description {
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  background-color: var(--template-palette-action-hover);
+  color: var(--template-palette-text-primary);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.outeritem {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.outeritem button:not([role='treeitem']) {
+  padding: 2px 4px;
+  height: 80%;
+}
+
+.actionbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.searchbox {
+  padding: 8px 16px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 4px;
+  height: unset;
+  background-color: transparent;
+  border: 1px solid var(--template-palette-divider);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--template-palette-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.searchbox:before {
+  content: 'Navigate between search results with ArrowUp and ArrowDown. Press Escape to close search.';
+  display: block;
+  width: 100%;
+}
+
+.searchbox input {
+  flex-grow: 1;
+  padding: 4px;
+  color: var(--template-palette-text-primary);
+  background-color: transparent;
+}
+
+.actionbtn {
+  height: 30px;
+  background-color: transparent;
+  border: 1px solid var(--template-palette-divider);
+  padding: 0 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--template-palette-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.actionbtn:hover {
+  cursor: pointer;
+  background-color: var(--template-palette-action-hover);
+}
+
+.visible-assistive-text {
+  position: unset !important;
+  width: unset !important;
+  height: 60px !important;
+  margin: unset !important;
+  overflow: auto !important;
+  clip: unset !important;
+  display: block;
+  margin-bottom: 1rem !important;
+  background-color: var(--template-palette-info-light);
+}
