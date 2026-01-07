@@ -64,7 +64,7 @@ export default function TreeToolbar({
           {onSearch && <ButtonSearch onSearch={handleSearchChange} />}
 
           {onExpandAll && (
-            <Tooltip title='Expand All'>
+            <Tooltip title='Expand'>
               <IconButton size='small' onClick={onExpandAll}>
                 <OpenInFullIcon />
               </IconButton>
@@ -72,7 +72,7 @@ export default function TreeToolbar({
           )}
 
           {onCollapseAll && (
-            <Tooltip title='Collapse All'>
+            <Tooltip title='Collapse'>
               <IconButton size='small' onClick={onCollapseAll}>
                 <CloseFullscreenIcon />
               </IconButton>

@@ -1,56 +1,39 @@
-export function buildTreeMap<T>(
-  data: T[],
-  keyId: keyof T,
-  parentKeyId?: keyof T
-) {
-  const map: Record<string, any> = {}
+export interface TreeDataMapper<T> {
+  itemsMap: Map<number, T>
+  childrenMap: Map<number, number[]>
+  rootIds: number[]
+}
 
-  // 1. ساخت نودها
-  for (const item of data) {
-    const id = String(item[keyId])
-    map[id] = {
-      index: id,
-      id,
-      children: [],
-      isFolder: false,
-      data: item,
+export function mapToTree<T extends Record<string, any>>(
+  items: T[],
+  idKey: keyof T,
+  parentKey: keyof T
+): TreeDataMapper<T> {
+  const itemsMap = new Map<number, T>()
+  const childrenMap = new Map<number, number[]>()
+  const rootIds: number[] = []
+
+  items.forEach(item => {
+    const id = Number(item[idKey])
+    itemsMap.set(id, item)
+  })
+
+  items.forEach(item => {
+    const id = Number(item[idKey])
+    const parentRaw = item[parentKey]
+    const parentId =
+      parentRaw === null || parentRaw === undefined ? 0 : Number(parentRaw)
+
+    if (parentId === 0) {
+      rootIds.push(id)
+    } else {
+      const children = childrenMap.get(parentId) || []
+      children.push(id)
+      childrenMap.set(parentId, children)
     }
-  }
+  })
 
-  // 2. اتصال child → parent
-  for (const item of data) {
-    const id = String(item[keyId])
-    const parentId = parentKeyId ? String(item[parentKeyId]) : null
+  childrenMap.set(0, rootIds)
 
-    if (parentId && map[parentId]) {
-      map[parentId].children.push(id)
-      map[parentId].isFolder = true
-    }
-  }
-
-  // 3. تضمین root
-  if (!map.root) {
-    map.root = {
-      index: 'root',
-      id: 'root',
-      children: [],
-      isFolder: true,
-      data: 'Root',
-    }
-  }
-
-  // 4. همه orphanها (بدون parent یا parent غایب) رو زیر root اضافه کن
-  for (const item of data) {
-    const id = String(item[keyId])
-    const parentId = parentKeyId ? String(item[parentKeyId]) : null
-    if (!parentId || !map[parentId]) {
-      if (id !== 'root') {
-        map.root.children.push(id)
-        map[id].parentId = 'root'
-        map.root.isFolder = true
-      }
-    }
-  }
-
-  return map
+  return { itemsMap, childrenMap, rootIds }
 }

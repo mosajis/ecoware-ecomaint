@@ -1,45 +1,28 @@
 import Splitter from '@/shared/components/Splitter'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import CustomizedTree from '@/shared/components/tree/Tree'
 import LocationUpsert from './LocationUpsert'
-import { useState, useCallback } from 'react'
+import { useMemo, useState } from 'react'
 import { tblLocation, TypeTblLocation } from '@/core/api/generated/api'
 import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
-import { GridColDef } from '@mui/x-data-grid'
-import { useDataTree } from '@/shared/hooks/useDataTree'
+import { GridColDef, GridRowId, GridRowSelectionModel } from '@mui/x-data-grid'
+import { useTreeData } from '@/shared/hooks/useDataTree'
+import { GenericTree } from '@/shared/components/tree/Tree'
+import { mapToTree } from '@/shared/components/tree/TreeUtil'
 
 export default function PageLocation() {
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
 
-  // === Mapping Transformer ===
-  const mapper = useCallback(
-    (row: TypeTblLocation) => ({
-      id: row.locationId.toString(),
-      label: row.name ?? '',
-      parentId: row.parentLocationId?.toString() ?? null,
-      data: row,
-    }),
-    []
-  )
+  const { dataTreeItems, loading, refetch, rows } = useTreeData({
+    request: tblLocation.getAll,
+    mapper: items => mapToTree(items, 'locationId', 'parentLocationId'),
+  })
 
-  // === useDataTree ===
-  const {
-    rows,
-    treeItems,
-    loading,
-    handleDelete,
-    handleFormSuccess,
-    handleRefresh,
-  } = useDataTree(
-    tblLocation.getAll,
-    tblLocation.deleteById,
-    'locationId',
-    mapper
-  )
-
-  // === Handlers ===
+  const handleTreeItemSelect = () => {}
+  // =========================
+  // Handlers
+  // =========================
   const handleCreate = () => {
     setSelectedRowId(null)
     setMode('create')
@@ -52,33 +35,33 @@ export default function PageLocation() {
     setOpenForm(true)
   }
 
-  // === Columns ===
+  const handleFormSuccess = () => {
+    setOpenForm(false)
+    refetch()
+  }
+
   const columns: GridColDef<TypeTblLocation>[] = [
-    { field: 'locationCode', headerName: 'Code', width: 60 },
     { field: 'name', headerName: 'Name', flex: 1 },
-    { field: 'orderNo', headerName: 'Order No', width: 100 },
+    { field: 'parentLocationId', headerName: 'Parent ID', width: 100 },
     dataGridActionColumn({
       onEdit: handleEdit,
-      onDelete: handleDelete,
+      onDelete: () => {},
     }),
   ]
 
   return (
     <>
       <Splitter initialPrimarySize='35%'>
-        {/* === TREE VIEW === */}
-        <CustomizedTree
-          onRefresh={handleRefresh}
-          label='Tree View'
-          items={treeItems}
+        <GenericTree<TypeTblLocation>
           loading={loading}
-          getRowId={row => row.locationId}
-          onAddClick={handleCreate}
-          onEditClick={handleEdit}
-          onDeleteClick={handleDelete}
+          data={dataTreeItems}
+          getItemName={item => item.name || '-'}
+          getItemId={item => item.locationId}
+          onRefresh={refetch}
+          onAdd={handleCreate}
+          onItemSelect={handleTreeItemSelect}
         />
 
-        {/* === GRID VIEW === */}
         <CustomizedDataGrid
           showToolbar
           disableRowNumber
@@ -86,13 +69,12 @@ export default function PageLocation() {
           loading={loading}
           rows={rows}
           columns={columns}
-          onRefreshClick={handleRefresh}
+          onRefreshClick={refetch}
           onAddClick={handleCreate}
           getRowId={row => row.locationId}
         />
       </Splitter>
 
-      {/* === FORM === */}
       <LocationUpsert
         open={openForm}
         mode={mode}
