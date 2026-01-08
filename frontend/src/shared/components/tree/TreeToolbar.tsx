@@ -140,22 +140,20 @@ const TreeToolbar = memo(function TreeToolbar({
         <Stack direction='row' spacing={0.5} alignItems='center'>
           {onSearch && <ButtonSearch onSearch={handleSearchChange} />}
 
-          {buttons.map(
+          {/* {buttons.map(
             btn =>
               btn.show && (
                 <Tooltip key={btn.key} title={btn.tooltip}>
-                  <span>
-                    <IconButton
-                      size='small'
-                      onClick={btn.onClick}
-                      disabled={btn.disabled}
-                    >
-                      {btn.icon}
-                    </IconButton>
-                  </span>
+                  <IconButton
+                    size='small'
+                    onClick={btn.onClick}
+                    disabled={btn.disabled}
+                  >
+                    {btn.icon}
+                  </IconButton>
                 </Tooltip>
               )
-          )}
+          )} */}
 
           {actions && <Box>{actions}</Box>}
         </Stack>

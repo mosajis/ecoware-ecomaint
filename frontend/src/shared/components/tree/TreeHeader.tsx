@@ -8,7 +8,10 @@ function TreeHeader({
   onRefresh,
   onExpandAll,
   onCollapseAll,
+  onEdit,
+  onDelete,
   label,
+  hasSelection,
 }: {
   loading?: boolean
   label: string
@@ -16,11 +19,17 @@ function TreeHeader({
   onRefresh?: () => void
   onExpandAll?: () => void
   onCollapseAll?: () => void
+  onDelete?: () => void
+  onEdit?: () => void
+  hasSelection?: boolean // ✅ برای disable کردن دکمه‌ها
 }) {
   return (
     <Box>
       <TreeToolbar
+        hasSelection={hasSelection}
         label={label}
+        onDelete={onDelete}
+        onEdit={onEdit}
         onAdd={onAdd}
         onRefresh={onRefresh}
         onExpandAll={onExpandAll}

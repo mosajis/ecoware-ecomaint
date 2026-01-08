@@ -26,7 +26,7 @@ function TreeContent<T>({
         const level = item.getItemMeta().level
 
         return (
-          <button
+          <div
             key={itemId}
             {...item.getProps()}
             style={
@@ -50,7 +50,7 @@ function TreeContent<T>({
             >
               {getItemName(itemData)}
             </div>
-          </button>
+          </div>
         )
       })}
     </div>

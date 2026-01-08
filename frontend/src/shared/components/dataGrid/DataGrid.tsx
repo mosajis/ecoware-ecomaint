@@ -4,8 +4,11 @@ import {
   type DataGridProps,
   type GridColDef,
   type GridSlotsComponent,
+  type GridRowSelectionModel,
+  GridRowId,
+  GridCallbackDetails,
 } from '@mui/x-data-grid'
-import { useMemo } from 'react'
+import { useMemo, useCallback, useState } from 'react'
 
 const rowNumberColumn: GridColDef = {
   field: 'rowNumber',
@@ -22,7 +25,9 @@ interface CustomizedDataGridProps extends DataGridProps {
   label?: string
   onAddClick?: () => void
   onRefreshClick?: () => void
-
+  onEditClick?: (rowId: number) => void
+  onDeleteClick?: (rowId: number) => void
+  getRowId: (row: any) => GridRowId
   disableSearch?: boolean
   disableDensity?: boolean
   disableExport?: boolean
@@ -30,13 +35,15 @@ interface CustomizedDataGridProps extends DataGridProps {
   disableFilters?: boolean
   disableAdd?: boolean
   disableRefresh?: boolean
+  disableEdit?: boolean
+  disableDelete?: boolean
 
   disableRowNumber?: boolean
 
   toolbarChildren?: React.ReactNode
 }
 
-export default function DataGrid({
+export default function GenericDataGrid({
   rows,
   columns = [],
   initialState,
@@ -44,6 +51,9 @@ export default function DataGrid({
   loading,
   onAddClick,
   onRefreshClick,
+  onEditClick,
+  onDeleteClick,
+  getRowId,
   disableSearch,
   disableDensity,
   disableExport,
@@ -51,10 +61,18 @@ export default function DataGrid({
   disableFilters,
   disableAdd,
   disableRefresh,
+  disableEdit,
+  disableDelete,
   disableRowNumber,
   toolbarChildren,
   ...rest
 }: CustomizedDataGridProps) {
+  const [rowSelectionModel, setRowSelectionModel] =
+    useState<GridRowSelectionModel>({
+      type: 'include',
+      ids: new Set<GridRowId>([]),
+    })
+
   const indexedRows = useMemo(() => {
     if (!rows) return []
     if (disableRowNumber) return rows
@@ -72,6 +90,31 @@ export default function DataGrid({
     }
   }, [initialState])
 
+  const handleRowSelectionChange = useCallback(
+    (
+      rowSelectionModel: GridRowSelectionModel,
+      details: GridCallbackDetails
+    ) => {
+      setRowSelectionModel(rowSelectionModel)
+    },
+    []
+  )
+
+  const handleEdit = useCallback(() => {
+    const rowId = Array.from(rowSelectionModel.ids)[0]
+    if (!rowId) return
+    onEditClick?.(Number(rowId))
+  }, [rowSelectionModel, onEditClick])
+
+  const handleDelete = useCallback(() => {
+    const rowId = Array.from(rowSelectionModel.ids)[0]
+    if (!rowId) return
+    onDeleteClick?.(Number(rowId))
+  }, [rowSelectionModel, onDeleteClick])
+
+  // ======================
+  // Toolbar wrapper
+  // ======================
   const ToolbarWrapper = useMemo(
     () => (props: any) =>
       (
@@ -81,6 +124,9 @@ export default function DataGrid({
           loading={loading}
           onAddClick={onAddClick}
           onRefreshClick={onRefreshClick}
+          onEditClick={handleEdit}
+          onDeleteClick={handleDelete}
+          hasSelection={rowSelectionModel.ids.size > 0}
           disableSearch={disableSearch}
           disableDensity={disableDensity}
           disableExport={disableExport}
@@ -88,6 +134,8 @@ export default function DataGrid({
           disableFilters={disableFilters}
           disableAdd={disableAdd}
           disableRefresh={disableRefresh}
+          disableEdit={disableEdit}
+          disableDelete={disableDelete}
         >
           {toolbarChildren}
         </DataGridToolbar>
@@ -98,6 +146,9 @@ export default function DataGrid({
       loading,
       onAddClick,
       onRefreshClick,
+      handleEdit,
+      handleDelete,
+      rowSelectionModel,
       disableSearch,
       disableDensity,
       disableExport,
@@ -105,6 +156,8 @@ export default function DataGrid({
       disableFilters,
       disableAdd,
       disableRefresh,
+      disableEdit,
+      disableDelete,
     ]
   )
 
@@ -113,12 +166,18 @@ export default function DataGrid({
     [ToolbarWrapper]
   )
 
+  // ======================
+  // Render
+  // ======================
   return (
     <MuiDataGrid
       rows={indexedRows}
       columns={columnsWithRowNumber}
       initialState={mergedInitialState}
       slots={slots}
+      rowSelectionModel={rowSelectionModel}
+      onRowSelectionModelChange={handleRowSelectionChange}
+      getRowId={getRowId}
       {...rest}
     />
   )

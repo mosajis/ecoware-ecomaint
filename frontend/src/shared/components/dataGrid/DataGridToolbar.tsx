@@ -1,8 +1,8 @@
-import { Toolbar } from '@mui/x-data-grid'
-import { useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import AddIcon from '@mui/icons-material/Add'
 import RefreshIcon from '@mui/icons-material/Refresh'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
 import ToolbarButton from './toolbar/ToolbarButton'
 import ButtonDensity from './toolbar/ButtonDensity'
 import ButtonExport from './toolbar/ButtonExport'
@@ -11,12 +11,17 @@ import ButtonFilters from './toolbar/ButtonFilter'
 import ButtonSearch from './toolbar/ButtonSearch'
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
+import { Toolbar } from '@mui/x-data-grid'
+import { useTheme } from '@mui/material/styles'
 
 interface DataGridToolbarProps {
   label: string
   loading?: boolean
   onAddClick?: () => void
   onRefreshClick?: () => void
+  onEditClick?: () => void
+  onDeleteClick?: () => void
+  hasSelection?: boolean
 
   disableSearch?: boolean
   disableDensity?: boolean
@@ -25,6 +30,8 @@ interface DataGridToolbarProps {
   disableFilters?: boolean
   disableAdd?: boolean
   disableRefresh?: boolean
+  disableEdit?: boolean
+  disableDelete?: boolean
 
   children?: React.ReactNode
 }
@@ -37,6 +44,9 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
     loading,
     onAddClick,
     onRefreshClick,
+    onEditClick,
+    onDeleteClick,
+    hasSelection,
     disableSearch,
     disableDensity,
     disableExport,
@@ -44,6 +54,8 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
     disableFilters,
     disableAdd,
     disableRefresh,
+    disableEdit,
+    disableDelete,
     children,
   } = props
 
@@ -72,6 +84,24 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
           {!disableExport && <ButtonExport />}
           {!disableColumns && <ButtonColumns />}
           {!disableFilters && <ButtonFilters />}
+          {!disableEdit && onEditClick && (
+            <ToolbarButton
+              title='Edit'
+              onClick={onEditClick}
+              disabled={!hasSelection}
+            >
+              <EditIcon />
+            </ToolbarButton>
+          )}
+          {!disableDelete && onDeleteClick && (
+            <ToolbarButton
+              title='Delete'
+              onClick={onDeleteClick}
+              disabled={!hasSelection}
+            >
+              <DeleteIcon />
+            </ToolbarButton>
+          )}
           {!disableRefresh && onRefreshClick && (
             <ToolbarButton title='Refresh' onClick={onRefreshClick}>
               <RefreshIcon />

@@ -1,27 +1,52 @@
 import Splitter from '@/shared/components/Splitter/Splitter'
-import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import LocationUpsert from './LocationUpsert'
+import GenericDataGrid from '@/shared/components/dataGrid/DataGrid'
 import { tblLocation, TypeTblLocation } from '@/core/api/generated/api'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { GridColDef } from '@mui/x-data-grid'
-import { useTreeData } from '@/shared/hooks/useDataTree'
-import { useState, useCallback, useMemo } from 'react'
+import { useDataTree } from '@/shared/hooks/useDataTree'
+import { useState, useCallback } from 'react'
 import { GenericTree } from '@/shared/components/tree/Tree'
 import { mapToTree } from '@/shared/components/tree/TreeUtil'
+
+const columns: GridColDef<TypeTblLocation>[] = [
+  { field: 'locationCode', headerName: 'Code', width: 60 },
+  { field: 'name', headerName: 'Name', flex: 1 },
+  {
+    field: 'parentLocation',
+    headerName: 'Parent',
+    flex: 1,
+    valueGetter: (_, row) => row?.tblLocation?.name,
+  },
+]
 
 export default function PageLocation() {
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
 
-  const { dataTreeItems, loading, refetch, rows } = useTreeData({
-    request: tblLocation.getAll,
-    mapper: items => mapToTree(items, 'locationId', 'parentLocationId'),
-  })
+  const treeMapper = useCallback(
+    (items: TypeTblLocation[]) =>
+      mapToTree(items, 'locationId', 'parentLocationId'),
+    []
+  )
 
-  const handleTreeItemSelect = useCallback(() => {
-    // Implementation
-  }, [])
+  const getAll = useCallback(
+    () =>
+      tblLocation.getAll({
+        include: {
+          tblLocation: true,
+        },
+      }),
+    []
+  )
+
+  const { tree, rows, loading, refetch, handleDelete } =
+    useDataTree<TypeTblLocation>({
+      getAll,
+      deleteById: tblLocation.deleteById,
+      getId: item => item.locationId,
+      mapper: treeMapper,
+    })
 
   const handleCreate = useCallback(() => {
     setSelectedRowId(null)
@@ -29,53 +54,36 @@ export default function PageLocation() {
     setOpenForm(true)
   }, [])
 
-  const handleEdit = useCallback((row: TypeTblLocation) => {
-    setSelectedRowId(row.locationId)
+  const handleEdit = useCallback((rowId: number) => {
+    setSelectedRowId(rowId)
     setMode('update')
     setOpenForm(true)
   }, [])
 
-  const handleFormSuccess = useCallback(() => {
-    setOpenForm(false)
-    refetch()
-  }, [refetch])
-
-  // ✅ 3. Memoize columns
-  const columns: GridColDef<TypeTblLocation>[] = useMemo(
-    () => [
-      { field: 'name', headerName: 'Name', flex: 1 },
-      { field: 'parentLocationId', headerName: 'Parent ID', width: 100 },
-      dataGridActionColumn({
-        onEdit: handleEdit,
-        onDelete: () => {
-          // TODO: implement delete with refetch
-        },
-      }),
-    ],
-    [handleEdit]
-  )
-
-  console.log(dataTreeItems)
   return (
     <>
       <Splitter initialPrimarySize='35%'>
         <GenericTree<TypeTblLocation>
+          label='Tree View'
           loading={loading}
-          data={dataTreeItems}
-          getItemName={item => item.name || '-'}
-          getItemId={item => item.locationId}
+          data={tree}
+          onDelete={handleDelete}
+          onEdit={handleEdit}
           onRefresh={refetch}
           onAdd={handleCreate}
-          onItemSelect={handleTreeItemSelect}
+          getItemName={item => item.name || '-'}
+          getItemId={item => item.locationId}
         />
 
-        <CustomizedDataGrid
+        <GenericDataGrid
+          label='List View'
           showToolbar
           disableRowNumber
-          label='List View'
           loading={loading}
           rows={rows}
           columns={columns}
+          onEditClick={handleEdit}
+          onDeleteClick={handleDelete}
           onRefreshClick={refetch}
           onAddClick={handleCreate}
           getRowId={row => row.locationId}
@@ -87,7 +95,7 @@ export default function PageLocation() {
         mode={mode}
         recordId={selectedRowId}
         onClose={() => setOpenForm(false)}
-        onSuccess={handleFormSuccess}
+        onSuccess={refetch}
       />
     </>
   )

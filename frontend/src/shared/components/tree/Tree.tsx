@@ -1,5 +1,5 @@
 import { useTree } from '@headless-tree/react'
-import { useEffect, useMemo, useCallback } from 'react'
+import { useEffect, useCallback, useState } from 'react'
 import {
   syncDataLoaderFeature,
   selectionFeature,
@@ -19,14 +19,17 @@ interface GenericTreeProps<T> {
   getItemId: (item: T) => string | number
   onAdd?: () => void
   onRefresh?: () => void
+  onEdit?: (itemId: number) => void
+  onDelete?: (itemId: number) => void
   loading?: boolean
-  initialState?: Partial<TreeState<T>> | undefined
+  initialState?: Partial<TreeState<T>>
 }
 
 export function GenericTree<T>({
   label,
   data,
-  initialState,
+  onDelete,
+  onEdit,
   onItemSelect,
   getItemName,
   getItemId,
@@ -34,66 +37,103 @@ export function GenericTree<T>({
   onRefresh,
   loading = false,
 }: GenericTreeProps<T>) {
+  const [expandedItems, setExpandedItems] = useState<string[]>([])
+  const [selectedItems, setSelectedItems] = useState<string[]>([])
+  const [focusedItem, setFocusedItem] = useState<string | null>(null)
+
   const { itemsMap, childrenMap, rootIds } = data
 
-  // کش کردن tree config
-  const treeConfig = useMemo(
-    () => ({
-      rootItemId: 'root',
-      initialState,
-      getItemName: (item: any) => getItemName(item.getItemData()),
-      isItemFolder: (item: any) => {
+  // Clean up state when items are removed
+  useEffect(() => {
+    const validIds = new Set(Array.from(itemsMap.keys()).map(String))
+    setExpandedItems(prev => prev.filter(id => validIds.has(id)))
+    setSelectedItems(prev => prev.filter(id => validIds.has(id)))
+    setFocusedItem(prev => (prev && validIds.has(prev) ? prev : null))
+  }, [itemsMap])
+
+  const tree = useTree<T>({
+    rootItemId: 'root',
+    state: { selectedItems, expandedItems, focusedItem },
+    setSelectedItems,
+    setExpandedItems,
+    setFocusedItem,
+    getItemName: item => {
+      try {
+        return getItemName(item.getItemData())
+      } catch {
+        return 'Deleted Item'
+      }
+    },
+    isItemFolder: item => {
+      try {
         const id = getItemId(item.getItemData())
         return (childrenMap.get(Number(id))?.length ?? 0) > 0
+      } catch {
+        return false
+      }
+    },
+    dataLoader: {
+      getItem: itemId => {
+        if (itemId === 'root') return {} as T
+        return itemsMap.get(Number(itemId)) || ({ id: itemId } as T)
       },
-      dataLoader: {
-        getItem: (itemId: string | number) => {
-          if (itemId === 'root') return {} as T
-          const id = Number(itemId)
-          const item = itemsMap.get(id)
-          if (!item) throw new Error(`Tree item not found: ${itemId}`)
-          return item
-        },
-        getChildren: (itemId: string | number) => {
-          if (itemId === 'root') return rootIds.map(id => String(id))
-          const id = Number(itemId)
-          return (childrenMap.get(id) || []).map(childId => String(childId))
-        },
+      getChildren: itemId => {
+        if (itemId === 'root') return rootIds.map(String)
+        return (childrenMap.get(Number(itemId)) || [])
+          .filter(id => itemsMap.has(id))
+          .map(String)
       },
-      features: [syncDataLoaderFeature, selectionFeature, hotkeysCoreFeature],
-      indent: 20,
-    }),
-    [itemsMap, childrenMap, rootIds, initialState, getItemName, getItemId]
-  )
+    },
+    features: [syncDataLoaderFeature, selectionFeature, hotkeysCoreFeature],
+  })
 
-  const tree = useTree(treeConfig)
-
+  // Rebuild tree when items change
   useEffect(() => {
     tree.rebuildTree()
   }, [itemsMap, childrenMap, rootIds, tree])
 
+  // Auto-expand root items
+  useEffect(() => {
+    if (!rootIds.length) return
+    setExpandedItems(prev => {
+      const next = new Set(prev)
+      rootIds.forEach(id => next.add(String(id)))
+      return Array.from(next)
+    })
+  }, [rootIds])
+
+  // Expand / Collapse all
   const handleExpandAll = useCallback(() => {
-    const items = tree.getItems()
-    for (let i = 0, len = items.length; i < len; i++) {
-      items[i].expand()
-    }
+    tree.getItems().forEach(item => item.expand())
   }, [tree])
 
   const handleCollapseAll = useCallback(() => {
-    const items = tree.getItems()
-    for (let i = 0, len = items.length; i < len; i++) {
-      items[i].collapse()
-    }
+    tree.getItems().forEach(item => item.collapse())
   }, [tree])
+
+  // Only send ID for edit/delete for performance
+  const handleEdit = useCallback(() => {
+    if (!selectedItems[0]) return
+    onEdit?.(Number(selectedItems[0]))
+  }, [selectedItems, onEdit])
+
+  const handleDelete = useCallback(() => {
+    if (!selectedItems[0]) return
+    onDelete?.(Number(selectedItems[0]))
+  }, [selectedItems, onDelete])
 
   return (
     <div className='tree-container'>
       <TreeHeader
+        onDelete={handleDelete}
+        onEdit={handleEdit}
         label={label || 'Tree View'}
-        onExpandAll={handleExpandAll}
-        onCollapseAll={handleCollapseAll}
         onAdd={onAdd}
         onRefresh={onRefresh}
+        onExpandAll={handleExpandAll}
+        onCollapseAll={handleCollapseAll}
+        loading={loading}
+        hasSelection={selectedItems.length > 0}
       />
       <TreeContent
         tree={tree}

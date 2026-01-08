@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { toast } from 'sonner'
 
 export interface TreeDataMapper<T> {
@@ -8,56 +8,125 @@ export interface TreeDataMapper<T> {
 }
 
 interface UseTreeDataOptions<T> {
-  request: () => Promise<{ items: T[] }>
+  getAll: (params?: any) => Promise<{ items: T[] } | T[]>
+  deleteById?: (id: number) => Promise<any>
   mapper: (items: T[]) => TreeDataMapper<T>
+  getId: (item: T) => number
+  isEnabled?: boolean
 }
 
-interface UseTreeDataReturn<T> {
-  dataTreeItems: TreeDataMapper<T>
-  loading: boolean
-  error: Error | null
-  rows: T[] | []
-  refetch: () => Promise<void>
-}
-
-export function useTreeData<T>({
-  request,
+export function useDataTree<T>({
+  getAll,
+  deleteById,
   mapper,
-}: UseTreeDataOptions<T>): UseTreeDataReturn<T> {
+  getId,
+  isEnabled = true,
+}: UseTreeDataOptions<T>) {
   const [rows, setRows] = useState<T[]>([])
-  const [dataTreeItems, setDataTreeItems] = useState<TreeDataMapper<T>>({
+  const [tree, setTree] = useState<TreeDataMapper<T>>({
     itemsMap: new Map(),
     childrenMap: new Map(),
     rootIds: [],
   })
+  const [loading, setLoading] = useState(false)
 
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<Error | null>(null)
+  const fetchRef = useRef<(params?: any) => Promise<void>>(() =>
+    Promise.resolve()
+  )
 
-  const fetchData = async () => {
-    try {
+  const buildTree = useCallback(
+    (items: T[]) => {
+      const mapped = mapper(items)
+      setRows(items)
+      setTree(mapped)
+    },
+    [mapper]
+  )
+
+  const fetchData = useCallback(
+    async (params?: any) => {
+      if (!isEnabled) return
       setLoading(true)
-      setError(null)
-      const response = await request()
-      const mappedData = mapper(response.items)
-      setRows(response.items)
-      setDataTreeItems(mappedData)
-    } catch (err) {
-      toast.error('Error in Get/Map data to create tree')
-    } finally {
-      setLoading(false)
-    }
-  }
+      try {
+        const res = await getAll(params)
+        const items = Array.isArray(res) ? res : res.items
+        buildTree(items)
+      } catch (err) {
+        toast.error('Failed to load tree data')
+      } finally {
+        setLoading(false)
+      }
+    },
+    [getAll, buildTree, isEnabled]
+  )
+
+  useEffect(() => {
+    fetchRef.current = fetchData
+  }, [fetchData])
+
+  const refetch = useCallback(() => {
+    if (isEnabled) fetchRef.current()
+  }, [isEnabled])
+
+  /**
+   * Delete + Refetch (مهم‌ترین تغییر اینجاست)
+   */
+  const handleDelete = useCallback(
+    async (id: number) => {
+      if (!deleteById || !isEnabled) return
+
+      setLoading(true)
+      const prevRows = rows
+
+      // Optimistic update
+      const nextRows = rows.filter(x => getId(x) !== id)
+      buildTree(nextRows)
+
+      try {
+        await deleteById(id)
+      } catch (err) {
+        // Rollback on error
+        buildTree(prevRows)
+        toast.error('Failed to delete item')
+      } finally {
+        setLoading(false)
+      }
+    },
+    [deleteById, getId, rows, buildTree, isEnabled]
+  )
+
+  /**
+   * Create / Update (local)
+   */
+  const handleUpsert = useCallback(
+    (record: T) => {
+      if (!isEnabled) return
+      const id = getId(record)
+
+      setRows(prev => {
+        const exists = prev.some(x => getId(x) === id)
+        const next = exists
+          ? prev.map(x => (getId(x) === id ? record : x))
+          : [record, ...prev]
+
+        setTree(mapper(next))
+        return next
+      })
+    },
+    [getId, mapper, isEnabled]
+  )
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [fetchData])
 
   return {
-    dataTreeItems,
-    loading,
-    error,
-    refetch: fetchData,
     rows,
+    tree,
+    loading,
+    fetchData,
+    refetch,
+    handleDelete,
+    handleUpsert,
   }
 }
