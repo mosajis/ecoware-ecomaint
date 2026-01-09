@@ -26,6 +26,7 @@ interface CustomizedDataGridProps extends DataGridProps {
   onAddClick?: () => void
   onRefreshClick?: () => void
   onEditClick?: (rowId: number) => void
+  onDoubleClick?: (rowId: number) => void
   onDeleteClick?: (rowId: number) => void
   getRowId: (row: any) => GridRowId
   disableSearch?: boolean
@@ -53,6 +54,7 @@ export default function GenericDataGrid({
   onRefreshClick,
   onEditClick,
   onDeleteClick,
+  onDoubleClick,
   getRowId,
   disableSearch,
   disableDensity,
@@ -178,6 +180,7 @@ export default function GenericDataGrid({
       rowSelectionModel={rowSelectionModel}
       onRowSelectionModelChange={handleRowSelectionChange}
       getRowId={getRowId}
+      onRowDoubleClick={row => onDoubleClick?.(Number(row.id))}
       {...rest}
     />
   )

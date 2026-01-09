@@ -1,10 +1,8 @@
-import { useState, useCallback, useMemo, memo } from 'react'
 import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
 import Tooltip from '@mui/material/Tooltip'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { ReactNode } from 'react'
 import OpenInFullIcon from '@mui/icons-material/OpenInFull'
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen'
 import RefreshIcon from '@mui/icons-material/Refresh'
@@ -12,6 +10,10 @@ import AddIcon from '@mui/icons-material/Add'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import ButtonSearch from './toolbar/ButtonSearch'
+import ConfirmDialog from '../ConfirmDialog'
+import Divider from '@mui/material/Divider'
+import { useState, useCallback, useMemo, memo } from 'react'
+import { ReactNode } from 'react'
 
 interface TreeToolbarProps {
   label?: string
@@ -23,7 +25,7 @@ interface TreeToolbarProps {
   onAdd?: () => void
   onEdit?: () => void
   onDelete?: () => void
-  hasSelection?: boolean // برای enable/disable کردن edit و delete
+  hasSelection?: boolean
   actions?: ReactNode
 }
 
@@ -34,6 +36,7 @@ interface ActionButton {
   onClick?: () => void
   disabled?: boolean
   show: boolean
+  hasDivider?: boolean
 }
 
 const TreeToolbar = memo(function TreeToolbar({
@@ -49,6 +52,7 @@ const TreeToolbar = memo(function TreeToolbar({
   actions,
 }: TreeToolbarProps) {
   const [searchText, setSearchText] = useState('')
+  const [confirmOpen, setConfirmOpen] = useState(false)
 
   const handleSearchChange = useCallback(
     (value: string) => {
@@ -58,7 +62,6 @@ const TreeToolbar = memo(function TreeToolbar({
     [onSearch]
   )
 
-  // بهینه‌سازی: sx object را با useMemo کش می‌کنیم
   const boxSx = useMemo(
     () => (theme: any) => ({
       padding: '3.5px 0.2rem',
@@ -73,7 +76,19 @@ const TreeToolbar = memo(function TreeToolbar({
     []
   )
 
-  // بهینه‌سازی: آرایه دکمه‌ها برای جلوگیری از تکرار کد
+  const handleDeleteClick = () => {
+    setConfirmOpen(true)
+  }
+
+  const handleConfirmDelete = () => {
+    setConfirmOpen(false)
+    onDelete?.()
+  }
+
+  const handleCancelDelete = () => {
+    setConfirmOpen(false)
+  }
+
   const buttons: ActionButton[] = useMemo(
     () => [
       {
@@ -89,6 +104,7 @@ const TreeToolbar = memo(function TreeToolbar({
         tooltip: 'Collapse',
         onClick: onCollapseAll,
         show: !!onCollapseAll,
+        hasDivider: true,
       },
       {
         key: 'edit',
@@ -102,7 +118,7 @@ const TreeToolbar = memo(function TreeToolbar({
         key: 'delete',
         icon: <DeleteIcon />,
         tooltip: 'Delete',
-        onClick: onDelete,
+        onClick: handleDeleteClick,
         disabled: !hasSelection,
         show: !!onDelete,
       },
@@ -133,31 +149,52 @@ const TreeToolbar = memo(function TreeToolbar({
   )
 
   return (
-    <Box>
-      <Box sx={boxSx}>
-        <Typography fontWeight='bold'>{label}</Typography>
+    <Box sx={boxSx}>
+      <Typography fontWeight='bold'>{label}</Typography>
 
-        <Stack direction='row' spacing={0.5} alignItems='center'>
-          {onSearch && <ButtonSearch onSearch={handleSearchChange} />}
-
-          {/* {buttons.map(
-            btn =>
-              btn.show && (
-                <Tooltip key={btn.key} title={btn.tooltip}>
-                  <IconButton
-                    size='small'
-                    onClick={btn.onClick}
-                    disabled={btn.disabled}
-                  >
-                    {btn.icon}
-                  </IconButton>
+      <Stack direction='row' spacing={0.5} alignItems='center'>
+        {onSearch && <ButtonSearch onSearch={handleSearchChange} />}
+        <Divider orientation='vertical' style={{ color: 'red', height: 20 }} />
+        {buttons.map(
+          btn =>
+            btn.show && (
+              <Box
+                key={btn.key}
+                display={'flex'}
+                alignItems={'center'}
+                gap={0.5}
+              >
+                <Tooltip title={btn.tooltip}>
+                  <span>
+                    <IconButton
+                      size='small'
+                      onClick={btn.onClick}
+                      disabled={btn.disabled}
+                    >
+                      {btn.icon}
+                    </IconButton>
+                  </span>
                 </Tooltip>
-              )
-          )} */}
+                {btn.hasDivider && (
+                  <Divider
+                    orientation='vertical'
+                    style={{ color: 'red', height: 20 }}
+                  />
+                )}
+              </Box>
+            )
+        )}
 
-          {actions && <Box>{actions}</Box>}
-        </Stack>
-      </Box>
+        {actions && <Box>{actions}</Box>}
+      </Stack>
+      {/* Confirm Dialog */}
+      <ConfirmDialog
+        open={confirmOpen}
+        onCancel={handleCancelDelete}
+        onConfirm={handleConfirmDelete}
+        title='Delete Item'
+        message='Are you certain you want to delete this item?'
+      />
     </Box>
   )
 })

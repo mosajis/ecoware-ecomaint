@@ -10,6 +10,7 @@ function TreeHeader({
   onCollapseAll,
   onEdit,
   onDelete,
+  onSearch,
   label,
   hasSelection,
 }: {
@@ -21,6 +22,7 @@ function TreeHeader({
   onCollapseAll?: () => void
   onDelete?: () => void
   onEdit?: () => void
+  onSearch?: () => void
   hasSelection?: boolean // ✅ برای disable کردن دکمه‌ها
 }) {
   return (
@@ -34,6 +36,7 @@ function TreeHeader({
         onRefresh={onRefresh}
         onExpandAll={onExpandAll}
         onCollapseAll={onCollapseAll}
+        onSearch={onSearch}
       />
       {loading && <LinearProgress />}
     </Box>

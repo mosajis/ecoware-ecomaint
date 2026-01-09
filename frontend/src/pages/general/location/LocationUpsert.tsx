@@ -1,15 +1,14 @@
 import * as z from 'zod'
 import FormDialog from '@/shared/components/formDialog/FormDialog'
-import { memo, useEffect, useState, useCallback } from 'react'
+import NumberField from '@/shared/components/NumberField'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
+import { memo, useEffect, useState, useCallback } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { tblLocation, TypeTblLocation } from '@/core/api/generated/api'
-import { AsyncSelectDialog } from '@/shared/components/AsyncSelectDialog'
 import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
 import { buildRelation, requiredStringField } from '@/core/api/helper'
-import NumberField from '@/shared/components/NumberField'
 
 // === Validation Schema ===
 const schema = z.object({
@@ -39,10 +38,6 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
   const [loadingInitial, setLoadingInitial] = useState(false)
   const [submitting, setSubmitting] = useState(false)
 
-  const [parentLocation, setParentLocation] = useState<TypeTblLocation | null>(
-    null
-  )
-
   const defaultValues: LocationFormValues = {
     name: '',
     locationCode: '',
@@ -50,7 +45,7 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
     orderNo: null,
   }
 
-  const { control, handleSubmit, reset, watch } = useForm<LocationFormValues>({
+  const { control, handleSubmit, reset } = useForm<LocationFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
   })
@@ -59,7 +54,6 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
   const fetchData = useCallback(async () => {
     if (mode !== 'update' || !recordId) {
       reset(defaultValues)
-      setParentLocation(null)
       return
     }
 
@@ -76,13 +70,6 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         parentLocationId: res?.tblLocation ?? null,
         orderNo: res?.orderNo ?? null,
       })
-
-      // نمایش parent
-      if (res?.tblLocation) {
-        setParentLocation(res.tblLocation)
-      } else {
-        setParentLocation(null)
-      }
     } finally {
       setLoadingInitial(false)
     }
@@ -91,8 +78,6 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
   useEffect(() => {
     if (open) fetchData()
   }, [open, fetchData])
-
-  const isDisabled = loadingInitial || submitting
 
   // === Submit Handler ===
   const handleFormSubmit = useCallback(
@@ -140,6 +125,8 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
     [mode, recordId, onSuccess, onClose]
   )
 
+  const isDisabled = loadingInitial || submitting
+
   return (
     <FormDialog
       open={open}
@@ -156,7 +143,7 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           control={control}
           render={({ field, fieldState }) => (
             <TextField
-              sx={{ width: '75%' }}
+              sx={{ width: '80%' }}
               {...field}
               label='Code *'
               size='small'

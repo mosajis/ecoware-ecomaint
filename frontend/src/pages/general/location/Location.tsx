@@ -17,6 +17,7 @@ const columns: GridColDef<TypeTblLocation>[] = [
     flex: 1,
     valueGetter: (_, row) => row?.tblLocation?.name,
   },
+  { field: 'orderNo', headerName: 'Order No', width: 80 },
 ]
 
 export default function PageLocation() {
@@ -69,6 +70,7 @@ export default function PageLocation() {
           data={tree}
           onDelete={handleDelete}
           onEdit={handleEdit}
+          onDoubleClick={handleEdit}
           onRefresh={refetch}
           onAdd={handleCreate}
           getItemName={item => item.name || '-'}
@@ -82,6 +84,7 @@ export default function PageLocation() {
           loading={loading}
           rows={rows}
           columns={columns}
+          onDoubleClick={handleEdit}
           onEditClick={handleEdit}
           onDeleteClick={handleDelete}
           onRefreshClick={refetch}

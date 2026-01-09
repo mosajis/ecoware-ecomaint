@@ -8,6 +8,7 @@ import type { DialogProps } from '@mui/material/Dialog'
 import Spinner from '../Spinner'
 
 export type FormDialogWrapperProps = {
+  readonly?: boolean
   open: boolean
   onClose: () => void
   title: string
@@ -22,6 +23,7 @@ export type FormDialogWrapperProps = {
 }
 
 export default function FormDialog({
+  readonly,
   open,
   onClose,
   title,
@@ -54,19 +56,23 @@ export default function FormDialog({
         <form
           onSubmit={e => {
             e.preventDefault()
-            onSubmit?.(e)
+            if (!readonly) {
+              onSubmit?.(e)
+            }
           }}
         >
           <Suspense fallback={<Spinner />}>{children}</Suspense>
 
           <DialogActions sx={{ p: 0, m: 0, mt: 2 }}>
-            <FormDialogAction
-              onCancel={onClose}
-              submitting={submitting}
-              cancelText={cancelText}
-              submitText={submitText}
-              disabled={isDisabled}
-            />
+            {!readonly && (
+              <FormDialogAction
+                onCancel={onClose}
+                submitting={submitting}
+                cancelText={cancelText}
+                submitText={submitText}
+                disabled={isDisabled}
+              />
+            )}
           </DialogActions>
         </form>
       </DialogContent>

@@ -9,6 +9,7 @@ interface TreeContentProps<T> {
   getItemId: (item: T) => string | number
   onItemSelect?: (item: T) => void
   rootIds: (string | number)[]
+  onDoubleClick?: (rowId: number) => void
 }
 
 function TreeContent<T>({
@@ -16,6 +17,7 @@ function TreeContent<T>({
   getItemName,
   getItemId,
   onItemSelect,
+  onDoubleClick,
 }: TreeContentProps<T>) {
   const items = tree.getItems()
   return (
@@ -27,6 +29,8 @@ function TreeContent<T>({
 
         return (
           <div
+            onDoubleClick={() => onDoubleClick?.(Number(itemId))}
+            className='tree-item'
             key={itemId}
             {...item.getProps()}
             style={

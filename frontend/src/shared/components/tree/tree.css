@@ -16,7 +16,7 @@
   padding: 0.5rem;
 }
 
-.tree button[role='treeitem'] {
+.tree .tree-item {
   display: flex;
   background: transparent;
   border: none;
@@ -28,7 +28,7 @@
 }
 
 /* خطوط عمودی برای تمام levels */
-.tree button[role='treeitem']::before {
+.tree .tree-item::before {
   content: '';
   position: absolute;
   top: 0;
@@ -54,7 +54,7 @@
 }
 
 /* خط افقی */
-.tree button[role='treeitem']::after {
+.tree .tree-item::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -65,13 +65,13 @@
 }
 
 /* حذف خط عمودی برای آخرین child در هر level */
-.tree button[role='treeitem']:last-child::before {
+.tree .tree-item:last-child::before {
   height: 50%;
 }
 
 /* حذف خطوط برای root items */
-.tree button[role='treeitem'][aria-level='1']::before,
-.tree button[role='treeitem'][aria-level='1']::after {
+.tree .tree-item[aria-level='1']::before,
+.tree .tree-item[aria-level='1']::after {
   display: none;
 }
 
@@ -80,7 +80,8 @@
   text-align: left;
   background-color: rgba(var(--template-palette-background-defaultChannel) / 1);
   color: var(--template-palette-text-primary);
-  padding: 6px 10px;
+  padding: 4px;
+  padding-left: 0;
   position: relative;
   border-radius: 8px;
   transition: background-color 0.2s ease;
@@ -117,7 +118,8 @@ button:focus-visible .treeitem.focused,
   width: 10px;
   display: inline-block;
   z-index: 1;
-  margin-right: 4px;
+  margin-right: 3px;
+  margin-left: 3px;
   transition: transform 0.1s ease-in-out;
   position: relative;
   opacity: 0.7;
@@ -128,16 +130,16 @@ button:focus-visible .treeitem.focused,
 }
 
 .treeitem:not(.folder) {
-  padding-left: 24px;
+  padding-left: 8px;
 }
 
 .treeitem.selected:after {
   content: ' ';
   position: absolute;
-  top: 5px;
+  top: 7px;
   left: -2px;
   height: 16px;
-  width: 4px;
+  width: 3px;
   background-color: var(--template-palette-primary-main);
   border-radius: 99px;
   z-index: 2;

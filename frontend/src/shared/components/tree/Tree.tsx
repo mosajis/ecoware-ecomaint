@@ -1,19 +1,21 @@
+import TreeHeader from './TreeHeader'
+import TreeContent from './TreeContent'
 import { useTree } from '@headless-tree/react'
 import { useEffect, useCallback, useState } from 'react'
+import { TreeDataMapper } from '@/shared/hooks/useDataTree'
 import {
   syncDataLoaderFeature,
   selectionFeature,
   hotkeysCoreFeature,
   TreeState,
 } from '@headless-tree/core'
-import TreeHeader from './TreeHeader'
-import TreeContent from './TreeContent'
-import { TreeDataMapper } from '@/shared/hooks/useDataTree'
+
 import './tree.css'
 
 interface GenericTreeProps<T> {
   label?: string
   data: TreeDataMapper<T>
+  onDoubleClick?: (rowId: number) => void
   onItemSelect?: (item: T) => void
   getItemName: (item: T) => string
   getItemId: (item: T) => string | number
@@ -35,6 +37,7 @@ export function GenericTree<T>({
   getItemId,
   onAdd,
   onRefresh,
+  onDoubleClick,
   loading = false,
 }: GenericTreeProps<T>) {
   const [expandedItems, setExpandedItems] = useState<string[]>([])
@@ -57,13 +60,7 @@ export function GenericTree<T>({
     setSelectedItems,
     setExpandedItems,
     setFocusedItem,
-    getItemName: item => {
-      try {
-        return getItemName(item.getItemData())
-      } catch {
-        return 'Deleted Item'
-      }
-    },
+    getItemName: item => getItemName(item.getItemData()),
     isItemFolder: item => {
       try {
         const id = getItemId(item.getItemData())
@@ -122,12 +119,17 @@ export function GenericTree<T>({
     onDelete?.(Number(selectedItems[0]))
   }, [selectedItems, onDelete])
 
+  const handleSearch = () => {
+    console.log('search')
+  }
+
   return (
     <div className='tree-container'>
       <TreeHeader
+        label={label || 'Tree View'}
+        onSearch={handleSearch}
         onDelete={handleDelete}
         onEdit={handleEdit}
-        label={label || 'Tree View'}
         onAdd={onAdd}
         onRefresh={onRefresh}
         onExpandAll={handleExpandAll}
@@ -137,10 +139,11 @@ export function GenericTree<T>({
       />
       <TreeContent
         tree={tree}
+        rootIds={rootIds}
+        onDoubleClick={onDoubleClick}
         getItemName={getItemName}
         getItemId={getItemId}
         onItemSelect={onItemSelect}
-        rootIds={rootIds}
       />
     </div>
   )

@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 import { Toolbar } from '@mui/x-data-grid'
 import { useTheme } from '@mui/material/styles'
+import { Divider } from '@mui/material'
 
 interface DataGridToolbarProps {
   label: string
@@ -32,6 +33,7 @@ interface DataGridToolbarProps {
   disableRefresh?: boolean
   disableEdit?: boolean
   disableDelete?: boolean
+  disableShow?: boolean
 
   children?: React.ReactNode
 }
@@ -56,6 +58,7 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
     disableRefresh,
     disableEdit,
     disableDelete,
+    disableShow,
     children,
   } = props
 
@@ -78,12 +81,20 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
           {children}
         </Box>
 
-        <Box display='flex' gap={0.5}>
+        <Box display='flex' gap={0.5} alignItems={'center'}>
           {!disableSearch && <ButtonSearch />}
+          <Divider
+            orientation='vertical'
+            style={{ color: 'red', height: 20 }}
+          />
           {!disableDensity && <ButtonDensity />}
           {!disableExport && <ButtonExport />}
           {!disableColumns && <ButtonColumns />}
           {!disableFilters && <ButtonFilters />}
+          <Divider
+            orientation='vertical'
+            style={{ color: 'red', height: 20 }}
+          />
           {!disableEdit && onEditClick && (
             <ToolbarButton
               title='Edit'
