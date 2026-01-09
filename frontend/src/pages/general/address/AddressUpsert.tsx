@@ -28,7 +28,7 @@ type Props = {
   mode: 'create' | 'update'
   recordId?: number | null
   onClose: () => void
-  onSuccess: (data: TypeTblAddress) => void
+  onSuccess?: (data: TypeTblAddress) => void
 }
 
 function AddressUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
@@ -106,7 +106,7 @@ function AddressUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         }
 
         if (result) {
-          onSuccess(result)
+          onSuccess?.(result)
           onClose()
         }
       } catch (err) {

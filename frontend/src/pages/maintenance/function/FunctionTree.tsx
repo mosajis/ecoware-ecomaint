@@ -1,11 +1,12 @@
 import Splitter from '@/shared/components/Splitter/Splitter'
-import CustomizedTree from '@/shared/components/tree/Tree'
 import FunctionFormDialog from './FunctionUpsert'
 import TabsComponent from './FunctionTabs'
 
 import { tblFunctions, TypeTblFunctions } from '@/core/api/generated/api'
 import { useCallback, useMemo, useState } from 'react'
 import { useDataTree } from '@/shared/hooks/useDataTree'
+import { mapToTree } from '@/shared/components/tree/TreeUtil'
+import { GenericTree } from '@/shared/components/tree/Tree'
 
 export default function PageFunctionTree() {
   const [selected, setSelected] = useState<TypeTblFunctions | null>(null)
@@ -13,22 +14,26 @@ export default function PageFunctionTree() {
   const [mode, setMode] = useState<'create' | 'update'>('create')
 
   const mapper = useCallback(
-    (row: TypeTblFunctions) => ({
-      id: row.functionId.toString(),
-      label: row.funcDescr ?? row.funcNo ?? '',
-      parentId: row.parentFunctionId?.toString() ?? null,
-      data: row,
-    }),
+    (items: TypeTblFunctions[]) =>
+      mapToTree(items, 'functionId', 'parentFunctionId'),
     []
   )
 
-  const { treeItems, loading, handleDelete, handleFormSuccess, handleRefresh } =
-    useDataTree(
-      tblFunctions.getAll,
-      tblFunctions.deleteById,
-      'functionId',
-      mapper
-    )
+  const { tree, rows, loading, refetch, handleDelete } =
+    useDataTree<TypeTblFunctions>({
+      getAll: tblFunctions.getAll,
+      deleteById: tblFunctions.deleteById,
+      getId: item => item.functionId,
+      mapper,
+    })
+
+  // const { treeItems, loading, handleDelete, handleFormSuccess, handleRefresh } =
+  //   useDataTree(
+  //     tblFunctions.getAll,
+  //     tblFunctions.deleteById,
+  //     'functionId',
+  //     mapper
+  //   )
 
   // --- Handlers ---
   const handleCreate = () => {
@@ -46,17 +51,14 @@ export default function PageFunctionTree() {
   return (
     <>
       <Splitter initialPrimarySize='40%'>
-        <CustomizedTree
-          label='Function Tree'
-          items={treeItems}
-          loading={loading}
-          onRefresh={handleRefresh}
-          getRowId={row => row.functionId}
-          onAddClick={handleCreate}
-          onEditClick={handleEdit}
-          onDeleteClick={handleDelete}
-        />
+        {/* <GenericTree
 
+        data={tree}
+        getItemId={row => row.functionId}
+          label='Function Tree'
+          loading={loading}
+        /> */}
+        tree
         <TabsComponent />
       </Splitter>
 
@@ -65,7 +67,7 @@ export default function PageFunctionTree() {
         mode={mode}
         recordId={selected?.functionId}
         onClose={() => setOpenForm(false)}
-        onSuccess={handleFormSuccess}
+        onSuccess={refetch}
       />
     </>
   )

@@ -1,10 +1,20 @@
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import AddressUpsert from './AddressUpsert'
-import { useCallback, useMemo, useState } from 'react'
-import { tblAddress, TypeTblAddress } from '@/core/api/generated/api'
 import { type GridColDef } from '@mui/x-data-grid'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
+import { useCallback, useState } from 'react'
+import { tblAddress, TypeTblAddress } from '@/core/api/generated/api'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
+
+const columns: GridColDef<TypeTblAddress>[] = [
+  { field: 'code', headerName: 'Code', width: 60 },
+  { field: 'name', headerName: 'Name', flex: 1 },
+  { field: 'address1', headerName: 'Address 1', flex: 1 },
+  { field: 'address2', headerName: 'Address 2', flex: 1 },
+  { field: 'phone', headerName: 'Phone', flex: 2 },
+  { field: 'contact', headerName: 'Contact Person', flex: 1 },
+  { field: 'eMail', headerName: 'Email', flex: 1 },
+  { field: 'orderNo', headerName: 'Order No', width: 100 },
+]
 
 export default function PageAddress() {
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null)
@@ -12,61 +22,58 @@ export default function PageAddress() {
   const [mode, setMode] = useState<'create' | 'update'>('create')
 
   // === useDataGrid ===
-  const { rows, loading, handleDelete, handleFormSuccess, handleRefresh } =
-    useDataGrid(tblAddress.getAll, tblAddress.deleteById, 'addressId')
+  const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
+    tblAddress.getAll,
+    tblAddress.deleteById,
+    'addressId'
+  )
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
     setSelectedRowId(null)
     setMode('create')
-    setOpenForm(true)
+    handleUpsertOpen()
   }, [])
 
-  const handleEdit = useCallback((row: TypeTblAddress) => {
-    setSelectedRowId(row.addressId)
+  const handleEdit = useCallback((rowId: number) => {
+    setSelectedRowId(rowId)
     setMode('update')
-    setOpenForm(true)
+    handleUpsertOpen()
   }, [])
 
-  // === Columns ===
-  const columns = useMemo<GridColDef<TypeTblAddress>[]>(
-    () => [
-      { field: 'code', headerName: 'Code', width: 60 },
-      { field: 'name', headerName: 'Name', flex: 1 },
-      { field: 'address1', headerName: 'Address 1', flex: 1 },
-      { field: 'address2', headerName: 'Address 2', flex: 1 },
-      { field: 'phone', headerName: 'Phone', flex: 2 },
-      { field: 'contact', headerName: 'Contact Person', flex: 1 },
-      { field: 'eMail', headerName: 'Email', flex: 1 },
-      { field: 'orderNo', headerName: 'Order No', width: 100 },
-      dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
-    ],
-    [handleEdit, handleDelete]
-  )
+  const handleUpsertClose = useCallback(() => {
+    setOpenForm(false)
+  }, [setOpenForm])
+
+  const handleUpsertOpen = useCallback(() => {
+    setOpenForm(true)
+  }, [setOpenForm])
+
+  const getRowId = useCallback((row: TypeTblAddress) => row.addressId, [])
 
   return (
     <>
       <CustomizedDataGrid
-        label='Address'
         showToolbar
         disableRowNumber
+        label='Address'
         onAddClick={handleCreate}
         onRefreshClick={handleRefresh}
+        onDeleteClick={handleDelete}
+        onEditClick={handleEdit}
+        onDoubleClick={handleEdit}
         rows={rows}
         columns={columns}
         loading={loading}
-        getRowId={row => row.addressId}
+        getRowId={getRowId}
       />
 
       <AddressUpsert
         open={openForm}
         mode={mode}
         recordId={selectedRowId}
-        onClose={() => setOpenForm(false)}
-        onSuccess={record => {
-          handleFormSuccess(record)
-          setOpenForm(false)
-        }}
+        onClose={handleUpsertClose}
+        onSuccess={handleRefresh}
       />
     </>
   )

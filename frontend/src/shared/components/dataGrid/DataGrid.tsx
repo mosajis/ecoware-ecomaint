@@ -9,6 +9,7 @@ import {
   GridCallbackDetails,
 } from '@mui/x-data-grid'
 import { useMemo, useCallback, useState } from 'react'
+import ConfirmDialog from '../ConfirmDialog'
 
 const rowNumberColumn: GridColDef = {
   field: 'rowNumber',
@@ -114,9 +115,6 @@ export default function GenericDataGrid({
     onDeleteClick?.(Number(rowId))
   }, [rowSelectionModel, onDeleteClick])
 
-  // ======================
-  // Toolbar wrapper
-  // ======================
   const ToolbarWrapper = useMemo(
     () => (props: any) =>
       (
@@ -168,9 +166,6 @@ export default function GenericDataGrid({
     [ToolbarWrapper]
   )
 
-  // ======================
-  // Render
-  // ======================
   return (
     <MuiDataGrid
       rows={indexedRows}

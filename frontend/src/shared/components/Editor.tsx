@@ -1,10 +1,9 @@
 import {
-  alpha,
-  LinearProgress,
-  Typography,
   useColorScheme,
   useTheme,
 } from '@mui/material'
+import LinearProgress from '@mui/material/LinearProgress'
+import Typography from '@mui/material/Typography'
 import React, {
   useCallback,
   memo,

@@ -1,4 +1,6 @@
-import { Stepper, Step, StepLabel } from '@mui/material'
+import Stepper from '@mui/material/Stepper'
+import Step from '@mui/material/Step'
+import StepLabel from '@mui/material/StepLabel'
 import { reportWorkSteps } from './reportWorkSteps'
 import { useAtomValue } from 'jotai'
 import { atomActiveStep } from './ReportWorkAtom'

@@ -11,9 +11,11 @@ import ButtonFilters from './toolbar/ButtonFilter'
 import ButtonSearch from './toolbar/ButtonSearch'
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
+import ConfirmDialog from '../ConfirmDialog'
+import Divider from '@mui/material/Divider'
 import { Toolbar } from '@mui/x-data-grid'
 import { useTheme } from '@mui/material/styles'
-import { Divider } from '@mui/material'
+import { useState } from 'react'
 
 interface DataGridToolbarProps {
   label: string
@@ -33,13 +35,27 @@ interface DataGridToolbarProps {
   disableRefresh?: boolean
   disableEdit?: boolean
   disableDelete?: boolean
-  disableShow?: boolean
 
   children?: React.ReactNode
 }
 
 export default function DataGridToolbar(props: DataGridToolbarProps) {
   const theme = useTheme()
+
+  const [confirmOpen, setConfirmOpen] = useState(false)
+
+  const handleDeleteClick = () => {
+    setConfirmOpen(true)
+  }
+
+  const handleConfirmDelete = () => {
+    setConfirmOpen(false)
+    onDeleteClick?.()
+  }
+
+  const handleCancelDelete = () => {
+    setConfirmOpen(false)
+  }
 
   const {
     label,
@@ -58,7 +74,6 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
     disableRefresh,
     disableEdit,
     disableDelete,
-    disableShow,
     children,
   } = props
 
@@ -107,7 +122,7 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
           {!disableDelete && onDeleteClick && (
             <ToolbarButton
               title='Delete'
-              onClick={onDeleteClick}
+              onClick={handleDeleteClick}
               disabled={!hasSelection}
             >
               <DeleteIcon />
@@ -127,6 +142,14 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
       </Toolbar>
 
       {loading && <LinearProgress />}
+
+      <ConfirmDialog
+        open={confirmOpen}
+        onCancel={handleCancelDelete}
+        onConfirm={handleConfirmDelete}
+        title='Delete Item'
+        message='Are you certain you want to delete this item?'
+      />
     </Box>
   )
 }

@@ -1,4 +1,5 @@
-import { Box, LinearProgress } from '@mui/material'
+import LinearProgress from '@mui/material/LinearProgress'
+import Box from '@mui/material/Box'
 import TreeToolbar from './TreeToolbar'
 
 // ===== TreeHeader =====

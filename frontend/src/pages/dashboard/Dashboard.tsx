@@ -1,15 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import {
-  Box,
-  Grid,
-  Card,
-  CardContent,
-  Typography,
-  Stack,
-  LinearProgress,
-  Divider,
-  CircularProgress,
-} from '@mui/material'
+import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import Typography from '@mui/material/Typography'
+import Stack from '@mui/material/Stack'
+import LinearProgress from '@mui/material/LinearProgress'
+import Divider from '@mui/material/Divider'
+import CircularProgress from '@mui/material/CircularProgress'
 import { BarChart } from '@mui/x-charts/BarChart'
 import { PieChart } from '@mui/x-charts/PieChart'
 import {
@@ -318,12 +316,6 @@ const Dashboard: React.FC = () => {
                     cornerRadius: 4,
                   },
                 ]}
-                slotProps={{
-                  legend: {
-                    direction: 'column',
-                    position: { vertical: 'top', horizontal: 'right' },
-                  },
-                }}
               />
             </CardContent>
           </Card>

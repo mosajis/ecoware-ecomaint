@@ -41,13 +41,6 @@ export default function DataGridActions({
         alignItems='center'
         height='100%'
       >
-        {true && (
-          <DataGridActionsButton
-            title='Show'
-            icon={<Eye fontSize='small' sx={{ color: '#4671b6ff' }} />}
-            onClick={onEdit}
-          />
-        )}
         {onEdit && (
           <DataGridActionsButton
             title='Edit'

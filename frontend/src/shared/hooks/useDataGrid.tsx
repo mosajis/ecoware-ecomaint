@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useRef } from 'react'
 import { toast } from 'sonner'
 
 export function useDataGrid<T, K extends keyof T = keyof T>(
-  getAll: (params?: any) => Promise<{ items: T[] } | T[]>,
+  getAll: (params?: any) => Promise<{ items: T[] }>,
   deleteById: (id: any) => Promise<any>,
   keyId: K,
   isEnabled: boolean = true
@@ -11,6 +11,7 @@ export function useDataGrid<T, K extends keyof T = keyof T>(
   const [loading, setLoading] = useState(false)
 
   const getIdValue = useCallback((row: T) => row[keyId], [keyId])
+
   const fetchRef = useRef<(params?: any) => Promise<void>>(() =>
     Promise.resolve()
   )
@@ -19,19 +20,13 @@ export function useDataGrid<T, K extends keyof T = keyof T>(
     async (params?: any) => {
       if (!isEnabled) return
       setLoading(true)
+
       try {
         const res = await getAll(params)
-        if (Array.isArray(res)) {
-          setRows(res as T[])
-        } else if ('items' in res && Array.isArray(res.items)) {
-          setRows(res.items as T[])
-        } else {
-          console.warn('Unexpected getAll result:', res)
-          setRows([])
-        }
-      } catch (error) {
-        const message =
-          error instanceof Error ? error.message : 'Failed to load data'
+
+        setRows(res.items)
+      } catch (error: any) {
+        const message = error.message || 'Failed to load data'
         toast.error(message)
       } finally {
         setLoading(false)
@@ -49,36 +44,21 @@ export function useDataGrid<T, K extends keyof T = keyof T>(
   }, [isEnabled])
 
   const handleDelete = useCallback(
-    async (row: T) => {
-      if (!isEnabled) return
-      const id = getIdValue(row)
+    async (rowId: number) => {
+      if (!isEnabled && !rowId) return
+
       setLoading(true)
       try {
-        await deleteById(id)
-        setRows(prev => prev.filter(x => getIdValue(x) !== id))
-      } catch (error) {
-        const message =
-          error instanceof Error ? error.message : 'Failed to delete'
+        await deleteById(rowId)
+        await handleRefresh()
+      } catch (error: any) {
+        const message = error.message || 'Failed to delete'
         toast.error(message)
       } finally {
         setLoading(false)
       }
     },
     [deleteById, getIdValue, isEnabled]
-  )
-
-  const handleFormSuccess = useCallback(
-    (record: T) => {
-      if (!isEnabled) return
-      const id = getIdValue(record)
-      setRows(prev => {
-        const exists = prev.some(x => getIdValue(x) === id)
-        return exists
-          ? prev.map(x => (getIdValue(x) === id ? record : x))
-          : [record, ...prev]
-      })
-    },
-    [getIdValue, isEnabled]
   )
 
   useEffect(() => {
@@ -90,7 +70,6 @@ export function useDataGrid<T, K extends keyof T = keyof T>(
     loading,
     fetchData,
     handleDelete,
-    handleFormSuccess,
     handleRefresh,
   }
 }

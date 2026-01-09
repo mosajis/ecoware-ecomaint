@@ -1,5 +1,5 @@
+import Chip from '@mui/material/Chip'
 import { FC } from 'react'
-import { Chip } from '@mui/material'
 import { STATUS } from '../types'
 
 type StatusKey = keyof typeof STATUS
