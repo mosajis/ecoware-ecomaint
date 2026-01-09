@@ -20,6 +20,7 @@ export const FILE_CONFIG = {
     'application/vnd.ms-excel': '.xls',
     'text/csv': '.csv',
     'text/plain': '.txt',
+    'text/plain;charset=utf-8': '.txt',
     'image/jpeg': '.jpg',
     'image/png': '.png',
     'image/gif': '.gif',

@@ -58,3 +58,5 @@ frontend/dist-stats.html
 !/uploads/attachments/.gitkeep
 backend/uploads/**
 backend/uploads/*
+frontend/dist-stats.html
+frontend/dist-stats.html
