@@ -25,14 +25,7 @@ type Props = {
 }
 
 const TabsComponent = ({ partTypeId }: Props) => {
-  return (
-    <TabsContainer
-      tabs={tabs}
-      queryParamKey='tab'
-      fillHeight
-      tabProps={{ selected: partTypeId }}
-    />
-  )
+  return <TabsContainer tabs={tabs} tabProps={{ selected: partTypeId }} />
 }
 
 export default TabsComponent

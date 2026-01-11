@@ -31,14 +31,7 @@ type Props = {
 }
 
 const Tabs = ({ compTypeJob }: Props) => {
-  return (
-    <TabsContainer
-      tabs={tabs}
-      queryParamKey='tab'
-      fillHeight={true}
-      tabProps={{ compTypeJob }}
-    />
-  )
+  return <TabsContainer tabs={tabs} tabProps={{ compTypeJob }} />
 }
 
 export default Tabs

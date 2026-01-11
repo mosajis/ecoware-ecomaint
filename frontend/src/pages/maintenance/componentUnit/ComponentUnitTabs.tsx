@@ -1,7 +1,3 @@
-import TabsContainer, {
-  ReusableTabItem,
-} from '@/shared/components/TabsContainer'
-import { lazy } from 'react'
 import AccountTree from '@mui/icons-material/AccountTree'
 import AddBox from '@mui/icons-material/AddBox'
 import AttachFile from '@mui/icons-material/AttachFile'
@@ -13,7 +9,11 @@ import Description from '@mui/icons-material/Description'
 import DoneAll from '@mui/icons-material/DoneAll'
 import StackedLineChart from '@mui/icons-material/StackedLineChart'
 import Tune from '@mui/icons-material/Tune'
+import { lazy } from 'react'
 import { TypeTblComponentUnit } from '@/core/api/generated/api'
+import TabsContainer, {
+  ReusableTabItem,
+} from '@/shared/components/TabsContainer'
 
 // Lazy imports
 const TabDetails = lazy(() => import('./tabs/TabDetails'))
@@ -35,7 +35,11 @@ type Props = {
 
 // Define tabs
 const tabs: ReusableTabItem[] = [
-  { label: 'Job', icon: <AccountTree />, component: TabJob },
+  {
+    label: 'Job (Check upser due Date)',
+    icon: <AccountTree />,
+    component: TabJob,
+  },
   { label: 'Details', icon: <Description />, component: TabDetails },
   { label: 'Counter', icon: <BarChart />, component: TabCounter },
   { label: 'Measure Point', icon: <Tune />, component: TabMeasures },
@@ -43,8 +47,6 @@ const tabs: ReusableTabItem[] = [
   { label: 'Work Order', icon: <ContentCopy />, component: TabWorkOrder },
   { label: 'Maint Log', icon: <DoneAll />, component: TabMaintLog },
   { label: 'Function', icon: <CheckCircle />, component: TabPerformed },
-  // { label: 'Part crud', icon: <Build />, component: TabPart },
-  // { label: 'Oil Info crud', icon: <ColorLens />, component: TabOilInfo },
   { label: 'Stock Used', icon: <StackedLineChart />, component: TabStockUsed },
   { label: 'Attachment', icon: <AttachFile />, component: TabAttachment },
   {
@@ -60,7 +62,6 @@ const ComponentUnitTabs = (props: Props) => {
   return (
     <TabsContainer
       tabs={tabs}
-      queryParamKey='tab'
       tabProps={{
         label,
         componentUnit,

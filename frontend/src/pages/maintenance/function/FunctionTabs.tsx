@@ -50,13 +50,7 @@ type Props = {
 
 const TabsComponent = (props: Props) => {
   const { functionId, label } = props
-  return (
-    <TabsContainer
-      tabs={tabs}
-      queryParamKey='tab'
-      tabProps={{ functionId, label }}
-    />
-  )
+  return <TabsContainer tabs={tabs} tabProps={{ functionId, label }} />
 }
 
 export default TabsComponent

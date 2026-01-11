@@ -61,8 +61,6 @@ const TabsComponent = ({ selectedMaintLog }: Props) => {
   return (
     <TabsContainer
       tabs={tabs}
-      queryParamKey='tab'
-      fillHeight
       tabProps={{
         selected: selectedMaintLog,
         label: selectedMaintLog?.tblComponentUnit?.compNo,

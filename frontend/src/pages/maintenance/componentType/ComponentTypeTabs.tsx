@@ -58,8 +58,6 @@ const ComponentTypeTabs = ({ compType, label }: Props) => {
     <TabsContainer
       persistInUrl
       tabs={tabs}
-      queryParamKey='tab'
-      fillHeight
       tabProps={{
         compType,
         label,

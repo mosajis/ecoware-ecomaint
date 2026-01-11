@@ -56,7 +56,7 @@ export default function FormDialog({
         />
       )}
 
-      <DialogContent dividers sx={{ p: 1 }}>
+      <DialogContent dividers sx={{ p: hideHeader ? 1 : 1.5 }}>
         <form
           onSubmit={e => {
             e.preventDefault()
