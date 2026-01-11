@@ -1,10 +1,18 @@
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import JobClassUpsert from './JobClassUpsert'
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback } from 'react'
 import { tblJobClass, TypeTblJobClass } from '@/core/api/generated/api'
 import { GridColDef } from '@mui/x-data-grid'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
+
+const getRowId = (row: TypeTblJobClass) => row.jobClassId
+
+// === Columns ===
+const columns: GridColDef<TypeTblJobClass>[] = [
+  { field: 'code', headerName: 'Code', width: 60 },
+  { field: 'name', headerName: 'Name', flex: 1 },
+  { field: 'orderNo', headerName: 'Order No', width: 80 },
+]
 
 export default function PageJobClass() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
@@ -12,43 +20,45 @@ export default function PageJobClass() {
   const [mode, setMode] = useState<'create' | 'update'>('create')
 
   // === useDataGrid ===
-  const { rows, loading, handleRefresh, handleDelete, handleFormSuccess } =
-    useDataGrid(tblJobClass.getAll, tblJobClass.deleteById, 'jobClassId')
+  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
+    tblJobClass.getAll,
+    tblJobClass.deleteById,
+    'jobClassId'
+  )
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
     setSelectedRowId(null)
     setMode('create')
-    setOpenForm(true)
+    handleUpsertOpen()
   }, [])
 
-  const handleEdit = useCallback((row: TypeTblJobClass) => {
-    setSelectedRowId(row.jobClassId)
+  const handleEdit = useCallback((rowId: number) => {
+    setSelectedRowId(rowId)
     setMode('update')
-    setOpenForm(true)
+    handleUpsertOpen()
   }, [])
 
-  // === Columns ===
-  const columns = useMemo<GridColDef<TypeTblJobClass>[]>(
-    () => [
-      { field: 'code', headerName: 'Code', width: 60 },
-      { field: 'name', headerName: 'Name', flex: 1 },
-      { field: 'orderNo', headerName: 'Order No', width: 100 },
-      dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
-    ],
-    [handleEdit, handleDelete]
-  )
+  const handleUpsertClose = useCallback(() => {
+    setOpenForm(false)
+  }, [])
 
+  const handleUpsertOpen = useCallback(() => {
+    setOpenForm(true)
+  }, [])
   return (
     <>
       <CustomizedDataGrid
-        label='Job Class'
         showToolbar
+        label='Job Class'
         rows={rows}
         columns={columns}
         loading={loading}
-        getRowId={row => row.jobClassId}
+        getRowId={getRowId}
         onAddClick={handleCreate}
+        onEditClick={handleEdit}
+        onDoubleClick={handleEdit}
+        onDeleteClick={handleDelete}
         onRefreshClick={handleRefresh}
       />
 
@@ -56,11 +66,8 @@ export default function PageJobClass() {
         open={openForm}
         mode={mode}
         recordId={selectedRowId}
-        onClose={() => setOpenForm(false)}
-        onSuccess={record => {
-          handleFormSuccess(record)
-          setOpenForm(false)
-        }}
+        onClose={handleUpsertClose}
+        onSuccess={handleRefresh}
       />
     </>
   )

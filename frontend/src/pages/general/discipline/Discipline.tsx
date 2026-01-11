@@ -5,6 +5,8 @@ import { tblDiscipline, TypeTblDiscipline } from '@/core/api/generated/api'
 import { GridColDef } from '@mui/x-data-grid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 
+const getRowId = (row: TypeTblDiscipline) => row.discId
+
 // === Columns ===
 const columns: GridColDef<TypeTblDiscipline>[] = [
   { field: 'name', headerName: 'Name', flex: 1 },
@@ -38,13 +40,11 @@ export default function PageDiscipline() {
 
   const handleUpsertClose = useCallback(() => {
     setOpenForm(false)
-  }, [setOpenForm])
+  }, [])
 
   const handleUpsertOpen = useCallback(() => {
     setOpenForm(true)
-  }, [setOpenForm])
-
-  const getRowId = useCallback((row: TypeTblDiscipline) => row.discId, [])
+  }, [])
 
   return (
     <>

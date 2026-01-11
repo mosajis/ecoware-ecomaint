@@ -5,6 +5,8 @@ import { useCallback, useState } from 'react'
 import { tblAddress, TypeTblAddress } from '@/core/api/generated/api'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 
+const getRowId = (row: TypeTblAddress) => row.addressId
+
 const columns: GridColDef<TypeTblAddress>[] = [
   { field: 'code', headerName: 'Code', width: 60 },
   { field: 'name', headerName: 'Name', flex: 1 },
@@ -43,13 +45,11 @@ export default function PageAddress() {
 
   const handleUpsertClose = useCallback(() => {
     setOpenForm(false)
-  }, [setOpenForm])
+  }, [])
 
   const handleUpsertOpen = useCallback(() => {
     setOpenForm(true)
-  }, [setOpenForm])
-
-  const getRowId = useCallback((row: TypeTblAddress) => row.addressId, [])
+  }, [])
 
   return (
     <>

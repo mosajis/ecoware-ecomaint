@@ -8,6 +8,8 @@ import { useState, useCallback } from 'react'
 import { GenericTree } from '@/shared/components/tree/Tree'
 import { mapToTree } from '@/shared/components/tree/TreeUtil'
 
+const getRowId = (row: TypeTblLocation) => row.locationId
+
 const columns: GridColDef<TypeTblLocation>[] = [
   { field: 'locationCode', headerName: 'Code', width: 60 },
   { field: 'name', headerName: 'Name', flex: 1 },
@@ -52,16 +54,22 @@ export default function PageLocation() {
   const handleCreate = useCallback(() => {
     setSelectedRowId(null)
     setMode('create')
-    setOpenForm(true)
+    handleUpsertOpen()
   }, [])
 
   const handleEdit = useCallback((rowId: number) => {
     setSelectedRowId(rowId)
     setMode('update')
-    setOpenForm(true)
+    handleUpsertOpen()
   }, [])
 
-  const getRowId = useCallback((row: TypeTblLocation) => row.locationId, [])
+  const handleUpsertClose = useCallback(() => {
+    setOpenForm(false)
+  }, [])
+
+  const handleUpsertOpen = useCallback(() => {
+    setOpenForm(true)
+  }, [])
 
   return (
     <>
@@ -99,7 +107,7 @@ export default function PageLocation() {
         open={openForm}
         mode={mode}
         recordId={selectedRowId}
-        onClose={() => setOpenForm(false)}
+        onClose={handleUpsertClose}
         onSuccess={refetch}
       />
     </>

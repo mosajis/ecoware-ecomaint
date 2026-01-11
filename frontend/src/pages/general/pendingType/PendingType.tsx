@@ -1,75 +1,71 @@
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import PendingTypeUpsert from './PendingTypeUpsert'
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback } from 'react'
 import { tblPendingType, TypeTblPendingType } from '@/core/api/generated/api'
 import { GridColDef } from '@mui/x-data-grid'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
+
+const getRowId = (row: TypeTblPendingType) => row.pendTypeId
+
+const columns: GridColDef<TypeTblPendingType>[] = [
+  { field: 'pendTypeName', headerName: 'Name', flex: 2 },
+  { field: 'description', headerName: 'Description', flex: 2 },
+  { field: 'orderNo', headerName: 'Order No', width: 120 },
+]
 
 export default function PagePendingType() {
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
 
-  const getAll = useCallback(() => {
-    return tblPendingType.getAll()
-  }, [])
-  const { rows, loading, handleRefresh, handleDelete, handleFormSuccess } =
-    useDataGrid(getAll, tblPendingType.deleteById, 'pendTypeId')
+  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
+    tblPendingType.getAll,
+    tblPendingType.deleteById,
+    'pendTypeId'
+  )
 
   const handleCreate = useCallback(() => {
     setSelectedRowId(null)
     setMode('create')
-    setOpenForm(true)
+    handleUpsertOpen()
   }, [])
 
-  const handleEdit = useCallback((row: TypeTblPendingType) => {
-    setSelectedRowId(row.pendTypeId)
+  const handleEdit = useCallback((rowId: number) => {
+    setSelectedRowId(rowId)
     setMode('update')
-    setOpenForm(true)
+    handleUpsertOpen()
   }, [])
 
-  const columns: GridColDef<TypeTblPendingType>[] = useMemo(
-    () => [
-      { field: 'pendTypeName', headerName: 'Name', flex: 2 },
-      {
-        field: 'parent',
-        headerName: 'Parent',
-        flex: 1,
-        valueGetter: (_, row) => row?.tblPendingType?.pendTypeName,
-      },
-      { field: 'description', headerName: 'Description', flex: 2 },
-      { field: 'orderNo', headerName: 'Order No', width: 120 },
-      dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
-    ],
-    [handleEdit, handleDelete]
-  )
+  const handleUpsertClose = useCallback(() => {
+    setOpenForm(false)
+  }, [])
+
+  const handleUpsertOpen = useCallback(() => {
+    setOpenForm(true)
+  }, [])
 
   return (
     <>
       <CustomizedDataGrid
+        showToolbar
+        label='Pending Type'
         rows={rows}
         columns={columns}
-        label='Pending Type'
-        showToolbar
         loading={loading}
-        getRowId={row => row.pendTypeId}
+        onDeleteClick={handleDelete}
+        onEditClick={handleEdit}
+        onDoubleClick={handleEdit}
         onAddClick={handleCreate}
-        onRefreshClick={handleRefresh}
+        getRowId={getRowId}
       />
 
-      {openForm && (
-        <PendingTypeUpsert
-          open={openForm}
-          mode={mode}
-          recordId={selectedRowId}
-          onClose={() => setOpenForm(false)}
-          onSuccess={record => {
-            handleFormSuccess(record)
-            setOpenForm(false)
-          }}
-        />
-      )}
+      <PendingTypeUpsert
+        open={openForm}
+        mode={mode}
+        recordId={selectedRowId}
+        onClose={handleUpsertClose}
+        onSuccess={handleRefresh}
+      />
     </>
   )
 }

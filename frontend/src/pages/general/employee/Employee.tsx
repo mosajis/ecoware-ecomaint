@@ -5,7 +5,8 @@ import { tblEmployee, TypeTblEmployee } from '@/core/api/generated/api'
 import { GridColDef } from '@mui/x-data-grid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 
-// === Columns
+const getRowId = (row: TypeTblEmployee) => row.employeeId
+
 const columns: GridColDef<TypeTblEmployee>[] = [
   { field: 'code', headerName: 'Code', width: 60 },
   { field: 'lastName', headerName: 'Last Name', flex: 1 },
@@ -63,13 +64,11 @@ export default function PageEmployee() {
 
   const handleUpsertClose = useCallback(() => {
     setOpenForm(false)
-  }, [setOpenForm])
+  }, [])
 
   const handleUpsertOpen = useCallback(() => {
     setOpenForm(true)
-  }, [setOpenForm])
-
-  const getId = useCallback((row: TypeTblEmployee) => row.employeeId, [])
+  }, [])
 
   return (
     <>
@@ -85,7 +84,7 @@ export default function PageEmployee() {
         onDeleteClick={handleDelete}
         onEditClick={handleEdit}
         onDoubleClick={handleEdit}
-        getRowId={getId}
+        getRowId={getRowId}
       />
 
       <EmployeeUpsert
