@@ -9,6 +9,7 @@ import { GenericTree } from '@/shared/components/tree/Tree'
 import { mapToTree } from '@/shared/components/tree/TreeUtil'
 
 const getRowId = (row: TypeTblLocation) => row.locationId
+const getItemName = (row: TypeTblLocation) => row.name || '-'
 
 const columns: GridColDef<TypeTblLocation>[] = [
   { field: 'locationCode', headerName: 'Code', width: 60 },
@@ -47,7 +48,7 @@ export default function PageLocation() {
     useDataTree<TypeTblLocation>({
       getAll,
       deleteById: tblLocation.deleteById,
-      getId: item => item.locationId,
+      getId: getRowId,
       mapper: treeMapper,
     })
 
@@ -83,7 +84,7 @@ export default function PageLocation() {
           onDoubleClick={handleEdit}
           onAdd={handleCreate}
           onRefresh={refetch}
-          getItemName={item => item.name || '-'}
+          getItemName={getItemName}
           getItemId={getRowId}
         />
 

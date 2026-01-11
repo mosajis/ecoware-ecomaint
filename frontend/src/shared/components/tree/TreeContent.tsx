@@ -30,7 +30,7 @@ function TreeContent<T>({
         return (
           <div
             onDoubleClick={() => onDoubleClick?.(Number(itemId))}
-            className='tree-item'
+            className='tree-item-parent'
             key={itemId}
             {...item.getProps()}
             style={
@@ -45,7 +45,7 @@ function TreeContent<T>({
             }}
           >
             <div
-              className={cn('treeitem', {
+              className={cn('tree-item', {
                 focused: item.isFocused(),
                 expanded: item.isExpanded(),
                 selected: item.isSelected(),
