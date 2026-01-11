@@ -95,7 +95,7 @@ export default function AsyncSelect<T>({
       multiple={multiple}
       options={options}
       value={field?.value ?? value ?? (multiple ? [] : null)}
-      getOptionLabel={getOptionLabel}
+      getOptionLabel={getOptionLabel || ''}
       isOptionEqualToValue={(option, val) => option === val}
       onChange={(_, v) => handleChange(v, field?.onChange)}
       inputValue={inputValue}

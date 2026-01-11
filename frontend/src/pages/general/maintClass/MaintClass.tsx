@@ -114,7 +114,6 @@ export default function PageMaintClass() {
       <Splitter initialPrimarySize='34%'>
         <CustomizedDataGrid
           showToolbar
-          disableDensity
           disableColumns
           disableExport
           disableRefresh
@@ -133,7 +132,6 @@ export default function PageMaintClass() {
         <Splitter initialPrimarySize='50%'>
           <CustomizedDataGrid
             showToolbar
-            disableDensity
             disableColumns
             disableExport
             disableRefresh
@@ -151,7 +149,6 @@ export default function PageMaintClass() {
 
           <CustomizedDataGrid
             showToolbar
-            disableDensity
             disableColumns
             disableExport
             disableRefresh

@@ -19,6 +19,7 @@ export type FormDialogWrapperProps = {
   cancelText?: string
   submitText?: string
   disabled?: boolean
+  hideHeader?: boolean
   maxWidth?: DialogProps['maxWidth']
 }
 
@@ -31,6 +32,7 @@ export default function FormDialog({
   loadingInitial = false,
   onSubmit,
   children,
+  hideHeader = false,
   cancelText = 'Cancel',
   submitText = 'Ok',
   disabled = false,
@@ -45,14 +47,16 @@ export default function FormDialog({
       fullWidth
       maxWidth={maxWidth}
     >
-      <DialogHeader
-        title={title}
-        onClose={onClose}
-        loading={loadingInitial}
-        disabled={isDisabled}
-      />
+      {!hideHeader && (
+        <DialogHeader
+          title={title}
+          onClose={onClose}
+          loading={loadingInitial}
+          disabled={isDisabled}
+        />
+      )}
 
-      <DialogContent dividers>
+      <DialogContent dividers sx={{ p: 1 }}>
         <form
           onSubmit={e => {
             e.preventDefault()

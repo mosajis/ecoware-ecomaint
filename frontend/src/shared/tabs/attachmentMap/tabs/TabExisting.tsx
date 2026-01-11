@@ -1,49 +1,67 @@
-import { memo } from 'react'
-import Box from '@mui/material/Box'
+import TabContainer from '@/shared/components/TabContainer'
 import DataGrid from '@/shared/components/dataGrid/DataGrid'
-import { TypeTblAttachment } from '@/core/api/generated/api'
+import { memo, useCallback, useEffect, useState } from 'react'
+import {
+  tblAttachment,
+  tblAttachmentType,
+  TypeTblAttachment,
+} from '@/core/api/generated/api'
 import { attachmentColumns } from '../AttachmentColumn'
+import { GridRowId, GridRowSelectionModel } from '@mui/x-data-grid'
+import { useDataGrid } from '@/shared/hooks/useDataGrid'
 
-interface ExistingAttachmentTabProps {
-  attachments: TypeTblAttachment[]
-  loading: boolean
-  selectedAttachmentId: number | null
+const getRowId = (row: TypeTblAttachment) => row.attachmentId
+
+interface Props {
   onSelectionChange: (id: number | null) => void
 }
 
-function TabAttachmentExisting({
-  attachments,
-  loading,
-  selectedAttachmentId,
-  onSelectionChange,
-}: ExistingAttachmentTabProps) {
+function TabAttachmentExisting({ onSelectionChange }: Props) {
+  const [rowSelectionModel, setRowSelectionModel] =
+    useState<GridRowSelectionModel>({
+      type: 'include',
+      ids: new Set<GridRowId>([]),
+    })
+
+  const getAll = useCallback(() => {
+    return tblAttachment.getAll({
+      include: {
+        tblAttachmentType: true,
+      },
+    })
+  }, [])
+
+  const { loading, rows } = useDataGrid(
+    getAll,
+    tblAttachment.deleteById,
+    'attachmentId'
+  )
+
+  useEffect(() => {
+    const firstItem = Array.from(rowSelectionModel.ids)[0]
+    if (firstItem) {
+      onSelectionChange(Number(firstItem))
+      return
+    }
+    onSelectionChange(null)
+  }, [rowSelectionModel.ids])
+
   return (
-    <Box
-      display='flex'
-      flexDirection='column'
-      gap={2}
-      height='calc(100% - 40px)'
-    >
+    <TabContainer>
       <DataGrid
-        rows={attachments}
-        columns={attachmentColumns}
-        loading={loading}
-        getRowId={row => row.attachmentId}
-        label='Attachments'
-        checkboxSelection
         disableRowNumber
-        disableMultipleRowSelection
-        // rowSelectionModel={selectedAttachmentId ? [selectedAttachmentId] : []}
-        // onRowSelectionModelChange={model => {
-        //   onSelectionChange((model[0] as number) ?? null)
-        // }}
         disableAdd
         disableRefresh
-        initialState={{
-          pagination: { paginationModel: { pageSize: 10 } },
-        }}
+        disableMultipleRowSelection
+        label='Attachments'
+        rows={rows}
+        loading={loading}
+        columns={attachmentColumns}
+        rowSelectionModel={rowSelectionModel}
+        onRowSelectionModelChange={setRowSelectionModel}
+        getRowId={getRowId}
       />
-    </Box>
+    </TabContainer>
   )
 }
 

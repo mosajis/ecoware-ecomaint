@@ -58,7 +58,7 @@ export default function GenericDataGrid({
   onDoubleClick,
   getRowId,
   disableSearch,
-  disableDensity,
+  disableDensity = true,
   disableExport,
   disableColumns,
   disableFilters,

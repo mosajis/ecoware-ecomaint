@@ -1,32 +1,30 @@
-import { lazy } from 'react'
-import TabsContainer, {
-  type ReusableTabItem,
-} from '@/shared/components/TabsContainer'
+import Edit from '@mui/icons-material/Edit'
 import AttachFile from '@mui/icons-material/AttachFile'
 import Build from '@mui/icons-material/Build'
 import CheckCircle from '@mui/icons-material/CheckCircle'
 import Tune from '@mui/icons-material/Tune'
-import AddBox from '@mui/icons-material/AddBox'
+import TabsContainer, {
+  type ReusableTabItem,
+} from '@/shared/components/TabsContainer'
+import { lazy } from 'react'
 
 // Lazy-loaded tab components
 const TabMaintLog = lazy(() => import('./tabs/TabMaintLog'))
-const TabAttachment = lazy(() => import('./tabs/tabAttachment/TabAttachment'))
+const TabAttachment = lazy(() => import('./tabs/TabAttachment'))
 const TabComponentUnit = lazy(() => import('./tabs/TabComponentUnit'))
 const TabTriggers = lazy(() => import('./tabs/TabTriggers'))
-const TabRevision = lazy(() => import('./tabs/TabRevision'))
 const TabJobDescription = lazy(() => import('./tabs/TabJobDescription'))
 
 // Define tabs in reusable format
-const JobDescTabs: ReusableTabItem[] = [
+const tabs: ReusableTabItem[] = [
   {
     label: 'Description',
-    icon: <CheckCircle />,
+    icon: <Edit />,
     component: TabJobDescription,
   },
   { label: 'MaintLog', icon: <CheckCircle />, component: TabMaintLog },
   { label: 'Component Unit', icon: <Build />, component: TabComponentUnit },
   { label: 'Triggers (not set)', icon: <Tune />, component: TabTriggers },
-  // { label: 'Revision (not set)', icon: <AddBox />, component: TabRevision },
   { label: 'Attachment', icon: <AttachFile />, component: TabAttachment },
 ]
 
@@ -35,13 +33,7 @@ type Props = {
   label?: string | null
 }
 
-export function JobDescriptionTabs(props: Props) {
+export function Tabs(props: Props) {
   const { jobDescriptionId, label } = props
-  return (
-    <TabsContainer
-      tabs={JobDescTabs}
-      queryParamKey='tab'
-      tabProps={{ jobDescriptionId, label }}
-    />
-  )
+  return <TabsContainer tabs={tabs} tabProps={{ jobDescriptionId, label }} />
 }

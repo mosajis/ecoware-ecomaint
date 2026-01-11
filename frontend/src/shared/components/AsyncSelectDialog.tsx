@@ -108,7 +108,6 @@ export function AsyncSelectDialog<TItem extends Record<string, any>>({
           showToolbar
           disableAdd
           disableColumnFilter
-          disableDensity
           disableExport
           disableColumns
           rows={rows}

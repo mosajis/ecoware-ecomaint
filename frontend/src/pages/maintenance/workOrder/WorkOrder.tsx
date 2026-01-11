@@ -184,12 +184,12 @@ export default function WorkOrderPage() {
     <>
       <Splitter horizontal initialPrimarySize='60%'>
         <CustomizedDataGrid
+          checkboxSelection
+          showToolbar
           label='WorkOrders'
           rows={rows}
           columns={columns}
           loading={loading}
-          checkboxSelection
-          showToolbar
           getRowId={row => row.workOrderId}
           onRowSelectionModelChange={handleRowSelectionChange}
           onRefreshClick={handleRefresh}

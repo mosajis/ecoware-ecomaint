@@ -1,21 +1,35 @@
 import Splitter from '@/shared/components/Splitter/Splitter'
-import AppEditor from '@/shared/components/Editor'
 import JobDescriptionUpsert from './JobDescriptionUpsert'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import { GridColDef } from '@mui/x-data-grid'
-import { useCallback, useMemo, useState } from 'react'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
-import { JobDescriptionTabs } from './JobDescriptionTabs'
+import { useCallback, useState } from 'react'
+import { Tabs } from './JobDescriptionTabs'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 import {
   tblJobDescription,
   TypeTblJobDescription,
 } from '@/core/api/generated/api'
 
+const getRowId = (row: TypeTblJobDescription) => row.jobDescId
+
+// === Columns ===
+const columns: GridColDef<TypeTblJobDescription>[] = [
+  { field: 'jobDescCode', headerName: 'Code', width: 120 },
+  { field: 'jobDescTitle', headerName: 'JobTitle', flex: 2 },
+  {
+    field: 'jobClass',
+    headerName: 'JobClass',
+    flex: 1,
+    valueGetter: (value, row) => row?.tblJobClass?.name,
+  },
+  { field: 'changeReason', headerName: 'ChangeReason', flex: 1 },
+]
+
 export default function PageJobDescription() {
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
-  const [selected, setSelected] = useState<TypeTblJobDescription | null>(null)
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
+  const [label, setLabel] = useState<string | null>(null)
 
   // === DataGrid ===
   const getAll = useCallback(() => {
@@ -32,70 +46,63 @@ export default function PageJobDescription() {
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
-    setSelected(null)
+    setSelectedRowId(null)
     setMode('create')
-
-    setOpenForm(true)
+    handleUpsertOpen()
   }, [])
 
-  const handleEdit = useCallback((row: TypeTblJobDescription) => {
-    setSelected(row)
+  const handleEdit = useCallback((rowId: number) => {
+    setSelectedRowId(rowId)
     setMode('update')
+    handleUpsertOpen()
+  }, [])
+
+  const handleUpsertClose = useCallback(() => {
+    setOpenForm(false)
+  }, [])
+
+  const handleUpsertOpen = useCallback(() => {
     setOpenForm(true)
   }, [])
 
-  // === Columns ===
-  const columns: GridColDef<TypeTblJobDescription>[] = useMemo(
-    () => [
-      { field: 'jobDescCode', headerName: 'Code', width: 120 },
-      { field: 'jobDescTitle', headerName: 'JobTitle', flex: 2 },
-      {
-        field: 'jobClass',
-        headerName: 'JobClass',
-        flex: 1,
-        valueGetter: (value, row) => row?.tblJobClass?.name,
-      },
-      { field: 'changeReason', headerName: 'ChangeReason', flex: 1 },
-      dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
-    ],
-    [handleEdit, handleDelete]
+  const handleRowClick = useCallback(
+    ({ row }: { row: TypeTblJobDescription }) => {
+      setSelectedRowId(row.jobDescId)
+      setLabel(row.jobDescTitle)
+    },
+    []
   )
-
-  const handleRowClick = (params: any) => {
-    setSelected(params.row)
-  }
 
   return (
     <>
       <Splitter initialPrimarySize='45%' resetOnDoubleClick>
         <CustomizedDataGrid
-          label='Job Description'
-          getRowId={row => row.jobDescId}
-          loading={loading}
-          disableRowNumber
-          onAddClick={handleCreate}
-          rows={rows}
-          onRefreshClick={handleRefresh}
-          columns={columns}
           showToolbar
+          disableRowNumber
+          disableRefresh
+          disableColumns
+          label='Job Description'
+          loading={loading}
+          rows={rows}
+          columns={columns}
+          onAddClick={handleCreate}
+          onRefreshClick={handleRefresh}
+          onDoubleClick={handleEdit}
+          onEditClick={handleEdit}
+          onDeleteClick={handleDelete}
           onRowClick={handleRowClick}
+          getRowId={getRowId}
         />
 
-        <JobDescriptionTabs
-          label={selected?.jobDescTitle}
-          jobDescriptionId={selected?.jobDescId}
-        />
+        <Tabs label={label} jobDescriptionId={selectedRowId} />
       </Splitter>
 
       <JobDescriptionUpsert
         open={openForm}
         mode={mode}
-        recordId={selected?.jobDescId}
-        onClose={() => setOpenForm(false)}
-        onSuccess={() => {
-          handleRefresh()
-          setOpenForm(false)
-        }}
+        recordId={selectedRowId}
+        onClose={handleUpsertClose}
+        onSuccess={handleRefresh}
       />
     </>
   )

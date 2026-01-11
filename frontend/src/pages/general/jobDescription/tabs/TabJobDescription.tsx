@@ -1,7 +1,6 @@
 import Editor from '@/shared/components/Editor'
-
 import { useEditor } from '@/shared/hooks/useEditor'
-import { tblComponentUnit, tblJobDescription } from '@/core/api/generated/api'
+import { tblJobDescription } from '@/core/api/generated/api'
 
 interface Props {
   jobDescriptionId?: number | null
@@ -16,10 +15,10 @@ const TabJobDescription = ({ label, jobDescriptionId }: Props) => {
 
   return (
     <Editor
+      autoSave
       readOnly={!jobDescriptionId}
       label={label || 'Details'}
       initValue={data?.jobDesc}
-      autoSave
       loading={loading}
       onSave={value => save({ jobDesc: value })}
     />

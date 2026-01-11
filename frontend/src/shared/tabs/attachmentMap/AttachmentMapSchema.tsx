@@ -11,7 +11,10 @@ export const newAttachmentSchema = z.object({
       attachmentTypeId: z.number(),
       name: z.string(),
     })
-    .nullable(),
+    .nullable()
+    .refine(val => val !== null, {
+      message: 'attachment Type is required',
+    }),
   isUserAttachment: z.boolean(),
   file: z.instanceof(File, { message: 'File is required' }),
 })

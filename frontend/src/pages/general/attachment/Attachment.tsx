@@ -4,15 +4,50 @@ import CellFileSize from '@/shared/components/dataGrid/cells/CellFileSize'
 import CellDateTime from '@/shared/components/dataGrid/cells/CellDateTime'
 import CellDownload from '@/shared/components/dataGrid/cells/CellDownload'
 import { type GridColDef } from '@mui/x-data-grid'
-import { useCallback, useMemo, useState } from 'react'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
+import { useCallback, useState } from 'react'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 import { tblAttachment, TypeTblAttachment } from '@/core/api/generated/api'
 
+const getRowId = (row: TypeTblAttachment) => row.attachmentId
+
+// === Columns ===
+const columns: GridColDef<TypeTblAttachment>[] = [
+  {
+    field: 'Link',
+    headerName: 'Link',
+    width: 55,
+    renderCell: ({ row }) => <CellDownload attachmentId={row.attachmentId} />,
+  },
+  { field: 'title', headerName: 'Title', flex: 1 },
+  { field: 'fileName', headerName: 'File Name', flex: 1 },
+  {
+    field: 'attachmentType',
+    headerName: 'Attachment Type',
+    width: 200,
+    valueGetter: (_, row) => row?.tblAttachmentType?.name,
+  },
+  {
+    field: 'size',
+    headerName: 'Size',
+    width: 100,
+    renderCell: ({ value }) => <CellFileSize value={value} />,
+  },
+  {
+    field: 'isUserAttachment',
+    headerName: 'User Attachment',
+    type: 'boolean',
+    width: 135,
+  },
+  {
+    field: 'createdAt',
+    headerName: 'Created At',
+    width: 150,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+]
+
 export default function PageAttachment() {
-  const [selectedRowId, setSelectedRowId] = useState<undefined | number>(
-    undefined
-  )
+  const [selectedRowId, setSelectedRowId] = useState<null | number>(null)
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
 
@@ -21,83 +56,48 @@ export default function PageAttachment() {
     []
   )
   // === useDataGrid ===
-  const { rows, loading, handleDelete, handleFormSuccess, handleRefresh } =
-    useDataGrid(getAll, tblAttachment.deleteById, 'attachmentId')
+  const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
+    getAll,
+    tblAttachment.deleteById,
+    'attachmentId'
+  )
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
-    setSelectedRowId(undefined)
+    setSelectedRowId(null)
     setMode('create')
-    setOpenForm(true)
+    handleUpsertOpen()
   }, [])
 
-  const handleEdit = useCallback((row: TypeTblAttachment) => {
-    setSelectedRowId(row.attachmentId)
-    setMode('update')
-    setOpenForm(true)
+  const handleUpsertClose = useCallback(() => {
+    setOpenForm(false)
   }, [])
 
-  // === Columns ===
-  const columns = useMemo<GridColDef<TypeTblAttachment>[]>(
-    () => [
-      {
-        field: 'Link',
-        headerName: 'Link',
-        width: 55,
-        renderCell: ({ row }) => (
-          <CellDownload attachmentId={row.attachmentId} />
-        ),
-      },
-      { field: 'title', headerName: 'Title', flex: 1 },
-      { field: 'fileName', headerName: 'File Name', flex: 1 },
-      {
-        field: 'attachmentType',
-        headerName: 'Attachment Type',
-        width: 200,
-        valueGetter: (_, row) => row?.tblAttachmentType?.name,
-      },
-      {
-        field: 'size',
-        headerName: 'Size',
-        width: 100,
-        renderCell: ({ value }) => <CellFileSize value={value} />,
-      },
-      {
-        field: 'isUserAttachment',
-        headerName: 'User Attachment',
-        type: 'boolean',
-        width: 135,
-      },
-      {
-        field: 'createdAt',
-        headerName: 'Created At',
-        width: 150,
-        renderCell: ({ value }) => <CellDateTime value={value} />,
-      },
-      dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
-    ],
-    [handleEdit, handleDelete]
-  )
+  const handleUpsertOpen = useCallback(() => {
+    setOpenForm(true)
+  }, [])
 
   return (
     <>
       <CustomizedDataGrid
-        label='Attachments'
         showToolbar
         disableRowNumber
-        onAddClick={handleCreate}
-        onRefreshClick={handleRefresh}
+        disableEdit
+        label='Attachments'
         rows={rows}
         columns={columns}
         loading={loading}
-        getRowId={row => row.attachmentId}
+        onDeleteClick={handleDelete}
+        onAddClick={handleCreate}
+        onRefreshClick={handleRefresh}
+        getRowId={getRowId}
       />
 
       <AttachmentUpsert
         open={openForm}
         mode={mode}
         recordId={selectedRowId}
-        onClose={() => setOpenForm(false)}
+        onClose={handleUpsertClose}
         onSuccess={handleRefresh}
       />
     </>

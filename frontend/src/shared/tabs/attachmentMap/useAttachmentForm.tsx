@@ -5,6 +5,7 @@ import { useAtomValue } from 'jotai'
 import { atomUser } from '@/pages/auth/auth.atom'
 import { tblAttachment, TypeTblAttachment } from '@/core/api/generated/api'
 import { buildRelation } from '@/core/api/helper'
+import { createAttachment } from '@/pages/general/attachment/AttachmentService'
 import {
   existingAttachmentSchema,
   newAttachmentSchema,
@@ -16,7 +17,6 @@ import {
   MapRelationConfig,
   AttachmentMapService,
 } from './AttachmentType'
-import { createAttachment } from '@/pages/general/attachment/AttachmentService'
 
 interface UseAttachmentFormProps<T> {
   open: boolean
@@ -53,7 +53,10 @@ export function useAttachmentForm<T>({
     resolver: zodResolver(newAttachmentSchema),
     defaultValues: {
       title: '',
-      attachmentType: null,
+      attachmentType: {
+        attachmentTypeId: 0,
+        name: '',
+      },
       isUserAttachment: true,
       file: new File([], ''),
     },
@@ -168,7 +171,7 @@ export function useAttachmentForm<T>({
           attachmentTypeId: values.attachmentType?.attachmentTypeId || 0,
           isUserAttachment: values.isUserAttachment,
           file: values.file,
-          createdUserId: user?.userId || 0,
+          createdUserId: user?.userId as number,
         })
 
         if (!newAttachment) {

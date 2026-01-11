@@ -183,6 +183,7 @@ model TblCompJob {
   tblUsers                TblUsers?                @relation(fields: [createdUserId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJob_tblUsers")
   tblCompJobCounters      TblCompJobCounter[]
   tblCompJobMeasurePoints TblCompJobMeasurePoint[]
+  tblCompJobTriggers      TblCompJobTrigger[]
   tblWorkOrders           TblWorkOrder[]
 
   @@index([jobDescId], map: "CJ_JobDescId_Ix")
@@ -236,13 +237,15 @@ model TblCompJobMeasurePoint {
 }
 
 model TblCompJobTrigger {
-  compJobTriggerId Int       @id(map: "PK_tblCompJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_CompJobTrigger]"), map: "DF_CompJobTriggerID") @map("CompJobTriggerID")
-  jobTriggerId     Int?      @map("JobTriggerID")
-  compJobId        Int?      @map("CompJobID")
-  deptId           Int?      @map("DeptID")
-  exportMarker     Int?      @map("ExportMarker")
-  lastupdate       DateTime? @db.DateTime
-  orderNo          Int?      @map("OrderNo")
+  compJobTriggerId Int            @id(map: "PK_tblCompJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_CompJobTrigger]"), map: "DF_CompJobTriggerID") @map("CompJobTriggerID")
+  jobTriggerId     Int?           @map("JobTriggerID")
+  compJobId        Int?           @map("CompJobID")
+  deptId           Int?           @map("DeptID")
+  exportMarker     Int?           @map("ExportMarker")
+  lastupdate       DateTime?      @db.DateTime
+  orderNo          Int?           @map("OrderNo")
+  tblCompJob       TblCompJob?    @relation(fields: [compJobId], references: [compJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJobTrigger_tblCompJob")
+  tblJobTrigger    TblJobTrigger? @relation(fields: [jobTriggerId], references: [jobTriggerId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJobTrigger_tblJobTrigger")
 
   @@map("tblCompJobTrigger")
   @@schema("dbo")
@@ -516,6 +519,7 @@ model TblCompTypeJob {
   tblUsers                    TblUsers?                    @relation(fields: [createdUserId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJob_tblUsers")
   tblCompTypeJobCounters      TblCompTypeJobCounter[]
   tblCompTypeJobMeasurePoints TblCompTypeJobMeasurePoint[]
+  tblCompTypeJobTriggers      TblCompTypeJobTrigger[]
 
   @@map("tblCompTypeJob")
   @@schema("dbo")
@@ -563,15 +567,17 @@ model TblCompTypeJobMeasurePoint {
 }
 
 model TblCompTypeJobTrigger {
-  compTypeJobTriggerId Int       @id(map: "PK_tblCompTypeJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeJobTrigger]"), map: "DF_CompTypeJobTriggerID") @map("CompTypeJobTriggerID")
-  jobTriggerId         Int?      @map("JobTriggerID")
-  compTypeJobId        Int?      @map("CompTypeJobID")
-  deptId               Int?      @map("DeptID")
-  exportMarker         Int?      @map("ExportMarker")
-  lastupdate           DateTime? @db.DateTime
-  orderNo              Int?      @map("OrderNo")
-  createdUserId        Int?      @map("CreatedUserId")
-  tblUsers             TblUsers? @relation(fields: [createdUserId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJobTrigger_tblUsers")
+  compTypeJobTriggerId Int             @id(map: "PK_tblCompTypeJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeJobTrigger]"), map: "DF_CompTypeJobTriggerID") @map("CompTypeJobTriggerID")
+  jobTriggerId         Int?            @map("JobTriggerID")
+  compTypeJobId        Int?            @map("CompTypeJobID")
+  deptId               Int?            @map("DeptID")
+  exportMarker         Int?            @map("ExportMarker")
+  lastupdate           DateTime?       @db.DateTime
+  orderNo              Int?            @map("OrderNo")
+  createdUserId        Int?            @map("CreatedUserId")
+  tblCompTypeJob       TblCompTypeJob? @relation(fields: [compTypeJobId], references: [compTypeJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJobTrigger_tblCompTypeJob")
+  tblJobTrigger        TblJobTrigger?  @relation(fields: [jobTriggerId], references: [jobTriggerId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJobTrigger_tblJobTrigger")
+  tblUsers             TblUsers?       @relation(fields: [createdUserId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJobTrigger_tblUsers")
 
   @@map("tblCompTypeJobTrigger")
   @@schema("dbo")
@@ -842,6 +848,20 @@ model TblJobDescriptionAttachment {
   tblUsers                   TblUsers          @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblJobDescriptionAttachment_Users")
 
   @@map("tblJobDescriptionAttachment")
+  @@schema("dbo")
+}
+
+model TblJobTrigger {
+  jobTriggerId           Int                     @id(map: "PK_tblJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_JobTrigger]"), map: "DF_JobTriggerID") @map("JobTriggerID")
+  descr                  String?                 @map("Descr") @db.NVarChar(300)
+  deptId                 Int?                    @map("DeptID")
+  exportMarker           Int?                    @map("ExportMarker")
+  lastupdate             DateTime?               @db.DateTime
+  orderNo                Int?                    @map("OrderNo")
+  tblCompJobTriggers     TblCompJobTrigger[]
+  tblCompTypeJobTriggers TblCompTypeJobTrigger[]
+
+  @@map("tblJobTrigger")
   @@schema("dbo")
 }
 
@@ -1332,18 +1352,6 @@ model TblStockType {
   otherTblStockTypes TblStockType[] @relation("tblStockTypeTotblStockType")
 
   @@map("tblStockType")
-  @@schema("dbo")
-}
-
-model TblTrigger {
-  triggerId    Int       @id(map: "PK_tblJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_JobTrigger]"), map: "DF_JobTriggerID") @map("TriggerID")
-  descr        String?   @map("Descr") @db.NVarChar(300)
-  deptId       Int?      @map("DeptID")
-  exportMarker Int?      @map("ExportMarker")
-  lastupdate   DateTime? @db.DateTime
-  orderNo      Int?      @map("OrderNo")
-
-  @@map("tblTrigger")
   @@schema("dbo")
 }
 

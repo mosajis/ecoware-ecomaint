@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import Box from '@mui/material/Box'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
@@ -6,11 +5,10 @@ import FormDialog from '@/shared/components/formDialog/FormDialog'
 import ExistingAttachmentTab from './tabs/TabExisting'
 import NewAttachmentTab from './tabs/TabNew'
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck'
-import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import UploadIcon from '@mui/icons-material/Upload'
+import { memo } from 'react'
 import { useAttachmentForm } from './useAttachmentForm'
 import { BaseAttachmentUpsertProps } from './AttachmentType'
-import { Add, Check } from '@mui/icons-material'
 
 function AttachmentMapUpsert<T = any>({
   open,
@@ -25,7 +23,6 @@ function AttachmentMapUpsert<T = any>({
     submitting,
     selectedAttachmentId,
     setSelectedAttachmentId,
-    attachments,
     loadingAttachments,
     existingForm,
     newForm,
@@ -41,6 +38,7 @@ function AttachmentMapUpsert<T = any>({
 
   return (
     <FormDialog
+      hideHeader
       open={open}
       maxWidth='sm'
       onClose={onClose}
@@ -59,12 +57,6 @@ function AttachmentMapUpsert<T = any>({
           onChange={(_, newValue) =>
             setActiveTab(newValue === 1 ? 'existing' : 'new')
           }
-          sx={{
-            borderBottom: 1,
-            borderColor: 'divider',
-            mb: 1,
-            bgcolor: 'white',
-          }}
         >
           <Tab
             label='New Attachment'
@@ -79,12 +71,7 @@ function AttachmentMapUpsert<T = any>({
         </Tabs>
 
         {activeTab === 'existing' && (
-          <ExistingAttachmentTab
-            attachments={attachments}
-            loading={loadingAttachments}
-            selectedAttachmentId={selectedAttachmentId}
-            onSelectionChange={setSelectedAttachmentId}
-          />
+          <ExistingAttachmentTab onSelectionChange={setSelectedAttachmentId} />
         )}
 
         {activeTab === 'new' && (

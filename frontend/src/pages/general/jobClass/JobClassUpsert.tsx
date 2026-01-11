@@ -113,7 +113,7 @@ function JobClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display='grid' gridTemplateColumns='repeat(1, 1fr)' gap={1.5}>
+      <Box display='flex' flexDirection={'column'} gap={1.5}>
         <Controller
           name='code'
           control={control}
@@ -122,10 +122,10 @@ function JobClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               {...field}
               label='Code *'
               size='small'
+              sx={{ width: '50%' }}
               error={!!errors.code}
               helperText={errors.code?.message}
               disabled={isDisabled}
-              sx={{ gridColumn: 'span 2' }}
             />
           )}
         />
@@ -141,7 +141,6 @@ function JobClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               error={!!errors.name}
               helperText={errors.name?.message}
               disabled={isDisabled}
-              sx={{ gridColumn: 'span 2' }}
             />
           )}
         />
@@ -153,6 +152,7 @@ function JobClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               {...field}
               label='Order No'
               size='small'
+              sx={{ width: '50%' }}
               error={!!errors.orderNo}
               helperText={errors.orderNo?.message}
               disabled={isDisabled}

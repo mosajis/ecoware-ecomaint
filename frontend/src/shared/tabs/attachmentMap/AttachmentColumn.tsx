@@ -12,7 +12,7 @@ export const attachmentColumns: GridColDef[] = [
   },
 ]
 
-export const attachmentGridColumns: GridColDef[] = [
+export const attachmentTableColumns: GridColDef[] = [
   {
     field: 'Link',
     headerName: 'Link',

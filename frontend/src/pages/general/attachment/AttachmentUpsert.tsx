@@ -2,45 +2,37 @@ import * as z from 'zod'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import FormDialog from '@/shared/components/formDialog/FormDialog'
-import Switch from '@mui/material/Switch'
 import FileField from '@/shared/components/FileField'
 import AsyncSelect from '@/shared/components/AsyncSelect'
 import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
 import { memo, useEffect, useMemo, useCallback, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createAttachment } from './AttachmentService'
+import { newAttachmentSchema } from '@/shared/tabs/attachmentMap/AttachmentMapSchema'
 import {
   tblAttachment,
   TypeTblAttachment,
   tblAttachmentType,
 } from '@/core/api/generated/api'
+import { useAtomValue } from 'jotai'
+import { atomUser } from '@/pages/auth/auth.atom'
 
-// === Validation Schema with Zod ===
-const schema = z.object({
-  title: z.string().min(1, { message: 'Title is required' }),
-  attachmentType: z
-    .object({
-      attachmentTypeId: z.number(),
-      name: z.string(),
-    })
-    .nullable(),
-  isUserAttachment: z.boolean(),
-  file: z.instanceof(File, { message: 'File is required' }),
-})
-
-export type AttachmentFormValues = z.infer<typeof schema>
+export type AttachmentFormValues = z.infer<typeof newAttachmentSchema>
 
 type Props = {
   open: boolean
   mode: 'create' | 'update'
-  recordId?: number
+  recordId?: number | null
   onClose: () => void
   onSuccess: (data: TypeTblAttachment) => void
 }
 
 function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
   const [submitting, setSubmitting] = useState(false)
+
+  const user = useAtomValue(atomUser)
 
   const defaultValues: AttachmentFormValues = useMemo(
     () => ({
@@ -60,7 +52,7 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
     watch,
     formState: { errors },
   } = useForm<AttachmentFormValues>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(newAttachmentSchema),
     defaultValues,
     mode: 'onChange',
   })
@@ -86,7 +78,6 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
     }
   }, [selectedFile, setValue, watch])
 
-  // === بارگذاری داده اولیه در حالت update ===
   const fetchData = useCallback(async () => {
     if (mode === 'update' && recordId) {
       try {
@@ -102,9 +93,9 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
                   attachmentTypeId: res.tblAttachmentType.attachmentTypeId,
                   name: res.tblAttachmentType.name ?? '',
                 }
-              : { attachmentTypeId: 0, name: '' },
+              : null,
             isUserAttachment: res.isUserAttachment ?? true,
-            file: new File([], ''), // در update، فایل جدید آپلود می‌شه
+            file: new File([], ''),
           })
         }
       } catch (err) {
@@ -131,7 +122,7 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           attachmentTypeId: values?.attachmentType?.attachmentTypeId || 0,
           isUserAttachment: values.isUserAttachment,
           file: values.file,
-          createdUserId: 1,
+          createdUserId: user?.userId as number,
         }
 
         let result: TypeTblAttachment | undefined
@@ -165,7 +156,7 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
       loadingInitial={false}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display='flex' flexDirection='column' gap={2}>
+      <Box display='flex' flexDirection='column' gap={1.5}>
         {/* آپلود فایل */}
         <Controller
           name='file'
@@ -199,41 +190,42 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
             />
           )}
         />
-        {/* نوع پیوست */}
-        <Controller
-          name='attachmentType'
-          control={control}
-          render={({ field, fieldState }) => (
-            <AsyncSelect
-              {...field}
-              value={field.value}
-              onChange={field.onChange}
-              label='Attachment Type *'
-              request={tblAttachmentType.getAll}
-              getOptionLabel={row => row.name}
-              error={!!fieldState.error?.message}
-              helperText={fieldState.error?.message}
-            />
-          )}
-        />
+        <Box display={'grid'} gridTemplateColumns={'2fr 1fr '} gap={1.5}>
+          <Controller
+            name='attachmentType'
+            control={control}
+            render={({ field, fieldState }) => (
+              <AsyncSelect
+                {...field}
+                value={field.value}
+                onChange={field.onChange}
+                label='Attachment Type *'
+                request={tblAttachmentType.getAll}
+                getOptionLabel={row => row.name}
+                error={!!fieldState.error?.message}
+                helperText={fieldState.error?.message}
+              />
+            )}
+          />
 
-        {/* سوئیچ */}
-        <Controller
-          name='isUserAttachment'
-          control={control}
-          render={({ field }) => (
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={field.value}
-                  onChange={field.onChange}
-                  disabled={isDisabled}
-                />
-              }
-              label='User Attachment'
-            />
-          )}
-        />
+          <Controller
+            name='isUserAttachment'
+            control={control}
+            render={({ field }) => (
+              <FormControlLabel
+                sx={{ margin: 0 }}
+                control={
+                  <Checkbox
+                    checked={field.value}
+                    onChange={field.onChange}
+                    disabled={isDisabled}
+                  />
+                }
+                label='User Attachment'
+              />
+            )}
+          />
+        </Box>
       </Box>
     </FormDialog>
   )

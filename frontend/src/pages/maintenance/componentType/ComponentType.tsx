@@ -66,7 +66,6 @@ export default function PageComponentTypeList() {
         columns={columns}
         loading={loading}
         getRowId={row => row.compTypeId}
-        disableDensity
         disableRowNumber
         onAddClick={handleAddClick}
         onRowDoubleClick={({ row }) => handleDoubleClick(row)}

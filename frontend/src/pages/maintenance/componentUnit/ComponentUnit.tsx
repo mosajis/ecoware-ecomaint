@@ -155,7 +155,6 @@ export default function PageComponentUnit() {
         <CustomizedDataGrid
           label='Component Unit'
           showToolbar
-          disableDensity
           disableRowNumber
           disableRowSelectionOnClick
           rows={rows}

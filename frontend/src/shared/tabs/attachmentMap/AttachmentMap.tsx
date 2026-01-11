@@ -1,11 +1,9 @@
 import AttachmentMapUpsert from './AttachmentMapUpsert'
 import DataGrid from '@/shared/components/dataGrid/DataGrid'
 import { memo, useCallback, useMemo, useState } from 'react'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
-import { attachmentGridColumns } from './AttachmentColumn'
 import { BaseAttachmentGridProps, MapRelationConfig } from './AttachmentType'
-import { type GridColDef } from '@mui/x-data-grid'
+import { attachmentTableColumns } from './AttachmentColumn'
 
 function AttachmentMap<T = any>({
   filterId,
@@ -18,8 +16,6 @@ function AttachmentMap<T = any>({
   const [openForm, setOpenForm] = useState(false)
 
   const getAll = useCallback(() => {
-    if (!filterId) return Promise.resolve({ items: [] })
-
     return mapService.getAll({
       filter: {
         [filterKey]: filterId,
@@ -41,17 +37,13 @@ function AttachmentMap<T = any>({
     !!filterId
   )
 
-  const handleCreate = useCallback(() => {
+  const openUpsert = useCallback(() => {
     setOpenForm(true)
   }, [])
 
-  const columns = useMemo<GridColDef[]>(
-    () => [
-      ...attachmentGridColumns,
-      dataGridActionColumn({ onDelete: handleDelete }),
-    ],
-    [handleDelete]
-  )
+  const closeUpsert = useCallback(() => {
+    setOpenForm(false)
+  }, [])
 
   const relationConfig: MapRelationConfig = useMemo(
     () => ({
@@ -63,25 +55,29 @@ function AttachmentMap<T = any>({
     [filterKey, filterId]
   )
 
+  const getRowId = useCallback((row: any) => row[tableId], [tableId])
+
   return (
     <>
       <DataGrid
+        disableRowNumber
+        disableEdit
         label={label}
         showToolbar={!!filterId}
-        disableRowNumber
-        onAddClick={handleCreate}
-        onRefreshClick={handleRefresh}
         rows={rows}
-        columns={columns}
+        columns={attachmentTableColumns}
         loading={loading}
-        getRowId={row => row[tableId]}
+        onDeleteClick={handleDelete}
+        onAddClick={openUpsert}
+        onRefreshClick={handleRefresh}
+        getRowId={getRowId}
       />
 
       <AttachmentMapUpsert<T>
+        mapService={mapService}
         open={openForm}
         relationConfig={relationConfig}
-        mapService={mapService}
-        onClose={() => setOpenForm(false)}
+        onClose={closeUpsert}
         onSuccess={handleRefresh}
       />
     </>

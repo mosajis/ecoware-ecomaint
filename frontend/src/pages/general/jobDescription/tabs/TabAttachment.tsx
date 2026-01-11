@@ -2,13 +2,11 @@ import AttachmentMap from '@/shared/tabs/attachmentMap/AttachmentMap'
 import { memo } from 'react'
 import { tblJobDescriptionAttachment } from '@/core/api/generated/api'
 
-interface TabJobDescriptionAttachmentProps {
-  jobDescriptionId?: number | null | undefined
+interface Props {
+  jobDescriptionId?: number | null
 }
 
-export function TabJobDescriptionAttachment({
-  jobDescriptionId,
-}: TabJobDescriptionAttachmentProps) {
+export function TabAttachment({ jobDescriptionId }: Props) {
   return (
     <AttachmentMap
       filterId={jobDescriptionId}
@@ -21,4 +19,4 @@ export function TabJobDescriptionAttachment({
   )
 }
 
-export default memo(TabJobDescriptionAttachment)
+export default memo(TabAttachment)

@@ -64,7 +64,6 @@ export default function PageCounterType() {
       <Splitter initialPrimarySize='35%'>
         <CustomizedDataGrid
           showToolbar
-          disableDensity
           disableColumns
           disableExport
           rowSelection

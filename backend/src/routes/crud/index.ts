@@ -1,4 +1,3 @@
-export { default as ControllerSysdiagrams } from "./sysdiagrams.controller";
 export { default as ControllerTblAddress } from "./tblAddress.controller";
 export { default as ControllerTblAttachment } from "./tblAttachment.controller";
 export { default as ControllerTblAttachmentType } from "./tblAttachmentType.controller";

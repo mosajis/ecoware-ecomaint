@@ -7,8 +7,7 @@ const schemaPath = path.resolve('./orm/schema.prisma')
 const outputPath = path.resolve('./src/routes/crud')
 
 // Models to exclude from controller generation
-const excludeModels = ['getSysdiagrams', 'sysdiagrams']
-
+const excludeModels = ['GetSysdiagrams', 'Sysdiagrams']
 /**
  * Convert PascalCase to camelCase
  * @param {string} name - PascalCase string
@@ -97,7 +96,9 @@ async function main() {
 
     // Get all models excluding specified ones
     const models = dmmf.datamodel.models
-      .map(m => m.name)
+      .map(m => {
+        return m.name
+      })
       .filter(m => !excludeModels.includes(m))
 
     const generatedFiles = []
