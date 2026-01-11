@@ -90,7 +90,7 @@ function pull() {
  * Push schema changes to database
  */
 function push() {
-  runCommand(`prisma db push --schema=${SCHEMA}`, 'Push Database')
+  runCommand(`prisma db push --schema=${SCHEMA} `, 'Push Database')
   fixTimestamps()
   format()
   generate()

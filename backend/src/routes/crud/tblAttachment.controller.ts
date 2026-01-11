@@ -50,7 +50,7 @@ export class AttachmentService extends BaseService<any> {
       size: fileInfo.size,
       isUserAttachment: data.isUserAttachment,
       attachmentTypeId: data.attachmentTypeId,
-      createdUserId: 16,
+      createdUserId: data.createdUserId,
     } as any)
   }
 
@@ -170,7 +170,6 @@ const baseController = new BaseController({
       '/',
       async ({ body, set }) => {
         try {
-          // file واقعی از body.file یا body['file'] می‌آید به شرطی که parser درست باشد
           const file = body.file
 
           if (!file) {
@@ -178,8 +177,7 @@ const baseController = new BaseController({
             return { error: 'No file provided' }
           }
 
-          // Elysia File Object: file is { filename, type, data: Uint8Array }
-          const buffer = Buffer.from(await file.text())
+          const buffer = Buffer.from(await file.arrayBuffer())
           const fileName = file.name || 'unknown'
           const mimeType = file.type || 'application/octet-stream'
 
