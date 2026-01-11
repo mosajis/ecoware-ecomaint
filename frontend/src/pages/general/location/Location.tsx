@@ -61,6 +61,8 @@ export default function PageLocation() {
     setOpenForm(true)
   }, [])
 
+  const getRowId = useCallback((row: TypeTblLocation) => row.locationId, [])
+
   return (
     <>
       <Splitter initialPrimarySize='35%'>
@@ -71,10 +73,10 @@ export default function PageLocation() {
           onDelete={handleDelete}
           onEdit={handleEdit}
           onDoubleClick={handleEdit}
-          onRefresh={refetch}
           onAdd={handleCreate}
+          onRefresh={refetch}
           getItemName={item => item.name || '-'}
-          getItemId={item => item.locationId}
+          getItemId={getRowId}
         />
 
         <GenericDataGrid
@@ -89,7 +91,7 @@ export default function PageLocation() {
           onDeleteClick={handleDelete}
           onRefreshClick={refetch}
           onAddClick={handleCreate}
-          getRowId={row => row.locationId}
+          getRowId={getRowId}
         />
       </Splitter>
 

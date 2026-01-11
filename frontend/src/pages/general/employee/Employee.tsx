@@ -2,17 +2,33 @@ import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import EmployeeUpsert from './EmployeeUpsert'
 import { useState, useCallback } from 'react'
 import { tblEmployee, TypeTblEmployee } from '@/core/api/generated/api'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { GridColDef } from '@mui/x-data-grid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
+
+// === Columns
+const columns: GridColDef<TypeTblEmployee>[] = [
+  { field: 'code', headerName: 'Code', width: 60 },
+  { field: 'lastName', headerName: 'Last Name', flex: 1 },
+  { field: 'firstName', headerName: 'First Name', flex: 1 },
+  {
+    field: 'address',
+    headerName: 'Address',
+    flex: 1,
+    valueGetter: (v, row) => row.tblAddress?.name,
+  },
+  {
+    field: 'discipline',
+    headerName: 'Discipline',
+    flex: 1,
+    valueGetter: (v, row) => row.tblDiscipline?.name,
+  },
+  { field: 'orderNo', headerName: 'Order No', width: 80 },
+]
 
 export default function PageEmployee() {
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
-
-  // === getId function
-  const getId = useCallback((row: TypeTblEmployee) => row.employeeId, [])
 
   const getAll = useCallback(
     () =>
@@ -26,57 +42,49 @@ export default function PageEmployee() {
   )
 
   // === useDataGrid hook
-  const { rows, loading, handleDelete, handleFormSuccess, handleRefresh } =
-    useDataGrid(getAll, tblEmployee.deleteById, 'employeeId')
+  const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
+    getAll,
+    tblEmployee.deleteById,
+    'employeeId'
+  )
 
   // === Handlers
   const handleCreate = useCallback(() => {
     setSelectedRowId(null)
     setMode('create')
-    setOpenForm(true)
+    handleUpsertOpen()
   }, [])
 
-  const handleEdit = useCallback((row: TypeTblEmployee) => {
-    setSelectedRowId(row.employeeId)
+  const handleEdit = useCallback((rowId: number) => {
+    setSelectedRowId(rowId)
     setMode('update')
-    setOpenForm(true)
+    handleUpsertOpen()
   }, [])
 
-  // === Columns
-  const columns: GridColDef<TypeTblEmployee>[] = [
-    { field: 'code', headerName: 'Code', width: 60 },
-    { field: 'lastName', headerName: 'Last Name', flex: 1 },
-    { field: 'firstName', headerName: 'First Name', flex: 1 },
-    {
-      field: 'address',
-      headerName: 'Address',
-      flex: 1,
-      valueGetter: (v, row) => row.tblAddress?.name,
-    },
-    {
-      field: 'discipline',
-      headerName: 'Discipline',
-      flex: 1,
-      valueGetter: (v, row) => row.tblDiscipline?.name,
-    },
-    { field: 'orderNo', headerName: 'Order No', width: 100 },
-    dataGridActionColumn({
-      onEdit: handleEdit,
-      onDelete: handleDelete,
-    }),
-  ]
+  const handleUpsertClose = useCallback(() => {
+    setOpenForm(false)
+  }, [setOpenForm])
+
+  const handleUpsertOpen = useCallback(() => {
+    setOpenForm(true)
+  }, [setOpenForm])
+
+  const getId = useCallback((row: TypeTblEmployee) => row.employeeId, [])
 
   return (
     <>
       <CustomizedDataGrid
-        loading={loading}
         showToolbar
         disableRowNumber
         label='Employee'
+        loading={loading}
         rows={rows}
         columns={columns}
         onAddClick={handleCreate}
         onRefreshClick={handleRefresh}
+        onDeleteClick={handleDelete}
+        onEditClick={handleEdit}
+        onDoubleClick={handleEdit}
         getRowId={getId}
       />
 
@@ -84,7 +92,7 @@ export default function PageEmployee() {
         open={openForm}
         mode={mode}
         recordId={selectedRowId}
-        onClose={() => setOpenForm(false)}
+        onClose={handleUpsertClose}
         onSuccess={handleRefresh}
       />
     </>

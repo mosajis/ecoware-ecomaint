@@ -26,15 +26,15 @@ type BaseAsyncSelectFieldProps<TItem extends Record<string, any>> = {
 // ---------------- Single / Multiple Props ----------------
 type AsyncSelectSingleProps<TItem extends Record<string, any>> =
   BaseAsyncSelectFieldProps<TItem> & {
-    selectionMode?: 'single' // default
-    value?: TItem | null
+    selectionMode?: 'single'
+    value?: any | null
     onChange: (value: TItem | null) => void
   }
 
 type AsyncSelectMultipleProps<TItem extends Record<string, any>> =
   BaseAsyncSelectFieldProps<TItem> & {
     selectionMode: 'multiple'
-    value?: TItem[] | null
+    value?: any[] | null
     onChange: (value: TItem[] | null) => void
   }
 
@@ -91,7 +91,9 @@ export function AsyncSelectField<TItem extends Record<string, any>>({
         onClick={() => !disabled && setDialogOpen(true)}
         error={error}
         helperText={helperText}
-        InputProps={{ endAdornment: <MoreHorizIcon /> }}
+        InputProps={{
+          endAdornment: <MoreHorizIcon sx={{ cursor: 'pointer' }} />,
+        }}
       />
 
       <AsyncSelectDialog<TItem>

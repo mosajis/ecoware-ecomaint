@@ -2,12 +2,12 @@ import * as z from 'zod'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import FormDialog from '@/shared/components/formDialog/FormDialog'
+import NumberField from '@/shared/components/NumberField'
 import { memo, useEffect, useMemo, useState, useCallback } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { tblMaintClass, TypeTblMaintClass } from '@/core/api/generated/api'
 import { requiredStringField } from '@/core/api/helper'
-import NumberField from '@/shared/components/NumberField'
 
 const schema = z.object({
   description: requiredStringField(),

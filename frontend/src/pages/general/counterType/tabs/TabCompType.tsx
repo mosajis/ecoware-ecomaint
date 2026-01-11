@@ -1,18 +1,19 @@
-import React, { useCallback } from 'react'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
+import { GridColDef } from '@mui/x-data-grid'
+import { useDataGrid } from '@/shared/hooks/useDataGrid'
+import { useCallback } from 'react'
 import {
   tblCompTypeCounter,
   TypeTblCompTypeCounter,
 } from '@/core/api/generated/api'
-import { GridColDef } from '@mui/x-data-grid'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
 
 interface TabCompTypeCounterProps {
   counterTypeId: number | null | undefined
-  label?: string | null
+  label?: string
 }
 
-// ---- Columns (مطابق نیاز میتونی تغییر بدی) ----
+const getRowId = (row: TypeTblCompTypeCounter) => row.compTypeCounterId
+
 const columns: GridColDef<TypeTblCompTypeCounter>[] = [
   {
     field: 'code',
@@ -31,19 +32,6 @@ const columns: GridColDef<TypeTblCompTypeCounter>[] = [
 export default function TabCompTypeCounter(props: TabCompTypeCounterProps) {
   const { counterTypeId, label } = props
 
-  // اگر مقدار نداشت جدول خالی نمایش بده
-  if (!counterTypeId) {
-    return (
-      <CustomizedDataGrid
-        rows={[]}
-        columns={columns}
-        loading={false}
-        label='CompType Counter'
-        showToolbar
-      />
-    )
-  }
-
   const getAll = useCallback(() => {
     return tblCompTypeCounter.getAll({
       filter: { counterTypeId },
@@ -54,18 +42,22 @@ export default function TabCompTypeCounter(props: TabCompTypeCounterProps) {
   const { rows, loading, fetchData } = useDataGrid(
     getAll,
     tblCompTypeCounter.deleteById,
-    'compTypeCounterId'
+    'compTypeCounterId',
+    !!counterTypeId
   )
 
   return (
     <CustomizedDataGrid
+      disableEdit
+      disableDelete
+      disableRowSelectionOnClick
       rows={rows}
       columns={columns}
       loading={loading}
-      label={label || undefined}
-      showToolbar
+      label={label}
+      showToolbar={!!label}
       onRefreshClick={fetchData}
-      getRowId={row => row.compTypeCounterId}
+      getRowId={getRowId}
     />
   )
 }

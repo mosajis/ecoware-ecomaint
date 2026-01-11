@@ -4,7 +4,6 @@ import MaintCauseFormDialog from './MaintCauseUpsert.js'
 import Splitter from '@/shared/components/Splitter/Splitter.js'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import { useState, useCallback } from 'react'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { GridColDef } from '@mui/x-data-grid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid.js'
 import {
@@ -16,40 +15,46 @@ import {
   TypeTblMaintClass,
 } from '@/core/api/generated/api'
 
+const getRowIdClass = (row: TypeTblMaintClass) => row.maintClassId
+const getRowIdCause = (row: TypeTblMaintCause) => row.maintCauseId
+const getRowIdType = (row: TypeTblMaintType) => row.maintTypeId
+
+const columns: GridColDef<any>[] = [
+  { field: 'descr', headerName: 'Description', flex: 1 },
+  { field: 'orderNo', headerName: 'Order No', width: 80 },
+]
+
 export default function PageMaintClass() {
   // ---------------- Maint Type ----------------
   const {
     rows: typeRows,
     loading: loadingType,
     handleDelete: handleDeleteType,
-    handleFormSuccess: handleTypeSuccess,
     handleRefresh: refreshType,
   } = useDataGrid(tblMaintType.getAll, tblMaintType.deleteById, 'maintTypeId')
-
-  const typeColumns: GridColDef<TypeTblMaintType>[] = [
-    { field: 'descr', headerName: 'Description', flex: 1 },
-    { field: 'orderNo', headerName: 'Order No', width: 100 },
-    dataGridActionColumn({
-      onEdit: row => openTypeForm('update', row.maintTypeId),
-      onDelete: handleDeleteType,
-    }),
-  ]
 
   const [openType, setOpenType] = useState(false)
   const [modeType, setModeType] = useState<'create' | 'update'>('create')
   const [selectedTypeId, setSelectedTypeId] = useState<number | null>(null)
 
-  const openTypeForm = useCallback((mode: 'create' | 'update', id?: number) => {
-    setModeType(mode)
-    setSelectedTypeId(id ?? null)
-    setOpenType(true)
+  const openUpsertMaintType = useCallback(
+    (mode: 'create' | 'update' = 'create', id?: number) => {
+      setModeType(mode)
+      setSelectedTypeId(id ?? null)
+      setOpenType(true)
+    },
+    []
+  )
+
+  const closeUpsertMaintType = useCallback(() => {
+    setOpenType(false)
   }, [])
 
+  // ---------------- Maint Class ----------------
   const {
     rows: classRows,
     loading: loadingClass,
     handleDelete: handleDeleteClass,
-    handleFormSuccess: handleClassSuccess,
     handleRefresh: refreshClass,
   } = useDataGrid(
     tblMaintClass.getAll,
@@ -57,21 +62,12 @@ export default function PageMaintClass() {
     'maintClassId'
   )
 
-  const classColumns: GridColDef<TypeTblMaintClass>[] = [
-    { field: 'descr', headerName: 'Description', flex: 1 },
-    { field: 'orderNo', headerName: 'Order No', width: 100 },
-    dataGridActionColumn({
-      onEdit: row => openClassForm('update', row.maintClassId),
-      onDelete: handleDeleteClass,
-    }),
-  ]
-
   const [openClass, setOpenClass] = useState(false)
   const [modeClass, setModeClass] = useState<'create' | 'update'>('create')
   const [selectedClassId, setSelectedClassId] = useState<number | null>(null)
 
-  const openClassForm = useCallback(
-    (mode: 'create' | 'update', id?: number) => {
+  const openUpsertMaintClass = useCallback(
+    (mode: 'create' | 'update' = 'create', id?: number) => {
       setModeClass(mode)
       setSelectedClassId(id ?? null)
       setOpenClass(true)
@@ -79,13 +75,16 @@ export default function PageMaintClass() {
     []
   )
 
+  const closeUpsertMaintClass = useCallback(() => {
+    setOpenClass(false)
+  }, [])
+
   // ---------------- Maint Cause ----------------
 
   const {
     rows: causeRows,
     loading: loadingCause,
     handleDelete: handleDeleteCause,
-    handleFormSuccess: handleCauseSuccess,
     handleRefresh: refreshCause,
   } = useDataGrid(
     tblMaintCause.getAll,
@@ -93,21 +92,12 @@ export default function PageMaintClass() {
     'maintCauseId'
   )
 
-  const causeColumns: GridColDef<TypeTblMaintCause>[] = [
-    { field: 'descr', headerName: 'Description', flex: 1 },
-    { field: 'orderNo', headerName: 'Order No', width: 100 },
-    dataGridActionColumn({
-      onEdit: row => openCauseForm('update', row.maintCauseId),
-      onDelete: handleDeleteCause,
-    }),
-  ]
-
   const [openCause, setOpenCause] = useState(false)
   const [modeCause, setModeCause] = useState<'create' | 'update'>('create')
   const [selectedCauseId, setSelectedCauseId] = useState<number | null>(null)
 
-  const openCauseForm = useCallback(
-    (mode: 'create' | 'update', id?: number) => {
+  const openUpsertMaintCause = useCallback(
+    (mode: 'create' | 'update' = 'create', id?: number) => {
       setModeCause(mode)
       setSelectedCauseId(id ?? null)
       setOpenCause(true)
@@ -115,41 +105,66 @@ export default function PageMaintClass() {
     []
   )
 
+  const closeUpsertMaintCause = useCallback(() => {
+    setOpenCause(false)
+  }, [])
+
   return (
     <>
       <Splitter initialPrimarySize='34%'>
         <CustomizedDataGrid
-          label='Maint Class'
           showToolbar
+          disableDensity
+          disableColumns
+          disableExport
+          disableRefresh
+          label='Maint Class'
           rows={classRows}
-          columns={classColumns}
+          columns={columns}
           loading={loadingClass}
-          onAddClick={() => openClassForm('create')}
+          onEditClick={rowId => openUpsertMaintClass('update', rowId)}
+          onDoubleClick={rowId => openUpsertMaintClass('update', rowId)}
+          onAddClick={() => openUpsertMaintClass()}
+          onDeleteClick={handleDeleteClass}
           onRefreshClick={refreshClass}
-          getRowId={row => row.maintClassId}
+          getRowId={getRowIdClass}
         />
 
         <Splitter initialPrimarySize='50%'>
           <CustomizedDataGrid
-            label='Maint Type'
             showToolbar
+            disableDensity
+            disableColumns
+            disableExport
+            disableRefresh
+            label='Maint Type'
             rows={typeRows}
-            columns={typeColumns}
+            columns={columns}
             loading={loadingType}
-            onAddClick={() => openTypeForm('create')}
+            onEditClick={rowId => openUpsertMaintType('update', rowId)}
+            onDoubleClick={rowId => openUpsertMaintType('update', rowId)}
+            onAddClick={() => openUpsertMaintType()}
+            onDeleteClick={handleDeleteType}
             onRefreshClick={refreshType}
-            getRowId={row => row.maintTypeId}
+            getRowId={getRowIdType}
           />
 
           <CustomizedDataGrid
-            label='Maint Cause'
             showToolbar
+            disableDensity
+            disableColumns
+            disableExport
+            disableRefresh
+            label='Maint Cause'
             rows={causeRows}
-            columns={causeColumns}
+            columns={columns}
             loading={loadingCause}
-            onAddClick={() => openCauseForm('create')}
+            onEditClick={rowId => openUpsertMaintCause('update', rowId)}
+            onDoubleClick={rowId => openUpsertMaintCause('update', rowId)}
+            onAddClick={() => openUpsertMaintCause()}
+            onDeleteClick={handleDeleteCause}
             onRefreshClick={refreshCause}
-            getRowId={row => row.maintCauseId}
+            getRowId={getRowIdCause}
           />
         </Splitter>
       </Splitter>
@@ -158,24 +173,24 @@ export default function PageMaintClass() {
         open={openType}
         mode={modeType}
         recordId={selectedTypeId}
-        onClose={() => setOpenType(false)}
-        onSuccess={handleTypeSuccess}
+        onClose={closeUpsertMaintType}
+        onSuccess={refreshType}
       />
 
       <MaintClassFormDialog
         open={openClass}
         mode={modeClass}
         recordId={selectedClassId}
-        onClose={() => setOpenClass(false)}
-        onSuccess={handleClassSuccess}
+        onClose={closeUpsertMaintClass}
+        onSuccess={refreshClass}
       />
 
       <MaintCauseFormDialog
         open={openCause}
         mode={modeCause}
         recordId={selectedCauseId}
-        onClose={() => setOpenCause(false)}
-        onSuccess={handleCauseSuccess}
+        onClose={closeUpsertMaintCause}
+        onSuccess={refreshCause}
       />
     </>
   )

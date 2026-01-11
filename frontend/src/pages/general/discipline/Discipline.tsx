@@ -2,9 +2,14 @@ import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import DisciplineFormDialog from './DisciplineUpsert'
 import { useState, useCallback } from 'react'
 import { tblDiscipline, TypeTblDiscipline } from '@/core/api/generated/api'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { GridColDef } from '@mui/x-data-grid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
+
+// === Columns ===
+const columns: GridColDef<TypeTblDiscipline>[] = [
+  { field: 'name', headerName: 'Name', flex: 1 },
+  { field: 'orderNo', headerName: 'Order No', width: 80 },
+]
 
 export default function PageDiscipline() {
   const [openForm, setOpenForm] = useState(false)
@@ -12,28 +17,34 @@ export default function PageDiscipline() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
 
   // === Hook ===
-  const { rows, loading, handleDelete, handleFormSuccess, handleRefresh } =
-    useDataGrid(tblDiscipline.getAll, tblDiscipline.deleteById, 'discId')
+  const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
+    tblDiscipline.getAll,
+    tblDiscipline.deleteById,
+    'discId'
+  )
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
     setSelectedRowId(null)
     setMode('create')
-    setOpenForm(true)
+    handleUpsertOpen()
   }, [])
 
-  const handleEdit = useCallback((row: TypeTblDiscipline) => {
-    setSelectedRowId(row.discId)
+  const handleEdit = useCallback((rowId: number) => {
+    setSelectedRowId(rowId)
     setMode('update')
-    setOpenForm(true)
+    handleUpsertOpen()
   }, [])
 
-  // === Columns ===
-  const columns: GridColDef<TypeTblDiscipline>[] = [
-    { field: 'name', headerName: 'Name', flex: 1 },
-    { field: 'orderNo', headerName: 'Order No', width: 100 },
-    dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
-  ]
+  const handleUpsertClose = useCallback(() => {
+    setOpenForm(false)
+  }, [setOpenForm])
+
+  const handleUpsertOpen = useCallback(() => {
+    setOpenForm(true)
+  }, [setOpenForm])
+
+  const getRowId = useCallback((row: TypeTblDiscipline) => row.discId, [])
 
   return (
     <>
@@ -43,16 +54,18 @@ export default function PageDiscipline() {
         label='Discipline'
         rows={rows}
         columns={columns}
+        onDeleteClick={handleDelete}
+        onEditClick={handleEdit}
+        onDoubleClick={handleEdit}
         onAddClick={handleCreate}
-        onRefreshClick={handleRefresh}
-        getRowId={row => row.discId}
+        getRowId={getRowId}
       />
 
       <DisciplineFormDialog
         open={openForm}
         mode={mode}
         recordId={selectedRowId}
-        onClose={() => setOpenForm(false)}
+        onClose={handleUpsertClose}
         onSuccess={handleRefresh}
       />
     </>

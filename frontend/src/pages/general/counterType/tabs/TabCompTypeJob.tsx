@@ -1,53 +1,52 @@
-import { useCallback } from "react";
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
+import { useCallback } from 'react'
+import { GridColDef } from '@mui/x-data-grid'
+import { useDataGrid } from '@/shared/hooks/useDataGrid'
 import {
   tblCompTypeJobCounter,
-  tblMaintType,
   TypeTblCompTypeJobCounter,
-} from "@/core/api/generated/api";
-import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "@/shared/hooks/useDataGrid";
+} from '@/core/api/generated/api'
 
-interface TabCompTypeJobCounterProps {
-  counterTypeId: number | null | undefined;
-  label?: string | null;
+interface Props {
+  counterTypeId: number | null | undefined
+  label?: string
 }
+
+const getRowId = (row: TypeTblCompTypeJobCounter) => row.compTypeJobCounterId
 
 const columns: GridColDef<TypeTblCompTypeJobCounter>[] = [
   {
-    field: "jobDescId",
-    headerName: "Job Desc",
+    field: 'jobDescId',
+    headerName: 'Job Desc',
     flex: 1,
     valueGetter: (_, row) =>
       // @ts-ignore
       row.tblCompTypeJob?.tblJobDescription?.jobDescTitle,
   },
   {
-    field: "maintTypeId",
-    headerName: "Maint Type",
-    flex: 1,
-    // @ts-ignore
-    valueGetter: (_, row) => row.tblCompTypeJob?.tblMaintType.descr,
-  },
-  {
-    field: "frequency",
-    headerName: "Frequency",
-    flex: 1,
-    valueGetter: (_, row) => row.frequency,
-  },
-  {
-    field: "compTypeCounter",
-    headerName: "Counter Type",
+    field: 'compTypeCounter',
+    headerName: 'Counter Type',
     flex: 1,
     // @ts-ignore
     valueGetter: (_, row) => row?.tblCompTypeCounter?.tblCompType?.compName,
   },
-];
+  {
+    field: 'maintType',
+    headerName: 'Maint Type',
+    width: 100,
+    // @ts-ignore
+    valueGetter: (_, row) => row.tblCompTypeJob?.tblMaintType.descr,
+  },
+  {
+    field: 'frequency',
+    headerName: 'Frequency',
+    width: 100,
+    valueGetter: (_, row) => row.frequency,
+  },
+]
 
-export default function TabCompTypeJobCounter(
-  props: TabCompTypeJobCounterProps
-) {
-  const { counterTypeId, label } = props;
+export default function TabCompTypeJobCounter(props: Props) {
+  const { counterTypeId, label } = props
 
   const getAll = useCallback(async () => {
     return tblCompTypeJobCounter.getAll({
@@ -67,25 +66,28 @@ export default function TabCompTypeJobCounter(
           },
         },
       },
-    });
-  }, [counterTypeId]);
+    })
+  }, [counterTypeId])
 
   const { rows, loading, fetchData } = useDataGrid(
     getAll,
     tblCompTypeJobCounter.deleteById,
-    "compTypeJobCounterId",
+    'compTypeJobCounterId',
     !!counterTypeId
-  );
+  )
 
   return (
     <CustomizedDataGrid
+      disableEdit
+      disableDelete
+      disableRowSelectionOnClick
       rows={rows}
       columns={columns}
       loading={loading}
-      label={label || undefined}
-      showToolbar
+      label={label}
+      showToolbar={!!label}
       onRefreshClick={fetchData}
-      getRowId={(row) => row.compTypeJobCounterId}
+      getRowId={getRowId}
     />
-  );
+  )
 }

@@ -17,7 +17,7 @@ type Props = {
   queryParamKey?: string
   fillHeight?: boolean
   tabProps?: Record<string, any>
-  persistInUrl?: boolean // ← نیا prop
+  persistInUrl?: boolean
 }
 
 const TabsContainer = ({
@@ -25,7 +25,7 @@ const TabsContainer = ({
   queryParamKey = 'tab',
   fillHeight = true,
   tabProps,
-  persistInUrl = false, // ← پیش‌فرض true
+  persistInUrl = true,
 }: Props) => {
   const router = useRouter()
   const current = router.state.location.pathname

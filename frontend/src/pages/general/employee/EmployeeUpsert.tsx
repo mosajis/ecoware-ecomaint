@@ -13,6 +13,8 @@ import {
   tblAddress,
   tblDiscipline,
   tblEmployee,
+  TypeTblAddress,
+  TypeTblDiscipline,
   TypeTblEmployee,
 } from '@/core/api/generated/api'
 
@@ -31,8 +33,8 @@ export const schema = z.object({
 
   discipline: z
     .object({
-      id: z.number(),
-      label: z.string(),
+      discId: z.number(),
+      name: z.string(),
     })
     .nullable()
     .refine(val => val !== null, {
@@ -100,8 +102,8 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
             discipline: res.tblDiscipline
               ? {
-                  id: res.tblDiscipline.discId,
-                  label: res.tblDiscipline.name ?? '',
+                  discId: res.tblDiscipline.discId,
+                  name: res.tblDiscipline.name ?? '',
                 }
               : null,
 
@@ -140,7 +142,11 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
             'addressId',
             values.address?.addressId
           ),
-          ...buildRelation('tblDiscipline', 'discId', values.discipline?.id),
+          ...buildRelation(
+            'tblDiscipline',
+            'discId',
+            values.discipline?.discId
+          ),
         }
 
         let result: TypeTblEmployee
@@ -231,10 +237,8 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           name='address'
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectField
-              dialogMaxWidth='sm'
+            <AsyncSelectField<TypeTblAddress>
               label='Address'
-              selectionMode='single'
               value={field.value}
               request={tblAddress.getAll}
               columns={[{ field: 'name', headerName: 'Address', flex: 1 }]}
@@ -250,18 +254,17 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           name='discipline'
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelect
+            <AsyncSelect<TypeTblDiscipline>
               name='discipline'
               control={control}
               label='Discipline *'
               disabled={isDisabled}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
-              apiCall={() => tblDiscipline.getAll().then(res => res.items)}
-              mapper={d => ({
-                id: d.discId!,
-                label: d.name ?? '',
-              })}
+              request={tblDiscipline.getAll}
+              getOptionLabel={row => row.name || ''}
+              value={field.value}
+              onChange={field.onChange}
             />
           )}
         />

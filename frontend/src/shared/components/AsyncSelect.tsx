@@ -8,61 +8,39 @@ import CircularProgress from '@mui/material/CircularProgress'
 export type SelectionMode = 'single' | 'multiple'
 
 export interface AsyncSelectProps<T> {
-  // RHF
   name?: string
   control?: Control<any>
-
-  // UI
   label?: string
   placeholder?: string
   disabled?: boolean
   sx?: any
-
-  // Behavior
   selectionMode?: SelectionMode
-
-  // Data
-  request: () => Promise<any>
-  extractRows?: (data: any) => T[]
-
-  // Mapping
-  getOptionLabel?: (row: T) => string
-
-  // Controlled mode - حالا value خود آبجکت است
-  value?: T | T[] | null
-  onChange?: (value: T | T[] | null) => void
-
-  // Edit mode support - گزینه‌های اولیه (مثلاً برای ویرایش)
+  value?: any | null
   initialOptions?: T[]
-
-  // Validation
   error?: boolean
   helperText?: ReactNode
+  request: () => Promise<any>
+  extractRows?: (data: any) => T[]
+  getOptionLabel?: (row: T) => string
+  onChange?: (value: T | T[] | null) => void
 }
 
 export default function AsyncSelect<T>({
   name,
   control,
-
   label,
   placeholder,
   disabled = false,
   sx,
-
   selectionMode = 'single',
-
-  request,
-  extractRows = (data: any) => data?.items ?? [],
-
-  getOptionLabel = (row: any) => row?.label ?? String(row),
-
   value,
-  onChange,
-
   initialOptions = [],
-
   error,
   helperText,
+  request,
+  extractRows = (data: any) => data?.items ?? [],
+  getOptionLabel = (row: any) => row?.label ?? String(row),
+  onChange,
 }: AsyncSelectProps<T>) {
   const multiple = selectionMode === 'multiple'
 
@@ -72,9 +50,6 @@ export default function AsyncSelect<T>({
 
   const loadedOnceRef = useRef(false)
 
-  // ===============================
-  // Load options (debounced)
-  // ===============================
   const loadOptions = useCallback(
     debounce(async (query?: string) => {
       setLoading(true)
@@ -89,9 +64,6 @@ export default function AsyncSelect<T>({
     [request, extractRows]
   )
 
-  // ===============================
-  // Merge initial options (برای حالت ویرایش)
-  // ===============================
   useEffect(() => {
     if (initialOptions.length > 0) {
       setOptions(prev => {
@@ -103,9 +75,6 @@ export default function AsyncSelect<T>({
     }
   }, [initialOptions])
 
-  // ===============================
-  // Open handler - اولین بار بدون query لود می‌کند
-  // ===============================
   const handleOpen = () => {
     if (!loadedOnceRef.current) {
       loadOptions('')
@@ -113,9 +82,6 @@ export default function AsyncSelect<T>({
     }
   }
 
-  // ===============================
-  // Change handler - مستقیماً آبجکت را پاس می‌دهد
-  // ===============================
   const handleChange = (
     selected: T | T[] | null,
     fieldOnChange?: (value: any) => void
@@ -124,9 +90,6 @@ export default function AsyncSelect<T>({
     onChange?.(selected)
   }
 
-  // ===============================
-  // Core render
-  // ===============================
   const renderAutocomplete = (field?: any) => (
     <Autocomplete<T, boolean, false, false>
       multiple={multiple}

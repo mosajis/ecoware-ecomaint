@@ -12,36 +12,34 @@ import {
 
 export interface SelectModalProps<TItem extends Record<string, any>> {
   open: boolean
-  onClose: () => void
   title?: string
 
-  request: () => Promise<any> // API call
-  extractRows?: (data: any) => TItem[] // optional extractor
+  onClose: () => void
+  request: () => Promise<any>
+  extractRows?: (data: any) => TItem[]
+  onSelect: (selected: TItem | TItem[] | null) => void
+  getRowId: GridRowIdGetter<TItem>
 
   columns: any[]
   selectionMode?: 'single' | 'multiple'
-  onSelect: (selected: TItem | TItem[] | null) => void
-
-  getRowId: GridRowIdGetter<TItem>
-  selected?: TItem | TItem[] | null // مقدار اولیه برای edit
-
+  selected?: TItem | TItem[] | null
   height?: number | string
   maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false
 }
 
 export function AsyncSelectDialog<TItem extends Record<string, any>>({
   open,
-  onClose,
   title = 'Select',
+  selectionMode = 'single',
+  columns,
+  onClose,
   request,
   extractRows,
-  columns,
   onSelect,
-  selectionMode = 'single',
   getRowId,
   selected = null,
   height = 600,
-  maxWidth = 'md',
+  maxWidth = 'sm',
 }: SelectModalProps<TItem>) {
   const [rows, setRows] = useState<TItem[]>([])
   const [loading, setLoading] = useState(false)
@@ -71,13 +69,7 @@ export function AsyncSelectDialog<TItem extends Record<string, any>>({
   }, [open, fetchData])
 
   useEffect(() => {
-    const initialIds = new Set<GridRowId>()
-    if (selectionMode === 'single' && selected && !Array.isArray(selected)) {
-      initialIds.add(getRowId(selected))
-    } else if (selectionMode === 'multiple' && Array.isArray(selected)) {
-      selected.forEach(item => initialIds.add(getRowId(item)))
-    }
-    setSelection({ type: 'include', ids: initialIds })
+    console.log()
   }, [selected, selectionMode, getRowId])
 
   // ---------------- Handle OK ----------------
@@ -102,7 +94,6 @@ export function AsyncSelectDialog<TItem extends Record<string, any>>({
     }
     setSelection(newSelection)
 
-    // اگر single selection است، فوری اوکی کن
     if (selectionMode === 'single') {
       onSelect(row)
       onClose()
@@ -114,22 +105,21 @@ export function AsyncSelectDialog<TItem extends Record<string, any>>({
     <Dialog open={open} onClose={onClose} fullWidth maxWidth={maxWidth}>
       <DialogContent sx={{ height, p: 1 }}>
         <CustomizedDataGrid
-          getRowId={getRowId}
-          onRefreshClick={fetchData}
-          label={title}
-          rows={rows}
-          columns={columns}
-          loading={loading}
           showToolbar
           disableAdd
           disableColumnFilter
           disableDensity
           disableExport
           disableColumns
+          rows={rows}
+          loading={loading}
+          label={title}
+          columns={columns}
           checkboxSelection={selectionMode === 'multiple'}
-          disableRowSelectionOnClick={false}
           onRowSelectionModelChange={setSelection}
           onRowDoubleClick={handleRowDoubleClick}
+          onRefreshClick={fetchData}
+          getRowId={getRowId}
         />
       </DialogContent>
       <DialogActions sx={{ p: 0, m: 1 }}>

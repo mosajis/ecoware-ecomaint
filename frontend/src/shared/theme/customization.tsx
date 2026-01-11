@@ -747,6 +747,9 @@ export const inputsCustomizations: Components<Theme> = {
           fontSize: '17px',
         },
       },
+      paper: ({ theme }) => ({
+        border: `1px solid ${(theme.vars || theme).palette.divider}`,
+      }),
     },
   },
 
