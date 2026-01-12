@@ -31,7 +31,13 @@ type Props = {
 }
 
 const Tabs = ({ compTypeJob }: Props) => {
-  return <TabsContainer tabs={tabs} tabProps={{ compTypeJob }} />
+  return (
+    <TabsContainer
+      tabs={tabs}
+      persistInUrl={false}
+      tabProps={{ compTypeJob }}
+    />
+  )
 }
 
 export default Tabs

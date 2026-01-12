@@ -205,21 +205,28 @@ function CompMeasurePointUpsert({
         />
 
         {/* Current Value */}
-        <Controller
-          name='currentValue'
-          control={control}
-          render={({ field }) => (
-            <NumberField {...field} label='Current Value' size='small' />
-          )}
-        />
+        <Box display={'flex'} gap={1.5}>
+          <Controller
+            name='currentValue'
+            control={control}
+            render={({ field }) => (
+              <NumberField
+                fullWidth
+                {...field}
+                label='Current Value'
+                size='small'
+              />
+            )}
+          />
 
-        <Controller
-          name='currentDate'
-          control={control}
-          render={({ field }) => (
-            <DateField label='Current Date' field={field} type='DATETIME' />
-          )}
-        />
+          <Controller
+            name='currentDate'
+            control={control}
+            render={({ field }) => (
+              <DateField label='Current Date' field={field} type='DATETIME' />
+            )}
+          />
+        </Box>
 
         <Controller
           name='setValue'
@@ -256,7 +263,9 @@ function CompMeasurePointUpsert({
         <Controller
           name='orderNo'
           control={control}
-          render={({ field }) => <NumberField {...field} label='Order No' />}
+          render={({ field }) => (
+            <NumberField sx={{ width: '40%' }} {...field} label='Order No' />
+          )}
         />
       </Box>
     </FormDialog>

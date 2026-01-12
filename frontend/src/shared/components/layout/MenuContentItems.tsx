@@ -174,7 +174,7 @@ export const menuContentItems: {
         path: '/maintenance/component-type',
       },
       {
-        text: 'Component Job (x)',
+        text: 'Component Job',
         icon: <BuildRoundedIcon />,
         id: 'maint:componentType:componentJob',
         path: '/maintenance/component-job',

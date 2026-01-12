@@ -13,6 +13,7 @@ import {
   tblCounterType,
   TypeTblCompCounter,
 } from '@/core/api/generated/api'
+import { Checkbox, FormControlLabel } from '@mui/material'
 
 /* === Schema === */
 const schema = z.object({
@@ -173,71 +174,101 @@ function CompCounterUpsert({
           )}
         />
 
-        {/* Current Value */}
-        <Controller
-          name='currentValue'
-          control={control}
-          render={({ field }) => (
-            <NumberField {...field} label='Current Value' size='small' />
-          )}
-        />
+        <Box display={'flex'} gap={1.5}>
+          {/* Current Value */}
+          <Controller
+            name='currentValue'
+            control={control}
+            render={({ field }) => (
+              <NumberField
+                fullWidth
+                {...field}
+                label='Current Value'
+                size='small'
+              />
+            )}
+          />
 
-        {/* Current Date */}
-        <Controller
-          name='currentDate'
-          control={control}
-          render={({ field }) => (
-            <DateField label='Current Date' field={field} type='DATETIME' />
-          )}
-        />
+          {/* Current Date */}
+          <Controller
+            name='currentDate'
+            control={control}
+            render={({ field }) => (
+              <DateField label='Current Date' field={field} type='DATETIME' />
+            )}
+          />
+        </Box>
 
-        {/* Start Value */}
-        <Controller
-          name='startValue'
-          control={control}
-          render={({ field }) => (
-            <NumberField {...field} label='Start Value' size='small' />
-          )}
-        />
+        <Box display={'flex'} gap={1.5}>
+          {/* Start Value */}
+          <Controller
+            name='startValue'
+            control={control}
+            render={({ field }) => (
+              <NumberField
+                fullWidth
+                {...field}
+                label='Start Value'
+                size='small'
+              />
+            )}
+          />
 
-        {/* Start Date */}
-        <Controller
-          name='startDate'
-          control={control}
-          render={({ field }) => (
-            <DateField label='Start Date' field={field} type='DATETIME' />
-          )}
-        />
+          {/* Start Date */}
+          <Controller
+            name='startDate'
+            control={control}
+            render={({ field }) => (
+              <DateField label='Start Date' field={field} type='DATETIME' />
+            )}
+          />
+        </Box>
 
         {/* Average Count Rate */}
-        <Controller
-          name='averageCountRate'
-          control={control}
-          render={({ field }) => (
-            <NumberField
-              {...field}
-              label='Average Count Rate'
-              size='small'
-              disabled
-            />
-          )}
-        />
+        <Box display={'grid'} gridTemplateColumns={'1fr 1fr'} gap={1.5}>
+          <Controller
+            name='averageCountRate'
+            control={control}
+            render={({ field }) => (
+              <NumberField
+                {...field}
+                fullWidth
+                label='Average Count Rate'
+                size='small'
+                disabled
+              />
+            )}
+          />
 
-        {/* Use Calculate Average */}
-        <Controller
-          name='useCalcAverage'
-          control={control}
-          render={({ field }) => (
-            <NumberField {...field} label='Use Calc Average' size='small' />
-          )}
-        />
+          <Controller
+            name='useCalcAverage'
+            control={control}
+            render={({ field }) => (
+              <FormControlLabel
+                sx={{ margin: 0 }}
+                control={
+                  <Checkbox
+                    checked={Boolean(field.value)}
+                    onChange={field.onChange}
+                  />
+                }
+                label='Use Calc Average'
+              />
+            )}
+          />
+        </Box>
 
         {/* Order */}
         <Controller
           name='orderNo'
           control={control}
           render={({ field }) => (
-            <NumberField {...field} label='Order No' size='small' />
+            <NumberField
+              sx={{ width: '40%' }}
+              {...field}
+              label='Order No'
+              size='small'
+            />
           )}
         />
       </Box>

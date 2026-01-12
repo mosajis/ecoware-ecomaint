@@ -1,18 +1,78 @@
 import Splitter from '@/shared/components/Splitter/Splitter'
 import Editor from '@/shared/components/Editor'
+import CellDateTime from '@/shared/components/dataGrid/cells/CellDateTime'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback } from 'react'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 import {
   tblCompJob,
-  tblJobDescription,
+  tblCompJobCounter,
   type TypeTblCompJob,
 } from '@/core/api/generated/api'
-import {
-  GridRowSelectionCheckboxParams,
-  type GridColDef,
-} from '@mui/x-data-grid'
-import CellDateTime from '@/shared/components/dataGrid/cells/CellDateTime'
+import { type GridColDef } from '@mui/x-data-grid'
+import CellFrequency from '@/shared/components/dataGrid/cells/CellFrequency'
+
+const columns: GridColDef<TypeTblCompJob>[] = [
+  {
+    field: 'compNo',
+    headerName: 'Component',
+    flex: 2,
+    valueGetter: (value, row) => row.tblComponentUnit?.compNo,
+  },
+
+  {
+    field: 'compTypeName',
+    headerName: 'CompType',
+    flex: 1,
+    // @ts-ignore
+    valueGetter: (value, row) => row.tblComponentUnit?.tblCompType.compName,
+  },
+
+  {
+    field: 'jobCode',
+    headerName: 'Job Code',
+    width: 100,
+    valueGetter: (value, row) => row.tblJobDescription?.jobDescCode,
+  },
+
+  {
+    field: 'jobTitle',
+    headerName: 'Job Title',
+    flex: 1,
+    valueGetter: (value, row) => row.tblJobDescription?.jobDescTitle,
+  },
+
+  {
+    field: 'discipline',
+    headerName: 'Discipline',
+    width: 100,
+    valueGetter: (value, row) => row.tblDiscipline?.name,
+  },
+
+  {
+    field: 'frequency',
+    headerName: 'Frequency',
+    renderCell: ({ row, value }) => (
+      <CellFrequency frequency={value} frequencyPeriod={row.tblPeriod} />
+    ),
+  },
+
+  {
+    field: 'lastDone',
+    headerName: 'Last Done',
+    width: 150,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+  {
+    field: 'nextDueDate',
+    headerName: 'Next Due Date',
+    width: 150,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+
+  // { field: 'realOverDue', headerName: 'RealOverDue', flex: 1 },
+  // { field: 'lastTimeDone', headerName: 'LastTimeDone', flex: 1 },
+]
 
 export default function PageComponentJob() {
   const [selected, setSelected] = useState<TypeTblCompJob | null>(null)
@@ -32,7 +92,7 @@ export default function PageComponentJob() {
     })
   }, [])
 
-  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
+  const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
     tblCompJob.deleteById,
     'compJobId'
@@ -42,86 +102,27 @@ export default function PageComponentJob() {
     setSelected(params.row)
   }
 
-  const columns: GridColDef<TypeTblCompJob>[] = [
-    {
-      field: 'compTypeName',
-      headerName: 'CompType Name',
-      flex: 1,
-      // @ts-ignore
-      valueGetter: (value, row) => row.tblComponentUnit?.tblCompType.compType,
-    },
-
-    {
-      field: 'compNo',
-      headerName: 'CompNo',
-      flex: 1,
-      valueGetter: (value, row) => row.tblComponentUnit?.compNo,
-    },
-
-    {
-      field: 'jobCode',
-      headerName: 'Job Code',
-      flex: 1,
-      valueGetter: (value, row) => row.tblJobDescription?.jobDescCode,
-    },
-
-    {
-      field: 'jobTitle',
-      headerName: 'Job Title',
-      flex: 1,
-      valueGetter: (value, row) => row.tblJobDescription?.jobDescTitle,
-    },
-
-    {
-      field: 'jobDisiplice',
-      headerName: 'Job Disiplice',
-      flex: 1,
-      valueGetter: (value, row) => row.tblDiscipline?.name,
-    },
-
-    { field: 'frequency', headerName: 'Frequency', flex: 1 },
-
-    {
-      field: 'frequencyPeriod',
-      headerName: 'Frequency Period',
-      flex: 1,
-      valueGetter: (value, row) => row.tblPeriod?.name,
-    },
-
-    {
-      field: 'lastDone',
-      headerName: 'Last Done',
-      width: 150,
-      renderCell: ({ value }) => <CellDateTime value={value} />,
-    },
-    {
-      field: 'nextDueDate',
-      headerName: 'Next Due Date',
-      width: 150,
-      renderCell: ({ value }) => <CellDateTime value={value} />,
-    },
-
-    { field: 'realOverDue', headerName: 'RealOverDue', flex: 1 },
-    { field: 'lastTimeDone', headerName: 'LastTimeDone', flex: 1 },
-  ]
-
   return (
     <>
       <Splitter initialPrimarySize='70%' horizontal>
         <CustomizedDataGrid
+          disableAdd
+          disableEdit
+          disableDelete
+          disableRowNumber
+          showToolbar
           rows={rows}
           loading={loading}
           columns={columns}
           label='Component Job'
-          showToolbar
           onRefreshClick={handleRefresh}
           getRowId={row => row.compJobId}
           onRowClick={handleRowClick}
         />
 
         <Editor
-          label={selected?.tblJobDescription?.jobDescTitle || 'Job Description'}
           readOnly
+          label={selected?.tblJobDescription?.jobDescTitle || 'Job Description'}
           key={selected?.compJobId}
           initValue={selected?.tblJobDescription?.jobDesc}
         />

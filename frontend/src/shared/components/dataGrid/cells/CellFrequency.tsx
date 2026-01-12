@@ -9,8 +9,13 @@ type Props = {
 const CellFrequency: FC<Props> = ({ frequency, frequencyPeriod }) => {
   if (frequency == null) return '-'
 
-  const formatted = `${frequency} ${frequencyPeriod?.name || '-'}`
-  return formatted
+  const fn = frequencyPeriod?.name || '-'
+  return (
+    <div style={{ display: 'flex' }}>
+      <div style={{ width: '20px' }}>{frequency}</div>
+      <div>{fn}</div>
+    </div>
+  )
 }
 
 export default CellFrequency

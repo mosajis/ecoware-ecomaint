@@ -16,13 +16,14 @@ import {
   tblLocation,
   TypeTblComponentUnit,
 } from '@/core/api/generated/api'
+import { logicTblComponentUnit } from './ComponentUnitEffect'
 
 type Props = {
   open: boolean
   mode: 'create' | 'update'
   recordId?: number | null
   onClose: () => void
-  onSuccess: (data: TypeTblComponentUnit) => void
+  onSuccess: () => void
 }
 
 function ComponentUnitUpsert({
@@ -131,16 +132,15 @@ function ComponentUnitUpsert({
           ...buildRelation('tblComponentUnit', 'compId', v.parentComp?.compId),
         }
 
-        let result: TypeTblComponentUnit
-
         if (mode === 'create') {
-          result = await tblComponentUnit.create(body)
+          const result = await tblComponentUnit.create(body)
+          await logicTblComponentUnit.effect(result.compId, 0)
         } else {
-          result = await tblComponentUnit.update(recordId!, body)
+          await tblComponentUnit.update(recordId!, body)
         }
 
-        onSuccess(result)
-        onClose()
+        // onSuccess()
+        // onClose()
       } finally {
         setSubmitting(false)
       }

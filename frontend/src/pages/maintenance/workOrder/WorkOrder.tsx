@@ -5,7 +5,6 @@ import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import TabsComponent from './WorkOrderTabs'
 import StatusChip from './customCell/Status'
 import OverdueText from './customCell/OverDue'
-import ReportWorkOrder from './report/Report'
 import { useCallback, useMemo, useState } from 'react'
 import { tblWorkOrder } from '@/core/api/generated/api'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
@@ -15,6 +14,7 @@ import { TypeTblWorkOrderWithRels } from './types'
 import WorkOrderFilterDialog, {
   type WorkOrderFilter,
 } from './WorkOrderDialogFilter'
+import { columns } from './WorkOrderColumns'
 
 export default function WorkOrderPage() {
   const [issueDialogOpen, setIssueDialogOpen] = useState(false)
@@ -63,80 +63,6 @@ export default function WorkOrderPage() {
   const selectedStatuses = selectedWorkOrders
     .map(w => w.tblWorkOrderStatus?.name)
     .filter(w => w !== undefined)
-
-  const columns: GridColDef<TypeTblWorkOrderWithRels>[] = useMemo(
-    () => [
-      {
-        field: 'jobCode',
-        headerName: 'Job Code',
-        width: 90,
-        valueGetter: (_, row) =>
-          row?.tblCompJob?.tblJobDescription?.jobDescCode,
-      },
-      {
-        field: 'component',
-        headerName: 'Component',
-        flex: 2,
-        valueGetter: (_, row) => row.tblComponentUnit?.compNo,
-      },
-      {
-        field: 'location',
-        headerName: 'Location',
-        width: 100,
-        valueGetter: (_, row) => row?.tblComponentUnit?.tblLocation?.name,
-      },
-      {
-        field: 'jobDescTitle',
-        headerName: 'Job Desc',
-        flex: 2,
-        valueGetter: (_, row) =>
-          row?.tblCompJob?.tblJobDescription?.jobDescTitle,
-      },
-      {
-        field: 'discipline',
-        headerName: 'Discipline',
-        width: 110,
-        valueGetter: (_, row) => row?.tblDiscipline?.name,
-      },
-      {
-        field: 'status',
-        headerName: 'Status',
-        width: 90,
-        valueGetter: (_, row) => row?.tblWorkOrderStatus?.name,
-        renderCell: params => <StatusChip status={params.value} />,
-      },
-      {
-        field: 'dueDate',
-        headerName: 'Due Date',
-        width: 130,
-        valueFormatter: value => (value ? formatDateTime(value) : ''),
-      },
-      {
-        field: 'completed',
-        headerName: 'Completed Date',
-        width: 130,
-        valueFormatter: value => (value ? formatDateTime(value) : ''),
-      },
-      {
-        field: 'overDue',
-        headerName: 'OverDue',
-        width: 80,
-        valueGetter: (_, row) => calculateOverdue(row),
-        renderCell: params => <OverdueText value={params.value} />,
-      },
-      {
-        field: 'pendingType',
-        headerName: 'Pending Type',
-        valueGetter: (_, row) => row?.tblPendingType?.pendTypeName,
-      },
-      {
-        field: 'priority',
-        headerName: 'Priority',
-        width: 70,
-      },
-    ],
-    []
-  )
 
   const handleFilter = useCallback((): void => {
     setFilterOpen(true)

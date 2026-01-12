@@ -1,5 +1,6 @@
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import { useCallback, useMemo, useState } from 'react'
+import MeasurePointUpsert from './TabMeasuresUpsert'
+import { useCallback, useState } from 'react'
 import { GridColDef } from '@mui/x-data-grid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
 import {
@@ -7,13 +8,40 @@ import {
   TypeTblCompType,
   TypeTblCompTypeMeasurePoint,
 } from '@/core/api/generated/api'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
-import MeasurePointUpsert from './TabMeasuresUpsert'
 
 type Props = {
   compType?: TypeTblCompType | null
   label?: string
 }
+
+const getRowId = (row: TypeTblCompTypeMeasurePoint) =>
+  row.compTypeMeasurePointId
+
+// === Columns ===
+const columns: GridColDef<TypeTblCompTypeMeasurePoint>[] = [
+  {
+    field: 'measureName',
+    headerName: 'Measure',
+    flex: 1,
+    valueGetter: (_, row) => row.tblCounterType?.name,
+  },
+  {
+    field: 'unitName',
+    headerName: 'Unit',
+    flex: 1,
+    valueGetter: (_, row) => row.tblUnit?.name,
+  },
+  {
+    field: 'unitDescription',
+    headerName: 'Unit Description',
+    flex: 1,
+    valueGetter: (_, row) => row.tblUnit?.description,
+  },
+  { field: 'setValue', headerName: 'Set Value', width: 110 },
+  { field: 'operationalMinValue', headerName: 'Min', width: 100 },
+  { field: 'operationalMaxValue', headerName: 'Max', width: 100 },
+  { field: 'orderNo', headerName: 'Order', width: 80 },
+]
 
 const TabMeasuresPage = ({ compType, label }: Props) => {
   const compTypeId = compType?.compTypeId
@@ -34,85 +62,58 @@ const TabMeasuresPage = ({ compType, label }: Props) => {
   }, [compTypeId])
 
   // === useDataGrid ===
-  const { rows, loading, handleDelete, handleRefresh, handleFormSuccess } =
-    useDataGrid(
-      getAll,
-      tblCompTypeMeasurePoint.deleteById,
-      'compTypeMeasurePointId',
-      !!compTypeId
-    )
+  const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
+    getAll,
+    tblCompTypeMeasurePoint.deleteById,
+    'compTypeMeasurePointId',
+    !!compTypeId
+  )
 
   // === Handlers ===
   const handleCreate = () => {
     setSelectedId(null)
     setMode('create')
-    setOpenForm(true)
+    handleUpsertOpen()
   }
 
-  const handleEdit = (row: TypeTblCompTypeMeasurePoint) => {
-    setSelectedId(row.compTypeMeasurePointId)
+  const handleEdit = (rowId: number) => {
+    setSelectedId(rowId)
     setMode('update')
-    setOpenForm(true)
+    handleUpsertOpen()
   }
 
-  // === Columns ===
-  const columns = useMemo<GridColDef<TypeTblCompTypeMeasurePoint>[]>(
-    () => [
-      {
-        field: 'measureName',
-        headerName: 'Measure',
-        flex: 1,
-        valueGetter: (_, row) => row.tblCounterType?.name || '',
-      },
-      {
-        field: 'unitName',
-        headerName: 'Unit',
-        flex: 1,
-        valueGetter: (_, row) => row.tblUnit?.name || '',
-      },
-      {
-        field: 'unitDescription',
-        headerName: 'Unit Description',
-        flex: 1,
-        valueGetter: (_, row) => row.tblUnit?.description || '',
-      },
-      { field: 'setValue', headerName: 'Set Value', width: 110 },
-      { field: 'operationalMinValue', headerName: 'Min', width: 100 },
-      { field: 'operationalMaxValue', headerName: 'Max', width: 100 },
-      { field: 'orderNo', headerName: 'Order', width: 80 },
-      dataGridActionColumn({
-        onEdit: handleEdit,
-        onDelete: handleDelete,
-      }),
-    ],
-    [handleDelete]
-  )
+  const handleUpsertClose = useCallback(() => {
+    setOpenForm(false)
+  }, [])
 
+  const handleUpsertOpen = useCallback(() => {
+    setOpenForm(true)
+  }, [])
   return (
     <>
       <CustomizedDataGrid
-        label={label || 'Measure Points'}
+        showToolbar={!!label}
+        label={label}
         rows={rows}
         columns={columns}
         loading={loading}
-        showToolbar
-        disableRowSelectionOnClick
         onRefreshClick={handleRefresh}
         onAddClick={handleCreate}
-        getRowId={row => row.compTypeMeasurePointId}
+        onEditClick={handleEdit}
+        onDoubleClick={handleEdit}
+        onDeleteClick={handleDelete}
+        getRowId={getRowId}
       />
 
       {/* === UPSERT === */}
-      {compTypeId && (
-        <MeasurePointUpsert
-          open={openForm}
-          mode={mode}
-          recordId={selectedId}
-          compTypeId={compTypeId}
-          onClose={() => setOpenForm(false)}
-          onSuccess={handleRefresh}
-        />
-      )}
+      <MeasurePointUpsert
+        open={openForm}
+        mode={mode}
+        recordId={selectedId}
+        compTypeId={compTypeId!}
+        onClose={handleUpsertClose}
+        onSuccess={handleRefresh}
+      />
     </>
   )
 }

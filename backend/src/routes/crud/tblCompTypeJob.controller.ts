@@ -12,7 +12,7 @@ import { buildResponseSchema } from '@/utils/base.schema'
 import {
   effectCompTypeJobChange,
   OperationEnum,
-} from '../effects/EffectCompTypeJob'
+} from '../effects/EffectTblCompTypeJob'
 
 export const ServiceTblCompTypeJob = new BaseService(prisma.tblCompTypeJob)
 

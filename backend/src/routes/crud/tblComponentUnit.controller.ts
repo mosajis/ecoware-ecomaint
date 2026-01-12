@@ -12,7 +12,7 @@ import {
 import {
   effectComponentUnitChange,
   OperationEnum,
-} from '../effects/EffectComponentUnit'
+} from '../effects/EffectTblComponentUnit'
 
 export const ServiceTblComponentUnit = new BaseService(prisma.tblComponentUnit)
 

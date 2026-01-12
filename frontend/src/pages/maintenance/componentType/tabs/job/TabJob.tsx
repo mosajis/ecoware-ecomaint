@@ -42,8 +42,8 @@ const TabJob = ({ compType, label }: Props) => {
   }
 
   const onDelete = async (row: TypeTblCompTypeJob) => {
-    await handleDelete(row)
-    handleSuccess(row, true)
+    // await handleDelete(row)
+    // handleSuccess(row, true)
   }
 
   const onEdit = (row: TypeTblCompTypeJob) => {

@@ -4,7 +4,7 @@ interface OverdueTextProps {
   value?: number | null
 }
 
-const OverdueText: FC<OverdueTextProps> = ({ value }) => {
+const CellOverdue: FC<OverdueTextProps> = ({ value }) => {
   if (value == null) return null
 
   const color = value < 0 ? 'red' : 'green'
@@ -21,4 +21,4 @@ const OverdueText: FC<OverdueTextProps> = ({ value }) => {
   )
 }
 
-export default OverdueText
+export default CellOverdue

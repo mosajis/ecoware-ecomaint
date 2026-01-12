@@ -15,6 +15,38 @@ type Props = {
   label?: string
 }
 
+const getRowId = (row: TypeTblCompCounter) => row.compCounterId
+
+// === Columns ===
+const columns: GridColDef<TypeTblCompCounter>[] = [
+  {
+    field: 'counterType',
+    headerName: 'Counter Type',
+    flex: 1,
+    valueGetter: (_, row) => row.tblCounterType?.name || '',
+  },
+  {
+    field: 'currentValue',
+    headerName: 'Current Value',
+    width: 120,
+  },
+  {
+    field: 'startValue',
+    headerName: 'Start Value',
+    width: 120,
+  },
+  {
+    field: 'averageCountRate',
+    headerName: 'Avg Rate',
+    width: 120,
+  },
+  {
+    field: 'order No',
+    headerName: 'Order',
+    width: 85,
+  },
+]
+
 const TabCompCounter = ({ componentUnit, label }: Props) => {
   const compId = componentUnit?.compId
   const [openForm, setOpenForm] = useState(false)
@@ -47,75 +79,46 @@ const TabCompCounter = ({ componentUnit, label }: Props) => {
   const handleCreate = () => {
     setSelectedId(null)
     setMode('create')
-    setOpenForm(true)
+    handleUpsertOpen()
   }
 
-  const handleEdit = (row: TypeTblCompCounter) => {
-    setSelectedId(row.compCounterId)
+  const handleEdit = (rowId: number) => {
+    setSelectedId(rowId)
     setMode('update')
-    setOpenForm(true)
+    handleUpsertOpen()
   }
 
-  // === Columns ===
-  const columns = useMemo<GridColDef[]>(
-    () => [
-      {
-        field: 'counterType',
-        headerName: 'Counter Type',
-        flex: 1,
-        valueGetter: (_, row) => row.tblCounterType?.name || '',
-      },
-      {
-        field: 'currentValue',
-        headerName: 'Current Value',
-        width: 120,
-      },
-      {
-        field: 'startValue',
-        headerName: 'Start Value',
-        width: 120,
-      },
-      {
-        field: 'averageCountRate',
-        headerName: 'Avg Rate',
-        width: 120,
-      },
-      {
-        field: 'orderNo',
-        headerName: 'Order',
-        width: 90,
-      },
-      dataGridActionColumn({
-        onEdit: handleEdit,
-        onDelete: handleDelete,
-      }),
-    ],
-    [handleDelete]
-  )
+  const handleUpsertClose = useCallback(() => {
+    setOpenForm(false)
+  }, [])
+
+  const handleUpsertOpen = useCallback(() => {
+    setOpenForm(true)
+  }, [])
 
   return (
     <>
       <CustomizedDataGrid
-        label={label || 'Counters'}
+        label={label}
+        showToolbar={!!label}
         columns={columns}
-        showToolbar
         rows={rows}
         loading={loading}
         onAddClick={handleCreate}
-        getRowId={row => row.compCounterId}
+        onDoubleClick={handleEdit}
+        onEditClick={handleEdit}
+        onDeleteClick={handleDelete}
+        getRowId={getRowId}
       />
 
-      {/* === UPSERT === */}
-      {compId && (
-        <TabCounterUpsert
-          open={openForm}
-          mode={mode}
-          recordId={selectedId}
-          compId={compId}
-          onClose={() => setOpenForm(false)}
-          onSuccess={handleRefresh}
-        />
-      )}
+      <TabCounterUpsert
+        open={openForm}
+        mode={mode}
+        recordId={selectedId}
+        compId={compId!}
+        onClose={handleUpsertClose}
+        onSuccess={handleRefresh}
+      />
     </>
   )
 }
