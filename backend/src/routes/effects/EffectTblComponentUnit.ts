@@ -14,14 +14,12 @@ export const OperationEnum = t.Enum({
 
 export async function effectComponentUnitChange({
   componentUnitId,
-  operation,
+  userId,
 }: {
   componentUnitId: number
-  operation: 0 | 2
+  userId: number
 }) {
   return prisma.$transaction(async tx => {
-    const userId = 16
-
     const componentUnit = await tx.tblComponentUnit.findUnique({
       where: { compId: componentUnitId },
     })

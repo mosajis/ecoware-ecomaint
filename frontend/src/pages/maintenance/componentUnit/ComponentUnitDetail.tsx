@@ -15,7 +15,6 @@ const ComponentTypeDetail = () => {
   const [componentUnit, setComponentUnit] =
     useState<TypeTblComponentUnit | null>(null)
 
-  // ===== Fetch Component Type =====
   useEffect(() => {
     if (!id) return
 
@@ -29,10 +28,8 @@ const ComponentTypeDetail = () => {
       })
   }, [id])
 
-  // ===== Spinner =====
   if (loading) return <Spinner />
 
-  // ===== Safety =====
   if (!componentUnit) return null
 
   return <ComponentUnitTabs label={breadcrumb} componentUnit={componentUnit} />

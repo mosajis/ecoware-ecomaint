@@ -1,9 +1,9 @@
 import { api } from '@/service/axios'
 
 export const logicTblComponentUnit = {
-  effect: (componentUnitId: number, operation: 0 | 2) =>
+  effect: (componentUnitId: number, userId: number) =>
     api.post<{ status: string; message: string }>(
       `/tblComponentUnit/${componentUnitId}/effect`,
-      { data: { componentUnitId, operation } }
+      { data: { componentUnitId, userId } }
     ),
 }

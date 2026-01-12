@@ -26,7 +26,7 @@ export const schema = z.object({
     }),
   vendor: z
     .object({
-      vendorId: z.number(),
+      addressId: z.number(),
       name: z.string().nullable().optional(),
     })
     .nullable()
@@ -40,6 +40,7 @@ export const schema = z.object({
     .optional(),
   compNo: z.string().min(1, 'Component No is required'),
   serialNo: z.string().nullable().optional(),
+  model: z.string().nullable().optional(),
   assetNo: z.string().nullable().optional(),
   comment1: z.string().nullable().optional(),
   comment2: z.string().nullable().optional(),

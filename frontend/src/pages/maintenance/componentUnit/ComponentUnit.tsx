@@ -38,7 +38,7 @@ const columns: GridColDef<TypeTblComponentUnit>[] = [
     width: 120,
     valueGetter: (_, row) => row.tblCompStatus?.compStatusName ?? '',
   },
-  { field: 'orderNo', headerName: 'Order No', width: 100 },
+  { field: 'orderNo', headerName: 'Order No', width: 85 },
 ]
 
 export default function PageComponentUnit() {
@@ -50,7 +50,6 @@ export default function PageComponentUnit() {
 
   const getAll = useCallback(() => {
     return tblComponentUnit.getAll({
-      paginate: false,
       include: {
         tblCompType: true,
         tblCompStatus: true,
