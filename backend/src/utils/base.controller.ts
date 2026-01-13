@@ -32,7 +32,7 @@ export interface BaseControllerOptions<Model> {
   createSchema: any
   updateSchema: any
   responseSchema: any
-  primaryKey?: string // 🆕 کلید اصلی (پیش‌فرض: id)
+  primaryKey?: string
   extend?: (app: Elysia) => void
   excludeRoutes?: (
     | 'getAll'

@@ -1,28 +1,29 @@
 import * as z from 'zod'
+import Box from '@mui/material/Box'
+import FormDialog from '@/shared/components/formDialog/FormDialog'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import NumberField from '@/shared/components/NumberField'
 import { memo, useCallback, useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Box from '@mui/material/Box'
-import FormDialog from '@/shared/components/formDialog/FormDialog'
-import NumberField from '@/shared/components/NumberField'
 import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
+import { buildRelation } from '@/core/api/helper'
 import {
   tblCompTypeJobCounter,
   tblCompTypeCounter,
   TypeTblCompTypeJobCounter,
   TypeTblCompTypeJob,
-  tblCompJob,
-  tblComponentUnit,
 } from '@/core/api/generated/api'
-import { buildRelation } from '@/core/api/helper'
 
 /* === Schema === */
 const schema = z.object({
-  compTypeCounter: z.object({
-    compTypeCounterId: z.number(),
-  }),
+  compTypeCounter: z
+    .object({
+      compTypeCounterId: z.number(),
+    })
+    .nullable()
+    .refine(Boolean, { message: 'Counter is required' }),
   frequency: z.number().nullable(),
   window: z.number().nullable(),
   showInAlert: z.boolean(),
@@ -35,10 +36,9 @@ type FormValues = z.infer<typeof schema>
 type Props = {
   open: boolean
   mode: 'create' | 'update'
-  recordId?: number | null
+  recordId?: number
   compTypeJobId: number
   compTypeId: number
-  compTypeJob?: TypeTblCompTypeJob | null
   onClose: () => void
   onSuccess: (data: TypeTblCompTypeJobCounter) => void
 }
@@ -49,7 +49,6 @@ function JobCounterUpsert({
   recordId,
   compTypeJobId,
   compTypeId,
-  compTypeJob,
   onClose,
   onSuccess,
 }: Props) {
@@ -80,15 +79,17 @@ function JobCounterUpsert({
     setLoadingInitial(true)
     try {
       const res = await tblCompTypeJobCounter.getById(recordId, {
-        include: { tblCompTypeCounter: true },
+        include: {
+          tblCompTypeCounter: {
+            include: {
+              tblCounterType: true,
+            },
+          },
+        },
       })
 
       reset({
-        compTypeCounter: res.tblCompTypeCounter
-          ? {
-              compTypeCounterId: res.tblCompTypeCounter.compTypeCounterId,
-            }
-          : undefined,
+        compTypeCounter: res.tblCompTypeCounter,
         frequency: res.frequency ?? null,
         window: res.window ?? null,
         showInAlert: res.showInAlert ?? false,
@@ -122,7 +123,7 @@ function JobCounterUpsert({
           ...buildRelation(
             'tblCompTypeCounter',
             'compTypeCounterId',
-            parsed.data.compTypeCounter.compTypeCounterId
+            parsed.data?.compTypeCounter?.compTypeCounterId
           ),
           ...buildRelation('tblCompTypeJob', 'compTypeJobId', compTypeJobId),
         }
@@ -205,45 +206,55 @@ function JobCounterUpsert({
           )}
         />
 
-        <Controller
-          name='frequency'
-          control={control}
-          render={({ field }) => <NumberField {...field} label='Frequency' />}
-        />
+        <Box display={'flex'} gap={1.5}>
+          <Controller
+            name='frequency'
+            control={control}
+            render={({ field }) => (
+              <NumberField fullWidth {...field} label='Frequency' />
+            )}
+          />
 
-        <Controller
-          name='window'
-          control={control}
-          render={({ field }) => <NumberField {...field} label='Window' />}
-        />
-
-        <Controller
-          name='showInAlert'
-          control={control}
-          render={({ field }) => (
-            <FormControlLabel
-              control={<Checkbox checked={field.value} {...field} />}
-              label='Show In Alert'
+          <Controller
+            name='window'
+            control={control}
+            render={({ field }) => (
+              <NumberField fullWidth {...field} label='Window' />
+            )}
+          />
+        </Box>
+        <Box display={'grid'} gridTemplateColumns={'2fr 3fr'} gap={1.5}>
+          <Controller
+            name='orderNo'
+            control={control}
+            render={({ field }) => <NumberField {...field} label='Order No' />}
+          />
+          <Box display={'flex'} gap={1.5}>
+            <Controller
+              name='showInAlert'
+              control={control}
+              render={({ field }) => (
+                <FormControlLabel
+                  sx={{ m: 0 }}
+                  control={<Checkbox checked={field.value} {...field} />}
+                  label='Show In Alert'
+                />
+              )}
             />
-          )}
-        />
 
-        <Controller
-          name='updateByFunction'
-          control={control}
-          render={({ field }) => (
-            <FormControlLabel
-              control={<Checkbox checked={field.value} {...field} />}
-              label='Update By Function'
+            <Controller
+              name='updateByFunction'
+              control={control}
+              render={({ field }) => (
+                <FormControlLabel
+                  sx={{ m: 0 }}
+                  control={<Checkbox checked={field.value} {...field} />}
+                  label='Update By Function'
+                />
+              )}
             />
-          )}
-        />
-
-        <Controller
-          name='orderNo'
-          control={control}
-          render={({ field }) => <NumberField {...field} label='Order No' />}
-        />
+          </Box>
+        </Box>
       </Box>
     </FormDialog>
   )

@@ -2,21 +2,14 @@ import * as z from 'zod'
 import FormDialog from '@/shared/components/formDialog/FormDialog'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
+import NumberField from '@/shared/components/NumberField'
 import { memo, useEffect, useState, useCallback } from 'react'
 import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
 import { buildRelation, requiredStringField } from '@/core/api/helper'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  tblCompType,
-  tblAddress,
-  type TypeTblCompType,
-} from '@/core/api/generated/api'
-import NumberField from '@/shared/components/NumberField'
+import { tblCompType, tblAddress } from '@/core/api/generated/api'
 
-// =======================
-// VALIDATION SCHEMA
-// =======================
 const schema = z.object({
   compTypeNo: requiredStringField(),
   compName: requiredStringField(),
@@ -38,17 +31,14 @@ const schema = z.object({
     .optional(),
 })
 
-export type CompTypeFormValues = z.infer<typeof schema>
+type CompTypeFormValues = z.infer<typeof schema>
 
-// =======================
-// PROPS
-// =======================
 type Props = {
   open: boolean
   mode: 'create' | 'update'
   recordId?: number | null
   onClose: () => void
-  onSuccess: (data: TypeTblCompType) => void
+  onSuccess: () => void
 }
 
 function ComponentTypeUpsert({
@@ -75,9 +65,6 @@ function ComponentTypeUpsert({
     defaultValues,
   })
 
-  // =======================
-  // LOAD RECORD FOR UPDATE
-  // =======================
   const loadData = useCallback(async () => {
     if (mode !== 'update' || !recordId) {
       reset(defaultValues)
@@ -112,15 +99,6 @@ function ComponentTypeUpsert({
     }
   }, [mode, recordId, reset])
 
-  useEffect(() => {
-    if (open) loadData()
-  }, [open, loadData])
-
-  const isDisabled = loadingInitial || submitting
-
-  // =======================
-  // SUBMIT HANDLER
-  // =======================
   const onSubmitForm = useCallback(
     async (values: CompTypeFormValues) => {
       const parsed = schema.safeParse(values)
@@ -148,15 +126,13 @@ function ComponentTypeUpsert({
           ...parentRel,
         }
 
-        let result: TypeTblCompType
-
         if (mode === 'create') {
-          result = await tblCompType.create(payload)
+          await tblCompType.create(payload)
         } else {
-          result = await tblCompType.update(recordId!, payload)
+          await tblCompType.update(recordId!, payload)
         }
 
-        onSuccess(result)
+        onSuccess()
         onClose()
       } finally {
         setSubmitting(false)
@@ -165,9 +141,12 @@ function ComponentTypeUpsert({
     [mode, recordId, onSuccess, onClose]
   )
 
-  // =======================
-  // RENDER FORM
-  // =======================
+  useEffect(() => {
+    if (open) loadData()
+  }, [open, loadData])
+
+  const isDisabled = loadingInitial || submitting
+
   return (
     <FormDialog
       open={open}
@@ -216,7 +195,7 @@ function ComponentTypeUpsert({
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              label='Type *'
+              label='Type / Model'
               size='small'
               error={!!fieldState.error}
               helperText={fieldState.error?.message}

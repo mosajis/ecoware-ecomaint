@@ -12,7 +12,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
 import { BorderedBox } from '@/shared/components/BorderedBox'
 import { buildRelation } from '@/core/api/helper'
-import { logicTblCompTypeJob } from './TabJobEffect'
 import {
   tblCompTypeJob,
   tblJobDescription,
@@ -97,7 +96,7 @@ const schema = z.object({
   mandatoryHistory: z.boolean().nullable().optional(),
 })
 
-export type JobFormValues = z.infer<typeof schema>
+type JobFormValues = z.infer<typeof schema>
 
 type Props = {
   open: boolean
@@ -108,7 +107,7 @@ type Props = {
   compType?: {
     compTypeId: number
     compName: string
-  } | null
+  }
 }
 
 const DEFAULT_VALUES: JobFormValues = {
@@ -168,6 +167,7 @@ function ComponentTypeJobUpsert({
           tblMaintClass: true,
           tblMaintCause: true,
           tblMaintType: true,
+          tblPeriod: true,
         },
       })
 

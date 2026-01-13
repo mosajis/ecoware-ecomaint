@@ -8,6 +8,8 @@ import {
   TypeTblCompType,
 } from '@/core/api/generated/api'
 
+const getRowId = (row: TypeTblComponentUnit) => row.compId
+
 // === Columns ===
 const columns: GridColDef<TypeTblComponentUnit>[] = [
   {
@@ -27,7 +29,11 @@ const columns: GridColDef<TypeTblComponentUnit>[] = [
     headerName: 'Comp No',
     flex: 1,
   },
-
+  {
+    field: 'model',
+    headerName: 'Model',
+    flex: 1,
+  },
   {
     field: 'location',
     headerName: 'Location',
@@ -37,12 +43,12 @@ const columns: GridColDef<TypeTblComponentUnit>[] = [
   {
     field: 'serialNo',
     headerName: 'Serial',
-    width: 100,
+    flex: 1,
   },
 ]
 
 type Props = {
-  compType?: TypeTblCompType | null
+  compType?: TypeTblCompType
   label?: string
 }
 
@@ -63,7 +69,7 @@ const TabComponentUnit = ({ compType, label }: Props) => {
   }, [compTypeId])
 
   // === useDataGrid ===
-  const { rows, loading, fetchData } = useDataGrid(
+  const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
     tblComponentUnit.deleteById,
     'compId',
@@ -72,14 +78,17 @@ const TabComponentUnit = ({ compType, label }: Props) => {
 
   return (
     <CustomizedDataGrid
-      label={label || 'Component'}
+      disableEdit
+      disableDelete
+      disableAdd
+      disableRowNumber
+      label={label}
+      showToolbar={!!label}
       rows={rows}
       columns={columns}
       loading={loading}
-      showToolbar
-      disableRowNumber
-      onRefreshClick={fetchData}
-      getRowId={row => row.compId}
+      onRefreshClick={handleRefresh}
+      getRowId={getRowId}
     />
   )
 }

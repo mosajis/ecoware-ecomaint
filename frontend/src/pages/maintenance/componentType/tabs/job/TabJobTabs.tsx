@@ -27,7 +27,7 @@ const tabs: ReusableTabItem[] = [
 ]
 
 type Props = {
-  compTypeJob?: TypeTblCompTypeJob | undefined | null
+  compTypeJob?: TypeTblCompTypeJob
 }
 
 const Tabs = ({ compTypeJob }: Props) => {

@@ -12,7 +12,6 @@ import { buildRelation } from '@/core/api/helper'
 import {
   tblCompTypeJobMeasurePoint,
   tblCompTypeMeasurePoint,
-  tblCounterType,
   TypeTblCompTypeJobMeasurePoint,
 } from '@/core/api/generated/api'
 
@@ -191,57 +190,67 @@ function TabMasuresUpsert({
           )}
         />
 
-        <Controller
-          name='minValue'
-          control={control}
-          render={({ field }) => <NumberField {...field} label='Min Value' />}
-        />
+        <Box display={'flex'} gap={1.5}>
+          <Controller
+            name='minValue'
+            control={control}
+            render={({ field }) => (
+              <NumberField fullWidth {...field} label='Min Value' />
+            )}
+          />
 
-        <Controller
-          name='maxValue'
-          control={control}
-          render={({ field }) => <NumberField {...field} label='Max Value' />}
-        />
-
-        <Controller
-          name='useOperationalValues'
-          control={control}
-          render={({ field }) => (
-            <FormControlLabel
-              label='Use Operational Values'
-              control={
-                <Checkbox
-                  checked={field.value}
-                  onChange={e => field.onChange(e.target.checked)}
-                  inputRef={field.ref}
+          <Controller
+            name='maxValue'
+            control={control}
+            render={({ field }) => (
+              <NumberField fullWidth {...field} label='Max Value' />
+            )}
+          />
+        </Box>
+        <Box display={'grid'} gridTemplateColumns={'1fr 2fr'} gap={1.5}>
+          <Controller
+            name='orderNo'
+            control={control}
+            render={({ field }) => <NumberField {...field} label='Order No' />}
+          />
+          <Box display={'flex'} gap={1.5}>
+            <Controller
+              name='useOperationalValues'
+              control={control}
+              render={({ field }) => (
+                <FormControlLabel
+                  label='Use Operational Values'
+                  sx={{ m: 0 }}
+                  control={
+                    <Checkbox
+                      checked={field.value}
+                      onChange={e => field.onChange(e.target.checked)}
+                      inputRef={field.ref}
+                    />
+                  }
                 />
-              }
+              )}
             />
-          )}
-        />
 
-        <Controller
-          name='updateOnReport'
-          control={control}
-          render={({ field }) => (
-            <FormControlLabel
-              label='Update On Report'
-              control={
-                <Checkbox
-                  checked={field.value}
-                  onChange={e => field.onChange(e.target.checked)}
-                  inputRef={field.ref}
+            <Controller
+              name='updateOnReport'
+              control={control}
+              render={({ field }) => (
+                <FormControlLabel
+                  label='Update On Report'
+                  sx={{ m: 0 }}
+                  control={
+                    <Checkbox
+                      checked={field.value}
+                      onChange={e => field.onChange(e.target.checked)}
+                      inputRef={field.ref}
+                    />
+                  }
                 />
-              }
+              )}
             />
-          )}
-        />
-
-        <Controller
-          name='orderNo'
-          control={control}
-          render={({ field }) => <NumberField {...field} label='Order No' />}
-        />
+          </Box>
+        </Box>
       </Box>
     </FormDialog>
   )

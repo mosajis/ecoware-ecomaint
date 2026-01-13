@@ -22,7 +22,7 @@ const schema = z.object({
       compCounterId: z.number(),
     })
     .nullable()
-    .refine(Boolean, { message: 'Measure Point is required' }),
+    .refine(Boolean, { message: 'Counter is required' }),
 
   frequency: z.number().nullable(),
   window: z.number().nullable(),

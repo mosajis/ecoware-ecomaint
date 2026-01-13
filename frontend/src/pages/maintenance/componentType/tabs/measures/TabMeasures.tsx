@@ -89,6 +89,7 @@ const TabMeasuresPage = ({ compType, label }: Props) => {
   const handleUpsertOpen = useCallback(() => {
     setOpenForm(true)
   }, [])
+
   return (
     <>
       <CustomizedDataGrid

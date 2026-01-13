@@ -1,19 +1,70 @@
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import JobMeasureUpsert from './TabMasuresUpsert' // فرض می‌کنم که این کامپوننت قبلاً ساخته شده
-import { useCallback, useMemo, useState } from 'react'
+import JobMeasureUpsert from './TabMasuresUpsert'
+import { useCallback, useState } from 'react'
 import { GridColDef } from '@mui/x-data-grid'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import {
   tblCompTypeJobMeasurePoint,
-  tblCompTypeMeasurePoint,
   TypeTblCompTypeJob,
   TypeTblCompTypeJobMeasurePoint,
 } from '@/core/api/generated/api'
 
 type Props = {
-  compTypeJob?: TypeTblCompTypeJob | null
+  compTypeJob?: TypeTblCompTypeJob
 }
+
+const getRowId = (row: TypeTblCompTypeJobMeasurePoint) =>
+  row.compTypeJobMeasurePointId
+// === Columns ===
+const columns: GridColDef<TypeTblCompTypeJobMeasurePoint>[] = [
+  {
+    field: 'measureName',
+    headerName: 'Measure Name',
+    flex: 1,
+    valueGetter: (v, row) =>
+      // @ts-ignore
+      row?.tblCompTypeMeasurePoint?.tblCounterType?.name,
+  },
+  {
+    field: 'unitName',
+    headerName: 'Unit Name',
+    flex: 1,
+    // @ts-ignore
+    valueGetter: (v, row) => row?.tblCompTypeMeasurePoint?.tblUnit?.name,
+  },
+  {
+    field: 'unitDescription',
+    headerName: 'Unit Description',
+    flex: 1,
+    // @ts-ignore
+    valueGetter: (v, row) =>
+      // @ts-ignore
+      row?.tblCompTypeMeasurePoint?.tblUnit?.description,
+  },
+
+  {
+    field: 'minValue',
+    headerName: 'Min Value',
+    flex: 1,
+  },
+  {
+    field: 'maxValue',
+    headerName: 'Max Value',
+    flex: 1,
+  },
+  {
+    field: 'updateOnReport',
+    headerName: 'Update On Report',
+    flex: 1,
+    type: 'boolean',
+  },
+  {
+    field: 'useOperationalValues',
+    headerName: 'use Operational Values',
+    flex: 1,
+    type: 'boolean',
+  },
+]
 
 const TabMeasuresPage = ({ compTypeJob }: Props) => {
   const [openForm, setOpenForm] = useState(false)
@@ -22,6 +73,8 @@ const TabMeasuresPage = ({ compTypeJob }: Props) => {
 
   const compTypeJobId = compTypeJob?.compTypeJobId
   const compTypeId = compTypeJob?.compTypeId
+
+  const label = compTypeJob?.tblJobDescription?.jobDescTitle || ''
 
   // === getAll callback ===
   const getAll = useCallback(() => {
@@ -35,112 +88,65 @@ const TabMeasuresPage = ({ compTypeJob }: Props) => {
         },
       },
       filter: {
-        compTypeJobId: compTypeJob?.compTypeJobId,
+        compTypeJobId,
       },
     })
-  }, [compTypeJob?.compTypeJobId])
+  }, [compTypeJobId])
 
   // === useDataGrid ===
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
     getAll,
     tblCompTypeJobMeasurePoint.deleteById,
     'compTypeJobMeasurePointId',
-    !!compTypeJob
+    !!compTypeJobId
   )
 
   // === Handlers ===
   const handleCreate = () => {
     setSelectedId(null)
     setMode('create')
-    setOpenForm(true)
+    handleUpsertOpen()
   }
 
-  const handleEdit = (row: TypeTblCompTypeJobMeasurePoint) => {
-    setSelectedId(row.compTypeJobMeasurePointId)
+  const handleEdit = (rowId: number) => {
+    setSelectedId(rowId)
     setMode('update')
-    setOpenForm(true)
+    handleUpsertOpen()
   }
 
-  // === Columns ===
-  const columns = useMemo<GridColDef<TypeTblCompTypeJobMeasurePoint>[]>(
-    () => [
-      {
-        field: 'measureName',
-        headerName: 'Measure Name',
-        flex: 1,
-        valueGetter: (v, row) =>
-          // @ts-ignore
-          row?.tblCompTypeMeasurePoint?.tblCounterType?.name,
-      },
-      {
-        field: 'unitName',
-        headerName: 'Unit Name',
-        flex: 1,
-        // @ts-ignore
-        valueGetter: (v, row) => row?.tblCompTypeMeasurePoint?.tblUnit?.name,
-      },
-      {
-        field: 'unitDescription',
-        headerName: 'Unit Description',
-        flex: 1,
-        // @ts-ignore
-        valueGetter: (v, row) =>
-          // @ts-ignore
-          row?.tblCompTypeMeasurePoint?.tblUnit?.description,
-      },
+  const handleUpsertClose = useCallback(() => {
+    setOpenForm(false)
+  }, [])
 
-      {
-        field: 'minValue',
-        headerName: 'Min Value',
-        flex: 1,
-      },
-      {
-        field: 'maxValue',
-        headerName: 'Max Value',
-        flex: 1,
-      },
-      {
-        field: 'updateOnReport',
-        headerName: 'Update On Report',
-        flex: 1,
-        type: 'boolean',
-      },
-      {
-        field: 'useOperationalValues',
-        headerName: 'use Operational Values',
-        flex: 1,
-        type: 'boolean',
-      },
-      dataGridActionColumn({ onDelete: handleDelete, onEdit: handleEdit }),
-    ],
-    [handleDelete]
-  )
+  const handleUpsertOpen = useCallback(() => {
+    setOpenForm(true)
+  }, [])
 
   return (
     <>
       <CustomizedDataGrid
-        label={compTypeJob?.tblJobDescription?.jobDescTitle || 'Measure Points'}
+        label={label}
+        showToolbar={!!label}
         rows={rows}
-        columns={columns}
         loading={loading}
-        showToolbar
-        onRefreshClick={handleRefresh}
-        getRowId={row => row.compTypeJobMeasurePointId}
+        columns={columns}
         onAddClick={handleCreate}
+        onEditClick={handleEdit}
+        onDoubleClick={handleEdit}
+        onDeleteClick={handleDelete}
+        onRefreshClick={handleRefresh}
+        getRowId={getRowId}
       />
 
-      {/* === UPSERT === */}
-      {compTypeJobId && compTypeId && (
-        <JobMeasureUpsert
-          open={openForm}
-          mode={mode}
-          recordId={selectedId}
-          compTypeJobId={compTypeJobId}
-          compTypeId={compTypeId}
-          onClose={() => setOpenForm(false)}
-          onSuccess={handleRefresh}
-        />
-      )}
+      <JobMeasureUpsert
+        open={openForm}
+        mode={mode}
+        recordId={selectedId}
+        compTypeJobId={compTypeJobId!}
+        compTypeId={compTypeId!}
+        onClose={handleUpsertClose}
+        onSuccess={handleRefresh}
+      />
     </>
   )
 }
