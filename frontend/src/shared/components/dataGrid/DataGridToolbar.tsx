@@ -16,6 +16,7 @@ import Divider from '@mui/material/Divider'
 import { Toolbar } from '@mui/x-data-grid'
 import { useTheme } from '@mui/material/styles'
 import { useState } from 'react'
+import { QuestionMark, QuestionMarkOutlined } from '@mui/icons-material'
 
 interface DataGridToolbarProps {
   label: string
@@ -91,7 +92,10 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
         }}
       >
         <Box display={'flex'} alignItems={'center'} gap={2}>
-          <Typography fontWeight='bold'>{label}</Typography>
+          <Box display={'flex'} alignItems={'center'} gap={0.6}>
+            {/* <QuestionMark sx={{ fontSize: 15 }} /> */}
+            <Typography fontWeight='bold'>{label}</Typography>
+          </Box>
 
           {children}
         </Box>

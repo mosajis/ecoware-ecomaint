@@ -7,17 +7,17 @@ import {
 
 interface Props {
   componentUnit?: TypeTblComponentUnit | null
-  label?: string | null
+  label?: string
 }
 
-export function TabComponentUnitAttachment({ componentUnit }: Props) {
+export function TabComponentUnitAttachment({ componentUnit, label }: Props) {
   return (
     <AttachmentMap
       filterId={componentUnit?.compId}
       filterKey='compId'
       relName='tblComponentUnit'
       tableId='componentUnitAttachmentId'
-      label='Attachments'
+      label={label}
       mapService={tblComponentUnitAttachment}
     />
   )

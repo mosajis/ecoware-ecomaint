@@ -1,10 +1,9 @@
+import CellWorkOrderStatus from './customCell/CellWorkOrderStatus'
+import CellDateTime from '@/shared/components/dataGrid/cells/CellDateTime'
+import CellOverdue from './customCell/CellWorkOrderOverDue'
 import { GridColDef } from '@mui/x-data-grid'
 import { TypeTblWorkOrderWithRels } from './types'
-import StatusChip from './customCell/Status'
-import OverdueText from './customCell/OverDue'
 import { calculateOverdue } from '@/core/api/helper'
-import CellDateTime from '@/shared/components/dataGrid/cells/CellDateTime'
-import CellOverdue from './customCell/OverDue'
 
 export const columns: GridColDef<TypeTblWorkOrderWithRels>[] = [
   {
@@ -40,9 +39,9 @@ export const columns: GridColDef<TypeTblWorkOrderWithRels>[] = [
   {
     field: 'status',
     headerName: 'Status',
-    width: 95,
+    width: 101,
     valueGetter: (_, row) => row?.tblWorkOrderStatus?.name,
-    renderCell: params => <StatusChip status={params.value} />,
+    renderCell: params => <CellWorkOrderStatus status={params.value} />,
   },
   {
     field: 'dueDate',

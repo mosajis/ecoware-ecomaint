@@ -22,9 +22,8 @@ const TabCounter = lazy(() => import('./tabs/counter/TabCounter'))
 const TabWorkOrder = lazy(() => import('./tabs/TabWorkOrder'))
 const TabMaintLog = lazy(() => import('./tabs/TabMaintLog'))
 const TabAttachment = lazy(() => import('./tabs/TabAttachment'))
-const TabJobAttachment = lazy(() => import('./tabs/TabJobAttachment'))
+const TabUserAttachment = lazy(() => import('./tabs/TabUserAttachment'))
 const TabFailureReport = lazy(() => import('./tabs/TabFailureReport'))
-const TabPerformed = lazy(() => import('./tabs/TabPerformed'))
 const TabMeasures = lazy(() => import('./tabs/measures/TabMeasures'))
 const TabStockUsed = lazy(() => import('./tabs/TabStockUsed'))
 
@@ -46,13 +45,16 @@ const tabs: ReusableTabItem[] = [
   { label: 'Failure Report', icon: <BugReport />, component: TabFailureReport },
   { label: 'Work Order', icon: <ContentCopy />, component: TabWorkOrder },
   { label: 'Maint Log', icon: <DoneAll />, component: TabMaintLog },
-  { label: 'Function', icon: <CheckCircle />, component: TabPerformed },
-  { label: 'Stock Used', icon: <StackedLineChart />, component: TabStockUsed },
+  {
+    label: 'Stock Used (not set)',
+    icon: <StackedLineChart />,
+    component: TabStockUsed,
+  },
   { label: 'Attachment', icon: <AttachFile />, component: TabAttachment },
   {
-    label: 'Job Attachment (Check)',
-    icon: <AddBox />,
-    component: TabJobAttachment,
+    label: 'User Attachment',
+    icon: <AttachFile />,
+    component: TabUserAttachment,
   },
 ]
 

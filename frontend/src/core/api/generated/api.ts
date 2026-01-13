@@ -18,7 +18,7 @@ function stringifyQuery<Q extends Record<string, any>>(query?: Q) {
 
 export type TypeSysdiagrams = DynamicResponse<'getSysdiagrams'>['items'][0];
 export const sysdiagrams = {
-  getAll: (query?: DynamicQuery<'getSysdiagrams'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getSysdiagrams'>) =>
     api.get<DynamicResponse<'getSysdiagrams'>>('/sysdiagrams', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getSysdiagramsByDiagramId'>) =>
     api.get<DynamicResponse<'getSysdiagramsByDiagramId'>>(`/sysdiagrams/${id}`, { params: stringifyQuery(query) }),
@@ -36,7 +36,7 @@ export const sysdiagrams = {
 
 export type TypeTblAddress = DynamicResponse<'getTblAddress'>['items'][0];
 export const tblAddress = {
-  getAll: (query?: DynamicQuery<'getTblAddress'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblAddress'>) =>
     api.get<DynamicResponse<'getTblAddress'>>('/tblAddress', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblAddressByAddressId'>) =>
     api.get<DynamicResponse<'getTblAddressByAddressId'>>(`/tblAddress/${id}`, { params: stringifyQuery(query) }),
@@ -54,7 +54,7 @@ export const tblAddress = {
 
 export type TypeTblAttachment = DynamicResponse<'getTblAttachment'>['items'][0];
 export const tblAttachment = {
-  getAll: (query?: DynamicQuery<'getTblAttachment'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblAttachment'>) =>
     api.get<DynamicResponse<'getTblAttachment'>>('/tblAttachment', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblAttachmentByAttachmentId'>) =>
     api.get<DynamicResponse<'getTblAttachmentByAttachmentId'>>(`/tblAttachment/${id}`, { params: stringifyQuery(query) }),
@@ -72,7 +72,7 @@ export const tblAttachment = {
 
 export type TypeTblAttachmentType = DynamicResponse<'getTblAttachmentType'>['items'][0];
 export const tblAttachmentType = {
-  getAll: (query?: DynamicQuery<'getTblAttachmentType'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblAttachmentType'>) =>
     api.get<DynamicResponse<'getTblAttachmentType'>>('/tblAttachmentType', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblAttachmentTypeByAttachmentTypeId'>) =>
     api.get<DynamicResponse<'getTblAttachmentTypeByAttachmentTypeId'>>(`/tblAttachmentType/${id}`, { params: stringifyQuery(query) }),
@@ -90,7 +90,7 @@ export const tblAttachmentType = {
 
 export type TypeTblCompCounter = DynamicResponse<'getTblCompCounter'>['items'][0];
 export const tblCompCounter = {
-  getAll: (query?: DynamicQuery<'getTblCompCounter'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompCounter'>) =>
     api.get<DynamicResponse<'getTblCompCounter'>>('/tblCompCounter', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompCounterByCompCounterId'>) =>
     api.get<DynamicResponse<'getTblCompCounterByCompCounterId'>>(`/tblCompCounter/${id}`, { params: stringifyQuery(query) }),
@@ -108,7 +108,7 @@ export const tblCompCounter = {
 
 export type TypeTblCompCounterLog = DynamicResponse<'getTblCompCounterLog'>['items'][0];
 export const tblCompCounterLog = {
-  getAll: (query?: DynamicQuery<'getTblCompCounterLog'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompCounterLog'>) =>
     api.get<DynamicResponse<'getTblCompCounterLog'>>('/tblCompCounterLog', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompCounterLogByCompCounterLogId'>) =>
     api.get<DynamicResponse<'getTblCompCounterLogByCompCounterLogId'>>(`/tblCompCounterLog/${id}`, { params: stringifyQuery(query) }),
@@ -126,7 +126,7 @@ export const tblCompCounterLog = {
 
 export type TypeTblCompJob = DynamicResponse<'getTblCompJob'>['items'][0];
 export const tblCompJob = {
-  getAll: (query?: DynamicQuery<'getTblCompJob'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompJob'>) =>
     api.get<DynamicResponse<'getTblCompJob'>>('/tblCompJob', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompJobByCompJobId'>) =>
     api.get<DynamicResponse<'getTblCompJobByCompJobId'>>(`/tblCompJob/${id}`, { params: stringifyQuery(query) }),
@@ -144,7 +144,7 @@ export const tblCompJob = {
 
 export type TypeTblCompJobCounter = DynamicResponse<'getTblCompJobCounter'>['items'][0];
 export const tblCompJobCounter = {
-  getAll: (query?: DynamicQuery<'getTblCompJobCounter'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompJobCounter'>) =>
     api.get<DynamicResponse<'getTblCompJobCounter'>>('/tblCompJobCounter', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompJobCounterByCompJobCounterId'>) =>
     api.get<DynamicResponse<'getTblCompJobCounterByCompJobCounterId'>>(`/tblCompJobCounter/${id}`, { params: stringifyQuery(query) }),
@@ -162,7 +162,7 @@ export const tblCompJobCounter = {
 
 export type TypeTblCompJobMeasurePoint = DynamicResponse<'getTblCompJobMeasurePoint'>['items'][0];
 export const tblCompJobMeasurePoint = {
-  getAll: (query?: DynamicQuery<'getTblCompJobMeasurePoint'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompJobMeasurePoint'>) =>
     api.get<DynamicResponse<'getTblCompJobMeasurePoint'>>('/tblCompJobMeasurePoint', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompJobMeasurePointByCompJobMeasurePointId'>) =>
     api.get<DynamicResponse<'getTblCompJobMeasurePointByCompJobMeasurePointId'>>(`/tblCompJobMeasurePoint/${id}`, { params: stringifyQuery(query) }),
@@ -180,7 +180,7 @@ export const tblCompJobMeasurePoint = {
 
 export type TypeTblCompJobTrigger = DynamicResponse<'getTblCompJobTrigger'>['items'][0];
 export const tblCompJobTrigger = {
-  getAll: (query?: DynamicQuery<'getTblCompJobTrigger'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompJobTrigger'>) =>
     api.get<DynamicResponse<'getTblCompJobTrigger'>>('/tblCompJobTrigger', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompJobTriggerByCompJobTriggerId'>) =>
     api.get<DynamicResponse<'getTblCompJobTriggerByCompJobTriggerId'>>(`/tblCompJobTrigger/${id}`, { params: stringifyQuery(query) }),
@@ -198,7 +198,7 @@ export const tblCompJobTrigger = {
 
 export type TypeTblCompMeasurePoint = DynamicResponse<'getTblCompMeasurePoint'>['items'][0];
 export const tblCompMeasurePoint = {
-  getAll: (query?: DynamicQuery<'getTblCompMeasurePoint'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompMeasurePoint'>) =>
     api.get<DynamicResponse<'getTblCompMeasurePoint'>>('/tblCompMeasurePoint', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompMeasurePointByCompMeasurePointId'>) =>
     api.get<DynamicResponse<'getTblCompMeasurePointByCompMeasurePointId'>>(`/tblCompMeasurePoint/${id}`, { params: stringifyQuery(query) }),
@@ -216,7 +216,7 @@ export const tblCompMeasurePoint = {
 
 export type TypeTblCompMeasurePointLog = DynamicResponse<'getTblCompMeasurePointLog'>['items'][0];
 export const tblCompMeasurePointLog = {
-  getAll: (query?: DynamicQuery<'getTblCompMeasurePointLog'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompMeasurePointLog'>) =>
     api.get<DynamicResponse<'getTblCompMeasurePointLog'>>('/tblCompMeasurePointLog', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompMeasurePointLogByCompMeasurePointLogId'>) =>
     api.get<DynamicResponse<'getTblCompMeasurePointLogByCompMeasurePointLogId'>>(`/tblCompMeasurePointLog/${id}`, { params: stringifyQuery(query) }),
@@ -234,7 +234,7 @@ export const tblCompMeasurePointLog = {
 
 export type TypeTblCompOilInfo = DynamicResponse<'getTblCompOilInfo'>['items'][0];
 export const tblCompOilInfo = {
-  getAll: (query?: DynamicQuery<'getTblCompOilInfo'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompOilInfo'>) =>
     api.get<DynamicResponse<'getTblCompOilInfo'>>('/tblCompOilInfo', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompOilInfoByCompOilInfoId'>) =>
     api.get<DynamicResponse<'getTblCompOilInfoByCompOilInfoId'>>(`/tblCompOilInfo/${id}`, { params: stringifyQuery(query) }),
@@ -252,7 +252,7 @@ export const tblCompOilInfo = {
 
 export type TypeTblCompSpare = DynamicResponse<'getTblCompSpare'>['items'][0];
 export const tblCompSpare = {
-  getAll: (query?: DynamicQuery<'getTblCompSpare'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompSpare'>) =>
     api.get<DynamicResponse<'getTblCompSpare'>>('/tblCompSpare', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompSpareByCompSpareId'>) =>
     api.get<DynamicResponse<'getTblCompSpareByCompSpareId'>>(`/tblCompSpare/${id}`, { params: stringifyQuery(query) }),
@@ -270,7 +270,7 @@ export const tblCompSpare = {
 
 export type TypeTblCompStatus = DynamicResponse<'getTblCompStatus'>['items'][0];
 export const tblCompStatus = {
-  getAll: (query?: DynamicQuery<'getTblCompStatus'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompStatus'>) =>
     api.get<DynamicResponse<'getTblCompStatus'>>('/tblCompStatus', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompStatusByCompStatusId'>) =>
     api.get<DynamicResponse<'getTblCompStatusByCompStatusId'>>(`/tblCompStatus/${id}`, { params: stringifyQuery(query) }),
@@ -288,7 +288,7 @@ export const tblCompStatus = {
 
 export type TypeTblCompStatusLog = DynamicResponse<'getTblCompStatusLog'>['items'][0];
 export const tblCompStatusLog = {
-  getAll: (query?: DynamicQuery<'getTblCompStatusLog'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompStatusLog'>) =>
     api.get<DynamicResponse<'getTblCompStatusLog'>>('/tblCompStatusLog', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompStatusLogByCompStatusLogId'>) =>
     api.get<DynamicResponse<'getTblCompStatusLogByCompStatusLogId'>>(`/tblCompStatusLog/${id}`, { params: stringifyQuery(query) }),
@@ -306,7 +306,7 @@ export const tblCompStatusLog = {
 
 export type TypeTblCompType = DynamicResponse<'getTblCompType'>['items'][0];
 export const tblCompType = {
-  getAll: (query?: DynamicQuery<'getTblCompType'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompType'>) =>
     api.get<DynamicResponse<'getTblCompType'>>('/tblCompType', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompTypeByCompTypeId'>) =>
     api.get<DynamicResponse<'getTblCompTypeByCompTypeId'>>(`/tblCompType/${id}`, { params: stringifyQuery(query) }),
@@ -324,7 +324,7 @@ export const tblCompType = {
 
 export type TypeTblCompTypeAttachment = DynamicResponse<'getTblCompTypeAttachment'>['items'][0];
 export const tblCompTypeAttachment = {
-  getAll: (query?: DynamicQuery<'getTblCompTypeAttachment'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompTypeAttachment'>) =>
     api.get<DynamicResponse<'getTblCompTypeAttachment'>>('/tblCompTypeAttachment', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompTypeAttachmentByCompTypeAttachmentId'>) =>
     api.get<DynamicResponse<'getTblCompTypeAttachmentByCompTypeAttachmentId'>>(`/tblCompTypeAttachment/${id}`, { params: stringifyQuery(query) }),
@@ -342,7 +342,7 @@ export const tblCompTypeAttachment = {
 
 export type TypeTblCompTypeCounter = DynamicResponse<'getTblCompTypeCounter'>['items'][0];
 export const tblCompTypeCounter = {
-  getAll: (query?: DynamicQuery<'getTblCompTypeCounter'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompTypeCounter'>) =>
     api.get<DynamicResponse<'getTblCompTypeCounter'>>('/tblCompTypeCounter', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompTypeCounterByCompTypeCounterId'>) =>
     api.get<DynamicResponse<'getTblCompTypeCounterByCompTypeCounterId'>>(`/tblCompTypeCounter/${id}`, { params: stringifyQuery(query) }),
@@ -360,7 +360,7 @@ export const tblCompTypeCounter = {
 
 export type TypeTblCompTypeJob = DynamicResponse<'getTblCompTypeJob'>['items'][0];
 export const tblCompTypeJob = {
-  getAll: (query?: DynamicQuery<'getTblCompTypeJob'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompTypeJob'>) =>
     api.get<DynamicResponse<'getTblCompTypeJob'>>('/tblCompTypeJob', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompTypeJobByCompTypeJobId'>) =>
     api.get<DynamicResponse<'getTblCompTypeJobByCompTypeJobId'>>(`/tblCompTypeJob/${id}`, { params: stringifyQuery(query) }),
@@ -383,7 +383,7 @@ export const tblCompTypeJobByCompTypeJobIdEffect = {
 
 export type TypeTblCompTypeJobCounter = DynamicResponse<'getTblCompTypeJobCounter'>['items'][0];
 export const tblCompTypeJobCounter = {
-  getAll: (query?: DynamicQuery<'getTblCompTypeJobCounter'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompTypeJobCounter'>) =>
     api.get<DynamicResponse<'getTblCompTypeJobCounter'>>('/tblCompTypeJobCounter', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompTypeJobCounterByCompTypeJobCounterId'>) =>
     api.get<DynamicResponse<'getTblCompTypeJobCounterByCompTypeJobCounterId'>>(`/tblCompTypeJobCounter/${id}`, { params: stringifyQuery(query) }),
@@ -401,7 +401,7 @@ export const tblCompTypeJobCounter = {
 
 export type TypeTblCompTypeJobMeasurePoint = DynamicResponse<'getTblCompTypeJobMeasurePoint'>['items'][0];
 export const tblCompTypeJobMeasurePoint = {
-  getAll: (query?: DynamicQuery<'getTblCompTypeJobMeasurePoint'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompTypeJobMeasurePoint'>) =>
     api.get<DynamicResponse<'getTblCompTypeJobMeasurePoint'>>('/tblCompTypeJobMeasurePoint', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompTypeJobMeasurePointByCompTypeJobMeasurePointId'>) =>
     api.get<DynamicResponse<'getTblCompTypeJobMeasurePointByCompTypeJobMeasurePointId'>>(`/tblCompTypeJobMeasurePoint/${id}`, { params: stringifyQuery(query) }),
@@ -419,7 +419,7 @@ export const tblCompTypeJobMeasurePoint = {
 
 export type TypeTblCompTypeJobTrigger = DynamicResponse<'getTblCompTypeJobTrigger'>['items'][0];
 export const tblCompTypeJobTrigger = {
-  getAll: (query?: DynamicQuery<'getTblCompTypeJobTrigger'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompTypeJobTrigger'>) =>
     api.get<DynamicResponse<'getTblCompTypeJobTrigger'>>('/tblCompTypeJobTrigger', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompTypeJobTriggerByCompTypeJobTriggerId'>) =>
     api.get<DynamicResponse<'getTblCompTypeJobTriggerByCompTypeJobTriggerId'>>(`/tblCompTypeJobTrigger/${id}`, { params: stringifyQuery(query) }),
@@ -437,7 +437,7 @@ export const tblCompTypeJobTrigger = {
 
 export type TypeTblCompTypeMeasurePoint = DynamicResponse<'getTblCompTypeMeasurePoint'>['items'][0];
 export const tblCompTypeMeasurePoint = {
-  getAll: (query?: DynamicQuery<'getTblCompTypeMeasurePoint'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCompTypeMeasurePoint'>) =>
     api.get<DynamicResponse<'getTblCompTypeMeasurePoint'>>('/tblCompTypeMeasurePoint', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCompTypeMeasurePointByCompTypeMeasurePointId'>) =>
     api.get<DynamicResponse<'getTblCompTypeMeasurePointByCompTypeMeasurePointId'>>(`/tblCompTypeMeasurePoint/${id}`, { params: stringifyQuery(query) }),
@@ -455,7 +455,7 @@ export const tblCompTypeMeasurePoint = {
 
 export type TypeTblComponentUnit = DynamicResponse<'getTblComponentUnit'>['items'][0];
 export const tblComponentUnit = {
-  getAll: (query?: DynamicQuery<'getTblComponentUnit'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblComponentUnit'>) =>
     api.get<DynamicResponse<'getTblComponentUnit'>>('/tblComponentUnit', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblComponentUnitByCompId'>) =>
     api.get<DynamicResponse<'getTblComponentUnitByCompId'>>(`/tblComponentUnit/${id}`, { params: stringifyQuery(query) }),
@@ -473,7 +473,7 @@ export const tblComponentUnit = {
 
 export type TypeTblComponentUnitAttachment = DynamicResponse<'getTblComponentUnitAttachment'>['items'][0];
 export const tblComponentUnitAttachment = {
-  getAll: (query?: DynamicQuery<'getTblComponentUnitAttachment'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblComponentUnitAttachment'>) =>
     api.get<DynamicResponse<'getTblComponentUnitAttachment'>>('/tblComponentUnitAttachment', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblComponentUnitAttachmentByComponentUnitAttachmentId'>) =>
     api.get<DynamicResponse<'getTblComponentUnitAttachmentByComponentUnitAttachmentId'>>(`/tblComponentUnitAttachment/${id}`, { params: stringifyQuery(query) }),
@@ -491,7 +491,7 @@ export const tblComponentUnitAttachment = {
 
 export type TypeTblCounterType = DynamicResponse<'getTblCounterType'>['items'][0];
 export const tblCounterType = {
-  getAll: (query?: DynamicQuery<'getTblCounterType'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblCounterType'>) =>
     api.get<DynamicResponse<'getTblCounterType'>>('/tblCounterType', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblCounterTypeByCounterTypeId'>) =>
     api.get<DynamicResponse<'getTblCounterTypeByCounterTypeId'>>(`/tblCounterType/${id}`, { params: stringifyQuery(query) }),
@@ -509,7 +509,7 @@ export const tblCounterType = {
 
 export type TypeTblDepartment = DynamicResponse<'getTblDepartment'>['items'][0];
 export const tblDepartment = {
-  getAll: (query?: DynamicQuery<'getTblDepartment'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblDepartment'>) =>
     api.get<DynamicResponse<'getTblDepartment'>>('/tblDepartment', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblDepartmentByDeptId'>) =>
     api.get<DynamicResponse<'getTblDepartmentByDeptId'>>(`/tblDepartment/${id}`, { params: stringifyQuery(query) }),
@@ -527,7 +527,7 @@ export const tblDepartment = {
 
 export type TypeTblDiscipline = DynamicResponse<'getTblDiscipline'>['items'][0];
 export const tblDiscipline = {
-  getAll: (query?: DynamicQuery<'getTblDiscipline'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblDiscipline'>) =>
     api.get<DynamicResponse<'getTblDiscipline'>>('/tblDiscipline', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblDisciplineByDiscId'>) =>
     api.get<DynamicResponse<'getTblDisciplineByDiscId'>>(`/tblDiscipline/${id}`, { params: stringifyQuery(query) }),
@@ -545,7 +545,7 @@ export const tblDiscipline = {
 
 export type TypeTblEmployee = DynamicResponse<'getTblEmployee'>['items'][0];
 export const tblEmployee = {
-  getAll: (query?: DynamicQuery<'getTblEmployee'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblEmployee'>) =>
     api.get<DynamicResponse<'getTblEmployee'>>('/tblEmployee', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblEmployeeByEmployeeId'>) =>
     api.get<DynamicResponse<'getTblEmployeeByEmployeeId'>>(`/tblEmployee/${id}`, { params: stringifyQuery(query) }),
@@ -563,7 +563,7 @@ export const tblEmployee = {
 
 export type TypeTblFailureReportAttachment = DynamicResponse<'getTblFailureReportAttachment'>['items'][0];
 export const tblFailureReportAttachment = {
-  getAll: (query?: DynamicQuery<'getTblFailureReportAttachment'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblFailureReportAttachment'>) =>
     api.get<DynamicResponse<'getTblFailureReportAttachment'>>('/tblFailureReportAttachment', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblFailureReportAttachmentByFailureReportAttachmentId'>) =>
     api.get<DynamicResponse<'getTblFailureReportAttachmentByFailureReportAttachmentId'>>(`/tblFailureReportAttachment/${id}`, { params: stringifyQuery(query) }),
@@ -581,7 +581,7 @@ export const tblFailureReportAttachment = {
 
 export type TypeTblFailureReports = DynamicResponse<'getTblFailureReports'>['items'][0];
 export const tblFailureReports = {
-  getAll: (query?: DynamicQuery<'getTblFailureReports'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblFailureReports'>) =>
     api.get<DynamicResponse<'getTblFailureReports'>>('/tblFailureReports', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblFailureReportsByFailureReportId'>) =>
     api.get<DynamicResponse<'getTblFailureReportsByFailureReportId'>>(`/tblFailureReports/${id}`, { params: stringifyQuery(query) }),
@@ -599,7 +599,7 @@ export const tblFailureReports = {
 
 export type TypeTblFollowStatus = DynamicResponse<'getTblFollowStatus'>['items'][0];
 export const tblFollowStatus = {
-  getAll: (query?: DynamicQuery<'getTblFollowStatus'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblFollowStatus'>) =>
     api.get<DynamicResponse<'getTblFollowStatus'>>('/tblFollowStatus', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblFollowStatusByFollowStatusId'>) =>
     api.get<DynamicResponse<'getTblFollowStatusByFollowStatusId'>>(`/tblFollowStatus/${id}`, { params: stringifyQuery(query) }),
@@ -617,7 +617,7 @@ export const tblFollowStatus = {
 
 export type TypeTblFunctions = DynamicResponse<'getTblFunctions'>['items'][0];
 export const tblFunctions = {
-  getAll: (query?: DynamicQuery<'getTblFunctions'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblFunctions'>) =>
     api.get<DynamicResponse<'getTblFunctions'>>('/tblFunctions', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblFunctionsByFunctionId'>) =>
     api.get<DynamicResponse<'getTblFunctionsByFunctionId'>>(`/tblFunctions/${id}`, { params: stringifyQuery(query) }),
@@ -635,7 +635,7 @@ export const tblFunctions = {
 
 export type TypeTblJobClass = DynamicResponse<'getTblJobClass'>['items'][0];
 export const tblJobClass = {
-  getAll: (query?: DynamicQuery<'getTblJobClass'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblJobClass'>) =>
     api.get<DynamicResponse<'getTblJobClass'>>('/tblJobClass', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblJobClassByJobClassId'>) =>
     api.get<DynamicResponse<'getTblJobClassByJobClassId'>>(`/tblJobClass/${id}`, { params: stringifyQuery(query) }),
@@ -653,7 +653,7 @@ export const tblJobClass = {
 
 export type TypeTblJobDescription = DynamicResponse<'getTblJobDescription'>['items'][0];
 export const tblJobDescription = {
-  getAll: (query?: DynamicQuery<'getTblJobDescription'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblJobDescription'>) =>
     api.get<DynamicResponse<'getTblJobDescription'>>('/tblJobDescription', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblJobDescriptionByJobDescId'>) =>
     api.get<DynamicResponse<'getTblJobDescriptionByJobDescId'>>(`/tblJobDescription/${id}`, { params: stringifyQuery(query) }),
@@ -671,7 +671,7 @@ export const tblJobDescription = {
 
 export type TypeTblJobDescriptionAttachment = DynamicResponse<'getTblJobDescriptionAttachment'>['items'][0];
 export const tblJobDescriptionAttachment = {
-  getAll: (query?: DynamicQuery<'getTblJobDescriptionAttachment'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblJobDescriptionAttachment'>) =>
     api.get<DynamicResponse<'getTblJobDescriptionAttachment'>>('/tblJobDescriptionAttachment', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblJobDescriptionAttachmentByJobDescriptionAttachmentId'>) =>
     api.get<DynamicResponse<'getTblJobDescriptionAttachmentByJobDescriptionAttachmentId'>>(`/tblJobDescriptionAttachment/${id}`, { params: stringifyQuery(query) }),
@@ -689,7 +689,7 @@ export const tblJobDescriptionAttachment = {
 
 export type TypeTblJobTrigger = DynamicResponse<'getTblJobTrigger'>['items'][0];
 export const tblJobTrigger = {
-  getAll: (query?: DynamicQuery<'getTblJobTrigger'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblJobTrigger'>) =>
     api.get<DynamicResponse<'getTblJobTrigger'>>('/tblJobTrigger', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblJobTriggerByJobTriggerId'>) =>
     api.get<DynamicResponse<'getTblJobTriggerByJobTriggerId'>>(`/tblJobTrigger/${id}`, { params: stringifyQuery(query) }),
@@ -707,7 +707,7 @@ export const tblJobTrigger = {
 
 export type TypeTblJobTriggerLog = DynamicResponse<'getTblJobTriggerLog'>['items'][0];
 export const tblJobTriggerLog = {
-  getAll: (query?: DynamicQuery<'getTblJobTriggerLog'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblJobTriggerLog'>) =>
     api.get<DynamicResponse<'getTblJobTriggerLog'>>('/tblJobTriggerLog', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblJobTriggerLogByJobTriggerLogId'>) =>
     api.get<DynamicResponse<'getTblJobTriggerLogByJobTriggerLogId'>>(`/tblJobTriggerLog/${id}`, { params: stringifyQuery(query) }),
@@ -725,7 +725,7 @@ export const tblJobTriggerLog = {
 
 export type TypeTblJobVersion = DynamicResponse<'getTblJobVersion'>['items'][0];
 export const tblJobVersion = {
-  getAll: (query?: DynamicQuery<'getTblJobVersion'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblJobVersion'>) =>
     api.get<DynamicResponse<'getTblJobVersion'>>('/tblJobVersion', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblJobVersionByJobVersionId'>) =>
     api.get<DynamicResponse<'getTblJobVersionByJobVersionId'>>(`/tblJobVersion/${id}`, { params: stringifyQuery(query) }),
@@ -743,7 +743,7 @@ export const tblJobVersion = {
 
 export type TypeTblLocation = DynamicResponse<'getTblLocation'>['items'][0];
 export const tblLocation = {
-  getAll: (query?: DynamicQuery<'getTblLocation'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblLocation'>) =>
     api.get<DynamicResponse<'getTblLocation'>>('/tblLocation', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblLocationByLocationId'>) =>
     api.get<DynamicResponse<'getTblLocationByLocationId'>>(`/tblLocation/${id}`, { params: stringifyQuery(query) }),
@@ -761,7 +761,7 @@ export const tblLocation = {
 
 export type TypeTblLogCounter = DynamicResponse<'getTblLogCounter'>['items'][0];
 export const tblLogCounter = {
-  getAll: (query?: DynamicQuery<'getTblLogCounter'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblLogCounter'>) =>
     api.get<DynamicResponse<'getTblLogCounter'>>('/tblLogCounter', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblLogCounterByLogCounterId'>) =>
     api.get<DynamicResponse<'getTblLogCounterByLogCounterId'>>(`/tblLogCounter/${id}`, { params: stringifyQuery(query) }),
@@ -779,7 +779,7 @@ export const tblLogCounter = {
 
 export type TypeTblLogDiscipline = DynamicResponse<'getTblLogDiscipline'>['items'][0];
 export const tblLogDiscipline = {
-  getAll: (query?: DynamicQuery<'getTblLogDiscipline'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblLogDiscipline'>) =>
     api.get<DynamicResponse<'getTblLogDiscipline'>>('/tblLogDiscipline', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblLogDisciplineByLogDiscId'>) =>
     api.get<DynamicResponse<'getTblLogDisciplineByLogDiscId'>>(`/tblLogDiscipline/${id}`, { params: stringifyQuery(query) }),
@@ -797,7 +797,7 @@ export const tblLogDiscipline = {
 
 export type TypeTblLoginAudit = DynamicResponse<'getTblLoginAudit'>['items'][0];
 export const tblLoginAudit = {
-  getAll: (query?: DynamicQuery<'getTblLoginAudit'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblLoginAudit'>) =>
     api.get<DynamicResponse<'getTblLoginAudit'>>('/tblLoginAudit', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblLoginAuditByLoginAuditId'>) =>
     api.get<DynamicResponse<'getTblLoginAuditByLoginAuditId'>>(`/tblLoginAudit/${id}`, { params: stringifyQuery(query) }),
@@ -815,7 +815,7 @@ export const tblLoginAudit = {
 
 export type TypeTblMaintCause = DynamicResponse<'getTblMaintCause'>['items'][0];
 export const tblMaintCause = {
-  getAll: (query?: DynamicQuery<'getTblMaintCause'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblMaintCause'>) =>
     api.get<DynamicResponse<'getTblMaintCause'>>('/tblMaintCause', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblMaintCauseByMaintCauseId'>) =>
     api.get<DynamicResponse<'getTblMaintCauseByMaintCauseId'>>(`/tblMaintCause/${id}`, { params: stringifyQuery(query) }),
@@ -833,7 +833,7 @@ export const tblMaintCause = {
 
 export type TypeTblMaintClass = DynamicResponse<'getTblMaintClass'>['items'][0];
 export const tblMaintClass = {
-  getAll: (query?: DynamicQuery<'getTblMaintClass'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblMaintClass'>) =>
     api.get<DynamicResponse<'getTblMaintClass'>>('/tblMaintClass', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblMaintClassByMaintClassId'>) =>
     api.get<DynamicResponse<'getTblMaintClassByMaintClassId'>>(`/tblMaintClass/${id}`, { params: stringifyQuery(query) }),
@@ -851,7 +851,7 @@ export const tblMaintClass = {
 
 export type TypeTblMaintLog = DynamicResponse<'getTblMaintLog'>['items'][0];
 export const tblMaintLog = {
-  getAll: (query?: DynamicQuery<'getTblMaintLog'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblMaintLog'>) =>
     api.get<DynamicResponse<'getTblMaintLog'>>('/tblMaintLog', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblMaintLogByMaintLogId'>) =>
     api.get<DynamicResponse<'getTblMaintLogByMaintLogId'>>(`/tblMaintLog/${id}`, { params: stringifyQuery(query) }),
@@ -869,7 +869,7 @@ export const tblMaintLog = {
 
 export type TypeTblMaintLogAttachment = DynamicResponse<'getTblMaintLogAttachment'>['items'][0];
 export const tblMaintLogAttachment = {
-  getAll: (query?: DynamicQuery<'getTblMaintLogAttachment'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblMaintLogAttachment'>) =>
     api.get<DynamicResponse<'getTblMaintLogAttachment'>>('/tblMaintLogAttachment', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblMaintLogAttachmentByMaintLogAttachmentId'>) =>
     api.get<DynamicResponse<'getTblMaintLogAttachmentByMaintLogAttachmentId'>>(`/tblMaintLogAttachment/${id}`, { params: stringifyQuery(query) }),
@@ -887,7 +887,7 @@ export const tblMaintLogAttachment = {
 
 export type TypeTblMaintLogFollow = DynamicResponse<'getTblMaintLogFollow'>['items'][0];
 export const tblMaintLogFollow = {
-  getAll: (query?: DynamicQuery<'getTblMaintLogFollow'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblMaintLogFollow'>) =>
     api.get<DynamicResponse<'getTblMaintLogFollow'>>('/tblMaintLogFollow', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblMaintLogFollowByFollowId'>) =>
     api.get<DynamicResponse<'getTblMaintLogFollowByFollowId'>>(`/tblMaintLogFollow/${id}`, { params: stringifyQuery(query) }),
@@ -905,7 +905,7 @@ export const tblMaintLogFollow = {
 
 export type TypeTblMaintLogStocks = DynamicResponse<'getTblMaintLogStocks'>['items'][0];
 export const tblMaintLogStocks = {
-  getAll: (query?: DynamicQuery<'getTblMaintLogStocks'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblMaintLogStocks'>) =>
     api.get<DynamicResponse<'getTblMaintLogStocks'>>('/tblMaintLogStocks', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblMaintLogStocksByMaintLogStockId'>) =>
     api.get<DynamicResponse<'getTblMaintLogStocksByMaintLogStockId'>>(`/tblMaintLogStocks/${id}`, { params: stringifyQuery(query) }),
@@ -923,7 +923,7 @@ export const tblMaintLogStocks = {
 
 export type TypeTblMaintType = DynamicResponse<'getTblMaintType'>['items'][0];
 export const tblMaintType = {
-  getAll: (query?: DynamicQuery<'getTblMaintType'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblMaintType'>) =>
     api.get<DynamicResponse<'getTblMaintType'>>('/tblMaintType', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblMaintTypeByMaintTypeId'>) =>
     api.get<DynamicResponse<'getTblMaintTypeByMaintTypeId'>>(`/tblMaintType/${id}`, { params: stringifyQuery(query) }),
@@ -941,7 +941,7 @@ export const tblMaintType = {
 
 export type TypeTblOilSamplingLog = DynamicResponse<'getTblOilSamplingLog'>['items'][0];
 export const tblOilSamplingLog = {
-  getAll: (query?: DynamicQuery<'getTblOilSamplingLog'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblOilSamplingLog'>) =>
     api.get<DynamicResponse<'getTblOilSamplingLog'>>('/tblOilSamplingLog', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblOilSamplingLogByOilSamplingLogId'>) =>
     api.get<DynamicResponse<'getTblOilSamplingLogByOilSamplingLogId'>>(`/tblOilSamplingLog/${id}`, { params: stringifyQuery(query) }),
@@ -959,7 +959,7 @@ export const tblOilSamplingLog = {
 
 export type TypeTblParameters = DynamicResponse<'getTblParameters'>['items'][0];
 export const tblParameters = {
-  getAll: (query?: DynamicQuery<'getTblParameters'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblParameters'>) =>
     api.get<DynamicResponse<'getTblParameters'>>('/tblParameters', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblParametersByParameterId'>) =>
     api.get<DynamicResponse<'getTblParametersByParameterId'>>(`/tblParameters/${id}`, { params: stringifyQuery(query) }),
@@ -977,7 +977,7 @@ export const tblParameters = {
 
 export type TypeTblPendingType = DynamicResponse<'getTblPendingType'>['items'][0];
 export const tblPendingType = {
-  getAll: (query?: DynamicQuery<'getTblPendingType'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblPendingType'>) =>
     api.get<DynamicResponse<'getTblPendingType'>>('/tblPendingType', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblPendingTypeByPendTypeId'>) =>
     api.get<DynamicResponse<'getTblPendingTypeByPendTypeId'>>(`/tblPendingType/${id}`, { params: stringifyQuery(query) }),
@@ -995,7 +995,7 @@ export const tblPendingType = {
 
 export type TypeTblPeriod = DynamicResponse<'getTblPeriod'>['items'][0];
 export const tblPeriod = {
-  getAll: (query?: DynamicQuery<'getTblPeriod'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblPeriod'>) =>
     api.get<DynamicResponse<'getTblPeriod'>>('/tblPeriod', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblPeriodByPeriodId'>) =>
     api.get<DynamicResponse<'getTblPeriodByPeriodId'>>(`/tblPeriod/${id}`, { params: stringifyQuery(query) }),
@@ -1013,7 +1013,7 @@ export const tblPeriod = {
 
 export type TypeTblReScheduleLog = DynamicResponse<'getTblReScheduleLog'>['items'][0];
 export const tblReScheduleLog = {
-  getAll: (query?: DynamicQuery<'getTblReScheduleLog'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblReScheduleLog'>) =>
     api.get<DynamicResponse<'getTblReScheduleLog'>>('/tblReScheduleLog', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblReScheduleLogByRescheduleLogId'>) =>
     api.get<DynamicResponse<'getTblReScheduleLogByRescheduleLogId'>>(`/tblReScheduleLog/${id}`, { params: stringifyQuery(query) }),
@@ -1031,7 +1031,7 @@ export const tblReScheduleLog = {
 
 export type TypeTblRotationLog = DynamicResponse<'getTblRotationLog'>['items'][0];
 export const tblRotationLog = {
-  getAll: (query?: DynamicQuery<'getTblRotationLog'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblRotationLog'>) =>
     api.get<DynamicResponse<'getTblRotationLog'>>('/tblRotationLog', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblRotationLogByRotationLogId'>) =>
     api.get<DynamicResponse<'getTblRotationLogByRotationLogId'>>(`/tblRotationLog/${id}`, { params: stringifyQuery(query) }),
@@ -1049,7 +1049,7 @@ export const tblRotationLog = {
 
 export type TypeTblRound = DynamicResponse<'getTblRound'>['items'][0];
 export const tblRound = {
-  getAll: (query?: DynamicQuery<'getTblRound'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblRound'>) =>
     api.get<DynamicResponse<'getTblRound'>>('/tblRound', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblRoundByRoundId'>) =>
     api.get<DynamicResponse<'getTblRoundByRoundId'>>(`/tblRound/${id}`, { params: stringifyQuery(query) }),
@@ -1067,7 +1067,7 @@ export const tblRound = {
 
 export type TypeTblRoundCompJob = DynamicResponse<'getTblRoundCompJob'>['items'][0];
 export const tblRoundCompJob = {
-  getAll: (query?: DynamicQuery<'getTblRoundCompJob'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblRoundCompJob'>) =>
     api.get<DynamicResponse<'getTblRoundCompJob'>>('/tblRoundCompJob', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblRoundCompJobByRoundCompJobId'>) =>
     api.get<DynamicResponse<'getTblRoundCompJobByRoundCompJobId'>>(`/tblRoundCompJob/${id}`, { params: stringifyQuery(query) }),
@@ -1085,7 +1085,7 @@ export const tblRoundCompJob = {
 
 export type TypeTblStockItem = DynamicResponse<'getTblStockItem'>['items'][0];
 export const tblStockItem = {
-  getAll: (query?: DynamicQuery<'getTblStockItem'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblStockItem'>) =>
     api.get<DynamicResponse<'getTblStockItem'>>('/tblStockItem', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblStockItemByStockItemId'>) =>
     api.get<DynamicResponse<'getTblStockItemByStockItemId'>>(`/tblStockItem/${id}`, { params: stringifyQuery(query) }),
@@ -1103,7 +1103,7 @@ export const tblStockItem = {
 
 export type TypeTblStockType = DynamicResponse<'getTblStockType'>['items'][0];
 export const tblStockType = {
-  getAll: (query?: DynamicQuery<'getTblStockType'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblStockType'>) =>
     api.get<DynamicResponse<'getTblStockType'>>('/tblStockType', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblStockTypeByStockTypeId'>) =>
     api.get<DynamicResponse<'getTblStockTypeByStockTypeId'>>(`/tblStockType/${id}`, { params: stringifyQuery(query) }),
@@ -1121,7 +1121,7 @@ export const tblStockType = {
 
 export type TypeTblUnit = DynamicResponse<'getTblUnit'>['items'][0];
 export const tblUnit = {
-  getAll: (query?: DynamicQuery<'getTblUnit'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblUnit'>) =>
     api.get<DynamicResponse<'getTblUnit'>>('/tblUnit', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblUnitByUnitId'>) =>
     api.get<DynamicResponse<'getTblUnitByUnitId'>>(`/tblUnit/${id}`, { params: stringifyQuery(query) }),
@@ -1139,7 +1139,7 @@ export const tblUnit = {
 
 export type TypeTblUsers = DynamicResponse<'getTblUsers'>['items'][0];
 export const tblUsers = {
-  getAll: (query?: DynamicQuery<'getTblUsers'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblUsers'>) =>
     api.get<DynamicResponse<'getTblUsers'>>('/tblUsers', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblUsersByUserId'>) =>
     api.get<DynamicResponse<'getTblUsersByUserId'>>(`/tblUsers/${id}`, { params: stringifyQuery(query) }),
@@ -1157,7 +1157,7 @@ export const tblUsers = {
 
 export type TypeTblWorkOrder = DynamicResponse<'getTblWorkOrder'>['items'][0];
 export const tblWorkOrder = {
-  getAll: (query?: DynamicQuery<'getTblWorkOrder'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblWorkOrder'>) =>
     api.get<DynamicResponse<'getTblWorkOrder'>>('/tblWorkOrder', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblWorkOrderByWorkOrderId'>) =>
     api.get<DynamicResponse<'getTblWorkOrderByWorkOrderId'>>(`/tblWorkOrder/${id}`, { params: stringifyQuery(query) }),
@@ -1175,7 +1175,7 @@ export const tblWorkOrder = {
 
 export type TypeTblWorkOrderStatus = DynamicResponse<'getTblWorkOrderStatus'>['items'][0];
 export const tblWorkOrderStatus = {
-  getAll: (query?: DynamicQuery<'getTblWorkOrderStatus'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblWorkOrderStatus'>) =>
     api.get<DynamicResponse<'getTblWorkOrderStatus'>>('/tblWorkOrderStatus', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblWorkOrderStatusByWorkOrderStatusId'>) =>
     api.get<DynamicResponse<'getTblWorkOrderStatusByWorkOrderStatusId'>>(`/tblWorkOrderStatus/${id}`, { params: stringifyQuery(query) }),
@@ -1193,7 +1193,7 @@ export const tblWorkOrderStatus = {
 
 export type TypeTblWorkShopComponent = DynamicResponse<'getTblWorkShopComponent'>['items'][0];
 export const tblWorkShopComponent = {
-  getAll: (query?: DynamicQuery<'getTblWorkShopComponent'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblWorkShopComponent'>) =>
     api.get<DynamicResponse<'getTblWorkShopComponent'>>('/tblWorkShopComponent', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblWorkShopComponentByWShopCompId'>) =>
     api.get<DynamicResponse<'getTblWorkShopComponentByWShopCompId'>>(`/tblWorkShopComponent/${id}`, { params: stringifyQuery(query) }),
@@ -1211,7 +1211,7 @@ export const tblWorkShopComponent = {
 
 export type TypeTblWorkShopDone = DynamicResponse<'getTblWorkShopDone'>['items'][0];
 export const tblWorkShopDone = {
-  getAll: (query?: DynamicQuery<'getTblWorkShopDone'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblWorkShopDone'>) =>
     api.get<DynamicResponse<'getTblWorkShopDone'>>('/tblWorkShopDone', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblWorkShopDoneByWShopDoneId'>) =>
     api.get<DynamicResponse<'getTblWorkShopDoneByWShopDoneId'>>(`/tblWorkShopDone/${id}`, { params: stringifyQuery(query) }),
@@ -1229,7 +1229,7 @@ export const tblWorkShopDone = {
 
 export type TypeTblWorkShopRequest = DynamicResponse<'getTblWorkShopRequest'>['items'][0];
 export const tblWorkShopRequest = {
-  getAll: (query?: DynamicQuery<'getTblWorkShopRequest'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblWorkShopRequest'>) =>
     api.get<DynamicResponse<'getTblWorkShopRequest'>>('/tblWorkShopRequest', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblWorkShopRequestByWShopRequestId'>) =>
     api.get<DynamicResponse<'getTblWorkShopRequestByWShopRequestId'>>(`/tblWorkShopRequest/${id}`, { params: stringifyQuery(query) }),
@@ -1247,7 +1247,7 @@ export const tblWorkShopRequest = {
 
 export type TypeTblWorkShopRequestAttachment = DynamicResponse<'getTblWorkShopRequestAttachment'>['items'][0];
 export const tblWorkShopRequestAttachment = {
-  getAll: (query?: DynamicQuery<'getTblWorkShopRequestAttachment'> & { select?: Record<string, any> }) =>
+  getAll: (query?: DynamicQuery<'getTblWorkShopRequestAttachment'>) =>
     api.get<DynamicResponse<'getTblWorkShopRequestAttachment'>>('/tblWorkShopRequestAttachment', { params: stringifyQuery(query) }),
   getById: (id: number, query?: DynamicQuery<'getTblWorkShopRequestAttachmentByWShopRequestAttachmentId'>) =>
     api.get<DynamicResponse<'getTblWorkShopRequestAttachmentByWShopRequestAttachmentId'>>(`/tblWorkShopRequestAttachment/${id}`, { params: stringifyQuery(query) }),

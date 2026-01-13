@@ -24,7 +24,12 @@ const TabMaintLog = ({ componentUnit, label }: Props) => {
         compId,
       },
       include: {
-        tblWorkOrder: true,
+        tblWorkOrder: {
+          include: {
+            tblDiscipline: true,
+          },
+        },
+        tblFollowStatus: true,
         tblComponentUnit: true,
         tblMaintClass: true,
         tblJobDescription: true,
@@ -41,6 +46,9 @@ const TabMaintLog = ({ componentUnit, label }: Props) => {
 
   return (
     <CustomizedDataGrid
+      disableEdit
+      disableAdd
+      disableDelete
       disableRowNumber
       label={label}
       showToolbar={!!label}

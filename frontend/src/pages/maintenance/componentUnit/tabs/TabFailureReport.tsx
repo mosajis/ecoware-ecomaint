@@ -7,24 +7,27 @@ import {
   TypeTblFailureReports,
 } from '@/core/api/generated/api'
 import { useCallback } from 'react'
+import CellDateTime from '@/shared/components/dataGrid/cells/CellDateTime'
 
 const getRowId = (row: TypeTblFailureReports) => row.failureReportId
 
 const columns: GridColDef<TypeTblFailureReports>[] = [
   {
-    field: 'number',
+    field: 'failureNumber',
     headerName: 'Number',
-    width: 120,
+    width: 80,
   },
   {
     field: 'compNo',
     headerName: 'Comp No',
-    width: 130,
+    flex: 1,
+    valueGetter: (_, row) => row.tblComponentUnit?.compNo,
   },
   {
-    field: 'failureDate',
+    field: 'failureReportDate',
     headerName: 'Failure Date',
-    width: 150,
+    width: 130,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
   },
   {
     field: 'title',
@@ -38,33 +41,42 @@ const columns: GridColDef<TypeTblFailureReports>[] = [
   },
   {
     field: 'discName',
-    headerName: 'Disc Name',
-    width: 150,
+    headerName: 'Discipline',
+    width: 110,
+    valueGetter: (_, row) => row.tblDiscipline?.name,
   },
   {
-    field: 'lastUpdated',
+    field: 'lastupdate',
     headerName: 'Last Updated',
-    width: 160,
+    width: 130,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
   },
   {
     field: 'loggedBy',
     headerName: 'Logged By',
-    width: 150,
+    flex: 1,
+    valueGetter: (_, row) =>
+      row.tblUsersTblFailureReportsLoggedByTotblUsers?.uName,
   },
   {
     field: 'approvedBy',
     headerName: 'Approved By',
-    width: 150,
+    flex: 1,
+    valueGetter: (_, row) =>
+      row.tblUsersTblFailureReportsApprovedbyTotblUsers?.uName,
   },
   {
     field: 'closedBy',
     headerName: 'Closed By',
-    width: 150,
+    flex: 1,
+    valueGetter: (_, row) =>
+      row.tblUsersTblFailureReportsClosedByTotblUsers?.uName,
   },
   {
-    field: 'closedDate',
+    field: 'closedDateTime',
     headerName: 'Closed Date',
-    width: 150,
+    width: 130,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
   },
 ]
 
@@ -78,7 +90,14 @@ const TabFailureReport = ({ componentUnit, label }: TabFailureReportProps) => {
 
   const getAll = useCallback(() => {
     return tblFailureReports.getAll({
-      filter: { compId },
+      include: {
+        tblComponentUnit: true,
+        tblDiscipline: true,
+        tblUsersTblFailureReportsLoggedByTotblUsers: true,
+        tblUsersTblFailureReportsApprovedbyTotblUsers: true,
+        tblUsersTblFailureReportsClosedByTotblUsers: true,
+      },
+      // filter: { compId },
     })
   }, [compId])
 

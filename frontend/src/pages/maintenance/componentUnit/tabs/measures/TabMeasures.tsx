@@ -15,6 +15,7 @@ type Props = {
 }
 
 const getRowId = (row: TypeTblCompMeasurePoint) => row.compMeasurePointId
+
 // === Columns ===
 const columns: GridColDef<TypeTblCompMeasurePoint>[] = [
   {

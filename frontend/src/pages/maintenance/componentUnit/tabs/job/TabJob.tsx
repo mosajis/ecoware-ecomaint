@@ -10,6 +10,8 @@ import {
   TypeTblCompJob,
   TypeTblComponentUnit,
 } from '@/core/api/generated/api'
+import Splitter from '@/shared/components/Splitter/Splitter'
+import Tabs from './TabJobTabs'
 
 interface Props {
   componentUnit?: TypeTblComponentUnit | null
@@ -123,6 +125,9 @@ const TabJob = ({ componentUnit, label }: Props) => {
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
+  const [selectedCompJob, setSelectedCompJob] = useState<TypeTblCompJob | null>(
+    null
+  )
 
   const getAll = useCallback(() => {
     return tblCompJob.getAll({
@@ -171,22 +176,30 @@ const TabJob = ({ componentUnit, label }: Props) => {
   const handleUpsertOpen = useCallback(() => {
     setOpenForm(true)
   }, [])
+
+  const handleRowClick = ({ row }: { row: TypeTblCompJob }) => {
+    setSelectedCompJob(row)
+  }
   return (
     <>
-      <CustomizedDataGrid
-        disableRowNumber
-        label={label}
-        showToolbar={!!label}
-        rows={rows}
-        columns={columns}
-        loading={loading}
-        onEditClick={handleEdit}
-        onDoubleClick={handleEdit}
-        onDeleteClick={handleDelete}
-        getRowId={getRowId}
-        onRefreshClick={handleRefresh}
-        onAddClick={handleAdd}
-      />
+      <Splitter horizontal initialPrimarySize='65%'>
+        <CustomizedDataGrid
+          disableRowNumber
+          label={label}
+          showToolbar={!!label}
+          rows={rows}
+          columns={columns}
+          loading={loading}
+          onRowClick={handleRowClick}
+          onEditClick={handleEdit}
+          onDoubleClick={handleEdit}
+          onDeleteClick={handleDelete}
+          getRowId={getRowId}
+          onRefreshClick={handleRefresh}
+          onAddClick={handleAdd}
+        />
+        <Tabs compJob={selectedCompJob} />
+      </Splitter>
 
       <ComponentJobUpsert
         open={openForm}

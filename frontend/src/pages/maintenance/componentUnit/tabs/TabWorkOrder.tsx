@@ -54,7 +54,10 @@ const TabWorkOrder = ({ componentUnit, label }: Props) => {
 
   return (
     <CustomizedDataGrid
+      disableEdit
+      disableDelete
       disableRowNumber
+      disableRowSelectionOnClick
       label={label}
       showToolbar={!!label}
       rows={rows}

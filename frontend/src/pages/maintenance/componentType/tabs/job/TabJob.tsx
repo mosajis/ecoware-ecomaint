@@ -213,7 +213,7 @@ const TabJob = ({ compType, label }: Props) => {
 
   return (
     <>
-      <Splitter horizontal initialPrimarySize='55%'>
+      <Splitter horizontal initialPrimarySize='65%'>
         <CustomizedDataGrid
           label={label || 'Job'}
           rows={rows}

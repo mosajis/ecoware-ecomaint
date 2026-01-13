@@ -9,8 +9,8 @@ import {
 } from '@/core/api/generated/api'
 import { TypeTblWorkOrderWithRels } from '../../workOrder/types'
 import { calculateOverdue, formatDateTime } from '@/core/api/helper'
-import StatusChip from '../../workOrder/customCell/Status'
-import OverdueText from '../../workOrder/customCell/OverDue'
+import StatusChip from '../../workOrder/customCell/CellWorkOrderStatus'
+import OverdueText from '../../workOrder/customCell/CellWorkOrderOverDue'
 
 interface Props {
   selected: TypeTblMaintLog

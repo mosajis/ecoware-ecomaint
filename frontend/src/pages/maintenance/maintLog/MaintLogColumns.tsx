@@ -31,38 +31,17 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
   {
     field: 'discipline',
     headerName: 'Discipline',
+    // @ts-ignore
+    valueGetter: (_, row) => row?.tblWorkOrder?.tblDiscipline?.name,
   },
   {
     field: 'reportedBy',
-    headerName: 'Reported By',
+    headerName: 'Reported By (not set)',
   },
   {
     field: 'followStatus',
     headerName: 'Follow Status',
-  },
-  {
-    field: 'currentStatus',
-    headerName: 'Current Status',
-  },
-  {
-    field: 'followCount',
-    headerName: 'Follow Count',
-  },
-  {
-    field: 'follower',
-    headerName: 'Follower',
-  },
-  {
-    field: 'statusId',
-    headerName: 'Status',
-  },
-  {
-    field: 'stockUsed',
-    headerName: 'Stock Used',
-  },
-  {
-    field: 'empHours',
-    headerName: 'Emp/HRS',
+    valueGetter: (_, row) => row?.tblFollowStatus?.fsName,
   },
   {
     field: 'maintClass',
@@ -70,26 +49,11 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
     valueGetter: (_, row) => row?.tblMaintClass?.descr ?? '',
   },
   {
-    field: 'totalAttachment',
-    headerName: 'Total Attachment',
-  },
-  {
     field: 'downTime',
     headerName: 'DownTime',
     renderCell: ({ value }) => <CellDateTime value={value} />,
   },
-  {
-    field: 'componentStatusName',
-    headerName: 'Component Status Name',
-    width: 180,
-    // valueGetter: (_, row) => row?.tblComponentUnit?.tblCompStatus?.name ?? '',
-  },
-  {
-    field: 'isCritical',
-    headerName: 'IsCritical',
-    type: 'boolean',
-    width: 80,
-  },
+
   {
     field: 'unplanned',
     headerName: 'Unplanned',
