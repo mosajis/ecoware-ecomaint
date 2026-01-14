@@ -22,7 +22,6 @@ const schema = z.object({
       no: z.string().nullable().optional(),
     })
     .nullable(),
-  deptId: z.number().nullable().optional(),
 })
 
 export type StockItemFormValues = z.infer<typeof schema>
@@ -47,7 +46,6 @@ function StockItemFormDialog({
 
   const defaultValues: StockItemFormValues = {
     stockTypeId: null,
-    deptId: null,
   }
 
   const { control, handleSubmit, reset } = useForm<StockItemFormValues>({
@@ -71,7 +69,6 @@ function StockItemFormDialog({
 
       reset({
         stockTypeId: res?.tblStockType ?? null,
-        deptId: res?.deptId ?? null,
       })
     } finally {
       setLoadingInitial(false)
@@ -145,36 +142,12 @@ function StockItemFormDialog({
               selectionMode='single'
               value={field.value}
               request={tblStockType.getAll}
-              columns={[
-                { field: 'no', headerName: 'No', width: 80 },
-                { field: 'name', headerName: 'Name', flex: 1 },
-              ]}
+              columns={[{ field: 'name', headerName: 'Name', flex: 1 }]}
               getRowId={row => row.stockTypeId}
               onChange={field.onChange}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}
-            />
-          )}
-        />
-
-        {/* Department ID */}
-        <Controller
-          name='deptId'
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label='Department ID'
-              type='number'
-              size='small'
-              disabled={isDisabled}
-              value={field.value ?? ''}
-              onChange={e =>
-                field.onChange(
-                  e.target.value === '' ? null : Number(e.target.value)
-                )
-              }
             />
           )}
         />

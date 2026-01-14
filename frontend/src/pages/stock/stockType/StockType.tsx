@@ -1,90 +1,85 @@
 import Splitter from '@/shared/components/Splitter/Splitter'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import StockTypeFormDialog from './StockTypeUpsert'
-import CustomizedTree from '@/shared/components/tree/Tree'
 import { useState, useCallback } from 'react'
 import { tblStockType, TypeTblStockType } from '@/core/api/generated/api'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
 import { GridColDef } from '@mui/x-data-grid'
 import { useDataTree } from '@/shared/hooks/useDataTree'
+import { mapToTree } from '@/shared/components/tree/TreeUtil'
+import { GenericTree } from '@/shared/components/tree/Tree'
+
+const getRowId = (row: TypeTblStockType) => row.stockTypeId
+const getItemName = (row: TypeTblStockType) => row.name || '-'
+
+// === Columns ===
+const columns: GridColDef<TypeTblStockType>[] = [
+  { field: 'no', headerName: 'Number', width: 80 },
+  { field: 'name', headerName: 'Name', flex: 1 },
+  {
+    field: 'orderNo',
+    headerName: 'Order No',
+    width: 80,
+  },
+]
 
 export default function PageStockType() {
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
 
-  // === Mapping Transformer ===
-  const mapper = useCallback(
-    (row: TypeTblStockType) => ({
-      id: row.stockTypeId.toString(),
-      label: row.name ?? '',
-      parentId: row.parentStockTypeId?.toString() ?? null,
-      data: row,
-    }),
+  // === useDataTree ===
+  const treeMapper = useCallback(
+    (items: TypeTblStockType[]) =>
+      mapToTree(items, 'stockTypeId', 'parentStockTypeId'),
     []
   )
 
-  // === useDataTree ===
-  const {
-    rows,
-    treeItems,
-    loading,
-    handleDelete,
-    handleFormSuccess,
-    handleRefresh,
-  } = useDataTree(
-    tblStockType.getAll,
-    tblStockType.deleteById,
-    'stockTypeId',
-    mapper
-  )
+  const getAll = useCallback(() => tblStockType.getAll(), [])
+
+  const { tree, rows, loading, refetch, handleDelete } =
+    useDataTree<TypeTblStockType>({
+      getAll,
+      deleteById: tblStockType.deleteById,
+      getId: getRowId,
+      mapper: treeMapper,
+    })
 
   // === Handlers ===
   const handleCreate = () => {
     setSelectedRowId(null)
     setMode('create')
-    setOpenForm(true)
+    handleUpsertOpen()
   }
 
-  const handleEdit = (row: TypeTblStockType) => {
-    setSelectedRowId(row.stockTypeId)
+  const handleEdit = (rowId: number) => {
+    setSelectedRowId(rowId)
     setMode('update')
-    setOpenForm(true)
+    handleUpsertOpen()
   }
 
-  // === Columns ===
-  const columns: GridColDef<TypeTblStockType>[] = [
-    { field: 'no', headerName: 'No', width: 80 },
-    { field: 'name', headerName: 'Name', flex: 1 },
-    {
-      field: 'deptId',
-      headerName: 'Department ID',
-      width: 120,
-    },
-    {
-      field: 'orderNo',
-      headerName: 'Order No',
-      width: 80,
-    },
-    dataGridActionColumn({
-      onEdit: handleEdit,
-      onDelete: handleDelete,
-    }),
-  ]
+  const handleUpsertClose = useCallback(() => {
+    setOpenForm(false)
+  }, [])
+
+  const handleUpsertOpen = useCallback(() => {
+    setOpenForm(true)
+  }, [])
 
   return (
     <>
       <Splitter>
         {/* === TREE VIEW === */}
-        <CustomizedTree
-          onRefresh={handleRefresh}
+        <GenericTree<TypeTblStockType>
           label='Tree View'
-          items={treeItems}
           loading={loading}
-          getRowId={row => row.stockTypeId}
-          onAddClick={handleCreate}
-          onEditClick={handleEdit}
-          onDeleteClick={handleDelete}
+          data={tree}
+          onDelete={handleDelete}
+          onEdit={handleEdit}
+          onDoubleClick={handleEdit}
+          onAdd={handleCreate}
+          onRefresh={refetch}
+          getItemName={getItemName}
+          getItemId={getRowId}
         />
 
         {/* === GRID VIEW === */}
@@ -94,9 +89,12 @@ export default function PageStockType() {
           loading={loading}
           rows={rows}
           columns={columns}
-          onRefreshClick={handleRefresh}
+          onEditClick={handleEdit}
+          onDeleteClick={handleDelete}
+          onDoubleClick={handleEdit}
+          onRefreshClick={refetch}
           onAddClick={handleCreate}
-          getRowId={row => row.stockTypeId}
+          getRowId={getRowId}
         />
       </Splitter>
 
@@ -105,8 +103,8 @@ export default function PageStockType() {
         open={openForm}
         mode={mode}
         recordId={selectedRowId}
-        onClose={() => setOpenForm(false)}
-        onSuccess={handleFormSuccess}
+        onClose={handleUpsertClose}
+        onSuccess={refetch}
       />
     </>
   )

@@ -21,7 +21,6 @@ const schema = z.object({
     })
     .nullable()
     .optional(),
-  deptId: z.number().nullable().optional(),
   orderNo: z.number().nullable(),
 })
 
@@ -32,7 +31,7 @@ type Props = {
   mode: 'create' | 'update'
   recordId?: number | null
   onClose: () => void
-  onSuccess: (data: TypeTblStockType) => void
+  onSuccess: () => void
 }
 
 function StockTypeFormDialog({
@@ -45,14 +44,10 @@ function StockTypeFormDialog({
   const [loadingInitial, setLoadingInitial] = useState(false)
   const [submitting, setSubmitting] = useState(false)
 
-  const [parentStockType, setParentStockType] =
-    useState<TypeTblStockType | null>(null)
-
   const defaultValues: StockTypeFormValues = {
     name: '',
     no: '',
     parentStockTypeId: null,
-    deptId: null,
     orderNo: null,
   }
 
@@ -65,7 +60,7 @@ function StockTypeFormDialog({
   const fetchData = useCallback(async () => {
     if (mode !== 'update' || !recordId) {
       reset(defaultValues)
-      setParentStockType(null)
+
       return
     }
 
@@ -80,16 +75,8 @@ function StockTypeFormDialog({
         name: res?.name ?? '',
         no: res?.no ?? '',
         parentStockTypeId: res?.tblStockType ?? null,
-        deptId: res?.deptId ?? null,
         orderNo: res?.orderNo,
       })
-
-      // نمایش parent
-      if (res?.tblStockType) {
-        setParentStockType(res.tblStockType)
-      } else {
-        setParentStockType(null)
-      }
     } finally {
       setLoadingInitial(false)
     }
@@ -124,21 +111,21 @@ function StockTypeFormDialog({
 
         if (mode === 'create') {
           // POST Request
-          result = await tblStockType.create({
+          await tblStockType.create({
             name: parsed.data.name,
             no: parsed.data.no,
             ...parentRelation,
           })
         } else {
           // PUT Request
-          result = await tblStockType.update(recordId!, {
+          await tblStockType.update(recordId!, {
             name: parsed.data.name,
             no: parsed.data.no,
             ...parentRelation,
           })
         }
 
-        onSuccess(result)
+        onSuccess()
         onClose()
       } finally {
         setSubmitting(false)
@@ -201,36 +188,12 @@ function StockTypeFormDialog({
               selectionMode='single'
               value={field.value}
               request={tblStockType.getAll}
-              columns={[
-                { field: 'no', headerName: 'No', width: 80 },
-                { field: 'name', headerName: 'Name', flex: 1 },
-              ]}
+              columns={[{ field: 'name', headerName: 'Name', flex: 1 }]}
               getRowId={row => row.stockTypeId}
               onChange={field.onChange}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}
-            />
-          )}
-        />
-
-        {/* Department ID */}
-        <Controller
-          name='deptId'
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label='Department ID'
-              type='number'
-              size='small'
-              disabled={isDisabled}
-              value={field.value ?? ''}
-              onChange={e =>
-                field.onChange(
-                  e.target.value === '' ? null : Number(e.target.value)
-                )
-              }
             />
           )}
         />

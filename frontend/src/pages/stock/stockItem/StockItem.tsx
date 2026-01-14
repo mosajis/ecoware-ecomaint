@@ -1,17 +1,25 @@
-import Splitter from '@/shared/components/Splitter/Splitter'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import StockItemFormDialog from './StockItemUpsert'
-import CustomizedTree from '@/shared/components/tree/Tree'
 import { useState, useCallback } from 'react'
-import {
-  tblStockItem,
-  tblStockType,
-  TypeTblStockItem,
-} from '@/core/api/generated/api'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
+import { tblStockItem, TypeTblStockItem } from '@/core/api/generated/api'
 import { GridColDef } from '@mui/x-data-grid'
-import { useDataTree } from '@/shared/hooks/useDataTree'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
+
+const getRowId = (row: TypeTblStockItem) => row.stockItemId
+
+const columns: GridColDef<TypeTblStockItem>[] = [
+  {
+    field: 'number',
+    headerName: 'Number',
+    valueGetter: (_, row) => row.tblStockType?.no,
+  },
+  {
+    field: 'tblStockType',
+    headerName: 'Stock Type',
+    flex: 1,
+    valueGetter: (_, row) => row.tblStockType?.name,
+  },
+]
 
 export default function PageStockItem() {
   const [openForm, setOpenForm] = useState(false)
@@ -25,47 +33,36 @@ export default function PageStockItem() {
       },
     })
   }, [])
+
   // === useDataTree ===
-  const { rows, loading, handleDelete, handleFormSuccess, handleRefresh } =
-    useDataGrid(getAll, tblStockItem.deleteById, 'stockItemId')
+  const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
+    getAll,
+    tblStockItem.deleteById,
+    'stockItemId'
+  )
 
   // === Handlers ===
   const handleCreate = () => {
     setSelectedRowId(null)
     setMode('create')
-    setOpenForm(true)
+    handleUpsertOpen()
   }
 
-  const handleEdit = (row: TypeTblStockItem) => {
-    setSelectedRowId(row.stockItemId)
+  const handleEdit = (rowId: number) => {
+    setSelectedRowId(rowId)
     setMode('update')
-    setOpenForm(true)
+    handleUpsertOpen()
   }
 
   // === Columns ===
-  const columns: GridColDef<TypeTblStockItem>[] = [
-    {
-      field: 'stockItemId',
-      headerName: 'Stock Item ID',
-      width: 100,
-    },
-    {
-      field: 'tblStockType',
-      headerName: 'Stock Type',
-      flex: 1,
-      renderCell: params => params.row.tblStockType?.name ?? '-',
-    },
-    {
-      field: 'deptId',
-      headerName: 'Department ID',
-      width: 120,
-    },
-    dataGridActionColumn({
-      onEdit: handleEdit,
-      onDelete: handleDelete,
-    }),
-  ]
 
+  const handleUpsertClose = useCallback(() => {
+    setOpenForm(false)
+  }, [])
+
+  const handleUpsertOpen = useCallback(() => {
+    setOpenForm(true)
+  }, [])
   return (
     <>
       <CustomizedDataGrid
@@ -74,18 +71,20 @@ export default function PageStockItem() {
         loading={loading}
         rows={rows}
         columns={columns}
+        onEditClick={handleEdit}
+        onDoubleClick={handleEdit}
+        onDeleteClick={handleDelete}
         onRefreshClick={handleRefresh}
         onAddClick={handleCreate}
-        getRowId={row => row.stockItemId}
+        getRowId={getRowId}
       />
 
-      {/* === FORM === */}
       <StockItemFormDialog
         open={openForm}
         mode={mode}
         recordId={selectedRowId}
-        onClose={() => setOpenForm(false)}
-        onSuccess={handleFormSuccess}
+        onClose={handleUpsertClose}
+        onSuccess={handleRefresh}
       />
     </>
   )
