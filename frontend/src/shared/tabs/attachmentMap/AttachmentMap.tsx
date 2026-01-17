@@ -6,6 +6,8 @@ import { BaseAttachmentGridProps, MapRelationConfig } from './AttachmentType'
 import { attachmentTableColumns } from './AttachmentColumn'
 
 function AttachmentMap<T = any>({
+  disableAdd,
+  disableDelete,
   filterId,
   filterKey,
   relName,
@@ -60,6 +62,8 @@ function AttachmentMap<T = any>({
   return (
     <>
       <DataGrid
+        disableAdd={disableAdd}
+        disableDelete={disableDelete}
         disableRowNumber
         disableEdit
         label={label}

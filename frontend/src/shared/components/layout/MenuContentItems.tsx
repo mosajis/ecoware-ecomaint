@@ -146,20 +146,6 @@ export const menuContentItems: {
         icon: <SettingsRoundedIcon />,
         id: 'maint:function',
         path: '/maintenance/function',
-        children: [
-          {
-            text: 'Tree View (x)',
-            id: 'maint:Function:tree',
-            path: '/maintenance/function/tree-view',
-            icon: <BulletIcon />,
-          },
-          {
-            text: 'List View (x)',
-            id: 'maint:Function:list',
-            path: '/maintenance/function',
-            icon: <BulletIcon />,
-          },
-        ],
       },
       {
         text: 'Component Unit (x)',

@@ -1,80 +1,86 @@
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { useCallback, useMemo } from "react";
-import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
+import CellDateTime from '@/shared/components/dataGrid/cells/CellDateTime'
+import { useCallback } from 'react'
+import { GridColDef } from '@mui/x-data-grid'
+import { useDataGrid } from '@/shared/hooks/useDataGrid'
 import {
-  tblCompTypeMeasurePoint,
   tblReScheduleLog,
+  TypeTblReScheduleLog,
   TypeTblWorkOrder,
-  type TypeTblCompMeasurePoint,
-} from "@/core/api/generated/api";
+} from '@/core/api/generated/api'
 
 interface Props {
-  workOrder?: TypeTblWorkOrder | null;
-  label?: string | null;
+  workOrder?: TypeTblWorkOrder
+  label?: string
 }
 
+const getRowId = (row: TypeTblReScheduleLog) => row.rescheduleLogId
+
+// === Columns ===
+const columns: GridColDef<TypeTblReScheduleLog>[] = [
+  {
+    field: 'fromDueDate',
+    headerName: 'From Due Date',
+    flex: 1,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+  {
+    field: 'toDueDate',
+    headerName: 'To Due Date',
+    flex: 1,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+  {
+    field: 'rescheduledDate',
+    headerName: 'Re Schedule Date',
+    flex: 1,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+  {
+    field: 'rescheduledBy',
+    headerName: 'Username SET REL',
+    flex: 1,
+  },
+  {
+    field: 'reason',
+    headerName: 'Reason',
+    flex: 1,
+  },
+]
+
 const TabRescheduleLog = ({ workOrder, label }: Props) => {
-  // === getAll callback ===
+  const workOrderId = workOrder?.workOrderId
+
   const getAll = useCallback(() => {
     return tblReScheduleLog.getAll({
       filter: {
-        workOrderId: workOrder?.workOrderId,
+        workOrderId,
       },
-    });
-  }, [workOrder?.workOrderId]);
+    })
+  }, [workOrderId])
 
   // === useDataGrid ===
-  const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
+  const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
     tblReScheduleLog.deleteById,
-    "rescheduleLogId",
-    !!workOrder?.workOrderId
-  );
-
-  // === Columns ===
-  const columns = useMemo<GridColDef<TypeTblCompMeasurePoint>[]>(
-    () => [
-      {
-        field: "fromDueDate",
-        headerName: "From Due Date",
-        flex: 1,
-      },
-      {
-        field: "toDueDate",
-        headerName: "To Due Date",
-        flex: 1,
-      },
-      {
-        field: "ReScheduleDate",
-        headerName: "Re Schedule Date",
-        flex: 1,
-      },
-      {
-        field: "username",
-        headerName: "Username",
-        flex: 1,
-      },
-      {
-        field: "reason",
-        headerName: "Reason",
-        flex: 1,
-      },
-    ],
-    []
-  );
+    'rescheduleLogId',
+    !!workOrderId
+  )
 
   return (
     <CustomizedDataGrid
-      label={label || "Reschedule Log"}
+      disableAdd
+      disableEdit
+      disableDelete
+      showToolbar={!!label}
+      label={label}
       rows={rows}
       columns={columns}
       loading={loading}
-      showToolbar
       onRefreshClick={handleRefresh}
-      getRowId={(row) => row.rescheduleLogId}
+      getRowId={getRowId}
     />
-  );
-};
+  )
+}
 
-export default TabRescheduleLog;
+export default TabRescheduleLog

@@ -2,15 +2,16 @@ import Splitter from '@/shared/components/Splitter/Splitter'
 import Editor from '@/shared/components/Editor'
 import CellDateTime from '@/shared/components/dataGrid/cells/CellDateTime'
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
+import CellFrequency from '@/shared/components/dataGrid/cells/CellFrequency'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import { useState, useCallback } from 'react'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
-import {
-  tblCompJob,
-  tblCompJobCounter,
-  type TypeTblCompJob,
-} from '@/core/api/generated/api'
-import { type GridColDef } from '@mui/x-data-grid'
-import CellFrequency from '@/shared/components/dataGrid/cells/CellFrequency'
+import { tblCompJob, TypeTblCompJob } from '@/core/api/generated/api'
+import { GridColDef } from '@mui/x-data-grid'
+import { logicTblWorkOrder } from '../workOrder/WorkOrderEffect'
+import { useAtomValue } from 'jotai'
+import { atomUser } from '@/pages/auth/auth.atom'
 
 const columns: GridColDef<TypeTblCompJob>[] = [
   {
@@ -69,12 +70,12 @@ const columns: GridColDef<TypeTblCompJob>[] = [
     width: 150,
     renderCell: ({ value }) => <CellDateTime value={value} />,
   },
-
-  // { field: 'realOverDue', headerName: 'RealOverDue', flex: 1 },
-  // { field: 'lastTimeDone', headerName: 'LastTimeDone', flex: 1 },
 ]
 
 export default function PageComponentJob() {
+  const user = useAtomValue(atomUser)
+  const userId = user?.userId as number
+
   const [selected, setSelected] = useState<TypeTblCompJob | null>(null)
 
   const getAll = useCallback(() => {
@@ -98,12 +99,19 @@ export default function PageComponentJob() {
     'compJobId'
   )
 
-  const handleRowClick = (params: any) => {
+  const handleRowClick = useCallback((params: any) => {
     setSelected(params.row)
+  }, [])
+
+  const onGenerateWorkOrder = async () => {
+    await logicTblWorkOrder.effectGenerateWorkOrder(userId)
   }
 
   return (
-    <>
+    <Box height={'calc(100% - 50px)'}>
+      <Button onClick={onGenerateWorkOrder} variant='contained' sx={{ mb: 1 }}>
+        Generate Work Order
+      </Button>
       <Splitter initialPrimarySize='70%' horizontal>
         <CustomizedDataGrid
           disableAdd
@@ -127,6 +135,6 @@ export default function PageComponentJob() {
           initValue={selected?.tblJobDescription?.jobDesc}
         />
       </Splitter>
-    </>
+    </Box>
   )
 }

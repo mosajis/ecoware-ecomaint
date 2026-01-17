@@ -151,16 +151,6 @@ export async function effectCompTypeJobChange({
       }
 
       // ================= HARD DELETE =================
-      case 2: {
-        await tx.tblCompJob.deleteMany({
-          where: {
-            jobDescId,
-            compId: { in: compIds },
-          },
-        })
-
-        return { status: 'OK', message: 'Soft delete complete.' }
-      }
 
       default:
         throw new Error('Invalid operation.')

@@ -1,5 +1,5 @@
-import { TypeTblMaintLog } from '@/core/api/generated/api'
 import CellDateTime from '@/shared/components/dataGrid/cells/CellDateTime'
+import { TypeTblMaintLog } from '@/core/api/generated/api'
 import { GridColDef } from '@mui/x-data-grid'
 
 export const columns: GridColDef<TypeTblMaintLog>[] = [
@@ -33,10 +33,6 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
     headerName: 'Discipline',
     // @ts-ignore
     valueGetter: (_, row) => row?.tblWorkOrder?.tblDiscipline?.name,
-  },
-  {
-    field: 'reportedBy',
-    headerName: 'Reported By (not set)',
   },
   {
     field: 'followStatus',

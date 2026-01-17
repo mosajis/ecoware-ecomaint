@@ -1,18 +1,17 @@
-import { TypeTblWorkOrder } from "@/core/api/generated/api";
-import Editor from "@/shared/components/Editor";
+import Editor from '@/shared/components/Editor'
+import { TypeTblWorkOrderWithRels } from '../types'
 
 interface Props {
-  workOrder?: TypeTblWorkOrder | null;
-  label?: string | null;
+  workOrder?: TypeTblWorkOrderWithRels | null
+  label?: string
 }
 
-const TabJobDescription = (props: Props) => {
-  const { workOrder } = props;
+const TabJobDescription = ({ workOrder, label }: Props) => {
+  const initValue = workOrder?.tblCompJob?.tblJobDescription?.jobDesc || ''
 
-  // @ts-ignore
-  const initValue = workOrder?.tblCompJob?.tblJobDescription?.jobDesc || "";
+  return (
+    <Editor label={label || 'Job Description'} initValue={initValue} readOnly />
+  )
+}
 
-  return <Editor initValue={initValue} readOnly={true} />;
-};
-
-export default TabJobDescription;
+export default TabJobDescription

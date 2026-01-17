@@ -77,7 +77,7 @@ function generate() {
  * Pull database schema and apply all fixes
  */
 function pull() {
-  runCommand(`prisma db pull --schema=${SCHEMA} --force`, 'Pull Database')
+  runCommand(`prisma db pull --schema=${SCHEMA}`, 'Pull Database')
   fixTimestamps()
   format()
   generate()

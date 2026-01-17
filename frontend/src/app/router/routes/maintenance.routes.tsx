@@ -6,34 +6,27 @@ import { routeComponentType } from '@/pages/maintenance/componentType/ComponentT
 import { routeComponentUnit } from '@/pages/maintenance/componentUnit/ComponentUnitRoutes'
 import { NotFound } from '@/pages/NotFound'
 
-// --- Lazy pages ---
-export const PageFunction = lazy(
-  () => import('@/pages/maintenance/function/Function')
-)
-export const PageFunctionTree = lazy(
-  () => import('@/pages/maintenance/function/FunctionTree')
-)
+//  Lazy pages ---
+const PageFunction = lazy(() => import('@/pages/maintenance/function/Function'))
 
-export const PageComponentJob = lazy(
+const PageComponentJob = lazy(
   () => import('@/pages/maintenance/componentJob/ComponentJob')
 )
-export const PageWorkOrder = lazy(
+const PageWorkOrder = lazy(
   () => import('@/pages/maintenance/workOrder/WorkOrder')
 )
-export const PageRound = lazy(() => import('@/pages/maintenance/round/Round'))
-export const PageMeasurePoints = lazy(
+const PageRound = lazy(() => import('@/pages/maintenance/round/Round'))
+const PageMeasurePoints = lazy(
   () => import('@/pages/maintenance/measurePoints/MeasurePoints')
 )
-export const PageMeasurePointsLogs = lazy(
+const PageMeasurePointsLogs = lazy(
   () => import('@/pages/maintenance/measurePointsLogs/MeasurePointsLogs')
 )
-export const PageCountersLog = lazy(
+const PageCountersLog = lazy(
   () => import('@/pages/maintenance/counterLog/CounterLog')
 )
-export const PageMaintLog = lazy(
-  () => import('@/pages/maintenance/maintLog/MaintLog')
-)
-export const PageCounterUpdate = lazy(
+const PageMaintLog = lazy(() => import('@/pages/maintenance/maintLog/MaintLog'))
+const PageCounterUpdate = lazy(
   () => import('@/pages/maintenance/counterUpdate/CountersUpdate')
 )
 
@@ -50,22 +43,9 @@ export const routeMaintenance = createRoute({
 export const routeFunction = createRoute({
   getParentRoute: () => routeMaintenance,
   path: 'function',
-  component: () => <Outlet />,
+  component: () => <LazyRoute Component={PageFunction} />,
   beforeLoad: () => ({ breadcrumb: 'Function' }),
 })
-export const routeFunctionList = createRoute({
-  getParentRoute: () => routeFunction,
-  path: 'list-view',
-  component: () => <LazyRoute Component={PageFunction} />,
-  beforeLoad: () => ({ breadcrumb: 'List View' }),
-})
-export const routeFunctionTree = createRoute({
-  getParentRoute: () => routeFunction,
-  path: 'tree-view',
-  component: () => <LazyRoute Component={PageFunctionTree} />,
-  beforeLoad: () => ({ breadcrumb: 'Tree View' }),
-})
-routeFunction.addChildren([routeFunctionList, routeFunctionTree])
 
 // --- Work Order ---
 export const routeWorkOrder = createRoute({

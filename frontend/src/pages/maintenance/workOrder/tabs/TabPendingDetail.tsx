@@ -1,18 +1,16 @@
-import { TypeTblWorkOrder } from "@/core/api/generated/api";
-import Editor from "@/shared/components/Editor";
+import Editor from '@/shared/components/Editor'
+import { TypeTblWorkOrderWithRels } from '../types'
 
 interface Props {
-  workOrder?: TypeTblWorkOrder | null;
-  label?: string | null;
+  workOrder?: TypeTblWorkOrderWithRels | null
+  label?: string | null
 }
 
-const TabPendingDetail = (props: Props) => {
-  const { workOrder } = props;
-
+const TabPendingDetail = ({ workOrder, label }: Props) => {
   // @ts-ignore
-  const initValue = workOrder?.tblPendingType?.description || "";
+  const initValue = workOrder?.tblPendingType?.description || ''
 
-  return <Editor initValue={initValue} readOnly={true} />;
-};
+  return <Editor label='Pending Detail' initValue={initValue} readOnly />
+}
 
-export default TabPendingDetail;
+export default TabPendingDetail

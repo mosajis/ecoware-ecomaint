@@ -1,10 +1,28 @@
+import AttachmentMap from '@/shared/tabs/attachmentMap/AttachmentMap'
+import { memo } from 'react'
+import {
+  tblJobDescriptionAttachment,
+  TypeTblWorkOrder,
+} from '@/core/api/generated/api'
+
 interface Props {
-  workOrderId?: number | null
-  label?: string | null
+  workOrder?: TypeTblWorkOrder
+  label?: string
 }
 
-const TabJobAttachments = (props: Props) => {
-  return <div>TabJobAttachments</div>
+export function TabAttachment({ workOrder }: Props) {
+  return (
+    <AttachmentMap
+      disableAdd
+      disableDelete
+      filterId={workOrder?.tblCompJob?.jobDescId}
+      filterKey='jobDescId'
+      relName='tblJobDescription'
+      tableId='jobDescriptionAttachmentId'
+      label='Attachments'
+      mapService={tblJobDescriptionAttachment}
+    />
+  )
 }
 
-export default TabJobAttachments
+export default memo(TabAttachment)

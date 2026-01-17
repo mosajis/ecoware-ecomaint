@@ -271,24 +271,27 @@ model TblCompMeasurePoint {
   tblCounterType          TblCounterType?          @relation(fields: [counterTypeId], references: [counterTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompMeasurePoint_tblCounterType")
   tblUnit                 TblUnit?                 @relation(fields: [unitId], references: [unitId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompMeasurePoint_tblUnit")
   tblUsers                TblUsers?                @relation(fields: [changedBy], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompMeasurePoint_tblUsers")
+  tblCompMeasurePointLogs TblCompMeasurePointLog[]
 
   @@map("tblCompMeasurePoint")
   @@schema("dbo")
 }
 
 model TblCompMeasurePointLog {
-  compMeasurePointLogId Int       @id(map: "PK_tblCompMeasurePointLog") @default(dbgenerated("NEXT VALUE FOR [Seq_CompMeasurePointLog]"), map: "DF_CompMeasurePointLogID") @map("CompMeasurePointLogID")
-  compMeasurePointId    Int?      @map("CompMeasurePointID")
-  changedBy             Int?      @map("ChangedBy")
-  changedDate           DateTime? @map("ChangedDate") @db.DateTime
-  currentDate           DateTime? @map("CurrentDate") @db.DateTime
-  unitId                Int?      @map("UnitID")
-  currentValue          Int?      @map("CurrentValue")
-  deptId                Int?      @map("DeptID")
-  exportMarker          Int?      @map("ExportMarker")
-  lastupdate            DateTime? @db.DateTime
-  orderNo               Int?      @map("OrderNo")
-  tblUsers              TblUsers? @relation(fields: [changedBy], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompMeasurePointLog_tblUsers")
+  compMeasurePointLogId Int                  @id(map: "PK_tblCompMeasurePointLog") @default(dbgenerated("NEXT VALUE FOR [Seq_CompMeasurePointLog]"), map: "DF_CompMeasurePointLogID") @map("CompMeasurePointLogID")
+  compMeasurePointId    Int?                 @map("CompMeasurePointID")
+  changedBy             Int?                 @map("ChangedBy")
+  changedDate           DateTime?            @map("ChangedDate") @db.DateTime
+  currentDate           DateTime?            @map("CurrentDate") @db.DateTime
+  unitId                Int?                 @map("UnitID")
+  currentValue          Int?                 @map("CurrentValue")
+  deptId                Int?                 @map("DeptID")
+  exportMarker          Int?                 @map("ExportMarker")
+  lastupdate            DateTime?            @db.DateTime
+  orderNo               Int?                 @map("OrderNo")
+  tblCompMeasurePoint   TblCompMeasurePoint? @relation(fields: [compMeasurePointId], references: [compMeasurePointId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompMeasurePointLog_tblCompMeasurePoint")
+  tblUnit               TblUnit?             @relation(fields: [unitId], references: [unitId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompMeasurePointLog_tblUnit")
+  tblUsers              TblUsers?            @relation(fields: [changedBy], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompMeasurePointLog_tblUsers")
 
   @@map("tblCompMeasurePointLog")
   @@schema("dbo")
@@ -1366,6 +1369,7 @@ model TblUnit {
   lastupdate               DateTime?                 @db.DateTime
   orderNo                  Int?                      @map("OrderNo")
   tblCompMeasurePoints     TblCompMeasurePoint[]
+  tblCompMeasurePointLogs  TblCompMeasurePointLog[]
   tblCompTypeMeasurePoints TblCompTypeMeasurePoint[]
 
   @@map("tblUnit")
@@ -1470,7 +1474,7 @@ model TblWorkOrder {
   orderNo                                 Int?                @map("OrderNo")
   userId                                  Int?                @map("UserID")
   userComment                             String?             @map("UserComment") @db.NVarChar(300)
-  triggerdTypeId                          Int?                @map("TriggerdTypeId")
+  workOrderTypeId                         Int?                @map("WorkOrderTypeId")
   tblMaintLogs                            TblMaintLog[]
   tblMaintLogFollows                      TblMaintLogFollow[]
   tblCompJob                              TblCompJob?         @relation(fields: [compJobId], references: [compJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblCompJob")
@@ -1521,6 +1525,14 @@ model TblWorkOrderStatus {
   tblWorkOrders     TblWorkOrder[]
 
   @@map("tblWorkOrderStatus")
+  @@schema("dbo")
+}
+
+model TblWorkOrderType {
+  workOrderTypeId Int    @id(map: "PK_tblWorkOrderType") @map("WorkOrderTypeID")
+  name            String @map("Name") @db.NVarChar(50)
+
+  @@map("tblWorkOrderType")
   @@schema("dbo")
 }
 

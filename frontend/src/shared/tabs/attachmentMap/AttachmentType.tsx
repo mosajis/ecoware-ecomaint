@@ -49,5 +49,7 @@ export interface BaseAttachmentGridProps<T = any> {
   relName: string
   tableId: string
   label?: string
+  disableAdd?: boolean
+  disableDelete?: boolean
   mapService: AttachmentMapService<T>
 }

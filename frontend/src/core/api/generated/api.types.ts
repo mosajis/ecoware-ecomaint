@@ -3520,6 +3520,38 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/tblWorkOrder/generate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["postTblWorkOrderGenerate"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblWorkOrder/generate/next": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["postTblWorkOrderGenerateNext"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tblWorkOrderStatus/": {
         parameters: {
             query?: never;
@@ -3894,13 +3926,13 @@ export interface operations {
     getTblAddress: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -4175,13 +4207,13 @@ export interface operations {
     deleteTblAddress: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -4596,13 +4628,13 @@ export interface operations {
     getTblAddressCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -4626,13 +4658,13 @@ export interface operations {
     getTblAttachment: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -4797,13 +4829,13 @@ export interface operations {
     deleteTblAttachment: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -5270,13 +5302,13 @@ export interface operations {
     getTblAttachmentCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -5312,13 +5344,13 @@ export interface operations {
     getTblAttachmentType: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -5496,13 +5528,13 @@ export interface operations {
     deleteTblAttachmentType: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -5776,13 +5808,13 @@ export interface operations {
     getTblAttachmentTypeCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -5806,13 +5838,13 @@ export interface operations {
     getTblCompCounter: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -6141,13 +6173,13 @@ export interface operations {
     deleteTblCompCounter: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -6634,13 +6666,13 @@ export interface operations {
     getTblCompCounterCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -6664,13 +6696,13 @@ export interface operations {
     getTblCompCounterLog: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -6912,13 +6944,13 @@ export interface operations {
     deleteTblCompCounterLog: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -7273,13 +7305,13 @@ export interface operations {
     getTblCompCounterLogCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -7303,13 +7335,13 @@ export interface operations {
     getTblCompJob: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -7555,7 +7587,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             }[];
                         }[];
                         total: number;
@@ -8068,7 +8100,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -8078,13 +8110,13 @@ export interface operations {
     deleteTblCompJob: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -8355,7 +8387,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -8925,7 +8957,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -9182,7 +9214,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -9192,13 +9224,13 @@ export interface operations {
     getTblCompJobCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -9222,13 +9254,13 @@ export interface operations {
     getTblCompJobCounter: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -9556,13 +9588,13 @@ export interface operations {
     deleteTblCompJobCounter: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -10043,13 +10075,13 @@ export interface operations {
     getTblCompJobCounterCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -10073,13 +10105,13 @@ export interface operations {
     getTblCompJobMeasurePoint: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -10326,13 +10358,13 @@ export interface operations {
     deleteTblCompJobMeasurePoint: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -10699,13 +10731,13 @@ export interface operations {
     getTblCompJobMeasurePointCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -10729,13 +10761,13 @@ export interface operations {
     getTblCompJobTrigger: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -10941,13 +10973,13 @@ export interface operations {
     deleteTblCompJobTrigger: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -11260,13 +11292,13 @@ export interface operations {
     getTblCompJobTriggerCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -11290,13 +11322,13 @@ export interface operations {
     getTblCompMeasurePoint: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -11413,6 +11445,19 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             });
+                            tblCompMeasurePointLogs?: {
+                                compMeasurePointLogId: number;
+                                compMeasurePointId: null | (number);
+                                changedBy: null | (number);
+                                changedDate: null | number);
+                                currentDate: null | number);
+                                unitId: null | (number);
+                                currentValue: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                orderNo: null | (number);
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -11467,6 +11512,11 @@ export interface operations {
                             userId: number;
                         };
                     };
+                    tblCompMeasurePointLogs?: {
+                        connect: {
+                            compMeasurePointLogId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     changedBy?: null | (number);
@@ -11503,6 +11553,11 @@ export interface operations {
                             userId: number;
                         };
                     };
+                    tblCompMeasurePointLogs?: {
+                        connect: {
+                            compMeasurePointLogId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     changedBy?: null | (number);
@@ -11538,6 +11593,11 @@ export interface operations {
                         connect: {
                             userId: number;
                         };
+                    };
+                    tblCompMeasurePointLogs?: {
+                        connect: {
+                            compMeasurePointLogId: number;
+                        }[];
                     };
                 };
             };
@@ -11651,6 +11711,19 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblCompMeasurePointLogs?: {
+                            compMeasurePointLogId: number;
+                            compMeasurePointId: null | (number);
+                            changedBy: null | (number);
+                            changedDate: null | number);
+                            currentDate: null | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        }[];
                     };
                 };
             };
@@ -11659,13 +11732,13 @@ export interface operations {
     deleteTblCompMeasurePoint: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -11807,6 +11880,19 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblCompMeasurePointLogs?: {
+                            compMeasurePointLogId: number;
+                            compMeasurePointId: null | (number);
+                            changedBy: null | (number);
+                            changedDate: null | number);
+                            currentDate: null | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        }[];
                     };
                 };
             };
@@ -11865,6 +11951,14 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblCompMeasurePointLogs?: {
+                        connect?: {
+                            compMeasurePointLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     changedBy?: null | (number);
@@ -11908,6 +12002,14 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblCompMeasurePointLogs?: {
+                        connect?: {
+                            compMeasurePointLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     changedBy?: null | (number);
@@ -11950,6 +12052,14 @@ export interface operations {
                             userId: number;
                         };
                         disconnect?: boolean;
+                    };
+                    tblCompMeasurePointLogs?: {
+                        connect?: {
+                            compMeasurePointLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
                     };
                 };
             };
@@ -12063,6 +12173,19 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblCompMeasurePointLogs?: {
+                            compMeasurePointLogId: number;
+                            compMeasurePointId: null | (number);
+                            changedBy: null | (number);
+                            changedDate: null | number);
+                            currentDate: null | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        }[];
                     };
                 };
             };
@@ -12189,6 +12312,19 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblCompMeasurePointLogs?: {
+                            compMeasurePointLogId: number;
+                            compMeasurePointId: null | (number);
+                            changedBy: null | (number);
+                            changedDate: null | number);
+                            currentDate: null | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        }[];
                     };
                 };
             };
@@ -12197,13 +12333,13 @@ export interface operations {
     getTblCompMeasurePointCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -12227,13 +12363,13 @@ export interface operations {
     getTblCompMeasurePointLog: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -12260,6 +12396,37 @@ export interface operations {
                             exportMarker: null | (number);
                             lastupdate: null | number);
                             orderNo: null | (number);
+                            tblCompMeasurePoint?: null | ({
+                                compMeasurePointId: number;
+                                compId: null | (number);
+                                counterTypeId: null | (number);
+                                changedBy: null | (number);
+                                currentDate: null | number);
+                                unitId: null | (number);
+                                currentValue: null | (number);
+                                setValue: null | (number);
+                                operationalMinValue: null | (number);
+                                operationalMaxValue: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                orderNo: null | (number);
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblUnit?: null | ({
+                                unitId: number;
+                                code: null | string;
+                                name: null | string;
+                                allowDecimals: null | (number);
+                                description: null | string;
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                orderNo: null | (number);
+                            } & {
+                                [key: string]: unknown;
+                            });
                             tblUsers?: null | ({
                                 userId: number;
                                 employeeId: null | (number);
@@ -12311,6 +12478,16 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     orderNo?: null | (number);
+                    tblCompMeasurePoint?: {
+                        connect: {
+                            compMeasurePointId: number;
+                        };
+                    };
+                    tblUnit?: {
+                        connect: {
+                            unitId: number;
+                        };
+                    };
                     tblUsers?: {
                         connect: {
                             userId: number;
@@ -12325,6 +12502,16 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     orderNo?: null | (number);
+                    tblCompMeasurePoint?: {
+                        connect: {
+                            compMeasurePointId: number;
+                        };
+                    };
+                    tblUnit?: {
+                        connect: {
+                            unitId: number;
+                        };
+                    };
                     tblUsers?: {
                         connect: {
                             userId: number;
@@ -12339,6 +12526,16 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     orderNo?: null | (number);
+                    tblCompMeasurePoint?: {
+                        connect: {
+                            compMeasurePointId: number;
+                        };
+                    };
+                    tblUnit?: {
+                        connect: {
+                            unitId: number;
+                        };
+                    };
                     tblUsers?: {
                         connect: {
                             userId: number;
@@ -12366,6 +12563,37 @@ export interface operations {
                         exportMarker: null | (number);
                         lastupdate: null | number);
                         orderNo: null | (number);
+                        tblCompMeasurePoint?: null | ({
+                            compMeasurePointId: number;
+                            compId: null | (number);
+                            counterTypeId: null | (number);
+                            changedBy: null | (number);
+                            currentDate: null | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblUnit?: null | ({
+                            unitId: number;
+                            code: null | string;
+                            name: null | string;
+                            allowDecimals: null | (number);
+                            description: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        } & {
+                            [key: string]: unknown;
+                        });
                         tblUsers?: null | ({
                             userId: number;
                             employeeId: null | (number);
@@ -12398,13 +12626,13 @@ export interface operations {
     deleteTblCompMeasurePointLog: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -12456,6 +12684,37 @@ export interface operations {
                         exportMarker: null | (number);
                         lastupdate: null | number);
                         orderNo: null | (number);
+                        tblCompMeasurePoint?: null | ({
+                            compMeasurePointId: number;
+                            compId: null | (number);
+                            counterTypeId: null | (number);
+                            changedBy: null | (number);
+                            currentDate: null | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblUnit?: null | ({
+                            unitId: number;
+                            code: null | string;
+                            name: null | string;
+                            allowDecimals: null | (number);
+                            description: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        } & {
+                            [key: string]: unknown;
+                        });
                         tblUsers?: null | ({
                             userId: number;
                             employeeId: null | (number);
@@ -12504,6 +12763,18 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     orderNo?: null | (number);
+                    tblCompMeasurePoint?: {
+                        connect?: {
+                            compMeasurePointId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblUnit?: {
+                        connect?: {
+                            unitId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblUsers?: {
                         connect?: {
                             userId: number;
@@ -12519,6 +12790,18 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     orderNo?: null | (number);
+                    tblCompMeasurePoint?: {
+                        connect?: {
+                            compMeasurePointId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblUnit?: {
+                        connect?: {
+                            unitId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblUsers?: {
                         connect?: {
                             userId: number;
@@ -12534,6 +12817,18 @@ export interface operations {
                     exportMarker?: null | (number);
                     lastupdate?: null | number);
                     orderNo?: null | (number);
+                    tblCompMeasurePoint?: {
+                        connect?: {
+                            compMeasurePointId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblUnit?: {
+                        connect?: {
+                            unitId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblUsers?: {
                         connect?: {
                             userId: number;
@@ -12562,6 +12857,37 @@ export interface operations {
                         exportMarker: null | (number);
                         lastupdate: null | number);
                         orderNo: null | (number);
+                        tblCompMeasurePoint?: null | ({
+                            compMeasurePointId: number;
+                            compId: null | (number);
+                            counterTypeId: null | (number);
+                            changedBy: null | (number);
+                            currentDate: null | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblUnit?: null | ({
+                            unitId: number;
+                            code: null | string;
+                            name: null | string;
+                            allowDecimals: null | (number);
+                            description: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        } & {
+                            [key: string]: unknown;
+                        });
                         tblUsers?: null | ({
                             userId: number;
                             employeeId: null | (number);
@@ -12622,6 +12948,37 @@ export interface operations {
                         exportMarker: null | (number);
                         lastupdate: null | number);
                         orderNo: null | (number);
+                        tblCompMeasurePoint?: null | ({
+                            compMeasurePointId: number;
+                            compId: null | (number);
+                            counterTypeId: null | (number);
+                            changedBy: null | (number);
+                            currentDate: null | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            setValue: null | (number);
+                            operationalMinValue: null | (number);
+                            operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblUnit?: null | ({
+                            unitId: number;
+                            code: null | string;
+                            name: null | string;
+                            allowDecimals: null | (number);
+                            description: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        } & {
+                            [key: string]: unknown;
+                        });
                         tblUsers?: null | ({
                             userId: number;
                             employeeId: null | (number);
@@ -12654,13 +13011,13 @@ export interface operations {
     getTblCompMeasurePointLogCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -12684,13 +13041,13 @@ export interface operations {
     getTblCompOilInfo: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -12798,13 +13155,13 @@ export interface operations {
     deleteTblCompOilInfo: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -12973,13 +13330,13 @@ export interface operations {
     getTblCompOilInfoCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -13003,13 +13360,13 @@ export interface operations {
     getTblCompSpare: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -13111,13 +13468,13 @@ export interface operations {
     deleteTblCompSpare: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -13277,13 +13634,13 @@ export interface operations {
     getTblCompSpareCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -13307,13 +13664,13 @@ export interface operations {
     getTblCompStatus: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -13458,13 +13815,13 @@ export interface operations {
     deleteTblCompStatus: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -13693,13 +14050,13 @@ export interface operations {
     getTblCompStatusCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -13723,13 +14080,13 @@ export interface operations {
     getTblCompStatusLog: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -13892,13 +14249,13 @@ export interface operations {
     deleteTblCompStatusLog: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -14148,13 +14505,13 @@ export interface operations {
     getTblCompStatusLogCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -14178,13 +14535,13 @@ export interface operations {
     getTblCompType: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -14673,13 +15030,13 @@ export interface operations {
     deleteTblCompType: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -15418,13 +15775,13 @@ export interface operations {
     getTblCompTypeCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -15448,13 +15805,13 @@ export interface operations {
     getTblCompTypeAttachment: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -15679,13 +16036,13 @@ export interface operations {
     deleteTblCompTypeAttachment: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -16016,13 +16373,13 @@ export interface operations {
     getTblCompTypeAttachmentCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -16046,13 +16403,13 @@ export interface operations {
     getTblCompTypeCounter: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -16275,13 +16632,13 @@ export interface operations {
     deleteTblCompTypeCounter: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -16618,13 +16975,13 @@ export interface operations {
     getTblCompTypeCounterCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -16648,13 +17005,13 @@ export interface operations {
     getTblCompTypeJob: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -17287,13 +17644,13 @@ export interface operations {
     deleteTblCompTypeJob: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -18203,13 +18560,13 @@ export interface operations {
     getTblCompTypeJobCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -18260,13 +18617,13 @@ export interface operations {
     getTblCompTypeJobCounter: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -18553,13 +18910,13 @@ export interface operations {
     deleteTblCompTypeJobCounter: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -18983,13 +19340,13 @@ export interface operations {
     getTblCompTypeJobCounterCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -19013,13 +19370,13 @@ export interface operations {
     getTblCompTypeJobMeasurePoint: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -19250,13 +19607,13 @@ export interface operations {
     deleteTblCompTypeJobMeasurePoint: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -19599,13 +19956,13 @@ export interface operations {
     getTblCompTypeJobMeasurePointCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -19629,13 +19986,13 @@ export interface operations {
     getTblCompTypeJobTrigger: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -19896,13 +20253,13 @@ export interface operations {
     deleteTblCompTypeJobTrigger: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -20293,13 +20650,13 @@ export interface operations {
     getTblCompTypeJobTriggerCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -20323,13 +20680,13 @@ export interface operations {
     getTblCompTypeMeasurePoint: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -20600,13 +20957,13 @@ export interface operations {
     deleteTblCompTypeMeasurePoint: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -21009,13 +21366,13 @@ export interface operations {
     getTblCompTypeMeasurePointCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -21039,13 +21396,13 @@ export interface operations {
     getTblComponentUnit: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -21368,7 +21725,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             }[];
                         }[];
                         total: number;
@@ -21958,7 +22315,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -21968,13 +22325,13 @@ export interface operations {
     deleteTblComponentUnit: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -22002,7 +22359,7 @@ export interface operations {
             };
             header?: never;
             path: {
-                compId: string | (number | string);
+                compId: number;
             };
             cookie?: never;
         };
@@ -22322,7 +22679,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -22334,7 +22691,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                compId: string | (number | string);
+                compId: number;
             };
             cookie?: never;
         };
@@ -23005,7 +23362,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -23339,7 +23696,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -23349,13 +23706,13 @@ export interface operations {
     getTblComponentUnitCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -23389,15 +23746,18 @@ export interface operations {
             content: {
                 "application/json": {
                     /** @enum {string} */
-                    operation: 0 | 2;
+                    operation: 0 | 1 | 2;
+                    userId: number;
                 };
                 "application/x-www-form-urlencoded": {
                     /** @enum {string} */
-                    operation: 0 | 2;
+                    operation: 0 | 1 | 2;
+                    userId: number;
                 };
                 "multipart/form-data": {
                     /** @enum {string} */
-                    operation: 0 | 2;
+                    operation: 0 | 1 | 2;
+                    userId: number;
                 };
             };
         };
@@ -23406,13 +23766,13 @@ export interface operations {
     getTblComponentUnitAttachment: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -23651,13 +24011,13 @@ export interface operations {
     deleteTblComponentUnitAttachment: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -23918,11 +24278,11 @@ export interface operations {
     deleteTblComponentUnitAttachmentByComponentUnitAttachmentId: {
         parameters: {
             query?: {
-                force?: boolean | string;
+                force?: boolean;
             };
             header?: never;
             path: {
-                componentUnitAttachmentId: string | (number | string);
+                componentUnitAttachmentId: number;
             };
             cookie?: never;
         };
@@ -24009,13 +24369,13 @@ export interface operations {
     getTblComponentUnitAttachmentCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -24039,13 +24399,13 @@ export interface operations {
     getTblCounterType: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -24362,13 +24722,13 @@ export interface operations {
     deleteTblCounterType: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -24858,13 +25218,13 @@ export interface operations {
     getTblCounterTypeCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -24888,13 +25248,13 @@ export interface operations {
     getTblDepartment: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -25017,13 +25377,13 @@ export interface operations {
     deleteTblDepartment: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -25207,13 +25567,13 @@ export interface operations {
     getTblDepartmentCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -25237,13 +25597,13 @@ export interface operations {
     getTblDiscipline: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -25425,7 +25785,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             }[];
                         }[];
                         total: number;
@@ -25736,7 +26096,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -25746,13 +26106,13 @@ export interface operations {
     deleteTblDiscipline: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -25959,7 +26319,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -26321,7 +26681,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -26514,7 +26874,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -26524,13 +26884,13 @@ export interface operations {
     getTblDisciplineCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -26554,13 +26914,13 @@ export interface operations {
     getTblEmployee: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -26873,13 +27233,13 @@ export interface operations {
     deleteTblEmployee: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -27339,13 +27699,13 @@ export interface operations {
     getTblEmployeeCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -27369,13 +27729,13 @@ export interface operations {
     getTblFailureReportAttachment: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -27624,13 +27984,13 @@ export interface operations {
     deleteTblFailureReportAttachment: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -27997,13 +28357,13 @@ export interface operations {
     getTblFailureReportAttachmentCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -28027,13 +28387,13 @@ export interface operations {
     getTblFailureReports: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -28596,13 +28956,13 @@ export interface operations {
     deleteTblFailureReports: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -29410,13 +29770,13 @@ export interface operations {
     getTblFailureReportsCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -29440,13 +29800,13 @@ export interface operations {
     getTblFollowStatus: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -29666,13 +30026,13 @@ export interface operations {
     deleteTblFollowStatus: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -30012,13 +30372,13 @@ export interface operations {
     getTblFollowStatusCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -30042,13 +30402,13 @@ export interface operations {
     getTblFunctions: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -30433,13 +30793,13 @@ export interface operations {
     deleteTblFunctions: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -31013,13 +31373,13 @@ export interface operations {
     getTblFunctionsCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -31043,13 +31403,13 @@ export interface operations {
     getTblJobClass: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -31204,13 +31564,13 @@ export interface operations {
     deleteTblJobClass: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -31454,13 +31814,13 @@ export interface operations {
     getTblJobClassCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -31484,13 +31844,13 @@ export interface operations {
     getTblJobDescription: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -31937,13 +32297,13 @@ export interface operations {
     deleteTblJobDescription: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -32613,13 +32973,13 @@ export interface operations {
     getTblJobDescriptionCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -32643,13 +33003,13 @@ export interface operations {
     getTblJobDescriptionAttachment: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -32890,13 +33250,13 @@ export interface operations {
     deleteTblJobDescriptionAttachment: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -33251,13 +33611,13 @@ export interface operations {
     getTblJobDescriptionAttachmentCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -33281,13 +33641,13 @@ export interface operations {
     getTblJobTrigger: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -33438,13 +33798,13 @@ export interface operations {
     deleteTblJobTrigger: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -33685,13 +34045,13 @@ export interface operations {
     getTblJobTriggerCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -33715,13 +34075,13 @@ export interface operations {
     getTblJobTriggerLog: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -33810,13 +34170,13 @@ export interface operations {
     deleteTblJobTriggerLog: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -33961,13 +34321,13 @@ export interface operations {
     getTblJobTriggerLogCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -33991,13 +34351,13 @@ export interface operations {
     getTblJobVersion: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -34109,13 +34469,13 @@ export interface operations {
     deleteTblJobVersion: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -34287,13 +34647,13 @@ export interface operations {
     getTblJobVersionCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -34317,13 +34677,13 @@ export interface operations {
     getTblLocation: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -34593,13 +34953,13 @@ export interface operations {
     deleteTblLocation: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -35014,13 +35374,13 @@ export interface operations {
     getTblLocationCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -35044,13 +35404,13 @@ export interface operations {
     getTblLogCounter: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -35330,13 +35690,13 @@ export interface operations {
     deleteTblLogCounter: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -35751,13 +36111,13 @@ export interface operations {
     getTblLogCounterCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -35781,13 +36141,13 @@ export interface operations {
     getTblLogDiscipline: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -36112,13 +36472,13 @@ export interface operations {
     deleteTblLogDiscipline: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -36599,13 +36959,13 @@ export interface operations {
     getTblLogDisciplineCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -36629,13 +36989,13 @@ export interface operations {
     getTblLoginAudit: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -36805,13 +37165,13 @@ export interface operations {
     deleteTblLoginAudit: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -37067,13 +37427,13 @@ export interface operations {
     getTblLoginAuditCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -37097,13 +37457,13 @@ export interface operations {
     getTblMaintCause: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -37256,7 +37616,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             }[];
                         }[];
                         total: number;
@@ -37502,7 +37862,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -37512,13 +37872,13 @@ export interface operations {
     deleteTblMaintCause: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -37696,7 +38056,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -37975,7 +38335,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -38139,7 +38499,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -38149,13 +38509,13 @@ export interface operations {
     getTblMaintCauseCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -38179,13 +38539,13 @@ export interface operations {
     getTblMaintClass: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -38338,7 +38698,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             }[];
                         }[];
                         total: number;
@@ -38584,7 +38944,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -38594,13 +38954,13 @@ export interface operations {
     deleteTblMaintClass: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -38778,7 +39138,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -39057,7 +39417,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -39221,7 +39581,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -39231,13 +39591,13 @@ export interface operations {
     getTblMaintClassCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -39261,13 +39621,13 @@ export interface operations {
     getTblMaintLog: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -39538,7 +39898,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             } & {
                                 [key: string]: unknown;
                             });
@@ -40192,7 +40552,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         } & {
                             [key: string]: unknown;
                         });
@@ -40264,13 +40624,13 @@ export interface operations {
     deleteTblMaintLog: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -40566,7 +40926,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         } & {
                             [key: string]: unknown;
                         });
@@ -41304,7 +41664,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         } & {
                             [key: string]: unknown;
                         });
@@ -41648,7 +42008,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         } & {
                             [key: string]: unknown;
                         });
@@ -41720,13 +42080,13 @@ export interface operations {
     getTblMaintLogCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -41750,13 +42110,13 @@ export interface operations {
     getTblMaintLogAttachment: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -42011,13 +42371,13 @@ export interface operations {
     deleteTblMaintLogAttachment: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -42393,13 +42753,13 @@ export interface operations {
     getTblMaintLogAttachmentCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -42423,13 +42783,13 @@ export interface operations {
     getTblMaintLogFollow: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -42541,7 +42901,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             } & {
                                 [key: string]: unknown;
                             };
@@ -42784,7 +43144,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         } & {
                             [key: string]: unknown;
                         };
@@ -42820,13 +43180,13 @@ export interface operations {
     deleteTblMaintLogFollow: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -42963,7 +43323,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         } & {
                             [key: string]: unknown;
                         };
@@ -43206,7 +43566,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         } & {
                             [key: string]: unknown;
                         };
@@ -43355,7 +43715,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         } & {
                             [key: string]: unknown;
                         };
@@ -43391,13 +43751,13 @@ export interface operations {
     getTblMaintLogFollowCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -43421,13 +43781,13 @@ export interface operations {
     getTblMaintLogStocks: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -43629,13 +43989,13 @@ export interface operations {
     deleteTblMaintLogStocks: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -43933,13 +44293,13 @@ export interface operations {
     getTblMaintLogStocksCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -43963,13 +44323,13 @@ export interface operations {
     getTblMaintType: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -44122,7 +44482,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             }[];
                         }[];
                         total: number;
@@ -44368,7 +44728,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -44378,13 +44738,13 @@ export interface operations {
     deleteTblMaintType: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -44562,7 +44922,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -44841,7 +45201,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -45005,7 +45365,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -45015,13 +45375,13 @@ export interface operations {
     getTblMaintTypeCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -45045,13 +45405,13 @@ export interface operations {
     getTblOilSamplingLog: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -45264,13 +45624,13 @@ export interface operations {
     deleteTblOilSamplingLog: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -45565,13 +45925,13 @@ export interface operations {
     getTblOilSamplingLogCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -45595,13 +45955,13 @@ export interface operations {
     getTblParameters: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -45701,13 +46061,13 @@ export interface operations {
     deleteTblParameters: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -45864,13 +46224,13 @@ export interface operations {
     getTblParametersCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -45894,13 +46254,13 @@ export interface operations {
     getTblPendingType: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -45963,7 +46323,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             }[];
                         }[];
                         total: number;
@@ -46077,7 +46437,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -46087,13 +46447,13 @@ export interface operations {
     deleteTblPendingType: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -46181,7 +46541,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -46301,7 +46661,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -46375,7 +46735,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -46385,13 +46745,13 @@ export interface operations {
     getTblPendingTypeCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -46415,13 +46775,13 @@ export interface operations {
     getTblPeriod: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -46720,13 +47080,13 @@ export interface operations {
     deleteTblPeriod: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -47195,13 +47555,13 @@ export interface operations {
     getTblPeriodCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -47225,13 +47585,13 @@ export interface operations {
     getTblReScheduleLog: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -47399,13 +47759,13 @@ export interface operations {
     deleteTblReScheduleLog: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -47658,13 +48018,13 @@ export interface operations {
     getTblReScheduleLogCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -47688,13 +48048,13 @@ export interface operations {
     getTblRotationLog: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -47921,13 +48281,13 @@ export interface operations {
     deleteTblRotationLog: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -48267,13 +48627,13 @@ export interface operations {
     getTblRotationLogCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -48297,13 +48657,13 @@ export interface operations {
     getTblRound: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -48383,7 +48743,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             }[];
                         }[];
                         total: number;
@@ -48559,7 +48919,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -48569,13 +48929,13 @@ export interface operations {
     deleteTblRound: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -48680,7 +49040,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -48862,7 +49222,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -48953,7 +49313,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -48963,13 +49323,13 @@ export interface operations {
     getTblRoundCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -48993,13 +49353,13 @@ export interface operations {
     getTblRoundCompJob: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -49168,13 +49528,13 @@ export interface operations {
     deleteTblRoundCompJob: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -49430,13 +49790,13 @@ export interface operations {
     getTblRoundCompJobCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -49460,13 +49820,13 @@ export interface operations {
     getTblStockItem: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -49614,13 +49974,13 @@ export interface operations {
     deleteTblStockItem: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -49855,13 +50215,13 @@ export interface operations {
     getTblStockItemCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -49885,13 +50245,13 @@ export interface operations {
     getTblStockType: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -50082,13 +50442,13 @@ export interface operations {
     deleteTblStockType: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -50383,13 +50743,13 @@ export interface operations {
     getTblStockTypeCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -50413,13 +50773,13 @@ export interface operations {
     getTblUnit: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -50455,6 +50815,19 @@ export interface operations {
                                 setValue: null | (number);
                                 operationalMinValue: null | (number);
                                 operationalMaxValue: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                orderNo: null | (number);
+                            }[];
+                            tblCompMeasurePointLogs?: {
+                                compMeasurePointLogId: number;
+                                compMeasurePointId: null | (number);
+                                changedBy: null | (number);
+                                changedDate: null | number);
+                                currentDate: null | number);
+                                unitId: null | (number);
+                                currentValue: null | (number);
                                 deptId: null | (number);
                                 exportMarker: null | (number);
                                 lastupdate: null | number);
@@ -50505,6 +50878,11 @@ export interface operations {
                             compMeasurePointId: number;
                         }[];
                     };
+                    tblCompMeasurePointLogs?: {
+                        connect: {
+                            compMeasurePointLogId: number;
+                        }[];
+                    };
                     tblCompTypeMeasurePoints?: {
                         connect: {
                             compTypeMeasurePointId: number;
@@ -50524,6 +50902,11 @@ export interface operations {
                             compMeasurePointId: number;
                         }[];
                     };
+                    tblCompMeasurePointLogs?: {
+                        connect: {
+                            compMeasurePointLogId: number;
+                        }[];
+                    };
                     tblCompTypeMeasurePoints?: {
                         connect: {
                             compTypeMeasurePointId: number;
@@ -50541,6 +50924,11 @@ export interface operations {
                     tblCompMeasurePoints?: {
                         connect: {
                             compMeasurePointId: number;
+                        }[];
+                    };
+                    tblCompMeasurePointLogs?: {
+                        connect: {
+                            compMeasurePointLogId: number;
                         }[];
                     };
                     tblCompTypeMeasurePoints?: {
@@ -50584,6 +50972,19 @@ export interface operations {
                             lastupdate: null | number);
                             orderNo: null | (number);
                         }[];
+                        tblCompMeasurePointLogs?: {
+                            compMeasurePointLogId: number;
+                            compMeasurePointId: null | (number);
+                            changedBy: null | (number);
+                            changedDate: null | number);
+                            currentDate: null | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        }[];
                         tblCompTypeMeasurePoints?: {
                             compTypeMeasurePointId: number;
                             compTypeId: null | (number);
@@ -50605,13 +51006,13 @@ export interface operations {
     deleteTblUnit: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -50677,6 +51078,19 @@ export interface operations {
                             lastupdate: null | number);
                             orderNo: null | (number);
                         }[];
+                        tblCompMeasurePointLogs?: {
+                            compMeasurePointLogId: number;
+                            compMeasurePointId: null | (number);
+                            changedBy: null | (number);
+                            changedDate: null | number);
+                            currentDate: null | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        }[];
                         tblCompTypeMeasurePoints?: {
                             compTypeMeasurePointId: number;
                             compTypeId: null | (number);
@@ -50722,6 +51136,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompMeasurePointLogs?: {
+                        connect?: {
+                            compMeasurePointLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblCompTypeMeasurePoints?: {
                         connect?: {
                             compTypeMeasurePointId: number;
@@ -50747,6 +51169,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompMeasurePointLogs?: {
+                        connect?: {
+                            compMeasurePointLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblCompTypeMeasurePoints?: {
                         connect?: {
                             compTypeMeasurePointId: number;
@@ -50767,6 +51197,14 @@ export interface operations {
                     tblCompMeasurePoints?: {
                         connect?: {
                             compMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompMeasurePointLogs?: {
+                        connect?: {
+                            compMeasurePointLogId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -50811,6 +51249,19 @@ export interface operations {
                             setValue: null | (number);
                             operationalMinValue: null | (number);
                             operationalMaxValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        }[];
+                        tblCompMeasurePointLogs?: {
+                            compMeasurePointLogId: number;
+                            compMeasurePointId: null | (number);
+                            changedBy: null | (number);
+                            changedDate: null | number);
+                            currentDate: null | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
                             deptId: null | (number);
                             exportMarker: null | (number);
                             lastupdate: null | number);
@@ -50879,6 +51330,19 @@ export interface operations {
                             lastupdate: null | number);
                             orderNo: null | (number);
                         }[];
+                        tblCompMeasurePointLogs?: {
+                            compMeasurePointLogId: number;
+                            compMeasurePointId: null | (number);
+                            changedBy: null | (number);
+                            changedDate: null | number);
+                            currentDate: null | number);
+                            unitId: null | (number);
+                            currentValue: null | (number);
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        }[];
                         tblCompTypeMeasurePoints?: {
                             compTypeMeasurePointId: number;
                             compTypeId: null | (number);
@@ -50900,13 +51364,13 @@ export interface operations {
     getTblUnitCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -50930,13 +51394,13 @@ export interface operations {
     getTblUsers: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -51498,7 +51962,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             }[];
                             tblWorkOrderTblWorkOrderPlannedByTotblUsers?: {
                                 workOrderId: number;
@@ -51537,7 +52001,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             }[];
                             tblWorkOrderTblWorkOrderCreatedByTotblUsers?: {
                                 workOrderId: number;
@@ -51576,7 +52040,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             }[];
                             tblWorkOrderTblWorkOrderPendingByTotblUsers?: {
                                 workOrderId: number;
@@ -51615,7 +52079,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             }[];
                             tblWorkShopRequestAttachments?: {
                                 wShopRequestAttachmentId: number;
@@ -52776,7 +53240,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkOrderTblWorkOrderPlannedByTotblUsers?: {
                             workOrderId: number;
@@ -52815,7 +53279,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkOrderTblWorkOrderCreatedByTotblUsers?: {
                             workOrderId: number;
@@ -52854,7 +53318,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkOrderTblWorkOrderPendingByTotblUsers?: {
                             workOrderId: number;
@@ -52893,7 +53357,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkShopRequestAttachments?: {
                             wShopRequestAttachmentId: number;
@@ -52911,13 +53375,13 @@ export interface operations {
     deleteTblUsers: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -53504,7 +53968,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkOrderTblWorkOrderPlannedByTotblUsers?: {
                             workOrderId: number;
@@ -53543,7 +54007,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkOrderTblWorkOrderCreatedByTotblUsers?: {
                             workOrderId: number;
@@ -53582,7 +54046,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkOrderTblWorkOrderPendingByTotblUsers?: {
                             workOrderId: number;
@@ -53621,7 +54085,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkShopRequestAttachments?: {
                             wShopRequestAttachmentId: number;
@@ -55094,7 +55558,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkOrderTblWorkOrderPlannedByTotblUsers?: {
                             workOrderId: number;
@@ -55133,7 +55597,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkOrderTblWorkOrderCreatedByTotblUsers?: {
                             workOrderId: number;
@@ -55172,7 +55636,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkOrderTblWorkOrderPendingByTotblUsers?: {
                             workOrderId: number;
@@ -55211,7 +55675,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkShopRequestAttachments?: {
                             wShopRequestAttachmentId: number;
@@ -55792,7 +56256,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkOrderTblWorkOrderPlannedByTotblUsers?: {
                             workOrderId: number;
@@ -55831,7 +56295,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkOrderTblWorkOrderCreatedByTotblUsers?: {
                             workOrderId: number;
@@ -55870,7 +56334,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkOrderTblWorkOrderPendingByTotblUsers?: {
                             workOrderId: number;
@@ -55909,7 +56373,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkShopRequestAttachments?: {
                             wShopRequestAttachmentId: number;
@@ -55927,13 +56391,13 @@ export interface operations {
     getTblUsersCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -55957,13 +56421,13 @@ export interface operations {
     getTblWorkOrder: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -56015,7 +56479,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                             tblMaintLogs?: {
                                 maintLogId: number;
                                 maintCauseId: null | (number);
@@ -56246,7 +56710,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             } & {
                                 [key: string]: unknown;
                             });
@@ -56287,7 +56751,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             }[];
                             tblWorkOrderStatus?: null | ({
                                 workOrderStatusId: number;
@@ -56786,7 +57250,7 @@ export interface operations {
                         orderNo: null | (number);
                         userId: null | (number);
                         userComment: null | string;
-                        triggerdTypeId: null | (number);
+                        workOrderTypeId: null | (number);
                         tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | (number);
@@ -57017,7 +57481,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         } & {
                             [key: string]: unknown;
                         });
@@ -57058,7 +57522,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkOrderStatus?: null | ({
                             workOrderStatusId: number;
@@ -57170,13 +57634,13 @@ export interface operations {
     deleteTblWorkOrder: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -57253,7 +57717,7 @@ export interface operations {
                         orderNo: null | (number);
                         userId: null | (number);
                         userComment: null | string;
-                        triggerdTypeId: null | (number);
+                        workOrderTypeId: null | (number);
                         tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | (number);
@@ -57484,7 +57948,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         } & {
                             [key: string]: unknown;
                         });
@@ -57525,7 +57989,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkOrderStatus?: null | ({
                             workOrderStatusId: number;
@@ -58090,7 +58554,7 @@ export interface operations {
                         orderNo: null | (number);
                         userId: null | (number);
                         userComment: null | string;
-                        triggerdTypeId: null | (number);
+                        workOrderTypeId: null | (number);
                         tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | (number);
@@ -58321,7 +58785,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         } & {
                             [key: string]: unknown;
                         });
@@ -58362,7 +58826,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkOrderStatus?: null | ({
                             workOrderStatusId: number;
@@ -58527,7 +58991,7 @@ export interface operations {
                         orderNo: null | (number);
                         userId: null | (number);
                         userComment: null | string;
-                        triggerdTypeId: null | (number);
+                        workOrderTypeId: null | (number);
                         tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | (number);
@@ -58758,7 +59222,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         } & {
                             [key: string]: unknown;
                         });
@@ -58799,7 +59263,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                         tblWorkOrderStatus?: null | ({
                             workOrderStatusId: number;
@@ -58911,13 +59375,13 @@ export interface operations {
     getTblWorkOrderCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -58938,16 +59402,36 @@ export interface operations {
             };
         };
     };
+    postTblWorkOrderGenerate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: never;
+    };
+    postTblWorkOrderGenerateNext: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: never;
+    };
     getTblWorkOrderStatus: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -59002,7 +59486,7 @@ export interface operations {
                                 orderNo: null | (number);
                                 userId: null | (number);
                                 userComment: null | string;
-                                triggerdTypeId: null | (number);
+                                workOrderTypeId: null | (number);
                             }[];
                         }[];
                         total: number;
@@ -59096,7 +59580,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -59106,13 +59590,13 @@ export interface operations {
     deleteTblWorkOrderStatus: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -59192,7 +59676,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -59292,7 +59776,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -59358,7 +59842,7 @@ export interface operations {
                             orderNo: null | (number);
                             userId: null | (number);
                             userComment: null | string;
-                            triggerdTypeId: null | (number);
+                            workOrderTypeId: null | (number);
                         }[];
                     };
                 };
@@ -59368,13 +59852,13 @@ export interface operations {
     getTblWorkOrderStatusCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -59398,13 +59882,13 @@ export interface operations {
     getTblWorkShopComponent: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -59505,13 +59989,13 @@ export interface operations {
     deleteTblWorkShopComponent: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -59671,13 +60155,13 @@ export interface operations {
     getTblWorkShopComponentCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -59701,13 +60185,13 @@ export interface operations {
     getTblWorkShopDone: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -59856,13 +60340,13 @@ export interface operations {
     deleteTblWorkShopDone: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -60082,13 +60566,13 @@ export interface operations {
     getTblWorkShopDoneCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -60112,13 +60596,13 @@ export interface operations {
     getTblWorkShopRequest: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -60336,13 +60820,13 @@ export interface operations {
     deleteTblWorkShopRequest: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -60655,13 +61139,13 @@ export interface operations {
     getTblWorkShopRequestCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -60685,13 +61169,13 @@ export interface operations {
     getTblWorkShopRequestAttachment: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -60954,13 +61438,13 @@ export interface operations {
     deleteTblWorkShopRequestAttachment: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;
@@ -61348,13 +61832,13 @@ export interface operations {
     getTblWorkShopRequestAttachmentCount: {
         parameters: {
             query?: {
-                page?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
-                perPage?: string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string | (number | string))))))))));
+                page?: number;
+                perPage?: number;
                 sort?: string;
                 filter?: string;
                 include?: string;
-                paginate?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
-                force?: (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | (boolean | string) | string) | string) | string) | string) | string) | string) | string) | string) | string) | string;
+                paginate?: boolean;
+                force?: boolean;
             };
             header?: never;
             path?: never;

@@ -32,15 +32,21 @@ const ControllerTblComponentUnit = new BaseController({
       async ({ params, body, set }) => {
         try {
           const componentUnitId = Number(params.componentUnitId)
+          const userId = Number(body.userId)
 
           if (isNaN(componentUnitId)) {
             set.status = 400
             return { status: 'ERROR', message: 'Invalid componentUnitId' }
           }
 
+          if (isNaN(userId)) {
+            set.status = 400
+            return { status: 'ERROR', message: 'Invalid userId' }
+          }
+
           await effectComponentUnitChange({
             componentUnitId,
-            operation: body.operation,
+            userId,
           })
 
           return { status: 'OK' }
@@ -59,6 +65,7 @@ const ControllerTblComponentUnit = new BaseController({
         },
         body: t.Object({
           operation: OperationEnum,
+          userId: t.Number(),
         }),
       }
     )

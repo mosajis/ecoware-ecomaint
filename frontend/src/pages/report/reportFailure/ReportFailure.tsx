@@ -1,42 +1,42 @@
 import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
 import { GridColDef } from '@mui/x-data-grid'
-import { useCallback, useMemo, useState } from 'react'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
+import { useCallback, useState } from 'react'
 import { useDataGrid } from '@/shared/hooks/useDataGrid'
-import { tblStockType, TypeTblStockType } from '@/core/api/generated/api'
+import {
+  tblFailureReports,
+  TypeTblFailureReports,
+} from '@/core/api/generated/api'
 
-const getRowId = (row: TypeTblStockType) => row.stockTypeId
-// === Columns ===
-const columns: GridColDef<TypeTblStockType>[] = [
-  { field: 'partName', headerName: 'Number', width: 120 },
-  { field: 'makerRef', headerName: 'Comp No', flex: 2 },
+const getRowId = (row: TypeTblFailureReports) => row.failureReportId
+
+const columns: GridColDef<TypeTblFailureReports>[] = [
   {
-    field: 'MESC',
-    headerName: 'Failure Date',
+    field: 'compNo',
+    headerName: 'Component Name',
     flex: 1,
-    // @ts-ignore
-    valueGetter: (value, row) => row?.tblJobClass?.name,
+    valueGetter: (_, row) => row?.tblComponentUnit?.comNo,
   },
-  { field: 'extraNo', headerName: 'Title', flex: 1 },
-  { field: 'changeReason', headerName: 'Total Wait', flex: 1 },
-  { field: 'notes', headerName: 'Disc. Name', flex: 1 },
-  { field: 'description', headerName: 'Last Updated', flex: 1 },
-  { field: 'farsiDescription', headerName: 'Loged By', flex: 1 },
-  { field: 'farsiDescription', headerName: 'Approved By', flex: 1 },
-  { field: 'farsiDescription', headerName: 'Closed By', flex: 1 },
-  { field: 'farsiDescription', headerName: 'Closed Date', flex: 1 },
 ]
 
 export default function PageReportFailure() {
   const [openForm, setOpenForm] = useState(false)
   const [mode, setMode] = useState<'create' | 'update'>('create')
-  const [selected, setSelected] = useState<TypeTblStockType | null>(null)
+  const [selected, setSelected] = useState<number | null>(null)
+
+  const getAll = useCallback(
+    () =>
+      tblFailureReports.getAll({
+        include: {
+          tblComponentUnit: true,
+        },
+      }),
+    []
+  )
 
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
-    tblStockType.getAll,
-    tblStockType.deleteById,
-    'stockTypeId',
-    false
+    getAll,
+    tblFailureReports.deleteById,
+    'failureReportId'
   )
 
   // === Handlers ===
@@ -46,22 +46,25 @@ export default function PageReportFailure() {
     setOpenForm(true)
   }, [])
 
-  const handleEdit = useCallback((row: TypeTblStockType) => {
-    setSelected(row)
+  const handleEdit = useCallback((rowId: number) => {
+    setSelected(rowId)
     setMode('update')
     setOpenForm(true)
   }, [])
 
   return (
     <CustomizedDataGrid
-      label='Failure Report'
-      getRowId={getRowId}
-      loading={loading}
-      onAddClick={handleCreate}
-      rows={rows}
-      onRefreshClick={handleRefresh}
-      columns={columns}
       showToolbar
+      label='Failure Report'
+      loading={loading}
+      rows={rows}
+      columns={columns}
+      onRefreshClick={handleRefresh}
+      onAddClick={handleCreate}
+      onEditClick={handleEdit}
+      onDoubleClick={handleEdit}
+      onDeleteClick={handleDelete}
+      getRowId={getRowId}
     />
   )
 }

@@ -1,99 +1,91 @@
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { useCallback, useMemo } from "react";
+import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
+import CellDateTime from '@/shared/components/dataGrid/cells/CellDateTime'
+import { useCallback } from 'react'
+import { GridColDef } from '@mui/x-data-grid'
+import { useDataGrid } from '@/shared/hooks/useDataGrid'
 import {
   tblCompMeasurePoint,
   tblCompTypeMeasurePoint,
   TypeTblWorkOrder,
   type TypeTblCompMeasurePoint,
-} from "@/core/api/generated/api";
-import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "@/shared/hooks/useDataGrid";
+} from '@/core/api/generated/api'
 
 interface Props {
-  workOrder?: TypeTblWorkOrder | null;
-  label?: string | null;
+  workOrder?: TypeTblWorkOrder
+  label?: string
 }
 
+const getRowId = (row: TypeTblCompMeasurePoint) => row.compMeasurePointId
+
+const columns: GridColDef<TypeTblCompMeasurePoint>[] = [
+  {
+    field: 'currentDate',
+    headerName: 'Current Date',
+    flex: 1,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+  {
+    field: 'currentValue',
+    headerName: 'Current Value',
+    flex: 1,
+  },
+  {
+    field: 'counterTypeName',
+    headerName: 'Counter Type Name',
+    flex: 1,
+    valueGetter: (v, row) => row?.tblCounterType?.name,
+  },
+
+  {
+    field: 'unitName',
+    headerName: 'Unit Name',
+    flex: 1,
+    valueGetter: (v, row) => row?.tblUnit?.name,
+  },
+  {
+    field: 'unitDescription',
+    headerName: 'Unit Description',
+    flex: 1,
+    valueGetter: (v, row) => row?.tblUnit?.description,
+  },
+]
+
 const TabMeasurePoints = ({ workOrder, label }: Props) => {
-  // === getAll callback ===
+  const compId = workOrder?.compId
+
   const getAll = useCallback(() => {
     return tblCompMeasurePoint.getAll({
       filter: {
-        compId: workOrder?.compId,
+        compId,
       },
       include: {
         tblUnit: true,
         tblCounterType: true,
       },
-    });
-  }, [workOrder]);
+    })
+  }, [compId])
 
-  // === useDataGrid ===
-  const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
+  const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
     tblCompTypeMeasurePoint.deleteById,
-    "compMeasurePointId",
-    !!workOrder?.compId
-  );
-
-  // === Columns ===
-  const columns = useMemo<GridColDef<TypeTblCompMeasurePoint>[]>(
-    () => [
-      {
-        field: "currentDate",
-        headerName: "Current Date",
-        flex: 1,
-      },
-      {
-        field: "currentValue",
-        headerName: "Current Value",
-        flex: 1,
-      },
-      {
-        field: "counterTypeName",
-        headerName: "Counter Type Name",
-        flex: 1,
-      },
-
-      {
-        field: "newValue",
-        headerName: "New Value",
-        flex: 1,
-      },
-
-      {
-        field: "isMandatory",
-        headerName: "is Mandatory",
-        flex: 1,
-      },
-
-      {
-        field: "unitName",
-        headerName: "Unit Name",
-        flex: 1,
-        valueGetter: (v, row) => row?.tblUnit?.name,
-      },
-      {
-        field: "unitDescription",
-        headerName: "Unit Description",
-        flex: 1,
-        valueGetter: (v, row) => row?.tblUnit?.description,
-      },
-    ],
-    []
-  );
+    'compMeasurePointId',
+    !!compId
+  )
 
   return (
     <CustomizedDataGrid
-      label={label || "Measures"}
+      disableAdd
+      disableEdit
+      disableDelete
+      showToolbar={!!label}
+      label={label}
       rows={rows}
       columns={columns}
       loading={loading}
-      showToolbar
       onRefreshClick={handleRefresh}
-      getRowId={(row) => row.compMeasurePointId}
+      getRowId={getRowId}
     />
-  );
-};
+  )
+}
 
-export default TabMeasurePoints;
+export default TabMeasurePoints

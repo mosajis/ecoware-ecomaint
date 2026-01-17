@@ -1,102 +1,118 @@
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { useMemo } from "react";
+import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
+import { GridColDef } from '@mui/x-data-grid'
+import { useDataGrid } from '@/shared/hooks/useDataGrid'
+import { useCallback } from 'react'
 import {
   tblCompMeasurePoint,
+  tblCompType,
+  tblUnit,
   TypeTblCompMeasurePoint,
-} from "@/core/api/generated/api";
-import { type GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "@/shared/hooks/useDataGrid";
+} from '@/core/api/generated/api'
+import CellDateTime from '@/shared/components/dataGrid/cells/CellDateTime'
 
-export default function PageMeasurePoints() {
+const getRowId = (row: TypeTblCompMeasurePoint) => row.compMeasurePointId
+
+const columns: GridColDef<TypeTblCompMeasurePoint>[] = [
+  {
+    field: 'compTypeNo',
+    headerName: 'CompType No',
+    // @ts-ignore
+    valueGetter: (_, row) => row?.tblComponentUnit?.tblCompType?.compTypeNo,
+  },
+  {
+    field: 'compType',
+    headerName: 'CompType',
+    flex: 1,
+    // @ts-ignore
+    valueGetter: (_, row) => row?.tblComponentUnit?.tblCompType?.compName,
+  },
+  {
+    field: 'compNo',
+    headerName: 'Component Name',
+    flex: 1,
+    valueGetter: (_, row) => row?.tblComponentUnit?.compNo,
+  },
+  {
+    field: 'measureName',
+    headerName: 'Measure Name',
+    valueGetter: (_, row) => row.tblCounterType?.name,
+  },
+  {
+    field: 'currentValue',
+    headerName: 'Current Value',
+  },
+  {
+    field: 'currentDate',
+    headerName: 'Current Date',
+    width: 130,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+  {
+    field: 'operationalMinValue',
+    headerName: 'Min Value',
+  },
+  {
+    field: 'setValue',
+    headerName: 'Set Value',
+  },
+  {
+    field: 'operationalMaxValue',
+    headerName: 'Max Value',
+  },
+  {
+    field: 'unitName',
+    headerName: 'Unit Name',
+    valueGetter: (_, row) => row.tblUnit?.name,
+  },
+  {
+    field: 'unitDescription',
+    headerName: 'Unit Description',
+    valueGetter: (_, row) => row.tblUnit?.description,
+  },
+]
+
+function PageMeasurePoints() {
   // === useDataGrid ===
-  const { rows, loading, handleRefresh } = useDataGrid<TypeTblCompMeasurePoint>(
-    tblCompMeasurePoint.getAll,
-    tblCompMeasurePoint.deleteById,
-    "compMeasurePointId"
-  );
-
-  // === Columns ===
-  const columns = useMemo<GridColDef<TypeTblCompMeasurePoint>[]>(
-    () => [
-      {
-        field: "compTypeNo",
-        headerName: "CompType No",
-        width: 100,
-        // valueGetter: (row) => row.compTypeNo,
-      },
-      {
-        field: "compType",
-        headerName: "CompType",
-        width: 120,
-        // valueGetter: (row) => row.compType,
-      },
-      {
-        field: "compNo",
-        headerName: "CompNo",
-        width: 120,
-        // valueGetter: (row) => row.compNo,
-      },
-      {
-        field: "measureName",
-        headerName: "Measure Name",
-        width: 150,
-        // valueGetter: (row) => row.measureName,
-      },
-      {
-        field: "currentValue",
-        headerName: "Current Value",
-        width: 120,
-        // valueGetter: (row) => row.currentValue,
-      },
-      {
-        field: "currentDate",
-        headerName: "Current Date",
-        width: 150,
-        // valueGetter: (row) => row.currentDate,
-      },
-      {
-        field: "operationalMinValue",
-        headerName: "Optional Min Value",
-        width: 150,
-        // valueGetter: (row) => row.operationalMinValue,
-      },
-      {
-        field: "setValue",
-        headerName: "Set Value",
-        width: 120,
-        // valueGetter: (row) => row.setValue,
-      },
-      {
-        field: "operationalMaxValue",
-        headerName: "Optional Max Value",
-        width: 150,
-        // valueGetter: (row) => row.operationalMaxValue,
-      },
-      {
-        field: "unitName",
-        headerName: "Unit Name",
-        width: 120,
-        // valueGetter: (row) => row.tblUnit?.unitName,
-      },
-      {
-        field: "unitDescription",
-        headerName: "Unit Description",
-        width: 150,
-        // valueGetter: (row) => row.tblUnit?.description,
-      },
-    ],
+  const getAll = useCallback(
+    () =>
+      tblCompMeasurePoint.getAll({
+        filter: {
+          tblCounterType: {
+            type: 3,
+          },
+        },
+        include: {
+          tblUnit: true,
+          tblCounterType: true,
+          tblComponentUnit: {
+            include: {
+              tblCompType: true,
+            },
+          },
+        },
+      }),
     []
-  );
+  )
+  const { rows, loading, handleRefresh } = useDataGrid(
+    getAll,
+    tblCompMeasurePoint.deleteById,
+    'compMeasurePointId'
+  )
 
   return (
     <CustomizedDataGrid
-      label="Measure Points"
       showToolbar
-      onRefreshClick={handleRefresh}
+      disableAdd
+      disableEdit
+      disableDelete
+      label='Measure Points'
       rows={rows}
       columns={columns}
       loading={loading}
-      getRowId={(row) => row.compMeasurePointId}
+      onRefreshClick={handleRefresh}
+      getRowId={getRowId}
     />
-  );
+  )
 }
+
+export default PageMeasurePoints

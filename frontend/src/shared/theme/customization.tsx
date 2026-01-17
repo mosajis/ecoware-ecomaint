@@ -504,6 +504,13 @@ export const feedbackCustomizations: Components<Theme> = {
 }
 
 export const inputsCustomizations: Components<Theme> = {
+  MuiFormControlLabel: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        margin: 0,
+      }),
+    },
+  },
   MuiButtonBase: {
     defaultProps: {
       disableTouchRipple: true,
@@ -1256,7 +1263,6 @@ export const tabsCustomization: Components<Theme> = {
       root: ({ theme }: { theme: Theme }) => ({
         minHeight: 42,
         border: `1px solid ${(theme.vars || theme).palette.divider}`, // حالا شناخته میشه
-        borderBottom: 0,
         borderRadius: '8px 8px 0 0',
         background: (theme.vars || theme).palette.background.paper,
       }),
