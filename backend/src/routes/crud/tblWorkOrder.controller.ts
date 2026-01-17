@@ -1,36 +1,36 @@
-import { BaseController } from '@/utils/base.controller'
-import { BaseService } from '@/utils/base.service'
-import { Prisma } from 'orm/generated/prisma'
-import { buildResponseSchema } from '@/utils/base.schema'
-import { prisma } from '@/utils/prisma'
+import { BaseController } from "@/utils/base.controller";
+import { BaseService } from "@/utils/base.service";
+import { Prisma } from "orm/generated/prisma";
+import { buildResponseSchema } from "@/utils/base.schema";
+import { prisma } from "@/utils/prisma";
 import {
   TblWorkOrder,
   TblWorkOrderInputCreate,
   TblWorkOrderInputUpdate,
   TblWorkOrderPlain,
-} from 'orm/generated/prismabox/TblWorkOrder'
+} from "orm/generated/prismabox/TblWorkOrder";
 
-export const ServiceTblWorkOrder = new BaseService(prisma.tblWorkOrder)
+export const ServiceTblWorkOrder = new BaseService(prisma.tblWorkOrder);
 
 const ControllerTblWorkOrder = new BaseController({
-  prefix: '/tblWorkOrder',
+  prefix: "/tblWorkOrder",
   swagger: {
-    tags: ['tblWorkOrder'],
+    tags: ["tblWorkOrder"],
   },
-  primaryKey: 'workOrderId',
+  primaryKey: "workOrderId",
   service: ServiceTblWorkOrder,
   createSchema: TblWorkOrderInputCreate,
   updateSchema: TblWorkOrderInputUpdate,
   responseSchema: buildResponseSchema(TblWorkOrderPlain, TblWorkOrder),
-  extend: app => {
-    app.post('/generate', async ({ params, body, set }: any) => {
-      const userId = Number(body.userId)
+  extend: (app) => {
+    app.post("/generate", async ({ params, body, set }: any) => {
+      const userId = Number(body.userId);
 
       if (!userId) {
-        throw new Error('User not found')
+        throw new Error("User not found");
       }
 
-      // Get all ComJobs with next Due Date null
+      // Get all ComJobs without next Due Date
       const compJobs = await prisma.tblCompJob.findMany({
         where: {
           nextDueDate: null,
@@ -47,48 +47,49 @@ const ControllerTblWorkOrder = new BaseController({
             },
           },
         },
-      })
+      });
 
-      // map CompJobs To WorkOrders
+      // Map CompJobs To WorkOrders
       const workOrders: Prisma.TblWorkOrderCreateManyInput[] = compJobs.map(
-        i => ({
+        (i) => ({
           createdBy: userId,
           respDiscId: i.discId,
           compId: i.compId,
           title: i.tblJobDescription?.jobDescTitle,
           priority: i.priority,
-          dueDate: new Date(),
           window: i.window,
+          dueDate: new Date(),
           created: new Date(),
+          lastupdate: new Date(),
           workOrderStatusId: 2,
           exportMarker: 0,
-          lastupdate: new Date(),
           workOrderTypeId: 2,
         })
-      )
+      );
 
-      // insert workOrders
+      // Bulk insert workOrders
       const resultTblWorkOrder = await prisma.tblWorkOrder.createMany({
         data: workOrders,
-      })
+      });
 
+      // Update Comjops NextDueDate
       const resultTblCompJob = await prisma.tblCompJob.updateMany({
         data: {
           nextDueDate: new Date(),
-          lastDone: new Date(),
           lastupdate: new Date(),
         },
         where: {
           compJobId: {
-            in: compJobs.map(i => i.compJobId),
+            in: compJobs.map((i) => i.compJobId),
           },
         },
-      })
-      return { message: 'ok', resultTblWorkOrder, resultTblCompJob }
-    })
+      });
 
-    app.post('/generate/next', async ({ params, body, set }) => {})
+      return { message: "ok", resultTblWorkOrder, resultTblCompJob };
+    });
+
+    app.post("/generate/next", async ({ params, body, set }) => {});
   },
-}).app
+}).app;
 
-export default ControllerTblWorkOrder
+export default ControllerTblWorkOrder;
