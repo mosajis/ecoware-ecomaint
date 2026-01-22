@@ -1,4 +1,3 @@
-// scripts/build.ts
 import { $ } from "bun";
 import { rm, mkdir, cp } from "fs/promises";
 import path from "path";
@@ -8,7 +7,6 @@ const log = {
   error: (msg) => console.error(`[build-backend] ❌ ${msg}`),
 };
 
-// مسیر خروجی build (یک لایه بالاتر)
 const outDir = path.resolve(process.cwd(), "../build");
 
 try {
@@ -19,7 +17,7 @@ try {
 
   // اجرای Prisma generate
   try {
-    await $`bun run prisma:generate`;
+    await $`bun run prisma generate`;
     log.success("Prisma generate completed.");
   } catch (e) {
     log.error("Prisma generate failed.");
