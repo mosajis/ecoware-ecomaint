@@ -3,8 +3,8 @@
   "version": "1.0.50",
   "scripts": {
     "prisma": "bun run scripts/prisma/prisma.js",
-    "dev": "bun run --watch src/main.ts",
-    "build": "bun run ./scripts/build.js"
+    "dev": "bun --watch src/main.ts",
+    "build": "bun ./scripts/build.js"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.4.1",

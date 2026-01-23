@@ -1,61 +1,85 @@
-import { Elysia } from 'elysia'
-import { cors } from '@elysiajs/cors'
-import { pluginErrorHandler } from './plugins/error.plugin'
-import { staticPlugin } from '@elysiajs/static'
-import { allRoutes } from './routes/routes'
-import { openapi } from '@elysiajs/openapi'
-import { initializeUploadDirs } from './utils/file.init'
+import { Elysia } from "elysia";
+import { cors } from "@elysiajs/cors";
+import { staticPlugin } from "@elysiajs/static";
+import { openapi } from "@elysiajs/openapi";
+import { readFile } from "node:fs/promises";
+
+import { pluginErrorHandler } from "./plugins/error.plugin";
+import { allRoutes } from "./routes/routes";
+import { initializeUploadDirs } from "./utils/file.init";
+
+let cachedHtml: string | null = null;
+
+async function renderIndexHtml() {
+  if (!cachedHtml) {
+    cachedHtml = await readFile("public/index.html", "utf-8");
+  }
+  return cachedHtml;
+}
 
 const app = new Elysia()
-  // CORS
+
+  /* ---------------- CORS ---------------- */
   .use(
     cors({
-      origin: ['http://localhost:5173'],
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization'],
-    })
+      origin: ["http://localhost:5173"],
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowedHeaders: ["Content-Type", "Authorization"],
+    }),
   )
 
-  // Error handler
+  /* ------------ Error handler ------------ */
   .use(pluginErrorHandler)
 
-  // API routes
+  /* --------------- API ------------------ */
   .use(allRoutes)
 
-  // OpenAPI plugin
+  /* ------------- OpenAPI ---------------- */
   .use(
     openapi({
-      path: '/docs',
-      specPath: '/docs/json',
-      provider: 'scalar',
+      path: "/docs",
+      specPath: "/docs/json",
+      provider: "scalar",
       documentation: {
         info: {
-          title: 'ECO | API',
-          version: '1.0.0',
-          description: 'API documentation',
+          title: "ECO | API",
+          version: "1.0.0",
+          description: "API documentation",
         },
       },
-    })
+    }),
   )
 
+  /* -------- Static assets only --------- */
   .use(
     staticPlugin({
-      indexHTML: true,
-      prefix: '/',
-    })
+      assets: "public/assets",
+      prefix: "/assets",
+    }),
   )
 
-// Initialize upload directories on startup
-await initializeUploadDirs()
+  /* --------------- Health --------------- */
+  .get("/health", () => "OK")
 
-// تعیین پورت
-const portArgIndex = process.argv.findIndex(arg => arg === '--port')
-const portArg = process.argv[portArgIndex + 1]
-const port = portArgIndex !== -1 && portArg ? parseInt(portArg, 10) : 5273
+  /* ------------- SPA entry -------------- */
+  .get("/", async ({ set }) => {
+    set.headers["content-type"] = "text/html; charset=utf-8";
+    return await renderIndexHtml();
+  })
 
-// اجرای سرور
-const info = app.listen(port)
-const environment = info?.server?.development ? 'development' : 'production'
-const origin = info?.server?.url.origin
+  /* -------- SPA fallback (React) -------- */
+  .get("/*", async ({ set }) => {
+    set.headers["content-type"] = "text/html; charset=utf-8";
+    return await renderIndexHtml();
+  });
 
-console.log(`🚀 Server[${environment}] running on ${origin}`)
+/* -------- Init dirs before listen ------- */
+await initializeUploadDirs();
+
+/* --------------- Server ---------------- */
+const port = Number(process.argv[process.argv.indexOf("--port") + 1]) || 5273;
+
+const info = app.listen(port);
+const env = info?.server?.development ? "development" : "production";
+
+console.log(`🚀 Server[${env}] running on ${info?.server?.url.origin}`);
