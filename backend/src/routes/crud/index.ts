@@ -67,6 +67,6 @@ export { default as ControllerTblWorkShopRequest } from "./tblWorkShopRequest.co
 export { default as ControllerTblWorkShopRequestAttachment } from "./tblWorkShopRequestAttachment.controller";
 export { default as ControllerTblFailureGroupFollow } from "./tblFailureGroupFollow.controller";
 export { default as ControllerTblFailureStatus } from "./tblFailureStatus.controller";
-export { default as ControllerTblFialureSeverityLevel } from "./tblFialureSeverityLevel.controller";
 export { default as ControllerTblSpareType } from "./tblSpareType.controller";
 export { default as ControllerTblSpareUnit } from "./tblSpareUnit.controller";
+export { default as ControllerTblFailureSeverityLevel } from "./tblFailureSeverityLevel.controller";

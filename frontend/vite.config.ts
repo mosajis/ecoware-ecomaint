@@ -7,11 +7,12 @@ export default defineConfig({
   plugins: [
     react(),
     visualizer({
-      open: false,
+      open: true,
       filename: "dist-stats.html",
     }),
   ],
   build: {
+    emptyOutDir: true,
     cssCodeSplit: true,
     minify: "esbuild",
     outDir: "../build/public",

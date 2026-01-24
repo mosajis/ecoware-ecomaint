@@ -51,7 +51,7 @@ const columns: GridColDef<TypeTblFailureReports>[] = [
     headerName: "Severity",
     width: 120,
     renderCell: ({ row }) => (
-      <CellSeverity value={row.tblFialureSeverityLevel} />
+      <CellSeverity value={row.tblFailureSeverityLevel} />
     ),
   },
   {
@@ -110,7 +110,7 @@ export default function PageReportFailure() {
         include: {
           tblComponentUnit: true,
           tblDiscipline: true,
-          tblFialureSeverityLevel: true,
+          tblFailureSeverityLevel: true,
           tblFailureStatus: true,
           tblFailureGroupFollow: true,
           tblUsersTblFailureReportsReportedUserIdTotblUsers: true,
@@ -141,7 +141,7 @@ export default function PageReportFailure() {
   }, []);
 
   const handleUpsertOpen = useCallback(() => {
-    setOpenForm(false);
+    setOpenForm(true);
   }, []);
 
   const handleUpsertClose = useCallback(() => {
@@ -184,13 +184,13 @@ export default function PageReportFailure() {
         />
       </Splitter>
 
-      {/* <FailureReportUpsert
+      <FailureReportUpsert
         open={openForm}
         mode={mode}
         recordId={selectedRowId}
         onClose={handleUpsertClose}
         onSuccess={handleRefresh}
-      /> */}
+      />
     </>
   );
 }

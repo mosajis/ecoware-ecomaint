@@ -1367,7 +1367,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Apply Change Effect */
+        /** Apply Component Unit Change Effect */
         post: operations["postTblComponentUnitByComponentUnitIdEffect"];
         delete?: never;
         options?: never;
@@ -1815,6 +1815,61 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/tblFailureSeverityLevel/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all */
+        get: operations["getTblFailureSeverityLevel"];
+        put?: never;
+        /** Create */
+        post: operations["postTblFailureSeverityLevel"];
+        /** Delete all */
+        delete: operations["deleteTblFailureSeverityLevel"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblFailureSeverityLevel/{failureSeverityLevelId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one */
+        get: operations["getTblFailureSeverityLevelByFailureSeverityLevelId"];
+        /** Update */
+        put: operations["putTblFailureSeverityLevelByFailureSeverityLevelId"];
+        post?: never;
+        /** Delete one */
+        delete: operations["deleteTblFailureSeverityLevelByFailureSeverityLevelId"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblFailureSeverityLevel/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Count */
+        get: operations["getTblFailureSeverityLevelCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tblFailureStatus/": {
         parameters: {
             query?: never;
@@ -1862,61 +1917,6 @@ export interface paths {
         };
         /** Count */
         get: operations["getTblFailureStatusCount"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblFialureSeverityLevel/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get all */
-        get: operations["getTblFialureSeverityLevel"];
-        put?: never;
-        /** Create */
-        post: operations["postTblFialureSeverityLevel"];
-        /** Delete all */
-        delete: operations["deleteTblFialureSeverityLevel"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblFialureSeverityLevel/{failureSeverityLevelId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get one */
-        get: operations["getTblFialureSeverityLevelByFailureSeverityLevelId"];
-        /** Update */
-        put: operations["putTblFialureSeverityLevelByFailureSeverityLevelId"];
-        post?: never;
-        /** Delete one */
-        delete: operations["deleteTblFialureSeverityLevelByFailureSeverityLevelId"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblFialureSeverityLevel/count": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Count */
-        get: operations["getTblFialureSeverityLevelCount"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3410,7 +3410,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/tblStockItem/": {
+    "/tblSpareType/": {
         parameters: {
             query?: never;
             header?: never;
@@ -3418,18 +3418,18 @@ export interface paths {
             cookie?: never;
         };
         /** Get all */
-        get: operations["getTblStockItem"];
+        get: operations["getTblSpareType"];
         put?: never;
         /** Create */
-        post: operations["postTblStockItem"];
+        post: operations["postTblSpareType"];
         /** Delete all */
-        delete: operations["deleteTblStockItem"];
+        delete: operations["deleteTblSpareType"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/tblStockItem/{stockItemId}": {
+    "/tblSpareType/{partTypeId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -3437,18 +3437,18 @@ export interface paths {
             cookie?: never;
         };
         /** Get one */
-        get: operations["getTblStockItemByStockItemId"];
+        get: operations["getTblSpareTypeByPartTypeId"];
         /** Update */
-        put: operations["putTblStockItemByStockItemId"];
+        put: operations["putTblSpareTypeByPartTypeId"];
         post?: never;
         /** Delete one */
-        delete: operations["deleteTblStockItemByStockItemId"];
+        delete: operations["deleteTblSpareTypeByPartTypeId"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/tblStockItem/count": {
+    "/tblSpareType/count": {
         parameters: {
             query?: never;
             header?: never;
@@ -3456,7 +3456,7 @@ export interface paths {
             cookie?: never;
         };
         /** Count */
-        get: operations["getTblStockItemCount"];
+        get: operations["getTblSpareTypeCount"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3465,7 +3465,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/tblStockType/": {
+    "/tblSpareUnit/": {
         parameters: {
             query?: never;
             header?: never;
@@ -3473,18 +3473,18 @@ export interface paths {
             cookie?: never;
         };
         /** Get all */
-        get: operations["getTblStockType"];
+        get: operations["getTblSpareUnit"];
         put?: never;
         /** Create */
-        post: operations["postTblStockType"];
+        post: operations["postTblSpareUnit"];
         /** Delete all */
-        delete: operations["deleteTblStockType"];
+        delete: operations["deleteTblSpareUnit"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/tblStockType/{stockTypeId}": {
+    "/tblSpareUnit/{partId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -3492,18 +3492,18 @@ export interface paths {
             cookie?: never;
         };
         /** Get one */
-        get: operations["getTblStockTypeByStockTypeId"];
+        get: operations["getTblSpareUnitByPartId"];
         /** Update */
-        put: operations["putTblStockTypeByStockTypeId"];
+        put: operations["putTblSpareUnitByPartId"];
         post?: never;
         /** Delete one */
-        delete: operations["deleteTblStockTypeByStockTypeId"];
+        delete: operations["deleteTblSpareUnitByPartId"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/tblStockType/count": {
+    "/tblSpareUnit/count": {
         parameters: {
             query?: never;
             header?: never;
@@ -3511,7 +3511,7 @@ export interface paths {
             cookie?: never;
         };
         /** Count */
-        get: operations["getTblStockTypeCount"];
+        get: operations["getTblSpareUnitCount"];
         put?: never;
         post?: never;
         delete?: never;
@@ -24016,25 +24016,19 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                componentUnitId: string;
+                componentUnitId: number;
             };
             cookie?: never;
         };
         requestBody: {
             content: {
                 "application/json": {
-                    /** @enum {string} */
-                    operation: 0 | 1 | 2;
                     userId: number;
                 };
                 "application/x-www-form-urlencoded": {
-                    /** @enum {string} */
-                    operation: 0 | 1 | 2;
                     userId: number;
                 };
                 "multipart/form-data": {
-                    /** @enum {string} */
-                    operation: 0 | 1 | 2;
                     userId: number;
                 };
             };
@@ -29191,7 +29185,7 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             });
-                            tblFialureSeverityLevel?: null | ({
+                            tblFailureSeverityLevel?: null | ({
                                 failureSeverityLevelId: number;
                                 name: null | string;
                             } & {
@@ -29360,7 +29354,7 @@ export interface operations {
                             id: number;
                         };
                     };
-                    tblFialureSeverityLevel?: {
+                    tblFailureSeverityLevel?: {
                         connect: {
                             id: number;
                         };
@@ -29427,7 +29421,7 @@ export interface operations {
                             id: number;
                         };
                     };
-                    tblFialureSeverityLevel?: {
+                    tblFailureSeverityLevel?: {
                         connect: {
                             id: number;
                         };
@@ -29494,7 +29488,7 @@ export interface operations {
                             id: number;
                         };
                     };
-                    tblFialureSeverityLevel?: {
+                    tblFailureSeverityLevel?: {
                         connect: {
                             id: number;
                         };
@@ -29612,7 +29606,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblFialureSeverityLevel?: null | ({
+                        tblFailureSeverityLevel?: null | ({
                             failureSeverityLevelId: number;
                             name: null | string;
                         } & {
@@ -29858,7 +29852,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblFialureSeverityLevel?: null | ({
+                        tblFailureSeverityLevel?: null | ({
                             failureSeverityLevelId: number;
                             name: null | string;
                         } & {
@@ -30031,7 +30025,7 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblFialureSeverityLevel?: {
+                    tblFailureSeverityLevel?: {
                         connect?: {
                             id: number;
                         };
@@ -30110,7 +30104,7 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblFialureSeverityLevel?: {
+                    tblFailureSeverityLevel?: {
                         connect?: {
                             id: number;
                         };
@@ -30189,7 +30183,7 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblFialureSeverityLevel?: {
+                    tblFailureSeverityLevel?: {
                         connect?: {
                             id: number;
                         };
@@ -30312,7 +30306,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblFialureSeverityLevel?: null | ({
+                        tblFailureSeverityLevel?: null | ({
                             failureSeverityLevelId: number;
                             name: null | string;
                         } & {
@@ -30528,7 +30522,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblFialureSeverityLevel?: null | ({
+                        tblFailureSeverityLevel?: null | ({
                             failureSeverityLevelId: number;
                             name: null | string;
                         } & {
@@ -30643,6 +30637,408 @@ export interface operations {
         };
     };
     getTblFailureReportsCount: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblFailureSeverityLevel: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            failureSeverityLevelId: number;
+                            name: null | string;
+                            tblFailureReports?: {
+                                failureReportId: number;
+                                compId: null | (number);
+                                discId: null | (number);
+                                maintLogId: null | (number);
+                                failureReportDate: null | number);
+                                failureDateTime: null | number);
+                                waitDateTime: Record<string, never> | number;
+                                totalWait: null | (number);
+                                title: null | string;
+                                failureDesc: null | string;
+                                failureCause: null | string;
+                                actionDesc: null | string;
+                                followDesc: null | string;
+                                reportedUserId: null | (number);
+                                deptId: null | (number);
+                                lastupdate: null | number);
+                                approvedUserId: null | (number);
+                                stateDateTime: null | number);
+                                stateCode: null | (number);
+                                closedUserId: null | (number);
+                                closedDateTime: null | number);
+                                failureNumber: null | (number);
+                                failureSeverityLevelId: null | (number);
+                                nextFollowDate: null | number);
+                                failureGroupFollowId: null | (number);
+                                failureStatusId: null | (number);
+                            }[];
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
+    };
+    postTblFailureSeverityLevel: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureSeverityLevelId: number;
+                        name: null | string;
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            compId: null | (number);
+                            discId: null | (number);
+                            maintLogId: null | (number);
+                            failureReportDate: null | number);
+                            failureDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
+                            totalWait: null | (number);
+                            title: null | string;
+                            failureDesc: null | string;
+                            failureCause: null | string;
+                            actionDesc: null | string;
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                            approvedUserId: null | (number);
+                            stateDateTime: null | number);
+                            stateCode: null | (number);
+                            closedUserId: null | (number);
+                            closedDateTime: null | number);
+                            failureNumber: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblFailureSeverityLevel: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        deleted: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblFailureSeverityLevelByFailureSeverityLevelId: {
+        parameters: {
+            query?: {
+                include?: string;
+            };
+            header?: never;
+            path: {
+                failureSeverityLevelId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureSeverityLevelId: number;
+                        name: null | string;
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            compId: null | (number);
+                            discId: null | (number);
+                            maintLogId: null | (number);
+                            failureReportDate: null | number);
+                            failureDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
+                            totalWait: null | (number);
+                            title: null | string;
+                            failureDesc: null | string;
+                            failureCause: null | string;
+                            actionDesc: null | string;
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                            approvedUserId: null | (number);
+                            stateDateTime: null | number);
+                            stateCode: null | (number);
+                            closedUserId: null | (number);
+                            closedDateTime: null | number);
+                            failureNumber: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    putTblFailureSeverityLevelByFailureSeverityLevelId: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                failureSeverityLevelId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureSeverityLevelId: number;
+                        name: null | string;
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            compId: null | (number);
+                            discId: null | (number);
+                            maintLogId: null | (number);
+                            failureReportDate: null | number);
+                            failureDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
+                            totalWait: null | (number);
+                            title: null | string;
+                            failureDesc: null | string;
+                            failureCause: null | string;
+                            actionDesc: null | string;
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                            approvedUserId: null | (number);
+                            stateDateTime: null | number);
+                            stateCode: null | (number);
+                            closedUserId: null | (number);
+                            closedDateTime: null | number);
+                            failureNumber: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblFailureSeverityLevelByFailureSeverityLevelId: {
+        parameters: {
+            query?: {
+                force?: boolean;
+            };
+            header?: never;
+            path: {
+                failureSeverityLevelId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureSeverityLevelId: number;
+                        name: null | string;
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            compId: null | (number);
+                            discId: null | (number);
+                            maintLogId: null | (number);
+                            failureReportDate: null | number);
+                            failureDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
+                            totalWait: null | (number);
+                            title: null | string;
+                            failureDesc: null | string;
+                            failureCause: null | string;
+                            actionDesc: null | string;
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                            approvedUserId: null | (number);
+                            stateDateTime: null | number);
+                            stateCode: null | (number);
+                            closedUserId: null | (number);
+                            closedDateTime: null | number);
+                            failureNumber: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    getTblFailureSeverityLevelCount: {
         parameters: {
             query?: {
                 page?: number;
@@ -31045,408 +31441,6 @@ export interface operations {
         };
     };
     getTblFailureStatusCount: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        count: number;
-                    };
-                };
-            };
-        };
-    };
-    getTblFialureSeverityLevel: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            failureSeverityLevelId: number;
-                            name: null | string;
-                            tblFailureReports?: {
-                                failureReportId: number;
-                                compId: null | (number);
-                                discId: null | (number);
-                                maintLogId: null | (number);
-                                failureReportDate: null | number);
-                                failureDateTime: null | number);
-                                waitDateTime: Record<string, never> | number;
-                                totalWait: null | (number);
-                                title: null | string;
-                                failureDesc: null | string;
-                                failureCause: null | string;
-                                actionDesc: null | string;
-                                followDesc: null | string;
-                                reportedUserId: null | (number);
-                                deptId: null | (number);
-                                lastupdate: null | number);
-                                approvedUserId: null | (number);
-                                stateDateTime: null | number);
-                                stateCode: null | (number);
-                                closedUserId: null | (number);
-                                closedDateTime: null | number);
-                                failureNumber: null | (number);
-                                failureSeverityLevelId: null | (number);
-                                nextFollowDate: null | number);
-                                failureGroupFollowId: null | (number);
-                                failureStatusId: null | (number);
-                            }[];
-                        }[];
-                        total: number;
-                        page: number;
-                        perPage: number;
-                        totalPages: number;
-                    };
-                };
-            };
-        };
-    };
-    postTblFialureSeverityLevel: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    name?: null | string;
-                    tblFailureReports?: {
-                        connect: {
-                            failureReportId: number;
-                        }[];
-                    };
-                };
-                "application/x-www-form-urlencoded": {
-                    name?: null | string;
-                    tblFailureReports?: {
-                        connect: {
-                            failureReportId: number;
-                        }[];
-                    };
-                };
-                "multipart/form-data": {
-                    name?: null | string;
-                    tblFailureReports?: {
-                        connect: {
-                            failureReportId: number;
-                        }[];
-                    };
-                };
-            };
-        };
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        failureSeverityLevelId: number;
-                        name: null | string;
-                        tblFailureReports?: {
-                            failureReportId: number;
-                            compId: null | (number);
-                            discId: null | (number);
-                            maintLogId: null | (number);
-                            failureReportDate: null | number);
-                            failureDateTime: null | number);
-                            waitDateTime: Record<string, never> | number;
-                            totalWait: null | (number);
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | (number);
-                            deptId: null | (number);
-                            lastupdate: null | number);
-                            approvedUserId: null | (number);
-                            stateDateTime: null | number);
-                            stateCode: null | (number);
-                            closedUserId: null | (number);
-                            closedDateTime: null | number);
-                            failureNumber: null | (number);
-                            failureSeverityLevelId: null | (number);
-                            nextFollowDate: null | number);
-                            failureGroupFollowId: null | (number);
-                            failureStatusId: null | (number);
-                        }[];
-                    };
-                };
-            };
-        };
-    };
-    deleteTblFialureSeverityLevel: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        deleted: number;
-                    };
-                };
-            };
-        };
-    };
-    getTblFialureSeverityLevelByFailureSeverityLevelId: {
-        parameters: {
-            query?: {
-                include?: string;
-            };
-            header?: never;
-            path: {
-                failureSeverityLevelId: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        failureSeverityLevelId: number;
-                        name: null | string;
-                        tblFailureReports?: {
-                            failureReportId: number;
-                            compId: null | (number);
-                            discId: null | (number);
-                            maintLogId: null | (number);
-                            failureReportDate: null | number);
-                            failureDateTime: null | number);
-                            waitDateTime: Record<string, never> | number;
-                            totalWait: null | (number);
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | (number);
-                            deptId: null | (number);
-                            lastupdate: null | number);
-                            approvedUserId: null | (number);
-                            stateDateTime: null | number);
-                            stateCode: null | (number);
-                            closedUserId: null | (number);
-                            closedDateTime: null | number);
-                            failureNumber: null | (number);
-                            failureSeverityLevelId: null | (number);
-                            nextFollowDate: null | number);
-                            failureGroupFollowId: null | (number);
-                            failureStatusId: null | (number);
-                        }[];
-                    };
-                };
-            };
-        };
-    };
-    putTblFialureSeverityLevelByFailureSeverityLevelId: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                failureSeverityLevelId: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    name?: null | string;
-                    tblFailureReports?: {
-                        connect?: {
-                            failureReportId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                };
-                "application/x-www-form-urlencoded": {
-                    name?: null | string;
-                    tblFailureReports?: {
-                        connect?: {
-                            failureReportId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                };
-                "multipart/form-data": {
-                    name?: null | string;
-                    tblFailureReports?: {
-                        connect?: {
-                            failureReportId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                };
-            };
-        };
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        failureSeverityLevelId: number;
-                        name: null | string;
-                        tblFailureReports?: {
-                            failureReportId: number;
-                            compId: null | (number);
-                            discId: null | (number);
-                            maintLogId: null | (number);
-                            failureReportDate: null | number);
-                            failureDateTime: null | number);
-                            waitDateTime: Record<string, never> | number;
-                            totalWait: null | (number);
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | (number);
-                            deptId: null | (number);
-                            lastupdate: null | number);
-                            approvedUserId: null | (number);
-                            stateDateTime: null | number);
-                            stateCode: null | (number);
-                            closedUserId: null | (number);
-                            closedDateTime: null | number);
-                            failureNumber: null | (number);
-                            failureSeverityLevelId: null | (number);
-                            nextFollowDate: null | number);
-                            failureGroupFollowId: null | (number);
-                            failureStatusId: null | (number);
-                        }[];
-                    };
-                };
-            };
-        };
-    };
-    deleteTblFialureSeverityLevelByFailureSeverityLevelId: {
-        parameters: {
-            query?: {
-                force?: boolean;
-            };
-            header?: never;
-            path: {
-                failureSeverityLevelId: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        failureSeverityLevelId: number;
-                        name: null | string;
-                        tblFailureReports?: {
-                            failureReportId: number;
-                            compId: null | (number);
-                            discId: null | (number);
-                            maintLogId: null | (number);
-                            failureReportDate: null | number);
-                            failureDateTime: null | number);
-                            waitDateTime: Record<string, never> | number;
-                            totalWait: null | (number);
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | (number);
-                            deptId: null | (number);
-                            lastupdate: null | number);
-                            approvedUserId: null | (number);
-                            stateDateTime: null | number);
-                            stateCode: null | (number);
-                            closedUserId: null | (number);
-                            closedDateTime: null | number);
-                            failureNumber: null | (number);
-                            failureSeverityLevelId: null | (number);
-                            nextFollowDate: null | number);
-                            failureGroupFollowId: null | (number);
-                            failureStatusId: null | (number);
-                        }[];
-                    };
-                };
-            };
-        };
-    };
-    getTblFialureSeverityLevelCount: {
         parameters: {
             query?: {
                 page?: number;
@@ -45533,9 +45527,9 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             };
-                            tblStockItem?: {
-                                stockItemId: number;
-                                stockTypeId: null | (number);
+                            tblSpareUnit?: {
+                                spareUnitId: number;
+                                spareTypeId: null | (number);
                                 deptId: null | (number);
                                 lastupdate: null | number);
                             } & {
@@ -45571,9 +45565,9 @@ export interface operations {
                             maintLogId: number;
                         };
                     };
-                    tblStockItem: {
+                    tblSpareUnit: {
                         connect: {
-                            stockItemId: number;
+                            id: number;
                         };
                     };
                 };
@@ -45588,9 +45582,9 @@ export interface operations {
                             maintLogId: number;
                         };
                     };
-                    tblStockItem: {
+                    tblSpareUnit: {
                         connect: {
-                            stockItemId: number;
+                            id: number;
                         };
                     };
                 };
@@ -45605,9 +45599,9 @@ export interface operations {
                             maintLogId: number;
                         };
                     };
-                    tblStockItem: {
+                    tblSpareUnit: {
                         connect: {
-                            stockItemId: number;
+                            id: number;
                         };
                     };
                 };
@@ -45662,9 +45656,9 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         };
-                        tblStockItem?: {
-                            stockItemId: number;
-                            stockTypeId: null | (number);
+                        tblSpareUnit?: {
+                            spareUnitId: number;
+                            spareTypeId: null | (number);
                             deptId: null | (number);
                             lastupdate: null | number);
                         } & {
@@ -45766,9 +45760,9 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         };
-                        tblStockItem?: {
-                            stockItemId: number;
-                            stockTypeId: null | (number);
+                        tblSpareUnit?: {
+                            spareUnitId: number;
+                            spareTypeId: null | (number);
                             deptId: null | (number);
                             lastupdate: null | number);
                         } & {
@@ -45801,9 +45795,9 @@ export interface operations {
                             maintLogId: number;
                         };
                     };
-                    tblStockItem?: {
+                    tblSpareUnit?: {
                         connect: {
-                            stockItemId: number;
+                            id: number;
                         };
                     };
                 };
@@ -45818,9 +45812,9 @@ export interface operations {
                             maintLogId: number;
                         };
                     };
-                    tblStockItem?: {
+                    tblSpareUnit?: {
                         connect: {
-                            stockItemId: number;
+                            id: number;
                         };
                     };
                 };
@@ -45835,9 +45829,9 @@ export interface operations {
                             maintLogId: number;
                         };
                     };
-                    tblStockItem?: {
+                    tblSpareUnit?: {
                         connect: {
-                            stockItemId: number;
+                            id: number;
                         };
                     };
                 };
@@ -45892,9 +45886,9 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         };
-                        tblStockItem?: {
-                            stockItemId: number;
-                            stockTypeId: null | (number);
+                        tblSpareUnit?: {
+                            spareUnitId: number;
+                            spareTypeId: null | (number);
                             deptId: null | (number);
                             lastupdate: null | number);
                         } & {
@@ -45966,9 +45960,9 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         };
-                        tblStockItem?: {
-                            stockItemId: number;
-                            stockTypeId: null | (number);
+                        tblSpareUnit?: {
+                            spareUnitId: number;
+                            spareTypeId: null | (number);
                             deptId: null | (number);
                             lastupdate: null | number);
                         } & {
@@ -51506,7 +51500,7 @@ export interface operations {
             };
         };
     };
-    getTblStockItem: {
+    getTblSpareType: {
         parameters: {
             query?: {
                 page?: number;
@@ -51531,25 +51525,17 @@ export interface operations {
                 content: {
                     "application/json": {
                         items: {
-                            stockItemId: number;
-                            stockTypeId: null | (number);
+                            spareTypeId: number;
+                            parentSpareTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
                             deptId: null | (number);
+                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            tblMaintLogStocks?: {
-                                maintLogStockId: number;
-                                maintLogId: number;
-                                stockItemId: number;
-                                deptId: number;
-                                exportMaker: null | (number);
-                                stockCount: null | number;
-                                orderNo: null | (number);
-                                createdUserId: null | (number);
-                                exportMarker: null | (number);
-                                lastupdate: null | number);
-                            }[];
-                            tblStockType?: null | ({
-                                stockTypeId: number;
-                                parentStockTypeId: null | (number);
+                            orderNo: null | (number);
+                            tblSpareType?: null | ({
+                                spareTypeId: number;
+                                parentSpareTypeId: null | (number);
                                 name: null | string;
                                 no: null | string;
                                 deptId: null | (number);
@@ -51559,6 +51545,22 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             });
+                            otherTblSpareTypes?: {
+                                spareTypeId: number;
+                                parentSpareTypeId: null | (number);
+                                name: null | string;
+                                no: null | string;
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                orderNo: null | (number);
+                            }[];
+                            tblSpareUnits?: {
+                                spareUnitId: number;
+                                spareTypeId: null | (number);
+                                deptId: null | (number);
+                                lastupdate: null | number);
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -51569,7 +51571,7 @@ export interface operations {
             };
         };
     };
-    postTblStockItem: {
+    postTblSpareType: {
         parameters: {
             query?: never;
             header?: never;
@@ -51579,42 +51581,69 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
+                    name?: null | string;
+                    no?: null | string;
+                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    tblMaintLogStocks?: {
+                    orderNo?: null | (number);
+                    tblSpareType?: {
                         connect: {
-                            maintLogStockId: number;
+                            id: number;
+                        };
+                    };
+                    otherTblSpareTypes?: {
+                        connect: {
+                            id: number;
                         }[];
                     };
-                    tblStockType?: {
+                    tblSpareUnits?: {
                         connect: {
-                            stockTypeId: number;
-                        };
+                            id: number;
+                        }[];
                     };
                 };
                 "application/x-www-form-urlencoded": {
+                    name?: null | string;
+                    no?: null | string;
+                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    tblMaintLogStocks?: {
+                    orderNo?: null | (number);
+                    tblSpareType?: {
                         connect: {
-                            maintLogStockId: number;
+                            id: number;
+                        };
+                    };
+                    otherTblSpareTypes?: {
+                        connect: {
+                            id: number;
                         }[];
                     };
-                    tblStockType?: {
+                    tblSpareUnits?: {
                         connect: {
-                            stockTypeId: number;
-                        };
+                            id: number;
+                        }[];
                     };
                 };
                 "multipart/form-data": {
+                    name?: null | string;
+                    no?: null | string;
+                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    tblMaintLogStocks?: {
+                    orderNo?: null | (number);
+                    tblSpareType?: {
                         connect: {
-                            maintLogStockId: number;
+                            id: number;
+                        };
+                    };
+                    otherTblSpareTypes?: {
+                        connect: {
+                            id: number;
                         }[];
                     };
-                    tblStockType?: {
+                    tblSpareUnits?: {
                         connect: {
-                            stockTypeId: number;
-                        };
+                            id: number;
+                        }[];
                     };
                 };
             };
@@ -51627,25 +51656,17 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        stockItemId: number;
-                        stockTypeId: null | (number);
+                        spareTypeId: number;
+                        parentSpareTypeId: null | (number);
+                        name: null | string;
+                        no: null | string;
                         deptId: null | (number);
+                        exportMarker: null | (number);
                         lastupdate: null | number);
-                        tblMaintLogStocks?: {
-                            maintLogStockId: number;
-                            maintLogId: number;
-                            stockItemId: number;
-                            deptId: number;
-                            exportMaker: null | (number);
-                            stockCount: null | number;
-                            orderNo: null | (number);
-                            createdUserId: null | (number);
-                            exportMarker: null | (number);
-                            lastupdate: null | number);
-                        }[];
-                        tblStockType?: null | ({
-                            stockTypeId: number;
-                            parentStockTypeId: null | (number);
+                        orderNo: null | (number);
+                        tblSpareType?: null | ({
+                            spareTypeId: number;
+                            parentSpareTypeId: null | (number);
                             name: null | string;
                             no: null | string;
                             deptId: null | (number);
@@ -51655,12 +51676,28 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        otherTblSpareTypes?: {
+                            spareTypeId: number;
+                            parentSpareTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        }[];
+                        tblSpareUnits?: {
+                            spareUnitId: number;
+                            spareTypeId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                        }[];
                     };
                 };
             };
         };
     };
-    deleteTblStockItem: {
+    deleteTblSpareType: {
         parameters: {
             query?: {
                 page?: number;
@@ -51690,14 +51727,14 @@ export interface operations {
             };
         };
     };
-    getTblStockItemByStockItemId: {
+    getTblSpareTypeByPartTypeId: {
         parameters: {
             query?: {
                 include?: string;
             };
             header?: never;
             path: {
-                stockItemId: number;
+                partTypeId: number;
             };
             cookie?: never;
         };
@@ -51710,25 +51747,17 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        stockItemId: number;
-                        stockTypeId: null | (number);
+                        spareTypeId: number;
+                        parentSpareTypeId: null | (number);
+                        name: null | string;
+                        no: null | string;
                         deptId: null | (number);
+                        exportMarker: null | (number);
                         lastupdate: null | number);
-                        tblMaintLogStocks?: {
-                            maintLogStockId: number;
-                            maintLogId: number;
-                            stockItemId: number;
-                            deptId: number;
-                            exportMaker: null | (number);
-                            stockCount: null | number;
-                            orderNo: null | (number);
-                            createdUserId: null | (number);
-                            exportMarker: null | (number);
-                            lastupdate: null | number);
-                        }[];
-                        tblStockType?: null | ({
-                            stockTypeId: number;
-                            parentStockTypeId: null | (number);
+                        orderNo: null | (number);
+                        tblSpareType?: null | ({
+                            spareTypeId: number;
+                            parentSpareTypeId: null | (number);
                             name: null | string;
                             no: null | string;
                             deptId: null | (number);
@@ -51738,71 +51767,123 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        otherTblSpareTypes?: {
+                            spareTypeId: number;
+                            parentSpareTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        }[];
+                        tblSpareUnits?: {
+                            spareUnitId: number;
+                            spareTypeId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                        }[];
                     };
                 };
             };
         };
     };
-    putTblStockItemByStockItemId: {
+    putTblSpareTypeByPartTypeId: {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                stockItemId: number;
+                partTypeId: number;
             };
             cookie?: never;
         };
         requestBody: {
             content: {
                 "application/json": {
+                    name?: null | string;
+                    no?: null | string;
+                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    tblMaintLogStocks?: {
+                    orderNo?: null | (number);
+                    tblSpareType?: {
                         connect?: {
-                            maintLogStockId: number;
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblSpareTypes?: {
+                        connect?: {
+                            id: number;
                         }[];
                         disconnect?: {
                             id: number;
                         }[];
                     };
-                    tblStockType?: {
+                    tblSpareUnits?: {
                         connect?: {
-                            stockTypeId: number;
-                        };
-                        disconnect?: boolean;
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
                     };
                 };
                 "application/x-www-form-urlencoded": {
+                    name?: null | string;
+                    no?: null | string;
+                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    tblMaintLogStocks?: {
+                    orderNo?: null | (number);
+                    tblSpareType?: {
                         connect?: {
-                            maintLogStockId: number;
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblSpareTypes?: {
+                        connect?: {
+                            id: number;
                         }[];
                         disconnect?: {
                             id: number;
                         }[];
                     };
-                    tblStockType?: {
+                    tblSpareUnits?: {
                         connect?: {
-                            stockTypeId: number;
-                        };
-                        disconnect?: boolean;
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
                     };
                 };
                 "multipart/form-data": {
+                    name?: null | string;
+                    no?: null | string;
+                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    tblMaintLogStocks?: {
+                    orderNo?: null | (number);
+                    tblSpareType?: {
                         connect?: {
-                            maintLogStockId: number;
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblSpareTypes?: {
+                        connect?: {
+                            id: number;
                         }[];
                         disconnect?: {
                             id: number;
                         }[];
                     };
-                    tblStockType?: {
+                    tblSpareUnits?: {
                         connect?: {
-                            stockTypeId: number;
-                        };
-                        disconnect?: boolean;
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
                     };
                 };
             };
@@ -51815,25 +51896,17 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        stockItemId: number;
-                        stockTypeId: null | (number);
+                        spareTypeId: number;
+                        parentSpareTypeId: null | (number);
+                        name: null | string;
+                        no: null | string;
                         deptId: null | (number);
+                        exportMarker: null | (number);
                         lastupdate: null | number);
-                        tblMaintLogStocks?: {
-                            maintLogStockId: number;
-                            maintLogId: number;
-                            stockItemId: number;
-                            deptId: number;
-                            exportMaker: null | (number);
-                            stockCount: null | number;
-                            orderNo: null | (number);
-                            createdUserId: null | (number);
-                            exportMarker: null | (number);
-                            lastupdate: null | number);
-                        }[];
-                        tblStockType?: null | ({
-                            stockTypeId: number;
-                            parentStockTypeId: null | (number);
+                        orderNo: null | (number);
+                        tblSpareType?: null | ({
+                            spareTypeId: number;
+                            parentSpareTypeId: null | (number);
                             name: null | string;
                             no: null | string;
                             deptId: null | (number);
@@ -51843,19 +51916,35 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        otherTblSpareTypes?: {
+                            spareTypeId: number;
+                            parentSpareTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        }[];
+                        tblSpareUnits?: {
+                            spareUnitId: number;
+                            spareTypeId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                        }[];
                     };
                 };
             };
         };
     };
-    deleteTblStockItemByStockItemId: {
+    deleteTblSpareTypeByPartTypeId: {
         parameters: {
             query?: {
                 force?: boolean;
             };
             header?: never;
             path: {
-                stockItemId: number;
+                partTypeId: number;
             };
             cookie?: never;
         };
@@ -51868,25 +51957,17 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        stockItemId: number;
-                        stockTypeId: null | (number);
+                        spareTypeId: number;
+                        parentSpareTypeId: null | (number);
+                        name: null | string;
+                        no: null | string;
                         deptId: null | (number);
+                        exportMarker: null | (number);
                         lastupdate: null | number);
-                        tblMaintLogStocks?: {
-                            maintLogStockId: number;
-                            maintLogId: number;
-                            stockItemId: number;
-                            deptId: number;
-                            exportMaker: null | (number);
-                            stockCount: null | number;
-                            orderNo: null | (number);
-                            createdUserId: null | (number);
-                            exportMarker: null | (number);
-                            lastupdate: null | number);
-                        }[];
-                        tblStockType?: null | ({
-                            stockTypeId: number;
-                            parentStockTypeId: null | (number);
+                        orderNo: null | (number);
+                        tblSpareType?: null | ({
+                            spareTypeId: number;
+                            parentSpareTypeId: null | (number);
                             name: null | string;
                             no: null | string;
                             deptId: null | (number);
@@ -51896,12 +51977,28 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        otherTblSpareTypes?: {
+                            spareTypeId: number;
+                            parentSpareTypeId: null | (number);
+                            name: null | string;
+                            no: null | string;
+                            deptId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            orderNo: null | (number);
+                        }[];
+                        tblSpareUnits?: {
+                            spareUnitId: number;
+                            spareTypeId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                        }[];
                     };
                 };
             };
         };
     };
-    getTblStockItemCount: {
+    getTblSpareTypeCount: {
         parameters: {
             query?: {
                 page?: number;
@@ -51931,7 +52028,7 @@ export interface operations {
             };
         };
     };
-    getTblStockType: {
+    getTblSpareUnit: {
         parameters: {
             query?: {
                 page?: number;
@@ -51956,23 +52053,25 @@ export interface operations {
                 content: {
                     "application/json": {
                         items: {
-                            stockTypeId: number;
-                            parentStockTypeId: null | (number);
-                            name: null | string;
-                            no: null | string;
+                            spareUnitId: number;
+                            spareTypeId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            orderNo: null | (number);
-                            tblStockItems?: {
+                            tblMaintLogStocks?: {
+                                maintLogStockId: number;
+                                maintLogId: number;
                                 stockItemId: number;
-                                stockTypeId: null | (number);
-                                deptId: null | (number);
+                                deptId: number;
+                                exportMaker: null | (number);
+                                stockCount: null | number;
+                                orderNo: null | (number);
+                                createdUserId: null | (number);
+                                exportMarker: null | (number);
                                 lastupdate: null | number);
                             }[];
-                            tblStockType?: null | ({
-                                stockTypeId: number;
-                                parentStockTypeId: null | (number);
+                            tblSpareType?: null | ({
+                                spareTypeId: number;
+                                parentSpareTypeId: null | (number);
                                 name: null | string;
                                 no: null | string;
                                 deptId: null | (number);
@@ -51982,16 +52081,6 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             });
-                            otherTblStockTypes?: {
-                                stockTypeId: number;
-                                parentStockTypeId: null | (number);
-                                name: null | string;
-                                no: null | string;
-                                deptId: null | (number);
-                                exportMarker: null | (number);
-                                lastupdate: null | number);
-                                orderNo: null | (number);
-                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -52002,7 +52091,7 @@ export interface operations {
             };
         };
     };
-    postTblStockType: {
+    postTblSpareUnit: {
         parameters: {
             query?: never;
             header?: never;
@@ -52012,69 +52101,42 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    name?: null | string;
-                    no?: null | string;
-                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    orderNo?: null | (number);
-                    tblStockItems?: {
+                    tblMaintLogStocks?: {
                         connect: {
-                            stockItemId: number;
+                            maintLogStockId: number;
                         }[];
                     };
-                    tblStockType?: {
-                        connect: {
-                            stockTypeId: number;
-                        };
-                    };
-                    otherTblStockTypes?: {
+                    tblSpareType?: {
                         connect: {
                             id: number;
-                        }[];
+                        };
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    name?: null | string;
-                    no?: null | string;
-                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    orderNo?: null | (number);
-                    tblStockItems?: {
+                    tblMaintLogStocks?: {
                         connect: {
-                            stockItemId: number;
+                            maintLogStockId: number;
                         }[];
                     };
-                    tblStockType?: {
-                        connect: {
-                            stockTypeId: number;
-                        };
-                    };
-                    otherTblStockTypes?: {
+                    tblSpareType?: {
                         connect: {
                             id: number;
-                        }[];
+                        };
                     };
                 };
                 "multipart/form-data": {
-                    name?: null | string;
-                    no?: null | string;
-                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    orderNo?: null | (number);
-                    tblStockItems?: {
+                    tblMaintLogStocks?: {
                         connect: {
-                            stockItemId: number;
+                            maintLogStockId: number;
                         }[];
                     };
-                    tblStockType?: {
-                        connect: {
-                            stockTypeId: number;
-                        };
-                    };
-                    otherTblStockTypes?: {
+                    tblSpareType?: {
                         connect: {
                             id: number;
-                        }[];
+                        };
                     };
                 };
             };
@@ -52087,23 +52149,25 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        stockTypeId: number;
-                        parentStockTypeId: null | (number);
-                        name: null | string;
-                        no: null | string;
+                        spareUnitId: number;
+                        spareTypeId: null | (number);
                         deptId: null | (number);
-                        exportMarker: null | (number);
                         lastupdate: null | number);
-                        orderNo: null | (number);
-                        tblStockItems?: {
+                        tblMaintLogStocks?: {
+                            maintLogStockId: number;
+                            maintLogId: number;
                             stockItemId: number;
-                            stockTypeId: null | (number);
-                            deptId: null | (number);
+                            deptId: number;
+                            exportMaker: null | (number);
+                            stockCount: null | number;
+                            orderNo: null | (number);
+                            createdUserId: null | (number);
+                            exportMarker: null | (number);
                             lastupdate: null | number);
                         }[];
-                        tblStockType?: null | ({
-                            stockTypeId: number;
-                            parentStockTypeId: null | (number);
+                        tblSpareType?: null | ({
+                            spareTypeId: number;
+                            parentSpareTypeId: null | (number);
                             name: null | string;
                             no: null | string;
                             deptId: null | (number);
@@ -52113,22 +52177,12 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        otherTblStockTypes?: {
-                            stockTypeId: number;
-                            parentStockTypeId: null | (number);
-                            name: null | string;
-                            no: null | string;
-                            deptId: null | (number);
-                            exportMarker: null | (number);
-                            lastupdate: null | number);
-                            orderNo: null | (number);
-                        }[];
                     };
                 };
             };
         };
     };
-    deleteTblStockType: {
+    deleteTblSpareUnit: {
         parameters: {
             query?: {
                 page?: number;
@@ -52158,14 +52212,14 @@ export interface operations {
             };
         };
     };
-    getTblStockTypeByStockTypeId: {
+    getTblSpareUnitByPartId: {
         parameters: {
             query?: {
                 include?: string;
             };
             header?: never;
             path: {
-                stockTypeId: number;
+                partId: number;
             };
             cookie?: never;
         };
@@ -52178,23 +52232,25 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        stockTypeId: number;
-                        parentStockTypeId: null | (number);
-                        name: null | string;
-                        no: null | string;
+                        spareUnitId: number;
+                        spareTypeId: null | (number);
                         deptId: null | (number);
-                        exportMarker: null | (number);
                         lastupdate: null | number);
-                        orderNo: null | (number);
-                        tblStockItems?: {
+                        tblMaintLogStocks?: {
+                            maintLogStockId: number;
+                            maintLogId: number;
                             stockItemId: number;
-                            stockTypeId: null | (number);
-                            deptId: null | (number);
+                            deptId: number;
+                            exportMaker: null | (number);
+                            stockCount: null | number;
+                            orderNo: null | (number);
+                            createdUserId: null | (number);
+                            exportMarker: null | (number);
                             lastupdate: null | number);
                         }[];
-                        tblStockType?: null | ({
-                            stockTypeId: number;
-                            parentStockTypeId: null | (number);
+                        tblSpareType?: null | ({
+                            spareTypeId: number;
+                            parentSpareTypeId: null | (number);
                             name: null | string;
                             no: null | string;
                             deptId: null | (number);
@@ -52204,117 +52260,71 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        otherTblStockTypes?: {
-                            stockTypeId: number;
-                            parentStockTypeId: null | (number);
-                            name: null | string;
-                            no: null | string;
-                            deptId: null | (number);
-                            exportMarker: null | (number);
-                            lastupdate: null | number);
-                            orderNo: null | (number);
-                        }[];
                     };
                 };
             };
         };
     };
-    putTblStockTypeByStockTypeId: {
+    putTblSpareUnitByPartId: {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                stockTypeId: number;
+                partId: number;
             };
             cookie?: never;
         };
         requestBody: {
             content: {
                 "application/json": {
-                    name?: null | string;
-                    no?: null | string;
-                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    orderNo?: null | (number);
-                    tblStockItems?: {
+                    tblMaintLogStocks?: {
                         connect?: {
-                            stockItemId: number;
+                            maintLogStockId: number;
                         }[];
                         disconnect?: {
                             id: number;
                         }[];
                     };
-                    tblStockType?: {
+                    tblSpareType?: {
                         connect?: {
-                            stockTypeId: number;
+                            id: number;
                         };
                         disconnect?: boolean;
-                    };
-                    otherTblStockTypes?: {
-                        connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    name?: null | string;
-                    no?: null | string;
-                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    orderNo?: null | (number);
-                    tblStockItems?: {
+                    tblMaintLogStocks?: {
                         connect?: {
-                            stockItemId: number;
+                            maintLogStockId: number;
                         }[];
                         disconnect?: {
                             id: number;
                         }[];
                     };
-                    tblStockType?: {
+                    tblSpareType?: {
                         connect?: {
-                            stockTypeId: number;
+                            id: number;
                         };
                         disconnect?: boolean;
-                    };
-                    otherTblStockTypes?: {
-                        connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
                     };
                 };
                 "multipart/form-data": {
-                    name?: null | string;
-                    no?: null | string;
-                    exportMarker?: null | (number);
                     lastupdate?: null | number);
-                    orderNo?: null | (number);
-                    tblStockItems?: {
+                    tblMaintLogStocks?: {
                         connect?: {
-                            stockItemId: number;
+                            maintLogStockId: number;
                         }[];
                         disconnect?: {
                             id: number;
                         }[];
                     };
-                    tblStockType?: {
+                    tblSpareType?: {
                         connect?: {
-                            stockTypeId: number;
+                            id: number;
                         };
                         disconnect?: boolean;
-                    };
-                    otherTblStockTypes?: {
-                        connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
                     };
                 };
             };
@@ -52327,23 +52337,25 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        stockTypeId: number;
-                        parentStockTypeId: null | (number);
-                        name: null | string;
-                        no: null | string;
+                        spareUnitId: number;
+                        spareTypeId: null | (number);
                         deptId: null | (number);
-                        exportMarker: null | (number);
                         lastupdate: null | number);
-                        orderNo: null | (number);
-                        tblStockItems?: {
+                        tblMaintLogStocks?: {
+                            maintLogStockId: number;
+                            maintLogId: number;
                             stockItemId: number;
-                            stockTypeId: null | (number);
-                            deptId: null | (number);
+                            deptId: number;
+                            exportMaker: null | (number);
+                            stockCount: null | number;
+                            orderNo: null | (number);
+                            createdUserId: null | (number);
+                            exportMarker: null | (number);
                             lastupdate: null | number);
                         }[];
-                        tblStockType?: null | ({
-                            stockTypeId: number;
-                            parentStockTypeId: null | (number);
+                        tblSpareType?: null | ({
+                            spareTypeId: number;
+                            parentSpareTypeId: null | (number);
                             name: null | string;
                             no: null | string;
                             deptId: null | (number);
@@ -52353,29 +52365,19 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        otherTblStockTypes?: {
-                            stockTypeId: number;
-                            parentStockTypeId: null | (number);
-                            name: null | string;
-                            no: null | string;
-                            deptId: null | (number);
-                            exportMarker: null | (number);
-                            lastupdate: null | number);
-                            orderNo: null | (number);
-                        }[];
                     };
                 };
             };
         };
     };
-    deleteTblStockTypeByStockTypeId: {
+    deleteTblSpareUnitByPartId: {
         parameters: {
             query?: {
                 force?: boolean;
             };
             header?: never;
             path: {
-                stockTypeId: number;
+                partId: number;
             };
             cookie?: never;
         };
@@ -52388,23 +52390,25 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        stockTypeId: number;
-                        parentStockTypeId: null | (number);
-                        name: null | string;
-                        no: null | string;
+                        spareUnitId: number;
+                        spareTypeId: null | (number);
                         deptId: null | (number);
-                        exportMarker: null | (number);
                         lastupdate: null | number);
-                        orderNo: null | (number);
-                        tblStockItems?: {
+                        tblMaintLogStocks?: {
+                            maintLogStockId: number;
+                            maintLogId: number;
                             stockItemId: number;
-                            stockTypeId: null | (number);
-                            deptId: null | (number);
+                            deptId: number;
+                            exportMaker: null | (number);
+                            stockCount: null | number;
+                            orderNo: null | (number);
+                            createdUserId: null | (number);
+                            exportMarker: null | (number);
                             lastupdate: null | number);
                         }[];
-                        tblStockType?: null | ({
-                            stockTypeId: number;
-                            parentStockTypeId: null | (number);
+                        tblSpareType?: null | ({
+                            spareTypeId: number;
+                            parentSpareTypeId: null | (number);
                             name: null | string;
                             no: null | string;
                             deptId: null | (number);
@@ -52414,22 +52418,12 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        otherTblStockTypes?: {
-                            stockTypeId: number;
-                            parentStockTypeId: null | (number);
-                            name: null | string;
-                            no: null | string;
-                            deptId: null | (number);
-                            exportMarker: null | (number);
-                            lastupdate: null | number);
-                            orderNo: null | (number);
-                        }[];
                     };
                 };
             };
         };
     };
-    getTblStockTypeCount: {
+    getTblSpareUnitCount: {
         parameters: {
             query?: {
                 page?: number;

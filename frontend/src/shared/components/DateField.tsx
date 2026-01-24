@@ -1,53 +1,55 @@
-import React from 'react'
-import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers'
-import { CalendarToday, AccessTime, Event } from '@mui/icons-material'
-import { DATE_FORMATS, DateTimeType } from '@/const'
-import { useAtomValue } from 'jotai'
-import { atomLanguage } from '../atoms/general.atom'
+import React from "react";
+import CalendarToday from "@mui/icons-material/CalendarToday";
+import AccessTime from "@mui/icons-material/AccessTime";
+import Event from "@mui/icons-material/Event";
+import { DatePicker, DateTimePicker, TimePicker } from "@mui/x-date-pickers";
+import { DATE_FORMATS, DateTimeType } from "@/const";
+import { useAtomValue } from "jotai";
+import { atomLanguage } from "../atoms/general.atom";
 
 interface DateFieldProps {
-  label: string
-  field: any
-  disabled?: boolean
-  type?: DateTimeType
+  label: string;
+  field: any;
+  disabled?: boolean;
+  type?: DateTimeType;
 }
 
 const DateField: React.FC<DateFieldProps> = ({
   label,
   field,
   disabled = false,
-  type = 'DATE',
+  type = "DATE",
   ...restProps
 }) => {
-  const language = useAtomValue(atomLanguage)
-  const locale = language === 'fa' ? 'FA' : 'EN'
+  const language = useAtomValue(atomLanguage);
+  const locale = language === "fa" ? "FA" : "EN";
 
-  const dateValue = field.value ? new Date(field.value) : null
+  const dateValue = field.value ? new Date(field.value) : null;
 
   const handleChange = (newValue: Date | null) => {
-    field.onChange(newValue ? newValue.toISOString() : null)
-  }
+    field.onChange(newValue ? newValue.toISOString() : null);
+  };
 
   const getDefaultIcon = (): React.ElementType => {
     switch (type) {
-      case 'TIME':
-        return AccessTime
-      case 'DATETIME':
-        return Event
-      case 'DATE':
+      case "TIME":
+        return AccessTime;
+      case "DATETIME":
+        return Event;
+      case "DATE":
       default:
-        return CalendarToday
+        return CalendarToday;
     }
-  }
+  };
 
   const Picker =
-    type === 'TIME'
+    type === "TIME"
       ? TimePicker
-      : type === 'DATETIME'
-      ? DateTimePicker
-      : DatePicker
+      : type === "DATETIME"
+        ? DateTimePicker
+        : DatePicker;
 
-  const format = DATE_FORMATS[locale][type]
+  const format = DATE_FORMATS[locale][type];
 
   return (
     <Picker
@@ -60,16 +62,16 @@ const DateField: React.FC<DateFieldProps> = ({
       slotProps={{
         textField: {
           fullWidth: true,
-          size: 'small',
+          size: "small",
         },
       }}
-      {...((type === 'TIME' || type === 'DATETIME') && { ampm: false })}
+      {...((type === "TIME" || type === "DATETIME") && { ampm: false })}
       timeSteps={
-        type === 'TIME' || type === 'DATETIME' ? { minutes: 1 } : undefined
+        type === "TIME" || type === "DATETIME" ? { minutes: 1 } : undefined
       }
       format={format}
     />
-  )
-}
+  );
+};
 
-export default DateField
+export default DateField;

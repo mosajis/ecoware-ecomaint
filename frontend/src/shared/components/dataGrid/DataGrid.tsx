@@ -1,48 +1,46 @@
-import DataGridToolbar from './DataGridToolbar'
+import DataGridToolbar from "./DataGridToolbar";
+import { DataGrid as MuiDataGrid, GridRowId } from "@mui/x-data-grid";
 import {
-  DataGrid as MuiDataGrid,
   type DataGridProps,
   type GridColDef,
   type GridSlotsComponent,
   type GridRowSelectionModel,
-  GridRowId,
-  GridCallbackDetails,
-} from '@mui/x-data-grid'
-import { useMemo, useCallback, useState } from 'react'
-import ConfirmDialog from '../ConfirmDialog'
+  type GridCallbackDetails,
+} from "@mui/x-data-grid";
+
+import { useMemo, useCallback, useState } from "react";
 
 const rowNumberColumn: GridColDef = {
-  field: 'rowNumber',
-  headerName: '#',
+  field: "rowNumber",
+  headerName: "#",
   width: 35,
   sortable: false,
   filterable: false,
   disableColumnMenu: true,
-  align: 'center',
-  headerAlign: 'center',
-}
+  align: "center",
+  headerAlign: "center",
+};
 
 interface CustomizedDataGridProps extends DataGridProps {
-  label?: string
-  onAddClick?: () => void
-  onRefreshClick?: () => void
-  onEditClick?: (rowId: number) => void
-  onDoubleClick?: (rowId: number) => void
-  onDeleteClick?: (rowId: number) => void
-  getRowId: (row: any) => GridRowId
-  disableSearch?: boolean
-  disableDensity?: boolean
-  disableExport?: boolean
-  disableColumns?: boolean
-  disableFilters?: boolean
-  disableAdd?: boolean
-  disableRefresh?: boolean
-  disableEdit?: boolean
-  disableDelete?: boolean
+  label?: string;
+  onAddClick?: () => void;
+  onRefreshClick?: () => void;
+  onEditClick?: (rowId: number) => void;
+  onDoubleClick?: (rowId: number) => void;
+  onDeleteClick?: (rowId: number) => void;
+  getRowId: (row: any) => GridRowId;
+  disableSearch?: boolean;
+  disableDensity?: boolean;
+  disableExport?: boolean;
+  disableColumns?: boolean;
+  disableFilters?: boolean;
+  disableAdd?: boolean;
+  disableRefresh?: boolean;
+  disableEdit?: boolean;
+  disableDelete?: boolean;
+  disableRowNumber?: boolean;
 
-  disableRowNumber?: boolean
-
-  toolbarChildren?: React.ReactNode
+  toolbarChildren?: React.ReactNode;
 }
 
 export default function GenericDataGrid({
@@ -72,74 +70,73 @@ export default function GenericDataGrid({
 }: CustomizedDataGridProps) {
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>({
-      type: 'include',
+      type: "include",
       ids: new Set<GridRowId>([]),
-    })
+    });
 
   const indexedRows = useMemo(() => {
-    if (!rows) return []
-    if (disableRowNumber) return rows
-    return rows.map((row, index) => ({ ...row, rowNumber: index + 1 }))
-  }, [rows, disableRowNumber])
+    if (!rows) return [];
+    if (disableRowNumber) return rows;
+    return rows.map((row, index) => ({ ...row, rowNumber: index + 1 }));
+  }, [rows, disableRowNumber]);
 
   const columnsWithRowNumber = useMemo(() => {
-    return disableRowNumber ? columns : [rowNumberColumn, ...columns]
-  }, [columns, disableRowNumber])
+    return disableRowNumber ? columns : [rowNumberColumn, ...columns];
+  }, [columns, disableRowNumber]);
 
   const mergedInitialState = useMemo(() => {
     return {
-      density: 'compact' as const,
+      density: "compact" as const,
       ...initialState,
-    }
-  }, [initialState])
+    };
+  }, [initialState]);
 
   const handleRowSelectionChange = useCallback(
     (
       rowSelectionModel: GridRowSelectionModel,
-      details: GridCallbackDetails
+      details: GridCallbackDetails,
     ) => {
-      setRowSelectionModel(rowSelectionModel)
+      setRowSelectionModel(rowSelectionModel);
     },
-    []
-  )
+    [],
+  );
 
   const handleEdit = useCallback(() => {
-    const rowId = Array.from(rowSelectionModel.ids)[0]
-    if (!rowId) return
-    onEditClick?.(Number(rowId))
-  }, [rowSelectionModel, onEditClick])
+    const rowId = Array.from(rowSelectionModel.ids)[0];
+    if (!rowId) return;
+    onEditClick?.(Number(rowId));
+  }, [rowSelectionModel, onEditClick]);
 
   const handleDelete = useCallback(() => {
-    const rowId = Array.from(rowSelectionModel.ids)[0]
-    if (!rowId) return
-    onDeleteClick?.(Number(rowId))
-  }, [rowSelectionModel, onDeleteClick])
+    const rowId = Array.from(rowSelectionModel.ids)[0];
+    if (!rowId) return;
+    onDeleteClick?.(Number(rowId));
+  }, [rowSelectionModel, onDeleteClick]);
 
   const ToolbarWrapper = useMemo(
-    () => (props: any) =>
-      (
-        <DataGridToolbar
-          {...props}
-          label={label!}
-          loading={loading}
-          onAddClick={onAddClick}
-          onRefreshClick={onRefreshClick}
-          onEditClick={handleEdit}
-          onDeleteClick={handleDelete}
-          hasSelection={rowSelectionModel.ids.size > 0}
-          disableSearch={disableSearch}
-          disableDensity={disableDensity}
-          disableExport={disableExport}
-          disableColumns={disableColumns}
-          disableFilters={disableFilters}
-          disableAdd={disableAdd}
-          disableRefresh={disableRefresh}
-          disableEdit={disableEdit}
-          disableDelete={disableDelete}
-        >
-          {toolbarChildren}
-        </DataGridToolbar>
-      ),
+    () => (props: any) => (
+      <DataGridToolbar
+        {...props}
+        label={label!}
+        loading={loading}
+        onAddClick={onAddClick}
+        onRefreshClick={onRefreshClick}
+        onEditClick={handleEdit}
+        onDeleteClick={handleDelete}
+        hasSelection={rowSelectionModel.ids.size > 0}
+        disableSearch={disableSearch}
+        disableDensity={disableDensity}
+        disableExport={disableExport}
+        disableColumns={disableColumns}
+        disableFilters={disableFilters}
+        disableAdd={disableAdd}
+        disableRefresh={disableRefresh}
+        disableEdit={disableEdit}
+        disableDelete={disableDelete}
+      >
+        {toolbarChildren}
+      </DataGridToolbar>
+    ),
     [
       toolbarChildren,
       label,
@@ -158,13 +155,13 @@ export default function GenericDataGrid({
       disableRefresh,
       disableEdit,
       disableDelete,
-    ]
-  )
+    ],
+  );
 
   const slots: Partial<GridSlotsComponent> = useMemo(
     () => ({ toolbar: ToolbarWrapper }),
-    [ToolbarWrapper]
-  )
+    [ToolbarWrapper],
+  );
 
   return (
     <MuiDataGrid
@@ -175,8 +172,8 @@ export default function GenericDataGrid({
       rowSelectionModel={rowSelectionModel}
       onRowSelectionModelChange={handleRowSelectionChange}
       getRowId={getRowId}
-      onRowDoubleClick={row => onDoubleClick?.(Number(row.id))}
+      onRowDoubleClick={(row) => onDoubleClick?.(Number(row.id))}
       {...rest}
     />
-  )
+  );
 }
