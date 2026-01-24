@@ -24,4 +24,4 @@ const ControllerTblUnit = new BaseController({
   responseSchema: buildResponseSchema(TblUnitPlain, TblUnit),
 }).app;
 
-export default ControllerTblUnit
+export default ControllerTblUnit;

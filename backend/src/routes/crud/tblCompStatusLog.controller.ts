@@ -24,4 +24,4 @@ const ControllerTblCompStatusLog = new BaseController({
   responseSchema: buildResponseSchema(TblCompStatusLogPlain, TblCompStatusLog),
 }).app;
 
-export default ControllerTblCompStatusLog
+export default ControllerTblCompStatusLog;

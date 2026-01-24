@@ -24,4 +24,4 @@ const ControllerTblLogDiscipline = new BaseController({
   responseSchema: buildResponseSchema(TblLogDisciplinePlain, TblLogDiscipline),
 }).app;
 
-export default ControllerTblLogDiscipline
+export default ControllerTblLogDiscipline;

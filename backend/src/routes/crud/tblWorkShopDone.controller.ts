@@ -24,4 +24,4 @@ const ControllerTblWorkShopDone = new BaseController({
   responseSchema: buildResponseSchema(TblWorkShopDonePlain, TblWorkShopDone),
 }).app;
 
-export default ControllerTblWorkShopDone
+export default ControllerTblWorkShopDone;

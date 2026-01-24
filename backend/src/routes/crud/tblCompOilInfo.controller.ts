@@ -24,4 +24,4 @@ const ControllerTblCompOilInfo = new BaseController({
   responseSchema: buildResponseSchema(TblCompOilInfoPlain, TblCompOilInfo),
 }).app;
 
-export default ControllerTblCompOilInfo
+export default ControllerTblCompOilInfo;

@@ -24,4 +24,4 @@ const ControllerTblLogCounter = new BaseController({
   responseSchema: buildResponseSchema(TblLogCounterPlain, TblLogCounter),
 }).app;
 
-export default ControllerTblLogCounter
+export default ControllerTblLogCounter;

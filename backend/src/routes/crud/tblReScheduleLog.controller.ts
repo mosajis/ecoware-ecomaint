@@ -24,4 +24,4 @@ const ControllerTblReScheduleLog = new BaseController({
   responseSchema: buildResponseSchema(TblReScheduleLogPlain, TblReScheduleLog),
 }).app;
 
-export default ControllerTblReScheduleLog
+export default ControllerTblReScheduleLog;

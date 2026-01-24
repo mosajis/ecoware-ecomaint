@@ -24,4 +24,4 @@ const ControllerTblFollowStatus = new BaseController({
   responseSchema: buildResponseSchema(TblFollowStatusPlain, TblFollowStatus),
 }).app;
 
-export default ControllerTblFollowStatus
+export default ControllerTblFollowStatus;

@@ -24,4 +24,4 @@ const ControllerTblDepartment = new BaseController({
   responseSchema: buildResponseSchema(TblDepartmentPlain, TblDepartment),
 }).app;
 
-export default ControllerTblDepartment
+export default ControllerTblDepartment;

@@ -24,4 +24,4 @@ const ControllerTblJobVersion = new BaseController({
   responseSchema: buildResponseSchema(TblJobVersionPlain, TblJobVersion),
 }).app;
 
-export default ControllerTblJobVersion
+export default ControllerTblJobVersion;

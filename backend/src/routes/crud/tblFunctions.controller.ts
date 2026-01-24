@@ -24,4 +24,4 @@ const ControllerTblFunctions = new BaseController({
   responseSchema: buildResponseSchema(TblFunctionsPlain, TblFunctions),
 }).app;
 
-export default ControllerTblFunctions
+export default ControllerTblFunctions;

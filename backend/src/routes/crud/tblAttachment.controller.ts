@@ -1,32 +1,32 @@
-import { Elysia, t } from 'elysia'
-import { BaseController } from '@/utils/base.controller'
-import { BaseService } from '@/utils/base.service'
-import { FileService } from '@/utils/file.service'
+import { Elysia, t } from "elysia";
+import { BaseController } from "@/utils/base.controller";
+import { BaseService } from "@/utils/base.service";
+import { FileService } from "@/utils/file.service";
 import {
   TblAttachment,
   TblAttachmentInputCreate,
   TblAttachmentInputUpdate,
   TblAttachmentPlain,
-} from 'orm/generated/prismabox/TblAttachment'
-import { buildResponseSchema } from '@/utils/base.schema'
-import { prisma } from '@/utils/prisma'
+} from "orm/generated/prismabox/TblAttachment";
+import { buildResponseSchema } from "@/utils/base.schema";
+import { prisma } from "@/utils/prisma";
 
 // ========================================
 // Interfaces
 // ========================================
 export interface CreateAttachmentInput {
-  title?: string
-  attachmentTypeId?: number
-  isUserAttachment: boolean
-  createdUserId: number
-  buffer: Buffer
-  originalFileName: string
-  mimeType: string
+  title?: string;
+  attachmentTypeId?: number;
+  isUserAttachment: boolean;
+  createdUserId: number;
+  buffer: Buffer;
+  originalFileName: string;
+  mimeType: string;
 }
 
 export interface UpdateAttachmentInput {
-  title?: string
-  attachmentTypeId?: number
+  title?: string;
+  attachmentTypeId?: number;
 }
 
 // ========================================
@@ -40,8 +40,8 @@ export class AttachmentService extends BaseService<any> {
     const fileInfo = await FileService.saveFile(
       data.buffer,
       data.originalFileName,
-      data.mimeType
-    )
+      data.mimeType,
+    );
 
     return this.create({
       title: data.title || fileInfo.originalName,
@@ -51,7 +51,7 @@ export class AttachmentService extends BaseService<any> {
       isUserAttachment: data.isUserAttachment,
       attachmentTypeId: data.attachmentTypeId,
       createdUserId: data.createdUserId,
-    } as any)
+    } as any);
   }
 
   /**
@@ -59,19 +59,19 @@ export class AttachmentService extends BaseService<any> {
    */
   async deleteWithFile(
     where: Record<string, any>,
-    options?: { force?: boolean }
+    options?: { force?: boolean },
   ): Promise<any> {
-    const attachment = await this.findOne(where)
+    const attachment = await this.findOne(where);
 
     if (!attachment) {
-      throw new Error('Attachment not found')
+      throw new Error("Attachment not found");
     }
 
     if (attachment.path) {
-      await FileService.deleteFile(attachment.path)
+      await FileService.deleteFile(attachment.path);
     }
 
-    return this.delete(where, options)
+    return this.delete(where, options);
   }
 
   /**
@@ -79,146 +79,146 @@ export class AttachmentService extends BaseService<any> {
    */
   async deleteAllWithFiles(
     where?: Record<string, any>,
-    options?: { force?: boolean }
+    options?: { force?: boolean },
   ): Promise<{ count: number }> {
     const attachments = await this.findAll({
       where,
       page: 1,
       perPage: Number.MAX_SAFE_INTEGER,
-    })
+    });
 
     for (const attachment of attachments.items) {
       if (attachment.path) {
-        await FileService.deleteFile(attachment.path)
+        await FileService.deleteFile(attachment.path);
       }
     }
 
-    return this.deleteAll(where, options)
+    return this.deleteAll(where, options);
   }
 
   /**
    * Get file for download
    */
   async getFileForDownload(attachmentId: number): Promise<{
-    buffer: Buffer
-    originalName: string
-    mimeType: string
+    buffer: Buffer;
+    originalName: string;
+    mimeType: string;
   }> {
-    const attachment = await this.findOne({ attachmentId })
+    const attachment = await this.findOne({ attachmentId });
 
     if (!attachment || !attachment.path) {
-      throw new Error('Attachment not found')
+      throw new Error("Attachment not found");
     }
 
-    const buffer = await FileService.readFile(attachment.path)
+    const buffer = await FileService.readFile(attachment.path);
 
     return {
       buffer,
       originalName: attachment.fileName,
       mimeType: this.getMimeType(attachment.fileName),
-    }
+    };
   }
 
   /**
    * Get MIME type from filename
    */
   private getMimeType(filename: string): string {
-    const ext = filename.toLowerCase().split('.').pop()
+    const ext = filename.toLowerCase().split(".").pop();
 
     const mimeMap: Record<string, string> = {
-      pdf: 'application/pdf',
-      doc: 'application/msword',
-      docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      xls: 'application/vnd.ms-excel',
-      xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      csv: 'text/csv',
-      txt: 'text/plain',
-      jpg: 'image/jpeg',
-      jpeg: 'image/jpeg',
-      png: 'image/png',
-      gif: 'image/gif',
-      webp: 'image/webp',
-      bmp: 'image/bmp',
-    }
+      pdf: "application/pdf",
+      doc: "application/msword",
+      docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      xls: "application/vnd.ms-excel",
+      xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      csv: "text/csv",
+      txt: "text/plain",
+      jpg: "image/jpeg",
+      jpeg: "image/jpeg",
+      png: "image/png",
+      gif: "image/gif",
+      webp: "image/webp",
+      bmp: "image/bmp",
+    };
 
-    return mimeMap[ext || ''] || 'application/octet-stream'
+    return mimeMap[ext || ""] || "application/octet-stream";
   }
 }
 
 // ========================================
 // Initialize Service
 // ========================================
-export const ServiceTblAttachment = new AttachmentService(prisma.tblAttachment)
+export const ServiceTblAttachment = new AttachmentService(prisma.tblAttachment);
 
 // ========================================
 // Create Controller with Base Routes
 // ========================================
 const baseController = new BaseController({
-  prefix: '/tblAttachment',
+  prefix: "/tblAttachment",
   swagger: {
-    tags: ['tblAttachment'],
+    tags: ["tblAttachment"],
   },
-  primaryKey: 'attachmentId',
+  primaryKey: "attachmentId",
   service: ServiceTblAttachment,
   createSchema: TblAttachmentInputCreate,
   updateSchema: TblAttachmentInputUpdate,
   responseSchema: buildResponseSchema(TblAttachmentPlain, TblAttachment),
-  excludeRoutes: ['create'],
+  excludeRoutes: ["create"],
   extend: (app: Elysia) => {
     // POST / - Upload file
     app.post(
-      '/',
+      "/",
       async ({ body, set }) => {
         try {
-          const file = body.file
+          const file = body.file;
 
           if (!file) {
-            set.status = 400
-            return { error: 'No file provided' }
+            set.status = 400;
+            return { error: "No file provided" };
           }
 
-          const buffer = Buffer.from(await file.arrayBuffer())
-          const fileName = file.name || 'unknown'
-          const mimeType = file.type || 'application/octet-stream'
+          const buffer = Buffer.from(await file.arrayBuffer());
+          const fileName = file.name || "unknown";
+          const mimeType = file.type || "application/octet-stream";
 
           // validation
           const validationError = FileService.validateFile(
             fileName,
             mimeType,
-            buffer.length
-          )
+            buffer.length,
+          );
           if (validationError) {
-            set.status = 400
+            set.status = 400;
             return {
               error: validationError.message,
               code: validationError.code,
-            }
+            };
           }
 
           // // فیلدهای دیگر
-          const createdUserId = Number(body.createdUserId || 1)
+          const createdUserId = Number(body.createdUserId || 1);
           const attachment = await ServiceTblAttachment.createWithFile({
             title: body.title,
             attachmentTypeId: Number(body.attachmentTypeId),
-            isUserAttachment: body.isUserAttachment === 'true',
+            isUserAttachment: body.isUserAttachment === "true",
             createdUserId,
             buffer,
             originalFileName: fileName,
             mimeType,
-          })
+          });
 
-          set.status = 201
-          return attachment
+          set.status = 201;
+          return attachment;
         } catch (error) {
-          set.status = 500
+          set.status = 500;
           return {
-            error: error instanceof Error ? error.message : 'Unknown error',
-          }
+            error: error instanceof Error ? error.message : "Unknown error",
+          };
         }
       },
       {
-        tags: ['tblAttachment'],
-        detail: { summary: 'Upload file' },
+        tags: ["tblAttachment"],
+        detail: { summary: "Upload file" },
         body: t.Object({
           title: t.Optional(t.String()),
           attachmentTypeId: t.Optional(t.String()),
@@ -226,7 +226,7 @@ const baseController = new BaseController({
           createdUserId: t.Optional(t.String()),
           file: t.File(),
         }),
-        type: 'multipart/form-data',
+        type: "multipart/form-data",
         response: t.Union([
           t.Object({
             /* Attachment Schema */
@@ -236,73 +236,73 @@ const baseController = new BaseController({
             code: t.Optional(t.String()),
           }),
         ]),
-      }
-    )
+      },
+    );
 
     // GET /:attachmentId/download - Download file
     app.get(
-      '/:attachmentId/download',
+      "/:attachmentId/download",
       async ({ params, set }) => {
         try {
-          const attachmentId = Number(params.attachmentId)
+          const attachmentId = Number(params.attachmentId);
 
           const fileData =
-            await ServiceTblAttachment.getFileForDownload(attachmentId)
+            await ServiceTblAttachment.getFileForDownload(attachmentId);
 
           const headers = FileService.getDownloadHeaders(
             fileData.originalName,
-            fileData.mimeType
-          )
+            fileData.mimeType,
+          );
 
-          set.headers = headers
-          set.status = 200
+          set.headers = headers;
+          set.status = 200;
 
-          return fileData.buffer
+          return fileData.buffer;
         } catch (error) {
-          set.status = 404
+          set.status = 404;
           return new TextEncoder().encode(
-            error instanceof Error ? error.message : 'File not found'
-          )
+            error instanceof Error ? error.message : "File not found",
+          );
         }
       },
       {
-        tags: ['tblAttachment'],
-        detail: { summary: 'Download file' },
+        tags: ["tblAttachment"],
+        detail: { summary: "Download file" },
         params: t.Object({ attachmentId: t.Number() }),
-      }
-    )
+      },
+    );
 
     // DELETE /:attachmentId - Delete with file cleanup
     app.delete(
-      '/:attachmentId',
+      "/:attachmentId",
       async ({ params, query, set }) => {
         try {
-          const attachmentId = Number(params.attachmentId)
+          const attachmentId = Number(params.attachmentId);
 
           const deleted = await ServiceTblAttachment.deleteWithFile(
             { attachmentId },
-            { force: query.force }
-          )
+            { force: query.force },
+          );
 
-          set.status = 200
-          return deleted
+          set.status = 200;
+          return deleted;
         } catch (error) {
-          set.status = 500
+          set.status = 500;
           return {
-            error: error instanceof Error ? error.message : 'Delete failed',
-          }
+            error: error instanceof Error ? error.message : "Delete failed",
+          };
         }
       },
       {
-        tags: ['tblAttachment'],
-        detail: { summary: 'Delete attachment' },
+        tags: ["tblAttachment"],
+        detail: { summary: "Delete attachment" },
         params: t.Object({ attachmentId: t.Number() }),
         query: t.Object({ force: t.Optional(t.Boolean()) }),
-      }
-    )
+      },
+    );
   },
-})
+});
 
-const ControllerTblAttachment = baseController.app
+const ControllerTblAttachment = baseController.app;
 
-export default ControllerTblAttachment
+export default ControllerTblAttachment;

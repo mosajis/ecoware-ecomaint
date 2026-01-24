@@ -10,7 +10,9 @@ import {
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
-export const ServiceTblJobDescriptionAttachment = new BaseService(prisma.tblJobDescriptionAttachment);
+export const ServiceTblJobDescriptionAttachment = new BaseService(
+  prisma.tblJobDescriptionAttachment,
+);
 
 const ControllerTblJobDescriptionAttachment = new BaseController({
   prefix: "/tblJobDescriptionAttachment",
@@ -21,7 +23,10 @@ const ControllerTblJobDescriptionAttachment = new BaseController({
   service: ServiceTblJobDescriptionAttachment,
   createSchema: TblJobDescriptionAttachmentInputCreate,
   updateSchema: TblJobDescriptionAttachmentInputUpdate,
-  responseSchema: buildResponseSchema(TblJobDescriptionAttachmentPlain, TblJobDescriptionAttachment),
+  responseSchema: buildResponseSchema(
+    TblJobDescriptionAttachmentPlain,
+    TblJobDescriptionAttachment,
+  ),
 }).app;
 
-export default ControllerTblJobDescriptionAttachment
+export default ControllerTblJobDescriptionAttachment;

@@ -24,4 +24,4 @@ const ControllerTblJobTriggerLog = new BaseController({
   responseSchema: buildResponseSchema(TblJobTriggerLogPlain, TblJobTriggerLog),
 }).app;
 
-export default ControllerTblJobTriggerLog
+export default ControllerTblJobTriggerLog;

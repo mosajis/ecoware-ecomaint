@@ -10,7 +10,9 @@ import {
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
-export const ServiceTblWorkOrderStatus = new BaseService(prisma.tblWorkOrderStatus);
+export const ServiceTblWorkOrderStatus = new BaseService(
+  prisma.tblWorkOrderStatus,
+);
 
 const ControllerTblWorkOrderStatus = new BaseController({
   prefix: "/tblWorkOrderStatus",
@@ -21,7 +23,10 @@ const ControllerTblWorkOrderStatus = new BaseController({
   service: ServiceTblWorkOrderStatus,
   createSchema: TblWorkOrderStatusInputCreate,
   updateSchema: TblWorkOrderStatusInputUpdate,
-  responseSchema: buildResponseSchema(TblWorkOrderStatusPlain, TblWorkOrderStatus),
+  responseSchema: buildResponseSchema(
+    TblWorkOrderStatusPlain,
+    TblWorkOrderStatus,
+  ),
 }).app;
 
-export default ControllerTblWorkOrderStatus
+export default ControllerTblWorkOrderStatus;

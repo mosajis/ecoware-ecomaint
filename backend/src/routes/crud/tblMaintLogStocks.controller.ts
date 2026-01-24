@@ -10,7 +10,9 @@ import {
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
-export const ServiceTblMaintLogStocks = new BaseService(prisma.tblMaintLogStocks);
+export const ServiceTblMaintLogStocks = new BaseService(
+  prisma.tblMaintLogStocks,
+);
 
 const ControllerTblMaintLogStocks = new BaseController({
   prefix: "/tblMaintLogStocks",
@@ -21,7 +23,10 @@ const ControllerTblMaintLogStocks = new BaseController({
   service: ServiceTblMaintLogStocks,
   createSchema: TblMaintLogStocksInputCreate,
   updateSchema: TblMaintLogStocksInputUpdate,
-  responseSchema: buildResponseSchema(TblMaintLogStocksPlain, TblMaintLogStocks),
+  responseSchema: buildResponseSchema(
+    TblMaintLogStocksPlain,
+    TblMaintLogStocks,
+  ),
 }).app;
 
-export default ControllerTblMaintLogStocks
+export default ControllerTblMaintLogStocks;

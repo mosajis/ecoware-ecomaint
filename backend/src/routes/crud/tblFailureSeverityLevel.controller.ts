@@ -10,7 +10,9 @@ import {
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
-export const ServiceTblFailureSeverityLevel = new BaseService(prisma.tblFailureSeverityLevel);
+export const ServiceTblFailureSeverityLevel = new BaseService(
+  prisma.tblFailureSeverityLevel,
+);
 
 const ControllerTblFailureSeverityLevel = new BaseController({
   prefix: "/tblFailureSeverityLevel",
@@ -21,7 +23,10 @@ const ControllerTblFailureSeverityLevel = new BaseController({
   service: ServiceTblFailureSeverityLevel,
   createSchema: TblFailureSeverityLevelInputCreate,
   updateSchema: TblFailureSeverityLevelInputUpdate,
-  responseSchema: buildResponseSchema(TblFailureSeverityLevelPlain, TblFailureSeverityLevel),
+  responseSchema: buildResponseSchema(
+    TblFailureSeverityLevelPlain,
+    TblFailureSeverityLevel,
+  ),
 }).app;
 
 export default ControllerTblFailureSeverityLevel;

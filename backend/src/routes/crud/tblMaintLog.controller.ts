@@ -24,4 +24,4 @@ const ControllerTblMaintLog = new BaseController({
   responseSchema: buildResponseSchema(TblMaintLogPlain, TblMaintLog),
 }).app;
 
-export default ControllerTblMaintLog
+export default ControllerTblMaintLog;

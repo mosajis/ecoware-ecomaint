@@ -10,7 +10,9 @@ import {
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
-export const ServiceTblFialureSeverityLevel = new BaseService(prisma.tblFialureSeverityLevel);
+export const ServiceTblFialureSeverityLevel = new BaseService(
+  prisma.tblFialureSeverityLevel,
+);
 
 const ControllerTblFialureSeverityLevel = new BaseController({
   prefix: "/tblFialureSeverityLevel",
@@ -21,7 +23,10 @@ const ControllerTblFialureSeverityLevel = new BaseController({
   service: ServiceTblFialureSeverityLevel,
   createSchema: TblFialureSeverityLevelInputCreate,
   updateSchema: TblFialureSeverityLevelInputUpdate,
-  responseSchema: buildResponseSchema(TblFialureSeverityLevelPlain, TblFialureSeverityLevel),
+  responseSchema: buildResponseSchema(
+    TblFialureSeverityLevelPlain,
+    TblFialureSeverityLevel,
+  ),
 }).app;
 
 export default ControllerTblFialureSeverityLevel;

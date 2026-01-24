@@ -24,4 +24,4 @@ const ControllerTblPeriod = new BaseController({
   responseSchema: buildResponseSchema(TblPeriodPlain, TblPeriod),
 }).app;
 
-export default ControllerTblPeriod
+export default ControllerTblPeriod;

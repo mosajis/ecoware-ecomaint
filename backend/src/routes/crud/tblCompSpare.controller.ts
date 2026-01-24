@@ -24,4 +24,4 @@ const ControllerTblCompSpare = new BaseController({
   responseSchema: buildResponseSchema(TblCompSparePlain, TblCompSpare),
 }).app;
 
-export default ControllerTblCompSpare
+export default ControllerTblCompSpare;

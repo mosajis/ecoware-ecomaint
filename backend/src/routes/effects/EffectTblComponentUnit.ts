@@ -1,11 +1,5 @@
+import { prisma } from "@/utils/prisma";
 import { t } from "elysia";
-import {
-  PrismaClient,
-  type TblCompJob,
-  type TblCompMeasurePoint,
-} from "orm/generated/prisma";
-
-const prisma = new PrismaClient();
 
 export const OperationEnum = t.Enum({
   CREATE: 0,

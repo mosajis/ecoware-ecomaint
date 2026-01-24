@@ -24,4 +24,4 @@ const ControllerTblSpareUnit = new BaseController({
   responseSchema: buildResponseSchema(TblSpareUnitPlain, TblSpareUnit),
 }).app;
 
-export default ControllerTblSpareUnit
+export default ControllerTblSpareUnit;

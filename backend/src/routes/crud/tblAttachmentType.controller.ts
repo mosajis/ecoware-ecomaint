@@ -1,6 +1,5 @@
 import { BaseController } from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
-import { PrismaClient } from "orm/generated/prisma";
 import {
   TblAttachmentType,
   TblAttachmentTypeInputCreate,
@@ -10,7 +9,9 @@ import {
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
-export const ServiceTblAttachmentType = new BaseService(prisma.tblAttachmentType);
+export const ServiceTblAttachmentType = new BaseService(
+  prisma.tblAttachmentType,
+);
 
 const ControllerTblAttachmentType = new BaseController({
   prefix: "/tblAttachmentType",
@@ -21,7 +22,10 @@ const ControllerTblAttachmentType = new BaseController({
   service: ServiceTblAttachmentType,
   createSchema: TblAttachmentTypeInputCreate,
   updateSchema: TblAttachmentTypeInputUpdate,
-  responseSchema: buildResponseSchema(TblAttachmentTypePlain, TblAttachmentType),
+  responseSchema: buildResponseSchema(
+    TblAttachmentTypePlain,
+    TblAttachmentType,
+  ),
 }).app;
 
-export default ControllerTblAttachmentType
+export default ControllerTblAttachmentType;

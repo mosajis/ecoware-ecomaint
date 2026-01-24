@@ -10,7 +10,9 @@ import {
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
-export const ServiceTblCompTypeAttachment = new BaseService(prisma.tblCompTypeAttachment);
+export const ServiceTblCompTypeAttachment = new BaseService(
+  prisma.tblCompTypeAttachment,
+);
 
 const ControllerTblCompTypeAttachment = new BaseController({
   prefix: "/tblCompTypeAttachment",
@@ -21,7 +23,10 @@ const ControllerTblCompTypeAttachment = new BaseController({
   service: ServiceTblCompTypeAttachment,
   createSchema: TblCompTypeAttachmentInputCreate,
   updateSchema: TblCompTypeAttachmentInputUpdate,
-  responseSchema: buildResponseSchema(TblCompTypeAttachmentPlain, TblCompTypeAttachment),
+  responseSchema: buildResponseSchema(
+    TblCompTypeAttachmentPlain,
+    TblCompTypeAttachment,
+  ),
 }).app;
 
-export default ControllerTblCompTypeAttachment
+export default ControllerTblCompTypeAttachment;

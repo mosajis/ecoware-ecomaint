@@ -24,4 +24,4 @@ const ControllerTblJobClass = new BaseController({
   responseSchema: buildResponseSchema(TblJobClassPlain, TblJobClass),
 }).app;
 
-export default ControllerTblJobClass
+export default ControllerTblJobClass;

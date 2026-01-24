@@ -24,4 +24,4 @@ const ControllerTblCompJob = new BaseController({
   responseSchema: buildResponseSchema(TblCompJobPlain, TblCompJob),
 }).app;
 
-export default ControllerTblCompJob
+export default ControllerTblCompJob;

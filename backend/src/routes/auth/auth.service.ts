@@ -1,7 +1,6 @@
-import bcrypt from 'bcrypt'
-import { PrismaClient, type TblUsers } from 'orm/generated/prisma'
-
-const prisma = new PrismaClient()
+import { prisma } from "@/utils/prisma";
+import bcrypt from "bcrypt";
+import { type TblUsers } from "orm/generated/prisma/client";
 
 export class AuthService {
   constructor() {}
@@ -10,46 +9,46 @@ export class AuthService {
     username,
     password,
   }: {
-    username: string
-    password: string
-  }): Promise<Omit<TblUsers, 'uPassword'> | null> {
+    username: string;
+    password: string;
+  }): Promise<Omit<TblUsers, "uPassword"> | null> {
     const user = await prisma.tblUsers.findFirst({
       where: { uUserName: username },
-    })
+    });
 
-    if (!user) return null
+    if (!user) return null;
 
-    const isPasswordValid = await bcrypt.compare(password, user.uPassword)
-    if (!isPasswordValid) return null
+    const isPasswordValid = await bcrypt.compare(password, user.uPassword);
+    if (!isPasswordValid) return null;
 
-    const { uPassword: _password, ...userWithoutPassword } = user
-    return userWithoutPassword
+    const { uPassword: _password, ...userWithoutPassword } = user;
+    return userWithoutPassword;
   }
 
-  async login(user: Omit<TblUsers, 'uPassword'>, sign: (payload: any) => any) {
+  async login(user: Omit<TblUsers, "uPassword">, sign: (payload: any) => any) {
     const payload = {
       sub: user.userId,
       username: user.uUserName,
       userGroupId: user.userGroupId,
-    }
+    };
 
-    const accessToken = await sign(payload)
+    const accessToken = await sign(payload);
 
-    return { accessToken }
+    return { accessToken };
   }
 
   async register(registerDto: { username: string; password: string }) {
-    const { username, password } = registerDto
+    const { username, password } = registerDto;
 
     const existingUser = await prisma.tblUsers.findFirst({
       where: { uUserName: username },
-    })
+    });
 
     if (existingUser) {
-      throw new Error('Mobile number already in use')
+      throw new Error("Mobile number already in use");
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10)
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await prisma.tblUsers.create({
       data: {
@@ -59,9 +58,9 @@ export class AuthService {
         uLastLogin: new Date().toISOString(),
         userId: 888,
       },
-    })
+    });
 
-    const { uPassword: _password, ...userWithoutPassword } = user
-    return userWithoutPassword
+    const { uPassword: _password, ...userWithoutPassword } = user;
+    return userWithoutPassword;
   }
 }

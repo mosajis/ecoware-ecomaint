@@ -24,4 +24,4 @@ const ControllerTblRound = new BaseController({
   responseSchema: buildResponseSchema(TblRoundPlain, TblRound),
 }).app;
 
-export default ControllerTblRound
+export default ControllerTblRound;

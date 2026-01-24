@@ -18,8 +18,6 @@ async function renderIndexHtml() {
 }
 
 const app = new Elysia()
-
-  /* ---------------- CORS ---------------- */
   .use(
     cors({
       origin: ["http://localhost:5173"],
@@ -28,13 +26,6 @@ const app = new Elysia()
     }),
   )
 
-  /* ------------ Error handler ------------ */
-  .use(pluginErrorHandler)
-
-  /* --------------- API ------------------ */
-  .use(allRoutes)
-
-  /* ------------- OpenAPI ---------------- */
   .use(
     openapi({
       path: "/docs",
@@ -50,24 +41,25 @@ const app = new Elysia()
     }),
   )
 
-  /* -------- Static assets only --------- */
   .use(
     staticPlugin({
       assets: "public/assets",
       prefix: "/assets",
     }),
   )
-
-  /* --------------- Health --------------- */
+  .use(pluginErrorHandler)
+  .use(allRoutes)
   .get("/health", () => "OK")
 
-  /* ------------- SPA entry -------------- */
-  .get("/", async ({ set }) => {
-    set.headers["content-type"] = "text/html; charset=utf-8";
-    return await renderIndexHtml();
-  })
+  .get(
+    "/",
+    async ({ set }) => {
+      set.headers["content-type"] = "text/html; charset=utf-8";
+      return await renderIndexHtml();
+    },
+    {},
+  )
 
-  /* -------- SPA fallback (React) -------- */
   .get("/*", async ({ set }) => {
     set.headers["content-type"] = "text/html; charset=utf-8";
     return await renderIndexHtml();
@@ -82,4 +74,4 @@ const port = Number(process.argv[process.argv.indexOf("--port") + 1]) || 5273;
 const info = app.listen(port);
 const env = info?.server?.development ? "development" : "production";
 
-console.log(`🚀 Server[${env}] running on ${info?.server?.url.origin}`);
+console.log(`🚀 Server [${env}] running on ${info?.server?.url.origin}`);

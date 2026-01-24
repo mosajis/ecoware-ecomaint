@@ -10,7 +10,9 @@ import {
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
-export const ServiceTblOilSamplingLog = new BaseService(prisma.tblOilSamplingLog);
+export const ServiceTblOilSamplingLog = new BaseService(
+  prisma.tblOilSamplingLog,
+);
 
 const ControllerTblOilSamplingLog = new BaseController({
   prefix: "/tblOilSamplingLog",
@@ -21,7 +23,10 @@ const ControllerTblOilSamplingLog = new BaseController({
   service: ServiceTblOilSamplingLog,
   createSchema: TblOilSamplingLogInputCreate,
   updateSchema: TblOilSamplingLogInputUpdate,
-  responseSchema: buildResponseSchema(TblOilSamplingLogPlain, TblOilSamplingLog),
+  responseSchema: buildResponseSchema(
+    TblOilSamplingLogPlain,
+    TblOilSamplingLog,
+  ),
 }).app;
 
-export default ControllerTblOilSamplingLog
+export default ControllerTblOilSamplingLog;

@@ -1,28 +1,26 @@
-import { t } from 'elysia'
-import { PrismaClient } from 'orm/generated/prisma'
-
-const prisma = new PrismaClient()
+import { prisma } from "@/utils/prisma";
+import { t } from "elysia";
 
 export const OperationEnum = t.Enum({
   CREATE: 0,
   UPDATE: 1,
   DELETE: 2,
-})
+});
 
 export async function effectCompTypeJobChange({
   compTypeJobId,
   operation,
 }: {
-  compTypeJobId: number
-  operation: 0 | 1 | 2
+  compTypeJobId: number;
+  operation: 0 | 1 | 2;
 }) {
-  return prisma.$transaction(async tx => {
+  return prisma.$transaction(async (tx) => {
     const ctj = await tx.tblCompTypeJob.findUnique({
       where: { compTypeJobId },
-    })
+    });
 
     if (!ctj) {
-      throw new Error('CompTypeJob not found.')
+      throw new Error("CompTypeJob not found.");
     }
 
     const {
@@ -46,23 +44,23 @@ export async function effectCompTypeJobChange({
       statusInUse,
       statusAvailable,
       statusRepair,
-    } = ctj
+    } = ctj;
 
     if (!compTypeId || !jobDescId) {
-      throw new Error('Invalid CompTypeJob data.')
+      throw new Error("Invalid CompTypeJob data.");
     }
 
     // 2) Units
     const units = await tx.tblComponentUnit.findMany({
       where: { compTypeId },
       select: { compId: true },
-    })
+    });
 
     if (!units.length) {
-      return { status: 'OK', message: 'No component units found.' }
+      return { status: "OK", message: "No component units found." };
     }
 
-    const compIds = units.map(u => u.compId)
+    const compIds = units.map((u) => u.compId);
 
     switch (operation) {
       // ================= INSERT =================
@@ -76,13 +74,13 @@ export async function effectCompTypeJobChange({
             compId: { in: compIds },
           },
           select: { compId: true },
-        })
+        });
 
-        const existingSet = new Set(existing.map(e => e.compId))
+        const existingSet = new Set(existing.map((e) => e.compId));
 
         const data = compIds
-          .filter(compId => !existingSet.has(compId))
-          .map(compId => ({
+          .filter((compId) => !existingSet.has(compId))
+          .map((compId) => ({
             compId,
             jobDescId,
             discId,
@@ -104,16 +102,16 @@ export async function effectCompTypeJobChange({
             statusInUse,
             statusAvailable,
             statusRepair,
-          }))
+          }));
 
         if (data.length) {
-          await tx.tblCompJob.createMany({ data })
+          await tx.tblCompJob.createMany({ data });
         }
 
         return {
-          status: 'OK',
+          status: "OK",
           message: `Inserted ${data.length} CompJob records.`,
-        }
+        };
       }
 
       // ================= UPDATE =================
@@ -145,15 +143,15 @@ export async function effectCompTypeJobChange({
             statusRepair,
             lastupdate: new Date(),
           },
-        })
+        });
 
-        return { status: 'OK', message: 'Update complete.' }
+        return { status: "OK", message: "Update complete." };
       }
 
       // ================= HARD DELETE =================
 
       default:
-        throw new Error('Invalid operation.')
+        throw new Error("Invalid operation.");
     }
-  })
+  });
 }

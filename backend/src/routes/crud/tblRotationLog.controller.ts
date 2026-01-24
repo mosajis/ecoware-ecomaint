@@ -24,4 +24,4 @@ const ControllerTblRotationLog = new BaseController({
   responseSchema: buildResponseSchema(TblRotationLogPlain, TblRotationLog),
 }).app;
 
-export default ControllerTblRotationLog
+export default ControllerTblRotationLog;

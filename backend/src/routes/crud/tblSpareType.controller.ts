@@ -24,4 +24,4 @@ const ControllerTblSpareType = new BaseController({
   responseSchema: buildResponseSchema(TblSpareTypePlain, TblSpareType),
 }).app;
 
-export default ControllerTblSpareType
+export default ControllerTblSpareType;

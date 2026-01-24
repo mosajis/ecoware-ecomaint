@@ -10,7 +10,9 @@ import {
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
-export const ServiceTblCompTypeCounter = new BaseService(prisma.tblCompTypeCounter);
+export const ServiceTblCompTypeCounter = new BaseService(
+  prisma.tblCompTypeCounter,
+);
 
 const ControllerTblCompTypeCounter = new BaseController({
   prefix: "/tblCompTypeCounter",
@@ -21,7 +23,10 @@ const ControllerTblCompTypeCounter = new BaseController({
   service: ServiceTblCompTypeCounter,
   createSchema: TblCompTypeCounterInputCreate,
   updateSchema: TblCompTypeCounterInputUpdate,
-  responseSchema: buildResponseSchema(TblCompTypeCounterPlain, TblCompTypeCounter),
+  responseSchema: buildResponseSchema(
+    TblCompTypeCounterPlain,
+    TblCompTypeCounter,
+  ),
 }).app;
 
-export default ControllerTblCompTypeCounter
+export default ControllerTblCompTypeCounter;

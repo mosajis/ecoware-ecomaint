@@ -27,8 +27,11 @@ export { default as ControllerTblCounterType } from "./tblCounterType.controller
 export { default as ControllerTblDepartment } from "./tblDepartment.controller";
 export { default as ControllerTblDiscipline } from "./tblDiscipline.controller";
 export { default as ControllerTblEmployee } from "./tblEmployee.controller";
+export { default as ControllerTblFailureGroupFollow } from "./tblFailureGroupFollow.controller";
 export { default as ControllerTblFailureReportAttachment } from "./tblFailureReportAttachment.controller";
 export { default as ControllerTblFailureReports } from "./tblFailureReports.controller";
+export { default as ControllerTblFailureSeverityLevel } from "./tblFailureSeverityLevel.controller";
+export { default as ControllerTblFailureStatus } from "./tblFailureStatus.controller";
 export { default as ControllerTblFollowStatus } from "./tblFollowStatus.controller";
 export { default as ControllerTblFunctions } from "./tblFunctions.controller";
 export { default as ControllerTblJobClass } from "./tblJobClass.controller";
@@ -56,6 +59,8 @@ export { default as ControllerTblReScheduleLog } from "./tblReScheduleLog.contro
 export { default as ControllerTblRotationLog } from "./tblRotationLog.controller";
 export { default as ControllerTblRound } from "./tblRound.controller";
 export { default as ControllerTblRoundCompJob } from "./tblRoundCompJob.controller";
+export { default as ControllerTblSpareType } from "./tblSpareType.controller";
+export { default as ControllerTblSpareUnit } from "./tblSpareUnit.controller";
 export { default as ControllerTblUnit } from "./tblUnit.controller";
 export { default as ControllerTblUsers } from "./tblUsers.controller";
 export { default as ControllerTblWorkOrder } from "./tblWorkOrder.controller";
@@ -65,8 +70,3 @@ export { default as ControllerTblWorkShopComponent } from "./tblWorkShopComponen
 export { default as ControllerTblWorkShopDone } from "./tblWorkShopDone.controller";
 export { default as ControllerTblWorkShopRequest } from "./tblWorkShopRequest.controller";
 export { default as ControllerTblWorkShopRequestAttachment } from "./tblWorkShopRequestAttachment.controller";
-export { default as ControllerTblFailureGroupFollow } from "./tblFailureGroupFollow.controller";
-export { default as ControllerTblFailureStatus } from "./tblFailureStatus.controller";
-export { default as ControllerTblSpareType } from "./tblSpareType.controller";
-export { default as ControllerTblSpareUnit } from "./tblSpareUnit.controller";
-export { default as ControllerTblFailureSeverityLevel } from "./tblFailureSeverityLevel.controller";

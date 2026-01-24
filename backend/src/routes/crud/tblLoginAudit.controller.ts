@@ -24,4 +24,4 @@ const ControllerTblLoginAudit = new BaseController({
   responseSchema: buildResponseSchema(TblLoginAuditPlain, TblLoginAudit),
 }).app;
 
-export default ControllerTblLoginAudit
+export default ControllerTblLoginAudit;

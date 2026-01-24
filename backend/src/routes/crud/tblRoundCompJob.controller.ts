@@ -24,4 +24,4 @@ const ControllerTblRoundCompJob = new BaseController({
   responseSchema: buildResponseSchema(TblRoundCompJobPlain, TblRoundCompJob),
 }).app;
 
-export default ControllerTblRoundCompJob
+export default ControllerTblRoundCompJob;

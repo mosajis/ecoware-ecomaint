@@ -24,4 +24,4 @@ const ControllerTblCounterType = new BaseController({
   responseSchema: buildResponseSchema(TblCounterTypePlain, TblCounterType),
 }).app;
 
-export default ControllerTblCounterType
+export default ControllerTblCounterType;

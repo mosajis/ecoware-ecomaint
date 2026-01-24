@@ -24,4 +24,4 @@ const ControllerTblCompType = new BaseController({
   responseSchema: buildResponseSchema(TblCompTypePlain, TblCompType),
 }).app;
 
-export default ControllerTblCompType
+export default ControllerTblCompType;

@@ -24,4 +24,4 @@ const ControllerTblPendingType = new BaseController({
   responseSchema: buildResponseSchema(TblPendingTypePlain, TblPendingType),
 }).app;
 
-export default ControllerTblPendingType
+export default ControllerTblPendingType;

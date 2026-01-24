@@ -10,7 +10,9 @@ import {
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
-export const ServiceTblWorkShopComponent = new BaseService(prisma.tblWorkShopComponent);
+export const ServiceTblWorkShopComponent = new BaseService(
+  prisma.tblWorkShopComponent,
+);
 
 const ControllerTblWorkShopComponent = new BaseController({
   prefix: "/tblWorkShopComponent",
@@ -21,7 +23,10 @@ const ControllerTblWorkShopComponent = new BaseController({
   service: ServiceTblWorkShopComponent,
   createSchema: TblWorkShopComponentInputCreate,
   updateSchema: TblWorkShopComponentInputUpdate,
-  responseSchema: buildResponseSchema(TblWorkShopComponentPlain, TblWorkShopComponent),
+  responseSchema: buildResponseSchema(
+    TblWorkShopComponentPlain,
+    TblWorkShopComponent,
+  ),
 }).app;
 
-export default ControllerTblWorkShopComponent
+export default ControllerTblWorkShopComponent;

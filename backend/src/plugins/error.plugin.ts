@@ -1,5 +1,5 @@
 import { Elysia } from "elysia";
-import { Prisma } from "orm/generated/prisma";
+import { Prisma } from "orm/generated/prisma/client";
 
 type ErrorResponse = {
   statusCode: number;

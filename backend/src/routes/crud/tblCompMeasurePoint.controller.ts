@@ -10,7 +10,9 @@ import {
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
-export const ServiceTblCompMeasurePoint = new BaseService(prisma.tblCompMeasurePoint);
+export const ServiceTblCompMeasurePoint = new BaseService(
+  prisma.tblCompMeasurePoint,
+);
 
 const ControllerTblCompMeasurePoint = new BaseController({
   prefix: "/tblCompMeasurePoint",
@@ -21,7 +23,10 @@ const ControllerTblCompMeasurePoint = new BaseController({
   service: ServiceTblCompMeasurePoint,
   createSchema: TblCompMeasurePointInputCreate,
   updateSchema: TblCompMeasurePointInputUpdate,
-  responseSchema: buildResponseSchema(TblCompMeasurePointPlain, TblCompMeasurePoint),
+  responseSchema: buildResponseSchema(
+    TblCompMeasurePointPlain,
+    TblCompMeasurePoint,
+  ),
 }).app;
 
-export default ControllerTblCompMeasurePoint
+export default ControllerTblCompMeasurePoint;

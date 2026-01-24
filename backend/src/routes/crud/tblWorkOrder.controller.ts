@@ -64,7 +64,7 @@ const ControllerTblWorkOrder = new BaseController({
           workOrderStatusId: 2,
           exportMarker: 0,
           workOrderTypeId: 2,
-        })
+        }),
       );
 
       // Bulk insert workOrders

@@ -10,7 +10,9 @@ import {
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
-export const ServiceTblFailureReportAttachment = new BaseService(prisma.tblFailureReportAttachment);
+export const ServiceTblFailureReportAttachment = new BaseService(
+  prisma.tblFailureReportAttachment,
+);
 
 const ControllerTblFailureReportAttachment = new BaseController({
   prefix: "/tblFailureReportAttachment",
@@ -21,7 +23,10 @@ const ControllerTblFailureReportAttachment = new BaseController({
   service: ServiceTblFailureReportAttachment,
   createSchema: TblFailureReportAttachmentInputCreate,
   updateSchema: TblFailureReportAttachmentInputUpdate,
-  responseSchema: buildResponseSchema(TblFailureReportAttachmentPlain, TblFailureReportAttachment),
+  responseSchema: buildResponseSchema(
+    TblFailureReportAttachmentPlain,
+    TblFailureReportAttachment,
+  ),
 }).app;
 
-export default ControllerTblFailureReportAttachment
+export default ControllerTblFailureReportAttachment;

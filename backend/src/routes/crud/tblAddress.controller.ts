@@ -1,6 +1,5 @@
 import { BaseController } from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
-import { PrismaClient } from "orm/generated/prisma";
 import {
   TblAddress,
   TblAddressInputCreate,
@@ -24,4 +23,4 @@ const ControllerTblAddress = new BaseController({
   responseSchema: buildResponseSchema(TblAddressPlain, TblAddress),
 }).app;
 
-export default ControllerTblAddress
+export default ControllerTblAddress;

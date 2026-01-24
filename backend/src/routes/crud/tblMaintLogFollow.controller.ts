@@ -10,7 +10,9 @@ import {
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
-export const ServiceTblMaintLogFollow = new BaseService(prisma.tblMaintLogFollow);
+export const ServiceTblMaintLogFollow = new BaseService(
+  prisma.tblMaintLogFollow,
+);
 
 const ControllerTblMaintLogFollow = new BaseController({
   prefix: "/tblMaintLogFollow",
@@ -21,7 +23,10 @@ const ControllerTblMaintLogFollow = new BaseController({
   service: ServiceTblMaintLogFollow,
   createSchema: TblMaintLogFollowInputCreate,
   updateSchema: TblMaintLogFollowInputUpdate,
-  responseSchema: buildResponseSchema(TblMaintLogFollowPlain, TblMaintLogFollow),
+  responseSchema: buildResponseSchema(
+    TblMaintLogFollowPlain,
+    TblMaintLogFollow,
+  ),
 }).app;
 
-export default ControllerTblMaintLogFollow
+export default ControllerTblMaintLogFollow;
