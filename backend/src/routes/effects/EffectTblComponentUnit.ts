@@ -1,200 +1,201 @@
-import { t } from 'elysia'
+import { t } from "elysia";
 import {
   PrismaClient,
   type TblCompJob,
   type TblCompMeasurePoint,
-} from 'orm/generated/prisma'
+} from "orm/generated/prisma";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 export const OperationEnum = t.Enum({
   CREATE: 0,
   UPDATE: 1,
   DELETE: 2,
-})
+});
 
 export async function effectComponentUnitChange({
   componentUnitId,
   userId,
 }: {
-  componentUnitId: number
-  userId: number
+  componentUnitId: number;
+  userId: number;
 }) {
-  return prisma.$transaction(async tx => {
+  const now = new Date();
+
+  return prisma.$transaction(async (tx) => {
+    // =========================================================================
+    // ComponentUnit
+    // =========================================================================
     const componentUnit = await tx.tblComponentUnit.findUnique({
       where: { compId: componentUnitId },
-    })
+      select: {
+        compId: true,
+        compTypeId: true,
+      },
+    });
 
-    if (!componentUnit) {
-      throw new Error('componentUnit not found.')
+    if (!componentUnit?.compTypeId) {
+      throw new Error("Invalid componentUnit or compTypeId");
     }
 
-    const { compTypeId } = componentUnit
+    const { compId, compTypeId } = componentUnit;
 
-    if (!compTypeId) {
-      throw new Error('Invalid compType data.')
-    }
+    // =========================================================================
+    // Read CompType data
+    // =========================================================================
+    const [
+      compTypeJobs,
+      compTypeMeasurePoints,
+      compTypeCounters,
+      compTypeAttachments,
+    ] = await Promise.all([
+      tx.tblCompTypeJob.findMany({ where: { compTypeId } }),
+      tx.tblCompTypeMeasurePoint.findMany({ where: { compTypeId } }),
+      tx.tblCompTypeCounter.findMany({ where: { compTypeId } }),
+      tx.tblCompTypeAttachment.findMany({ where: { compTypeId } }),
+    ]);
 
-    // ------------------------------- CompTypeJob ------------------------------------------
-    // Read From CompTypeJob
-    const compTypeJobs = await tx.tblCompTypeJob.findMany({
-      where: { compTypeId },
-    })
+    // =========================================================================
+    // CompJob
+    // =========================================================================
+    await tx.tblCompJob.createMany({
+      data: compTypeJobs.map((j) => ({
+        compId,
+        exportMarker: 0,
+        lastupdate: now,
+        orderNo: j.orderNo,
+        discId: j.discId,
+        jobDescId: j.jobDescId,
+        jobConditionId: j.jobConditionId,
+        frequency: j.frequency,
+        frequencyPeriod: j.frequencyPeriod,
+        planningMethod: j.planningMethod,
+        statusNone: j.statusNone,
+        statusInUse: j.statusInUse,
+        statusAvailable: j.statusAvailable,
+        statusRepair: j.statusRepair,
+        outputFormat: j.outputFormat,
+        maintClassId: j.maintClassId,
+        maintCauseId: j.maintCauseId,
+        maintTypeId: j.maintTypeId,
+        rescheduleLimitId: j.rescheduleLimitId,
+        priority: j.priority,
+        window: j.window,
+        active: j.active,
+        mandatoryHistory: j.mandatoryHistory,
+        deptId: j.deptId,
+        mandatoryResource: j.mandatoryResource,
+        mandatoryStockUsage: j.mandatoryStockUsage,
+        createdUserId: userId,
+        changeReason: "",
+        notes: "",
+      })),
+    });
 
-    // Parsed CompTypeJob To compJobs
-    const compJobs = compTypeJobs.map(i => ({
-      compId: componentUnit.compId,
-      exportMarker: 0,
-      lastupdate: new Date(),
-      orderNo: i.orderNo,
-      discId: i.discId,
-      jobDescId: i.jobDescId,
-      jobConditionId: i.jobConditionId,
-      frequency: i.frequency,
-      frequencyPeriod: i.frequencyPeriod,
-      planningMethod: i.planningMethod,
-      statusNone: i.statusNone,
-      statusInUse: i.statusInUse,
-      statusAvailable: i.statusAvailable,
-      statusRepair: i.statusRepair,
-      outputFormat: i.outputFormat,
-      maintClassId: i.maintClassId,
-      maintCauseId: i.maintCauseId,
-      maintTypeId: i.maintTypeId,
-      rescheduleLimitId: i.rescheduleLimitId,
-      priority: i.priority,
-      window: i.window,
-      active: i.active,
-      mandatoryHistory: i.mandatoryHistory,
-      deptId: i.deptId,
-      mandatoryResource: i.mandatoryResource,
-      mandatoryStockUsage: i.mandatoryStockUsage,
-      createdUserId: userId,
-      changeReason: '',
-      notes: '',
-      lastDone: null,
-      nextDueDate: null,
-      cbmStatus: null,
-    }))
+    // =========================================================================
+    // Measure Points
+    // =========================================================================
+    await tx.tblCompMeasurePoint.createMany({
+      data: compTypeMeasurePoints.map((m) => ({
+        compId,
+        counterTypeId: m.counterTypeId,
+        unitId: m.unitId,
+        setValue: m.setValue,
+        operationalMinValue: m.operationalMinValue,
+        operationalMaxValue: m.operationalMaxValue,
+        deptId: m.deptId,
+        orderNo: m.orderNo,
+        lastupdate: now,
+        currentValue: 0,
+        exportMarker: 0,
+      })),
+    });
 
-    // write to tblCompJob
-    await tx.tblCompJob.createMany({ data: compJobs })
+    // =========================================================================
+    // Counters
+    // =========================================================================
+    await tx.tblCompCounter.createMany({
+      data: compTypeCounters.map((c) => ({
+        compId,
+        counterTypeId: c.counterTypeId,
+        deptId: c.deptId,
+        orderNo: c.orderNo,
+        averageCountRate: c.averageCountRate,
+        useCalcAverage: c.useCalcAverage,
+        exportMarker: 0,
+        lastupdate: now,
+        currentValue: 0,
+      })),
+    });
 
-    // ------------------------------- CompTypeMeasurePoint ----------------------------------
-    // Read From CompTypeMeasurePoint
-    const compTypeMeasurePoint = await tx.tblCompTypeMeasurePoint.findMany({
-      where: { compTypeId },
-    })
+    // =========================================================================
+    // Attachments
+    // =========================================================================
+    await tx.tblComponentUnitAttachment.createMany({
+      data: compTypeAttachments.map((a) => ({
+        compId,
+        attachmentId: a.attachmentId,
+        orderNo: a.orderNo,
+        createdUserId: userId,
+        createdAt: now,
+      })),
+    });
 
-    // Parsed CompTypeMeasurePoint To CompMeasurePoint
-    const compMeasurePoints = compTypeMeasurePoint.map(i => ({
-      compId: componentUnit.compId,
-      counterTypeId: i.counterTypeId,
-      unitId: i.unitId,
-      setValue: i.setValue,
-      operationalMinValue: i.operationalMinValue,
-      operationalMaxValue: i.operationalMaxValue,
-      deptId: i.deptId,
-      orderNo: i.orderNo,
-      lastupdate: new Date(),
-      changedBy: null,
-      currentDate: null,
-      currentValue: 0,
-      exportMarker: 0,
-    }))
+    // =========================================================================
+    // JobCounter (کاملاً ID-based)
+    // =========================================================================
+    const compTypeJobIds = compTypeJobs.map((j) => j.compTypeJobId);
 
-    // write to CompMeasurePoint
-    await tx.tblCompMeasurePoint.createMany({ data: compMeasurePoints })
-
-    // ------------------------------- CompTypeCounter --------------------------------------
-    // Read From CompTypeCounter
-    const compTypeCounter = await tx.tblCompTypeCounter.findMany({
-      where: { compTypeId },
-    })
-
-    // Parsed CompTypeCounter To CompCounter
-    const compCounters = compTypeCounter.map(i => ({
-      compId: componentUnit.compId,
-      counterTypeId: i.counterTypeId,
-      deptId: i.deptId,
-      orderNo: i.orderNo,
-      averageCountRate: i.averageCountRate,
-      useCalcAverage: i.useCalcAverage,
-      exportMarker: 0,
-      lastupdate: new Date(),
-      // Check this fields
-      dependsOnId: null,
-      startDate: null,
-      startValue: null,
-      lastZeroedValue: null,
-      zeroedDate: null,
-      changedBy: null,
-      currentDate: null,
-      currentValue: 0,
-    }))
-
-    // write to CompMeasurePoint
-    await tx.tblCompCounter.createMany({ data: compCounters })
-
-    // ------------------------------- CompTypeAttachmnet --------------------------------------
-    // Read From CompTypeAttachments
-    const compTypeAttachments = await tx.tblCompTypeAttachment.findMany({
-      where: { compTypeId },
-    })
-
-    // Parsed CompTypeAttachment To CompAttachment
-    const compAttachments = compTypeAttachments.map(i => ({
-      compId: componentUnit.compId,
-      attachmentId: i.attachmentId,
-      orderNo: i.orderNo,
-      createdUserId: userId,
-      createdAt: new Date(),
-    }))
-
-    // write to CompMeasurePoint
-    await tx.tblComponentUnitAttachment.createMany({ data: compAttachments })
-
-    // ------------------------------- CompTypeJobCounter --------------------------------------
-    compTypeJobs.forEach(async i => {
-      const compTypeJobCounter = await tx.tblCompTypeJobCounter.findFirst({
-        where: { compTypeJobId: i.compTypeJobId },
-        include: {
-          tblCompTypeCounter: true,
-        },
-      })
-
-      if (compTypeJobCounter) {
-        const compCoutner = await tx.tblCompCounter.findFirst({
-          where: {
-            counterTypeId: compTypeJobCounter.tblCompTypeCounter?.counterTypeId,
-          },
-        })
-        if (compCoutner) {
-          const compJob = await tx.tblCompJob.findFirst({
+    const compTypeJobCounters =
+      compTypeJobIds.length === 0
+        ? []
+        : await tx.tblCompTypeJobCounter.findMany({
             where: {
-              jobDescId: i.jobDescId,
+              compTypeJobId: { in: compTypeJobIds },
             },
-          })
-          await tx.tblCompJobCounter.create({
-            data: {
-              compJobId: compJob?.compJobId,
-              compCounterId: compCoutner.compCounterId,
-              frequency: compTypeJobCounter.frequency,
-              window: compTypeJobCounter.window,
-              deptId: compTypeJobCounter.deptId,
-              orderNo: compTypeJobCounter.orderNo,
-              updateByFunction: compTypeJobCounter.updateByFunction,
-              showInAlert: compTypeJobCounter.showInAlert,
-              exportMarker: 0,
-              lastupdate: new Date(),
-              createdUserId: userId,
-              lastDoneCount: null,
-              nextDueCount: null,
-              orderNumber: 0,
-            },
-          })
-        }
-      }
-    })
-  })
+          });
+
+    const [compJobs, compCounters] = await Promise.all([
+      tx.tblCompJob.findMany({ where: { compId } }),
+      tx.tblCompCounter.findMany({ where: { compId } }),
+    ]);
+
+    const jobMap = new Map(compJobs.map((j) => [j.jobDescId, j]));
+    const counterMap = new Map(compCounters.map((c) => [c.counterTypeId, c]));
+
+    const jobCounterData = compTypeJobCounters
+      .map((jc) => {
+        const compTypeJob = compTypeJobs.find(
+          (j) => j.compTypeJobId === jc.compTypeJobId,
+        );
+        if (!compTypeJob) return null;
+
+        const job = jobMap.get(compTypeJob.jobDescId);
+        const counter = counterMap.get(jc.compTypeCounterId);
+
+        if (!job || !counter) return null;
+
+        return {
+          compJobId: job.compJobId,
+          compCounterId: counter.compCounterId,
+          frequency: jc.frequency,
+          window: jc.window,
+          deptId: jc.deptId,
+          orderNo: jc.orderNo,
+          updateByFunction: jc.updateByFunction,
+          showInAlert: jc.showInAlert,
+          exportMarker: 0,
+          lastupdate: now,
+          createdUserId: userId,
+          orderNumber: 0,
+        };
+      })
+      .filter(Boolean);
+
+    if (jobCounterData.length > 0) {
+      await tx.tblCompJobCounter.createMany({
+        data: jobCounterData as any[],
+      });
+    }
+  });
 }

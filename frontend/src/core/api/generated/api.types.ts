@@ -1650,6 +1650,61 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/tblFailureGroupFollow/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all */
+        get: operations["getTblFailureGroupFollow"];
+        put?: never;
+        /** Create */
+        post: operations["postTblFailureGroupFollow"];
+        /** Delete all */
+        delete: operations["deleteTblFailureGroupFollow"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblFailureGroupFollow/{failureGroupFollowId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one */
+        get: operations["getTblFailureGroupFollowByFailureGroupFollowId"];
+        /** Update */
+        put: operations["putTblFailureGroupFollowByFailureGroupFollowId"];
+        post?: never;
+        /** Delete one */
+        delete: operations["deleteTblFailureGroupFollowByFailureGroupFollowId"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblFailureGroupFollow/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Count */
+        get: operations["getTblFailureGroupFollowCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tblFailureReportAttachment/": {
         parameters: {
             query?: never;
@@ -1752,6 +1807,116 @@ export interface paths {
         };
         /** Count */
         get: operations["getTblFailureReportsCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblFailureStatus/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all */
+        get: operations["getTblFailureStatus"];
+        put?: never;
+        /** Create */
+        post: operations["postTblFailureStatus"];
+        /** Delete all */
+        delete: operations["deleteTblFailureStatus"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblFailureStatus/{failureStatusId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one */
+        get: operations["getTblFailureStatusByFailureStatusId"];
+        /** Update */
+        put: operations["putTblFailureStatusByFailureStatusId"];
+        post?: never;
+        /** Delete one */
+        delete: operations["deleteTblFailureStatusByFailureStatusId"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblFailureStatus/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Count */
+        get: operations["getTblFailureStatusCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblFialureSeverityLevel/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all */
+        get: operations["getTblFialureSeverityLevel"];
+        put?: never;
+        /** Create */
+        post: operations["postTblFialureSeverityLevel"];
+        /** Delete all */
+        delete: operations["deleteTblFialureSeverityLevel"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblFialureSeverityLevel/{failureSeverityLevelId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one */
+        get: operations["getTblFialureSeverityLevelByFailureSeverityLevelId"];
+        /** Update */
+        put: operations["putTblFialureSeverityLevelByFailureSeverityLevelId"];
+        post?: never;
+        /** Delete one */
+        delete: operations["deleteTblFialureSeverityLevelByFailureSeverityLevelId"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblFialureSeverityLevel/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Count */
+        get: operations["getTblFialureSeverityLevelCount"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3607,6 +3772,61 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/tblWorkOrderType/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all */
+        get: operations["getTblWorkOrderType"];
+        put?: never;
+        /** Create */
+        post: operations["postTblWorkOrderType"];
+        /** Delete all */
+        delete: operations["deleteTblWorkOrderType"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblWorkOrderType/{workOrderTypeId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one */
+        get: operations["getTblWorkOrderTypeByWorkOrderTypeId"];
+        /** Update */
+        put: operations["putTblWorkOrderTypeByWorkOrderTypeId"];
+        post?: never;
+        /** Delete one */
+        delete: operations["deleteTblWorkOrderTypeByWorkOrderTypeId"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblWorkOrderType/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Count */
+        get: operations["getTblWorkOrderTypeCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tblWorkShopComponent/": {
         parameters: {
             query?: never;
@@ -3895,6 +4115,38 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/health": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["getHealth"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["getIndex"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/*": {
         parameters: {
             query?: never;
@@ -3903,6 +4155,22 @@ export interface paths {
             cookie?: never;
         };
         get: operations["get*"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/assets/*": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["getAssets*"];
         put?: never;
         post?: never;
         delete?: never;
@@ -21623,24 +21891,26 @@ export interface operations {
                                 maintLogId: null | (number);
                                 failureReportDate: null | number);
                                 failureDateTime: null | number);
-                                waitDateTime: null | number);
+                                waitDateTime: Record<string, never> | number;
                                 totalWait: null | (number);
                                 title: null | string;
                                 failureDesc: null | string;
                                 failureCause: null | string;
                                 actionDesc: null | string;
-                                nextAction: null | string;
-                                loggedBy: null | (number);
+                                followDesc: null | string;
+                                reportedUserId: null | (number);
                                 deptId: null | (number);
-                                exportMarker: null | (number);
                                 lastupdate: null | number);
-                                approvedby: null | (number);
+                                approvedUserId: null | (number);
                                 stateDateTime: null | number);
                                 stateCode: null | (number);
-                                closedBy: null | (number);
+                                closedUserId: null | (number);
                                 closedDateTime: null | number);
                                 failureNumber: null | (number);
-                                orderNo: null | (number);
+                                failureSeverityLevelId: null | (number);
+                                nextFollowDate: null | number);
+                                failureGroupFollowId: null | (number);
+                                failureStatusId: null | (number);
                             }[];
                             tblFunctions?: {
                                 functionId: number;
@@ -22213,24 +22483,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
                         tblFunctions?: {
                             functionId: number;
@@ -22577,24 +22849,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
                         tblFunctions?: {
                             functionId: number;
@@ -23260,24 +23534,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
                         tblFunctions?: {
                             functionId: number;
@@ -23594,24 +23870,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
                         tblFunctions?: {
                             functionId: number;
@@ -25717,24 +25995,26 @@ export interface operations {
                                 maintLogId: null | (number);
                                 failureReportDate: null | number);
                                 failureDateTime: null | number);
-                                waitDateTime: null | number);
+                                waitDateTime: Record<string, never> | number;
                                 totalWait: null | (number);
                                 title: null | string;
                                 failureDesc: null | string;
                                 failureCause: null | string;
                                 actionDesc: null | string;
-                                nextAction: null | string;
-                                loggedBy: null | (number);
+                                followDesc: null | string;
+                                reportedUserId: null | (number);
                                 deptId: null | (number);
-                                exportMarker: null | (number);
                                 lastupdate: null | number);
-                                approvedby: null | (number);
+                                approvedUserId: null | (number);
                                 stateDateTime: null | number);
                                 stateCode: null | (number);
-                                closedBy: null | (number);
+                                closedUserId: null | (number);
                                 closedDateTime: null | number);
                                 failureNumber: null | (number);
-                                orderNo: null | (number);
+                                failureSeverityLevelId: null | (number);
+                                nextFollowDate: null | number);
+                                failureGroupFollowId: null | (number);
+                                failureStatusId: null | (number);
                             }[];
                             tblLogDisciplines?: {
                                 logDiscId: number;
@@ -26028,24 +26308,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
                         tblLogDisciplines?: {
                             logDiscId: number;
@@ -26251,24 +26533,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
                         tblLogDisciplines?: {
                             logDiscId: number;
@@ -26613,24 +26897,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
                         tblLogDisciplines?: {
                             logDiscId: number;
@@ -26806,24 +27092,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
                         tblLogDisciplines?: {
                             logDiscId: number;
@@ -27726,6 +28014,408 @@ export interface operations {
             };
         };
     };
+    getTblFailureGroupFollow: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            failureGroupFollowId: number;
+                            name: null | string;
+                            tblFailureReports?: {
+                                failureReportId: number;
+                                compId: null | (number);
+                                discId: null | (number);
+                                maintLogId: null | (number);
+                                failureReportDate: null | number);
+                                failureDateTime: null | number);
+                                waitDateTime: Record<string, never> | number;
+                                totalWait: null | (number);
+                                title: null | string;
+                                failureDesc: null | string;
+                                failureCause: null | string;
+                                actionDesc: null | string;
+                                followDesc: null | string;
+                                reportedUserId: null | (number);
+                                deptId: null | (number);
+                                lastupdate: null | number);
+                                approvedUserId: null | (number);
+                                stateDateTime: null | number);
+                                stateCode: null | (number);
+                                closedUserId: null | (number);
+                                closedDateTime: null | number);
+                                failureNumber: null | (number);
+                                failureSeverityLevelId: null | (number);
+                                nextFollowDate: null | number);
+                                failureGroupFollowId: null | (number);
+                                failureStatusId: null | (number);
+                            }[];
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
+    };
+    postTblFailureGroupFollow: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureGroupFollowId: number;
+                        name: null | string;
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            compId: null | (number);
+                            discId: null | (number);
+                            maintLogId: null | (number);
+                            failureReportDate: null | number);
+                            failureDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
+                            totalWait: null | (number);
+                            title: null | string;
+                            failureDesc: null | string;
+                            failureCause: null | string;
+                            actionDesc: null | string;
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                            approvedUserId: null | (number);
+                            stateDateTime: null | number);
+                            stateCode: null | (number);
+                            closedUserId: null | (number);
+                            closedDateTime: null | number);
+                            failureNumber: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblFailureGroupFollow: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        deleted: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblFailureGroupFollowByFailureGroupFollowId: {
+        parameters: {
+            query?: {
+                include?: string;
+            };
+            header?: never;
+            path: {
+                failureGroupFollowId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureGroupFollowId: number;
+                        name: null | string;
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            compId: null | (number);
+                            discId: null | (number);
+                            maintLogId: null | (number);
+                            failureReportDate: null | number);
+                            failureDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
+                            totalWait: null | (number);
+                            title: null | string;
+                            failureDesc: null | string;
+                            failureCause: null | string;
+                            actionDesc: null | string;
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                            approvedUserId: null | (number);
+                            stateDateTime: null | number);
+                            stateCode: null | (number);
+                            closedUserId: null | (number);
+                            closedDateTime: null | number);
+                            failureNumber: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    putTblFailureGroupFollowByFailureGroupFollowId: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                failureGroupFollowId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureGroupFollowId: number;
+                        name: null | string;
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            compId: null | (number);
+                            discId: null | (number);
+                            maintLogId: null | (number);
+                            failureReportDate: null | number);
+                            failureDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
+                            totalWait: null | (number);
+                            title: null | string;
+                            failureDesc: null | string;
+                            failureCause: null | string;
+                            actionDesc: null | string;
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                            approvedUserId: null | (number);
+                            stateDateTime: null | number);
+                            stateCode: null | (number);
+                            closedUserId: null | (number);
+                            closedDateTime: null | number);
+                            failureNumber: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblFailureGroupFollowByFailureGroupFollowId: {
+        parameters: {
+            query?: {
+                force?: boolean;
+            };
+            header?: never;
+            path: {
+                failureGroupFollowId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureGroupFollowId: number;
+                        name: null | string;
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            compId: null | (number);
+                            discId: null | (number);
+                            maintLogId: null | (number);
+                            failureReportDate: null | number);
+                            failureDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
+                            totalWait: null | (number);
+                            title: null | string;
+                            failureDesc: null | string;
+                            failureCause: null | string;
+                            actionDesc: null | string;
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                            approvedUserId: null | (number);
+                            stateDateTime: null | number);
+                            stateCode: null | (number);
+                            closedUserId: null | (number);
+                            closedDateTime: null | number);
+                            failureNumber: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    getTblFailureGroupFollowCount: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
     getTblFailureReportAttachment: {
         parameters: {
             query?: {
@@ -27777,24 +28467,26 @@ export interface operations {
                                 maintLogId: null | (number);
                                 failureReportDate: null | number);
                                 failureDateTime: null | number);
-                                waitDateTime: null | number);
+                                waitDateTime: Record<string, never> | number;
                                 totalWait: null | (number);
                                 title: null | string;
                                 failureDesc: null | string;
                                 failureCause: null | string;
                                 actionDesc: null | string;
-                                nextAction: null | string;
-                                loggedBy: null | (number);
+                                followDesc: null | string;
+                                reportedUserId: null | (number);
                                 deptId: null | (number);
-                                exportMarker: null | (number);
                                 lastupdate: null | number);
-                                approvedby: null | (number);
+                                approvedUserId: null | (number);
                                 stateDateTime: null | number);
                                 stateCode: null | (number);
-                                closedBy: null | (number);
+                                closedUserId: null | (number);
                                 closedDateTime: null | number);
                                 failureNumber: null | (number);
-                                orderNo: null | (number);
+                                failureSeverityLevelId: null | (number);
+                                nextFollowDate: null | number);
+                                failureGroupFollowId: null | (number);
+                                failureStatusId: null | (number);
                             } & {
                                 [key: string]: unknown;
                             };
@@ -27931,24 +28623,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         } & {
                             [key: string]: unknown;
                         };
@@ -28057,24 +28751,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         } & {
                             [key: string]: unknown;
                         };
@@ -28208,24 +28904,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         } & {
                             [key: string]: unknown;
                         };
@@ -28304,24 +29002,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         } & {
                             [key: string]: unknown;
                         };
@@ -28415,24 +29115,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                             tblFailureReportAttachments?: {
                                 failureReportAttachmentId: number;
                                 failureReportId: number;
@@ -28477,6 +29179,24 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             });
+                            tblFailureGroupFollow?: null | ({
+                                failureGroupFollowId: number;
+                                name: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblFailureStatus?: null | ({
+                                failureStatusId: number;
+                                name: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblFialureSeverityLevel?: null | ({
+                                failureSeverityLevelId: number;
+                                name: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            });
                             tblMaintLog?: null | ({
                                 maintLogId: number;
                                 maintCauseId: null | (number);
@@ -28508,7 +29228,7 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             });
-                            tblUsersTblFailureReportsApprovedbyTotblUsers?: null | ({
+                            tblUsersTblFailureReportsApprovedUserIdTotblUsers?: null | ({
                                 userId: number;
                                 employeeId: null | (number);
                                 addressId: null | (number);
@@ -28532,7 +29252,7 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             });
-                            tblUsersTblFailureReportsClosedByTotblUsers?: null | ({
+                            tblUsersTblFailureReportsClosedUserIdTotblUsers?: null | ({
                                 userId: number;
                                 employeeId: null | (number);
                                 addressId: null | (number);
@@ -28556,7 +29276,7 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             });
-                            tblUsersTblFailureReportsLoggedByTotblUsers?: null | ({
+                            tblUsersTblFailureReportsReportedUserIdTotblUsers?: null | ({
                                 userId: number;
                                 employeeId: null | (number);
                                 addressId: null | (number);
@@ -28602,23 +29322,19 @@ export interface operations {
                 "application/json": {
                     failureReportDate?: null | number);
                     failureDateTime?: null | number);
-                    waitDateTime?: null | number);
+                    waitDateTime: Record<string, never> | number;
                     totalWait?: null | (number);
                     title?: null | string;
                     failureDesc?: null | string;
                     failureCause?: null | string;
                     actionDesc?: null | string;
-                    nextAction?: null | string;
-                    loggedBy?: null | (number);
-                    exportMarker?: null | (number);
+                    followDesc?: null | string;
                     lastupdate?: null | number);
-                    approvedby?: null | (number);
                     stateDateTime?: null | number);
                     stateCode?: null | (number);
-                    closedBy?: null | (number);
                     closedDateTime?: null | number);
                     failureNumber?: null | (number);
-                    orderNo?: null | (number);
+                    nextFollowDate?: null | number);
                     tblFailureReportAttachments?: {
                         connect: {
                             failureReportAttachmentId: number;
@@ -28634,22 +29350,37 @@ export interface operations {
                             discId: number;
                         };
                     };
+                    tblFailureGroupFollow?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblFailureStatus?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblFialureSeverityLevel?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                     tblMaintLog?: {
                         connect: {
                             maintLogId: number;
                         };
                     };
-                    tblUsersTblFailureReportsApprovedbyTotblUsers?: {
+                    tblUsersTblFailureReportsApprovedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         };
                     };
-                    tblUsersTblFailureReportsClosedByTotblUsers?: {
+                    tblUsersTblFailureReportsClosedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         };
                     };
-                    tblUsersTblFailureReportsLoggedByTotblUsers?: {
+                    tblUsersTblFailureReportsReportedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         };
@@ -28658,23 +29389,19 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     failureReportDate?: null | number);
                     failureDateTime?: null | number);
-                    waitDateTime?: null | number);
+                    waitDateTime: Record<string, never> | number;
                     totalWait?: null | (number);
                     title?: null | string;
                     failureDesc?: null | string;
                     failureCause?: null | string;
                     actionDesc?: null | string;
-                    nextAction?: null | string;
-                    loggedBy?: null | (number);
-                    exportMarker?: null | (number);
+                    followDesc?: null | string;
                     lastupdate?: null | number);
-                    approvedby?: null | (number);
                     stateDateTime?: null | number);
                     stateCode?: null | (number);
-                    closedBy?: null | (number);
                     closedDateTime?: null | number);
                     failureNumber?: null | (number);
-                    orderNo?: null | (number);
+                    nextFollowDate?: null | number);
                     tblFailureReportAttachments?: {
                         connect: {
                             failureReportAttachmentId: number;
@@ -28690,22 +29417,37 @@ export interface operations {
                             discId: number;
                         };
                     };
+                    tblFailureGroupFollow?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblFailureStatus?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblFialureSeverityLevel?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                     tblMaintLog?: {
                         connect: {
                             maintLogId: number;
                         };
                     };
-                    tblUsersTblFailureReportsApprovedbyTotblUsers?: {
+                    tblUsersTblFailureReportsApprovedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         };
                     };
-                    tblUsersTblFailureReportsClosedByTotblUsers?: {
+                    tblUsersTblFailureReportsClosedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         };
                     };
-                    tblUsersTblFailureReportsLoggedByTotblUsers?: {
+                    tblUsersTblFailureReportsReportedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         };
@@ -28714,23 +29456,19 @@ export interface operations {
                 "multipart/form-data": {
                     failureReportDate?: null | number);
                     failureDateTime?: null | number);
-                    waitDateTime?: null | number);
+                    waitDateTime: Record<string, never> | number;
                     totalWait?: null | (number);
                     title?: null | string;
                     failureDesc?: null | string;
                     failureCause?: null | string;
                     actionDesc?: null | string;
-                    nextAction?: null | string;
-                    loggedBy?: null | (number);
-                    exportMarker?: null | (number);
+                    followDesc?: null | string;
                     lastupdate?: null | number);
-                    approvedby?: null | (number);
                     stateDateTime?: null | number);
                     stateCode?: null | (number);
-                    closedBy?: null | (number);
                     closedDateTime?: null | number);
                     failureNumber?: null | (number);
-                    orderNo?: null | (number);
+                    nextFollowDate?: null | number);
                     tblFailureReportAttachments?: {
                         connect: {
                             failureReportAttachmentId: number;
@@ -28746,22 +29484,37 @@ export interface operations {
                             discId: number;
                         };
                     };
+                    tblFailureGroupFollow?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblFailureStatus?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblFialureSeverityLevel?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                     tblMaintLog?: {
                         connect: {
                             maintLogId: number;
                         };
                     };
-                    tblUsersTblFailureReportsApprovedbyTotblUsers?: {
+                    tblUsersTblFailureReportsApprovedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         };
                     };
-                    tblUsersTblFailureReportsClosedByTotblUsers?: {
+                    tblUsersTblFailureReportsClosedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         };
                     };
-                    tblUsersTblFailureReportsLoggedByTotblUsers?: {
+                    tblUsersTblFailureReportsReportedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         };
@@ -28783,24 +29536,26 @@ export interface operations {
                         maintLogId: null | (number);
                         failureReportDate: null | number);
                         failureDateTime: null | number);
-                        waitDateTime: null | number);
+                        waitDateTime: Record<string, never> | number;
                         totalWait: null | (number);
                         title: null | string;
                         failureDesc: null | string;
                         failureCause: null | string;
                         actionDesc: null | string;
-                        nextAction: null | string;
-                        loggedBy: null | (number);
+                        followDesc: null | string;
+                        reportedUserId: null | (number);
                         deptId: null | (number);
-                        exportMarker: null | (number);
                         lastupdate: null | number);
-                        approvedby: null | (number);
+                        approvedUserId: null | (number);
                         stateDateTime: null | number);
                         stateCode: null | (number);
-                        closedBy: null | (number);
+                        closedUserId: null | (number);
                         closedDateTime: null | number);
                         failureNumber: null | (number);
-                        orderNo: null | (number);
+                        failureSeverityLevelId: null | (number);
+                        nextFollowDate: null | number);
+                        failureGroupFollowId: null | (number);
+                        failureStatusId: null | (number);
                         tblFailureReportAttachments?: {
                             failureReportAttachmentId: number;
                             failureReportId: number;
@@ -28845,6 +29600,24 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblFailureGroupFollow?: null | ({
+                            failureGroupFollowId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblFailureStatus?: null | ({
+                            failureStatusId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblFialureSeverityLevel?: null | ({
+                            failureSeverityLevelId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
                         tblMaintLog?: null | ({
                             maintLogId: number;
                             maintCauseId: null | (number);
@@ -28876,7 +29649,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblFailureReportsApprovedbyTotblUsers?: null | ({
+                        tblUsersTblFailureReportsApprovedUserIdTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | (number);
                             addressId: null | (number);
@@ -28900,7 +29673,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblFailureReportsClosedByTotblUsers?: null | ({
+                        tblUsersTblFailureReportsClosedUserIdTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | (number);
                             addressId: null | (number);
@@ -28924,7 +29697,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblFailureReportsLoggedByTotblUsers?: null | ({
+                        tblUsersTblFailureReportsReportedUserIdTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | (number);
                             addressId: null | (number);
@@ -29009,24 +29782,26 @@ export interface operations {
                         maintLogId: null | (number);
                         failureReportDate: null | number);
                         failureDateTime: null | number);
-                        waitDateTime: null | number);
+                        waitDateTime: Record<string, never> | number;
                         totalWait: null | (number);
                         title: null | string;
                         failureDesc: null | string;
                         failureCause: null | string;
                         actionDesc: null | string;
-                        nextAction: null | string;
-                        loggedBy: null | (number);
+                        followDesc: null | string;
+                        reportedUserId: null | (number);
                         deptId: null | (number);
-                        exportMarker: null | (number);
                         lastupdate: null | number);
-                        approvedby: null | (number);
+                        approvedUserId: null | (number);
                         stateDateTime: null | number);
                         stateCode: null | (number);
-                        closedBy: null | (number);
+                        closedUserId: null | (number);
                         closedDateTime: null | number);
                         failureNumber: null | (number);
-                        orderNo: null | (number);
+                        failureSeverityLevelId: null | (number);
+                        nextFollowDate: null | number);
+                        failureGroupFollowId: null | (number);
+                        failureStatusId: null | (number);
                         tblFailureReportAttachments?: {
                             failureReportAttachmentId: number;
                             failureReportId: number;
@@ -29071,6 +29846,24 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblFailureGroupFollow?: null | ({
+                            failureGroupFollowId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblFailureStatus?: null | ({
+                            failureStatusId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblFialureSeverityLevel?: null | ({
+                            failureSeverityLevelId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
                         tblMaintLog?: null | ({
                             maintLogId: number;
                             maintCauseId: null | (number);
@@ -29102,7 +29895,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblFailureReportsApprovedbyTotblUsers?: null | ({
+                        tblUsersTblFailureReportsApprovedUserIdTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | (number);
                             addressId: null | (number);
@@ -29126,7 +29919,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblFailureReportsClosedByTotblUsers?: null | ({
+                        tblUsersTblFailureReportsClosedUserIdTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | (number);
                             addressId: null | (number);
@@ -29150,7 +29943,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblFailureReportsLoggedByTotblUsers?: null | ({
+                        tblUsersTblFailureReportsReportedUserIdTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | (number);
                             addressId: null | (number);
@@ -29193,23 +29986,19 @@ export interface operations {
                 "application/json": {
                     failureReportDate?: null | number);
                     failureDateTime?: null | number);
-                    waitDateTime?: null | number);
+                    waitDateTime?: Record<string, never> | number;
                     totalWait?: null | (number);
                     title?: null | string;
                     failureDesc?: null | string;
                     failureCause?: null | string;
                     actionDesc?: null | string;
-                    nextAction?: null | string;
-                    loggedBy?: null | (number);
-                    exportMarker?: null | (number);
+                    followDesc?: null | string;
                     lastupdate?: null | number);
-                    approvedby?: null | (number);
                     stateDateTime?: null | number);
                     stateCode?: null | (number);
-                    closedBy?: null | (number);
                     closedDateTime?: null | number);
                     failureNumber?: null | (number);
-                    orderNo?: null | (number);
+                    nextFollowDate?: null | number);
                     tblFailureReportAttachments?: {
                         connect?: {
                             failureReportAttachmentId: number;
@@ -29230,25 +30019,43 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblFailureGroupFollow?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblFailureStatus?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblFialureSeverityLevel?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblMaintLog?: {
                         connect?: {
                             maintLogId: number;
                         };
                         disconnect?: boolean;
                     };
-                    tblUsersTblFailureReportsApprovedbyTotblUsers?: {
+                    tblUsersTblFailureReportsApprovedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         };
                         disconnect?: boolean;
                     };
-                    tblUsersTblFailureReportsClosedByTotblUsers?: {
+                    tblUsersTblFailureReportsClosedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         };
                         disconnect?: boolean;
                     };
-                    tblUsersTblFailureReportsLoggedByTotblUsers?: {
+                    tblUsersTblFailureReportsReportedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         };
@@ -29258,23 +30065,19 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     failureReportDate?: null | number);
                     failureDateTime?: null | number);
-                    waitDateTime?: null | number);
+                    waitDateTime?: Record<string, never> | number;
                     totalWait?: null | (number);
                     title?: null | string;
                     failureDesc?: null | string;
                     failureCause?: null | string;
                     actionDesc?: null | string;
-                    nextAction?: null | string;
-                    loggedBy?: null | (number);
-                    exportMarker?: null | (number);
+                    followDesc?: null | string;
                     lastupdate?: null | number);
-                    approvedby?: null | (number);
                     stateDateTime?: null | number);
                     stateCode?: null | (number);
-                    closedBy?: null | (number);
                     closedDateTime?: null | number);
                     failureNumber?: null | (number);
-                    orderNo?: null | (number);
+                    nextFollowDate?: null | number);
                     tblFailureReportAttachments?: {
                         connect?: {
                             failureReportAttachmentId: number;
@@ -29295,25 +30098,43 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblFailureGroupFollow?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblFailureStatus?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblFialureSeverityLevel?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblMaintLog?: {
                         connect?: {
                             maintLogId: number;
                         };
                         disconnect?: boolean;
                     };
-                    tblUsersTblFailureReportsApprovedbyTotblUsers?: {
+                    tblUsersTblFailureReportsApprovedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         };
                         disconnect?: boolean;
                     };
-                    tblUsersTblFailureReportsClosedByTotblUsers?: {
+                    tblUsersTblFailureReportsClosedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         };
                         disconnect?: boolean;
                     };
-                    tblUsersTblFailureReportsLoggedByTotblUsers?: {
+                    tblUsersTblFailureReportsReportedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         };
@@ -29323,23 +30144,19 @@ export interface operations {
                 "multipart/form-data": {
                     failureReportDate?: null | number);
                     failureDateTime?: null | number);
-                    waitDateTime?: null | number);
+                    waitDateTime?: Record<string, never> | number;
                     totalWait?: null | (number);
                     title?: null | string;
                     failureDesc?: null | string;
                     failureCause?: null | string;
                     actionDesc?: null | string;
-                    nextAction?: null | string;
-                    loggedBy?: null | (number);
-                    exportMarker?: null | (number);
+                    followDesc?: null | string;
                     lastupdate?: null | number);
-                    approvedby?: null | (number);
                     stateDateTime?: null | number);
                     stateCode?: null | (number);
-                    closedBy?: null | (number);
                     closedDateTime?: null | number);
                     failureNumber?: null | (number);
-                    orderNo?: null | (number);
+                    nextFollowDate?: null | number);
                     tblFailureReportAttachments?: {
                         connect?: {
                             failureReportAttachmentId: number;
@@ -29360,25 +30177,43 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblFailureGroupFollow?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblFailureStatus?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblFialureSeverityLevel?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblMaintLog?: {
                         connect?: {
                             maintLogId: number;
                         };
                         disconnect?: boolean;
                     };
-                    tblUsersTblFailureReportsApprovedbyTotblUsers?: {
+                    tblUsersTblFailureReportsApprovedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         };
                         disconnect?: boolean;
                     };
-                    tblUsersTblFailureReportsClosedByTotblUsers?: {
+                    tblUsersTblFailureReportsClosedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         };
                         disconnect?: boolean;
                     };
-                    tblUsersTblFailureReportsLoggedByTotblUsers?: {
+                    tblUsersTblFailureReportsReportedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         };
@@ -29401,24 +30236,26 @@ export interface operations {
                         maintLogId: null | (number);
                         failureReportDate: null | number);
                         failureDateTime: null | number);
-                        waitDateTime: null | number);
+                        waitDateTime: Record<string, never> | number;
                         totalWait: null | (number);
                         title: null | string;
                         failureDesc: null | string;
                         failureCause: null | string;
                         actionDesc: null | string;
-                        nextAction: null | string;
-                        loggedBy: null | (number);
+                        followDesc: null | string;
+                        reportedUserId: null | (number);
                         deptId: null | (number);
-                        exportMarker: null | (number);
                         lastupdate: null | number);
-                        approvedby: null | (number);
+                        approvedUserId: null | (number);
                         stateDateTime: null | number);
                         stateCode: null | (number);
-                        closedBy: null | (number);
+                        closedUserId: null | (number);
                         closedDateTime: null | number);
                         failureNumber: null | (number);
-                        orderNo: null | (number);
+                        failureSeverityLevelId: null | (number);
+                        nextFollowDate: null | number);
+                        failureGroupFollowId: null | (number);
+                        failureStatusId: null | (number);
                         tblFailureReportAttachments?: {
                             failureReportAttachmentId: number;
                             failureReportId: number;
@@ -29463,6 +30300,24 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblFailureGroupFollow?: null | ({
+                            failureGroupFollowId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblFailureStatus?: null | ({
+                            failureStatusId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblFialureSeverityLevel?: null | ({
+                            failureSeverityLevelId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
                         tblMaintLog?: null | ({
                             maintLogId: number;
                             maintCauseId: null | (number);
@@ -29494,7 +30349,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblFailureReportsApprovedbyTotblUsers?: null | ({
+                        tblUsersTblFailureReportsApprovedUserIdTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | (number);
                             addressId: null | (number);
@@ -29518,7 +30373,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblFailureReportsClosedByTotblUsers?: null | ({
+                        tblUsersTblFailureReportsClosedUserIdTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | (number);
                             addressId: null | (number);
@@ -29542,7 +30397,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblFailureReportsLoggedByTotblUsers?: null | ({
+                        tblUsersTblFailureReportsReportedUserIdTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | (number);
                             addressId: null | (number);
@@ -29597,24 +30452,26 @@ export interface operations {
                         maintLogId: null | (number);
                         failureReportDate: null | number);
                         failureDateTime: null | number);
-                        waitDateTime: null | number);
+                        waitDateTime: Record<string, never> | number;
                         totalWait: null | (number);
                         title: null | string;
                         failureDesc: null | string;
                         failureCause: null | string;
                         actionDesc: null | string;
-                        nextAction: null | string;
-                        loggedBy: null | (number);
+                        followDesc: null | string;
+                        reportedUserId: null | (number);
                         deptId: null | (number);
-                        exportMarker: null | (number);
                         lastupdate: null | number);
-                        approvedby: null | (number);
+                        approvedUserId: null | (number);
                         stateDateTime: null | number);
                         stateCode: null | (number);
-                        closedBy: null | (number);
+                        closedUserId: null | (number);
                         closedDateTime: null | number);
                         failureNumber: null | (number);
-                        orderNo: null | (number);
+                        failureSeverityLevelId: null | (number);
+                        nextFollowDate: null | number);
+                        failureGroupFollowId: null | (number);
+                        failureStatusId: null | (number);
                         tblFailureReportAttachments?: {
                             failureReportAttachmentId: number;
                             failureReportId: number;
@@ -29659,6 +30516,24 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblFailureGroupFollow?: null | ({
+                            failureGroupFollowId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblFailureStatus?: null | ({
+                            failureStatusId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblFialureSeverityLevel?: null | ({
+                            failureSeverityLevelId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
                         tblMaintLog?: null | ({
                             maintLogId: number;
                             maintCauseId: null | (number);
@@ -29690,7 +30565,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblFailureReportsApprovedbyTotblUsers?: null | ({
+                        tblUsersTblFailureReportsApprovedUserIdTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | (number);
                             addressId: null | (number);
@@ -29714,7 +30589,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblFailureReportsClosedByTotblUsers?: null | ({
+                        tblUsersTblFailureReportsClosedUserIdTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | (number);
                             addressId: null | (number);
@@ -29738,7 +30613,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblFailureReportsLoggedByTotblUsers?: null | ({
+                        tblUsersTblFailureReportsReportedUserIdTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | (number);
                             addressId: null | (number);
@@ -29768,6 +30643,810 @@ export interface operations {
         };
     };
     getTblFailureReportsCount: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblFailureStatus: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            failureStatusId: number;
+                            name: null | string;
+                            tblFailureReports?: {
+                                failureReportId: number;
+                                compId: null | (number);
+                                discId: null | (number);
+                                maintLogId: null | (number);
+                                failureReportDate: null | number);
+                                failureDateTime: null | number);
+                                waitDateTime: Record<string, never> | number;
+                                totalWait: null | (number);
+                                title: null | string;
+                                failureDesc: null | string;
+                                failureCause: null | string;
+                                actionDesc: null | string;
+                                followDesc: null | string;
+                                reportedUserId: null | (number);
+                                deptId: null | (number);
+                                lastupdate: null | number);
+                                approvedUserId: null | (number);
+                                stateDateTime: null | number);
+                                stateCode: null | (number);
+                                closedUserId: null | (number);
+                                closedDateTime: null | number);
+                                failureNumber: null | (number);
+                                failureSeverityLevelId: null | (number);
+                                nextFollowDate: null | number);
+                                failureGroupFollowId: null | (number);
+                                failureStatusId: null | (number);
+                            }[];
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
+    };
+    postTblFailureStatus: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureStatusId: number;
+                        name: null | string;
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            compId: null | (number);
+                            discId: null | (number);
+                            maintLogId: null | (number);
+                            failureReportDate: null | number);
+                            failureDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
+                            totalWait: null | (number);
+                            title: null | string;
+                            failureDesc: null | string;
+                            failureCause: null | string;
+                            actionDesc: null | string;
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                            approvedUserId: null | (number);
+                            stateDateTime: null | number);
+                            stateCode: null | (number);
+                            closedUserId: null | (number);
+                            closedDateTime: null | number);
+                            failureNumber: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblFailureStatus: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        deleted: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblFailureStatusByFailureStatusId: {
+        parameters: {
+            query?: {
+                include?: string;
+            };
+            header?: never;
+            path: {
+                failureStatusId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureStatusId: number;
+                        name: null | string;
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            compId: null | (number);
+                            discId: null | (number);
+                            maintLogId: null | (number);
+                            failureReportDate: null | number);
+                            failureDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
+                            totalWait: null | (number);
+                            title: null | string;
+                            failureDesc: null | string;
+                            failureCause: null | string;
+                            actionDesc: null | string;
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                            approvedUserId: null | (number);
+                            stateDateTime: null | number);
+                            stateCode: null | (number);
+                            closedUserId: null | (number);
+                            closedDateTime: null | number);
+                            failureNumber: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    putTblFailureStatusByFailureStatusId: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                failureStatusId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureStatusId: number;
+                        name: null | string;
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            compId: null | (number);
+                            discId: null | (number);
+                            maintLogId: null | (number);
+                            failureReportDate: null | number);
+                            failureDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
+                            totalWait: null | (number);
+                            title: null | string;
+                            failureDesc: null | string;
+                            failureCause: null | string;
+                            actionDesc: null | string;
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                            approvedUserId: null | (number);
+                            stateDateTime: null | number);
+                            stateCode: null | (number);
+                            closedUserId: null | (number);
+                            closedDateTime: null | number);
+                            failureNumber: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblFailureStatusByFailureStatusId: {
+        parameters: {
+            query?: {
+                force?: boolean;
+            };
+            header?: never;
+            path: {
+                failureStatusId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureStatusId: number;
+                        name: null | string;
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            compId: null | (number);
+                            discId: null | (number);
+                            maintLogId: null | (number);
+                            failureReportDate: null | number);
+                            failureDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
+                            totalWait: null | (number);
+                            title: null | string;
+                            failureDesc: null | string;
+                            failureCause: null | string;
+                            actionDesc: null | string;
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                            approvedUserId: null | (number);
+                            stateDateTime: null | number);
+                            stateCode: null | (number);
+                            closedUserId: null | (number);
+                            closedDateTime: null | number);
+                            failureNumber: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    getTblFailureStatusCount: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblFialureSeverityLevel: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            failureSeverityLevelId: number;
+                            name: null | string;
+                            tblFailureReports?: {
+                                failureReportId: number;
+                                compId: null | (number);
+                                discId: null | (number);
+                                maintLogId: null | (number);
+                                failureReportDate: null | number);
+                                failureDateTime: null | number);
+                                waitDateTime: Record<string, never> | number;
+                                totalWait: null | (number);
+                                title: null | string;
+                                failureDesc: null | string;
+                                failureCause: null | string;
+                                actionDesc: null | string;
+                                followDesc: null | string;
+                                reportedUserId: null | (number);
+                                deptId: null | (number);
+                                lastupdate: null | number);
+                                approvedUserId: null | (number);
+                                stateDateTime: null | number);
+                                stateCode: null | (number);
+                                closedUserId: null | (number);
+                                closedDateTime: null | number);
+                                failureNumber: null | (number);
+                                failureSeverityLevelId: null | (number);
+                                nextFollowDate: null | number);
+                                failureGroupFollowId: null | (number);
+                                failureStatusId: null | (number);
+                            }[];
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
+    };
+    postTblFialureSeverityLevel: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureSeverityLevelId: number;
+                        name: null | string;
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            compId: null | (number);
+                            discId: null | (number);
+                            maintLogId: null | (number);
+                            failureReportDate: null | number);
+                            failureDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
+                            totalWait: null | (number);
+                            title: null | string;
+                            failureDesc: null | string;
+                            failureCause: null | string;
+                            actionDesc: null | string;
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                            approvedUserId: null | (number);
+                            stateDateTime: null | number);
+                            stateCode: null | (number);
+                            closedUserId: null | (number);
+                            closedDateTime: null | number);
+                            failureNumber: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblFialureSeverityLevel: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        deleted: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblFialureSeverityLevelByFailureSeverityLevelId: {
+        parameters: {
+            query?: {
+                include?: string;
+            };
+            header?: never;
+            path: {
+                failureSeverityLevelId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureSeverityLevelId: number;
+                        name: null | string;
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            compId: null | (number);
+                            discId: null | (number);
+                            maintLogId: null | (number);
+                            failureReportDate: null | number);
+                            failureDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
+                            totalWait: null | (number);
+                            title: null | string;
+                            failureDesc: null | string;
+                            failureCause: null | string;
+                            actionDesc: null | string;
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                            approvedUserId: null | (number);
+                            stateDateTime: null | number);
+                            stateCode: null | (number);
+                            closedUserId: null | (number);
+                            closedDateTime: null | number);
+                            failureNumber: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    putTblFialureSeverityLevelByFailureSeverityLevelId: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                failureSeverityLevelId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    name?: null | string;
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureSeverityLevelId: number;
+                        name: null | string;
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            compId: null | (number);
+                            discId: null | (number);
+                            maintLogId: null | (number);
+                            failureReportDate: null | number);
+                            failureDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
+                            totalWait: null | (number);
+                            title: null | string;
+                            failureDesc: null | string;
+                            failureCause: null | string;
+                            actionDesc: null | string;
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                            approvedUserId: null | (number);
+                            stateDateTime: null | number);
+                            stateCode: null | (number);
+                            closedUserId: null | (number);
+                            closedDateTime: null | number);
+                            failureNumber: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblFialureSeverityLevelByFailureSeverityLevelId: {
+        parameters: {
+            query?: {
+                force?: boolean;
+            };
+            header?: never;
+            path: {
+                failureSeverityLevelId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureSeverityLevelId: number;
+                        name: null | string;
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            compId: null | (number);
+                            discId: null | (number);
+                            maintLogId: null | (number);
+                            failureReportDate: null | number);
+                            failureDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
+                            totalWait: null | (number);
+                            title: null | string;
+                            failureDesc: null | string;
+                            failureCause: null | string;
+                            actionDesc: null | string;
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
+                            deptId: null | (number);
+                            lastupdate: null | number);
+                            approvedUserId: null | (number);
+                            stateDateTime: null | number);
+                            stateCode: null | (number);
+                            closedUserId: null | (number);
+                            closedDateTime: null | number);
+                            failureNumber: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    getTblFialureSeverityLevelCount: {
         parameters: {
             query?: {
                 page?: number;
@@ -39677,24 +41356,26 @@ export interface operations {
                                 maintLogId: null | (number);
                                 failureReportDate: null | number);
                                 failureDateTime: null | number);
-                                waitDateTime: null | number);
+                                waitDateTime: Record<string, never> | number;
                                 totalWait: null | (number);
                                 title: null | string;
                                 failureDesc: null | string;
                                 failureCause: null | string;
                                 actionDesc: null | string;
-                                nextAction: null | string;
-                                loggedBy: null | (number);
+                                followDesc: null | string;
+                                reportedUserId: null | (number);
                                 deptId: null | (number);
-                                exportMarker: null | (number);
                                 lastupdate: null | number);
-                                approvedby: null | (number);
+                                approvedUserId: null | (number);
                                 stateDateTime: null | number);
                                 stateCode: null | (number);
-                                closedBy: null | (number);
+                                closedUserId: null | (number);
                                 closedDateTime: null | number);
                                 failureNumber: null | (number);
-                                orderNo: null | (number);
+                                failureSeverityLevelId: null | (number);
+                                nextFollowDate: null | number);
+                                failureGroupFollowId: null | (number);
+                                failureStatusId: null | (number);
                             }[];
                             tblLogCounters?: {
                                 logCounterId: number;
@@ -40331,24 +42012,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
                         tblLogCounters?: {
                             logCounterId: number;
@@ -40705,24 +42388,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
                         tblLogCounters?: {
                             logCounterId: number;
@@ -41443,24 +43128,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
                         tblLogCounters?: {
                             logCounterId: number;
@@ -41787,24 +43474,26 @@ export interface operations {
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
                         tblLogCounters?: {
                             logCounterId: number;
@@ -51662,83 +53351,89 @@ export interface operations {
                                 createdUserId: number;
                                 createdAt: Record<string, never> | number;
                             }[];
-                            tblFailureReportsTblFailureReportsApprovedbyTotblUsers?: {
+                            tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
                                 failureReportId: number;
                                 compId: null | (number);
                                 discId: null | (number);
                                 maintLogId: null | (number);
                                 failureReportDate: null | number);
                                 failureDateTime: null | number);
-                                waitDateTime: null | number);
+                                waitDateTime: Record<string, never> | number;
                                 totalWait: null | (number);
                                 title: null | string;
                                 failureDesc: null | string;
                                 failureCause: null | string;
                                 actionDesc: null | string;
-                                nextAction: null | string;
-                                loggedBy: null | (number);
+                                followDesc: null | string;
+                                reportedUserId: null | (number);
                                 deptId: null | (number);
-                                exportMarker: null | (number);
                                 lastupdate: null | number);
-                                approvedby: null | (number);
+                                approvedUserId: null | (number);
                                 stateDateTime: null | number);
                                 stateCode: null | (number);
-                                closedBy: null | (number);
+                                closedUserId: null | (number);
                                 closedDateTime: null | number);
                                 failureNumber: null | (number);
-                                orderNo: null | (number);
+                                failureSeverityLevelId: null | (number);
+                                nextFollowDate: null | number);
+                                failureGroupFollowId: null | (number);
+                                failureStatusId: null | (number);
                             }[];
-                            tblFailureReportsTblFailureReportsClosedByTotblUsers?: {
+                            tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
                                 failureReportId: number;
                                 compId: null | (number);
                                 discId: null | (number);
                                 maintLogId: null | (number);
                                 failureReportDate: null | number);
                                 failureDateTime: null | number);
-                                waitDateTime: null | number);
+                                waitDateTime: Record<string, never> | number;
                                 totalWait: null | (number);
                                 title: null | string;
                                 failureDesc: null | string;
                                 failureCause: null | string;
                                 actionDesc: null | string;
-                                nextAction: null | string;
-                                loggedBy: null | (number);
+                                followDesc: null | string;
+                                reportedUserId: null | (number);
                                 deptId: null | (number);
-                                exportMarker: null | (number);
                                 lastupdate: null | number);
-                                approvedby: null | (number);
+                                approvedUserId: null | (number);
                                 stateDateTime: null | number);
                                 stateCode: null | (number);
-                                closedBy: null | (number);
+                                closedUserId: null | (number);
                                 closedDateTime: null | number);
                                 failureNumber: null | (number);
-                                orderNo: null | (number);
+                                failureSeverityLevelId: null | (number);
+                                nextFollowDate: null | number);
+                                failureGroupFollowId: null | (number);
+                                failureStatusId: null | (number);
                             }[];
-                            tblFailureReportsTblFailureReportsLoggedByTotblUsers?: {
+                            tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
                                 failureReportId: number;
                                 compId: null | (number);
                                 discId: null | (number);
                                 maintLogId: null | (number);
                                 failureReportDate: null | number);
                                 failureDateTime: null | number);
-                                waitDateTime: null | number);
+                                waitDateTime: Record<string, never> | number;
                                 totalWait: null | (number);
                                 title: null | string;
                                 failureDesc: null | string;
                                 failureCause: null | string;
                                 actionDesc: null | string;
-                                nextAction: null | string;
-                                loggedBy: null | (number);
+                                followDesc: null | string;
+                                reportedUserId: null | (number);
                                 deptId: null | (number);
-                                exportMarker: null | (number);
                                 lastupdate: null | number);
-                                approvedby: null | (number);
+                                approvedUserId: null | (number);
                                 stateDateTime: null | number);
                                 stateCode: null | (number);
-                                closedBy: null | (number);
+                                closedUserId: null | (number);
                                 closedDateTime: null | number);
                                 failureNumber: null | (number);
-                                orderNo: null | (number);
+                                failureSeverityLevelId: null | (number);
+                                nextFollowDate: null | number);
+                                failureGroupFollowId: null | (number);
+                                failureStatusId: null | (number);
                             }[];
                             tblJobDescriptionAttachments?: {
                                 jobDescriptionAttachmentId: number;
@@ -52199,17 +53894,17 @@ export interface operations {
                             failureReportAttachmentId: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsApprovedbyTotblUsers?: {
+                    tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsClosedByTotblUsers?: {
+                    tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsLoggedByTotblUsers?: {
+                    tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         }[];
@@ -52391,17 +54086,17 @@ export interface operations {
                             failureReportAttachmentId: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsApprovedbyTotblUsers?: {
+                    tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsClosedByTotblUsers?: {
+                    tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsLoggedByTotblUsers?: {
+                    tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         }[];
@@ -52583,17 +54278,17 @@ export interface operations {
                             failureReportAttachmentId: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsApprovedbyTotblUsers?: {
+                    tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsClosedByTotblUsers?: {
+                    tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsLoggedByTotblUsers?: {
+                    tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
                         connect: {
                             id: number;
                         }[];
@@ -52940,83 +54635,89 @@ export interface operations {
                             createdUserId: number;
                             createdAt: Record<string, never> | number;
                         }[];
-                        tblFailureReportsTblFailureReportsApprovedbyTotblUsers?: {
+                        tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
                             failureReportId: number;
                             compId: null | (number);
                             discId: null | (number);
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
-                        tblFailureReportsTblFailureReportsClosedByTotblUsers?: {
+                        tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
                             failureReportId: number;
                             compId: null | (number);
                             discId: null | (number);
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
-                        tblFailureReportsTblFailureReportsLoggedByTotblUsers?: {
+                        tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
                             failureReportId: number;
                             compId: null | (number);
                             discId: null | (number);
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
                         tblJobDescriptionAttachments?: {
                             jobDescriptionAttachmentId: number;
@@ -53668,83 +55369,89 @@ export interface operations {
                             createdUserId: number;
                             createdAt: Record<string, never> | number;
                         }[];
-                        tblFailureReportsTblFailureReportsApprovedbyTotblUsers?: {
+                        tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
                             failureReportId: number;
                             compId: null | (number);
                             discId: null | (number);
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
-                        tblFailureReportsTblFailureReportsClosedByTotblUsers?: {
+                        tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
                             failureReportId: number;
                             compId: null | (number);
                             discId: null | (number);
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
-                        tblFailureReportsTblFailureReportsLoggedByTotblUsers?: {
+                        tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
                             failureReportId: number;
                             compId: null | (number);
                             discId: null | (number);
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
                         tblJobDescriptionAttachments?: {
                             jobDescriptionAttachmentId: number;
@@ -54247,7 +55954,7 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsApprovedbyTotblUsers?: {
+                    tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         }[];
@@ -54255,7 +55962,7 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsClosedByTotblUsers?: {
+                    tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         }[];
@@ -54263,7 +55970,7 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsLoggedByTotblUsers?: {
+                    tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         }[];
@@ -54544,7 +56251,7 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsApprovedbyTotblUsers?: {
+                    tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         }[];
@@ -54552,7 +56259,7 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsClosedByTotblUsers?: {
+                    tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         }[];
@@ -54560,7 +56267,7 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsLoggedByTotblUsers?: {
+                    tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         }[];
@@ -54841,7 +56548,7 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsApprovedbyTotblUsers?: {
+                    tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         }[];
@@ -54849,7 +56556,7 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsClosedByTotblUsers?: {
+                    tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         }[];
@@ -54857,7 +56564,7 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsLoggedByTotblUsers?: {
+                    tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
                         connect?: {
                             id: number;
                         }[];
@@ -55258,83 +56965,89 @@ export interface operations {
                             createdUserId: number;
                             createdAt: Record<string, never> | number;
                         }[];
-                        tblFailureReportsTblFailureReportsApprovedbyTotblUsers?: {
+                        tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
                             failureReportId: number;
                             compId: null | (number);
                             discId: null | (number);
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
-                        tblFailureReportsTblFailureReportsClosedByTotblUsers?: {
+                        tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
                             failureReportId: number;
                             compId: null | (number);
                             discId: null | (number);
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
-                        tblFailureReportsTblFailureReportsLoggedByTotblUsers?: {
+                        tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
                             failureReportId: number;
                             compId: null | (number);
                             discId: null | (number);
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
                         tblJobDescriptionAttachments?: {
                             jobDescriptionAttachmentId: number;
@@ -55956,83 +57669,89 @@ export interface operations {
                             createdUserId: number;
                             createdAt: Record<string, never> | number;
                         }[];
-                        tblFailureReportsTblFailureReportsApprovedbyTotblUsers?: {
+                        tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
                             failureReportId: number;
                             compId: null | (number);
                             discId: null | (number);
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
-                        tblFailureReportsTblFailureReportsClosedByTotblUsers?: {
+                        tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
                             failureReportId: number;
                             compId: null | (number);
                             discId: null | (number);
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
-                        tblFailureReportsTblFailureReportsLoggedByTotblUsers?: {
+                        tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
                             failureReportId: number;
                             compId: null | (number);
                             discId: null | (number);
                             maintLogId: null | (number);
                             failureReportDate: null | number);
                             failureDateTime: null | number);
-                            waitDateTime: null | number);
+                            waitDateTime: Record<string, never> | number;
                             totalWait: null | (number);
                             title: null | string;
                             failureDesc: null | string;
                             failureCause: null | string;
                             actionDesc: null | string;
-                            nextAction: null | string;
-                            loggedBy: null | (number);
+                            followDesc: null | string;
+                            reportedUserId: null | (number);
                             deptId: null | (number);
-                            exportMarker: null | (number);
                             lastupdate: null | number);
-                            approvedby: null | (number);
+                            approvedUserId: null | (number);
                             stateDateTime: null | number);
                             stateCode: null | (number);
-                            closedBy: null | (number);
+                            closedUserId: null | (number);
                             closedDateTime: null | number);
                             failureNumber: null | (number);
-                            orderNo: null | (number);
+                            failureSeverityLevelId: null | (number);
+                            nextFollowDate: null | number);
+                            failureGroupFollowId: null | (number);
+                            failureStatusId: null | (number);
                         }[];
                         tblJobDescriptionAttachments?: {
                             jobDescriptionAttachmentId: number;
@@ -59879,6 +61598,229 @@ export interface operations {
             };
         };
     };
+    getTblWorkOrderType: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            workOrderTypeId: number;
+                            name: string;
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
+    };
+    postTblWorkOrderType: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name: string;
+                };
+                "application/x-www-form-urlencoded": {
+                    name: string;
+                };
+                "multipart/form-data": {
+                    name: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workOrderTypeId: number;
+                        name: string;
+                    };
+                };
+            };
+        };
+    };
+    deleteTblWorkOrderType: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        deleted: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblWorkOrderTypeByWorkOrderTypeId: {
+        parameters: {
+            query?: {
+                include?: string;
+            };
+            header?: never;
+            path: {
+                workOrderTypeId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workOrderTypeId: number;
+                        name: string;
+                    };
+                };
+            };
+        };
+    };
+    putTblWorkOrderTypeByWorkOrderTypeId: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                workOrderTypeId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                };
+                "application/x-www-form-urlencoded": {
+                    name?: string;
+                };
+                "multipart/form-data": {
+                    name?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workOrderTypeId: number;
+                        name: string;
+                    };
+                };
+            };
+        };
+    };
+    deleteTblWorkOrderTypeByWorkOrderTypeId: {
+        parameters: {
+            query?: {
+                force?: boolean;
+            };
+            header?: never;
+            path: {
+                workOrderTypeId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workOrderTypeId: number;
+                        name: string;
+                    };
+                };
+            };
+        };
+    };
+    getTblWorkOrderTypeCount: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
     getTblWorkShopComponent: {
         parameters: {
             query?: {
@@ -61951,7 +63893,37 @@ export interface operations {
         requestBody?: never;
         responses: never;
     };
+    getHealth: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: never;
+    };
+    getIndex: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: never;
+    };
     "get*": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: never;
+    };
+    "getAssets*": {
         parameters: {
             query?: never;
             header?: never;
