@@ -1,5 +1,5 @@
-import { Elysia, t } from 'elysia'
-import { BaseService } from './base.service'
+import { Elysia, t } from "elysia";
+import { BaseService } from "./base.service";
 
 const querySchema = t.Object({
   page: t.Optional(t.Number()),
@@ -9,44 +9,44 @@ const querySchema = t.Object({
   include: t.Optional(t.String()),
   paginate: t.Optional(t.Boolean()),
   force: t.Optional(t.Boolean()),
-})
+});
 
-function parseSortString(sort?: string): Record<string, 'asc' | 'desc'> {
-  if (!sort) return {}
-  return sort.split(',').reduce(
+function parseSortString(sort?: string): Record<string, "asc" | "desc"> {
+  if (!sort) return {};
+  return sort.split(",").reduce(
     (acc, pair) => {
-      const [field, order] = pair.split(':')
-      if (field && (order === 'asc' || order === 'desc')) {
-        acc[field] = order
+      const [field, order] = pair.split(":");
+      if (field && (order === "asc" || order === "desc")) {
+        acc[field] = order;
       }
-      return acc
+      return acc;
     },
-    {} as Record<string, 'asc' | 'desc'>
-  )
+    {} as Record<string, "asc" | "desc">,
+  );
 }
 
 export interface BaseControllerOptions<Model> {
-  prefix: string
-  swagger: { tags: string[] }
-  service: BaseService<any>
-  createSchema: any
-  updateSchema: any
-  responseSchema: any
-  primaryKey?: string
-  extend?: (app: Elysia) => void
+  prefix: string;
+  swagger: { tags: string[] };
+  service: BaseService<any>;
+  createSchema: any;
+  updateSchema: any;
+  responseSchema: any;
+  primaryKey?: string;
+  extend?: (app: Elysia) => void;
   excludeRoutes?: (
-    | 'getAll'
-    | 'getOne'
-    | 'create'
-    | 'update'
-    | 'delete'
-    | 'deleteAll'
-    | 'count'
-  )[]
+    | "getAll"
+    | "getOne"
+    | "create"
+    | "update"
+    | "delete"
+    | "deleteAll"
+    | "count"
+  )[];
 }
 
 export class BaseController<Model extends Record<string, any>> {
-  readonly app: Elysia
+  readonly app: Elysia;
 
   constructor({
     prefix,
@@ -57,17 +57,17 @@ export class BaseController<Model extends Record<string, any>> {
     swagger,
     extend,
     excludeRoutes = [],
-    primaryKey = 'id', // 🆕 مقدار پیش‌فرض id
+    primaryKey = "id", // 🆕 مقدار پیش‌فرض id
   }: BaseControllerOptions<Model>) {
-    const { tags } = swagger
-    const app = new Elysia({ prefix })
+    const { tags } = swagger;
+    const app = new Elysia({ prefix });
 
-    const isEnabled = (route: string) => !excludeRoutes.includes(route as any)
+    const isEnabled = (route: string) => !excludeRoutes.includes(route as any);
 
     // 🧩 GET / (Get All)
-    if (isEnabled('getAll')) {
+    if (isEnabled("getAll")) {
       app.get(
-        '/',
+        "/",
         async ({ query }) => {
           const {
             page = 1,
@@ -76,29 +76,29 @@ export class BaseController<Model extends Record<string, any>> {
             filter,
             include,
             paginate = false,
-          } = query
+          } = query;
 
-          let parsedFilter: Record<string, any> = {}
-          let parsedInclude: Record<string, any> = {}
+          let parsedFilter: Record<string, any> = {};
+          let parsedInclude: Record<string, any> = {};
 
           if (filter) {
             try {
-              parsedFilter = JSON.parse(filter)
+              parsedFilter = JSON.parse(filter);
             } catch {
-              throw new Error('Invalid filter JSON')
+              throw new Error("Invalid filter JSON");
             }
           }
 
           if (include) {
             try {
-              parsedInclude = JSON.parse(include)
+              parsedInclude = JSON.parse(include);
             } catch {
-              throw new Error('Invalid include JSON')
+              throw new Error("Invalid include JSON");
             }
           }
 
-          const sortObj = parseSortString(sort)
-          const usePagination = !!paginate
+          const sortObj = parseSortString(sort);
+          const usePagination = !!paginate;
 
           return await service.findAll({
             where: parsedFilter,
@@ -106,11 +106,11 @@ export class BaseController<Model extends Record<string, any>> {
             include: parsedInclude,
             page: usePagination ? Number(page) : 1,
             perPage: usePagination ? Number(perPage) : Number.MAX_SAFE_INTEGER,
-          })
+          });
         },
         {
           tags,
-          detail: { summary: 'Get all' },
+          detail: { summary: "Get all" },
           query: querySchema,
           response: t.Object({
             items: t.Array(responseSchema),
@@ -119,169 +119,169 @@ export class BaseController<Model extends Record<string, any>> {
             perPage: t.Integer(),
             totalPages: t.Integer(),
           }),
-        }
-      )
+        },
+      );
     }
 
     // 🧩 GET /:primaryKey (Get One)
-    if (isEnabled('getOne')) {
+    if (isEnabled("getOne")) {
       app.get(
         `/:${primaryKey}`,
         async ({ params, query }) => {
-          let parsedInclude: Record<string, any> = {}
+          let parsedInclude: Record<string, any> = {};
           if (query.include) {
             try {
-              parsedInclude = JSON.parse(query.include)
+              parsedInclude = JSON.parse(query.include);
             } catch {
-              throw new Error('Invalid include JSON')
+              throw new Error("Invalid include JSON");
             }
           }
-          const keyValue = params[primaryKey]
+          const keyValue = params[primaryKey];
           return await service.findOne(
             {
               [primaryKey]: isNaN(Number(keyValue))
                 ? keyValue
                 : Number(keyValue),
             },
-            parsedInclude
-          )
+            parsedInclude,
+          );
         },
         {
           tags,
-          detail: { summary: 'Get one' },
+          detail: { summary: "Get one" },
           params: t.Object({ [primaryKey]: t.Union([t.String(), t.Number()]) }),
           query: t.Object({
             include: t.Optional(t.String()),
           }),
           response: responseSchema,
-        }
-      )
+        },
+      );
     }
 
     // 🧩 POST / (Create)
-    if (isEnabled('create')) {
+    if (isEnabled("create")) {
       app.post(
-        '/',
+        "/",
         async ({ body }) => {
-          return await service.create(body)
+          return await service.create(body);
         },
         {
           tags,
-          detail: { summary: 'Create' },
+          detail: { summary: "Create" },
           body: createSchema,
           response: responseSchema,
-        }
-      )
+        },
+      );
     }
 
     // 🧩 PUT /:primaryKey (Update)
-    if (isEnabled('update')) {
+    if (isEnabled("update")) {
       app.put(
         `/:${primaryKey}`,
         async ({ params, body }) => {
-          const keyValue = params[primaryKey]
+          const keyValue = params[primaryKey];
           return await service.update(
             {
               [primaryKey]: isNaN(Number(keyValue))
                 ? keyValue
                 : Number(keyValue),
             },
-            body
-          )
+            body,
+          );
         },
         {
           tags,
-          detail: { summary: 'Update' },
+          detail: { summary: "Update" },
           validate: false,
           params: t.Object({ [primaryKey]: t.Union([t.String(), t.Number()]) }),
           body: updateSchema,
           response: responseSchema,
-        }
-      )
+        },
+      );
     }
 
     // 🧩 DELETE /:primaryKey (Soft or Force Delete)
-    if (isEnabled('delete')) {
+    if (isEnabled("delete")) {
       app.delete(
         `/:${primaryKey}`,
         async ({ params, query }) => {
-          const keyValue = params[primaryKey]
+          const keyValue = params[primaryKey];
           return await service.delete(
             {
               [primaryKey]: isNaN(Number(keyValue))
                 ? keyValue
                 : Number(keyValue),
             },
-            { force: query.force }
-          )
+            { force: query.force },
+          );
         },
         {
           tags,
-          detail: { summary: 'Delete one' },
+          detail: { summary: "Delete one" },
           params: t.Object({ [primaryKey]: t.Union([t.String(), t.Number()]) }),
           query: t.Object({ force: t.Optional(t.Boolean()) }),
           response: responseSchema,
-        }
-      )
+        },
+      );
     }
 
     // 🧩 DELETE / (Delete All)
-    if (isEnabled('deleteAll')) {
+    if (isEnabled("deleteAll")) {
       app.delete(
-        '/',
+        "/",
         async ({ query }) => {
-          let parsedFilter: Record<string, any> = {}
+          let parsedFilter: Record<string, any> = {};
           if (query.filter) {
             try {
-              parsedFilter = JSON.parse(query.filter)
+              parsedFilter = JSON.parse(query.filter);
             } catch {
-              throw new Error('Invalid filter JSON')
+              throw new Error("Invalid filter JSON");
             }
           }
           const result = await service.deleteAll(parsedFilter, {
             force: query.force,
-          })
-          return { deleted: result.count ?? result.deleted ?? 0 }
+          });
+          return { deleted: result.count ?? result.deleted ?? 0 };
         },
         {
           tags,
-          detail: { summary: 'Delete all' },
+          detail: { summary: "Delete all" },
           query: querySchema,
           response: t.Object({
             deleted: t.Integer(),
           }),
-        }
-      )
+        },
+      );
     }
 
     // 🧩 GET /count
-    if (isEnabled('count')) {
+    if (isEnabled("count")) {
       app.get(
-        '/count',
+        "/count",
         async ({ query }) => {
-          let parsedFilter: Record<string, any> = {}
+          let parsedFilter: Record<string, any> = {};
           if (query.filter) {
             try {
-              parsedFilter = JSON.parse(query.filter)
+              parsedFilter = JSON.parse(query.filter);
             } catch {
-              throw new Error('Invalid filter JSON')
+              throw new Error("Invalid filter JSON");
             }
           }
-          const result = await service.count(parsedFilter)
-          return { count: result }
+          const result = await service.count(parsedFilter);
+          return { count: result };
         },
         {
           tags,
-          detail: { summary: 'Count' },
+          detail: { summary: "Count" },
           query: querySchema,
           response: t.Object({ count: t.Integer() }),
-        }
-      )
+        },
+      );
     }
 
     // 🧩 Extend custom routes
-    if (extend) extend(app as any)
+    if (extend) extend(app as any);
 
-    this.app = app as any
+    this.app = app as any;
   }
 }

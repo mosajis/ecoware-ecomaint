@@ -21,5 +21,9 @@ const sqlConfig = {
 
 const adapter = new PrismaMssql(sqlConfig);
 const prisma = new PrismaClient({ adapter });
+// prisma.tblWorkOrder.findMany({
+//   where: {
 
+//   }
+// })
 export { prisma };
