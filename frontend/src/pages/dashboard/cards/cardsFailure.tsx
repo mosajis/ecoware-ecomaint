@@ -12,16 +12,16 @@ export const buildFailureCardsData = (count: TypeStatistics) => [
     value: count.open,
     // color: KPI_COLORS.yellow,
   },
-  {
-    label: "Closed",
-    value: count.open,
-    // color: KPI_COLORS.green,
-  },
 
   {
     label: "Last Week",
     value: count.open,
     // color: KPI_COLORS.blue,
+  },
+  {
+    label: "Closed",
+    value: count.open,
+    // color: KPI_COLORS.green,
   },
   {
     label: "Last Mounth",

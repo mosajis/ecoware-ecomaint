@@ -67,9 +67,9 @@ export default function PageStockType() {
 
   return (
     <>
-      <Splitter>
-        {/* === TREE VIEW === */}
-        <GenericTree<TypeTblSpareType>
+      {/* <Splitter> */}
+      {/* === TREE VIEW === */}
+      {/* <GenericTree<TypeTblSpareType>
           label="Tree View"
           loading={loading}
           data={tree}
@@ -80,10 +80,10 @@ export default function PageStockType() {
           onRefresh={refetch}
           getItemName={getItemName}
           getItemId={getRowId}
-        />
+        /> */}
 
-        {/* === GRID VIEW === */}
-        <CustomizedDataGrid
+      {/* === GRID VIEW === */}
+      {/* <CustomizedDataGrid
           showToolbar
           label="List View"
           loading={loading}
@@ -95,9 +95,21 @@ export default function PageStockType() {
           onRefreshClick={refetch}
           onAddClick={handleCreate}
           getRowId={getRowId}
-        />
-      </Splitter>
-
+        /> */}
+      {/* </Splitter> */}
+      <CustomizedDataGrid
+        showToolbar
+        label="List View"
+        loading={loading}
+        rows={rows}
+        columns={columns}
+        onEditClick={handleEdit}
+        onDeleteClick={handleDelete}
+        onDoubleClick={handleEdit}
+        onRefreshClick={refetch}
+        onAddClick={handleCreate}
+        getRowId={getRowId}
+      />
       {/* === FORM === */}
       <StockTypeFormDialog
         open={openForm}

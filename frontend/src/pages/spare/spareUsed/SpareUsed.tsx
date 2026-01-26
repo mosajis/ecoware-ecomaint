@@ -1,133 +1,117 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback } from "react";
 import {
+  tblMaintLog,
   tblMaintLogStocks,
+  tblSpareType,
+  tblSpareUnit,
+  TypeTblMaintLog,
   TypeTblMaintLogStocks,
 } from "@/core/api/generated/api";
+import Splitter from "@/shared/components/Splitter/Splitter";
 
 const getRowId = (row: TypeTblMaintLogStocks) => row.maintLogStockId;
 
 const columns: GridColDef<TypeTblMaintLogStocks>[] = [
   {
-    field: "tblMaintLog",
-    headerName: "Component",
+    field: "partName",
+    headerName: "Part Name",
     flex: 1,
-    // @ts-ignore
-    valueGetter: (_, row) => row?.tblMaintLog?.tblComponentUnit?.compNo,
   },
   {
-    field: "jobCode",
-    headerName: "Job Code",
+    field: "maker",
+    headerName: "Maker",
     flex: 1,
-    // @ts-ignore
-    valueGetter: (_, row) => row?.tblMaintLog?.tblJobDescription?.jobDescCode,
   },
   {
-    field: "jobName",
-    headerName: "Job Name",
+    field: "totalCount",
+    headerName: "Total Count",
     flex: 1,
+  },
+  {
+    field: "totalUse",
+    headerName: "Total Use",
+    flex: 1,
+  },
+  {
+    field: "partNo",
+    headerName: "Part No",
+    flex: 1,
+  },
+  {
+    field: "extraNo",
+    headerName: "Extra No",
+    flex: 1,
+  },
+  {
+    field: "notes",
+    headerName: "Notes",
+    flex: 1,
+  },
+  {
+    field: "description",
+    headerName: "Description",
+    flex: 1,
+  },
+  {
+    field: "unitName",
+    headerName: "Unit Name",
+    flex: 5,
     // @ts-ignore
-    valueGetter: (_, row) => row?.tblMaintLog?.tblJobDescription?.jobDescTitle,
-  },
-  {
-    field: "dateDone",
-    headerName: "Date Done",
-    width: 150,
-    valueGetter: (_, row) => row?.tblMaintLog?.dateDone,
-    // @ts-ignore
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-  {
-    field: "discipline",
-    headerName: "Discipline",
-    width: 120,
-    valueGetter: (_, row) =>
-      // @ts-ignore
-      row.tblMaintLog?.tblWorkOrder?.tblCompJob?.tblDiscipline?.name,
-  },
-  {
-    field: "followStatus",
-    headerName: "Follow Status",
-    width: 120,
-    valueGetter: (_, row) =>
-      // @ts-ignore
-      row.tblMaintLog?.tblFollowStatus?.fsName,
-  },
-  {
-    field: "maintClass",
-    headerName: "Maint Class",
-    width: 120,
-    valueGetter: (_, row) =>
-      // @ts-ignore
-      row.tblMaintLog?.tblMaintClass?.descr,
-  },
-  {
-    field: "downTime",
-    headerName: "Down Time (Min)",
-    width: 120,
-    valueGetter: (_, row) => row.tblMaintLog?.totalDuration,
-  },
-  {
-    field: "isUnplanned",
-    headerName: "Is Unplanned",
-    width: 120,
-    // @ts-ignore
-    valueGetter: (_, row) => row.tblMaintLog?.tblWorkOrder?.unexpected,
-    type: "boolean",
-  },
-  {
-    field: "stockCount",
-    headerName: "Stock Count",
-    width: 120,
+    valueGetter: (_, row) => row.tblSpareUnit.tblSpareType.name,
   },
 ];
 
 export default function PageStockUsed() {
   const getAll = useCallback(() => {
     return tblMaintLogStocks.getAll({
+      filter: {},
       include: {
-        tblMaintLog: {
+        tblSpareUnit: {
           include: {
-            tblFollowStatus: true,
-            tblMaintClass: true,
-            tblWorkOrder: {
-              include: {
-                tblCompJob: {
-                  include: {
-                    tblDiscipline: true,
-                  },
-                },
-              },
-            },
-            tblJobDescription: true,
-            tblComponentUnit: true,
+            tblSpareType: true,
           },
         },
-        tblStockItem: true,
       },
     });
   }, []);
 
   const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
-    tblMaintLogStocks.deleteById,
+    tblMaintLog.deleteById,
     "maintLogStockId",
   );
 
   return (
-    <CustomizedDataGrid
-      showToolbar
-      disableEdit
-      disableDelete
-      label="Stock Used"
-      loading={loading}
-      rows={rows}
-      columns={columns}
-      onRefreshClick={handleRefresh}
-      getRowId={getRowId}
-    />
+    <Splitter horizontal>
+      <CustomizedDataGrid
+        showToolbar
+        disableEdit
+        disableDelete
+        disableAdd
+        disableRefresh
+        label="Spare Used"
+        loading={loading}
+        rows={rows}
+        columns={columns}
+        onRefreshClick={handleRefresh}
+        getRowId={getRowId}
+      />
+      <CustomizedDataGrid
+        showToolbar
+        disableEdit
+        disableDelete
+        disableAdd
+        disableRefresh
+        label="MaintLog"
+        loading={loading}
+        rows={rows}
+        columns={columns}
+        onRefreshClick={handleRefresh}
+        getRowId={getRowId}
+      />
+    </Splitter>
   );
 }

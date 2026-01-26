@@ -43,13 +43,13 @@ const Dashboard = () => {
 
   return (
     <Box display={"flex"} flexDirection={"column"} gap={1.5}>
-      {/* <KpiSection
+      {/* <CardSection
         cols={6}
         title="KPI Overview"
         subtitle="Overall maintenance performance and status"
-        kpis={generalKpis}
-      />
-      <Divider /> */}
+        cards={kpiCardsData}
+      /> */}
+      <Divider />
       <CardSection
         cols={6}
         title="Work Order Statistics"
@@ -71,7 +71,7 @@ const Dashboard = () => {
           >
             <Box p={1.5}>
               <PageHeader
-                title="WorkOrder Graph"
+                title="WorkOrder"
                 subtitle="Current workload and completion status"
               />
               <WorkOrdersPieChart counts={counts} />
@@ -79,7 +79,7 @@ const Dashboard = () => {
 
             <CardSection
               cols={2}
-              title="Failure Analysis"
+              title="Failure Report"
               subtitle="Breakdown of failure-related maintenance"
               cards={failureCardsData}
             />
@@ -104,9 +104,7 @@ const Dashboard = () => {
             "Mechanic",
             "HSE Officer",
             "Toolpusher",
-            "BargeMaster",
-            "Technical Inspection",
-            "Toolpusher",
+            "Mud Enginer",
           ].map((i) => (
             <DisciplineCard title={i || ""} counts={counts} />
           ))}

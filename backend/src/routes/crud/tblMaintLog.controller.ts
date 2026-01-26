@@ -1,6 +1,5 @@
 import { BaseController } from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
-import { PrismaClient } from "orm/generated/prisma";
 import {
   TblMaintLog,
   TblMaintLogInputCreate,
