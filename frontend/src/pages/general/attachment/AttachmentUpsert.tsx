@@ -1,48 +1,48 @@
-import * as z from 'zod'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import FormDialog from '@/shared/components/formDialog/FormDialog'
-import FileField from '@/shared/components/FileField'
-import AsyncSelect from '@/shared/components/AsyncSelect'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
-import { memo, useEffect, useMemo, useCallback, useState } from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { createAttachment } from './AttachmentService'
-import { newAttachmentSchema } from '@/shared/tabs/attachmentMap/AttachmentMapSchema'
+import * as z from "zod";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import FileField from "@/shared/components/FileField";
+import AsyncSelect from "@/shared/components/AsyncSelect";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import { memo, useEffect, useMemo, useCallback, useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createAttachment } from "./AttachmentService";
+import { newAttachmentSchema } from "@/shared/tabs/attachmentMap/AttachmentMapSchema";
 import {
   tblAttachment,
   TypeTblAttachment,
   tblAttachmentType,
-} from '@/core/api/generated/api'
-import { useAtomValue } from 'jotai'
-import { atomUser } from '@/pages/auth/auth.atom'
+} from "@/core/api/generated/api";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
 
-export type AttachmentFormValues = z.infer<typeof newAttachmentSchema>
+export type AttachmentFormValues = z.infer<typeof newAttachmentSchema>;
 
 type Props = {
-  open: boolean
-  mode: 'create' | 'update'
-  recordId?: number | null
-  onClose: () => void
-  onSuccess: (data: TypeTblAttachment) => void
-}
+  open: boolean;
+  mode: "create" | "update";
+  recordId?: number | null;
+  onClose: () => void;
+  onSuccess: (data: TypeTblAttachment) => void;
+};
 
 function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
-  const [submitting, setSubmitting] = useState(false)
+  const [submitting, setSubmitting] = useState(false);
 
-  const user = useAtomValue(atomUser)
+  const user = useAtomValue(atomUser);
 
   const defaultValues: AttachmentFormValues = useMemo(
     () => ({
-      title: '',
+      title: "",
       attachmentType: null,
       isUserAttachment: true,
-      file: new File([], ''),
+      file: new File([], ""),
     }),
-    []
-  )
+    [],
+  );
 
   const {
     control,
@@ -54,68 +54,68 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
   } = useForm<AttachmentFormValues>({
     resolver: zodResolver(newAttachmentSchema),
     defaultValues,
-    mode: 'onChange',
-  })
+    mode: "onChange",
+  });
 
-  const selectedFile = watch('file')
+  const selectedFile = watch("file");
 
   useEffect(() => {
-    const fileName = selectedFile?.name?.trim()
+    const fileName = selectedFile?.name?.trim();
 
     if (!fileName) {
-      setValue('title', '')
-      return
+      setValue("title", "");
+      return;
     }
 
-    const lastDotIndex = fileName.lastIndexOf('.')
+    const lastDotIndex = fileName.lastIndexOf(".");
     const nameWithoutExtension =
-      lastDotIndex === -1 ? fileName : fileName.substring(0, lastDotIndex)
+      lastDotIndex === -1 ? fileName : fileName.substring(0, lastDotIndex);
 
-    const currentTitle = watch('title')
+    const currentTitle = watch("title");
 
     if (!currentTitle?.trim()) {
-      setValue('title', nameWithoutExtension)
+      setValue("title", nameWithoutExtension);
     }
-  }, [selectedFile, setValue, watch])
+  }, [selectedFile, setValue, watch]);
 
   const fetchData = useCallback(async () => {
-    if (mode === 'update' && recordId) {
+    if (mode === "update" && recordId) {
       try {
         const res = await tblAttachment.getById(recordId, {
           include: { tblAttachmentType: true },
-        })
+        });
 
         if (res) {
           reset({
-            title: res.title ?? '',
+            title: res.title ?? "",
             attachmentType: res.tblAttachmentType
               ? {
                   attachmentTypeId: res.tblAttachmentType.attachmentTypeId,
-                  name: res.tblAttachmentType.name ?? '',
+                  name: res.tblAttachmentType.name ?? "",
                 }
               : null,
             isUserAttachment: res.isUserAttachment ?? true,
-            file: new File([], ''),
-          })
+            file: new File([], ""),
+          });
         }
       } catch (err) {
-        console.error('Failed to load attachment data', err)
+        console.error("Failed to load attachment data", err);
       }
     } else {
-      reset(defaultValues)
+      reset(defaultValues);
     }
-  }, [mode, recordId, reset, defaultValues])
+  }, [mode, recordId, reset, defaultValues]);
 
   useEffect(() => {
-    if (open) fetchData()
-  }, [open, fetchData])
+    if (open) fetchData();
+  }, [open, fetchData]);
 
-  const isDisabled = submitting
+  const isDisabled = submitting;
 
   // === ارسال فرم ===
   const handleFormSubmit = useCallback(
     async (values: AttachmentFormValues) => {
-      setSubmitting(true)
+      setSubmitting(true);
       try {
         const payload = {
           title: values.title,
@@ -123,66 +123,66 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           isUserAttachment: values.isUserAttachment,
           file: values.file,
           createdUserId: user?.userId as number,
-        }
+        };
 
-        let result: TypeTblAttachment | undefined
+        let result: TypeTblAttachment | undefined;
 
-        if (mode === 'create') {
-          result = await createAttachment(payload)
-        } else if (mode === 'update' && recordId) {
-          result = await tblAttachment.update(recordId, payload)
+        if (mode === "create") {
+          result = await createAttachment(payload);
+        } else if (mode === "update" && recordId) {
+          result = await tblAttachment.update(recordId, payload);
         }
 
         if (result) {
-          onSuccess(result)
-          onClose()
+          onSuccess(result);
+          onClose();
         }
       } catch (err) {
-        console.error('Failed to submit attachment form', err)
+        console.error("Failed to submit attachment form", err);
       } finally {
-        setSubmitting(false)
+        setSubmitting(false);
       }
     },
-    [mode, recordId, onSuccess, onClose]
-  )
+    [mode, recordId, onSuccess, onClose],
+  );
 
   return (
     <FormDialog
       open={open}
-      maxWidth='sm'
+      maxWidth="sm"
       onClose={onClose}
-      title={mode === 'create' ? 'Create Attachment' : 'Edit Attachment'}
+      title={mode === "create" ? "Create Attachment" : "Edit Attachment"}
       submitting={submitting}
       loadingInitial={false}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display='flex' flexDirection='column' gap={1.5}>
+      <Box display="flex" flexDirection="column" gap={1.5}>
         {/* آپلود فایل */}
         <Controller
-          name='file'
+          name="file"
           control={control}
           render={({ field: { onChange } }) => (
             <FileField
-              label='Attachment File *'
+              label="Attachment File *"
               onChange={onChange}
               error={!!errors.file}
               helperText={errors.file?.message as string}
-              disabled={isDisabled || mode === 'update'}
+              disabled={isDisabled || mode === "update"}
               required
-              placeholder='Click to upload or drag and drop file'
+              placeholder="Click to upload or drag and drop file"
             />
           )}
         />
 
         {/* عنوان */}
         <Controller
-          name='title'
+          name="title"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label='Title *'
-              size='small'
+              label="Title *"
+              size="small"
               fullWidth
               error={!!errors.title}
               helperText={errors.title?.message}
@@ -190,18 +190,18 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
             />
           )}
         />
-        <Box display={'grid'} gridTemplateColumns={'2fr 1fr '} gap={1.5}>
+        <Box display={"grid"} gridTemplateColumns={"2fr 1fr "} gap={1.5}>
           <Controller
-            name='attachmentType'
+            name="attachmentType"
             control={control}
             render={({ field, fieldState }) => (
               <AsyncSelect
                 {...field}
                 value={field.value}
                 onChange={field.onChange}
-                label='Attachment Type *'
+                label="Attachment Type *"
                 request={tblAttachmentType.getAll}
-                getOptionLabel={row => row.name}
+                getOptionLabel={(row) => row.name}
                 error={!!fieldState.error?.message}
                 helperText={fieldState.error?.message}
               />
@@ -209,7 +209,7 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           />
 
           <Controller
-            name='isUserAttachment'
+            name="isUserAttachment"
             control={control}
             render={({ field }) => (
               <FormControlLabel
@@ -221,14 +221,14 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
                     disabled={isDisabled}
                   />
                 }
-                label='User Attachment'
+                label="User Attachment"
               />
             )}
           />
         </Box>
       </Box>
     </FormDialog>
-  )
+  );
 }
 
-export default memo(AttachmentUpsert)
+export default memo(AttachmentUpsert);

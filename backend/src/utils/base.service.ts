@@ -1,44 +1,44 @@
 interface BaseServiceOptions {
-  maxLimit?: number
-  softDelete?: boolean
-  softDeleteField?: string
-  allowedIncludes?: string[]
+  maxLimit?: number;
+  softDelete?: boolean;
+  softDeleteField?: string;
+  allowedIncludes?: string[];
 }
 
 export class BaseService<T extends { id: any }> {
-  private model: any
-  private maxLimit: number
-  private softDelete: boolean
-  private softDeleteField: string
-  private allowedIncludes: string[]
+  private model: any;
+  private maxLimit: number;
+  private softDelete: boolean;
+  private softDeleteField: string;
+  private allowedIncludes: string[];
 
   constructor(model: any, options: BaseServiceOptions = {}) {
-    this.model = model
-    this.maxLimit = options.maxLimit ?? 5000
-    this.softDelete = options.softDelete ?? false
-    this.softDeleteField = options.softDeleteField ?? 'deletedAt'
-    this.allowedIncludes = options.allowedIncludes ?? []
+    this.model = model;
+    this.maxLimit = options.maxLimit ?? 5000;
+    this.softDelete = options.softDelete ?? false;
+    this.softDeleteField = options.softDeleteField ?? "deletedAt";
+    this.allowedIncludes = options.allowedIncludes ?? [];
   }
 
   // 🆕 بررسی وجود فیلد در model
   private async hasField(fieldName: string): Promise<boolean> {
     try {
-      const sample = await this.model.findFirst({ take: 1 })
-      return sample ? fieldName in sample : false
+      const sample = await this.model.findFirst({ take: 1 });
+      return sample ? fieldName in sample : false;
     } catch {
-      return false
+      return false;
     }
   }
 
   // 🧠 ایجاد رکورد جدید
   async create(data: any) {
-    return this.model.create({ data })
+    return this.model.create({ data });
   }
 
   // 🧱 دریافت همه با فیلتر، pagination و include امن
   async findAll({
     where = {},
-    orderBy = { createdAt: 'desc' },
+    orderBy = { createdAt: "desc" },
     include = {},
     page = 1,
     perPage = 20,
@@ -47,29 +47,29 @@ export class BaseService<T extends { id: any }> {
   }: any = {}) {
     // Soft-delete filter
     if (this.softDelete) {
-      where[this.softDeleteField] = null
+      where[this.softDeleteField] = null;
     }
 
     // Safe pagination
-    const safePerPage = Math.min(Number(perPage) || 20, this.maxLimit)
+    const safePerPage = Math.min(Number(perPage) || 20, this.maxLimit);
     const safeSkip =
-      skip ?? (page && perPage ? (page - 1) * safePerPage : undefined)
+      skip ?? (page && perPage ? (page - 1) * safePerPage : undefined);
 
     // 🆕 اگر orderNo وجود دارد، آن را بر defaultSort اولویت دهید
-    let finalOrderBy = orderBy
-    if (await this.hasField('orderNo')) {
+    let finalOrderBy = orderBy;
+    if (await this.hasField("orderNo")) {
       finalOrderBy = {
-        orderNo: { sort: 'asc', nulls: 'last' },
+        orderNo: { sort: "asc", nulls: "last" },
         ...orderBy,
-      }
+      };
     }
 
     // Include whitelist
     const safeInclude = Object.fromEntries(
       Object.entries(include).filter(([key]) =>
-        this.allowedIncludes.includes(key)
-      )
-    )
+        this.allowedIncludes.includes(key),
+      ),
+    );
 
     const [items, total] = await Promise.all([
       this.model.findMany({
@@ -80,7 +80,7 @@ export class BaseService<T extends { id: any }> {
         take: take ?? safePerPage,
       }),
       this.model.count({ where }),
-    ])
+    ]);
 
     return {
       items,
@@ -88,27 +88,27 @@ export class BaseService<T extends { id: any }> {
       page,
       perPage: safePerPage,
       totalPages: Math.ceil(total / safePerPage),
-    }
+    };
   }
 
   // 🔍 دریافت یک رکورد
   async findOne(where: any, include: any = {}) {
     if (this.softDelete) {
-      where[this.softDeleteField] = null
+      where[this.softDeleteField] = null;
     }
 
     const safeInclude = Object.fromEntries(
       Object.entries(include).filter(([key]) =>
-        this.allowedIncludes.includes(key)
-      )
-    )
+        this.allowedIncludes.includes(key),
+      ),
+    );
 
-    return this.model.findFirst({ where, include: include })
+    return this.model.findFirst({ where, include: include });
   }
 
   // ✏️ بروزرسانی
   async update(where: any, data: any) {
-    return this.model.update({ where, data })
+    return this.model.update({ where, data });
   }
 
   // ❌ حذف (soft یا hard)
@@ -117,10 +117,10 @@ export class BaseService<T extends { id: any }> {
       return this.model.update({
         where,
         data: { [this.softDeleteField]: new Date() },
-      })
+      });
     }
 
-    return this.model.delete({ where })
+    return this.model.delete({ where });
   }
 
   // ❌ حذف همه با فیلتر
@@ -129,17 +129,17 @@ export class BaseService<T extends { id: any }> {
       return this.model.updateMany({
         where,
         data: { [this.softDeleteField]: new Date() },
-      })
+      });
     }
 
-    return this.model.deleteMany({ where })
+    return this.model.deleteMany({ where });
   }
 
   // 🔢 شمارش رکوردها
   async count(where: any = {}) {
     if (this.softDelete) {
-      where[this.softDeleteField] = null
+      where[this.softDeleteField] = null;
     }
-    return this.model.count({ where })
+    return this.model.count({ where });
   }
 }

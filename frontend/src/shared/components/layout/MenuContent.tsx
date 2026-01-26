@@ -26,7 +26,7 @@ export default function MenuContent() {
         section.items?.some((item) =>
           item.children
             ? item.children.some((child) => currentPath.startsWith(child.path))
-            : currentPath.startsWith(item.path)
+            : currentPath.startsWith(item.path),
         )
       ) {
         newOpen[section.title] = true;
@@ -107,9 +107,9 @@ export default function MenuContent() {
           section.items?.some((item) =>
             item.children
               ? item.children.some((child) =>
-                  currentPath.startsWith(child.path)
+                  currentPath.startsWith(child.path),
                 )
-              : currentPath.startsWith(item.path)
+              : currentPath.startsWith(item.path),
           );
 
         const hasItems = section.items && section.items.length > 0;

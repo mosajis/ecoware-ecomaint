@@ -17,7 +17,7 @@ const TabFailureReport = ({ functionId, label }: TabFailureReportProps) => {
     tblFailureReports.getAll,
     tblFailureReports.getById,
     "failureReportId",
-    !!functionId
+    !!functionId,
   );
 
   const columns = useMemo<GridColDef<TypeTblFailureReports>[]>(
@@ -80,7 +80,7 @@ const TabFailureReport = ({ functionId, label }: TabFailureReportProps) => {
         width: 150,
       },
     ],
-    []
+    [],
   );
 
   return (

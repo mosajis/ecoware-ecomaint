@@ -1,44 +1,44 @@
-import * as z from 'zod'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import FormDialog from '@/shared/components/formDialog/FormDialog'
-import { memo, useEffect, useState, useCallback, useMemo } from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { tblJobClass, TypeTblJobClass } from '@/core/api/generated/api'
-import { requiredStringField } from '@/core/api/helper'
-import NumberField from '@/shared/components/NumberField'
+import * as z from "zod";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import { memo, useEffect, useState, useCallback, useMemo } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { tblJobClass, TypeTblJobClass } from "@/core/api/generated/api";
+import { requiredStringField } from "@/core/helper";
+import NumberField from "@/shared/components/NumberField";
 
 // === Validation Schema ===
 const schema = z.object({
   code: requiredStringField(),
   name: requiredStringField(),
   orderNo: z.number().nullable(),
-})
+});
 
-export type JobClassFormValues = z.infer<typeof schema>
+export type JobClassFormValues = z.infer<typeof schema>;
 
 type Props = {
-  open: boolean
-  mode: 'create' | 'update'
-  recordId?: number | null
-  onClose: () => void
-  onSuccess: (data: TypeTblJobClass) => void
-}
+  open: boolean;
+  mode: "create" | "update";
+  recordId?: number | null;
+  onClose: () => void;
+  onSuccess: (data: TypeTblJobClass) => void;
+};
 
 function JobClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
+  const [loadingInitial, setLoadingInitial] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   // === Default values ===
   const defaultValues: JobClassFormValues = useMemo(
     () => ({
-      code: '',
-      name: '',
+      code: "",
+      name: "",
       orderNo: null,
     }),
-    []
-  )
+    [],
+  );
 
   const {
     control,
@@ -48,81 +48,81 @@ function JobClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
   } = useForm<JobClassFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
-  })
+  });
 
   // === Fetch data for update mode ===
   const fetchData = useCallback(async () => {
-    if (mode === 'update' && recordId) {
-      setLoadingInitial(true)
+    if (mode === "update" && recordId) {
+      setLoadingInitial(true);
       try {
-        const res = await tblJobClass.getById(recordId)
+        const res = await tblJobClass.getById(recordId);
         if (res) {
           reset({
-            code: res.code ?? '',
-            name: res.name ?? '',
+            code: res.code ?? "",
+            name: res.name ?? "",
             orderNo: res.orderNo,
-          })
+          });
         }
       } catch (err) {
-        console.error('Failed to fetch JobClass', err)
-        reset(defaultValues)
+        console.error("Failed to fetch JobClass", err);
+        reset(defaultValues);
       } finally {
-        setLoadingInitial(false)
+        setLoadingInitial(false);
       }
     } else {
-      reset(defaultValues)
+      reset(defaultValues);
     }
-  }, [mode, recordId, reset, defaultValues])
+  }, [mode, recordId, reset, defaultValues]);
 
   useEffect(() => {
-    if (open) fetchData()
-  }, [open, fetchData])
+    if (open) fetchData();
+  }, [open, fetchData]);
 
-  const isDisabled = loadingInitial || submitting
+  const isDisabled = loadingInitial || submitting;
 
   // === Submit handler ===
   const handleFormSubmit = useCallback(
     async (values: JobClassFormValues) => {
-      setSubmitting(true)
+      setSubmitting(true);
       try {
-        let result: TypeTblJobClass
-        if (mode === 'create') {
-          result = await tblJobClass.create(values)
-        } else if (mode === 'update' && recordId) {
-          result = await tblJobClass.update(recordId, values)
+        let result: TypeTblJobClass;
+        if (mode === "create") {
+          result = await tblJobClass.create(values);
+        } else if (mode === "update" && recordId) {
+          result = await tblJobClass.update(recordId, values);
         } else {
-          return
+          return;
         }
-        onSuccess(result)
-        onClose()
+        onSuccess(result);
+        onClose();
       } catch (err) {
-        console.error('Submit failed', err)
+        console.error("Submit failed", err);
       } finally {
-        setSubmitting(false)
+        setSubmitting(false);
       }
     },
-    [mode, recordId, onSuccess, onClose]
-  )
+    [mode, recordId, onSuccess, onClose],
+  );
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === 'create' ? 'Create Job Class' : 'Edit Job Class'}
+      title={mode === "create" ? "Create Job Class" : "Edit Job Class"}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display='flex' flexDirection={'column'} gap={1.5}>
+      <Box display="flex" flexDirection={"column"} gap={1.5}>
         <Controller
-          name='code'
+          name="code"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label='Code *'
-              size='small'
-              sx={{ width: '50%' }}
+              label="Code *"
+              size="small"
+              sx={{ width: "50%" }}
               error={!!errors.code}
               helperText={errors.code?.message}
               disabled={isDisabled}
@@ -131,13 +131,13 @@ function JobClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         />
 
         <Controller
-          name='name'
+          name="name"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label='Name *'
-              size='small'
+              label="Name *"
+              size="small"
               error={!!errors.name}
               helperText={errors.name?.message}
               disabled={isDisabled}
@@ -145,14 +145,14 @@ function JobClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           )}
         />
         <Controller
-          name='orderNo'
+          name="orderNo"
           control={control}
           render={({ field }) => (
             <NumberField
               {...field}
-              label='Order No'
-              size='small'
-              sx={{ width: '50%' }}
+              label="Order No"
+              size="small"
+              sx={{ width: "50%" }}
               error={!!errors.orderNo}
               helperText={errors.orderNo?.message}
               disabled={isDisabled}
@@ -161,7 +161,7 @@ function JobClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         />
       </Box>
     </FormDialog>
-  )
+  );
 }
 
-export default memo(JobClassUpsert)
+export default memo(JobClassUpsert);

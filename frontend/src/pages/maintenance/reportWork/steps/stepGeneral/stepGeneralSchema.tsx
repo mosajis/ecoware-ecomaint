@@ -1,7 +1,7 @@
-import * as z from 'zod'
+import * as z from "zod";
 
 export const selectSchema = <T extends z.ZodRawShape>(shape: T) =>
-  z.object(shape).nullable()
+  z.object(shape).nullable();
 
 export const schema = z.object({
   dateDone: z.string(),
@@ -23,6 +23,6 @@ export const schema = z.object({
     maintClassId: z.number(),
     descr: z.string().nullable(),
   }),
-})
+});
 
-export type TypeValues = z.infer<typeof schema>
+export type TypeValues = z.infer<typeof schema>;

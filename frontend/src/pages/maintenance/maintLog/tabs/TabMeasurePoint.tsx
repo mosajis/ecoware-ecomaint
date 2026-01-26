@@ -1,87 +1,87 @@
-import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import { useCallback, useMemo } from 'react'
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import { useCallback, useMemo } from "react";
 import {
   tblCompMeasurePoint,
   tblCompTypeMeasurePoint,
   type TypeTblCompTypeMeasurePoint,
-} from '@/core/api/generated/api'
-import { GridColDef } from '@mui/x-data-grid'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
+} from "@/core/api/generated/api";
+import { GridColDef } from "@mui/x-data-grid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 interface TabMaintLogProps {
-  compUnitId?: number | null
-  label?: string | null
+  compUnitId?: number | null;
+  label?: string | null;
 }
 
 // maintLogMeasurepoint
 const TabMeasurePoints = ({ compUnitId }: TabMaintLogProps) => {
   // === getAll callback ===
   const getAll = useCallback(() => {
-    if (!compUnitId) return Promise.resolve({ items: [] })
+    if (!compUnitId) return Promise.resolve({ items: [] });
 
     return tblCompMeasurePoint.getAll({
       include: {
         tblUnit: true,
         tblCounterType: true,
       },
-    })
-  }, [compUnitId])
+    });
+  }, [compUnitId]);
 
   // === useDataGrid ===
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
     tblCompTypeMeasurePoint.deleteById,
-    'compMeasurePointId',
-    !!compUnitId
-  )
+    "compMeasurePointId",
+    !!compUnitId,
+  );
 
   // === Columns ===
   const columns = useMemo<GridColDef<TypeTblCompTypeMeasurePoint>[]>(
     () => [
       {
-        field: 'measureName',
-        headerName: 'Measure Name',
+        field: "measureName",
+        headerName: "Measure Name",
         flex: 1,
         valueGetter: (v, row) => row?.tblCounterType?.name,
       },
       {
-        field: 'unitName',
-        headerName: 'Unit Name',
+        field: "unitName",
+        headerName: "Unit Name",
         flex: 1,
         valueGetter: (v, row) => row?.tblUnit?.name,
       },
       {
-        field: 'unitDescription',
-        headerName: 'Unit Description',
+        field: "unitDescription",
+        headerName: "Unit Description",
         flex: 1,
         valueGetter: (v, row) => row?.tblUnit?.description,
       },
-      { field: 'setValue', headerName: 'Set Value', flex: 1 },
+      { field: "setValue", headerName: "Set Value", flex: 1 },
       {
-        field: 'operationalMinValue',
-        headerName: 'Min Value',
+        field: "operationalMinValue",
+        headerName: "Min Value",
         flex: 1,
       },
       {
-        field: 'operationalMaxValue',
-        headerName: 'Max Value',
+        field: "operationalMaxValue",
+        headerName: "Max Value",
         flex: 1,
       },
     ],
-    []
-  )
+    [],
+  );
 
   return (
     <CustomizedDataGrid
-      label='Measures'
+      label="Measures"
       rows={rows}
       columns={columns}
       loading={loading}
       showToolbar
       onRefreshClick={handleRefresh}
-      getRowId={row => row.compTypeMeasurePointId}
+      getRowId={(row) => row.compTypeMeasurePointId}
     />
-  )
-}
+  );
+};
 
-export default TabMeasurePoints
+export default TabMeasurePoints;

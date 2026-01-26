@@ -1,32 +1,32 @@
-import Splitter from '@/shared/components/Splitter/Splitter'
-import TabsComponent from './FunctionTabs'
-import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import FunctionUpsert from './FunctionUpsert'
-import { tblFunctions, TypeTblFunctions } from '@/core/api/generated/api'
-import { useCallback, useState } from 'react'
-import { GridColDef } from '@mui/x-data-grid'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
+import Splitter from "@/shared/components/Splitter/Splitter";
+import TabsComponent from "./FunctionTabs";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import FunctionUpsert from "./FunctionUpsert";
+import { tblFunctions, TypeTblFunctions } from "@/core/api/generated/api";
+import { useCallback, useState } from "react";
+import { GridColDef } from "@mui/x-data-grid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
-const getRowId = (row: TypeTblFunctions) => row.functionId
+const getRowId = (row: TypeTblFunctions) => row.functionId;
 
 // === Columns ===
 const columns: GridColDef<TypeTblFunctions>[] = [
-  { field: 'funcNo', headerName: 'Function No', flex: 1 },
-  { field: 'funcDescr', headerName: 'Function Descr', flex: 1 },
-  { field: 'funcRef', headerName: 'Function Ref', flex: 1 },
+  { field: "funcNo", headerName: "Function No", flex: 1 },
+  { field: "funcDescr", headerName: "Function Descr", flex: 1 },
+  { field: "funcRef", headerName: "Function Ref", flex: 1 },
   {
-    field: 'component',
-    headerName: 'Component',
+    field: "component",
+    headerName: "Component",
     flex: 1,
     valueGetter: (_, row) => row.tblComponentUnit?.compNo,
   },
-]
+];
 
 export default function PageFunction() {
-  const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
-  const [row, setRow] = useState<TypeTblFunctions | null>(null)
-  const [openForm, setOpenForm] = useState(false)
-  const [mode, setMode] = useState<'create' | 'update'>('create')
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+  const [row, setRow] = useState<TypeTblFunctions | null>(null);
+  const [openForm, setOpenForm] = useState(false);
+  const [mode, setMode] = useState<"create" | "update">("create");
 
   const getAll = useCallback(
     () =>
@@ -35,46 +35,46 @@ export default function PageFunction() {
           tblComponentUnit: true,
         },
       }),
-    []
-  )
+    [],
+  );
   // === useDataGrid ===
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
     getAll,
     tblFunctions.deleteById,
-    'functionId'
-  )
+    "functionId",
+  );
 
   const handleRowClick = (params: any) => {
-    setRow(params.row)
-  }
+    setRow(params.row);
+  };
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
-    setSelectedRowId(null)
-    setMode('create')
-    handleUpsertOpen()
-  }, [])
+    setSelectedRowId(null);
+    setMode("create");
+    handleUpsertOpen();
+  }, []);
 
   const handleEdit = useCallback((rowId: number) => {
-    setSelectedRowId(rowId)
-    setMode('update')
-    handleUpsertOpen()
-  }, [])
+    setSelectedRowId(rowId);
+    setMode("update");
+    handleUpsertOpen();
+  }, []);
 
   const handleUpsertClose = useCallback(() => {
-    setOpenForm(false)
-  }, [])
+    setOpenForm(false);
+  }, []);
 
   const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true)
-  }, [])
+    setOpenForm(true);
+  }, []);
 
   return (
     <>
       <Splitter horizontal>
         <CustomizedDataGrid
           showToolbar
-          label='Functions'
+          label="Functions"
           rows={rows}
           columns={columns}
           loading={loading}
@@ -96,5 +96,5 @@ export default function PageFunction() {
         onSuccess={handleRefresh}
       />
     </>
-  )
+  );
 }

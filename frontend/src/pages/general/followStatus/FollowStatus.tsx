@@ -1,56 +1,56 @@
-import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import FollowStatusUpsert from './FollowStatusUpsert'
-import { useCallback, useState } from 'react'
-import { tblFollowStatus, TypeTblFollowStatus } from '@/core/api/generated/api'
-import { GridColDef } from '@mui/x-data-grid'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import FollowStatusUpsert from "./FollowStatusUpsert";
+import { useCallback, useState } from "react";
+import { tblFollowStatus, TypeTblFollowStatus } from "@/core/api/generated/api";
+import { GridColDef } from "@mui/x-data-grid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
-const getRowId = (row: TypeTblFollowStatus) => row.followStatusId
+const getRowId = (row: TypeTblFollowStatus) => row.followStatusId;
 
 const columns: GridColDef<TypeTblFollowStatus>[] = [
-  { field: 'fsName', headerName: 'Name', flex: 1 },
-  { field: 'fsDesc', headerName: 'Description', flex: 2 },
-  { field: 'orderNo', headerName: 'Order No', width: 80 },
-]
+  { field: "fsName", headerName: "Name", flex: 1 },
+  { field: "fsDesc", headerName: "Description", flex: 2 },
+  { field: "orderNo", headerName: "Order No", width: 80 },
+];
 
 export default function PageFollowStatus() {
-  const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
-  const [openForm, setOpenForm] = useState(false)
-  const [mode, setMode] = useState<'create' | 'update'>('create')
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+  const [openForm, setOpenForm] = useState(false);
+  const [mode, setMode] = useState<"create" | "update">("create");
 
   // === useDataGrid ===
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
     tblFollowStatus.getAll,
     tblFollowStatus.deleteById,
-    'followStatusId'
-  )
+    "followStatusId",
+  );
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
-    setSelectedRowId(null)
-    setMode('create')
-    handleUpsertOpen()
-  }, [])
+    setSelectedRowId(null);
+    setMode("create");
+    handleUpsertOpen();
+  }, []);
 
   const handleEdit = useCallback((rowId: number) => {
-    setSelectedRowId(rowId)
-    setMode('update')
-    handleUpsertOpen()
-  }, [])
+    setSelectedRowId(rowId);
+    setMode("update");
+    handleUpsertOpen();
+  }, []);
 
   const handleUpsertClose = useCallback(() => {
-    setOpenForm(false)
-  }, [])
+    setOpenForm(false);
+  }, []);
 
   const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true)
-  }, [])
+    setOpenForm(true);
+  }, []);
 
   return (
     <>
       <CustomizedDataGrid
         showToolbar
-        label='Follow Status'
+        label="Follow Status"
         rows={rows}
         columns={columns}
         loading={loading}
@@ -70,5 +70,5 @@ export default function PageFollowStatus() {
         onSuccess={handleRefresh}
       />
     </>
-  )
+  );
 }

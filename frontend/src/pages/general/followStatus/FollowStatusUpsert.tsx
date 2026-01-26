@@ -1,30 +1,30 @@
-import * as z from 'zod'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import FormDialog from '@/shared/components/formDialog/FormDialog'
-import { memo, useEffect, useMemo, useState, useCallback } from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { tblFollowStatus, TypeTblFollowStatus } from '@/core/api/generated/api'
-import { requiredStringField } from '@/core/api/helper'
-import NumberField from '@/shared/components/NumberField'
+import * as z from "zod";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import { memo, useEffect, useMemo, useState, useCallback } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { tblFollowStatus, TypeTblFollowStatus } from "@/core/api/generated/api";
+import { requiredStringField } from "@/core/helper";
+import NumberField from "@/shared/components/NumberField";
 
 // === Validation Schema ===
 const schema = z.object({
   fsName: requiredStringField(),
   fsDesc: z.string().nullable(),
   orderNo: z.number().nullable(),
-})
+});
 
-export type FollowStatusFormValues = z.infer<typeof schema>
+export type FollowStatusFormValues = z.infer<typeof schema>;
 
 type Props = {
-  open: boolean
-  mode: 'create' | 'update'
-  recordId?: number | null
-  onClose: () => void
-  onSuccess: (data: TypeTblFollowStatus) => void
-}
+  open: boolean;
+  mode: "create" | "update";
+  recordId?: number | null;
+  onClose: () => void;
+  onSuccess: (data: TypeTblFollowStatus) => void;
+};
 
 function FollowStatusUpsert({
   open,
@@ -33,17 +33,17 @@ function FollowStatusUpsert({
   onClose,
   onSuccess,
 }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
+  const [loadingInitial, setLoadingInitial] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const defaultValues: FollowStatusFormValues = useMemo(
     () => ({
-      fsName: '',
-      fsDesc: '',
+      fsName: "",
+      fsDesc: "",
       orderNo: null,
     }),
-    []
-  )
+    [],
+  );
 
   const {
     control,
@@ -53,108 +53,108 @@ function FollowStatusUpsert({
   } = useForm<FollowStatusFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
-  })
+  });
 
   // === Fetch data for update mode
   const fetchData = useCallback(async () => {
-    if (mode === 'update' && recordId) {
-      setLoadingInitial(true)
+    if (mode === "update" && recordId) {
+      setLoadingInitial(true);
       try {
-        const res = await tblFollowStatus.getById(recordId)
+        const res = await tblFollowStatus.getById(recordId);
         reset({
-          fsName: res?.fsName ?? '',
-          fsDesc: res?.fsDesc ?? '',
+          fsName: res?.fsName ?? "",
+          fsDesc: res?.fsDesc ?? "",
           orderNo: res.orderNo,
-        })
+        });
       } catch (err) {
-        console.error('Failed to fetch FollowStatus', err)
-        reset(defaultValues)
+        console.error("Failed to fetch FollowStatus", err);
+        reset(defaultValues);
       } finally {
-        setLoadingInitial(false)
+        setLoadingInitial(false);
       }
     } else {
-      reset(defaultValues)
+      reset(defaultValues);
     }
-  }, [mode, recordId, reset, defaultValues])
+  }, [mode, recordId, reset, defaultValues]);
 
   useEffect(() => {
-    if (open) fetchData()
-  }, [open, fetchData])
+    if (open) fetchData();
+  }, [open, fetchData]);
 
-  const isDisabled = loadingInitial || submitting
+  const isDisabled = loadingInitial || submitting;
 
   // === Form submit handler
   const handleFormSubmit = useCallback(
     async (values: FollowStatusFormValues) => {
-      setSubmitting(true)
+      setSubmitting(true);
       try {
-        let result: TypeTblFollowStatus
-        if (mode === 'create') {
-          result = await tblFollowStatus.create(values)
-        } else if (mode === 'update' && recordId) {
-          result = await tblFollowStatus.update(recordId, values)
+        let result: TypeTblFollowStatus;
+        if (mode === "create") {
+          result = await tblFollowStatus.create(values);
+        } else if (mode === "update" && recordId) {
+          result = await tblFollowStatus.update(recordId, values);
         } else {
-          return
+          return;
         }
-        onSuccess(result)
-        onClose()
+        onSuccess(result);
+        onClose();
       } catch (err) {
-        console.error('Submit failed', err)
+        console.error("Submit failed", err);
       } finally {
-        setSubmitting(false)
+        setSubmitting(false);
       }
     },
-    [mode, recordId, onSuccess, onClose]
-  )
+    [mode, recordId, onSuccess, onClose],
+  );
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === 'create' ? 'Create Follow Status' : 'Edit Follow Status'}
+      title={mode === "create" ? "Create Follow Status" : "Edit Follow Status"}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display='grid' gridTemplateColumns='repeat(4, 1fr)' gap={1.5}>
+      <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1.5}>
         <Controller
-          name='fsName'
+          name="fsName"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label='Name *'
-              size='small'
+              label="Name *"
+              size="small"
               error={!!errors.fsName}
               helperText={errors.fsName?.message}
               disabled={isDisabled}
-              sx={{ gridColumn: 'span 4' }}
+              sx={{ gridColumn: "span 4" }}
             />
           )}
         />
         <Controller
-          name='fsDesc'
+          name="fsDesc"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label='Description'
-              size='small'
+              label="Description"
+              size="small"
               error={!!errors.fsDesc}
               helperText={errors.fsDesc?.message}
               disabled={isDisabled}
-              sx={{ gridColumn: 'span 4' }}
+              sx={{ gridColumn: "span 4" }}
             />
           )}
         />
         <Controller
-          name='orderNo'
+          name="orderNo"
           control={control}
           render={({ field }) => (
             <NumberField
               {...field}
-              label='Order No'
-              size='small'
+              label="Order No"
+              size="small"
               error={!!errors.orderNo}
               helperText={errors.orderNo?.message}
               disabled={isDisabled}
@@ -163,7 +163,7 @@ function FollowStatusUpsert({
         />
       </Box>
     </FormDialog>
-  )
+  );
 }
 
-export default memo(FollowStatusUpsert)
+export default memo(FollowStatusUpsert);

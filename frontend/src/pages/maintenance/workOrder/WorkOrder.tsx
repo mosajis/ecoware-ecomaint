@@ -1,26 +1,26 @@
-import ReportPrintDialog from './WorkOrderDialogReport'
-import WorkOrderActionBar from './WorkOrderActions'
-import Splitter from '@/shared/components/Splitter/Splitter'
-import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import TabsComponent from './WorkOrderTabs'
-import { useCallback, useMemo, useState } from 'react'
-import { columns } from './WorkOrderColumns'
-import { tblWorkOrder, TypeTblWorkOrder } from '@/core/api/generated/api'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
-import { GridRowId, GridRowSelectionModel } from '@mui/x-data-grid'
-import { TypeTblWorkOrderWithRels } from './types'
+import ReportPrintDialog from "./WorkOrderDialogReport";
+import WorkOrderActionBar from "./WorkOrderActions";
+import Splitter from "@/shared/components/Splitter/Splitter";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import TabsComponent from "./WorkOrderTabs";
+import { useCallback, useMemo, useState } from "react";
+import { columns } from "./WorkOrderColumns";
+import { tblWorkOrder, TypeTblWorkOrder } from "@/core/api/generated/api";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
+import { TypeTblWorkOrderWithRels } from "./types";
 import WorkOrderFilterDialog, {
   type WorkOrderFilter,
-} from './WorkOrderDialogFilter'
+} from "./WorkOrderDialogFilter";
 
-const getRowId = (row: TypeTblWorkOrder) => row.workOrderId
+const getRowId = (row: TypeTblWorkOrder) => row.workOrderId;
 
 export default function WorkOrderPage() {
-  const [dialogIssue, setDialogIssue] = useState(false)
-  const [dialogFilter, setDialogFilter] = useState(false)
+  const [dialogIssue, setDialogIssue] = useState(false);
+  const [dialogFilter, setDialogFilter] = useState(false);
 
-  const [filter, setFilter] = useState<WorkOrderFilter | null>(null)
-  const [selectedRows, setSelectedRows] = useState<GridRowId[]>([])
+  const [filter, setFilter] = useState<WorkOrderFilter | null>(null);
+  const [selectedRows, setSelectedRows] = useState<GridRowId[]>([]);
 
   const getAll = useCallback(
     () =>
@@ -46,95 +46,95 @@ export default function WorkOrderPage() {
           tblWorkOrderStatus: true,
         },
       }),
-    [filter]
-  )
+    [filter],
+  );
 
   const { rows, loading, handleRefresh } =
     useDataGrid<TypeTblWorkOrderWithRels>(
       getAll,
       tblWorkOrder.deleteById,
-      'workOrderId'
-    )
+      "workOrderId",
+    );
 
   const selectedWorkOrders = useMemo<TypeTblWorkOrderWithRels[]>(() => {
-    return rows.filter(r => selectedRows.includes(r.workOrderId))
-  }, [selectedRows, rows])
+    return rows.filter((r) => selectedRows.includes(r.workOrderId));
+  }, [selectedRows, rows]);
 
   const selectedStatuses = selectedWorkOrders
-    .map(w => w.tblWorkOrderStatus?.name)
-    .filter(w => w !== undefined)
+    .map((w) => w.tblWorkOrderStatus?.name)
+    .filter((w) => w !== undefined);
 
   const openDialogIssue = useCallback(() => {
-    setDialogIssue(true)
-  }, [])
+    setDialogIssue(true);
+  }, []);
 
   const openDialogFilter = useCallback(() => {
-    setDialogFilter(true)
-  }, [])
+    setDialogFilter(true);
+  }, []);
 
   const closeDialogFilter = useCallback(() => {
-    setDialogFilter(false)
-  }, [])
+    setDialogFilter(false);
+  }, []);
 
   const closeDialogIssue = useCallback(() => {
-    setDialogIssue(false)
-  }, [])
+    setDialogIssue(false);
+  }, []);
 
   const onFilterClick = useCallback(() => {
-    openDialogFilter()
-  }, [])
+    openDialogFilter();
+  }, []);
 
   const onIssueClick = useCallback(() => {
-    openDialogIssue()
-  }, [])
+    openDialogIssue();
+  }, []);
 
-  const onCompleteClick = useCallback(() => {}, [])
+  const onCompleteClick = useCallback(() => {}, []);
 
-  const onPendingClick = useCallback(() => {}, [])
+  const onPendingClick = useCallback(() => {}, []);
 
-  const onPostponedClick = useCallback(() => {}, [])
+  const onPostponedClick = useCallback(() => {}, []);
 
-  const onCancelClick = useCallback(() => {}, [])
+  const onCancelClick = useCallback(() => {}, []);
 
-  const onRequestClick = useCallback(() => {}, [])
+  const onRequestClick = useCallback(() => {}, []);
 
-  const onRescheduleClick = useCallback(() => {}, [])
+  const onRescheduleClick = useCallback(() => {}, []);
 
-  const onPrintClick = useCallback(() => {}, [])
+  const onPrintClick = useCallback(() => {}, []);
 
   const handleRowSelectionChange = useCallback(
     (model: GridRowSelectionModel) => {
-      if (model.type === 'include') {
-        setSelectedRows(Array.from(model.ids))
+      if (model.type === "include") {
+        setSelectedRows(Array.from(model.ids));
       }
 
-      if (model.type === 'exclude') {
-        const allIds = rows.map(r => r.workOrderId)
-        const excluded = model.ids
-        const selected = allIds.filter(id => !excluded.has(id))
-        setSelectedRows(selected)
+      if (model.type === "exclude") {
+        const allIds = rows.map((r) => r.workOrderId);
+        const excluded = model.ids;
+        const selected = allIds.filter((id) => !excluded.has(id));
+        setSelectedRows(selected);
       }
     },
-    [rows]
-  )
+    [rows],
+  );
 
-  const handleSubmitIssue = () => {}
+  const handleSubmitIssue = () => {};
 
   const handleSubmitFilter = (filter: WorkOrderFilter | null) => {
-    setFilter(filter)
-    openDialogFilter()
-  }
+    setFilter(filter);
+    openDialogFilter();
+  };
 
   return (
     <>
-      <Splitter horizontal initialPrimarySize='65%'>
+      <Splitter horizontal initialPrimarySize="65%">
         <CustomizedDataGrid
           disableRowNumber
           disableEdit
           disableDelete
           checkboxSelection
           showToolbar
-          label='WorkOrders'
+          label="WorkOrders"
           rows={rows}
           columns={columns}
           loading={loading}
@@ -160,7 +160,7 @@ export default function WorkOrderPage() {
       </Splitter>
 
       <ReportPrintDialog
-        title='Issue WorkOrder'
+        title="Issue WorkOrder"
         workOrders={selectedWorkOrders}
         open={dialogIssue}
         onClose={closeDialogIssue}
@@ -173,5 +173,5 @@ export default function WorkOrderPage() {
         onSubmit={handleSubmitFilter}
       />
     </>
-  )
+  );
 }

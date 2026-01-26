@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
 import { schema, DEFAULT_VALUES, SchemaValue } from "./ReportFailureSchema";
-import { buildRelation } from "@/core/api/helper";
+import { buildRelation } from "@/core/helper";
 import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
 import {

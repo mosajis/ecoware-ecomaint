@@ -1,12 +1,12 @@
-import DataGridActions from './DataGridActions'
-import { type GridColDef, type GridRenderCellParams } from '@mui/x-data-grid'
-import type { ReactNode } from 'react'
+import DataGridActions from "./DataGridActions";
+import { type GridColDef, type GridRenderCellParams } from "@mui/x-data-grid";
+import type { ReactNode } from "react";
 
 interface DataGridActionColumnProps {
-  width?: number
-  onEdit?: (row: any) => void
-  onDelete?: (row: any) => void
-  renderExtras?: (row: any) => ReactNode
+  width?: number;
+  onEdit?: (row: any) => void;
+  onDelete?: (row: any) => void;
+  renderExtras?: (row: any) => ReactNode;
 }
 
 export const dataGridActionColumn = ({
@@ -15,8 +15,8 @@ export const dataGridActionColumn = ({
   onDelete,
   renderExtras,
 }: DataGridActionColumnProps): GridColDef => ({
-  field: 'actions',
-  headerName: 'Actions',
+  field: "actions",
+  headerName: "Actions",
   width,
   sortable: false,
   filterable: false,
@@ -29,4 +29,4 @@ export const dataGridActionColumn = ({
       {renderExtras?.(params.row)}
     </DataGridActions>
   ),
-})
+});

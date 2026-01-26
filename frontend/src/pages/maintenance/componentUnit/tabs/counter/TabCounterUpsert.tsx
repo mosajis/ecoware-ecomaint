@@ -6,7 +6,7 @@ import DateField from "@/shared/components/DateField";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
-import { buildRelation } from "@/core/api/helper";
+import { buildRelation } from "@/core/helper";
 import { memo, useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

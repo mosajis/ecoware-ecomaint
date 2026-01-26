@@ -1,26 +1,26 @@
-import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
-import { useCallback } from 'react'
-import { columns } from '../../maintLog/MaintLogColumns'
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { useCallback } from "react";
+import { columns } from "../../maintLog/MaintLogColumns";
 import {
   tblMaintLog,
   TypeTblMaintLog,
   TypeTblWorkOrder,
-} from '@/core/api/generated/api'
+} from "@/core/api/generated/api";
 
 interface Props {
-  workOrder?: TypeTblWorkOrder
-  label?: string
+  workOrder?: TypeTblWorkOrder;
+  label?: string;
 }
 
-const getRowId = (row: TypeTblMaintLog) => row.maintLogId
+const getRowId = (row: TypeTblMaintLog) => row.maintLogId;
 
 const TabMaintLog = (props: Props) => {
-  const { workOrder, label } = props
+  const { workOrder, label } = props;
 
-  const compId = workOrder?.compId
-  const jobDescId = workOrder?.tblCompJob?.jobDescId
-  const workOrderId = workOrder?.workOrderId
+  const compId = workOrder?.compId;
+  const jobDescId = workOrder?.tblCompJob?.jobDescId;
+  const workOrderId = workOrder?.workOrderId;
 
   const getAll = useCallback(
     () =>
@@ -41,15 +41,15 @@ const TabMaintLog = (props: Props) => {
           tblJobDescription: true,
         },
       }),
-    [compId, jobDescId]
-  )
+    [compId, jobDescId],
+  );
   // === useDataGrid ===
   const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
     tblMaintLog.deleteById,
-    'maintLogId',
-    !!workOrderId
-  )
+    "maintLogId",
+    !!workOrderId,
+  );
 
   return (
     <CustomizedDataGrid
@@ -62,7 +62,7 @@ const TabMaintLog = (props: Props) => {
       rows={rows}
       columns={columns}
     />
-  )
-}
+  );
+};
 
-export default TabMaintLog
+export default TabMaintLog;

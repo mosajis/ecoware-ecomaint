@@ -6,7 +6,7 @@ export type SortOrder = "component" | "workOrderNumber" | "dueDate";
 
 const sortWorkOrders = (
   workOrders: TypeTblWorkOrderWithRels[],
-  sortOrder: SortOrder
+  sortOrder: SortOrder,
 ): TypeTblWorkOrderWithRels[] => {
   const comparators: Record<
     SortOrder,
@@ -14,7 +14,7 @@ const sortWorkOrders = (
   > = {
     component: (a, b) =>
       (a.tblComponentUnit?.compNo ?? "").localeCompare(
-        b.tblComponentUnit?.compNo ?? ""
+        b.tblComponentUnit?.compNo ?? "",
       ),
     workOrderNumber: (a, b) => (a.woNo ?? "").localeCompare(b.woNo ?? ""),
     dueDate: (a, b) => {

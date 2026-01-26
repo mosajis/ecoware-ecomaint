@@ -1,5 +1,5 @@
-import React from 'react'
-import ReportWorkStep from '../ReportWorkStep'
+import React from "react";
+import ReportWorkStep from "../ReportWorkStep";
 
 const TabAttachments: React.FC = () => {
   return (
@@ -15,7 +15,7 @@ const TabAttachments: React.FC = () => {
            mapService={tblCompTypeAttachment}
          /> */}
     </ReportWorkStep>
-  )
-}
+  );
+};
 
-export default TabAttachments
+export default TabAttachments;

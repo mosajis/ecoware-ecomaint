@@ -1,16 +1,16 @@
-import { formatFileSize } from '@/core/api/helper'
-import { FC } from 'react'
+import { formatFileSize } from "@/core/helper";
+import { FC } from "react";
 
 type CellFileSizeProps = {
-  value?: number | null
-}
+  value?: number | null;
+};
 
 const CellFileSize: FC<CellFileSizeProps> = ({ value }) => {
-  if (value == null) return '-'
+  if (value == null) return "-";
 
-  const formatted = formatFileSize(value)
+  const formatted = formatFileSize(value);
 
-  return formatted
-}
+  return formatted;
+};
 
-export default CellFileSize
+export default CellFileSize;

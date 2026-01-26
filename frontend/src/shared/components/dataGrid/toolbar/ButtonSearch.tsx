@@ -26,7 +26,7 @@ const StyledToolbarButton = styled(ToolbarButton)<{ ownerState: OwnerState }>(
     opacity: ownerState.expanded ? 0 : 1,
     pointerEvents: ownerState.expanded ? "none" : "auto",
     transition: theme.transitions.create(["opacity"]),
-  })
+  }),
 );
 
 const StyledTextField = styled(TextField)<{

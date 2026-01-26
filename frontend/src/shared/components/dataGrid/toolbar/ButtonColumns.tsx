@@ -13,12 +13,12 @@ export default function ButtonColumns() {
   const apiRef = useGridApiContext();
   const columnVisibilityModel = useGridSelector(
     apiRef,
-    gridColumnVisibilityModelSelector
+    gridColumnVisibilityModelSelector,
   );
 
   // تعداد ستون‌های مخفی
   const hiddenCount = Object.values(columnVisibilityModel).filter(
-    (v) => v === false
+    (v) => v === false,
   ).length;
 
   return (

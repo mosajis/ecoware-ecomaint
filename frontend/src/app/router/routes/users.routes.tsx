@@ -1,17 +1,17 @@
-import { createRoute } from '@tanstack/react-router'
-import { protectedRoute } from './protected.routes'
-import { lazy } from 'react'
+import { createRoute } from "@tanstack/react-router";
+import { protectedRoute } from "./protected.routes";
+import { lazy } from "react";
 
 // --- Lazy pages ---
-export const PageUsers = lazy(() => import('@/pages/users/Users'))
+export const PageUsers = lazy(() => import("@/pages/users/Users"));
 
 // --- General parent route ---
 export const UsersRoute = createRoute({
   getParentRoute: () => protectedRoute,
-  path: 'users',
+  path: "users",
   component: () => <PageUsers />,
-  beforeLoad: () => ({ breadcrumb: 'Users' }),
-})
+  beforeLoad: () => ({ breadcrumb: "Users" }),
+});
 
 // --- Add all children to parent ---
-export const usersRoutesTree = UsersRoute
+export const usersRoutesTree = UsersRoute;

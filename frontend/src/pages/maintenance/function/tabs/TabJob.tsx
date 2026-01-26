@@ -23,7 +23,7 @@ const TabJob = ({ functionId, label }: TabJobProps) => {
       tblJobDescription.getAll,
       tblJobDescription.deleteById,
       "jobDescId",
-      !!functionId
+      !!functionId,
     );
 
   // --- Handlers ---
@@ -58,7 +58,7 @@ const TabJob = ({ functionId, label }: TabJobProps) => {
       { field: "lastDone", headerName: "Last Done", width: 150 },
       { field: "nextDueDate", headerName: "Next Due Date", width: 150 },
     ],
-    [handleEdit, handleDelete]
+    [handleEdit, handleDelete],
   );
 
   return (

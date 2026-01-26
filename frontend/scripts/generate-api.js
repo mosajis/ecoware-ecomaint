@@ -1,51 +1,54 @@
-import fs from 'fs'
-import path from 'path'
+import fs from "fs";
+import path from "path";
 
-const typesPath = path.resolve('./src/core/api/generated/api.types.ts')
-const outputPath = path.resolve('./src/core/api/generated/api.ts')
+const typesPath = path.resolve("./src/core/api/generated/api.types.ts");
+const outputPath = path.resolve("./src/core/api/generated/api.ts");
 
 // خواندن فایل types
-const typesContent = fs.readFileSync(typesPath, 'utf-8')
+const typesContent = fs.readFileSync(typesPath, "utf-8");
 
 // لیست ریسورس‌هایی که نباید ساخته شوند
 const ignoreResources = [
-  'id',
-  'format',
-  'codeId',
-  'code',
-  'onRotation',
-  'codeDefId',
-  'authLogin',
-  'authRegister',
-  'authLogout',
-  'authAuthorization',
-  'tblAttachmentByAttachmentIdDownload',
-]
+  "id",
+  "format",
+  "codeId",
+  "code",
+  "onRotation",
+  "codeDefId",
+  "authLogin",
+  "authRegister",
+  "authLogout",
+  "authAuthorization",
+  "health",
+  "index",
+  "statistics",
+  "tblAttachmentByAttachmentIdDownload",
+];
 
 // helper camelCase
 function camelCase(str) {
   return str
     .replace(/[-_/](.)/g, (_, c) => c.toUpperCase())
-    .replace(/^./, c => c.toLowerCase())
+    .replace(/^./, (c) => c.toLowerCase());
 }
 
 // regex برای پیدا کردن عملیات
-const opRegex = /(get|post|put|delete)([A-Z][a-zA-Z0-9_]*)\s*:/g
-const resourcesMap = {}
+const opRegex = /(get|post|put|delete)([A-Z][a-zA-Z0-9_]*)\s*:/g;
+const resourcesMap = {};
 
-let match
+let match;
 while ((match = opRegex.exec(typesContent)) !== null) {
-  const method = match[1] // get/post/put/delete
-  const name = match[2] // مثل SysdiagramsByDiagramId
+  const method = match[1]; // get/post/put/delete
+  const name = match[2]; // مثل SysdiagramsByDiagramId
 
   // شناسایی اسم ریسورس واقعی (حذف ByXId و Count)
   const resourceName = camelCase(
-    name.replace(/By[A-Z].*Id$/, '').replace(/Count$/, '')
-  )
+    name.replace(/By[A-Z].*Id$/, "").replace(/Count$/, ""),
+  );
 
-  if (!resourcesMap[resourceName]) resourcesMap[resourceName] = {}
-  resourcesMap[resourceName][method] = resourcesMap[resourceName][method] || []
-  resourcesMap[resourceName][method].push(match[0].split(':')[0])
+  if (!resourcesMap[resourceName]) resourcesMap[resourceName] = {};
+  resourcesMap[resourceName][method] = resourcesMap[resourceName][method] || [];
+  resourcesMap[resourceName][method].push(match[0].split(":")[0]);
 }
 
 // === تولید خروجی ===
@@ -67,72 +70,72 @@ function stringifyQuery<Q extends Record<string, any>>(query?: Q) {
   return result as Q;
 }
 
-`
+`;
 
 for (const [resource, ops] of Object.entries(resourcesMap)) {
   if (ignoreResources.includes(resource)) {
-    console.log(`🚫 Ignored: ${resource}`)
-    continue
+    console.log(`🚫 Ignored: ${resource}`);
+    continue;
   }
 
-  const getOps = ops.get || []
-  let getAllOp = getOps.find(x => !/By[A-Z].*Id$|Count/i.test(x))
+  const getOps = ops.get || [];
+  let getAllOp = getOps.find((x) => !/By[A-Z].*Id$|Count/i.test(x));
   if (!getAllOp) {
-    const expected = 'get' + resource[0].toUpperCase() + resource.slice(1)
-    getAllOp = getOps.find(x => x === expected)
+    const expected = "get" + resource[0].toUpperCase() + resource.slice(1);
+    getAllOp = getOps.find((x) => x === expected);
   }
 
-  const typeName = resource[0].toUpperCase() + resource.slice(1)
+  const typeName = resource[0].toUpperCase() + resource.slice(1);
   if (getAllOp) {
-    output += `export type Type${typeName} = DynamicResponse<'${getAllOp}'>['items'][0];\n`
+    output += `export type Type${typeName} = DynamicResponse<'${getAllOp}'>['items'][0];\n`;
   }
 
-  output += `export const ${resource} = {\n`
+  output += `export const ${resource} = {\n`;
 
-  const getByIdOp = getOps.find(x => /By[A-Z].*Id$/.test(x))
-  const countOp = getOps.find(x => /Count/i.test(x))
+  const getByIdOp = getOps.find((x) => /By[A-Z].*Id$/.test(x));
+  const countOp = getOps.find((x) => /Count/i.test(x));
 
   if (getAllOp)
     output += `  getAll: (query?: DynamicQuery<'${getAllOp}'>) =>
-    api.get<DynamicResponse<'${getAllOp}'>>('/${resource}', { params: stringifyQuery(query) }),\n`
+    api.get<DynamicResponse<'${getAllOp}'>>('/${resource}', { params: stringifyQuery(query) }),\n`;
 
   if (getByIdOp)
     output += `  getById: (id: number, query?: DynamicQuery<'${getByIdOp}'>) =>
-    api.get<DynamicResponse<'${getByIdOp}'>>(\`/${resource}/\${id}\`, { params: stringifyQuery(query) }),\n`
+    api.get<DynamicResponse<'${getByIdOp}'>>(\`/${resource}/\${id}\`, { params: stringifyQuery(query) }),\n`;
 
   if (countOp)
     output += `  count: (query?: DynamicQuery<'${countOp}'>) =>
-    api.get<DynamicResponse<'${countOp}'>>('/${resource}/count', { params: stringifyQuery(query) }),\n`
+    api.get<DynamicResponse<'${countOp}'>>('/${resource}/count', { params: stringifyQuery(query) }),\n`;
 
-  const postOp = ops.post?.[0]
+  const postOp = ops.post?.[0];
   if (postOp)
     output += `  create: (data: DynamicCreate<'${postOp}'>) =>
-    api.post<DynamicResponse<'${postOp}'>>('/${resource}', { data }),\n`
+    api.post<DynamicResponse<'${postOp}'>>('/${resource}', { data }),\n`;
 
-  const putOp = ops.put?.find(x => /By[A-Z].*Id$/.test(x)) || ops.put?.[0]
+  const putOp = ops.put?.find((x) => /By[A-Z].*Id$/.test(x)) || ops.put?.[0];
   if (putOp)
     output += `  update: (id: number, data: DynamicUpdate<'${putOp}'>) =>
-    api.put<DynamicResponse<'${putOp}'>>(\`/${resource}/\${id}\`, { data }),\n`
+    api.put<DynamicResponse<'${putOp}'>>(\`/${resource}/\${id}\`, { data }),\n`;
 
-  const delOps = ops.delete || []
-  const delById = delOps.find(x => /By[A-Z].*Id$/.test(x))
-  const delAll = delOps.find(x => !/By[A-Z].*Id$/.test(x))
+  const delOps = ops.delete || [];
+  const delById = delOps.find((x) => /By[A-Z].*Id$/.test(x));
+  const delAll = delOps.find((x) => !/By[A-Z].*Id$/.test(x));
 
   if (delById)
     output += `  deleteById: (id: number, query?: DynamicQuery<'${delById}'>) =>
-    api.delete<DynamicResponse<'${delById}'>>(\`/${resource}/\${id}\`, { params: stringifyQuery(query) }),\n`
+    api.delete<DynamicResponse<'${delById}'>>(\`/${resource}/\${id}\`, { params: stringifyQuery(query) }),\n`;
 
   if (delAll)
     output += `  deleteAll: (query?: DynamicQuery<'${delAll}'>) =>
-    api.delete<DynamicResponse<'${delAll}'>>('/${resource}', { params: stringifyQuery(query) }),\n`
+    api.delete<DynamicResponse<'${delAll}'>>('/${resource}', { params: stringifyQuery(query) }),\n`;
 
-  output += `};\n\n`
+  output += `};\n\n`;
 }
 
 // ذخیره فایل خروجی
-fs.mkdirSync(path.dirname(outputPath), { recursive: true })
-fs.writeFileSync(outputPath, output, 'utf-8')
+fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+fs.writeFileSync(outputPath, output, "utf-8");
 
 console.log(
-  `✅ API generated for ${Object.keys(resourcesMap).length} resources`
-)
+  `✅ API generated for ${Object.keys(resourcesMap).length} resources`,
+);

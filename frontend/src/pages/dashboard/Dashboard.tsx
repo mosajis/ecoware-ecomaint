@@ -2,132 +2,116 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import Spinner from "@/shared/components/Spinner";
-import KpiSection from "./_components/KpiSection";
-import { tblMaintLog, tblWorkOrder } from "@/core/api/generated/api";
-import { useEffect, useMemo, useState } from "react";
-import { buildWorkOrderKpis } from "./kpis/workOrderKpis";
-import { buildFailureKpis } from "./kpis/failureKpis";
-import { daysAgo } from "@/shared/utils/zodUtils";
-import WorkOrdersPieChart from "./_components/charts/WorkOrdersPieChart";
-import { buildGeneralKpis } from "./kpis/generalKpis";
+import WorkOrdersPieChart from "./_components/charts/ChartPie";
+import DisciplineCard from "./_components/CardDiscipline";
+import { useEffect, useState } from "react";
 
-export type WorkOrderCounts = {
-  total: number;
-  completed: number;
-  overdue: number;
-  pend: number;
-  current: number;
-  open: number;
-};
+import { PageHeader } from "../../shared/components/PageHeader";
+import { getStatistics, TypeStatistics } from "@/core/api/api";
+import { buildWorkOrderCardsData } from "./cards/cardsWorkOrder";
+import { buildKpiCardsData } from "./cards/cardsKpi";
+import { buildFailureCardsData } from "./cards/cardsFailure";
+import { buildUnplannedCardsData } from "./cards/cardsUnplanned";
+import CardSection from "./_components/CardSection";
 
 const Dashboard = () => {
-  const [counts, setCounts] = useState<WorkOrderCounts | null>(null);
+  const [counts, setCounts] = useState<TypeStatistics | null>(null);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchCounts = async () => {
+    const initFetch = async () => {
       setLoading(true);
 
-      const [total, completed, overdue, pend, current] = await Promise.all([
-        // total
-        tblWorkOrder.count(),
-        // completed
-        tblMaintLog.count(),
-        // overdue
-        tblWorkOrder.count({
-          filter: {
-            dueDate: { lt: daysAgo(7) },
-            workOrderStatusId: { notIn: [2, 3, 4] },
-          },
-        }),
-        // pend
-        tblWorkOrder.count({
-          filter: {
-            workOrderStatusId: { in: [4] },
-          },
-        }),
-        // current
-        tblWorkOrder.count({
-          filter: {
-            dueDate: {
-              gte: daysAgo(7),
-              lte: new Date(),
-            },
-            workOrderStatusId: { notIn: [2, 3, 4] },
-          },
-        }),
-      ]);
-
-      setCounts({
-        open: overdue.count + current.count,
-        total: total.count,
-        completed: completed.count,
-        overdue: overdue.count,
-        pend: pend.count,
-        current: current.count,
-      });
+      const counts = await getStatistics();
+      setCounts(counts);
 
       setLoading(false);
     };
 
-    fetchCounts();
+    initFetch();
   }, []);
 
   if (loading || !counts) {
     return <Spinner />;
   }
 
-  const workOrderKpis = buildWorkOrderKpis(counts);
-  const generalKpis = buildGeneralKpis(counts);
-  // const failureKpis = buildFailureKpis({
-  //   total: woCalc.total,
-  //   open: woCalc.open.value,
-  // });
+  const workOrderCardsData = buildWorkOrderCardsData(counts);
+  const kpiCardsData = buildKpiCardsData(counts);
+  const failureCardsData = buildFailureCardsData(counts);
+  const unplannedCardsData = buildUnplannedCardsData(counts);
 
   return (
-    <Box>
-      {/* Row 1 */}
+    <Box display={"flex"} flexDirection={"column"} gap={1.5}>
+      {/* <KpiSection
+        cols={6}
+        title="KPI Overview"
+        subtitle="Overall maintenance performance and status"
+        kpis={generalKpis}
+      />
+      <Divider /> */}
+      <CardSection
+        cols={6}
+        title="Work Order Statistics"
+        subtitle="Work order volume, progress, and status"
+        cards={workOrderCardsData}
+      />
+      <Divider />
+
       <Stack
         display="grid"
-        gridTemplateColumns="5fr auto 1fr "
+        gridTemplateColumns="1fr"
         divider={<Divider orientation="vertical" />}
       >
         <Box>
-          <KpiSection
-            cols={5}
-            title="Work Orders Statistics"
-            subtitle="Current workload and completion status"
-            kpis={workOrderKpis}
-          />
           <Stack
             display="grid"
-            gridTemplateColumns="1fr auto 1fr "
+            gridTemplateColumns="1fr auto 1fr auto 1fr "
             divider={<Divider orientation="vertical" />}
           >
-            <KpiSection
+            <Box p={1.5}>
+              <PageHeader
+                title="WorkOrder Graph"
+                subtitle="Current workload and completion status"
+              />
+              <WorkOrdersPieChart counts={counts} />
+            </Box>
+
+            <CardSection
               cols={2}
-              title="KPIs"
-              subtitle="Unscheduled maintenance activities"
-              kpis={generalKpis}
+              title="Failure Analysis"
+              subtitle="Breakdown of failure-related maintenance"
+              cards={failureCardsData}
             />
-            <KpiSection
-              cols={3}
-              title="KPIs"
-              subtitle="Unscheduled maintenance activities"
-              kpis={generalKpis}
+            <CardSection
+              cols={2}
+              title="Unplanned Jobs"
+              subtitle="Reactive and unscheduled maintenance tasks"
+              cards={unplannedCardsData}
             />
           </Stack>
         </Box>
-        <KpiSection
-          cols={1}
-          title="KPIs"
-          subtitle="Unscheduled maintenance activities"
-          kpis={generalKpis}
-        />
       </Stack>
-
-      {/* <WorkOrdersPieChart counts={counts} /> */}
-      <Divider sx={{ my: 2 }} />
+      <Divider />
+      <Box p={1.5}>
+        <PageHeader
+          title="Discipline Analysis"
+          subtitle="Distribution of work orders across maintenance disciplines"
+        />
+        <Box display="grid" gridTemplateColumns="repeat(5, 1fr)" gap={1.5}>
+          {[
+            "Electrician",
+            "Mechanic",
+            "HSE Officer",
+            "Toolpusher",
+            "BargeMaster",
+            "Technical Inspection",
+            "Toolpusher",
+          ].map((i) => (
+            <DisciplineCard title={i || ""} counts={counts} />
+          ))}
+        </Box>
+      </Box>
     </Box>
   );
 };

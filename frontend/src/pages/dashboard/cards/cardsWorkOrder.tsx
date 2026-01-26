@@ -1,24 +1,17 @@
 import { toPercent } from "@/shared/utils/zodUtils";
 import { KPI_COLORS } from "../_consts/colors";
-import { WorkOrderCounts } from "../Dashboard";
+import { TypeStatistics } from "@/core/api/api";
 
-export const buildWorkOrderKpis = (counts: WorkOrderCounts) => [
+export const buildWorkOrderCardsData = (counts: TypeStatistics) => [
   {
-    label: "Open",
+    label: "Today",
     value: counts.open,
     color: KPI_COLORS.blue,
   },
   {
-    label: "Pend",
-    value: counts.pend,
-    color: KPI_COLORS.yellow,
-    percent: toPercent(counts.pend, counts.open),
-  },
-  {
-    label: "Overdue",
-    value: counts.overdue,
-    color: KPI_COLORS.red,
-    percent: toPercent(counts.overdue, counts.open),
+    label: "Open",
+    value: counts.open,
+    color: KPI_COLORS.blue,
   },
   {
     label: "Current",
@@ -26,6 +19,19 @@ export const buildWorkOrderKpis = (counts: WorkOrderCounts) => [
     color: KPI_COLORS.blue,
     percent: toPercent(counts.current, counts.open),
   },
+  {
+    label: "Pend",
+    value: counts.pending,
+    color: KPI_COLORS.yellow,
+    percent: toPercent(counts.pending, counts.open),
+  },
+  {
+    label: "Overdue",
+    value: counts.overdue,
+    color: KPI_COLORS.red,
+    percent: toPercent(counts.overdue, counts.open),
+  },
+
   {
     label: "Completed",
     value: counts.completed,

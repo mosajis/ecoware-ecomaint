@@ -5,7 +5,7 @@ import { memo, useEffect, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
-import { buildRelation } from "@/core/api/helper";
+import { buildRelation } from "@/core/helper";
 import {
   tblSpareType,
   tblSpareUnit,

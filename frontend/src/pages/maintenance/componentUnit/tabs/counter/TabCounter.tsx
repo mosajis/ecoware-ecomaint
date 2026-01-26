@@ -1,57 +1,57 @@
-import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import TabCounterUpsert from './TabCounterUpsert'
-import { useCallback, useMemo, useState } from 'react'
-import { GridColDef } from '@mui/x-data-grid'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
-import { dataGridActionColumn } from '@/shared/components/dataGrid/DataGridActionsColumn'
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import TabCounterUpsert from "./TabCounterUpsert";
+import { useCallback, useMemo, useState } from "react";
+import { GridColDef } from "@mui/x-data-grid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import {
   tblCompCounter,
   TypeTblComponentUnit,
   TypeTblCompCounter,
-} from '@/core/api/generated/api'
+} from "@/core/api/generated/api";
 
 type Props = {
-  componentUnit?: TypeTblComponentUnit | null
-  label?: string
-}
+  componentUnit?: TypeTblComponentUnit | null;
+  label?: string;
+};
 
-const getRowId = (row: TypeTblCompCounter) => row.compCounterId
+const getRowId = (row: TypeTblCompCounter) => row.compCounterId;
 
 // === Columns ===
 const columns: GridColDef<TypeTblCompCounter>[] = [
   {
-    field: 'counterType',
-    headerName: 'Counter Type',
+    field: "counterType",
+    headerName: "Counter Type",
     flex: 1,
-    valueGetter: (_, row) => row.tblCounterType?.name || '',
+    valueGetter: (_, row) => row.tblCounterType?.name || "",
   },
   {
-    field: 'currentValue',
-    headerName: 'Current Value',
+    field: "currentValue",
+    headerName: "Current Value",
     width: 120,
   },
   {
-    field: 'startValue',
-    headerName: 'Start Value',
+    field: "startValue",
+    headerName: "Start Value",
     width: 120,
   },
   {
-    field: 'averageCountRate',
-    headerName: 'Avg Rate',
+    field: "averageCountRate",
+    headerName: "Avg Rate",
     width: 120,
   },
   {
-    field: 'order No',
-    headerName: 'Order',
+    field: "order No",
+    headerName: "Order",
     width: 85,
   },
-]
+];
 
 const TabCompCounter = ({ componentUnit, label }: Props) => {
-  const compId = componentUnit?.compId
-  const [openForm, setOpenForm] = useState(false)
-  const [mode, setMode] = useState<'create' | 'update'>('create')
-  const [selectedId, setSelectedId] = useState<number | null>(null)
+  const compId = componentUnit?.compId;
+  const [openForm, setOpenForm] = useState(false);
+  const [mode, setMode] = useState<"create" | "update">("create");
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   // === getAll ===
   const getAll = useCallback(() => {
@@ -64,37 +64,37 @@ const TabCompCounter = ({ componentUnit, label }: Props) => {
       filter: {
         compId,
       },
-    })
-  }, [compId])
+    });
+  }, [compId]);
 
   // === useDataGrid ===
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
     tblCompCounter.deleteById,
-    'compCounterId',
-    !!compId
-  )
+    "compCounterId",
+    !!compId,
+  );
 
   // === Handlers ===
   const handleCreate = () => {
-    setSelectedId(null)
-    setMode('create')
-    handleUpsertOpen()
-  }
+    setSelectedId(null);
+    setMode("create");
+    handleUpsertOpen();
+  };
 
   const handleEdit = (rowId: number) => {
-    setSelectedId(rowId)
-    setMode('update')
-    handleUpsertOpen()
-  }
+    setSelectedId(rowId);
+    setMode("update");
+    handleUpsertOpen();
+  };
 
   const handleUpsertClose = useCallback(() => {
-    setOpenForm(false)
-  }, [])
+    setOpenForm(false);
+  }, []);
 
   const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true)
-  }, [])
+    setOpenForm(true);
+  }, []);
 
   return (
     <>
@@ -120,7 +120,7 @@ const TabCompCounter = ({ componentUnit, label }: Props) => {
         onSuccess={handleRefresh}
       />
     </>
-  )
-}
+  );
+};
 
-export default TabCompCounter
+export default TabCompCounter;

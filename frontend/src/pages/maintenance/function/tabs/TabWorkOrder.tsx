@@ -14,7 +14,7 @@ const TabWorkOrder = ({ functionId, label }: TabWorkOrderProps) => {
     tblWorkOrder.getAll,
     tblWorkOrder.deleteAll,
     "workOrderId",
-    !!functionId
+    !!functionId,
   );
 
   const columns = useMemo<GridColDef<TypeTblWorkOrder>[]>(
@@ -97,7 +97,7 @@ const TabWorkOrder = ({ functionId, label }: TabWorkOrderProps) => {
         // valueGetter: (row) => row.pendingDate ?? "",
       },
     ],
-    []
+    [],
   );
 
   return (

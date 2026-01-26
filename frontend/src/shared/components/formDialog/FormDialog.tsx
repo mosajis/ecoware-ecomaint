@@ -1,27 +1,27 @@
-import React, { Suspense } from 'react'
-import DialogHeader from '../dialog/DialogHeader'
-import FormDialogAction from './FormDialogAction'
-import Dialog from '@mui/material/Dialog'
-import DialogContent from '@mui/material/DialogContent'
-import DialogActions from '@mui/material/DialogActions'
-import type { DialogProps } from '@mui/material/Dialog'
-import Spinner from '../Spinner'
+import React, { Suspense } from "react";
+import DialogHeader from "../dialog/DialogHeader";
+import FormDialogAction from "./FormDialogAction";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import type { DialogProps } from "@mui/material/Dialog";
+import Spinner from "../Spinner";
 
 export type FormDialogWrapperProps = {
-  readonly?: boolean
-  open: boolean
-  onClose: () => void
-  title: string
-  submitting?: boolean
-  loadingInitial?: boolean
-  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void
-  children: React.ReactNode // این می‌تونه lazy هم باشه
-  cancelText?: string
-  submitText?: string
-  disabled?: boolean
-  hideHeader?: boolean
-  maxWidth?: DialogProps['maxWidth']
-}
+  readonly?: boolean;
+  open: boolean;
+  onClose: () => void;
+  title: string;
+  submitting?: boolean;
+  loadingInitial?: boolean;
+  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
+  children: React.ReactNode; // این می‌تونه lazy هم باشه
+  cancelText?: string;
+  submitText?: string;
+  disabled?: boolean;
+  hideHeader?: boolean;
+  maxWidth?: DialogProps["maxWidth"];
+};
 
 export default function FormDialog({
   readonly,
@@ -33,12 +33,12 @@ export default function FormDialog({
   onSubmit,
   children,
   hideHeader = false,
-  cancelText = 'Cancel',
-  submitText = 'Ok',
+  cancelText = "Cancel",
+  submitText = "Ok",
   disabled = false,
-  maxWidth = 'sm',
+  maxWidth = "sm",
 }: FormDialogWrapperProps) {
-  const isDisabled = disabled || submitting || loadingInitial
+  const isDisabled = disabled || submitting || loadingInitial;
 
   return (
     <Dialog
@@ -58,10 +58,10 @@ export default function FormDialog({
 
       <DialogContent dividers sx={{ p: hideHeader ? 1 : 1.5 }}>
         <form
-          onSubmit={e => {
-            e.preventDefault()
+          onSubmit={(e) => {
+            e.preventDefault();
             if (!readonly) {
-              onSubmit?.(e)
+              onSubmit?.(e);
             }
           }}
         >
@@ -81,5 +81,5 @@ export default function FormDialog({
         </form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

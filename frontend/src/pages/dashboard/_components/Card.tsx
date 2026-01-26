@@ -3,22 +3,27 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
-export type KPICardProps = {
+export type DashboardCardProps = {
   label: string;
   value: string | number;
-  color: string;
+  color?: string;
   percent?: string | number;
 };
 
-export function KPICard({ label, value, color, percent }: KPICardProps) {
+export function DashboardCard({
+  label,
+  value,
+  color,
+  percent,
+}: DashboardCardProps) {
   return (
     <Card
-      sx={{
-        borderTop: `4px solid rgb(${color})`,
+      sx={(s) => ({
+        borderTop: `4px solid ${color ? `rgb(${color})` : s.palette.divider}`,
         height: "100%",
         width: "100%",
         background: `rgba(${color}, 0.065) !important`,
-      }}
+      })}
     >
       <CardContent>
         <Typography variant="caption" color="textSecondary" fontWeight={"bold"}>

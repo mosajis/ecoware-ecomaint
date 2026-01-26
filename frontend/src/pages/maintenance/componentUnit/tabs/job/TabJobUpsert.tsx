@@ -1,18 +1,18 @@
-import * as z from 'zod'
-import FormDialog from '@/shared/components/formDialog/FormDialog'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import RadioGroup from '@mui/material/RadioGroup'
-import Radio from '@mui/material/Radio'
-import DateField from '@/shared/components/DateField'
-import { memo, useEffect, useState, useCallback, useMemo } from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
-import { BorderedBox } from '@/shared/components/BorderedBox'
-import { buildRelation } from '@/core/api/helper'
+import * as z from "zod";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import RadioGroup from "@mui/material/RadioGroup";
+import Radio from "@mui/material/Radio";
+import DateField from "@/shared/components/DateField";
+import { memo, useEffect, useState, useCallback, useMemo } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { BorderedBox } from "@/shared/components/BorderedBox";
+import { buildRelation } from "@/core/helper";
 import {
   tblCompJob,
   tblJobDescription,
@@ -22,7 +22,7 @@ import {
   tblMaintType,
   tblPeriod,
   TypeTblCompJob,
-} from '@/core/api/generated/api'
+} from "@/core/api/generated/api";
 
 /* ================= Schema ================= */
 
@@ -87,24 +87,24 @@ const schema = z.object({
   statusInUse: z.boolean().optional(),
   statusRepair: z.boolean().optional(),
 
-  planningMethod: z.enum(['Variable', 'Fixed']).optional(),
+  planningMethod: z.enum(["Variable", "Fixed"]).optional(),
 
   active: z.boolean().optional(),
   mandatoryHistory: z.boolean().optional(),
-})
+});
 
-export type JobFormValues = z.infer<typeof schema>
+export type JobFormValues = z.infer<typeof schema>;
 
 /* ================= Props ================= */
 
 type Props = {
-  open: boolean
-  mode: 'create' | 'update'
-  recordId?: number | null
-  compId: number
-  onClose: () => void
-  onSuccess: (data: TypeTblCompJob) => void
-}
+  open: boolean;
+  mode: "create" | "update";
+  recordId?: number | null;
+  compId: number;
+  onClose: () => void;
+  onSuccess: (data: TypeTblCompJob) => void;
+};
 
 /* ================= Defaults ================= */
 
@@ -124,10 +124,10 @@ const DEFAULT_VALUES: JobFormValues = {
   statusAvailable: true,
   statusInUse: true,
   statusRepair: true,
-  planningMethod: 'Variable',
+  planningMethod: "Variable",
   active: true,
   mandatoryHistory: false,
-}
+};
 
 /* ================= Component ================= */
 
@@ -139,25 +139,25 @@ function ComponentJobUpsert({
   onClose,
   onSuccess,
 }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
+  const [loadingInitial, setLoadingInitial] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  const defaultValues = useMemo(() => DEFAULT_VALUES, [])
+  const defaultValues = useMemo(() => DEFAULT_VALUES, []);
 
   const { control, handleSubmit, reset } = useForm<JobFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
-  })
+  });
 
   /* ===== Load data in update mode ===== */
 
   const fetchData = useCallback(async () => {
-    if (mode !== 'update' || !recordId) {
-      reset(defaultValues)
-      return
+    if (mode !== "update" || !recordId) {
+      reset(defaultValues);
+      return;
     }
 
-    setLoadingInitial(true)
+    setLoadingInitial(true);
     try {
       const row = await tblCompJob.getById(recordId, {
         include: {
@@ -168,7 +168,7 @@ function ComponentJobUpsert({
           tblMaintType: true,
           tblPeriod: true,
         },
-      })
+      });
 
       reset({
         lastDone: row.lastDone ?? null,
@@ -186,20 +186,20 @@ function ComponentJobUpsert({
         statusAvailable: !!row.statusAvailable,
         statusInUse: !!row.statusInUse,
         statusRepair: !!row.statusRepair,
-        planningMethod: row.planningMethod ? 'Fixed' : 'Variable',
+        planningMethod: row.planningMethod ? "Fixed" : "Variable",
         active: !!row.active,
         mandatoryHistory: !!row.mandatoryHistory,
-      })
+      });
     } finally {
-      setLoadingInitial(false)
+      setLoadingInitial(false);
     }
-  }, [mode, recordId, reset, defaultValues])
+  }, [mode, recordId, reset, defaultValues]);
 
   useEffect(() => {
-    if (open) fetchData()
-  }, [open, fetchData])
+    if (open) fetchData();
+  }, [open, fetchData]);
 
-  const isDisabled = loadingInitial || submitting
+  const isDisabled = loadingInitial || submitting;
 
   /* ================= Submit ================= */
 
@@ -213,7 +213,7 @@ function ComponentJobUpsert({
         priority: values.priority ?? null,
         window: values.window ?? null,
 
-        planningMethod: values.planningMethod === 'Fixed' ? 1 : 0,
+        planningMethod: values.planningMethod === "Fixed" ? 1 : 0,
 
         statusNone: values.statusNone ? 1 : 0,
         statusAvailable: values.statusAvailable ? 1 : 0,
@@ -223,81 +223,81 @@ function ComponentJobUpsert({
         active: values.active ? 1 : 0,
         mandatoryHistory: values.mandatoryHistory ? 1 : 0,
 
-        ...buildRelation('tblComponentUnit', 'compId', compId),
+        ...buildRelation("tblComponentUnit", "compId", compId),
         ...buildRelation(
-          'tblJobDescription',
-          'jobDescId',
-          values.jobDesc?.jobDescId
+          "tblJobDescription",
+          "jobDescId",
+          values.jobDesc?.jobDescId,
         ),
-        ...buildRelation('tblDiscipline', 'discId', values.disc?.discId),
+        ...buildRelation("tblDiscipline", "discId", values.disc?.discId),
         ...buildRelation(
-          'tblMaintClass',
-          'maintClassId',
-          values.maintClass?.maintClassId
-        ),
-        ...buildRelation(
-          'tblMaintCause',
-          'maintCauseId',
-          values.maintCause?.maintCauseId
+          "tblMaintClass",
+          "maintClassId",
+          values.maintClass?.maintClassId,
         ),
         ...buildRelation(
-          'tblMaintType',
-          'maintTypeId',
-          values.maintType?.maintTypeId
+          "tblMaintCause",
+          "maintCauseId",
+          values.maintCause?.maintCauseId,
         ),
         ...buildRelation(
-          'tblPeriod',
-          'periodId',
-          values.frequencyPeriod?.periodId
+          "tblMaintType",
+          "maintTypeId",
+          values.maintType?.maintTypeId,
         ),
-      }
+        ...buildRelation(
+          "tblPeriod",
+          "periodId",
+          values.frequencyPeriod?.periodId,
+        ),
+      };
 
-      setSubmitting(true)
+      setSubmitting(true);
       try {
         const res =
-          mode === 'create'
+          mode === "create"
             ? await tblCompJob.create(body)
-            : await tblCompJob.update(recordId!, body)
+            : await tblCompJob.update(recordId!, body);
 
-        onSuccess(res)
-        onClose()
+        onSuccess(res);
+        onClose();
       } finally {
-        setSubmitting(false)
+        setSubmitting(false);
       }
     },
-    [mode, recordId, compId, onSuccess, onClose]
-  )
+    [mode, recordId, compId, onSuccess, onClose],
+  );
 
   /* ================= UI ================= */
 
   return (
     <FormDialog
-      maxWidth='md'
+      maxWidth="md"
       open={open}
       onClose={onClose}
-      title={mode === 'create' ? 'Component Job' : 'Edit Component Job'}
+      title={mode === "create" ? "Component Job" : "Edit Component Job"}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display='flex' flexDirection='column' gap={2}>
+      <Box display="flex" flexDirection="column" gap={2}>
         {/* Job Description */}
         <Controller
-          name='jobDesc'
+          name="jobDesc"
           control={control}
           render={({ field }) => (
-            <Box width='60%'>
+            <Box width="60%">
               <AsyncSelectField
-                dialogMaxWidth='sm'
-                label='Job Description'
+                dialogMaxWidth="sm"
+                label="Job Description"
                 value={field.value}
-                selectionMode='single'
+                selectionMode="single"
                 request={tblJobDescription.getAll}
                 columns={[
-                  { field: 'jobDescTitle', headerName: 'Title', flex: 1 },
+                  { field: "jobDescTitle", headerName: "Title", flex: 1 },
                 ]}
-                getOptionLabel={row => row.jobDescTitle}
-                getRowId={row => row.jobDescId}
+                getOptionLabel={(row) => row.jobDescTitle}
+                getRowId={(row) => row.jobDescId}
                 onChange={field.onChange}
               />
             </Box>
@@ -306,18 +306,18 @@ function ComponentJobUpsert({
 
         {/* Discipline */}
         <Controller
-          name='disc'
+          name="disc"
           control={control}
           render={({ field }) => (
-            <Box width='45%'>
+            <Box width="45%">
               <AsyncSelectField
-                dialogMaxWidth='sm'
-                label='Discipline'
+                dialogMaxWidth="sm"
+                label="Discipline"
                 value={field.value}
-                selectionMode='single'
+                selectionMode="single"
                 request={tblDiscipline.getAll}
-                columns={[{ field: 'name', headerName: 'Discipline', flex: 1 }]}
-                getRowId={row => row.discId}
+                columns={[{ field: "name", headerName: "Discipline", flex: 1 }]}
+                getRowId={(row) => row.discId}
                 onChange={field.onChange}
               />
             </Box>
@@ -325,40 +325,40 @@ function ComponentJobUpsert({
         />
 
         {/* Frequency & Period */}
-        <Box display='flex' gap={1.5} width='66%'>
+        <Box display="flex" gap={1.5} width="66%">
           <Controller
-            name='frequency'
+            name="frequency"
             control={control}
             render={({ field }) => (
               <TextField
                 {...field}
                 fullWidth
-                type='number'
-                label='Frequency'
-                size='small'
+                type="number"
+                label="Frequency"
+                size="small"
                 disabled={isDisabled}
-                value={field.value ?? ''}
-                onChange={e =>
+                value={field.value ?? ""}
+                onChange={(e) =>
                   field.onChange(
-                    e.target.value === '' ? null : Number(e.target.value)
+                    e.target.value === "" ? null : Number(e.target.value),
                   )
                 }
               />
             )}
           />
           <Controller
-            name='frequencyPeriod'
+            name="frequencyPeriod"
             control={control}
             render={({ field }) => (
               <AsyncSelectField
-                dialogMaxWidth='sm'
-                label='Frequency Period'
+                dialogMaxWidth="sm"
+                label="Frequency Period"
                 value={field.value}
-                selectionMode='single'
+                selectionMode="single"
                 request={tblPeriod.getAll}
-                columns={[{ field: 'name', headerName: 'Name', flex: 1 }]}
-                getOptionLabel={row => row.name}
-                getRowId={row => row.periodId}
+                columns={[{ field: "name", headerName: "Name", flex: 1 }]}
+                getOptionLabel={(row) => row.name}
+                getRowId={(row) => row.periodId}
                 onChange={field.onChange}
               />
             )}
@@ -366,57 +366,57 @@ function ComponentJobUpsert({
         </Box>
 
         {/* Maintenance Fields */}
-        <Box display='flex' gap={1.5}>
+        <Box display="flex" gap={1.5}>
           <Controller
-            name='maintClass'
+            name="maintClass"
             control={control}
             render={({ field }) => (
               <AsyncSelectField
-                dialogMaxWidth='sm'
-                label='Maint Class'
+                dialogMaxWidth="sm"
+                label="Maint Class"
                 value={field.value}
-                selectionMode='single'
+                selectionMode="single"
                 request={tblMaintClass.getAll}
                 columns={[
-                  { field: 'descr', headerName: 'Maint Class', flex: 1 },
+                  { field: "descr", headerName: "Maint Class", flex: 1 },
                 ]}
-                getRowId={row => row.maintClassId}
+                getRowId={(row) => row.maintClassId}
                 onChange={field.onChange}
               />
             )}
           />
           <Controller
-            name='maintCause'
+            name="maintCause"
             control={control}
             render={({ field }) => (
               <AsyncSelectField
-                dialogMaxWidth='sm'
-                label='Maint Cause'
+                dialogMaxWidth="sm"
+                label="Maint Cause"
                 value={field.value}
-                selectionMode='single'
+                selectionMode="single"
                 request={tblMaintCause.getAll}
                 columns={[
-                  { field: 'descr', headerName: 'Maint Cause', flex: 1 },
+                  { field: "descr", headerName: "Maint Cause", flex: 1 },
                 ]}
-                getRowId={row => row.maintCauseId}
+                getRowId={(row) => row.maintCauseId}
                 onChange={field.onChange}
               />
             )}
           />
           <Controller
-            name='maintType'
+            name="maintType"
             control={control}
             render={({ field }) => (
               <AsyncSelectField
-                dialogMaxWidth='sm'
-                label='Maint Type'
+                dialogMaxWidth="sm"
+                label="Maint Type"
                 value={field.value}
-                selectionMode='single'
+                selectionMode="single"
                 request={tblMaintType.getAll}
                 columns={[
-                  { field: 'descr', headerName: 'Maint Type', flex: 1 },
+                  { field: "descr", headerName: "Maint Type", flex: 1 },
                 ]}
-                getRowId={row => row.maintTypeId}
+                getRowId={(row) => row.maintTypeId}
                 onChange={field.onChange}
               />
             )}
@@ -424,42 +424,42 @@ function ComponentJobUpsert({
         </Box>
 
         {/* Priority & Window */}
-        <Box display='flex' width='66%' gap={1.5}>
+        <Box display="flex" width="66%" gap={1.5}>
           <Controller
-            name='priority'
+            name="priority"
             control={control}
             render={({ field }) => (
               <TextField
                 {...field}
-                type='number'
-                label='Priority'
+                type="number"
+                label="Priority"
                 fullWidth
-                size='small'
+                size="small"
                 disabled={isDisabled}
-                value={field.value ?? ''}
-                onChange={e =>
+                value={field.value ?? ""}
+                onChange={(e) =>
                   field.onChange(
-                    e.target.value === '' ? null : Number(e.target.value)
+                    e.target.value === "" ? null : Number(e.target.value),
                   )
                 }
               />
             )}
           />
           <Controller
-            name='window'
+            name="window"
             control={control}
             render={({ field }) => (
               <TextField
                 {...field}
-                type='number'
-                label='Window'
+                type="number"
+                label="Window"
                 fullWidth
-                size='small'
+                size="small"
                 disabled={isDisabled}
-                value={field.value ?? ''}
-                onChange={e =>
+                value={field.value ?? ""}
+                onChange={(e) =>
                   field.onChange(
-                    e.target.value === '' ? null : Number(e.target.value)
+                    e.target.value === "" ? null : Number(e.target.value),
                   )
                 }
               />
@@ -467,35 +467,35 @@ function ComponentJobUpsert({
           />
         </Box>
 
-        <Box display={'flex'} gap={2}>
+        <Box display={"flex"} gap={2}>
           <Controller
-            name='lastDone'
+            name="lastDone"
             control={control}
             render={({ field }) => (
-              <DateField label='Last Done' field={field} type='DATETIME' />
+              <DateField label="Last Done" field={field} type="DATETIME" />
             )}
           />
           <Controller
-            name='nextDueDate'
+            name="nextDueDate"
             control={control}
             render={({ field }) => (
-              <DateField label='Next Due Date' field={field} type='DATETIME' />
+              <DateField label="Next Due Date" field={field} type="DATETIME" />
             )}
           />
         </Box>
       </Box>
 
       {/* Status */}
-      <BorderedBox label='Component Status' mt={2} width='80%'>
-        <Box display='flex' gap={2}>
+      <BorderedBox label="Component Status" mt={2} width="80%">
+        <Box display="flex" gap={2}>
           {(
             [
-              'statusNone',
-              'statusAvailable',
-              'statusInUse',
-              'statusRepair',
+              "statusNone",
+              "statusAvailable",
+              "statusInUse",
+              "statusRepair",
             ] as const
-          ).map(name => (
+          ).map((name) => (
             <Controller
               key={name}
               name={name}
@@ -503,7 +503,7 @@ function ComponentJobUpsert({
               render={({ field }) => (
                 <FormControlLabel
                   control={<Checkbox {...field} checked={!!field.value} />}
-                  label={name.replace('status', '')}
+                  label={name.replace("status", "")}
                 />
               )}
             />
@@ -512,47 +512,47 @@ function ComponentJobUpsert({
       </BorderedBox>
 
       {/* Bottom */}
-      <Box display='flex' gap={1.5}>
-        <BorderedBox label='Planning Method' mt={2}>
+      <Box display="flex" gap={1.5}>
+        <BorderedBox label="Planning Method" mt={2}>
           <Controller
-            name='planningMethod'
+            name="planningMethod"
             control={control}
             render={({ field }) => (
               <RadioGroup {...field} row>
                 <FormControlLabel
-                  value='Variable'
+                  value="Variable"
                   control={<Radio />}
-                  label='Variable'
+                  label="Variable"
                 />
                 <FormControlLabel
-                  value='Fixed'
+                  value="Fixed"
                   control={<Radio />}
-                  label='Fixed'
+                  label="Fixed"
                 />
               </RadioGroup>
             )}
           />
         </BorderedBox>
 
-        <BorderedBox label='Advanced Option' mt={2}>
+        <BorderedBox label="Advanced Option" mt={2}>
           <Box>
             <Controller
-              name='active'
+              name="active"
               control={control}
               render={({ field }) => (
                 <FormControlLabel
                   control={<Checkbox {...field} checked={!!field.value} />}
-                  label='Active'
+                  label="Active"
                 />
               )}
             />
             <Controller
-              name='mandatoryHistory'
+              name="mandatoryHistory"
               control={control}
               render={({ field }) => (
                 <FormControlLabel
                   control={<Checkbox {...field} checked={!!field.value} />}
-                  label='Mandatory History'
+                  label="Mandatory History"
                 />
               )}
             />
@@ -560,7 +560,7 @@ function ComponentJobUpsert({
         </BorderedBox>
       </Box>
     </FormDialog>
-  )
+  );
 }
 
-export default memo(ComponentJobUpsert)
+export default memo(ComponentJobUpsert);

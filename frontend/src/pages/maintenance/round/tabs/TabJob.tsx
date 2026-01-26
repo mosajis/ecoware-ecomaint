@@ -21,7 +21,7 @@ const TabJob = ({ roundId, label }: TabJobProps) => {
     useDataGrid(
       tblJobDescription.getAll,
       tblJobDescription.deleteById,
-      "jobDescId"
+      "jobDescId",
       //   !!roundId
     );
 
@@ -57,7 +57,7 @@ const TabJob = ({ roundId, label }: TabJobProps) => {
       { field: "lastDone", headerName: "Last Done", width: 150 },
       { field: "nextDueDate", headerName: "Next Due Date", width: 150 },
     ],
-    [handleEdit, handleDelete]
+    [handleEdit, handleDelete],
   );
 
   return (

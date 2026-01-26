@@ -25,7 +25,7 @@ const Printable = React.forwardRef<HTMLDivElement, PrintableProps>(
       pagePadding = 8,
       style,
     },
-    ref
+    ref,
   ) => {
     const pagePaddingMM = pagePadding + "mm";
 
@@ -96,7 +96,7 @@ const Printable = React.forwardRef<HTMLDivElement, PrintableProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 Printable.displayName = "Printable";

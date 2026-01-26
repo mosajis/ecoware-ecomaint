@@ -1,18 +1,18 @@
-import DataGridActionBar from '@/shared/components/dataGrid/DataGridActionBar'
-import Filter from '@mui/icons-material/FilterList'
-import { WORK_ORDER_ACTIONS } from './WorkOrderActionsConfig'
+import DataGridActionBar from "@/shared/components/dataGrid/DataGridActionBar";
+import Filter from "@mui/icons-material/FilterList";
+import { WORK_ORDER_ACTIONS } from "./WorkOrderActionsConfig";
 
 type Props = {
-  selectedStatuses: string[]
+  selectedStatuses: string[];
 
-  onIssue: () => void
-  onComplete: () => void
-  onPending: () => void
-  onPostponed: () => void
-  onCancel: () => void
-  onRequest: () => void
-  onFilter: () => void
-}
+  onIssue: () => void;
+  onComplete: () => void;
+  onPending: () => void;
+  onPostponed: () => void;
+  onCancel: () => void;
+  onRequest: () => void;
+  onFilter: () => void;
+};
 
 export default function WorkOrderActionBar({
   selectedStatuses,
@@ -24,11 +24,11 @@ export default function WorkOrderActionBar({
   onRequest,
   onFilter,
 }: Props) {
-  const selectedCount = selectedStatuses.length
+  const selectedCount = selectedStatuses.length;
 
   const actions = [
     {
-      label: 'Filter',
+      label: "Filter",
       icon: <Filter />,
       isEnabled: true,
       onClick: onFilter,
@@ -73,7 +73,7 @@ export default function WorkOrderActionBar({
       ...WORK_ORDER_ACTIONS.request,
       onClick: onRequest,
     },
-  ]
+  ];
 
-  return <DataGridActionBar actions={actions} />
+  return <DataGridActionBar actions={actions} />;
 }

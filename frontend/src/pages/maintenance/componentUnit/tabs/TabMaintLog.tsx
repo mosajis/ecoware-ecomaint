@@ -1,22 +1,22 @@
-import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import { useCallback } from 'react'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
-import { columns } from '../../maintLog/MaintLogColumns'
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import { useCallback } from "react";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { columns } from "../../maintLog/MaintLogColumns";
 import {
   tblMaintLog,
   TypeTblComponentUnit,
   TypeTblMaintLog,
-} from '@/core/api/generated/api'
+} from "@/core/api/generated/api";
 
 interface Props {
-  componentUnit?: TypeTblComponentUnit
-  label?: string
+  componentUnit?: TypeTblComponentUnit;
+  label?: string;
 }
 
-const getRowId = (row: TypeTblMaintLog) => row.maintLogId
+const getRowId = (row: TypeTblMaintLog) => row.maintLogId;
 
 const TabMaintLog = ({ componentUnit, label }: Props) => {
-  const compId = componentUnit?.compId
+  const compId = componentUnit?.compId;
 
   const getAll = useCallback(() => {
     return tblMaintLog.getAll({
@@ -34,15 +34,15 @@ const TabMaintLog = ({ componentUnit, label }: Props) => {
         tblMaintClass: true,
         tblJobDescription: true,
       },
-    })
-  }, [compId])
+    });
+  }, [compId]);
 
   const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
     tblMaintLog.getById,
-    'maintLogId',
-    !!compId
-  )
+    "maintLogId",
+    !!compId,
+  );
 
   return (
     <CustomizedDataGrid
@@ -58,7 +58,7 @@ const TabMaintLog = ({ componentUnit, label }: Props) => {
       onRefreshClick={handleRefresh}
       getRowId={getRowId}
     />
-  )
-}
+  );
+};
 
-export default TabMaintLog
+export default TabMaintLog;

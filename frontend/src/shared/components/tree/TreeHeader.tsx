@@ -1,6 +1,6 @@
-import LinearProgress from '@mui/material/LinearProgress'
-import Box from '@mui/material/Box'
-import TreeToolbar from './TreeToolbar'
+import LinearProgress from "@mui/material/LinearProgress";
+import Box from "@mui/material/Box";
+import TreeToolbar from "./TreeToolbar";
 
 // ===== TreeHeader =====
 function TreeHeader({
@@ -15,16 +15,16 @@ function TreeHeader({
   label,
   hasSelection,
 }: {
-  loading?: boolean
-  label: string
-  onAdd?: () => void
-  onRefresh?: () => void
-  onExpandAll?: () => void
-  onCollapseAll?: () => void
-  onDelete?: () => void
-  onEdit?: () => void
-  onSearch?: () => void
-  hasSelection?: boolean // ✅ برای disable کردن دکمه‌ها
+  loading?: boolean;
+  label: string;
+  onAdd?: () => void;
+  onRefresh?: () => void;
+  onExpandAll?: () => void;
+  onCollapseAll?: () => void;
+  onDelete?: () => void;
+  onEdit?: () => void;
+  onSearch?: () => void;
+  hasSelection?: boolean; // ✅ برای disable کردن دکمه‌ها
 }) {
   return (
     <Box>
@@ -41,7 +41,7 @@ function TreeHeader({
       />
       {loading && <LinearProgress />}
     </Box>
-  )
+  );
 }
 
-export default TreeHeader
+export default TreeHeader;

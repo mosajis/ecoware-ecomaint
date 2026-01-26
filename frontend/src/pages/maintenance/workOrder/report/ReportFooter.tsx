@@ -1,4 +1,4 @@
-import { formatDateTime } from "@/core/api/helper";
+import { formatDateTime } from "@/core/helper";
 
 type FooterProps = {
   printedBy: string;

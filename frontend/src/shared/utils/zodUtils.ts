@@ -31,8 +31,5 @@ export function normalizeFormData<T extends Record<string, any>>(data: T): T {
   return result;
 }
 
-export const daysAgo = (days: number) =>
-  new Date(Date.now() - days * 24 * 60 * 60 * 1000);
-
 export const toPercent = (value: number, total: number) =>
-  total === 0 ? 0 : ((value / total) * 100).toFixed(2);
+  total === 0 ? 0 : Number(((value / total) * 100).toFixed(2));

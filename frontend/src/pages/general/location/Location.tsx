@@ -1,38 +1,38 @@
-import Splitter from '@/shared/components/Splitter/Splitter'
-import LocationUpsert from './LocationUpsert'
-import GenericDataGrid from '@/shared/components/dataGrid/DataGrid'
-import { tblLocation, TypeTblLocation } from '@/core/api/generated/api'
-import { GridColDef } from '@mui/x-data-grid'
-import { useDataTree } from '@/shared/hooks/useDataTree'
-import { useState, useCallback } from 'react'
-import { GenericTree } from '@/shared/components/tree/Tree'
-import { mapToTree } from '@/shared/components/tree/TreeUtil'
+import Splitter from "@/shared/components/Splitter/Splitter";
+import LocationUpsert from "./LocationUpsert";
+import GenericDataGrid from "@/shared/components/dataGrid/DataGrid";
+import { tblLocation, TypeTblLocation } from "@/core/api/generated/api";
+import { GridColDef } from "@mui/x-data-grid";
+import { useDataTree } from "@/shared/hooks/useDataTree";
+import { useState, useCallback } from "react";
+import { GenericTree } from "@/shared/components/tree/Tree";
+import { mapToTree } from "@/shared/components/tree/TreeUtil";
 
-const getRowId = (row: TypeTblLocation) => row.locationId
-const getItemName = (row: TypeTblLocation) => row.name || '-'
+const getRowId = (row: TypeTblLocation) => row.locationId;
+const getItemName = (row: TypeTblLocation) => row.name || "-";
 
 const columns: GridColDef<TypeTblLocation>[] = [
-  { field: 'locationCode', headerName: 'Code', width: 60 },
-  { field: 'name', headerName: 'Name', flex: 1 },
+  { field: "locationCode", headerName: "Code", width: 60 },
+  { field: "name", headerName: "Name", flex: 1 },
   {
-    field: 'parentLocation',
-    headerName: 'Parent',
+    field: "parentLocation",
+    headerName: "Parent",
     flex: 1,
     valueGetter: (_, row) => row?.tblLocation?.name,
   },
-  { field: 'orderNo', headerName: 'Order No', width: 80 },
-]
+  { field: "orderNo", headerName: "Order No", width: 80 },
+];
 
 export default function PageLocation() {
-  const [openForm, setOpenForm] = useState(false)
-  const [mode, setMode] = useState<'create' | 'update'>('create')
-  const [selectedRowId, setSelectedRowId] = useState<number | null>(null)
+  const [openForm, setOpenForm] = useState(false);
+  const [mode, setMode] = useState<"create" | "update">("create");
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
   const treeMapper = useCallback(
     (items: TypeTblLocation[]) =>
-      mapToTree(items, 'locationId', 'parentLocationId'),
-    []
-  )
+      mapToTree(items, "locationId", "parentLocationId"),
+    [],
+  );
 
   const getAll = useCallback(
     () =>
@@ -41,8 +41,8 @@ export default function PageLocation() {
           tblLocation: true,
         },
       }),
-    []
-  )
+    [],
+  );
 
   const { tree, rows, loading, refetch, handleDelete } =
     useDataTree<TypeTblLocation>({
@@ -50,33 +50,33 @@ export default function PageLocation() {
       deleteById: tblLocation.deleteById,
       getId: getRowId,
       mapper: treeMapper,
-    })
+    });
 
   const handleCreate = useCallback(() => {
-    setSelectedRowId(null)
-    setMode('create')
-    handleUpsertOpen()
-  }, [])
+    setSelectedRowId(null);
+    setMode("create");
+    handleUpsertOpen();
+  }, []);
 
   const handleEdit = useCallback((rowId: number) => {
-    setSelectedRowId(rowId)
-    setMode('update')
-    handleUpsertOpen()
-  }, [])
+    setSelectedRowId(rowId);
+    setMode("update");
+    handleUpsertOpen();
+  }, []);
 
   const handleUpsertClose = useCallback(() => {
-    setOpenForm(false)
-  }, [])
+    setOpenForm(false);
+  }, []);
 
   const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true)
-  }, [])
+    setOpenForm(true);
+  }, []);
 
   return (
     <>
-      <Splitter initialPrimarySize='35%'>
+      <Splitter initialPrimarySize="35%">
         <GenericTree<TypeTblLocation>
-          label='Tree View'
+          label="Tree View"
           loading={loading}
           data={tree}
           onDelete={handleDelete}
@@ -89,7 +89,7 @@ export default function PageLocation() {
         />
 
         <GenericDataGrid
-          label='List View'
+          label="List View"
           showToolbar
           disableRowNumber
           loading={loading}
@@ -112,5 +112,5 @@ export default function PageLocation() {
         onSuccess={refetch}
       />
     </>
-  )
+  );
 }

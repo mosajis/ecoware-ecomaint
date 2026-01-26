@@ -1,54 +1,54 @@
-import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import { useCallback } from 'react'
-import { tblCompCounter, TypeTblCompCounter } from '@/core/api/generated/api'
-import { GridColDef } from '@mui/x-data-grid'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import { useCallback } from "react";
+import { tblCompCounter, TypeTblCompCounter } from "@/core/api/generated/api";
+import { GridColDef } from "@mui/x-data-grid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 interface Props {
-  counterTypeId: number | null | undefined
-  label?: string
+  counterTypeId: number | null | undefined;
+  label?: string;
 }
 
-const getRowId = (row: TypeTblCompCounter) => row.compCounterId
+const getRowId = (row: TypeTblCompCounter) => row.compCounterId;
 
 const columns: GridColDef<TypeTblCompCounter>[] = [
   {
-    field: 'compNo',
-    headerName: 'Component',
+    field: "compNo",
+    headerName: "Component",
     flex: 2,
     valueGetter: (_, row) => row.tblComponentUnit?.compNo,
   },
   {
-    field: 'CompType',
-    headerName: 'CompType',
+    field: "CompType",
+    headerName: "CompType",
     flex: 2,
     // @ts-ignore
     valueGetter: (_, row) => row.tblComponentUnit?.tblCompType?.compName,
   },
   {
-    field: 'model',
-    headerName: 'Model',
+    field: "model",
+    headerName: "Model",
     flex: 1,
     valueGetter: (_, row) => row.tblComponentUnit?.misc1,
   },
   {
-    field: 'serialNo',
-    headerName: 'SerialNo',
+    field: "serialNo",
+    headerName: "SerialNo",
     flex: 1,
     valueGetter: (_, row) => row.tblComponentUnit?.serialNo,
   },
   {
-    field: 'statusId',
-    headerName: 'Status',
+    field: "statusId",
+    headerName: "Status",
     width: 80,
     valueGetter: (_, row) =>
       // @ts-ignore
       row.tblComponentUnit?.tblCompStatus?.compStatusName,
   },
-]
+];
 
 export default function TabCompUnitCounter(props: Props) {
-  const { counterTypeId, label } = props
+  const { counterTypeId, label } = props;
 
   const getAll = useCallback(() => {
     return tblCompCounter.getAll({
@@ -61,15 +61,15 @@ export default function TabCompUnitCounter(props: Props) {
           },
         },
       },
-    })
-  }, [counterTypeId])
+    });
+  }, [counterTypeId]);
 
   const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
     tblCompCounter.deleteById,
-    'compCounterId',
-    !!counterTypeId
-  )
+    "compCounterId",
+    !!counterTypeId,
+  );
 
   return (
     <CustomizedDataGrid
@@ -84,5 +84,5 @@ export default function TabCompUnitCounter(props: Props) {
       onRefreshClick={handleRefresh}
       getRowId={getRowId}
     />
-  )
+  );
 }

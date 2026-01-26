@@ -61,7 +61,7 @@ export default class Api {
           window.location.pathname = "/auth/login";
         }
         return Promise.reject(error);
-      }
+      },
     );
 
     this.get = this._fetch("get");
@@ -77,7 +77,7 @@ export default class Api {
     (method: string) =>
     async <T = any>(
       url: string,
-      { data, params, ...options }: any = {}
+      { data, params, ...options }: any = {},
     ): Promise<T> => {
       try {
         const response = await this.axios({

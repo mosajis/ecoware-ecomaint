@@ -1,37 +1,37 @@
-import { memo, useEffect, useMemo, useState, useCallback } from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import FormDialog from '@/shared/components/formDialog/FormDialog'
-import { tblMaintType, TypeTblMaintType } from '@/core/api/generated/api'
-import { requiredStringField } from '@/core/api/helper'
-import NumberField from '@/shared/components/NumberField'
+import { memo, useEffect, useMemo, useState, useCallback } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import { tblMaintType, TypeTblMaintType } from "@/core/api/generated/api";
+import { requiredStringField } from "@/core/helper";
+import NumberField from "@/shared/components/NumberField";
 
 const schema = z.object({
   description: requiredStringField(),
   orderNo: z.number().nullable(),
-})
+});
 
-export type MaintTypeFormValues = z.infer<typeof schema>
+export type MaintTypeFormValues = z.infer<typeof schema>;
 
 type Props = {
-  open: boolean
-  mode: 'create' | 'update'
-  recordId?: number | null
-  onClose: () => void
-  onSuccess: (data: TypeTblMaintType) => void
-}
+  open: boolean;
+  mode: "create" | "update";
+  recordId?: number | null;
+  onClose: () => void;
+  onSuccess: (data: TypeTblMaintType) => void;
+};
 
 function MaintTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
+  const [loadingInitial, setLoadingInitial] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const defaultValues: MaintTypeFormValues = useMemo(
-    () => ({ description: '', orderNo: null }),
-    []
-  )
+    () => ({ description: "", orderNo: null }),
+    [],
+  );
 
   const {
     control,
@@ -41,93 +41,93 @@ function MaintTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
   } = useForm<MaintTypeFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
-  })
+  });
 
   const fetchData = useCallback(async () => {
-    if (mode === 'update' && recordId) {
-      setLoadingInitial(true)
+    if (mode === "update" && recordId) {
+      setLoadingInitial(true);
       try {
-        const res = await tblMaintType.getById(recordId)
-        reset({ description: res?.descr ?? '', orderNo: res.orderNo })
+        const res = await tblMaintType.getById(recordId);
+        reset({ description: res?.descr ?? "", orderNo: res.orderNo });
       } catch (err) {
-        console.error('Failed to fetch MaintType', err)
-        reset(defaultValues)
+        console.error("Failed to fetch MaintType", err);
+        reset(defaultValues);
       } finally {
-        setLoadingInitial(false)
+        setLoadingInitial(false);
       }
     } else {
-      reset(defaultValues)
+      reset(defaultValues);
     }
-  }, [mode, recordId, reset, defaultValues])
+  }, [mode, recordId, reset, defaultValues]);
 
   useEffect(() => {
-    if (open) fetchData()
-  }, [open, fetchData])
+    if (open) fetchData();
+  }, [open, fetchData]);
 
-  const isDisabled = loadingInitial || submitting
+  const isDisabled = loadingInitial || submitting;
 
   const handleFormSubmit = useCallback(
     async (values: MaintTypeFormValues) => {
-      setSubmitting(true)
+      setSubmitting(true);
       try {
-        let result: TypeTblMaintType
-        if (mode === 'create') {
+        let result: TypeTblMaintType;
+        if (mode === "create") {
           result = await tblMaintType.create({
             descr: values.description,
             orderNo: values.orderNo,
-          })
-        } else if (mode === 'update' && recordId) {
+          });
+        } else if (mode === "update" && recordId) {
           result = await tblMaintType.update(recordId, {
             descr: values.description,
             orderNo: values.orderNo,
-          })
+          });
         } else {
-          return
+          return;
         }
-        onSuccess(result)
-        onClose()
+        onSuccess(result);
+        onClose();
       } catch (err) {
-        console.error('Submit failed', err)
+        console.error("Submit failed", err);
       } finally {
-        setSubmitting(false)
+        setSubmitting(false);
       }
     },
-    [mode, recordId, onSuccess, onClose]
-  )
+    [mode, recordId, onSuccess, onClose],
+  );
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === 'create' ? 'Create Maint Type' : 'Edit Maint Type'}
+      title={mode === "create" ? "Create Maint Type" : "Edit Maint Type"}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display='grid' gridTemplateColumns='repeat(4, 1fr)' gap={1.5}>
+      <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1.5}>
         <Controller
-          name='description'
+          name="description"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label='Description *'
-              size='small'
+              label="Description *"
+              size="small"
               error={!!errors.description}
               helperText={errors.description?.message}
               disabled={isDisabled}
-              sx={{ gridColumn: 'span 4' }}
+              sx={{ gridColumn: "span 4" }}
             />
           )}
         />
         <Controller
-          name='orderNo'
+          name="orderNo"
           control={control}
           render={({ field }) => (
             <NumberField
               {...field}
-              label='Order No'
-              size='small'
+              label="Order No"
+              size="small"
               error={!!errors.orderNo}
               helperText={errors.orderNo?.message}
               disabled={isDisabled}
@@ -136,7 +136,7 @@ function MaintTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         />
       </Box>
     </FormDialog>
-  )
+  );
 }
 
-export default memo(MaintTypeUpsert)
+export default memo(MaintTypeUpsert);

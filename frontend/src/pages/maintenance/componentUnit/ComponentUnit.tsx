@@ -1,52 +1,52 @@
-import Splitter from '@/shared/components/Splitter/Splitter'
-import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import ComponentUnitUpsert from './ComponentUnitUpsert'
-import { useRouter } from '@tanstack/react-router'
-import { routeComponentUnitDetail } from './ComponentUnitRoutes'
-import { useDataTree } from '@/shared/hooks/useDataTree'
-import { mapToTree } from '@/shared/components/tree/TreeUtil'
-import { GenericTree } from '@/shared/components/tree/Tree'
-import { GridColDef } from '@mui/x-data-grid'
-import { useCallback, useState } from 'react'
+import Splitter from "@/shared/components/Splitter/Splitter";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import ComponentUnitUpsert from "./ComponentUnitUpsert";
+import { useRouter } from "@tanstack/react-router";
+import { routeComponentUnitDetail } from "./ComponentUnitRoutes";
+import { useDataTree } from "@/shared/hooks/useDataTree";
+import { mapToTree } from "@/shared/components/tree/TreeUtil";
+import { GenericTree } from "@/shared/components/tree/Tree";
+import { GridColDef } from "@mui/x-data-grid";
+import { useCallback, useState } from "react";
 import {
   tblComponentUnit,
   TypeTblComponentUnit,
-} from '@/core/api/generated/api'
+} from "@/core/api/generated/api";
 
-const getRowId = (row: TypeTblComponentUnit) => row.compId
-const getItemName = (row: TypeTblComponentUnit) => row.compNo || '-'
+const getRowId = (row: TypeTblComponentUnit) => row.compId;
+const getItemName = (row: TypeTblComponentUnit) => row.compNo || "-";
 
 const columns: GridColDef<TypeTblComponentUnit>[] = [
-  { field: 'compNo', headerName: 'Component No', width: 280 },
+  { field: "compNo", headerName: "Component No", width: 280 },
   {
-    field: 'compType',
-    headerName: 'Component Type',
+    field: "compType",
+    headerName: "Component Type",
     flex: 1,
-    valueGetter: (_, row) => row.tblCompType?.compType ?? '',
+    valueGetter: (_, row) => row.tblCompType?.compType ?? "",
   },
-  { field: 'model', headerName: 'Model / Type', flex: 1 },
+  { field: "model", headerName: "Model / Type", flex: 1 },
   {
-    field: 'locationId',
-    headerName: 'Location',
+    field: "locationId",
+    headerName: "Location",
     flex: 1,
-    valueGetter: (_, row) => row.tblLocation?.name ?? '',
+    valueGetter: (_, row) => row.tblLocation?.name ?? "",
   },
-  { field: 'serialNo', headerName: 'Serial No', flex: 1 },
+  { field: "serialNo", headerName: "Serial No", flex: 1 },
   {
-    field: 'statusId',
-    headerName: 'Status',
+    field: "statusId",
+    headerName: "Status",
     width: 120,
-    valueGetter: (_, row) => row.tblCompStatus?.compStatusName ?? '',
+    valueGetter: (_, row) => row.tblCompStatus?.compStatusName ?? "",
   },
-  { field: 'orderNo', headerName: 'Order No', width: 85 },
-]
+  { field: "orderNo", headerName: "Order No", width: 85 },
+];
 
 export default function PageComponentUnit() {
-  const router = useRouter()
+  const router = useRouter();
 
-  const [selectedRowId, setSelectedRowId] = useState<null | number>(null)
-  const [openForm, setOpenForm] = useState(false)
-  const [mode, setMode] = useState<'create' | 'update'>('create')
+  const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
+  const [openForm, setOpenForm] = useState(false);
+  const [mode, setMode] = useState<"create" | "update">("create");
 
   const getAll = useCallback(() => {
     return tblComponentUnit.getAll({
@@ -55,62 +55,62 @@ export default function PageComponentUnit() {
         tblCompStatus: true,
         tblLocation: true,
       },
-    })
-  }, [])
+    });
+  }, []);
 
   const treeMapper = useCallback(
     (items: TypeTblComponentUnit[]) =>
-      mapToTree(items, 'compId', 'parentCompId'),
-    []
-  )
+      mapToTree(items, "compId", "parentCompId"),
+    [],
+  );
 
   const { rows, tree, loading, refetch, handleDelete } =
     useDataTree<TypeTblComponentUnit>({
       getAll,
       deleteById: tblComponentUnit.deleteById,
-      getId: item => item.compId,
+      getId: (item) => item.compId,
       mapper: treeMapper,
-    })
+    });
 
   const handleCreate = useCallback(() => {
-    setSelectedRowId(null)
-    setMode('create')
-    handleUpsertOpen()
-  }, [])
+    setSelectedRowId(null);
+    setMode("create");
+    handleUpsertOpen();
+  }, []);
 
   const handleEdit = useCallback((rowId: number) => {
-    setSelectedRowId(rowId)
-    setMode('update')
-    handleUpsertOpen()
-  }, [])
+    setSelectedRowId(rowId);
+    setMode("update");
+    handleUpsertOpen();
+  }, []);
 
   const handleUpsertClose = useCallback(() => {
-    setOpenForm(false)
-  }, [])
+    setOpenForm(false);
+  }, []);
 
   const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true)
-  }, [])
+    setOpenForm(true);
+  }, []);
 
   const handleRowDoubleClick = useCallback(
     (rowId: number) => {
-      const row = rows.find(i => i.compId === rowId)
+      const row = rows.find((i) => i.compId === rowId);
 
-      if (!row) return
+      if (!row) return;
       router.navigate({
         to: routeComponentUnitDetail.to,
         params: { id: rowId },
         search: { breadcrumb: row?.compNo },
-      })
+      });
     },
-    [router, rows]
-  )
+    [router, rows],
+  );
 
   return (
     <>
-      <Splitter initialPrimarySize='30%'>
+      <Splitter initialPrimarySize="30%">
         <GenericTree<TypeTblComponentUnit>
-          label='Tree View'
+          label="Tree View"
           loading={loading}
           data={tree}
           onDoubleClick={handleRowDoubleClick}
@@ -124,7 +124,7 @@ export default function PageComponentUnit() {
         <CustomizedDataGrid
           showToolbar
           disableRowNumber
-          label='List View'
+          label="List View"
           rows={rows}
           columns={columns}
           loading={loading}
@@ -145,5 +145,5 @@ export default function PageComponentUnit() {
         onSuccess={refetch}
       />
     </>
-  )
+  );
 }

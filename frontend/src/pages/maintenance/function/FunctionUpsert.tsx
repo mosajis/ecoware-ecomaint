@@ -1,24 +1,24 @@
-import * as z from 'zod'
-import FormDialog from '@/shared/components/formDialog/FormDialog'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { buildRelation } from '@/core/api/helper'
-import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
-import { memo, useCallback, useEffect, useState } from 'react'
+import * as z from "zod";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { buildRelation } from "@/core/helper";
+import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { memo, useCallback, useEffect, useState } from "react";
 import {
   tblFunctions,
   tblComponentUnit,
   TypeTblFunctions,
-} from '@/core/api/generated/api'
+} from "@/core/api/generated/api";
 
 // =======================
 // VALIDATION SCHEMA
 // =======================
 const schema = z.object({
-  funcNo: z.string().min(1, 'Function No is required'),
-  funcDescr: z.string().min(1, 'Function Description is required'),
+  funcNo: z.string().min(1, "Function No is required"),
+  funcDescr: z.string().min(1, "Function Description is required"),
   funcRef: z.string().nullable().optional(),
 
   parent: z
@@ -36,58 +36,58 @@ const schema = z.object({
     })
     .nullable()
     .optional(),
-})
+});
 
-export type FunctionFormValues = z.infer<typeof schema>
+export type FunctionFormValues = z.infer<typeof schema>;
 
 // =======================
 // PROPS
 // =======================
 type Props = {
-  open: boolean
-  mode: 'create' | 'update'
-  recordId?: number | null
-  onClose: () => void
-  onSuccess: (data: TypeTblFunctions) => void
-}
+  open: boolean;
+  mode: "create" | "update";
+  recordId?: number | null;
+  onClose: () => void;
+  onSuccess: (data: TypeTblFunctions) => void;
+};
 
 function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
+  const [loadingInitial, setLoadingInitial] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const defaultValues: FunctionFormValues = {
-    funcNo: '',
-    funcDescr: '',
-    funcRef: '',
+    funcNo: "",
+    funcDescr: "",
+    funcRef: "",
     parent: null,
     component: null,
-  }
+  };
 
   const { control, handleSubmit, reset } = useForm<FunctionFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
-  })
+  });
 
   // =======================
   // LOAD RECORD FOR UPDATE
   // =======================
   const loadData = useCallback(async () => {
-    if (mode !== 'update' || !recordId) {
-      reset(defaultValues)
-      return
+    if (mode !== "update" || !recordId) {
+      reset(defaultValues);
+      return;
     }
 
-    setLoadingInitial(true)
+    setLoadingInitial(true);
 
     try {
       const res = await tblFunctions.getById(recordId, {
         include: { tblFunctions: true, tblComponentUnit: true },
-      })
+      });
 
       reset({
-        funcNo: res?.funcNo ?? '',
-        funcDescr: res?.funcDescr ?? '',
-        funcRef: res?.funcRef ?? '',
+        funcNo: res?.funcNo ?? "",
+        funcDescr: res?.funcDescr ?? "",
+        funcRef: res?.funcRef ?? "",
 
         parent: res?.tblFunctions
           ? {
@@ -102,56 +102,56 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               compNo: res.tblComponentUnit.compNo ?? null,
             }
           : null,
-      })
+      });
     } finally {
-      setLoadingInitial(false)
+      setLoadingInitial(false);
     }
-  }, [mode, recordId, reset])
+  }, [mode, recordId, reset]);
 
   useEffect(() => {
-    if (open) loadData()
-  }, [open, loadData])
+    if (open) loadData();
+  }, [open, loadData]);
 
-  const isDisabled = submitting || loadingInitial
+  const isDisabled = submitting || loadingInitial;
 
   // =======================
   // SUBMIT HANDLER
   // =======================
   const onSubmitForm = useCallback(
     async (values: FunctionFormValues) => {
-      const parsed = schema.safeParse(values)
-      if (!parsed.success) return
+      const parsed = schema.safeParse(values);
+      if (!parsed.success) return;
 
-      setSubmitting(true)
+      setSubmitting(true);
 
       try {
-        const d = parsed.data
+        const d = parsed.data;
 
         const payload = {
           funcNo: d.funcNo,
           funcDescr: d.funcDescr,
-          funcRef: d.funcRef ?? '',
+          funcRef: d.funcRef ?? "",
 
-          ...buildRelation('tblComponentUnit', 'compId', d.component?.compId),
-          ...buildRelation('tblFunctions', 'functionId', d.parent?.functionId),
-        }
+          ...buildRelation("tblComponentUnit", "compId", d.component?.compId),
+          ...buildRelation("tblFunctions", "functionId", d.parent?.functionId),
+        };
 
-        let result: TypeTblFunctions
+        let result: TypeTblFunctions;
 
-        if (mode === 'create') {
-          result = await tblFunctions.create(payload)
+        if (mode === "create") {
+          result = await tblFunctions.create(payload);
         } else {
-          result = await tblFunctions.update(recordId!, payload)
+          result = await tblFunctions.update(recordId!, payload);
         }
 
-        onSuccess(result)
-        onClose()
+        onSuccess(result);
+        onClose();
       } finally {
-        setSubmitting(false)
+        setSubmitting(false);
       }
     },
-    [mode, recordId, onClose, onSuccess]
-  )
+    [mode, recordId, onClose, onSuccess],
+  );
 
   // =======================
   // RENDER FORM
@@ -159,22 +159,22 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
   return (
     <FormDialog
       open={open}
-      title={mode === 'create' ? 'Create Function' : 'Edit Function'}
+      title={mode === "create" ? "Create Function" : "Edit Function"}
       loadingInitial={loadingInitial}
       submitting={submitting}
       onClose={onClose}
       onSubmit={handleSubmit(onSubmitForm)}
     >
-      <Box display='flex' flexDirection={'column'} gap={1.5}>
+      <Box display="flex" flexDirection={"column"} gap={1.5}>
         {/* Function No */}
         <Controller
-          name='funcNo'
+          name="funcNo"
           control={control}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              label='Function No'
-              size='small'
+              label="Function No"
+              size="small"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}
@@ -184,13 +184,13 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
         {/* Function Description */}
         <Controller
-          name='funcDescr'
+          name="funcDescr"
           control={control}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              label='Function Description'
-              size='small'
+              label="Function Description"
+              size="small"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}
@@ -200,13 +200,13 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
         {/* Function Ref */}
         <Controller
-          name='funcRef'
+          name="funcRef"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label='Function Reference'
-              size='small'
+              label="Function Reference"
+              size="small"
               disabled={isDisabled}
             />
           )}
@@ -214,27 +214,27 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
         {/* Component Select */}
         <Controller
-          name='component'
+          name="component"
           control={control}
           render={({ field, fieldState }) => (
             <AsyncSelectField
-              dialogMaxWidth='sm'
-              label='Component'
-              selectionMode='single'
+              dialogMaxWidth="sm"
+              label="Component"
+              selectionMode="single"
               request={tblComponentUnit.getAll}
-              getOptionLabel={row => row.compNo}
+              getOptionLabel={(row) => row.compNo}
               value={field.value}
               onChange={field.onChange}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               columns={[
                 {
-                  field: 'compNo',
-                  headerName: 'Component',
+                  field: "compNo",
+                  headerName: "Component",
                   flex: 1,
                 },
               ]}
-              getRowId={row => row.compId}
+              getRowId={(row) => row.compId}
               disabled={isDisabled}
             />
           )}
@@ -242,25 +242,25 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
         {/* Parent Function */}
         <Controller
-          name='parent'
+          name="parent"
           control={control}
           render={({ field, fieldState }) => (
             <AsyncSelectField
-              dialogMaxWidth='sm'
-              label='Parent Function'
-              getOptionLabel={row => row.funcNo}
-              selectionMode='single'
+              dialogMaxWidth="sm"
+              label="Parent Function"
+              getOptionLabel={(row) => row.funcNo}
+              selectionMode="single"
               request={tblFunctions.getAll}
               value={field.value}
               onChange={field.onChange}
               columns={[
                 {
-                  field: 'funcDescr',
-                  headerName: 'Description',
+                  field: "funcDescr",
+                  headerName: "Description",
                   flex: 1,
                 },
               ]}
-              getRowId={row => row.functionId}
+              getRowId={(row) => row.functionId}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}
@@ -269,7 +269,7 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         />
       </Box>
     </FormDialog>
-  )
+  );
 }
 
-export default memo(FunctionUpsert)
+export default memo(FunctionUpsert);

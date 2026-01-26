@@ -1,15 +1,15 @@
-import FormDialog from '@/shared/components/formDialog/FormDialog'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import NumberField from '@/shared/components/NumberField'
-import { memo, useEffect, useState, useCallback } from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
-import { buildRelation } from '@/core/api/helper'
-import { DEFAULT_VALUES, schema, SchemaValue } from './ComponentUnitSchema'
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import NumberField from "@/shared/components/NumberField";
+import { memo, useEffect, useState, useCallback } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { buildRelation } from "@/core/helper";
+import { DEFAULT_VALUES, schema, SchemaValue } from "./ComponentUnitSchema";
 import {
   tblAddress,
   tblComponentUnit,
@@ -18,18 +18,18 @@ import {
   tblLocation,
   TypeTblAddress,
   TypeTblCompStatus,
-} from '@/core/api/generated/api'
-import { logicTblComponentUnit } from './ComponentUnitEffect'
-import { useAtomValue } from 'jotai'
-import { atomUser } from '@/pages/auth/auth.atom'
+} from "@/core/api/generated/api";
+import { logicTblComponentUnit } from "./ComponentUnitEffect";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
 
 type Props = {
-  open: boolean
-  mode: 'create' | 'update'
-  recordId?: number | null
-  onClose: () => void
-  onSuccess: () => void
-}
+  open: boolean;
+  mode: "create" | "update";
+  recordId?: number | null;
+  onClose: () => void;
+  onSuccess: () => void;
+};
 
 function ComponentUnitUpsert({
   open,
@@ -38,22 +38,22 @@ function ComponentUnitUpsert({
   onClose,
   onSuccess,
 }: Props) {
-  const user = useAtomValue(atomUser)
-  const [loading, setLoading] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
+  const user = useAtomValue(atomUser);
+  const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const { control, handleSubmit, reset } = useForm<SchemaValue>({
     resolver: zodResolver(schema),
     defaultValues: DEFAULT_VALUES,
-  })
+  });
 
   const fetchData = useCallback(async () => {
-    if (mode !== 'update' || !recordId) {
-      reset(DEFAULT_VALUES)
-      return
+    if (mode !== "update" || !recordId) {
+      reset(DEFAULT_VALUES);
+      return;
     }
 
-    setLoading(true)
+    setLoading(true);
     try {
       const res = await tblComponentUnit.getById(recordId, {
         include: {
@@ -63,7 +63,7 @@ function ComponentUnitUpsert({
           tblComponentUnit: true,
           tblAddress: true,
         },
-      })
+      });
 
       reset({
         compType: res.tblCompType
@@ -98,7 +98,7 @@ function ComponentUnitUpsert({
               name: res.tblAddress.name,
             }
           : null,
-        compNo: res.compNo ?? '',
+        compNo: res.compNo ?? "",
         serialNo: res.serialNo ?? null,
         assetNo: res.assetNo ?? null,
         model: res.model ?? null,
@@ -107,25 +107,25 @@ function ComponentUnitUpsert({
         comment3: res.comment3 ?? null,
         isCritical: !!res.isCritical,
         orderNo: res.orderNo ?? null,
-      })
+      });
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [mode, recordId, reset])
+  }, [mode, recordId, reset]);
 
   useEffect(() => {
-    if (open) fetchData()
-  }, [open, fetchData])
+    if (open) fetchData();
+  }, [open, fetchData]);
 
   const handleFormSubmit = useCallback(
     async (values: SchemaValue) => {
-      const parsed = schema.safeParse(values)
-      if (!parsed.success) return
+      const parsed = schema.safeParse(values);
+      if (!parsed.success) return;
 
-      const v = parsed.data
+      const v = parsed.data;
 
       try {
-        setSubmitting(true)
+        setSubmitting(true);
 
         const body = {
           compNo: v.compNo,
@@ -137,59 +137,59 @@ function ComponentUnitUpsert({
           model: v.model ?? null,
           isCritical: v.isCritical ? 1 : 0,
           orderNo: v.orderNo ?? null,
-          ...buildRelation('tblCompType', 'compTypeId', v.compType?.compTypeId),
-          ...buildRelation('tblLocation', 'locationId', v.location?.locationId),
+          ...buildRelation("tblCompType", "compTypeId", v.compType?.compTypeId),
+          ...buildRelation("tblLocation", "locationId", v.location?.locationId),
           ...buildRelation(
-            'tblCompStatus',
-            'compStatusId',
-            v.status?.compStatusId
+            "tblCompStatus",
+            "compStatusId",
+            v.status?.compStatusId,
           ),
-          ...buildRelation('tblAddress', 'addressId', v.vendor?.addressId),
-          ...buildRelation('tblComponentUnit', 'compId', v.parentComp?.compId),
-        }
+          ...buildRelation("tblAddress", "addressId", v.vendor?.addressId),
+          ...buildRelation("tblComponentUnit", "compId", v.parentComp?.compId),
+        };
 
-        if (mode === 'create') {
-          const result = await tblComponentUnit.create(body)
+        if (mode === "create") {
+          const result = await tblComponentUnit.create(body);
           await logicTblComponentUnit.effect(
             result.compId,
-            user?.userId as number
-          )
+            user?.userId as number,
+          );
         } else {
-          await tblComponentUnit.update(recordId!, body)
+          await tblComponentUnit.update(recordId!, body);
         }
 
         // onSuccess()
         // onClose()
       } finally {
-        setSubmitting(false)
+        setSubmitting(false);
       }
     },
-    [mode, recordId, onSuccess, onClose]
-  )
-  const isDisabled = loading || submitting
+    [mode, recordId, onSuccess, onClose],
+  );
+  const isDisabled = loading || submitting;
 
   return (
     <FormDialog
-      maxWidth='sm'
+      maxWidth="sm"
       open={open}
       onClose={onClose}
-      title={mode === 'create' ? 'New Component Unit' : 'Edit Component Unit'}
+      title={mode === "create" ? "New Component Unit" : "Edit Component Unit"}
       submitting={submitting}
       loadingInitial={loading}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display='flex' flexDirection='column' gap={1.5}>
-        <Box display={'flex'} gap={1.5}>
+      <Box display="flex" flexDirection="column" gap={1.5}>
+        <Box display={"flex"} gap={1.5}>
           {/* Component No */}
           <Controller
-            name='compNo'
+            name="compNo"
             control={control}
             render={({ field, fieldState }) => (
               <TextField
                 {...field}
-                label='Component No'
-                size='small'
-                sx={{ width: '85%' }}
+                label="Component No"
+                size="small"
+                sx={{ width: "85%" }}
                 disabled={isDisabled}
                 error={!!fieldState.error}
                 helperText={fieldState.error?.message}
@@ -198,7 +198,7 @@ function ComponentUnitUpsert({
           />
           {/* Is Critical */}
           <Controller
-            name='isCritical'
+            name="isCritical"
             control={control}
             render={({ field }) => (
               <FormControlLabel
@@ -210,7 +210,7 @@ function ComponentUnitUpsert({
                     disabled={isDisabled}
                   />
                 }
-                label='Critical'
+                label="Critical"
               />
             )}
           />
@@ -218,83 +218,83 @@ function ComponentUnitUpsert({
 
         {/* Component Type */}
         <Controller
-          name='compType'
+          name="compType"
           control={control}
           render={({ field }) => (
             <AsyncSelectField
-              label='Type'
-              getOptionLabel={row => row.compName}
+              label="Type"
+              getOptionLabel={(row) => row.compName}
               value={field.value}
-              selectionMode='single'
+              selectionMode="single"
               request={tblCompType.getAll}
-              columns={[{ field: 'compName', headerName: 'Name', flex: 1 }]}
-              getRowId={row => row.compTypeId}
+              columns={[{ field: "compName", headerName: "Name", flex: 1 }]}
+              getRowId={(row) => row.compTypeId}
               onChange={field.onChange}
             />
           )}
         />
 
-        <Box display={'grid'} gridTemplateColumns={'3fr 1fr'} gap={1.5}>
+        <Box display={"grid"} gridTemplateColumns={"3fr 1fr"} gap={1.5}>
           {/* Location */}
           <Controller
-            name='location'
+            name="location"
             control={control}
             render={({ field }) => (
               <AsyncSelectField
-                label='Location'
-                getOptionLabel={row => row.name}
+                label="Location"
+                getOptionLabel={(row) => row.name}
                 value={field.value}
-                selectionMode='single'
+                selectionMode="single"
                 request={tblLocation.getAll}
-                columns={[{ field: 'name', headerName: 'Name', flex: 1 }]}
-                getRowId={row => row.locationId}
+                columns={[{ field: "name", headerName: "Name", flex: 1 }]}
+                getRowId={(row) => row.locationId}
                 onChange={field.onChange}
               />
             )}
           />
           {/* Component Type */}
           <Controller
-            name='status'
+            name="status"
             control={control}
             render={({ field }) => (
               <AsyncSelectField<TypeTblCompStatus>
-                label='Status'
+                label="Status"
                 value={field.value}
-                selectionMode='single'
+                selectionMode="single"
                 request={tblCompStatus.getAll}
                 columns={[
-                  { field: 'compStatusName', headerName: 'Status', flex: 1 },
+                  { field: "compStatusName", headerName: "Status", flex: 1 },
                 ]}
                 onChange={field.onChange}
-                getOptionLabel={row => row.compStatusName}
-                getRowId={row => row.compStatusId}
+                getOptionLabel={(row) => row.compStatusName}
+                getRowId={(row) => row.compStatusId}
               />
             )}
           />
         </Box>
         <Controller
-          name='model'
+          name="model"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label='Model / Type'
-              size='small'
+              label="Model / Type"
+              size="small"
               fullWidth
               disabled={isDisabled}
             />
           )}
         />
         {/* Serial No */}
-        <Box display={'flex'} gap={1.5}>
+        <Box display={"flex"} gap={1.5}>
           <Controller
-            name='serialNo'
+            name="serialNo"
             control={control}
             render={({ field }) => (
               <TextField
                 {...field}
-                label='Serial No'
-                size='small'
+                label="Serial No"
+                size="small"
                 fullWidth
                 disabled={isDisabled}
               />
@@ -303,13 +303,13 @@ function ComponentUnitUpsert({
 
           {/* Asset No */}
           <Controller
-            name='assetNo'
+            name="assetNo"
             control={control}
             render={({ field }) => (
               <TextField
                 {...field}
-                label='Asset No'
-                size='small'
+                label="Asset No"
+                size="small"
                 fullWidth
                 disabled={isDisabled}
               />
@@ -319,29 +319,29 @@ function ComponentUnitUpsert({
 
         {/* Component Type */}
         <Controller
-          name='vendor'
+          name="vendor"
           control={control}
           render={({ field }) => (
             <AsyncSelectField<TypeTblAddress>
-              label='Maker'
+              label="Maker"
               value={field.value}
-              selectionMode='single'
+              selectionMode="single"
               request={tblAddress.getAll}
-              columns={[{ field: 'name', headerName: 'Name', flex: 1 }]}
+              columns={[{ field: "name", headerName: "Name", flex: 1 }]}
               onChange={field.onChange}
-              getOptionLabel={row => row.name}
-              getRowId={row => row.addressId}
+              getOptionLabel={(row) => row.name}
+              getRowId={(row) => row.addressId}
             />
           )}
         />
         <Controller
-          name='comment1'
+          name="comment1"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label='Comment 1'
-              size='small'
+              label="Comment 1"
+              size="small"
               fullWidth
               disabled={isDisabled}
             />
@@ -350,13 +350,13 @@ function ComponentUnitUpsert({
 
         {/* Comment2 */}
         <Controller
-          name='comment2'
+          name="comment2"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label='Comment 2'
-              size='small'
+              label="Comment 2"
+              size="small"
               fullWidth
               disabled={isDisabled}
             />
@@ -365,13 +365,13 @@ function ComponentUnitUpsert({
 
         {/* Comment3 */}
         <Controller
-          name='comment3'
+          name="comment3"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label='Comment 3'
-              size='small'
+              label="Comment 3"
+              size="small"
               fullWidth
               disabled={isDisabled}
             />
@@ -380,20 +380,20 @@ function ComponentUnitUpsert({
 
         {/* Parent Component */}
         <Controller
-          name='parentComp'
+          name="parentComp"
           control={control}
           render={({ field, fieldState }) => (
             <AsyncSelectField
-              label='Parent'
-              getOptionLabel={row => row.compNo ?? ''}
+              label="Parent"
+              getOptionLabel={(row) => row.compNo ?? ""}
               value={field.value}
-              selectionMode='single'
+              selectionMode="single"
               request={tblComponentUnit.getAll}
               columns={[
-                { field: 'compNo', headerName: 'Comp No', flex: 1 },
-                { field: 'compName', headerName: 'Name', flex: 1 },
+                { field: "compNo", headerName: "Comp No", flex: 1 },
+                { field: "compName", headerName: "Name", flex: 1 },
               ]}
-              getRowId={row => row.compId}
+              getRowId={(row) => row.compId}
               onChange={field.onChange}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -402,21 +402,21 @@ function ComponentUnitUpsert({
         />
         {/* Order No */}
         <Controller
-          name='orderNo'
+          name="orderNo"
           control={control}
           render={({ field }) => (
             <NumberField
               {...field}
-              label='Order No'
-              size='small'
-              sx={{ width: '35%' }}
+              label="Order No"
+              size="small"
+              sx={{ width: "35%" }}
               disabled={isDisabled}
             />
           )}
         />
       </Box>
     </FormDialog>
-  )
+  );
 }
 
-export default memo(ComponentUnitUpsert)
+export default memo(ComponentUnitUpsert);

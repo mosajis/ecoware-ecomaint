@@ -15,7 +15,7 @@ export const runStoredProc = async <SP extends SPNames>(
   spName: SP,
   params: Partial<{
     [K in keyof SPConfigType[SP]["parameters"]]: any;
-  }>
+  }>,
 ): Promise<{ recordset: any[]; output: ProcedureParams }> => {
   const sp = spConfig[spName];
 

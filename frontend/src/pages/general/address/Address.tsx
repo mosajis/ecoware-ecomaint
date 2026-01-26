@@ -1,62 +1,62 @@
-import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import AddressUpsert from './AddressUpsert'
-import { type GridColDef } from '@mui/x-data-grid'
-import { useCallback, useState } from 'react'
-import { tblAddress, TypeTblAddress } from '@/core/api/generated/api'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import AddressUpsert from "./AddressUpsert";
+import { type GridColDef } from "@mui/x-data-grid";
+import { useCallback, useState } from "react";
+import { tblAddress, TypeTblAddress } from "@/core/api/generated/api";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
-const getRowId = (row: TypeTblAddress) => row.addressId
+const getRowId = (row: TypeTblAddress) => row.addressId;
 
 const columns: GridColDef<TypeTblAddress>[] = [
-  { field: 'code', headerName: 'Code', width: 60 },
-  { field: 'name', headerName: 'Name', flex: 1 },
-  { field: 'address1', headerName: 'Address 1', flex: 1 },
-  { field: 'address2', headerName: 'Address 2', flex: 1 },
-  { field: 'phone', headerName: 'Phone', flex: 2 },
-  { field: 'contact', headerName: 'Contact Person', flex: 1 },
-  { field: 'eMail', headerName: 'Email', flex: 1 },
-  { field: 'orderNo', headerName: 'Order No', width: 100 },
-]
+  { field: "code", headerName: "Code", width: 60 },
+  { field: "name", headerName: "Name", flex: 1 },
+  { field: "address1", headerName: "Address 1", flex: 1 },
+  { field: "address2", headerName: "Address 2", flex: 1 },
+  { field: "phone", headerName: "Phone", flex: 2 },
+  { field: "contact", headerName: "Contact Person", flex: 1 },
+  { field: "eMail", headerName: "Email", flex: 1 },
+  { field: "orderNo", headerName: "Order No", width: 100 },
+];
 
 export default function PageAddress() {
-  const [selectedRowId, setSelectedRowId] = useState<null | number>(null)
-  const [openForm, setOpenForm] = useState(false)
-  const [mode, setMode] = useState<'create' | 'update'>('create')
+  const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
+  const [openForm, setOpenForm] = useState(false);
+  const [mode, setMode] = useState<"create" | "update">("create");
 
   // === useDataGrid ===
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     tblAddress.getAll,
     tblAddress.deleteById,
-    'addressId'
-  )
+    "addressId",
+  );
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
-    setSelectedRowId(null)
-    setMode('create')
-    handleUpsertOpen()
-  }, [])
+    setSelectedRowId(null);
+    setMode("create");
+    handleUpsertOpen();
+  }, []);
 
   const handleEdit = useCallback((rowId: number) => {
-    setSelectedRowId(rowId)
-    setMode('update')
-    handleUpsertOpen()
-  }, [])
+    setSelectedRowId(rowId);
+    setMode("update");
+    handleUpsertOpen();
+  }, []);
 
   const handleUpsertClose = useCallback(() => {
-    setOpenForm(false)
-  }, [])
+    setOpenForm(false);
+  }, []);
 
   const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true)
-  }, [])
+    setOpenForm(true);
+  }, []);
 
   return (
     <>
       <CustomizedDataGrid
         showToolbar
         disableRowNumber
-        label='Address'
+        label="Address"
         onAddClick={handleCreate}
         onRefreshClick={handleRefresh}
         onDeleteClick={handleDelete}
@@ -76,5 +76,5 @@ export default function PageAddress() {
         onSuccess={handleRefresh}
       />
     </>
-  )
+  );
 }

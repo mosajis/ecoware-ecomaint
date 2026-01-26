@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const CountersUpdateFormDialog = () => {
-  return <div>CountersUpdateFormDialog</div>
-}
+  return <div>CountersUpdateFormDialog</div>;
+};
 
-export default CountersUpdateFormDialog
+export default CountersUpdateFormDialog;

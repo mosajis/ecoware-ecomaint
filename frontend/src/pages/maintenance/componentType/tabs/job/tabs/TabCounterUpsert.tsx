@@ -1,20 +1,20 @@
-import * as z from 'zod'
-import Box from '@mui/material/Box'
-import FormDialog from '@/shared/components/formDialog/FormDialog'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import NumberField from '@/shared/components/NumberField'
-import { memo, useCallback, useEffect, useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
-import { buildRelation } from '@/core/api/helper'
+import * as z from "zod";
+import Box from "@mui/material/Box";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import NumberField from "@/shared/components/NumberField";
+import { memo, useCallback, useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { buildRelation } from "@/core/helper";
 import {
   tblCompTypeJobCounter,
   tblCompTypeCounter,
   TypeTblCompTypeJobCounter,
   TypeTblCompTypeJob,
-} from '@/core/api/generated/api'
+} from "@/core/api/generated/api";
 
 /* === Schema === */
 const schema = z.object({
@@ -23,25 +23,25 @@ const schema = z.object({
       compTypeCounterId: z.number(),
     })
     .nullable()
-    .refine(Boolean, { message: 'Counter is required' }),
+    .refine(Boolean, { message: "Counter is required" }),
   frequency: z.number().nullable(),
   window: z.number().nullable(),
   showInAlert: z.boolean(),
   updateByFunction: z.boolean(),
   orderNo: z.number().nullable(),
-})
+});
 
-type FormValues = z.infer<typeof schema>
+type FormValues = z.infer<typeof schema>;
 
 type Props = {
-  open: boolean
-  mode: 'create' | 'update'
-  recordId?: number
-  compTypeJobId: number
-  compTypeId: number
-  onClose: () => void
-  onSuccess: (data: TypeTblCompTypeJobCounter) => void
-}
+  open: boolean;
+  mode: "create" | "update";
+  recordId?: number;
+  compTypeJobId: number;
+  compTypeId: number;
+  onClose: () => void;
+  onSuccess: (data: TypeTblCompTypeJobCounter) => void;
+};
 
 function JobCounterUpsert({
   open,
@@ -52,8 +52,8 @@ function JobCounterUpsert({
   onClose,
   onSuccess,
 }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
+  const [loadingInitial, setLoadingInitial] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const defaultValues: FormValues = {
     compTypeCounter: null as any,
@@ -62,21 +62,21 @@ function JobCounterUpsert({
     showInAlert: true,
     updateByFunction: false,
     orderNo: null,
-  }
+  };
 
   const { control, handleSubmit, reset } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues,
-  })
+  });
 
   // === Load edit ===
   const fetchData = useCallback(async () => {
-    if (mode !== 'update' || !recordId) {
-      reset(defaultValues)
-      return
+    if (mode !== "update" || !recordId) {
+      reset(defaultValues);
+      return;
     }
 
-    setLoadingInitial(true)
+    setLoadingInitial(true);
     try {
       const res = await tblCompTypeJobCounter.getById(recordId, {
         include: {
@@ -86,7 +86,7 @@ function JobCounterUpsert({
             },
           },
         },
-      })
+      });
 
       reset({
         compTypeCounter: res.tblCompTypeCounter,
@@ -95,24 +95,24 @@ function JobCounterUpsert({
         showInAlert: res.showInAlert ?? false,
         updateByFunction: res.updateByFunction ?? false,
         orderNo: res.orderNo ?? null,
-      })
+      });
     } finally {
-      setLoadingInitial(false)
+      setLoadingInitial(false);
     }
-  }, [mode, recordId, reset])
+  }, [mode, recordId, reset]);
 
   useEffect(() => {
-    if (open) fetchData()
-  }, [open, fetchData])
+    if (open) fetchData();
+  }, [open, fetchData]);
 
   // === Submit ===
   const onSubmit = useCallback(
     async (values: FormValues) => {
-      const parsed = schema.safeParse(values)
-      if (!parsed.success) return
+      const parsed = schema.safeParse(values);
+      if (!parsed.success) return;
 
       try {
-        setSubmitting(true)
+        setSubmitting(true);
 
         const payload = {
           frequency: parsed.data.frequency,
@@ -121,17 +121,17 @@ function JobCounterUpsert({
           updateByFunction: parsed.data.updateByFunction,
           orderNo: parsed.data.orderNo,
           ...buildRelation(
-            'tblCompTypeCounter',
-            'compTypeCounterId',
-            parsed.data?.compTypeCounter?.compTypeCounterId
+            "tblCompTypeCounter",
+            "compTypeCounterId",
+            parsed.data?.compTypeCounter?.compTypeCounterId,
           ),
-          ...buildRelation('tblCompTypeJob', 'compTypeJobId', compTypeJobId),
-        }
+          ...buildRelation("tblCompTypeJob", "compTypeJobId", compTypeJobId),
+        };
 
-        let result: TypeTblCompTypeJobCounter
+        let result: TypeTblCompTypeJobCounter;
 
-        if (mode === 'create') {
-          result = await tblCompTypeJobCounter.create(payload)
+        if (mode === "create") {
+          result = await tblCompTypeJobCounter.create(payload);
           // const jobDescId = compTypeJob?.jobDescId
           // const compTypeId = compTypeJob?.compTypeId
 
@@ -149,35 +149,35 @@ function JobCounterUpsert({
           //   },
           // })
         } else {
-          result = await tblCompTypeJobCounter.update(recordId!, payload)
+          result = await tblCompTypeJobCounter.update(recordId!, payload);
         }
 
-        onSuccess(result)
-        onClose()
+        onSuccess(result);
+        onClose();
       } finally {
-        setSubmitting(false)
+        setSubmitting(false);
       }
     },
-    [mode, recordId, compTypeJobId, onSuccess, onClose]
-  )
+    [mode, recordId, compTypeJobId, onSuccess, onClose],
+  );
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === 'create' ? 'Create Job Counter' : 'Edit Job Counter'}
+      title={mode === "create" ? "Create Job Counter" : "Edit Job Counter"}
       loadingInitial={loadingInitial}
       submitting={submitting}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Box display='grid' gap={1.5}>
+      <Box display="grid" gap={1.5}>
         {/* Counter */}
         <Controller
-          name='compTypeCounter'
+          name="compTypeCounter"
           control={control}
           render={({ field, fieldState }) => (
             <AsyncSelectField
-              label='Counter *'
+              label="Counter *"
               value={field.value}
               onChange={field.onChange}
               getOptionLabel={(row: any) => row?.tblCounterType?.name}
@@ -193,63 +193,63 @@ function JobCounterUpsert({
               }
               columns={[
                 {
-                  field: 'tblCounterType.name',
-                  headerName: 'Counter Type',
+                  field: "tblCounterType.name",
+                  headerName: "Counter Type",
                   flex: 1,
                   valueGetter: (_: any, row: any) => row?.tblCounterType?.name,
                 },
               ]}
-              getRowId={row => row.compTypeCounterId}
+              getRowId={(row) => row.compTypeCounterId}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
           )}
         />
 
-        <Box display={'flex'} gap={1.5}>
+        <Box display={"flex"} gap={1.5}>
           <Controller
-            name='frequency'
+            name="frequency"
             control={control}
             render={({ field }) => (
-              <NumberField fullWidth {...field} label='Frequency' />
+              <NumberField fullWidth {...field} label="Frequency" />
             )}
           />
 
           <Controller
-            name='window'
+            name="window"
             control={control}
             render={({ field }) => (
-              <NumberField fullWidth {...field} label='Window' />
+              <NumberField fullWidth {...field} label="Window" />
             )}
           />
         </Box>
-        <Box display={'grid'} gridTemplateColumns={'2fr 3fr'} gap={1.5}>
+        <Box display={"grid"} gridTemplateColumns={"2fr 3fr"} gap={1.5}>
           <Controller
-            name='orderNo'
+            name="orderNo"
             control={control}
-            render={({ field }) => <NumberField {...field} label='Order No' />}
+            render={({ field }) => <NumberField {...field} label="Order No" />}
           />
-          <Box display={'flex'} gap={1.5}>
+          <Box display={"flex"} gap={1.5}>
             <Controller
-              name='showInAlert'
+              name="showInAlert"
               control={control}
               render={({ field }) => (
                 <FormControlLabel
                   sx={{ m: 0 }}
                   control={<Checkbox checked={field.value} {...field} />}
-                  label='Show In Alert'
+                  label="Show In Alert"
                 />
               )}
             />
 
             <Controller
-              name='updateByFunction'
+              name="updateByFunction"
               control={control}
               render={({ field }) => (
                 <FormControlLabel
                   sx={{ m: 0 }}
                   control={<Checkbox checked={field.value} {...field} />}
-                  label='Update By Function'
+                  label="Update By Function"
                 />
               )}
             />
@@ -257,7 +257,7 @@ function JobCounterUpsert({
         </Box>
       </Box>
     </FormDialog>
-  )
+  );
 }
 
-export default memo(JobCounterUpsert)
+export default memo(JobCounterUpsert);

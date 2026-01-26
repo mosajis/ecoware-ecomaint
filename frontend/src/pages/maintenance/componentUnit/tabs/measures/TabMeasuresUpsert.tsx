@@ -1,20 +1,20 @@
-import * as z from 'zod'
-import { memo, useCallback, useEffect, useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import FormDialog from '@/shared/components/formDialog/FormDialog'
-import NumberField from '@/shared/components/NumberField'
-import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
+import * as z from "zod";
+import { memo, useCallback, useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import NumberField from "@/shared/components/NumberField";
+import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
 import {
   tblCompMeasurePoint,
   tblCounterType,
   tblUnit,
   TypeTblCompMeasurePoint,
-} from '@/core/api/generated/api'
-import { buildRelation } from '@/core/api/helper'
-import DateField from '@/shared/components/DateField'
+} from "@/core/api/generated/api";
+import { buildRelation } from "@/core/helper";
+import DateField from "@/shared/components/DateField";
 
 /* === Schema === */
 const schema = z.object({
@@ -32,18 +32,18 @@ const schema = z.object({
   operationalMinValue: z.number().nullable(),
   operationalMaxValue: z.number().nullable(),
   orderNo: z.number().nullable(),
-})
+});
 
-type FormValues = z.infer<typeof schema>
+type FormValues = z.infer<typeof schema>;
 
 type Props = {
-  open: boolean
-  mode: 'create' | 'update'
-  recordId?: number | null
-  compId: number
-  onClose: () => void
-  onSuccess: (data: TypeTblCompMeasurePoint) => void
-}
+  open: boolean;
+  mode: "create" | "update";
+  recordId?: number | null;
+  compId: number;
+  onClose: () => void;
+  onSuccess: (data: TypeTblCompMeasurePoint) => void;
+};
 
 function CompMeasurePointUpsert({
   open,
@@ -53,8 +53,8 @@ function CompMeasurePointUpsert({
   onClose,
   onSuccess,
 }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
+  const [loadingInitial, setLoadingInitial] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const defaultValues: FormValues = {
     counterType: null as any,
@@ -65,25 +65,25 @@ function CompMeasurePointUpsert({
     operationalMinValue: null,
     operationalMaxValue: null,
     orderNo: null,
-  }
+  };
 
   const { control, handleSubmit, reset } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues,
-  })
+  });
 
   // === Load in edit ===
   const fetchData = useCallback(async () => {
-    if (mode !== 'update' || !recordId) {
-      reset(defaultValues)
-      return
+    if (mode !== "update" || !recordId) {
+      reset(defaultValues);
+      return;
     }
 
-    setLoadingInitial(true)
+    setLoadingInitial(true);
     try {
       const res = await tblCompMeasurePoint.getById(recordId, {
         include: { tblCounterType: true, tblUnit: true },
-      })
+      });
 
       reset({
         counterType: res.tblCounterType
@@ -106,24 +106,24 @@ function CompMeasurePointUpsert({
         operationalMinValue: res.operationalMinValue ?? null,
         operationalMaxValue: res.operationalMaxValue ?? null,
         orderNo: res.orderNo ?? null,
-      })
+      });
     } finally {
-      setLoadingInitial(false)
+      setLoadingInitial(false);
     }
-  }, [mode, recordId, reset])
+  }, [mode, recordId, reset]);
 
   useEffect(() => {
-    if (open) fetchData()
-  }, [open, fetchData])
+    if (open) fetchData();
+  }, [open, fetchData]);
 
   // === Submit ===
   const onSubmit = useCallback(
     async (values: FormValues) => {
-      const parsed = schema.safeParse(values)
-      if (!parsed.success) return
+      const parsed = schema.safeParse(values);
+      if (!parsed.success) return;
 
       try {
-        setSubmitting(true)
+        setSubmitting(true);
 
         const payload = {
           currentValue: parsed.data.currentValue,
@@ -133,53 +133,53 @@ function CompMeasurePointUpsert({
           operationalMaxValue: parsed.data.operationalMaxValue,
           orderNo: parsed.data.orderNo,
           ...buildRelation(
-            'tblCounterType',
-            'counterTypeId',
-            parsed.data.counterType.counterTypeId
+            "tblCounterType",
+            "counterTypeId",
+            parsed.data.counterType.counterTypeId,
           ),
-          ...buildRelation('tblUnit', 'unitId', parsed.data.unit.unitId),
-          ...buildRelation('tblComponentUnit', 'compId', compId),
-        }
+          ...buildRelation("tblUnit", "unitId", parsed.data.unit.unitId),
+          ...buildRelation("tblComponentUnit", "compId", compId),
+        };
 
-        let result: TypeTblCompMeasurePoint
+        let result: TypeTblCompMeasurePoint;
 
-        if (mode === 'create') {
-          result = await tblCompMeasurePoint.create(payload)
+        if (mode === "create") {
+          result = await tblCompMeasurePoint.create(payload);
         } else {
-          result = await tblCompMeasurePoint.update(recordId!, payload)
+          result = await tblCompMeasurePoint.update(recordId!, payload);
         }
 
-        onSuccess(result)
-        onClose()
+        onSuccess(result);
+        onClose();
       } finally {
-        setSubmitting(false)
+        setSubmitting(false);
       }
     },
-    [mode, recordId, compId, onSuccess, onClose]
-  )
+    [mode, recordId, compId, onSuccess, onClose],
+  );
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === 'create' ? 'Create Measure Point' : 'Edit Measure Point'}
+      title={mode === "create" ? "Create Measure Point" : "Edit Measure Point"}
       loadingInitial={loadingInitial}
       submitting={submitting}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Box display='grid' gap={1.5}>
+      <Box display="grid" gap={1.5}>
         {/* Measure (Counter Type) */}
         <Controller
-          name='counterType'
+          name="counterType"
           control={control}
           render={({ field, fieldState }) => (
             <AsyncSelectField
-              label='Measure *'
+              label="Measure *"
               value={field.value}
               onChange={field.onChange}
               request={() => tblCounterType.getAll({ filter: { type: 3 } })}
-              columns={[{ field: 'name', headerName: 'Name', flex: 1 }]}
-              getRowId={row => row.counterTypeId}
+              columns={[{ field: "name", headerName: "Name", flex: 1 }]}
+              getRowId={(row) => row.counterTypeId}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
@@ -188,16 +188,16 @@ function CompMeasurePointUpsert({
 
         {/* Unit */}
         <Controller
-          name='unit'
+          name="unit"
           control={control}
           render={({ field, fieldState }) => (
             <AsyncSelectField
-              label='Unit *'
+              label="Unit *"
               value={field.value}
               onChange={field.onChange}
               request={tblUnit.getAll}
-              columns={[{ field: 'name', headerName: 'Name', flex: 1 }]}
-              getRowId={row => row.unitId}
+              columns={[{ field: "name", headerName: "Name", flex: 1 }]}
+              getRowId={(row) => row.unitId}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
@@ -205,71 +205,71 @@ function CompMeasurePointUpsert({
         />
 
         {/* Current Value */}
-        <Box display={'flex'} gap={1.5}>
+        <Box display={"flex"} gap={1.5}>
           <Controller
-            name='currentValue'
+            name="currentValue"
             control={control}
             render={({ field }) => (
               <NumberField
                 fullWidth
                 {...field}
-                label='Current Value'
-                size='small'
+                label="Current Value"
+                size="small"
               />
             )}
           />
 
           <Controller
-            name='currentDate'
+            name="currentDate"
             control={control}
             render={({ field }) => (
-              <DateField label='Current Date' field={field} type='DATETIME' />
+              <DateField label="Current Date" field={field} type="DATETIME" />
             )}
           />
         </Box>
 
         <Controller
-          name='setValue'
+          name="setValue"
           control={control}
-          render={({ field }) => <NumberField {...field} label='Set Value' />}
+          render={({ field }) => <NumberField {...field} label="Set Value" />}
         />
 
-        <Box display={'flex'} gap={1.5}>
+        <Box display={"flex"} gap={1.5}>
           <Controller
-            name='operationalMinValue'
+            name="operationalMinValue"
             control={control}
             render={({ field }) => (
               <NumberField
                 sx={{ flex: 1 }}
                 {...field}
-                label='Operational Min'
+                label="Operational Min"
               />
             )}
           />
 
           <Controller
-            name='operationalMaxValue'
+            name="operationalMaxValue"
             control={control}
             render={({ field }) => (
               <NumberField
                 sx={{ flex: 1 }}
                 {...field}
-                label='Operational Max'
+                label="Operational Max"
               />
             )}
           />
         </Box>
 
         <Controller
-          name='orderNo'
+          name="orderNo"
           control={control}
           render={({ field }) => (
-            <NumberField sx={{ width: '40%' }} {...field} label='Order No' />
+            <NumberField sx={{ width: "40%" }} {...field} label="Order No" />
           )}
         />
       </Box>
     </FormDialog>
-  )
+  );
 }
 
-export default memo(CompMeasurePointUpsert)
+export default memo(CompMeasurePointUpsert);

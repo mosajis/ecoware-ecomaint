@@ -1,4 +1,4 @@
-import * as z from 'zod'
+import * as z from "zod";
 
 export const schema = z.object({
   compType: z
@@ -21,8 +21,8 @@ export const schema = z.object({
       compNo: z.string().nullable(),
     })
     .nullable()
-    .refine(val => val !== null, {
-      message: 'ComponentType is required',
+    .refine((val) => val !== null, {
+      message: "ComponentType is required",
     }),
   vendor: z
     .object({
@@ -38,7 +38,7 @@ export const schema = z.object({
     })
     .nullable()
     .optional(),
-  compNo: z.string().min(1, 'Component No is required'),
+  compNo: z.string().min(1, "Component No is required"),
   serialNo: z.string().nullable().optional(),
   model: z.string().nullable().optional(),
   assetNo: z.string().nullable().optional(),
@@ -47,9 +47,9 @@ export const schema = z.object({
   comment3: z.string().nullable().optional(),
   isCritical: z.boolean().nullable().optional(),
   orderNo: z.number().nullable().optional(),
-})
+});
 
-export type SchemaValue = z.infer<typeof schema>
+export type SchemaValue = z.infer<typeof schema>;
 
 export const DEFAULT_VALUES: SchemaValue = {
   compType: null,
@@ -57,7 +57,7 @@ export const DEFAULT_VALUES: SchemaValue = {
   parentComp: null,
   vendor: null,
   status: null,
-  compNo: '',
+  compNo: "",
   serialNo: null,
   assetNo: null,
   comment1: null,
@@ -65,4 +65,4 @@ export const DEFAULT_VALUES: SchemaValue = {
   comment3: null,
   isCritical: false,
   orderNo: null,
-}
+};

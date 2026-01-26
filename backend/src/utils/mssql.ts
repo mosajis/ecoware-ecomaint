@@ -8,7 +8,7 @@ function parseMSSQLConnection(url: string) {
   const [, hostPartRaw] = url.split("://");
   if (!hostPartRaw) {
     throw new Error(
-      "❌ Invalid MSSQL connection string (missing host section)"
+      "❌ Invalid MSSQL connection string (missing host section)",
     );
   }
 
@@ -43,7 +43,7 @@ function parseMSSQLConnection(url: string) {
 
   if (!user || !password || !database) {
     throw new Error(
-      "❌ DATABASE_URL missing required fields (user/password/database)"
+      "❌ DATABASE_URL missing required fields (user/password/database)",
     );
   }
 

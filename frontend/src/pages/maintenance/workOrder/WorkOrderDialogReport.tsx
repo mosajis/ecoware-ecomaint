@@ -65,7 +65,7 @@ function ReportPrintDialog({
             value={sortOrder}
             onChange={(e) =>
               setSortOrder(
-                e.target.value as "component" | "workOrderNumber" | "dueDate"
+                e.target.value as "component" | "workOrderNumber" | "dueDate",
               )
             }
           >

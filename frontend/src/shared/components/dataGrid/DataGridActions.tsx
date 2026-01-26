@@ -1,15 +1,15 @@
-import { useState, ReactNode } from 'react'
-import Stack from '@mui/material/Stack'
-import EditIcon from '@mui/icons-material/Edit'
-import Eye from '@mui/icons-material/RemoveRedEye'
-import DeleteIcon from '@mui/icons-material/Delete'
-import DataGridActionsButton from './DataGridActionsButton'
-import ConfirmDialog from '../ConfirmDialog'
+import { useState, ReactNode } from "react";
+import Stack from "@mui/material/Stack";
+import EditIcon from "@mui/icons-material/Edit";
+import Eye from "@mui/icons-material/RemoveRedEye";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DataGridActionsButton from "./DataGridActionsButton";
+import ConfirmDialog from "../ConfirmDialog";
 
 interface DataGridActionsProps {
-  onEdit?: () => void
-  onDelete?: () => void
-  children?: ReactNode
+  onEdit?: () => void;
+  onDelete?: () => void;
+  children?: ReactNode;
 }
 
 export default function DataGridActions({
@@ -17,42 +17,42 @@ export default function DataGridActions({
   onDelete,
   children,
 }: DataGridActionsProps) {
-  const [confirmOpen, setConfirmOpen] = useState(false)
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const handleDeleteClick = () => {
-    setConfirmOpen(true)
-  }
+    setConfirmOpen(true);
+  };
 
   const handleConfirmDelete = () => {
-    setConfirmOpen(false)
-    onDelete?.()
-  }
+    setConfirmOpen(false);
+    onDelete?.();
+  };
 
   const handleCancelDelete = () => {
-    setConfirmOpen(false)
-  }
+    setConfirmOpen(false);
+  };
 
   return (
     <>
       <Stack
-        direction='row'
+        direction="row"
         spacing={0.5}
-        display='flex'
-        alignItems='center'
-        height='100%'
+        display="flex"
+        alignItems="center"
+        height="100%"
       >
         {onEdit && (
           <DataGridActionsButton
-            title='Edit'
-            icon={<EditIcon fontSize='small' sx={{ color: '#4671b6ff' }} />}
+            title="Edit"
+            icon={<EditIcon fontSize="small" sx={{ color: "#4671b6ff" }} />}
             onClick={onEdit}
           />
         )}
 
         {onDelete && (
           <DataGridActionsButton
-            title='Delete'
-            icon={<DeleteIcon fontSize='small' sx={{ color: '#be3c3cff' }} />}
+            title="Delete"
+            icon={<DeleteIcon fontSize="small" sx={{ color: "#be3c3cff" }} />}
             onClick={handleDeleteClick}
           />
         )}
@@ -65,9 +65,9 @@ export default function DataGridActions({
         open={confirmOpen}
         onCancel={handleCancelDelete}
         onConfirm={handleConfirmDelete}
-        title='Delete Item'
-        message='Are you certain you want to delete this item?'
+        title="Delete Item"
+        message="Are you certain you want to delete this item?"
       />
     </>
-  )
+  );
 }

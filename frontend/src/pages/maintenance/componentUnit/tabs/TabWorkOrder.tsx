@@ -1,22 +1,22 @@
-import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
-import { columns } from '../../workOrder/WorkOrderColumns'
-import { useCallback } from 'react'
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { columns } from "../../workOrder/WorkOrderColumns";
+import { useCallback } from "react";
 import {
   tblWorkOrder,
   TypeTblComponentUnit,
   TypeTblWorkOrder,
-} from '@/core/api/generated/api'
+} from "@/core/api/generated/api";
 
 interface Props {
-  componentUnit?: TypeTblComponentUnit
-  label?: string
+  componentUnit?: TypeTblComponentUnit;
+  label?: string;
 }
 
-const getRowId = (row: TypeTblWorkOrder) => row.workOrderId
+const getRowId = (row: TypeTblWorkOrder) => row.workOrderId;
 
 const TabWorkOrder = ({ componentUnit, label }: Props) => {
-  const compId = componentUnit?.compId
+  const compId = componentUnit?.compId;
 
   const getAll = useCallback(
     () =>
@@ -42,15 +42,15 @@ const TabWorkOrder = ({ componentUnit, label }: Props) => {
           tblWorkOrderStatus: true,
         },
       }),
-    []
-  )
+    [],
+  );
 
   const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
     tblWorkOrder.deleteAll,
-    'workOrderId',
-    !!compId
-  )
+    "workOrderId",
+    !!compId,
+  );
 
   return (
     <CustomizedDataGrid
@@ -66,7 +66,7 @@ const TabWorkOrder = ({ componentUnit, label }: Props) => {
       onRefreshClick={handleRefresh}
       getRowId={getRowId}
     />
-  )
-}
+  );
+};
 
-export default TabWorkOrder
+export default TabWorkOrder;

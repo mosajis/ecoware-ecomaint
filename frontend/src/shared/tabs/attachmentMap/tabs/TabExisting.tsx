@@ -1,50 +1,50 @@
-import TabContainer from '@/shared/components/TabContainer'
-import DataGrid from '@/shared/components/dataGrid/DataGrid'
-import { memo, useCallback, useEffect, useState } from 'react'
+import TabContainer from "@/shared/components/TabContainer";
+import DataGrid from "@/shared/components/dataGrid/DataGrid";
+import { memo, useCallback, useEffect, useState } from "react";
 import {
   tblAttachment,
   tblAttachmentType,
   TypeTblAttachment,
-} from '@/core/api/generated/api'
-import { attachmentColumns } from '../AttachmentColumn'
-import { GridRowId, GridRowSelectionModel } from '@mui/x-data-grid'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
+} from "@/core/api/generated/api";
+import { attachmentColumns } from "../AttachmentColumn";
+import { GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
-const getRowId = (row: TypeTblAttachment) => row.attachmentId
+const getRowId = (row: TypeTblAttachment) => row.attachmentId;
 
 interface Props {
-  onSelectionChange: (id: number | null) => void
+  onSelectionChange: (id: number | null) => void;
 }
 
 function TabAttachmentExisting({ onSelectionChange }: Props) {
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>({
-      type: 'include',
+      type: "include",
       ids: new Set<GridRowId>([]),
-    })
+    });
 
   const getAll = useCallback(() => {
     return tblAttachment.getAll({
       include: {
         tblAttachmentType: true,
       },
-    })
-  }, [])
+    });
+  }, []);
 
   const { loading, rows } = useDataGrid(
     getAll,
     tblAttachment.deleteById,
-    'attachmentId'
-  )
+    "attachmentId",
+  );
 
   useEffect(() => {
-    const firstItem = Array.from(rowSelectionModel.ids)[0]
+    const firstItem = Array.from(rowSelectionModel.ids)[0];
     if (firstItem) {
-      onSelectionChange(Number(firstItem))
-      return
+      onSelectionChange(Number(firstItem));
+      return;
     }
-    onSelectionChange(null)
-  }, [rowSelectionModel.ids])
+    onSelectionChange(null);
+  }, [rowSelectionModel.ids]);
 
   return (
     <TabContainer>
@@ -53,7 +53,7 @@ function TabAttachmentExisting({ onSelectionChange }: Props) {
         disableAdd
         disableRefresh
         disableMultipleRowSelection
-        label='Attachments'
+        label="Attachments"
         rows={rows}
         loading={loading}
         columns={attachmentColumns}
@@ -62,7 +62,7 @@ function TabAttachmentExisting({ onSelectionChange }: Props) {
         getRowId={getRowId}
       />
     </TabContainer>
-  )
+  );
 }
 
-export default memo(TabAttachmentExisting)
+export default memo(TabAttachmentExisting);

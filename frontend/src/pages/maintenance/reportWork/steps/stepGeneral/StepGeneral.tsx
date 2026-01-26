@@ -1,28 +1,28 @@
-import Editor from '@/shared/components/Editor'
-import ReportWorkStep from '../../ReportWorkStep'
-import DateField from '@/shared/components/DateField'
-import NumberField from '@/shared/components/NumberField'
-import Box from '@mui/material/Box'
-import { Controller, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useAtom } from 'jotai'
-import { buildRelation } from '@/core/api/helper'
-import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
-import { schema, TypeValues } from './stepGeneralSchema'
+import Editor from "@/shared/components/Editor";
+import ReportWorkStep from "../../ReportWorkStep";
+import DateField from "@/shared/components/DateField";
+import NumberField from "@/shared/components/NumberField";
+import Box from "@mui/material/Box";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useAtom } from "jotai";
+import { buildRelation } from "@/core/helper";
+import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { schema, TypeValues } from "./stepGeneralSchema";
 import {
   tblMaintType,
   tblMaintCause,
   tblMaintClass,
   tblMaintLog,
-} from '@/core/api/generated/api'
-import { atomInitalData } from '../../ReportWorkAtom'
+} from "@/core/api/generated/api";
+import { atomInitalData } from "../../ReportWorkAtom";
 
 const TabGeneral = () => {
-  const [initalData, setInitalData] = useAtom(atomInitalData)
+  const [initalData, setInitalData] = useAtom(atomInitalData);
 
   const defaultValues: TypeValues = {
     dateDone:
-      new Date(initalData.maintLog?.dateDone || '').toString() ||
+      new Date(initalData.maintLog?.dateDone || "").toString() ||
       new Date().toISOString(),
     totalDuration: initalData.maintLog?.totalDuration || null,
     waitingMin: initalData.maintLog?.downTime || null,
@@ -32,8 +32,8 @@ const TabGeneral = () => {
     maintCause: initalData.maintLog?.tblMaintCause ?? null,
     maintClass: initalData.maintLog?.tblMaintClass ?? null,
 
-    history: initalData.maintLog?.history || '',
-  }
+    history: initalData.maintLog?.history || "",
+  };
 
   const {
     control,
@@ -42,9 +42,9 @@ const TabGeneral = () => {
   } = useForm<TypeValues>({
     resolver: zodResolver(schema),
     defaultValues,
-  })
+  });
 
-  const isDisabled = isSubmitting
+  const isDisabled = isSubmitting;
 
   const onSubmit = async (values: TypeValues) => {
     const payload = {
@@ -52,80 +52,80 @@ const TabGeneral = () => {
       downTime: values.waitingMin ?? 0,
       dateDone: values.dateDone ? new Date(values.dateDone).getTime() : null,
       unexpected: values.unexpected ? 1 : 0,
-      history: values.history || '',
+      history: values.history || "",
 
       ...buildRelation(
-        'tblMaintType',
-        'maintTypeId',
-        values.maintType?.maintTypeId
+        "tblMaintType",
+        "maintTypeId",
+        values.maintType?.maintTypeId,
       ),
       ...buildRelation(
-        'tblMaintCause',
-        'maintCauseId',
-        values.maintCause?.maintCauseId
+        "tblMaintCause",
+        "maintCauseId",
+        values.maintCause?.maintCauseId,
       ),
       ...buildRelation(
-        'tblMaintClass',
-        'maintClassId',
-        values.maintClass?.maintClassId
+        "tblMaintClass",
+        "maintClassId",
+        values.maintClass?.maintClassId,
       ),
-    }
+    };
 
-    let savedRecord
+    let savedRecord;
 
     if (initalData.maintLog?.maintLogId) {
       // اگر رکورد قبلاً وجود داشته، آپدیت کن
       savedRecord = await tblMaintLog.update(
         initalData.maintLog.maintLogId,
-        payload
-      )
+        payload,
+      );
     } else {
       // اگر وجود نداشت، ایجاد کن
-      savedRecord = await tblMaintLog.create(payload)
+      savedRecord = await tblMaintLog.create(payload);
     }
 
-    setInitalData(prev => ({
+    setInitalData((prev) => ({
       ...prev,
       maintLog: { ...prev.maintLog, ...savedRecord },
-    }))
+    }));
 
-    return savedRecord
-  }
+    return savedRecord;
+  };
 
   const handleNext = (goNext: () => void) => {
-    handleSubmit(async values => {
-      await onSubmit(values)
-      goNext()
-    })()
-  }
+    handleSubmit(async (values) => {
+      await onSubmit(values);
+      goNext();
+    })();
+  };
 
   return (
     <ReportWorkStep onNext={handleNext}>
-      <Box display={'grid'} gap={1.5} gridTemplateColumns={'1fr 1fr 1fr'}>
+      <Box display={"grid"} gap={1.5} gridTemplateColumns={"1fr 1fr 1fr"}>
         <Controller
-          name='dateDone'
+          name="dateDone"
           control={control}
           render={({ field }) => (
-            <DateField type='DATETIME' label='Date Done' field={field} />
+            <DateField type="DATETIME" label="Date Done" field={field} />
           )}
         />
         <Controller
-          name='totalDuration'
+          name="totalDuration"
           control={control}
           render={({ field }) => (
             <NumberField
-              label='Total Duration (min)'
+              label="Total Duration (min)"
               field={field}
               disabled={isDisabled}
             />
           )}
         />
         <Controller
-          name='waitingMin'
+          name="waitingMin"
           control={control}
           render={({ field }) => (
             <NumberField
-              label='Waiting (min)'
+              label="Waiting (min)"
               field={field}
               disabled={isDisabled}
             />
@@ -147,56 +147,56 @@ const TabGeneral = () => {
           render={({ field }) => <NumberField label='Last Date Read' field={field} />}
         /> */}
         <Controller
-          name='maintType'
+          name="maintType"
           control={control}
           render={({ field }) => (
             <AsyncSelectField
-              label='Maint Type'
+              label="Maint Type"
               value={field.value}
               request={tblMaintType.getAll}
-              columns={[{ field: 'descr', headerName: 'Description', flex: 1 }]}
-              getRowId={row => row.maintTypeId}
+              columns={[{ field: "descr", headerName: "Description", flex: 1 }]}
+              getRowId={(row) => row.maintTypeId}
               onChange={field.onChange}
             />
           )}
         />
         <Controller
-          name='maintCause'
+          name="maintCause"
           control={control}
           render={({ field }) => (
             <AsyncSelectField
-              label='Maint Cause'
+              label="Maint Cause"
               value={field.value}
               request={tblMaintCause.getAll}
-              columns={[{ field: 'descr', headerName: 'Description', flex: 1 }]}
-              getRowId={row => row.maintCauseId}
+              columns={[{ field: "descr", headerName: "Description", flex: 1 }]}
+              getRowId={(row) => row.maintCauseId}
               onChange={field.onChange}
             />
           )}
         />
         <Controller
-          name='maintClass'
+          name="maintClass"
           control={control}
           render={({ field }) => (
             <AsyncSelectField
-              label='Maint Class'
+              label="Maint Class"
               value={field.value}
               request={tblMaintClass.getAll}
-              columns={[{ field: 'descr', headerName: 'Description', flex: 1 }]}
-              getRowId={row => row.maintClassId}
+              columns={[{ field: "descr", headerName: "Description", flex: 1 }]}
+              getRowId={(row) => row.maintClassId}
               onChange={field.onChange}
             />
           )}
         />
       </Box>
       {/* -------- Editors -------- */}
-      <Box display='flex' gap={1} flex={1}>
+      <Box display="flex" gap={1} flex={1}>
         <Controller
-          name='history'
+          name="history"
           control={control}
           render={({ field }) => (
             <Editor
-              label='History'
+              label="History"
               autoSave={false}
               initValue={initalData.maintLog?.history}
               {...field}
@@ -204,13 +204,13 @@ const TabGeneral = () => {
           )}
         />
         <Editor
-          label='Job Description'
-          initValue={initalData.maintLog?.tblJobDescription?.jobDesc || '--'}
+          label="Job Description"
+          initValue={initalData.maintLog?.tblJobDescription?.jobDesc || "--"}
           readOnly
         />
       </Box>
     </ReportWorkStep>
-  )
-}
+  );
+};
 
-export default TabGeneral
+export default TabGeneral;

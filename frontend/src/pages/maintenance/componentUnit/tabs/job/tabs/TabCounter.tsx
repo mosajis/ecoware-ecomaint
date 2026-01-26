@@ -1,58 +1,58 @@
-import JobCounterUpsert from './TabCounterUpsert'
-import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import { useCallback, useState } from 'react'
-import { GridColDef } from '@mui/x-data-grid'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
+import JobCounterUpsert from "./TabCounterUpsert";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import { useCallback, useState } from "react";
+import { GridColDef } from "@mui/x-data-grid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
   tblCompJobCounter,
   tblCompTypeJobCounter,
   TypeTblCompJob,
   TypeTblCompJobCounter,
   TypeTblCompTypeJobCounter,
-} from '@/core/api/generated/api'
+} from "@/core/api/generated/api";
 
 type Props = {
-  compJob?: TypeTblCompJob | null
-}
+  compJob?: TypeTblCompJob | null;
+};
 
-const getRowId = (row: TypeTblCompJobCounter) => row.compJobCounterId
+const getRowId = (row: TypeTblCompJobCounter) => row.compJobCounterId;
 
 // === Columns ===
 const columns: GridColDef<TypeTblCompTypeJobCounter>[] = [
   {
-    field: 'counterType',
-    headerName: 'Counter Type',
+    field: "counterType",
+    headerName: "Counter Type",
     flex: 1,
     valueGetter: (_, row) =>
       // @ts-ignore
       row.tblCompCounter?.tblCounterType?.name,
   },
-  { field: 'frequency', headerName: 'Frequency', width: 120 },
-  { field: 'window', headerName: 'Window', width: 120 },
+  { field: "frequency", headerName: "Frequency", width: 120 },
+  { field: "window", headerName: "Window", width: 120 },
   {
-    field: 'showInAlert',
-    headerName: 'Alert',
+    field: "showInAlert",
+    headerName: "Alert",
     width: 90,
-    type: 'boolean',
+    type: "boolean",
   },
   {
-    field: 'updateByFunction',
-    headerName: 'By Func',
+    field: "updateByFunction",
+    headerName: "By Func",
     width: 110,
-    type: 'boolean',
+    type: "boolean",
   },
-  { field: 'orderNo', headerName: 'Order No', width: 80 },
-]
+  { field: "orderNo", headerName: "Order No", width: 80 },
+];
 
 const TabCounter = ({ compJob }: Props) => {
-  const compJobId = compJob?.compJobId
-  const compId = compJob?.compId
+  const compJobId = compJob?.compJobId;
+  const compId = compJob?.compId;
 
-  const label = compJob?.tblJobDescription?.jobDescTitle || ''
+  const label = compJob?.tblJobDescription?.jobDescTitle || "";
 
-  const [openForm, setOpenForm] = useState(false)
-  const [mode, setMode] = useState<'create' | 'update'>('create')
-  const [selectedId, setSelectedId] = useState<number | null>(null)
+  const [openForm, setOpenForm] = useState(false);
+  const [mode, setMode] = useState<"create" | "update">("create");
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   // === getAll ===
   const getAll = useCallback(() => {
@@ -67,37 +67,37 @@ const TabCounter = ({ compJob }: Props) => {
       filter: {
         compJobId,
       },
-    })
-  }, [compJobId])
+    });
+  }, [compJobId]);
 
   // === useDataGrid ===
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
     tblCompTypeJobCounter.deleteById,
-    'compJobId',
-    !!compJobId
-  )
+    "compJobId",
+    !!compJobId,
+  );
 
   // === Handlers ===
   const handleCreate = () => {
-    setSelectedId(null)
-    setMode('create')
-    handleUpsertOpen()
-  }
+    setSelectedId(null);
+    setMode("create");
+    handleUpsertOpen();
+  };
 
   const handleEdit = (rowId: number) => {
-    setSelectedId(rowId)
-    setMode('update')
-    handleUpsertOpen()
-  }
+    setSelectedId(rowId);
+    setMode("update");
+    handleUpsertOpen();
+  };
 
   const handleUpsertClose = useCallback(() => {
-    setOpenForm(false)
-  }, [])
+    setOpenForm(false);
+  }, []);
 
   const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true)
-  }, [])
+    setOpenForm(true);
+  }, []);
 
   return (
     <>
@@ -128,7 +128,7 @@ const TabCounter = ({ compJob }: Props) => {
         />
       )}
     </>
-  )
-}
+  );
+};
 
-export default TabCounter
+export default TabCounter;

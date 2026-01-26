@@ -1,14 +1,14 @@
-import * as z from 'zod'
-import AsyncSelect from '@/shared/components/AsyncSelect'
-import FormDialog from '@/shared/components/formDialog/FormDialog'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import NumberField from '@/shared/components/NumberField'
-import { memo, useEffect, useMemo, useState, useCallback } from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { buildRelation, requiredStringField } from '@/core/api/helper'
-import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
+import * as z from "zod";
+import AsyncSelect from "@/shared/components/AsyncSelect";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import NumberField from "@/shared/components/NumberField";
+import { memo, useEffect, useMemo, useState, useCallback } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { buildRelation, requiredStringField } from "@/core/helper";
+import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
 import {
   tblAddress,
   tblDiscipline,
@@ -16,7 +16,7 @@ import {
   TypeTblAddress,
   TypeTblDiscipline,
   TypeTblEmployee,
-} from '@/core/api/generated/api'
+} from "@/core/api/generated/api";
 
 // === Validation Schema ===
 export const schema = z.object({
@@ -37,178 +37,178 @@ export const schema = z.object({
       name: z.string(),
     })
     .nullable()
-    .refine(val => val !== null, {
-      message: 'Discipline is required',
+    .refine((val) => val !== null, {
+      message: "Discipline is required",
     }),
 
   orderNo: z.number().nullable(),
-})
+});
 
-export type EmployeeFormValues = z.infer<typeof schema>
+export type EmployeeFormValues = z.infer<typeof schema>;
 
 type Props = {
-  open: boolean
-  mode: 'create' | 'update'
-  recordId?: number | null
-  onClose: () => void
-  onSuccess: (data: TypeTblEmployee) => void
-}
+  open: boolean;
+  mode: "create" | "update";
+  recordId?: number | null;
+  onClose: () => void;
+  onSuccess: (data: TypeTblEmployee) => void;
+};
 
 function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
+  const [loadingInitial, setLoadingInitial] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const defaultValues: EmployeeFormValues = useMemo(
     () => ({
-      code: '',
-      lastName: '',
-      firstName: '',
+      code: "",
+      lastName: "",
+      firstName: "",
       address: null,
       discipline: null,
       orderNo: null,
     }),
-    []
-  )
+    [],
+  );
 
   const { control, handleSubmit, reset } = useForm<EmployeeFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
-  })
+  });
 
   // === Fetch initial data ===
   const fetchData = useCallback(async () => {
-    if (mode === 'update' && recordId) {
-      setLoadingInitial(true)
+    if (mode === "update" && recordId) {
+      setLoadingInitial(true);
       try {
         const res = await tblEmployee.getById(recordId, {
           include: {
             tblDiscipline: true,
             tblAddress: true,
           },
-        })
+        });
 
         if (res) {
           reset({
-            code: res.code ?? '',
-            lastName: res.lastName ?? '',
-            firstName: res.firstName ?? '',
+            code: res.code ?? "",
+            lastName: res.lastName ?? "",
+            firstName: res.firstName ?? "",
 
             address: res.tblAddress
               ? {
                   addressId: res.tblAddress.addressId,
-                  name: res.tblAddress.name ?? '',
+                  name: res.tblAddress.name ?? "",
                 }
               : null,
 
             discipline: res.tblDiscipline
               ? {
                   discId: res.tblDiscipline.discId,
-                  name: res.tblDiscipline.name ?? '',
+                  name: res.tblDiscipline.name ?? "",
                 }
               : null,
 
             orderNo: res.orderNo ?? null,
-          })
+          });
         }
       } finally {
-        setLoadingInitial(false)
+        setLoadingInitial(false);
       }
     } else {
-      reset(defaultValues)
+      reset(defaultValues);
     }
-  }, [mode, recordId, reset, defaultValues])
+  }, [mode, recordId, reset, defaultValues]);
 
   useEffect(() => {
-    if (open) fetchData()
-  }, [open, fetchData])
+    if (open) fetchData();
+  }, [open, fetchData]);
 
-  const isDisabled = loadingInitial || submitting
+  const isDisabled = loadingInitial || submitting;
 
   // === Submit Handler ===
   const handleFormSubmit = useCallback(
     async (values: EmployeeFormValues) => {
-      setSubmitting(true)
+      setSubmitting(true);
 
       try {
         const payload = {
           code: values.code ?? null,
-          lastName: values.lastName ?? '',
-          firstName: values.firstName ?? '',
+          lastName: values.lastName ?? "",
+          firstName: values.firstName ?? "",
           orderNo: values.orderNo,
 
           // Relation
           ...buildRelation(
-            'tblAddress',
-            'addressId',
-            values.address?.addressId
+            "tblAddress",
+            "addressId",
+            values.address?.addressId,
           ),
           ...buildRelation(
-            'tblDiscipline',
-            'discId',
-            values.discipline?.discId
+            "tblDiscipline",
+            "discId",
+            values.discipline?.discId,
           ),
-        }
+        };
 
-        let result: TypeTblEmployee
+        let result: TypeTblEmployee;
 
-        if (mode === 'create') {
-          result = await tblEmployee.create(payload)
-        } else if (mode === 'update' && recordId) {
-          result = await tblEmployee.update(recordId, payload)
+        if (mode === "create") {
+          result = await tblEmployee.create(payload);
+        } else if (mode === "update" && recordId) {
+          result = await tblEmployee.update(recordId, payload);
         } else {
-          return
+          return;
         }
 
-        onSuccess(result)
-        onClose()
+        onSuccess(result);
+        onClose();
       } catch (err) {
-        console.error('Submit failed', err)
+        console.error("Submit failed", err);
       } finally {
-        setSubmitting(false)
+        setSubmitting(false);
       }
     },
-    [mode, recordId, onSuccess, onClose]
-  )
+    [mode, recordId, onSuccess, onClose],
+  );
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === 'create' ? 'Create Employee' : 'Edit Employee'}
+      title={mode === "create" ? "Create Employee" : "Edit Employee"}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display='flex' flexDirection={'column'} gap={1}>
+      <Box display="flex" flexDirection={"column"} gap={1}>
         {/* Code (70%) */}
         <Controller
-          name='code'
+          name="code"
           control={control}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              sx={{ width: '70%' }}
-              label='Code *'
+              sx={{ width: "70%" }}
+              label="Code *"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
-              size='small'
+              size="small"
               disabled={isDisabled}
             />
           )}
         />
 
-        <Box display={'flex'} gap={1}>
+        <Box display={"flex"} gap={1}>
           <Controller
-            name='lastName'
+            name="lastName"
             control={control}
             render={({ field, fieldState }) => (
               <TextField
                 {...field}
-                sx={{ flex: '1' }}
-                label='Last Name *'
+                sx={{ flex: "1" }}
+                label="Last Name *"
                 error={!!fieldState.error}
                 helperText={fieldState.error?.message}
-                size='small'
+                size="small"
                 disabled={isDisabled}
               />
             )}
@@ -216,16 +216,16 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
           {/* First Name (50%) */}
           <Controller
-            name='firstName'
+            name="firstName"
             control={control}
             render={({ field, fieldState }) => (
               <TextField
                 {...field}
-                sx={{ flex: '1' }}
-                label='First Name *'
+                sx={{ flex: "1" }}
+                label="First Name *"
                 error={!!fieldState.error}
                 helperText={fieldState.error?.message}
-                size='small'
+                size="small"
                 disabled={isDisabled}
               />
             )}
@@ -234,15 +234,15 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
         {/* Address (70%) */}
         <Controller
-          name='address'
+          name="address"
           control={control}
           render={({ field, fieldState }) => (
             <AsyncSelectField<TypeTblAddress>
-              label='Address'
+              label="Address"
               value={field.value}
               request={tblAddress.getAll}
-              columns={[{ field: 'name', headerName: 'Address', flex: 1 }]}
-              getRowId={row => row.addressId}
+              columns={[{ field: "name", headerName: "Address", flex: 1 }]}
+              getRowId={(row) => row.addressId}
               onChange={field.onChange}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -251,18 +251,18 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         />
         {/* Discipline (30%) */}
         <Controller
-          name='discipline'
+          name="discipline"
           control={control}
           render={({ field, fieldState }) => (
             <AsyncSelect<TypeTblDiscipline>
-              name='discipline'
+              name="discipline"
               control={control}
-              label='Discipline *'
+              label="Discipline *"
               disabled={isDisabled}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               request={tblDiscipline.getAll}
-              getOptionLabel={row => row.name || ''}
+              getOptionLabel={(row) => row.name || ""}
               value={field.value}
               onChange={field.onChange}
             />
@@ -270,21 +270,21 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         />
 
         <Controller
-          name='orderNo'
+          name="orderNo"
           control={control}
           render={({ field }) => (
             <NumberField
               {...field}
-              sx={{ width: '50%' }}
-              label='Order No'
-              size='small'
+              sx={{ width: "50%" }}
+              label="Order No"
+              size="small"
               disabled={isDisabled}
             />
           )}
         />
       </Box>
     </FormDialog>
-  )
+  );
 }
 
-export default memo(EmployeeUpsert)
+export default memo(EmployeeUpsert);

@@ -1,40 +1,40 @@
-import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import JobMeasureUpsert from './TabMasuresUpsert'
-import { useCallback, useState } from 'react'
-import { GridColDef } from '@mui/x-data-grid'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import JobMeasureUpsert from "./TabMasuresUpsert";
+import { useCallback, useState } from "react";
+import { GridColDef } from "@mui/x-data-grid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
   tblCompTypeJobMeasurePoint,
   TypeTblCompTypeJob,
   TypeTblCompTypeJobMeasurePoint,
-} from '@/core/api/generated/api'
+} from "@/core/api/generated/api";
 
 type Props = {
-  compTypeJob?: TypeTblCompTypeJob
-}
+  compTypeJob?: TypeTblCompTypeJob;
+};
 
 const getRowId = (row: TypeTblCompTypeJobMeasurePoint) =>
-  row.compTypeJobMeasurePointId
+  row.compTypeJobMeasurePointId;
 // === Columns ===
 const columns: GridColDef<TypeTblCompTypeJobMeasurePoint>[] = [
   {
-    field: 'measureName',
-    headerName: 'Measure Name',
+    field: "measureName",
+    headerName: "Measure Name",
     flex: 1,
     valueGetter: (v, row) =>
       // @ts-ignore
       row?.tblCompTypeMeasurePoint?.tblCounterType?.name,
   },
   {
-    field: 'unitName',
-    headerName: 'Unit Name',
+    field: "unitName",
+    headerName: "Unit Name",
     flex: 1,
     // @ts-ignore
     valueGetter: (v, row) => row?.tblCompTypeMeasurePoint?.tblUnit?.name,
   },
   {
-    field: 'unitDescription',
-    headerName: 'Unit Description',
+    field: "unitDescription",
+    headerName: "Unit Description",
     flex: 1,
     // @ts-ignore
     valueGetter: (v, row) =>
@@ -43,38 +43,38 @@ const columns: GridColDef<TypeTblCompTypeJobMeasurePoint>[] = [
   },
 
   {
-    field: 'minValue',
-    headerName: 'Min Value',
+    field: "minValue",
+    headerName: "Min Value",
     flex: 1,
   },
   {
-    field: 'maxValue',
-    headerName: 'Max Value',
+    field: "maxValue",
+    headerName: "Max Value",
     flex: 1,
   },
   {
-    field: 'updateOnReport',
-    headerName: 'Update On Report',
+    field: "updateOnReport",
+    headerName: "Update On Report",
     flex: 1,
-    type: 'boolean',
+    type: "boolean",
   },
   {
-    field: 'useOperationalValues',
-    headerName: 'use Operational Values',
+    field: "useOperationalValues",
+    headerName: "use Operational Values",
     flex: 1,
-    type: 'boolean',
+    type: "boolean",
   },
-]
+];
 
 const TabMeasuresPage = ({ compTypeJob }: Props) => {
-  const [openForm, setOpenForm] = useState(false)
-  const [mode, setMode] = useState<'create' | 'update'>('create')
-  const [selectedId, setSelectedId] = useState<number | null>(null)
+  const [openForm, setOpenForm] = useState(false);
+  const [mode, setMode] = useState<"create" | "update">("create");
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  const compTypeJobId = compTypeJob?.compTypeJobId
-  const compTypeId = compTypeJob?.compTypeId
+  const compTypeJobId = compTypeJob?.compTypeJobId;
+  const compTypeId = compTypeJob?.compTypeId;
 
-  const label = compTypeJob?.tblJobDescription?.jobDescTitle || ''
+  const label = compTypeJob?.tblJobDescription?.jobDescTitle || "";
 
   // === getAll callback ===
   const getAll = useCallback(() => {
@@ -90,37 +90,37 @@ const TabMeasuresPage = ({ compTypeJob }: Props) => {
       filter: {
         compTypeJobId,
       },
-    })
-  }, [compTypeJobId])
+    });
+  }, [compTypeJobId]);
 
   // === useDataGrid ===
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
     getAll,
     tblCompTypeJobMeasurePoint.deleteById,
-    'compTypeJobMeasurePointId',
-    !!compTypeJobId
-  )
+    "compTypeJobMeasurePointId",
+    !!compTypeJobId,
+  );
 
   // === Handlers ===
   const handleCreate = () => {
-    setSelectedId(null)
-    setMode('create')
-    handleUpsertOpen()
-  }
+    setSelectedId(null);
+    setMode("create");
+    handleUpsertOpen();
+  };
 
   const handleEdit = (rowId: number) => {
-    setSelectedId(rowId)
-    setMode('update')
-    handleUpsertOpen()
-  }
+    setSelectedId(rowId);
+    setMode("update");
+    handleUpsertOpen();
+  };
 
   const handleUpsertClose = useCallback(() => {
-    setOpenForm(false)
-  }, [])
+    setOpenForm(false);
+  }, []);
 
   const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true)
-  }, [])
+    setOpenForm(true);
+  }, []);
 
   return (
     <>
@@ -148,7 +148,7 @@ const TabMeasuresPage = ({ compTypeJob }: Props) => {
         onSuccess={handleRefresh}
       />
     </>
-  )
-}
+  );
+};
 
-export default TabMeasuresPage
+export default TabMeasuresPage;

@@ -28,14 +28,15 @@
 }
 
 .tree .tree-item-parent::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   bottom: 0;
   left: 5px;
   width: 1px;
   background-color: var(--template-palette-divider);
-  box-shadow: 20px 0 0 var(--template-palette-divider),
+  box-shadow:
+    20px 0 0 var(--template-palette-divider),
     40px 0 0 var(--template-palette-divider),
     60px 0 0 var(--template-palette-divider),
     80px 0 0 var(--template-palette-divider),
@@ -54,7 +55,7 @@
 
 /* خط افقی */
 .tree .tree-item-parent::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: calc((var(--tree-level) - 1) * 20px + 5px);
@@ -69,8 +70,8 @@
 }
 
 /* حذف خطوط برای root items */
-.tree .tree-item-parent[aria-level='1']::before,
-.tree .tree-item-parent[aria-level='1']::after {
+.tree .tree-item-parent[aria-level="1"]::before,
+.tree .tree-item-parent[aria-level="1"]::after {
   display: none;
 }
 
@@ -92,7 +93,7 @@
   background-color: var(--template-palette-background-paper);
 }
 
-.tree .tree-item[role='tree-item']:focus {
+.tree .tree-item[role="tree-item"]:focus {
   outline: none;
 }
 
@@ -140,7 +141,7 @@
 }
 
 .tree-item.selected:after {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 7px;
   left: -2px;
@@ -192,7 +193,7 @@
 }
 
 .searchbox:before {
-  content: 'Navigate between search results with ArrowUp and ArrowDown. Press Escape to close search.';
+  content: "Navigate between search results with ArrowUp and ArrowDown. Press Escape to close search.";
   display: block;
   width: 100%;
 }

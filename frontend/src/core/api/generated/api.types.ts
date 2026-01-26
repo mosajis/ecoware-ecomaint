@@ -3694,6 +3694,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** Generate WorkOrders from CompJobs */
         post: operations["postTblWorkOrderGenerate"];
         delete?: never;
         options?: never;
@@ -4107,6 +4108,23 @@ export interface paths {
         };
         /** Get authorized user from token */
         get: operations["getAuthAuthorization"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/statistics/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Dashboard statistics */
+        get: operations["getStatistics"];
         put?: never;
         post?: never;
         delete?: never;
@@ -51588,7 +51606,7 @@ export interface operations {
                     orderNo?: null | (number);
                     tblSpareType?: {
                         connect: {
-                            id: number;
+                            spareTypeId: number;
                         };
                     };
                     otherTblSpareTypes?: {
@@ -51610,7 +51628,7 @@ export interface operations {
                     orderNo?: null | (number);
                     tblSpareType?: {
                         connect: {
-                            id: number;
+                            spareTypeId: number;
                         };
                     };
                     otherTblSpareTypes?: {
@@ -51632,7 +51650,7 @@ export interface operations {
                     orderNo?: null | (number);
                     tblSpareType?: {
                         connect: {
-                            id: number;
+                            spareTypeId: number;
                         };
                     };
                     otherTblSpareTypes?: {
@@ -51807,7 +51825,7 @@ export interface operations {
                     orderNo?: null | (number);
                     tblSpareType?: {
                         connect?: {
-                            id: number;
+                            spareTypeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -51836,7 +51854,7 @@ export interface operations {
                     orderNo?: null | (number);
                     tblSpareType?: {
                         connect?: {
-                            id: number;
+                            spareTypeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -51865,7 +51883,7 @@ export interface operations {
                     orderNo?: null | (number);
                     tblSpareType?: {
                         connect?: {
-                            id: number;
+                            spareTypeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -52109,7 +52127,7 @@ export interface operations {
                     };
                     tblSpareType?: {
                         connect: {
-                            id: number;
+                            spareTypeId: number;
                         };
                     };
                 };
@@ -52122,7 +52140,7 @@ export interface operations {
                     };
                     tblSpareType?: {
                         connect: {
-                            id: number;
+                            spareTypeId: number;
                         };
                     };
                 };
@@ -52135,7 +52153,7 @@ export interface operations {
                     };
                     tblSpareType?: {
                         connect: {
-                            id: number;
+                            spareTypeId: number;
                         };
                     };
                 };
@@ -52288,7 +52306,7 @@ export interface operations {
                     };
                     tblSpareType?: {
                         connect?: {
-                            id: number;
+                            spareTypeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -52305,7 +52323,7 @@ export interface operations {
                     };
                     tblSpareType?: {
                         connect?: {
-                            id: number;
+                            spareTypeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -52322,7 +52340,7 @@ export interface operations {
                     };
                     tblSpareType?: {
                         connect?: {
-                            id: number;
+                            spareTypeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -61122,8 +61140,34 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: never;
-        responses: never;
+        requestBody: {
+            content: {
+                "application/json": {
+                    userId: number;
+                };
+                "application/x-www-form-urlencoded": {
+                    userId: number;
+                };
+                "multipart/form-data": {
+                    userId: number;
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        message: string;
+                        createdWorkOrders: number;
+                        updatedCompJobs: number;
+                    };
+                };
+            };
+        };
     };
     postTblWorkOrderGenerateNext: {
         parameters: {
@@ -63886,6 +63930,33 @@ export interface operations {
         };
         requestBody?: never;
         responses: never;
+    };
+    getStatistics: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        total: number;
+                        open: number;
+                        completed: number;
+                        overdue: number;
+                        pending: number;
+                        current: number;
+                    };
+                };
+            };
+        };
     };
     getHealth: {
         parameters: {

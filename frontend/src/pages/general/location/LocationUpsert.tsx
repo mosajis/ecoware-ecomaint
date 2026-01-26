@@ -1,14 +1,14 @@
-import * as z from 'zod'
-import FormDialog from '@/shared/components/formDialog/FormDialog'
-import NumberField from '@/shared/components/NumberField'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import { memo, useEffect, useState, useCallback } from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { tblLocation, TypeTblLocation } from '@/core/api/generated/api'
-import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
-import { buildRelation, requiredStringField } from '@/core/api/helper'
+import * as z from "zod";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import NumberField from "@/shared/components/NumberField";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import { memo, useEffect, useState, useCallback } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { tblLocation, TypeTblLocation } from "@/core/api/generated/api";
+import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { buildRelation, requiredStringField } from "@/core/helper";
 
 // === Validation Schema ===
 const schema = z.object({
@@ -22,131 +22,131 @@ const schema = z.object({
     })
     .nullable()
     .optional(),
-})
+});
 
-export type LocationFormValues = z.infer<typeof schema>
+export type LocationFormValues = z.infer<typeof schema>;
 
 type Props = {
-  open: boolean
-  mode: 'create' | 'update'
-  recordId?: number | null
-  onClose: () => void
-  onSuccess: (data: TypeTblLocation) => void
-}
+  open: boolean;
+  mode: "create" | "update";
+  recordId?: number | null;
+  onClose: () => void;
+  onSuccess: (data: TypeTblLocation) => void;
+};
 
 function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
+  const [loadingInitial, setLoadingInitial] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const defaultValues: LocationFormValues = {
-    name: '',
-    locationCode: '',
+    name: "",
+    locationCode: "",
     parentLocationId: null,
     orderNo: null,
-  }
+  };
 
   const { control, handleSubmit, reset } = useForm<LocationFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
-  })
+  });
 
   // === Load record in edit mode ===
   const fetchData = useCallback(async () => {
-    if (mode !== 'update' || !recordId) {
-      reset(defaultValues)
-      return
+    if (mode !== "update" || !recordId) {
+      reset(defaultValues);
+      return;
     }
 
-    setLoadingInitial(true)
+    setLoadingInitial(true);
 
     try {
       const res = await tblLocation.getById(recordId, {
         include: { tblLocation: true },
-      })
+      });
 
       reset({
-        name: res?.name ?? '',
-        locationCode: res?.locationCode ?? '',
+        name: res?.name ?? "",
+        locationCode: res?.locationCode ?? "",
         parentLocationId: res?.tblLocation ?? null,
         orderNo: res?.orderNo ?? null,
-      })
+      });
     } finally {
-      setLoadingInitial(false)
+      setLoadingInitial(false);
     }
-  }, [mode, recordId, reset])
+  }, [mode, recordId, reset]);
 
   useEffect(() => {
-    if (open) fetchData()
-  }, [open, fetchData])
+    if (open) fetchData();
+  }, [open, fetchData]);
 
   // === Submit Handler ===
   const handleFormSubmit = useCallback(
     async (values: LocationFormValues) => {
-      const parsed = schema.safeParse(values)
-      if (!parsed.success) return
+      const parsed = schema.safeParse(values);
+      if (!parsed.success) return;
 
       try {
-        setSubmitting(true)
+        setSubmitting(true);
 
-        let result: TypeTblLocation
+        let result: TypeTblLocation;
 
         const parentId = parsed.data.parentLocationId
           ? parsed.data.parentLocationId.locationId
-          : null
+          : null;
 
         const parentRelation = buildRelation(
-          'tblLocation',
-          'locationId',
-          parentId
-        )
+          "tblLocation",
+          "locationId",
+          parentId,
+        );
 
-        if (mode === 'create') {
+        if (mode === "create") {
           result = await tblLocation.create({
             orderNo: parsed.data.orderNo,
             name: parsed.data.name,
             locationCode: parsed.data.locationCode,
             ...parentRelation,
-          })
+          });
         } else {
           result = await tblLocation.update(recordId!, {
             orderNo: parsed.data.orderNo,
             name: parsed.data.name,
             locationCode: parsed.data.locationCode,
             ...parentRelation,
-          })
+          });
         }
 
-        onSuccess(result)
-        onClose()
+        onSuccess(result);
+        onClose();
       } finally {
-        setSubmitting(false)
+        setSubmitting(false);
       }
     },
-    [mode, recordId, onSuccess, onClose]
-  )
+    [mode, recordId, onSuccess, onClose],
+  );
 
-  const isDisabled = loadingInitial || submitting
+  const isDisabled = loadingInitial || submitting;
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === 'create' ? 'Create Location' : 'Edit Location'}
+      title={mode === "create" ? "Create Location" : "Edit Location"}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display='grid' gridTemplateColumns='repeat(1, 1fr)' gap={1.5}>
+      <Box display="grid" gridTemplateColumns="repeat(1, 1fr)" gap={1.5}>
         {/* Code */}
         <Controller
-          name='locationCode'
+          name="locationCode"
           control={control}
           render={({ field, fieldState }) => (
             <TextField
-              sx={{ width: '80%' }}
+              sx={{ width: "80%" }}
               {...field}
-              label='Code *'
-              size='small'
+              label="Code *"
+              size="small"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}
@@ -156,13 +156,13 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
         {/* Name */}
         <Controller
-          name='name'
+          name="name"
           control={control}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              label='Name *'
-              size='small'
+              label="Name *"
+              size="small"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}
@@ -172,17 +172,17 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
         {/* Parent Location */}
         <Controller
-          name='parentLocationId'
+          name="parentLocationId"
           control={control}
           render={({ field, fieldState }) => (
             <AsyncSelectField
-              dialogMaxWidth='sm'
-              label='Parent Location'
-              selectionMode='single'
+              dialogMaxWidth="sm"
+              label="Parent Location"
+              selectionMode="single"
               value={field.value}
               request={tblLocation.getAll}
-              columns={[{ field: 'name', headerName: 'Name', flex: 1 }]}
-              getRowId={row => row.locationId}
+              columns={[{ field: "name", headerName: "Name", flex: 1 }]}
+              getRowId={(row) => row.locationId}
               onChange={field.onChange}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -192,21 +192,21 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
         {/* Order */}
         <Controller
-          name='orderNo'
+          name="orderNo"
           control={control}
           render={({ field }) => (
             <NumberField
               {...field}
-              label='Order No'
-              sx={{ width: '50%' }}
-              size='small'
+              label="Order No"
+              sx={{ width: "50%" }}
+              size="small"
               disabled={isDisabled}
             />
           )}
         />
       </Box>
     </FormDialog>
-  )
+  );
 }
 
-export default memo(LocationUpsert)
+export default memo(LocationUpsert);

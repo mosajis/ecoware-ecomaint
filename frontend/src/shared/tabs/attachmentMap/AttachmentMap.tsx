@@ -1,9 +1,9 @@
-import AttachmentMapUpsert from './AttachmentMapUpsert'
-import DataGrid from '@/shared/components/dataGrid/DataGrid'
-import { memo, useCallback, useMemo, useState } from 'react'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
-import { BaseAttachmentGridProps, MapRelationConfig } from './AttachmentType'
-import { attachmentTableColumns } from './AttachmentColumn'
+import AttachmentMapUpsert from "./AttachmentMapUpsert";
+import DataGrid from "@/shared/components/dataGrid/DataGrid";
+import { memo, useCallback, useMemo, useState } from "react";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { BaseAttachmentGridProps, MapRelationConfig } from "./AttachmentType";
+import { attachmentTableColumns } from "./AttachmentColumn";
 
 function AttachmentMap<T = any>({
   disableAdd,
@@ -12,10 +12,10 @@ function AttachmentMap<T = any>({
   filterKey,
   relName,
   tableId,
-  label = 'Attachments',
+  label = "Attachments",
   mapService,
 }: BaseAttachmentGridProps<T>) {
-  const [openForm, setOpenForm] = useState(false)
+  const [openForm, setOpenForm] = useState(false);
 
   const getAll = useCallback(() => {
     return mapService.getAll({
@@ -29,35 +29,35 @@ function AttachmentMap<T = any>({
           },
         },
       },
-    })
-  }, [filterId, filterKey, mapService])
+    });
+  }, [filterId, filterKey, mapService]);
 
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
     mapService.deleteById,
     tableId as any,
-    !!filterId
-  )
+    !!filterId,
+  );
 
   const openUpsert = useCallback(() => {
-    setOpenForm(true)
-  }, [])
+    setOpenForm(true);
+  }, []);
 
   const closeUpsert = useCallback(() => {
-    setOpenForm(false)
-  }, [])
+    setOpenForm(false);
+  }, []);
 
   const relationConfig: MapRelationConfig = useMemo(
     () => ({
       filterId,
       filterKey,
       relName,
-      attachmentField: 'tblAttachment',
+      attachmentField: "tblAttachment",
     }),
-    [filterKey, filterId]
-  )
+    [filterKey, filterId],
+  );
 
-  const getRowId = useCallback((row: any) => row[tableId], [tableId])
+  const getRowId = useCallback((row: any) => row[tableId], [tableId]);
 
   return (
     <>
@@ -85,7 +85,7 @@ function AttachmentMap<T = any>({
         onSuccess={handleRefresh}
       />
     </>
-  )
+  );
 }
 
-export default memo(AttachmentMap)
+export default memo(AttachmentMap);

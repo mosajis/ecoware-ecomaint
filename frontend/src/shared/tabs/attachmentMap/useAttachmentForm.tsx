@@ -1,29 +1,29 @@
-import { useState, useEffect, useCallback } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useAtomValue } from 'jotai'
-import { atomUser } from '@/pages/auth/auth.atom'
-import { tblAttachment, TypeTblAttachment } from '@/core/api/generated/api'
-import { buildRelation } from '@/core/api/helper'
-import { createAttachment } from '@/pages/general/attachment/AttachmentService'
+import { useState, useEffect, useCallback } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
+import { tblAttachment, TypeTblAttachment } from "@/core/api/generated/api";
+import { buildRelation } from "@/core/helper";
+import { createAttachment } from "@/pages/general/attachment/AttachmentService";
 import {
   existingAttachmentSchema,
   newAttachmentSchema,
-} from './AttachmentMapSchema'
+} from "./AttachmentMapSchema";
 import {
   ExistingAttachmentFormValues,
   NewAttachmentFormValues,
   AttachmentFormMode,
   MapRelationConfig,
   AttachmentMapService,
-} from './AttachmentType'
+} from "./AttachmentType";
 
 interface UseAttachmentFormProps<T> {
-  open: boolean
-  relationConfig: MapRelationConfig
-  mapService: AttachmentMapService<T>
-  onSuccess: (data: T) => void
-  onClose: () => void
+  open: boolean;
+  relationConfig: MapRelationConfig;
+  mapService: AttachmentMapService<T>;
+  onSuccess: (data: T) => void;
+  onClose: () => void;
 }
 
 export function useAttachmentForm<T>({
@@ -33,96 +33,96 @@ export function useAttachmentForm<T>({
   onSuccess,
   onClose,
 }: UseAttachmentFormProps<T>) {
-  const [activeTab, setActiveTab] = useState<AttachmentFormMode>('new')
-  const [submitting, setSubmitting] = useState(false)
+  const [activeTab, setActiveTab] = useState<AttachmentFormMode>("new");
+  const [submitting, setSubmitting] = useState(false);
   const [selectedAttachmentId, setSelectedAttachmentId] = useState<
     number | null
-  >(null)
-  const [attachments, setAttachments] = useState<TypeTblAttachment[]>([])
-  const [loadingAttachments, setLoadingAttachments] = useState(false)
+  >(null);
+  const [attachments, setAttachments] = useState<TypeTblAttachment[]>([]);
+  const [loadingAttachments, setLoadingAttachments] = useState(false);
 
-  const user = useAtomValue(atomUser)
+  const user = useAtomValue(atomUser);
 
   const existingForm = useForm<ExistingAttachmentFormValues>({
     resolver: zodResolver(existingAttachmentSchema),
     defaultValues: { selectedAttachmentId: null },
-    mode: 'onChange',
-  })
+    mode: "onChange",
+  });
 
   const newForm = useForm<NewAttachmentFormValues>({
     resolver: zodResolver(newAttachmentSchema),
     defaultValues: {
-      title: '',
+      title: "",
       attachmentType: {
         attachmentTypeId: 0,
-        name: '',
+        name: "",
       },
       isUserAttachment: true,
-      file: new File([], ''),
+      file: new File([], ""),
     },
-    mode: 'onChange',
-  })
+    mode: "onChange",
+  });
 
-  const selectedFile = newForm.watch('file')
+  const selectedFile = newForm.watch("file");
 
   // Auto-fill title from filename
   useEffect(() => {
-    const fileName = selectedFile?.name?.trim()
+    const fileName = selectedFile?.name?.trim();
     if (!fileName) {
-      newForm.setValue('title', '')
-      return
+      newForm.setValue("title", "");
+      return;
     }
 
-    const lastDotIndex = fileName.lastIndexOf('.')
+    const lastDotIndex = fileName.lastIndexOf(".");
     const nameWithoutExtension =
-      lastDotIndex === -1 ? fileName : fileName.substring(0, lastDotIndex)
+      lastDotIndex === -1 ? fileName : fileName.substring(0, lastDotIndex);
 
-    const currentTitle = newForm.watch('title')
+    const currentTitle = newForm.watch("title");
     if (!currentTitle?.trim()) {
-      newForm.setValue('title', nameWithoutExtension)
+      newForm.setValue("title", nameWithoutExtension);
     }
-  }, [selectedFile, newForm])
+  }, [selectedFile, newForm]);
 
   const loadAttachments = useCallback(async () => {
-    setLoadingAttachments(true)
+    setLoadingAttachments(true);
     try {
       const res = await tblAttachment.getAll({
         include: { tblAttachmentType: true },
-      })
-      setAttachments(res.items ?? [])
+      });
+      setAttachments(res.items ?? []);
     } catch (err) {
-      console.error('Failed to load attachments', err)
+      console.error("Failed to load attachments", err);
     } finally {
-      setLoadingAttachments(false)
+      setLoadingAttachments(false);
     }
-  }, [])
+  }, []);
 
   const resetForms = useCallback(() => {
-    existingForm.reset({ selectedAttachmentId: null })
+    existingForm.reset({ selectedAttachmentId: null });
     newForm.reset({
-      title: '',
+      title: "",
       attachmentType: null,
       isUserAttachment: true,
-      file: new File([], ''),
-    })
-    setSelectedAttachmentId(null)
-  }, [existingForm, newForm])
+      file: new File([], ""),
+    });
+    setSelectedAttachmentId(null);
+  }, [existingForm, newForm]);
 
   useEffect(() => {
     if (open) {
-      resetForms()
-      loadAttachments()
+      resetForms();
+      loadAttachments();
     }
-  }, [open, resetForms, loadAttachments])
+  }, [open, resetForms, loadAttachments]);
 
   const handleExistingSubmit = useCallback(
     async (values: ExistingAttachmentFormValues) => {
       if (!selectedAttachmentId) {
-        alert('Please select an attachment')
-        return
+        alert("Please select an attachment");
+        return;
       }
 
-      setSubmitting(true)
+      setSubmitting(true);
 
       try {
         const mapPayload = {
@@ -130,26 +130,26 @@ export function useAttachmentForm<T>({
           ...buildRelation(
             relationConfig.relName,
             relationConfig.filterKey,
-            relationConfig.filterId
+            relationConfig.filterId,
           ),
           ...buildRelation(
             relationConfig.attachmentField,
-            'attachmentId',
-            selectedAttachmentId
+            "attachmentId",
+            selectedAttachmentId,
           ),
-          ...buildRelation('tblUsers', 'userId', user?.userId),
-        }
+          ...buildRelation("tblUsers", "userId", user?.userId),
+        };
 
-        const result = await mapService.create(mapPayload)
+        const result = await mapService.create(mapPayload);
 
         if (result) {
-          onSuccess(result)
-          onClose()
+          onSuccess(result);
+          onClose();
         }
       } catch (err) {
-        console.error('Failed to submit existing attachment', err)
+        console.error("Failed to submit existing attachment", err);
       } finally {
-        setSubmitting(false)
+        setSubmitting(false);
       }
     },
     [
@@ -159,12 +159,12 @@ export function useAttachmentForm<T>({
       user?.userId,
       onSuccess,
       onClose,
-    ]
-  )
+    ],
+  );
 
   const handleNewSubmit = useCallback(
     async (values: NewAttachmentFormValues) => {
-      setSubmitting(true)
+      setSubmitting(true);
       try {
         const newAttachment = await createAttachment({
           title: values.title,
@@ -172,10 +172,10 @@ export function useAttachmentForm<T>({
           isUserAttachment: values.isUserAttachment,
           file: values.file,
           createdUserId: user?.userId as number,
-        })
+        });
 
         if (!newAttachment) {
-          throw new Error('Failed to create attachment')
+          throw new Error("Failed to create attachment");
         }
 
         const mapPayload = {
@@ -183,30 +183,30 @@ export function useAttachmentForm<T>({
           ...buildRelation(
             relationConfig.relName,
             relationConfig.filterKey,
-            relationConfig.filterId
+            relationConfig.filterId,
           ),
           ...buildRelation(
             relationConfig.attachmentField,
-            'attachmentId',
-            newAttachment.attachmentId
+            "attachmentId",
+            newAttachment.attachmentId,
           ),
-          ...buildRelation('tblUsers', 'userId', user?.userId),
-        }
+          ...buildRelation("tblUsers", "userId", user?.userId),
+        };
 
-        const result = await mapService.create(mapPayload)
+        const result = await mapService.create(mapPayload);
 
         if (result) {
-          onSuccess(result)
-          onClose()
+          onSuccess(result);
+          onClose();
         }
       } catch (err) {
-        console.error('Failed to submit new attachment', err)
+        console.error("Failed to submit new attachment", err);
       } finally {
-        setSubmitting(false)
+        setSubmitting(false);
       }
     },
-    [relationConfig, mapService, user?.userId, onSuccess, onClose]
-  )
+    [relationConfig, mapService, user?.userId, onSuccess, onClose],
+  );
 
   return {
     activeTab,
@@ -220,5 +220,5 @@ export function useAttachmentForm<T>({
     newForm,
     handleExistingSubmit,
     handleNewSubmit,
-  }
+  };
 }

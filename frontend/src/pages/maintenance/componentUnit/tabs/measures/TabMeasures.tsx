@@ -1,58 +1,58 @@
-import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import Upsert from './TabMeasuresUpsert'
-import { useCallback, useState } from 'react'
-import { GridColDef } from '@mui/x-data-grid'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import Upsert from "./TabMeasuresUpsert";
+import { useCallback, useState } from "react";
+import { GridColDef } from "@mui/x-data-grid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
   tblCompMeasurePoint,
   TypeTblComponentUnit,
   TypeTblCompMeasurePoint,
-} from '@/core/api/generated/api'
+} from "@/core/api/generated/api";
 
 type Props = {
-  componentUnit?: TypeTblComponentUnit | null
-  label?: string
-}
+  componentUnit?: TypeTblComponentUnit | null;
+  label?: string;
+};
 
-const getRowId = (row: TypeTblCompMeasurePoint) => row.compMeasurePointId
+const getRowId = (row: TypeTblCompMeasurePoint) => row.compMeasurePointId;
 
 // === Columns ===
 const columns: GridColDef<TypeTblCompMeasurePoint>[] = [
   {
-    field: 'measureName',
-    headerName: 'Measure',
+    field: "measureName",
+    headerName: "Measure",
     flex: 1,
-    valueGetter: (_, row) => row.tblCounterType?.name || '',
+    valueGetter: (_, row) => row.tblCounterType?.name || "",
   },
   {
-    field: 'unitName',
-    headerName: 'Unit',
+    field: "unitName",
+    headerName: "Unit",
     flex: 1,
-    valueGetter: (_, row) => row.tblUnit?.name || '',
+    valueGetter: (_, row) => row.tblUnit?.name || "",
   },
   {
-    field: 'unitDescription',
-    headerName: 'Unit Description',
+    field: "unitDescription",
+    headerName: "Unit Description",
     flex: 1,
-    valueGetter: (_, row) => row.tblUnit?.description || '',
+    valueGetter: (_, row) => row.tblUnit?.description || "",
   },
   {
-    field: 'currentValue',
-    headerName: 'Current Value',
+    field: "currentValue",
+    headerName: "Current Value",
     width: 120,
   },
-  { field: 'setValue', headerName: 'Set Value', width: 110 },
-  { field: 'operationalMinValue', headerName: 'Min', width: 100 },
-  { field: 'operationalMaxValue', headerName: 'Max', width: 100 },
-  { field: 'orderNo', headerName: 'Order', width: 80 },
-]
+  { field: "setValue", headerName: "Set Value", width: 110 },
+  { field: "operationalMinValue", headerName: "Min", width: 100 },
+  { field: "operationalMaxValue", headerName: "Max", width: 100 },
+  { field: "orderNo", headerName: "Order", width: 80 },
+];
 
 const TabCompMeasurePoint = ({ componentUnit, label }: Props) => {
-  const compId = componentUnit?.compId
+  const compId = componentUnit?.compId;
 
-  const [openForm, setOpenForm] = useState(false)
-  const [mode, setMode] = useState<'create' | 'update'>('create')
-  const [selectedId, setSelectedId] = useState<number | null>(null)
+  const [openForm, setOpenForm] = useState(false);
+  const [mode, setMode] = useState<"create" | "update">("create");
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   // === getAll ===
   const getAll = useCallback(() => {
@@ -63,37 +63,37 @@ const TabCompMeasurePoint = ({ componentUnit, label }: Props) => {
         tblCounterType: true,
         tblCompJobMeasurePoints: true,
       },
-    })
-  }, [compId])
+    });
+  }, [compId]);
 
   // === useDataGrid ===
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
     tblCompMeasurePoint.deleteById,
-    'compMeasurePointId',
-    !!compId
-  )
+    "compMeasurePointId",
+    !!compId,
+  );
 
   // === Handlers ===
   const handleCreate = () => {
-    setSelectedId(null)
-    setMode('create')
-    handleUpsertOpen()
-  }
+    setSelectedId(null);
+    setMode("create");
+    handleUpsertOpen();
+  };
 
   const handleEdit = (rowId: number) => {
-    setSelectedId(rowId)
-    setMode('update')
-    handleUpsertOpen()
-  }
+    setSelectedId(rowId);
+    setMode("update");
+    handleUpsertOpen();
+  };
 
   const handleUpsertClose = useCallback(() => {
-    setOpenForm(false)
-  }, [])
+    setOpenForm(false);
+  }, []);
 
   const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true)
-  }, [])
+    setOpenForm(true);
+  }, []);
 
   return (
     <>
@@ -120,7 +120,7 @@ const TabCompMeasurePoint = ({ componentUnit, label }: Props) => {
         onSuccess={handleRefresh}
       />
     </>
-  )
-}
+  );
+};
 
-export default TabCompMeasurePoint
+export default TabCompMeasurePoint;

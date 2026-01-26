@@ -8,7 +8,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { tblSpareType, TypeTblSpareType } from "@/core/api/generated/api";
 import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
-import { buildRelation } from "@/core/api/helper";
+import { buildRelation } from "@/core/helper";
 
 // === Validation Schema ===
 const schema = z.object({

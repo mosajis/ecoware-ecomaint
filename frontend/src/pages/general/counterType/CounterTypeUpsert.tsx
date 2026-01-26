@@ -1,14 +1,14 @@
-import * as z from 'zod'
-import FormDialog from '@/shared/components/formDialog/FormDialog'
-import Box from '@mui/material/Box'
-import MenuItem from '@mui/material/MenuItem'
-import TextField from '@mui/material/TextField'
-import { memo, useEffect, useState, useCallback, useMemo } from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { tblCounterType, TypeTblCounterType } from '@/core/api/generated/api'
-import { requiredStringField } from '@/core/api/helper'
-import NumberField from '@/shared/components/NumberField'
+import * as z from "zod";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import Box from "@mui/material/Box";
+import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
+import { memo, useEffect, useState, useCallback, useMemo } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { tblCounterType, TypeTblCounterType } from "@/core/api/generated/api";
+import { requiredStringField } from "@/core/helper";
+import NumberField from "@/shared/components/NumberField";
 
 // === Zod schema ===
 const schema = z.object({
@@ -16,17 +16,17 @@ const schema = z.object({
   name: requiredStringField(),
   type: z.number(),
   orderNo: z.number().nullable(),
-})
+});
 
-export type CounterTypeFormValues = z.infer<typeof schema>
+export type CounterTypeFormValues = z.infer<typeof schema>;
 
 type Props = {
-  open: boolean
-  mode: 'create' | 'update'
-  recordId?: number | null
-  onClose: () => void
-  onSuccess: (data: TypeTblCounterType) => void
-}
+  open: boolean;
+  mode: "create" | "update";
+  recordId?: number | null;
+  onClose: () => void;
+  onSuccess: (data: TypeTblCounterType) => void;
+};
 
 function CounterTypeUpsert({
   open,
@@ -35,18 +35,18 @@ function CounterTypeUpsert({
   onClose,
   onSuccess,
 }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
+  const [loadingInitial, setLoadingInitial] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const defaultValues: CounterTypeFormValues = useMemo(
     () => ({
-      code: '',
-      name: '',
+      code: "",
+      name: "",
       type: 0,
       orderNo: null,
     }),
-    []
-  )
+    [],
+  );
 
   const {
     control,
@@ -56,95 +56,95 @@ function CounterTypeUpsert({
   } = useForm<CounterTypeFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
-  })
+  });
 
   // === Fetch data for update ===
   const fetchData = useCallback(async () => {
-    if (mode === 'update' && recordId) {
-      setLoadingInitial(true)
+    if (mode === "update" && recordId) {
+      setLoadingInitial(true);
       try {
-        const res = await tblCounterType.getById(recordId)
+        const res = await tblCounterType.getById(recordId);
         if (res) {
           reset({
-            code: res.code ?? '',
-            name: res.name ?? '',
+            code: res.code ?? "",
+            name: res.name ?? "",
             type: res.type ?? 0,
             orderNo: res.type ?? 0,
-          })
+          });
         }
       } catch (err) {
-        console.error('Failed to fetch CounterType', err)
-        reset(defaultValues)
+        console.error("Failed to fetch CounterType", err);
+        reset(defaultValues);
       } finally {
-        setLoadingInitial(false)
+        setLoadingInitial(false);
       }
     } else {
-      reset(defaultValues)
+      reset(defaultValues);
     }
-  }, [mode, recordId, reset, defaultValues])
+  }, [mode, recordId, reset, defaultValues]);
 
   useEffect(() => {
-    if (open) fetchData()
-  }, [open, fetchData])
+    if (open) fetchData();
+  }, [open, fetchData]);
 
-  const isDisabled = loadingInitial || submitting
+  const isDisabled = loadingInitial || submitting;
 
   const handleFormSubmit = useCallback(
     async (values: CounterTypeFormValues) => {
-      setSubmitting(true)
+      setSubmitting(true);
       try {
-        let result: TypeTblCounterType
-        if (mode === 'create') {
-          result = await tblCounterType.create(values)
-        } else if (mode === 'update' && recordId) {
-          result = await tblCounterType.update(recordId, values)
+        let result: TypeTblCounterType;
+        if (mode === "create") {
+          result = await tblCounterType.create(values);
+        } else if (mode === "update" && recordId) {
+          result = await tblCounterType.update(recordId, values);
         } else {
-          return
+          return;
         }
-        onSuccess(result)
-        onClose()
+        onSuccess(result);
+        onClose();
       } catch (err) {
-        console.error('Submit failed', err)
+        console.error("Submit failed", err);
       } finally {
-        setSubmitting(false)
+        setSubmitting(false);
       }
     },
-    [mode, recordId, onSuccess, onClose]
-  )
+    [mode, recordId, onSuccess, onClose],
+  );
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === 'create' ? 'Create Counter Type' : 'Edit Counter Type'}
+      title={mode === "create" ? "Create Counter Type" : "Edit Counter Type"}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display='flex' flexDirection={'column'} gap={1.5}>
+      <Box display="flex" flexDirection={"column"} gap={1.5}>
         <Controller
-          name='code'
+          name="code"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label='Code *'
-              size='small'
+              label="Code *"
+              size="small"
               error={!!errors.code}
               helperText={errors.code?.message}
               disabled={isDisabled}
-              sx={{ width: '70%' }}
+              sx={{ width: "70%" }}
             />
           )}
         />
         <Controller
-          name='name'
+          name="name"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label='Name *'
-              size='small'
+              label="Name *"
+              size="small"
               error={!!errors.name}
               helperText={errors.name?.message}
               disabled={isDisabled}
@@ -152,13 +152,13 @@ function CounterTypeUpsert({
           )}
         />
         <Controller
-          name='orderNo'
+          name="orderNo"
           control={control}
           render={({ field }) => (
             <NumberField
               {...field}
-              label='Order No'
-              size='small'
+              label="Order No"
+              size="small"
               error={!!errors.orderNo}
               helperText={errors.orderNo?.message}
               disabled={isDisabled}
@@ -166,20 +166,20 @@ function CounterTypeUpsert({
           )}
         />
         <Controller
-          name='type'
+          name="type"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
               select
-              label='Type *'
-              size='small'
+              label="Type *"
+              size="small"
               disabled={isDisabled}
-              sx={{ width: '50%' }}
-              value={field.value ?? ''}
-              onChange={e =>
+              sx={{ width: "50%" }}
+              value={field.value ?? ""}
+              onChange={(e) =>
                 field.onChange(
-                  e.target.value === '' ? null : Number(e.target.value)
+                  e.target.value === "" ? null : Number(e.target.value),
                 )
               }
             >
@@ -190,7 +190,7 @@ function CounterTypeUpsert({
         />
       </Box>
     </FormDialog>
-  )
+  );
 }
 
-export default memo(CounterTypeUpsert)
+export default memo(CounterTypeUpsert);

@@ -1,55 +1,55 @@
-import JobCounterUpsert from './TabCounterUpsert'
-import CustomizedDataGrid from '@/shared/components/dataGrid/DataGrid'
-import { useCallback, useState } from 'react'
-import { GridColDef } from '@mui/x-data-grid'
-import { useDataGrid } from '@/shared/hooks/useDataGrid'
+import JobCounterUpsert from "./TabCounterUpsert";
+import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import { useCallback, useState } from "react";
+import { GridColDef } from "@mui/x-data-grid";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
   tblCompTypeJobCounter,
   TypeTblCompTypeJob,
   TypeTblCompTypeJobCounter,
-} from '@/core/api/generated/api'
+} from "@/core/api/generated/api";
 
 type Props = {
-  compTypeJob?: TypeTblCompTypeJob
-}
+  compTypeJob?: TypeTblCompTypeJob;
+};
 
-const getRowId = (row: TypeTblCompTypeJobCounter) => row.compTypeJobCounterId
+const getRowId = (row: TypeTblCompTypeJobCounter) => row.compTypeJobCounterId;
 
 const columns: GridColDef<TypeTblCompTypeJobCounter>[] = [
   {
-    field: 'counterType',
-    headerName: 'Counter Type',
+    field: "counterType",
+    headerName: "Counter Type",
     flex: 1,
     valueGetter: (_, row) =>
       // @ts-ignore
       row.tblCompTypeCounter?.tblCounterType?.name,
   },
-  { field: 'frequency', headerName: 'Frequency', width: 120 },
-  { field: 'window', headerName: 'Window', width: 120 },
+  { field: "frequency", headerName: "Frequency", width: 120 },
+  { field: "window", headerName: "Window", width: 120 },
   {
-    field: 'showInAlert',
-    headerName: 'Alert',
+    field: "showInAlert",
+    headerName: "Alert",
     width: 90,
-    type: 'boolean',
+    type: "boolean",
   },
   {
-    field: 'updateByFunction',
-    headerName: 'By Func',
+    field: "updateByFunction",
+    headerName: "By Func",
     width: 110,
-    type: 'boolean',
+    type: "boolean",
   },
-  { field: 'orderNo', headerName: 'Order', width: 80 },
-]
+  { field: "orderNo", headerName: "Order", width: 80 },
+];
 
 const TabCounter = ({ compTypeJob }: Props) => {
-  const compTypeJobId = compTypeJob?.compTypeJobId
-  const compTypeId = compTypeJob?.compTypeId
+  const compTypeJobId = compTypeJob?.compTypeJobId;
+  const compTypeId = compTypeJob?.compTypeId;
 
-  const [openForm, setOpenForm] = useState(false)
-  const [mode, setMode] = useState<'create' | 'update'>('create')
-  const [selectedId, setSelectedId] = useState<number | null>(null)
+  const [openForm, setOpenForm] = useState(false);
+  const [mode, setMode] = useState<"create" | "update">("create");
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  const label = compTypeJob?.tblJobDescription?.jobDescTitle || ''
+  const label = compTypeJob?.tblJobDescription?.jobDescTitle || "";
 
   // === getAll ===
   const getAll = useCallback(() => {
@@ -64,37 +64,37 @@ const TabCounter = ({ compTypeJob }: Props) => {
       filter: {
         compTypeJobId,
       },
-    })
-  }, [compTypeJobId])
+    });
+  }, [compTypeJobId]);
 
   // === useDataGrid ===
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
     tblCompTypeJobCounter.deleteById,
-    'compTypeJobCounterId',
-    !!compTypeJobId
-  )
+    "compTypeJobCounterId",
+    !!compTypeJobId,
+  );
 
   // === Handlers ===
   const handleCreate = () => {
-    setSelectedId(null)
-    setMode('create')
-    handleUpsertOpen()
-  }
+    setSelectedId(null);
+    setMode("create");
+    handleUpsertOpen();
+  };
 
   const handleEdit = (rowId: number) => {
-    setSelectedId(rowId)
-    setMode('update')
-    handleUpsertOpen()
-  }
+    setSelectedId(rowId);
+    setMode("update");
+    handleUpsertOpen();
+  };
 
   const handleUpsertClose = useCallback(() => {
-    setOpenForm(false)
-  }, [])
+    setOpenForm(false);
+  }, []);
 
   const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true)
-  }, [])
+    setOpenForm(true);
+  }, []);
 
   return (
     <>
@@ -122,7 +122,7 @@ const TabCounter = ({ compTypeJob }: Props) => {
         onSuccess={handleRefresh}
       />
     </>
-  )
-}
+  );
+};
 
-export default TabCounter
+export default TabCounter;

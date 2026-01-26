@@ -35,7 +35,7 @@ const Report = forwardRef<HTMLDivElement, WorkOrderReportProps>(
         />
       }
     />
-  )
+  ),
 );
 
 export default Report;

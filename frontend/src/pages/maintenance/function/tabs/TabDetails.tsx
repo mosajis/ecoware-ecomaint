@@ -1,23 +1,23 @@
-import Editor from '@/shared/components/Editor'
+import Editor from "@/shared/components/Editor";
 
 interface TabDetailsProps {
-  functionId?: number | null
-  label?: string | null
+  functionId?: number | null;
+  label?: string | null;
 }
 
 const TabDetails = (props: TabDetailsProps) => {
-  const { label, functionId } = props
+  const { label, functionId } = props;
 
-  const handleSave = () => {}
+  const handleSave = () => {};
 
   return (
     <Editor
-      label={label || 'Details'}
+      label={label || "Details"}
       autoSave
-      initValue={''}
+      initValue={""}
       onSave={handleSave}
     />
-  )
-}
+  );
+};
 
-export default TabDetails
+export default TabDetails;

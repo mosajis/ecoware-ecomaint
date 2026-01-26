@@ -14,7 +14,7 @@ const TabMaintLog = ({ functionId, label }: TabMaintLogProps) => {
     tblMaintLog.getAll,
     tblMaintLog.getById,
     "maintLogId",
-    !!functionId
+    !!functionId,
   );
 
   const columns = useMemo<GridColDef<TypeTblMaintLog>[]>(
@@ -128,7 +128,7 @@ const TabMaintLog = ({ functionId, label }: TabMaintLogProps) => {
         // valueGetter: (row) => (row.isUnplanned ? "Yes" : "No"),
       },
     ],
-    []
+    [],
   );
 
   return (

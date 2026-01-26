@@ -1,14 +1,14 @@
-import * as z from 'zod'
-import FormDialog from '@/shared/components/formDialog/FormDialog'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import NumberField from '@/shared/components/NumberField'
-import { memo, useEffect, useState, useCallback } from 'react'
-import { AsyncSelectField } from '@/shared/components/AsyncSelectField'
-import { buildRelation, requiredStringField } from '@/core/api/helper'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { tblCompType, tblAddress } from '@/core/api/generated/api'
+import * as z from "zod";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import NumberField from "@/shared/components/NumberField";
+import { memo, useEffect, useState, useCallback } from "react";
+import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { buildRelation, requiredStringField } from "@/core/helper";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { tblCompType, tblAddress } from "@/core/api/generated/api";
 
 const schema = z.object({
   compTypeNo: requiredStringField(),
@@ -29,17 +29,17 @@ const schema = z.object({
     })
     .nullable()
     .optional(),
-})
+});
 
-type CompTypeFormValues = z.infer<typeof schema>
+type CompTypeFormValues = z.infer<typeof schema>;
 
 type Props = {
-  open: boolean
-  mode: 'create' | 'update'
-  recordId?: number | null
-  onClose: () => void
-  onSuccess: () => void
-}
+  open: boolean;
+  mode: "create" | "update";
+  recordId?: number | null;
+  onClose: () => void;
+  onSuccess: () => void;
+};
 
 function ComponentTypeUpsert({
   open,
@@ -48,30 +48,30 @@ function ComponentTypeUpsert({
   onClose,
   onSuccess,
 }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
+  const [loadingInitial, setLoadingInitial] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const defaultValues: CompTypeFormValues = {
-    compTypeNo: '',
-    compName: '',
-    compType: '',
+    compTypeNo: "",
+    compName: "",
+    compType: "",
     maker: null,
     tblCompType: null,
     orderNo: null,
-  }
+  };
 
   const { control, handleSubmit, reset } = useForm<CompTypeFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
-  })
+  });
 
   const loadData = useCallback(async () => {
-    if (mode !== 'update' || !recordId) {
-      reset(defaultValues)
-      return
+    if (mode !== "update" || !recordId) {
+      reset(defaultValues);
+      return;
     }
 
-    setLoadingInitial(true)
+    setLoadingInitial(true);
 
     try {
       const res = await tblCompType.getById(recordId, {
@@ -79,12 +79,12 @@ function ComponentTypeUpsert({
           tblAddress: true,
           tblCompType: true,
         },
-      })
+      });
 
       reset({
-        compTypeNo: res?.compTypeNo ?? '',
-        compName: res?.compName ?? '',
-        compType: res?.compType ?? '',
+        compTypeNo: res?.compTypeNo ?? "",
+        compName: res?.compName ?? "",
+        compType: res?.compType ?? "",
         orderNo: res?.orderNo ?? null,
         maker: res?.tblAddress ?? null,
         tblCompType: res?.tblCompType
@@ -93,30 +93,30 @@ function ComponentTypeUpsert({
               compName: res.tblCompType.compName ?? null,
             }
           : null,
-      })
+      });
     } finally {
-      setLoadingInitial(false)
+      setLoadingInitial(false);
     }
-  }, [mode, recordId, reset])
+  }, [mode, recordId, reset]);
 
   const onSubmitForm = useCallback(
     async (values: CompTypeFormValues) => {
-      const parsed = schema.safeParse(values)
-      if (!parsed.success) return
+      const parsed = schema.safeParse(values);
+      if (!parsed.success) return;
 
-      setSubmitting(true)
+      setSubmitting(true);
 
       try {
         const makerRel = buildRelation(
-          'tblAddress',
-          'addressId',
-          parsed.data.maker?.addressId
-        )
+          "tblAddress",
+          "addressId",
+          parsed.data.maker?.addressId,
+        );
         const parentRel = buildRelation(
-          'tblCompType',
-          'compTypeId',
-          parsed.data.tblCompType?.compTypeId
-        )
+          "tblCompType",
+          "compTypeId",
+          parsed.data.tblCompType?.compTypeId,
+        );
         const payload = {
           compTypeNo: parsed.data.compTypeNo,
           compName: parsed.data.compName,
@@ -124,49 +124,49 @@ function ComponentTypeUpsert({
           orderNo: parsed.data.orderNo,
           ...makerRel,
           ...parentRel,
-        }
+        };
 
-        if (mode === 'create') {
-          await tblCompType.create(payload)
+        if (mode === "create") {
+          await tblCompType.create(payload);
         } else {
-          await tblCompType.update(recordId!, payload)
+          await tblCompType.update(recordId!, payload);
         }
 
-        onSuccess()
-        onClose()
+        onSuccess();
+        onClose();
       } finally {
-        setSubmitting(false)
+        setSubmitting(false);
       }
     },
-    [mode, recordId, onSuccess, onClose]
-  )
+    [mode, recordId, onSuccess, onClose],
+  );
 
   useEffect(() => {
-    if (open) loadData()
-  }, [open, loadData])
+    if (open) loadData();
+  }, [open, loadData]);
 
-  const isDisabled = loadingInitial || submitting
+  const isDisabled = loadingInitial || submitting;
 
   return (
     <FormDialog
       open={open}
       title={
-        mode === 'create' ? 'Create Component Type' : 'Edit Component Type'
+        mode === "create" ? "Create Component Type" : "Edit Component Type"
       }
       onClose={onClose}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(onSubmitForm)}
     >
-      <Box display='grid' gridTemplateColumns='1fr' gap={1.5}>
+      <Box display="grid" gridTemplateColumns="1fr" gap={1.5}>
         <Controller
-          name='compTypeNo'
+          name="compTypeNo"
           control={control}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              label='Code *'
-              size='small'
+              label="Code *"
+              size="small"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}
@@ -175,13 +175,13 @@ function ComponentTypeUpsert({
         />
 
         <Controller
-          name='compName'
+          name="compName"
           control={control}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              label='Name *'
-              size='small'
+              label="Name *"
+              size="small"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}
@@ -190,13 +190,13 @@ function ComponentTypeUpsert({
         />
 
         <Controller
-          name='compType'
+          name="compType"
           control={control}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              label='Type / Model'
-              size='small'
+              label="Type / Model"
+              size="small"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}
@@ -206,17 +206,17 @@ function ComponentTypeUpsert({
 
         {/* Maker Address */}
         <Controller
-          name='maker'
+          name="maker"
           control={control}
           render={({ field, fieldState }) => (
             <AsyncSelectField
-              dialogMaxWidth='sm'
-              label='Maker'
-              selectionMode='single'
+              dialogMaxWidth="sm"
+              label="Maker"
+              selectionMode="single"
               value={field.value}
               request={tblAddress.getAll}
-              columns={[{ field: 'name', headerName: 'Address', flex: 1 }]}
-              getRowId={row => row.addressId}
+              columns={[{ field: "name", headerName: "Address", flex: 1 }]}
+              getRowId={(row) => row.addressId}
               onChange={field.onChange}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -225,18 +225,18 @@ function ComponentTypeUpsert({
           )}
         />
         <Controller
-          name='tblCompType'
+          name="tblCompType"
           control={control}
           render={({ field, fieldState }) => (
             <AsyncSelectField
-              dialogMaxWidth='sm'
-              label='Parent '
-              selectionMode='single'
-              getOptionLabel={row => row.compName}
+              dialogMaxWidth="sm"
+              label="Parent "
+              selectionMode="single"
+              getOptionLabel={(row) => row.compName}
               value={field.value}
               request={tblCompType.getAll}
-              columns={[{ field: 'compName', headerName: 'Name', flex: 1 }]}
-              getRowId={row => row.compTypeId}
+              columns={[{ field: "compName", headerName: "Name", flex: 1 }]}
+              getRowId={(row) => row.compTypeId}
               onChange={field.onChange}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -246,13 +246,13 @@ function ComponentTypeUpsert({
         />
 
         <Controller
-          name='orderNo'
+          name="orderNo"
           control={control}
           render={({ field, fieldState }) => (
             <NumberField
               {...field}
-              label='Order No '
-              size='small'
+              label="Order No "
+              size="small"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}
@@ -261,7 +261,7 @@ function ComponentTypeUpsert({
         />
       </Box>
     </FormDialog>
-  )
+  );
 }
 
-export default memo(ComponentTypeUpsert)
+export default memo(ComponentTypeUpsert);

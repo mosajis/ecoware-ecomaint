@@ -1,5 +1,5 @@
-import { promises as fs } from 'fs'
-import { FILE_CONFIG } from './file.config'
+import { promises as fs } from "fs";
+import { FILE_CONFIG } from "./file.config";
 
 /**
  * Initialize upload directories on app startup
@@ -8,21 +8,21 @@ import { FILE_CONFIG } from './file.config'
 export async function initializeUploadDirs() {
   try {
     // Create main uploads directory
-    await fs.mkdir(FILE_CONFIG.UPLOAD_DIR, { recursive: true })
+    await fs.mkdir(FILE_CONFIG.UPLOAD_DIR, { recursive: true });
 
     // Create attachments subdirectory
-    await fs.mkdir(FILE_CONFIG.ATTACHMENT_DIR, { recursive: true })
+    await fs.mkdir(FILE_CONFIG.ATTACHMENT_DIR, { recursive: true });
 
     // Optional: Create .gitkeep files to track empty directories in git
-    const gitkeepPath = `${FILE_CONFIG.ATTACHMENT_DIR}/.gitkeep`
+    const gitkeepPath = `${FILE_CONFIG.ATTACHMENT_DIR}/.gitkeep`;
     try {
-      await fs.writeFile(gitkeepPath, '')
+      await fs.writeFile(gitkeepPath, "");
     } catch {
       // File might already exist
     }
   } catch (error) {
-    console.error('❌ Failed to initialize upload directories:', error)
-    throw error
+    console.error("❌ Failed to initialize upload directories:", error);
+    throw error;
   }
 }
 
@@ -31,9 +31,9 @@ export async function initializeUploadDirs() {
  */
 export async function cleanupUploadDirs() {
   try {
-    await fs.rm(FILE_CONFIG.UPLOAD_DIR, { recursive: true, force: true })
-    console.log('✅ Upload directories cleaned up')
+    await fs.rm(FILE_CONFIG.UPLOAD_DIR, { recursive: true, force: true });
+    console.log("✅ Upload directories cleaned up");
   } catch (error) {
-    console.error('❌ Failed to cleanup upload directories:', error)
+    console.error("❌ Failed to cleanup upload directories:", error);
   }
 }

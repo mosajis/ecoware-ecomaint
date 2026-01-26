@@ -33,7 +33,7 @@ export const WORK_ORDER_ACTIONS: Record<ActionKey, ActionConfig> = {
     isEnabled: (statuses) =>
       statuses.every(
         (s) =>
-          s === STATUS.ISSUE || s === STATUS.PENDING || s === STATUS.POSTPONED
+          s === STATUS.ISSUE || s === STATUS.PENDING || s === STATUS.POSTPONED,
       ),
   },
 

@@ -1,26 +1,30 @@
-import { toPercent } from "@/shared/utils/zodUtils";
 import { KPI_COLORS } from "../_consts/colors";
-import { WorkOrderCounts } from "../Dashboard";
+import { TypeStatistics } from "@/core/api/api";
 
-export const buildGeneralKpis = (counts: WorkOrderCounts) => [
+export const buildKpiCardsData = (counts: TypeStatistics) => [
   {
     label: "MTBF",
     value: counts.open,
+    color: KPI_COLORS.blue,
   },
   {
     label: "MTTR",
-    value: counts.pend,
+    value: counts.pending,
+    color: KPI_COLORS.blue,
   },
   {
     label: "PMC",
     value: counts.overdue,
+    color: KPI_COLORS.blue,
   },
   {
     label: "PMP",
     value: counts.current,
+    color: KPI_COLORS.blue,
   },
   {
     label: "Backlog Ratio",
     value: counts.completed,
+    color: KPI_COLORS.blue,
   },
 ];
