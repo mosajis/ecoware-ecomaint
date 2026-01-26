@@ -12,6 +12,7 @@
     "@elysiajs/openapi": "^1.4.14",
     "@elysiajs/static": "^1.4.7",
     "@prisma/adapter-mssql": "^7.3.0",
+    "@scalar/api-reference": "^1.43.15",
     "@sinclair/typebox": "^0.34.48",
     "bcrypt": "^6.0.0",
     "dotenv": "^17.2.3",

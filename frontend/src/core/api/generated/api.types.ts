@@ -2915,6 +2915,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/tblMaintLogStocks/uniqueSpareUnit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get unique spare units by stockItemId (paginated) */
+        get: operations["getTblMaintLogStocksUniqueSpareUnit"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tblMaintType/": {
         parameters: {
             query?: never;
@@ -46016,6 +46033,90 @@ export interface operations {
                 content: {
                     "application/json": {
                         count: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblMaintLogStocksUniqueSpareUnit: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            maintLogStockId: number;
+                            maintLogId: number;
+                            stockItemId: number;
+                            deptId: number;
+                            exportMaker: null | (number);
+                            stockCount: null | number;
+                            orderNo: null | (number);
+                            createdUserId: null | (number);
+                            exportMarker: null | (number);
+                            lastupdate: null | number);
+                            tblMaintLog?: {
+                                maintLogId: number;
+                                maintCauseId: null | (number);
+                                maintTypeId: null | (number);
+                                maintClassId: null | (number);
+                                functionId: null | (number);
+                                jobDescId: null | (number);
+                                workOrderId: null | (number);
+                                compId: null | (number);
+                                roundId: null | (number);
+                                totalDuration: null | (number);
+                                downTime: null | (number);
+                                dateDone: null | number);
+                                frequency: null | (number);
+                                frequencyPeriod: null | (number);
+                                overdueCount: null | (number);
+                                overdueReason: null | string;
+                                unexpected: null | (number);
+                                cbmStatus: null | (number);
+                                loggedBy: null | (number);
+                                deptId: null | (number);
+                                exportMarker: null | (number);
+                                lastupdate: null | number);
+                                history: null | string;
+                                mlStatus: null | (number);
+                                followStatusId: null | (number);
+                                orderNo: null | (number);
+                                updatedUserId: null | (number);
+                            } & {
+                                [key: string]: unknown;
+                            };
+                            tblSpareUnit?: {
+                                spareUnitId: number;
+                                spareTypeId: null | (number);
+                                deptId: null | (number);
+                                lastupdate: null | number);
+                            } & {
+                                [key: string]: unknown;
+                            };
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
                     };
                 };
             };

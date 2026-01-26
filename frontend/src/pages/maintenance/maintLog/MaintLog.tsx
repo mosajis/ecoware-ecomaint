@@ -34,12 +34,12 @@ export default function PageMaintLog() {
   const getAll = useCallback(() => {
     return tblMaintLog.getAll({
       include: {
-        tblWorkOrder: true,
         tblComponentUnit: {
           include: {
             tblCompStatus: true,
           },
         },
+        tblWorkOrder: true,
         tblMaintClass: true,
         tblJobDescription: true,
       },

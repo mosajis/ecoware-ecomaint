@@ -23,6 +23,7 @@ const ignoreResources = [
   "index",
   "statistics",
   "tblAttachmentByAttachmentIdDownload",
+  "tblMaintLogStocksUniqueSpareUnit",
 ];
 
 // helper camelCase

@@ -7,11 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { buildRelation } from "@/core/helper";
 import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
 import { memo, useCallback, useEffect, useState } from "react";
-import {
-  tblFunctions,
-  tblComponentUnit,
-  TypeTblFunctions,
-} from "@/core/api/generated/api";
+import { tblFunctions, TypeTblFunctions } from "@/core/api/generated/api";
 
 // =======================
 // VALIDATION SCHEMA
@@ -25,14 +21,6 @@ const schema = z.object({
     .object({
       functionId: z.number(),
       funcNo: z.string().nullable().optional(),
-    })
-    .nullable()
-    .optional(),
-
-  component: z
-    .object({
-      compId: z.number(),
-      compNo: z.string().nullable().optional(),
     })
     .nullable()
     .optional(),
@@ -60,7 +48,6 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
     funcDescr: "",
     funcRef: "",
     parent: null,
-    component: null,
   };
 
   const { control, handleSubmit, reset } = useForm<FunctionFormValues>({
@@ -95,13 +82,6 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               funcNo: res.tblFunctions.funcDescr ?? null,
             }
           : null,
-
-        component: res?.tblComponentUnit
-          ? {
-              compId: res.tblComponentUnit.compId,
-              compNo: res.tblComponentUnit.compNo ?? null,
-            }
-          : null,
       });
     } finally {
       setLoadingInitial(false);
@@ -132,7 +112,6 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           funcDescr: d.funcDescr,
           funcRef: d.funcRef ?? "",
 
-          ...buildRelation("tblComponentUnit", "compId", d.component?.compId),
           ...buildRelation("tblFunctions", "functionId", d.parent?.functionId),
         };
 
@@ -207,34 +186,6 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               {...field}
               label="Function Reference"
               size="small"
-              disabled={isDisabled}
-            />
-          )}
-        />
-
-        {/* Component Select */}
-        <Controller
-          name="component"
-          control={control}
-          render={({ field, fieldState }) => (
-            <AsyncSelectField
-              dialogMaxWidth="sm"
-              label="Component"
-              selectionMode="single"
-              request={tblComponentUnit.getAll}
-              getOptionLabel={(row) => row.compNo}
-              value={field.value}
-              onChange={field.onChange}
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
-              columns={[
-                {
-                  field: "compNo",
-                  headerName: "Component",
-                  flex: 1,
-                },
-              ]}
-              getRowId={(row) => row.compId}
               disabled={isDisabled}
             />
           )}

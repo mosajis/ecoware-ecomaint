@@ -30,7 +30,6 @@ const app = new Elysia()
     openapi({
       path: "/docs",
       specPath: "/docs/json",
-      provider: "scalar",
       documentation: {
         info: {
           title: "ECO | API",

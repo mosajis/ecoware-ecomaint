@@ -26,3 +26,10 @@ export type TypeStatistics = DynamicResponse<"getStatistics">;
 
 export const getStatistics = (): Promise<TypeStatistics> =>
   api.get(`/statistics/`);
+
+export type TypeMaintLogStocksBySpareUnitId =
+  DynamicResponse<"getTblMaintLogStocksUniqueSpareUnit">;
+
+export const tblMaintLogStocksBySpareUnitId =
+  (): Promise<TypeMaintLogStocksBySpareUnitId> =>
+    api.get(`/tblMaintLogStocks/uniqueSpareUnit`);

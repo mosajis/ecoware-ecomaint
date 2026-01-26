@@ -1,7 +1,7 @@
 import { Elysia, t } from "elysia";
 import { BaseService } from "./base.service";
 
-const querySchema = t.Object({
+export const querySchema = t.Object({
   page: t.Optional(t.Number()),
   perPage: t.Optional(t.Number()),
   sort: t.Optional(t.String()),
