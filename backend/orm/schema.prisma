@@ -343,6 +343,7 @@ model TblComponentUnit {
   tblFailureReports           TblFailureReports[]
   tblFunctions                TblFunctions[]
   tblMaintLogs                TblMaintLog[]
+  tblRotationLog              TblRotationLog[]
   tblWorkOrders               TblWorkOrder[]
 
   @@map("tblComponentUnit")
@@ -767,15 +768,11 @@ model TblFollowStatus {
 model TblFunctions {
   functionId        Int               @id(map: "PK_tblFunctions") @default(dbgenerated("NEXT VALUE FOR [Seq_Functions]"), map: "DF_FunctionID") @map("FunctionID")
   compId            Int?              @map("CompID")
-  criticalityId     Int?              @map("CriticalityID")
-  locationId        Int?              @map("LocationID")
   funcNo            String?           @map("FuncNo") @db.NVarChar(90)
-  funcDescr         String?           @map("FuncDescr") @db.NVarChar(80)
-  funcRef           String?           @map("FuncRef") @db.NVarChar(25)
+  FuncDesc          String?           @db.NVarChar(80)
   parentFunctionId  Int?              @map("ParentFunctionID")
   notes             String?           @map("Notes") @db.NVarChar(300)
   statusId          Int?              @map("StatusID")
-  userTableId       Int?              @map("UserTableID")
   deptId            Int?              @map("DeptID")
   exportMarker      Int?              @map("ExportMarker")
   lastupdate        DateTime?         @db.DateTime
@@ -783,8 +780,8 @@ model TblFunctions {
   tblComponentUnit  TblComponentUnit? @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblFunctions_tblComponentUnit")
   tblFunctions      TblFunctions?     @relation("tblFunctionsTotblFunctions", fields: [parentFunctionId], references: [functionId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblFunctions_tblFunctions")
   otherTblFunctions TblFunctions[]    @relation("tblFunctionsTotblFunctions")
-  tblLocation       TblLocation?      @relation(fields: [locationId], references: [locationId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblFunctions_tblLocation")
   tblMaintLogs      TblMaintLog[]
+  tblRotationLog    TblRotationLog[]
 
   @@map("tblFunctions")
 }
@@ -905,7 +902,6 @@ model TblLocation {
   lastupdate        DateTime?          @db.DateTime
   orderNo           Int?               @map("OrderNo")
   tblComponentUnits TblComponentUnit[]
-  tblFunctions      TblFunctions[]
   tblLocation       TblLocation?       @relation("tblLocationTotblLocation", fields: [parentLocationId], references: [locationId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLocation_tblLocation")
   otherTblLocations TblLocation[]      @relation("tblLocationTotblLocation")
 
@@ -1230,20 +1226,22 @@ model TblReScheduleLog {
 }
 
 model TblRotationLog {
-  rotationLogId                                  Int       @id(map: "PK_tblRotationLog") @default(dbgenerated("NEXT VALUE FOR [Seq_RotationLog]"), map: "DF_RotationLogID") @map("RotationLogID")
-  compId                                         Int?      @map("CompID")
-  functionId                                     Int?      @map("FunctionID")
-  userInsertedId                                 Int?      @map("UserInsertedID")
-  userRemovedId                                  Int?      @map("UserRemovedID")
-  fromDate                                       DateTime? @map("FromDate") @db.DateTime
-  toDate                                         DateTime? @map("ToDate") @db.DateTime
-  notes                                          String?   @map("Notes") @db.NVarChar(300)
-  deptId                                         Int?      @map("DeptID")
-  exportMarker                                   Int?      @map("ExportMarker")
-  lastupdate                                     DateTime? @db.DateTime
-  orderNo                                        Int?      @map("OrderNo")
-  tblUsersTblRotationLogUserInsertedIdTotblUsers TblUsers? @relation("tblRotationLog_UserInsertedIDTotblUsers", fields: [userInsertedId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRotationLog_tblUsers")
-  tblUsersTblRotationLogUserRemovedIdTotblUsers  TblUsers? @relation("tblRotationLog_UserRemovedIDTotblUsers", fields: [userRemovedId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRotationLog_tblUsers1")
+  rotationLogId                                  Int               @id(map: "PK_tblRotationLog") @default(dbgenerated("NEXT VALUE FOR [Seq_RotationLog]"), map: "DF_RotationLogID") @map("RotationLogID")
+  compId                                         Int?              @map("CompID")
+  functionId                                     Int?              @map("FunctionID")
+  userInsertedId                                 Int?              @map("UserInsertedID")
+  userRemovedId                                  Int?              @map("UserRemovedID")
+  fromDate                                       DateTime?         @map("FromDate") @db.DateTime
+  toDate                                         DateTime?         @map("ToDate") @db.DateTime
+  notes                                          String?           @map("Notes") @db.NVarChar(300)
+  deptId                                         Int?              @map("DeptID")
+  exportMarker                                   Int?              @map("ExportMarker")
+  lastupdate                                     DateTime?         @db.DateTime
+  orderNo                                        Int?              @map("OrderNo")
+  tblComponentUnit                               TblComponentUnit? @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRotationLog_tblComponentUnit")
+  tblFunctions                                   TblFunctions?     @relation(fields: [functionId], references: [functionId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRotationLog_tblFunctions")
+  tblUsersTblRotationLogUserRemovedIdTotblUsers  TblUsers?         @relation("tblRotationLog_UserRemovedIDTotblUsers", fields: [userRemovedId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRotationLog_tblUsers1")
+  tblUsersTblRotationLogUserInsertedIdTotblUsers TblUsers?         @relation("tblRotationLog_UserInsertedIDTotblUsers", fields: [userInsertedId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRotationLog_tblUsers")
 
   @@map("tblRotationLog")
 }
@@ -1306,11 +1304,16 @@ model TblSpareType {
   spareTypeId        Int            @id(map: "PK_tblSpareType") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareType]"), map: "DF_SpareType") @map("SpareTypeID")
   parentSpareTypeId  Int?           @map("ParentSpareTypeID")
   name               String?        @db.NVarChar(200)
-  no                 String?        @db.NVarChar(200)
+  PartTypeNo         String?        @db.NVarChar(200)
+  MakerRefNo         String?        @db.NVarChar(200)
+  ExtraNo            String?        @db.NVarChar(200)
+  Note               String?        @db.NVarChar(200)
+  UnitID             Int?
   deptId             Int?           @map("DeptID")
   exportMarker       Int?           @map("ExportMarker")
   lastupdate         DateTime?      @db.DateTime
   orderNo            Int?           @map("OrderNo")
+  tblUnit            TblUnit?       @relation(fields: [UnitID], references: [unitId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblSpareType_tblUnit")
   tblSpareType       TblSpareType?  @relation("tblSpareTypeTotblSpareType", fields: [parentSpareTypeId], references: [spareTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblStockType_tblStockType")
   otherTblSpareTypes TblSpareType[] @relation("tblSpareTypeTotblSpareType")
   tblSpareUnits      TblSpareUnit[]
@@ -1342,6 +1345,7 @@ model TblUnit {
   tblCompMeasurePoints     TblCompMeasurePoint[]
   tblCompMeasurePointLogs  TblCompMeasurePointLog[]
   tblCompTypeMeasurePoints TblCompTypeMeasurePoint[]
+  tblSpareType             TblSpareType[]
 
   @@map("tblUnit")
 }
@@ -1394,8 +1398,8 @@ model TblUsers {
   tblMaintLogAttachments                                     TblMaintLogAttachment[]
   tblMaintLogFollows                                         TblMaintLogFollow[]
   tblReScheduleLogs                                          TblReScheduleLog[]
-  tblRotationLogTblRotationLogUserInsertedIdTotblUsers       TblRotationLog[]               @relation("tblRotationLog_UserInsertedIDTotblUsers")
   tblRotationLogTblRotationLogUserRemovedIdTotblUsers        TblRotationLog[]               @relation("tblRotationLog_UserRemovedIDTotblUsers")
+  tblRotationLogTblRotationLogUserInsertedIdTotblUsers       TblRotationLog[]               @relation("tblRotationLog_UserInsertedIDTotblUsers")
   tblRoundCompJobs                                           TblRoundCompJob[]
   tblWorkOrderTblWorkOrderIssuedByTotblUsers                 TblWorkOrder[]                 @relation("tblWorkOrder_IssuedByTotblUsers")
   tblWorkOrderTblWorkOrderPlannedByTotblUsers                TblWorkOrder[]                 @relation("tblWorkOrder_PlannedByTotblUsers")

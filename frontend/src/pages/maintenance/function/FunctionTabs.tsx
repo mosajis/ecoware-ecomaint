@@ -12,7 +12,6 @@ import TabsContainer, {
 import { lazy } from "react";
 
 // Lazy-loaded components
-const TabDetails = lazy(() => import("./tabs/TabDetails"));
 const TabJob = lazy(() => import("./tabs/TabJob"));
 const TabCounter = lazy(() => import("./tabs/TabCounter"));
 const TabWorkOrder = lazy(() => import("./tabs/TabWorkOrder"));
@@ -22,7 +21,6 @@ const TabRotationLog = lazy(() => import("./tabs/TabRotationLog"));
 
 // Tabs definition
 const tabs: ReusableTabItem[] = [
-  { label: "Details (not set)", icon: <Description />, component: TabDetails },
   {
     label: "RotaionLog (not set)",
     icon: <RestoreIcon />,

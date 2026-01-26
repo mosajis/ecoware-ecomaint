@@ -22,6 +22,24 @@ const columns: GridColDef<TypeTblFunctions>[] = [
   },
 ];
 
+// دو تا دکمه install Component و remove COmponent
+// وقتی install کام رو زد یک مودال باز میشه یک نوت میگیره
+// یک تاریخ میگیره
+// یه کامپوونت
+// توضیحات میگیره
+// میزنه توی rotationLog insert
+// تو خود function به روزنه رسانی کامپوونت
+// تمامی tab ها از روی Component
+
+// در جدول componentUnit استوس باید به روز رسانی شود به 2 inUsed
+
+// لیست component هایی که تو مودال نشون میدیم فقط None ها 1
+
+// وقتی که ریمو میکنیم وضعین کامپ.ننت میشه none
+// وقتی که remove هم میکنیم to Date
+// توضیحات هم میخواد
+// فانکشن هم به روزاسانی کامپوننت
+
 export default function PageFunction() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   const [row, setRow] = useState<TypeTblFunctions | null>(null);
