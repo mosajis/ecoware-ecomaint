@@ -297,7 +297,7 @@ model TblCompOilInfo {
   compOilInfoId    Int       @id(map: "PK_TblCompOilInfo") @default(dbgenerated("NEXT VALUE FOR [Seq_CompOilInfo]"), map: "DF_CompOilInfoID") @map("CompOilInfoID")
   compId           Int?      @map("CompId")
   compCounterId    Int?      @map("CompCounterID")
-  partTypeId       Int?      @map("PartTypeID")
+  spareTypeId      Int?      @map("SpareTypeID")
   compJobId        Int?      @map("CompJobID")
   tankCapacity     Int?      @map("TankCapacity")
   laboratoryCode   String?   @map("LaboratoryCode") @db.NVarChar(100)
@@ -366,7 +366,7 @@ model TblComponentUnitAttachment {
 model TblCompSpare {
   compSpareId  Int       @id(map: "PK_tblCompSpare") @default(dbgenerated("NEXT VALUE FOR [Seq_CompSpare]"), map: "DF_CompSpareID") @map("CompSpareID")
   compTypeId   Int?      @map("CompTypeID")
-  partTypeId   Int?      @map("PartTypeID")
+  spareTypeId  Int?      @map("SpareTypeID")
   quantity     Int?      @map("Quantity")
   drawingNo    String?   @map("DrawingNo") @db.NVarChar(100)
   position     String?   @map("Position") @db.NVarChar(20)

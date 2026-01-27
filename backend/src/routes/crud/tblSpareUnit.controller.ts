@@ -17,7 +17,7 @@ const ControllerTblSpareUnit = new BaseController({
   swagger: {
     tags: ["tblSpareUnit"],
   },
-  primaryKey: "partId",
+  primaryKey: "spareUnitId",
   service: ServiceTblSpareUnit,
   createSchema: TblSpareUnitInputCreate,
   updateSchema: TblSpareUnitInputUpdate,
