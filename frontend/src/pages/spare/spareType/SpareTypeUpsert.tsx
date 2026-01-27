@@ -19,6 +19,7 @@ const schema = z.object({
 
   partTypeNo: z.string().nullable().optional(),
   makerRefNo: z.string().nullable().optional(),
+  extraNo: z.string().nullable().optional(),
   note: z.string().nullable().optional(),
 
   parentSpareType: z
@@ -50,13 +51,7 @@ type Props = {
   onSuccess: () => void;
 };
 
-function StockTypeFormDialog({
-  open,
-  mode,
-  recordId,
-  onClose,
-  onSuccess,
-}: Props) {
+function SpareTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -65,6 +60,7 @@ function StockTypeFormDialog({
     partTypeNo: "",
     makerRefNo: "",
     note: "",
+    extraNo: "",
     parentSpareType: null,
     unit: null,
     orderNo: null,
@@ -92,6 +88,7 @@ function StockTypeFormDialog({
 
       reset({
         name: res?.name ?? "",
+        extraNo: res?.extraNo ?? "",
         partTypeNo: res?.partTypeNo ?? "",
         makerRefNo: res?.makerRefNo ?? "",
         note: res?.note ?? "",
@@ -136,6 +133,7 @@ function StockTypeFormDialog({
           partTypeNo: parsed.data.partTypeNo,
           makerRefNo: parsed.data.makerRefNo,
           note: parsed.data.note,
+          extraNo: parsed?.data.extraNo ?? "",
           orderNo: parsed.data.orderNo,
           ...parentRelation,
           ...unitRelation,
@@ -160,7 +158,7 @@ function StockTypeFormDialog({
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === "create" ? "Create Stock Type" : "Edit Stock Type"}
+      title={mode === "create" ? "Create Spare Type" : "Edit Spare Type"}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
@@ -174,7 +172,23 @@ function StockTypeFormDialog({
             <TextField
               sx={{ width: "75%" }}
               {...field}
-              label="No"
+              label="MESC Code *"
+              size="small"
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
+              disabled={isDisabled}
+            />
+          )}
+        />
+
+        {/* Name */}
+        <Controller
+          name="extraNo"
+          control={control}
+          render={({ field, fieldState }) => (
+            <TextField
+              {...field}
+              label="Extra No *"
               size="small"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -190,7 +204,7 @@ function StockTypeFormDialog({
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              label="Name *"
+              label="Part Name *"
               size="small"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -199,19 +213,50 @@ function StockTypeFormDialog({
           )}
         />
 
-        {/* Parent Stock Type */}
+        {/* Name */}
+        <Controller
+          name="note"
+          control={control}
+          render={({ field, fieldState }) => (
+            <TextField
+              {...field}
+              label="Note"
+              size="small"
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
+              disabled={isDisabled}
+            />
+          )}
+        />
+
+        {/* Name */}
+        <Controller
+          name="makerRefNo"
+          control={control}
+          render={({ field, fieldState }) => (
+            <TextField
+              {...field}
+              label="MakerRef No *"
+              size="small"
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
+              disabled={isDisabled}
+            />
+          )}
+        />
+
         <Controller
           name="parentSpareType"
           control={control}
           render={({ field, fieldState }) => (
             <AsyncSelectField
               dialogMaxWidth="sm"
-              label="Parent Stock Type"
+              label="Parent Spare Type"
               selectionMode="single"
               value={field.value}
               request={tblSpareType.getAll}
               columns={[{ field: "name", headerName: "Name", flex: 1 }]}
-              getRowId={(row) => row.stockTypeId}
+              getRowId={(row) => row.spareTypeId}
               onChange={field.onChange}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -259,4 +304,4 @@ function StockTypeFormDialog({
   );
 }
 
-export default memo(StockTypeFormDialog);
+export default memo(SpareTypeUpsert);

@@ -1,5 +1,5 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import StockItemFormDialog from "./SpareUnitUpsert";
+import SpareItemUpsert from "./SpareUnitUpsert";
 import { useState, useCallback } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
@@ -15,13 +15,13 @@ const columns: GridColDef<TypeTblSpareUnit>[] = [
   },
   {
     field: "tblSpareType",
-    headerName: "Stock Type",
+    headerName: "Spare Type",
     flex: 1,
     valueGetter: (_, row) => row.tblSpareType?.name,
   },
 ];
 
-export default function PageStockItem() {
+export default function PageSpareUnit() {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
@@ -79,7 +79,7 @@ export default function PageStockItem() {
         getRowId={getRowId}
       />
 
-      <StockItemFormDialog
+      <SpareItemUpsert
         open={openForm}
         mode={mode}
         recordId={selectedRowId}

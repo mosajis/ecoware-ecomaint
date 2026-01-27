@@ -14,16 +14,15 @@ import {
 
 // === Validation Schema ===
 const schema = z.object({
-  stockTypeId: z
+  spareTypeId: z
     .object({
-      stockTypeId: z.number(),
+      spareTypeId: z.number(),
       name: z.string().nullable().optional(),
-      no: z.string().nullable().optional(),
     })
     .nullable(),
 });
 
-export type StockItemFormValues = z.infer<typeof schema>;
+export type SpareUnitFormValues = z.infer<typeof schema>;
 
 type Props = {
   open: boolean;
@@ -33,7 +32,7 @@ type Props = {
   onSuccess: (data: TypeTblSpareUnit) => void;
 };
 
-function StockItemFormDialog({
+function SpareUnitFormDialog({
   open,
   mode,
   recordId,
@@ -43,11 +42,11 @@ function StockItemFormDialog({
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const defaultValues: StockItemFormValues = {
-    stockTypeId: null,
+  const defaultValues: SpareUnitFormValues = {
+    spareTypeId: null,
   };
 
-  const { control, handleSubmit, reset } = useForm<StockItemFormValues>({
+  const { control, handleSubmit, reset } = useForm<SpareUnitFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
   });
@@ -67,7 +66,7 @@ function StockItemFormDialog({
       });
 
       reset({
-        stockTypeId: res?.tblSpareType ?? null,
+        spareTypeId: res?.tblSpareType ?? null,
       });
     } finally {
       setLoadingInitial(false);
@@ -82,7 +81,7 @@ function StockItemFormDialog({
 
   // === Submit Handler ===
   const handleFormSubmit = useCallback(
-    async (values: StockItemFormValues) => {
+    async (values: SpareUnitFormValues) => {
       const parsed = schema.safeParse(values);
       if (!parsed.success) return;
 
@@ -91,23 +90,23 @@ function StockItemFormDialog({
 
         let result: TypeTblSpareUnit;
 
-        const stockTypeId = parsed.data.stockTypeId?.stockTypeId ?? null;
+        const spareTypeId = parsed.data.spareTypeId?.spareTypeId ?? null;
 
-        const stockTypeRelation = buildRelation(
+        const spareTypeRelation = buildRelation(
           "tblSpareType",
           "spareTypeId",
-          stockTypeId,
+          spareTypeId,
         );
 
         if (mode === "create") {
           // POST Request
           result = await tblSpareUnit.create({
-            ...stockTypeRelation,
+            ...spareTypeRelation,
           });
         } else {
           // PUT Request
           result = await tblSpareUnit.update(recordId!, {
-            ...stockTypeRelation,
+            ...spareTypeRelation,
           });
         }
 
@@ -124,25 +123,25 @@ function StockItemFormDialog({
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === "create" ? "Create Stock Item" : "Edit Stock Item"}
+      title={mode === "create" ? "Create Spare Item" : "Edit Spare Item"}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
       <Box display="grid" gridTemplateColumns="repeat(1, 1fr)" gap={1.5}>
-        {/* Stock Type Select */}
+        {/* Spare Type Select */}
         <Controller
-          name="stockTypeId"
+          name="spareTypeId"
           control={control}
           render={({ field, fieldState }) => (
             <AsyncSelectField
               dialogMaxWidth="sm"
-              label="Stock Type"
+              label="Spare Type"
               selectionMode="single"
               value={field.value}
               request={tblSpareType.getAll}
               columns={[{ field: "name", headerName: "Name", flex: 1 }]}
-              getRowId={(row) => row.stockTypeId}
+              getRowId={(row) => row.spareTypeId}
               onChange={field.onChange}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -155,4 +154,4 @@ function StockItemFormDialog({
   );
 }
 
-export default memo(StockItemFormDialog);
+export default memo(SpareUnitFormDialog);

@@ -1,11 +1,11 @@
-import Splitter from "@/shared/components/Splitter/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import StockTypeFormDialog from "./SpareTypeUpsert";
+import SpareTypeFormDialog from "./SpareTypeUpsert";
+import Splitter from "@/shared/components/Splitter/Splitter";
+import { GenericTree } from "@/shared/components/tree/Tree";
 import { useState, useCallback } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataTree } from "@/shared/hooks/useDataTree";
 import { mapToTree } from "@/shared/components/tree/TreeUtil";
-import { GenericTree } from "@/shared/components/tree/Tree";
 import { tblSpareType, TypeTblSpareType } from "@/core/api/generated/api";
 
 const getRowId = (row: TypeTblSpareType) => row.spareTypeId;
@@ -52,7 +52,7 @@ const columns: GridColDef<TypeTblSpareType>[] = [
     headerName: "Unit",
     flex: 1,
     // @ts-ignore
-    valueGetter: (_, row) => row?.tblUnit?.name,
+    valueGetter: (_, row) => row.tblUnit?.name,
   },
 ];
 
@@ -68,7 +68,15 @@ export default function PageStockType() {
     [],
   );
 
-  const getAll = useCallback(() => tblSpareType.getAll(), []);
+  const getAll = useCallback(
+    () =>
+      tblSpareType.getAll({
+        include: {
+          tblUnit: true,
+        },
+      }),
+    [],
+  );
 
   const { tree, rows, loading, refetch, handleDelete } =
     useDataTree<TypeTblSpareType>({
@@ -145,7 +153,7 @@ export default function PageStockType() {
         getRowId={getRowId}
       />
       {/* === FORM === */}
-      <StockTypeFormDialog
+      <SpareTypeFormDialog
         open={openForm}
         mode={mode}
         recordId={selectedRowId}

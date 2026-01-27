@@ -19,7 +19,7 @@ const columns: GridColDef<TypeTblMaintLogStocks>[] = [
   {
     field: "partName",
     headerName: "Part Name",
-    flex: 1,
+    flex: 2,
     // @ts-ignore
     valueGetter: (_, row) => row.tblSpareUnit.tblSpareType.name,
   },
