@@ -108,10 +108,9 @@ const maintLogColumns: GridColDef<TypeTblMaintLogStocks>[] = [
   },
   {
     field: "downTime",
-    headerName: "DownTime",
+    headerName: "DownTime (Min)",
     valueGetter: (_, row) => row?.tblMaintLog?.downTime,
     width: 130,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
   },
 
   {

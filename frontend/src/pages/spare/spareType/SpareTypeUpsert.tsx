@@ -22,13 +22,13 @@ const schema = z.object({
   extraNo: z.string().nullable().optional(),
   note: z.string().nullable().optional(),
 
-  parentSpareType: z
-    .object({
-      spareTypeId: z.number(),
-      name: z.string().nullable().optional(),
-    })
-    .nullable()
-    .optional(),
+  // parentSpareType: z
+  //   .object({
+  //     spareTypeId: z.number(),
+  //     name: z.string().nullable().optional(),
+  //   })
+  //   .nullable()
+  //   .optional(),
 
   unit: z
     .object({
@@ -61,7 +61,7 @@ function SpareTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
     makerRefNo: "",
     note: "",
     extraNo: "",
-    parentSpareType: null,
+    // parentSpareType: null,
     unit: null,
     orderNo: null,
   };
@@ -92,7 +92,7 @@ function SpareTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         partTypeNo: res?.partTypeNo ?? "",
         makerRefNo: res?.makerRefNo ?? "",
         note: res?.note ?? "",
-        parentSpareType: res?.tblSpareType ?? null,
+        // parentSpareType: res?.tblSpareType ?? null,
         unit: res?.tblUnit ?? null,
         orderNo: res?.orderNo ?? null,
       });
@@ -116,11 +116,11 @@ function SpareTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
       try {
         setSubmitting(true);
 
-        const parentRelation = buildRelation(
-          "tblSpareType",
-          "spareTypeId",
-          parsed.data.parentSpareType?.spareTypeId ?? null,
-        );
+        // const parentRelation = buildRelation(
+        //   "tblSpareType",
+        //   "spareTypeId",
+        //   parsed.data.parentSpareType?.spareTypeId ?? null,
+        // );
 
         const unitRelation = buildRelation(
           "tblUnit",
@@ -135,7 +135,7 @@ function SpareTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           note: parsed.data.note,
           extraNo: parsed?.data.extraNo ?? "",
           orderNo: parsed.data.orderNo,
-          ...parentRelation,
+          // ...parentRelation,
           ...unitRelation,
         };
 
@@ -183,12 +183,47 @@ function SpareTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
         {/* Name */}
         <Controller
-          name="extraNo"
+          name="name"
           control={control}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              label="Extra No *"
+              label="Part Name *"
+              size="small"
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
+              disabled={isDisabled}
+            />
+          )}
+        />
+        <Controller
+          name="unit"
+          control={control}
+          render={({ field, fieldState }) => (
+            <AsyncSelectField
+              dialogMaxWidth="sm"
+              label="Unit"
+              selectionMode="single"
+              value={field.value}
+              request={tblUnit.getAll}
+              columns={[{ field: "name", headerName: "Name", flex: 1 }]}
+              getRowId={(row) => row.unitId}
+              onChange={field.onChange}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
+              disabled={isDisabled}
+            />
+          )}
+        />
+
+        {/* Name */}
+        <Controller
+          name="makerRefNo"
+          control={control}
+          render={({ field, fieldState }) => (
+            <TextField
+              {...field}
+              label="MakerRef No *"
               size="small"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -199,12 +234,12 @@ function SpareTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
         {/* Name */}
         <Controller
-          name="name"
+          name="extraNo"
           control={control}
           render={({ field, fieldState }) => (
             <TextField
               {...field}
-              label="Part Name *"
+              label="Extra No *"
               size="small"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -229,23 +264,7 @@ function SpareTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           )}
         />
 
-        {/* Name */}
-        <Controller
-          name="makerRefNo"
-          control={control}
-          render={({ field, fieldState }) => (
-            <TextField
-              {...field}
-              label="MakerRef No *"
-              size="small"
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
-              disabled={isDisabled}
-            />
-          )}
-        />
-
-        <Controller
+        {/* <Controller
           name="parentSpareType"
           control={control}
           render={({ field, fieldState }) => (
@@ -263,7 +282,7 @@ function SpareTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               disabled={isDisabled}
             />
           )}
-        />
+        /> */}
 
         {/* Order */}
         <Controller
@@ -275,26 +294,6 @@ function SpareTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               label="Order"
               sx={{ width: "50%" }}
               size="small"
-              disabled={isDisabled}
-            />
-          )}
-        />
-
-        <Controller
-          name="unit"
-          control={control}
-          render={({ field, fieldState }) => (
-            <AsyncSelectField
-              dialogMaxWidth="sm"
-              label="Unit"
-              selectionMode="single"
-              value={field.value}
-              request={tblUnit.getAll}
-              columns={[{ field: "name", headerName: "Name", flex: 1 }]}
-              getRowId={(row) => row.unitId}
-              onChange={field.onChange}
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
               disabled={isDisabled}
             />
           )}

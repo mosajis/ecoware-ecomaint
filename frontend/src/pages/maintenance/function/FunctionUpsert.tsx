@@ -4,18 +4,16 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { buildRelation } from "@/core/helper";
+import { buildRelation, requiredStringField } from "@/core/helper";
 import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
 import { memo, useCallback, useEffect, useState } from "react";
 import { tblFunctions, TypeTblFunctions } from "@/core/api/generated/api";
+import NumberField from "@/shared/components/NumberField";
 
-// =======================
-// VALIDATION SCHEMA
-// =======================
 const schema = z.object({
-  funcNo: z.string().min(1, "Function No is required"),
-  funcDescr: z.string().min(1, "Function Description is required"),
-  funcRef: z.string().nullable().optional(),
+  funcNo: requiredStringField(),
+  funcDesc: requiredStringField(),
+  orderNo: z.number().nullable(),
 
   parent: z
     .object({
@@ -28,9 +26,6 @@ const schema = z.object({
 
 export type FunctionFormValues = z.infer<typeof schema>;
 
-// =======================
-// PROPS
-// =======================
 type Props = {
   open: boolean;
   mode: "create" | "update";
@@ -45,9 +40,9 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
   const defaultValues: FunctionFormValues = {
     funcNo: "",
-    funcDescr: "",
-    funcRef: "",
+    funcDesc: "",
     parent: null,
+    orderNo: null,
   };
 
   const { control, handleSubmit, reset } = useForm<FunctionFormValues>({
@@ -73,13 +68,12 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
       reset({
         funcNo: res?.funcNo ?? "",
-        funcDescr: res?.funcDescr ?? "",
-        funcRef: res?.funcRef ?? "",
-
+        funcDesc: res?.funcDesc ?? "",
+        orderNo: res?.orderNo,
         parent: res?.tblFunctions
           ? {
               functionId: res.tblFunctions.functionId,
-              funcNo: res.tblFunctions.funcDescr ?? null,
+              funcNo: res.tblFunctions.funcNo,
             }
           : null,
       });
@@ -109,9 +103,8 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
         const payload = {
           funcNo: d.funcNo,
-          funcDescr: d.funcDescr,
-          funcRef: d.funcRef ?? "",
-
+          funcDesc: d.funcDesc,
+          orderNo: d.orderNo,
           ...buildRelation("tblFunctions", "functionId", d.parent?.functionId),
         };
 
@@ -163,7 +156,7 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
         {/* Function Description */}
         <Controller
-          name="funcDescr"
+          name="funcDesc"
           control={control}
           render={({ field, fieldState }) => (
             <TextField
@@ -177,20 +170,22 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           )}
         />
 
-        {/* Function Ref */}
+        {/* Function Description */}
         <Controller
-          name="funcRef"
+          name="orderNo"
           control={control}
-          render={({ field }) => (
-            <TextField
+          render={({ field, fieldState }) => (
+            <NumberField
               {...field}
-              label="Function Reference"
+              sx={{ width: "30%" }}
+              label="Order No"
               size="small"
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
               disabled={isDisabled}
             />
           )}
         />
-
         {/* Parent Function */}
         <Controller
           name="parent"
@@ -206,7 +201,12 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               onChange={field.onChange}
               columns={[
                 {
-                  field: "funcDescr",
+                  field: "funcNo",
+                  headerName: "Function No",
+                  flex: 1,
+                },
+                {
+                  field: "funcDesc",
                   headerName: "Description",
                   flex: 1,
                 },

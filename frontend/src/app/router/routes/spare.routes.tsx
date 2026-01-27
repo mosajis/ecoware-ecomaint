@@ -18,7 +18,7 @@ const StockItem = createRoute({
       Component={lazy(() => import("@/pages/spare/spareUnit/SpareUnit"))}
     />
   ),
-  beforeLoad: () => ({ breadcrumb: "unit" }),
+  beforeLoad: () => ({ breadcrumb: "Spare unit" }),
 });
 
 const StockType = createRoute({
@@ -29,7 +29,7 @@ const StockType = createRoute({
       Component={lazy(() => import("@/pages/spare/spareType/SpareType"))}
     />
   ),
-  beforeLoad: () => ({ breadcrumb: "Type" }),
+  beforeLoad: () => ({ breadcrumb: "Spare Type" }),
 });
 
 const StockUsed = createRoute({
@@ -40,7 +40,7 @@ const StockUsed = createRoute({
       Component={lazy(() => import("@/pages/spare/spareUsed/SpareUsed"))}
     />
   ),
-  beforeLoad: () => ({ breadcrumb: "Used" }),
+  beforeLoad: () => ({ breadcrumb: "Spare Used" }),
 });
 
 export const routes = Route.addChildren([StockItem, StockType, StockUsed]);

@@ -1,17 +1,29 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
 import { tblRotationLog, TypeTblRotationLog } from "@/core/api/generated/api";
 
-interface TabRotationLogProps {
+const getRowId = (row: TypeTblRotationLog) => row.rotationLogId;
+
+interface Props {
   functionId?: number | null;
   label?: string | null;
 }
 
-const TabRotationLog = ({ functionId, label }: TabRotationLogProps) => {
+const TabRotationLog = ({ functionId, label }: Props) => {
+  const getAll = useCallback(
+    () =>
+      tblRotationLog.getAll({
+        filter: {
+          functionId: functionId,
+        },
+      }),
+    [functionId],
+  );
+
   const { rows, loading, handleRefresh } = useDataGrid(
-    tblRotationLog.getAll,
+    getAll,
     tblRotationLog.deleteById,
     "rotationLogId",
     !!functionId,
@@ -33,12 +45,15 @@ const TabRotationLog = ({ functionId, label }: TabRotationLogProps) => {
   return (
     <CustomizedDataGrid
       label={label ?? "Rotation Log"}
+      disableAdd
+      disableEdit
+      disableDelete
       showToolbar
       rows={rows}
       columns={columns}
       loading={loading}
       onRefreshClick={handleRefresh}
-      getRowId={(row) => row.rotationLogId}
+      getRowId={getRowId}
     />
   );
 };

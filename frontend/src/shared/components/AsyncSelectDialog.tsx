@@ -109,6 +109,8 @@ export function AsyncSelectDialog<TItem extends Record<string, any>>({
         <CustomizedDataGrid
           showToolbar
           disableAdd
+          disableDelete
+          disableEdit
           disableColumnFilter
           disableExport
           disableColumns

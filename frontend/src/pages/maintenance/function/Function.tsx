@@ -1,7 +1,12 @@
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import Splitter from "@/shared/components/Splitter/Splitter";
 import TabsComponent from "./FunctionTabs";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import FunctionUpsert from "./FunctionUpsert";
+import DialogInstallRemoveComponent from "./DialogInstallRemoveComponent";
+import Add from "@mui/icons-material/Add";
+import Remove from "@mui/icons-material/Remove";
 import { tblFunctions, TypeTblFunctions } from "@/core/api/generated/api";
 import { useCallback, useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
@@ -12,14 +17,14 @@ const getRowId = (row: TypeTblFunctions) => row.functionId;
 // === Columns ===
 const columns: GridColDef<TypeTblFunctions>[] = [
   { field: "funcNo", headerName: "Function No", flex: 1 },
-  { field: "funcDescr", headerName: "Function Descr", flex: 1 },
-  { field: "funcRef", headerName: "Function Ref", flex: 1 },
+  { field: "funcDesc", headerName: "Function Desc", flex: 1 },
   {
     field: "component",
     headerName: "Component",
     flex: 1,
     valueGetter: (_, row) => row.tblComponentUnit?.compNo,
   },
+  { field: "orderNo", headerName: "Order No", width: 120 },
 ];
 
 // دو تا دکمه install Component و remove COmponent
@@ -45,6 +50,11 @@ export default function PageFunction() {
   const [row, setRow] = useState<TypeTblFunctions | null>(null);
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
+
+  const [componentDialog, setComponentDialog] = useState<{
+    open: boolean;
+    mode: "install" | "remove";
+  } | null>(null);
 
   const getAll = useCallback(
     () =>
@@ -87,11 +97,34 @@ export default function PageFunction() {
     setOpenForm(true);
   }, []);
 
+  const Toolbar = () => (
+    <Box display={"flex"}>
+      <Button
+        disabled={!row || !!row.compId}
+        size="small"
+        startIcon={<Add />}
+        onClick={() => setComponentDialog({ open: true, mode: "install" })}
+      >
+        Install Component
+      </Button>
+
+      <Button
+        color="error"
+        size="small"
+        startIcon={<Remove />}
+        disabled={!row || !row.compId}
+        onClick={() => setComponentDialog({ open: true, mode: "remove" })}
+      >
+        Remove Component
+      </Button>
+    </Box>
+  );
   return (
     <>
       <Splitter horizontal>
         <CustomizedDataGrid
           showToolbar
+          toolbarChildren={<Toolbar />}
           label="Functions"
           rows={rows}
           columns={columns}
@@ -104,7 +137,7 @@ export default function PageFunction() {
           getRowId={getRowId}
           onRowClick={handleRowClick}
         />
-        <TabsComponent label={row?.funcDescr} functionId={selectedRowId} />
+        <TabsComponent label={row?.funcDesc} functionId={selectedRowId} />
       </Splitter>
       <FunctionUpsert
         open={openForm}
@@ -113,6 +146,16 @@ export default function PageFunction() {
         onClose={handleUpsertClose}
         onSuccess={handleRefresh}
       />
+      {componentDialog && row && (
+        <DialogInstallRemoveComponent
+          open={componentDialog.open}
+          mode={componentDialog.mode}
+          functionId={row.functionId}
+          compId={row.compId}
+          onClose={() => setComponentDialog(null)}
+          onSuccess={handleRefresh}
+        />
+      )}
     </>
   );
 }
