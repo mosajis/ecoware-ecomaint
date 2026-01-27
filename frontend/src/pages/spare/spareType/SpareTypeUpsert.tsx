@@ -6,25 +6,41 @@ import NumberField from "@/shared/components/NumberField";
 import { memo, useEffect, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { tblSpareType, TypeTblSpareType } from "@/core/api/generated/api";
+import {
+  tblSpareType,
+  tblUnit,
+  TypeTblSpareType,
+} from "@/core/api/generated/api";
 import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
 import { buildRelation } from "@/core/helper";
 
-// === Validation Schema ===
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
-  no: z.string().nullable().optional(),
-  parentStockTypeId: z
+
+  partTypeNo: z.string().nullable().optional(),
+  makerRefNo: z.string().nullable().optional(),
+  note: z.string().nullable().optional(),
+
+  parentSpareType: z
     .object({
-      stockTypeId: z.number(),
+      spareTypeId: z.number(),
       name: z.string().nullable().optional(),
     })
     .nullable()
     .optional(),
-  orderNo: z.number().nullable(),
+
+  unit: z
+    .object({
+      unitId: z.number(),
+      name: z.string().nullable().optional(),
+    })
+    .nullable()
+    .optional(),
+
+  orderNo: z.number().nullable().optional(),
 });
 
-export type StockTypeFormValues = z.infer<typeof schema>;
+export type SpareTypeFormValues = z.infer<typeof schema>;
 
 type Props = {
   open: boolean;
@@ -44,38 +60,44 @@ function StockTypeFormDialog({
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const defaultValues: StockTypeFormValues = {
+  const defaultValues: SpareTypeFormValues = {
     name: "",
-    no: "",
-    parentStockTypeId: null,
+    partTypeNo: "",
+    makerRefNo: "",
+    note: "",
+    parentSpareType: null,
+    unit: null,
     orderNo: null,
   };
 
-  const { control, handleSubmit, reset } = useForm<StockTypeFormValues>({
+  const { control, handleSubmit, reset } = useForm<SpareTypeFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
   });
 
-  // === Load record in edit mode ===
   const fetchData = useCallback(async () => {
     if (mode !== "update" || !recordId) {
       reset(defaultValues);
-
       return;
     }
 
     setLoadingInitial(true);
-
     try {
       const res = await tblSpareType.getById(recordId, {
-        include: { tblSpareType: true },
+        include: {
+          tblSpareType: true,
+          tblUnit: true,
+        },
       });
 
       reset({
         name: res?.name ?? "",
-        no: res?.no ?? "",
-        parentStockTypeId: res?.tblSpareType ?? null,
-        orderNo: res?.orderNo,
+        partTypeNo: res?.partTypeNo ?? "",
+        makerRefNo: res?.makerRefNo ?? "",
+        note: res?.note ?? "",
+        parentSpareType: res?.tblSpareType ?? null,
+        unit: res?.tblUnit ?? null,
+        orderNo: res?.orderNo ?? null,
       });
     } finally {
       setLoadingInitial(false);
@@ -90,39 +112,39 @@ function StockTypeFormDialog({
 
   // === Submit Handler ===
   const handleFormSubmit = useCallback(
-    async (values: StockTypeFormValues) => {
+    async (values: SpareTypeFormValues) => {
       const parsed = schema.safeParse(values);
       if (!parsed.success) return;
 
       try {
         setSubmitting(true);
 
-        let result: TypeTblSpareType;
-
-        const parentId = parsed.data.parentStockTypeId
-          ? parsed.data.parentStockTypeId.stockTypeId
-          : null;
-
         const parentRelation = buildRelation(
           "tblSpareType",
           "spareTypeId",
-          parentId,
+          parsed.data.parentSpareType?.spareTypeId ?? null,
         );
 
+        const unitRelation = buildRelation(
+          "tblUnit",
+          "unitId",
+          parsed.data.unit?.unitId ?? null,
+        );
+
+        const payload = {
+          name: parsed.data.name,
+          partTypeNo: parsed.data.partTypeNo,
+          makerRefNo: parsed.data.makerRefNo,
+          note: parsed.data.note,
+          orderNo: parsed.data.orderNo,
+          ...parentRelation,
+          ...unitRelation,
+        };
+
         if (mode === "create") {
-          // POST Request
-          await tblSpareType.create({
-            name: parsed.data.name,
-            no: parsed.data.no,
-            ...parentRelation,
-          });
+          await tblSpareType.create(payload);
         } else {
-          // PUT Request
-          await tblSpareType.update(recordId!, {
-            name: parsed.data.name,
-            no: parsed.data.no,
-            ...parentRelation,
-          });
+          await tblSpareType.update(recordId!, payload);
         }
 
         onSuccess();
@@ -131,7 +153,7 @@ function StockTypeFormDialog({
         setSubmitting(false);
       }
     },
-    [mode, recordId, onSuccess, onClose],
+    [mode, recordId, onClose, onSuccess],
   );
 
   return (
@@ -146,7 +168,7 @@ function StockTypeFormDialog({
       <Box display="grid" gridTemplateColumns="repeat(1, 1fr)" gap={1.5}>
         {/* No */}
         <Controller
-          name="no"
+          name="partTypeNo"
           control={control}
           render={({ field, fieldState }) => (
             <TextField
@@ -179,7 +201,7 @@ function StockTypeFormDialog({
 
         {/* Parent Stock Type */}
         <Controller
-          name="parentStockTypeId"
+          name="parentSpareType"
           control={control}
           render={({ field, fieldState }) => (
             <AsyncSelectField
@@ -208,6 +230,26 @@ function StockTypeFormDialog({
               label="Order"
               sx={{ width: "50%" }}
               size="small"
+              disabled={isDisabled}
+            />
+          )}
+        />
+
+        <Controller
+          name="unit"
+          control={control}
+          render={({ field, fieldState }) => (
+            <AsyncSelectField
+              dialogMaxWidth="sm"
+              label="Unit"
+              selectionMode="single"
+              value={field.value}
+              request={tblUnit.getAll}
+              columns={[{ field: "name", headerName: "Name", flex: 1 }]}
+              getRowId={(row) => row.unitId}
+              onChange={field.onChange}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
               disabled={isDisabled}
             />
           )}

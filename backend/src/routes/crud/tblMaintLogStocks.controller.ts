@@ -19,13 +19,43 @@ const responseSchema = buildResponseSchema(
   TblMaintLogStocks,
 );
 
-const responseSchemaWithTotals = t.Intersect([
-  responseSchema,
-  t.Object({
-    totalCount: t.Number(),
-    totalUse: t.Number(),
-  }),
-]);
+const MaintLogStockWithTotalsSchema = t.Object({
+  maintLogStockId: t.Number(),
+  stockItemId: t.Number(),
+  stockCount: t.Union([t.Number(), t.Null()]),
+
+  tblSpareUnit: t.Optional(
+    t.Union([
+      t.Null(),
+      t.Object({
+        spareUnitId: t.Number(),
+
+        tblSpareType: t.Optional(
+          t.Union([
+            t.Null(),
+            t.Object({
+              spareTypeId: t.Number(),
+              name: t.Union([t.String(), t.Null()]),
+
+              tblUnit: t.Optional(
+                t.Union([
+                  t.Null(),
+                  t.Object({
+                    unitId: t.Number(),
+                    name: t.Union([t.String(), t.Null()]),
+                  }),
+                ]),
+              ),
+            }),
+          ]),
+        ),
+      }),
+    ]),
+  ),
+
+  totalCount: t.Number(),
+  totalUse: t.Number(),
+});
 
 const ControllerTblMaintLogStocks = new BaseController({
   prefix: "/tblMaintLogStocks",
@@ -106,7 +136,7 @@ const ControllerTblMaintLogStocks = new BaseController({
           };
           return {
             ...r,
-            totalCount: agg.totalCount,
+            totalCount: agg.totalCount ?? 0,
             totalUse: agg.totalUse,
           };
         });
@@ -133,7 +163,7 @@ const ControllerTblMaintLogStocks = new BaseController({
         },
         query: querySchema,
         response: t.Object({
-          items: t.Any(),
+          items: t.Array(MaintLogStockWithTotalsSchema),
           total: t.Integer(),
           page: t.Integer(),
           perPage: t.Integer(),

@@ -11,14 +11,48 @@ import { tblSpareType, TypeTblSpareType } from "@/core/api/generated/api";
 const getRowId = (row: TypeTblSpareType) => row.spareTypeId;
 const getItemName = (row: TypeTblSpareType) => row.name || "-";
 
-// === Columns ===
 const columns: GridColDef<TypeTblSpareType>[] = [
-  { field: "no", headerName: "Number", width: 80 },
-  { field: "name", headerName: "Name", flex: 1 },
   {
-    field: "orderNo",
-    headerName: "Order No",
-    width: 80,
+    field: "partName",
+    headerName: "Part Name",
+    flex: 1,
+    // @ts-ignore
+    valueGetter: (_, row) => row?.name,
+  },
+  {
+    field: "partTypeNo",
+    headerName: "MESC Code",
+    flex: 1,
+    // @ts-ignore
+    valueGetter: (_, row) => row?.partTypeNo,
+  },
+  {
+    field: "makerRefNo",
+    headerName: "Maker Ref",
+    flex: 1,
+    // @ts-ignore
+    valueGetter: (_, row) => row?.makerRefNo,
+  },
+  {
+    field: "extraNo",
+    headerName: "Extra No",
+    flex: 1,
+    // @ts-ignore
+    valueGetter: (_, row) => row?.extraNo,
+  },
+  {
+    field: "note",
+    headerName: "Note",
+    flex: 1,
+    // @ts-ignore
+    valueGetter: (_, row) => row?.note,
+  },
+  {
+    field: "unit",
+    headerName: "Unit",
+    flex: 1,
+    // @ts-ignore
+    valueGetter: (_, row) => row?.tblUnit?.name,
   },
 ];
 

@@ -131,7 +131,7 @@ export default function PageStockUsed() {
     return tblMaintLogStocksBySpareUnitId();
   }, []);
 
-  const { rows, loading, handleRefresh } = useDataGrid(
+  const { rows, loading, handleRefresh } = useDataGrid<any>(
     getAll,
     tblMaintLog.deleteById,
     "maintLogStockId",
