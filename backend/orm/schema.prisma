@@ -297,7 +297,6 @@ model TblCompOilInfo {
   compOilInfoId    Int       @id(map: "PK_TblCompOilInfo") @default(dbgenerated("NEXT VALUE FOR [Seq_CompOilInfo]"), map: "DF_CompOilInfoID") @map("CompOilInfoID")
   compId           Int?      @map("CompId")
   compCounterId    Int?      @map("CompCounterID")
-  spareTypeId      Int?      @map("SpareTypeID")
   compJobId        Int?      @map("CompJobID")
   tankCapacity     Int?      @map("TankCapacity")
   laboratoryCode   String?   @map("LaboratoryCode") @db.NVarChar(100)
@@ -308,6 +307,7 @@ model TblCompOilInfo {
   deptId           Int?      @map("DeptID")
   exportMarker     Int?      @map("ExportMarker")
   lastupdate       DateTime? @db.DateTime
+  spareTypeId      Int?      @map("SpareTypeID")
 }
 
 model TblComponentUnit {
@@ -366,7 +366,6 @@ model TblComponentUnitAttachment {
 model TblCompSpare {
   compSpareId  Int       @id(map: "PK_tblCompSpare") @default(dbgenerated("NEXT VALUE FOR [Seq_CompSpare]"), map: "DF_CompSpareID") @map("CompSpareID")
   compTypeId   Int?      @map("CompTypeID")
-  spareTypeId  Int?      @map("SpareTypeID")
   quantity     Int?      @map("Quantity")
   drawingNo    String?   @map("DrawingNo") @db.NVarChar(100)
   position     String?   @map("Position") @db.NVarChar(20)
@@ -375,6 +374,7 @@ model TblCompSpare {
   exportMarker Int?      @map("ExportMarker")
   lastupdate   DateTime? @db.DateTime
   orderNo      Int?      @map("OrderNo")
+  spareTypeId  Int?      @map("SpareTypeID")
 
   @@map("tblCompSpare")
 }
@@ -1240,8 +1240,8 @@ model TblRotationLog {
   orderNo                                        Int?              @map("OrderNo")
   tblComponentUnit                               TblComponentUnit? @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRotationLog_tblComponentUnit")
   tblFunctions                                   TblFunctions?     @relation(fields: [functionId], references: [functionId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRotationLog_tblFunctions")
-  tblUsersTblRotationLogUserRemovedIdTotblUsers  TblUsers?         @relation("tblRotationLog_UserRemovedIDTotblUsers", fields: [userRemovedId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRotationLog_tblUsers1")
   tblUsersTblRotationLogUserInsertedIdTotblUsers TblUsers?         @relation("tblRotationLog_UserInsertedIDTotblUsers", fields: [userInsertedId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRotationLog_tblUsers")
+  tblUsersTblRotationLogUserRemovedIdTotblUsers  TblUsers?         @relation("tblRotationLog_UserRemovedIDTotblUsers", fields: [userRemovedId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRotationLog_tblUsers1")
 
   @@map("tblRotationLog")
 }
@@ -1398,8 +1398,8 @@ model TblUsers {
   tblMaintLogAttachments                                     TblMaintLogAttachment[]
   tblMaintLogFollows                                         TblMaintLogFollow[]
   tblReScheduleLogs                                          TblReScheduleLog[]
-  tblRotationLogTblRotationLogUserRemovedIdTotblUsers        TblRotationLog[]               @relation("tblRotationLog_UserRemovedIDTotblUsers")
   tblRotationLogTblRotationLogUserInsertedIdTotblUsers       TblRotationLog[]               @relation("tblRotationLog_UserInsertedIDTotblUsers")
+  tblRotationLogTblRotationLogUserRemovedIdTotblUsers        TblRotationLog[]               @relation("tblRotationLog_UserRemovedIDTotblUsers")
   tblRoundCompJobs                                           TblRoundCompJob[]
   tblWorkOrderTblWorkOrderIssuedByTotblUsers                 TblWorkOrder[]                 @relation("tblWorkOrder_IssuedByTotblUsers")
   tblWorkOrderTblWorkOrderPlannedByTotblUsers                TblWorkOrder[]                 @relation("tblWorkOrder_PlannedByTotblUsers")

@@ -1,20 +1,22 @@
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
 import Splitter from "@/shared/components/Splitter/Splitter";
-import TabsComponent from "./FunctionTabs";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import TabsComponent from "./FunctionTabs";
 import FunctionUpsert from "./FunctionUpsert";
-import DialogInstallRemoveComponent from "./DialogInstallRemoveComponent";
-import Add from "@mui/icons-material/Add";
-import Remove from "@mui/icons-material/Remove";
-import { tblFunctions, TypeTblFunctions } from "@/core/api/generated/api";
-import { useCallback, useState } from "react";
+import DialogInstallRemoveComponent from "./_components/DialogInstallRemoveComponent";
+import { useRouter } from "@tanstack/react-router";
+import { useDataTree } from "@/shared/hooks/useDataTree";
+import { mapToTree } from "@/shared/components/tree/TreeUtil";
+import { GenericTree } from "@/shared/components/tree/Tree";
 import { GridColDef } from "@mui/x-data-grid";
-import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { useCallback, useState, useMemo } from "react";
+import { tblFunctions, TypeTblFunctions } from "@/core/api/generated/api";
+import { Box, Button } from "@mui/material";
+import { Add, Remove } from "@mui/icons-material";
+import { routeDetail } from "./FunctionRoutes";
 
 const getRowId = (row: TypeTblFunctions) => row.functionId;
+const getItemName = (row: TypeTblFunctions) => row.funcNo || "-";
 
-// === Columns ===
 const columns: GridColDef<TypeTblFunctions>[] = [
   { field: "funcNo", headerName: "Function No", flex: 1 },
   { field: "funcDesc", headerName: "Function Desc", flex: 1 },
@@ -27,27 +29,10 @@ const columns: GridColDef<TypeTblFunctions>[] = [
   { field: "orderNo", headerName: "Order No", width: 120 },
 ];
 
-// دو تا دکمه install Component و remove COmponent
-// وقتی install کام رو زد یک مودال باز میشه یک نوت میگیره
-// یک تاریخ میگیره
-// یه کامپوونت
-// توضیحات میگیره
-// میزنه توی rotationLog insert
-// تو خود function به روزنه رسانی کامپوونت
-// تمامی tab ها از روی Component
-
-// در جدول componentUnit استوس باید به روز رسانی شود به 2 inUsed
-
-// لیست component هایی که تو مودال نشون میدیم فقط None ها 1
-
-// وقتی که ریمو میکنیم وضعین کامپ.ننت میشه none
-// وقتی که remove هم میکنیم to Date
-// توضیحات هم میخواد
-// فانکشن هم به روزاسانی کامپوننت
-
 export default function PageFunction() {
+  const router = useRouter();
+
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
-  const [row, setRow] = useState<TypeTblFunctions | null>(null);
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
 
@@ -56,104 +41,147 @@ export default function PageFunction() {
     mode: "install" | "remove";
   } | null>(null);
 
-  const getAll = useCallback(
-    () =>
-      tblFunctions.getAll({
-        include: {
-          tblComponentUnit: true,
-        },
-      }),
+  const getAll = useCallback(() => {
+    return tblFunctions.getAll({
+      include: {
+        tblComponentUnit: true,
+      },
+    });
+  }, []);
+
+  // === tree mapper ===
+  const treeMapper = useCallback(
+    (items: TypeTblFunctions[]) =>
+      mapToTree(items, "functionId", "parentFunctionId"),
     [],
   );
-  // === useDataGrid ===
-  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
-    getAll,
-    tblFunctions.deleteById,
-    "functionId",
-  );
+
+  const { rows, tree, loading, refetch, handleDelete } =
+    useDataTree<TypeTblFunctions>({
+      getAll,
+      deleteById: tblFunctions.deleteById,
+      getId: (item) => item.functionId,
+      mapper: treeMapper,
+    });
+
+  const selectedRow = useMemo(() => {
+    if (!selectedRowId) return null;
+    return rows.find((r) => r.functionId === selectedRowId) || null;
+  }, [selectedRowId, rows]);
 
   const handleRowClick = (params: any) => {
-    setRow(params.row);
+    setSelectedRowId(params.row.functionId);
   };
 
-  // === Handlers ===
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
     setMode("create");
-    handleUpsertOpen();
+    setOpenForm(true);
   }, []);
 
   const handleEdit = useCallback((rowId: number) => {
     setSelectedRowId(rowId);
     setMode("update");
-    handleUpsertOpen();
+    setOpenForm(true);
   }, []);
 
   const handleUpsertClose = useCallback(() => {
     setOpenForm(false);
   }, []);
 
-  const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true);
-  }, []);
+  const handleAfterInstallRemove = useCallback(() => {
+    setComponentDialog(null);
+    refetch();
+  }, [refetch]);
 
-  const Toolbar = () => (
-    <Box display={"flex"}>
-      <Button
-        disabled={!row || !!row.compId}
-        size="small"
-        startIcon={<Add />}
-        onClick={() => setComponentDialog({ open: true, mode: "install" })}
-      >
-        Install Component
-      </Button>
+  const handleRowDoubleClick = useCallback(
+    (rowId: number) => {
+      const row = rows.find((i) => i.functionId === rowId);
+      if (!row) return;
 
-      <Button
-        color="error"
-        size="small"
-        startIcon={<Remove />}
-        disabled={!row || !row.compId}
-        onClick={() => setComponentDialog({ open: true, mode: "remove" })}
-      >
-        Remove Component
-      </Button>
-    </Box>
+      router.navigate({
+        to: routeDetail.to,
+        params: { id: rowId },
+        search: { breadcrumb: row?.funcNo },
+      });
+    },
+    [router, rows],
   );
+
   return (
     <>
-      <Splitter horizontal>
+      <Splitter initialPrimarySize="30%">
+        <GenericTree<TypeTblFunctions>
+          label="Tree View"
+          loading={loading}
+          data={tree}
+          onDoubleClick={handleRowDoubleClick}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+          onAdd={handleCreate}
+          onRefresh={refetch}
+          getItemId={getRowId}
+          getItemName={getItemName}
+        />
+
         <CustomizedDataGrid
           showToolbar
-          toolbarChildren={<Toolbar />}
           label="Functions"
           rows={rows}
           columns={columns}
           loading={loading}
+          getRowId={getRowId}
           onEditClick={handleEdit}
           onDeleteClick={handleDelete}
-          onDoubleClick={handleEdit}
+          onDoubleClick={handleRowDoubleClick}
           onAddClick={handleCreate}
-          onRefreshClick={handleRefresh}
-          getRowId={getRowId}
+          onRefreshClick={refetch}
           onRowClick={handleRowClick}
+          toolbarChildren={
+            <Box display={"flex"}>
+              <Button
+                disabled={!selectedRow || !!selectedRow?.compId}
+                size="small"
+                startIcon={<Add />}
+                onClick={() =>
+                  setComponentDialog({ open: true, mode: "install" })
+                }
+              >
+                Install Component
+              </Button>
+
+              <Button
+                color="error"
+                size="small"
+                startIcon={<Remove />}
+                disabled={!selectedRow || !selectedRow?.compId}
+                onClick={() =>
+                  setComponentDialog({ open: true, mode: "remove" })
+                }
+              >
+                Remove Component
+              </Button>
+            </Box>
+          }
         />
-        <TabsComponent label={row?.funcDesc} functionId={selectedRowId} />
       </Splitter>
+
       <FunctionUpsert
         open={openForm}
         mode={mode}
         recordId={selectedRowId}
         onClose={handleUpsertClose}
-        onSuccess={handleRefresh}
+        onSuccess={refetch}
       />
-      {componentDialog && row && (
+
+      {componentDialog && selectedRow && (
         <DialogInstallRemoveComponent
           open={componentDialog.open}
           mode={componentDialog.mode}
-          functionId={row.functionId}
-          compId={row.compId}
+          functionId={selectedRow.functionId}
+          compId={selectedRow.compId}
           onClose={() => setComponentDialog(null)}
-          onSuccess={handleRefresh}
+          onSuccess={handleAfterInstallRemove}
         />
       )}
     </>

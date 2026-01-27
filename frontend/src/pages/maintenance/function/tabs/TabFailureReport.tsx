@@ -1,99 +1,64 @@
-import { useMemo } from "react";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { GridColDef } from "@mui/x-data-grid";
+import { useCallback } from "react";
 import {
   tblFailureReports,
   TypeTblFailureReports,
+  TypeTblFunctions,
 } from "@/core/api/generated/api";
+import { columns } from "@/pages/report/reportFailure/ReportFailure";
 
-interface TabFailureReportProps {
-  functionId?: number | null;
-  label?: string | null;
+interface Props {
+  recordFunction?: TypeTblFunctions;
+  label?: string;
 }
 
-const TabFailureReport = ({ functionId, label }: TabFailureReportProps) => {
-  const { rows, loading, handleRefresh } = useDataGrid(
-    tblFailureReports.getAll,
-    tblFailureReports.getById,
-    "failureReportId",
-    !!functionId,
+const getRowId = (row: TypeTblFailureReports) => row.failureReportId;
+
+export default function TabFailureReport({ label, recordFunction }: Props) {
+  const compId = recordFunction?.tblComponentUnit?.compId;
+
+  const getAll = useCallback(
+    () =>
+      tblFailureReports.getAll({
+        filter: {
+          compId,
+        },
+        include: {
+          tblComponentUnit: true,
+          tblDiscipline: true,
+          tblFailureSeverityLevel: true,
+          tblFailureStatus: true,
+          tblFailureGroupFollow: true,
+          tblUsersTblFailureReportsReportedUserIdTotblUsers: true,
+          tblUsersTblFailureReportsApprovedUserIdTotblUsers: true,
+          tblUsersTblFailureReportsClosedUserIdTotblUsers: true,
+        },
+      }),
+    [compId],
   );
 
-  const columns = useMemo<GridColDef<TypeTblFailureReports>[]>(
-    () => [
-      {
-        field: "number",
-        headerName: "Number",
-        width: 120,
-      },
-      {
-        field: "compNo",
-        headerName: "Comp No",
-        width: 130,
-        // valueGetter: (row) => row.tblComp?.compNo ?? "",
-      },
-      {
-        field: "failureDate",
-        headerName: "Failure Date",
-        width: 150,
-      },
-      {
-        field: "title",
-        headerName: "Title",
-        flex: 1,
-      },
-      {
-        field: "totalWait",
-        headerName: "Total Wait",
-        width: 140,
-      },
-      {
-        field: "discName",
-        headerName: "Disc Name",
-        width: 150,
-      },
-      {
-        field: "lastUpdated",
-        headerName: "Last Updated",
-        width: 160,
-      },
-      {
-        field: "loggedBy",
-        headerName: "Logged By",
-        width: 150,
-        // valueGetter: (row) => row.tblUserLogged?.fullName ?? "",
-      },
-      {
-        field: "approvedBy",
-        headerName: "Approved By",
-        width: 150,
-      },
-      {
-        field: "closedBy",
-        headerName: "Closed By",
-        width: 150,
-      },
-      {
-        field: "closedDate",
-        headerName: "Closed Date",
-        width: 150,
-      },
-    ],
-    [],
+  const { rows, loading, handleRefresh } = useDataGrid(
+    getAll,
+    tblFailureReports.deleteById,
+    "failureReportId",
+    !!compId,
   );
 
   return (
     <CustomizedDataGrid
-      label={label ?? "Failure Report"}
-      showToolbar
+      disableRowNumber
+      disableAdd
+      disableRowSelectionOnClick
+      disableEdit
+      disableDelete
+      showToolbar={!!label}
+      label={label}
+      loading={loading}
       rows={rows}
       columns={columns}
-      loading={loading}
       onRefreshClick={handleRefresh}
-      getRowId={(row) => row.failureReportId}
+      getRowId={getRowId}
     />
   );
-};
-
-export default TabFailureReport;
+}

@@ -225,23 +225,23 @@ export const menuContentItems: {
   },
 
   {
-    title: "Spare (x)",
+    title: "Spare",
     icon: <Inventory2RoundedIcon />,
     items: [
       {
-        text: "Spare Type (x)",
+        text: "Spare Type",
         icon: <CategoryRoundedIcon />,
         id: "spare:type",
         path: "/spare/type",
       },
       {
-        text: "Spare Unit (x)",
+        text: "Spare Unit",
         icon: <ShapeLineIcon />,
         id: "spare:unit",
         path: "/spare/unit",
       },
       {
-        text: "Spare Used (x)",
+        text: "Spare Used",
         icon: <DoneAllIcon />,
         id: "spare:spare-used",
         path: "/spare/used",

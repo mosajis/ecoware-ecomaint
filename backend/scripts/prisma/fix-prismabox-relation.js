@@ -74,6 +74,11 @@ const TABLE_PKS = {
   TblUsers: "UserID",
 };
 
+const SPECIAL_RELATIONS = {
+  tblUsersTblRotationLogUserRemovedIdTotblUsers: "userId",
+  tblUsersTblRotationLogUserInsertedIdTotblUsers: "userId",
+};
+
 const PRISMABOX_DIR = path.resolve("./orm/generated/prismabox");
 const MAX_DEPTH = 5;
 
@@ -101,6 +106,7 @@ function log(message, type = "info") {
 function buildFieldToPKMap() {
   const map = {};
 
+  // روابط معمولی
   for (const [tableName, pk] of Object.entries(TABLE_PKS)) {
     const fieldNameBase =
       tableName.charAt(0).toLowerCase() + tableName.slice(1);
@@ -109,6 +115,11 @@ function buildFieldToPKMap() {
     if (!fieldNameBase.endsWith("s")) {
       map[fieldNameBase + "s"] = _.camelCase(pk);
     }
+  }
+
+  // روابط خاص (چندگانه و self-referencing)
+  for (const [fieldName, pk] of Object.entries(SPECIAL_RELATIONS)) {
+    map[fieldName] = _.camelCase(pk);
   }
 
   return map;
@@ -270,7 +281,7 @@ function fixFile(filePath, fieldToPKMap) {
         ),
         replacement: `$1${pkCamelCase}$2`,
       },
-      // NEW: Fix for RelationsInputCreate and RelationsInputUpdate
+      // Fix for RelationsInputCreate and RelationsInputUpdate
       {
         regex: new RegExp(
           `(${fieldName}\\s*:\\s*t\\.Object\\s*\\(\\s*\\{\\s*connect\\s*:\\s*t\\.Object\\s*\\(\\s*\\{\\s*)id(\\s*:)`,

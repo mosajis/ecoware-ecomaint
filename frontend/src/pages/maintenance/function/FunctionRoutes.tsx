@@ -5,39 +5,36 @@ import { createRoute, Outlet } from "@tanstack/react-router";
 import { lazy } from "react";
 
 // --- Component Unit ---
-export const routeComponentUnit = createRoute({
+const routeFunction = createRoute({
   getParentRoute: () => routeMaintenance,
-  path: "component-unit",
+  path: "/function",
   component: () => <Outlet />,
-  beforeLoad: () => ({ breadcrumb: "Component Unit" }),
+  beforeLoad: () => ({ breadcrumb: "Functions" }),
 });
 
-export const routeComponentUnitList = createRoute({
-  getParentRoute: () => routeComponentUnit,
+const routeList = createRoute({
+  getParentRoute: () => routeFunction,
   path: "/",
   component: () => (
     <LazyRoute
-      Component={lazy(
-        () => import("@/pages/maintenance/componentUnit/ComponentUnit"),
-      )}
+      Component={lazy(() => import("@/pages/maintenance/function/Function"))}
     />
   ),
   beforeLoad: () => ({ breadcrumb: "List" }),
 });
 
-export const routeComponentUnitDetail = createDetailRoute({
-  parent: routeComponentUnit,
+export const routeDetail = createDetailRoute({
+  parent: routeFunction,
   path: "$id",
   Component: () => (
     <LazyRoute
       Component={lazy(
-        () => import("@/pages/maintenance/componentUnit/ComponentUnitDetail"),
+        () => import("@/pages/maintenance/function/FunctionDetail"),
       )}
     />
   ),
 });
 
-routeComponentUnit.addChildren([
-  routeComponentUnitList,
-  routeComponentUnitDetail,
-]);
+routeFunction.addChildren([routeList, routeDetail]);
+
+export default routeFunction;

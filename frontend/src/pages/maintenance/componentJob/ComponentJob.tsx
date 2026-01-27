@@ -9,9 +9,9 @@ import { useState, useCallback } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { tblCompJob, TypeTblCompJob } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
-import { logicTblWorkOrder } from "../workOrder/WorkOrderEffect";
 import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
+import { logicTblWorkOrder } from "@/core/api/api";
 
 const columns: GridColDef<TypeTblCompJob>[] = [
   {

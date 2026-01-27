@@ -5,11 +5,9 @@ import { LazyRoute } from "./_components/lazyRoute";
 import { routeComponentType } from "@/pages/maintenance/componentType/ComponentTypeRoutes";
 import { routeComponentUnit } from "@/pages/maintenance/componentUnit/ComponentUnitRoutes";
 import { NotFound } from "@/pages/NotFound";
+import routeFunction from "@/pages/maintenance/function/FunctionRoutes";
 
 //  Lazy pages ---
-const PageFunction = lazy(
-  () => import("@/pages/maintenance/function/Function"),
-);
 
 const PageComponentJob = lazy(
   () => import("@/pages/maintenance/componentJob/ComponentJob"),
@@ -41,14 +39,6 @@ export const routeMaintenance = createRoute({
   path: "maintenance",
   component: () => <Outlet />,
   beforeLoad: () => ({ breadcrumb: "Maintenance" }),
-});
-
-// --- Function ---
-export const routeFunction = createRoute({
-  getParentRoute: () => routeMaintenance,
-  path: "function",
-  component: () => <LazyRoute Component={PageFunction} />,
-  beforeLoad: () => ({ breadcrumb: "Function" }),
 });
 
 // --- Work Order ---

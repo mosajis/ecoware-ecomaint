@@ -12,7 +12,7 @@ import NumberField from "@/shared/components/NumberField";
 
 const schema = z.object({
   funcNo: requiredStringField(),
-  funcDesc: requiredStringField(),
+  funcDesc: z.string().optional().nullable(),
   orderNo: z.number().nullable(),
 
   parent: z

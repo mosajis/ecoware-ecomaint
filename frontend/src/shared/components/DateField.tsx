@@ -12,6 +12,10 @@ interface DateFieldProps {
   field: any;
   disabled?: boolean;
   type?: DateTimeType;
+
+  // 🔹 new (optional)
+  error?: boolean;
+  helperText?: React.ReactNode;
 }
 
 const DateField: React.FC<DateFieldProps> = ({
@@ -19,6 +23,8 @@ const DateField: React.FC<DateFieldProps> = ({
   field,
   disabled = false,
   type = "DATE",
+  error,
+  helperText,
   ...restProps
 }) => {
   const language = useAtomValue(atomLanguage);
@@ -63,6 +69,8 @@ const DateField: React.FC<DateFieldProps> = ({
         textField: {
           fullWidth: true,
           size: "small",
+          error,
+          helperText,
         },
       }}
       {...((type === "TIME" || type === "DATETIME") && { ampm: false })}

@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
@@ -12,6 +12,9 @@ import {
   tblRotationLog,
 } from "@/core/api/generated/api";
 import { buildRelation } from "@/core/helper";
+import DateField from "@/shared/components/DateField";
+import { useAtom, useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
 
 // =======================
 // SCHEMA
@@ -21,13 +24,13 @@ const installSchema = z.object({
     compId: z.number(),
     compNo: z.string(),
   }),
-  fromDate: z.string().min(1, "From date is required"),
+  fromDate: z.date().or(z.string()),
   notes: z.string().nullable().optional(),
 });
 
 const removeSchema = z.object({
-  toDate: z.string().min(1, "To date is required"),
-  notes: z.string().min(1, "Notes is required"),
+  toDate: z.date().or(z.string()),
+  notes: z.string().nullable().optional(),
 });
 
 type InstallValues = z.infer<typeof installSchema>;
@@ -50,10 +53,25 @@ function DialogInstallRemoveComponent({
   onClose,
   onSuccess,
 }: Props) {
+  const [loading, setloading] = useState(false);
   const schema = mode === "install" ? installSchema : removeSchema;
+  const user = useAtomValue(atomUser);
+  const userId = user?.userId as number;
 
   const { control, handleSubmit } = useForm<any>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      ...(mode === "install"
+        ? {
+            component: null,
+            fromDate: new Date(),
+            notes: "",
+          }
+        : {
+            toDate: new Date(),
+            notes: "",
+          }),
+    },
   });
 
   // =======================
@@ -61,6 +79,7 @@ function DialogInstallRemoveComponent({
   // =======================
   const onSubmit = useCallback(
     async (values: InstallValues | RemoveValues) => {
+      setloading(true);
       if (mode === "install") {
         const v = values as InstallValues;
 
@@ -68,7 +87,11 @@ function DialogInstallRemoveComponent({
         await tblRotationLog.create({
           ...buildRelation("tblFunctions", "functionId", functionId),
           ...buildRelation("tblComponentUnit", "compId", v.component.compId),
-
+          ...buildRelation(
+            "tblUsersTblRotationLogUserInsertedIdTotblUsers",
+            "userId",
+            userId,
+          ),
           fromDate: new Date(v.fromDate) as any,
           notes: v.notes ?? "",
         });
@@ -80,13 +103,19 @@ function DialogInstallRemoveComponent({
 
         // 3. update component status → InUse = 2
         await tblComponentUnit.update(v.component.compId, {
-          ...buildRelation("tblCompStatus", "statusId", 2),
+          ...buildRelation("tblCompStatus", "compStatusId", 2),
         });
       } else {
         const v = values as RemoveValues;
 
         await tblRotationLog.create({
+          ...buildRelation("tblComponentUnit", "compId", compId),
           ...buildRelation("tblFunctions", "functionId", functionId),
+          ...buildRelation(
+            "tblUsersTblRotationLogUserRemovedIdTotblUsers",
+            "userId",
+            userId,
+          ),
 
           toDate: new Date(v.toDate) as any,
           notes: v.notes ?? "",
@@ -94,16 +123,19 @@ function DialogInstallRemoveComponent({
 
         // function → null
         await tblFunctions.update(functionId, {
-          ...buildRelation("tblComponentUnit", "compId", null),
+          tblComponentUnit: {
+            disconnect: true,
+          },
         });
 
         // component → None = 1
         if (compId) {
           await tblComponentUnit.update(compId, {
-            ...buildRelation("tblCompStatus", "statusId", 1),
+            ...buildRelation("tblCompStatus", "compStatusId", 1),
           });
         }
       }
+      setloading(false);
       onSuccess();
       onClose();
     },
@@ -117,6 +149,7 @@ function DialogInstallRemoveComponent({
     <FormDialog
       open={open}
       title={mode === "install" ? "Install Component" : "Remove Component"}
+      loadingInitial={loading}
       onClose={onClose}
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -150,12 +183,10 @@ function DialogInstallRemoveComponent({
               name="fromDate"
               control={control}
               render={({ field, fieldState }) => (
-                <TextField
-                  {...field}
-                  type="date"
-                  size="small"
+                <DateField
+                  field={field}
+                  type="DATE"
                   label="From Date"
-                  InputLabelProps={{ shrink: true }}
                   error={!!fieldState.error}
                   helperText={fieldState.error?.message}
                 />
@@ -178,12 +209,10 @@ function DialogInstallRemoveComponent({
               name="toDate"
               control={control}
               render={({ field, fieldState }) => (
-                <TextField
-                  {...field}
-                  type="date"
-                  size="small"
+                <DateField
+                  field={field}
+                  type="DATE"
                   label="To Date"
-                  InputLabelProps={{ shrink: true }}
                   error={!!fieldState.error}
                   helperText={fieldState.error?.message}
                 />

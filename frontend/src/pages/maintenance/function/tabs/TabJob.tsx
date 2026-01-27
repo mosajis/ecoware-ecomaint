@@ -1,77 +1,103 @@
-import { useMemo, useState, useCallback } from "react";
+import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
+import CellFrequency from "@/shared/components/dataGrid/cells/CellFrequency";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { useCallback } from "react";
 import { GridColDef } from "@mui/x-data-grid";
-import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
+
 import {
-  tblJobDescription,
-  TypeTblJobDescription,
+  tblCompJob,
+  TypeTblCompJob,
+  TypeTblFunctions,
 } from "@/core/api/generated/api";
 
-interface TabJobProps {
-  functionId?: number | null;
-  label?: string | null;
+interface Props {
+  recordFunction?: TypeTblFunctions;
+  label?: string;
 }
 
-const TabJob = ({ functionId, label }: TabJobProps) => {
-  // const [openForm, setOpenForm] = useState(false);
-  // const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+const getRowId = (row: TypeTblCompJob) => row.compJobId;
 
-  // --- useDataGrid ---
-  const { rows, loading, handleRefresh, handleDelete, handleFormSuccess } =
-    useDataGrid(
-      tblJobDescription.getAll,
-      tblJobDescription.deleteById,
-      "jobDescId",
-      !!functionId,
-    );
+const columns: GridColDef<TypeTblCompJob>[] = [
+  {
+    field: "jobDescCode",
+    headerName: "Code",
+    width: 100,
+    valueGetter: (_, row) => row.tblJobDescription?.jobDescCode,
+  },
+  {
+    field: "jobDescTitle",
+    headerName: "Job Title",
+    flex: 1,
+    valueGetter: (_, row) => row.tblJobDescription?.jobDescTitle,
+  },
+  {
+    field: "discipline",
+    headerName: "Discipline",
+    flex: 1,
+    valueGetter: (_, row) => row.tblDiscipline?.name ?? "",
+  },
+  {
+    field: "frequency",
+    headerName: "Frequency",
+    width: 150,
+    renderCell: ({ row, value }) => (
+      <CellFrequency frequency={value} frequencyPeriod={row.tblPeriod} />
+    ),
+  },
+  {
+    field: "lastDone",
+    headerName: "Last Done",
+    width: 130,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+  {
+    field: "nextDueDate",
+    headerName: "Next Due Date",
+    width: 130,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+];
 
-  // --- Handlers ---
-  const handleAdd = useCallback(() => {
-    // setSelectedRowId(null);
-    // setOpenForm(true);
-  }, []);
+const TabJob = ({ recordFunction, label }: Props) => {
+  const compId = recordFunction?.tblComponentUnit?.compId;
 
-  const handleEdit = useCallback((row: TypeTblJobDescription) => {
-    // setSelectedRowId(row.jobDescriptionId);
-    // setOpenForm(true);
-  }, []);
-
-  // --- Columns ---
-  const columns = useMemo<GridColDef<TypeTblJobDescription>[]>(
-    () => [
-      { field: "jobDescCode", headerName: "Code", width: 100 },
-      { field: "jobDescTitle", headerName: "Job Title", flex: 1 },
-      {
-        field: "discipline",
-        headerName: "Discipline (set Rel)",
-        flex: 1,
-        // valueGetter: (_, row) => row.discipline?.name ?? "",
-      },
-      { field: "frequency", headerName: "Frequency", width: 120 },
-      {
-        field: "tblPeriod",
-        headerName: "Frequency Period (set Rel)",
-        width: 150,
-        // valueGetter: (_, row) => row.tblPeriod?.name ?? "",
-      },
-      { field: "lastDone", headerName: "Last Done", width: 150 },
-      { field: "nextDueDate", headerName: "Next Due Date", width: 150 },
-    ],
-    [handleEdit, handleDelete],
+  const getAll = useCallback(
+    () =>
+      tblCompJob.getAll({
+        include: {
+          tblPeriod: true,
+          tblDiscipline: true,
+          tblJobDescription: true,
+        },
+        filter: {
+          compId,
+        },
+      }),
+    [compId],
   );
-
+  // --- useDataGrid ---
+  const { rows, loading, handleRefresh } = useDataGrid(
+    getAll,
+    tblCompJob.deleteById,
+    "compJobId",
+    !!compId,
+  );
   return (
     <>
       <CustomizedDataGrid
-        label={label ?? "Job List"}
-        showToolbar
+        disableRowNumber
+        disableAdd
+        disableRowSelectionOnClick
+        disableEdit
+        disableDelete
+        showToolbar={!!label}
+        label={label}
         rows={rows}
         columns={columns}
         loading={loading}
         onRefreshClick={handleRefresh}
-        onAddClick={handleAdd}
-        getRowId={(row) => row.jobDescId}
+        getRowId={getRowId}
       />
     </>
   );

@@ -15,7 +15,7 @@ import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 
 const getRowId = (row: TypeTblFailureReports) => row.failureReportId;
 
-const columns: GridColDef<TypeTblFailureReports>[] = [
+export const columns: GridColDef<TypeTblFailureReports>[] = [
   {
     field: "failureNumber",
     headerName: "Number",
