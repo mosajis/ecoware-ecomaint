@@ -343,7 +343,7 @@ model TblComponentUnit {
   tblFailureReports           TblFailureReports[]
   tblFunctions                TblFunctions[]
   tblMaintLogs                TblMaintLog[]
-  tblRotationLog              TblRotationLog[]
+  tblRotationLogs             TblRotationLog[]
   tblWorkOrders               TblWorkOrder[]
 
   @@map("tblComponentUnit")
@@ -769,7 +769,7 @@ model TblFunctions {
   functionId        Int               @id(map: "PK_tblFunctions") @default(dbgenerated("NEXT VALUE FOR [Seq_Functions]"), map: "DF_FunctionID") @map("FunctionID")
   compId            Int?              @map("CompID")
   funcNo            String?           @map("FuncNo") @db.NVarChar(90)
-  FuncDesc          String?           @db.NVarChar(80)
+  funcDesc          String?           @map("FuncDesc") @db.NVarChar(80)
   parentFunctionId  Int?              @map("ParentFunctionID")
   notes             String?           @map("Notes") @db.NVarChar(300)
   statusId          Int?              @map("StatusID")
@@ -781,7 +781,7 @@ model TblFunctions {
   tblFunctions      TblFunctions?     @relation("tblFunctionsTotblFunctions", fields: [parentFunctionId], references: [functionId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblFunctions_tblFunctions")
   otherTblFunctions TblFunctions[]    @relation("tblFunctionsTotblFunctions")
   tblMaintLogs      TblMaintLog[]
-  tblRotationLog    TblRotationLog[]
+  tblRotationLogs   TblRotationLog[]
 
   @@map("tblFunctions")
 }
@@ -1304,16 +1304,16 @@ model TblSpareType {
   spareTypeId        Int            @id(map: "PK_tblSpareType") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareType]"), map: "DF_SpareType") @map("SpareTypeID")
   parentSpareTypeId  Int?           @map("ParentSpareTypeID")
   name               String?        @db.NVarChar(200)
-  PartTypeNo         String?        @db.NVarChar(200)
-  MakerRefNo         String?        @db.NVarChar(200)
-  ExtraNo            String?        @db.NVarChar(200)
-  Note               String?        @db.NVarChar(200)
-  UnitID             Int?
+  partTypeNo         String?        @map("PartTypeNo") @db.NVarChar(200)
+  makerRefNo         String?        @map("MakerRefNo") @db.NVarChar(200)
+  extraNo            String?        @map("ExtraNo") @db.NVarChar(200)
+  note               String?        @map("Note") @db.NVarChar(200)
+  unitId             Int?           @map("UnitID")
   deptId             Int?           @map("DeptID")
   exportMarker       Int?           @map("ExportMarker")
   lastupdate         DateTime?      @db.DateTime
   orderNo            Int?           @map("OrderNo")
-  tblUnit            TblUnit?       @relation(fields: [UnitID], references: [unitId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblSpareType_tblUnit")
+  tblUnit            TblUnit?       @relation(fields: [unitId], references: [unitId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblSpareType_tblUnit")
   tblSpareType       TblSpareType?  @relation("tblSpareTypeTotblSpareType", fields: [parentSpareTypeId], references: [spareTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblStockType_tblStockType")
   otherTblSpareTypes TblSpareType[] @relation("tblSpareTypeTotblSpareType")
   tblSpareUnits      TblSpareUnit[]
@@ -1345,7 +1345,7 @@ model TblUnit {
   tblCompMeasurePoints     TblCompMeasurePoint[]
   tblCompMeasurePointLogs  TblCompMeasurePointLog[]
   tblCompTypeMeasurePoints TblCompTypeMeasurePoint[]
-  tblSpareType             TblSpareType[]
+  tblSpareTypes            TblSpareType[]
 
   @@map("tblUnit")
 }

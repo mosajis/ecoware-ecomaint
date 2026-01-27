@@ -26,12 +26,12 @@ const columns: GridColDef<TypeTblMaintLogStocks>[] = [
   {
     field: "totalCount",
     headerName: "Total Count",
-    flex: 1,
+    width: 130,
   },
   {
     field: "totalUse",
     headerName: "Total Use",
-    flex: 1,
+    width: 130,
   },
   {
     field: "partTypeNo",
@@ -42,7 +42,7 @@ const columns: GridColDef<TypeTblMaintLogStocks>[] = [
   },
   {
     field: "makerRefNo",
-    headerName: "Extra No",
+    headerName: "Maker Ref",
     flex: 1,
     // @ts-ignore
     valueGetter: (_, row) => row?.tblSpareUnit?.tblSpareType.makerRefNo,
@@ -64,9 +64,9 @@ const columns: GridColDef<TypeTblMaintLogStocks>[] = [
   {
     field: "unit",
     headerName: "Unit",
-    flex: 5,
+    flex: 1,
     // @ts-ignore
-    valueGetter: (_, row) => row?.tblSpareUnit?.tblUnit?.name,
+    valueGetter: (_, row) => row?.tblSpareUnit?.tblSpareType?.tblUnit?.name,
   },
 ];
 
@@ -100,20 +100,6 @@ const maintLogColumns: GridColDef<TypeTblMaintLogStocks>[] = [
 
     renderCell: ({ value }) => <CellDateTime value={value} />,
   },
-
-  {
-    field: "discipline",
-    headerName: "Discipline",
-    valueGetter: (_, row) =>
-      // @ts-ignore
-      row?.tblMaintLog?.tblWorkOrder?.tblDiscipline?.name,
-  },
-  {
-    field: "followStatus",
-    headerName: "Follow Status",
-    // @ts-ignore
-    valueGetter: (_, row) => row?.tblMaintLog?.tblFollowStatus?.fsName,
-  },
   {
     field: "maintClass",
     headerName: "Maint Class",
@@ -124,7 +110,7 @@ const maintLogColumns: GridColDef<TypeTblMaintLogStocks>[] = [
     field: "downTime",
     headerName: "DownTime",
     valueGetter: (_, row) => row?.tblMaintLog?.downTime,
-
+    width: 130,
     renderCell: ({ value }) => <CellDateTime value={value} />,
   },
 
@@ -198,7 +184,6 @@ export default function PageStockUsed() {
         disableEdit
         disableDelete
         disableAdd
-        disableRefresh
         label="Spare Used"
         loading={loading}
         rows={rows}

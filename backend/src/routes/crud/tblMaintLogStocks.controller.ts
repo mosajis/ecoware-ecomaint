@@ -63,7 +63,11 @@ const ControllerTblMaintLogStocks = new BaseController({
           include: {
             tblSpareUnit: {
               include: {
-                tblSpareType: true,
+                tblSpareType: {
+                  include: {
+                    tblUnit: true,
+                  },
+                },
               },
             },
           },
