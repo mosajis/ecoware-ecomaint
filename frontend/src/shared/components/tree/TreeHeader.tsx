@@ -1,6 +1,7 @@
 import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
 import TreeToolbar from "./TreeToolbar";
+import { useCallback, useRef, useState } from "react";
 
 // ===== TreeHeader =====
 function TreeHeader({
@@ -23,8 +24,8 @@ function TreeHeader({
   onCollapseAll?: () => void;
   onDelete?: () => void;
   onEdit?: () => void;
-  onSearch?: () => void;
-  hasSelection?: boolean; // ✅ برای disable کردن دکمه‌ها
+  onSearch?: (txt: string) => void;
+  hasSelection?: boolean;
 }) {
   return (
     <Box>
@@ -39,6 +40,7 @@ function TreeHeader({
         onCollapseAll={onCollapseAll}
         onSearch={onSearch}
       />
+
       {loading && <LinearProgress />}
     </Box>
   );

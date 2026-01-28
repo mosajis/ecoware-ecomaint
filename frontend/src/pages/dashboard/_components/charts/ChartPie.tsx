@@ -11,28 +11,21 @@ type Props = {
 
 export default function WorkOrdersPieChart({ counts }: Props) {
   const openBreakdownData = React.useMemo(() => {
-    const openTotal = counts.open;
+    const openTotal = counts.workOrder.open;
 
     return [
       {
-        id: "Pending",
-        label: "Pending",
-        value: counts.pending,
-        percentage: toPercent(counts.pending, openTotal),
-        color: `rgba(${KPI_COLORS.yellow}, 0.6)`,
-      },
-      {
         id: "Overdue",
         label: "Overdue",
-        value: counts.overdue,
-        percentage: toPercent(counts.overdue, openTotal),
+        value: counts.workOrder.overdue,
+        percentage: toPercent(counts.workOrder.overdue, openTotal),
         color: `rgba(${KPI_COLORS.red}, 0.6)`,
       },
       {
         id: "Current",
         label: "Current",
-        value: counts.current,
-        percentage: toPercent(counts.current, openTotal),
+        value: counts.workOrder.current,
+        percentage: toPercent(counts.workOrder.current, openTotal),
         color: `rgba(${KPI_COLORS.blue}, 0.6)`,
       },
     ];

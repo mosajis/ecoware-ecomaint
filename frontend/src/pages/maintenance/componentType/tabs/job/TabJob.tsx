@@ -8,13 +8,13 @@ import CellFrequency from "@/shared/components/dataGrid/cells/CellFrequency";
 import { toast } from "sonner";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { logicTblCompTypeJob } from "./TabJobEffect";
 import { useCallback, useState } from "react";
 import {
   tblCompTypeJob,
   TypeTblCompType,
   TypeTblCompTypeJob,
 } from "@/core/api/generated/api";
+import { logicTblCompTypeJob } from "@/core/api/api";
 
 // === Columns ===
 type Props = {

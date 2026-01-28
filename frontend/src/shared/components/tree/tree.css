@@ -27,6 +27,12 @@
   color: inherit;
 }
 
+.tree-text-highlight {
+  background-color: var(--template-palette-warning-light);
+  padding: 0 1px;
+  border-radius: 2px;
+}
+
 .tree .tree-item-parent::before {
   content: "";
   position: absolute;
@@ -150,87 +156,4 @@
   background-color: var(--template-palette-primary-main);
   border-radius: 99px;
   z-index: 2;
-}
-
-.description {
-  font-family: sans-serif;
-  font-size: 0.8rem;
-  background-color: var(--template-palette-action-hover);
-  color: var(--template-palette-text-primary);
-  border-radius: 8px;
-  padding: 8px 12px;
-}
-
-.outeritem {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
-
-.actionbar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-top: 8px;
-}
-
-.searchbox {
-  padding: 8px 16px;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
-  gap: 4px;
-  height: unset;
-  background-color: transparent;
-  border: 1px solid var(--template-palette-divider);
-  border-radius: 4px;
-  font-size: 0.8rem;
-  color: var(--template-palette-text-secondary);
-  display: flex;
-  align-items: center;
-  justify-items: center;
-}
-
-.searchbox:before {
-  content: "Navigate between search results with ArrowUp and ArrowDown. Press Escape to close search.";
-  display: block;
-  width: 100%;
-}
-
-.searchbox input {
-  flex-grow: 1;
-  padding: 4px;
-  color: var(--template-palette-text-primary);
-  background-color: transparent;
-}
-
-.actionbtn {
-  height: 30px;
-  background-color: transparent;
-  border: 1px solid var(--template-palette-divider);
-  padding: 0 8px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  color: var(--template-palette-text-secondary);
-  display: flex;
-  align-items: center;
-  justify-items: center;
-}
-
-.actionbtn:hover {
-  cursor: pointer;
-  background-color: var(--template-palette-action-hover);
-}
-
-.visible-assistive-text {
-  position: unset !important;
-  width: unset !important;
-  height: 60px !important;
-  margin: unset !important;
-  overflow: auto !important;
-  clip: unset !important;
-  display: block;
-  margin-bottom: 1rem !important;
-  background-color: var(--template-palette-info-light);
 }

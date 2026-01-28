@@ -10,6 +10,7 @@ export type ReusableTabItem<T = any> = {
   icon: JSX.Element;
   component?: React.LazyExoticComponent<React.FC<T>>;
   containerProps?: React.ComponentProps<typeof TabContainer>;
+  disabled?: boolean;
 };
 
 type Props = {
@@ -82,6 +83,7 @@ const TabsContainer = ({
       >
         {tabs.map((tab) => (
           <Tab
+            disabled={tab.disabled}
             key={tab.label}
             value={tab.label}
             icon={cloneElement(tab.icon, { sx: { fontSize: 17 } })}

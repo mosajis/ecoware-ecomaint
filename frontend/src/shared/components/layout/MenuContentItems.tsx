@@ -60,7 +60,7 @@ export const menuContentItems: {
   path?: string;
 }[] = [
   {
-    title: "Dashboard (x)",
+    title: "Dashboard",
     icon: <DashboardRoundedIcon />,
     items: [],
     path: "/dashboard",

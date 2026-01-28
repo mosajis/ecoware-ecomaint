@@ -19,9 +19,9 @@ import {
   TypeTblAddress,
   TypeTblCompStatus,
 } from "@/core/api/generated/api";
-import { logicTblComponentUnit } from "./ComponentUnitEffect";
 import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
+import { logicTblComponentUnit } from "@/core/api/api";
 
 type Props = {
   open: boolean;

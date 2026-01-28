@@ -18,8 +18,8 @@ const getRowId = (row: TypeTblFailureReports) => row.failureReportId;
 export const columns: GridColDef<TypeTblFailureReports>[] = [
   {
     field: "failureNumber",
-    headerName: "Number",
-    width: 100,
+    headerName: "No",
+    width: 50,
     valueGetter: (_, row) => row.failureNumber,
   },
   {
@@ -43,13 +43,13 @@ export const columns: GridColDef<TypeTblFailureReports>[] = [
   {
     field: "totalWait",
     headerName: "Total Wait",
-    width: 100,
+    flex: 1,
     valueGetter: (_, row) => row.totalWait,
   },
   {
     field: "severity",
     headerName: "Severity",
-    width: 120,
+    flex: 1,
     renderCell: ({ row }) => (
       <CellSeverity value={row.tblFailureSeverityLevel} />
     ),
@@ -57,19 +57,20 @@ export const columns: GridColDef<TypeTblFailureReports>[] = [
   {
     field: "groupFollow",
     headerName: "Group Follow",
-    width: 130,
+    flex: 1,
     valueGetter: (_, row) => row?.tblFailureGroupFollow?.name,
   },
   {
     field: "discipline",
     headerName: "Discipline",
-    width: 120,
+    flex: 1,
+
     valueGetter: (_, row) => row?.tblDiscipline?.name,
   },
   {
     field: "reportedBy",
     headerName: "Reported By",
-    width: 130,
+    flex: 1,
     valueGetter: (_, row) =>
       // @ts-ignore
       row?.tblUsersTblFailureReportsReportedUserIdTotblUsers?.uName,
@@ -77,7 +78,7 @@ export const columns: GridColDef<TypeTblFailureReports>[] = [
   {
     field: "approvedBy",
     headerName: "Approved By",
-    width: 130,
+    flex: 1,
     valueGetter: (_, row) =>
       // @ts-ignore
       row?.tblUsersTblFailureReportsApprovedUserIdTotblUsers?.userName,
@@ -85,7 +86,7 @@ export const columns: GridColDef<TypeTblFailureReports>[] = [
   {
     field: "closedBy",
     headerName: "Closed By",
-    width: 130,
+    flex: 1,
     valueGetter: (_, row) =>
       // @ts-ignore
       row?.tblUsersTblFailureReportsClosedUserIdTotblUsers?.userName,

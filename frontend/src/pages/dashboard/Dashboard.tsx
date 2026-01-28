@@ -4,28 +4,24 @@ import Stack from "@mui/material/Stack";
 import Spinner from "@/shared/components/Spinner";
 import WorkOrdersPieChart from "./_components/charts/ChartPie";
 import DisciplineCard from "./_components/CardDiscipline";
+import CardSection from "./_components/CardSection";
 import { useEffect, useState } from "react";
-
 import { PageHeader } from "../../shared/components/PageHeader";
 import { getStatistics, TypeStatistics } from "@/core/api/api";
 import { buildWorkOrderCardsData } from "./cards/cardsWorkOrder";
 import { buildKpiCardsData } from "./cards/cardsKpi";
 import { buildFailureCardsData } from "./cards/cardsFailure";
 import { buildUnplannedCardsData } from "./cards/cardsUnplanned";
-import CardSection from "./_components/CardSection";
 
 const Dashboard = () => {
   const [counts, setCounts] = useState<TypeStatistics | null>(null);
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const initFetch = async () => {
       setLoading(true);
-
       const counts = await getStatistics();
       setCounts(counts);
-
       setLoading(false);
     };
 
@@ -37,19 +33,11 @@ const Dashboard = () => {
   }
 
   const workOrderCardsData = buildWorkOrderCardsData(counts);
-  const kpiCardsData = buildKpiCardsData(counts);
   const failureCardsData = buildFailureCardsData(counts);
   const unplannedCardsData = buildUnplannedCardsData(counts);
 
   return (
     <Box display={"flex"} flexDirection={"column"} gap={1.5}>
-      {/* <CardSection
-        cols={6}
-        title="KPI Overview"
-        subtitle="Overall maintenance performance and status"
-        cards={kpiCardsData}
-      /> */}
-      <Divider />
       <CardSection
         cols={6}
         title="Work Order Statistics"
@@ -104,9 +92,13 @@ const Dashboard = () => {
             "Mechanic",
             "HSE Officer",
             "Toolpusher",
-            "Mud Enginer",
-          ].map((i) => (
-            <DisciplineCard title={i || ""} counts={counts} />
+            "Mud Engineer",
+          ].map((discipline) => (
+            <DisciplineCard
+              key={discipline}
+              title={discipline}
+              counts={counts}
+            />
           ))}
         </Box>
       </Box>

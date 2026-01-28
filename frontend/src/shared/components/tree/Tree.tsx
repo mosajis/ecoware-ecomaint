@@ -2,6 +2,7 @@ import TreeHeader from "./TreeHeader";
 import TreeContent from "./TreeContent";
 import { useTree } from "@headless-tree/react";
 import { useEffect, useCallback, useState } from "react";
+import { useRef } from "react";
 import { TreeDataMapper } from "@/shared/hooks/useDataTree";
 import {
   syncDataLoaderFeature,
@@ -38,13 +39,65 @@ export function GenericTree<T>({
   onAdd,
   onRefresh,
   onDoubleClick,
+
   loading = false,
 }: GenericTreeProps<T>) {
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [focusedItem, setFocusedItem] = useState<string | null>(null);
 
+  const [searchQuery, setSearchQuery] = useState("");
+
   const { itemsMap, childrenMap, rootIds } = data;
+
+  const clickTimerRef = useRef<number | null>(null);
+  const CLICK_DELAY = 200;
+
+  const handleItemClick = useCallback(
+    (item: T) => {
+      if (clickTimerRef.current) return;
+
+      clickTimerRef.current = window.setTimeout(() => {
+        clickTimerRef.current = null;
+        onItemSelect?.(item);
+      }, CLICK_DELAY);
+    },
+    [onItemSelect],
+  );
+
+  const handleItemDoubleClick = useCallback(
+    (itemId: number) => {
+      if (clickTimerRef.current) {
+        clearTimeout(clickTimerRef.current);
+        clickTimerRef.current = null;
+      }
+
+      onDoubleClick?.(itemId);
+    },
+    [onDoubleClick],
+  );
+
+  const getAncestorIds = useCallback(
+    (id: number) => {
+      const result: string[] = [];
+      let currentId: number | undefined = id;
+
+      while (currentId != null) {
+        const parentEntry = Array.from(childrenMap.entries()).find(
+          ([, children]) => children.includes(currentId!),
+        );
+
+        if (!parentEntry) break;
+
+        const parentId = parentEntry[0];
+        result.push(String(parentId));
+        currentId = parentId;
+      }
+
+      return result;
+    },
+    [childrenMap],
+  );
 
   // Clean up state when items are removed
   useEffect(() => {
@@ -62,12 +115,13 @@ export function GenericTree<T>({
     setFocusedItem,
     getItemName: (item) => getItemName(item.getItemData()),
     isItemFolder: (item) => {
-      try {
-        const id = getItemId(item.getItemData());
-        return (childrenMap.get(Number(id))?.length ?? 0) > 0;
-      } catch {
-        return false;
-      }
+      const data = item.getItemData();
+      if (!data) return false;
+
+      const id = Number(getItemId(data));
+      if (Number.isNaN(id)) return false;
+
+      return (childrenMap.get(id)?.length ?? 0) > 0;
     },
     dataLoader: {
       getItem: (itemId) => {
@@ -84,24 +138,22 @@ export function GenericTree<T>({
     features: [syncDataLoaderFeature, selectionFeature, hotkeysCoreFeature],
   });
 
-  // Rebuild tree when items change
-  useEffect(() => {
-    tree.rebuildTree();
-  }, [itemsMap, childrenMap, rootIds, tree]);
-
   // Auto-expand root items
   useEffect(() => {
     if (!rootIds.length) return;
+
     setExpandedItems((prev) => {
-      const next = new Set(prev);
-      rootIds.forEach((id) => next.add(String(id)));
-      return Array.from(next);
+      if (prev.length > 0) return prev;
+
+      return rootIds.map(String);
     });
   }, [rootIds]);
 
   // Expand / Collapse all
   const handleExpandAll = useCallback(() => {
-    tree.getItems().forEach((item) => item.expand());
+    tree.getItems().forEach((item) => {
+      if (item.isFolder()) item.expand();
+    });
   }, [tree]);
 
   const handleCollapseAll = useCallback(() => {
@@ -119,9 +171,40 @@ export function GenericTree<T>({
     onDelete?.(Number(selectedItems[0]));
   }, [selectedItems, onDelete]);
 
-  const handleSearch = () => {
-    console.log("search");
-  };
+  const handleSearch = useCallback(
+    (txt: string) => {
+      const q = txt.trim().toLowerCase();
+
+      if (!q) {
+        setSearchQuery("");
+
+        return;
+      }
+
+      setSearchQuery(q);
+
+      const nextExpanded = new Set<string>();
+      const nextHighlighted = new Set<string>();
+
+      itemsMap.forEach((item, id) => {
+        const name = getItemName(item).toLowerCase();
+        if (!name.includes(q)) return;
+
+        const idStr = String(id);
+        nextHighlighted.add(idStr);
+        nextExpanded.add(idStr);
+
+        getAncestorIds(id).forEach((ancestorId) =>
+          nextExpanded.add(ancestorId),
+        );
+      });
+
+      if (nextExpanded.size > 0) {
+        setExpandedItems(Array.from(nextExpanded));
+      }
+    },
+    [itemsMap, getItemName, getAncestorIds],
+  );
 
   return (
     <div className="tree-container">
@@ -139,11 +222,11 @@ export function GenericTree<T>({
       />
       <TreeContent
         tree={tree}
-        rootIds={rootIds}
-        onDoubleClick={onDoubleClick}
+        searchQuery={searchQuery}
+        onItemClick={handleItemClick}
+        onItemDoubleClick={handleItemDoubleClick}
         getItemName={getItemName}
         getItemId={getItemId}
-        onItemSelect={onItemSelect}
       />
     </div>
   );

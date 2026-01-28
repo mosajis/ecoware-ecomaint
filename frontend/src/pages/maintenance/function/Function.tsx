@@ -26,7 +26,7 @@ const columns: GridColDef<TypeTblFunctions>[] = [
     flex: 1,
     valueGetter: (_, row) => row.tblComponentUnit?.compNo,
   },
-  { field: "orderNo", headerName: "Order No", width: 120 },
+  { field: "orderNo", headerName: "Order No", width: 85 },
 ];
 
 export default function PageFunction() {
@@ -89,11 +89,6 @@ export default function PageFunction() {
     setOpenForm(false);
   }, []);
 
-  const handleAfterInstallRemove = useCallback(() => {
-    setComponentDialog(null);
-    refetch();
-  }, [refetch]);
-
   const handleRowDoubleClick = useCallback(
     (rowId: number) => {
       const row = rows.find((i) => i.functionId === rowId);
@@ -110,23 +105,21 @@ export default function PageFunction() {
 
   return (
     <>
-      <Splitter initialPrimarySize="30%">
+      <Splitter initialPrimarySize="35%">
         <GenericTree<TypeTblFunctions>
-          label="Tree View"
           loading={loading}
           data={tree}
           onDoubleClick={handleRowDoubleClick}
           onEdit={handleEdit}
           onDelete={handleDelete}
           onAdd={handleCreate}
-          onRefresh={refetch}
           getItemId={getRowId}
           getItemName={getItemName}
         />
 
         <CustomizedDataGrid
           showToolbar
-          label="Functions"
+          label="List View"
           rows={rows}
           columns={columns}
           loading={loading}
@@ -181,7 +174,7 @@ export default function PageFunction() {
           functionId={selectedRow.functionId}
           compId={selectedRow.compId}
           onClose={() => setComponentDialog(null)}
-          onSuccess={handleAfterInstallRemove}
+          onSuccess={refetch}
         />
       )}
     </>

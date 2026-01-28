@@ -7,7 +7,6 @@ import {
   Stack,
   LinearProgress,
   Box,
-  LinearProgressPropsColorOverrides,
 } from "@mui/material";
 
 type Props = {
@@ -16,11 +15,43 @@ type Props = {
 };
 
 const DisciplineCard = ({ title, counts }: Props) => {
+  const disciplineStats = counts.disciplines[title] || {
+    open: 0,
+    pending: 0,
+    overdue: 0,
+    current: 0,
+  };
+
+  const totalOpen = disciplineStats.open;
+
   const items = [
-    { label: "Open", value: counts.open, color: "info" },
-    { label: "Current", value: counts.current, color: "info" },
-    { label: "Pending", value: 2000, color: "warning" },
-    { label: "Overdue", value: counts.overdue, color: "error" },
+    {
+      label: "Open",
+      value: disciplineStats.open,
+      color: "info",
+      total: counts.workOrder.total,
+      sx: {
+        marginBottom: 2,
+      },
+    },
+    {
+      label: "Current",
+      value: disciplineStats.current,
+      color: "info",
+      total: totalOpen,
+    },
+    {
+      label: "Pending",
+      value: disciplineStats.pending,
+      color: "warning",
+      total: totalOpen,
+    },
+    {
+      label: "Overdue",
+      value: disciplineStats.overdue,
+      color: "error",
+      total: totalOpen,
+    },
   ];
 
   return (
@@ -32,7 +63,7 @@ const DisciplineCard = ({ title, counts }: Props) => {
           </Typography>
 
           {items.map((item) => {
-            const percent = toPercent(item.value, counts.total);
+            const percent = toPercent(item.value, item.total);
             return (
               <Box key={item.label}>
                 <Stack
@@ -40,14 +71,27 @@ const DisciplineCard = ({ title, counts }: Props) => {
                   justifyContent="space-between"
                   alignItems="center"
                 >
-                  <Typography variant="caption" fontWeight="bold">
+                  <Typography flex={1} variant="caption" fontWeight="bold">
                     {item.label}
                   </Typography>
-                  <Typography variant="caption" fontWeight="bold">
+
+                  <Typography
+                    textAlign={"center"}
+                    flex={2}
+                    variant="caption"
+                    fontWeight="bold"
+                  >
+                    {percent === 0 ? "0.00" : percent} %
+                  </Typography>
+                  <Typography
+                    textAlign={"right"}
+                    flex={1}
+                    variant="caption"
+                    fontWeight="bold"
+                  >
                     {item.value}
                   </Typography>
                 </Stack>
-
                 <LinearProgress
                   color={item.color as any}
                   variant="determinate"
@@ -56,6 +100,7 @@ const DisciplineCard = ({ title, counts }: Props) => {
                     background: "#acacac49",
                     height: 4,
                     borderRadius: 4,
+                    ...item.sx,
                   }}
                 />
               </Box>

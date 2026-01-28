@@ -12,8 +12,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ButtonSearch from "./toolbar/ButtonSearch";
 import ConfirmDialog from "../ConfirmDialog";
 import Divider from "@mui/material/Divider";
-import { useState, useCallback, useMemo, memo } from "react";
+import { useState, useCallback, useMemo, memo, useRef } from "react";
 import { ReactNode } from "react";
+import SearchPopover from "./_component/SearchPopover";
 
 interface TreeToolbarProps {
   label?: string;
@@ -54,10 +55,21 @@ const TreeToolbar = memo(function TreeToolbar({
   const [searchText, setSearchText] = useState("");
   const [confirmOpen, setConfirmOpen] = useState(false);
 
+  const debounceRef = useRef<number | null>(null);
+
   const handleSearchChange = useCallback(
     (value: string) => {
       setSearchText(value);
-      onSearch?.(value);
+
+      if (!onSearch) return;
+
+      if (debounceRef.current) {
+        window.clearTimeout(debounceRef.current);
+      }
+
+      debounceRef.current = window.setTimeout(() => {
+        onSearch(value);
+      }, 250); // sweet spot
     },
     [onSearch],
   );
@@ -153,7 +165,7 @@ const TreeToolbar = memo(function TreeToolbar({
       <Typography fontWeight="bold">{label}</Typography>
 
       <Stack direction="row" spacing={0.5} alignItems="center">
-        {onSearch && <ButtonSearch onSearch={handleSearchChange} />}
+        {onSearch && <SearchPopover onSearch={handleSearchChange} />}
         <Divider orientation="vertical" style={{ color: "red", height: 20 }} />
         {buttons.map(
           (btn) =>

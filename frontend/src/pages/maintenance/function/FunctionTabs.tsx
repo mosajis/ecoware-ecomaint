@@ -18,36 +18,54 @@ const TabMaintLog = lazy(() => import("./tabs/TabMaintLog"));
 const TabFailureReport = lazy(() => import("./tabs/TabFailureReport"));
 const TabRotationLog = lazy(() => import("./tabs/TabRotationLog"));
 
-// Tabs definition
-const tabs: ReusableTabItem[] = [
-  {
-    label: "RotaionLog",
-    icon: <RestoreIcon />,
-    component: TabRotationLog,
-  },
-  { label: "Job", icon: <AccountTree />, component: TabJob },
-  { label: "Counter", icon: <BarChart />, component: TabCounter },
-  {
-    label: "Work Order",
-    icon: <ContentCopy />,
-    component: TabWorkOrder,
-  },
-  { label: "Maint Log", icon: <DoneAll />, component: TabMaintLog },
-  {
-    label: "Failure Report (not set)",
-    icon: <BugReport />,
-    component: TabFailureReport,
-  },
-];
-
 type Props = {
   recordFunction?: TypeTblFunctions;
   label?: string;
 };
 
 const TabsComponent = (props: Props) => {
-  const { recordFunction: _f, label } = props;
-  return <TabsContainer tabs={tabs} tabProps={{ recordFunction: _f, label }} />;
+  const { recordFunction, label } = props;
+
+  // Tabs definition
+  const tabs: ReusableTabItem[] = [
+    {
+      label: "RotaionLog",
+      icon: <RestoreIcon />,
+      component: TabRotationLog,
+    },
+    {
+      label: "Job",
+      icon: <AccountTree />,
+      component: TabJob,
+      disabled: !recordFunction?.tblComponentUnit?.compId,
+    },
+    {
+      label: "Counter",
+      icon: <BarChart />,
+      component: TabCounter,
+      disabled: !recordFunction?.tblComponentUnit?.compId,
+    },
+    {
+      label: "Work Order",
+      icon: <ContentCopy />,
+      component: TabWorkOrder,
+      disabled: !recordFunction?.tblComponentUnit?.compId,
+    },
+    {
+      label: "Maint Log",
+      icon: <DoneAll />,
+      component: TabMaintLog,
+      disabled: !recordFunction?.tblComponentUnit?.compId,
+    },
+    {
+      label: "Failure Report",
+      icon: <BugReport />,
+      component: TabFailureReport,
+      disabled: !recordFunction?.tblComponentUnit?.compId,
+    },
+  ];
+
+  return <TabsContainer tabs={tabs} tabProps={{ recordFunction, label }} />;
 };
 
 export default TabsComponent;
