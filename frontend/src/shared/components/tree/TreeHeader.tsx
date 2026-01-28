@@ -1,21 +1,9 @@
 import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
 import TreeToolbar from "./TreeToolbar";
-import { useCallback, useRef, useState } from "react";
+import { memo } from "react";
 
-// ===== TreeHeader =====
-function TreeHeader({
-  loading,
-  onAdd,
-  onRefresh,
-  onExpandAll,
-  onCollapseAll,
-  onEdit,
-  onDelete,
-  onSearch,
-  label,
-  hasSelection,
-}: {
+interface TreeHeaderProps {
   loading?: boolean;
   label: string;
   onAdd?: () => void;
@@ -26,7 +14,20 @@ function TreeHeader({
   onEdit?: () => void;
   onSearch?: (txt: string) => void;
   hasSelection?: boolean;
-}) {
+}
+
+const TreeHeader = memo(function TreeHeader({
+  loading,
+  onAdd,
+  onRefresh,
+  onExpandAll,
+  onCollapseAll,
+  onEdit,
+  onDelete,
+  onSearch,
+  label,
+  hasSelection,
+}: TreeHeaderProps) {
   return (
     <Box>
       <TreeToolbar
@@ -44,6 +45,6 @@ function TreeHeader({
       {loading && <LinearProgress />}
     </Box>
   );
-}
+});
 
 export default TreeHeader;

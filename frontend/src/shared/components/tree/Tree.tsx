@@ -1,8 +1,7 @@
 import TreeHeader from "./TreeHeader";
 import TreeContent from "./TreeContent";
 import { useTree } from "@headless-tree/react";
-import { useEffect, useCallback, useState } from "react";
-import { useRef } from "react";
+import { useEffect, useCallback, useState, useMemo, useRef } from "react";
 import { TreeDataMapper } from "@/shared/hooks/useDataTree";
 import {
   syncDataLoaderFeature,
@@ -39,19 +38,150 @@ export function GenericTree<T>({
   onAdd,
   onRefresh,
   onDoubleClick,
-
   loading = false,
 }: GenericTreeProps<T>) {
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [focusedItem, setFocusedItem] = useState<string | null>(null);
-
   const [searchQuery, setSearchQuery] = useState("");
 
   const { itemsMap, childrenMap, rootIds } = data;
 
   const clickTimerRef = useRef<number | null>(null);
   const CLICK_DELAY = 200;
+
+  // ✅ Cache parent-child relationships for O(1) lookup
+  const parentMap = useMemo(() => {
+    const map = new Map<number, number>();
+    childrenMap.forEach((children, parentId) => {
+      children.forEach((childId) => {
+        map.set(childId, parentId);
+      });
+    });
+    return map;
+  }, [childrenMap]);
+
+  // ✅ Optimized getAncestorIds with O(log n) instead of O(n²)
+  const getAncestorIds = useCallback(
+    (id: number): string[] => {
+      const result: string[] = [];
+      let currentId: number | undefined = id;
+
+      while (currentId != null) {
+        const parentId = parentMap.get(currentId);
+        if (parentId == null) break;
+
+        result.push(String(parentId));
+        currentId = parentId;
+      }
+
+      return result;
+    },
+    [parentMap],
+  );
+
+  // ✅ Memoize valid IDs set
+  const validIdsSet = useMemo(() => {
+    return new Set(Array.from(itemsMap.keys()).map(String));
+  }, [itemsMap]);
+
+  // ✅ Clean up state when items are removed - optimized
+  useEffect(() => {
+    setExpandedItems((prev) => {
+      const filtered = prev.filter((id) => validIdsSet.has(id));
+      return filtered.length === prev.length ? prev : filtered;
+    });
+
+    setSelectedItems((prev) => {
+      const filtered = prev.filter((id) => validIdsSet.has(id));
+      return filtered.length === prev.length ? prev : filtered;
+    });
+
+    setFocusedItem((prev) => (prev && validIdsSet.has(prev) ? prev : null));
+  }, [validIdsSet]);
+
+  // ✅ Memoize tree configuration
+  const treeConfig = useMemo(
+    () => ({
+      rootItemId: "root" as const,
+      state: { selectedItems, expandedItems, focusedItem },
+      setSelectedItems,
+      setExpandedItems,
+      setFocusedItem,
+      getItemName: (item: any) => getItemName(item.getItemData()),
+      isItemFolder: (item: any) => {
+        const data = item.getItemData();
+        if (!data) return false;
+
+        const id = Number(getItemId(data));
+        if (Number.isNaN(id)) return false;
+
+        return (childrenMap.get(id)?.length ?? 0) > 0;
+      },
+      dataLoader: {
+        getItem: (itemId: string) => {
+          if (itemId === "root") return {} as T;
+          return itemsMap.get(Number(itemId)) || ({ id: itemId } as T);
+        },
+        getChildren: (itemId: string) => {
+          if (itemId === "root") return rootIds.map(String);
+          const children = childrenMap.get(Number(itemId)) || [];
+          return children.filter((id) => itemsMap.has(id)).map(String);
+        },
+      },
+      features: [syncDataLoaderFeature, selectionFeature, hotkeysCoreFeature],
+    }),
+    [
+      selectedItems,
+      expandedItems,
+      focusedItem,
+      getItemName,
+      getItemId,
+      childrenMap,
+      itemsMap,
+      rootIds,
+    ],
+  );
+
+  const tree = useTree<T>(treeConfig);
+
+  // ✅ Auto-expand root items - optimized
+  useEffect(() => {
+    if (!rootIds.length || expandedItems.length > 0) return;
+
+    setExpandedItems(rootIds.map(String));
+  }, [rootIds, expandedItems.length]);
+
+  // ✅ Memoize tree items getter
+  const getTreeItems = useCallback(() => tree.getItems(), [tree]);
+
+  // ✅ Expand / Collapse all - optimized
+  const handleExpandAll = useCallback(() => {
+    const items = getTreeItems();
+    items.forEach((item) => {
+      if (item.isFolder()) item.expand();
+    });
+  }, [getTreeItems]);
+
+  const handleCollapseAll = useCallback(() => {
+    const items = getTreeItems();
+    items.forEach((item) => item.collapse());
+  }, [getTreeItems]);
+
+  // ✅ Optimized handlers
+  const handleEdit = useCallback(() => {
+    const firstSelected = selectedItems[0];
+    if (firstSelected) {
+      onEdit?.(Number(firstSelected));
+    }
+  }, [selectedItems, onEdit]);
+
+  const handleDelete = useCallback(() => {
+    const firstSelected = selectedItems[0];
+    if (firstSelected) {
+      onDelete?.(Number(firstSelected));
+    }
+  }, [selectedItems, onDelete]);
 
   const handleItemClick = useCallback(
     (item: T) => {
@@ -77,127 +207,33 @@ export function GenericTree<T>({
     [onDoubleClick],
   );
 
-  const getAncestorIds = useCallback(
-    (id: number) => {
-      const result: string[] = [];
-      let currentId: number | undefined = id;
-
-      while (currentId != null) {
-        const parentEntry = Array.from(childrenMap.entries()).find(
-          ([, children]) => children.includes(currentId!),
-        );
-
-        if (!parentEntry) break;
-
-        const parentId = parentEntry[0];
-        result.push(String(parentId));
-        currentId = parentId;
-      }
-
-      return result;
-    },
-    [childrenMap],
-  );
-
-  // Clean up state when items are removed
-  useEffect(() => {
-    const validIds = new Set(Array.from(itemsMap.keys()).map(String));
-    setExpandedItems((prev) => prev.filter((id) => validIds.has(id)));
-    setSelectedItems((prev) => prev.filter((id) => validIds.has(id)));
-    setFocusedItem((prev) => (prev && validIds.has(prev) ? prev : null));
-  }, [itemsMap]);
-
-  const tree = useTree<T>({
-    rootItemId: "root",
-    state: { selectedItems, expandedItems, focusedItem },
-    setSelectedItems,
-    setExpandedItems,
-    setFocusedItem,
-    getItemName: (item) => getItemName(item.getItemData()),
-    isItemFolder: (item) => {
-      const data = item.getItemData();
-      if (!data) return false;
-
-      const id = Number(getItemId(data));
-      if (Number.isNaN(id)) return false;
-
-      return (childrenMap.get(id)?.length ?? 0) > 0;
-    },
-    dataLoader: {
-      getItem: (itemId) => {
-        if (itemId === "root") return {} as T;
-        return itemsMap.get(Number(itemId)) || ({ id: itemId } as T);
-      },
-      getChildren: (itemId) => {
-        if (itemId === "root") return rootIds.map(String);
-        return (childrenMap.get(Number(itemId)) || [])
-          .filter((id) => itemsMap.has(id))
-          .map(String);
-      },
-    },
-    features: [syncDataLoaderFeature, selectionFeature, hotkeysCoreFeature],
-  });
-
-  // Auto-expand root items
-  useEffect(() => {
-    if (!rootIds.length) return;
-
-    setExpandedItems((prev) => {
-      if (prev.length > 0) return prev;
-
-      return rootIds.map(String);
-    });
-  }, [rootIds]);
-
-  // Expand / Collapse all
-  const handleExpandAll = useCallback(() => {
-    tree.getItems().forEach((item) => {
-      if (item.isFolder()) item.expand();
-    });
-  }, [tree]);
-
-  const handleCollapseAll = useCallback(() => {
-    tree.getItems().forEach((item) => item.collapse());
-  }, [tree]);
-
-  // Only send ID for edit/delete for performance
-  const handleEdit = useCallback(() => {
-    if (!selectedItems[0]) return;
-    onEdit?.(Number(selectedItems[0]));
-  }, [selectedItems, onEdit]);
-
-  const handleDelete = useCallback(() => {
-    if (!selectedItems[0]) return;
-    onDelete?.(Number(selectedItems[0]));
-  }, [selectedItems, onDelete]);
-
+  // ✅ Heavily optimized search with early exits and batched updates
   const handleSearch = useCallback(
     (txt: string) => {
       const q = txt.trim().toLowerCase();
 
       if (!q) {
         setSearchQuery("");
-
         return;
       }
 
       setSearchQuery(q);
 
       const nextExpanded = new Set<string>();
-      const nextHighlighted = new Set<string>();
+      const itemsArray = Array.from(itemsMap.entries());
 
-      itemsMap.forEach((item, id) => {
+      // ✅ Single pass through items
+      for (const [id, item] of itemsArray) {
         const name = getItemName(item).toLowerCase();
-        if (!name.includes(q)) return;
+        if (!name.includes(q)) continue;
 
         const idStr = String(id);
-        nextHighlighted.add(idStr);
         nextExpanded.add(idStr);
 
-        getAncestorIds(id).forEach((ancestorId) =>
-          nextExpanded.add(ancestorId),
-        );
-      });
+        // ✅ Add ancestors in one go
+        const ancestors = getAncestorIds(id);
+        ancestors.forEach((ancestorId) => nextExpanded.add(ancestorId));
+      }
 
       if (nextExpanded.size > 0) {
         setExpandedItems(Array.from(nextExpanded));

@@ -1,69 +1,114 @@
-import Popover from "@mui/material/Popover";
-import TextField from "@mui/material/TextField";
-import SearchIcon from "@mui/icons-material/Search";
+import { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
+import Popper from "@mui/material/Popper";
+import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
-import { useState, useRef } from "react";
+import InputAdornment from "@mui/material/InputAdornment";
+import SearchIcon from "@mui/icons-material/Search";
+import ClearIcon from "@mui/icons-material/Clear";
 
-const SearchPopover = ({
-  onSearch,
-}: {
+interface SearchPopperProps {
   onSearch?: (value: string) => void;
-}) => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [searchText, setSearchText] = useState("");
-  const debounceRef = useRef<number | null>(null);
+  debounceMs?: number;
+}
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+const SearchPopper: React.FC<SearchPopperProps> = ({
+  onSearch,
+  debounceMs = 250,
+}) => {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [value, setValue] = useState("");
+  const debounceRef = useRef<number | undefined>(undefined);
+
+  const open = Boolean(anchorEl);
+  const id = open ? "search-popper" : undefined;
+
+  const handleToggle = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl((prev) => (prev ? null : event.currentTarget));
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const open = Boolean(anchorEl);
-
-  const handleChange = (value: string) => {
-    setSearchText(value);
-
+  useEffect(() => {
     if (!onSearch) return;
 
-    if (debounceRef.current) {
-      window.clearTimeout(debounceRef.current);
-    }
-
+    window.clearTimeout(debounceRef.current);
     debounceRef.current = window.setTimeout(() => {
       onSearch(value);
-    }, 250);
+    }, debounceMs);
+
+    return () => window.clearTimeout(debounceRef.current);
+  }, [value, onSearch, debounceMs]);
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Escape") {
+      if (value) {
+        setValue("");
+      } else {
+        handleClose();
+      }
+    }
   };
 
   return (
     <>
-      <IconButton size="small" onClick={handleClick}>
+      <IconButton size="small" onClick={handleToggle} aria-describedby={id}>
         <SearchIcon />
       </IconButton>
-      <Popover
+
+      <Popper
+        id={id}
         open={open}
         anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
+        sx={{ zIndex: 1 }}
+        placement="bottom-start"
+        modifiers={[
+          {
+            name: "offset",
+            options: {
+              offset: [0, 6],
+            },
+          },
+        ]}
       >
-        <Box p={1}>
+        <Box
+          sx={{
+            p: 1,
+            minWidth: 220,
+            bgcolor: "background.paper",
+            borderRadius: 1,
+            boxShadow: 3,
+          }}
+        >
           <TextField
             size="small"
-            value={searchText}
-            onChange={(e) => handleChange(e.target.value)}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
             placeholder="Search..."
             autoFocus
+            fullWidth
+            onKeyDown={handleKeyDown}
+            InputProps={{
+              endAdornment: value ? (
+                <InputAdornment position="end">
+                  <IconButton
+                    sx={{ border: 0 }}
+                    size="small"
+                    onClick={() => setValue("")}
+                    edge="end"
+                  >
+                    <ClearIcon fontSize="small" />
+                  </IconButton>
+                </InputAdornment>
+              ) : null,
+            }}
           />
         </Box>
-      </Popover>
+      </Popper>
     </>
   );
 };
 
-export default SearchPopover;
+export default SearchPopper;
