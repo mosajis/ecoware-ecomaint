@@ -66,9 +66,7 @@ export function useDataGrid<T, K extends keyof T = keyof T>(
       setLoading(true);
       try {
         await deleteById(rowId);
-
-        // refresh بدون toggle مجدد loading
-        await fetchRef.current(undefined, true);
+        await handleRefresh();
       } catch (error: any) {
         toast.error(error?.message || "Failed to delete");
       } finally {

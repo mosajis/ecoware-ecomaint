@@ -61,6 +61,54 @@ export function GenericTree<T>({
     return map;
   }, [childrenMap]);
 
+  // ✅ Save previous expanded state
+  const [previousExpandedItems, setPreviousExpandedItems] = useState<string[]>(
+    [],
+  );
+
+  // ✅ هنگام تغییر داده‌ها، وضعیت expanded را ذخیره کنیم
+  useEffect(() => {
+    if (rootIds.length > 0) {
+      // قبل از بارگذاری داده‌ها، وضعیت expandedItems رو ذخیره کنیم
+      setPreviousExpandedItems(expandedItems);
+      setExpandedItems(rootIds.map(String)); // ریشه‌ها رو باز کنیم
+    }
+  }, [rootIds]); // اگر rootIds تغییر کرد
+
+  // ✅ زمانی که داده‌ها تغییر می‌کنند، وضعیت expandedItems را دوباره بازیابی کنیم
+  useEffect(() => {
+    if (rootIds.length > 0 && previousExpandedItems.length > 0) {
+      setExpandedItems((prev) => {
+        // اگر داده‌ها تغییر کرده باشند، وضعیت expandedItems رو از حافظه قبلی بازیابی کنیم
+        const nextExpanded = [
+          ...new Set([...previousExpandedItems, ...rootIds.map(String)]),
+        ];
+        return nextExpanded;
+      });
+    }
+  }, [rootIds, previousExpandedItems]);
+
+  const handleRefresh = useCallback(() => {
+    // ابتدا داده‌ها را دوباره بارگذاری کن
+    onRefresh?.();
+
+    // پس از رفرش، اطمینان حاصل کن که expandedItems به روز می‌شود
+    setExpandedItems((prev) => {
+      // اگر ریشه‌ها تغییر کرده‌اند، وضعیت expandedItems را بازنشانی می‌کنیم
+      if (rootIds.length !== prev.length) {
+        return rootIds.map(String);
+      }
+      return prev;
+    });
+  }, [onRefresh, rootIds]);
+
+  useEffect(() => {
+    if (rootIds.length > 0) {
+      // زمانی که داده‌ها بارگذاری می‌شوند، همه‌ی rootItems را expand کن
+      setExpandedItems(rootIds.map(String));
+    }
+  }, [rootIds]); // اگر rootIds تغییر کند، expandedItems به روز می‌شود
+
   // ✅ Optimized getAncestorIds with O(log n) instead of O(n²)
   const getAncestorIds = useCallback(
     (id: number): string[] => {
@@ -250,7 +298,7 @@ export function GenericTree<T>({
         onDelete={handleDelete}
         onEdit={handleEdit}
         onAdd={onAdd}
-        onRefresh={onRefresh}
+        onRefresh={handleRefresh}
         onExpandAll={handleExpandAll}
         onCollapseAll={handleCollapseAll}
         loading={loading}

@@ -68,52 +68,22 @@ export function useDataTree<T>({
     if (isEnabled) fetchRef.current();
   }, [isEnabled]);
 
-  /**
-   * Delete + Refetch (مهم‌ترین تغییر اینجاست)
-   */
   const handleDelete = useCallback(
     async (id: number) => {
       if (!deleteById || !isEnabled) return;
 
       setLoading(true);
-      const prevRows = rows;
-
-      // Optimistic update
-      const nextRows = rows.filter((x) => getId(x) !== id);
-      buildTree(nextRows);
 
       try {
         await deleteById(id);
+        await fetchData();
       } catch (err) {
-        // Rollback on error
-        buildTree(prevRows);
         toast.error("Failed to delete item");
       } finally {
         setLoading(false);
       }
     },
     [deleteById, getId, rows, buildTree, isEnabled],
-  );
-
-  /**
-   * Create / Update (local)
-   */
-  const handleUpsert = useCallback(
-    (record: T) => {
-      if (!isEnabled) return;
-      const id = getId(record);
-
-      setRows((prev) => {
-        const exists = prev.some((x) => getId(x) === id);
-        const next = exists
-          ? prev.map((x) => (getId(x) === id ? record : x))
-          : [record, ...prev];
-
-        setTree(mapper(next));
-        return next;
-      });
-    },
-    [getId, mapper, isEnabled],
   );
 
   useEffect(() => {
@@ -127,6 +97,5 @@ export function useDataTree<T>({
     fetchData,
     refetch,
     handleDelete,
-    handleUpsert,
   };
 }

@@ -144,7 +144,7 @@ export const menuContentItems: {
     icon: <BuildRoundedIcon />,
     items: [
       {
-        text: "Function (x)",
+        text: "Function",
         icon: <SettingsRoundedIcon />,
         id: "maint:function",
         path: "/maintenance/function",
