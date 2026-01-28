@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import { tblMaintType, TypeTblMaintType } from "@/core/api/generated/api";
 import { requiredStringField } from "@/core/helper";
-import NumberField from "@/shared/components/NumberField";
+import NumberField from "@/shared/components/fields/FieldNumber";
 
 const schema = z.object({
   description: requiredStringField(),

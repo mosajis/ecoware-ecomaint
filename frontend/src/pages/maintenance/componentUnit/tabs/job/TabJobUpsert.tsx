@@ -10,7 +10,7 @@ import DateField from "@/shared/components/DateField";
 import { memo, useEffect, useState, useCallback, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { BorderedBox } from "@/shared/components/BorderedBox";
 import { buildRelation } from "@/core/helper";
 import {
@@ -287,7 +287,7 @@ function ComponentJobUpsert({
           control={control}
           render={({ field }) => (
             <Box width="60%">
-              <AsyncSelectField
+              <AsyncSelectGridField
                 dialogMaxWidth="sm"
                 label="Job Description"
                 value={field.value}
@@ -310,7 +310,7 @@ function ComponentJobUpsert({
           control={control}
           render={({ field }) => (
             <Box width="45%">
-              <AsyncSelectField
+              <AsyncSelectGridField
                 dialogMaxWidth="sm"
                 label="Discipline"
                 value={field.value}
@@ -350,7 +350,7 @@ function ComponentJobUpsert({
             name="frequencyPeriod"
             control={control}
             render={({ field }) => (
-              <AsyncSelectField
+              <AsyncSelectGridField
                 dialogMaxWidth="sm"
                 label="Frequency Period"
                 value={field.value}
@@ -371,7 +371,7 @@ function ComponentJobUpsert({
             name="maintClass"
             control={control}
             render={({ field }) => (
-              <AsyncSelectField
+              <AsyncSelectGridField
                 dialogMaxWidth="sm"
                 label="Maint Class"
                 value={field.value}
@@ -389,7 +389,7 @@ function ComponentJobUpsert({
             name="maintCause"
             control={control}
             render={({ field }) => (
-              <AsyncSelectField
+              <AsyncSelectGridField
                 dialogMaxWidth="sm"
                 label="Maint Cause"
                 value={field.value}
@@ -407,7 +407,7 @@ function ComponentJobUpsert({
             name="maintType"
             control={control}
             render={({ field }) => (
-              <AsyncSelectField
+              <AsyncSelectGridField
                 dialogMaxWidth="sm"
                 label="Maint Type"
                 value={field.value}

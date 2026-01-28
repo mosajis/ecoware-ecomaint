@@ -1,13 +1,13 @@
 import * as z from "zod";
 import Box from "@mui/material/Box";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import NumberField from "@/shared/components/NumberField";
+import NumberField from "@/shared/components/fields/FieldNumber";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { memo, useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
 import {
   tblCompTypeJobMeasurePoint,
@@ -164,7 +164,7 @@ function TabMasuresUpsert({
           name="compTypeMeasurePoint"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectField
+            <AsyncSelectGridField
               label="Measure Point *"
               value={field.value}
               onChange={field.onChange}

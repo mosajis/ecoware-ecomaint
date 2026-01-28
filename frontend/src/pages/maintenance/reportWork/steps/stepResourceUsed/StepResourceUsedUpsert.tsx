@@ -6,8 +6,8 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
-import NumberField from "@/shared/components/NumberField";
+import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
+import NumberField from "@/shared/components/fields/FieldNumber";
 
 import {
   tblEmployee,
@@ -182,7 +182,7 @@ function StepResourceUsedFormDialog({
           control={control}
           rules={{ required: "Employee is required" }}
           render={({ field, fieldState }) => (
-            <AsyncSelectField<TypeTblEmployee>
+            <AsyncSelectGridField<TypeTblEmployee>
               dialogMaxWidth="sm"
               label="Employee *"
               selectionMode="single"

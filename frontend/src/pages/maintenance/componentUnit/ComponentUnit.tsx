@@ -22,7 +22,7 @@ const columns: GridColDef<TypeTblComponentUnit>[] = [
     field: "compType",
     headerName: "Component Type",
     flex: 1,
-    valueGetter: (_, row) => row.tblCompType?.compType ?? "",
+    valueGetter: (_, row) => row.tblCompType?.compName ?? "",
   },
   { field: "model", headerName: "Model / Type", flex: 1 },
   {

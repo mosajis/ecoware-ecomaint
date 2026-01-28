@@ -9,6 +9,7 @@ import {
   TypeTblComponentUnit,
   TypeTblCompCounter,
 } from "@/core/api/generated/api";
+import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 
 type Props = {
   componentUnit?: TypeTblComponentUnit | null;
@@ -26,19 +27,39 @@ const columns: GridColDef<TypeTblCompCounter>[] = [
     valueGetter: (_, row) => row.tblCounterType?.name || "",
   },
   {
+    field: "currentDate",
+    headerName: "Current Date",
+    flex: 1,
+
+    renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+  {
     field: "currentValue",
     headerName: "Current Value",
-    width: 120,
+    flex: 1,
+  },
+  {
+    field: "startDate",
+    headerName: "Start Date",
+    flex: 1,
+
+    renderCell: ({ value }) => <CellDateTime value={value} />,
   },
   {
     field: "startValue",
     headerName: "Start Value",
-    width: 120,
+    flex: 1,
+  },
+  {
+    field: "useCalcAverage",
+    headerName: "Use Calc Avg",
+    flex: 1,
+    type: "boolean",
   },
   {
     field: "averageCountRate",
     headerName: "Avg Rate",
-    width: 120,
+    flex: 1,
   },
   {
     field: "order No",

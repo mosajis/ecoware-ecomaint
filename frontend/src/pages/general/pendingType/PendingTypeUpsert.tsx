@@ -5,10 +5,10 @@ import * as z from "zod";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import NumberField from "@/shared/components/NumberField";
+import NumberField from "@/shared/components/fields/FieldNumber";
 import { tblPendingType, TypeTblPendingType } from "@/core/api/generated/api";
 import { buildRelation, requiredStringField } from "@/core/helper";
-import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
 
 const schema = z.object({
   pendTypeName: requiredStringField(),

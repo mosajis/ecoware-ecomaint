@@ -3,13 +3,16 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import NumberField from "@/shared/components/NumberField";
+import NumberField from "@/shared/components/fields/FieldNumber";
 import { memo, useEffect, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
 import { DEFAULT_VALUES, schema, SchemaValue } from "./ComponentUnitSchema";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
+import { logicTblComponentUnit } from "@/core/api/api";
 import {
   tblAddress,
   tblComponentUnit,
@@ -19,9 +22,6 @@ import {
   TypeTblAddress,
   TypeTblCompStatus,
 } from "@/core/api/generated/api";
-import { useAtomValue } from "jotai";
-import { atomUser } from "@/pages/auth/auth.atom";
-import { logicTblComponentUnit } from "@/core/api/api";
 
 type Props = {
   open: boolean;
@@ -78,7 +78,6 @@ function ComponentUnitUpsert({
               name: res.tblLocation.name,
             }
           : null,
-        //@ts-ignore
         parentComp: res.tblComponentUnit
           ? {
               compId: res.tblComponentUnit?.compId,
@@ -139,11 +138,7 @@ function ComponentUnitUpsert({
           orderNo: v.orderNo ?? null,
           ...buildRelation("tblCompType", "compTypeId", v.compType?.compTypeId),
           ...buildRelation("tblLocation", "locationId", v.location?.locationId),
-          ...buildRelation(
-            "tblCompStatus",
-            "compStatusId",
-            v.status?.compStatusId,
-          ),
+          ...buildRelation("tblCompStatus", "compStatusId", 1),
           ...buildRelation("tblAddress", "addressId", v.vendor?.addressId),
           ...buildRelation("tblComponentUnit", "compId", v.parentComp?.compId),
         };
@@ -158,8 +153,8 @@ function ComponentUnitUpsert({
           await tblComponentUnit.update(recordId!, body);
         }
 
-        // onSuccess()
-        // onClose()
+        onSuccess();
+        onClose();
       } finally {
         setSubmitting(false);
       }
@@ -187,7 +182,7 @@ function ComponentUnitUpsert({
             render={({ field, fieldState }) => (
               <TextField
                 {...field}
-                label="Component No"
+                label="Component No *"
                 size="small"
                 sx={{ width: "85%" }}
                 disabled={isDisabled}
@@ -220,9 +215,9 @@ function ComponentUnitUpsert({
         <Controller
           name="compType"
           control={control}
-          render={({ field }) => (
-            <AsyncSelectField
-              label="Type"
+          render={({ field, fieldState }) => (
+            <AsyncSelectGridField
+              label="Type *"
               getOptionLabel={(row) => row.compName}
               value={field.value}
               selectionMode="single"
@@ -230,6 +225,8 @@ function ComponentUnitUpsert({
               columns={[{ field: "compName", headerName: "Name", flex: 1 }]}
               getRowId={(row) => row.compTypeId}
               onChange={field.onChange}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
             />
           )}
         />
@@ -240,7 +237,7 @@ function ComponentUnitUpsert({
             name="location"
             control={control}
             render={({ field }) => (
-              <AsyncSelectField
+              <AsyncSelectGridField
                 label="Location"
                 getOptionLabel={(row) => row.name}
                 value={field.value}
@@ -257,7 +254,7 @@ function ComponentUnitUpsert({
             name="status"
             control={control}
             render={({ field }) => (
-              <AsyncSelectField<TypeTblCompStatus>
+              <AsyncSelectGridField<TypeTblCompStatus>
                 label="Status"
                 value={field.value}
                 selectionMode="single"
@@ -322,7 +319,7 @@ function ComponentUnitUpsert({
           name="vendor"
           control={control}
           render={({ field }) => (
-            <AsyncSelectField<TypeTblAddress>
+            <AsyncSelectGridField<TypeTblAddress>
               label="Maker"
               value={field.value}
               selectionMode="single"
@@ -383,16 +380,13 @@ function ComponentUnitUpsert({
           name="parentComp"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectField
+            <AsyncSelectGridField
               label="Parent"
               getOptionLabel={(row) => row.compNo ?? ""}
               value={field.value}
               selectionMode="single"
               request={tblComponentUnit.getAll}
-              columns={[
-                { field: "compNo", headerName: "Comp No", flex: 1 },
-                { field: "compName", headerName: "Name", flex: 1 },
-              ]}
+              columns={[{ field: "compNo", headerName: "Comp No", flex: 1 }]}
               getRowId={(row) => row.compId}
               onChange={field.onChange}
               error={!!fieldState.error}

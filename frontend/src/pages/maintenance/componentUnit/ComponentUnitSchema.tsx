@@ -4,10 +4,9 @@ export const schema = z.object({
   compType: z
     .object({
       compTypeId: z.number(),
-      compName: z.string().nullable().optional(),
+      compName: z.string().nullable(),
     })
-    .nullable()
-    .optional(),
+    .nullable(),
   location: z
     .object({
       locationId: z.number(),
@@ -20,10 +19,8 @@ export const schema = z.object({
       compId: z.number(),
       compNo: z.string().nullable(),
     })
-    .nullable()
-    .refine((val) => val !== null, {
-      message: "ComponentType is required",
-    }),
+    .nullable(),
+
   vendor: z
     .object({
       addressId: z.number(),

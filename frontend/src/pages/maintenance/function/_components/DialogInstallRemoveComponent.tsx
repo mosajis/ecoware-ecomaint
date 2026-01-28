@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
 import {
   tblComponentUnit,
   tblFunctions,
@@ -160,7 +160,7 @@ function DialogInstallRemoveComponent({
               name="component"
               control={control}
               render={({ field, fieldState }) => (
-                <AsyncSelectField
+                <AsyncSelectGridField
                   columns={[{ field: "compNo", headerName: "Name", flex: 1 }]}
                   label="Component"
                   selectionMode="single"

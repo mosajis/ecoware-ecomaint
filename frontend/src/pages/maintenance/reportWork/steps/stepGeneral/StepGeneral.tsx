@@ -1,13 +1,13 @@
 import Editor from "@/shared/components/Editor";
 import ReportWorkStep from "../../ReportWorkStep";
 import DateField from "@/shared/components/DateField";
-import NumberField from "@/shared/components/NumberField";
+import NumberField from "@/shared/components/fields/FieldNumber";
 import Box from "@mui/material/Box";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAtom } from "jotai";
 import { buildRelation } from "@/core/helper";
-import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { schema, TypeValues } from "./stepGeneralSchema";
 import {
   tblMaintType,
@@ -150,7 +150,7 @@ const TabGeneral = () => {
           name="maintType"
           control={control}
           render={({ field }) => (
-            <AsyncSelectField
+            <AsyncSelectGridField
               label="Maint Type"
               value={field.value}
               request={tblMaintType.getAll}
@@ -164,7 +164,7 @@ const TabGeneral = () => {
           name="maintCause"
           control={control}
           render={({ field }) => (
-            <AsyncSelectField
+            <AsyncSelectGridField
               label="Maint Cause"
               value={field.value}
               request={tblMaintCause.getAll}
@@ -178,7 +178,7 @@ const TabGeneral = () => {
           name="maintClass"
           control={control}
           render={({ field }) => (
-            <AsyncSelectField
+            <AsyncSelectGridField
               label="Maint Class"
               value={field.value}
               request={tblMaintClass.getAll}

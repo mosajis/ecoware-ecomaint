@@ -1,13 +1,13 @@
 import * as z from "zod";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import NumberField from "@/shared/components/NumberField";
+import NumberField from "@/shared/components/fields/FieldNumber";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { memo, useEffect, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { tblLocation, TypeTblLocation } from "@/core/api/generated/api";
-import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation, requiredStringField } from "@/core/helper";
 
 // === Validation Schema ===
@@ -175,7 +175,7 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           name="parentLocationId"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectField
+            <AsyncSelectGridField
               dialogMaxWidth="sm"
               label="Parent Location"
               selectionMode="single"

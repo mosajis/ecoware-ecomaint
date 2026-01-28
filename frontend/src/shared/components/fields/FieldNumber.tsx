@@ -16,7 +16,7 @@ type NumberFieldProps = Omit<TextFieldProps, "value" | "onChange" | "type"> & {
   onChange?: (value: number | null) => void;
 };
 
-const NumberField = ({
+const FieldNumber = ({
   label,
   field,
   value,
@@ -45,4 +45,4 @@ const NumberField = ({
   );
 };
 
-export default NumberField;
+export default FieldNumber;

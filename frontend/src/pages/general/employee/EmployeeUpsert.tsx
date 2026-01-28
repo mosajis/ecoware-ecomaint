@@ -1,14 +1,14 @@
 import * as z from "zod";
-import AsyncSelect from "@/shared/components/AsyncSelect";
+import AsyncSelect from "@/shared/components/fields/FieldAsyncSelectGrid";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import NumberField from "@/shared/components/NumberField";
+import NumberField from "@/shared/components/fields/FieldNumber";
 import { memo, useEffect, useMemo, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { buildRelation, requiredStringField } from "@/core/helper";
-import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
 import {
   tblAddress,
   tblDiscipline,
@@ -237,7 +237,7 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           name="address"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectField<TypeTblAddress>
+            <AsyncSelectGridField<TypeTblAddress>
               label="Address"
               value={field.value}
               request={tblAddress.getAll}

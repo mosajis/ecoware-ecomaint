@@ -32,7 +32,7 @@ interface FileFieldProps {
   className?: string;
 }
 
-const FileField = React.forwardRef<HTMLInputElement, FileFieldProps>(
+const FieldFile = React.forwardRef<HTMLInputElement, FileFieldProps>(
   (props, ref) => {
     const {
       label = "Upload File",
@@ -407,6 +407,4 @@ const FileField = React.forwardRef<HTMLInputElement, FileFieldProps>(
   },
 );
 
-FileField.displayName = "FileField";
-
-export default FileField;
+export default FieldFile;

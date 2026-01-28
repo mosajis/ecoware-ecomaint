@@ -1,11 +1,11 @@
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import TextField from "@mui/material/TextField";
 import { JSX, useState } from "react";
-import { AsyncSelectDialog } from "./AsyncSelectDialog";
 import type { GridRowId } from "@mui/x-data-grid";
+import { AsyncSelectGridDialog } from "./_components/AsyncSelectGridDialog";
 
 // ---------------- Base Props ----------------
-type BaseAsyncSelectFieldProps<TItem extends Record<string, any>> = {
+type BaseAsyncSelectGridFieldProps<TItem extends Record<string, any>> = {
   label?: string;
   placeholder?: string;
   disabled?: boolean;
@@ -25,24 +25,24 @@ type BaseAsyncSelectFieldProps<TItem extends Record<string, any>> = {
 
 // ---------------- Single / Multiple Props ----------------
 type AsyncSelectSingleProps<TItem extends Record<string, any>> =
-  BaseAsyncSelectFieldProps<TItem> & {
+  BaseAsyncSelectGridFieldProps<TItem> & {
     selectionMode?: "single";
     value?: any | null;
     onChange: (value: TItem | null) => void;
   };
 
 type AsyncSelectMultipleProps<TItem extends Record<string, any>> =
-  BaseAsyncSelectFieldProps<TItem> & {
+  BaseAsyncSelectGridFieldProps<TItem> & {
     selectionMode: "multiple";
     value?: any[] | null;
     onChange: (value: TItem[] | null) => void;
   };
 
-export type AsyncSelectFieldProps<TItem extends Record<string, any>> =
+export type AsyncSelectGridFieldProps<TItem extends Record<string, any>> =
   | AsyncSelectSingleProps<TItem>
   | AsyncSelectMultipleProps<TItem>;
 
-export function AsyncSelectField<TItem extends Record<string, any>>({
+function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
   label,
   placeholder,
   value,
@@ -58,7 +58,7 @@ export function AsyncSelectField<TItem extends Record<string, any>>({
   getOptionLabel = (item) => item?.name ?? Object.values(item)[1] ?? "",
   dialogHeight = 600,
   dialogMaxWidth = "sm",
-}: AsyncSelectFieldProps<TItem>) {
+}: AsyncSelectGridFieldProps<TItem>) {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const displayValue =
@@ -96,7 +96,7 @@ export function AsyncSelectField<TItem extends Record<string, any>>({
         }}
       />
 
-      <AsyncSelectDialog<TItem>
+      <AsyncSelectGridDialog<TItem>
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
         title={label}
@@ -113,3 +113,5 @@ export function AsyncSelectField<TItem extends Record<string, any>>({
     </>
   );
 }
+
+export default FieldAsyncSelectGrid;

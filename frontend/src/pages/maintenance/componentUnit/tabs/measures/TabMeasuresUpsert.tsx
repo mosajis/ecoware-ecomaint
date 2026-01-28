@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import NumberField from "@/shared/components/NumberField";
-import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import NumberField from "@/shared/components/fields/FieldNumber";
+import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
 import {
   tblCompMeasurePoint,
   tblCounterType,
@@ -173,7 +173,7 @@ function CompMeasurePointUpsert({
           name="counterType"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectField
+            <AsyncSelectGridField
               label="Measure *"
               value={field.value}
               onChange={field.onChange}
@@ -191,7 +191,7 @@ function CompMeasurePointUpsert({
           name="unit"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectField
+            <AsyncSelectGridField
               label="Unit *"
               value={field.value}
               onChange={field.onChange}

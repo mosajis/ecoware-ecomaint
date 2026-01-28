@@ -7,7 +7,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { tblDiscipline, TypeTblDiscipline } from "@/core/api/generated/api";
 import { requiredStringField } from "@/core/helper";
-import NumberField from "@/shared/components/NumberField";
+import NumberField from "@/shared/components/fields/FieldNumber";
 
 // === Validation Schema ===
 const schema = z.object({

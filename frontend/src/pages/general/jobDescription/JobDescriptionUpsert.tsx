@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import { memo, useEffect, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
 import {
   tblJobDescription,
@@ -183,7 +183,7 @@ function JobDescriptionUpsert({
           name="jobClassId"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectField
+            <AsyncSelectGridField
               label="Job Class"
               selectionMode="single"
               value={field.value}

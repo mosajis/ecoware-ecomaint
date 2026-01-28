@@ -2,11 +2,11 @@ import * as z from "zod";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import NumberField from "@/shared/components/NumberField";
+import NumberField from "@/shared/components/fields/FieldNumber";
 import { useForm, Controller } from "react-hook-form";
 import { memo, useEffect, useState, useCallback } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
 import {
   tblMaintLogStocks,
@@ -188,7 +188,7 @@ function StockUsedFormDialog({
             required: "Stock Item is required",
           }}
           render={({ field, fieldState }) => (
-            <AsyncSelectField
+            <AsyncSelectGridField
               dialogMaxWidth="sm"
               label="Stock Item *"
               selectionMode="single"

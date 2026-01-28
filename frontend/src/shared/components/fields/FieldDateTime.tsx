@@ -5,7 +5,7 @@ import Event from "@mui/icons-material/Event";
 import { DatePicker, DateTimePicker, TimePicker } from "@mui/x-date-pickers";
 import { DATE_FORMATS, DateTimeType } from "@/const";
 import { useAtomValue } from "jotai";
-import { atomLanguage } from "../atoms/general.atom";
+import { atomLanguage } from "@/shared/atoms/general.atom";
 
 interface DateFieldProps {
   label: string;
@@ -18,7 +18,7 @@ interface DateFieldProps {
   helperText?: React.ReactNode;
 }
 
-const DateField: React.FC<DateFieldProps> = ({
+const FieldDateTime: React.FC<DateFieldProps> = ({
   label,
   field,
   disabled = false,
@@ -82,4 +82,4 @@ const DateField: React.FC<DateFieldProps> = ({
   );
 };
 
-export default DateField;
+export default FieldDateTime;

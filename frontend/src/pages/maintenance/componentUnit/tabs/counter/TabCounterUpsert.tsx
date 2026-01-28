@@ -1,11 +1,11 @@
 import * as z from "zod";
 import Box from "@mui/material/Box";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import NumberField from "@/shared/components/NumberField";
-import DateField from "@/shared/components/DateField";
+import NumberField from "@/shared/components/fields/FieldNumber";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import FieldDateTime from "@/shared/components/fields/FieldDateTime";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
 import { memo, useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -166,7 +166,7 @@ function CompCounterUpsert({
           name="counterType"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectField
+            <FieldAsyncSelectGrid
               label="Counter Type *"
               value={field.value}
               onChange={field.onChange}
@@ -180,6 +180,18 @@ function CompCounterUpsert({
         />
 
         <Box display={"flex"} gap={1.5}>
+          {/* Current Date */}
+          <Controller
+            name="currentDate"
+            control={control}
+            render={({ field }) => (
+              <FieldDateTime
+                label="Current Date"
+                field={field}
+                type="DATETIME"
+              />
+            )}
+          />
           {/* Current Value */}
           <Controller
             name="currentValue"
@@ -193,18 +205,18 @@ function CompCounterUpsert({
               />
             )}
           />
-
-          {/* Current Date */}
-          <Controller
-            name="currentDate"
-            control={control}
-            render={({ field }) => (
-              <DateField label="Current Date" field={field} type="DATETIME" />
-            )}
-          />
         </Box>
 
         <Box display={"flex"} gap={1.5}>
+          {/* Start Date */}
+          <Controller
+            name="startDate"
+            control={control}
+            render={({ field }) => (
+              <FieldDateTime label="Start Date" field={field} type="DATETIME" />
+            )}
+          />
+
           {/* Start Value */}
           <Controller
             name="startValue"
@@ -216,15 +228,6 @@ function CompCounterUpsert({
                 label="Start Value"
                 size="small"
               />
-            )}
-          />
-
-          {/* Start Date */}
-          <Controller
-            name="startDate"
-            control={control}
-            render={({ field }) => (
-              <DateField label="Start Date" field={field} type="DATETIME" />
             )}
           />
         </Box>
@@ -240,7 +243,6 @@ function CompCounterUpsert({
                 fullWidth
                 label="Average Count Rate"
                 size="small"
-                disabled
               />
             )}
           />
@@ -257,7 +259,7 @@ function CompCounterUpsert({
                     onChange={field.onChange}
                   />
                 }
-                label="Use Calc Average"
+                label="Use this average"
               />
             )}
           />

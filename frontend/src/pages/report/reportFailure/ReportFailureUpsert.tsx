@@ -5,7 +5,7 @@ import Editor from "@/shared/components/Editor";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
-import { AsyncSelectField } from "@/shared/components/AsyncSelectField";
+import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { schema, DEFAULT_VALUES, SchemaValue } from "./ReportFailureSchema";
 import { buildRelation } from "@/core/helper";
 import { useAtomValue } from "jotai";
@@ -197,7 +197,7 @@ function FailureReportUpsert({
           name="component"
           control={control}
           render={({ field }) => (
-            <AsyncSelectField
+            <AsyncSelectGridField
               label="Component"
               value={field.value}
               selectionMode="single"
@@ -235,7 +235,7 @@ function FailureReportUpsert({
             name="failureStatus"
             control={control}
             render={({ field }) => (
-              <AsyncSelectField
+              <AsyncSelectGridField
                 columns={[]}
                 label="Status"
                 value={field.value}
@@ -252,7 +252,7 @@ function FailureReportUpsert({
             name="failureSeverity"
             control={control}
             render={({ field }) => (
-              <AsyncSelectField
+              <AsyncSelectGridField
                 columns={[]}
                 label="Severity"
                 value={field.value}
@@ -271,7 +271,7 @@ function FailureReportUpsert({
           name="failureGroupFollow"
           control={control}
           render={({ field }) => (
-            <AsyncSelectField
+            <AsyncSelectGridField
               columns={[]}
               label="Follow Group"
               value={field.value}
