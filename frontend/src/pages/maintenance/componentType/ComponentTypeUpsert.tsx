@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import NumberField from "@/shared/components/fields/FieldNumber";
 import { memo, useEffect, useState, useCallback } from "react";
-import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation, requiredStringField } from "@/core/helper";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -209,7 +209,7 @@ function ComponentTypeUpsert({
           name="maker"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectGridField
+            <FieldAsyncSelectGrid
               dialogMaxWidth="sm"
               label="Maker"
               selectionMode="single"
@@ -228,7 +228,7 @@ function ComponentTypeUpsert({
           name="tblCompType"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectGridField
+            <FieldAsyncSelectGrid
               dialogMaxWidth="sm"
               label="Parent "
               selectionMode="single"

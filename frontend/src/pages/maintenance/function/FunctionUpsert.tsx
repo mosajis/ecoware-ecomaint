@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { buildRelation, requiredStringField } from "@/core/helper";
-import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { memo, useCallback, useEffect, useState } from "react";
 import { tblFunctions, TypeTblFunctions } from "@/core/api/generated/api";
 import NumberField from "@/shared/components/fields/FieldNumber";
@@ -191,7 +191,7 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           name="parent"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectGridField
+            <FieldAsyncSelectGrid
               dialogMaxWidth="sm"
               label="Parent Function"
               getOptionLabel={(row) => row.funcNo}

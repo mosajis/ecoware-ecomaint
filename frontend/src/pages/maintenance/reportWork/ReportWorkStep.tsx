@@ -7,7 +7,7 @@ import ReportWorkStepper from "./reportWorkStepper";
 import DialogActions from "@mui/material/DialogActions";
 import { useAtom } from "jotai";
 import { reportWorkSteps } from "./reportWorkSteps";
-import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { atomActiveStep, atomInitalData } from "./ReportWorkAtom";
 import {
   tblComponentUnit,
@@ -74,7 +74,7 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
       >
         <ReportWorkStepper />
         <Box display={"grid"} gap={1.5} gridTemplateColumns={"1fr 1fr"}>
-          <AsyncSelectGridField
+          <FieldAsyncSelectGrid
             label="Component"
             disabled={!!initalData.maintLog}
             request={tblComponentUnit.getAll}

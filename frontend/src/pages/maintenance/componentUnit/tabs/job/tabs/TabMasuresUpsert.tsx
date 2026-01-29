@@ -7,7 +7,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { memo, useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
 import {
   tblCompJobMeasurePoint,
@@ -162,7 +162,7 @@ function TabMasuresUpsert({
           name="compMeasurePoint"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectGridField
+            <FieldAsyncSelectGrid
               label="Measure Point *"
               value={field.value}
               onChange={field.onChange}

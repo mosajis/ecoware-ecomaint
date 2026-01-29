@@ -71,7 +71,7 @@ async function fixTypesFile(path) {
       stdio: "inherit",
     });
 
-    // await fixTypesFile(typesPath);
+    await fixTypesFile(typesPath);
   } catch (err) {
     console.error("Error:", err);
   }

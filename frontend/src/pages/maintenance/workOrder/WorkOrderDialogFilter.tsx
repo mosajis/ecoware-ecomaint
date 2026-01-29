@@ -7,7 +7,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import {
   tblComponentUnit,
   tblCompType,
@@ -435,7 +435,7 @@ export default function WorkOrderFilterDialog({
             </Box>
 
             <Box display="flex" gap={1.5} flexDirection="column">
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 value={filters.component}
                 dialogMaxWidth="sm"
                 label="Component"
@@ -451,7 +451,7 @@ export default function WorkOrderFilterDialog({
                   }));
                 }}
               />
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 value={filters.componentType}
                 dialogMaxWidth="sm"
                 label="Component Type"
@@ -474,7 +474,7 @@ export default function WorkOrderFilterDialog({
             </Box>
 
             <Box display="flex" gap={1.5} flexDirection="column">
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 value={filters.maintType}
                 dialogMaxWidth="sm"
                 label="Maint Type"
@@ -489,7 +489,7 @@ export default function WorkOrderFilterDialog({
                   }));
                 }}
               />
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 value={filters.maintClass}
                 dialogMaxWidth="sm"
                 label="Maint Class"
@@ -504,7 +504,7 @@ export default function WorkOrderFilterDialog({
                   }));
                 }}
               />
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 value={filters.pendingType}
                 dialogMaxWidth="sm"
                 label="Pending Type"

@@ -6,11 +6,11 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import RadioGroup from "@mui/material/RadioGroup";
 import Radio from "@mui/material/Radio";
-import DateField from "@/shared/components/DateField";
+import FieldDateTime from "@/shared/components/fields/FieldDateTime";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { memo, useEffect, useState, useCallback, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { BorderedBox } from "@/shared/components/BorderedBox";
 import { buildRelation } from "@/core/helper";
 import {
@@ -287,7 +287,7 @@ function ComponentJobUpsert({
           control={control}
           render={({ field }) => (
             <Box width="60%">
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 dialogMaxWidth="sm"
                 label="Job Description"
                 value={field.value}
@@ -310,7 +310,7 @@ function ComponentJobUpsert({
           control={control}
           render={({ field }) => (
             <Box width="45%">
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 dialogMaxWidth="sm"
                 label="Discipline"
                 value={field.value}
@@ -350,7 +350,7 @@ function ComponentJobUpsert({
             name="frequencyPeriod"
             control={control}
             render={({ field }) => (
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 dialogMaxWidth="sm"
                 label="Frequency Period"
                 value={field.value}
@@ -371,7 +371,7 @@ function ComponentJobUpsert({
             name="maintClass"
             control={control}
             render={({ field }) => (
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 dialogMaxWidth="sm"
                 label="Maint Class"
                 value={field.value}
@@ -389,7 +389,7 @@ function ComponentJobUpsert({
             name="maintCause"
             control={control}
             render={({ field }) => (
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 dialogMaxWidth="sm"
                 label="Maint Cause"
                 value={field.value}
@@ -407,7 +407,7 @@ function ComponentJobUpsert({
             name="maintType"
             control={control}
             render={({ field }) => (
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 dialogMaxWidth="sm"
                 label="Maint Type"
                 value={field.value}
@@ -472,14 +472,18 @@ function ComponentJobUpsert({
             name="lastDone"
             control={control}
             render={({ field }) => (
-              <DateField label="Last Done" field={field} type="DATETIME" />
+              <FieldDateTime label="Last Done" field={field} type="DATETIME" />
             )}
           />
           <Controller
             name="nextDueDate"
             control={control}
             render={({ field }) => (
-              <DateField label="Next Due Date" field={field} type="DATETIME" />
+              <FieldDateTime
+                label="Next Due Date"
+                field={field}
+                type="DATETIME"
+              />
             )}
           />
         </Box>

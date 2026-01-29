@@ -8,7 +8,7 @@ import FormDialog from "@/shared/components/formDialog/FormDialog";
 import NumberField from "@/shared/components/fields/FieldNumber";
 import { tblPendingType, TypeTblPendingType } from "@/core/api/generated/api";
 import { buildRelation, requiredStringField } from "@/core/helper";
-import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 
 const schema = z.object({
   pendTypeName: requiredStringField(),

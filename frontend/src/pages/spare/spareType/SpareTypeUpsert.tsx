@@ -11,7 +11,7 @@ import {
   tblUnit,
   TypeTblSpareType,
 } from "@/core/api/generated/api";
-import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
 
 const schema = z.object({
@@ -200,7 +200,7 @@ function SpareTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           name="unit"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectGridField
+            <FieldAsyncSelectGrid
               dialogMaxWidth="sm"
               label="Unit"
               selectionMode="single"
@@ -268,7 +268,7 @@ function SpareTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           name="parentSpareType"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectGridField
+            <FieldAsyncSelectGrid
               dialogMaxWidth="sm"
               label="Parent Spare Type"
               selectionMode="single"

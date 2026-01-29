@@ -5,14 +5,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import {
   tblComponentUnit,
   tblFunctions,
   tblRotationLog,
 } from "@/core/api/generated/api";
 import { buildRelation } from "@/core/helper";
-import DateField from "@/shared/components/DateField";
+import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 import { useAtom, useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
 
@@ -160,7 +160,7 @@ function DialogInstallRemoveComponent({
               name="component"
               control={control}
               render={({ field, fieldState }) => (
-                <AsyncSelectGridField
+                <FieldAsyncSelectGrid
                   columns={[{ field: "compNo", headerName: "Name", flex: 1 }]}
                   label="Component"
                   selectionMode="single"

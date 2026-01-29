@@ -5,7 +5,7 @@ import type { GridRowId } from "@mui/x-data-grid";
 import { AsyncSelectGridDialog } from "./_components/AsyncSelectGridDialog";
 
 // ---------------- Base Props ----------------
-type BaseAsyncSelectGridFieldProps<TItem extends Record<string, any>> = {
+type BaseFieldAsyncSelectGridProps<TItem extends Record<string, any>> = {
   label?: string;
   placeholder?: string;
   disabled?: boolean;
@@ -25,20 +25,20 @@ type BaseAsyncSelectGridFieldProps<TItem extends Record<string, any>> = {
 
 // ---------------- Single / Multiple Props ----------------
 type AsyncSelectSingleProps<TItem extends Record<string, any>> =
-  BaseAsyncSelectGridFieldProps<TItem> & {
+  BaseFieldAsyncSelectGridProps<TItem> & {
     selectionMode?: "single";
     value?: any | null;
     onChange: (value: TItem | null) => void;
   };
 
 type AsyncSelectMultipleProps<TItem extends Record<string, any>> =
-  BaseAsyncSelectGridFieldProps<TItem> & {
+  BaseFieldAsyncSelectGridProps<TItem> & {
     selectionMode: "multiple";
     value?: any[] | null;
     onChange: (value: TItem[] | null) => void;
   };
 
-export type AsyncSelectGridFieldProps<TItem extends Record<string, any>> =
+export type FieldAsyncSelectGridProps<TItem extends Record<string, any>> =
   | AsyncSelectSingleProps<TItem>
   | AsyncSelectMultipleProps<TItem>;
 
@@ -58,7 +58,7 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
   getOptionLabel = (item) => item?.name ?? Object.values(item)[1] ?? "",
   dialogHeight = 600,
   dialogMaxWidth = "sm",
-}: AsyncSelectGridFieldProps<TItem>) {
+}: FieldAsyncSelectGridProps<TItem>) {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const displayValue =

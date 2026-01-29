@@ -31,8 +31,8 @@ export interface AsyncSelectProps<T> {
   getOptionLabel?: (row: T) => string;
   getOptionKey?: (row: T) => string | number;
   onChange?: (value: T | T[] | null) => void;
-  enableClientSideFilter?: boolean; // فیلتر سمت کلاینت
-  minCharsToSearch?: number; // حداقل کاراکتر برای سرچ
+  enableClientSideFilter?: boolean;
+  minCharsToSearch?: number;
 }
 
 export default function FieldAsyncSelect<T>({
@@ -52,7 +52,7 @@ export default function FieldAsyncSelect<T>({
   getOptionLabel = (row: any) => row?.label ?? String(row),
   getOptionKey = (row: any) => row?.id ?? getOptionLabel(row),
   onChange,
-  enableClientSideFilter = true, // به صورت پیش‌فرض فعال
+  enableClientSideFilter = true,
   minCharsToSearch = 0,
 }: AsyncSelectProps<T>) {
   const multiple = selectionMode === "multiple";
@@ -70,7 +70,6 @@ export default function FieldAsyncSelect<T>({
     data: initialOptions,
   });
 
-  // مرج کردن initialOptions با cache
   useEffect(() => {
     if (initialOptions.length > 0) {
       const mergedOptions = mergeOptions(cacheRef.current.data, initialOptions);
@@ -80,7 +79,6 @@ export default function FieldAsyncSelect<T>({
     }
   }, [initialOptions]);
 
-  // تابع مرج که تکراری‌ها رو حذف می‌کنه
   const mergeOptions = (existing: T[], newOptions: T[]): T[] => {
     const map = new Map<string | number, T>();
 
@@ -211,7 +209,7 @@ export default function FieldAsyncSelect<T>({
       onOpen={handleOpen}
       loading={loading}
       disabled={disabled}
-      filterOptions={(x) => x} // خودمون فیلتر می‌کنیم
+      filterOptions={(x) => x}
       renderInput={(params) => (
         <TextField
           {...params}

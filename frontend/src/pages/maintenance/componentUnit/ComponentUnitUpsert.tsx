@@ -7,7 +7,7 @@ import NumberField from "@/shared/components/fields/FieldNumber";
 import { memo, useEffect, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
 import { DEFAULT_VALUES, schema, SchemaValue } from "./ComponentUnitSchema";
 import { useAtomValue } from "jotai";
@@ -216,7 +216,7 @@ function ComponentUnitUpsert({
           name="compType"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectGridField
+            <FieldAsyncSelectGrid
               label="Type *"
               getOptionLabel={(row) => row.compName}
               value={field.value}
@@ -237,7 +237,7 @@ function ComponentUnitUpsert({
             name="location"
             control={control}
             render={({ field }) => (
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 label="Location"
                 getOptionLabel={(row) => row.name}
                 value={field.value}
@@ -254,7 +254,7 @@ function ComponentUnitUpsert({
             name="status"
             control={control}
             render={({ field }) => (
-              <AsyncSelectGridField<TypeTblCompStatus>
+              <FieldAsyncSelectGrid<TypeTblCompStatus>
                 label="Status"
                 value={field.value}
                 selectionMode="single"
@@ -319,7 +319,7 @@ function ComponentUnitUpsert({
           name="vendor"
           control={control}
           render={({ field }) => (
-            <AsyncSelectGridField<TypeTblAddress>
+            <FieldAsyncSelectGrid<TypeTblAddress>
               label="Maker"
               value={field.value}
               selectionMode="single"
@@ -380,7 +380,7 @@ function ComponentUnitUpsert({
           name="parentComp"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectGridField
+            <FieldAsyncSelectGrid
               label="Parent"
               getOptionLabel={(row) => row.compNo ?? ""}
               value={field.value}

@@ -9,7 +9,7 @@ import Radio from "@mui/material/Radio";
 import { memo, useEffect, useState, useCallback, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { BorderedBox } from "@/shared/components/BorderedBox";
 import { buildRelation } from "@/core/helper";
 import {
@@ -292,7 +292,7 @@ function ComponentTypeJobUpsert({
           control={control}
           render={({ field }) => (
             <Box width="60%">
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 dialogMaxWidth="sm"
                 label="Job Description"
                 getOptionLabel={(row) => row.jobDescTitle}
@@ -315,7 +315,7 @@ function ComponentTypeJobUpsert({
           control={control}
           render={({ field }) => (
             <Box width="45%">
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 dialogMaxWidth="sm"
                 label="Discipline"
                 value={field.value}
@@ -355,7 +355,7 @@ function ComponentTypeJobUpsert({
             name="frequencyPeriod"
             control={control}
             render={({ field, fieldState }) => (
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 dialogMaxWidth="sm"
                 label="Frequency Period"
                 value={field.value}
@@ -377,7 +377,7 @@ function ComponentTypeJobUpsert({
             name="maintClass"
             control={control}
             render={({ field }) => (
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 dialogMaxWidth="sm"
                 label="Maint Class"
                 value={field.value}
@@ -395,7 +395,7 @@ function ComponentTypeJobUpsert({
             name="maintCause"
             control={control}
             render={({ field }) => (
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 dialogMaxWidth="sm"
                 label="Maint Cause"
                 value={field.value}
@@ -413,7 +413,7 @@ function ComponentTypeJobUpsert({
             name="maintType"
             control={control}
             render={({ field }) => (
-              <AsyncSelectGridField
+              <FieldAsyncSelectGrid
                 dialogMaxWidth="sm"
                 label="Maint Type"
                 value={field.value}

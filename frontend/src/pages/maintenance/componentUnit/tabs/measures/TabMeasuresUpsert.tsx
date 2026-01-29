@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import NumberField from "@/shared/components/fields/FieldNumber";
-import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import {
   tblCompMeasurePoint,
   tblCounterType,
@@ -14,7 +14,7 @@ import {
   TypeTblCompMeasurePoint,
 } from "@/core/api/generated/api";
 import { buildRelation } from "@/core/helper";
-import DateField from "@/shared/components/DateField";
+import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 
 /* === Schema === */
 const schema = z.object({
@@ -173,7 +173,7 @@ function CompMeasurePointUpsert({
           name="counterType"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectGridField
+            <FieldAsyncSelectGrid
               label="Measure *"
               value={field.value}
               onChange={field.onChange}
@@ -191,7 +191,7 @@ function CompMeasurePointUpsert({
           name="unit"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectGridField
+            <FieldAsyncSelectGrid
               label="Unit *"
               value={field.value}
               onChange={field.onChange}

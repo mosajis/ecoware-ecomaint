@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import { memo, useEffect, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
 import {
   tblSpareType,
@@ -134,7 +134,7 @@ function SpareUnitFormDialog({
           name="spareTypeId"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectGridField
+            <FieldAsyncSelectGrid
               dialogMaxWidth="sm"
               label="Spare Type"
               selectionMode="single"

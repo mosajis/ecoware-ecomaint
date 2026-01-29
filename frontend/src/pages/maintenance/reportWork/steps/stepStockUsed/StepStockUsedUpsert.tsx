@@ -6,7 +6,7 @@ import NumberField from "@/shared/components/fields/FieldNumber";
 import { useForm, Controller } from "react-hook-form";
 import { memo, useEffect, useState, useCallback } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
 import {
   tblMaintLogStocks,
@@ -188,7 +188,7 @@ function StockUsedFormDialog({
             required: "Stock Item is required",
           }}
           render={({ field, fieldState }) => (
-            <AsyncSelectGridField
+            <FieldAsyncSelectGrid
               dialogMaxWidth="sm"
               label="Stock Item *"
               selectionMode="single"

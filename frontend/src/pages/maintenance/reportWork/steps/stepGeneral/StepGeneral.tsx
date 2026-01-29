@@ -1,13 +1,13 @@
 import Editor from "@/shared/components/Editor";
 import ReportWorkStep from "../../ReportWorkStep";
-import DateField from "@/shared/components/DateField";
+import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 import NumberField from "@/shared/components/fields/FieldNumber";
 import Box from "@mui/material/Box";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAtom } from "jotai";
 import { buildRelation } from "@/core/helper";
-import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { schema, TypeValues } from "./stepGeneralSchema";
 import {
   tblMaintType,
@@ -150,7 +150,7 @@ const TabGeneral = () => {
           name="maintType"
           control={control}
           render={({ field }) => (
-            <AsyncSelectGridField
+            <FieldAsyncSelectGrid
               label="Maint Type"
               value={field.value}
               request={tblMaintType.getAll}
@@ -164,7 +164,7 @@ const TabGeneral = () => {
           name="maintCause"
           control={control}
           render={({ field }) => (
-            <AsyncSelectGridField
+            <FieldAsyncSelectGrid
               label="Maint Cause"
               value={field.value}
               request={tblMaintCause.getAll}
@@ -178,7 +178,7 @@ const TabGeneral = () => {
           name="maintClass"
           control={control}
           render={({ field }) => (
-            <AsyncSelectGridField
+            <FieldAsyncSelectGrid
               label="Maint Class"
               value={field.value}
               request={tblMaintClass.getAll}

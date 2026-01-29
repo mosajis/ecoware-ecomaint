@@ -7,7 +7,7 @@ import { memo, useEffect, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { tblLocation, TypeTblLocation } from "@/core/api/generated/api";
-import { AsyncSelectGridField } from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation, requiredStringField } from "@/core/helper";
 
 // === Validation Schema ===
@@ -175,7 +175,7 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           name="parentLocationId"
           control={control}
           render={({ field, fieldState }) => (
-            <AsyncSelectGridField
+            <FieldAsyncSelectGrid
               dialogMaxWidth="sm"
               label="Parent Location"
               selectionMode="single"
