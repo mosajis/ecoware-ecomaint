@@ -34,7 +34,6 @@ export class FileService {
       };
     }
 
-    console.log(mimeType);
     // Check MIME type
     if (!FILE_CONFIG.ALLOWED_MIME_TYPES[mimeType as AllowedMimeType]) {
       return {

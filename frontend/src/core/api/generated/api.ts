@@ -1128,16 +1128,16 @@ export type TypeTblSpareType = DynamicResponse<'getTblSpareType'>['items'][0];
 export const tblSpareType = {
   getAll: (query?: DynamicQuery<'getTblSpareType'>) =>
     api.get<DynamicResponse<'getTblSpareType'>>('/tblSpareType', { params: stringifyQuery(query) }),
-  getById: (id: number, query?: DynamicQuery<'getTblSpareTypeByPartTypeId'>) =>
-    api.get<DynamicResponse<'getTblSpareTypeByPartTypeId'>>(`/tblSpareType/${id}`, { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblSpareTypeBySpareTypeId'>) =>
+    api.get<DynamicResponse<'getTblSpareTypeBySpareTypeId'>>(`/tblSpareType/${id}`, { params: stringifyQuery(query) }),
   count: (query?: DynamicQuery<'getTblSpareTypeCount'>) =>
     api.get<DynamicResponse<'getTblSpareTypeCount'>>('/tblSpareType/count', { params: stringifyQuery(query) }),
   create: (data: DynamicCreate<'postTblSpareType'>) =>
     api.post<DynamicResponse<'postTblSpareType'>>('/tblSpareType', { data }),
-  update: (id: number, data: DynamicUpdate<'putTblSpareTypeByPartTypeId'>) =>
-    api.put<DynamicResponse<'putTblSpareTypeByPartTypeId'>>(`/tblSpareType/${id}`, { data }),
-  deleteById: (id: number, query?: DynamicQuery<'deleteTblSpareTypeByPartTypeId'>) =>
-    api.delete<DynamicResponse<'deleteTblSpareTypeByPartTypeId'>>(`/tblSpareType/${id}`, { params: stringifyQuery(query) }),
+  update: (id: number, data: DynamicUpdate<'putTblSpareTypeBySpareTypeId'>) =>
+    api.put<DynamicResponse<'putTblSpareTypeBySpareTypeId'>>(`/tblSpareType/${id}`, { data }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblSpareTypeBySpareTypeId'>) =>
+    api.delete<DynamicResponse<'deleteTblSpareTypeBySpareTypeId'>>(`/tblSpareType/${id}`, { params: stringifyQuery(query) }),
   deleteAll: (query?: DynamicQuery<'deleteTblSpareType'>) =>
     api.delete<DynamicResponse<'deleteTblSpareType'>>('/tblSpareType', { params: stringifyQuery(query) }),
 };
@@ -1146,16 +1146,16 @@ export type TypeTblSpareUnit = DynamicResponse<'getTblSpareUnit'>['items'][0];
 export const tblSpareUnit = {
   getAll: (query?: DynamicQuery<'getTblSpareUnit'>) =>
     api.get<DynamicResponse<'getTblSpareUnit'>>('/tblSpareUnit', { params: stringifyQuery(query) }),
-  getById: (id: number, query?: DynamicQuery<'getTblSpareUnitByPartId'>) =>
-    api.get<DynamicResponse<'getTblSpareUnitByPartId'>>(`/tblSpareUnit/${id}`, { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblSpareUnitBySpareUnitId'>) =>
+    api.get<DynamicResponse<'getTblSpareUnitBySpareUnitId'>>(`/tblSpareUnit/${id}`, { params: stringifyQuery(query) }),
   count: (query?: DynamicQuery<'getTblSpareUnitCount'>) =>
     api.get<DynamicResponse<'getTblSpareUnitCount'>>('/tblSpareUnit/count', { params: stringifyQuery(query) }),
   create: (data: DynamicCreate<'postTblSpareUnit'>) =>
     api.post<DynamicResponse<'postTblSpareUnit'>>('/tblSpareUnit', { data }),
-  update: (id: number, data: DynamicUpdate<'putTblSpareUnitByPartId'>) =>
-    api.put<DynamicResponse<'putTblSpareUnitByPartId'>>(`/tblSpareUnit/${id}`, { data }),
-  deleteById: (id: number, query?: DynamicQuery<'deleteTblSpareUnitByPartId'>) =>
-    api.delete<DynamicResponse<'deleteTblSpareUnitByPartId'>>(`/tblSpareUnit/${id}`, { params: stringifyQuery(query) }),
+  update: (id: number, data: DynamicUpdate<'putTblSpareUnitBySpareUnitId'>) =>
+    api.put<DynamicResponse<'putTblSpareUnitBySpareUnitId'>>(`/tblSpareUnit/${id}`, { data }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblSpareUnitBySpareUnitId'>) =>
+    api.delete<DynamicResponse<'deleteTblSpareUnitBySpareUnitId'>>(`/tblSpareUnit/${id}`, { params: stringifyQuery(query) }),
   deleteAll: (query?: DynamicQuery<'deleteTblSpareUnit'>) =>
     api.delete<DynamicResponse<'deleteTblSpareUnit'>>('/tblSpareUnit', { params: stringifyQuery(query) }),
 };

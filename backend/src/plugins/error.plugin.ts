@@ -51,7 +51,8 @@ export const pluginErrorHandler = (app: Elysia) =>
     else if (error instanceof Error) {
       response = {
         statusCode: 400,
-        message: error.message,
+        message: "[errorPlugin] UnHandled Error",
+        details: error.message,
       };
     }
 

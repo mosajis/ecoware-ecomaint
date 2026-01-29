@@ -10,7 +10,6 @@ const commands = {
   push: "Push schema to database",
   format: "Format schema file",
   studio: "Open Prisma Studio",
-  "fix-timestamps": "Fix timestamp fields in schema",
   "fix-relations": "Fix relation fields in generated files",
   "fix-datetimes": "Fix DateTime types in generated files",
 };
@@ -78,7 +77,6 @@ function generate() {
  */
 function pull() {
   runCommand(`prisma db pull --schema=${SCHEMA}`, "Pull Database");
-  fixTimestamps();
   format();
   generate();
   // log('Prisma', 'Pushing changes to database...', 'info')
@@ -94,7 +92,6 @@ function push() {
     `prisma db push --schema=${SCHEMA} --accept-data-loss`,
     "Push Database",
   );
-  fixTimestamps();
   format();
   generate();
 }
@@ -112,13 +109,6 @@ function format() {
  */
 function studio() {
   runCommand(`prisma studio --schema=${SCHEMA}`, "Prisma Studio");
-}
-
-/**
- * Fix timestamps in schema
- */
-function fixTimestamps() {
-  runCommand(`node ./scripts/prisma/fix-timestamp-schema.js`, "Fix Timestamps");
 }
 
 /**
@@ -173,7 +163,6 @@ function main() {
     push,
     format,
     studio,
-    "fix-timestamps": fixTimestamps,
     "fix-relations": fixRelations,
     "fix-datetimes": fixDateTimes,
   };

@@ -40,31 +40,38 @@ function download(url, dest) {
 async function fixTypesFile(path) {
   let content = await fsp.readFile(path, "utf-8");
 
-  // اصلاح string | number به number
-  content = content.replace(/\bstring\s*\|\s*number\b/g, "number");
+  // 1️⃣ (Record<string, never> | string | number) => string
+  content = content.replace(
+    /\(\s*Record<string,\s*never>\s*\|\s*string\s*\|\s*number\s*\)/g,
+    "string",
+  );
 
-  // حذف همه | unknown ها
-  content = content.replace(/\s*\|\s*unknown/g, "");
+  // حالت بدون پرانتز
+  content = content.replace(
+    /Record<string,\s*never>\s*\|\s*string\s*\|\s*number/g,
+    "string",
+  );
 
-  content = content.replace(/\s*\|\s*\(?Record<string,\s*never>\)?/g, "");
+  // 2️⃣ (string | number) => number
+  content = content.replace(/\(\s*string\s*\|\s*number\s*\)/g, "number");
 
-  // اختیاری: حذف | any هم اگر لازم باشه
-  // content = content.replace(/\s*\|\s*any/g, "");
+  // حالت بدون پرانتز
+  content = content.replace(/string\s*\|\s*number/g, "number");
 
   await fsp.writeFile(path, content, "utf-8");
-  console.log("✅ Fixed types and removed | unknown");
+  console.log("[generate-api-types] Fixed generated types.");
 }
 
 (async () => {
   try {
     await download(url, outputPath);
-    console.log("Downloaded OpenAPI spec.");
+    console.log("[generate-api-types] Downloaded OpenAPI spec.");
 
     execSync(`npx openapi-typescript ${url} --output ${typesPath}`, {
       stdio: "inherit",
     });
 
-    await fixTypesFile(typesPath);
+    // await fixTypesFile(typesPath);
   } catch (err) {
     console.error("Error:", err);
   }
