@@ -1,6 +1,5 @@
 import Splitter from "@/shared/components/Splitter/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import TabsComponent from "./FunctionTabs";
 import FunctionUpsert from "./FunctionUpsert";
 import DialogInstallRemoveComponent from "./_components/DialogInstallRemoveComponent";
 import { useRouter } from "@tanstack/react-router";

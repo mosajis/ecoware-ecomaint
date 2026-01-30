@@ -91,14 +91,16 @@ export default class Api {
         });
         return response.data as T;
       } catch (err: any) {
-        jotaiStore.set(AtomApiError, {
+        const parsedError = {
           message:
             err?.response?.data?.message ||
             err?.message ||
             "Unexpected server error",
           statusCode: err?.response?.status,
           details: err?.response?.data,
-        });
+        };
+
+        jotaiStore.set(AtomApiError, parsedError);
 
         throw err;
       }

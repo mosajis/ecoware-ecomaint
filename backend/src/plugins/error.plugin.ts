@@ -55,7 +55,6 @@ export const pluginErrorHandler = (app: Elysia) =>
         details: error.message,
       };
     }
-
     set.status = response.statusCode;
     return response;
   });

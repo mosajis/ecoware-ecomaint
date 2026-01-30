@@ -29,7 +29,7 @@ export async function effectComponentUnitChange({
     });
 
     if (!componentUnit?.compTypeId) {
-      throw new Error("Invalid componentUnit or compTypeId");
+      throw new Error("Invalid componentUnit or compTypeId", { cause: "s" });
     }
 
     const { compId, compTypeId } = componentUnit;

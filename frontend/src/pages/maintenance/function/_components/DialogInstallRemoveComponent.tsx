@@ -1,20 +1,20 @@
 import * as z from "zod";
-import { memo, useCallback, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldDateTime from "@/shared/components/fields/FieldDateTime";
+import { memo, useCallback, useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { buildRelation } from "@/core/helper";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
 import {
   tblComponentUnit,
   tblFunctions,
   tblRotationLog,
 } from "@/core/api/generated/api";
-import { buildRelation } from "@/core/helper";
-import FieldDateTime from "@/shared/components/fields/FieldDateTime";
-import { useAtom, useAtomValue } from "jotai";
-import { atomUser } from "@/pages/auth/auth.atom";
 
 // =======================
 // SCHEMA
@@ -183,7 +183,7 @@ function DialogInstallRemoveComponent({
               name="fromDate"
               control={control}
               render={({ field, fieldState }) => (
-                <DateField
+                <FieldDateTime
                   field={field}
                   type="DATE"
                   label="From Date"
@@ -209,7 +209,7 @@ function DialogInstallRemoveComponent({
               name="toDate"
               control={control}
               render={({ field, fieldState }) => (
-                <DateField
+                <FieldDateTime
                   field={field}
                   type="DATE"
                   label="To Date"

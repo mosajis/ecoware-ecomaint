@@ -52,6 +52,7 @@ export default function FormDialog({
   useEffect(() => {
     if (!open) setError(null);
   }, [open]);
+
   // 🔹 یکبار محاسبه کن
   const isDisabled = useMemo(
     () => disabled || submitting || loadingInitial,
@@ -66,16 +67,7 @@ export default function FormDialog({
 
       setError(null);
 
-      try {
-        await onSubmit?.(e);
-      } catch (err: any) {
-        const message =
-          err?.response?.data?.message ||
-          err?.message ||
-          "Something went wrong. Please try again.";
-
-        setError(message);
-      }
+      await onSubmit?.(e);
     },
     [onSubmit, readonly],
   );
@@ -83,6 +75,7 @@ export default function FormDialog({
   // 🔹 padding content
   const contentPadding = useMemo(() => (hideHeader ? 1 : 1.5), [hideHeader]);
 
+  console.log(error);
   return (
     <Dialog
       open={open}
@@ -100,7 +93,7 @@ export default function FormDialog({
       )}
 
       <DialogContent dividers sx={{ p: contentPadding }}>
-        {error?.message && (
+        {error && (
           <Alert
             severity="error"
             sx={{ mb: 1.5, border: "1px solid #a151517a" }}
