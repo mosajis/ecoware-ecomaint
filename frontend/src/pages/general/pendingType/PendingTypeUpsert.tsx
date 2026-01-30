@@ -1,14 +1,14 @@
-import { memo, useEffect, useState, useCallback, useMemo } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import NumberField from "@/shared/components/fields/FieldNumber";
-import { tblPendingType, TypeTblPendingType } from "@/core/api/generated/api";
-import { buildRelation, requiredStringField } from "@/core/helper";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
+import { memo, useEffect, useState, useCallback, useMemo } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { tblPendingType, TypeTblPendingType } from "@/core/api/generated/api";
+import { requiredStringField } from "@/core/helper";
 
 const schema = z.object({
   pendTypeName: requiredStringField(),
@@ -23,7 +23,7 @@ const schema = z.object({
     .optional(),
 });
 
-export type PendingTypeFormValues = z.infer<typeof schema>;
+export type PendingTypeFormValues = z.input<typeof schema>;
 
 type Props = {
   open: boolean;
@@ -74,14 +74,14 @@ function PendingTypeUpsert({
           pendTypeName: res?.pendTypeName ?? "",
           description: res?.description ?? "",
           orderNo: res?.orderNo ?? null,
-          parentPendingTypeId: res?.tblPendingType ?? null,
+          // parentPendingTypeId: res?.tblPendingType ?? null,
         });
 
-        if (res?.tblPendingType) {
-          setParentPending(res.tblPendingType);
-        } else {
-          setParentPending(null);
-        }
+        // if (res?.tblPendingType) {
+        //   setParentPending(res.tblPendingType);
+        // } else {
+        //   setParentPending(null);
+        // }
       } catch (err) {
         console.error("Failed to fetch Pending Type", err);
         reset(defaultValues);

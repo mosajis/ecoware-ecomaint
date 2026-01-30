@@ -9,6 +9,7 @@ import {
 import { attachmentColumns } from "../AttachmentColumn";
 import { GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { LinearProgress } from "@mui/material";
 
 const getRowId = (row: TypeTblAttachment) => row.attachmentId;
 
@@ -48,6 +49,7 @@ function TabAttachmentExisting({ onSelectionChange }: Props) {
 
   return (
     <TabContainer>
+      {loading && <LinearProgress />}
       <DataGrid
         disableRowNumber
         disableAdd
@@ -55,7 +57,6 @@ function TabAttachmentExisting({ onSelectionChange }: Props) {
         disableMultipleRowSelection
         label="Attachments"
         rows={rows}
-        loading={loading}
         columns={attachmentColumns}
         rowSelectionModel={rowSelectionModel}
         onRowSelectionModelChange={setRowSelectionModel}

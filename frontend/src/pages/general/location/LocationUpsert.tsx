@@ -176,6 +176,7 @@ function LocationUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           control={control}
           render={({ field, fieldState }) => (
             <FieldAsyncSelectGrid
+              disabled={isDisabled}
               dialogMaxWidth="sm"
               label="Parent Location"
               selectionMode="single"

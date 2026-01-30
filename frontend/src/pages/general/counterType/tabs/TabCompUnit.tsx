@@ -29,7 +29,7 @@ const columns: GridColDef<TypeTblCompCounter>[] = [
     field: "model",
     headerName: "Model",
     flex: 1,
-    valueGetter: (_, row) => row.tblComponentUnit?.misc1,
+    valueGetter: (_, row) => row.tblComponentUnit?.model,
   },
   {
     field: "serialNo",

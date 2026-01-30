@@ -172,11 +172,7 @@ export default function GenericDataGrid({
       rowSelectionModel={rowSelectionModel}
       onRowSelectionModelChange={handleRowSelectionChange}
       getRowId={getRowId}
-      onRowDoubleClick={(params, event) => {
-        event.defaultMuiPrevented = true;
-
-        onDoubleClick?.(Number(params.id));
-      }}
+      onRowDoubleClick={(params, event) => onDoubleClick?.(Number(params.id))}
       {...rest}
     />
   );

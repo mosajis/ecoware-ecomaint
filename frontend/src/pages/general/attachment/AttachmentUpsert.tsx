@@ -20,7 +20,7 @@ import {
   TypeTblAttachmentType,
 } from "@/core/api/generated/api";
 
-export type AttachmentFormValues = z.infer<typeof newAttachmentSchema>;
+export type AttachmentFormValues = z.input<typeof newAttachmentSchema>;
 
 type Props = {
   open: boolean;

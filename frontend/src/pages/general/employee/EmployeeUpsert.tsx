@@ -238,6 +238,7 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           control={control}
           render={({ field, fieldState }) => (
             <FieldAsyncSelectGrid<TypeTblAddress>
+              disabled={isDisabled}
               label="Address"
               value={field.value}
               request={tblAddress.getAll}

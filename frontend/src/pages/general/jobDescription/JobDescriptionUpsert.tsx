@@ -2,10 +2,10 @@ import * as z from "zod";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { memo, useEffect, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
 import {
   tblJobDescription,
@@ -184,6 +184,7 @@ function JobDescriptionUpsert({
           control={control}
           render={({ field, fieldState }) => (
             <FieldAsyncSelectGrid
+              disabled={isDisabled}
               label="Job Class"
               selectionMode="single"
               value={field.value}

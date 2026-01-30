@@ -2,12 +2,12 @@ import * as z from "zod";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
+import FieldNumber from "@/shared/components/fields/FieldNumber";
 import { memo, useEffect, useState, useCallback, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { tblJobClass, TypeTblJobClass } from "@/core/api/generated/api";
 import { requiredStringField } from "@/core/helper";
-import NumberField from "@/shared/components/fields/FieldNumber";
 
 // === Validation Schema ===
 const schema = z.object({
@@ -148,7 +148,7 @@ function JobClassUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           name="orderNo"
           control={control}
           render={({ field }) => (
-            <NumberField
+            <FieldNumber
               {...field}
               label="Order No"
               size="small"
