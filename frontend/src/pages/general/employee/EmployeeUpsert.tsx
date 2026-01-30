@@ -1,14 +1,14 @@
 import * as z from "zod";
-import AsyncSelect from "@/shared/components/fields/FieldAsyncSelectGrid";
+import AsyncSelect from "@/shared/components/fields/FieldAsyncSelect";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import NumberField from "@/shared/components/fields/FieldNumber";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { memo, useEffect, useMemo, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { buildRelation, requiredStringField } from "@/core/helper";
-import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import {
   tblAddress,
   tblDiscipline,
@@ -34,7 +34,7 @@ export const schema = z.object({
   discipline: z
     .object({
       discId: z.number(),
-      name: z.string(),
+      name: z.string().optional().nullable(),
     })
     .nullable()
     .refine((val) => val !== null, {
@@ -44,7 +44,7 @@ export const schema = z.object({
   orderNo: z.number().nullable(),
 });
 
-export type EmployeeFormValues = z.infer<typeof schema>;
+export type EmployeeFormValues = z.input<typeof schema>;
 
 type Props = {
   open: boolean;
@@ -64,8 +64,8 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
       lastName: "",
       firstName: "",
       address: null,
-      discipline: null,
       orderNo: null,
+      discipline: null,
     }),
     [],
   );
@@ -255,8 +255,6 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           control={control}
           render={({ field, fieldState }) => (
             <AsyncSelect<TypeTblDiscipline>
-              name="discipline"
-              control={control}
               label="Discipline *"
               disabled={isDisabled}
               error={!!fieldState.error}

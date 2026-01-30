@@ -3,21 +3,22 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import FileField from "@/shared/components/fields/FieldFile";
-import AsyncSelect from "@/shared/components/fields/FieldAsyncSelectGrid";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import FieldAsyncSelect from "@/shared/components/fields/FieldAsyncSelect";
 import { memo, useEffect, useMemo, useCallback, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createAttachment } from "./AttachmentService";
 import { newAttachmentSchema } from "@/shared/tabs/attachmentMap/AttachmentMapSchema";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
 import {
   tblAttachment,
   TypeTblAttachment,
   tblAttachmentType,
+  TypeTblAttachmentType,
 } from "@/core/api/generated/api";
-import { useAtomValue } from "jotai";
-import { atomUser } from "@/pages/auth/auth.atom";
 
 export type AttachmentFormValues = z.infer<typeof newAttachmentSchema>;
 
@@ -195,7 +196,7 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
             name="attachmentType"
             control={control}
             render={({ field, fieldState }) => (
-              <AsyncSelect
+              <FieldAsyncSelect<TypeTblAttachmentType>
                 {...field}
                 value={field.value}
                 onChange={field.onChange}

@@ -1,11 +1,20 @@
-import React, { Suspense } from "react";
+import React, {
+  Suspense,
+  useState,
+  useCallback,
+  useMemo,
+  useEffect,
+} from "react";
 import DialogHeader from "../dialog/DialogHeader";
 import FormDialogAction from "./FormDialogAction";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import type { DialogProps } from "@mui/material/Dialog";
 import Spinner from "../Spinner";
+import Alert from "@mui/material/Alert";
+import type { DialogProps } from "@mui/material/Dialog";
+import { useAtom, useAtomValue } from "jotai";
+import { AtomApiError } from "@/shared/atoms/error.atom";
 
 export type FormDialogWrapperProps = {
   readonly?: boolean;
@@ -15,7 +24,7 @@ export type FormDialogWrapperProps = {
   submitting?: boolean;
   loadingInitial?: boolean;
   onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
-  children: React.ReactNode; // این می‌تونه lazy هم باشه
+  children: React.ReactNode; // می‌تونه lazy هم باشه
   cancelText?: string;
   submitText?: string;
   disabled?: boolean;
@@ -38,7 +47,41 @@ export default function FormDialog({
   disabled = false,
   maxWidth = "sm",
 }: FormDialogWrapperProps) {
-  const isDisabled = disabled || submitting || loadingInitial;
+  const [error, setError] = useAtom(AtomApiError);
+
+  useEffect(() => {
+    if (!open) setError(null);
+  }, [open]);
+  // 🔹 یکبار محاسبه کن
+  const isDisabled = useMemo(
+    () => disabled || submitting || loadingInitial,
+    [disabled, submitting, loadingInitial],
+  );
+
+  // 🔹 handler submit با useCallback
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (readonly) return;
+
+      setError(null);
+
+      try {
+        await onSubmit?.(e);
+      } catch (err: any) {
+        const message =
+          err?.response?.data?.message ||
+          err?.message ||
+          "Something went wrong. Please try again.";
+
+        setError(message);
+      }
+    },
+    [onSubmit, readonly],
+  );
+
+  // 🔹 padding content
+  const contentPadding = useMemo(() => (hideHeader ? 1 : 1.5), [hideHeader]);
 
   return (
     <Dialog
@@ -56,15 +99,17 @@ export default function FormDialog({
         />
       )}
 
-      <DialogContent dividers sx={{ p: hideHeader ? 1 : 1.5 }}>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (!readonly) {
-              onSubmit?.(e);
-            }
-          }}
-        >
+      <DialogContent dividers sx={{ p: contentPadding }}>
+        {error?.message && (
+          <Alert
+            severity="error"
+            sx={{ mb: 1.5, border: "1px solid #a151517a" }}
+          >
+            {error.statusCode} - {error.message}
+          </Alert>
+        )}
+
+        <form onSubmit={handleSubmit}>
           <Suspense fallback={<Spinner />}>{children}</Suspense>
 
           <DialogActions sx={{ p: 0, m: 0, mt: 2 }}>

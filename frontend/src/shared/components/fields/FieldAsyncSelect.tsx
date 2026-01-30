@@ -11,6 +11,7 @@ import {
   ReactNode,
   useMemo,
 } from "react";
+import { DynamicQuery, DynamicResponse } from "@/core/api/dynamicTypes";
 
 export type SelectionMode = "single" | "multiple";
 
@@ -26,7 +27,7 @@ export interface AsyncSelectProps<T> {
   initialOptions?: T[];
   error?: boolean;
   helperText?: ReactNode;
-  request: (query?: string) => Promise<any>;
+  request: (query?: DynamicQuery<any>) => DynamicResponse<any>;
   extractRows?: (data: any) => T[];
   getOptionLabel?: (row: T) => string;
   getOptionKey?: (row: T) => string | number;

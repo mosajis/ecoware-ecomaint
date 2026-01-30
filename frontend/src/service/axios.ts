@@ -3,6 +3,8 @@ import qs from "qs";
 import isEmpty from "lodash-es/isEmpty";
 import { configAxios } from "@/config";
 import { LOCAL_STORAGE } from "@/const";
+import { jotaiStore } from "@/shared/atoms/jotai.store";
+import { AtomApiError } from "@/shared/atoms/error.atom";
 
 export default class Api {
   axios;
@@ -89,8 +91,16 @@ export default class Api {
         });
         return response.data as T;
       } catch (err: any) {
-        console.error(err);
-        throw err; // مناسب برای استفاده در TanStack Query
+        jotaiStore.set(AtomApiError, {
+          message:
+            err?.response?.data?.message ||
+            err?.message ||
+            "Unexpected server error",
+          statusCode: err?.response?.status,
+          details: err?.response?.data,
+        });
+
+        throw err;
       }
     };
 }

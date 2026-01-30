@@ -9,6 +9,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { AdapterDateFnsJalali } from "@mui/x-date-pickers/AdapterDateFnsJalali";
 import { atomLanguage } from "@/shared/atoms/general.atom";
+import { jotaiStore } from "@/shared/atoms/jotai.store";
 
 interface ProvidersProps {
   children?: ReactNode;
@@ -30,7 +31,7 @@ const LocalizationWrapper = ({ children }: ProvidersProps) => {
 
 const Providers = ({ children }: ProvidersProps) => {
   return (
-    <JotaiProvider>
+    <JotaiProvider store={jotaiStore}>
       <LocalizationWrapper>
         <AppTheme>
           <CssBaseline enableColorScheme />
