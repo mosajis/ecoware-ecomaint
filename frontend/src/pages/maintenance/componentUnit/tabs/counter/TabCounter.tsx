@@ -1,9 +1,8 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import TabCounterUpsert from "./TabCounterUpsert";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import {
   tblCompCounter,
   TypeTblComponentUnit,
@@ -62,8 +61,8 @@ const columns: GridColDef<TypeTblCompCounter>[] = [
     flex: 1,
   },
   {
-    field: "order No",
-    headerName: "Order",
+    field: "orderNo",
+    headerName: "Order No",
     width: 85,
   },
 ];
@@ -79,7 +78,6 @@ const TabCompCounter = ({ componentUnit, label }: Props) => {
     return tblCompCounter.getAll({
       include: {
         tblCounterType: true,
-        tblCompCounterLogs: true,
         tblCompJobCounters: true,
       },
       filter: {

@@ -50,16 +50,14 @@ export default function FormDialog({
   const [error, setError] = useAtom(AtomApiError);
 
   useEffect(() => {
-    if (!open) setError(null);
+    if (open) setError(null);
   }, [open]);
 
-  // 🔹 یکبار محاسبه کن
   const isDisabled = useMemo(
     () => disabled || submitting || loadingInitial,
     [disabled, submitting, loadingInitial],
   );
 
-  // 🔹 handler submit با useCallback
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -75,7 +73,6 @@ export default function FormDialog({
   // 🔹 padding content
   const contentPadding = useMemo(() => (hideHeader ? 1 : 1.5), [hideHeader]);
 
-  console.log(error);
   return (
     <Dialog
       open={open}

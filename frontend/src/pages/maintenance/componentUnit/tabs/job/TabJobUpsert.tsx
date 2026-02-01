@@ -1,13 +1,13 @@
 import * as z from "zod";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import RadioGroup from "@mui/material/RadioGroup";
 import Radio from "@mui/material/Radio";
 import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldNumber from "@/shared/components/fields/FieldNumber";
 import { memo, useEffect, useState, useCallback, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,7 +22,9 @@ import {
   tblMaintType,
   tblPeriod,
   TypeTblCompJob,
+  TypeTblDiscipline,
 } from "@/core/api/generated/api";
+import FieldAsyncSelect from "@/shared/components/fields/FieldAsyncSelect";
 
 /* ================= Schema ================= */
 
@@ -35,7 +37,9 @@ const schema = z.object({
       jobDescTitle: z.string().nullable().optional(),
     })
     .nullable()
-    .optional(),
+    .refine((val) => val !== null, {
+      message: "Job Description is required",
+    }),
 
   disc: z
     .object({
@@ -43,7 +47,9 @@ const schema = z.object({
       name: z.string().nullable().optional(),
     })
     .nullable()
-    .optional(),
+    .refine((val) => val !== null, {
+      message: "Discipline is required",
+    }),
 
   maintClass: z
     .object({
@@ -93,7 +99,7 @@ const schema = z.object({
   mandatoryHistory: z.boolean().optional(),
 });
 
-export type JobFormValues = z.infer<typeof schema>;
+export type JobFormValues = z.input<typeof schema>;
 
 /* ================= Props ================= */
 
@@ -285,11 +291,12 @@ function ComponentJobUpsert({
         <Controller
           name="jobDesc"
           control={control}
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <Box width="60%">
               <FieldAsyncSelectGrid
+                disabled={isDisabled}
                 dialogMaxWidth="sm"
-                label="Job Description"
+                label="Job Description *"
                 value={field.value}
                 selectionMode="single"
                 request={tblJobDescription.getAll}
@@ -299,28 +306,27 @@ function ComponentJobUpsert({
                 getOptionLabel={(row) => row.jobDescTitle}
                 getRowId={(row) => row.jobDescId}
                 onChange={field.onChange}
+                error={!!fieldState.error?.message}
+                helperText={fieldState.error?.message}
               />
             </Box>
           )}
         />
 
-        {/* Discipline */}
         <Controller
           name="disc"
           control={control}
-          render={({ field }) => (
-            <Box width="45%">
-              <FieldAsyncSelectGrid
-                dialogMaxWidth="sm"
-                label="Discipline"
-                value={field.value}
-                selectionMode="single"
-                request={tblDiscipline.getAll}
-                columns={[{ field: "name", headerName: "Discipline", flex: 1 }]}
-                getRowId={(row) => row.discId}
-                onChange={field.onChange}
-              />
-            </Box>
+          render={({ field, fieldState }) => (
+            <FieldAsyncSelect<TypeTblDiscipline>
+              label="Discipline *"
+              disabled={isDisabled}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
+              request={tblDiscipline.getAll}
+              getOptionLabel={(row) => row.name || ""}
+              value={field.value}
+              onChange={field.onChange}
+            />
           )}
         />
 
@@ -329,28 +335,23 @@ function ComponentJobUpsert({
           <Controller
             name="frequency"
             control={control}
-            render={({ field }) => (
-              <TextField
+            render={({ field, fieldState }) => (
+              <FieldNumber
                 {...field}
                 fullWidth
-                type="number"
                 label="Frequency"
-                size="small"
                 disabled={isDisabled}
-                value={field.value ?? ""}
-                onChange={(e) =>
-                  field.onChange(
-                    e.target.value === "" ? null : Number(e.target.value),
-                  )
-                }
+                error={!!fieldState.error?.message}
+                helperText={fieldState.error?.message}
               />
             )}
           />
           <Controller
             name="frequencyPeriod"
             control={control}
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FieldAsyncSelectGrid
+                disabled={isDisabled}
                 dialogMaxWidth="sm"
                 label="Frequency Period"
                 value={field.value}
@@ -360,6 +361,8 @@ function ComponentJobUpsert({
                 getOptionLabel={(row) => row.name}
                 getRowId={(row) => row.periodId}
                 onChange={field.onChange}
+                error={!!fieldState.error?.message}
+                helperText={fieldState.error?.message}
               />
             )}
           />
@@ -370,8 +373,9 @@ function ComponentJobUpsert({
           <Controller
             name="maintClass"
             control={control}
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FieldAsyncSelectGrid
+                disabled={isDisabled}
                 dialogMaxWidth="sm"
                 label="Maint Class"
                 value={field.value}
@@ -382,14 +386,17 @@ function ComponentJobUpsert({
                 ]}
                 getRowId={(row) => row.maintClassId}
                 onChange={field.onChange}
+                error={!!fieldState.error?.message}
+                helperText={fieldState.error?.message}
               />
             )}
           />
           <Controller
             name="maintCause"
             control={control}
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FieldAsyncSelectGrid
+                disabled={isDisabled}
                 dialogMaxWidth="sm"
                 label="Maint Cause"
                 value={field.value}
@@ -400,14 +407,17 @@ function ComponentJobUpsert({
                 ]}
                 getRowId={(row) => row.maintCauseId}
                 onChange={field.onChange}
+                error={!!fieldState.error?.message}
+                helperText={fieldState.error?.message}
               />
             )}
           />
           <Controller
             name="maintType"
             control={control}
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FieldAsyncSelectGrid
+                disabled={isDisabled}
                 dialogMaxWidth="sm"
                 label="Maint Type"
                 value={field.value}
@@ -418,6 +428,8 @@ function ComponentJobUpsert({
                 ]}
                 getRowId={(row) => row.maintTypeId}
                 onChange={field.onChange}
+                error={!!fieldState.error?.message}
+                helperText={fieldState.error?.message}
               />
             )}
           />
@@ -428,40 +440,28 @@ function ComponentJobUpsert({
           <Controller
             name="priority"
             control={control}
-            render={({ field }) => (
-              <TextField
+            render={({ field, fieldState }) => (
+              <FieldNumber
                 {...field}
-                type="number"
                 label="Priority"
                 fullWidth
-                size="small"
                 disabled={isDisabled}
-                value={field.value ?? ""}
-                onChange={(e) =>
-                  field.onChange(
-                    e.target.value === "" ? null : Number(e.target.value),
-                  )
-                }
+                error={!!fieldState.error?.message}
+                helperText={fieldState.error?.message}
               />
             )}
           />
           <Controller
             name="window"
             control={control}
-            render={({ field }) => (
-              <TextField
+            render={({ field, fieldState }) => (
+              <FieldNumber
                 {...field}
-                type="number"
                 label="Window"
                 fullWidth
-                size="small"
                 disabled={isDisabled}
-                value={field.value ?? ""}
-                onChange={(e) =>
-                  field.onChange(
-                    e.target.value === "" ? null : Number(e.target.value),
-                  )
-                }
+                error={!!fieldState.error?.message}
+                helperText={fieldState.error?.message}
               />
             )}
           />
@@ -471,18 +471,28 @@ function ComponentJobUpsert({
           <Controller
             name="lastDone"
             control={control}
-            render={({ field }) => (
-              <FieldDateTime label="Last Done" field={field} type="DATETIME" />
+            render={({ field, fieldState }) => (
+              <FieldDateTime
+                disabled={isDisabled}
+                label="Last Done"
+                field={field}
+                type="DATETIME"
+                error={!!fieldState.error?.message}
+                helperText={fieldState.error?.message}
+              />
             )}
           />
           <Controller
             name="nextDueDate"
             control={control}
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FieldDateTime
+                disabled={isDisabled}
                 label="Next Due Date"
                 field={field}
                 type="DATETIME"
+                error={!!fieldState.error?.message}
+                helperText={fieldState.error?.message}
               />
             )}
           />
@@ -506,7 +516,14 @@ function ComponentJobUpsert({
               control={control}
               render={({ field }) => (
                 <FormControlLabel
-                  control={<Checkbox {...field} checked={!!field.value} />}
+                  disabled={isDisabled}
+                  control={
+                    <Checkbox
+                      {...field}
+                      checked={!!field.value}
+                      disabled={isDisabled}
+                    />
+                  }
                   label={name.replace("status", "")}
                 />
               )}
@@ -525,12 +542,12 @@ function ComponentJobUpsert({
               <RadioGroup {...field} row>
                 <FormControlLabel
                   value="Variable"
-                  control={<Radio />}
+                  control={<Radio disabled={isDisabled} />}
                   label="Variable"
                 />
                 <FormControlLabel
                   value="Fixed"
-                  control={<Radio />}
+                  control={<Radio disabled={isDisabled} />}
                   label="Fixed"
                 />
               </RadioGroup>
@@ -539,13 +556,20 @@ function ComponentJobUpsert({
         </BorderedBox>
 
         <BorderedBox label="Advanced Option" mt={2}>
-          <Box>
+          <Box gap={1.5} display={"flex"} alignItems={"center"}>
             <Controller
               name="active"
               control={control}
               render={({ field }) => (
                 <FormControlLabel
-                  control={<Checkbox {...field} checked={!!field.value} />}
+                  disabled={isDisabled}
+                  control={
+                    <Checkbox
+                      {...field}
+                      checked={!!field.value}
+                      disabled={isDisabled}
+                    />
+                  }
                   label="Active"
                 />
               )}
@@ -555,7 +579,14 @@ function ComponentJobUpsert({
               control={control}
               render={({ field }) => (
                 <FormControlLabel
-                  control={<Checkbox {...field} checked={!!field.value} />}
+                  disabled={isDisabled}
+                  control={
+                    <Checkbox
+                      {...field}
+                      checked={!!field.value}
+                      disabled={isDisabled}
+                    />
+                  }
                   label="Mandatory History"
                 />
               )}

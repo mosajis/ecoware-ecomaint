@@ -6,7 +6,10 @@ export const schema = z.object({
       compTypeId: z.number(),
       compName: z.string().nullable(),
     })
-    .nullable(),
+    .nullable()
+    .refine((val) => val !== null, {
+      message: "CompType is required",
+    }),
   location: z
     .object({
       locationId: z.number(),
@@ -46,7 +49,7 @@ export const schema = z.object({
   orderNo: z.number().nullable().optional(),
 });
 
-export type SchemaValue = z.infer<typeof schema>;
+export type SchemaValue = z.input<typeof schema>;
 
 export const DEFAULT_VALUES: SchemaValue = {
   compType: null,

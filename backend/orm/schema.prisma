@@ -94,27 +94,29 @@ model TblAttachmentType {
 }
 
 model TblCompCounter {
-  compCounterId      Int                 @id(clustered: false, map: "PK_tblCompCounter") @default(dbgenerated("NEXT VALUE FOR [Seq_CompCounter]"), map: "DF_CompCounterID") @map("CompCounterID")
-  compId             Int?                @map("CompID")
-  counterTypeId      Int?                @map("CounterTypeID")
-  currentValue       Int?                @map("CurrentValue")
-  currentDate        DateTime?           @map("CurrentDate") @db.DateTime
-  changedBy          Int?                @map("ChangedBy")
-  dependsOnId        Int?                @map("DependsOnID")
-  startDate          DateTime?           @map("StartDate") @db.DateTime
-  startValue         Int?                @map("StartValue")
-  lastZeroedValue    Int?                @map("LastZeroedValue")
-  zeroedDate         DateTime?           @map("ZeroedDate") @db.DateTime
-  averageCountRate   Int?                @map("AverageCountRate")
-  useCalcAverage     Int?                @map("UseCalcAverage")
-  deptId             Int?                @map("DeptID")
-  exportMarker       Int?                @map("ExportMarker")
-  lastupdate         DateTime?           @db.DateTime
-  orderNo            Int?                @map("OrderNo")
-  tblComponentUnit   TblComponentUnit?   @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompCounter_tblComponentUnit")
-  tblCounterType     TblCounterType?     @relation(fields: [counterTypeId], references: [counterTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompCounter_tblCounterType")
-  tblCompCounterLogs TblCompCounterLog[]
-  tblCompJobCounters TblCompJobCounter[]
+  compCounterId        Int                 @id(clustered: false, map: "PK_tblCompCounter") @default(dbgenerated("NEXT VALUE FOR [Seq_CompCounter]"), map: "DF_CompCounterID") @map("CompCounterID")
+  compId               Int?                @map("CompID")
+  counterTypeId        Int?                @map("CounterTypeID")
+  currentValue         Int?                @map("CurrentValue")
+  currentDate          DateTime?           @map("CurrentDate") @db.DateTime
+  changedBy            Int?                @map("ChangedBy")
+  dependsOnId          Int?                @map("DependsOnID")
+  startDate            DateTime?           @map("StartDate") @db.DateTime
+  startValue           Int?                @map("StartValue")
+  lastZeroedValue      Int?                @map("LastZeroedValue")
+  zeroedDate           DateTime?           @map("ZeroedDate") @db.DateTime
+  averageCountRate     Int?                @map("AverageCountRate")
+  useCalcAverage       Int?                @map("UseCalcAverage")
+  deptId               Int?                @map("DeptID")
+  exportMarker         Int?                @map("ExportMarker")
+  lastupdate           DateTime?           @db.DateTime
+  orderNo              Int?                @map("OrderNo")
+  tblCompCounter       TblCompCounter?     @relation("tblCompCounterTotblCompCounter", fields: [dependsOnId], references: [compCounterId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompCounter_tblCompCounter")
+  otherTblCompCounters TblCompCounter[]    @relation("tblCompCounterTotblCompCounter")
+  tblComponentUnit     TblComponentUnit?   @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompCounter_tblComponentUnit")
+  tblCounterType       TblCounterType?     @relation(fields: [counterTypeId], references: [counterTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompCounter_tblCounterType")
+  tblCompCounterLogs   TblCompCounterLog[]
+  tblCompJobCounters   TblCompJobCounter[]
 
   @@map("tblCompCounter")
 }
@@ -208,7 +210,7 @@ model TblCompJobCounter {
   orderNumber      Int?            @map("OrderNumber")
   orderNo          Int?            @map("OrderNo")
   createdUserId    Int?            @map("CreatedUserId")
-  tblCompCounter   TblCompCounter? @relation(fields: [compCounterId], references: [compCounterId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJobCounter_tblCompCounter")
+  tblCompCounter   TblCompCounter? @relation(fields: [compCounterId], references: [compCounterId], onDelete: Cascade, onUpdate: NoAction, map: "FK_tblCompJobCounter_tblCompCounter")
   tblCompJob       TblCompJob?     @relation(fields: [compJobId], references: [compJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJobCounter_tblCompJob")
   tblUsers         TblUsers?       @relation(fields: [createdUserId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJobCounter_tblUsers")
 

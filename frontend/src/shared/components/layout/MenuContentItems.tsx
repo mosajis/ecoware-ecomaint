@@ -198,7 +198,7 @@ export const menuContentItems: {
         path: "/maintenance/update-counter",
       },
       {
-        text: "Counter Logs (x)",
+        text: "Counter Logs",
         icon: <HistoryRoundedIcon />,
         id: "maint:counterLog",
         path: "/maintenance/counters-log",

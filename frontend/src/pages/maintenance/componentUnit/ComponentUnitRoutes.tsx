@@ -37,7 +37,9 @@ export const routeComponentUnitDetail = createDetailRoute({
   ),
 });
 
-routeComponentUnit.addChildren([
+const routes = routeComponentUnit.addChildren([
   routeComponentUnitList,
   routeComponentUnitDetail,
 ]);
+
+export default routes;

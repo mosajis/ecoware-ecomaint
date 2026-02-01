@@ -3,8 +3,8 @@ import { createRoute, Outlet } from "@tanstack/react-router";
 import { protectedRoute } from "./protected.routes";
 import { LazyRoute } from "./_components/lazyRoute";
 import { routeComponentType } from "@/pages/maintenance/componentType/ComponentTypeRoutes";
-import { routeComponentUnit } from "@/pages/maintenance/componentUnit/ComponentUnitRoutes";
 import { NotFound } from "@/pages/NotFound";
+import routeComponentUnit from "@/pages/maintenance/componentUnit/ComponentUnitRoutes";
 import routeFunction from "@/pages/maintenance/function/FunctionRoutes";
 
 //  Lazy pages ---

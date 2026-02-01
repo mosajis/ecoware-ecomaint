@@ -1,9 +1,7 @@
 import AccountTree from "@mui/icons-material/AccountTree";
-import AddBox from "@mui/icons-material/AddBox";
 import AttachFile from "@mui/icons-material/AttachFile";
 import BarChart from "@mui/icons-material/BarChart";
 import BugReport from "@mui/icons-material/BugReport";
-import CheckCircle from "@mui/icons-material/CheckCircle";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 import Description from "@mui/icons-material/Description";
 import DoneAll from "@mui/icons-material/DoneAll";
@@ -35,7 +33,7 @@ type Props = {
 // Define tabs
 const tabs: ReusableTabItem[] = [
   {
-    label: "Job (Check upser due Date)",
+    label: "Job",
     icon: <AccountTree />,
     component: TabJob,
   },

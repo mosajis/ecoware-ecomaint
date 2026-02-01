@@ -18,20 +18,34 @@ import {
 
 /* === Schema === */
 const schema = z.object({
-  counterType: z.object({
-    counterTypeId: z.number(),
-    name: z.string().optional().nullable(),
-  }),
-  currentValue: z.number().nullable(),
-  currentDate: z.string().nullable(),
-  startDate: z.string().nullable(),
-  startValue: z.number().nullable(),
+  counterType: z
+    .object({
+      counterTypeId: z.number(),
+      name: z.string().optional().nullable(),
+    })
+    .nullable()
+    .refine((val) => val !== null, {
+      message: "counterType is required",
+    }),
+
+  dependOn: z
+    .object({
+      compCounterId: z.number(),
+      name: z.string().optional().nullable(),
+    })
+    .nullable()
+    .optional(),
+
+  startDate: z.string().or(z.date()),
+  startValue: z.number(),
+
   averageCountRate: z.number().nullable(),
-  useCalcAverage: z.number().nullable(),
+  useCalcAverage: z.boolean().nullable(),
+
   orderNo: z.number().nullable(),
 });
 
-type FormValues = z.infer<typeof schema>;
+type FormValues = z.input<typeof schema>;
 
 type Props = {
   open: boolean;
@@ -53,12 +67,13 @@ function CompCounterUpsert({
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
+  const isDisabled = loadingInitial || submitting;
+
   const defaultValues: FormValues = {
-    counterType: null as any,
-    currentValue: null,
-    currentDate: null,
-    startDate: null,
-    startValue: null,
+    counterType: null,
+    dependOn: null,
+    startDate: new Date(),
+    startValue: 0,
     averageCountRate: null,
     useCalcAverage: null,
     orderNo: null,
@@ -69,7 +84,7 @@ function CompCounterUpsert({
     defaultValues,
   });
 
-  // === Load in edit ===
+  /* === Load in edit === */
   const fetchData = useCallback(async () => {
     if (mode !== "update" || !recordId) {
       reset(defaultValues);
@@ -79,17 +94,23 @@ function CompCounterUpsert({
     setLoadingInitial(true);
     try {
       const res = await tblCompCounter.getById(recordId, {
-        include: { tblCounterType: true },
+        include: {
+          tblCounterType: true,
+          tblCompCounter: {
+            include: {
+              tblCounterType: true,
+            },
+          },
+        },
       });
 
       reset({
-        counterType: { ...res.tblCounterType },
-        currentValue: res.currentValue ?? null,
-        currentDate: res.currentDate ?? null,
-        startDate: res.startDate ?? null,
-        startValue: res.startValue ?? null,
+        counterType: res.tblCounterType ?? null,
+        dependOn: res?.tblCompCounter ?? null,
+        startDate: res.startDate ?? new Date(),
+        startValue: res.startValue ?? 0,
         averageCountRate: res.averageCountRate ?? null,
-        useCalcAverage: res.useCalcAverage ?? null,
+        useCalcAverage: Boolean(res.useCalcAverage),
         orderNo: res.orderNo ?? null,
       });
     } finally {
@@ -101,7 +122,7 @@ function CompCounterUpsert({
     if (open) fetchData();
   }, [open, fetchData]);
 
-  // === Submit ===
+  /* === Submit === */
   const onSubmit = useCallback(
     async (values: FormValues) => {
       const parsed = schema.safeParse(values);
@@ -113,8 +134,16 @@ function CompCounterUpsert({
         const counterTypeRelation = buildRelation(
           "tblCounterType",
           "counterTypeId",
-          parsed.data.counterType.counterTypeId,
+          parsed.data.counterType!.counterTypeId,
         );
+
+        const dependOnRelation = parsed.data.dependOn
+          ? buildRelation(
+              "tblCompCounter",
+              "compCounterId",
+              parsed.data.dependOn.compCounterId,
+            )
+          : {};
 
         const compRelation = buildRelation(
           "tblComponentUnit",
@@ -123,14 +152,13 @@ function CompCounterUpsert({
         );
 
         const payload = {
-          currentValue: parsed.data.currentValue,
-          currentDate: parsed.data.currentDate,
-          startDate: parsed.data.startDate,
+          startDate: parsed.data.startDate.toString(),
           startValue: parsed.data.startValue,
           averageCountRate: parsed.data.averageCountRate,
-          useCalcAverage: parsed.data.useCalcAverage,
+          useCalcAverage: parsed.data.useCalcAverage ? 1 : 0,
           orderNo: parsed.data.orderNo,
           ...counterTypeRelation,
+          ...dependOnRelation,
           ...compRelation,
         };
 
@@ -170,50 +198,41 @@ function CompCounterUpsert({
               label="Counter Type *"
               value={field.value}
               onChange={field.onChange}
-              request={() => tblCounterType.getAll({ filter: { type: 0 } })}
+              request={() =>
+                tblCounterType.getAll({
+                  filter: {
+                    type: 0,
+                    NOT: {
+                      tblCompCounters: {
+                        some: { compId },
+                      },
+                    },
+                  },
+                })
+              }
               columns={[{ field: "name", headerName: "Name", flex: 1 }]}
               getRowId={(row) => row.counterTypeId}
+              disabled={isDisabled || mode === "update"}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />
           )}
         />
 
-        <Box display={"flex"} gap={1.5}>
-          {/* Current Date */}
-          <Controller
-            name="currentDate"
-            control={control}
-            render={({ field }) => (
-              <FieldDateTime
-                label="Current Date"
-                field={field}
-                type="DATETIME"
-              />
-            )}
-          />
-          {/* Current Value */}
-          <Controller
-            name="currentValue"
-            control={control}
-            render={({ field }) => (
-              <NumberField
-                fullWidth
-                {...field}
-                label="Current Value"
-                size="small"
-              />
-            )}
-          />
-        </Box>
-
-        <Box display={"flex"} gap={1.5}>
+        <Box display="flex" gap={1.5}>
           {/* Start Date */}
           <Controller
             name="startDate"
             control={control}
-            render={({ field }) => (
-              <FieldDateTime label="Start Date" field={field} type="DATETIME" />
+            render={({ field, fieldState }) => (
+              <FieldDateTime
+                label="Start Date"
+                field={field}
+                type="DATETIME"
+                disabled={isDisabled}
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
+              />
             )}
           />
 
@@ -221,19 +240,23 @@ function CompCounterUpsert({
           <Controller
             name="startValue"
             control={control}
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <NumberField
                 fullWidth
                 {...field}
+                onChange={field.onChange}
                 label="Start Value"
                 size="small"
+                disabled={isDisabled}
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
               />
             )}
           />
         </Box>
 
-        {/* Average Count Rate */}
-        <Box display={"grid"} gridTemplateColumns={"1fr 1fr"} gap={1.5}>
+        {/* Average */}
+        <Box display="grid" gridTemplateColumns="1fr 1fr" gap={1.5}>
           <Controller
             name="averageCountRate"
             control={control}
@@ -241,6 +264,7 @@ function CompCounterUpsert({
               <NumberField
                 {...field}
                 fullWidth
+                disabled={isDisabled}
                 label="Average Count Rate"
                 size="small"
               />
@@ -255,8 +279,9 @@ function CompCounterUpsert({
                 sx={{ margin: 0 }}
                 control={
                   <Checkbox
+                    disabled={isDisabled}
                     checked={Boolean(field.value)}
-                    onChange={field.onChange}
+                    onChange={(_, checked) => field.onChange(checked)}
                   />
                 }
                 label="Use this average"
@@ -264,6 +289,44 @@ function CompCounterUpsert({
             )}
           />
         </Box>
+
+        {/* Depends On */}
+        <Controller
+          name="dependOn"
+          control={control}
+          render={({ field, fieldState }) => (
+            <FieldAsyncSelectGrid
+              label="Depends On"
+              value={field.value}
+              disabled={isDisabled}
+              getOptionLabel={(row) => row?.tblCounterType?.name}
+              onChange={field.onChange}
+              request={() =>
+                tblCompCounter.getAll({
+                  filter: {
+                    compCounterId: {
+                      not: recordId,
+                    },
+                  },
+                  include: {
+                    tblCounterType: true,
+                  },
+                })
+              }
+              columns={[
+                {
+                  field: "name",
+                  headerName: "Name",
+                  flex: 1,
+                  valueGetter: (_: any, row: any) => row?.tblCounterType?.name,
+                },
+              ]}
+              getRowId={(row) => row.counterTypeId}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
+            />
+          )}
+        />
 
         {/* Order */}
         <Controller
@@ -273,6 +336,7 @@ function CompCounterUpsert({
             <NumberField
               sx={{ width: "40%" }}
               {...field}
+              disabled={isDisabled}
               label="Order No"
               size="small"
             />

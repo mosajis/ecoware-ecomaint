@@ -218,6 +218,7 @@ function ComponentUnitUpsert({
           render={({ field, fieldState }) => (
             <FieldAsyncSelectGrid
               label="Type *"
+              disabled={isDisabled}
               getOptionLabel={(row) => row.compName}
               value={field.value}
               selectionMode="single"
@@ -239,6 +240,7 @@ function ComponentUnitUpsert({
             render={({ field }) => (
               <FieldAsyncSelectGrid
                 label="Location"
+                disabled={isDisabled}
                 getOptionLabel={(row) => row.name}
                 value={field.value}
                 selectionMode="single"
@@ -257,6 +259,7 @@ function ComponentUnitUpsert({
               <FieldAsyncSelectGrid<TypeTblCompStatus>
                 label="Status"
                 value={field.value}
+                disabled={isDisabled}
                 selectionMode="single"
                 request={tblCompStatus.getAll}
                 columns={[
@@ -322,6 +325,7 @@ function ComponentUnitUpsert({
             <FieldAsyncSelectGrid<TypeTblAddress>
               label="Maker"
               value={field.value}
+              disabled={isDisabled}
               selectionMode="single"
               request={tblAddress.getAll}
               columns={[{ field: "name", headerName: "Name", flex: 1 }]}
@@ -383,6 +387,7 @@ function ComponentUnitUpsert({
             <FieldAsyncSelectGrid
               label="Parent"
               getOptionLabel={(row) => row.compNo ?? ""}
+              disabled={isDisabled}
               value={field.value}
               selectionMode="single"
               request={tblComponentUnit.getAll}

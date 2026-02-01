@@ -138,8 +138,9 @@ const TreeToolbar = memo(function TreeToolbar({
         px: 0.5,
         py: 0.4,
         borderRadius: `${theme.shape.borderRadius}px ${theme.shape.borderRadius}px 0 0`,
-        bgcolor: theme.palette.background.paper,
-        borderBottom: `1px solid ${theme.palette.divider}`,
+        bgcolor: (theme.vars || theme).palette.background.paper,
+
+        borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
@@ -152,10 +153,15 @@ const TreeToolbar = memo(function TreeToolbar({
 
         <Divider orientation="vertical" sx={dividerSx} />
 
-        {buttons.map((btn: any) => (
-          <Box key={btn.key} display="flex" alignItems="center">
-            <ActionBtn {...btn} />
-            {btn.divider && <Divider orientation="vertical" sx={dividerSx} />}
+        {buttons.map((btn) => (
+          <Box key={btn?.key} display="flex" alignItems="center">
+            <ActionBtn
+              icon={btn?.icon}
+              tooltip={btn?.tooltip || ""}
+              disabled={btn?.disabled}
+              onClick={btn?.onClick}
+            />
+            {btn?.divider && <Divider orientation="vertical" sx={dividerSx} />}
           </Box>
         ))}
 
