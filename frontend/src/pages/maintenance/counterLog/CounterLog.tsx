@@ -1,14 +1,12 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { useCallback, useMemo } from "react";
+import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
+import { useCallback } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
-  tblCompCounter,
   tblCompCounterLog,
-  tblComponentUnit,
   TypeTblCompCounterLog,
 } from "@/core/api/generated/api";
-import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 
 const getRowId = (row: TypeTblCompCounterLog) => row.compCounterLogId;
 
@@ -80,21 +78,19 @@ export default function PageCounterLog() {
       }),
     [],
   );
-  // === useDataGrid ===
+
   const { rows, loading, handleRefresh } = useDataGrid<TypeTblCompCounterLog>(
     getAll,
     tblCompCounterLog.deleteById,
     "compCounterLogId",
   );
-
-  // === Columns ===
-
   return (
     <CustomizedDataGrid
       showToolbar
       disableAdd
       disableDelete
       disableEdit
+      disableRowSelectionOnClick
       label="Counter Logs"
       rows={rows}
       columns={columns}
