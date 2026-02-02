@@ -6,12 +6,12 @@ export async function effectCompCounter(
   counter: TblCompCounter,
 ) {
   const hasCurrent = counter.currentDate && counter.currentValue !== null;
-
   const hasStart = counter.startDate && counter.startValue !== null;
 
   if (!hasCurrent && !hasStart) return null;
 
-  return tx.tblCompCounterLog.create({
+  // لاگ اصلی Counter
+  const log = await tx.tblCompCounterLog.create({
     data: {
       compCounterId: counter.compCounterId,
       currentDate: counter.currentDate,
@@ -24,4 +24,22 @@ export async function effectCompCounter(
       lastupdate: new Date(),
     },
   });
+
+  if (counter.dependsOnId) {
+    await tx.tblCompCounterLog.create({
+      data: {
+        compCounterId: counter.dependsOnId,
+        currentDate: counter.currentDate,
+        currentValue: counter.currentValue,
+        startDate: counter.startDate,
+        startValue: counter.startValue,
+        orderNo: counter.orderNo,
+        deptId: counter.deptId ?? 1234,
+        changedDate: new Date(),
+        lastupdate: new Date(),
+      },
+    });
+  }
+
+  return log;
 }

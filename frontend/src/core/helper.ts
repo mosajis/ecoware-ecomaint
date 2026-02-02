@@ -9,7 +9,15 @@ export function buildRelation(
   idField: string,
   id: number | null | undefined,
 ) {
-  if (id == null) {
+  if (id === null) {
+    return {
+      [relationName]: {
+        disconnect: true,
+      },
+    };
+  }
+
+  if (id === undefined) {
     return {};
   }
 
@@ -19,7 +27,6 @@ export function buildRelation(
     },
   };
 }
-
 export function formatDateTime(
   dateTime: string | Date | number,
   type: DateTimeType = "DATETIME",

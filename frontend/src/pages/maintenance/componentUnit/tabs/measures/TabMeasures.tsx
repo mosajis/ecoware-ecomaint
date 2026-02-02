@@ -1,5 +1,6 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import Upsert from "./TabMeasuresUpsert";
+import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import { useCallback, useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
@@ -8,7 +9,6 @@ import {
   TypeTblComponentUnit,
   TypeTblCompMeasurePoint,
 } from "@/core/api/generated/api";
-import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 
 type Props = {
   componentUnit?: TypeTblComponentUnit | null;
@@ -107,6 +107,7 @@ const TabCompMeasurePoint = ({ componentUnit, label }: Props) => {
   return (
     <>
       <CustomizedDataGrid
+        disableEdit
         showToolbar={!!label}
         label={label}
         rows={rows}

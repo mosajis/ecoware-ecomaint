@@ -12,6 +12,7 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   tblCompCounter,
+  tblComponentUnit,
   tblCounterType,
   TypeTblCompCounter,
 } from "@/core/api/generated/api";
@@ -137,14 +138,11 @@ function CompCounterUpsert({
           parsed.data.counterType!.counterTypeId,
         );
 
-        const dependOnRelation = parsed.data.dependOn
-          ? buildRelation(
-              "tblCompCounter",
-              "compCounterId",
-              parsed.data.dependOn.compCounterId,
-            )
-          : {};
-
+        const dependOnRelation = buildRelation(
+          "tblCompCounter",
+          "compCounterId",
+          parsed.data?.dependOn?.compCounterId ?? null,
+        );
         const compRelation = buildRelation(
           "tblComponentUnit",
           "compId",
@@ -299,7 +297,7 @@ function CompCounterUpsert({
               label="Depends On"
               value={field.value}
               disabled={isDisabled}
-              getOptionLabel={(row) => row?.tblCounterType?.name}
+              getOptionLabel={(row) => row?.tblComponentUnit?.compNo}
               onChange={field.onChange}
               request={() =>
                 tblCompCounter.getAll({
@@ -310,6 +308,7 @@ function CompCounterUpsert({
                   },
                   include: {
                     tblCounterType: true,
+                    tblComponentUnit: true,
                   },
                 })
               }
@@ -318,7 +317,8 @@ function CompCounterUpsert({
                   field: "name",
                   headerName: "Name",
                   flex: 1,
-                  valueGetter: (_: any, row: any) => row?.tblCounterType?.name,
+                  valueGetter: (_: any, row: any) =>
+                    row?.tblComponentUnit?.compNo,
                 },
               ]}
               getRowId={(row) => row.counterTypeId}

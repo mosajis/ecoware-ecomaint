@@ -1,20 +1,18 @@
 import * as z from "zod";
+import Box from "@mui/material/Box";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import FieldNumber from "@/shared/components/fields/FieldNumber";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
+import { buildRelation } from "@/core/helper";
 import { memo, useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import FormDialog from "@/shared/components/formDialog/FormDialog";
-import NumberField from "@/shared/components/fields/FieldNumber";
-import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import {
   tblCompMeasurePoint,
   tblCounterType,
   tblUnit,
   TypeTblCompMeasurePoint,
 } from "@/core/api/generated/api";
-import { buildRelation } from "@/core/helper";
-import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 
 /* === Schema === */
 const schema = z.object({
@@ -26,8 +24,6 @@ const schema = z.object({
     unitId: z.number(),
     name: z.string().optional(),
   }),
-  currentValue: z.number().nullable(),
-  currentDate: z.string().nullable(),
   setValue: z.number().nullable(),
   operationalMinValue: z.number().nullable(),
   operationalMaxValue: z.number().nullable(),
@@ -59,8 +55,6 @@ function CompMeasurePointUpsert({
   const defaultValues: FormValues = {
     counterType: null as any,
     unit: null as any,
-    currentValue: null,
-    currentDate: null,
     setValue: null,
     operationalMinValue: null,
     operationalMaxValue: null,
@@ -100,8 +94,6 @@ function CompMeasurePointUpsert({
             }
           : undefined,
 
-        currentValue: res.currentValue ?? null,
-        currentDate: res.currentDate ?? null,
         setValue: res.setValue ?? null,
         operationalMinValue: res.operationalMinValue ?? null,
         operationalMaxValue: res.operationalMaxValue ?? null,
@@ -126,8 +118,6 @@ function CompMeasurePointUpsert({
         setSubmitting(true);
 
         const payload = {
-          currentValue: parsed.data.currentValue,
-          currentDate: parsed.data.currentDate,
           setValue: parsed.data.setValue,
           operationalMinValue: parsed.data.operationalMinValue,
           operationalMaxValue: parsed.data.operationalMaxValue,
@@ -169,6 +159,7 @@ function CompMeasurePointUpsert({
     >
       <Box display="grid" gap={1.5}>
         {/* Measure (Counter Type) */}
+        {compId}
         <Controller
           name="counterType"
           control={control}
@@ -177,7 +168,18 @@ function CompMeasurePointUpsert({
               label="Measure *"
               value={field.value}
               onChange={field.onChange}
-              request={() => tblCounterType.getAll({ filter: { type: 3 } })}
+              request={() =>
+                tblCounterType.getAll({
+                  filter: {
+                    type: 3,
+                    NOT: {
+                      tblCompMeasurePoints: {
+                        some: { compId },
+                      },
+                    },
+                  },
+                })
+              }
               columns={[{ field: "name", headerName: "Name", flex: 1 }]}
               getRowId={(row) => row.counterTypeId}
               error={!!fieldState.error}
@@ -185,7 +187,6 @@ function CompMeasurePointUpsert({
             />
           )}
         />
-
         {/* Unit */}
         <Controller
           name="unit"
@@ -203,43 +204,17 @@ function CompMeasurePointUpsert({
             />
           )}
         />
-
-        {/* Current Value */}
-        <Box display={"flex"} gap={1.5}>
-          <Controller
-            name="currentValue"
-            control={control}
-            render={({ field }) => (
-              <NumberField
-                fullWidth
-                {...field}
-                label="Current Value"
-                size="small"
-              />
-            )}
-          />
-
-          <Controller
-            name="currentDate"
-            control={control}
-            render={({ field }) => (
-              <DateField label="Current Date" field={field} type="DATETIME" />
-            )}
-          />
-        </Box>
-
         <Controller
           name="setValue"
           control={control}
-          render={({ field }) => <NumberField {...field} label="Set Value" />}
+          render={({ field }) => <FieldNumber {...field} label="Set Value" />}
         />
-
         <Box display={"flex"} gap={1.5}>
           <Controller
             name="operationalMinValue"
             control={control}
             render={({ field }) => (
-              <NumberField
+              <FieldNumber
                 sx={{ flex: 1 }}
                 {...field}
                 label="Operational Min"
@@ -251,7 +226,7 @@ function CompMeasurePointUpsert({
             name="operationalMaxValue"
             control={control}
             render={({ field }) => (
-              <NumberField
+              <FieldNumber
                 sx={{ flex: 1 }}
                 {...field}
                 label="Operational Max"
@@ -259,12 +234,11 @@ function CompMeasurePointUpsert({
             )}
           />
         </Box>
-
         <Controller
           name="orderNo"
           control={control}
           render={({ field }) => (
-            <NumberField sx={{ width: "40%" }} {...field} label="Order No" />
+            <FieldNumber sx={{ width: "40%" }} {...field} label="Order No" />
           )}
         />
       </Box>

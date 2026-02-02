@@ -192,16 +192,16 @@ export const menuContentItems: {
         path: "/maintenance/component-trigger",
       },
       {
-        text: "Counter Update (x)",
+        text: "Counters",
         icon: <UpdateRoundedIcon />,
-        id: "maint:updateCounter",
-        path: "/maintenance/update-counter",
+        id: "maint:counters",
+        path: "/maintenance/counters",
       },
       {
-        text: "Counter Logs",
+        text: "Counters Logs",
         icon: <HistoryRoundedIcon />,
         id: "maint:counterLog",
-        path: "/maintenance/counters-log",
+        path: "/maintenance/counters-logs",
       },
       {
         text: "Measure Points (x)",
@@ -210,7 +210,7 @@ export const menuContentItems: {
         path: "/maintenance/measure-points",
       },
       {
-        text: "Measure Points Logs (x)",
+        text: "Measure Points Logs",
         icon: <ListAltRoundedIcon />,
         id: "maint:measurePointsLogs",
         path: "/maintenance/measure-points-logs",

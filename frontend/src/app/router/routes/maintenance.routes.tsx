@@ -23,13 +23,13 @@ const PageMeasurePointsLogs = lazy(
   () => import("@/pages/maintenance/measurePointsLogs/MeasurePointsLogs"),
 );
 const PageCountersLog = lazy(
-  () => import("@/pages/maintenance/counterLog/CounterLog"),
+  () => import("@/pages/maintenance/countersLogs/CountersLogs"),
 );
 const PageMaintLog = lazy(
   () => import("@/pages/maintenance/maintLog/MaintLog"),
 );
 const PageCounterUpdate = lazy(
-  () => import("@/pages/maintenance/counterUpdate/CountersUpdate"),
+  () => import("@/pages/maintenance/counters/Counters"),
 );
 
 // --- Maintenance root ---
@@ -74,7 +74,7 @@ export const routeMeasurePointsLogs = createRoute({
 // --- Counters & Maint Logs ---
 export const routeCountersLog = createRoute({
   getParentRoute: () => routeMaintenance,
-  path: "counters-log",
+  path: "counters-logs",
   component: () => <LazyRoute Component={PageCountersLog} />,
   beforeLoad: () => ({ breadcrumb: "Counters Logs" }),
 });
@@ -88,9 +88,9 @@ export const routeMaintLog = createRoute({
 // --- Counter Update ---
 export const routeCounterUpdate = createRoute({
   getParentRoute: () => routeMaintenance,
-  path: "update-counter",
+  path: "counters",
   component: () => <LazyRoute Component={PageCounterUpdate} />,
-  beforeLoad: () => ({ breadcrumb: "Update Counter" }),
+  beforeLoad: () => ({ breadcrumb: "Counters" }),
 });
 
 export const routeComponentJob = createRoute({

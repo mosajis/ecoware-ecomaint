@@ -1,5 +1,8 @@
+import { t } from "elysia";
 import { BaseController } from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
+import { buildResponseSchema } from "@/utils/base.schema";
+import { prisma } from "@/utils/prisma";
 
 import {
   TblCompMeasurePoint,
@@ -7,8 +10,8 @@ import {
   TblCompMeasurePointInputUpdate,
   TblCompMeasurePointPlain,
 } from "orm/generated/prismabox/TblCompMeasurePoint";
-import { buildResponseSchema } from "@/utils/base.schema";
-import { prisma } from "@/utils/prisma";
+
+import { effectCompMeasurePoint } from "../effects/EffectTblCompMeasurePoint";
 
 export const ServiceTblCompMeasurePoint = new BaseService(
   prisma.tblCompMeasurePoint,
@@ -27,6 +30,47 @@ const ControllerTblCompMeasurePoint = new BaseController({
     TblCompMeasurePointPlain,
     TblCompMeasurePoint,
   ),
+  extend: (app) => {
+    // Update
+    app.put(
+      "/:compMeasurePointId",
+      async ({ params, body }) => {
+        const compMeasurePointId = Number(params.compMeasurePointId);
+        const data = body;
+
+        const result = await prisma.$transaction(async (tx) => {
+          const measurePoint = await tx.tblCompMeasurePoint.update({
+            where: { compMeasurePointId },
+            data: {
+              currentValue: data.currentValue ?? null,
+              currentDate: data.currentDate ?? null,
+            },
+          });
+
+          await effectCompMeasurePoint(tx, measurePoint);
+          return measurePoint;
+        });
+
+        return result;
+      },
+      {
+        tags: ["tblCompMeasurePoint"],
+        detail: {
+          summary: "Update",
+          description:
+            "Update TblCompMeasurePoint and run side effects in transaction",
+        },
+        params: t.Object({
+          compMeasurePointId: t.Number(),
+        }),
+        body: TblCompMeasurePointInputUpdate,
+        response: buildResponseSchema(
+          TblCompMeasurePointPlain,
+          TblCompMeasurePoint,
+        ),
+      },
+    );
+  },
 }).app;
 
 export default ControllerTblCompMeasurePoint;

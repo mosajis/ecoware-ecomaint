@@ -1,5 +1,7 @@
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import ClearIcon from "@mui/icons-material/Clear";
 import TextField from "@mui/material/TextField";
+import IconButton from "@mui/material/IconButton";
 import { JSX, useState } from "react";
 import type { GridRowId } from "@mui/x-data-grid";
 import { AsyncSelectGridDialog } from "./_components/AsyncSelectGridDialog";
@@ -46,15 +48,15 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
   label,
   placeholder,
   value,
+  error,
+  helperText,
+  columns,
   disabled = false,
   selectionMode = "single",
   request,
   extractRows = (data) => data.items ?? [],
-  columns,
   getRowId,
   onChange,
-  error,
-  helperText,
   getOptionLabel = (item) => item?.name ?? Object.values(item)[1] ?? "",
   dialogHeight = 600,
   dialogMaxWidth = "sm",
@@ -70,6 +72,11 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
         ? value.map((v) => getOptionLabel(v)).join(", ")
         : "";
 
+  const hasValue =
+    selectionMode === "single"
+      ? !!value
+      : Array.isArray(value) && value.length > 0;
+
   const handleSelect = (selected: TItem | TItem[] | null) => {
     if (selectionMode === "multiple") {
       (onChange as (v: TItem[] | null) => void)(selected as TItem[] | null);
@@ -77,6 +84,15 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
       (onChange as (v: TItem | null) => void)(selected as TItem | null);
     }
     setDialogOpen(false);
+  };
+
+  const handleClear = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (selectionMode === "multiple") {
+      (onChange as (v: TItem[] | null) => void)(null);
+    } else {
+      (onChange as (v: TItem | null) => void)(null);
+    }
   };
 
   return (
@@ -92,7 +108,18 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
         error={error}
         helperText={helperText}
         InputProps={{
-          endAdornment: <MoreHorizIcon sx={{ cursor: "pointer" }} />,
+          endAdornment: (
+            <>
+              {hasValue && !disabled && (
+                <ClearIcon
+                  fontSize="small"
+                  onClick={handleClear}
+                  sx={{ mr: 1, border: 0, cursor: "pointer" }}
+                />
+              )}
+              <MoreHorizIcon sx={{ cursor: "pointer" }} />
+            </>
+          ),
         }}
       />
 
