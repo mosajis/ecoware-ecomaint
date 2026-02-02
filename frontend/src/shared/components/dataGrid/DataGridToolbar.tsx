@@ -90,10 +90,12 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
           borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
         }}
       >
-        <Box display={"flex"} alignItems={"center"} gap={2}>
+        <Box display={"flex"} alignItems={"center"}>
           <Box display={"flex"} alignItems={"center"} gap={0.6}>
             {/* <QuestionMark sx={{ fontSize: 15 }} /> */}
-            <Typography fontWeight="bold">{label}</Typography>
+            <Typography fontWeight="bold" mr={2}>
+              {label}
+            </Typography>
           </Box>
 
           {children}

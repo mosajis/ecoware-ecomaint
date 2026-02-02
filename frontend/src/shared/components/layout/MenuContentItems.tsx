@@ -150,7 +150,7 @@ export const menuContentItems: {
         path: "/maintenance/function",
       },
       {
-        text: "Component Unit (x)",
+        text: "Component Unit",
         icon: <Inventory2RoundedIcon />,
         id: "maint:componentUnit:component",
         path: "/maintenance/component-unit",
@@ -204,7 +204,7 @@ export const menuContentItems: {
         path: "/maintenance/counters-logs",
       },
       {
-        text: "Measure Points (x)",
+        text: "Measure Points",
         icon: <ExploreRoundedIcon />,
         id: "maint:measurePoints",
         path: "/maintenance/measure-points",

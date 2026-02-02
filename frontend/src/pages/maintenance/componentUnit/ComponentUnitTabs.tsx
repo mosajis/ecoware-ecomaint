@@ -23,7 +23,7 @@ const TabAttachment = lazy(() => import("./tabs/TabAttachment"));
 const TabUserAttachment = lazy(() => import("./tabs/TabUserAttachment"));
 const TabFailureReport = lazy(() => import("./tabs/TabFailureReport"));
 const TabMeasures = lazy(() => import("./tabs/measures/TabMeasures"));
-const TabStockUsed = lazy(() => import("./tabs/TabStockUsed"));
+// const TabStockUsed = lazy(() => import("./tabs/TabStockUsed"));
 
 type Props = {
   componentUnit?: TypeTblComponentUnit | undefined | null;
@@ -43,11 +43,11 @@ const tabs: ReusableTabItem[] = [
   { label: "Failure Report", icon: <BugReport />, component: TabFailureReport },
   { label: "Work Order", icon: <ContentCopy />, component: TabWorkOrder },
   { label: "Maint Log", icon: <DoneAll />, component: TabMaintLog },
-  {
-    label: "Stock Used (not set)",
-    icon: <StackedLineChart />,
-    component: TabStockUsed,
-  },
+  // {
+  //   label: "Stock Used (not set)",
+  //   icon: <StackedLineChart />,
+  //   component: TabStockUsed,
+  // },
   { label: "Attachment", icon: <AttachFile />, component: TabAttachment },
   {
     label: "User Attachment",

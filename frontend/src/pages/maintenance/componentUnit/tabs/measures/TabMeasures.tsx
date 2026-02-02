@@ -1,20 +1,23 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import Upsert from "./TabMeasuresUpsert";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
-import { useCallback, useState } from "react";
-import { GridColDef } from "@mui/x-data-grid";
+import Button from "@mui/material/Button";
+import MeasurePointsTrend from "@/pages/maintenance/measurePoints/MeasurePointsTrend";
+import { useCallback, useMemo, useState } from "react";
+import { GridColDef, GridRowSelectionModel } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
   tblCompMeasurePoint,
   TypeTblComponentUnit,
   TypeTblCompMeasurePoint,
 } from "@/core/api/generated/api";
+import { LineChart } from "@mui/x-charts";
+import { BarChartSharp, ChairAlt, StackedLineChart } from "@mui/icons-material";
 
 type Props = {
   componentUnit?: TypeTblComponentUnit | null;
   label?: string;
 };
-
 const getRowId = (row: TypeTblCompMeasurePoint) => row.compMeasurePointId;
 
 // === Columns ===
@@ -25,19 +28,13 @@ const columns: GridColDef<TypeTblCompMeasurePoint>[] = [
     flex: 1,
     valueGetter: (_, row) => row.tblCounterType?.name || "",
   },
-
   {
     field: "currentDate",
     headerName: "Current Date",
     width: 135,
-
     renderCell: ({ value }) => <CellDateTime value={value} />,
   },
-  {
-    field: "currentValue",
-    headerName: "Current Value",
-    width: 120,
-  },
+  { field: "currentValue", headerName: "Current Value", width: 120 },
   {
     field: "unitName",
     headerName: "Unit",
@@ -59,11 +56,19 @@ const columns: GridColDef<TypeTblCompMeasurePoint>[] = [
 const TabCompMeasurePoint = ({ componentUnit, label }: Props) => {
   const compId = componentUnit?.compId;
 
+  const [openTrend, setOpenTrend] = useState(false);
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  // === getAll ===
+  // Row selection model
+  const [rowSelectionModel, setRowSelectionModel] =
+    useState<GridRowSelectionModel>({
+      type: "include",
+      ids: new Set(),
+    });
+
+  // Fetch all rows
   const getAll = useCallback(() => {
     return tblCompMeasurePoint.getAll({
       filter: { compId },
@@ -71,11 +76,11 @@ const TabCompMeasurePoint = ({ componentUnit, label }: Props) => {
         tblUnit: true,
         tblCounterType: true,
         tblCompJobMeasurePoints: true,
+        tblComponentUnit: true,
       },
     });
   }, [compId]);
 
-  // === useDataGrid ===
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
     tblCompMeasurePoint.deleteById,
@@ -87,22 +92,25 @@ const TabCompMeasurePoint = ({ componentUnit, label }: Props) => {
   const handleCreate = () => {
     setSelectedId(null);
     setMode("create");
-    handleUpsertOpen();
+    setOpenForm(true);
   };
 
   const handleEdit = (rowId: number) => {
     setSelectedId(rowId);
     setMode("update");
-    handleUpsertOpen();
+    setOpenForm(true);
   };
 
-  const handleUpsertClose = useCallback(() => {
-    setOpenForm(false);
-  }, []);
+  const handleUpsertClose = () => setOpenForm(false);
 
-  const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true);
-  }, []);
+  const selectedRowId = useMemo(() => {
+    const ids = Array.from(rowSelectionModel.ids);
+    return ids.length === 1 ? ids[0] : null;
+  }, [rowSelectionModel]);
+
+  const selectedRow = useMemo(() => {
+    return rows.find((row) => row.compMeasurePointId === selectedRowId) || null;
+  }, [rows, selectedRowId]);
 
   return (
     <>
@@ -119,8 +127,26 @@ const TabCompMeasurePoint = ({ componentUnit, label }: Props) => {
         onDoubleClick={handleEdit}
         onDeleteClick={handleDelete}
         getRowId={getRowId}
+        rowSelectionModel={rowSelectionModel}
+        onRowSelectionModelChange={setRowSelectionModel}
+        toolbarChildren={
+          <Button
+            onClick={() => setOpenTrend(true)}
+            disabled={!selectedRowId}
+            size="small"
+            startIcon={<BarChartSharp />}
+          >
+            Trend
+          </Button>
+        }
       />
-
+      {JSON.stringify(selectedRow)}
+      <MeasurePointsTrend
+        open={openTrend}
+        onClose={() => setOpenTrend(false)}
+        compMeasurePointId={selectedRow?.compMeasurePointId!}
+        title={selectedRow?.tblComponentUnit?.compNo || ""}
+      />
       <Upsert
         open={openForm}
         mode={mode}

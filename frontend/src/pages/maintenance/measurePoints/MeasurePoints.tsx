@@ -3,6 +3,8 @@ import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import Splitter from "@/shared/components/Splitter/Splitter";
 import Button from "@mui/material/Button";
 import MeasurePointsUpdate from "./MeasurePointsUpdate";
+import MeasurePointsTrend from "./MeasurePointsTrend";
+
 import { GridColDef, GridRowSelectionModel } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback, useMemo, useState } from "react";
@@ -15,6 +17,7 @@ import {
   tblCompMeasurePointLog,
   TypeTblCompMeasurePoint,
 } from "@/core/api/generated/api";
+import { BarChartSharp } from "@mui/icons-material";
 
 const getRowId = (row: TypeTblCompMeasurePoint) => row.compMeasurePointId;
 
@@ -75,6 +78,7 @@ const columns: GridColDef<TypeTblCompMeasurePoint>[] = [
 
 function PageMeasurePoints() {
   const [openForm, setOpenForm] = useState(false);
+  const [openTrend, setOpenTrend] = useState(false);
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>({
       type: "include",
@@ -178,15 +182,25 @@ function PageMeasurePoints() {
           rowSelectionModel={rowSelectionModel}
           onRowSelectionModelChange={setRowSelectionModel}
           toolbarChildren={
-            <Button
-              sx={{ ml: 3 }}
-              onClick={() => setOpenForm(true)}
-              disabled={!selectedRowId}
-              variant={!selectedRow ? "text" : "contained"}
-              size="small"
-            >
-              Update Measure
-            </Button>
+            <>
+              <Button
+                sx={{ ml: 3 }}
+                onClick={() => setOpenForm(true)}
+                disabled={!selectedRowId}
+                variant={!selectedRow ? "text" : "contained"}
+                size="small"
+              >
+                Update Measure
+              </Button>
+              <Button
+                onClick={() => setOpenTrend(true)}
+                disabled={!selectedRowId}
+                size="small"
+                startIcon={<BarChartSharp />}
+              >
+                Trend
+              </Button>
+            </>
           }
         />
         <CustomizedDataGrid
@@ -202,6 +216,12 @@ function PageMeasurePoints() {
           getRowId={logGetRowId}
         />
       </Splitter>
+      <MeasurePointsTrend
+        open={openTrend}
+        onClose={() => setOpenTrend(false)}
+        compMeasurePointId={selectedRowId}
+        title={selectedRow?.tblComponentUnit?.compNo || ""}
+      />
       <MeasurePointsUpdate
         open={openForm}
         recordId={selectedRowId}

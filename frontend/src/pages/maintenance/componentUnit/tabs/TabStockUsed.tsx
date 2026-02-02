@@ -26,6 +26,7 @@ const columns = [
 const TabStockUsed = ({ componentUnit, label }: Props) => {
   const compId = componentUnit?.compId;
 
+  // tblMaintLog>getAll compId = compId  maintLog
   const getAll = useCallback(
     () =>
       tblSpareUnit.getAll({
