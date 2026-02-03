@@ -111,15 +111,26 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
           endAdornment: (
             <>
               {hasValue && !disabled && (
-                <ClearIcon
-                  fontSize="small"
+                <IconButton
+                  size="small"
                   onClick={handleClear}
-                  sx={{ mr: 1, border: 0, cursor: "pointer" }}
-                />
+                  sx={{ mr: 0.5 }}
+                  edge="end"
+                >
+                  <ClearIcon fontSize="small" />
+                </IconButton>
               )}
-              <MoreHorizIcon sx={{ cursor: "pointer" }} />
+              <IconButton
+                size="small"
+                onClick={() => !disabled && setDialogOpen(true)}
+                disabled={disabled}
+                edge="end"
+              >
+                <MoreHorizIcon fontSize="small" />
+              </IconButton>
             </>
           ),
+          readOnly: true,
         }}
       />
 

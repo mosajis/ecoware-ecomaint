@@ -59,14 +59,9 @@ const TabCompMeasurePoint = ({ componentUnit, label }: Props) => {
   const [openTrend, setOpenTrend] = useState(false);
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-
-  // Row selection model
-  const [rowSelectionModel, setRowSelectionModel] =
-    useState<GridRowSelectionModel>({
-      type: "include",
-      ids: new Set(),
-    });
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+  const [selectedRow, setSelectedRow] =
+    useState<TypeTblCompMeasurePoint | null>(null);
 
   // Fetch all rows
   const getAll = useCallback(() => {
@@ -90,27 +85,28 @@ const TabCompMeasurePoint = ({ componentUnit, label }: Props) => {
 
   // === Handlers ===
   const handleCreate = () => {
-    setSelectedId(null);
+    setSelectedRowId(null);
     setMode("create");
     setOpenForm(true);
   };
 
   const handleEdit = (rowId: number) => {
-    setSelectedId(rowId);
+    setSelectedRowId(rowId);
     setMode("update");
     setOpenForm(true);
   };
 
   const handleUpsertClose = () => setOpenForm(false);
 
-  const selectedRowId = useMemo(() => {
-    const ids = Array.from(rowSelectionModel.ids);
-    return ids.length === 1 ? ids[0] : null;
-  }, [rowSelectionModel]);
-
-  const selectedRow = useMemo(() => {
-    return rows.find((row) => row.compMeasurePointId === selectedRowId) || null;
-  }, [rows, selectedRowId]);
+  const handleRowSelect = ({ row }: { row: TypeTblCompMeasurePoint }) => {
+    if (selectedRowId !== row.compMeasurePointId) {
+      setSelectedRowId(row.compMeasurePointId);
+      setSelectedRow(row);
+      return;
+    }
+    setSelectedRow(null);
+    setSelectedRowId(null);
+  };
 
   return (
     <>
@@ -126,9 +122,8 @@ const TabCompMeasurePoint = ({ componentUnit, label }: Props) => {
         onEditClick={handleEdit}
         onDoubleClick={handleEdit}
         onDeleteClick={handleDelete}
+        onRowClick={handleRowSelect}
         getRowId={getRowId}
-        rowSelectionModel={rowSelectionModel}
-        onRowSelectionModelChange={setRowSelectionModel}
         toolbarChildren={
           <Button
             onClick={() => setOpenTrend(true)}
@@ -140,7 +135,6 @@ const TabCompMeasurePoint = ({ componentUnit, label }: Props) => {
           </Button>
         }
       />
-      {JSON.stringify(selectedRow)}
       <MeasurePointsTrend
         open={openTrend}
         onClose={() => setOpenTrend(false)}
@@ -150,7 +144,7 @@ const TabCompMeasurePoint = ({ componentUnit, label }: Props) => {
       <Upsert
         open={openForm}
         mode={mode}
-        recordId={selectedId}
+        recordId={selectedRowId}
         compId={compId!}
         onClose={handleUpsertClose}
         onSuccess={handleRefresh}

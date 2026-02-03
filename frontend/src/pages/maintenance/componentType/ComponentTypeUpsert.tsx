@@ -3,8 +3,8 @@ import FormDialog from "@/shared/components/formDialog/FormDialog";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import NumberField from "@/shared/components/fields/FieldNumber";
-import { memo, useEffect, useState, useCallback } from "react";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
+import { memo, useEffect, useState, useCallback } from "react";
 import { buildRelation, requiredStringField } from "@/core/helper";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,7 +13,7 @@ import { tblCompType, tblAddress } from "@/core/api/generated/api";
 const schema = z.object({
   compTypeNo: requiredStringField(),
   compName: requiredStringField(),
-  compType: requiredStringField(),
+  compType: z.string().nullable().optional(),
   orderNo: z.number().nullable(),
   tblCompType: z
     .object({
@@ -167,6 +167,7 @@ function ComponentTypeUpsert({
               {...field}
               label="Code *"
               size="small"
+              sx={{ width: "40%" }}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}
@@ -253,6 +254,7 @@ function ComponentTypeUpsert({
               {...field}
               label="Order No "
               size="small"
+              sx={{ width: "40%" }}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}

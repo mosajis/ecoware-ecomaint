@@ -9,16 +9,16 @@ export function buildRelation(
   idField: string,
   id: number | null | undefined,
 ) {
+  if (id === undefined) {
+    return {};
+  }
+
   if (id === null) {
     return {
       [relationName]: {
         disconnect: true,
       },
     };
-  }
-
-  if (id === undefined) {
-    return {};
   }
 
   return {

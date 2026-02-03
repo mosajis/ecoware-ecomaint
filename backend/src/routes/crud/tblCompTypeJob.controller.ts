@@ -10,7 +10,7 @@ import {
 } from "orm/generated/prismabox/TblCompTypeJob";
 import { buildResponseSchema } from "@/utils/base.schema";
 import {
-  effectCompTypeJobChange,
+  effectCompTypeJob,
   OperationEnum,
 } from "../effects/EffectTblCompTypeJob";
 
@@ -39,9 +39,10 @@ const ControllerTblCompTypeJob = new BaseController({
             return { status: "ERROR", message: "Invalid compTypeJobId" };
           }
 
-          await effectCompTypeJobChange({
+          await effectCompTypeJob({
             compTypeJobId,
-            operation: body.operation, // enum value
+            operation: body.operation,
+            oldCompTypeId: body.oldCompTypeId,
           });
 
           return { status: "OK" };
@@ -56,10 +57,11 @@ const ControllerTblCompTypeJob = new BaseController({
       {
         tags: ["tblCompTypeJob"],
         detail: {
-          summary: "Apply Change Effect",
+          summary: "Apply Job Change Effect",
         },
         body: t.Object({
           operation: OperationEnum,
+          oldCompTypeId: t.Optional(t.Number()),
         }),
       },
     );

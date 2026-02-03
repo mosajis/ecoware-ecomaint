@@ -550,7 +550,10 @@ export interface paths {
         };
         /** Get one */
         get: operations["getTblCompMeasurePointByCompMeasurePointId"];
-        /** Update */
+        /**
+         * Update
+         * @description Update TblCompMeasurePoint and run side effects in transaction
+         */
         put: operations["putTblCompMeasurePointByCompMeasurePointId"];
         post?: never;
         /** Delete one */
@@ -962,6 +965,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/tblCompTypeAttachment/{compTypeAttachmentId}/effect": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Apply Attachment Change Effect */
+        post: operations["postTblCompTypeAttachmentByCompTypeAttachmentIdEffect"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tblCompTypeCounter/": {
         parameters: {
             query?: never;
@@ -1011,6 +1031,23 @@ export interface paths {
         get: operations["getTblCompTypeCounterCount"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblCompTypeCounter/{compTypeCounterId}/effect": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Apply Counter Change Effect */
+        post: operations["postTblCompTypeCounterByCompTypeCounterIdEffect"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1144,6 +1181,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/tblCompTypeJobCounter/{compTypeJobCounterId}/effect": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Apply Job Counter Change Effect */
+        post: operations["postTblCompTypeJobCounterByCompTypeJobCounterIdEffect"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tblCompTypeJobMeasurePoint/": {
         parameters: {
             query?: never;
@@ -1193,6 +1247,23 @@ export interface paths {
         get: operations["getTblCompTypeJobMeasurePointCount"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblCompTypeJobMeasurePoint/{compTypeJobMeasurePointId}/effect": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Apply Job MeasurePoint Change Effect */
+        post: operations["postTblCompTypeJobMeasurePointByCompTypeJobMeasurePointIdEffect"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1303,6 +1374,23 @@ export interface paths {
         get: operations["getTblCompTypeMeasurePointCount"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblCompTypeMeasurePoint/{compTypeMeasurePointId}/effect": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Apply MeasurePoint Change Effect */
+        post: operations["postTblCompTypeMeasurePointByCompTypeMeasurePointIdEffect"];
         delete?: never;
         options?: never;
         head?: never;
@@ -16981,6 +17069,33 @@ export interface operations {
             };
         };
     };
+    postTblCompTypeAttachmentByCompTypeAttachmentIdEffect: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                compTypeAttachmentId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+                "application/x-www-form-urlencoded": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+                "multipart/form-data": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+            };
+        };
+        responses: never;
+    };
     getTblCompTypeCounter: {
         parameters: {
             query?: {
@@ -17582,6 +17697,33 @@ export interface operations {
                 };
             };
         };
+    };
+    postTblCompTypeCounterByCompTypeCounterIdEffect: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                compTypeCounterId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+                "application/x-www-form-urlencoded": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+                "multipart/form-data": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+            };
+        };
+        responses: never;
     };
     getTblCompTypeJob: {
         parameters: {
@@ -19948,6 +20090,33 @@ export interface operations {
             };
         };
     };
+    postTblCompTypeJobCounterByCompTypeJobCounterIdEffect: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                compTypeJobCounterId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+                "application/x-www-form-urlencoded": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+                "multipart/form-data": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+            };
+        };
+        responses: never;
+    };
     getTblCompTypeJobMeasurePoint: {
         parameters: {
             query?: {
@@ -20563,6 +20732,33 @@ export interface operations {
                 };
             };
         };
+    };
+    postTblCompTypeJobMeasurePointByCompTypeJobMeasurePointIdEffect: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                compTypeJobMeasurePointId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+                "application/x-www-form-urlencoded": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+                "multipart/form-data": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+            };
+        };
+        responses: never;
     };
     getTblCompTypeJobTrigger: {
         parameters: {
@@ -21973,6 +22169,33 @@ export interface operations {
                 };
             };
         };
+    };
+    postTblCompTypeMeasurePointByCompTypeMeasurePointIdEffect: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                compTypeMeasurePointId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+                "application/x-www-form-urlencoded": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+                "multipart/form-data": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+            };
+        };
+        responses: never;
     };
     getTblComponentUnit: {
         parameters: {

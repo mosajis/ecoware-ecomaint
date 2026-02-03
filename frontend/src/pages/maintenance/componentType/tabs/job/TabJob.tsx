@@ -16,7 +16,8 @@ import {
 } from "@/core/api/generated/api";
 import { logicTblCompTypeJob } from "@/core/api/api";
 
-// === Columns ===
+// ================= Columns =================
+
 type Props = {
   compType?: TypeTblCompType;
   label?: string;
@@ -29,13 +30,13 @@ const columns: GridColDef<TypeTblCompTypeJob>[] = [
     field: "jobCode",
     headerName: "Code",
     width: 90,
-    valueGetter: (v, row) => row?.tblJobDescription?.jobDescCode,
+    valueGetter: (_, row) => row.tblJobDescription?.jobDescCode,
   },
   {
     field: "jobName",
     headerName: "Title",
     flex: 2.5,
-    valueGetter: (v, row) => row?.tblJobDescription?.jobDescTitle,
+    valueGetter: (_, row) => row.tblJobDescription?.jobDescTitle,
   },
   {
     field: "frequency",
@@ -68,12 +69,10 @@ const columns: GridColDef<TypeTblCompTypeJob>[] = [
     flex: 1,
     valueGetter: (_, row) => row.tblMaintCause?.descr,
   },
-
   {
     field: "priority",
     headerName: "Priority",
     width: 75,
-    valueGetter: (_, row) => row.priority,
   },
   {
     field: "window",
@@ -83,44 +82,31 @@ const columns: GridColDef<TypeTblCompTypeJob>[] = [
   {
     field: "planningMethod",
     headerName: "Method",
-    width: 75,
-    valueGetter: (_, row) => (row.planningMethod ? "Fixed" : "Vairable"),
+    width: 90,
+    valueGetter: (_, row) => (row.planningMethod ? "Fixed" : "Variable"),
   },
-  {
-    field: "statusNone",
-    headerName: "St-None",
-    width: 85,
-    type: "boolean",
-  },
-  {
-    field: "statusInUse",
-    headerName: "St-InUse",
-    width: 85,
-    type: "boolean",
-  },
+  { field: "statusNone", headerName: "St-None", width: 85, type: "boolean" },
+  { field: "statusInUse", headerName: "St-InUse", width: 85, type: "boolean" },
   {
     field: "statusAvailable",
     headerName: "St-Available",
-    width: 85,
+    width: 95,
     type: "boolean",
   },
   {
     field: "statusRepair",
     headerName: "St-Repair",
-    width: 85,
+    width: 90,
     type: "boolean",
   },
 ];
 
+// ================= Component =================
+
 const TabJob = ({ compType, label }: Props) => {
   const compTypeId = compType?.compTypeId;
 
-  const [confirmOpen, setConfirmOpen] = useState(false);
-  const [effectJobId, setEffectJobId] = useState<number | null>(null);
-  const [effectOperation, setEffectOperation] = useState<0 | 1 | 2 | null>(
-    null,
-  );
-
+  // ---- UI State
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
@@ -128,25 +114,16 @@ const TabJob = ({ compType, label }: Props) => {
     null,
   );
 
-  const handleCreate = () => {
-    setSelectedRowId(null);
-    setMode("create");
-    handleUpsertOpen();
-  };
+  // ---- Delete / Effect State
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [pendingDeleteRow, setPendingDeleteRow] =
+    useState<TypeTblCompTypeJob | null>(null);
+  const [effectJobId, setEffectJobId] = useState<number | null>(null);
+  const [effectOperation, setEffectOperation] = useState<0 | 1 | 2 | null>(
+    null,
+  );
 
-  const handleEdit = (rowId: number) => {
-    setSelectedRowId(rowId);
-    setMode("update");
-    handleUpsertOpen();
-  };
-
-  const handleUpsertClose = useCallback(() => {
-    setOpenForm(false);
-  }, []);
-
-  const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true);
-  }, []);
+  // ================= Data =================
 
   const getAll = useCallback(() => {
     return tblCompTypeJob.getAll({
@@ -162,50 +139,84 @@ const TabJob = ({ compType, label }: Props) => {
     });
   }, [compTypeId]);
 
-  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
+  const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
-    tblCompTypeJob.deleteById,
+    undefined as any, // no automatic delete
     "compTypeJobId",
     !!compTypeId,
   );
+
+  // ================= Handlers =================
+
+  const handleCreate = () => {
+    setSelectedRowId(null);
+    setMode("create");
+    setOpenForm(true);
+  };
+
+  const handleEdit = (rowId: number) => {
+    setSelectedRowId(rowId);
+    setMode("update");
+    setOpenForm(true);
+  };
 
   const handleRowClick = ({ row }: { row: TypeTblCompTypeJob }) => {
     setSelectedRow(row);
   };
 
-  const handleSuccess = (
-    data: TypeTblCompTypeJob,
-    isDelete: boolean = false,
-  ) => {
-    setEffectJobId(data.compTypeJobId);
-    setEffectOperation(isDelete ? 2 : mode === "create" ? 0 : 1);
+  const handleAskDelete = (rowId: number) => {
+    const row = rows.find((r) => r.compTypeJobId === rowId);
+    if (!row) return;
 
-    openConfirmDialog();
-  };
-
-  const openConfirmDialog = () => {
+    setPendingDeleteRow(row);
+    setEffectJobId(row.compTypeJobId);
+    setEffectOperation(2); // DELETE
     setConfirmOpen(true);
   };
 
-  const closeConfirmDialog = () => {
+  const handleUpsertSuccess = (data: TypeTblCompTypeJob) => {
+    setEffectJobId(data.compTypeJobId);
+    setEffectOperation(mode === "create" ? 0 : 1);
+    setConfirmOpen(true);
+  };
+
+  // ================= Confirm Logic =================
+
+  const resetConfirmState = () => {
     setConfirmOpen(false);
+    setPendingDeleteRow(null);
+    setEffectJobId(null);
+    setEffectOperation(null);
+  };
+
+  const handleConfirmYes = async () => {
+    try {
+      if (effectJobId !== null && effectOperation !== null) {
+        await logicTblCompTypeJob.effect(effectJobId, effectOperation);
+      }
+
+      if (effectOperation === 2 && pendingDeleteRow) {
+        await tblCompTypeJob.deleteById(pendingDeleteRow.compTypeJobId);
+      }
+
+      toast.success("Changes applied successfully");
+    } catch (err: any) {
+      toast.error(err?.response?.data?.message || "Failed to apply effect");
+    } finally {
+      resetConfirmState();
+      handleRefresh();
+    }
+  };
+
+  const handleConfirmNo = async () => {
+    if (effectOperation === 2 && pendingDeleteRow) {
+      await tblCompTypeJob.deleteById(pendingDeleteRow.compTypeJobId);
+    }
+    resetConfirmState();
     handleRefresh();
   };
 
-  const handleApplyEffect = async () => {
-    if (!effectJobId || effectOperation === null) return;
-
-    try {
-      await logicTblCompTypeJob.effect(effectJobId, effectOperation);
-      closeConfirmDialog();
-    } catch (err: any) {
-      toast.error(
-        err?.response?.data?.message ||
-          "Failed to apply changes to related components",
-      );
-      throw err;
-    }
-  };
+  // ================= Render =================
 
   return (
     <>
@@ -221,6 +232,7 @@ const TabJob = ({ compType, label }: Props) => {
           onRefreshClick={handleRefresh}
           onAddClick={handleCreate}
           onEditClick={handleEdit}
+          onDeleteClick={handleAskDelete}
           onDoubleClick={handleEdit}
           onRowClick={handleRowClick}
         />
@@ -233,25 +245,20 @@ const TabJob = ({ compType, label }: Props) => {
         mode={mode}
         recordId={selectedRowId}
         compType={compType as any}
-        onClose={handleUpsertClose}
-        onSuccess={handleSuccess}
+        onClose={() => setOpenForm(false)}
+        onSuccess={handleUpsertSuccess}
       />
+
       <ConfirmDialog
         open={confirmOpen}
-        icon={
-          <PublishedWithChangesIcon
-            sx={{
-              fontSize: "3rem",
-            }}
-          />
-        }
+        icon={<PublishedWithChangesIcon sx={{ fontSize: "3rem" }} />}
         title="Apply Changes"
-        message="Are you sure apply all changes to related components?"
+        message="Apply changes to related components?"
         confirmText="Yes"
         cancelText="No"
         confirmColor="primary"
-        onConfirm={handleApplyEffect}
-        onCancel={closeConfirmDialog}
+        onConfirm={handleConfirmYes}
+        onCancel={handleConfirmNo}
       />
     </>
   );

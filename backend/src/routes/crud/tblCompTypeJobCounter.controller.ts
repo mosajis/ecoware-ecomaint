@@ -1,6 +1,7 @@
 import { BaseController } from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
-
+import { prisma } from "@/utils/prisma";
+import { t } from "elysia";
 import {
   TblCompTypeJobCounter,
   TblCompTypeJobCounterInputCreate,
@@ -8,7 +9,10 @@ import {
   TblCompTypeJobCounterPlain,
 } from "orm/generated/prismabox/TblCompTypeJobCounter";
 import { buildResponseSchema } from "@/utils/base.schema";
-import { prisma } from "@/utils/prisma";
+import {
+  effectCompTypeJobCounter,
+  OperationEnum,
+} from "../effects/EffectTblCompTypeJobCounter";
 
 export const ServiceTblCompTypeJobCounter = new BaseService(
   prisma.tblCompTypeJobCounter,
@@ -27,6 +31,49 @@ const ControllerTblCompTypeJobCounter = new BaseController({
     TblCompTypeJobCounterPlain,
     TblCompTypeJobCounter,
   ),
+
+  extend: (app) => {
+    app.post(
+      "/:compTypeJobCounterId/effect",
+      async ({ params, body, set }) => {
+        try {
+          const compTypeJobCounterId = Number(params.compTypeJobCounterId);
+
+          if (isNaN(compTypeJobCounterId)) {
+            set.status = 400;
+            return {
+              status: "ERROR",
+              message: "Invalid compTypeJobCounterId",
+            };
+          }
+
+          await effectCompTypeJobCounter({
+            compTypeJobCounterId,
+            operation: body.operation,
+            oldCompTypeId: body.oldCompTypeId,
+          });
+
+          return { status: "OK" };
+        } catch (err: any) {
+          set.status = 400;
+          return {
+            status: "ERROR",
+            message: err.message,
+          };
+        }
+      },
+      {
+        tags: ["tblCompTypeJobCounter"],
+        detail: {
+          summary: "Apply Job Counter Change Effect",
+        },
+        body: t.Object({
+          operation: OperationEnum,
+          oldCompTypeId: t.Optional(t.Number()),
+        }),
+      },
+    );
+  },
 }).app;
 
 export default ControllerTblCompTypeJobCounter;

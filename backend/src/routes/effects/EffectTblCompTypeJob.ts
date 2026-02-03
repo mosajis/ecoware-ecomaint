@@ -7,14 +7,19 @@ export const OperationEnum = t.Enum({
   DELETE: 2,
 });
 
-export async function effectCompTypeJobChange({
+type OperationType = typeof OperationEnum.static;
+
+export async function effectCompTypeJob({
   compTypeJobId,
   operation,
+  oldCompTypeId,
 }: {
   compTypeJobId: number;
-  operation: 0 | 1 | 2;
+  operation: OperationType;
+  oldCompTypeId?: number;
 }) {
   return prisma.$transaction(async (tx) => {
+    // ================= Fetch CompTypeJob =================
     const ctj = await tx.tblCompTypeJob.findUnique({
       where: { compTypeJobId },
     });
@@ -50,24 +55,48 @@ export async function effectCompTypeJobChange({
       throw new Error("Invalid CompTypeJob data.");
     }
 
-    // 2) Units
-    const units = await tx.tblComponentUnit.findMany({
-      where: { compTypeId },
-      select: { compId: true },
-    });
+    // ================= Determine which compTypeId to use =================
+    const targetCompTypeId =
+      operation === 1 && oldCompTypeId ? oldCompTypeId : compTypeId;
 
-    if (!units.length) {
+    // ================= Fetch Component Units =================
+    const compIds = await tx.tblComponentUnit
+      .findMany({
+        where: { compTypeId: targetCompTypeId },
+        select: { compId: true },
+      })
+      .then((rows) => rows.map((r) => r.compId));
+
+    if (!compIds.length) {
       return { status: "OK", message: "No component units found." };
     }
 
-    const compIds = units.map((u) => u.compId);
+    // ================= Shared payload =================
+    const baseData = {
+      discId,
+      frequency,
+      frequencyPeriod,
+      jobConditionId,
+      planningMethod,
+      window,
+      outputFormat,
+      active,
+      mandatoryResource,
+      deptId,
+      priority,
+      maintClassId,
+      maintCauseId,
+      maintTypeId,
+      statusNone,
+      statusInUse,
+      statusAvailable,
+      statusRepair,
+    };
 
+    // ================= Operation Switch =================
     switch (operation) {
-      // ================= INSERT =================
+      // ========= CREATE =========
       case 0: {
-        /**
-         * فقط برای CompIDهایی که Job ندارند INSERT می‌کنیم
-         */
         const existing = await tx.tblCompJob.findMany({
           where: {
             jobDescId,
@@ -83,29 +112,13 @@ export async function effectCompTypeJobChange({
           .map((compId) => ({
             compId,
             jobDescId,
-            discId,
-            frequency,
-            frequencyPeriod,
-            jobConditionId,
-            planningMethod,
-            window,
-            outputFormat,
-            active,
-            mandatoryResource,
-            deptId,
-            exportMarker: 1,
-            priority,
-            maintClassId,
-            maintCauseId,
-            maintTypeId,
-            statusNone,
-            statusInUse,
-            statusAvailable,
-            statusRepair,
+            ...baseData,
           }));
 
         if (data.length) {
-          await tx.tblCompJob.createMany({ data });
+          await tx.tblCompJob.createMany({
+            data,
+          });
         }
 
         return {
@@ -114,44 +127,41 @@ export async function effectCompTypeJobChange({
         };
       }
 
-      // ================= UPDATE =================
+      // ========= UPDATE =========
       case 1: {
-        await tx.tblCompJob.updateMany({
+        const result = await tx.tblCompJob.updateMany({
           where: {
             jobDescId,
             compId: { in: compIds },
           },
           data: {
-            discId,
-            frequency,
-            frequencyPeriod,
-            jobConditionId,
-            planningMethod,
-            window,
-            outputFormat,
-            active,
-            mandatoryResource,
-            deptId,
-            exportMarker: 2,
-            priority,
-            maintClassId,
-            maintCauseId,
-            maintTypeId,
-            statusNone,
-            statusInUse,
-            statusAvailable,
-            statusRepair,
+            ...baseData,
             lastupdate: new Date(),
           },
         });
 
-        return { status: "OK", message: "Update complete." };
+        return {
+          status: "OK",
+          message: `Updated ${result.count} CompJob records.`,
+        };
       }
 
-      // ================= HARD DELETE =================
+      case 2: {
+        const result = await tx.tblCompJob.deleteMany({
+          where: {
+            jobDescId,
+            compId: { in: compIds },
+          },
+        });
+
+        return {
+          status: "OK",
+          message: `Hard deleted ${result.count} CompJob records.`,
+        };
+      }
 
       default:
-        throw new Error("Invalid operation.");
+        throw new Error("Unsupported operation.");
     }
   });
 }
