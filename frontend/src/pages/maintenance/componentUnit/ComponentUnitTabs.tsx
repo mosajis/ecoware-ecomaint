@@ -37,7 +37,7 @@ const tabs: ReusableTabItem[] = [
     icon: <AccountTree />,
     component: TabJob,
   },
-  { label: "Details", icon: <Description />, component: TabDetails },
+  { label: "Notes", icon: <Description />, component: TabDetails },
   { label: "Counter", icon: <BarChart />, component: TabCounter },
   { label: "Measure Point", icon: <Tune />, component: TabMeasures },
   { label: "Failure Report", icon: <BugReport />, component: TabFailureReport },

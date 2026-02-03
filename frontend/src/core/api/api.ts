@@ -10,8 +10,10 @@ export const logicTblCompTypeJob = {
     oldCompTypeId?: number,
   ) =>
     api.post(`/tblCompTypeJob/${compTypeJobId}/effect`, {
-      operation,
-      oldCompTypeId,
+      data: {
+        operation,
+        oldCompTypeId,
+      },
     }),
 };
 
@@ -22,8 +24,10 @@ export const logicTblCompTypeCounter = {
     oldCompTypeId?: number,
   ) =>
     api.post(`/tblCompTypeCounter/${compTypeCounterId}/effect`, {
-      operation,
-      oldCompTypeId,
+      data: {
+        operation,
+        oldCompTypeId,
+      },
     }),
 };
 
@@ -34,8 +38,10 @@ export const logicTblCompTypeAttachment = {
     oldCompTypeId?: number,
   ) =>
     api.post(`/tblCompTypeAttachment/${compTypeAttachmentId}/effect`, {
-      operation,
-      oldCompTypeId,
+      data: {
+        operation,
+        oldCompTypeId,
+      },
     }),
 };
 
@@ -43,11 +49,13 @@ export const logicTblCompTypeMeasurePoint = {
   effect: (
     compTypeMeasurePointId: number,
     operation: 0 | 1 | 2,
-    oldCompTypeId?: number,
+    oldCounterTypeId?: number,
   ) =>
     api.post(`/tblCompTypeMeasurePoint/${compTypeMeasurePointId}/effect`, {
-      operation,
-      oldCompTypeId,
+      data: {
+        operation,
+        oldCounterTypeId,
+      },
     }),
 };
 
@@ -58,8 +66,10 @@ export const logicTblCompTypeJobCounter = {
     oldCompTypeId?: number,
   ) =>
     api.post(`/tblCompTypeJobCounter/${compTypeJobCounterId}/effect`, {
-      operation,
-      oldCompTypeId,
+      data: {
+        operation,
+        oldCompTypeId,
+      },
     }),
 };
 
@@ -72,8 +82,10 @@ export const logicTblCompTypeJobMeasurePoint = {
     api.post(
       `/tblCompTypeJobMeasurePoint/${compTypeJobMeasurePointId}/effect`,
       {
-        operation,
-        oldCompTypeId,
+        data: {
+          operation,
+          oldCompTypeId,
+        },
       },
     ),
 };

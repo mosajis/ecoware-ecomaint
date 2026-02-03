@@ -12,6 +12,7 @@ import {
   TypeTblCompType,
   TypeTblCompTypeMeasurePoint,
 } from "@/core/api/generated/api";
+import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 
 type Props = {
   compType?: TypeTblCompType | null;
@@ -27,19 +28,26 @@ const columns: GridColDef<TypeTblCompTypeMeasurePoint>[] = [
     field: "measureName",
     headerName: "Measure",
     flex: 1,
-    valueGetter: (_, row) => row.tblCounterType?.name,
+    valueGetter: (_, row) => row.tblCounterType?.name || "",
   },
+  {
+    field: "currentDate",
+    headerName: "Current Date",
+    width: 135,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+  { field: "currentValue", headerName: "Current Value", width: 120 },
   {
     field: "unitName",
     headerName: "Unit",
     flex: 1,
-    valueGetter: (_, row) => row.tblUnit?.name,
+    valueGetter: (_, row) => row.tblUnit?.name || "",
   },
   {
     field: "unitDescription",
     headerName: "Unit Description",
     flex: 1,
-    valueGetter: (_, row) => row.tblUnit?.description,
+    valueGetter: (_, row) => row.tblUnit?.description || "",
   },
   { field: "setValue", headerName: "Set Value", width: 110 },
   { field: "operationalMinValue", headerName: "Min", width: 100 },

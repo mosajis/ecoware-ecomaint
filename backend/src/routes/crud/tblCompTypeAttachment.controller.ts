@@ -1,144 +1,76 @@
+import { BaseController } from "@/utils/base.controller";
+import { BaseService } from "@/utils/base.service";
 import { prisma } from "@/utils/prisma";
 import { t } from "elysia";
+import {
+  TblCompTypeAttachment,
+  TblCompTypeAttachmentInputCreate,
+  TblCompTypeAttachmentInputUpdate,
+  TblCompTypeAttachmentPlain,
+} from "orm/generated/prismabox/TblCompTypeAttachment";
+import { buildResponseSchema } from "@/utils/base.schema";
+import {
+  effectCompTypeAttachment,
+  OperationEnum,
+} from "../effects/EffectTblCompTypeAttachment";
 
-export const OperationEnum = t.Enum({
-  CREATE: 0,
-  UPDATE: 1,
-  DELETE: 2,
-});
+export const ServiceTblCompTypeAttachment = new BaseService(
+  prisma.tblCompTypeAttachment,
+);
 
-type OperationType = typeof OperationEnum.static;
+const ControllerTblCompTypeAttachment = new BaseController({
+  prefix: "/tblCompTypeAttachment",
+  swagger: {
+    tags: ["tblCompTypeAttachment"],
+  },
+  primaryKey: "compTypeAttachmentId",
+  service: ServiceTblCompTypeAttachment,
+  createSchema: TblCompTypeAttachmentInputCreate,
+  updateSchema: TblCompTypeAttachmentInputUpdate,
+  responseSchema: buildResponseSchema(
+    TblCompTypeAttachmentPlain,
+    TblCompTypeAttachment,
+  ),
 
-export async function effectCompTypeMeasurePoint({
-  compTypeMeasurePointId,
-  operation,
-  oldCompTypeId,
-}: {
-  compTypeMeasurePointId: number;
-  operation: OperationType;
-  oldCompTypeId?: number;
-}) {
-  return prisma.$transaction(async (tx) => {
-    // ================= Fetch CompTypeMeasurePoint =================
-    const ctmp = await tx.tblCompTypeMeasurePoint.findUnique({
-      where: { compTypeMeasurePointId },
-    });
+  extend: (app) => {
+    app.post(
+      "/:compTypeAttachmentId/effect",
+      async ({ params, body, set }) => {
+        try {
+          const compTypeAttachmentId = Number(params.compTypeAttachmentId);
 
-    if (!ctmp) {
-      throw new Error("CompTypeMeasurePoint not found.");
-    }
+          if (isNaN(compTypeAttachmentId)) {
+            set.status = 400;
+            return { status: "ERROR", message: "Invalid compTypeAttachmentId" };
+          }
 
-    const {
-      compTypeId,
-      counterTypeId,
-      unitId,
-      setValue,
-      operationalMinValue,
-      operationalMaxValue,
-      deptId,
-      orderNo,
-    } = ctmp;
-
-    if (!compTypeId || !counterTypeId) {
-      throw new Error("Invalid CompTypeMeasurePoint data.");
-    }
-
-    // ================= Determine which compTypeId to use =================
-    const targetCompTypeId =
-      operation === 1 && oldCompTypeId ? oldCompTypeId : compTypeId;
-
-    // ================= Fetch Component Units =================
-    const compIds = await tx.tblComponentUnit
-      .findMany({
-        where: { compTypeId: targetCompTypeId },
-        select: { compId: true },
-      })
-      .then((rows) => rows.map((r) => r.compId));
-
-    if (!compIds.length) {
-      return { status: "OK", message: "No component units found." };
-    }
-
-    // ================= Shared payload =================
-    const baseData = {
-      counterTypeId,
-      unitId,
-      setValue,
-      operationalMinValue,
-      operationalMaxValue,
-      deptId,
-      orderNo,
-    };
-
-    // ================= Operation Switch =================
-    switch (operation) {
-      // ========= CREATE =========
-      case 0: {
-        const existing = await tx.tblCompMeasurePoint.findMany({
-          where: {
-            counterTypeId,
-            compId: { in: compIds },
-          },
-          select: { compId: true },
-        });
-
-        const existingSet = new Set(existing.map((e) => e.compId));
-
-        const data = compIds
-          .filter((compId) => !existingSet.has(compId))
-          .map((compId) => ({
-            compId,
-            ...baseData,
-          }));
-
-        if (data.length) {
-          await tx.tblCompMeasurePoint.createMany({
-            data,
+          await effectCompTypeAttachment({
+            compTypeAttachmentId,
+            operation: body.operation,
+            oldCompTypeId: body.oldCompTypeId,
           });
+
+          return { status: "OK" };
+        } catch (err: any) {
+          set.status = 400;
+          return {
+            status: "ERROR",
+            message: err.message,
+          };
         }
+      },
+      {
+        tags: ["tblCompTypeAttachment"],
+        detail: {
+          summary: "Apply Attachment Change Effect",
+        },
+        body: t.Object({
+          operation: OperationEnum,
+          oldCompTypeId: t.Optional(t.Number()),
+        }),
+      },
+    );
+  },
+}).app;
 
-        return {
-          status: "OK",
-          message: `Inserted ${data.length} CompMeasurePoint records.`,
-        };
-      }
-
-      // ========= UPDATE =========
-      case 1: {
-        const result = await tx.tblCompMeasurePoint.updateMany({
-          where: {
-            counterTypeId,
-            compId: { in: compIds },
-          },
-          data: {
-            ...baseData,
-            lastupdate: new Date(),
-          },
-        });
-
-        return {
-          status: "OK",
-          message: `Updated ${result.count} CompMeasurePoint records.`,
-        };
-      }
-
-      // ========= DELETE =========
-      case 2: {
-        const result = await tx.tblCompMeasurePoint.deleteMany({
-          where: {
-            counterTypeId,
-            compId: { in: compIds },
-          },
-        });
-
-        return {
-          status: "OK",
-          message: `Hard deleted ${result.count} CompMeasurePoint records.`,
-        };
-      }
-
-      default:
-        throw new Error("Unsupported operation.");
-    }
-  });
-}
+export default ControllerTblCompTypeAttachment;

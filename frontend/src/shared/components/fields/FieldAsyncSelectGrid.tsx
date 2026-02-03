@@ -114,7 +114,13 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
                 <IconButton
                   size="small"
                   onClick={handleClear}
-                  sx={{ mr: 0.5 }}
+                  sx={{
+                    mr: 0.2,
+                    width: "30px",
+                    height: "30px",
+                    borderRadius: "20px",
+                    border: 0,
+                  }}
                   edge="end"
                 >
                   <ClearIcon fontSize="small" />
@@ -124,6 +130,12 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
                 size="small"
                 onClick={() => !disabled && setDialogOpen(true)}
                 disabled={disabled}
+                sx={{
+                  width: "30px",
+                  height: "30px",
+                  borderRadius: "20px",
+                  border: 0,
+                }}
                 edge="end"
               >
                 <MoreHorizIcon fontSize="small" />

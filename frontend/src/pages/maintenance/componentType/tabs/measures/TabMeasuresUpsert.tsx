@@ -149,6 +149,8 @@ function MeasurePointUpsert({
     [mode, recordId, compTypeId, onSuccess, onClose],
   );
 
+  const isDisabled = loadingInitial || submitting;
+
   return (
     <FormDialog
       open={open}
@@ -165,6 +167,7 @@ function MeasurePointUpsert({
           control={control}
           render={({ field, fieldState }) => (
             <FieldAsyncSelectGrid
+              disabled={isDisabled}
               label="Measure *"
               value={field.value}
               onChange={field.onChange}
@@ -184,6 +187,7 @@ function MeasurePointUpsert({
           render={({ field, fieldState }) => (
             <FieldAsyncSelectGrid
               label="Unit *"
+              disabled={isDisabled}
               value={field.value}
               onChange={field.onChange}
               request={tblUnit.getAll}
@@ -198,7 +202,9 @@ function MeasurePointUpsert({
         <Controller
           name="setValue"
           control={control}
-          render={({ field }) => <NumberField {...field} label="Set Value" />}
+          render={({ field }) => (
+            <NumberField disabled={isDisabled} {...field} label="Set Value" />
+          )}
         />
 
         <Box display={"flex"} gap={1.5}>
@@ -209,6 +215,7 @@ function MeasurePointUpsert({
               <NumberField
                 sx={{ flex: 1 }}
                 {...field}
+                disabled={isDisabled}
                 label="Operational Min"
               />
             )}
@@ -221,6 +228,7 @@ function MeasurePointUpsert({
               <NumberField
                 sx={{ flex: 1 }}
                 {...field}
+                disabled={isDisabled}
                 label="Operational Max"
               />
             )}
@@ -230,7 +238,9 @@ function MeasurePointUpsert({
         <Controller
           name="orderNo"
           control={control}
-          render={({ field }) => <NumberField {...field} label="Order No" />}
+          render={({ field }) => (
+            <NumberField disabled={isDisabled} {...field} label="Order No" />
+          )}
         />
       </Box>
     </FormDialog>
