@@ -1,19 +1,18 @@
 import * as z from "zod";
-import { memo, useCallback, useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import NumberField from "@/shared/components/fields/FieldNumber";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
+import { buildRelation } from "@/core/helper";
+import { memo, useCallback, useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   tblCompTypeMeasurePoint,
   tblCounterType,
   tblUnit,
   TypeTblCompTypeMeasurePoint,
 } from "@/core/api/generated/api";
-import { buildRelation } from "@/core/helper";
 
 /* === Schema === */
 const schema = z.object({
@@ -167,11 +166,22 @@ function MeasurePointUpsert({
           control={control}
           render={({ field, fieldState }) => (
             <FieldAsyncSelectGrid
-              disabled={isDisabled}
+              disabled={isDisabled || mode === "update"}
               label="Measure *"
               value={field.value}
               onChange={field.onChange}
-              request={() => tblCounterType.getAll({ filter: { type: 3 } })}
+              request={() =>
+                tblCounterType.getAll({
+                  filter: {
+                    type: 3,
+                    tblCompTypeMeasurePoints: {
+                      none: {
+                        compTypeId,
+                      },
+                    },
+                  },
+                })
+              }
               columns={[{ field: "name", headerName: "Name", flex: 1 }]}
               getRowId={(row) => row.counterTypeId}
               error={!!fieldState.error}

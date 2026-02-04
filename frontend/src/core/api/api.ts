@@ -46,15 +46,10 @@ export const logicTblCompTypeAttachment = {
 };
 
 export const logicTblCompTypeMeasurePoint = {
-  effect: (
-    compTypeMeasurePointId: number,
-    operation: 0 | 1 | 2,
-    oldCounterTypeId?: number,
-  ) =>
+  effect: (compTypeMeasurePointId: number, operation: 0 | 1 | 2) =>
     api.post(`/tblCompTypeMeasurePoint/${compTypeMeasurePointId}/effect`, {
       data: {
         operation,
-        oldCounterTypeId,
       },
     }),
 };

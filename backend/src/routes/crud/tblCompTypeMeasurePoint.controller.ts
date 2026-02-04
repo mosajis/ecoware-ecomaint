@@ -50,7 +50,6 @@ const ControllerTblCompTypeMeasurePoint = new BaseController({
           await effectCompTypeMeasurePoint({
             compTypeMeasurePointId,
             operation: body.operation,
-            oldCounterTypeId: body.oldCounterTypeId,
           });
 
           return { status: "OK" };
@@ -69,7 +68,6 @@ const ControllerTblCompTypeMeasurePoint = new BaseController({
         },
         body: t.Object({
           operation: OperationEnum,
-          oldCounterTypeId: t.Optional(t.Number()),
         }),
       },
     );

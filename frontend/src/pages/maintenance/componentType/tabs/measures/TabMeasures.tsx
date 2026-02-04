@@ -141,11 +141,7 @@ const TabMeasuresPage = ({ compType, label }: Props) => {
   const handleConfirmYes = async () => {
     try {
       if (effectId !== null && effectOperation !== null) {
-        await logicTblCompTypeMeasurePoint.effect(
-          effectId,
-          effectOperation,
-          oldCounterTypeId || undefined, // 👈 اصلاح شد
-        );
+        await logicTblCompTypeMeasurePoint.effect(effectId, effectOperation);
       }
 
       if (effectOperation === 2 && pendingDeleteRow) {

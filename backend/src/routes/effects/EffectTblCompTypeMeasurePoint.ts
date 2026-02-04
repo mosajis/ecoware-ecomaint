@@ -12,11 +12,9 @@ type OperationType = typeof OperationEnum.static;
 export async function effectCompTypeMeasurePoint({
   compTypeMeasurePointId,
   operation,
-  oldCounterTypeId,
 }: {
   compTypeMeasurePointId: number;
   operation: OperationType;
-  oldCounterTypeId?: number;
 }) {
   return prisma.$transaction(async (tx) => {
     // ================= Fetch CompTypeMeasurePoint =================
@@ -66,10 +64,6 @@ export async function effectCompTypeMeasurePoint({
       orderNo,
     };
 
-    // counterTypeId هدف برای where
-    const whereCounterTypeId =
-      operation === 1 && oldCounterTypeId ? oldCounterTypeId : counterTypeId;
-
     // ================= Operation Switch =================
     switch (operation) {
       // ========= CREATE =========
@@ -105,7 +99,7 @@ export async function effectCompTypeMeasurePoint({
       case 1: {
         const result = await tx.tblCompMeasurePoint.updateMany({
           where: {
-            counterTypeId: whereCounterTypeId,
+            counterTypeId,
             compId: { in: compIds },
           },
           data: {
@@ -124,7 +118,7 @@ export async function effectCompTypeMeasurePoint({
       case 2: {
         const result = await tx.tblCompMeasurePoint.deleteMany({
           where: {
-            counterTypeId: whereCounterTypeId,
+            counterTypeId,
             compId: { in: compIds },
           },
         });
