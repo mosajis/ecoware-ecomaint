@@ -9,6 +9,7 @@ import { Controller, UseFormReturn } from "react-hook-form";
 import { tblAttachmentType } from "@/core/api/generated/api";
 import { NewAttachmentFormValues } from "../AttachmentType";
 import TabContainer from "@/shared/components/TabContainer";
+import FieldAsyncSelect from "@/shared/components/fields/FieldAsyncSelect";
 
 interface NewAttachmentTabProps {
   form: UseFormReturn<NewAttachmentFormValues>;
@@ -56,7 +57,7 @@ function NewAttachmentTab({ form, disabled }: NewAttachmentTabProps) {
             name="attachmentType"
             control={form.control}
             render={({ field, fieldState }) => (
-              <AsyncSelect
+              <FieldAsyncSelect
                 {...field}
                 value={field.value}
                 onChange={field.onChange}

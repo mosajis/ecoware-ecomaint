@@ -47,7 +47,6 @@ const ControllerTblCompTypeAttachment = new BaseController({
           await effectCompTypeAttachment({
             compTypeAttachmentId,
             operation: body.operation,
-            oldCompTypeId: body.oldCompTypeId,
           });
 
           return { status: "OK" };
@@ -66,7 +65,6 @@ const ControllerTblCompTypeAttachment = new BaseController({
         },
         body: t.Object({
           operation: OperationEnum,
-          oldCompTypeId: t.Optional(t.Number()),
         }),
       },
     );

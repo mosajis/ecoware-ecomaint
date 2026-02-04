@@ -5,6 +5,12 @@ import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { BaseAttachmentGridProps, MapRelationConfig } from "./AttachmentType";
 import { attachmentTableColumns } from "./AttachmentColumn";
 
+export type AttachmentMapProps<T = any> = BaseAttachmentGridProps<T> & {
+  onAfterAdd?: (id: number) => void;
+  onAskDelete?: (id: number, deleteFn: () => Promise<void>) => void;
+  refreshTrigger?: number;
+};
+
 function AttachmentMap<T = any>({
   disableAdd,
   disableDelete,
@@ -14,7 +20,10 @@ function AttachmentMap<T = any>({
   tableId,
   label = "Attachments",
   mapService,
-}: BaseAttachmentGridProps<T>) {
+  onAfterAdd,
+  onAskDelete,
+  refreshTrigger,
+}: AttachmentMapProps<T>) {
   const [openForm, setOpenForm] = useState(false);
 
   const getAll = useCallback(() => {
@@ -32,12 +41,19 @@ function AttachmentMap<T = any>({
     });
   }, [filterId, filterKey, mapService]);
 
-  const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
+  const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
-    mapService.deleteById,
+    undefined as any,
     tableId as any,
     !!filterId,
   );
+
+  // Refresh when trigger changes
+  useMemo(() => {
+    if (refreshTrigger !== undefined) {
+      handleRefresh();
+    }
+  }, [refreshTrigger, handleRefresh]);
 
   const openUpsert = useCallback(() => {
     setOpenForm(true);
@@ -47,6 +63,40 @@ function AttachmentMap<T = any>({
     setOpenForm(false);
   }, []);
 
+  const handleAddSuccess = useCallback(
+    (data: any) => {
+      const id = data[tableId];
+
+      if (onAfterAdd) {
+        // اگر callback وجود داشت، فقط callback را صدا بزن
+        onAfterAdd(id);
+      } else {
+        // اگر callback نبود، مستقیم refresh کن
+        handleRefresh();
+      }
+      closeUpsert();
+    },
+    [tableId, onAfterAdd, handleRefresh, closeUpsert],
+  );
+
+  const handleDeleteClick = useCallback(
+    async (rowId: number) => {
+      const deleteFn = async () => {
+        await mapService.deleteById(rowId);
+        handleRefresh();
+      };
+
+      if (onAskDelete) {
+        // والد مسئول confirm و effect و delete است
+        onAskDelete(rowId, deleteFn);
+      } else {
+        // حالت پیش‌فرض: مستقیم پاک کن
+        await deleteFn();
+      }
+    },
+    [onAskDelete, mapService, handleRefresh],
+  );
+
   const relationConfig: MapRelationConfig = useMemo(
     () => ({
       filterId,
@@ -54,7 +104,7 @@ function AttachmentMap<T = any>({
       relName,
       attachmentField: "tblAttachment",
     }),
-    [filterKey, filterId],
+    [filterKey, filterId, relName],
   );
 
   const getRowId = useCallback((row: any) => row[tableId], [tableId]);
@@ -71,7 +121,7 @@ function AttachmentMap<T = any>({
         rows={rows}
         columns={attachmentTableColumns}
         loading={loading}
-        onDeleteClick={handleDelete}
+        onDeleteClick={handleDeleteClick}
         onAddClick={openUpsert}
         onRefreshClick={handleRefresh}
         getRowId={getRowId}
@@ -82,7 +132,7 @@ function AttachmentMap<T = any>({
         open={openForm}
         relationConfig={relationConfig}
         onClose={closeUpsert}
-        onSuccess={handleRefresh}
+        onSuccess={handleAddSuccess}
       />
     </>
   );

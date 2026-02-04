@@ -32,15 +32,10 @@ export const logicTblCompTypeCounter = {
 };
 
 export const logicTblCompTypeAttachment = {
-  effect: (
-    compTypeAttachmentId: number,
-    operation: 0 | 1 | 2,
-    oldCompTypeId?: number,
-  ) =>
+  effect: (compTypeAttachmentId: number, operation: 0 | 1 | 2) =>
     api.post(`/tblCompTypeAttachment/${compTypeAttachmentId}/effect`, {
       data: {
         operation,
-        oldCompTypeId,
       },
     }),
 };
