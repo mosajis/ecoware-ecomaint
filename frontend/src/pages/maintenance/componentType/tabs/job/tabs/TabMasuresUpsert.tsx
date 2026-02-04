@@ -3,11 +3,11 @@ import Box from "@mui/material/Box";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import NumberField from "@/shared/components/fields/FieldNumber";
 import Checkbox from "@mui/material/Checkbox";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { memo, useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
 import {
   tblCompTypeJobMeasurePoint,
@@ -147,7 +147,7 @@ function TabMasuresUpsert({
     [mode, recordId, compTypeJobId, onSuccess, onClose],
   );
 
-  /* ================= Render ================= */
+  const isDisabled = loadingInitial || submitting;
 
   return (
     <FormDialog
@@ -168,10 +168,20 @@ function TabMasuresUpsert({
               label="Measure Point *"
               value={field.value}
               onChange={field.onChange}
+              disabled={isDisabled || mode === "update"}
               request={() =>
                 tblCompTypeMeasurePoint.getAll({
                   include: { tblCounterType: true },
-                  filter: { compTypeId },
+                  filter: {
+                    compTypeId,
+                    tblCompTypeJobMeasurePoints: {
+                      none: {
+                        tblCompTypeMeasurePoint: {
+                          compTypeId,
+                        },
+                      },
+                    },
+                  },
                 })
               }
               getOptionLabel={(row: any) => row?.tblCounterType?.name}
@@ -195,7 +205,12 @@ function TabMasuresUpsert({
             name="minValue"
             control={control}
             render={({ field }) => (
-              <NumberField fullWidth {...field} label="Min Value" />
+              <NumberField
+                fullWidth
+                disabled={isDisabled}
+                {...field}
+                label="Min Value"
+              />
             )}
           />
 
@@ -203,7 +218,12 @@ function TabMasuresUpsert({
             name="maxValue"
             control={control}
             render={({ field }) => (
-              <NumberField fullWidth {...field} label="Max Value" />
+              <NumberField
+                fullWidth
+                disabled={isDisabled}
+                {...field}
+                label="Max Value"
+              />
             )}
           />
         </Box>
@@ -211,7 +231,9 @@ function TabMasuresUpsert({
           <Controller
             name="orderNo"
             control={control}
-            render={({ field }) => <NumberField {...field} label="Order No" />}
+            render={({ field }) => (
+              <NumberField disabled={isDisabled} {...field} label="Order No" />
+            )}
           />
           <Box display={"flex"} gap={1.5}>
             <Controller
@@ -223,6 +245,7 @@ function TabMasuresUpsert({
                   sx={{ m: 0 }}
                   control={
                     <Checkbox
+                      disabled={isDisabled}
                       checked={field.value}
                       onChange={(e) => field.onChange(e.target.checked)}
                       inputRef={field.ref}
@@ -241,6 +264,7 @@ function TabMasuresUpsert({
                   sx={{ m: 0 }}
                   control={
                     <Checkbox
+                      disabled={isDisabled}
                       checked={field.value}
                       onChange={(e) => field.onChange(e.target.checked)}
                       inputRef={field.ref}

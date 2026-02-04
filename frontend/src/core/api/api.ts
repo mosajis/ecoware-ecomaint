@@ -50,31 +50,21 @@ export const logicTblCompTypeMeasurePoint = {
 };
 
 export const logicTblCompTypeJobCounter = {
-  effect: (
-    compTypeJobCounterId: number,
-    operation: 0 | 1 | 2,
-    oldCompTypeId?: number,
-  ) =>
+  effect: (compTypeJobCounterId: number, operation: 0 | 1 | 2) =>
     api.post(`/tblCompTypeJobCounter/${compTypeJobCounterId}/effect`, {
       data: {
         operation,
-        oldCompTypeId,
       },
     }),
 };
 
 export const logicTblCompTypeJobMeasurePoint = {
-  effect: (
-    compTypeJobMeasurePointId: number,
-    operation: 0 | 1 | 2,
-    oldCompTypeId?: number,
-  ) =>
+  effect: (compTypeJobMeasurePointId: number, operation: 0 | 1 | 2) =>
     api.post(
       `/tblCompTypeJobMeasurePoint/${compTypeJobMeasurePointId}/effect`,
       {
         data: {
           operation,
-          oldCompTypeId,
         },
       },
     ),

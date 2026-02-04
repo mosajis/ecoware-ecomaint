@@ -50,7 +50,6 @@ const ControllerTblCompTypeJobCounter = new BaseController({
           await effectCompTypeJobCounter({
             compTypeJobCounterId,
             operation: body.operation,
-            oldCompTypeId: body.oldCompTypeId,
           });
 
           return { status: "OK" };
@@ -69,7 +68,6 @@ const ControllerTblCompTypeJobCounter = new BaseController({
         },
         body: t.Object({
           operation: OperationEnum,
-          oldCompTypeId: t.Optional(t.Number()),
         }),
       },
     );

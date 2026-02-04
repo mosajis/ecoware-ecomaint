@@ -1,8 +1,12 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import JobMeasureUpsert from "./TabMasuresUpsert";
+import ConfirmDialog from "@/shared/components/ConfirmDialog";
+import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import { useCallback, useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { toast } from "sonner";
+import { logicTblCompTypeJobMeasurePoint } from "@/core/api/api";
 import {
   tblCompTypeJobMeasurePoint,
   TypeTblCompTypeJob,
@@ -15,43 +19,36 @@ type Props = {
 
 const getRowId = (row: TypeTblCompTypeJobMeasurePoint) =>
   row.compTypeJobMeasurePointId;
-// === Columns ===
+
+/* ================= Columns ================= */
+
 const columns: GridColDef<TypeTblCompTypeJobMeasurePoint>[] = [
   {
     field: "measureName",
     headerName: "Measure Name",
     flex: 1,
-    valueGetter: (v, row) =>
-      // @ts-ignore
-      row?.tblCompTypeMeasurePoint?.tblCounterType?.name,
+    valueGetter: (_, row) =>
+      //@ts-ignore
+      row?.tblCompTypeMeasurePoint?.tblCounterType?.name || "",
   },
   {
     field: "unitName",
     headerName: "Unit Name",
     flex: 1,
-    // @ts-ignore
-    valueGetter: (v, row) => row?.tblCompTypeMeasurePoint?.tblUnit?.name,
+    valueGetter: (_, row) =>
+      //@ts-ignore
+      row?.tblCompTypeMeasurePoint?.tblUnit?.name || "",
   },
   {
     field: "unitDescription",
     headerName: "Unit Description",
     flex: 1,
-    // @ts-ignore
-    valueGetter: (v, row) =>
-      // @ts-ignore
-      row?.tblCompTypeMeasurePoint?.tblUnit?.description,
+    valueGetter: (_, row) =>
+      //@ts-ignore
+      row?.tblCompTypeMeasurePoint?.tblUnit?.description || "",
   },
-
-  {
-    field: "minValue",
-    headerName: "Min Value",
-    flex: 1,
-  },
-  {
-    field: "maxValue",
-    headerName: "Max Value",
-    flex: 1,
-  },
+  { field: "minValue", headerName: "Min Value", flex: 1 },
+  { field: "maxValue", headerName: "Max Value", flex: 1 },
   {
     field: "updateOnReport",
     headerName: "Update On Report",
@@ -60,23 +57,34 @@ const columns: GridColDef<TypeTblCompTypeJobMeasurePoint>[] = [
   },
   {
     field: "useOperationalValues",
-    headerName: "use Operational Values",
+    headerName: "Use Operational Values",
     flex: 1,
     type: "boolean",
   },
 ];
 
+/* ================= Component ================= */
+
 const TabMeasuresPage = ({ compTypeJob }: Props) => {
+  const compTypeJobId = compTypeJob?.compTypeJobId;
+  const compTypeId = compTypeJob?.compTypeId;
+  const label = compTypeJob?.tblJobDescription?.jobDescTitle || "";
+
+  // ---- UI State
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  const compTypeJobId = compTypeJob?.compTypeJobId;
-  const compTypeId = compTypeJob?.compTypeId;
+  // ---- Effect / Confirm State
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [effectId, setEffectId] = useState<number | null>(null);
+  const [effectOperation, setEffectOperation] = useState<0 | 1 | 2 | null>(
+    null,
+  );
+  const [pendingDeleteId, setPendingDeleteId] = useState<number | null>(null);
 
-  const label = compTypeJob?.tblJobDescription?.jobDescTitle || "";
+  /* ================= Data ================= */
 
-  // === getAll callback ===
   const getAll = useCallback(() => {
     return tblCompTypeJobMeasurePoint.getAll({
       include: {
@@ -87,40 +95,81 @@ const TabMeasuresPage = ({ compTypeJob }: Props) => {
           },
         },
       },
-      filter: {
-        compTypeJobId,
-      },
+      filter: { compTypeJobId },
     });
   }, [compTypeJobId]);
 
-  // === useDataGrid ===
-  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
+  const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
-    tblCompTypeJobMeasurePoint.deleteById,
+    undefined as any,
     "compTypeJobMeasurePointId",
     !!compTypeJobId,
   );
 
-  // === Handlers ===
+  /* ================= Handlers ================= */
+
   const handleCreate = () => {
     setSelectedId(null);
     setMode("create");
-    handleUpsertOpen();
+    setOpenForm(true);
   };
 
   const handleEdit = (rowId: number) => {
     setSelectedId(rowId);
     setMode("update");
-    handleUpsertOpen();
+    setOpenForm(true);
   };
 
-  const handleUpsertClose = useCallback(() => {
-    setOpenForm(false);
-  }, []);
+  const handleAskDelete = (rowId: number) => {
+    setPendingDeleteId(rowId);
+    setEffectId(rowId);
+    setEffectOperation(2);
+    setConfirmOpen(true);
+  };
 
-  const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true);
-  }, []);
+  const handleUpsertSuccess = (data: TypeTblCompTypeJobMeasurePoint) => {
+    setEffectId(data.compTypeJobMeasurePointId);
+    setEffectOperation(mode === "create" ? 0 : 1);
+    setConfirmOpen(true);
+  };
+
+  const resetConfirmState = () => {
+    setConfirmOpen(false);
+    setEffectId(null);
+    setEffectOperation(null);
+    setPendingDeleteId(null);
+  };
+
+  /* ================= Confirm Actions ================= */
+
+  const handleConfirmYes = async () => {
+    try {
+      if (effectId !== null && effectOperation !== null) {
+        await logicTblCompTypeJobMeasurePoint.effect(effectId, effectOperation);
+      }
+
+      if (effectOperation === 2 && pendingDeleteId !== null) {
+        await tblCompTypeJobMeasurePoint.deleteById(pendingDeleteId);
+      }
+
+      toast.success("Changes applied successfully");
+    } catch (err: any) {
+      toast.error(err?.response?.data?.message || "Failed to apply changes");
+    } finally {
+      resetConfirmState();
+      handleRefresh();
+    }
+  };
+
+  const handleConfirmNo = async () => {
+    if (effectOperation === 2 && pendingDeleteId !== null) {
+      await tblCompTypeJobMeasurePoint.deleteById(pendingDeleteId);
+    }
+    resetConfirmState();
+    handleRefresh();
+  };
+
+  /* ================= Render ================= */
 
   return (
     <>
@@ -133,7 +182,7 @@ const TabMeasuresPage = ({ compTypeJob }: Props) => {
         onAddClick={handleCreate}
         onEditClick={handleEdit}
         onDoubleClick={handleEdit}
-        onDeleteClick={handleDelete}
+        onDeleteClick={handleAskDelete}
         onRefreshClick={handleRefresh}
         getRowId={getRowId}
       />
@@ -144,8 +193,20 @@ const TabMeasuresPage = ({ compTypeJob }: Props) => {
         recordId={selectedId}
         compTypeJobId={compTypeJobId!}
         compTypeId={compTypeId!}
-        onClose={handleUpsertClose}
-        onSuccess={handleRefresh}
+        onClose={() => setOpenForm(false)}
+        onSuccess={handleUpsertSuccess}
+      />
+
+      <ConfirmDialog
+        open={confirmOpen}
+        icon={<PublishedWithChangesIcon sx={{ fontSize: "3rem" }} />}
+        title="Apply Changes"
+        message="Apply changes to related components?"
+        confirmText="Yes"
+        cancelText="No"
+        confirmColor="primary"
+        onConfirm={handleConfirmYes}
+        onCancel={handleConfirmNo}
       />
     </>
   );

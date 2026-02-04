@@ -52,7 +52,6 @@ const ControllerTblCompTypeJobMeasurePoint = new BaseController({
           await effectCompTypeJobMeasurePoint({
             compTypeJobMeasurePointId,
             operation: body.operation,
-            oldCompTypeId: body.oldCompTypeId,
           });
 
           return { status: "OK" };
@@ -71,7 +70,6 @@ const ControllerTblCompTypeJobMeasurePoint = new BaseController({
         },
         body: t.Object({
           operation: OperationEnum,
-          oldCompTypeId: t.Optional(t.Number()),
         }),
       },
     );

@@ -1,8 +1,12 @@
 import JobCounterUpsert from "./TabCounterUpsert";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import ConfirmDialog from "@/shared/components/ConfirmDialog";
+import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import { useCallback, useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { logicTblCompTypeJobCounter } from "@/core/api/api";
+import { toast } from "sonner";
 import {
   tblCompTypeJobCounter,
   TypeTblCompTypeJob,
@@ -48,6 +52,13 @@ const TabCounter = ({ compTypeJob }: Props) => {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedId, setSelectedId] = useState<number | null>(null);
+
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [effectId, setEffectId] = useState<number | null>(null);
+  const [effectOperation, setEffectOperation] = useState<0 | 1 | 2 | null>(
+    null,
+  );
+  const [pendingDeleteId, setPendingDeleteId] = useState<number | null>(null);
 
   const label = compTypeJob?.tblJobDescription?.jobDescTitle || "";
 
@@ -96,6 +107,54 @@ const TabCounter = ({ compTypeJob }: Props) => {
     setOpenForm(true);
   }, []);
 
+  const handleUpsertSuccess = (data: TypeTblCompTypeJobCounter) => {
+    setEffectId(data.compTypeJobCounterId);
+    setEffectOperation(mode === "create" ? 0 : 1);
+    setConfirmOpen(true);
+  };
+
+  const handleAskDelete = (rowId: number) => {
+    setPendingDeleteId(rowId);
+    setEffectId(rowId);
+    setEffectOperation(2);
+    setConfirmOpen(true);
+  };
+
+  const resetConfirmState = () => {
+    setConfirmOpen(false);
+    setEffectId(null);
+    setEffectOperation(null);
+    setPendingDeleteId(null);
+  };
+
+  const handleConfirmYes = async () => {
+    try {
+      if (effectId !== null && effectOperation !== null) {
+        await logicTblCompTypeJobCounter.effect(effectId, effectOperation);
+      }
+
+      if (effectOperation === 2 && pendingDeleteId !== null) {
+        await tblCompTypeJobCounter.deleteById(pendingDeleteId);
+      }
+
+      toast.success("Changes applied successfully");
+    } catch (err: any) {
+      toast.error(err?.response?.data?.message || "Failed to apply changes");
+    } finally {
+      resetConfirmState();
+      handleRefresh();
+    }
+  };
+
+  const handleConfirmNo = async () => {
+    if (effectOperation === 2 && pendingDeleteId !== null) {
+      await tblCompTypeJobCounter.deleteById(pendingDeleteId);
+    }
+
+    resetConfirmState();
+    handleRefresh();
+  };
+
   return (
     <>
       <CustomizedDataGrid
@@ -106,7 +165,7 @@ const TabCounter = ({ compTypeJob }: Props) => {
         loading={loading}
         onRefreshClick={handleRefresh}
         onAddClick={handleCreate}
-        onDeleteClick={handleDelete}
+        onDeleteClick={handleAskDelete}
         onEditClick={handleEdit}
         onDoubleClick={handleEdit}
         getRowId={getRowId}
@@ -119,7 +178,18 @@ const TabCounter = ({ compTypeJob }: Props) => {
         compTypeJobId={compTypeJobId!}
         compTypeId={compTypeId!}
         onClose={handleUpsertClose}
-        onSuccess={handleRefresh}
+        onSuccess={handleUpsertSuccess}
+      />
+      <ConfirmDialog
+        open={confirmOpen}
+        icon={<PublishedWithChangesIcon sx={{ fontSize: "3rem" }} />}
+        title="Apply Changes"
+        message="Apply changes to related components?"
+        confirmText="Yes"
+        cancelText="No"
+        confirmColor="primary"
+        onConfirm={handleConfirmYes}
+        onCancel={handleConfirmNo}
       />
     </>
   );

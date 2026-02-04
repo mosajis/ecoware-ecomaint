@@ -12,11 +12,9 @@ type OperationType = typeof OperationEnum.static;
 export async function effectCompTypeJobCounter({
   compTypeJobCounterId,
   operation,
-  oldCompTypeId,
 }: {
   compTypeJobCounterId: number;
   operation: OperationType;
-  oldCompTypeId?: number;
 }) {
   return prisma.$transaction(async (tx) => {
     // ================= Fetch CompTypeJobCounter =================
@@ -51,14 +49,10 @@ export async function effectCompTypeJobCounter({
       throw new Error("Invalid CompTypeJobCounter data.");
     }
 
-    // ================= Determine which compTypeId to use =================
-    const targetCompTypeId =
-      operation === 1 && oldCompTypeId ? oldCompTypeId : compTypeId;
-
     // ================= Fetch Component Units =================
     const compIds = await tx.tblComponentUnit
       .findMany({
-        where: { compTypeId: targetCompTypeId },
+        where: { compTypeId },
         select: { compId: true },
       })
       .then((rows) => rows.map((r) => r.compId));

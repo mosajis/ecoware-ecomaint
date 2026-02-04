@@ -161,6 +161,8 @@ function JobCounterUpsert({
     [mode, recordId, compTypeJobId, onSuccess, onClose],
   );
 
+  const isDisabled = loadingInitial || submitting;
+
   return (
     <FormDialog
       open={open}
@@ -180,6 +182,7 @@ function JobCounterUpsert({
               label="Counter *"
               value={field.value}
               onChange={field.onChange}
+              disabled={isDisabled || mode === "update"}
               getOptionLabel={(row: any) => row?.tblCounterType?.name}
               request={() =>
                 tblCompTypeCounter.getAll({
@@ -187,7 +190,14 @@ function JobCounterUpsert({
                     tblCounterType: true,
                   },
                   filter: {
-                    compTypeId: compTypeId,
+                    compTypeId,
+                    tblCompTypeJobCounters: {
+                      none: {
+                        tblCompTypeCounter: {
+                          compTypeId,
+                        },
+                      },
+                    },
                   },
                 })
               }
@@ -211,7 +221,12 @@ function JobCounterUpsert({
             name="frequency"
             control={control}
             render={({ field }) => (
-              <NumberField fullWidth {...field} label="Frequency" />
+              <NumberField
+                fullWidth
+                disabled={isDisabled}
+                {...field}
+                label="Frequency"
+              />
             )}
           />
 
@@ -219,7 +234,12 @@ function JobCounterUpsert({
             name="window"
             control={control}
             render={({ field }) => (
-              <NumberField fullWidth {...field} label="Window" />
+              <NumberField
+                fullWidth
+                {...field}
+                disabled={isDisabled}
+                label="Window"
+              />
             )}
           />
         </Box>
@@ -227,7 +247,9 @@ function JobCounterUpsert({
           <Controller
             name="orderNo"
             control={control}
-            render={({ field }) => <NumberField {...field} label="Order No" />}
+            render={({ field }) => (
+              <NumberField disabled={isDisabled} {...field} label="Order No" />
+            )}
           />
           <Box display={"flex"} gap={1.5}>
             <Controller
@@ -236,7 +258,13 @@ function JobCounterUpsert({
               render={({ field }) => (
                 <FormControlLabel
                   sx={{ m: 0 }}
-                  control={<Checkbox checked={field.value} {...field} />}
+                  control={
+                    <Checkbox
+                      disabled={isDisabled}
+                      checked={field.value}
+                      {...field}
+                    />
+                  }
                   label="Show In Alert"
                 />
               )}
@@ -248,7 +276,13 @@ function JobCounterUpsert({
               render={({ field }) => (
                 <FormControlLabel
                   sx={{ m: 0 }}
-                  control={<Checkbox checked={field.value} {...field} />}
+                  control={
+                    <Checkbox
+                      disabled={isDisabled}
+                      checked={field.value}
+                      {...field}
+                    />
+                  }
                   label="Update By Function"
                 />
               )}
