@@ -1,5 +1,8 @@
 import CounterUpsert from "./TabCounterUpsert";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
+import ConfirmDialog from "@/shared/components/ConfirmDialog";
+import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import { useCallback, useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
@@ -8,6 +11,8 @@ import {
   TypeTblCompType,
   TypeTblCompTypeCounter,
 } from "@/core/api/generated/api";
+import { toast } from "sonner";
+import { logicTblCompTypeCounter } from "@/core/api/api";
 
 type Props = {
   compType?: TypeTblCompType;
@@ -25,14 +30,44 @@ const columns: GridColDef<TypeTblCompTypeCounter>[] = [
     valueGetter: (_, row) => row.tblCounterType?.name || "",
   },
   {
+    field: "currentDate",
+    headerName: "Current Date",
+    flex: 1,
+
+    renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+  {
+    field: "currentValue",
+    headerName: "Current Value",
+    flex: 1,
+  },
+  {
+    field: "startDate",
+    headerName: "Start Date",
+    flex: 1,
+
+    renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+  {
+    field: "startValue",
+    headerName: "Start Value",
+    flex: 1,
+  },
+  {
+    field: "useCalcAverage",
+    headerName: "Use Calc Avg",
+    flex: 1,
+    type: "boolean",
+  },
+  {
     field: "averageCountRate",
     headerName: "Avg Rate",
-    width: 120,
+    flex: 1,
   },
   {
     field: "orderNo",
-    headerName: "Order",
-    width: 90,
+    headerName: "Order No",
+    width: 85,
   },
 ];
 
@@ -42,6 +77,12 @@ const TabCounter = ({ compType, label }: Props) => {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [effectId, setEffectId] = useState<number | null>(null);
+  const [effectOperation, setEffectOperation] = useState<0 | 1 | 2 | null>(
+    null,
+  );
+  const [pendingDeleteId, setPendingDeleteId] = useState<number | null>(null);
 
   // === getAll ===
   const getAll = useCallback(() => {
@@ -77,6 +118,54 @@ const TabCounter = ({ compType, label }: Props) => {
     handleUpsertOpen();
   };
 
+  const handleAskDelete = (rowId: number) => {
+    setPendingDeleteId(rowId);
+    setEffectId(rowId);
+    setEffectOperation(2);
+    setConfirmOpen(true);
+  };
+
+  const handleUpsertSuccess = (data: TypeTblCompTypeCounter) => {
+    setEffectId(data.compTypeCounterId);
+    setEffectOperation(mode === "create" ? 0 : 1);
+    setConfirmOpen(true);
+  };
+
+  const resetConfirmState = () => {
+    setConfirmOpen(false);
+    setEffectId(null);
+    setEffectOperation(null);
+    setPendingDeleteId(null);
+  };
+
+  const handleConfirmYes = async () => {
+    try {
+      if (effectId !== null && effectOperation !== null) {
+        await logicTblCompTypeCounter.effect(effectId, effectOperation);
+      }
+
+      if (effectOperation === 2 && pendingDeleteId) {
+        await tblCompTypeCounter.deleteById(pendingDeleteId);
+      }
+
+      toast.success("Changes applied successfully");
+    } catch (err: any) {
+      toast.error(err?.response?.data?.message || "Failed to apply effect");
+    } finally {
+      resetConfirmState();
+      handleRefresh();
+    }
+  };
+
+  const handleConfirmNo = async () => {
+    if (effectOperation === 2 && pendingDeleteId) {
+      await tblCompTypeCounter.deleteById(pendingDeleteId);
+    }
+
+    resetConfirmState();
+    handleRefresh();
+  };
+
   const handleUpsertClose = useCallback(() => {
     setOpenForm(false);
   }, []);
@@ -94,7 +183,7 @@ const TabCounter = ({ compType, label }: Props) => {
         columns={columns}
         loading={loading}
         onAddClick={handleCreate}
-        onDeleteClick={handleDelete}
+        onDeleteClick={handleAskDelete}
         onDoubleClick={handleEdit}
         onEditClick={handleEdit}
         onRefreshClick={handleRefresh}
@@ -107,7 +196,18 @@ const TabCounter = ({ compType, label }: Props) => {
         recordId={selectedId}
         compTypeId={compTypeId!}
         onClose={handleUpsertClose}
-        onSuccess={handleRefresh}
+        onSuccess={handleUpsertSuccess}
+      />
+      <ConfirmDialog
+        open={confirmOpen}
+        icon={<PublishedWithChangesIcon sx={{ fontSize: "3rem" }} />}
+        title="Apply Changes"
+        message="Apply changes to related components?"
+        confirmText="Yes"
+        cancelText="No"
+        confirmColor="primary"
+        onConfirm={handleConfirmYes}
+        onCancel={handleConfirmNo}
       />
     </>
   );

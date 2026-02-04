@@ -311,7 +311,7 @@ function ComponentTypeJobUpsert({
                 helperText={fieldState.error?.message}
                 getRowId={(row) => row.jobDescId}
                 onChange={field.onChange}
-                disabled={isDisabled}
+                disabled={isDisabled || mode === "update"}
               />
             </Box>
           )}

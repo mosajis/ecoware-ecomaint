@@ -37,6 +37,9 @@ export const PageJobClass = lazy(
 export const PageJobDescription = lazy(
   () => import("@/pages/general/jobDescription/JobDescription"),
 );
+export const PageJobTrigger = lazy(
+  () => import("@/pages/general/jobTrigger/JobTrigger"),
+);
 
 // --- General parent route ---
 export const generalRoute = createRoute({
@@ -123,6 +126,13 @@ export const generalJobDescriptionRoute = createRoute({
   beforeLoad: () => ({ breadcrumb: "Job Description" }),
 });
 
+export const generalJobTriggerRoute = createRoute({
+  getParentRoute: () => generalRoute,
+  path: "job-trigger",
+  component: () => <LazyRoute Component={PageJobTrigger} />,
+  beforeLoad: () => ({ breadcrumb: "Job Trigger" }),
+});
+
 // --- Add all children to parent ---
 export const generalRouteTree = generalRoute.addChildren([
   generalAttachmentRoute,
@@ -136,4 +146,5 @@ export const generalRouteTree = generalRoute.addChildren([
   generalPendingTypeRoute,
   generalJobClassRoute,
   generalJobDescriptionRoute,
+  generalJobTriggerRoute,
 ]);

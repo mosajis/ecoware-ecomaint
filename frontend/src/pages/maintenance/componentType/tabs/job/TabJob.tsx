@@ -15,6 +15,7 @@ import {
   TypeTblCompTypeJob,
 } from "@/core/api/generated/api";
 import { logicTblCompTypeJob } from "@/core/api/api";
+import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 
 // ================= Columns =================
 
@@ -98,6 +99,18 @@ const columns: GridColDef<TypeTblCompTypeJob>[] = [
     headerName: "St-Repair",
     width: 90,
     type: "boolean",
+  },
+  {
+    field: "lastDone",
+    headerName: "Last Done",
+    width: 150,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+  {
+    field: "nextDueDate",
+    headerName: "Next Due Date",
+    width: 150,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
   },
 ];
 

@@ -30,6 +30,7 @@ import TodayRoundedIcon from "@mui/icons-material/TodayRounded";
 import ReportProblemRoundedIcon from "@mui/icons-material/ReportProblemRounded";
 import WorkRoundedIcon from "@mui/icons-material/WorkRounded";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
+import CommitIcon from "@mui/icons-material/Commit";
 
 const BulletIcon = () => (
   <Box
@@ -130,6 +131,12 @@ export const menuContentItems: {
         icon: <DescriptionRoundedIcon />,
         id: "general:jobDescription",
         path: "/general/job-description",
+      },
+      {
+        text: "Job Trigger",
+        icon: <CommitIcon />,
+        id: "general:jobTrigger",
+        path: "/general/job-trigger",
       },
       {
         text: "Attachment",
