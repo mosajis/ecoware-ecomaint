@@ -111,7 +111,6 @@ const TabCompMeasurePoint = ({ componentUnit, label }: Props) => {
   return (
     <>
       <CustomizedDataGrid
-        disableEdit
         showToolbar={!!label}
         label={label}
         rows={rows}

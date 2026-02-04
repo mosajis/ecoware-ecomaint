@@ -42,6 +42,11 @@ const ControllerTblCompMeasurePoint = new BaseController({
           const measurePoint = await tx.tblCompMeasurePoint.update({
             where: { compMeasurePointId },
             data: {
+              setValue: data.setValue ?? null,
+              operationalMinValue: data.operationalMinValue ?? null,
+              operationalMaxValue: data.operationalMaxValue ?? null,
+              orderNo: data.orderNo ?? null,
+              unitId: data?.tblUnit?.connect?.unitId ?? null,
               currentValue: data.currentValue ?? null,
               currentDate: data.currentDate ?? null,
             },
