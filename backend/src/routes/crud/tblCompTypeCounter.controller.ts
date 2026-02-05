@@ -44,12 +44,12 @@ const ControllerTblCompTypeCounter = new BaseController({
             return { status: "ERROR", message: "Invalid compTypeCounterId" };
           }
 
-          await effectCompTypeCounter({
+          const result = await effectCompTypeCounter({
             compTypeCounterId,
             operation: body.operation,
           });
 
-          return { status: "OK" };
+          return result;
         } catch (err: any) {
           set.status = 400;
           return {

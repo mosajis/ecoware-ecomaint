@@ -49,12 +49,12 @@ const ControllerTblCompTypeJobMeasurePoint = new BaseController({
             };
           }
 
-          await effectCompTypeJobMeasurePoint({
+          const result = await effectCompTypeJobMeasurePoint({
             compTypeJobMeasurePointId,
             operation: body.operation,
           });
 
-          return { status: "OK" };
+          return result;
         } catch (err: any) {
           set.status = 400;
           return {

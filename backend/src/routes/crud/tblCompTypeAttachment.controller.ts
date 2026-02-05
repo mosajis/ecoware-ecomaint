@@ -44,12 +44,12 @@ const ControllerTblCompTypeAttachment = new BaseController({
             return { status: "ERROR", message: "Invalid compTypeAttachmentId" };
           }
 
-          await effectCompTypeAttachment({
+          const result = await effectCompTypeAttachment({
             compTypeAttachmentId,
             operation: body.operation,
           });
 
-          return { status: "OK" };
+          return result;
         } catch (err: any) {
           set.status = 400;
           return {

@@ -87,6 +87,51 @@ export async function effectComponentUnitChange({
     });
 
     // =========================================================================
+    // JobTrigger (ID-based)
+    // =========================================================================
+    const compTypeJobIds = compTypeJobs.map((j) => j.compTypeJobId);
+
+    const compTypeJobTriggers =
+      compTypeJobIds.length === 0
+        ? []
+        : await tx.tblCompTypeJobTrigger.findMany({
+            where: {
+              compTypeJobId: { in: compTypeJobIds },
+            },
+          });
+
+    if (compTypeJobTriggers.length > 0) {
+      const compJobs = await tx.tblCompJob.findMany({
+        where: { compId },
+      });
+
+      const jobMap = new Map(compJobs.map((j) => [j.jobDescId, j]));
+
+      const jobTriggerData = compTypeJobTriggers
+        .map((ctjt) => {
+          const compTypeJob = compTypeJobs.find(
+            (j) => j.compTypeJobId === ctjt.compTypeJobId,
+          );
+          if (!compTypeJob) return null;
+
+          const job = jobMap.get(compTypeJob.jobDescId);
+          if (!job) return null;
+
+          return {
+            compJobId: job.compJobId,
+            jobTriggerId: ctjt.jobTriggerId,
+          };
+        })
+        .filter(Boolean);
+
+      if (jobTriggerData.length > 0) {
+        await tx.tblCompJobTrigger.createMany({
+          data: jobTriggerData as any[],
+        });
+      }
+    }
+
+    // =========================================================================
     // Measure Points
     // =========================================================================
     await tx.tblCompMeasurePoint.createMany({
@@ -138,7 +183,6 @@ export async function effectComponentUnitChange({
     // =========================================================================
     // JobCounter (کاملاً ID-based)
     // =========================================================================
-    const compTypeJobIds = compTypeJobs.map((j) => j.compTypeJobId);
 
     const compTypeJobCounters =
       compTypeJobIds.length === 0

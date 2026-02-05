@@ -39,13 +39,12 @@ const ControllerTblCompTypeJob = new BaseController({
             return { status: "ERROR", message: "Invalid compTypeJobId" };
           }
 
-          await effectCompTypeJob({
+          const result = await effectCompTypeJob({
             compTypeJobId,
             operation: body.operation,
-            oldCompTypeId: body.oldCompTypeId,
           });
 
-          return { status: "OK" };
+          return result;
         } catch (err: any) {
           set.status = 400;
           return {
@@ -61,7 +60,6 @@ const ControllerTblCompTypeJob = new BaseController({
         },
         body: t.Object({
           operation: OperationEnum,
-          oldCompTypeId: t.Optional(t.Number()),
         }),
       },
     );

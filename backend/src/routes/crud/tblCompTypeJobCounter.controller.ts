@@ -47,12 +47,12 @@ const ControllerTblCompTypeJobCounter = new BaseController({
             };
           }
 
-          await effectCompTypeJobCounter({
+          const result = await effectCompTypeJobCounter({
             compTypeJobCounterId,
             operation: body.operation,
           });
 
-          return { status: "OK" };
+          return result;
         } catch (err: any) {
           set.status = 400;
           return {

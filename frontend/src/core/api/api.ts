@@ -58,6 +58,15 @@ export const logicTblCompTypeJobCounter = {
     }),
 };
 
+export const logicTblCompTypeJobTrigger = {
+  effect: (compTypeJobTriggerId: number, operation: 0 | 1 | 2) =>
+    api.post(`/tblCompTypeJobTrigger/${compTypeJobTriggerId}/effect`, {
+      data: {
+        operation,
+      },
+    }),
+};
+
 export const logicTblCompTypeJobMeasurePoint = {
   effect: (compTypeJobMeasurePointId: number, operation: 0 | 1 | 2) =>
     api.post(
