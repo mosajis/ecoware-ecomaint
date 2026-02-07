@@ -5,8 +5,8 @@ import BugReport from "@mui/icons-material/BugReport";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 import Description from "@mui/icons-material/Description";
 import DoneAll from "@mui/icons-material/DoneAll";
-import StackedLineChart from "@mui/icons-material/StackedLineChart";
 import Tune from "@mui/icons-material/Tune";
+
 import { lazy } from "react";
 import { TypeTblComponentUnit } from "@/core/api/generated/api";
 import TabsContainer, {

@@ -9,11 +9,7 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
-import {
-  TypeTblCompJobCounter,
-  tblCompCounter,
-  tblCompJobCounter,
-} from "@/core/api/generated/api";
+import { tblCompCounter, tblCompJobCounter } from "@/core/api/generated/api";
 
 /* === Schema === */
 const schema = z.object({
@@ -24,7 +20,7 @@ const schema = z.object({
     .nullable()
     .refine(Boolean, { message: "Counter is required" }),
 
-  frequency: z.number(),
+  frequency: z.number().nullable(),
   window: z.number().nullable(),
   showInAlert: z.boolean(),
   updateByFunction: z.boolean(),
