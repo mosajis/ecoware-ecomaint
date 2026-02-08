@@ -2,6 +2,7 @@ import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
+
 import StraightenIcon from "@mui/icons-material/Straighten";
 import TabsContainer, {
   ReusableTabItem,
@@ -34,6 +35,7 @@ const tabs: ReusableTabItem[] = [
     icon: <StraightenIcon />,
     component: TabMeasure,
   },
+
   {
     label: "Components",
     icon: <PrecisionManufacturingIcon />,

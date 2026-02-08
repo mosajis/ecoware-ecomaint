@@ -34,7 +34,7 @@ try {
 
   // Build bundle
   try {
-    await run(`bun build src/main.ts --outfile=${outDir}/app`);
+    await run(`bun build src/main.ts --outdir=${outDir} --target=node`);
     log.success("TypeScript build & bundle completed.");
   } catch (e) {
     log.error("TypeScript build failed.");
@@ -43,13 +43,13 @@ try {
 
   // Copy Prisma binaries (important)
   try {
-    await cp("./node_modules/.prisma", `${outDir}/node_modules/.prisma`, {
-      recursive: true,
-    });
-    log.success("Prisma binaries copied.");
+    // await cp("./node_modules/.prisma", `${outDir}/node_modules/.prisma`, {
+    //   recursive: true,
+    // });
+    // log.success("Prisma binaries copied.");
   } catch (e) {
-    log.error("Failed to copy Prisma binaries.");
-    throw e;
+    // log.error("Failed to copy Prisma binaries.");
+    // throw e;
   }
 
   // Copy ORM
