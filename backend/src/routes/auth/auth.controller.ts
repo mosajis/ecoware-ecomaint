@@ -3,6 +3,7 @@ import { jwt } from "@elysiajs/jwt";
 import { AuthService } from "./auth.service";
 import { TblUsersPlain } from "orm/generated/prismabox/TblUsers";
 import { ServiceTblUsers } from "../crud/tblUsers.controller";
+import { prisma } from "@/utils/prisma";
 
 const authService = new AuthService();
 
@@ -135,7 +136,16 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
         }
 
         const username = String(payload.username);
-        const user = await ServiceTblUsers.findOne({ uUserName: username });
+        const user = await prisma.tblUsers.findFirst({
+          where: { uUserName: username },
+          include: {
+            tblEmployeeTblUsersEmployeeIdTotblEmployee: {
+              include: {
+                tblDiscipline: true,
+              },
+            },
+          },
+        });
 
         if (!user) {
           // token is valid but user not found
@@ -162,7 +172,7 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
           }),
           t.Object({
             authorized: t.Literal(true),
-            user: UsersSafePlain,
+            user: t.Any(),
           }),
         ]),
         detail: {

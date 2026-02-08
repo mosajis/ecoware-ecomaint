@@ -163,7 +163,7 @@ export const menuContentItems: {
         path: "/maintenance/component-unit",
       },
       {
-        text: "Component Type (x)",
+        text: "Component Type",
         icon: <PrecisionManufacturingRoundedIcon />,
         id: "maint:componentType",
         path: "/maintenance/component-type",
@@ -191,12 +191,6 @@ export const menuContentItems: {
         icon: <PostAddRoundedIcon />,
         id: "maint:requisitionWork",
         path: "/maintenance/requisition-work",
-      },
-      {
-        text: "Component Trigger (x)",
-        icon: <FlashOnRoundedIcon />,
-        id: "maint:componentTrigger",
-        path: "/maintenance/component-trigger",
       },
       {
         text: "Counters",

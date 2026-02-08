@@ -17,7 +17,7 @@ const getRowId = (row: TypeTblWorkOrder) => row.workOrderId;
 
 export default function WorkOrderPage() {
   const [dialogIssue, setDialogIssue] = useState(false);
-  const [dialogFilter, setDialogFilter] = useState(false);
+  const [dialogFilter, setDialogFilter] = useState(false); // 🔹 تغییر از true به false
 
   const [filter, setFilter] = useState<WorkOrderFilter | null>(null);
   const [selectedRows, setSelectedRows] = useState<GridRowId[]>([]);
@@ -25,8 +25,6 @@ export default function WorkOrderPage() {
   const getAll = useCallback(
     () =>
       tblWorkOrder.getAll({
-        paginate: true,
-        perPage: 200,
         filter: filter ?? undefined,
         include: {
           tblComponentUnit: {
@@ -54,6 +52,7 @@ export default function WorkOrderPage() {
       getAll,
       tblWorkOrder.deleteById,
       "workOrderId",
+      !dialogFilter,
     );
 
   const selectedWorkOrders = useMemo<TypeTblWorkOrderWithRels[]>(() => {
@@ -122,7 +121,7 @@ export default function WorkOrderPage() {
 
   const handleSubmitFilter = (filter: WorkOrderFilter | null) => {
     setFilter(filter);
-    openDialogFilter();
+    closeDialogFilter(); // 🔹 تغییر از openDialogFilter به closeDialogFilter
   };
 
   return (
@@ -139,7 +138,6 @@ export default function WorkOrderPage() {
           columns={columns}
           loading={loading}
           getRowId={getRowId}
-          // disableRowSelectionOnClick={false}
           onRowSelectionModelChange={handleRowSelectionChange}
           onRefreshClick={handleRefresh}
           toolbarChildren={

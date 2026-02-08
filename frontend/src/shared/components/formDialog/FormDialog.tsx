@@ -20,6 +20,7 @@ export type FormDialogWrapperProps = {
   readonly?: boolean;
   open: boolean;
   onClose: () => void;
+  onCancelClick: () => void;
   title: string;
   submitting?: boolean;
   loadingInitial?: boolean;
@@ -36,6 +37,7 @@ export default function FormDialog({
   readonly,
   open,
   onClose,
+  onCancelClick,
   title,
   submitting = false,
   loadingInitial = false,
@@ -105,7 +107,7 @@ export default function FormDialog({
           <DialogActions sx={{ p: 0, m: 0, mt: 2 }}>
             {!readonly && (
               <FormDialogAction
-                onCancel={onClose}
+                onCancel={onCancelClick || onclose}
                 submitting={submitting}
                 cancelText={cancelText}
                 submitText={submitText}

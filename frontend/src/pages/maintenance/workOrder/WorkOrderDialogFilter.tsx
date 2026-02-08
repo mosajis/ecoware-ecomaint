@@ -1,5 +1,5 @@
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 import {
   tblComponentUnit,
   tblCompType,
@@ -20,6 +21,8 @@ import {
   TypeTblMaintType,
   TypeTblPendingType,
 } from "@/core/api/generated/api";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
 
 const RESPONSIBILITIES = [
   "Electrician",
@@ -37,12 +40,12 @@ const RESPONSIBILITIES = [
 ];
 
 const WORKORDER_STATUSES = [
-  "Planned",
-  "Issued",
-  "Pending",
-  "Completed",
-  "Controlled",
-  "Canceled",
+  "Plan",
+  "Issue",
+  "Pend",
+  "Complete",
+  "Control",
+  "Cancel",
   "Postponed",
 ];
 
@@ -52,7 +55,7 @@ const COMPONENT_STATUSES = [
   "Available",
   "Repair",
   "Scrapped",
-  "Transferred",
+  "Transfered",
 ];
 
 interface CheckboxGroupProps {
@@ -92,12 +95,6 @@ export interface WorkOrderFilter {
   AND?: any[];
 }
 
-interface WorkOrderFilterDialogProps {
-  open: boolean;
-  onClose: () => void;
-  onSubmit: (filter: WorkOrderFilter | null) => void;
-}
-
 type FiltersState = {
   number: string;
   title: string;
@@ -120,13 +117,33 @@ type FiltersState = {
   criticalComponent: boolean;
 };
 
+interface WorkOrderFilterDialogProps {
+  open: boolean;
+  onClose: () => void;
+  onSubmit: (filter: WorkOrderFilter | null) => void;
+  initialFilters?: Partial<FiltersState>; // 🔹 اضافه شد برای دریافت فیلترهای اولیه
+}
+
 export default function WorkOrderFilterDialog({
   open,
   onClose,
   onSubmit,
+  initialFilters, // 🔹 اضافه شد
 }: WorkOrderFilterDialogProps) {
-  const [filters, setFilters] = useState<FiltersState>({
-    number: "123",
+  const user = useAtomValue(atomUser);
+
+  const userDisipline =
+    // @ts-ignore
+    user?.tblEmployeeTblUsersEmployeeIdTotblEmployee?.tblDiscipline?.name;
+
+  const defaultDiscipline =
+    userDisipline && RESPONSIBILITIES.includes(userDisipline)
+      ? [userDisipline]
+      : [];
+
+  // 🔹 تابع برای ساخت مقادیر پیش‌فرض با در نظر گرفتن initialFilters
+  const getDefaultFilters = (): FiltersState => ({
+    number: "",
     title: "",
     jobCode: "",
     priority: "",
@@ -135,58 +152,50 @@ export default function WorkOrderFilterDialog({
     maintType: null,
     maintClass: null,
     pendingType: null,
-    workOrderStatuses: [],
-    componentStatuses: [],
-    responsibilities: [],
-    dueNow: false,
-    overDue: false,
+    workOrderStatuses: ["Plan", "Issue", "Pend"],
+    componentStatuses: ["None", "InUse", "Available", "Repair"],
+    responsibilities: defaultDiscipline,
+    dueNow: true,
+    overDue: true,
     dueThisWeek: false,
     dueNextWeek: false,
     dueFrom: "",
     dueTo: "",
     criticalComponent: false,
+    ...initialFilters, // 🔹 اعمال مقادیر اولیه از parent
   });
 
-  // فقط text inputs به ref احتیاج دارند
-  const textInputRefs = useRef({
-    number: "",
-    title: "",
-    jobCode: "",
-    priority: "",
-    dueFrom: "",
-    dueTo: "",
-  });
+  // 🔹 استفاده از controlled state به جای ref
+  const [filters, setFilters] = useState<FiltersState>(getDefaultFilters());
 
   const handleApply = () => {
-    // پس از apply، ref ها رو تو state sync کن
-    const textValues = textInputRefs.current;
-
     const conditions: any[] = [];
 
-    if (textValues.number) {
+    // 🔹 استفاده مستقیم از filters.number به جای textInputRefs
+    if (filters.number) {
       conditions.push({
-        woNo: { contains: textValues.number, mode: "insensitive" },
+        woNo: { contains: filters.number, mode: "insensitive" },
       });
     }
 
-    if (textValues.title) {
+    if (filters.title) {
       conditions.push({
-        title: { contains: textValues.title, mode: "insensitive" },
+        title: { contains: filters.title, mode: "insensitive" },
       });
     }
 
-    if (textValues.jobCode) {
+    if (filters.jobCode) {
       conditions.push({
         tblCompJob: {
           tblJobDescription: {
-            jobDescCode: { contains: textValues.jobCode },
+            jobDescCode: { contains: filters.jobCode },
           },
         },
       });
     }
 
-    if (textValues.priority) {
-      conditions.push({ priority: parseInt(textValues.priority) });
+    if (filters.priority) {
+      conditions.push({ priority: parseInt(filters.priority) });
     }
 
     if (filters.component) {
@@ -249,20 +258,27 @@ export default function WorkOrderFilterDialog({
       });
     }
 
+    const dueConditions: any[] = [];
+    const today = new Date(new Date().toISOString().split("T")[0]);
+
     if (filters.dueNow) {
-      const today = new Date().toISOString().split("T")[0];
-      conditions.push({
+      dueConditions.push({
         dueDate: {
-          gte: new Date(today),
-          lt: new Date(new Date(today).getTime() + 86400000),
+          gte: today,
+          lt: new Date(today.getTime() + 86400000),
         },
       });
     }
 
     if (filters.overDue) {
-      const today = new Date().toISOString().split("T")[0];
+      dueConditions.push({
+        dueDate: { lt: today },
+      });
+    }
+
+    if (dueConditions.length > 0) {
       conditions.push({
-        dueDate: { lt: new Date(today) },
+        OR: dueConditions,
       });
     }
 
@@ -292,11 +308,11 @@ export default function WorkOrderFilterDialog({
       });
     }
 
-    if (textValues.dueFrom && textValues.dueTo) {
+    if (filters.dueFrom && filters.dueTo) {
       conditions.push({
         dueDate: {
-          gte: new Date(textValues.dueFrom),
-          lte: new Date(textValues.dueTo),
+          gte: new Date(filters.dueFrom),
+          lte: new Date(filters.dueTo),
         },
       });
     }
@@ -304,7 +320,7 @@ export default function WorkOrderFilterDialog({
     if (filters.criticalComponent) {
       conditions.push({
         tblComponentUnit: {
-          critical: true,
+          isCritical: 1,
         },
       });
     }
@@ -318,36 +334,7 @@ export default function WorkOrderFilterDialog({
   };
 
   const handleClearFilter = () => {
-    setFilters({
-      number: "",
-      title: "",
-      jobCode: "",
-      priority: "",
-      component: null,
-      componentType: null,
-      maintType: null,
-      maintClass: null,
-      pendingType: null,
-      workOrderStatuses: [],
-      componentStatuses: [],
-      responsibilities: [],
-      dueNow: false,
-      overDue: false,
-      dueThisWeek: false,
-      dueNextWeek: false,
-      dueFrom: "",
-      dueTo: "",
-      criticalComponent: false,
-    });
-
-    textInputRefs.current = {
-      number: "",
-      title: "",
-      jobCode: "",
-      priority: "",
-      dueFrom: "",
-      dueTo: "",
-    };
+    setFilters(getDefaultFilters());
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -356,14 +343,9 @@ export default function WorkOrderFilterDialog({
   };
 
   const handleOnClose = () => {
-    handleClearFilter();
-    onSubmit(null);
+    // 🔹 فقط مودال رو می‌بنده، state رو نمی‌زنه
     onClose();
   };
-
-  // plan issue pend
-  // due now
-  // over due
 
   return (
     <FormDialog
@@ -374,6 +356,7 @@ export default function WorkOrderFilterDialog({
       onSubmit={handleSubmit}
       submitText="Ok"
       cancelText="Clear"
+      onCancelClick={handleClearFilter} // 🔹 دکمه Clear فیلترها رو پاک می‌کنه
     >
       <Box display="flex" gap={1.5} flexDirection="column">
         <Box>
@@ -387,38 +370,36 @@ export default function WorkOrderFilterDialog({
             gridTemplateColumns="1fr 1fr 1fr"
           >
             <Box display="flex" flexDirection="column" gap={1.5}>
+              {/* 🔹 تبدیل به controlled input */}
               <TextField
                 fullWidth
                 size="small"
                 label="Number"
                 name="number"
-                defaultValue={textInputRefs.current.number}
+                value={filters.number}
                 onChange={(e) => {
-                  textInputRefs.current.number = e.target.value;
+                  setFilters((prev) => ({ ...prev, number: e.target.value }));
                 }}
-                // InputLabelProps={{ shrink: true }}
               />
               <TextField
                 fullWidth
                 size="small"
                 label="Title"
                 name="title"
-                defaultValue={textInputRefs.current.title}
+                value={filters.title}
                 onChange={(e) => {
-                  textInputRefs.current.title = e.target.value;
+                  setFilters((prev) => ({ ...prev, title: e.target.value }));
                 }}
-                // InputLabelProps={{ shrink: true }}
               />
               <TextField
                 fullWidth
                 size="small"
                 label="Job Code"
                 name="jobCode"
-                defaultValue={textInputRefs.current.jobCode}
+                value={filters.jobCode}
                 onChange={(e) => {
-                  textInputRefs.current.jobCode = e.target.value;
+                  setFilters((prev) => ({ ...prev, jobCode: e.target.value }));
                 }}
-                // InputLabelProps={{ shrink: true }}
               />
               <TextField
                 fullWidth
@@ -426,11 +407,13 @@ export default function WorkOrderFilterDialog({
                 size="small"
                 label="Priority"
                 name="priority"
-                defaultValue={textInputRefs.current.priority}
+                value={filters.priority}
                 onChange={(e) => {
-                  textInputRefs.current.priority = e.target.value;
+                  setFilters((prev) => ({
+                    ...prev,
+                    priority: e.target.value,
+                  }));
                 }}
-                // InputLabelProps={{ shrink: true }}
               />
             </Box>
 
@@ -522,13 +505,35 @@ export default function WorkOrderFilterDialog({
                   }));
                 }}
               />
+              <FormControlLabel
+                sx={{ height: "1.7rem", mt: 1 }}
+                control={
+                  <Checkbox
+                    size="small"
+                    checked={filters.criticalComponent}
+                    onChange={() => {
+                      setFilters((prev) => ({
+                        ...prev,
+                        criticalComponent: !prev.criticalComponent,
+                      }));
+                    }}
+                  />
+                }
+                label="Critical Component"
+              />
             </Box>
           </Box>
         </Box>
 
         <Divider />
 
-        <Box sx={{ display: "flex", gap: 1.5 }}>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "1.5fr auto 1fr auto 1.2fr auto auto ",
+            gap: 1.5,
+          }}
+        >
           <CheckboxGroup
             title="Resp. Discipline"
             items={RESPONSIBILITIES}
@@ -628,47 +633,37 @@ export default function WorkOrderFilterDialog({
                 Due Between
               </Typography>
 
-              <Box display="flex" gap={1.5} alignItems="center">
-                <TextField
-                  type="date"
-                  size="small"
-                  name="dueFrom"
-                  defaultValue={textInputRefs.current.dueFrom}
-                  onChange={(e) => {
-                    textInputRefs.current.dueFrom = e.target.value;
+              <Box display="flex" gap={1.5} alignItems="center" width={400}>
+                {/* 🔹 استفاده از FieldDateTime */}
+                <FieldDateTime
+                  type="DATE"
+                  label="From"
+                  field={{
+                    value: filters.dueFrom,
+                    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                      setFilters((prev) => ({
+                        ...prev,
+                        dueFrom: e.target.value,
+                      }));
+                    },
                   }}
-                  // InputLabelProps={{ shrink: true }}
                 />
                 <Typography>-</Typography>
-                <TextField
-                  type="date"
-                  size="small"
-                  name="dueTo"
-                  defaultValue={textInputRefs.current.dueTo}
-                  onChange={(e) => {
-                    textInputRefs.current.dueTo = e.target.value;
+                <FieldDateTime
+                  type="DATE"
+                  label="To"
+                  field={{
+                    value: filters.dueTo,
+                    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                      setFilters((prev) => ({
+                        ...prev,
+                        dueTo: e.target.value,
+                      }));
+                    },
                   }}
-                  // InputLabelProps={{ shrink: true }}
                 />
               </Box>
             </Box>
-
-            <FormControlLabel
-              sx={{ height: "1.7rem", mt: 1 }}
-              control={
-                <Checkbox
-                  size="small"
-                  checked={filters.criticalComponent}
-                  onChange={() => {
-                    setFilters((prev) => ({
-                      ...prev,
-                      criticalComponent: !prev.criticalComponent,
-                    }));
-                  }}
-                />
-              }
-              label="Critical Component"
-            />
           </Box>
         </Box>
       </Box>

@@ -88,6 +88,13 @@ export const logicTblWorkOrder = {
     }),
 };
 
+export const logicTblJobTrigger = {
+  effectFireTrigger: (userId: number, jobTriggerId: number) =>
+    api.post(`/tblJobTrigger/${jobTriggerId}/generate`, {
+      data: { userId },
+    }),
+};
+
 export const logicTblComponentUnit = {
   effect: (componentUnitId: number, userId: number) =>
     api.post(`/tblComponentUnit/${componentUnitId}/effect`, {
