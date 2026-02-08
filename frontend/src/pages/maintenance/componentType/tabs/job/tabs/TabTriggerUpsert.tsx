@@ -147,7 +147,17 @@ function JobTriggerUpsert({
               onChange={field.onChange}
               disabled={isDisabled || mode === "update"}
               getOptionLabel={(row: any) => row?.descr}
-              request={tblJobTrigger.getAll}
+              request={() =>
+                tblJobTrigger.getAll({
+                  filter: {
+                    tblCompTypeJobTriggers: {
+                      none: {
+                        compTypeJobId,
+                      },
+                    },
+                  },
+                })
+              }
               columns={[
                 {
                   field: "descr",

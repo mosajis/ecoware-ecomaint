@@ -135,7 +135,17 @@ function JobCounterUpsert({
               label="Trigger *"
               value={field.value}
               onChange={field.onChange}
-              request={tblJobTrigger.getAll}
+              request={() =>
+                tblJobTrigger.getAll({
+                  filter: {
+                    tblCompJobTriggers: {
+                      none: {
+                        compJobId,
+                      },
+                    },
+                  },
+                })
+              }
               columns={[
                 {
                   field: "descr",
