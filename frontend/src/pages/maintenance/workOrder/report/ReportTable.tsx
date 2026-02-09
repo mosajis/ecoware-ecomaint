@@ -3,6 +3,7 @@ import { TypeTblWorkOrderWithRels } from "../types";
 
 const extractData = (wo: TypeTblWorkOrderWithRels) => ({
   title: wo.title,
+  // @ts-ignore
   plannedBy: wo.usersTblWorkOrderPlannedByToUsers?.uName,
   workorderId: wo.workOrderId,
   component: wo.tblComponentUnit?.compNo,
@@ -37,6 +38,14 @@ const ReportTable = ({ workorder, outputFormat }: WorkOrderReportProps) => {
 
   return (
     <table key={workorder.workOrderId} className="template-workorder-box">
+      <colgroup>
+        <col style={{ width: "14%" }} />
+        <col style={{ width: "19%" }} />
+        <col style={{ width: "14%" }} />
+        <col style={{ width: "19%" }} />
+        <col style={{ width: "14%" }} />
+        <col style={{ width: "14%" }} />
+      </colgroup>
       <tbody>
         {/* Header Section */}
         <tr>

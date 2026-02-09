@@ -24,7 +24,7 @@ const Report = forwardRef<HTMLDivElement, WorkOrderReportProps>(
         <ReportHeader
           location="not set"
           title="Work Order Reports"
-          totalLength={5}
+          totalLength={workOrders.length}
         />
       }
       Content={

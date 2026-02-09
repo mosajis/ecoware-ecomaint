@@ -811,7 +811,7 @@ model TblJobDescription {
   jobClassId                   Int?                          @map("JobClassID")
   jobDescCode                  String?                       @map("JobDescCode") @db.NVarChar(300)
   jobDescTitle                 String?                       @map("JobDescTitle") @db.NVarChar(250)
-  jobDesc                      String?                       @map("JobDesc") @db.NVarChar(300)
+  jobDesc                      String?                       @map("JobDesc") @db.NVarChar(4000)
   revision                     String?                       @map("Revision") @db.NVarChar(30)
   changeReason                 String?                       @map("ChangeReason") @db.NVarChar(255)
   status                       Int?                          @map("Status")

@@ -51,10 +51,7 @@ const ControllerTblWorkOrder = new BaseController({
           select: {
             // Primary Keys
             workOrderId: true,
-            // compJobId: true,
-            // compId: true,
-            // respDiscId: true,
-            // pendTypeId: true,
+            compId: true,
 
             // Main Fields
             title: true,
@@ -67,20 +64,12 @@ const ControllerTblWorkOrder = new BaseController({
             created: true,
             started: true,
             completed: true,
-            issuedDate: true,
-            // pendingdate: true,
 
             // Relations
             tblComponentUnit: {
               select: {
                 compId: true,
                 compNo: true,
-                // tblCompStatus: {
-                //   select: {
-                //     compStatusId: true,
-                //     compStatusName: true,
-                //   },
-                // },
                 tblLocation: {
                   select: {
                     name: true,
