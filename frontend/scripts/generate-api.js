@@ -57,7 +57,8 @@ let output = `// ⚠️ Auto-generated file. Do not edit manually.
 import { api } from '@/service/axios';
 import type { DynamicResponse, DynamicQuery, DynamicCreate, DynamicUpdate } from '../dynamicTypes';
 
-// 🔥 Utility برای stringify خودکار query
+// 🔥 Utility برای stringify خودکار query parameters
+// این تابع filter, include, select و سایر objectها را به JSON string تبدیل می‌کند
 function stringifyQuery<Q extends Record<string, any>>(query?: Q) {
   if (!query) return query;
   const result: Record<string, any> = {};
@@ -96,10 +97,12 @@ for (const [resource, ops] of Object.entries(resourcesMap)) {
   const getByIdOp = getOps.find((x) => /By[A-Z].*Id$/.test(x));
   const countOp = getOps.find((x) => /Count/i.test(x));
 
+  // getAll - supports: filter, include, select, sort, page, perPage, paginate
   if (getAllOp)
     output += `  getAll: (query?: DynamicQuery<'${getAllOp}'>) =>
     api.get<DynamicResponse<'${getAllOp}'>>('/${resource}', { params: stringifyQuery(query) }),\n`;
 
+  // getById - supports: include, select
   if (getByIdOp)
     output += `  getById: (id: number, query?: DynamicQuery<'${getByIdOp}'>) =>
     api.get<DynamicResponse<'${getByIdOp}'>>(\`/${resource}/\${id}\`, { params: stringifyQuery(query) }),\n`;
@@ -113,6 +116,7 @@ for (const [resource, ops] of Object.entries(resourcesMap)) {
     output += `  create: (data: DynamicCreate<'${postOp}'>) =>
     api.post<DynamicResponse<'${postOp}'>>('/${resource}', { data }),\n`;
 
+  // update - supports: include, select
   const putOp = ops.put?.find((x) => /By[A-Z].*Id$/.test(x)) || ops.put?.[0];
   if (putOp)
     output += `  update: (id: number, data: DynamicUpdate<'${putOp}'>, query?: DynamicQuery<'${getByIdOp}'>) =>
@@ -140,3 +144,4 @@ fs.writeFileSync(outputPath, output, "utf-8");
 console.log(
   `✅ API generated for ${Object.keys(resourcesMap).length} resources`,
 );
+console.log(`📦 Supports: filter, include, select, sort, pagination`);

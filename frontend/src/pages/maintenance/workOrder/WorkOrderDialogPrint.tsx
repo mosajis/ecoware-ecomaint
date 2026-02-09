@@ -67,7 +67,7 @@ export default function WorkOrderDialogPrint({
               <FormControlLabel
                 value="details"
                 control={<Radio size="small" />}
-                label="List with Details"
+                label="By Details"
               />
             </RadioGroup>
           </BorderedBox>

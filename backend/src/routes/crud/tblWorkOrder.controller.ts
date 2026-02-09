@@ -1,5 +1,9 @@
 import { t } from "elysia";
-import { BaseController } from "@/utils/base.controller";
+import {
+  BaseController,
+  parseSortString,
+  querySchema,
+} from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
@@ -23,6 +27,109 @@ const ControllerTblWorkOrder = new BaseController({
   updateSchema: TblWorkOrderInputUpdate,
   responseSchema: buildResponseSchema(TblWorkOrderPlain, TblWorkOrder),
   extend: (app) => {
+    app.get(
+      "/",
+      async ({ query }) => {
+        const {
+          page = 1,
+          perPage = 20,
+          sort,
+          filter,
+          paginate = false,
+        } = query;
+
+        const parsedFilter = filter ? JSON.parse(filter) : {};
+
+        const sortObj = parseSortString(sort);
+        const usePagination = !!paginate;
+
+        return await ServiceTblWorkOrder.findAll({
+          where: parsedFilter,
+          orderBy: sortObj,
+          page: usePagination ? Number(page) : 1,
+          perPage: usePagination ? Number(perPage) : Number.MAX_SAFE_INTEGER,
+          select: {
+            // Primary Keys
+            workOrderId: true,
+            // compJobId: true,
+            // compId: true,
+            // respDiscId: true,
+            // pendTypeId: true,
+
+            // Main Fields
+            title: true,
+            priority: true,
+            description: true,
+            userComment: true,
+
+            // Date Fields
+            dueDate: true,
+            created: true,
+            started: true,
+            completed: true,
+            issuedDate: true,
+            // pendingdate: true,
+
+            // Relations
+            tblComponentUnit: {
+              select: {
+                compId: true,
+                compNo: true,
+                // tblCompStatus: {
+                //   select: {
+                //     compStatusId: true,
+                //     compStatusName: true,
+                //   },
+                // },
+                tblLocation: {
+                  select: {
+                    name: true,
+                  },
+                },
+              },
+            },
+            tblCompJob: {
+              select: {
+                compJobId: true,
+                nextDueDate: true,
+                tblJobDescription: {
+                  select: {
+                    jobDescCode: true,
+                    jobDesc: true,
+                  },
+                },
+                tblPeriod: {
+                  select: {
+                    name: true,
+                  },
+                },
+              },
+            },
+            tblPendingType: {
+              select: {
+                pendTypeName: true,
+              },
+            },
+            tblDiscipline: {
+              select: {
+                name: true,
+              },
+            },
+            tblWorkOrderStatus: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        });
+      },
+      {
+        tags: ["tblWorkOrder"],
+        detail: { summary: "Get all with custom select" },
+        query: querySchema,
+        response: t.Any(),
+      },
+    );
     app.post(
       "/generate",
       async ({ body, set }) => {

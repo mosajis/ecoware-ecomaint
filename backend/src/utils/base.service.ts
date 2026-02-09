@@ -1,3 +1,4 @@
+// base.service.ts
 interface BaseServiceOptions {
   maxLimit?: number;
   softDelete?: boolean;
@@ -35,11 +36,12 @@ export class BaseService<T extends { id: any }> {
     return this.model.create({ data });
   }
 
-  // 🧱 دریافت همه با فیلتر، pagination و include امن
+  // 🧱 دریافت همه با فیلتر، pagination، include و select
   async findAll({
     where = {},
     orderBy = { createdAt: "desc" },
     include = {},
+    select = {}, // 🆕
     page = 1,
     perPage = 20,
     skip = undefined,
@@ -64,21 +66,27 @@ export class BaseService<T extends { id: any }> {
       };
     }
 
-    // Include whitelist
-    const safeInclude = Object.fromEntries(
-      Object.entries(include).filter(([key]) =>
-        this.allowedIncludes.includes(key),
-      ),
-    );
+    // 🆕 اگر select و include هر دو وجود دارند، select اولویت دارد
+    const hasSelect = Object.keys(select).length > 0;
+    const hasInclude = Object.keys(include).length > 0;
+
+    // Query options
+    const queryOptions: any = {
+      where,
+      orderBy: finalOrderBy,
+      skip: safeSkip,
+      take: take ?? safePerPage,
+    };
+
+    // 🆕 select یا include (نه هر دو)
+    if (hasSelect) {
+      queryOptions.select = select;
+    } else if (hasInclude) {
+      queryOptions.include = include;
+    }
 
     const [items, total] = await Promise.all([
-      this.model.findMany({
-        where,
-        orderBy: finalOrderBy,
-        include: include,
-        skip: safeSkip,
-        take: take ?? safePerPage,
-      }),
+      this.model.findMany(queryOptions),
       this.model.count({ where }),
     ]);
 
@@ -92,32 +100,38 @@ export class BaseService<T extends { id: any }> {
   }
 
   // 🔍 دریافت یک رکورد
-  async findOne(where: any, include: any = {}) {
+  async findOne(where: any, include: any = {}, select: any = {}) {
+    // 🆕 select اضافه شد
     if (this.softDelete) {
       where[this.softDeleteField] = null;
     }
 
-    const safeInclude = Object.fromEntries(
-      Object.entries(include).filter(([key]) =>
-        this.allowedIncludes.includes(key),
-      ),
-    );
+    const hasSelect = Object.keys(select).length > 0;
+    const hasInclude = Object.keys(include).length > 0;
 
-    return this.model.findFirst({ where, include: include });
+    const queryOptions: any = { where };
+
+    // 🆕 select یا include (نه هر دو)
+    if (hasSelect) {
+      queryOptions.select = select;
+    } else if (hasInclude) {
+      queryOptions.include = include;
+    }
+
+    return this.model.findFirst(queryOptions);
   }
 
-  async update(where: any, data: any, include: any = {}) {
-    // Safe include
-    // const safeInclude = Object.fromEntries(
-    //   Object.entries(include).filter(([key]) =>
-    //     this.allowedIncludes.includes(key),
-    //   ),
-    // );
-
+  // 🔄 به‌روزرسانی
+  async update(where: any, data: any, include: any = {}, select: any = {}) {
+    // 🆕 select اضافه شد
     await this.model.update({ where, data });
 
-    if (Object.keys(include).length > 0) {
-      return this.findOne(where, include);
+    const hasSelect = Object.keys(select).length > 0;
+    const hasInclude = Object.keys(include).length > 0;
+
+    // 🆕 بازگشت رکورد به‌روزرسانی شده با select یا include
+    if (hasSelect || hasInclude) {
+      return this.findOne(where, include, select);
     }
 
     return this.model.findFirst({ where });

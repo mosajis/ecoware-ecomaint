@@ -4362,6 +4362,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -4643,6 +4644,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -4669,6 +4671,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -4760,6 +4763,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -5066,6 +5070,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -5096,6 +5101,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -5267,6 +5273,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -5293,6 +5300,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -5408,6 +5416,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -5742,6 +5751,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -5784,6 +5794,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -5968,6 +5979,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -5994,6 +6006,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -6059,6 +6072,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -6250,6 +6264,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -6280,6 +6295,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -6725,6 +6741,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -6751,6 +6768,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -7380,6 +7398,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -7410,6 +7429,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -7658,6 +7678,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -7684,6 +7705,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -7769,6 +7791,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -8021,6 +8044,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -8051,6 +8075,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -8826,6 +8851,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -8852,6 +8878,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -9109,6 +9136,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -9942,6 +9970,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -9972,6 +10001,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -10306,6 +10336,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -10332,6 +10363,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -10454,6 +10486,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -10795,6 +10828,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -10825,6 +10859,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -11078,6 +11113,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -11104,6 +11140,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -11196,6 +11233,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -11453,6 +11491,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -11483,6 +11522,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -11695,6 +11735,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -11721,6 +11762,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -11800,6 +11842,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -12016,6 +12059,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -12046,6 +12090,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -12456,6 +12501,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -12482,6 +12528,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -13057,6 +13104,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -13087,6 +13135,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -13350,6 +13399,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -13376,6 +13426,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -13467,6 +13518,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -13737,6 +13789,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -13767,6 +13820,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -13881,6 +13935,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -13907,6 +13962,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -13946,6 +14002,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -14058,6 +14115,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -14088,6 +14146,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -14196,6 +14255,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -14222,6 +14282,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -14258,6 +14319,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -14364,6 +14426,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -14394,6 +14457,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -14545,6 +14609,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -14571,6 +14636,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -14624,6 +14690,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -14782,6 +14849,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -14812,6 +14880,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -14981,6 +15050,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -15007,6 +15077,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -15069,6 +15140,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -15239,6 +15311,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -15269,6 +15342,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -15764,6 +15838,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -15790,6 +15865,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -15958,6 +16034,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -16511,6 +16588,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -16541,6 +16619,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -16772,6 +16851,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -16798,6 +16878,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -16882,6 +16963,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -17111,6 +17193,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -17168,6 +17251,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -17397,6 +17481,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -17423,6 +17508,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -17500,6 +17586,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -17742,6 +17829,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -17799,6 +17887,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -18438,6 +18527,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -18464,6 +18554,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -18668,6 +18759,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -19356,6 +19448,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -19413,6 +19506,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -19706,6 +19800,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -19732,6 +19827,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -19838,6 +19934,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -20138,6 +20235,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -20195,6 +20293,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -20432,6 +20531,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -20458,6 +20558,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -20542,6 +20643,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -20783,6 +20885,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -20840,6 +20943,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -21107,6 +21211,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -21133,6 +21238,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -21232,6 +21338,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -21506,6 +21613,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -21563,6 +21671,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -21840,6 +21949,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -21866,6 +21976,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -21958,6 +22069,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -22251,6 +22363,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -22308,6 +22421,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -23276,6 +23390,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -23302,6 +23417,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -23648,6 +23764,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -24719,6 +24836,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -24773,6 +24891,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -25018,6 +25137,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -25044,6 +25164,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -25135,6 +25256,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -25378,6 +25500,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -25408,6 +25531,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -25731,6 +25855,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -25757,6 +25882,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -25863,6 +25989,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -26229,6 +26356,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -26259,6 +26387,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -26388,6 +26517,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -26414,6 +26544,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -26453,6 +26584,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -26580,6 +26712,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -26610,6 +26743,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -27123,6 +27257,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -27149,6 +27284,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -27344,6 +27480,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -27909,6 +28046,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -27939,6 +28077,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -28317,6 +28456,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -28343,6 +28483,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -28472,6 +28613,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -28875,6 +29017,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -28905,6 +29048,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -29048,6 +29192,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -29074,6 +29219,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -29129,6 +29275,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -29279,6 +29426,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -29309,6 +29457,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -29568,6 +29717,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -29594,6 +29744,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -29692,6 +29843,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -29949,6 +30101,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -29979,6 +30132,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -30621,6 +30775,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -30647,6 +30802,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -30863,6 +31019,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -31539,6 +31696,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -31569,6 +31727,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -31712,6 +31871,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -31738,6 +31898,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -31793,6 +31954,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -31943,6 +32105,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -31973,6 +32136,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -32116,6 +32280,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -32142,6 +32307,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -32197,6 +32363,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -32347,6 +32514,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -32377,6 +32545,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -32603,6 +32772,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -32629,6 +32799,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -32709,6 +32880,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -32951,6 +33123,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -32981,6 +33154,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -33349,6 +33523,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -33375,6 +33550,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -33505,6 +33681,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -33904,6 +34081,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -33934,6 +34112,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -34095,6 +34274,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -34121,6 +34301,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -34179,6 +34360,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -34347,6 +34529,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -34377,6 +34560,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -34830,6 +35014,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -34856,6 +35041,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -35018,6 +35204,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -35508,6 +35695,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -35538,6 +35726,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -35785,6 +35974,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -35811,6 +36001,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -35903,6 +36094,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -36148,6 +36340,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -36178,6 +36371,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -36335,6 +36529,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -36361,6 +36556,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -36411,6 +36607,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -36584,6 +36781,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -36652,6 +36850,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -36747,6 +36946,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -36773,6 +36973,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -36807,6 +37008,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -36900,6 +37102,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -36930,6 +37133,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -37048,6 +37252,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -37074,6 +37279,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -37112,6 +37318,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -37228,6 +37435,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -37258,6 +37466,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -37485,6 +37694,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -37511,6 +37721,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -37587,6 +37798,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -37833,6 +38045,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -37863,6 +38076,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -38149,6 +38363,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -38175,6 +38390,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -38279,6 +38495,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -38572,6 +38789,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -38602,6 +38820,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -38933,6 +39152,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -38959,6 +39179,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -39081,6 +39302,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -39422,6 +39644,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -39452,6 +39675,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -39628,6 +39852,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -39654,6 +39879,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -39715,6 +39941,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -39892,6 +40119,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -39922,6 +40150,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -40337,6 +40566,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -40363,6 +40593,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -40527,6 +40758,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -40976,6 +41208,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -41006,6 +41239,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -41421,6 +41655,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -41447,6 +41682,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -41611,6 +41847,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -42060,6 +42297,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -42090,6 +42328,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -43089,6 +43328,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -43115,6 +43355,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -43457,6 +43698,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -44541,6 +44783,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -44571,6 +44814,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -44832,6 +45076,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -44858,6 +45103,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -44957,6 +45203,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -45216,6 +45463,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -45246,6 +45494,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -45643,6 +45892,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -45669,6 +45919,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -45818,6 +46069,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -46216,6 +46468,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -46246,6 +46499,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -46454,6 +46708,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -46480,6 +46735,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -46554,6 +46810,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -46760,6 +47017,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -46790,6 +47048,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -46841,6 +47100,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -47256,6 +47516,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -47282,6 +47543,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -47446,6 +47708,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -47895,6 +48158,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -47925,6 +48189,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -48144,6 +48409,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -48170,6 +48436,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -48230,6 +48497,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -48447,6 +48715,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -48477,6 +48746,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -48583,6 +48853,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -48609,6 +48880,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -48644,6 +48916,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -48748,6 +49021,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -48778,6 +49052,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -48971,6 +49246,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -48997,6 +49273,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -49071,6 +49348,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -49271,6 +49549,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -49301,6 +49580,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -49606,6 +49886,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -49632,6 +49913,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -49753,6 +50035,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -50083,6 +50366,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -50113,6 +50397,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -50384,6 +50669,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -50410,6 +50696,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -50511,6 +50798,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -50786,6 +51074,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -50816,6 +51105,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -51155,6 +51445,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -51181,6 +51472,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -51304,6 +51596,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -51653,6 +51946,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -51683,6 +51977,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -51955,6 +52250,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -51981,6 +52277,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -52072,6 +52369,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -52351,6 +52649,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -52381,6 +52680,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -52556,6 +52856,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -52582,6 +52883,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -52644,6 +52946,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -52820,6 +53123,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -52850,6 +53154,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -53121,6 +53426,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -53147,6 +53453,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -53233,6 +53540,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -53526,6 +53834,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -53556,6 +53865,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -53718,6 +54028,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -53744,6 +54055,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -53801,6 +54113,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -53973,6 +54286,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -54003,6 +54317,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -54279,6 +54594,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -54305,6 +54621,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -54395,6 +54712,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -54705,6 +55023,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -54735,6 +55054,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -56781,6 +57101,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -56807,6 +57128,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -57530,6 +57852,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -59892,6 +60215,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -59922,6 +60246,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -61176,6 +61501,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -61202,6 +61528,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -61652,6 +61979,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -62982,6 +63310,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -63058,6 +63387,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -63223,6 +63553,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -63249,6 +63580,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -63315,6 +63647,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -63487,6 +63820,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -63517,6 +63851,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -63589,6 +63924,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -63615,6 +63951,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -63642,6 +63979,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -63712,6 +64050,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -63742,6 +64081,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -63849,6 +64189,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -63875,6 +64216,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -63912,6 +64254,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -64017,6 +64360,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -64047,6 +64391,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -64202,6 +64547,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -64228,6 +64574,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -64277,6 +64624,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -64430,6 +64778,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -64460,6 +64809,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -64684,6 +65034,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -64710,6 +65061,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -64774,6 +65126,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -65005,6 +65358,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -65035,6 +65389,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -65304,6 +65659,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };
@@ -65330,6 +65686,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -65433,6 +65790,7 @@ export interface operations {
         parameters: {
             query?: {
                 include?: string;
+                select?: string;
             };
             header?: never;
             path: {
@@ -65700,6 +66058,7 @@ export interface operations {
                 sort?: string;
                 filter?: string;
                 include?: string;
+                select?: string;
                 paginate?: boolean;
                 force?: boolean;
             };

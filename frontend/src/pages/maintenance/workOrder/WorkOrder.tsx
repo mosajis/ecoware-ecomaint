@@ -43,28 +43,6 @@ export default function WorkOrderPage() {
     () =>
       tblWorkOrder.getAll({
         filter: filter ?? undefined,
-        include: {
-          tblComponentUnit: {
-            include: {
-              tblCompStatus: true,
-              tblLocation: {
-                select: {
-                  locationId: true,
-                  name: true,
-                },
-              },
-            },
-          },
-          tblCompJob: {
-            include: {
-              tblJobDescription: true,
-              tblPeriod: true,
-            },
-          },
-          tblPendingType: true,
-          tblDiscipline: true,
-          tblWorkOrderStatus: true,
-        },
       }),
     [filter],
   );
@@ -342,8 +320,8 @@ export default function WorkOrderPage() {
 
   const successReschedule = (record: TypeTblWorkOrder) => {
     optimisticUpdate(record.workOrderId, {
-      tblWorkOrderStatus: record.tblWorkOrderStatus,
       dueDate: record.dueDate,
+      window: record.window,
     });
   };
 
@@ -492,7 +470,7 @@ export default function WorkOrderPage() {
         workOrder={selectedWorkOrders[0]}
         open={dialogReschedule}
         onClose={closeDialogReschedule}
-        onSuccess={successReschedule}
+        onSuccess={() => {}}
       />
     </>
   );

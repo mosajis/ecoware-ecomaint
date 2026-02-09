@@ -1,3 +1,4 @@
+// base.controller.ts
 import { Elysia, t } from "elysia";
 import { BaseService } from "./base.service";
 
@@ -7,11 +8,12 @@ export const querySchema = t.Object({
   sort: t.Optional(t.String()),
   filter: t.Optional(t.String()),
   include: t.Optional(t.String()),
+  select: t.Optional(t.String()), // 🆕 اضافه شد
   paginate: t.Optional(t.Boolean()),
   force: t.Optional(t.Boolean()),
 });
 
-function parseSortString(sort?: string): Record<string, "asc" | "desc"> {
+export function parseSortString(sort?: string): Record<string, "asc" | "desc"> {
   if (!sort) return {};
   return sort.split(",").reduce(
     (acc, pair) => {
@@ -57,7 +59,7 @@ export class BaseController<Model extends Record<string, any>> {
     swagger,
     extend,
     excludeRoutes = [],
-    primaryKey = "id", // 🆕 مقدار پیش‌فرض id
+    primaryKey = "id",
   }: BaseControllerOptions<Model>) {
     const { tags } = swagger;
     const app = new Elysia({ prefix });
@@ -75,11 +77,13 @@ export class BaseController<Model extends Record<string, any>> {
             sort,
             filter,
             include,
+            select, // 🆕
             paginate = false,
           } = query;
 
           let parsedFilter: Record<string, any> = {};
           let parsedInclude: Record<string, any> = {};
+          let parsedSelect: Record<string, any> = {}; // 🆕
 
           if (filter) {
             try {
@@ -97,6 +101,15 @@ export class BaseController<Model extends Record<string, any>> {
             }
           }
 
+          // 🆕 پارس select
+          if (select) {
+            try {
+              parsedSelect = JSON.parse(select);
+            } catch {
+              throw new Error("Invalid select JSON");
+            }
+          }
+
           const sortObj = parseSortString(sort);
           const usePagination = !!paginate;
 
@@ -104,6 +117,7 @@ export class BaseController<Model extends Record<string, any>> {
             where: parsedFilter,
             orderBy: sortObj,
             include: parsedInclude,
+            select: parsedSelect, // 🆕
             page: usePagination ? Number(page) : 1,
             perPage: usePagination ? Number(perPage) : Number.MAX_SAFE_INTEGER,
           });
@@ -111,7 +125,7 @@ export class BaseController<Model extends Record<string, any>> {
         {
           tags,
           detail: { summary: "Get all" },
-          query: t.Any(),
+          query: querySchema,
           response: t.Object({
             items: t.Array(responseSchema),
             total: t.Integer(),
@@ -129,6 +143,8 @@ export class BaseController<Model extends Record<string, any>> {
         `/:${primaryKey}`,
         async ({ params, query }) => {
           let parsedInclude: Record<string, any> = {};
+          let parsedSelect: Record<string, any> = {}; // 🆕
+
           if (query.include) {
             try {
               parsedInclude = JSON.parse(query.include);
@@ -136,6 +152,16 @@ export class BaseController<Model extends Record<string, any>> {
               throw new Error("Invalid include JSON");
             }
           }
+
+          // 🆕 پارس select
+          if (query.select) {
+            try {
+              parsedSelect = JSON.parse(query.select);
+            } catch {
+              throw new Error("Invalid select JSON");
+            }
+          }
+
           const keyValue = params[primaryKey];
           return await service.findOne(
             {
@@ -144,6 +170,7 @@ export class BaseController<Model extends Record<string, any>> {
                 : Number(keyValue),
             },
             parsedInclude,
+            parsedSelect, // 🆕
           );
         },
         {
@@ -152,6 +179,7 @@ export class BaseController<Model extends Record<string, any>> {
           params: t.Object({ [primaryKey]: t.Union([t.String(), t.Number()]) }),
           query: t.Object({
             include: t.Optional(t.String()),
+            select: t.Optional(t.String()), // 🆕
           }),
           response: responseSchema,
         },
@@ -180,11 +208,22 @@ export class BaseController<Model extends Record<string, any>> {
         `/:${primaryKey}`,
         async ({ params, body, query }) => {
           let parsedInclude: Record<string, any> = {};
+          let parsedSelect: Record<string, any> = {}; // 🆕
+
           if (query.include) {
             try {
               parsedInclude = JSON.parse(query.include);
             } catch {
               throw new Error("Invalid include JSON");
+            }
+          }
+
+          // 🆕 پارس select
+          if (query.select) {
+            try {
+              parsedSelect = JSON.parse(query.select);
+            } catch {
+              throw new Error("Invalid select JSON");
             }
           }
 
@@ -197,6 +236,7 @@ export class BaseController<Model extends Record<string, any>> {
             },
             body,
             parsedInclude,
+            parsedSelect, // 🆕
           );
         },
         {
@@ -206,7 +246,8 @@ export class BaseController<Model extends Record<string, any>> {
           params: t.Object({ [primaryKey]: t.Union([t.String(), t.Number()]) }),
           body: updateSchema,
           query: t.Object({
-            include: t.Optional(t.String()), // 🆕 اضافه کردن query param
+            include: t.Optional(t.String()),
+            select: t.Optional(t.String()), // 🆕
           }),
           response: responseSchema,
         },

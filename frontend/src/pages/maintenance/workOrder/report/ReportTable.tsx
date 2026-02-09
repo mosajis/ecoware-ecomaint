@@ -4,12 +4,14 @@ import { TypeTblWorkOrderWithRels } from "../types";
 const extractData = (wo: TypeTblWorkOrderWithRels) => ({
   title: wo.title,
   plannedBy: wo.usersTblWorkOrderPlannedByToUsers?.uName,
+  workorderId: wo.workOrderId,
   component: wo.tblComponentUnit?.compNo,
   dueDate: wo.dueDate,
   location: wo.tblComponentUnit?.tblLocation?.name,
   lastDone: wo.completed,
   discipline: wo.tblDiscipline?.name,
   frequency: wo.tblCompJob?.frequency,
+  window: wo.window,
   frequencyPeriod: wo.tblCompJob?.tblPeriod?.name,
   priority: wo.priority,
   overDue: calculateOverdue(wo),
@@ -38,13 +40,18 @@ const ReportTable = ({ workorder, outputFormat }: WorkOrderReportProps) => {
       <tbody>
         {/* Header Section */}
         <tr>
-          <td style={{ backgroundColor: "#fff8b6ff" }}>Title</td>
+          <td style={{ backgroundColor: "#fff8b6ff", fontWeight: "bold" }}>
+            Title
+          </td>
           <td colSpan={3} style={{ backgroundColor: "#fff8b6ff" }}>
             {val(data.title)}
           </td>
-          <td style={{ backgroundColor: "#fff8b6ff" }}>PlannedBy</td>
+
+          <td style={{ backgroundColor: "#fff8b6ff", fontWeight: "bold" }}>
+            WO.NO
+          </td>
           <td style={{ backgroundColor: "#fff8b6ff" }}>
-            {val(data.plannedBy)}
+            WO-{val(data.workorderId)}
           </td>
         </tr>
 
@@ -79,8 +86,8 @@ const ReportTable = ({ workorder, outputFormat }: WorkOrderReportProps) => {
           >
             {data.overDue}
           </td>
-          <td className="label">WO No</td>
-          <td>{val(data.woNo)}</td>
+          <td className="label">Window</td>
+          <td>{val(data.window)}</td>
         </tr>
         <tr>
           <td className="label">Job Code</td>
@@ -96,7 +103,8 @@ const ReportTable = ({ workorder, outputFormat }: WorkOrderReportProps) => {
           <>
             <tr>
               <td className="label">Job Description</td>
-              <td colSpan={5}>{val(data.jobDesc)}</td>
+              {/*  set work break */}
+              <td colSpan={5}>{data.jobDesc}</td>
             </tr>
             <tr>
               <td className="label">Pend Type</td>

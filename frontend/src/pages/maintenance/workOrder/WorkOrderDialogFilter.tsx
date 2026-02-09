@@ -28,15 +28,9 @@ const RESPONSIBILITIES = [
   "Electrician",
   "Mechanic",
   "Toolpusher",
-  "BargeMaster",
+  "MudEngineer",
   "HSE Officer",
-  "ENG",
-  "Technical Inspection",
   "PM",
-  "IT",
-  "Instruction",
-  "Doctor",
-  "ENG-KISH",
 ];
 
 const WORKORDER_STATUSES = [

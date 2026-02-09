@@ -7,21 +7,21 @@ import { calculateOverdue } from "@/core/helper";
 
 export const columns: GridColDef<TypeTblWorkOrderWithRels>[] = [
   {
+    field: "workOrderId",
+    headerName: "WO.NO",
+    width: 90,
+    valueFormatter: (value) => "WO-" + value,
+  },
+  {
     field: "jobCode",
     headerName: "Job Code",
     width: 90,
     valueGetter: (_, row) => row?.tblCompJob?.tblJobDescription?.jobDescCode,
   },
   {
-    field: "workOrderId",
-    headerName: "Number",
-    width: 90,
-    valueFormatter: (value) => "wo-" + value,
-  },
-  {
     field: "component",
     headerName: "Component",
-    flex: 2,
+    flex: 1,
     valueGetter: (_, row) => row.tblComponentUnit?.compNo,
   },
   {
@@ -33,7 +33,7 @@ export const columns: GridColDef<TypeTblWorkOrderWithRels>[] = [
   {
     field: "jobDescTitle",
     headerName: "Job Desc",
-    flex: 2,
+    flex: 1,
     valueGetter: (_, row) => row?.tblCompJob?.tblJobDescription?.jobDescTitle,
   },
   {
@@ -52,14 +52,14 @@ export const columns: GridColDef<TypeTblWorkOrderWithRels>[] = [
   {
     field: "dueDate",
     headerName: "Due Date",
-    width: 130,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
+    width: 95,
+    renderCell: ({ value }) => <CellDateTime value={value} type="DATE" />,
   },
   {
     field: "completed",
-    headerName: "Completed Date",
-    width: 130,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
+    headerName: "Completed",
+    width: 95,
+    renderCell: ({ value }) => <CellDateTime value={value} type="DATE" />,
   },
   {
     field: "overDue",
@@ -71,6 +71,7 @@ export const columns: GridColDef<TypeTblWorkOrderWithRels>[] = [
   {
     field: "pendingType",
     headerName: "Pending Type",
+    width: 120,
     valueGetter: (_, row) => row?.tblPendingType?.pendTypeName,
   },
   {

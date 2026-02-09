@@ -9,11 +9,11 @@ export const ReportHeader = ({ title, location, totalLength }: HeaderProps) => {
     <div className="report-workorder-header">
       <h1>Ecoware (Preventive Maintenance System)</h1>
       <div>
-        <strong>Location:</strong> {location}
+        <strong>GPTK - RIG: {location}</strong>
       </div>
       <h3>{title}</h3>
       <div>
-        <strong>Total: </strong> {JSON.stringify(totalLength)}
+        <strong>Total:</strong> {totalLength}
       </div>
     </div>
   );

@@ -61,18 +61,16 @@ export default function WorkOrderDialogReschedule({
   const user = useAtomValue(atomUser);
   const userId = user?.userId as number;
 
-  // // Set current values when workOrder changes
-  // useEffect(() => {
-  //   if (workOrder) {
-  //     setValue("currentDueDate", workOrder.dueDate ? workOrder.dueDate : null);
-  //     setValue(
-  //       "currentDueCount",
-  //       workOrder.tblCompJob?.
-  //         ? new Date().getTime()
-  //         : null,
-  //     );
-  //   }
-  // }, [workOrder, setValue]);
+  // Set current values when workOrder changes
+  useEffect(() => {
+    if (workOrder) {
+      setValue("currentDueDate", workOrder.dueDate ? workOrder.dueDate : null);
+      // setValue(
+      //   "currentDueCount",
+      //   workOrder.tblCompJob?.tbl
+      // );
+    }
+  }, [workOrder, setValue]);
 
   const onSubmit = async (data: formValues) => {
     if (!workOrder) return;

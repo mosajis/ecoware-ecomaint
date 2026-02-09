@@ -2,7 +2,8 @@
 import { api } from '@/service/axios';
 import type { DynamicResponse, DynamicQuery, DynamicCreate, DynamicUpdate } from '../dynamicTypes';
 
-// 🔥 Utility برای stringify خودکار query
+// 🔥 Utility برای stringify خودکار query parameters
+// این تابع filter, include, select و سایر objectها را به JSON string تبدیل می‌کند
 function stringifyQuery<Q extends Record<string, any>>(query?: Q) {
   if (!query) return query;
   const result: Record<string, any> = {};
@@ -437,6 +438,11 @@ export const tblCompTypeJobTrigger = {
     api.delete<DynamicResponse<'deleteTblCompTypeJobTrigger'>>('/tblCompTypeJobTrigger', { params: stringifyQuery(query) }),
 };
 
+export const tblCompTypeJobTriggerByCompTypeJobTriggerIdEffect = {
+  create: (data: DynamicCreate<'postTblCompTypeJobTriggerByCompTypeJobTriggerIdEffect'>) =>
+    api.post<DynamicResponse<'postTblCompTypeJobTriggerByCompTypeJobTriggerIdEffect'>>('/tblCompTypeJobTriggerByCompTypeJobTriggerIdEffect', { data }),
+};
+
 export type TypeTblCompTypeMeasurePoint = DynamicResponse<'getTblCompTypeMeasurePoint'>['items'][0];
 export const tblCompTypeMeasurePoint = {
   getAll: (query?: DynamicQuery<'getTblCompTypeMeasurePoint'>) =>
@@ -769,6 +775,11 @@ export const tblJobTrigger = {
     api.delete<DynamicResponse<'deleteTblJobTriggerByJobTriggerId'>>(`/tblJobTrigger/${id}`, { params: stringifyQuery(query) }),
   deleteAll: (query?: DynamicQuery<'deleteTblJobTrigger'>) =>
     api.delete<DynamicResponse<'deleteTblJobTrigger'>>('/tblJobTrigger', { params: stringifyQuery(query) }),
+};
+
+export const tblJobTriggerByJobTriggerIdGenerate = {
+  create: (data: DynamicCreate<'postTblJobTriggerByJobTriggerIdGenerate'>) =>
+    api.post<DynamicResponse<'postTblJobTriggerByJobTriggerIdGenerate'>>('/tblJobTriggerByJobTriggerIdGenerate', { data }),
 };
 
 export type TypeTblJobTriggerLog = DynamicResponse<'getTblJobTriggerLog'>['items'][0];
