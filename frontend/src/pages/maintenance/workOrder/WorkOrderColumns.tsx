@@ -13,6 +13,12 @@ export const columns: GridColDef<TypeTblWorkOrderWithRels>[] = [
     valueGetter: (_, row) => row?.tblCompJob?.tblJobDescription?.jobDescCode,
   },
   {
+    field: "workOrderId",
+    headerName: "Number",
+    width: 90,
+    valueFormatter: (value) => "wo-" + value,
+  },
+  {
     field: "component",
     headerName: "Component",
     flex: 2,

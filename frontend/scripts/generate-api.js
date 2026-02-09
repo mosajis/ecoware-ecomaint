@@ -115,8 +115,8 @@ for (const [resource, ops] of Object.entries(resourcesMap)) {
 
   const putOp = ops.put?.find((x) => /By[A-Z].*Id$/.test(x)) || ops.put?.[0];
   if (putOp)
-    output += `  update: (id: number, data: DynamicUpdate<'${putOp}'>) =>
-    api.put<DynamicResponse<'${putOp}'>>(\`/${resource}/\${id}\`, { data }),\n`;
+    output += `  update: (id: number, data: DynamicUpdate<'${putOp}'>, query?: DynamicQuery<'${getByIdOp}'>) =>
+    api.put<DynamicResponse<'${putOp}'>>(\`/${resource}/\${id}\`, { data, params: stringifyQuery(query) }),\n`;
 
   const delOps = ops.delete || [];
   const delById = delOps.find((x) => /By[A-Z].*Id$/.test(x));

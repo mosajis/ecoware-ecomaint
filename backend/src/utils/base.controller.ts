@@ -111,7 +111,7 @@ export class BaseController<Model extends Record<string, any>> {
         {
           tags,
           detail: { summary: "Get all" },
-          query: querySchema,
+          query: t.Any(),
           response: t.Object({
             items: t.Array(responseSchema),
             total: t.Integer(),
@@ -178,7 +178,16 @@ export class BaseController<Model extends Record<string, any>> {
     if (isEnabled("update")) {
       app.put(
         `/:${primaryKey}`,
-        async ({ params, body }) => {
+        async ({ params, body, query }) => {
+          let parsedInclude: Record<string, any> = {};
+          if (query.include) {
+            try {
+              parsedInclude = JSON.parse(query.include);
+            } catch {
+              throw new Error("Invalid include JSON");
+            }
+          }
+
           const keyValue = params[primaryKey];
           return await service.update(
             {
@@ -187,6 +196,7 @@ export class BaseController<Model extends Record<string, any>> {
                 : Number(keyValue),
             },
             body,
+            parsedInclude,
           );
         },
         {
@@ -195,6 +205,9 @@ export class BaseController<Model extends Record<string, any>> {
           validate: false,
           params: t.Object({ [primaryKey]: t.Union([t.String(), t.Number()]) }),
           body: updateSchema,
+          query: t.Object({
+            include: t.Optional(t.String()), // 🆕 اضافه کردن query param
+          }),
           response: responseSchema,
         },
       );

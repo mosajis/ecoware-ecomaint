@@ -3,11 +3,11 @@ import ReportWorkStep from "../../ReportWorkStep";
 import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 import NumberField from "@/shared/components/fields/FieldNumber";
 import Box from "@mui/material/Box";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAtom } from "jotai";
 import { buildRelation } from "@/core/helper";
-import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { schema, TypeValues } from "./stepGeneralSchema";
 import {
   tblMaintType,
@@ -21,9 +21,7 @@ const TabGeneral = () => {
   const [initalData, setInitalData] = useAtom(atomInitalData);
 
   const defaultValues: TypeValues = {
-    dateDone:
-      new Date(initalData.maintLog?.dateDone || "").toString() ||
-      new Date().toISOString(),
+    dateDone: initalData.maintLog?.dateDone || null,
     totalDuration: initalData.maintLog?.totalDuration || null,
     waitingMin: initalData.maintLog?.downTime || null,
     unexpected: initalData.maintLog?.unexpected === 1 || false,
@@ -50,7 +48,7 @@ const TabGeneral = () => {
     const payload = {
       totalDuration: values.totalDuration ?? 0,
       downTime: values.waitingMin ?? 0,
-      dateDone: values.dateDone ? new Date(values.dateDone).getTime() : null,
+      dateDone: values.dateDone,
       unexpected: values.unexpected ? 1 : 0,
       history: values.history || "",
 
@@ -105,18 +103,26 @@ const TabGeneral = () => {
         <Controller
           name="dateDone"
           control={control}
-          render={({ field }) => (
-            <DateField type="DATETIME" label="Date Done" field={field} />
+          render={({ field, fieldState }) => (
+            <FieldDateTime
+              type="DATETIME"
+              label="Date Done"
+              field={field}
+              error={!!fieldState.error?.message}
+              helperText={fieldState.error?.message}
+            />
           )}
         />
         <Controller
           name="totalDuration"
           control={control}
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <NumberField
               label="Total Duration (min)"
               field={field}
               disabled={isDisabled}
+              error={!!fieldState.error?.message}
+              helperText={fieldState.error?.message}
             />
           )}
         />

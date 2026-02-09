@@ -1212,18 +1212,19 @@ model TblPeriod {
 }
 
 model TblReScheduleLog {
-  rescheduleLogId Int       @id(map: "PK_tblRescheduleLog") @default(dbgenerated("NEXT VALUE FOR [Seq_ReScheduleLog]"), map: "DF_RescheduleLogID") @map("RescheduleLogID")
-  workOrderId     Int?      @map("WorkOrderID")
-  fromDueDate     DateTime? @map("FromDueDate") @db.DateTime
-  toDueDate       DateTime? @map("ToDueDate") @db.DateTime
-  rescheduledBy   Int?      @map("RescheduledBy")
-  rescheduledDate DateTime? @map("RescheduledDate") @db.DateTime
-  reason          String?   @map("Reason") @db.NVarChar(300)
-  deptId          Int?      @map("DeptID")
-  exportMarker    Int?      @map("ExportMarker")
-  lastupdate      DateTime? @db.DateTime
-  orderNo         Int?      @map("OrderNo")
-  tblUsers        TblUsers? @relation(fields: [rescheduledBy], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblReScheduleLog_tblUsers")
+  rescheduleLogId Int           @id(map: "PK_tblRescheduleLog") @default(dbgenerated("NEXT VALUE FOR [Seq_ReScheduleLog]"), map: "DF_RescheduleLogID") @map("RescheduleLogID")
+  workOrderId     Int?          @map("WorkOrderID")
+  fromDueDate     DateTime?     @map("FromDueDate") @db.DateTime
+  toDueDate       DateTime?     @map("ToDueDate") @db.DateTime
+  rescheduledBy   Int?          @map("RescheduledBy")
+  rescheduledDate DateTime?     @map("RescheduledDate") @db.DateTime
+  reason          String?       @map("Reason") @db.NVarChar(300)
+  deptId          Int?          @map("DeptID")
+  exportMarker    Int?          @map("ExportMarker")
+  lastupdate      DateTime?     @db.DateTime
+  orderNo         Int?          @map("OrderNo")
+  tblUsers        TblUsers?     @relation(fields: [rescheduledBy], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblReScheduleLog_tblUsers")
+  tblWorkOrder    TblWorkOrder? @relation(fields: [workOrderId], references: [workOrderId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblReScheduleLog_tblWorkOrder")
 
   @@map("tblReScheduleLog")
 }
@@ -1454,6 +1455,7 @@ model TblWorkOrder {
   workOrderTypeId                         Int?                @map("WorkOrderTypeId")
   tblMaintLogs                            TblMaintLog[]
   tblMaintLogFollows                      TblMaintLogFollow[]
+  tblReScheduleLogs                       TblReScheduleLog[]
   tblCompJob                              TblCompJob?         @relation(fields: [compJobId], references: [compJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblCompJob")
   tblComponentUnit                        TblComponentUnit?   @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblComponentUnit")
   tblDiscipline                           TblDiscipline?      @relation(fields: [respDiscId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblDiscipline")

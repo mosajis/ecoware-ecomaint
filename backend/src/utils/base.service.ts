@@ -106,9 +106,21 @@ export class BaseService<T extends { id: any }> {
     return this.model.findFirst({ where, include: include });
   }
 
-  // ✏️ بروزرسانی
-  async update(where: any, data: any) {
-    return this.model.update({ where, data });
+  async update(where: any, data: any, include: any = {}) {
+    // Safe include
+    // const safeInclude = Object.fromEntries(
+    //   Object.entries(include).filter(([key]) =>
+    //     this.allowedIncludes.includes(key),
+    //   ),
+    // );
+
+    await this.model.update({ where, data });
+
+    if (Object.keys(include).length > 0) {
+      return this.findOne(where, include);
+    }
+
+    return this.model.findFirst({ where });
   }
 
   // ❌ حذف (soft یا hard)

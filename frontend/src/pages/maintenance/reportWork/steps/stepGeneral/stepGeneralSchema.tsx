@@ -4,7 +4,7 @@ export const selectSchema = <T extends z.ZodRawShape>(shape: T) =>
   z.object(shape).nullable();
 
 export const schema = z.object({
-  dateDone: z.string(),
+  dateDone: z.string().nullable(),
   totalDuration: z.number().nullable(),
   waitingMin: z.number().nullable(),
   unexpected: z.boolean(),
@@ -25,4 +25,4 @@ export const schema = z.object({
   }),
 });
 
-export type TypeValues = z.infer<typeof schema>;
+export type TypeValues = z.input<typeof schema>;

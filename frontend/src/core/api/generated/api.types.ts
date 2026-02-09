@@ -1118,7 +1118,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Apply Change Effect */
+        /** Apply Job Change Effect */
         post: operations["postTblCompTypeJobByCompTypeJobIdEffect"];
         delete?: never;
         options?: never;
@@ -1319,6 +1319,23 @@ export interface paths {
         get: operations["getTblCompTypeJobTriggerCount"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblCompTypeJobTrigger/{compTypeJobTriggerId}/effect": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Apply Job Trigger Change Effect */
+        post: operations["postTblCompTypeJobTriggerByCompTypeJobTriggerIdEffect"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2343,6 +2360,23 @@ export interface paths {
         get: operations["getTblJobTriggerCount"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblJobTrigger/{jobTriggerId}/generate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Generate WorkOrders from JobTrigger */
+        post: operations["postTblJobTriggerByJobTriggerIdGenerate"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4724,7 +4758,9 @@ export interface operations {
     };
     putTblAddressByAddressId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 addressId: number;
@@ -5370,7 +5406,9 @@ export interface operations {
     };
     putTblAttachmentByAttachmentId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 attachmentId: number;
@@ -6019,7 +6057,9 @@ export interface operations {
     };
     putTblAttachmentTypeByAttachmentTypeId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 attachmentTypeId: number;
@@ -7727,7 +7767,9 @@ export interface operations {
     };
     putTblCompCounterLogByCompCounterLogId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compCounterLogId: number;
@@ -9065,7 +9107,9 @@ export interface operations {
     };
     putTblCompJobByCompJobId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compJobId: number;
@@ -10408,7 +10452,9 @@ export interface operations {
     };
     putTblCompJobCounterByCompJobCounterId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compJobCounterId: number;
@@ -11148,7 +11194,9 @@ export interface operations {
     };
     putTblCompJobMeasurePointByCompJobMeasurePointId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compJobMeasurePointId: number;
@@ -11750,7 +11798,9 @@ export interface operations {
     };
     putTblCompJobTriggerByCompJobTriggerId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compJobTriggerId: number;
@@ -13415,7 +13465,9 @@ export interface operations {
     };
     putTblCompMeasurePointLogByCompMeasurePointLogId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compMeasurePointLogId: number;
@@ -13892,7 +13944,9 @@ export interface operations {
     };
     putTblCompOilInfoByCompOilInfoId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compOilInfoId: number;
@@ -14202,7 +14256,9 @@ export interface operations {
     };
     putTblCompSpareByCompSpareId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compSpareId: number;
@@ -14566,7 +14622,9 @@ export interface operations {
     };
     putTblCompStatusByCompStatusId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compStatusId: number;
@@ -15009,7 +15067,9 @@ export interface operations {
     };
     putTblCompStatusLogByCompStatusLogId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compStatusLogId: number;
@@ -15896,7 +15956,9 @@ export interface operations {
     };
     putTblCompTypeByCompTypeId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compTypeId: number;
@@ -16818,7 +16880,9 @@ export interface operations {
     };
     putTblCompTypeAttachmentByCompTypeAttachmentId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compTypeAttachmentId: number;
@@ -17434,7 +17498,9 @@ export interface operations {
     };
     putTblCompTypeCounterByCompTypeCounterId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compTypeCounterId: number;
@@ -18600,7 +18666,9 @@ export interface operations {
     };
     putTblCompTypeJobByCompTypeJobId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compTypeJobId: number;
@@ -19768,7 +19836,9 @@ export interface operations {
     };
     putTblCompTypeJobCounterByCompTypeJobCounterId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compTypeJobCounterId: number;
@@ -20470,7 +20540,9 @@ export interface operations {
     };
     putTblCompTypeJobMeasurePointByCompTypeJobMeasurePointId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compTypeJobMeasurePointId: number;
@@ -21158,7 +21230,9 @@ export interface operations {
     };
     putTblCompTypeJobTriggerByCompTypeJobTriggerId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compTypeJobTriggerId: number;
@@ -21453,6 +21527,33 @@ export interface operations {
                 };
             };
         };
+    };
+    postTblCompTypeJobTriggerByCompTypeJobTriggerIdEffect: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                compTypeJobTriggerId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+                "application/x-www-form-urlencoded": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+                "multipart/form-data": {
+                    /** @enum {string} */
+                    operation: 0 | 1 | 2;
+                };
+            };
+        };
+        responses: never;
     };
     getTblCompTypeMeasurePoint: {
         parameters: {
@@ -21855,7 +21956,9 @@ export interface operations {
     };
     putTblCompTypeMeasurePointByCompTypeMeasurePointId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compTypeMeasurePointId: number;
@@ -23543,7 +23646,9 @@ export interface operations {
     };
     putTblComponentUnitByCompId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 compId: number;
@@ -25028,7 +25133,9 @@ export interface operations {
     };
     putTblComponentUnitAttachmentByComponentUnitAttachmentId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 componentUnitAttachmentId: number;
@@ -25754,7 +25861,9 @@ export interface operations {
     };
     putTblCounterTypeByCounterTypeId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 counterTypeId: number;
@@ -26342,7 +26451,9 @@ export interface operations {
     };
     putTblDepartmentByDeptId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 deptId: number;
@@ -27231,7 +27342,9 @@ export interface operations {
     };
     putTblDisciplineByDiscId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 discId: number;
@@ -27925,6 +28038,28 @@ export interface operations {
                                 createdUserId: null | number;
                                 timeSpent: null | number;
                             }[];
+                            tblUsersTblUsersEmployeeIdTotblEmployees?: {
+                                userId: number;
+                                employeeId: null | number;
+                                addressId: null | number;
+                                userGroupId: null | number;
+                                uUserName: string;
+                                uPassword: string;
+                                uName: null | string;
+                                uTitle: null | string;
+                                uComment1: null | string;
+                                uComment2: null | string;
+                                uDigitalSign: null | string;
+                                uAccountDisabled: null | boolean;
+                                uLogonAttempts: null | number;
+                                uForcePasswordChange: null | boolean;
+                                uLastLogin: null | string;
+                                exportMarker: null | number;
+                                uLastUpdated: null | string;
+                                orderNo: null | number;
+                                deptId: null | number;
+                                lastUpdate: null | string;
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -27975,6 +28110,11 @@ export interface operations {
                             logDiscId: number;
                         }[];
                     };
+                    tblUsersTblUsersEmployeeIdTotblEmployees?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     code?: null | string;
@@ -28007,6 +28147,11 @@ export interface operations {
                             logDiscId: number;
                         }[];
                     };
+                    tblUsersTblUsersEmployeeIdTotblEmployees?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     code?: null | string;
@@ -28037,6 +28182,11 @@ export interface operations {
                     tblLogDisciplines?: {
                         connect: {
                             logDiscId: number;
+                        }[];
+                    };
+                    tblUsersTblUsersEmployeeIdTotblEmployees?: {
+                        connect: {
+                            id: number;
                         }[];
                     };
                 };
@@ -28131,6 +28281,28 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                             timeSpent: null | number;
+                        }[];
+                        tblUsersTblUsersEmployeeIdTotblEmployees?: {
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: string;
+                            uPassword: string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
                         }[];
                     };
                 };
@@ -28269,6 +28441,28 @@ export interface operations {
                             createdUserId: null | number;
                             timeSpent: null | number;
                         }[];
+                        tblUsersTblUsersEmployeeIdTotblEmployees?: {
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: string;
+                            uPassword: string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        }[];
                     };
                 };
             };
@@ -28276,7 +28470,9 @@ export interface operations {
     };
     putTblEmployeeByEmployeeId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 employeeId: number;
@@ -28322,6 +28518,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblUsersTblUsersEmployeeIdTotblEmployees?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     code?: null | string;
@@ -28360,6 +28564,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblUsersTblUsersEmployeeIdTotblEmployees?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     code?: null | string;
@@ -28393,6 +28605,14 @@ export interface operations {
                     tblLogDisciplines?: {
                         connect?: {
                             logDiscId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblUsersTblUsersEmployeeIdTotblEmployees?: {
+                        connect?: {
+                            id: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -28490,6 +28710,28 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                             timeSpent: null | number;
+                        }[];
+                        tblUsersTblUsersEmployeeIdTotblEmployees?: {
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: string;
+                            uPassword: string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
                         }[];
                     };
                 };
@@ -28597,6 +28839,28 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                             timeSpent: null | number;
+                        }[];
+                        tblUsersTblUsersEmployeeIdTotblEmployees?: {
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: string;
+                            uPassword: string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
                         }[];
                     };
                 };
@@ -28863,7 +29127,9 @@ export interface operations {
     };
     putTblFailureGroupFollowByFailureGroupFollowId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 failureGroupFollowId: number;
@@ -29424,7 +29690,9 @@ export interface operations {
     };
     putTblFailureReportAttachmentByFailureReportAttachmentId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 failureReportAttachmentId: number;
@@ -30593,7 +30861,9 @@ export interface operations {
     };
     putTblFailureReportsByFailureReportId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 failureReportId: number;
@@ -31521,7 +31791,9 @@ export interface operations {
     };
     putTblFailureSeverityLevelByFailureSeverityLevelId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 failureSeverityLevelId: number;
@@ -31923,7 +32195,9 @@ export interface operations {
     };
     putTblFailureStatusByFailureStatusId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 failureStatusId: number;
@@ -32433,7 +32707,9 @@ export interface operations {
     };
     putTblFollowStatusByFollowStatusId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 followStatusId: number;
@@ -33227,7 +33503,9 @@ export interface operations {
     };
     putTblFunctionsByFunctionId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 functionId: number;
@@ -33899,7 +34177,9 @@ export interface operations {
     };
     putTblJobClassByJobClassId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 jobClassId: number;
@@ -34736,7 +35016,9 @@ export interface operations {
     };
     putTblJobDescriptionByJobDescId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 jobDescId: number;
@@ -35619,7 +35901,9 @@ export interface operations {
     };
     putTblJobDescriptionAttachmentByJobDescriptionAttachmentId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 jobDescriptionAttachmentId: number;
@@ -36125,7 +36409,9 @@ export interface operations {
     };
     putTblJobTriggerByJobTriggerId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 jobTriggerId: number;
@@ -36320,6 +36606,44 @@ export interface operations {
             };
         };
     };
+    postTblJobTriggerByJobTriggerIdGenerate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                jobTriggerId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    userId: number;
+                };
+                "application/x-www-form-urlencoded": {
+                    userId: number;
+                };
+                "multipart/form-data": {
+                    userId: number;
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        message: string;
+                        createdWorkOrders: number;
+                        updatedCompJobs: number;
+                    };
+                };
+            };
+        };
+    };
     getTblJobTriggerLog: {
         parameters: {
             query?: {
@@ -36481,7 +36805,9 @@ export interface operations {
     };
     putTblJobTriggerLogByJobTriggerLogId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 jobTriggerLogId: number;
@@ -36784,7 +37110,9 @@ export interface operations {
     };
     putTblJobVersionByJobVersionId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 jobVersionId: number;
@@ -37257,7 +37585,9 @@ export interface operations {
     };
     putTblLocationByLocationId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 locationId: number;
@@ -37947,7 +38277,9 @@ export interface operations {
     };
     putTblLogCounterByLogCounterId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 logCounterId: number;
@@ -38747,7 +39079,9 @@ export interface operations {
     };
     putTblLogDisciplineByLogDiscId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 logDiscId: number;
@@ -39379,7 +39713,9 @@ export interface operations {
     };
     putTblLoginAuditByLoginAuditId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 loginAuditId: number;
@@ -40189,7 +40525,9 @@ export interface operations {
     };
     putTblMaintCauseByMaintCauseId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 maintCauseId: number;
@@ -41271,7 +41609,9 @@ export interface operations {
     };
     putTblMaintClassByMaintClassId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 maintClassId: number;
@@ -43115,7 +43455,9 @@ export interface operations {
     };
     putTblMaintLogByMaintLogId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 maintLogId: number;
@@ -44613,7 +44955,9 @@ export interface operations {
     };
     putTblMaintLogAttachmentByMaintLogAttachmentId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 maintLogAttachmentId: number;
@@ -45472,7 +45816,9 @@ export interface operations {
     };
     putTblMaintLogFollowByFollowId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 followId: number;
@@ -46206,7 +46552,9 @@ export interface operations {
     };
     putTblMaintLogStocksByMaintLogStockId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 maintLogStockId: number;
@@ -47096,7 +47444,9 @@ export interface operations {
     };
     putTblMaintTypeByMaintTypeId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 maintTypeId: number;
@@ -47878,7 +48228,9 @@ export interface operations {
     };
     putTblOilSamplingLogByOilSamplingLogId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 oilSamplingLogId: number;
@@ -48290,7 +48642,9 @@ export interface operations {
     };
     putTblParametersByParameterId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 parameterId: number;
@@ -48715,7 +49069,9 @@ export interface operations {
     };
     putTblPendingTypeByPendTypeId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 pendTypeId: number;
@@ -49395,7 +49751,9 @@ export interface operations {
     };
     putTblPeriodByPeriodId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 periodId: number;
@@ -49807,6 +50165,47 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             });
+                            tblWorkOrder?: null | ({
+                                workOrderId: number;
+                                compJobId: null | number;
+                                maintClassId: null | number;
+                                maintTypeId: null | number;
+                                maintCauseId: null | number;
+                                createdBy: null | number;
+                                issuedBy: null | number;
+                                plannedBy: null | number;
+                                issuedDate: null | string;
+                                respDiscId: null | number;
+                                compId: null | number;
+                                roundId: null | number;
+                                parentWorkOrderId: null | number;
+                                woNo: null | string;
+                                title: null | string;
+                                priority: null | number;
+                                estTotalDuration: null | number;
+                                dueDate: null | string;
+                                window: null | number;
+                                created: null | string;
+                                started: null | string;
+                                completed: null | string;
+                                description: null | string;
+                                filed: null | number;
+                                unexpected: null | number;
+                                workOrderStatusId: null | number;
+                                deptId: null | number;
+                                exportMarker: null | number;
+                                lastupdate: null | string;
+                                reportingMethod: null | number;
+                                pendingBy: null | number;
+                                pendTypeId: null | number;
+                                pendingdate: null | string;
+                                orderNo: null | number;
+                                userId: null | number;
+                                userComment: null | string;
+                                workOrderTypeId: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
                         }[];
                         total: number;
                         page: number;
@@ -49840,6 +50239,11 @@ export interface operations {
                             userId: number;
                         };
                     };
+                    tblWorkOrder?: {
+                        connect: {
+                            workOrderId: number;
+                        };
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     fromDueDate?: null | string;
@@ -49855,6 +50259,11 @@ export interface operations {
                             userId: number;
                         };
                     };
+                    tblWorkOrder?: {
+                        connect: {
+                            workOrderId: number;
+                        };
+                    };
                 };
                 "multipart/form-data": {
                     fromDueDate?: null | string;
@@ -49868,6 +50277,11 @@ export interface operations {
                     tblUsers?: {
                         connect: {
                             userId: number;
+                        };
+                    };
+                    tblWorkOrder?: {
+                        connect: {
+                            workOrderId: number;
                         };
                     };
                 };
@@ -49913,6 +50327,47 @@ export interface operations {
                             orderNo: null | number;
                             deptId: null | number;
                             lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblWorkOrder?: null | ({
+                            workOrderId: number;
+                            compJobId: null | number;
+                            maintClassId: null | number;
+                            maintTypeId: null | number;
+                            maintCauseId: null | number;
+                            createdBy: null | number;
+                            issuedBy: null | number;
+                            plannedBy: null | number;
+                            issuedDate: null | string;
+                            respDiscId: null | number;
+                            compId: null | number;
+                            roundId: null | number;
+                            parentWorkOrderId: null | number;
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | number;
+                            estTotalDuration: null | number;
+                            dueDate: null | string;
+                            window: null | number;
+                            created: null | string;
+                            started: null | string;
+                            completed: null | string;
+                            description: null | string;
+                            filed: null | number;
+                            unexpected: null | number;
+                            workOrderStatusId: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            reportingMethod: null | number;
+                            pendingBy: null | number;
+                            pendTypeId: null | number;
+                            pendingdate: null | string;
+                            orderNo: null | number;
+                            userId: null | number;
+                            userComment: null | string;
+                            workOrderTypeId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -50006,6 +50461,47 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblWorkOrder?: null | ({
+                            workOrderId: number;
+                            compJobId: null | number;
+                            maintClassId: null | number;
+                            maintTypeId: null | number;
+                            maintCauseId: null | number;
+                            createdBy: null | number;
+                            issuedBy: null | number;
+                            plannedBy: null | number;
+                            issuedDate: null | string;
+                            respDiscId: null | number;
+                            compId: null | number;
+                            roundId: null | number;
+                            parentWorkOrderId: null | number;
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | number;
+                            estTotalDuration: null | number;
+                            dueDate: null | string;
+                            window: null | number;
+                            created: null | string;
+                            started: null | string;
+                            completed: null | string;
+                            description: null | string;
+                            filed: null | number;
+                            unexpected: null | number;
+                            workOrderStatusId: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            reportingMethod: null | number;
+                            pendingBy: null | number;
+                            pendTypeId: null | number;
+                            pendingdate: null | string;
+                            orderNo: null | number;
+                            userId: null | number;
+                            userComment: null | string;
+                            workOrderTypeId: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
                     };
                 };
             };
@@ -50013,7 +50509,9 @@ export interface operations {
     };
     putTblReScheduleLogByRescheduleLogId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 rescheduleLogId: number;
@@ -50037,6 +50535,12 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblWorkOrder?: {
+                        connect?: {
+                            workOrderId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     fromDueDate?: null | string;
@@ -50053,6 +50557,12 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblWorkOrder?: {
+                        connect?: {
+                            workOrderId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                 };
                 "multipart/form-data": {
                     fromDueDate?: null | string;
@@ -50066,6 +50576,12 @@ export interface operations {
                     tblUsers?: {
                         connect?: {
                             userId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblWorkOrder?: {
+                        connect?: {
+                            workOrderId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -50112,6 +50628,47 @@ export interface operations {
                             orderNo: null | number;
                             deptId: null | number;
                             lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblWorkOrder?: null | ({
+                            workOrderId: number;
+                            compJobId: null | number;
+                            maintClassId: null | number;
+                            maintTypeId: null | number;
+                            maintCauseId: null | number;
+                            createdBy: null | number;
+                            issuedBy: null | number;
+                            plannedBy: null | number;
+                            issuedDate: null | string;
+                            respDiscId: null | number;
+                            compId: null | number;
+                            roundId: null | number;
+                            parentWorkOrderId: null | number;
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | number;
+                            estTotalDuration: null | number;
+                            dueDate: null | string;
+                            window: null | number;
+                            created: null | string;
+                            started: null | string;
+                            completed: null | string;
+                            description: null | string;
+                            filed: null | number;
+                            unexpected: null | number;
+                            workOrderStatusId: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            reportingMethod: null | number;
+                            pendingBy: null | number;
+                            pendTypeId: null | number;
+                            pendingdate: null | string;
+                            orderNo: null | number;
+                            userId: null | number;
+                            userComment: null | string;
+                            workOrderTypeId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -50172,6 +50729,47 @@ export interface operations {
                             orderNo: null | number;
                             deptId: null | number;
                             lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblWorkOrder?: null | ({
+                            workOrderId: number;
+                            compJobId: null | number;
+                            maintClassId: null | number;
+                            maintTypeId: null | number;
+                            maintCauseId: null | number;
+                            createdBy: null | number;
+                            issuedBy: null | number;
+                            plannedBy: null | number;
+                            issuedDate: null | string;
+                            respDiscId: null | number;
+                            compId: null | number;
+                            roundId: null | number;
+                            parentWorkOrderId: null | number;
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | number;
+                            estTotalDuration: null | number;
+                            dueDate: null | string;
+                            window: null | number;
+                            created: null | string;
+                            started: null | string;
+                            completed: null | string;
+                            description: null | string;
+                            filed: null | number;
+                            unexpected: null | number;
+                            workOrderStatusId: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            reportingMethod: null | number;
+                            pendingBy: null | number;
+                            pendTypeId: null | number;
+                            pendingdate: null | string;
+                            orderNo: null | number;
+                            userId: null | number;
+                            userComment: null | string;
+                            workOrderTypeId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -50704,7 +51302,9 @@ export interface operations {
     };
     putTblRotationLogByRotationLogId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 rotationLogId: number;
@@ -51470,7 +52070,9 @@ export interface operations {
     };
     putTblRoundByRoundId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 roundId: number;
@@ -52040,7 +52642,9 @@ export interface operations {
     };
     putTblRoundCompJobByRoundCompJobId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 roundCompJobId: number;
@@ -52627,7 +53231,9 @@ export interface operations {
     };
     putTblSpareTypeBySpareTypeId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 spareTypeId: number;
@@ -53193,7 +53799,9 @@ export interface operations {
     };
     putTblSpareUnitBySpareUnitId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 spareUnitId: number;
@@ -53785,7 +54393,9 @@ export interface operations {
     };
     putTblUnitByUnitId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 unitId: number;
@@ -54657,6 +55267,25 @@ export interface operations {
                                 orderNo: null | number;
                                 createdUserId: null | number;
                             }[];
+                            tblEmployeeTblUsersEmployeeIdTotblEmployee?: null | ({
+                                employeeId: number;
+                                code: null | string;
+                                lastName: null | string;
+                                firstName: null | string;
+                                available: null | number;
+                                discId: null | number;
+                                addressId: null | number;
+                                notes: null | string;
+                                initials: null | string;
+                                empTitle: null | string;
+                                deptId: null | number;
+                                exportMarker: null | number;
+                                lastupdate: null | string;
+                                orderNo: null | number;
+                                createdUserId: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
                             tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                                 workOrderId: number;
                                 compJobId: null | number;
@@ -55006,6 +55635,11 @@ export interface operations {
                             roundCompJobId: number;
                         }[];
                     };
+                    tblEmployeeTblUsersEmployeeIdTotblEmployee?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                     tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                         connect: {
                             id: number;
@@ -55198,6 +55832,11 @@ export interface operations {
                             roundCompJobId: number;
                         }[];
                     };
+                    tblEmployeeTblUsersEmployeeIdTotblEmployee?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
                     tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                         connect: {
                             id: number;
@@ -55389,6 +56028,11 @@ export interface operations {
                         connect: {
                             roundCompJobId: number;
                         }[];
+                    };
+                    tblEmployeeTblUsersEmployeeIdTotblEmployee?: {
+                        connect: {
+                            id: number;
+                        };
                     };
                     tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                         connect: {
@@ -55941,6 +56585,25 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                         }[];
+                        tblEmployeeTblUsersEmployeeIdTotblEmployee?: null | ({
+                            employeeId: number;
+                            code: null | string;
+                            lastName: null | string;
+                            firstName: null | string;
+                            available: null | number;
+                            discId: null | number;
+                            addressId: null | number;
+                            notes: null | string;
+                            initials: null | string;
+                            empTitle: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                            createdUserId: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
                         tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                             workOrderId: number;
                             compJobId: null | number;
@@ -56675,6 +57338,25 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                         }[];
+                        tblEmployeeTblUsersEmployeeIdTotblEmployee?: null | ({
+                            employeeId: number;
+                            code: null | string;
+                            lastName: null | string;
+                            firstName: null | string;
+                            available: null | number;
+                            discId: null | number;
+                            addressId: null | number;
+                            notes: null | string;
+                            initials: null | string;
+                            empTitle: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                            createdUserId: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
                         tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                             workOrderId: number;
                             compJobId: null | number;
@@ -56846,7 +57528,9 @@ export interface operations {
     };
     putTblUsersByUserId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 userId: number;
@@ -57110,6 +57794,12 @@ export interface operations {
                         disconnect?: {
                             id: number;
                         }[];
+                    };
+                    tblEmployeeTblUsersEmployeeIdTotblEmployee?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
                     };
                     tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                         connect?: {
@@ -57408,6 +58098,12 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblEmployeeTblUsersEmployeeIdTotblEmployee?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                         connect?: {
                             id: number;
@@ -57704,6 +58400,12 @@ export interface operations {
                         disconnect?: {
                             id: number;
                         }[];
+                    };
+                    tblEmployeeTblUsersEmployeeIdTotblEmployee?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
                     };
                     tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                         connect?: {
@@ -58271,6 +58973,25 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                         }[];
+                        tblEmployeeTblUsersEmployeeIdTotblEmployee?: null | ({
+                            employeeId: number;
+                            code: null | string;
+                            lastName: null | string;
+                            firstName: null | string;
+                            available: null | number;
+                            discId: null | number;
+                            addressId: null | number;
+                            notes: null | string;
+                            initials: null | string;
+                            empTitle: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                            createdUserId: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
                         tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                             workOrderId: number;
                             compJobId: null | number;
@@ -58975,6 +59696,25 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                         }[];
+                        tblEmployeeTblUsersEmployeeIdTotblEmployee?: null | ({
+                            employeeId: number;
+                            code: null | string;
+                            lastName: null | string;
+                            firstName: null | string;
+                            available: null | number;
+                            discId: null | number;
+                            addressId: null | number;
+                            notes: null | string;
+                            initials: null | string;
+                            empTitle: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                            createdUserId: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
                         tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                             workOrderId: number;
                             compJobId: null | number;
@@ -59279,6 +60019,19 @@ export interface operations {
                                 lastupdate: null | string;
                                 followStatuseId: null | number;
                                 waitingTime: null | number;
+                                orderNo: null | number;
+                            }[];
+                            tblReScheduleLogs?: {
+                                rescheduleLogId: number;
+                                workOrderId: null | number;
+                                fromDueDate: null | string;
+                                toDueDate: null | string;
+                                rescheduledBy: null | number;
+                                rescheduledDate: null | string;
+                                reason: null | string;
+                                deptId: null | number;
+                                exportMarker: null | number;
+                                lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
                             tblCompJob?: null | ({
@@ -59664,6 +60417,11 @@ export interface operations {
                             followId: number;
                         }[];
                     };
+                    tblReScheduleLogs?: {
+                        connect: {
+                            rescheduleLogId: number;
+                        }[];
+                    };
                     tblCompJob?: {
                         connect: {
                             compJobId: number;
@@ -59774,6 +60532,11 @@ export interface operations {
                             followId: number;
                         }[];
                     };
+                    tblReScheduleLogs?: {
+                        connect: {
+                            rescheduleLogId: number;
+                        }[];
+                    };
                     tblCompJob?: {
                         connect: {
                             compJobId: number;
@@ -59882,6 +60645,11 @@ export interface operations {
                     tblMaintLogFollows?: {
                         connect: {
                             followId: number;
+                        }[];
+                    };
+                    tblReScheduleLogs?: {
+                        connect: {
+                            rescheduleLogId: number;
                         }[];
                     };
                     tblCompJob?: {
@@ -60050,6 +60818,19 @@ export interface operations {
                             lastupdate: null | string;
                             followStatuseId: null | number;
                             waitingTime: null | number;
+                            orderNo: null | number;
+                        }[];
+                        tblReScheduleLogs?: {
+                            rescheduleLogId: number;
+                            workOrderId: null | number;
+                            fromDueDate: null | string;
+                            toDueDate: null | string;
+                            rescheduledBy: null | number;
+                            rescheduledDate: null | string;
+                            reason: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
                             orderNo: null | number;
                         }[];
                         tblCompJob?: null | ({
@@ -60519,6 +61300,19 @@ export interface operations {
                             waitingTime: null | number;
                             orderNo: null | number;
                         }[];
+                        tblReScheduleLogs?: {
+                            rescheduleLogId: number;
+                            workOrderId: null | number;
+                            fromDueDate: null | string;
+                            toDueDate: null | string;
+                            rescheduledBy: null | number;
+                            rescheduledDate: null | string;
+                            reason: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        }[];
                         tblCompJob?: null | ({
                             compJobId: number;
                             discId: null | number;
@@ -60856,7 +61650,9 @@ export interface operations {
     };
     putTblWorkOrderByWorkOrderId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 workOrderId: number;
@@ -60900,6 +61696,14 @@ export interface operations {
                     tblMaintLogFollows?: {
                         connect?: {
                             followId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblReScheduleLogs?: {
+                        connect?: {
+                            rescheduleLogId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -61038,6 +61842,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblReScheduleLogs?: {
+                        connect?: {
+                            rescheduleLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblCompJob?: {
                         connect?: {
                             compJobId: number;
@@ -61166,6 +61978,14 @@ export interface operations {
                     tblMaintLogFollows?: {
                         connect?: {
                             followId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblReScheduleLogs?: {
+                        connect?: {
+                            rescheduleLogId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -61354,6 +62174,19 @@ export interface operations {
                             lastupdate: null | string;
                             followStatuseId: null | number;
                             waitingTime: null | number;
+                            orderNo: null | number;
+                        }[];
+                        tblReScheduleLogs?: {
+                            rescheduleLogId: number;
+                            workOrderId: null | number;
+                            fromDueDate: null | string;
+                            toDueDate: null | string;
+                            rescheduledBy: null | number;
+                            rescheduledDate: null | string;
+                            reason: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
                             orderNo: null | number;
                         }[];
                         tblCompJob?: null | ({
@@ -61791,6 +62624,19 @@ export interface operations {
                             lastupdate: null | string;
                             followStatuseId: null | number;
                             waitingTime: null | number;
+                            orderNo: null | number;
+                        }[];
+                        tblReScheduleLogs?: {
+                            rescheduleLogId: number;
+                            workOrderId: null | number;
+                            fromDueDate: null | string;
+                            toDueDate: null | string;
+                            rescheduledBy: null | number;
+                            rescheduledDate: null | string;
+                            reason: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
                             orderNo: null | number;
                         }[];
                         tblCompJob?: null | ({
@@ -62467,7 +63313,9 @@ export interface operations {
     };
     putTblWorkOrderStatusByWorkOrderStatusId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 workOrderStatusId: number;
@@ -62792,7 +63640,9 @@ export interface operations {
     };
     putTblWorkOrderTypeByWorkOrderTypeId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 workOrderTypeId: number;
@@ -63060,7 +63910,9 @@ export interface operations {
     };
     putTblWorkShopComponentByWShopCompId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 wShopCompId: number;
@@ -63423,7 +64275,9 @@ export interface operations {
     };
     putTblWorkShopDoneByWShopDoneId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 wShopDoneId: number;
@@ -63918,7 +64772,9 @@ export interface operations {
     };
     putTblWorkShopRequestByWShopRequestId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 wShopRequestId: number;
@@ -64575,7 +65431,9 @@ export interface operations {
     };
     putTblWorkShopRequestAttachmentByWShopRequestAttachmentId: {
         parameters: {
-            query?: never;
+            query?: {
+                include?: string;
+            };
             header?: never;
             path: {
                 wShopRequestAttachmentId: number;

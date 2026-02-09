@@ -1,5 +1,7 @@
 import DataGridActionBar from "@/shared/components/dataGrid/DataGridActionBar";
 import Filter from "@mui/icons-material/FilterList";
+import AutoModeIcon from "@mui/icons-material/AutoMode";
+import PrintIcon from "@mui/icons-material/Print";
 import { WORK_ORDER_ACTIONS } from "./WorkOrderActionsConfig";
 
 type Props = {
@@ -12,6 +14,8 @@ type Props = {
   onCancel: () => void;
   onRequest: () => void;
   onFilter: () => void;
+  onReschedule: () => void;
+  onPrint: () => void;
 };
 
 export default function WorkOrderActionBar({
@@ -23,6 +27,8 @@ export default function WorkOrderActionBar({
   onCancel,
   onRequest,
   onFilter,
+  onReschedule,
+  onPrint,
 }: Props) {
   const selectedCount = selectedStatuses.length;
 
@@ -52,7 +58,7 @@ export default function WorkOrderActionBar({
       ...WORK_ORDER_ACTIONS.pending,
       onClick: onPending,
       disabled:
-        selectedCount === 0 ||
+        selectedCount != 1 ||
         !WORK_ORDER_ACTIONS.pending.isEnabled(selectedStatuses),
     },
     {
@@ -72,6 +78,18 @@ export default function WorkOrderActionBar({
     {
       ...WORK_ORDER_ACTIONS.request,
       onClick: onRequest,
+    },
+    {
+      label: "Rescadule",
+      icon: <AutoModeIcon />,
+      isEnabled: true,
+      disabled: false,
+      onClick: onReschedule,
+    },
+    {
+      label: "Print",
+      icon: <PrintIcon />,
+      onClick: onPrint,
     },
   ];
 

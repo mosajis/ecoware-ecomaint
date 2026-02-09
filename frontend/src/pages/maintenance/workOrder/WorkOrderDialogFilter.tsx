@@ -446,7 +446,7 @@ export default function WorkOrderFilterDialog({
                   { field: "compTypeNo", headerName: "compTypeNo", flex: 1 },
                 ]}
                 getRowId={(row) => row.compTypeId}
-                getOptionLabel={(row) => row.compTypeNo}
+                getOptionLabel={(row) => row.compName}
                 onChange={(value) => {
                   setFilters((prev) => ({
                     ...prev,
@@ -640,10 +640,10 @@ export default function WorkOrderFilterDialog({
                   label="From"
                   field={{
                     value: filters.dueFrom,
-                    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                    onChange: (v: string) => {
                       setFilters((prev) => ({
                         ...prev,
-                        dueFrom: e.target.value,
+                        dueFrom: v,
                       }));
                     },
                   }}
@@ -654,10 +654,10 @@ export default function WorkOrderFilterDialog({
                   label="To"
                   field={{
                     value: filters.dueTo,
-                    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                    onChange: (v: string) => {
                       setFilters((prev) => ({
                         ...prev,
-                        dueTo: e.target.value,
+                        dueTo: v,
                       }));
                     },
                   }}

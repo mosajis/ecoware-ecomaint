@@ -77,6 +77,42 @@ export function useDataGrid<T, K extends keyof T = keyof T>(
   );
 
   /**
+   * optimistic update یک ردیف
+   */
+  const optimisticUpdate = useCallback(
+    (rowId: T[K], patch: Partial<T>) => {
+      setRows((prev) =>
+        prev.map((row) =>
+          getIdValue(row) === rowId ? { ...row, ...patch } : row,
+        ),
+      );
+    },
+    [getIdValue],
+  );
+
+  /**
+   * جایگزینی کامل ردیف (وقتی API رکورد کامل برمی‌گردونه)
+   */
+  const optimisticReplace = useCallback(
+    (row: T) => {
+      setRows((prev) =>
+        prev.map((r) => (getIdValue(r) === getIdValue(row) ? row : r)),
+      );
+    },
+    [getIdValue],
+  );
+
+  /**
+   * حذف optimistic
+   */
+  const optimisticRemove = useCallback(
+    (rowId: T[K]) => {
+      setRows((prev) => prev.filter((r) => getIdValue(r) !== rowId));
+    },
+    [getIdValue],
+  );
+
+  /**
    * fetch اولیه
    */
   useEffect(() => {
@@ -90,5 +126,8 @@ export function useDataGrid<T, K extends keyof T = keyof T>(
     handleRefresh,
     handleDelete,
     getIdValue,
+    optimisticRemove,
+    optimisticReplace,
+    optimisticUpdate,
   };
 }

@@ -2,6 +2,7 @@ import React from "react";
 import CalendarToday from "@mui/icons-material/CalendarToday";
 import AccessTime from "@mui/icons-material/AccessTime";
 import Event from "@mui/icons-material/Event";
+import ClearIcon from "@mui/icons-material/Clear";
 import { DatePicker, DateTimePicker, TimePicker } from "@mui/x-date-pickers";
 import { DATE_FORMATS, DateTimeType } from "@/const";
 import { useAtomValue } from "jotai";
@@ -12,8 +13,6 @@ interface DateFieldProps {
   field: any;
   disabled?: boolean;
   type?: DateTimeType;
-
-  // 🔹 new (optional)
   error?: boolean;
   helperText?: React.ReactNode;
 }
@@ -36,13 +35,12 @@ const FieldDateTime: React.FC<DateFieldProps> = ({
     field.onChange(newValue ? newValue.toISOString() : null);
   };
 
-  const getDefaultIcon = (): React.ElementType => {
+  const getIcon = () => {
     switch (type) {
       case "TIME":
         return AccessTime;
       case "DATETIME":
         return Event;
-      case "DATE":
       default:
         return CalendarToday;
     }
@@ -55,7 +53,18 @@ const FieldDateTime: React.FC<DateFieldProps> = ({
         ? DateTimePicker
         : DatePicker;
 
-  const format = DATE_FORMATS[locale][type];
+  const iconStyle = {
+    fontSize: 1,
+    width: "18px",
+    height: "18px",
+    borderRadius: "5px",
+  };
+
+  const buttonStyle = {
+    p: 0,
+    width: "28px !important",
+    height: "28px !important",
+  };
 
   return (
     <Picker
@@ -64,20 +73,28 @@ const FieldDateTime: React.FC<DateFieldProps> = ({
       value={dateValue}
       onChange={handleChange}
       disabled={disabled}
-      slots={{ openPickerIcon: getDefaultIcon() }}
+      format={DATE_FORMATS[locale][type]}
+      slots={{
+        openPickerIcon: getIcon(),
+        clearIcon: ClearIcon,
+      }}
       slotProps={{
+        field: { clearable: true },
         textField: {
           fullWidth: true,
           size: "small",
           error,
           helperText,
         },
+        openPickerIcon: { sx: iconStyle },
+        clearIcon: { sx: iconStyle },
+        openPickerButton: { sx: { ...buttonStyle, marginRight: "-8px" } },
+        clearButton: { sx: buttonStyle },
       }}
-      {...((type === "TIME" || type === "DATETIME") && { ampm: false })}
-      timeSteps={
-        type === "TIME" || type === "DATETIME" ? { minutes: 1 } : undefined
-      }
-      format={format}
+      {...((type === "TIME" || type === "DATETIME") && {
+        ampm: false,
+        timeSteps: { minutes: 1 },
+      })}
     />
   );
 };

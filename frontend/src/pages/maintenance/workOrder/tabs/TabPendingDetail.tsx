@@ -7,10 +7,11 @@ interface Props {
 }
 
 const TabPendingDetail = ({ workOrder, label }: Props) => {
-  // @ts-ignore
-  const initValue = workOrder?.tblPendingType?.description || "";
+  const initValue = workOrder?.userComment || "";
 
-  return <Editor label="Pending Detail" initValue={initValue} readOnly />;
+  return (
+    <Editor label={label || "Pending Detail"} initValue={initValue} readOnly />
+  );
 };
 
 export default TabPendingDetail;
