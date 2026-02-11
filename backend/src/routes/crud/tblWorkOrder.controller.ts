@@ -13,8 +13,71 @@ import {
   TblWorkOrderInputUpdate,
   TblWorkOrderPlain,
 } from "orm/generated/prismabox/TblWorkOrder";
+import { periodToDays } from "@/helper";
 
 export const ServiceTblWorkOrder = new BaseService(prisma.tblWorkOrder);
+export const WorkOrderItemSchema = t.Object({
+  workOrderId: t.Number(),
+  compId: t.Number(),
+
+  title: t.String(),
+  priority: t.Optional(t.String()),
+  description: t.Optional(t.String()),
+  userComment: t.Optional(t.String()),
+
+  dueDate: t.Optional(t.String()),
+  created: t.Optional(t.String()),
+  started: t.Optional(t.String()),
+  completed: t.Optional(t.String()),
+
+  tblComponentUnit: t.Optional(
+    t.Object({
+      compId: t.Number(),
+      compNo: t.String(),
+      tblLocation: t.Optional(
+        t.Object({
+          name: t.String(),
+        }),
+      ),
+    }),
+  ),
+
+  tblCompJob: t.Optional(
+    t.Object({
+      compJobId: t.Number(),
+      nextDueDate: t.Optional(t.String()),
+      tblJobDescription: t.Optional(
+        t.Object({
+          jobDescCode: t.String(),
+          jobDescTitle: t.String(),
+        }),
+      ),
+      tblPeriod: t.Optional(
+        t.Object({
+          name: t.String(),
+        }),
+      ),
+    }),
+  ),
+
+  tblPendingType: t.Optional(
+    t.Object({
+      pendTypeName: t.String(),
+    }),
+  ),
+
+  tblDiscipline: t.Optional(
+    t.Object({
+      name: t.String(),
+    }),
+  ),
+
+  tblWorkOrderStatus: t.Optional(
+    t.Object({
+      name: t.String(),
+    }),
+  ),
+});
 
 const ControllerTblWorkOrder = new BaseController({
   prefix: "/tblWorkOrder",
@@ -84,7 +147,7 @@ const ControllerTblWorkOrder = new BaseController({
                 tblJobDescription: {
                   select: {
                     jobDescCode: true,
-                    jobDesc: true,
+                    jobDescTitle: true,
                   },
                 },
                 tblPeriod: {
@@ -116,9 +179,10 @@ const ControllerTblWorkOrder = new BaseController({
         tags: ["tblWorkOrder"],
         detail: { summary: "Get all with custom select" },
         query: querySchema,
-        response: t.Any(),
+        data: t.Array(WorkOrderItemSchema),
       },
     );
+
     app.post(
       "/generate",
       async ({ body, set }) => {
@@ -210,7 +274,196 @@ const ControllerTblWorkOrder = new BaseController({
       },
     );
 
-    app.post("/generate/next", async ({ params, body, set }) => {});
+    app.post(
+      "/generate/next",
+      async ({ body, set }) => {
+        const { maintLogId, userId } = body;
+
+        if (!maintLogId || !userId) {
+          set.status = 400;
+          return {
+            message: "maintLogId and userId are required",
+            success: false,
+          };
+        }
+
+        return prisma.$transaction(async (tx) => {
+          /* 1. MaintLog --------------------------------------------------------------------- */
+          const maintLog = await tx.tblMaintLog.findUnique({
+            where: { maintLogId },
+            select: {
+              maintLogId: true,
+              workOrderId: true,
+              dateDone: true,
+            },
+          });
+
+          if (!maintLog || !maintLog.workOrderId) {
+            set.status = 404;
+            return {
+              message: "MaintLog or WorkOrder not found",
+              success: false,
+            };
+          }
+
+          /* 2. WorkOrder --------------------------------------------------------------------- */
+          const workOrder = await tx.tblWorkOrder.findUnique({
+            where: { workOrderId: maintLog.workOrderId },
+            select: {
+              workOrderId: true,
+              compJobId: true,
+              dueDate: true,
+              workOrderTypeId: true,
+            },
+          });
+
+          if (!workOrder || !workOrder.compJobId) {
+            set.status = 404;
+            return {
+              message: "CompJob not found in WorkOrder",
+              success: false,
+            };
+          }
+
+          if (workOrder.workOrderTypeId !== 2) {
+            set.status = 400;
+            return {
+              message:
+                "Only WorkOrder with workOrderTypeId = 2 can generate next WorkOrder",
+              success: false,
+            };
+          }
+
+          /* 3. CompJob ------------------------------------------------------------------------- */
+          const compJob = await tx.tblCompJob.findUnique({
+            where: { compJobId: workOrder.compJobId },
+            include: {
+              tblCompJobCounters: true,
+              tblJobDescription: true,
+              tblPeriod: true,
+            },
+          });
+
+          if (!compJob) {
+            set.status = 404;
+            return {
+              message: "CompJob not found",
+              success: false,
+            };
+          }
+
+          /* 5. nextDueDate ------------------------------------------------------------------- */
+          const nextDueDateArray: Date[] = [];
+
+          const isFixed = compJob.planningMethod === 1;
+
+          if (
+            (!isFixed && !maintLog.dateDone) ||
+            (isFixed && !workOrder.dueDate)
+          ) {
+            set.status = 400;
+            return {
+              message: "Base date is missing for dueDate calculation",
+              success: false,
+            };
+          }
+
+          const baseDateDone = new Date(
+            isFixed ? workOrder.dueDate! : maintLog.dateDone!,
+          );
+
+          const now = new Date();
+
+          /* 6. Time Based calculation --------------------------------------------------------*/
+          if (compJob.frequency && compJob.frequencyPeriod) {
+            const days =
+              compJob.frequency * periodToDays(compJob.frequencyPeriod);
+
+            const calculatedDate = new Date(baseDateDone);
+            calculatedDate.setDate(calculatedDate.getDate() + days);
+
+            nextDueDateArray.push(calculatedDate);
+          }
+
+          // compcounter => avarage
+          // comp
+          /* 7. Counter-based calculation -------------------------------------------------------- */
+          // compJob.tblCompJobCounters?.forEach(counter => {
+          // if (counter.frequency) {
+          //   const counterDate = new Date(baseDateDone);
+          //   counterDate.setDate(counterDate.getDate() + counter.frequency);
+          //   dateDoneArray.push(counterDate);
+          // }
+          // });
+
+          /* 8. Final DueDate -------------------------------------------------------------------- */
+          if (nextDueDateArray.length === 0) {
+            nextDueDateArray.push(now);
+          }
+
+          const finalNextDueDate = new Date(
+            Math.min(...nextDueDateArray.map((d) => d.getTime())),
+          );
+
+          /* 9. Create Next WorkOrder ------------------------------------------------------------ */
+          const newWorkOrder = await tx.tblWorkOrder.create({
+            data: {
+              compJobId: compJob.compJobId,
+              createdBy: userId,
+              respDiscId: compJob.discId,
+              compId: compJob.compId,
+              title:
+                compJob.tblJobDescription?.jobDescTitle ??
+                "Faild to load jobDescTitle",
+              priority: compJob.priority,
+              window: compJob.window,
+              dueDate: finalNextDueDate,
+              created: now,
+              lastupdate: now,
+              workOrderStatusId: 2,
+              workOrderTypeId: 1,
+              exportMarker: 0,
+            },
+          });
+
+          /* 10. Update CompJob ------------------------------------------------------------------- */
+          await tx.tblCompJob.update({
+            where: { compJobId: compJob.compJobId },
+            data: {
+              nextDueDate: finalNextDueDate,
+              lastDone: maintLog.dateDone,
+              lastupdate: now,
+            },
+          });
+
+          /* 11. Response ------------------------------------------------------------------------- */
+          return {
+            message: "Next WorkOrder generated successfully",
+            success: true,
+            workOrderId: newWorkOrder.workOrderId,
+            dueDate: finalNextDueDate,
+            planningMethod: isFixed ? "Fixed" : "Variable",
+          };
+        });
+      },
+      {
+        body: t.Object({
+          maintLogId: t.Number(),
+          userId: t.Number(),
+        }),
+        response: t.Object({
+          message: t.String(),
+          success: t.Boolean(),
+          workOrderId: t.Optional(t.Number()),
+          dueDate: t.Optional(t.Date()),
+          planningMethod: t.Optional(t.String()),
+        }),
+        detail: {
+          tags: ["WorkOrder"],
+          summary: "Generate next WorkOrder from MaintLog",
+        },
+      },
+    );
   },
 }).app;
 

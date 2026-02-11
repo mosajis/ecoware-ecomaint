@@ -2830,7 +2830,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get all */
+        /** Get all with custom select */
         get: operations["getTblMaintLog"];
         put?: never;
         /** Create */
@@ -3782,7 +3782,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get all */
+        /** Get all with custom select */
         get: operations["getTblWorkOrder"];
         put?: never;
         /** Create */
@@ -3856,6 +3856,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** Generate next WorkOrder from MaintLog */
         post: operations["postTblWorkOrderGenerateNext"];
         delete?: never;
         options?: never;
@@ -32606,16 +32607,14 @@ export interface operations {
                                 followId: number;
                                 userId: number;
                                 maintLogId: number;
-                                workorderId: number;
                                 isRequest: null | number;
                                 isWaiting: null | number;
                                 isUnPlan: null | number;
                                 followDesc: null | string;
-                                deptId: number;
+                                deptId: null | number;
                                 exportMarker: null | number;
                                 lastupdate: null | string;
                                 followStatuseId: null | number;
-                                waitingTime: null | number;
                                 orderNo: null | number;
                             }[];
                         }[];
@@ -32747,16 +32746,14 @@ export interface operations {
                             followId: number;
                             userId: number;
                             maintLogId: number;
-                            workorderId: number;
                             isRequest: null | number;
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: number;
+                            deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
-                            waitingTime: null | number;
                             orderNo: null | number;
                         }[];
                     };
@@ -32859,16 +32856,14 @@ export interface operations {
                             followId: number;
                             userId: number;
                             maintLogId: number;
-                            workorderId: number;
                             isRequest: null | number;
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: number;
+                            deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
-                            waitingTime: null | number;
                             orderNo: null | number;
                         }[];
                     };
@@ -33018,16 +33013,14 @@ export interface operations {
                             followId: number;
                             userId: number;
                             maintLogId: number;
-                            workorderId: number;
                             isRequest: null | number;
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: number;
+                            deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
-                            waitingTime: null | number;
                             orderNo: null | number;
                         }[];
                     };
@@ -33098,16 +33091,14 @@ export interface operations {
                             followId: number;
                             userId: number;
                             maintLogId: number;
-                            workorderId: number;
                             isRequest: null | number;
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: number;
+                            deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
-                            waitingTime: null | number;
                             orderNo: null | number;
                         }[];
                     };
@@ -42337,341 +42328,7 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            maintLogId: number;
-                            maintCauseId: null | number;
-                            maintTypeId: null | number;
-                            maintClassId: null | number;
-                            functionId: null | number;
-                            jobDescId: null | number;
-                            workOrderId: null | number;
-                            compId: null | number;
-                            roundId: null | number;
-                            totalDuration: null | number;
-                            downTime: null | number;
-                            dateDone: null | string;
-                            frequency: null | number;
-                            frequencyPeriod: null | number;
-                            overdueCount: null | number;
-                            overdueReason: null | string;
-                            unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            history: null | string;
-                            mlStatus: null | number;
-                            followStatusId: null | number;
-                            orderNo: null | number;
-                            updatedUserId: null | number;
-                            tblFailureReports?: {
-                                failureReportId: number;
-                                compId: null | number;
-                                discId: null | number;
-                                maintLogId: null | number;
-                                failureReportDate: null | string;
-                                failureDateTime: null | string;
-                                waitDateTime: string;
-                                totalWait: null | number;
-                                title: null | string;
-                                failureDesc: null | string;
-                                failureCause: null | string;
-                                actionDesc: null | string;
-                                followDesc: null | string;
-                                reportedUserId: null | number;
-                                deptId: null | number;
-                                lastupdate: null | string;
-                                approvedUserId: null | number;
-                                stateDateTime: null | string;
-                                stateCode: null | number;
-                                closedUserId: null | number;
-                                closedDateTime: null | string;
-                                failureNumber: null | number;
-                                failureSeverityLevelId: null | number;
-                                nextFollowDate: null | string;
-                                failureGroupFollowId: null | number;
-                                failureStatusId: null | number;
-                            }[];
-                            tblLogCounters?: {
-                                logCounterId: number;
-                                maintLogId: null | number;
-                                counterTypeId: null | number;
-                                frequency: null | number;
-                                reportedCount: null | number;
-                                overdueCount: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                orderNo: null | number;
-                                createdUserId: null | number;
-                            }[];
-                            tblLogDisciplines?: {
-                                logDiscId: number;
-                                maintLogId: null | number;
-                                employeeId: null | number;
-                                discId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                orderNo: null | number;
-                                createdUserId: null | number;
-                                timeSpent: null | number;
-                            }[];
-                            tblComponentUnit?: null | ({
-                                compId: number;
-                                compTypeId: null | number;
-                                locationId: null | number;
-                                parentCompId: null | number;
-                                vendorId: null | number;
-                                compNo: null | string;
-                                serialNo: null | string;
-                                statusId: null | number;
-                                notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                isCritical: null | number;
-                                orderNo: null | number;
-                                model: null | string;
-                                comment1: null | string;
-                                comment2: null | string;
-                                comment3: null | string;
-                                assetNo: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblFollowStatus?: null | ({
-                                followStatusId: number;
-                                fsName: null | string;
-                                fsDesc: null | string;
-                                fsGroup: null | number;
-                                sortId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                followStatuseId1: null | number;
-                                orderNo: null | number;
-                                deptId: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblFunctions?: null | ({
-                                functionId: number;
-                                compId: null | number;
-                                funcNo: null | string;
-                                funcDesc: null | string;
-                                parentFunctionId: null | number;
-                                notes: null | string;
-                                statusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                orderNo: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblJobDescription?: null | ({
-                                jobDescId: number;
-                                jobClassId: null | number;
-                                jobDescCode: null | string;
-                                jobDescTitle: null | string;
-                                jobDesc: null | string;
-                                revision: null | string;
-                                changeReason: null | string;
-                                status: null | number;
-                                oldRevisionJobDescId: null | number;
-                                copiedFromJobDescId: null | number;
-                                createdDate: null | string;
-                                createdBy: null | number;
-                                approvedDate: null | string;
-                                approvedBy: null | number;
-                                applicationId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                orderNo: null | number;
-                                createdUserId: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblMaintCause?: null | ({
-                                maintCauseId: number;
-                                descr: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                orderNo: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblMaintClass?: null | ({
-                                maintClassId: number;
-                                descr: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                orderNo: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblMaintType?: null | ({
-                                maintTypeId: number;
-                                descr: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                orderNo: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblPeriod?: null | ({
-                                periodId: number;
-                                name: string;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblUsersTblMaintLogUpdatedUserIdTotblUsers?: null | ({
-                                userId: number;
-                                employeeId: null | number;
-                                addressId: null | number;
-                                userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
-                                uName: null | string;
-                                uTitle: null | string;
-                                uComment1: null | string;
-                                uComment2: null | string;
-                                uDigitalSign: null | string;
-                                uAccountDisabled: null | boolean;
-                                uLogonAttempts: null | number;
-                                uForcePasswordChange: null | boolean;
-                                uLastLogin: null | string;
-                                exportMarker: null | number;
-                                uLastUpdated: null | string;
-                                orderNo: null | number;
-                                deptId: null | number;
-                                lastUpdate: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblWorkOrder?: null | ({
-                                workOrderId: number;
-                                compJobId: null | number;
-                                maintClassId: null | number;
-                                maintTypeId: null | number;
-                                maintCauseId: null | number;
-                                createdBy: null | number;
-                                issuedBy: null | number;
-                                plannedBy: null | number;
-                                issuedDate: null | string;
-                                respDiscId: null | number;
-                                compId: null | number;
-                                roundId: null | number;
-                                parentWorkOrderId: null | number;
-                                woNo: null | string;
-                                title: null | string;
-                                priority: null | number;
-                                estTotalDuration: null | number;
-                                dueDate: null | string;
-                                window: null | number;
-                                created: null | string;
-                                started: null | string;
-                                completed: null | string;
-                                description: null | string;
-                                filed: null | number;
-                                unexpected: null | number;
-                                workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                reportingMethod: null | number;
-                                pendingBy: null | number;
-                                pendTypeId: null | number;
-                                pendingdate: null | string;
-                                orderNo: null | number;
-                                userId: null | number;
-                                userComment: null | string;
-                                workOrderTypeId: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblUsersTblMaintLogLoggedByTotblUsers?: null | ({
-                                userId: number;
-                                employeeId: null | number;
-                                addressId: null | number;
-                                userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
-                                uName: null | string;
-                                uTitle: null | string;
-                                uComment1: null | string;
-                                uComment2: null | string;
-                                uDigitalSign: null | string;
-                                uAccountDisabled: null | boolean;
-                                uLogonAttempts: null | number;
-                                uForcePasswordChange: null | boolean;
-                                uLastLogin: null | string;
-                                exportMarker: null | number;
-                                uLastUpdated: null | string;
-                                orderNo: null | number;
-                                deptId: null | number;
-                                lastUpdate: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblMaintLogAttachments?: {
-                                maintLogAttachmentId: number;
-                                maintLogId: number;
-                                attachmentId: number;
-                                orderNo: null | number;
-                                createdUserId: number;
-                                createdAt: string;
-                            }[];
-                            tblMaintLogFollows?: {
-                                followId: number;
-                                userId: number;
-                                maintLogId: number;
-                                workorderId: number;
-                                isRequest: null | number;
-                                isWaiting: null | number;
-                                isUnPlan: null | number;
-                                followDesc: null | string;
-                                deptId: number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                followStatuseId: null | number;
-                                waitingTime: null | number;
-                                orderNo: null | number;
-                            }[];
-                            tblMaintLogStocks?: {
-                                maintLogStockId: number;
-                                maintLogId: number;
-                                stockItemId: number;
-                                deptId: number;
-                                exportMaker: null | number;
-                                stockCount: null | number;
-                                orderNo: null | number;
-                                createdUserId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                            }[];
-                        }[];
-                        total: number;
-                        page: number;
-                        perPage: number;
-                        totalPages: number;
-                    };
-                };
-            };
-        };
+        responses: never;
     };
     postTblMaintLog: {
         parameters: {
@@ -43291,16 +42948,14 @@ export interface operations {
                             followId: number;
                             userId: number;
                             maintLogId: number;
-                            workorderId: number;
                             isRequest: null | number;
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: number;
+                            deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
-                            waitingTime: null | number;
                             orderNo: null | number;
                         }[];
                         tblMaintLogStocks?: {
@@ -43665,16 +43320,14 @@ export interface operations {
                             followId: number;
                             userId: number;
                             maintLogId: number;
-                            workorderId: number;
                             isRequest: null | number;
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: number;
+                            deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
-                            waitingTime: null | number;
                             orderNo: null | number;
                         }[];
                         tblMaintLogStocks?: {
@@ -44404,16 +44057,14 @@ export interface operations {
                             followId: number;
                             userId: number;
                             maintLogId: number;
-                            workorderId: number;
                             isRequest: null | number;
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: number;
+                            deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
-                            waitingTime: null | number;
                             orderNo: null | number;
                         }[];
                         tblMaintLogStocks?: {
@@ -44746,16 +44397,14 @@ export interface operations {
                             followId: number;
                             userId: number;
                             maintLogId: number;
-                            workorderId: number;
                             isRequest: null | number;
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: number;
+                            deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
-                            waitingTime: null | number;
                             orderNo: null | number;
                         }[];
                         tblMaintLogStocks?: {
@@ -45515,16 +45164,14 @@ export interface operations {
                             followId: number;
                             userId: number;
                             maintLogId: number;
-                            workorderId: number;
                             isRequest: null | number;
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: number;
+                            deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
-                            waitingTime: null | number;
                             orderNo: null | number;
                             tblFollowStatus?: null | ({
                                 followStatusId: number;
@@ -45568,47 +45215,6 @@ export interface operations {
                                 followStatusId: null | number;
                                 orderNo: null | number;
                                 updatedUserId: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            };
-                            tblWorkOrder?: {
-                                workOrderId: number;
-                                compJobId: null | number;
-                                maintClassId: null | number;
-                                maintTypeId: null | number;
-                                maintCauseId: null | number;
-                                createdBy: null | number;
-                                issuedBy: null | number;
-                                plannedBy: null | number;
-                                issuedDate: null | string;
-                                respDiscId: null | number;
-                                compId: null | number;
-                                roundId: null | number;
-                                parentWorkOrderId: null | number;
-                                woNo: null | string;
-                                title: null | string;
-                                priority: null | number;
-                                estTotalDuration: null | number;
-                                dueDate: null | string;
-                                window: null | number;
-                                created: null | string;
-                                started: null | string;
-                                completed: null | string;
-                                description: null | string;
-                                filed: null | number;
-                                unexpected: null | number;
-                                workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                reportingMethod: null | number;
-                                pendingBy: null | number;
-                                pendTypeId: null | number;
-                                pendingdate: null | string;
-                                orderNo: null | number;
-                                userId: null | number;
-                                userComment: null | string;
-                                workOrderTypeId: null | number;
                             } & {
                                 [key: string]: unknown;
                             };
@@ -45662,7 +45268,6 @@ export interface operations {
                     followDesc?: null | string;
                     exportMarker?: null | number;
                     lastupdate?: null | string;
-                    waitingTime?: null | number;
                     orderNo?: null | number;
                     tblFollowStatus?: {
                         connect: {
@@ -45672,11 +45277,6 @@ export interface operations {
                     tblMaintLog: {
                         connect: {
                             maintLogId: number;
-                        };
-                    };
-                    tblWorkOrder: {
-                        connect: {
-                            workOrderId: number;
                         };
                     };
                     tblUsers: {
@@ -45692,7 +45292,6 @@ export interface operations {
                     followDesc?: null | string;
                     exportMarker?: null | number;
                     lastupdate?: null | string;
-                    waitingTime?: null | number;
                     orderNo?: null | number;
                     tblFollowStatus?: {
                         connect: {
@@ -45702,11 +45301,6 @@ export interface operations {
                     tblMaintLog: {
                         connect: {
                             maintLogId: number;
-                        };
-                    };
-                    tblWorkOrder: {
-                        connect: {
-                            workOrderId: number;
                         };
                     };
                     tblUsers: {
@@ -45722,7 +45316,6 @@ export interface operations {
                     followDesc?: null | string;
                     exportMarker?: null | number;
                     lastupdate?: null | string;
-                    waitingTime?: null | number;
                     orderNo?: null | number;
                     tblFollowStatus?: {
                         connect: {
@@ -45732,11 +45325,6 @@ export interface operations {
                     tblMaintLog: {
                         connect: {
                             maintLogId: number;
-                        };
-                    };
-                    tblWorkOrder: {
-                        connect: {
-                            workOrderId: number;
                         };
                     };
                     tblUsers: {
@@ -45758,16 +45346,14 @@ export interface operations {
                         followId: number;
                         userId: number;
                         maintLogId: number;
-                        workorderId: number;
                         isRequest: null | number;
                         isWaiting: null | number;
                         isUnPlan: null | number;
                         followDesc: null | string;
-                        deptId: number;
+                        deptId: null | number;
                         exportMarker: null | number;
                         lastupdate: null | string;
                         followStatuseId: null | number;
-                        waitingTime: null | number;
                         orderNo: null | number;
                         tblFollowStatus?: null | ({
                             followStatusId: number;
@@ -45811,47 +45397,6 @@ export interface operations {
                             followStatusId: null | number;
                             orderNo: null | number;
                             updatedUserId: null | number;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                        tblWorkOrder?: {
-                            workOrderId: number;
-                            compJobId: null | number;
-                            maintClassId: null | number;
-                            maintTypeId: null | number;
-                            maintCauseId: null | number;
-                            createdBy: null | number;
-                            issuedBy: null | number;
-                            plannedBy: null | number;
-                            issuedDate: null | string;
-                            respDiscId: null | number;
-                            compId: null | number;
-                            roundId: null | number;
-                            parentWorkOrderId: null | number;
-                            woNo: null | string;
-                            title: null | string;
-                            priority: null | number;
-                            estTotalDuration: null | number;
-                            dueDate: null | string;
-                            window: null | number;
-                            created: null | string;
-                            started: null | string;
-                            completed: null | string;
-                            description: null | string;
-                            filed: null | number;
-                            unexpected: null | number;
-                            workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            reportingMethod: null | number;
-                            pendingBy: null | number;
-                            pendTypeId: null | number;
-                            pendingdate: null | string;
-                            orderNo: null | number;
-                            userId: null | number;
-                            userComment: null | string;
-                            workOrderTypeId: null | number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -45939,16 +45484,14 @@ export interface operations {
                         followId: number;
                         userId: number;
                         maintLogId: number;
-                        workorderId: number;
                         isRequest: null | number;
                         isWaiting: null | number;
                         isUnPlan: null | number;
                         followDesc: null | string;
-                        deptId: number;
+                        deptId: null | number;
                         exportMarker: null | number;
                         lastupdate: null | string;
                         followStatuseId: null | number;
-                        waitingTime: null | number;
                         orderNo: null | number;
                         tblFollowStatus?: null | ({
                             followStatusId: number;
@@ -45992,47 +45535,6 @@ export interface operations {
                             followStatusId: null | number;
                             orderNo: null | number;
                             updatedUserId: null | number;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                        tblWorkOrder?: {
-                            workOrderId: number;
-                            compJobId: null | number;
-                            maintClassId: null | number;
-                            maintTypeId: null | number;
-                            maintCauseId: null | number;
-                            createdBy: null | number;
-                            issuedBy: null | number;
-                            plannedBy: null | number;
-                            issuedDate: null | string;
-                            respDiscId: null | number;
-                            compId: null | number;
-                            roundId: null | number;
-                            parentWorkOrderId: null | number;
-                            woNo: null | string;
-                            title: null | string;
-                            priority: null | number;
-                            estTotalDuration: null | number;
-                            dueDate: null | string;
-                            window: null | number;
-                            created: null | string;
-                            started: null | string;
-                            completed: null | string;
-                            description: null | string;
-                            filed: null | number;
-                            unexpected: null | number;
-                            workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            reportingMethod: null | number;
-                            pendingBy: null | number;
-                            pendTypeId: null | number;
-                            pendingdate: null | string;
-                            orderNo: null | number;
-                            userId: null | number;
-                            userComment: null | string;
-                            workOrderTypeId: null | number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -46086,7 +45588,6 @@ export interface operations {
                     followDesc?: null | string;
                     exportMarker?: null | number;
                     lastupdate?: null | string;
-                    waitingTime?: null | number;
                     orderNo?: null | number;
                     tblFollowStatus?: {
                         connect?: {
@@ -46097,11 +45598,6 @@ export interface operations {
                     tblMaintLog?: {
                         connect: {
                             maintLogId: number;
-                        };
-                    };
-                    tblWorkOrder?: {
-                        connect: {
-                            workOrderId: number;
                         };
                     };
                     tblUsers?: {
@@ -46117,7 +45613,6 @@ export interface operations {
                     followDesc?: null | string;
                     exportMarker?: null | number;
                     lastupdate?: null | string;
-                    waitingTime?: null | number;
                     orderNo?: null | number;
                     tblFollowStatus?: {
                         connect?: {
@@ -46128,11 +45623,6 @@ export interface operations {
                     tblMaintLog?: {
                         connect: {
                             maintLogId: number;
-                        };
-                    };
-                    tblWorkOrder?: {
-                        connect: {
-                            workOrderId: number;
                         };
                     };
                     tblUsers?: {
@@ -46148,7 +45638,6 @@ export interface operations {
                     followDesc?: null | string;
                     exportMarker?: null | number;
                     lastupdate?: null | string;
-                    waitingTime?: null | number;
                     orderNo?: null | number;
                     tblFollowStatus?: {
                         connect?: {
@@ -46159,11 +45648,6 @@ export interface operations {
                     tblMaintLog?: {
                         connect: {
                             maintLogId: number;
-                        };
-                    };
-                    tblWorkOrder?: {
-                        connect: {
-                            workOrderId: number;
                         };
                     };
                     tblUsers?: {
@@ -46185,16 +45669,14 @@ export interface operations {
                         followId: number;
                         userId: number;
                         maintLogId: number;
-                        workorderId: number;
                         isRequest: null | number;
                         isWaiting: null | number;
                         isUnPlan: null | number;
                         followDesc: null | string;
-                        deptId: number;
+                        deptId: null | number;
                         exportMarker: null | number;
                         lastupdate: null | string;
                         followStatuseId: null | number;
-                        waitingTime: null | number;
                         orderNo: null | number;
                         tblFollowStatus?: null | ({
                             followStatusId: number;
@@ -46238,47 +45720,6 @@ export interface operations {
                             followStatusId: null | number;
                             orderNo: null | number;
                             updatedUserId: null | number;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                        tblWorkOrder?: {
-                            workOrderId: number;
-                            compJobId: null | number;
-                            maintClassId: null | number;
-                            maintTypeId: null | number;
-                            maintCauseId: null | number;
-                            createdBy: null | number;
-                            issuedBy: null | number;
-                            plannedBy: null | number;
-                            issuedDate: null | string;
-                            respDiscId: null | number;
-                            compId: null | number;
-                            roundId: null | number;
-                            parentWorkOrderId: null | number;
-                            woNo: null | string;
-                            title: null | string;
-                            priority: null | number;
-                            estTotalDuration: null | number;
-                            dueDate: null | string;
-                            window: null | number;
-                            created: null | string;
-                            started: null | string;
-                            completed: null | string;
-                            description: null | string;
-                            filed: null | number;
-                            unexpected: null | number;
-                            workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            reportingMethod: null | number;
-                            pendingBy: null | number;
-                            pendTypeId: null | number;
-                            pendingdate: null | string;
-                            orderNo: null | number;
-                            userId: null | number;
-                            userComment: null | string;
-                            workOrderTypeId: null | number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -46334,16 +45775,14 @@ export interface operations {
                         followId: number;
                         userId: number;
                         maintLogId: number;
-                        workorderId: number;
                         isRequest: null | number;
                         isWaiting: null | number;
                         isUnPlan: null | number;
                         followDesc: null | string;
-                        deptId: number;
+                        deptId: null | number;
                         exportMarker: null | number;
                         lastupdate: null | string;
                         followStatuseId: null | number;
-                        waitingTime: null | number;
                         orderNo: null | number;
                         tblFollowStatus?: null | ({
                             followStatusId: number;
@@ -46387,47 +45826,6 @@ export interface operations {
                             followStatusId: null | number;
                             orderNo: null | number;
                             updatedUserId: null | number;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                        tblWorkOrder?: {
-                            workOrderId: number;
-                            compJobId: null | number;
-                            maintClassId: null | number;
-                            maintTypeId: null | number;
-                            maintCauseId: null | number;
-                            createdBy: null | number;
-                            issuedBy: null | number;
-                            plannedBy: null | number;
-                            issuedDate: null | string;
-                            respDiscId: null | number;
-                            compId: null | number;
-                            roundId: null | number;
-                            parentWorkOrderId: null | number;
-                            woNo: null | string;
-                            title: null | string;
-                            priority: null | number;
-                            estTotalDuration: null | number;
-                            dueDate: null | string;
-                            window: null | number;
-                            created: null | string;
-                            started: null | string;
-                            completed: null | string;
-                            description: null | string;
-                            filed: null | number;
-                            unexpected: null | number;
-                            workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            reportingMethod: null | number;
-                            pendingBy: null | number;
-                            pendTypeId: null | number;
-                            pendingdate: null | string;
-                            orderNo: null | number;
-                            userId: null | number;
-                            userComment: null | string;
-                            workOrderTypeId: null | number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -55519,16 +54917,14 @@ export interface operations {
                                 followId: number;
                                 userId: number;
                                 maintLogId: number;
-                                workorderId: number;
                                 isRequest: null | number;
                                 isWaiting: null | number;
                                 isUnPlan: null | number;
                                 followDesc: null | string;
-                                deptId: number;
+                                deptId: null | number;
                                 exportMarker: null | number;
                                 lastupdate: null | string;
                                 followStatuseId: null | number;
-                                waitingTime: null | number;
                                 orderNo: null | number;
                             }[];
                             tblReScheduleLogs?: {
@@ -56837,16 +56233,14 @@ export interface operations {
                             followId: number;
                             userId: number;
                             maintLogId: number;
-                            workorderId: number;
                             isRequest: null | number;
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: number;
+                            deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
-                            waitingTime: null | number;
                             orderNo: null | number;
                         }[];
                         tblReScheduleLogs?: {
@@ -57592,16 +56986,14 @@ export interface operations {
                             followId: number;
                             userId: number;
                             maintLogId: number;
-                            workorderId: number;
                             isRequest: null | number;
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: number;
+                            deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
-                            waitingTime: null | number;
                             orderNo: null | number;
                         }[];
                         tblReScheduleLogs?: {
@@ -59228,16 +58620,14 @@ export interface operations {
                             followId: number;
                             userId: number;
                             maintLogId: number;
-                            workorderId: number;
                             isRequest: null | number;
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: number;
+                            deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
-                            waitingTime: null | number;
                             orderNo: null | number;
                         }[];
                         tblReScheduleLogs?: {
@@ -59951,16 +59341,14 @@ export interface operations {
                             followId: number;
                             userId: number;
                             maintLogId: number;
-                            workorderId: number;
                             isRequest: null | number;
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: number;
+                            deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
-                            waitingTime: null | number;
                             orderNo: null | number;
                         }[];
                         tblReScheduleLogs?: {
@@ -60255,449 +59643,7 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            workOrderId: number;
-                            compJobId: null | number;
-                            maintClassId: null | number;
-                            maintTypeId: null | number;
-                            maintCauseId: null | number;
-                            createdBy: null | number;
-                            issuedBy: null | number;
-                            plannedBy: null | number;
-                            issuedDate: null | string;
-                            respDiscId: null | number;
-                            compId: null | number;
-                            roundId: null | number;
-                            parentWorkOrderId: null | number;
-                            woNo: null | string;
-                            title: null | string;
-                            priority: null | number;
-                            estTotalDuration: null | number;
-                            dueDate: null | string;
-                            window: null | number;
-                            created: null | string;
-                            started: null | string;
-                            completed: null | string;
-                            description: null | string;
-                            filed: null | number;
-                            unexpected: null | number;
-                            workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            reportingMethod: null | number;
-                            pendingBy: null | number;
-                            pendTypeId: null | number;
-                            pendingdate: null | string;
-                            orderNo: null | number;
-                            userId: null | number;
-                            userComment: null | string;
-                            workOrderTypeId: null | number;
-                            tblMaintLogs?: {
-                                maintLogId: number;
-                                maintCauseId: null | number;
-                                maintTypeId: null | number;
-                                maintClassId: null | number;
-                                functionId: null | number;
-                                jobDescId: null | number;
-                                workOrderId: null | number;
-                                compId: null | number;
-                                roundId: null | number;
-                                totalDuration: null | number;
-                                downTime: null | number;
-                                dateDone: null | string;
-                                frequency: null | number;
-                                frequencyPeriod: null | number;
-                                overdueCount: null | number;
-                                overdueReason: null | string;
-                                unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                history: null | string;
-                                mlStatus: null | number;
-                                followStatusId: null | number;
-                                orderNo: null | number;
-                                updatedUserId: null | number;
-                            }[];
-                            tblMaintLogFollows?: {
-                                followId: number;
-                                userId: number;
-                                maintLogId: number;
-                                workorderId: number;
-                                isRequest: null | number;
-                                isWaiting: null | number;
-                                isUnPlan: null | number;
-                                followDesc: null | string;
-                                deptId: number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                followStatuseId: null | number;
-                                waitingTime: null | number;
-                                orderNo: null | number;
-                            }[];
-                            tblReScheduleLogs?: {
-                                rescheduleLogId: number;
-                                workOrderId: null | number;
-                                fromDueDate: null | string;
-                                toDueDate: null | string;
-                                rescheduledBy: null | number;
-                                rescheduledDate: null | string;
-                                reason: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                orderNo: null | number;
-                            }[];
-                            tblCompJob?: null | ({
-                                compJobId: number;
-                                discId: null | number;
-                                compId: null | number;
-                                jobDescId: null | number;
-                                jobConditionId: null | number;
-                                maintClassId: null | number;
-                                maintCauseId: null | number;
-                                maintTypeId: null | number;
-                                rescheduleLimitId: null | number;
-                                frequency: null | number;
-                                frequencyPeriod: null | number;
-                                changeReason: null | string;
-                                planningMethod: null | number;
-                                statusNone: null | number;
-                                statusInUse: null | number;
-                                statusAvailable: null | number;
-                                statusRepair: null | number;
-                                lastDone: null | string;
-                                nextDueDate: null | string;
-                                cbmStatus: null | number;
-                                outputFormat: null | number;
-                                priority: null | number;
-                                window: null | number;
-                                active: null | number;
-                                mandatoryHistory: null | number;
-                                notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                mandatoryResource: null | number;
-                                mandatoryStockUsage: null | number;
-                                orderNo: null | number;
-                                createdUserId: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblComponentUnit?: null | ({
-                                compId: number;
-                                compTypeId: null | number;
-                                locationId: null | number;
-                                parentCompId: null | number;
-                                vendorId: null | number;
-                                compNo: null | string;
-                                serialNo: null | string;
-                                statusId: null | number;
-                                notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                isCritical: null | number;
-                                orderNo: null | number;
-                                model: null | string;
-                                comment1: null | string;
-                                comment2: null | string;
-                                comment3: null | string;
-                                assetNo: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblDiscipline?: null | ({
-                                discId: number;
-                                code: null | string;
-                                name: null | string;
-                                externalDisc: null | number;
-                                parentDiscId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                orderNo: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblMaintCause?: null | ({
-                                maintCauseId: number;
-                                descr: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                orderNo: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblMaintClass?: null | ({
-                                maintClassId: number;
-                                descr: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                orderNo: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblMaintType?: null | ({
-                                maintTypeId: number;
-                                descr: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                orderNo: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblPendingType?: null | ({
-                                pendTypeId: number;
-                                parentId: null | number;
-                                groupId: null | number;
-                                pendTypeName: string;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                sortId: null | number;
-                                description: null | string;
-                                orderNo: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblRound?: null | ({
-                                roundId: number;
-                                maintCauseId: null | number;
-                                maintClassId: null | number;
-                                maintTypeId: null | number;
-                                rescheduleLimitId: null | number;
-                                roundCode: null | string;
-                                roundTitle: null | string;
-                                discId: null | number;
-                                frequency: null | number;
-                                frequencyPeriod: null | number;
-                                planningMethod: null | number;
-                                includeAllJobs: null | number;
-                                reportingMethod: null | number;
-                                lastDone: null | string;
-                                nextDueDate: null | string;
-                                description: null | string;
-                                priority: null | number;
-                                window: null | number;
-                                outputFormat: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                mandatoryHistory: null | number;
-                                mandatoryResource: null | number;
-                                mandatoryStockUsage: null | number;
-                                defineMethodOnReporting: null | number;
-                                orderNo: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblWorkOrder?: null | ({
-                                workOrderId: number;
-                                compJobId: null | number;
-                                maintClassId: null | number;
-                                maintTypeId: null | number;
-                                maintCauseId: null | number;
-                                createdBy: null | number;
-                                issuedBy: null | number;
-                                plannedBy: null | number;
-                                issuedDate: null | string;
-                                respDiscId: null | number;
-                                compId: null | number;
-                                roundId: null | number;
-                                parentWorkOrderId: null | number;
-                                woNo: null | string;
-                                title: null | string;
-                                priority: null | number;
-                                estTotalDuration: null | number;
-                                dueDate: null | string;
-                                window: null | number;
-                                created: null | string;
-                                started: null | string;
-                                completed: null | string;
-                                description: null | string;
-                                filed: null | number;
-                                unexpected: null | number;
-                                workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                reportingMethod: null | number;
-                                pendingBy: null | number;
-                                pendTypeId: null | number;
-                                pendingdate: null | string;
-                                orderNo: null | number;
-                                userId: null | number;
-                                userComment: null | string;
-                                workOrderTypeId: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            otherTblWorkOrders?: {
-                                workOrderId: number;
-                                compJobId: null | number;
-                                maintClassId: null | number;
-                                maintTypeId: null | number;
-                                maintCauseId: null | number;
-                                createdBy: null | number;
-                                issuedBy: null | number;
-                                plannedBy: null | number;
-                                issuedDate: null | string;
-                                respDiscId: null | number;
-                                compId: null | number;
-                                roundId: null | number;
-                                parentWorkOrderId: null | number;
-                                woNo: null | string;
-                                title: null | string;
-                                priority: null | number;
-                                estTotalDuration: null | number;
-                                dueDate: null | string;
-                                window: null | number;
-                                created: null | string;
-                                started: null | string;
-                                completed: null | string;
-                                description: null | string;
-                                filed: null | number;
-                                unexpected: null | number;
-                                workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                reportingMethod: null | number;
-                                pendingBy: null | number;
-                                pendTypeId: null | number;
-                                pendingdate: null | string;
-                                orderNo: null | number;
-                                userId: null | number;
-                                userComment: null | string;
-                                workOrderTypeId: null | number;
-                            }[];
-                            tblWorkOrderStatus?: null | ({
-                                workOrderStatusId: number;
-                                name: string;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblUsersTblWorkOrderIssuedByTotblUsers?: null | ({
-                                userId: number;
-                                employeeId: null | number;
-                                addressId: null | number;
-                                userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
-                                uName: null | string;
-                                uTitle: null | string;
-                                uComment1: null | string;
-                                uComment2: null | string;
-                                uDigitalSign: null | string;
-                                uAccountDisabled: null | boolean;
-                                uLogonAttempts: null | number;
-                                uForcePasswordChange: null | boolean;
-                                uLastLogin: null | string;
-                                exportMarker: null | number;
-                                uLastUpdated: null | string;
-                                orderNo: null | number;
-                                deptId: null | number;
-                                lastUpdate: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblUsersTblWorkOrderPlannedByTotblUsers?: null | ({
-                                userId: number;
-                                employeeId: null | number;
-                                addressId: null | number;
-                                userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
-                                uName: null | string;
-                                uTitle: null | string;
-                                uComment1: null | string;
-                                uComment2: null | string;
-                                uDigitalSign: null | string;
-                                uAccountDisabled: null | boolean;
-                                uLogonAttempts: null | number;
-                                uForcePasswordChange: null | boolean;
-                                uLastLogin: null | string;
-                                exportMarker: null | number;
-                                uLastUpdated: null | string;
-                                orderNo: null | number;
-                                deptId: null | number;
-                                lastUpdate: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblUsersTblWorkOrderCreatedByTotblUsers?: null | ({
-                                userId: number;
-                                employeeId: null | number;
-                                addressId: null | number;
-                                userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
-                                uName: null | string;
-                                uTitle: null | string;
-                                uComment1: null | string;
-                                uComment2: null | string;
-                                uDigitalSign: null | string;
-                                uAccountDisabled: null | boolean;
-                                uLogonAttempts: null | number;
-                                uForcePasswordChange: null | boolean;
-                                uLastLogin: null | string;
-                                exportMarker: null | number;
-                                uLastUpdated: null | string;
-                                orderNo: null | number;
-                                deptId: null | number;
-                                lastUpdate: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblUsersTblWorkOrderPendingByTotblUsers?: null | ({
-                                userId: number;
-                                employeeId: null | number;
-                                addressId: null | number;
-                                userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
-                                uName: null | string;
-                                uTitle: null | string;
-                                uComment1: null | string;
-                                uComment2: null | string;
-                                uDigitalSign: null | string;
-                                uAccountDisabled: null | boolean;
-                                uLogonAttempts: null | number;
-                                uForcePasswordChange: null | boolean;
-                                uLastLogin: null | string;
-                                exportMarker: null | number;
-                                uLastUpdated: null | string;
-                                orderNo: null | number;
-                                deptId: null | number;
-                                lastUpdate: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                        }[];
-                        total: number;
-                        page: number;
-                        perPage: number;
-                        totalPages: number;
-                    };
-                };
-            };
-        };
+        responses: never;
     };
     postTblWorkOrder: {
         parameters: {
@@ -60735,11 +59681,6 @@ export interface operations {
                     tblMaintLogs?: {
                         connect: {
                             maintLogId: number;
-                        }[];
-                    };
-                    tblMaintLogFollows?: {
-                        connect: {
-                            followId: number;
                         }[];
                     };
                     tblReScheduleLogs?: {
@@ -60852,11 +59793,6 @@ export interface operations {
                             maintLogId: number;
                         }[];
                     };
-                    tblMaintLogFollows?: {
-                        connect: {
-                            followId: number;
-                        }[];
-                    };
                     tblReScheduleLogs?: {
                         connect: {
                             rescheduleLogId: number;
@@ -60965,11 +59901,6 @@ export interface operations {
                     tblMaintLogs?: {
                         connect: {
                             maintLogId: number;
-                        }[];
-                    };
-                    tblMaintLogFollows?: {
-                        connect: {
-                            followId: number;
                         }[];
                     };
                     tblReScheduleLogs?: {
@@ -61128,22 +60059,6 @@ export interface operations {
                             followStatusId: null | number;
                             orderNo: null | number;
                             updatedUserId: null | number;
-                        }[];
-                        tblMaintLogFollows?: {
-                            followId: number;
-                            userId: number;
-                            maintLogId: number;
-                            workorderId: number;
-                            isRequest: null | number;
-                            isWaiting: null | number;
-                            isUnPlan: null | number;
-                            followDesc: null | string;
-                            deptId: number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            followStatuseId: null | number;
-                            waitingTime: null | number;
-                            orderNo: null | number;
                         }[];
                         tblReScheduleLogs?: {
                             rescheduleLogId: number;
@@ -61611,22 +60526,6 @@ export interface operations {
                             orderNo: null | number;
                             updatedUserId: null | number;
                         }[];
-                        tblMaintLogFollows?: {
-                            followId: number;
-                            userId: number;
-                            maintLogId: number;
-                            workorderId: number;
-                            isRequest: null | number;
-                            isWaiting: null | number;
-                            isUnPlan: null | number;
-                            followDesc: null | string;
-                            deptId: number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            followStatuseId: null | number;
-                            waitingTime: null | number;
-                            orderNo: null | number;
-                        }[];
                         tblReScheduleLogs?: {
                             rescheduleLogId: number;
                             workOrderId: null | number;
@@ -62021,14 +60920,6 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblMaintLogFollows?: {
-                        connect?: {
-                            followId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblReScheduleLogs?: {
                         connect?: {
                             rescheduleLogId: number;
@@ -62162,14 +61053,6 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblMaintLogFollows?: {
-                        connect?: {
-                            followId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblReScheduleLogs?: {
                         connect?: {
                             rescheduleLogId: number;
@@ -62298,14 +61181,6 @@ export interface operations {
                     tblMaintLogs?: {
                         connect?: {
                             maintLogId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblMaintLogFollows?: {
-                        connect?: {
-                            followId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -62487,22 +61362,6 @@ export interface operations {
                             followStatusId: null | number;
                             orderNo: null | number;
                             updatedUserId: null | number;
-                        }[];
-                        tblMaintLogFollows?: {
-                            followId: number;
-                            userId: number;
-                            maintLogId: number;
-                            workorderId: number;
-                            isRequest: null | number;
-                            isWaiting: null | number;
-                            isUnPlan: null | number;
-                            followDesc: null | string;
-                            deptId: number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            followStatuseId: null | number;
-                            waitingTime: null | number;
-                            orderNo: null | number;
                         }[];
                         tblReScheduleLogs?: {
                             rescheduleLogId: number;
@@ -62938,22 +61797,6 @@ export interface operations {
                             orderNo: null | number;
                             updatedUserId: null | number;
                         }[];
-                        tblMaintLogFollows?: {
-                            followId: number;
-                            userId: number;
-                            maintLogId: number;
-                            workorderId: number;
-                            isRequest: null | number;
-                            isWaiting: null | number;
-                            isUnPlan: null | number;
-                            followDesc: null | string;
-                            deptId: number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            followStatuseId: null | number;
-                            waitingTime: null | number;
-                            orderNo: null | number;
-                        }[];
                         tblReScheduleLogs?: {
                             rescheduleLogId: number;
                             workOrderId: null | number;
@@ -63376,8 +62219,39 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: never;
-        responses: never;
+        requestBody: {
+            content: {
+                "application/json": {
+                    maintLogId: number;
+                    userId: number;
+                };
+                "application/x-www-form-urlencoded": {
+                    maintLogId: number;
+                    userId: number;
+                };
+                "multipart/form-data": {
+                    maintLogId: number;
+                    userId: number;
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        message: string;
+                        success: boolean;
+                        workOrderId?: number;
+                        dueDate?: string;
+                        planningMethod?: string;
+                    };
+                };
+            };
+        };
     };
     getTblWorkOrderStatus: {
         parameters: {

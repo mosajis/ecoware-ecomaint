@@ -1,23 +1,21 @@
 import * as z from "zod";
-import { memo, useEffect, useState, useCallback } from "react";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import NumberField from "@/shared/components/fields/FieldNumber";
-
+import TextField from "@mui/material/TextField";
+import { memo, useEffect, useState, useCallback } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { buildRelation } from "@/core/helper";
+import { useAtomValue } from "jotai";
+import { atomInitalData } from "../../ReportWorkAtom";
 import {
   tblEmployee,
   tblLogDiscipline,
   TypeTblEmployee,
   TypeTblLogDiscipline,
 } from "@/core/api/generated/api";
-import { buildRelation } from "@/core/helper";
-import { useAtomValue } from "jotai";
-import { atomInitalData } from "../../ReportWorkAtom";
 
 /* =========================
    Schema

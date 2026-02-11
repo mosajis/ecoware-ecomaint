@@ -3,18 +3,29 @@ import CalendarToday from "@mui/icons-material/CalendarToday";
 import AccessTime from "@mui/icons-material/AccessTime";
 import Event from "@mui/icons-material/Event";
 import ClearIcon from "@mui/icons-material/Clear";
-import { DatePicker, DateTimePicker, TimePicker } from "@mui/x-date-pickers";
+import {
+  DatePicker,
+  DatePickerProps,
+  DateTimePicker,
+  DateTimePickerProps,
+  TimePicker,
+  TimePickerProps,
+} from "@mui/x-date-pickers";
 import { DATE_FORMATS, DateTimeType } from "@/const";
 import { useAtomValue } from "jotai";
 import { atomLanguage } from "@/shared/atoms/general.atom";
 
 interface DateFieldProps {
   label: string;
-  field: any;
+  field: any; // بهتره بعداً نوع دقیق‌تر بذارید (مثلاً از react-hook-form)
   disabled?: boolean;
   type?: DateTimeType;
   error?: boolean;
   helperText?: React.ReactNode;
+  // اجازه می‌دیم props خاص هر picker رو دریافت کنیم
+  pickerProps?: Partial<
+    DatePickerProps<any> & DateTimePickerProps<any> & TimePickerProps<any>
+  >;
 }
 
 const FieldDateTime: React.FC<DateFieldProps> = ({
@@ -24,7 +35,8 @@ const FieldDateTime: React.FC<DateFieldProps> = ({
   type = "DATE",
   error,
   helperText,
-  ...restProps
+  pickerProps = {}, // اسم بهتر و معنادارتر
+  ...rest // اگر props دیگری هم پاس داده شد (خیلی کم پیش میاد)
 }) => {
   const language = useAtomValue(atomLanguage);
   const locale = language === "fa" ? "FA" : "EN";
@@ -46,6 +58,7 @@ const FieldDateTime: React.FC<DateFieldProps> = ({
     }
   };
 
+  // انتخاب picker مناسب
   const Picker =
     type === "TIME"
       ? TimePicker
@@ -68,7 +81,6 @@ const FieldDateTime: React.FC<DateFieldProps> = ({
 
   return (
     <Picker
-      {...restProps}
       label={label}
       value={dateValue}
       onChange={handleChange}
@@ -91,6 +103,9 @@ const FieldDateTime: React.FC<DateFieldProps> = ({
         openPickerButton: { sx: { ...buttonStyle, marginRight: "-8px" } },
         clearButton: { sx: buttonStyle },
       }}
+      // مهم: props اضافی که از بیرون پاس داده می‌شود
+      {...pickerProps}
+      // اگر خواستی ampm و timeSteps فقط برای TIME و DATETIME اعمال بشه
       {...((type === "TIME" || type === "DATETIME") && {
         ampm: false,
         timeSteps: { minutes: 1 },

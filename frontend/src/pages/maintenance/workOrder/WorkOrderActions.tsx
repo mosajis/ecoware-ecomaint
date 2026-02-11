@@ -18,7 +18,7 @@ type Props = {
   onPrint: () => void;
 };
 
-export default function WorkOrderActionBar({
+export default function WorkOrderActions({
   selectedStatuses,
   onIssue,
   onComplete,

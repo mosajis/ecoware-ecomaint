@@ -9,7 +9,7 @@ type RHFField = {
 
 type NumberFieldProps = Omit<TextFieldProps, "value" | "onChange" | "type"> & {
   label: string;
-
+  readOnly?: boolean;
   field?: RHFField;
 
   value?: number | null;
@@ -20,6 +20,7 @@ const FieldNumber = ({
   label,
   field,
   value,
+  readOnly = false,
   onChange,
   ...restProps
 }: NumberFieldProps) => {
@@ -34,6 +35,9 @@ const FieldNumber = ({
       size="small"
       label={label}
       type="number"
+      InputProps={{
+        readOnly,
+      }}
       value={resolvedValue ?? ""}
       onChange={(e) => {
         const val = e.target.value;

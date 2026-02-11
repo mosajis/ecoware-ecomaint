@@ -1,26 +1,35 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import ReportWorkStep from "../../ReportWorkStep";
 import StepResourceUsedUpsert from "./StepResourceUsedUpsert";
+import Alert from "@mui/material/Alert";
 import { useState, useCallback } from "react";
-import { useAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { GridColDef } from "@mui/x-data-grid";
 import { atomInitalData } from "../../ReportWorkAtom";
 import {
   tblLogDiscipline,
-  TypeTblEmployee,
   TypeTblLogDiscipline,
 } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
-const TabResourceUsed = () => {
-  const [initData] = useAtom(atomInitalData);
+interface StepResourceUsedProps {
+  onDialogSuccess?: () => void;
+}
+
+const StepResourceUsed = ({ onDialogSuccess }: StepResourceUsedProps) => {
+  const initData = useAtomValue(atomInitalData);
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
+  const maintLogId = initData.maintLog?.maintLogId;
+
   // === Handlers ===
   const handleCreate = () => {
+    if (!maintLogId) {
+      return; // Should not happen due to disabled state
+    }
     setSelectedRowId(null);
     setMode("create");
     setOpenForm(true);
@@ -35,16 +44,17 @@ const TabResourceUsed = () => {
   const getAll = useCallback(() => {
     return tblLogDiscipline.getAll({
       filter: {
-        maintLogId: initData.maintLog?.maintLogId,
+        maintLogId: maintLogId,
       },
       include: { tblDiscipline: true, tblEmployee: true },
     });
-  }, [initData.maintLog?.maintLogId]);
+  }, [maintLogId]);
 
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
     getAll,
     tblLogDiscipline.deleteById,
     "logDiscId",
+    !!maintLogId, // Only fetch if maintLogId exists
   );
 
   const handleFormSuccess = () => {
@@ -57,7 +67,7 @@ const TabResourceUsed = () => {
     {
       field: "logDiscId",
       headerName: "Id",
-      flex: 1,
+      width: 80,
     },
     {
       field: "name",
@@ -72,7 +82,12 @@ const TabResourceUsed = () => {
       flex: 1,
       valueGetter: (_, row) => row.tblDiscipline?.name,
     },
-    { field: "timeSpent", headerName: "Time Spent (not set)", flex: 1 },
+    {
+      field: "timeSpent",
+      headerName: "Time Spent (min)",
+      flex: 1,
+      valueGetter: (_, row) => row.timeSpent || "--",
+    },
     dataGridActionColumn({
       onEdit: handleEdit,
       onDelete: handleDelete,
@@ -85,29 +100,37 @@ const TabResourceUsed = () => {
 
   return (
     <>
-      <ReportWorkStep onNext={handleNext}>
-        <CustomizedDataGrid
-          loading={loading}
-          showToolbar
-          onRefreshClick={handleRefresh}
-          label="Resource Used"
-          rows={rows}
-          columns={columns}
-          onAddClick={handleCreate}
-          getRowId={(row) => row.logDiscId}
-        />
+      <ReportWorkStep onNext={handleNext} onDialogSuccess={onDialogSuccess}>
+        {!maintLogId ? (
+          <Alert severity="warning">
+            Please save the General information first before adding resources.
+          </Alert>
+        ) : (
+          <CustomizedDataGrid
+            loading={loading}
+            showToolbar
+            onRefreshClick={handleRefresh}
+            label="Resource Used"
+            rows={rows}
+            columns={columns}
+            onAddClick={handleCreate}
+            getRowId={(row) => row.logDiscId}
+          />
+        )}
       </ReportWorkStep>
 
       {/* === FORM === */}
-      <StepResourceUsedUpsert
-        open={openForm}
-        mode={mode}
-        recordId={selectedRowId}
-        onClose={() => setOpenForm(false)}
-        onSuccess={handleFormSuccess}
-      />
+      {maintLogId && (
+        <StepResourceUsedUpsert
+          open={openForm}
+          mode={mode}
+          recordId={selectedRowId}
+          onClose={() => setOpenForm(false)}
+          onSuccess={handleFormSuccess}
+        />
+      )}
     </>
   );
 };
 
-export default TabResourceUsed;
+export default StepResourceUsed;

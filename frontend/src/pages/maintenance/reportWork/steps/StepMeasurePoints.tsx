@@ -1,83 +1,109 @@
+import ReportWorkStep from "../ReportWorkStep";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { useCallback, useMemo } from "react";
-import {
-  tblCompTypeMeasurePoint,
-  type TypeTblCompTypeMeasurePoint,
-} from "@/core/api/generated/api";
+import { useCallback } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import ReportWorkStep from "../ReportWorkStep";
+import {
+  tblCompMeasurePoint,
+  type TypeTblCompMeasurePoint,
+} from "@/core/api/generated/api";
 
 interface TabMaintLogProps {
   compUnitId?: number | null;
   label?: string | null;
 }
 
+const columns: GridColDef<TypeTblCompMeasurePoint>[] = [
+  {
+    field: "counterTypeName",
+    headerName: "Measure Name",
+    flex: 1.4,
+    valueGetter: (_, row) => row.tblCounterType?.name || "—",
+  },
+  {
+    field: "unitName",
+    headerName: "Unit",
+    flex: 1,
+    valueGetter: (_, row) => row.tblUnit?.name || "—",
+  },
+  {
+    field: "currentValue",
+    headerName: "Current Value",
+    flex: 1,
+    align: "right",
+    headerAlign: "right",
+  },
+  {
+    field: "setValue",
+    headerName: "Set Value",
+    flex: 1,
+    align: "right",
+    headerAlign: "right",
+  },
+  {
+    field: "operationalMinValue",
+    headerName: "Min (Operational)",
+    flex: 1,
+    align: "right",
+    headerAlign: "right",
+  },
+  {
+    field: "operationalMaxValue",
+    headerName: "Max (Operational)",
+    flex: 1,
+    align: "right",
+    headerAlign: "right",
+  },
+  {
+    field: "lastupdate",
+    headerName: "Last Update",
+    flex: 1.1,
+    valueFormatter: (value) =>
+      value ? new Date(value as string).toLocaleString() : "—",
+  },
+  {
+    field: "changedBy",
+    headerName: "Changed By",
+    flex: 1,
+    valueGetter: (_, row) =>
+      row.tblUsers?.fullName || row.tblUsers?.username || "—",
+  },
+];
+
 const TabMeasures = ({ compUnitId }: TabMaintLogProps) => {
-  // === getAll callback ===
   const getAll = useCallback(() => {
-    return tblCompTypeMeasurePoint.getAll({
+    if (!compUnitId) {
+      return Promise.resolve({ items: [] });
+    }
+
+    return tblCompMeasurePoint.getAll({
+      filter: {
+        compId: compUnitId,
+      },
       include: {
-        tblUnit: true,
         tblCounterType: true,
+        tblUnit: true,
       },
     });
   }, [compUnitId]);
 
-  // === useDataGrid ===
-  const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
+  const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
-    tblCompTypeMeasurePoint.deleteById,
-    "compTypeMeasurePointId",
+    tblCompMeasurePoint.deleteById,
+    "compMeasurePointId",
     !!compUnitId,
-  );
-
-  // === Columns ===
-  const columns = useMemo<GridColDef<TypeTblCompTypeMeasurePoint>[]>(
-    () => [
-      {
-        field: "measureName",
-        headerName: "Measure Name",
-        flex: 1,
-        valueGetter: (v, row) => row?.tblCounterType?.name,
-      },
-      {
-        field: "unitName",
-        headerName: "Unit Name",
-        flex: 1,
-        valueGetter: (v, row) => row?.tblUnit?.name,
-      },
-      {
-        field: "unitDescription",
-        headerName: "Unit Description",
-        flex: 1,
-        valueGetter: (v, row) => row?.tblUnit?.description,
-      },
-      { field: "setValue", headerName: "Set Value", flex: 1 },
-      {
-        field: "operationalMinValue",
-        headerName: "Min Value",
-        flex: 1,
-      },
-      {
-        field: "operationalMaxValue",
-        headerName: "Max Value",
-        flex: 1,
-      },
-    ],
-    [],
   );
 
   return (
     <ReportWorkStep>
       <CustomizedDataGrid
-        label="Measures"
+        label="Component Measures"
         rows={rows}
         columns={columns}
         loading={loading}
         showToolbar
         onRefreshClick={handleRefresh}
-        getRowId={(row) => row.compTypeMeasurePointId}
+        getRowId={(row) => row.compMeasurePointId}
       />
     </ReportWorkStep>
   );

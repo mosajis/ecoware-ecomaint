@@ -6,19 +6,25 @@ import Box from "@mui/material/Box";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { buildRelation } from "@/core/helper";
 import { schema, TypeValues } from "./stepGeneralSchema";
+import { atomInitalData, atomIsDirty } from "../../ReportWorkAtom";
+import { useCallback, useEffect } from "react";
 import {
   tblMaintType,
   tblMaintCause,
   tblMaintClass,
   tblMaintLog,
 } from "@/core/api/generated/api";
-import { atomInitalData } from "../../ReportWorkAtom";
 
-const TabGeneral = () => {
+interface StepGeneralProps {
+  onDialogSuccess?: () => void;
+}
+
+const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
   const [initalData, setInitalData] = useAtom(atomInitalData);
+  const setIsDirty = useSetAtom(atomIsDirty);
 
   const defaultValues: TypeValues = {
     dateDone: initalData.maintLog?.dateDone || null,
@@ -36,164 +42,258 @@ const TabGeneral = () => {
   const {
     control,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, isDirty },
+    reset,
   } = useForm<TypeValues>({
     resolver: zodResolver(schema),
     defaultValues,
   });
 
-  const isDisabled = isSubmitting;
+  // Track dirty state in atom
+  useEffect(() => {
+    setIsDirty(isDirty);
+  }, [isDirty, setIsDirty]);
 
-  const onSubmit = async (values: TypeValues) => {
-    const payload = {
-      totalDuration: values.totalDuration ?? 0,
-      downTime: values.waitingMin ?? 0,
-      dateDone: values.dateDone,
-      unexpected: values.unexpected ? 1 : 0,
-      history: values.history || "",
+  const onSubmit = useCallback(
+    async (values: TypeValues) => {
+      // Don't submit if no changes
+      if (!isDirty && initalData.maintLog?.maintLogId) {
+        return initalData.maintLog;
+      }
 
-      ...buildRelation(
-        "tblMaintType",
-        "maintTypeId",
-        values.maintType?.maintTypeId,
-      ),
-      ...buildRelation(
-        "tblMaintCause",
-        "maintCauseId",
-        values.maintCause?.maintCauseId,
-      ),
-      ...buildRelation(
-        "tblMaintClass",
-        "maintClassId",
-        values.maintClass?.maintClassId,
-      ),
-    };
+      try {
+        const payload = {
+          totalDuration: values.totalDuration ?? 0,
+          downTime: values.waitingMin ?? 0,
+          dateDone: values.dateDone,
+          unexpected: values.unexpected ? 1 : 0,
+          history: values.history || "",
 
-    let savedRecord;
+          // Add componentUnitId for new records
+          ...(!initalData.maintLog?.maintLogId && {
+            componentUnitId: initalData.componentUnit?.compId,
+          }),
 
-    if (initalData.maintLog?.maintLogId) {
-      // اگر رکورد قبلاً وجود داشته، آپدیت کن
-      savedRecord = await tblMaintLog.update(
-        initalData.maintLog.maintLogId,
-        payload,
-      );
-    } else {
-      // اگر وجود نداشت، ایجاد کن
-      savedRecord = await tblMaintLog.create(payload);
-    }
+          ...buildRelation(
+            "tblMaintType",
+            "maintTypeId",
+            values.maintType?.maintTypeId,
+          ),
+          ...buildRelation(
+            "tblMaintCause",
+            "maintCauseId",
+            values.maintCause?.maintCauseId,
+          ),
+          ...buildRelation(
+            "tblMaintClass",
+            "maintClassId",
+            values.maintClass?.maintClassId,
+          ),
+        };
 
-    setInitalData((prev) => ({
-      ...prev,
-      maintLog: { ...prev.maintLog, ...savedRecord },
-    }));
+        let savedRecord;
 
-    return savedRecord;
-  };
+        if (initalData.maintLog?.maintLogId) {
+          // Update existing record
+          savedRecord = await tblMaintLog.update(
+            initalData.maintLog.maintLogId,
+            payload,
+          );
+        } else {
+          // Create new record
+          savedRecord = await tblMaintLog.create(payload);
+        }
+
+        // Fetch full record with relations
+        const fullRecord = await tblMaintLog.getById(savedRecord.maintLogId, {
+          include: {
+            tblMaintCause: true,
+            tblMaintClass: true,
+            tblMaintType: true,
+            tblWorkOrder: true,
+            tblJobDescription: true,
+          },
+        });
+
+        // Replace entire maintLog with fresh data
+        setInitalData((prev) => ({
+          ...prev,
+          maintLog: fullRecord,
+        }));
+
+        // Reset form with new values to clear dirty state
+        reset({
+          dateDone: fullRecord.dateDone || null,
+          totalDuration: fullRecord.totalDuration || null,
+          waitingMin: fullRecord.downTime || null,
+          unexpected: fullRecord.unexpected === 1 || false,
+          maintType: fullRecord.tblMaintType ?? null,
+          maintCause: fullRecord.tblMaintCause ?? null,
+          maintClass: fullRecord.tblMaintClass ?? null,
+          history: fullRecord.history || "",
+        });
+
+        return fullRecord;
+      } catch (error) {
+        console.error("Failed to save maintenance log:", error);
+
+        throw error;
+      }
+    },
+    [isDirty, initalData, setInitalData, reset],
+  );
 
   const handleNext = (goNext: () => void) => {
     handleSubmit(async (values) => {
-      await onSubmit(values);
-      goNext();
+      try {
+        await onSubmit(values);
+        goNext();
+      } catch (error) {
+        // Error already handled in onSubmit
+      }
     })();
   };
 
+  const isDisabled = isSubmitting;
+
   return (
-    <ReportWorkStep onNext={handleNext}>
+    <ReportWorkStep onNext={handleNext} onDialogSuccess={onDialogSuccess}>
       <Box display={"grid"} gap={1.5} gridTemplateColumns={"1fr 1fr 1fr"}>
-        <Controller
-          name="dateDone"
-          control={control}
-          render={({ field, fieldState }) => (
-            <FieldDateTime
-              type="DATETIME"
-              label="Date Done"
-              field={field}
-              error={!!fieldState.error?.message}
-              helperText={fieldState.error?.message}
+        <Box display={"grid"} gap={1.5} gridTemplateColumns={"1fr"}>
+          <Controller
+            name="maintType"
+            control={control}
+            render={({ field }) => (
+              <FieldAsyncSelectGrid
+                label="Maint Type"
+                value={field.value}
+                request={tblMaintType.getAll}
+                columns={[
+                  { field: "descr", headerName: "Description", flex: 1 },
+                ]}
+                getRowId={(row) => row.maintTypeId}
+                onChange={field.onChange}
+              />
+            )}
+          />
+          <Controller
+            name="maintCause"
+            control={control}
+            render={({ field }) => (
+              <FieldAsyncSelectGrid
+                label="Maint Cause"
+                value={field.value}
+                request={tblMaintCause.getAll}
+                columns={[
+                  { field: "descr", headerName: "Description", flex: 1 },
+                ]}
+                getRowId={(row) => row.maintCauseId}
+                onChange={field.onChange}
+              />
+            )}
+          />
+          <Controller
+            name="maintClass"
+            control={control}
+            render={({ field }) => (
+              <FieldAsyncSelectGrid
+                label="Maint Class"
+                value={field.value}
+                request={tblMaintClass.getAll}
+                columns={[
+                  { field: "descr", headerName: "Description", flex: 1 },
+                ]}
+                getRowId={(row) => row.maintClassId}
+                onChange={field.onChange}
+              />
+            )}
+          />
+        </Box>
+        <Box display={"grid"} gap={1.5} gridTemplateColumns={"1fr"}>
+          <Controller
+            name="dateDone"
+            control={control}
+            render={({ field, fieldState }) => (
+              <FieldDateTime
+                type="DATETIME"
+                label="Date Done"
+                field={field}
+                error={!!fieldState.error?.message}
+                helperText={fieldState.error?.message}
+              />
+            )}
+          />
+          <Controller
+            name="totalDuration"
+            control={control}
+            render={({ field, fieldState }) => (
+              <NumberField
+                label="Total Duration (min)"
+                field={field}
+                disabled={isDisabled}
+                error={!!fieldState.error?.message}
+                helperText={fieldState.error?.message}
+              />
+            )}
+          />
+          <Controller
+            name="waitingMin"
+            control={control}
+            render={({ field }) => (
+              <NumberField
+                label="Waiting (min)"
+                field={field}
+                disabled={isDisabled}
+              />
+            )}
+          />
+        </Box>
+        <Box display={"flex"} gap={1.5} flexDirection={"column"}>
+          <Box display={"flex"} gap={1.5}>
+            <Controller
+              name="totalDuration"
+              control={control}
+              render={({ field, fieldState }) => (
+                <FieldDateTime
+                  pickerProps={{ readOnly: true }}
+                  type="DATETIME"
+                  label="Last Date"
+                  field={field}
+                  disabled={isDisabled}
+                  error={!!fieldState.error?.message}
+                  helperText={fieldState.error?.message}
+                />
+              )}
             />
-          )}
-        />
-        <Controller
-          name="totalDuration"
-          control={control}
-          render={({ field, fieldState }) => (
-            <NumberField
-              label="Total Duration (min)"
-              field={field}
-              disabled={isDisabled}
-              error={!!fieldState.error?.message}
-              helperText={fieldState.error?.message}
+            <Controller
+              name="totalDuration"
+              control={control}
+              render={({ field, fieldState }) => (
+                <NumberField
+                  readOnly
+                  label="Last Value"
+                  field={field}
+                  disabled={isDisabled}
+                  error={!!fieldState.error?.message}
+                  helperText={fieldState.error?.message}
+                />
+              )}
             />
-          )}
-        />
-        <Controller
-          name="waitingMin"
-          control={control}
-          render={({ field }) => (
-            <NumberField
-              label="Waiting (min)"
-              field={field}
-              disabled={isDisabled}
-            />
-          )}
-        />
-        {/* <Controller
-          name='runningNew'
-          control={control}
-          render={({ field }) => <NumberField label='Current Value' field={field} disabled={isDisabled} />}
-        />
-        <Controller
-          name='runningLastValue'
-          control={control}
-          render={({ field }) => <NumberField label='Last Value' field={field} disabled={isDisabled} />}
-        />
-        <Controller
-          name='runningLastDateRead'
-          control={control}
-          render={({ field }) => <NumberField label='Last Date Read' field={field} />}
-        /> */}
-        <Controller
-          name="maintType"
-          control={control}
-          render={({ field }) => (
-            <FieldAsyncSelectGrid
-              label="Maint Type"
-              value={field.value}
-              request={tblMaintType.getAll}
-              columns={[{ field: "descr", headerName: "Description", flex: 1 }]}
-              getRowId={(row) => row.maintTypeId}
-              onChange={field.onChange}
-            />
-          )}
-        />
-        <Controller
-          name="maintCause"
-          control={control}
-          render={({ field }) => (
-            <FieldAsyncSelectGrid
-              label="Maint Cause"
-              value={field.value}
-              request={tblMaintCause.getAll}
-              columns={[{ field: "descr", headerName: "Description", flex: 1 }]}
-              getRowId={(row) => row.maintCauseId}
-              onChange={field.onChange}
-            />
-          )}
-        />
-        <Controller
-          name="maintClass"
-          control={control}
-          render={({ field }) => (
-            <FieldAsyncSelectGrid
-              label="Maint Class"
-              value={field.value}
-              request={tblMaintClass.getAll}
-              columns={[{ field: "descr", headerName: "Description", flex: 1 }]}
-              getRowId={(row) => row.maintClassId}
-              onChange={field.onChange}
-            />
-          )}
-        />
+          </Box>
+          <Controller
+            name="totalDuration"
+            control={control}
+            render={({ field, fieldState }) => (
+              <NumberField
+                label="Reported Count"
+                field={field}
+                disabled={isDisabled}
+                error={!!fieldState.error?.message}
+                helperText={fieldState.error?.message}
+              />
+            )}
+          />
+        </Box>
       </Box>
       {/* -------- Editors -------- */}
       <Box display="flex" gap={1} flex={1}>
@@ -219,4 +319,4 @@ const TabGeneral = () => {
   );
 };
 
-export default TabGeneral;
+export default StepGeneral;

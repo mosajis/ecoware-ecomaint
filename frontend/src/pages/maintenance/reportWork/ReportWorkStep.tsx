@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import DialogContent from "@mui/material/DialogContent";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -19,6 +19,8 @@ interface ReportWorkStepProps {
   disabled?: boolean;
   onNext?: (goNext: () => void) => void;
   onPrev?: (prevStep: number) => void;
+  onFinish?: () => void | Promise<void>;
+  onDialogSuccess?: () => void;
   finishLabel?: string;
 }
 
@@ -27,6 +29,8 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
   disabled = false,
   onNext,
   onPrev,
+  onFinish,
+  onDialogSuccess,
   finishLabel = "Finish",
 }) => {
   const totalSteps = reportWorkSteps.length;
@@ -37,6 +41,8 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
   const handleNextClick = () => {
     if (onNext) {
       onNext(goNext);
+    } else {
+      goNext();
     }
   };
 
@@ -64,7 +70,25 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
     });
   };
 
-  disabled = disabled || !initalData.componentUnit?.compId;
+  const handleFinish = async () => {
+    if (onFinish) {
+      await onFinish();
+    }
+    // Call parent dialog success handler
+    onDialogSuccess?.();
+  };
+
+  // Disable if no component selected
+  const isComponentDisabled = !initalData.componentUnit?.compId;
+
+  // For steps after General, require maintLogId to be saved
+  const requiresMaintLog = activeStep > 0;
+  const hasMaintLog = !!initalData.maintLog?.maintLogId;
+  const isMaintLogDisabled = requiresMaintLog && !hasMaintLog;
+
+  const isDisabled = disabled || isComponentDisabled || isMaintLogDisabled;
+
+  const isLastStep = activeStep === totalSteps - 1;
 
   return (
     <>
@@ -106,24 +130,24 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={handlePrev} disabled={activeStep === 0 || disabled}>
+        <Button onClick={handlePrev} disabled={activeStep === 0}>
           Previous
         </Button>
 
-        {activeStep === totalSteps - 1 ? (
+        {isLastStep ? (
           <Button
             variant="contained"
-            // onClick={handleNextClick}
-            disabled={disabled}
+            onClick={handleFinish}
+            disabled={isDisabled}
           >
-            {finishLabel + "unset onClick"}
+            {finishLabel}
           </Button>
         ) : (
           <Button
             variant="contained"
             color="secondary"
             onClick={handleNextClick}
-            disabled={disabled}
+            disabled={isDisabled}
           >
             Next
           </Button>

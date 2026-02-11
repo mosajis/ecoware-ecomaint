@@ -1078,20 +1078,17 @@ model TblMaintLogFollow {
   followId        Int              @id(clustered: false, map: "PK_tblMaintLogFollow") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintLogFollow]"), map: "DF_MaintLogFollow") @map("FollowID")
   userId          Int              @map("UserId")
   maintLogId      Int              @map("MaintLogId")
-  workorderId     Int              @map("WorkorderId")
   isRequest       Int?             @map("IsRequest") @db.TinyInt
   isWaiting       Int?             @map("IsWaiting") @db.TinyInt
   isUnPlan        Int?             @map("IsUnPlan") @db.TinyInt
   followDesc      String?          @map("FollowDesc") @db.NVarChar(500)
-  deptId          Int              @map("DeptID")
+  deptId          Int?             @map("DeptID")
   exportMarker    Int?             @map("ExportMarker")
   lastupdate      DateTime?        @db.DateTime
   followStatuseId Int?             @map("FollowStatuseID")
-  waitingTime     Float?           @map("WaitingTime")
   orderNo         Int?             @map("OrderNo")
   tblFollowStatus TblFollowStatus? @relation(fields: [followStatuseId], references: [followStatusId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLogFollow_tblFollowStatus")
   tblMaintLog     TblMaintLog      @relation(fields: [maintLogId], references: [maintLogId], onUpdate: NoAction, map: "FK_tblMaintLogFollow_tblMaintLog")
-  tblWorkOrder    TblWorkOrder     @relation(fields: [workorderId], references: [workOrderId], onUpdate: NoAction, map: "FK_tblMaintLogFollow_tblWorkOrder")
   tblUsers        TblUsers         @relation(fields: [userId], references: [userId], onUpdate: NoAction, map: "FK_tblMaintLogFollow_Users")
 
   @@index([followStatuseId], map: "MLF_FollowStatusId_Ix", clustered: true)
@@ -1454,7 +1451,6 @@ model TblWorkOrder {
   userComment                             String?             @map("UserComment") @db.NVarChar(300)
   workOrderTypeId                         Int?                @map("WorkOrderTypeId")
   tblMaintLogs                            TblMaintLog[]
-  tblMaintLogFollows                      TblMaintLogFollow[]
   tblReScheduleLogs                       TblReScheduleLog[]
   tblCompJob                              TblCompJob?         @relation(fields: [compJobId], references: [compJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblCompJob")
   tblComponentUnit                        TblComponentUnit?   @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkOrder_tblComponentUnit")

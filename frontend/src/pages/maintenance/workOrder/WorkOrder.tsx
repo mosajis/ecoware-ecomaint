@@ -1,11 +1,12 @@
 import ConfirmDialog from "@/shared/components/ConfirmDialog";
 import WorkOrderPrintDialog from "./WorkOrderDialogPrint";
 import WorkOrderPendingDialog from "./WorkOrderDialogPending";
-import WorkOrderActionBar from "./WorkOrderActions";
+import WorkOrderActions from "./WorkOrderActions";
 import Splitter from "@/shared/components/Splitter/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import TabsComponent from "./WorkOrderTabs";
 import WorkOrderDialogReschedule from "./WorkOrderDialogReschedule";
+import ReportWorkDialog from "../reportWork/ReportWorkDialog";
 import { useCallback, useMemo, useState } from "react";
 import { columns } from "./WorkOrderColumns";
 import { tblWorkOrder, TypeTblWorkOrder } from "@/core/api/generated/api";
@@ -15,7 +16,6 @@ import { TypeTblWorkOrderWithRels } from "./types";
 import WorkOrderFilterDialog, {
   type WorkOrderFilter,
 } from "./WorkOrderDialogFilter";
-import ReportWorkDialog from "../reportWork/ReportWorkDialog";
 
 const getRowId = (row: TypeTblWorkOrder) => row.workOrderId;
 
@@ -373,7 +373,7 @@ export default function WorkOrderPage() {
           onRowSelectionModelChange={handleRowSelectionChange}
           onRefreshClick={handleRefresh}
           toolbarChildren={
-            <WorkOrderActionBar
+            <WorkOrderActions
               selectedStatuses={selectedStatuses}
               onFilter={onFilterClick}
               onIssue={onIssueClick}
@@ -470,7 +470,7 @@ export default function WorkOrderPage() {
         workOrder={selectedWorkOrders[0]}
         open={dialogReschedule}
         onClose={closeDialogReschedule}
-        onSuccess={() => {}}
+        onSuccess={successReschedule}
       />
     </>
   );
