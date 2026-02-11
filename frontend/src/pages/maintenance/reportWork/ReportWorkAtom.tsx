@@ -2,18 +2,21 @@ import { atom } from "jotai";
 import {
   TypeTblComponentUnit,
   TypeTblMaintLog,
+  TypeTblWorkOrder,
 } from "@/core/api/generated/api";
 
 export const atomActiveStep = atom(0);
 
-type TypeInitialData = {
+export type TypeInitialData = {
   componentUnit: TypeTblComponentUnit | null;
   maintLog: TypeTblMaintLog | null;
+  workOrder: TypeTblWorkOrder | null;
 };
 
 export const atomInitalData = atom<TypeInitialData>({
   componentUnit: null,
   maintLog: null,
+  workOrder: null,
 });
 
 // Track if General step has unsaved changes
@@ -26,6 +29,6 @@ export const resetReportWorkAtoms = (
   setIsDirty: (value: boolean) => void,
 ) => {
   setActiveStep(0);
-  setInitialData({ componentUnit: null, maintLog: null });
+  setInitialData({ componentUnit: null, maintLog: null, workOrder: null });
   setIsDirty(false);
 };

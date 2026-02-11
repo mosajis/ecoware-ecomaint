@@ -237,7 +237,7 @@ function StepResourceUsedFormDialog({
           render={({ field, fieldState }) => (
             <NumberField
               {...field}
-              label="Time Spent (Hours) *"
+              label="Time Spent (Minutes) *"
               size="small"
               value={field.value ?? 0}
               error={!!fieldState.error}

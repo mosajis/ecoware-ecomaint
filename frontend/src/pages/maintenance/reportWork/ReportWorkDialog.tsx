@@ -62,10 +62,12 @@ const ReportWorkDialog = ({
           });
           const maintLog = { ...result, tblComponentUnit: null };
           const componentUnit = result.tblComponentUnit || null;
+          const workOrder = result.tblWorkOrder;
 
           setInitData({
             maintLog,
             componentUnit,
+            workOrder,
           });
         } else if (workOrderId) {
           // حالت ۲: ایجاد maintLog جدید از روی workOrder
@@ -98,14 +100,15 @@ const ReportWorkDialog = ({
           setInitData({
             maintLog: initialMaintLog as any,
             componentUnit,
+            workOrder,
           });
         } else if (componentUnitId) {
           // حالت ۳: ایجاد maintLog جدید فقط با component
           const componentUnit = await tblComponentUnit.getById(componentUnitId);
-          setInitData({ componentUnit, maintLog: null });
+          setInitData({ componentUnit, maintLog: null, workOrder: null });
         } else {
           // حالت ۴: بدون هیچ ID - باید component انتخاب شود
-          setInitData({ componentUnit: null, maintLog: null });
+          setInitData({ componentUnit: null, maintLog: null, workOrder: null });
         }
       } catch (error) {
         console.error("Failed to fetch data:", error);

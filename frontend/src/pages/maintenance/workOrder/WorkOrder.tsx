@@ -49,7 +49,7 @@ export default function WorkOrderPage() {
 
   const { rows, loading, handleRefresh, optimisticUpdate } =
     useDataGrid<TypeTblWorkOrderWithRels>(
-      getAll,
+      getAll as any,
       tblWorkOrder.deleteById,
       "workOrderId",
       filter !== null,
@@ -348,12 +348,13 @@ export default function WorkOrderPage() {
     });
   };
 
-  const successComplete = (record: TypeTblWorkOrder) => {
-    optimisticUpdate(record.workOrderId, {
-      tblWorkOrderStatus: record.tblWorkOrderStatus,
-      workOrderStatusId: 5,
-      completed: record.completed,
-    });
+  const successComplete = () => {
+    handleRefresh();
+    // optimisticUpdate(record.workOrderId, {
+    //   tblWorkOrderStatus: record.tblWorkOrderStatus,
+    //   workOrderStatusId: 5,
+    //   completed: record.completed,
+    // });
   };
   return (
     <>
@@ -418,9 +419,10 @@ export default function WorkOrderPage() {
 
       {/* Complete Dialog */}
       <ReportWorkDialog
+        onSuccess={successComplete}
         onClose={closeDialogComplete}
         open={dialogComplete}
-        componentUnitId={selectedWorkOrders[0]?.compId!}
+        workOrderId={selectedWorkOrders[0]?.workOrderId}
       />
 
       {/* Pending Dialog */}

@@ -1,3 +1,6 @@
+import { buildResponseSchema } from "@/utils/base.schema";
+import { prisma } from "@/utils/prisma";
+import { t } from "elysia";
 import {
   BaseController,
   parseSortString,
@@ -10,10 +13,6 @@ import {
   TblMaintLogInputUpdate,
   TblMaintLogPlain,
 } from "orm/generated/prismabox/TblMaintLog";
-import { buildResponseSchema } from "@/utils/base.schema";
-import { prisma } from "@/utils/prisma";
-import { t } from "elysia";
-import { periodToDays } from "@/helper";
 
 /**
  * Item
@@ -103,7 +102,7 @@ const ControllerTblMaintLog = new BaseController({
           where: parsedFilter,
           orderBy: sortObj,
           page: usePagination ? Number(page) : 1,
-          perPage: usePagination ? Number(perPage) : Number.MAX_SAFE_INTEGER,
+          perPage: usePagination ? Number(perPage) : 250000,
 
           select: {
             maintLogId: true,
@@ -152,7 +151,111 @@ const ControllerTblMaintLog = new BaseController({
         tags: ["tblWorkOrder"],
         detail: { summary: "Get all with custom select" },
         query: querySchema,
-        data: t.Array(MaintLogItemSchema),
+        response: t.Any(),
+      },
+    );
+
+    app.get(
+      "/context",
+      async ({ query }) => {
+        const { compId, workOrderId, maintLogId } = query;
+
+        const COUNTER_TYPE_ID = 10001;
+
+        let isPlanned = false;
+        let isCounter = false;
+        let lastDate = null;
+        let lastValue = null;
+        let defaultReportedCount = null;
+        let jobDescTitle = null;
+        let frequency = null;
+        let frequencyPeriodId = null;
+
+        // ---------- PLANNED ----------
+        if (workOrderId) {
+          isPlanned = true;
+
+          const workOrder = await prisma.tblWorkOrder.findUnique({
+            where: { workOrderId: Number(workOrderId) },
+            include: {
+              tblCompJob: {
+                include: {
+                  tblCompJobCounters: true,
+                  tblJobDescription: true,
+                },
+              },
+            },
+          });
+
+          const compJob = workOrder?.tblCompJob;
+          jobDescTitle = compJob?.tblJobDescription?.jobDescTitle ?? null;
+          frequency = compJob?.frequency ?? null;
+          frequencyPeriodId = compJob?.frequencyPeriod ?? null;
+
+          if (workOrder?.tblCompJob?.tblCompJobCounters?.length) {
+            isCounter = true;
+          }
+        }
+
+        // ---------- UNPLANNED ----------
+        if (!isPlanned) {
+          const compCounter = await prisma.tblCompCounter.findFirst({
+            where: {
+              compId: Number(compId),
+              counterTypeId: COUNTER_TYPE_ID,
+            },
+          });
+
+          if (compCounter) {
+            isCounter = true;
+            lastDate = compCounter.currentDate;
+            lastValue = compCounter.currentValue;
+          }
+        }
+
+        // ---------- PLANNED last value ----------
+        if (isPlanned && isCounter) {
+          const compCounter = await prisma.tblCompCounter.findFirst({
+            where: {
+              compId: Number(compId),
+              counterTypeId: COUNTER_TYPE_ID,
+            },
+          });
+
+          if (compCounter) {
+            lastDate = compCounter.currentDate;
+            lastValue = compCounter.currentValue;
+          }
+        }
+
+        // ---------- EDIT MODE ----------
+        if (maintLogId) {
+          const logCounter = await prisma.tblLogCounter.findFirst({
+            where: { maintLogId: Number(maintLogId) },
+          });
+
+          if (logCounter) {
+            defaultReportedCount = logCounter.reportedCount;
+          }
+        }
+
+        return {
+          isPlanned,
+          isCounter,
+          lastDate,
+          lastValue,
+          defaultReportedCount,
+          jobDescTitle,
+          frequency,
+          frequencyPeriodId,
+        };
+      },
+      {
+        query: t.Object({
+          compId: t.Numeric(),
+          workOrderId: t.Optional(t.Numeric()),
+          maintLogId: t.Optional(t.Numeric()),
+        }),
       },
     );
   },

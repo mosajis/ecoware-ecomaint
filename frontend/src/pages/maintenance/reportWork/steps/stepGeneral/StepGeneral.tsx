@@ -9,157 +9,279 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAtom, useSetAtom } from "jotai";
 import { buildRelation } from "@/core/helper";
 import { schema, TypeValues } from "./stepGeneralSchema";
-import { atomInitalData, atomIsDirty } from "../../ReportWorkAtom";
-import { useCallback, useEffect } from "react";
+import {
+  atomInitalData,
+  atomIsDirty,
+  TypeInitialData,
+} from "../../ReportWorkAtom";
+import { useCallback, useEffect, useState } from "react";
 import {
   tblMaintType,
   tblMaintCause,
   tblMaintClass,
   tblMaintLog,
+  tblLogCounter,
+  tblCompCounter,
+  tblCompJobCounter,
 } from "@/core/api/generated/api";
+import { Checkbox, FormControlLabel } from "@mui/material";
 
 interface StepGeneralProps {
   onDialogSuccess?: () => void;
 }
 
+interface CounterViewData {
+  lastDate: string | null;
+  lastValue: number | null;
+}
+
+const COUNTER_TYPE_ID = 10001;
+
 const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
-  const [initalData, setInitalData] = useAtom(atomInitalData);
+  const [initalData, setInitalData] = useAtom<TypeInitialData>(atomInitalData);
+
   const setIsDirty = useSetAtom(atomIsDirty);
 
+  const [counterData, setCounterData] = useState<CounterViewData>({
+    lastDate: null,
+    lastValue: null,
+  });
+
+  const [isCounter, setIsCounter] = useState(false);
+
+  const compId = initalData.componentUnit?.compId;
+  const maintLogId = initalData.maintLog?.maintLogId;
+  const compJob = initalData.maintLog?.tblWorkOrder?.tblCompJob;
+
+  const workOrder = initalData.workOrder;
+  const isPlanned = !!compJob;
+
   const defaultValues: TypeValues = {
-    dateDone: initalData.maintLog?.dateDone || null,
+    dateDone: initalData.maintLog?.dateDone || new Date(),
     totalDuration: initalData.maintLog?.totalDuration || null,
     waitingMin: initalData.maintLog?.downTime || null,
-    unexpected: initalData.maintLog?.unexpected === 1 || false,
-
+    // unexpected: initalData.maintLog?.unexpected === 1 || false,
     maintType: initalData.maintLog?.tblMaintType ?? null,
     maintCause: initalData.maintLog?.tblMaintCause ?? null,
     maintClass: initalData.maintLog?.tblMaintClass ?? null,
-
     history: initalData.maintLog?.history || "",
+    reportedCount: 0,
   };
 
   const {
     control,
     handleSubmit,
-    formState: { isSubmitting, isDirty },
+    formState: { isDirty, isSubmitting },
     reset,
+    setValue,
   } = useForm<TypeValues>({
     resolver: zodResolver(schema),
     defaultValues,
   });
 
-  // Track dirty state in atom
+  /* ---------------- Counter Detection + Last Value ---------------- */
+  useEffect(() => {
+    if (!compId) return;
+
+    const loadCounterData = async () => {
+      setIsCounter(false);
+      setCounterData({ lastDate: null, lastValue: null });
+
+      // ---- UNPLANNED ----
+      if (!isPlanned) {
+        const compCounters = await tblCompCounter.getAll({
+          filter: {
+            compId,
+            counterTypeId: COUNTER_TYPE_ID,
+          },
+        });
+
+        if (!compCounters.items.length) return;
+
+        const counter = compCounters.items[0];
+        setIsCounter(true);
+        setCounterData({
+          lastDate: counter.currentDate || null,
+          lastValue: counter.currentValue || null,
+        });
+      }
+
+      // ---- PLANNED ----
+      if (isPlanned && compJob?.compJobId) {
+        const jobCounters = await tblCompJobCounter.getAll({
+          filter: {
+            compJobId: compJob.compJobId,
+            tblCompCounter: { counterTypeId: COUNTER_TYPE_ID },
+          },
+        });
+
+        if (!jobCounters.items.length) return;
+
+        const compCounters = await tblCompCounter.getAll({
+          filter: {
+            compId,
+            counterTypeId: COUNTER_TYPE_ID,
+          },
+        });
+
+        if (!compCounters.items.length) return;
+
+        const counter = compCounters.items[0];
+        setIsCounter(true);
+        setCounterData({
+          lastDate: counter.currentDate || null,
+          lastValue: counter.currentValue || null,
+        });
+      }
+
+      // ---- EDIT MODE : preload reportedCount ----
+      if (maintLogId) {
+        const logCounter = await tblLogCounter.getAll({
+          filter: { maintLogId },
+        });
+
+        if (logCounter.items.length) {
+          setValue("reportedCount", logCounter.items[0].reportedCount || 0);
+        }
+      }
+    };
+
+    loadCounterData();
+  }, [compId, isPlanned, compJob?.compJobId, maintLogId, setValue]);
+
+  /* ---------------- Dirty Flag ---------------- */
   useEffect(() => {
     setIsDirty(isDirty);
   }, [isDirty, setIsDirty]);
 
+  /* ---------------- Submit ---------------- */
   const onSubmit = useCallback(
     async (values: TypeValues) => {
-      // Don't submit if no changes
-      if (!isDirty && initalData.maintLog?.maintLogId) {
-        return initalData.maintLog;
-      }
+      const payload = {
+        totalDuration: values.totalDuration ?? 0,
+        downTime: values.waitingMin ?? 0,
+        dateDone: values.dateDone?.toString(),
+        unexpected: isPlanned ? 0 : 1,
+        history: values.history || "",
+        lastUpdate: new Date(),
+        ...(compJob && {
+          frequency: compJob.frequency,
+          ...buildRelation("tblPeriod", "periodId", compJob.frequencyPeriod),
+        }),
+        ...(!maintLogId && { compId }),
+        ...buildRelation(
+          "tblMaintType",
+          "maintTypeId",
+          values.maintType?.maintTypeId,
+        ),
+        ...buildRelation(
+          "tblJobDescription",
+          "jobDescId",
+          isPlanned ? compJob?.jobDescId : null,
+        ),
+        ...buildRelation("tblComponentUnit", "compId", compId),
+        ...buildRelation(
+          "tblWorkOrder",
+          "workOrderId",
+          initalData.workOrder.workOrderId || null,
+        ),
+        ...buildRelation(
+          "tblMaintCause",
+          "maintCauseId",
+          values.maintCause?.maintCauseId,
+        ),
+        ...buildRelation(
+          "tblMaintClass",
+          "maintClassId",
+          values.maintClass?.maintClassId,
+        ),
+      };
 
-      try {
-        const payload = {
-          totalDuration: values.totalDuration ?? 0,
-          downTime: values.waitingMin ?? 0,
-          dateDone: values.dateDone,
-          unexpected: values.unexpected ? 1 : 0,
-          history: values.history || "",
+      const saved = maintLogId
+        ? await tblMaintLog.update(maintLogId, payload)
+        : await tblMaintLog.create(payload);
 
-          // Add componentUnitId for new records
-          ...(!initalData.maintLog?.maintLogId && {
-            componentUnitId: initalData.componentUnit?.compId,
-          }),
-
-          ...buildRelation(
-            "tblMaintType",
-            "maintTypeId",
-            values.maintType?.maintTypeId,
-          ),
-          ...buildRelation(
-            "tblMaintCause",
-            "maintCauseId",
-            values.maintCause?.maintCauseId,
-          ),
-          ...buildRelation(
-            "tblMaintClass",
-            "maintClassId",
-            values.maintClass?.maintClassId,
-          ),
+      if (isCounter) {
+        const counterPayload = {
+          maintLogId: saved.maintLogId,
+          reportedCount: values.reportedCount,
+          counterTypeId: COUNTER_TYPE_ID,
+          lastupdate: new Date().toISOString(),
         };
 
-        let savedRecord;
+        const existing = await tblLogCounter.getAll({
+          filter: { maintLogId: saved.maintLogId },
+        });
 
-        if (initalData.maintLog?.maintLogId) {
-          // Update existing record
-          savedRecord = await tblMaintLog.update(
-            initalData.maintLog.maintLogId,
-            payload,
+        if (existing.items.length) {
+          await tblLogCounter.update(
+            existing.items[0].logCounterId,
+            counterPayload,
           );
         } else {
-          // Create new record
-          savedRecord = await tblMaintLog.create(payload);
+          await tblLogCounter.create(counterPayload);
         }
-
-        // Fetch full record with relations
-        const fullRecord = await tblMaintLog.getById(savedRecord.maintLogId, {
-          include: {
-            tblMaintCause: true,
-            tblMaintClass: true,
-            tblMaintType: true,
-            tblWorkOrder: true,
-            tblJobDescription: true,
-          },
-        });
-
-        // Replace entire maintLog with fresh data
-        setInitalData((prev) => ({
-          ...prev,
-          maintLog: fullRecord,
-        }));
-
-        // Reset form with new values to clear dirty state
-        reset({
-          dateDone: fullRecord.dateDone || null,
-          totalDuration: fullRecord.totalDuration || null,
-          waitingMin: fullRecord.downTime || null,
-          unexpected: fullRecord.unexpected === 1 || false,
-          maintType: fullRecord.tblMaintType ?? null,
-          maintCause: fullRecord.tblMaintCause ?? null,
-          maintClass: fullRecord.tblMaintClass ?? null,
-          history: fullRecord.history || "",
-        });
-
-        return fullRecord;
-      } catch (error) {
-        console.error("Failed to save maintenance log:", error);
-
-        throw error;
       }
+
+      const full = await tblMaintLog.getById(saved.maintLogId, {
+        include: {
+          tblMaintType: true,
+          tblMaintCause: true,
+          tblMaintClass: true,
+          tblWorkOrder: { include: { tblCompJob: true } },
+          tblJobDescription: true,
+        },
+      });
+
+      setInitalData((p) => ({ ...p, maintLog: full }));
+
+      reset({
+        ...values,
+        reportedCount: values.reportedCount,
+      });
+
+      return full;
     },
-    [isDirty, initalData, setInitalData, reset],
+    [maintLogId, compId, isCounter, reset, setInitalData],
   );
 
   const handleNext = (goNext: () => void) => {
     handleSubmit(async (values) => {
-      try {
-        await onSubmit(values);
-        goNext();
-      } catch (error) {
-        // Error already handled in onSubmit
-      }
+      await onSubmit(values);
+      goNext();
     })();
   };
 
-  const isDisabled = isSubmitting;
+  const disabledCounterFields = !isCounter;
 
+  /* ---------------- UI ---------------- */
   return (
     <ReportWorkStep onNext={handleNext} onDialogSuccess={onDialogSuccess}>
-      <Box display={"grid"} gap={1.5} gridTemplateColumns={"1fr 1fr 1fr"}>
-        <Box display={"grid"} gap={1.5} gridTemplateColumns={"1fr"}>
+      <Box display="grid" gap={1.5} gridTemplateColumns="1fr 1fr 1fr">
+        <Box display="grid" gap={1.5}>
+          <Controller
+            name="dateDone"
+            control={control}
+            render={({ field }) => (
+              <FieldDateTime type="DATETIME" label="Date Done" field={field} />
+            )}
+          />
+          <Controller
+            name="totalDuration"
+            control={control}
+            render={({ field }) => (
+              <NumberField label="Total Duration" field={field} />
+            )}
+          />
+          <Controller
+            name="waitingMin"
+            control={control}
+            render={({ field }) => (
+              <NumberField label="Waiting (min)" field={field} />
+            )}
+          />
+        </Box>
+        <Box display="grid" gap={1.5}>
           <Controller
             name="maintType"
             control={control}
@@ -171,7 +293,7 @@ const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
                 columns={[
                   { field: "descr", headerName: "Description", flex: 1 },
                 ]}
-                getRowId={(row) => row.maintTypeId}
+                getRowId={(r) => r.maintTypeId}
                 onChange={field.onChange}
               />
             )}
@@ -187,7 +309,7 @@ const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
                 columns={[
                   { field: "descr", headerName: "Description", flex: 1 },
                 ]}
-                getRowId={(row) => row.maintCauseId}
+                getRowId={(r) => r.maintCauseId}
                 onChange={field.onChange}
               />
             )}
@@ -203,116 +325,68 @@ const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
                 columns={[
                   { field: "descr", headerName: "Description", flex: 1 },
                 ]}
-                getRowId={(row) => row.maintClassId}
+                getRowId={(r) => r.maintClassId}
                 onChange={field.onChange}
               />
             )}
           />
         </Box>
-        <Box display={"grid"} gap={1.5} gridTemplateColumns={"1fr"}>
-          <Controller
-            name="dateDone"
-            control={control}
-            render={({ field, fieldState }) => (
-              <FieldDateTime
-                type="DATETIME"
-                label="Date Done"
-                field={field}
-                error={!!fieldState.error?.message}
-                helperText={fieldState.error?.message}
-              />
-            )}
-          />
-          <Controller
-            name="totalDuration"
-            control={control}
-            render={({ field, fieldState }) => (
-              <NumberField
-                label="Total Duration (min)"
-                field={field}
-                disabled={isDisabled}
-                error={!!fieldState.error?.message}
-                helperText={fieldState.error?.message}
-              />
-            )}
-          />
-          <Controller
-            name="waitingMin"
-            control={control}
-            render={({ field }) => (
-              <NumberField
-                label="Waiting (min)"
-                field={field}
-                disabled={isDisabled}
-              />
-            )}
-          />
-        </Box>
-        <Box display={"flex"} gap={1.5} flexDirection={"column"}>
-          <Box display={"flex"} gap={1.5}>
-            <Controller
-              name="totalDuration"
-              control={control}
-              render={({ field, fieldState }) => (
-                <FieldDateTime
-                  pickerProps={{ readOnly: true }}
-                  type="DATETIME"
-                  label="Last Date"
-                  field={field}
-                  disabled={isDisabled}
-                  error={!!fieldState.error?.message}
-                  helperText={fieldState.error?.message}
-                />
-              )}
+
+        <Box display="flex" flexDirection="column" gap={1.5}>
+          <Box display="flex" gap={1.5}>
+            <FieldDateTime
+              type="DATETIME"
+              label="Last Date"
+              disabled
+              field={{
+                name: "lastDate",
+                value: counterData.lastDate,
+                onChange: () => {},
+                onBlur: () => {},
+              }}
             />
-            <Controller
-              name="totalDuration"
-              control={control}
-              render={({ field, fieldState }) => (
-                <NumberField
-                  readOnly
-                  label="Last Value"
-                  field={field}
-                  disabled={isDisabled}
-                  error={!!fieldState.error?.message}
-                  helperText={fieldState.error?.message}
-                />
-              )}
+            <NumberField
+              label="Last Value"
+              disabled
+              field={{
+                name: "lastValue",
+                value: counterData.lastValue,
+                onChange: () => {},
+                onBlur: () => {},
+              }}
             />
           </Box>
+
           <Controller
-            name="totalDuration"
+            name="reportedCount"
             control={control}
             render={({ field, fieldState }) => (
               <NumberField
                 label="Reported Count"
                 field={field}
-                disabled={isDisabled}
-                error={!!fieldState.error?.message}
+                disabled={disabledCounterFields || isSubmitting}
+                error={!!fieldState.error}
                 helperText={fieldState.error?.message}
               />
             )}
           />
         </Box>
       </Box>
-      {/* -------- Editors -------- */}
-      <Box display="flex" gap={1} flex={1}>
+
+      <Box display="flex" gap={1} mt={2} height={"100%"}>
         <Controller
           name="history"
           control={control}
           render={({ field }) => (
-            <Editor
-              label="History"
-              autoSave={false}
-              initValue={initalData.maintLog?.history}
-              {...field}
-            />
+            <Editor label="History" autoSave={false} {...field} />
           )}
         />
         <Editor
           label="Job Description"
-          initValue={initalData.maintLog?.tblJobDescription?.jobDesc || "--"}
           readOnly
+          initValue={
+            isPlanned ? compJob?.tblJobDescription?.jobDesc?.trim() || "--" : ""
+          }
         />
       </Box>
     </ReportWorkStep>

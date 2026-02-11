@@ -4,10 +4,10 @@ export const selectSchema = <T extends z.ZodRawShape>(shape: T) =>
   z.object(shape).nullable();
 
 export const schema = z.object({
-  dateDone: z.string().nullable(),
+  dateDone: z.string().or(z.date()).nullable(),
   totalDuration: z.number().nullable(),
   waitingMin: z.number().nullable(),
-  unexpected: z.boolean(),
+  // unexpected: z.boolean(),
 
   history: z.string(),
 
@@ -23,6 +23,7 @@ export const schema = z.object({
     maintClassId: z.number(),
     descr: z.string().nullable(),
   }),
+  reportedCount: z.number().nullable(),
 });
 
 export type TypeValues = z.input<typeof schema>;

@@ -15,6 +15,7 @@ import {
 import {
   tblCompCounter,
   tblCompCounterLog,
+  tblComponentUnit,
   tblCounterType,
   TypeTblCompCounter,
   TypeTblCompCounterLog,
@@ -23,6 +24,12 @@ import {
 const getRowId = (row: TypeTblCompCounter) => row.compCounterId;
 
 const columns: GridColDef<TypeTblCompCounter>[] = [
+  {
+    field: "component",
+    headerName: "component",
+    flex: 1,
+    valueGetter: (_, row) => row.tblComponentUnit?.compNo,
+  },
   {
     field: "counterType",
     headerName: "Counter Type",
@@ -93,6 +100,7 @@ export default function PageCounterUpdate() {
           },
       include: {
         tblCounterType: true,
+        tblComponentUnit: true,
       },
     });
   }, [showAll]);

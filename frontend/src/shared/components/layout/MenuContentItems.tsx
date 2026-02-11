@@ -193,7 +193,7 @@ export const menuContentItems: {
         path: "/maintenance/requisition-work",
       },
       {
-        text: "Counters",
+        text: "Update Counter",
         icon: <UpdateRoundedIcon />,
         id: "maint:counters",
         path: "/maintenance/counters",

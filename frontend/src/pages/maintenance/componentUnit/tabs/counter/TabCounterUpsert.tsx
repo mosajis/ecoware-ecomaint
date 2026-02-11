@@ -138,11 +138,12 @@ function CompCounterUpsert({
           parsed.data.counterType!.counterTypeId,
         );
 
-        const dependOnRelation = buildRelation(
-          "tblCompCounter",
-          "compCounterId",
-          parsed.data?.dependOn?.compCounterId ?? null,
-        );
+        // If dependOn is not provided, we can skip building the relation
+        // const dependOnRelation = buildRelation(
+        //   "tblCompCounter",
+        //   "compCounterId",
+        //   parsed.data?.dependOn?.compCounterId,
+        // );
         const compRelation = buildRelation(
           "tblComponentUnit",
           "compId",
@@ -156,7 +157,7 @@ function CompCounterUpsert({
           useCalcAverage: parsed.data.useCalcAverage ? 1 : 0,
           orderNo: parsed.data.orderNo,
           ...counterTypeRelation,
-          ...dependOnRelation,
+          // ...dependOnRelation,
           ...compRelation,
         };
 

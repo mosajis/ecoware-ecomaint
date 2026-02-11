@@ -45,7 +45,7 @@ export default function PageMaintLog() {
 
   const getAll = useCallback(() => {
     return tblMaintLog.getAll({
-      filter: filter ?? undefined,
+      // filter: filter ?? undefined,
       include: {
         tblComponentUnit: {
           include: {
@@ -100,16 +100,16 @@ export default function PageMaintLog() {
       if (!selectedRow?.maintLogId) return;
 
       // Optimistic update
-      optimisticUpdate(selectedRow.maintLogId, {
-        followStatusId: selectedFollowStatus.followStatusId,
-        // If you have the relation loaded in your getAll include:
-        tblFollowStatus: selectedFollowStatus,
-      });
+      // optimisticUpdate(selectedRow.maintLogId, {
+      //   followStatusId: selectedFollowStatus.followStatusId,
+      //   // If you have the relation loaded in your getAll include:
+      //   tblFollowStatus: selectedFollowStatus,
+      // });
 
-      // Optional: background refresh after a short delay
-      setTimeout(() => {
-        handleRefresh();
-      }, 1800);
+      // // Optional: background refresh after a short delay
+      // setTimeout(() => {
+      //   handleRefresh();
+      // }, 1800);
 
       // Optional: toast.success("Follow-up recorded");
     },
