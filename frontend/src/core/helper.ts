@@ -7,13 +7,9 @@ import * as z from "zod";
 export function buildRelation(
   relationName: string,
   idField: string,
-  id: number | null | undefined,
+  value: number | null | undefined,
 ) {
-  if (id === undefined) {
-    return {};
-  }
-
-  if (id === null) {
+  if (value === undefined) {
     return {
       [relationName]: {
         disconnect: true,
@@ -21,9 +17,13 @@ export function buildRelation(
     };
   }
 
+  if (value === null) {
+    return {};
+  }
+
   return {
     [relationName]: {
-      connect: { [idField]: id },
+      connect: { [idField]: value },
     },
   };
 }

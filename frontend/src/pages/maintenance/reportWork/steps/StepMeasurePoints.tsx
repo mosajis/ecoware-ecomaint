@@ -5,10 +5,14 @@ import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
   tblCompMeasurePoint,
+  tblWorkOrder,
   type TypeTblCompMeasurePoint,
 } from "@/core/api/generated/api";
+import { useAtomValue } from "jotai";
+import { atomInitalData } from "../ReportWorkAtom";
 
 interface TabMaintLogProps {
+  onFinish?: (workOrderId: number) => void;
   compUnitId?: number | null;
   label?: string | null;
 }
@@ -70,22 +74,33 @@ const columns: GridColDef<TypeTblCompMeasurePoint>[] = [
   },
 ];
 
-const TabMeasures = ({ compUnitId }: TabMaintLogProps) => {
-  const getAll = useCallback(() => {
-    if (!compUnitId) {
-      return Promise.resolve({ items: [] });
-    }
+const TabMeasures = ({ compUnitId, onFinish }: TabMaintLogProps) => {
+  const maintLog = useAtomValue(atomInitalData).maintLog;
+  const workOrderId = maintLog?.workOrderId;
 
-    return tblCompMeasurePoint.getAll({
-      filter: {
-        compId: compUnitId,
-      },
-      include: {
-        tblCounterType: true,
-        tblUnit: true,
-      },
-    });
-  }, [compUnitId]);
+  const handleFinish = useCallback(() => {
+    if (onFinish) {
+      console.log(
+        "TabMeasures: onFinish called with workOrderId:",
+        workOrderId,
+      );
+      onFinish(workOrderId);
+    }
+  }, [onFinish]);
+
+  const getAll = useCallback(
+    () =>
+      tblCompMeasurePoint.getAll({
+        filter: {
+          compId: compUnitId,
+        },
+        include: {
+          tblCounterType: true,
+          tblUnit: true,
+        },
+      }),
+    [compUnitId],
+  );
 
   const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
@@ -95,7 +110,7 @@ const TabMeasures = ({ compUnitId }: TabMaintLogProps) => {
   );
 
   return (
-    <ReportWorkStep>
+    <ReportWorkStep onFinish={handleFinish}>
       <CustomizedDataGrid
         label="Component Measures"
         rows={rows}

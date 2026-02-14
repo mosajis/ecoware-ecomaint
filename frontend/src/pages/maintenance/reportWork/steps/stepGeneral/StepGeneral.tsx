@@ -4,6 +4,7 @@ import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 import NumberField from "@/shared/components/fields/FieldNumber";
 import Box from "@mui/material/Box";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
+import Spinner from "@/shared/components/Spinner";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAtom, useSetAtom } from "jotai";
@@ -44,12 +45,13 @@ const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
   // Default values
   const defaultValues: TypeValues = {
     dateDone: initalData.maintLog?.dateDone || new Date(),
-    totalDuration: initalData.maintLog?.totalDuration || null,
-    waitingMin: initalData.maintLog?.downTime || null,
+    totalDuration: initalData.maintLog?.totalDuration || 0,
+    waitingMin: initalData.maintLog?.downTime || 0,
     maintType: initalData.maintLog?.tblMaintType ?? null,
     maintCause: initalData.maintLog?.tblMaintCause ?? null,
     maintClass: initalData.maintLog?.tblMaintClass ?? null,
     history: initalData.maintLog?.history || "",
+    unexpected: initalData.maintLog?.unexpected || false,
     reportedCount: 0,
   };
 
@@ -64,9 +66,6 @@ const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
     defaultValues,
   });
 
-  /* ────────────────────────────────────────────────
-     Load Context از Backend
-  ──────────────────────────────────────────────── */
   useEffect(() => {
     const loadContext = async () => {
       if (!compId && !workOrderId && !maintLogId) {
@@ -112,16 +111,10 @@ const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
     loadContext();
   }, [compId, workOrderId, maintLogId, setValue, reset]);
 
-  /* ────────────────────────────────────────────────
-     Dirty Flag
-  ──────────────────────────────────────────────── */
   useEffect(() => {
     setIsDirty(isDirty);
   }, [isDirty, setIsDirty]);
 
-  /* ────────────────────────────────────────────────
-     Submit Handler
-  ──────────────────────────────────────────────── */
   const onSubmit = useCallback(
     async (values: TypeValues) => {
       if (!context) return;
@@ -222,9 +215,6 @@ const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
     [maintLogId, compId, workOrderId, context, reset, setInitalData],
   );
 
-  /* ────────────────────────────────────────────────
-     Next Handler
-  ──────────────────────────────────────────────── */
   const handleNext = (goNext: () => void) => {
     handleSubmit(async (values) => {
       await onSubmit(values);
@@ -232,15 +222,8 @@ const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
     })();
   };
 
-  /* ────────────────────────────────────────────────
-     UI
-  ──────────────────────────────────────────────── */
   if (isLoading || !context) {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" p={4}>
-        Loading...
-      </Box>
-    );
+    return <Spinner />;
   }
 
   const disabledCounterFields = !context.isCounter;
@@ -368,7 +351,7 @@ const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
       </Box>
 
       {/* ────── Editors ────── */}
-      <Box display="flex" gap={1} mt={2} height={"100%"}>
+      <Box display="flex" gap={1} height={"500px"}>
         <Controller
           name="history"
           control={control}

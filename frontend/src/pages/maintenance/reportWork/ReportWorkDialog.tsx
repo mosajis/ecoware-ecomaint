@@ -14,6 +14,7 @@ import {
 import {
   tblComponentUnit,
   tblMaintLog,
+  tblPendingType,
   tblWorkOrder,
 } from "@/core/api/generated/api";
 
@@ -49,7 +50,6 @@ const ReportWorkDialog = ({
         setIsLoading(true);
 
         if (maintLogId) {
-          // حالت ۱: ویرایش maintLog موجود
           const result = await tblMaintLog.getById(maintLogId, {
             include: {
               tblComponentUnit: true,
@@ -70,10 +70,10 @@ const ReportWorkDialog = ({
             workOrder,
           });
         } else if (workOrderId) {
-          // حالت ۲: ایجاد maintLog جدید از روی workOrder
           const workOrder = await tblWorkOrder.getById(workOrderId, {
             include: {
               tblComponentUnit: true,
+              tblPendingType: true,
               tblMaintType: true,
               tblMaintCause: true,
               tblMaintClass: true,
@@ -87,14 +87,12 @@ const ReportWorkDialog = ({
 
           const componentUnit = workOrder.tblComponentUnit || null;
 
-          // ایجاد یک maintLog اولیه با مقادیر از workOrder
           const initialMaintLog = {
             tblMaintType: workOrder.tblMaintType || null,
             tblMaintCause: workOrder.tblMaintCause || null,
             tblMaintClass: workOrder.tblMaintClass || null,
             tblJobDescription: workOrder.tblCompJob?.tblJobDescription || null,
             tblWorkOrder: workOrder,
-            history: "",
           };
 
           setInitData({
@@ -103,11 +101,9 @@ const ReportWorkDialog = ({
             workOrder,
           });
         } else if (componentUnitId) {
-          // حالت ۳: ایجاد maintLog جدید فقط با component
           const componentUnit = await tblComponentUnit.getById(componentUnitId);
           setInitData({ componentUnit, maintLog: null, workOrder: null });
         } else {
-          // حالت ۴: بدون هیچ ID - باید component انتخاب شود
           setInitData({ componentUnit: null, maintLog: null, workOrder: null });
         }
       } catch (error) {
@@ -146,7 +142,7 @@ const ReportWorkDialog = ({
           <Spinner />
         ) : (
           <Suspense fallback={<Spinner />}>
-            <StepComponent onDialogSuccess={handleSuccess} />
+            <StepComponent onFinish={handleSuccess} />
           </Suspense>
         )}
       </Box>

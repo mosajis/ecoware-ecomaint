@@ -2830,7 +2830,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get all with custom select */
+        /** Get maintenance logs with custom fields */
         get: operations["getTblMaintLog"];
         put?: never;
         /** Create */
@@ -2870,6 +2870,23 @@ export interface paths {
         };
         /** Count */
         get: operations["getTblMaintLogCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblMaintLog/context": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get context for creating or editing maintenance log */
+        get: operations["getTblMaintLogContext"];
         put?: never;
         post?: never;
         delete?: never;
@@ -42328,7 +42345,45 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
-        responses: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            maintLogId: number;
+                            dateDone?: string;
+                            downTime?: string;
+                            unplanned: boolean;
+                            tblComponentUnit?: {
+                                compNo: string;
+                            };
+                            tblJobDescription?: {
+                                jobDescCode: string;
+                                jobDescTitle: string;
+                            };
+                            tblWorkOrder?: {
+                                tblDiscipline?: {
+                                    name: string;
+                                };
+                            };
+                            tblFollowStatus?: {
+                                fsName: string;
+                            };
+                            tblMaintClass?: {
+                                descr?: string;
+                            };
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                    };
+                };
+            };
+        };
     };
     postTblMaintLog: {
         parameters: {
@@ -42962,7 +43017,7 @@ export interface operations {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: number;
+                            deptId: null | number;
                             exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
@@ -43334,7 +43389,7 @@ export interface operations {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: number;
+                            deptId: null | number;
                             exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
@@ -44071,7 +44126,7 @@ export interface operations {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: number;
+                            deptId: null | number;
                             exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
@@ -44411,7 +44466,7 @@ export interface operations {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: number;
+                            deptId: null | number;
                             exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
@@ -44450,6 +44505,50 @@ export interface operations {
                 content: {
                     "application/json": {
                         count: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblMaintLogContext: {
+        parameters: {
+            query?: {
+                compId?: number;
+                workOrderId?: number;
+                maintLogId?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        isPlanned: boolean;
+                        isCounter: boolean;
+                        counterData: {
+                            lastDate: (string | null) | null;
+                            lastValue: (number | null) | null;
+                        };
+                        reportedCount: number;
+                        jobDescription: {
+                            title: (string | null) | null;
+                            content: (string | null) | null;
+                        };
+                        frequency: {
+                            value: (number | null) | null;
+                            period: ({
+                                periodId: number;
+                                name: (string | null) | null;
+                            } | null) | null;
+                        };
+                        maintLog: (unknown | null) | null;
                     };
                 };
             };
@@ -45918,7 +46017,7 @@ export interface operations {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: number;
+                            deptId: null | number;
                             exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
@@ -45996,7 +46095,7 @@ export interface operations {
                     };
                     tblSpareUnit: {
                         connect: {
-                            id: number;
+                            spareUnitId: number;
                         };
                     };
                 };
@@ -46013,7 +46112,7 @@ export interface operations {
                     };
                     tblSpareUnit: {
                         connect: {
-                            id: number;
+                            spareUnitId: number;
                         };
                     };
                 };
@@ -46030,7 +46129,7 @@ export interface operations {
                     };
                     tblSpareUnit: {
                         connect: {
-                            id: number;
+                            spareUnitId: number;
                         };
                     };
                 };
@@ -46047,7 +46146,7 @@ export interface operations {
                         maintLogStockId: number;
                         maintLogId: number;
                         stockItemId: number;
-                        deptId: number;
+                        deptId: null | number;
                         exportMaker: null | number;
                         stockCount: null | number;
                         orderNo: null | number;
@@ -46153,7 +46252,7 @@ export interface operations {
                         maintLogStockId: number;
                         maintLogId: number;
                         stockItemId: number;
-                        deptId: number;
+                        deptId: null | number;
                         exportMaker: null | number;
                         stockCount: null | number;
                         orderNo: null | number;
@@ -46231,7 +46330,7 @@ export interface operations {
                     };
                     tblSpareUnit?: {
                         connect: {
-                            id: number;
+                            spareUnitId: number;
                         };
                     };
                 };
@@ -46248,7 +46347,7 @@ export interface operations {
                     };
                     tblSpareUnit?: {
                         connect: {
-                            id: number;
+                            spareUnitId: number;
                         };
                     };
                 };
@@ -46265,7 +46364,7 @@ export interface operations {
                     };
                     tblSpareUnit?: {
                         connect: {
-                            id: number;
+                            spareUnitId: number;
                         };
                     };
                 };
@@ -46282,7 +46381,7 @@ export interface operations {
                         maintLogStockId: number;
                         maintLogId: number;
                         stockItemId: number;
-                        deptId: number;
+                        deptId: null | number;
                         exportMaker: null | number;
                         stockCount: null | number;
                         orderNo: null | number;
@@ -46356,7 +46455,7 @@ export interface operations {
                         maintLogStockId: number;
                         maintLogId: number;
                         stockItemId: number;
-                        deptId: number;
+                        deptId: null | number;
                         exportMaker: null | number;
                         stockCount: null | number;
                         orderNo: null | number;
@@ -52676,7 +52775,7 @@ export interface operations {
                     };
                     tblSpareUnits?: {
                         connect: {
-                            id: number;
+                            spareUnitId: number;
                         }[];
                     };
                 };
@@ -52706,7 +52805,7 @@ export interface operations {
                     };
                     tblSpareUnits?: {
                         connect: {
-                            id: number;
+                            spareUnitId: number;
                         }[];
                     };
                 };
@@ -52736,7 +52835,7 @@ export interface operations {
                     };
                     tblSpareUnits?: {
                         connect: {
-                            id: number;
+                            spareUnitId: number;
                         }[];
                     };
                 };
@@ -52979,7 +53078,7 @@ export interface operations {
                     };
                     tblSpareUnits?: {
                         connect?: {
-                            id: number;
+                            spareUnitId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -53017,7 +53116,7 @@ export interface operations {
                     };
                     tblSpareUnits?: {
                         connect?: {
-                            id: number;
+                            spareUnitId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -53055,7 +53154,7 @@ export interface operations {
                     };
                     tblSpareUnits?: {
                         connect?: {
-                            id: number;
+                            spareUnitId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -53289,7 +53388,7 @@ export interface operations {
                                 maintLogStockId: number;
                                 maintLogId: number;
                                 stockItemId: number;
-                                deptId: number;
+                                deptId: null | number;
                                 exportMaker: null | number;
                                 stockCount: null | number;
                                 orderNo: null | number;
@@ -53389,7 +53488,7 @@ export interface operations {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: number;
+                            deptId: null | number;
                             exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
@@ -53478,7 +53577,7 @@ export interface operations {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: number;
+                            deptId: null | number;
                             exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
@@ -53590,7 +53689,7 @@ export interface operations {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: number;
+                            deptId: null | number;
                             exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
@@ -53647,7 +53746,7 @@ export interface operations {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: number;
+                            deptId: null | number;
                             exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;

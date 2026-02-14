@@ -2,15 +2,32 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import ReportWorkStep from "../../ReportWorkStep";
 import StepStockUsedUpsert from "./StepStockUsedUpsert";
 import { useCallback, useState } from "react";
-import {
-  tblMaintLogStocks,
-  TypeTblMaintLogStocks,
-} from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
 import { useAtomValue } from "jotai";
 import { atomInitalData } from "../../ReportWorkAtom";
-import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
+import {
+  tblMaintLogStocks,
+  TypeTblMaintLogStocks,
+} from "@/core/api/generated/api";
+
+const getRowId = (row: TypeTblMaintLogStocks) => row.maintLogStockId;
+const columns: GridColDef<TypeTblMaintLogStocks>[] = [
+  {
+    field: "stockNo",
+    headerName: "Extra No",
+    width: 100,
+    // @ts-ignore
+    valueGetter: (_, row) => row?.tblSpareUnit.tblSpareType.no,
+  },
+  {
+    field: "stockName",
+    headerName: "Stock Name",
+    flex: 1,
+    // @ts-ignore
+    valueGetter: (_, row) => row?.tblSpareUnit?.tblSpareType.name,
+  },
+];
 
 const StepStockUsed = () => {
   const [openForm, setOpenForm] = useState(false);
@@ -24,19 +41,13 @@ const StepStockUsed = () => {
   const handleCreate = () => {
     setSelectedRowId(null);
     setMode("create");
-    setOpenForm(true);
-  };
-
-  const handleEdit = (row: TypeTblMaintLogStocks) => {
-    setSelectedRowId(row.maintLogStockId);
-    setMode("update");
-    setOpenForm(true);
+    handleUpsertOpen();
   };
 
   const getAll = useCallback(() => {
     return tblMaintLogStocks.getAll({
       include: {
-        tblStockItem: {
+        tblSpareUnit: {
           include: {
             tblSpareType: true,
           },
@@ -56,38 +67,29 @@ const StepStockUsed = () => {
     !!maintLogId,
   );
 
-  const columns: GridColDef<TypeTblMaintLogStocks>[] = [
-    {
-      field: "stockNo",
-      headerName: "Extra No",
-      width: 100,
-      // @ts-ignore
-      valueGetter: (_, row) => row.tblStockItem.tblSpareType.no,
-    },
-    {
-      field: "stockName",
-      headerName: "Stock Name",
-      flex: 1,
-      // @ts-ignore
-      valueGetter: (_, row) => row.tblStockItem.tblSpareType.name,
-    },
-    dataGridActionColumn({ onEdit: handleEdit, onDelete: handleDelete }),
-  ];
-
   const handleNext = (goNext: () => void) => {
     goNext();
   };
 
+  const handleUpsertClose = useCallback(() => {
+    setOpenForm(false);
+  }, []);
+
+  const handleUpsertOpen = useCallback(() => {
+    setOpenForm(true);
+  }, []);
   return (
     <>
       <ReportWorkStep onNext={handleNext}>
         <CustomizedDataGrid
           showToolbar
-          loading={loading}
+          disableEdit
+          onDeleteClick={handleDelete}
           label={"Stock Used"}
           onAddClick={handleCreate}
+          getRowId={getRowId}
+          loading={loading}
           rows={rows}
-          getRowId={(row) => row.maintLogStockId}
           columns={columns}
         />
       </ReportWorkStep>
@@ -96,8 +98,8 @@ const StepStockUsed = () => {
         open={openForm}
         mode={mode}
         recordId={selectedRowId}
-        maintLogId={maintLogId || undefined}
-        onClose={() => setOpenForm(false)}
+        maintLogId={maintLogId}
+        onClose={handleUpsertClose}
         onSuccess={handleRefresh}
       />
     </>

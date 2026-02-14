@@ -3,35 +3,33 @@ import FormDialog from "@/shared/components/formDialog/FormDialog";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import NumberField from "@/shared/components/fields/FieldNumber";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { useForm, Controller } from "react-hook-form";
 import { memo, useEffect, useState, useCallback } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
-import { buildRelation } from "@/core/helper";
 import {
   tblMaintLogStocks,
   tblSpareUnit,
   TypeTblMaintLogStocks,
 } from "@/core/api/generated/api";
 
-// === Validation Schema ===
+/* =========================
+   Validation Schema
+========================= */
+
 const schema = z.object({
-  spareUnit: z
-    .object({
-      spareUnitId: z.number(),
-      tblSpareType: z
-        .object({
-          spareTypeId: z.number(),
-          no: z.string().nullable().optional(),
-          name: z.string().nullable().optional(),
-        })
-        .nullable()
-        .optional(),
-    })
-    .nullable(),
-  stockNo: z.string().nullable().optional(),
-  stockName: z.string().nullable().optional(),
-  stockCount: z.number().min(0, "Stock count must be greater than 0"),
+  spareUnit: z.object({
+    spareUnitId: z.number(),
+    tblSpareType: z
+      .object({
+        spareTypeId: z.number(),
+        no: z.string().nullable().optional(),
+        name: z.string().nullable().optional(),
+      })
+      .nullable()
+      .optional(),
+  }),
+  stockCount: z.number().min(1, "Stock count must be greater than 0"),
 });
 
 export type StockUsedFormValues = z.infer<typeof schema>;
@@ -57,10 +55,8 @@ function StockUsedFormDialog({
   const [submitting, setSubmitting] = useState(false);
 
   const defaultValues: StockUsedFormValues = {
-    spareUnit: null,
-    stockNo: null,
-    stockName: null,
-    stockCount: 0,
+    spareUnit: undefined as any,
+    stockCount: 1,
   };
 
   const { control, handleSubmit, reset, watch } = useForm<StockUsedFormValues>({
@@ -68,9 +64,12 @@ function StockUsedFormDialog({
     defaultValues,
   });
 
-  const stockItemValue = watch("spareUnit");
+  const selectedSpare = watch("spareUnit");
 
-  // === Load record in edit mode ===
+  /* =========================
+     Load record (Edit Mode)
+  ========================= */
+
   const fetchData = useCallback(async () => {
     if (mode !== "update" || !recordId) {
       reset(defaultValues);
@@ -82,10 +81,8 @@ function StockUsedFormDialog({
     try {
       const res = await tblMaintLogStocks.getById(recordId, {
         include: {
-          tblStockItem: {
-            include: {
-              tblSpareType: true,
-            },
+          tblSpareUnit: {
+            include: { tblSpareType: true },
           },
         },
       });
@@ -93,15 +90,8 @@ function StockUsedFormDialog({
       if (res?.tblSpareUnit) {
         reset({
           spareUnit: res.tblSpareUnit,
-          // @ts-ignore
-          stockNo: res.tblStockItem?.tblSpareType?.no ?? null,
-          // @ts-ignore
-
-          stockName: res.tblStockItem?.tblSpareType?.name ?? null,
-          stockCount: res.stockCount ?? 0,
+          stockCount: res.stockCount ?? 1,
         });
-      } else {
-        reset(defaultValues);
       }
     } finally {
       setLoadingInitial(false);
@@ -112,53 +102,46 @@ function StockUsedFormDialog({
     if (open) fetchData();
   }, [open, fetchData]);
 
-  // === Update stock display when stock item changes ===
-  useEffect(() => {
-    if (stockItemValue?.tblSpareType) {
-      // نمایش اطلاعات stock بر اساس انتخاب شده
-    }
-  }, [stockItemValue]);
-
   const isDisabled = loadingInitial || submitting;
 
-  // === Submit Handler ===
+  /* =========================
+     Submit Handler
+  ========================= */
+
   const handleFormSubmit = useCallback(
     async (values: StockUsedFormValues) => {
-      const parsed = schema.safeParse(values);
-      if (!parsed.success) return;
+      if (!maintLogId) {
+        console.error("maintLogId is required");
+        return;
+      }
 
       try {
         setSubmitting(true);
 
+        const payload = {
+          stockCount: values.stockCount,
+
+          // ✅ Relation 1
+          tblSpareUnit: {
+            connect: {
+              spareUnitId: values.spareUnit.spareUnitId,
+            },
+          },
+
+          // ✅ Relation 2
+          tblMaintLog: {
+            connect: {
+              maintLogId: maintLogId,
+            },
+          },
+        };
+
         let result: TypeTblMaintLogStocks;
 
-        const stockItemId = parsed.data.spareUnit?.spareUnitId ?? null;
-        const stockItemRelation = buildRelation(
-          "tblSpareUnit",
-          "spareUnitId",
-          stockItemId,
-        );
-
-        const maintLogRelation = buildRelation(
-          "tblMaintLog",
-          "maintLogId",
-          maintLogId,
-        );
-
         if (mode === "create") {
-          // POST Request
-          result = await tblMaintLogStocks.create({
-            stockCount: parsed.data.stockCount,
-            ...stockItemRelation,
-            ...maintLogRelation,
-          });
+          result = await tblMaintLogStocks.create(payload);
         } else {
-          // PUT Request
-          result = await tblMaintLogStocks.update(recordId!, {
-            stockCount: parsed.data.stockCount,
-            ...stockItemRelation,
-            ...maintLogRelation,
-          });
+          result = await tblMaintLogStocks.update(recordId!, payload);
         }
 
         onSuccess(result);
@@ -170,6 +153,10 @@ function StockUsedFormDialog({
     [mode, recordId, maintLogId, onSuccess, onClose],
   );
 
+  /* =========================
+     UI
+  ========================= */
+
   return (
     <FormDialog
       open={open}
@@ -179,14 +166,11 @@ function StockUsedFormDialog({
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <Box display="grid" gridTemplateColumns="repeat(1, 1fr)" gap={1.5}>
-        {/* Stock Item Select - Required */}
+      <Box display="grid" gap={1.5}>
+        {/* Spare Unit Select */}
         <Controller
           name="spareUnit"
           control={control}
-          rules={{
-            required: "Stock Item is required",
-          }}
           render={({ field, fieldState }) => (
             <FieldAsyncSelectGrid
               dialogMaxWidth="sm"
@@ -200,7 +184,7 @@ function StockUsedFormDialog({
               }
               columns={[
                 {
-                  field: "stockItemId",
+                  field: "spareUnitId",
                   headerName: "Stock Item ID",
                   width: 120,
                 },
@@ -208,11 +192,10 @@ function StockUsedFormDialog({
                   field: "tblSpareType",
                   headerName: "Stock Type",
                   flex: 1,
-                  // @ts-ignore
-                  valueGetter: (_, row) => row?.tblSpareType?.name,
+                  valueGetter: (_: any, row: any) => row?.tblSpareType?.name,
                 },
               ]}
-              getRowId={(row) => row.stockItemId}
+              getRowId={(row) => row.spareUnitId}
               onChange={field.onChange}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -221,43 +204,26 @@ function StockUsedFormDialog({
           )}
         />
 
-        {/* Stock No - Read Only */}
-        <Controller
-          name="stockNo"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Stock No"
-              size="small"
-              disabled={true}
-              value={stockItemValue?.tblSpareType?.no || ""}
-            />
-          )}
+        {/* Readonly Stock No */}
+        <TextField
+          label="Stock No"
+          size="small"
+          value={selectedSpare?.tblSpareType?.no ?? ""}
+          disabled
         />
 
-        {/* Stock Name - Read Only */}
-        <Controller
-          name="stockName"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Stock Name"
-              size="small"
-              disabled={true}
-              value={stockItemValue?.tblSpareType?.name || ""}
-            />
-          )}
+        {/* Readonly Stock Name */}
+        <TextField
+          label="Stock Name"
+          size="small"
+          value={selectedSpare?.tblSpareType?.name ?? ""}
+          disabled
         />
 
-        {/* Stock Count - Required */}
+        {/* Stock Count */}
         <Controller
           name="stockCount"
           control={control}
-          rules={{
-            required: "Stock count is required",
-          }}
           render={({ field, fieldState }) => (
             <NumberField
               {...field}
@@ -266,7 +232,7 @@ function StockUsedFormDialog({
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
               disabled={isDisabled}
-              value={field.value ?? 0}
+              value={field.value}
               onChange={(value) => field.onChange(value)}
             />
           )}

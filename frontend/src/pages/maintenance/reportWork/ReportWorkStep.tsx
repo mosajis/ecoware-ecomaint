@@ -65,12 +65,14 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
     componentUnit: TypeTblComponentUnit | null,
   ) => {
     setInitData({
+      workOrder: null,
       componentUnit: componentUnit,
       maintLog: null,
     });
   };
 
   const handleFinish = async () => {
+    console.log("onFinish called", onFinish);
     if (onFinish) {
       await onFinish();
     }
@@ -135,11 +137,7 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
         </Button>
 
         {isLastStep ? (
-          <Button
-            variant="contained"
-            onClick={handleFinish}
-            disabled={isDisabled}
-          >
+          <Button variant="contained" onClick={handleFinish}>
             {finishLabel}
           </Button>
         ) : (

@@ -196,34 +196,16 @@ export default function WorkOrderPage() {
       console.error("Error postponing work orders:", error);
     }
   };
-  const handleSubmitComplete = async (data: {
-    userComment?: string;
-    actualDuration?: number;
-  }) => {
-    try {
-      const updates = selectedWorkOrders.map((wo) =>
-        tblWorkOrder.update(wo.workOrderId, {
-          tblWorkOrderStatus: {
-            connect: {
-              workOrderStatusId: 5,
-            },
-          }, // Complete
-          completed: new Date().toString(),
-          userComment: data.userComment,
-        }),
-      );
-
-      const results = await Promise.all(updates);
-
-      // Optimistic update for all completed work orders
-      results.forEach((record) => {
-        successComplete(record);
-      });
-
-      closeDialogComplete();
-    } catch (error) {
-      console.error("Error completing work orders:", error);
-    }
+  const handleSubmitComplete = async (workOrderId: number) => {
+    const record = await tblWorkOrder.update(workOrderId, {
+      tblWorkOrderStatus: {
+        connect: {
+          workOrderStatusId: 5,
+        },
+      }, // Complete
+      completed: new Date().toString(),
+    });
+    successComplete(record);
   };
 
   const handleSubmitIssue = async () => {
@@ -348,13 +330,12 @@ export default function WorkOrderPage() {
     });
   };
 
-  const successComplete = () => {
-    handleRefresh();
-    // optimisticUpdate(record.workOrderId, {
-    //   tblWorkOrderStatus: record.tblWorkOrderStatus,
-    //   workOrderStatusId: 5,
-    //   completed: record.completed,
-    // });
+  const successComplete = (record: TypeTblWorkOrder) => {
+    optimisticUpdate(record.workOrderId, {
+      tblWorkOrderStatus: record.tblWorkOrderStatus,
+      workOrderStatusId: 5,
+      completed: record.completed,
+    });
   };
   return (
     <>
@@ -419,7 +400,7 @@ export default function WorkOrderPage() {
 
       {/* Complete Dialog */}
       <ReportWorkDialog
-        onSuccess={successComplete}
+        onSuccess={handleSubmitComplete}
         onClose={closeDialogComplete}
         open={dialogComplete}
         workOrderId={selectedWorkOrders[0]?.workOrderId}
@@ -437,7 +418,7 @@ export default function WorkOrderPage() {
       <ConfirmDialog
         open={dialogPostponed}
         title="Postponed Work Order(s)"
-        message={`Are you sure you want to complete ${selectedWorkOrders.length} work order(s)?`}
+        message={`Are you sure you want to Postponed ${selectedWorkOrders.length} work order(s)?`}
         confirmText="Postponed"
         cancelText="Cancel"
         onConfirm={handleConfirmPostponed}

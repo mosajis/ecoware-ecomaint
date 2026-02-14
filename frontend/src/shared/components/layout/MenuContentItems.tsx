@@ -168,12 +168,7 @@ export const menuContentItems: {
         id: "maint:componentType",
         path: "/maintenance/component-type",
       },
-      {
-        text: "Component Job",
-        icon: <BuildRoundedIcon />,
-        id: "maint:componentType:componentJob",
-        path: "/maintenance/component-job",
-      },
+
       {
         text: "Work Order (x)",
         icon: <AssignmentRoundedIcon />,
@@ -250,16 +245,16 @@ export const menuContentItems: {
     ],
   },
   {
-    title: "Report (x)",
+    title: "Report / Form (x)",
     icon: <AssessmentRoundedIcon />,
     path: "/report",
     items: [
-      {
-        text: "Daily Report (x)",
-        icon: <TodayRoundedIcon />,
-        id: "report:daily",
-        path: "/report/daily",
-      },
+      // {
+      //   text: "Daily Report (x)",
+      //   icon: <TodayRoundedIcon />,
+      //   id: "report:daily",
+      //   path: "/report/daily",
+      // },
       {
         text: "Failure Report (x)",
         icon: <ReportProblemRoundedIcon />,
@@ -267,16 +262,16 @@ export const menuContentItems: {
         path: "/report/failure",
       },
       {
-        text: "Job Report (x)",
-        icon: <WorkRoundedIcon />,
-        id: "report:job",
-        path: "/report/job",
-      },
-      {
-        text: "Monthly Report (x)",
+        text: "WorkShop Job (x)",
         icon: <CalendarMonthRoundedIcon />,
         id: "report:monthly",
         path: "/report/monthly",
+      },
+      {
+        text: "Component Job",
+        icon: <BuildRoundedIcon />,
+        id: "maint:componentType:componentJob",
+        path: "/maintenance/component-job",
       },
     ],
   },
