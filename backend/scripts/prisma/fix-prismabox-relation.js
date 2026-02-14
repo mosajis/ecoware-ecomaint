@@ -72,6 +72,7 @@ const TABLE_PKS = {
   TblWorkShopDone: "WShopDoneID",
   TblWorkShopRequest: "WShopRequestID",
   TblUsers: "UserID",
+  TblSpareUnit: "SpareUnitID",
 };
 
 const SPECIAL_RELATIONS = {
