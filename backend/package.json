@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "ecomaint-backend",
   "version": "1.0.50",
   "scripts": {

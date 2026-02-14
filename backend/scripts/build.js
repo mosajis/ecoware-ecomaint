@@ -34,7 +34,9 @@ try {
 
   // Build bundle
   try {
-    await run(`bun build src/main.ts --outdir=${outDir} --target=node`);
+    await run(
+      `bun build src/main.ts --outdir=${outDir} --target=node --format=esm`,
+    );
     log.success("TypeScript build & bundle completed.");
   } catch (e) {
     log.error("TypeScript build failed.");
