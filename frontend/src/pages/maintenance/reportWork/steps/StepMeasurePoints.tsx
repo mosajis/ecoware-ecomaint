@@ -5,7 +5,6 @@ import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
   tblCompMeasurePoint,
-  tblWorkOrder,
   type TypeTblCompMeasurePoint,
 } from "@/core/api/generated/api";
 import { useAtomValue } from "jotai";

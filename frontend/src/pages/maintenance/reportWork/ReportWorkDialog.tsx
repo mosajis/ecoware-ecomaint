@@ -126,7 +126,7 @@ const ReportWorkDialog = ({
 
   const handleSuccess = () => {
     // Call parent onSuccess callback
-    onSuccess?.();
+    onSuccess?.(workOrderId);
     handleClose();
   };
 
