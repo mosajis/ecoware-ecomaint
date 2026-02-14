@@ -75,7 +75,6 @@ const ControllerTblMaintLog = new BaseController({
   responseSchema: buildResponseSchema(TblMaintLogPlain, TblMaintLog),
 
   extend: (app) => {
-    // لیست با select سفارشی
     app.get(
       "/",
       async ({ query }) => {
@@ -101,7 +100,7 @@ const ControllerTblMaintLog = new BaseController({
             maintLogId: true,
             dateDone: true,
             downTime: true,
-            unplanned: true,
+            unexpected: true,
             tblComponentUnit: {
               select: { compNo: true },
             },
@@ -131,7 +130,7 @@ const ControllerTblMaintLog = new BaseController({
         tags: ["tblMaintLog"],
         detail: { summary: "Get maintenance logs with custom fields" },
         query: querySchema,
-        response: MaintLogListResponseSchema,
+        response: t.Any(),
       },
     );
 

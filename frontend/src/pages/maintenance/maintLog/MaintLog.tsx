@@ -20,7 +20,7 @@ const getRowId = (row: TypeTblMaintLog) => row.maintLogId;
 
 export default function PageMaintLog() {
   const [dialogReportWork, setDialogReportWork] = useState(false);
-  const [dialogFilter, setDialogFilter] = useState(true);
+  const [dialogFilter, setDialogFilter] = useState(false);
   const [dialogFollow, setDialogFollow] = useState(false);
 
   const [selectedRow, setSelectedRow] = useState<TypeTblMaintLog | null>(null);

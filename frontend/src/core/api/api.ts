@@ -1,5 +1,6 @@
 import { api } from "@/service/axios";
 import { DynamicResponse } from "./dynamicTypes";
+import { toast } from "sonner";
 
 // ================= CompType Effects =================
 
@@ -115,3 +116,28 @@ export type TypeMaintLogStocksBySpareUnitId =
 export const tblMaintLogStocksBySpareUnitId =
   (): Promise<TypeMaintLogStocksBySpareUnitId> =>
     api.get(`/tblMaintLogStocks/uniqueSpareUnit`);
+
+export const logicTblMaintLog = {
+  /**
+   * Generate next WorkOrder from MaintLog
+   */
+  generateNextWorkOrder: async (maintLogId: number, userId: number) => {
+    try {
+      const res = await api.post("/generate/next", {
+        data: { maintLogId, userId },
+      });
+
+      if (res.data.success) {
+        toast.success(res.data.message || "Next WorkOrder generated!");
+      } else {
+        toast.error(res.data.message || "Failed to generate next WorkOrder");
+      }
+
+      return res.data;
+    } catch (error: any) {
+      console.error("Error generating next WorkOrder:", error);
+      toast.error(error?.response?.data?.message || "Server Error");
+      throw error;
+    }
+  },
+};

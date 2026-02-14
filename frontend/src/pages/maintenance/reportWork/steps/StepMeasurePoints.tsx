@@ -79,10 +79,6 @@ const TabMeasures = ({ compUnitId, onFinish }: TabMaintLogProps) => {
 
   const handleFinish = useCallback(() => {
     if (onFinish) {
-      console.log(
-        "TabMeasures: onFinish called with workOrderId:",
-        workOrderId,
-      );
       onFinish(workOrderId);
     }
   }, [onFinish]);

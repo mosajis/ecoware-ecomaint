@@ -21,7 +21,7 @@ import {
 type Props = {
   open: boolean;
   onClose: () => void;
-  onSuccess?: () => void;
+  onSuccess?: (maintLogId: number) => void;
   componentUnitId?: number;
   maintLogId?: number;
   workOrderId?: number;
@@ -43,6 +43,8 @@ const ReportWorkDialog = ({
   const setIsDirty = useSetAtom(atomIsDirty);
 
   const StepComponent = reportWorkSteps[activeStep].component;
+
+  const initalData = useAtomValue(atomInitalData);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -125,8 +127,9 @@ const ReportWorkDialog = ({
   };
 
   const handleSuccess = () => {
-    // Call parent onSuccess callback
-    onSuccess?.(workOrderId);
+    const maintLogIdToSend = initalData?.maintLog?.maintLogId;
+
+    onSuccess?.(maintLogIdToSend);
     handleClose();
   };
 

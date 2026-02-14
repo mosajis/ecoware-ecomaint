@@ -24,6 +24,7 @@ import {
   tblLogCounter,
 } from "@/core/api/generated/api";
 import { getMaintLogContext, MaintLogContext } from "../../ReportWorkContext";
+import { Checkbox, FormControlLabel } from "@mui/material";
 
 interface StepGeneralProps {
   onDialogSuccess?: () => void;
@@ -58,7 +59,7 @@ const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
   const {
     control,
     handleSubmit,
-    formState: { isDirty, isSubmitting },
+    formState: { isDirty, isSubmitting, errors },
     reset,
     setValue,
   } = useForm<TypeValues>({
@@ -90,6 +91,7 @@ const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
             dateDone: data.maintLog.dateDone
               ? new Date(data.maintLog.dateDone)
               : new Date(),
+            unexpected: false,
             totalDuration: data.maintLog.totalDuration ?? null,
             waitingMin: data.maintLog.downTime ?? null,
             maintType: data.maintLog.tblMaintType ?? null,
@@ -236,22 +238,38 @@ const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
           <Controller
             name="dateDone"
             control={control}
-            render={({ field }) => (
-              <FieldDateTime type="DATETIME" label="Date Done" field={field} />
+            render={({ field, fieldState }) => (
+              <FieldDateTime
+                type="DATETIME"
+                label="Date Done"
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
+                field={field}
+              />
             )}
           />
           <Controller
             name="totalDuration"
             control={control}
-            render={({ field }) => (
-              <NumberField label="Total Duration" field={field} />
+            render={({ field, fieldState }) => (
+              <NumberField
+                label="Total Duration (Minutes)"
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
+                field={field}
+              />
             )}
           />
           <Controller
             name="waitingMin"
             control={control}
-            render={({ field }) => (
-              <NumberField label="Waiting (min)" field={field} />
+            render={({ field, fieldState }) => (
+              <NumberField
+                label="Waiting (Minutes)"
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
+                field={field}
+              />
             )}
           />
         </Box>
@@ -261,10 +279,12 @@ const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
           <Controller
             name="maintType"
             control={control}
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FieldAsyncSelectGrid
                 label="Maint Type"
                 value={field.value}
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
                 request={tblMaintType.getAll}
                 columns={[
                   { field: "descr", headerName: "Description", flex: 1 },
@@ -275,33 +295,37 @@ const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
             )}
           />
           <Controller
-            name="maintCause"
-            control={control}
-            render={({ field }) => (
-              <FieldAsyncSelectGrid
-                label="Maint Cause"
-                value={field.value}
-                request={tblMaintCause.getAll}
-                columns={[
-                  { field: "descr", headerName: "Description", flex: 1 },
-                ]}
-                getRowId={(r) => r.maintCauseId}
-                onChange={field.onChange}
-              />
-            )}
-          />
-          <Controller
             name="maintClass"
             control={control}
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FieldAsyncSelectGrid
                 label="Maint Class"
                 value={field.value}
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
                 request={tblMaintClass.getAll}
                 columns={[
                   { field: "descr", headerName: "Description", flex: 1 },
                 ]}
                 getRowId={(r) => r.maintClassId}
+                onChange={field.onChange}
+              />
+            )}
+          />
+          <Controller
+            name="maintCause"
+            control={control}
+            render={({ field, fieldState }) => (
+              <FieldAsyncSelectGrid
+                label="Maint Cause"
+                value={field.value}
+                request={tblMaintCause.getAll}
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
+                columns={[
+                  { field: "descr", headerName: "Description", flex: 1 },
+                ]}
+                getRowId={(r) => r.maintCauseId}
                 onChange={field.onChange}
               />
             )}
@@ -347,18 +371,27 @@ const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
               />
             )}
           />
+
+          <Controller
+            name="unexpected"
+            control={control}
+            render={({ field, fieldState }) => (
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={!!field.value}
+                    onChange={(e) => field.onChange(e.target.checked)}
+                  />
+                }
+                label="Unexpected"
+              />
+            )}
+          />
         </Box>
       </Box>
 
       {/* ────── Editors ────── */}
       <Box display="flex" gap={1} height={"500px"}>
-        <Controller
-          name="history"
-          control={control}
-          render={({ field }) => (
-            <Editor label="History" autoSave={false} {...field} />
-          )}
-        />
         <Editor
           label="Job Description"
           readOnly
@@ -367,6 +400,13 @@ const StepGeneral = ({ onDialogSuccess }: StepGeneralProps) => {
               ? context.jobDescription.content?.trim() || "--"
               : ""
           }
+        />
+        <Controller
+          name="history"
+          control={control}
+          render={({ field }) => (
+            <Editor label="History" autoSave={false} {...field} />
+          )}
         />
       </Box>
     </ReportWorkStep>

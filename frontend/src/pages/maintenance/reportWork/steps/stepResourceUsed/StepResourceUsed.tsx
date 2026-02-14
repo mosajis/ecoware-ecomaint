@@ -4,18 +4,46 @@ import StepResourceUsedUpsert from "./StepResourceUsedUpsert";
 import Alert from "@mui/material/Alert";
 import { useState, useCallback } from "react";
 import { useAtomValue } from "jotai";
-import { dataGridActionColumn } from "@/shared/components/dataGrid/DataGridActionsColumn";
 import { GridColDef } from "@mui/x-data-grid";
 import { atomInitalData } from "../../ReportWorkAtom";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
   tblLogDiscipline,
   TypeTblLogDiscipline,
 } from "@/core/api/generated/api";
-import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
 interface StepResourceUsedProps {
   onDialogSuccess?: () => void;
 }
+
+const getRowId = (row: TypeTblLogDiscipline) => row.logDiscId;
+
+const columns: GridColDef<TypeTblLogDiscipline>[] = [
+  {
+    field: "logDiscId",
+    headerName: "Id",
+    width: 80,
+  },
+  {
+    field: "name",
+    headerName: "Resource Name",
+    flex: 1,
+    valueGetter: (_, row) =>
+      `${row?.tblEmployee?.firstName} ${row?.tblEmployee?.lastName}`,
+  },
+  {
+    field: "discipline",
+    headerName: "Discipline",
+    flex: 1,
+    valueGetter: (_, row) => row.tblDiscipline?.name,
+  },
+  {
+    field: "timeSpent",
+    headerName: "Time Spent (min)",
+    flex: 1,
+    valueGetter: (_, row) => row.timeSpent || "--",
+  },
+];
 
 const StepResourceUsed = ({ onDialogSuccess }: StepResourceUsedProps) => {
   const initData = useAtomValue(atomInitalData);
@@ -63,36 +91,6 @@ const StepResourceUsed = ({ onDialogSuccess }: StepResourceUsedProps) => {
   };
 
   // === Columns ===
-  const columns: GridColDef<TypeTblLogDiscipline>[] = [
-    {
-      field: "logDiscId",
-      headerName: "Id",
-      width: 80,
-    },
-    {
-      field: "name",
-      headerName: "Resource Name",
-      flex: 1,
-      valueGetter: (_, row) =>
-        `${row?.tblEmployee?.firstName} ${row?.tblEmployee?.lastName}`,
-    },
-    {
-      field: "discipline",
-      headerName: "Discipline",
-      flex: 1,
-      valueGetter: (_, row) => row.tblDiscipline?.name,
-    },
-    {
-      field: "timeSpent",
-      headerName: "Time Spent (min)",
-      flex: 1,
-      valueGetter: (_, row) => row.timeSpent || "--",
-    },
-    dataGridActionColumn({
-      onEdit: handleEdit,
-      onDelete: handleDelete,
-    }),
-  ];
 
   const handleNext = (goNext: () => void) => {
     goNext();
@@ -107,14 +105,16 @@ const StepResourceUsed = ({ onDialogSuccess }: StepResourceUsedProps) => {
           </Alert>
         ) : (
           <CustomizedDataGrid
-            loading={loading}
             showToolbar
-            onRefreshClick={handleRefresh}
+            disableEdit
             label="Resource Used"
+            loading={loading}
             rows={rows}
             columns={columns}
+            onDeleteClick={handleDelete}
+            onRefreshClick={handleRefresh}
             onAddClick={handleCreate}
-            getRowId={(row) => row.logDiscId}
+            getRowId={getRowId}
           />
         )}
       </ReportWorkStep>

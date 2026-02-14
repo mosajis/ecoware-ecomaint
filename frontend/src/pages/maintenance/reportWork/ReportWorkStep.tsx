@@ -72,7 +72,6 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
   };
 
   const handleFinish = async () => {
-    console.log("onFinish called", onFinish);
     if (onFinish) {
       await onFinish();
     }
@@ -136,11 +135,13 @@ const ReportWorkStep: React.FC<ReportWorkStepProps> = ({
           Previous
         </Button>
 
-        {isLastStep ? (
+        {activeStep && (
           <Button variant="contained" onClick={handleFinish}>
             {finishLabel}
           </Button>
-        ) : (
+        )}
+
+        {!isLastStep && (
           <Button
             variant="contained"
             color="secondary"

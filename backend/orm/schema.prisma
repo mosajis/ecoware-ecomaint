@@ -1022,7 +1022,7 @@ model TblMaintLog {
   deptId                                     Int?                    @map("DeptID")
   exportMarker                               Int?                    @map("ExportMarker")
   lastupdate                                 DateTime?               @db.DateTime
-  history                                    String?                 @map("History") @db.NVarChar(300)
+  history                                    String?                 @map("History") @db.NVarChar(4000)
   mlStatus                                   Int?                    @map("MLStatus")
   followStatusId                             Int?                    @map("FollowStatusId")
   orderNo                                    Int?                    @map("OrderNo")

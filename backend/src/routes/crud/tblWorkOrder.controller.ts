@@ -325,11 +325,11 @@ const ControllerTblWorkOrder = new BaseController({
             };
           }
 
-          if (workOrder.workOrderTypeId !== 2) {
+          if (workOrder.workOrderTypeId !== 1) {
             set.status = 400;
             return {
               message:
-                "Only WorkOrder with workOrderTypeId = 2 can generate next WorkOrder",
+                "Only WorkOrder with workOrderTypeId = 1 can generate next WorkOrder",
               success: false,
             };
           }
@@ -459,7 +459,7 @@ const ControllerTblWorkOrder = new BaseController({
           planningMethod: t.Optional(t.String()),
         }),
         detail: {
-          tags: ["WorkOrder"],
+          tags: ["tblWorkOrder"],
           summary: "Generate next WorkOrder from MaintLog",
         },
       },

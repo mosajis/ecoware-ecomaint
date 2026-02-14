@@ -9,17 +9,27 @@ import WorkOrderDialogReschedule from "./WorkOrderDialogReschedule";
 import ReportWorkDialog from "../reportWork/ReportWorkDialog";
 import { useCallback, useMemo, useState } from "react";
 import { columns } from "./WorkOrderColumns";
-import { tblWorkOrder, TypeTblWorkOrder } from "@/core/api/generated/api";
+import {
+  tblWorkOrder,
+  tblWorkOrderGenerateNext,
+  TypeTblWorkOrder,
+} from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
 import { TypeTblWorkOrderWithRels } from "./types";
 import WorkOrderFilterDialog, {
   type WorkOrderFilter,
 } from "./WorkOrderDialogFilter";
+import { logicTblMaintLog } from "@/core/api/api";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
 
 const getRowId = (row: TypeTblWorkOrder) => row.workOrderId;
 
 export default function WorkOrderPage() {
+  const user = useAtomValue(atomUser);
+  const userId = user?.userId as number;
+
   // Dialog States
   const [dialogIssue, setDialogIssue] = useState(false);
   const [dialogFilter, setDialogFilter] = useState(true);
@@ -196,25 +206,42 @@ export default function WorkOrderPage() {
       console.error("Error postponing work orders:", error);
     }
   };
-  const handleSubmitComplete = async (workOrderId: number) => {
-    const record = await tblWorkOrder.update(workOrderId, {
-      tblWorkOrderStatus: {
-        connect: {
-          workOrderStatusId: 5,
+
+  const handleSubmitComplete = async (maintLogId: number) => {
+    const record = await tblWorkOrder.update(
+      selectedWorkOrders[0].workOrderId,
+      {
+        completed: new Date().toString(),
+        tblWorkOrderStatus: {
+          connect: {
+            workOrderStatusId: 5,
+          },
         },
-      }, // Complete
-      completed: new Date().toString(),
-    });
+      },
+      { include: { tblWorkOrderStatus: true } },
+    );
+
+    if (record.workOrderTypeId === 1) {
+      // await logicTblMaintLog.generateNextWorkOrder(maintLogId, userId);
+    }
     successComplete(record);
   };
 
   const handleSubmitIssue = async () => {
     try {
       const updates = selectedWorkOrders.map((wo) =>
-        tblWorkOrder.update(wo.workOrderId, {
-          tblWorkOrderStatus: { connect: { workOrderStatusId: 3 } }, // Issue
-          issuedDate: new Date().toString(),
-        }),
+        tblWorkOrder.update(
+          wo.workOrderId,
+          {
+            tblWorkOrderStatus: { connect: { workOrderStatusId: 3 } }, // Issue
+            issuedDate: new Date().toString(),
+          },
+          {
+            include: {
+              tblWorkOrderStatus: true,
+            },
+          },
+        ),
       );
 
       const results = await Promise.all(updates);
@@ -223,6 +250,8 @@ export default function WorkOrderPage() {
       results.forEach((record) => {
         successIssue(record);
       });
+
+      // setRowSelectionModel({ type: "include", ids: new Set<GridRowId>() });
 
       closeDialogIssue();
     } catch (error) {
