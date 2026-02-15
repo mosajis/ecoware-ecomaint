@@ -9,19 +9,14 @@ import WorkOrderDialogReschedule from "./WorkOrderDialogReschedule";
 import ReportWorkDialog from "../reportWork/ReportWorkDialog";
 import { useCallback, useMemo, useState } from "react";
 import { columns } from "./WorkOrderColumns";
-import {
-  tblWorkOrder,
-  tblWorkOrderGenerateNext,
-  TypeTblWorkOrder,
-} from "@/core/api/generated/api";
-import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
-import { TypeTblWorkOrderWithRels } from "./types";
+import { tblWorkOrder, TypeTblWorkOrder } from "@/core/api/generated/api";
 import WorkOrderFilterDialog, {
   type WorkOrderFilter,
 } from "./WorkOrderDialogFilter";
-import { logicTblMaintLog } from "@/core/api/api";
 import { useAtomValue } from "jotai";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
+import { TypeTblWorkOrderWithRels } from "./types";
 import { atomUser } from "@/pages/auth/auth.atom";
 
 const getRowId = (row: TypeTblWorkOrder) => row.workOrderId;
@@ -32,7 +27,7 @@ export default function WorkOrderPage() {
 
   // Dialog States
   const [dialogIssue, setDialogIssue] = useState(false);
-  const [dialogFilter, setDialogFilter] = useState(false);
+  const [dialogFilter, setDialogFilter] = useState(true);
   const [dialogComplete, setDialogComplete] = useState(false);
   const [dialogPending, setDialogPending] = useState(false);
   const [dialogPostponed, setDialogPostponed] = useState(false);
@@ -62,7 +57,7 @@ export default function WorkOrderPage() {
       getAll as any,
       tblWorkOrder.deleteById,
       "workOrderId",
-      // filter !== null,
+      filter !== null,
     );
 
   const selectedWorkOrders = useMemo<TypeTblWorkOrderWithRels[]>(() => {

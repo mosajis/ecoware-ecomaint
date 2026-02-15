@@ -13,14 +13,20 @@ export const schema = z.object({
   maintType: selectSchema({
     maintTypeId: z.number(),
     descr: z.string().nullable(),
+  }).refine((val) => val !== null, {
+    message: "Maint Type is required",
   }),
   maintCause: selectSchema({
     maintCauseId: z.number(),
     descr: z.string().nullable(),
+  }).refine((val) => val !== null, {
+    message: "Maint Cause is required",
   }),
   maintClass: selectSchema({
     maintClassId: z.number(),
     descr: z.string().nullable(),
+  }).refine((val) => val !== null, {
+    message: "Maint Class is required",
   }),
   reportedCount: z.number().nullable(),
 });

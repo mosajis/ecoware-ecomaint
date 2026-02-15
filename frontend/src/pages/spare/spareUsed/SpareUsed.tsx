@@ -21,7 +21,7 @@ const columns: GridColDef<TypeTblMaintLogStocks>[] = [
     headerName: "Part Name",
     flex: 2,
     // @ts-ignore
-    valueGetter: (_, row) => row.tblSpareUnit.tblSpareType.name,
+    valueGetter: (_, row) => row.tblSpareUnit?.tblSpareType?.name,
   },
   {
     field: "totalCount",

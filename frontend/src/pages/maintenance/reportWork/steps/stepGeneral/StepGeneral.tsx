@@ -86,7 +86,7 @@ const StepGeneral = () => {
 
   useEffect(() => {
     if (!context) return;
-
+    console.log(context);
     const values = {
       dateDone: maintLog?.dateDone ? new Date(maintLog.dateDone) : new Date(),
       totalDuration: maintLog?.totalDuration ?? 0,
@@ -95,7 +95,7 @@ const StepGeneral = () => {
       maintCause: maintLog?.tblMaintCause ?? null,
       maintClass: maintLog?.tblMaintClass ?? null,
       history: maintLog?.history ?? "",
-      unexpected: !!maintLog?.unexpected,
+      unexpected: !context?.isPlanned,
       reportedCount: maintLog?.reportedCount ?? 0,
     };
 
@@ -140,6 +140,16 @@ const StepGeneral = () => {
       const saved = maintLogId
         ? await tblMaintLog.update(maintLogId, payload)
         : await tblMaintLog.create(payload);
+      const recordMaintLog = await tblMaintLog.getById(saved.maintLogId, {
+        include: {
+          tblComponentUnit: true,
+          tblMaintCause: true,
+          tblMaintClass: true,
+          tblMaintType: true,
+          tblWorkOrder: true,
+          tblJobDescription: true,
+        },
+      });
 
       // Counter
       if (context.isCounter) {
@@ -163,9 +173,8 @@ const StepGeneral = () => {
           await tblLogCounter.create(counterPayload);
         }
       }
-
       setReportWork({
-        maintLog: { ...maintLog, maintLogId: saved.maintLogId },
+        maintLog: { ...recordMaintLog },
         workOrder: workOrder,
         componentUnit: componentUnit,
       });
@@ -235,7 +244,7 @@ const StepGeneral = () => {
                 label="Maint Type"
                 value={field.value}
                 error={!!fieldState.error}
-                helperText={fieldState.error?.message}
+                // helperText={fieldState.error?.message}
                 request={tblMaintType.getAll}
                 columns={[
                   { field: "descr", headerName: "Description", flex: 1 },
@@ -254,7 +263,7 @@ const StepGeneral = () => {
                 label="Maint Class"
                 value={field.value}
                 error={!!fieldState.error}
-                helperText={fieldState.error?.message}
+                // helperText={fieldState.error?.message}
                 request={tblMaintClass.getAll}
                 columns={[
                   { field: "descr", headerName: "Description", flex: 1 },
@@ -273,7 +282,7 @@ const StepGeneral = () => {
                 label="Maint Cause"
                 value={field.value}
                 error={!!fieldState.error}
-                helperText={fieldState.error?.message}
+                // helperText={fieldState.error?.message}
                 request={tblMaintCause.getAll}
                 columns={[
                   { field: "descr", headerName: "Description", flex: 1 },
@@ -365,6 +374,7 @@ const StepGeneral = () => {
       </Box>
 
       <Button
+        type="submit"
         variant="outlined"
         color="secondary"
         style={{ width: "200px" }}

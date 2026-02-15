@@ -147,8 +147,6 @@ const ReportWorkDialog = ({
         { include: { tblWorkOrderStatus: true } },
       );
 
-      console.log("hehere", record.workOrderTypeId === 1, maintLogId);
-
       if (record.workOrderTypeId === 1 && reportWork.maintLog.maintLogId) {
         await logicTblMaintLog.generateNextWorkOrder(
           reportWork.maintLog.maintLogId,
@@ -158,6 +156,7 @@ const ReportWorkDialog = ({
       setIsLoadingSubmit(false);
       onSuccess(record);
     }
+    onSuccess({});
   };
 
   return (

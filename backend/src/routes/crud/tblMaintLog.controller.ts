@@ -101,6 +101,7 @@ const ControllerTblMaintLog = new BaseController({
             dateDone: true,
             downTime: true,
             unexpected: true,
+            history: true,
             tblComponentUnit: {
               select: { compNo: true },
             },

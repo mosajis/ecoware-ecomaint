@@ -12,6 +12,10 @@ import {
   tblComponentUnit,
   TypeTblComponentUnit,
 } from "@/core/api/generated/api";
+import DataGridToolbar from "@/shared/components/dataGrid/DataGridToolbar";
+import { Button } from "@mui/material";
+import { se } from "date-fns/locale";
+import ReportWorkDialog from "../reportWork/ReportWorkDialog";
 
 const getRowId = (row: TypeTblComponentUnit) => row.compId;
 const getItemName = (row: TypeTblComponentUnit) => row.compNo || "-";
@@ -44,6 +48,7 @@ const columns: GridColDef<TypeTblComponentUnit>[] = [
 export default function PageComponentUnit() {
   const router = useRouter();
 
+  const [reportWork, setReportWork] = useState(false);
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
@@ -92,6 +97,15 @@ export default function PageComponentUnit() {
     setOpenForm(true);
   }, []);
 
+  const openDialogReportWork = useCallback(() => {
+    if (!selectedRowId) return;
+    setReportWork(true);
+  }, [selectedRowId]);
+
+  const closeDialogReportWork = useCallback(() => {
+    setReportWork(false);
+  }, []);
+
   const handleRowDoubleClick = useCallback(
     (rowId: number) => {
       const row = rows.find((i) => i.compId === rowId);
@@ -106,6 +120,9 @@ export default function PageComponentUnit() {
     [router, rows],
   );
 
+  const handleRowClick = ({ row }: { row: TypeTblComponentUnit }) => {
+    setSelectedRowId(row.compId);
+  };
   return (
     <>
       <Splitter initialPrimarySize="30%">
@@ -133,7 +150,13 @@ export default function PageComponentUnit() {
           onDeleteClick={handleDelete}
           onDoubleClick={handleRowDoubleClick}
           onAddClick={handleCreate}
+          onRowClick={handleRowClick}
           onRefreshClick={refetch}
+          toolbarChildren={
+            <Button disabled={!selectedRowId} onClick={openDialogReportWork}>
+              UnPlanned Job
+            </Button>
+          }
         />
       </Splitter>
 
@@ -143,6 +166,16 @@ export default function PageComponentUnit() {
         recordId={selectedRowId}
         onClose={handleUpsertClose}
         onSuccess={refetch}
+      />
+
+      <ReportWorkDialog
+        open={reportWork}
+        onClose={closeDialogReportWork}
+        onSuccess={() => {
+          closeDialogReportWork();
+          refetch();
+        }}
+        componentUnitId={selectedRowId ?? undefined}
       />
     </>
   );

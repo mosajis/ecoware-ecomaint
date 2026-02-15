@@ -10,3 +10,8 @@ body,
 .tab-container .rsw-editor {
   border-radius: 4px !important;
 }
+
+.rsw-ce,
+.MsoNormal span {
+  color: inherit !important;
+}
