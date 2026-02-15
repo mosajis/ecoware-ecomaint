@@ -18,22 +18,18 @@ const getRowId = (row: TypeTblMaintLog) => row.maintLogId;
 const TabMaintLog = (props: Props) => {
   const { workOrder, label } = props;
 
+  const workOrderId = workOrder?.workOrderId;
+
   const compId = workOrder?.compId;
   const jobDescId = workOrder?.tblCompJob?.jobDescId;
-  const workOrderId = workOrder?.workOrderId;
 
   const getAll = useCallback(
     () =>
       tblMaintLog.getAll({
-        filter: {
-          compId: workOrder?.compId,
-          jobDescId: workOrder?.tblCompJob?.jobDescId,
-        },
+        filter: { compId, jobDescId },
         include: {
           tblWorkOrder: {
-            include: {
-              tblDiscipline: true,
-            },
+            include: { tblDiscipline: true },
           },
           tblFollowStatus: true,
           tblComponentUnit: true,

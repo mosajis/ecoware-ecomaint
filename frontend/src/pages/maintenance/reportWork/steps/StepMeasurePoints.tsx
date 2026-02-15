@@ -1,121 +1,138 @@
-import ReportWorkStep from "../ReportWorkStep";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import {
-  tblCompMeasurePoint,
-  type TypeTblCompMeasurePoint,
-} from "@/core/api/generated/api";
 import { useAtomValue } from "jotai";
-import { atomInitalData } from "../ReportWorkAtom";
+import { reportWorkAtom } from "../ReportWorkAtom";
+import {
+  tblCompJobMeasurePoint,
+  tblCompMeasurePoint,
+  TypeTblCompJobMeasurePoint,
+} from "@/core/api/generated/api";
+import { atomUser } from "@/pages/auth/auth.atom";
+import StepMeasurePointsUpsert from "./StepMeasurePointsUpsert";
 
-interface TabMaintLogProps {
-  onFinish?: (workOrderId: number) => void;
-  compUnitId?: number | null;
-  label?: string | null;
-}
+const getRowId = (row: TypeTblCompJobMeasurePoint) => row.compJobMeasurePointId;
 
-const columns: GridColDef<TypeTblCompMeasurePoint>[] = [
+const columns: GridColDef<TypeTblCompJobMeasurePoint>[] = [
   {
     field: "counterTypeName",
     headerName: "Measure Name",
-    flex: 1.4,
-    valueGetter: (_, row) => row.tblCounterType?.name || "—",
-  },
-  {
-    field: "unitName",
-    headerName: "Unit",
     flex: 1,
-    valueGetter: (_, row) => row.tblUnit?.name || "—",
+    valueGetter: (_, row) =>
+      // @ts-ignore
+      row?.tblCompMeasurePoint?.tblCounterType?.name || "—",
   },
   {
     field: "currentValue",
     headerName: "Current Value",
     flex: 1,
-    align: "right",
-    headerAlign: "right",
-  },
-  {
-    field: "setValue",
-    headerName: "Set Value",
-    flex: 1,
-    align: "right",
-    headerAlign: "right",
-  },
-  {
-    field: "operationalMinValue",
-    headerName: "Min (Operational)",
-    flex: 1,
-    align: "right",
-    headerAlign: "right",
-  },
-  {
-    field: "operationalMaxValue",
-    headerName: "Max (Operational)",
-    flex: 1,
-    align: "right",
-    headerAlign: "right",
-  },
-  {
-    field: "lastupdate",
-    headerName: "Last Update",
-    flex: 1.1,
-    valueFormatter: (value) =>
-      value ? new Date(value as string).toLocaleString() : "—",
-  },
-  {
-    field: "changedBy",
-    headerName: "Changed By",
-    flex: 1,
+    align: "left",
     valueGetter: (_, row) =>
-      row.tblUsers?.fullName || row.tblUsers?.username || "—",
+      // @ts-ignore
+      row?.tblCompMeasurePoint?.currentValue ?? "—",
+  },
+  {
+    field: "unitName",
+    headerName: "Unit",
+    flex: 1,
+    // @ts-ignore
+    valueGetter: (_, row) => row?.tblCompMeasurePoint?.tblUnit?.name || "—",
   },
 ];
 
-const TabMeasures = ({ compUnitId, onFinish }: TabMaintLogProps) => {
-  const maintLog = useAtomValue(atomInitalData).maintLog;
-  const workOrderId = maintLog?.workOrderId;
+const TabMeasures = () => {
+  const { workOrder, maintLog } = useAtomValue(reportWorkAtom);
+  const [selectedRow, setSelectedRow] =
+    useState<TypeTblCompJobMeasurePoint | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
-  const handleFinish = useCallback(() => {
-    if (onFinish) {
-      onFinish(workOrderId);
-    }
-  }, [onFinish]);
+  const user = useAtomValue(atomUser);
+  const userId = user?.userId as number;
+  const compJobId = workOrder?.tblCompJob?.compJobId;
 
   const getAll = useCallback(
     () =>
-      tblCompMeasurePoint.getAll({
+      tblCompJobMeasurePoint.getAll({
         filter: {
-          compId: compUnitId,
+          // compJobId,
         },
         include: {
-          tblCounterType: true,
-          tblUnit: true,
+          tblCompMeasurePoint: {
+            include: {
+              tblCounterType: true,
+              tblUnit: true,
+            },
+          },
         },
       }),
-    [compUnitId],
+    [compJobId],
   );
 
-  const { rows, loading, handleRefresh } = useDataGrid(
+  const { rows, loading, handleRefresh, optimisticUpdate } = useDataGrid(
     getAll,
     tblCompMeasurePoint.deleteById,
-    "compMeasurePointId",
-    !!compUnitId,
+    "compJobMeasurePointId",
+    !!compJobId,
+  );
+
+  const handleEdit = useCallback(
+    (rowId: number) => {
+      const row = rows.find((r) => r.compJobMeasurePointId === rowId);
+      if (row) {
+        setSelectedRow(row);
+        setDialogOpen(true);
+      }
+    },
+    [rows],
+  );
+
+  const handleCloseDialog = useCallback(() => {
+    setDialogOpen(false);
+    setSelectedRow(null);
+  }, []);
+
+  const handleSuccess = useCallback(
+    (newValue: number, currentDate: string) => {
+      if (!selectedRow) return;
+
+      optimisticUpdate(selectedRow.compJobMeasurePointId, {
+        tblCompMeasurePoint: selectedRow.tblCompMeasurePoint
+          ? {
+              ...selectedRow.tblCompMeasurePoint,
+              currentValue: newValue,
+              currentDate: currentDate,
+            }
+          : selectedRow.tblCompMeasurePoint,
+      } as any);
+    },
+    [selectedRow, optimisticUpdate],
   );
 
   return (
-    <ReportWorkStep onFinish={handleFinish}>
+    <>
       <CustomizedDataGrid
+        showToolbar
+        disableAdd
         label="Component Measures"
         rows={rows}
         columns={columns}
         loading={loading}
-        showToolbar
         onRefreshClick={handleRefresh}
-        getRowId={(row) => row.compMeasurePointId}
+        onEditClick={handleEdit}
+        onDoubleClick={handleEdit}
+        getRowId={getRowId}
       />
-    </ReportWorkStep>
+
+      <StepMeasurePointsUpsert
+        open={dialogOpen}
+        row={selectedRow!}
+        maintLogDate={maintLog?.dateDone}
+        userId={userId}
+        onClose={handleCloseDialog}
+        onSuccess={handleSuccess}
+      />
+    </>
   );
 };
 

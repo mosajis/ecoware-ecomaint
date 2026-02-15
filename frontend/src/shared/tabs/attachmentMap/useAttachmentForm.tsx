@@ -17,6 +17,7 @@ import {
   MapRelationConfig,
   AttachmentMapService,
 } from "./AttachmentType";
+import { toast } from "sonner";
 
 interface UseAttachmentFormProps<T> {
   open: boolean;
@@ -118,7 +119,7 @@ export function useAttachmentForm<T>({
   const handleExistingSubmit = useCallback(
     async (values: ExistingAttachmentFormValues) => {
       if (!selectedAttachmentId) {
-        alert("Please select an attachment");
+        toast.error("Please select an attachment");
         return;
       }
 

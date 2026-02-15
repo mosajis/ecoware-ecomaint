@@ -123,21 +123,62 @@ export const logicTblMaintLog = {
    */
   generateNextWorkOrder: async (maintLogId: number, userId: number) => {
     try {
-      const res = await api.post("/generate/next", {
+      const res = await api.post("/tblWorkOrder/generate/next", {
         data: { maintLogId, userId },
       });
 
-      if (res.data.success) {
-        toast.success(res.data.message || "Next WorkOrder generated!");
+      if (res.success) {
+        toast.success(res.message || "Next WorkOrder generated!");
       } else {
-        toast.error(res.data.message || "Failed to generate next WorkOrder");
+        toast.error(res.message || "Failed to generate next WorkOrder");
       }
 
-      return res.data;
+      return res;
     } catch (error: any) {
       console.error("Error generating next WorkOrder:", error);
-      toast.error(error?.response?.data?.message || "Server Error");
+      toast.error(error?.response?.message || "Server Error");
       throw error;
     }
   },
+};
+
+export interface MaintLogContext {
+  isPlanned: boolean;
+  isCounter: boolean;
+  counterData: {
+    lastDate: string;
+    lastValue: number;
+  };
+  reportedCount: number;
+  jobDescription: {
+    title: string | null;
+    content: string | null;
+  };
+  frequency: {
+    value: number | null;
+    period: {
+      periodId: number;
+      name: string | null;
+    } | null;
+  };
+  maintLog: any;
+}
+
+export interface MaintLogContextParams {
+  compId?: number;
+  workOrderId?: number;
+  maintLogId?: number;
+}
+
+export const getMaintLogContext = async (
+  params: MaintLogContextParams,
+): Promise<MaintLogContext> => {
+  const queryParams: Record<string, any> = {};
+  if (params.compId) queryParams.compId = params.compId;
+  if (params.workOrderId) queryParams.workOrderId = params.workOrderId;
+  if (params.maintLogId) queryParams.maintLogId = params.maintLogId;
+
+  return api.get<MaintLogContext>("/tblMaintLog/context", {
+    params: queryParams,
+  });
 };

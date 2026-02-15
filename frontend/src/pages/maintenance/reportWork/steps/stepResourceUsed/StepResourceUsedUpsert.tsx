@@ -9,13 +9,13 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { buildRelation } from "@/core/helper";
 import { useAtomValue } from "jotai";
-import { atomInitalData } from "../../ReportWorkAtom";
 import {
   tblEmployee,
   tblLogDiscipline,
   TypeTblEmployee,
   TypeTblLogDiscipline,
 } from "@/core/api/generated/api";
+import { reportWorkAtom } from "../../ReportWorkAtom";
 
 /* =========================
    Schema
@@ -53,7 +53,7 @@ function StepResourceUsedFormDialog({
 }: Props) {
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const { maintLog } = useAtomValue(atomInitalData);
+  const { maintLog } = useAtomValue(reportWorkAtom);
 
   const maintLogId = maintLog?.maintLogId;
 

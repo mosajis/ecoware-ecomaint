@@ -148,6 +148,7 @@ const ControllerTblWorkOrder = new BaseController({
                   select: {
                     jobDescCode: true,
                     jobDescTitle: true,
+                    jobDesc: true,
                   },
                 },
                 tblPeriod: {

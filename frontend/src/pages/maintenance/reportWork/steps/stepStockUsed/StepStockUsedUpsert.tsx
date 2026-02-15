@@ -23,7 +23,7 @@ const schema = z.object({
     tblSpareType: z
       .object({
         spareTypeId: z.number(),
-        no: z.string().nullable().optional(),
+        partTypeNo: z.string().nullable().optional(),
         name: z.string().nullable().optional(),
       })
       .nullable()
@@ -176,6 +176,7 @@ function StockUsedFormDialog({
               dialogMaxWidth="sm"
               label="Stock Item *"
               selectionMode="single"
+              getOptionLabel={(row) => row?.tblSpareType?.name}
               value={field.value}
               request={() =>
                 tblSpareUnit.getAll({
@@ -184,15 +185,25 @@ function StockUsedFormDialog({
               }
               columns={[
                 {
-                  field: "spareUnitId",
-                  headerName: "Stock Item ID",
-                  width: 120,
+                  field: "partName",
+                  headerName: "Part Name",
+                  flex: 1,
+                  // @ts-ignore
+                  valueGetter: (_, row) => row?.tblSpareType?.name,
                 },
                 {
-                  field: "tblSpareType",
-                  headerName: "Stock Type",
+                  field: "partTypeNo",
+                  headerName: "MESC Code",
                   flex: 1,
-                  valueGetter: (_: any, row: any) => row?.tblSpareType?.name,
+                  // @ts-ignore
+                  valueGetter: (_, row) => row?.tblSpareType?.partTypeNo,
+                },
+                {
+                  field: "makerRefNo",
+                  headerName: "Maker Ref",
+                  flex: 1,
+                  // @ts-ignore
+                  valueGetter: (_, row) => row?.tblSpareType?.makerRefNo,
                 },
               ]}
               getRowId={(row) => row.spareUnitId}
@@ -206,18 +217,14 @@ function StockUsedFormDialog({
 
         {/* Readonly Stock No */}
         <TextField
-          label="Stock No"
+          label="MESC Code"
           size="small"
-          value={selectedSpare?.tblSpareType?.no ?? ""}
-          disabled
-        />
-
-        {/* Readonly Stock Name */}
-        <TextField
-          label="Stock Name"
-          size="small"
-          value={selectedSpare?.tblSpareType?.name ?? ""}
-          disabled
+          value={selectedSpare?.tblSpareType?.partTypeNo ?? ""}
+          slotProps={{
+            input: {
+              readOnly: true,
+            },
+          }}
         />
 
         {/* Stock Count */}

@@ -1,27 +1,25 @@
-import Dialog from "@mui/material/Dialog";
 import Spinner from "@/shared/components/Spinner";
+import Dialog from "@mui/material/Dialog";
 import DialogHeader from "@/shared/components/dialog/DialogHeader";
-import Box from "@mui/material/Box";
-import { Suspense, useEffect, useState } from "react";
-import { reportWorkSteps } from "./reportWorkSteps";
-import { useAtomValue, useSetAtom } from "jotai";
-import {
-  atomActiveStep,
-  atomInitalData,
-  atomIsDirty,
-  resetReportWorkAtoms,
-} from "./ReportWorkAtom";
+import ReportWorkTabs from "./ReportWorkTabs";
+import Button from "@mui/material/Button";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import { useEffect, useState } from "react";
 import {
   tblComponentUnit,
   tblMaintLog,
-  tblPendingType,
   tblWorkOrder,
 } from "@/core/api/generated/api";
+import { useAtom, useAtomValue } from "jotai";
+import { reportWorkAtom } from "./ReportWorkAtom";
+import { logicTblMaintLog } from "@/core/api/api";
+import { atomUser } from "@/pages/auth/auth.atom";
 
 type Props = {
   open: boolean;
+  onSuccess: (t: any) => void;
   onClose: () => void;
-  onSuccess?: (maintLogId: number) => void;
   componentUnitId?: number;
   maintLogId?: number;
   workOrderId?: number;
@@ -36,21 +34,29 @@ const ReportWorkDialog = ({
   workOrderId,
 }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
 
-  const activeStep = useAtomValue(atomActiveStep);
-  const setActiveStep = useSetAtom(atomActiveStep);
-  const setInitData = useSetAtom(atomInitalData);
-  const setIsDirty = useSetAtom(atomIsDirty);
+  const [reportWork, setReportWork] = useAtom(reportWorkAtom);
+  const { maintLog } = reportWork;
 
-  const StepComponent = reportWorkSteps[activeStep].component;
+  const user = useAtomValue(atomUser);
 
-  const initalData = useAtomValue(atomInitalData);
-
+  const userId = user?.userId as number;
+  /* ================= Fetch Data ================= */
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
+    if (!open) {
+      setReportWork({
+        maintLog: null,
+        workOrder: null,
+        componentUnit: null,
+      });
+    }
 
+    const fetchData = async () => {
+      setIsLoading(true);
+
+      try {
+        // Edit Mode
         if (maintLogId) {
           const result = await tblMaintLog.getById(maintLogId, {
             include: {
@@ -62,16 +68,20 @@ const ReportWorkDialog = ({
               tblJobDescription: true,
             },
           });
+
           const maintLog = { ...result, tblComponentUnit: null };
           const componentUnit = result.tblComponentUnit || null;
           const workOrder = result.tblWorkOrder;
 
-          setInitData({
+          setReportWork({
             maintLog,
             componentUnit,
             workOrder,
           });
-        } else if (workOrderId) {
+        }
+
+        // From WorkOrder
+        else if (workOrderId) {
           const workOrder = await tblWorkOrder.getById(workOrderId, {
             include: {
               tblComponentUnit: true,
@@ -89,7 +99,7 @@ const ReportWorkDialog = ({
 
           const componentUnit = workOrder.tblComponentUnit || null;
 
-          const initialMaintLog = {
+          const maintLog = {
             tblMaintType: workOrder.tblMaintType || null,
             tblMaintCause: workOrder.tblMaintCause || null,
             tblMaintClass: workOrder.tblMaintClass || null,
@@ -97,58 +107,86 @@ const ReportWorkDialog = ({
             tblWorkOrder: workOrder,
           };
 
-          setInitData({
-            maintLog: initialMaintLog as any,
+          setReportWork({
+            maintLog,
             componentUnit,
             workOrder,
           });
-        } else if (componentUnitId) {
-          const componentUnit = await tblComponentUnit.getById(componentUnitId);
-          setInitData({ componentUnit, maintLog: null, workOrder: null });
-        } else {
-          setInitData({ componentUnit: null, maintLog: null, workOrder: null });
         }
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
+
+        // From Component Unit
+        else if (componentUnitId) {
+          const componentUnit = await tblComponentUnit.getById(componentUnitId);
+          setReportWork({
+            componentUnit,
+            maintLog: null,
+            workOrder: null,
+          });
+        }
       } finally {
         setIsLoading(false);
       }
     };
 
-    if (open) {
-      fetchData();
+    fetchData();
+  }, [open, maintLogId, workOrderId, componentUnitId]);
+
+  const handleSuccess = async () => {
+    if (workOrderId) {
+      setIsLoadingSubmit(true);
+      const record = await tblWorkOrder.update(
+        workOrderId,
+        {
+          completed: new Date().toString(),
+          tblWorkOrderStatus: {
+            connect: {
+              workOrderStatusId: 5,
+            },
+          },
+        },
+        { include: { tblWorkOrderStatus: true } },
+      );
+
+      console.log("hehere", record.workOrderTypeId === 1, maintLogId);
+
+      if (record.workOrderTypeId === 1 && reportWork.maintLog.maintLogId) {
+        await logicTblMaintLog.generateNextWorkOrder(
+          reportWork.maintLog.maintLogId,
+          userId,
+        );
+      }
+      setIsLoadingSubmit(false);
+      onSuccess(record);
     }
-  }, [open, componentUnitId, maintLogId, workOrderId, setInitData]);
-
-  const handleClose = () => {
-    // Reset all atoms when closing
-    resetReportWorkAtoms(setActiveStep, setInitData, setIsDirty);
-    onClose();
-  };
-
-  const handleSuccess = () => {
-    const maintLogIdToSend = initalData?.maintLog?.maintLogId;
-
-    onSuccess?.(maintLogIdToSend);
-    handleClose();
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} fullWidth maxWidth="lg">
-      <DialogHeader
-        title="Report Work"
-        onClose={handleClose}
-        loading={isLoading}
-      />
-      <Box height={"650px"} display="flex" flexDirection="column">
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          <Suspense fallback={<Spinner />}>
-            <StepComponent onFinish={handleSuccess} />
-          </Suspense>
-        )}
-      </Box>
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="lg">
+      <DialogHeader title="Report Work" onClose={onClose} loading={isLoading} />
+      <DialogContent
+        dividers
+        style={{
+          padding: "8px",
+          height: "630px",
+          background: "var(--template-palette-background-default)",
+        }}
+      >
+        {isLoading ? <Spinner /> : <ReportWorkTabs />}
+      </DialogContent>
+      <DialogActions>
+        <Button
+          onClick={handleSuccess}
+          type="submit"
+          color="secondary"
+          style={{ width: 200 }}
+          variant={
+            maintLog?.maintLogId && !isLoadingSubmit ? "contained" : "text"
+          }
+          disabled={!maintLog?.maintLogId || isLoadingSubmit}
+        >
+          {isLoadingSubmit ? "submitting ..." : "submit"}
+        </Button>
+      </DialogActions>
     </Dialog>
   );
 };

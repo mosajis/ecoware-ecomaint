@@ -32,7 +32,7 @@ export default function WorkOrderPage() {
 
   // Dialog States
   const [dialogIssue, setDialogIssue] = useState(false);
-  const [dialogFilter, setDialogFilter] = useState(true);
+  const [dialogFilter, setDialogFilter] = useState(false);
   const [dialogComplete, setDialogComplete] = useState(false);
   const [dialogPending, setDialogPending] = useState(false);
   const [dialogPostponed, setDialogPostponed] = useState(false);
@@ -62,7 +62,7 @@ export default function WorkOrderPage() {
       getAll as any,
       tblWorkOrder.deleteById,
       "workOrderId",
-      filter !== null,
+      // filter !== null,
     );
 
   const selectedWorkOrders = useMemo<TypeTblWorkOrderWithRels[]>(() => {
@@ -207,26 +207,6 @@ export default function WorkOrderPage() {
     }
   };
 
-  const handleSubmitComplete = async (maintLogId: number) => {
-    const record = await tblWorkOrder.update(
-      selectedWorkOrders[0].workOrderId,
-      {
-        completed: new Date().toString(),
-        tblWorkOrderStatus: {
-          connect: {
-            workOrderStatusId: 5,
-          },
-        },
-      },
-      { include: { tblWorkOrderStatus: true } },
-    );
-
-    if (record.workOrderTypeId === 1) {
-      // await logicTblMaintLog.generateNextWorkOrder(maintLogId, userId);
-    }
-    successComplete(record);
-  };
-
   const handleSubmitIssue = async () => {
     try {
       const updates = selectedWorkOrders.map((wo) =>
@@ -360,6 +340,7 @@ export default function WorkOrderPage() {
   };
 
   const successComplete = (record: TypeTblWorkOrder) => {
+    closeDialogComplete();
     optimisticUpdate(record.workOrderId, {
       tblWorkOrderStatus: record.tblWorkOrderStatus,
       workOrderStatusId: 5,
@@ -429,7 +410,7 @@ export default function WorkOrderPage() {
 
       {/* Complete Dialog */}
       <ReportWorkDialog
-        onSuccess={handleSubmitComplete}
+        onSuccess={successComplete}
         onClose={closeDialogComplete}
         open={dialogComplete}
         workOrderId={selectedWorkOrders[0]?.workOrderId}

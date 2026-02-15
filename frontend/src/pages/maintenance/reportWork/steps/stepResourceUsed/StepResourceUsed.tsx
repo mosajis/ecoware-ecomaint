@@ -1,16 +1,15 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import ReportWorkStep from "../../ReportWorkStep";
 import StepResourceUsedUpsert from "./StepResourceUsedUpsert";
 import Alert from "@mui/material/Alert";
 import { useState, useCallback } from "react";
 import { useAtomValue } from "jotai";
 import { GridColDef } from "@mui/x-data-grid";
-import { atomInitalData } from "../../ReportWorkAtom";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
   tblLogDiscipline,
   TypeTblLogDiscipline,
 } from "@/core/api/generated/api";
+import { reportWorkAtom } from "../../ReportWorkAtom";
 
 interface StepResourceUsedProps {
   onDialogSuccess?: () => void;
@@ -45,8 +44,8 @@ const columns: GridColDef<TypeTblLogDiscipline>[] = [
   },
 ];
 
-const StepResourceUsed = ({ onDialogSuccess }: StepResourceUsedProps) => {
-  const initData = useAtomValue(atomInitalData);
+const StepResourceUsed = () => {
+  const initData = useAtomValue(reportWorkAtom);
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
@@ -82,42 +81,27 @@ const StepResourceUsed = ({ onDialogSuccess }: StepResourceUsedProps) => {
     getAll,
     tblLogDiscipline.deleteById,
     "logDiscId",
-    !!maintLogId, // Only fetch if maintLogId exists
+    !!maintLogId,
   );
 
   const handleFormSuccess = () => {
     setOpenForm(false);
     handleRefresh();
   };
-
-  // === Columns ===
-
-  const handleNext = (goNext: () => void) => {
-    goNext();
-  };
-
   return (
     <>
-      <ReportWorkStep onNext={handleNext} onDialogSuccess={onDialogSuccess}>
-        {!maintLogId ? (
-          <Alert severity="warning">
-            Please save the General information first before adding resources.
-          </Alert>
-        ) : (
-          <CustomizedDataGrid
-            showToolbar
-            disableEdit
-            label="Resource Used"
-            loading={loading}
-            rows={rows}
-            columns={columns}
-            onDeleteClick={handleDelete}
-            onRefreshClick={handleRefresh}
-            onAddClick={handleCreate}
-            getRowId={getRowId}
-          />
-        )}
-      </ReportWorkStep>
+      <CustomizedDataGrid
+        showToolbar
+        disableEdit
+        label="Resource Used"
+        loading={loading}
+        rows={rows}
+        columns={columns}
+        onDeleteClick={handleDelete}
+        onRefreshClick={handleRefresh}
+        onAddClick={handleCreate}
+        getRowId={getRowId}
+      />
 
       {/* === FORM === */}
       {maintLogId && (

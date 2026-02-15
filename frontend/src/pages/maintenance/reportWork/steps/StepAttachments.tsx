@@ -1,16 +1,15 @@
-import ReportWorkStep from "../ReportWorkStep";
 import AttachmentMap from "@/shared/tabs/attachmentMap/AttachmentMap";
 import Alert from "@mui/material/Alert";
 import { useAtomValue } from "jotai";
-import { atomInitalData } from "../ReportWorkAtom";
 import { tblMaintLogAttachment } from "@/core/api/generated/api";
+import { reportWorkAtom } from "../ReportWorkAtom";
 
 interface StepAttachmentsProps {
   onDialogSuccess?: () => void;
 }
 
-const StepAttachments = ({ onDialogSuccess }: StepAttachmentsProps) => {
-  const { maintLog } = useAtomValue(atomInitalData);
+const StepAttachments = () => {
+  const { maintLog } = useAtomValue(reportWorkAtom);
   const maintLogId = maintLog?.maintLogId;
 
   const handleNext = (goNext: () => void) => {
@@ -18,22 +17,14 @@ const StepAttachments = ({ onDialogSuccess }: StepAttachmentsProps) => {
   };
 
   return (
-    <ReportWorkStep onNext={handleNext} onDialogSuccess={onDialogSuccess}>
-      {!maintLogId ? (
-        <Alert severity="warning">
-          Please save the General information first before adding attachments.
-        </Alert>
-      ) : (
-        <AttachmentMap
-          filterId={maintLogId}
-          filterKey="maintLogId"
-          relName="tblMaintLog"
-          tableId="maintLogAttachmentId"
-          label="Maintenance Log Attachments"
-          mapService={tblMaintLogAttachment}
-        />
-      )}
-    </ReportWorkStep>
+    <AttachmentMap
+      filterId={maintLogId}
+      filterKey="maintLogId"
+      relName="tblMaintLog"
+      tableId="maintLogAttachmentId"
+      label="Maintenance Log Attachments"
+      mapService={tblMaintLogAttachment}
+    />
   );
 };
 

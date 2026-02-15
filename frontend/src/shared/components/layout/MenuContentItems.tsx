@@ -147,7 +147,7 @@ export const menuContentItems: {
     ],
   },
   {
-    title: "Maintenance (x)",
+    title: "Maintenance",
     icon: <BuildRoundedIcon />,
     items: [
       {
@@ -170,19 +170,19 @@ export const menuContentItems: {
       },
 
       {
-        text: "Work Order (x)",
+        text: "Work Order",
         icon: <AssignmentRoundedIcon />,
         id: "maint:workOrder",
         path: "/maintenance/work-order",
       },
       {
-        text: "Round (x)",
+        text: "Round",
         icon: <LoopRoundedIcon />,
         id: "maint:round",
         path: "/maintenance/round",
       },
       {
-        text: "Requisition Work (x)",
+        text: "Requisition Work",
         icon: <PostAddRoundedIcon />,
         id: "maint:requisitionWork",
         path: "/maintenance/requisition-work",
@@ -212,7 +212,7 @@ export const menuContentItems: {
         path: "/maintenance/measure-points-logs",
       },
       {
-        text: "Maint Log (x)",
+        text: "Maint Log",
         icon: <ArticleRoundedIcon />,
         id: "maint:maintLog",
         path: "/maintenance/maint-log",
@@ -245,24 +245,18 @@ export const menuContentItems: {
     ],
   },
   {
-    title: "Report / Form (x)",
+    title: "Report / Form",
     icon: <AssessmentRoundedIcon />,
     path: "/report",
     items: [
-      // {
-      //   text: "Daily Report (x)",
-      //   icon: <TodayRoundedIcon />,
-      //   id: "report:daily",
-      //   path: "/report/daily",
-      // },
       {
-        text: "Failure Report (x)",
+        text: "Failure Report",
         icon: <ReportProblemRoundedIcon />,
         id: "report:failure",
         path: "/report/failure",
       },
       {
-        text: "WorkShop Job (x)",
+        text: "WorkShop Job",
         icon: <CalendarMonthRoundedIcon />,
         id: "report:monthly",
         path: "/report/monthly",
@@ -276,7 +270,7 @@ export const menuContentItems: {
     ],
   },
   {
-    title: "Users (x)",
+    title: "Users",
     icon: <PeopleRoundedIcon />,
     items: [],
     path: "/users",
