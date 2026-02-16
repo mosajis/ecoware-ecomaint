@@ -39,7 +39,6 @@ export { default as ControllerTblJobDescription } from "./tblJobDescription.cont
 export { default as ControllerTblJobDescriptionAttachment } from "./tblJobDescriptionAttachment.controller";
 export { default as ControllerTblJobTrigger } from "./tblJobTrigger.controller";
 export { default as ControllerTblJobTriggerLog } from "./tblJobTriggerLog.controller";
-export { default as ControllerTblJobVersion } from "./tblJobVersion.controller";
 export { default as ControllerTblLocation } from "./tblLocation.controller";
 export { default as ControllerTblLogCounter } from "./tblLogCounter.controller";
 export { default as ControllerTblLogDiscipline } from "./tblLogDiscipline.controller";

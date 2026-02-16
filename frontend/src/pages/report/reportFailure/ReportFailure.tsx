@@ -33,14 +33,18 @@ export default function PageReportFailure() {
       tblFailureReports.getAll({
         filter: filter ?? undefined,
         include: {
-          tblComponentUnit: true,
-          tblDiscipline: true,
+          tblMaintLog: {
+            include: {
+              // tblComponentUnit: true,
+              // tblDiscipline: true,
+            },
+          },
           tblFailureSeverityLevel: true,
           tblFailureStatus: true,
           tblFailureGroupFollow: true,
-          tblUsersTblFailureReportsReportedUserIdTotblUsers: true,
-          tblUsersTblFailureReportsApprovedUserIdTotblUsers: true,
-          tblUsersTblFailureReportsClosedUserIdTotblUsers: true,
+          // tblUsersTblFailureReportsReportedUserIdTotblUsers: true,
+          // tblUsersTblFailureReportsApprovedUserIdTotblUsers: true,
+          // tblUsersTblFailureReportsClosedUserIdTotblUsers: true,
         },
       }),
     [filter],
@@ -132,7 +136,7 @@ export default function PageReportFailure() {
       <FailureReportUpsert
         open={openForm}
         mode={mode}
-        recordId={selectedRowId}
+        failureReportId={selectedRowId}
         onClose={closeUpsertDialog}
         onSuccess={handleRefresh}
       />
