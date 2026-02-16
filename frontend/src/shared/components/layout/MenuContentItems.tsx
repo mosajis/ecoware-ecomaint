@@ -258,8 +258,8 @@ export const menuContentItems: {
       {
         text: "WorkShop Job",
         icon: <CalendarMonthRoundedIcon />,
-        id: "report:monthly",
-        path: "/report/monthly",
+        id: "report:workshop",
+        path: "/report/workshop",
       },
       {
         text: "Component Job",

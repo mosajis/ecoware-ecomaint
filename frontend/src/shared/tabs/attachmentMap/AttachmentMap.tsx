@@ -117,7 +117,7 @@ function AttachmentMap<T = any>({
         disableRowNumber
         disableEdit
         label={label}
-        showToolbar={!!filterId}
+        showToolbar={!!label}
         rows={rows}
         columns={attachmentTableColumns}
         loading={loading}

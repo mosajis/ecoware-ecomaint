@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import type { TypeTblUsers } from "@/core/api/generated/api";
+import type { TypeTblDiscipline, TypeTblUsers } from "@/core/api/generated/api";
 
 // Your auth atom
 type TypeAuth = {
@@ -15,4 +15,10 @@ export const atomAuth = atom<TypeAuth>({
 export const atomUser = atom((get) => {
   const auth = get(atomAuth);
   return auth.user;
+});
+
+export const atomUserDiscipline = atom((get) => {
+  const auth = get(atomAuth);
+  return auth.user?.tblEmployeeTblUsersEmployeeIdTotblEmployee
+    ?.tblDiscipline as TypeTblDiscipline;
 });

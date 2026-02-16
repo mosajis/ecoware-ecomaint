@@ -89,7 +89,7 @@ function pull() {
  */
 function push() {
   runCommand(
-    `prisma db push --schema=${SCHEMA} --accept-data-loss`,
+    `prisma db push --accept-data-loss --schema=${SCHEMA}`,
     "Push Database",
   );
   format();

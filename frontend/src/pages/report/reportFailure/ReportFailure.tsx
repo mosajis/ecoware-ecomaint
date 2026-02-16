@@ -2,112 +2,36 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import FailureReportUpsert from "./ReportFailureUpsert";
 import Splitter from "@/shared/components/Splitter/Splitter";
 import AttachmentMap from "@/shared/tabs/attachmentMap/AttachmentMap";
-import CellSeverity from "../_components/CellSeverity";
-import { GridColDef } from "@mui/x-data-grid";
+import FailureReportFilterDialog from "./ReportFailureDialogFilter";
+import FailureReportActions from "./ReportFailureActions";
 import { useCallback, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { FailureReportFilter } from "./ReportFailureDialogFilter";
+import { columns } from "./ReportFailureColumns";
 import {
   tblFailureReportAttachment,
   tblFailureReports,
   TypeTblFailureReports,
 } from "@/core/api/generated/api";
-import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 
 const getRowId = (row: TypeTblFailureReports) => row.failureReportId;
 
-export const columns: GridColDef<TypeTblFailureReports>[] = [
-  {
-    field: "failureNumber",
-    headerName: "No",
-    width: 50,
-    valueGetter: (_, row) => row.failureNumber,
-  },
-  {
-    field: "componentName",
-    headerName: "Component Name",
-    flex: 1,
-    valueGetter: (_, row) => row?.tblComponentUnit?.compNo,
-  },
-  {
-    field: "failureDateTime",
-    headerName: "Failure Date",
-    width: 150,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-  {
-    field: "title",
-    headerName: "Title",
-    flex: 2,
-    valueGetter: (_, row) => row.title,
-  },
-  {
-    field: "totalWait",
-    headerName: "Total Wait",
-    flex: 1,
-    valueGetter: (_, row) => row.totalWait,
-  },
-  {
-    field: "severity",
-    headerName: "Severity",
-    flex: 1,
-    renderCell: ({ row }) => (
-      <CellSeverity value={row.tblFailureSeverityLevel} />
-    ),
-  },
-  {
-    field: "groupFollow",
-    headerName: "Group Follow",
-    flex: 1,
-    valueGetter: (_, row) => row?.tblFailureGroupFollow?.name,
-  },
-  {
-    field: "discipline",
-    headerName: "Discipline",
-    flex: 1,
-
-    valueGetter: (_, row) => row?.tblDiscipline?.name,
-  },
-  {
-    field: "reportedBy",
-    headerName: "Reported By",
-    flex: 1,
-    valueGetter: (_, row) =>
-      // @ts-ignore
-      row?.tblUsersTblFailureReportsReportedUserIdTotblUsers?.uName,
-  },
-  {
-    field: "approvedBy",
-    headerName: "Approved By",
-    flex: 1,
-    valueGetter: (_, row) =>
-      // @ts-ignore
-      row?.tblUsersTblFailureReportsApprovedUserIdTotblUsers?.userName,
-  },
-  {
-    field: "closedBy",
-    headerName: "Closed By",
-    flex: 1,
-    valueGetter: (_, row) =>
-      // @ts-ignore
-      row?.tblUsersTblFailureReportsClosedUserIdTotblUsers?.userName,
-  },
-  {
-    field: "closedDateTime",
-    headerName: "Close Date",
-    width: 150,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-];
-
 export default function PageReportFailure() {
-  const [openForm, setOpenForm] = useState(false);
-  const [mode, setMode] = useState<"create" | "update">("create");
-  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   const [label, setLabel] = useState<string | null>(null);
+
+  const [openForm, setOpenForm] = useState(false);
+  const [openFilter, setOpenFilter] = useState(true);
+
+  const [mode, setMode] = useState<"create" | "update">("create");
+
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+
+  const [filter, setFilter] = useState<FailureReportFilter | null>(null);
 
   const getAll = useCallback(
     () =>
       tblFailureReports.getAll({
+        filter: filter ?? undefined,
         include: {
           tblComponentUnit: true,
           tblDiscipline: true,
@@ -119,33 +43,34 @@ export default function PageReportFailure() {
           tblUsersTblFailureReportsClosedUserIdTotblUsers: true,
         },
       }),
-    [],
+    [filter],
   );
 
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
     getAll,
     tblFailureReports.deleteById,
     "failureReportId",
+    !openFilter,
   );
 
   // === Handlers ===
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
     setMode("create");
-    handleUpsertOpen();
+    openUpsertDialog();
   }, []);
 
   const handleEdit = useCallback((rowId: number) => {
     setSelectedRowId(rowId);
     setMode("update");
-    handleUpsertOpen();
+    openUpsertDialog();
   }, []);
 
-  const handleUpsertOpen = useCallback(() => {
+  const openUpsertDialog = useCallback(() => {
     setOpenForm(true);
   }, []);
 
-  const handleUpsertClose = useCallback(() => {
+  const closeUpsertDialog = useCallback(() => {
     setOpenForm(false);
   }, []);
 
@@ -156,6 +81,19 @@ export default function PageReportFailure() {
     },
     [],
   );
+
+  const openDialogFilter = useCallback(() => {
+    setOpenFilter(true);
+  }, []);
+
+  const closeDialogFilter = useCallback(() => {
+    setOpenFilter(false);
+  }, []);
+
+  const onFilterSubmit = (filter: FailureReportFilter | null) => {
+    setFilter(filter);
+    closeDialogFilter();
+  };
 
   return (
     <>
@@ -174,6 +112,12 @@ export default function PageReportFailure() {
           onDeleteClick={handleDelete}
           getRowId={getRowId}
           onRowClick={handleRowClick}
+          toolbarChildren={
+            <FailureReportActions
+              onFilter={openDialogFilter}
+              onPrint={() => {}}
+            />
+          }
         />
         <AttachmentMap
           label={label || "Failure Attachments"}
@@ -189,8 +133,14 @@ export default function PageReportFailure() {
         open={openForm}
         mode={mode}
         recordId={selectedRowId}
-        onClose={handleUpsertClose}
+        onClose={closeUpsertDialog}
         onSuccess={handleRefresh}
+      />
+
+      <FailureReportFilterDialog
+        open={openFilter}
+        onClose={closeDialogFilter}
+        onSubmit={onFilterSubmit}
       />
     </>
   );

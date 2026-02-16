@@ -202,6 +202,7 @@ export default function FieldAsyncSelect<T>({
       isOptionEqualToValue={(option, val) => {
         return getOptionKey(option) === getOptionKey(val);
       }}
+      fullWidth
       onChange={(_, v) => handleChange(v, field?.onChange)}
       inputValue={inputValue}
       onInputChange={(_, newValue, reason) =>

@@ -1,0 +1,48 @@
+.report-workorder-header {
+  display: grid;
+  grid-template-columns: 5fr 2fr;
+  border-bottom: 2px solid #333333;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.report-workorder-header h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.report-workorder-header h3 {
+  margin: 4px 0 0;
+}
+.template-workorder-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #333333;
+  border-top: 2px solid #333333;
+  padding-top: 10px;
+}
+
+.template-workorder-box {
+  margin-top: 10px;
+  width: 100%;
+  page-break-inside: avoid;
+  break-inside: "avoid";
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.template-workorder-box td {
+  border: 1px solid #333;
+  padding: 4px;
+  vertical-align: top;
+}
+.template-workorder-box th {
+  padding: 4px;
+  vertical-align: top;
+}
+
+.template-workorder-box .label {
+  font-weight: bold;
+  background: #f0f0f0;
+}

@@ -1,0 +1,134 @@
+import { calculateOverdue, formatDateTime, val } from "@/core/helper";
+import { TypeTblWorkOrderWithRels } from "../types";
+import { OutputFormat } from "./PrintTypes";
+
+const extractData = (wo: TypeTblWorkOrderWithRels) => ({
+  title: wo.title,
+  // @ts-ignore
+  plannedBy: wo.usersTblWorkOrderPlannedByToUsers?.uName,
+  workorderId: wo.workOrderId,
+  component: wo.tblComponentUnit?.compNo,
+  dueDate: wo.dueDate,
+  location: wo.tblComponentUnit?.tblLocation?.name,
+  lastDone: wo.completed,
+  discipline: wo.tblDiscipline?.name,
+  frequency: wo.tblCompJob?.frequency,
+  window: wo.window,
+  frequencyPeriod: wo.tblCompJob?.tblPeriod?.name,
+  priority: wo.priority,
+  overDue: calculateOverdue(wo),
+  woNo: wo.woNo,
+  jobCode: wo.tblCompJob?.tblJobDescription?.jobDescCode,
+  serialNo: wo.tblComponentUnit?.serialNo,
+  isCritical: wo.tblComponentUnit?.isCritical,
+  jobDesc: wo.tblCompJob?.tblJobDescription?.jobDesc,
+  pendType: wo.tblPendingType?.pendTypeName,
+  pendDate: wo.pendingdate,
+  pendDesc: wo.tblPendingType?.description,
+});
+
+type Props = {
+  workorder: TypeTblWorkOrderWithRels;
+  outputFormat: OutputFormat;
+};
+
+const PrintTable = ({ workorder, outputFormat }: Props) => {
+  const data = extractData(workorder);
+
+  return (
+    <table key={workorder.workOrderId} className="template-workorder-box">
+      <colgroup>
+        <col style={{ width: "14%" }} />
+        <col style={{ width: "19%" }} />
+        <col style={{ width: "14%" }} />
+        <col style={{ width: "19%" }} />
+        <col style={{ width: "14%" }} />
+        <col style={{ width: "14%" }} />
+      </colgroup>
+      <tbody>
+        {/* Header Section */}
+        <tr>
+          <td style={{ backgroundColor: "#fff8b6ff", fontWeight: "bold" }}>
+            Title
+          </td>
+          <td colSpan={3} style={{ backgroundColor: "#fff8b6ff" }}>
+            {val(data.title)}
+          </td>
+
+          <td style={{ backgroundColor: "#fff8b6ff", fontWeight: "bold" }}>
+            WO.NO
+          </td>
+          <td style={{ backgroundColor: "#fff8b6ff" }}>
+            WO-{val(data.workorderId)}
+          </td>
+        </tr>
+
+        {/* Main Info Section */}
+        <tr>
+          <td className="label">Component</td>
+          <td>{val(data.component)}</td>
+          <td className="label">Due Date</td>
+          <td>{data.dueDate ? formatDateTime(data.dueDate) : "-"}</td>
+          <td className="label">Discipline</td>
+          <td>{val(data.discipline)}</td>
+        </tr>
+        <tr>
+          <td className="label">Location</td>
+          <td>{val(data.location)}</td>
+          <td className="label">Last Done</td>
+          <td>{data.lastDone ? formatDateTime(data.lastDone) : "-"}</td>
+          <td className="label">Frequency</td>
+          <td>
+            {val(data.frequency)} {val(data.frequencyPeriod)}
+          </td>
+        </tr>
+        <tr>
+          <td className="label">Priority</td>
+          <td>{val(data.priority)}</td>
+          <td className="label">Over Due</td>
+          <td
+            style={{
+              color: Number(data.overDue) < 0 ? "red" : "green",
+              fontWeight: 600,
+            }}
+          >
+            {data.overDue}
+          </td>
+          <td className="label">Window</td>
+          <td>{val(data.window)}</td>
+        </tr>
+        <tr>
+          <td className="label">Job Code</td>
+          <td>{val(data.jobCode)}</td>
+          <td className="label">Serial</td>
+          <td>{val(data.serialNo)}</td>
+          <td className="label">is Critical</td>
+          <td>{data.isCritical ? "Yes" : "No"}</td>
+        </tr>
+
+        {/* Details Section - Conditional */}
+        {outputFormat === "details" && (
+          <>
+            <tr>
+              <td className="label">Job Description</td>
+              {/*  set work break */}
+              <td colSpan={5}>{data.jobDesc}</td>
+            </tr>
+            <tr>
+              <td className="label">Pend Type</td>
+              <td colSpan={3}>{val(data.pendType)}</td>
+              <td className="label">Pend Date</td>
+              <td>{data.pendDate ? formatDateTime(data.pendDate) : "-"}</td>
+            </tr>
+            <tr>
+              <td className="label">Pend Description</td>
+              <td colSpan={5}>{val(data.pendDesc)}</td>
+            </tr>
+          </>
+        )}
+      </tbody>
+    </table>
+  );
+};
+
+export default PrintTable;
