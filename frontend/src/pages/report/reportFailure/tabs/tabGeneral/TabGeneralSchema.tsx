@@ -2,9 +2,9 @@ import * as z from "zod";
 
 export const schema = z.object({
   // Basic Info
-  title: z.string().min(1, "Title is required"),
-  requestNo: z.string().nullable().optional(),
-  failureDateTime: z.date(),
+  title: z.string(),
+  requestNo: z.string(),
+  failureDateTime: z.date().or(z.string()),
 
   // Component & Location
   component: z
@@ -13,16 +13,13 @@ export const schema = z.object({
       compNo: z.string().nullable().optional(),
       serialNo: z.string().nullable().optional(),
       functionId: z.number().nullable().optional(),
-      tblLocation: z
-        .object({
-          locationId: z.number(),
-          name: z.string().nullable().optional(),
-        })
-        .nullable()
-        .optional(),
+      tblLocation: z.object({
+        locationId: z.number(),
+        name: z.string().nullable().optional(),
+      }),
     })
     .nullable()
-    .refine((val) => val !== null, "Component is required"),
+    .refine((val) => val !== null),
 
   // Status & Severity
   failureSeverity: z
@@ -31,7 +28,7 @@ export const schema = z.object({
       name: z.string().nullable().optional(),
     })
     .nullable()
-    .optional(),
+    .refine((val) => val !== null),
 
   failureStatus: z
     .object({
@@ -39,7 +36,7 @@ export const schema = z.object({
       name: z.string().nullable().optional(),
     })
     .nullable()
-    .optional(),
+    .refine((val) => val !== null),
 
   failureGroupFollow: z
     .object({
@@ -49,7 +46,7 @@ export const schema = z.object({
     .nullable()
     .optional(),
 
-  nextFollowDate: z.date().nullable().optional(),
+  nextFollowDate: z.string().nullable().optional(),
 
   // Maintenance Info
   maintClass: z
@@ -58,7 +55,7 @@ export const schema = z.object({
       descr: z.string().nullable().optional(),
     })
     .nullable()
-    .optional(),
+    .refine((val) => val !== null),
 
   maintCause: z
     .object({
@@ -66,7 +63,7 @@ export const schema = z.object({
       descr: z.string().nullable().optional(),
     })
     .nullable()
-    .optional(),
+    .refine((val) => val !== null),
 
   maintType: z
     .object({
@@ -74,18 +71,21 @@ export const schema = z.object({
       descr: z.string().nullable().optional(),
     })
     .nullable()
-    .optional(),
+    .refine((val) => val !== null),
 
   // Descriptions
-  failureDesc: z.string().nullable().optional(),
+  failureDesc: z.string(),
+  downTime: z.number(),
   followDesc: z.string().nullable().optional(),
 });
 
 export type SchemaValue = z.input<typeof schema>;
 
 export const DEFAULT_VALUES: SchemaValue = {
-  title: null as any,
-  requestNo: null,
+  downTime: 0,
+  title: "",
+  requestNo: "",
+  failureDesc: "",
   failureDateTime: new Date(),
   component: null,
   failureSeverity: null,
@@ -95,6 +95,5 @@ export const DEFAULT_VALUES: SchemaValue = {
   maintClass: null,
   maintCause: null,
   maintType: null,
-  failureDesc: null,
   followDesc: null,
 };

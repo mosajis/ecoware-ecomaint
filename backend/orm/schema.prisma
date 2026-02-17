@@ -39,16 +39,16 @@ model Sysdiagrams {
 
 model TblAddress {
   addressId         Int                @id(map: "PK_tblAddress") @default(dbgenerated("NEXT VALUE FOR [Seq_Address]"), map: "DF_AddressID") @map("AddressID")
-  name              String?            @map("Name") @db.NVarChar(100)
-  code              String?            @unique(map: "NonClusteredIndex-20251229-231818") @map("Code") @db.NVarChar(15)
+  name              String?            @map("Name") @db.NVarChar(200)
+  code              String?            @unique(map: "NonClusteredIndex-20251229-231818") @map("Code") @db.NVarChar(100)
   address1          String?            @map("Address1") @db.NVarChar(500)
   address2          String?            @map("Address2") @db.NVarChar(500)
   address3          String?            @map("Address3") @db.NVarChar(500)
   address4          String?            @map("Address4") @db.NVarChar(500)
-  phone             String?            @map("Phone") @db.NVarChar(30)
-  contact           String?            @map("Contact") @db.NVarChar(40)
-  eMail             String?            @map("EMail") @db.NVarChar(80)
-  notes             String?            @map("Notes") @db.NVarChar(500)
+  phone             String?            @map("Phone") @db.NVarChar(100)
+  contact           String?            @map("Contact") @db.NVarChar(100)
+  eMail             String?            @map("EMail") @db.NVarChar(100)
+  notes             String?            @map("Notes") @db.NVarChar(4000)
   exportMarker      Int?               @map("ExportMarker")
   lastupdate        DateTime?          @db.DateTime
   orderNo           Int?               @map("OrderNo")
@@ -61,10 +61,10 @@ model TblAddress {
 
 model TblAttachment {
   attachmentId                  Int                            @id(map: "PK_tblAttachment") @default(dbgenerated("NEXT VALUE FOR [Seq_Attachment]"), map: "DF_AttachmentID") @map("AttachmentID")
-  title                         String?                        @map("Title") @db.NVarChar(100)
-  fileName                      String                         @map("FileName") @db.NVarChar(100)
+  title                         String?                        @map("Title") @db.NVarChar(500)
+  fileName                      String?                        @map("FileName") @db.NVarChar(200)
   attachmentTypeId              Int?                           @map("AttachmentTypeId")
-  path                          String?                        @map("Path") @db.NVarChar(500)
+  path                          String?                        @map("Path") @db.NVarChar(4000)
   size                          Int?                           @map("Size")
   isUserAttachment              Boolean                        @map("IsUserAttachment")
   createdUserId                 Int                            @map("CreatedUserId")
@@ -83,8 +83,8 @@ model TblAttachment {
 
 model TblAttachmentType {
   attachmentTypeId Int             @id(map: "PK_tblAttachmentType1") @default(dbgenerated("NEXT VALUE FOR [Seq_AttachmentType]"), map: "DF_AttachmentTypeID") @map("AttachmentTypeID")
-  name             String          @map("Name") @db.NVarChar(50)
-  abbreviation     String          @map("Abbreviation") @db.NVarChar(50)
+  name             String?         @map("Name") @db.NVarChar(100)
+  abbreviation     String?         @map("Abbreviation") @db.NVarChar(100)
   createdBy        Int             @map("Created_By")
   createdAt        DateTime        @default(now()) @map("created_at")
   tblAttachments   TblAttachment[]
@@ -155,7 +155,7 @@ model TblCompJob {
   rescheduleLimitId       Int?                     @map("RescheduleLimitID")
   frequency               Int?                     @map("Frequency")
   frequencyPeriod         Int?                     @map("FrequencyPeriod")
-  changeReason            String?                  @map("ChangeReason") @db.NVarChar(255)
+  changeReason            String?                  @map("ChangeReason") @db.NVarChar(500)
   planningMethod          Int?                     @map("PlanningMethod")
   statusNone              Int?                     @map("StatusNone")
   statusInUse             Int?                     @map("StatusInUse")
@@ -169,7 +169,7 @@ model TblCompJob {
   window                  Int?                     @map("Window")
   active                  Int?                     @map("Active")
   mandatoryHistory        Int?                     @map("MandatoryHistory")
-  notes                   String?                  @map("Notes") @db.NVarChar(Max)
+  notes                   String?                  @map("Notes") @db.NVarChar(4000)
   deptId                  Int?                     @map("DeptID")
   exportMarker            Int?                     @map("ExportMarker")
   lastupdate              DateTime?                @db.DateTime
@@ -300,8 +300,8 @@ model TblCompOilInfo {
   compJobId        Int?      @map("CompJobID")
   tankCapacity     Int?      @map("TankCapacity")
   laboratoryCode   String?   @map("LaboratoryCode") @db.NVarChar(100)
-  samplingPosition String?   @map("SamplingPosition") @db.NVarChar(200)
-  oilGrade         String?   @map("OilGrade") @db.NVarChar(200)
+  samplingPosition String?   @map("SamplingPosition") @db.NVarChar(100)
+  oilGrade         String?   @map("OilGrade") @db.NVarChar(100)
   orderNo          Int?      @map("OrderNo")
   userId           Int?      @map("UserID")
   deptId           Int?      @map("DeptID")
@@ -316,20 +316,20 @@ model TblComponentUnit {
   locationId                  Int?                         @map("LocationID")
   parentCompId                Int?                         @map("ParentCompID")
   vendorId                    Int?                         @map("VendorID")
-  compNo                      String?                      @map("CompNo") @db.NVarChar(90)
-  serialNo                    String?                      @map("SerialNo") @db.NVarChar(80)
+  compNo                      String?                      @map("CompNo") @db.NVarChar(200)
+  serialNo                    String?                      @map("SerialNo") @db.NVarChar(200)
   statusId                    Int?                         @map("StatusID")
-  notes                       String?                      @map("Notes") @db.NVarChar(300)
+  notes                       String?                      @map("Notes") @db.NVarChar(4000)
   deptId                      Int?                         @map("DeptID")
   exportMarker                Int?                         @map("ExportMarker")
   lastupdate                  DateTime?                    @db.DateTime
   isCritical                  Int?                         @map("IsCritical") @db.TinyInt
   orderNo                     Int?                         @map("OrderNo")
-  model                       String?                      @db.NVarChar(100)
-  comment1                    String?                      @db.NVarChar(500)
-  comment2                    String?                      @db.NVarChar(500)
-  comment3                    String?                      @db.NVarChar(500)
-  assetNo                     String?                      @map("AssetNo") @db.NVarChar(100)
+  model                       String?                      @db.NVarChar(500)
+  comment1                    String?
+  comment2                    String?
+  comment3                    String?
+  assetNo                     String?                      @map("AssetNo") @db.NVarChar(200)
   tblCompCounters             TblCompCounter[]
   tblCompJobs                 TblCompJob[]
   tblCompMeasurePoints        TblCompMeasurePoint[]
@@ -366,9 +366,9 @@ model TblCompSpare {
   compSpareId  Int       @id(map: "PK_tblCompSpare") @default(dbgenerated("NEXT VALUE FOR [Seq_CompSpare]"), map: "DF_CompSpareID") @map("CompSpareID")
   compTypeId   Int?      @map("CompTypeID")
   quantity     Int?      @map("Quantity")
-  drawingNo    String?   @map("DrawingNo") @db.NVarChar(100)
-  position     String?   @map("Position") @db.NVarChar(20)
-  oldPartNo    String?   @map("OldPartNo") @db.NVarChar(30)
+  drawingNo    String?   @map("DrawingNo") @db.NVarChar(200)
+  position     String?   @map("Position") @db.NVarChar(200)
+  oldPartNo    String?   @map("OldPartNo") @db.NVarChar(100)
   deptId       Int?      @map("DeptID")
   exportMarker Int?      @map("ExportMarker")
   lastupdate   DateTime? @db.DateTime
@@ -413,12 +413,12 @@ model TblCompStatusLog {
 model TblCompType {
   compTypeId               Int                       @id(map: "PK_tblComponentType") @default(dbgenerated("NEXT VALUE FOR [Seq_CompType]"), map: "DF_CompTypeID") @map("CompTypeID")
   parentCompTypeId         Int?                      @map("ParentCompTypeID")
-  compTypeNo               String?                   @map("CompTypeNo") @db.NVarChar(80)
-  compName                 String?                   @map("CompName") @db.NVarChar(80)
-  compType                 String?                   @map("CompType") @db.NVarChar(80)
-  compTypeModel            String?                   @map("CompTypeModel") @db.NVarChar(80)
+  compTypeNo               String?                   @map("CompTypeNo") @db.NVarChar(200)
+  compName                 String?                   @map("CompName") @db.NVarChar(200)
+  compType                 String?                   @map("CompType") @db.NVarChar(200)
+  compTypeModel            String?                   @map("CompTypeModel") @db.NVarChar(200)
   makerId                  Int?                      @map("MakerID")
-  notes                    String?                   @map("Notes") @db.NVarChar(500)
+  notes                    String?                   @map("Notes") @db.NVarChar(4000)
   deptId                   Int?                      @map("DeptID")
   exportMarker             Int?                      @map("ExportMarker")
   lastupdate               DateTime?                 @db.DateTime
@@ -587,8 +587,8 @@ model TblCompTypeMeasurePoint {
 
 model TblCounterType {
   counterTypeId            Int                       @id(map: "PK_tblCounterType") @default(dbgenerated("NEXT VALUE FOR [Seq_CounterType]"), map: "DF_CounterTypeID") @map("CounterTypeID")
-  code                     String?                   @map("Code") @db.NVarChar(10)
-  name                     String?                   @map("Name") @db.NVarChar(30)
+  code                     String?                   @map("Code") @db.NVarChar(100)
+  name                     String?                   @map("Name") @db.NVarChar(100)
   maxDailyValue            Int?                      @map("MaxDailyValue")
   type                     Int?                      @map("Type")
   deptId                   Int?                      @map("DeptID")
@@ -608,13 +608,13 @@ model TblDepartment {
   deptId       Int       @id(map: "PK_tblDepartment") @default(dbgenerated("NEXT VALUE FOR [Seq_Department]"), map: "DF_DeptID") @map("DeptID")
   deptCode     Int?      @map("DeptCode")
   instId       Int?      @map("InstID")
-  deptName     String?   @map("DeptName") @db.NVarChar(40)
+  deptName     String?   @map("DeptName") @db.NVarChar(100)
   deptType     Int?      @map("DeptType")
-  comment1     String?   @map("Comment1") @db.NVarChar(40)
-  comment2     String?   @map("Comment2") @db.NVarChar(40)
+  comment1     String?   @map("Comment1") @db.NVarChar(100)
+  comment2     String?   @map("Comment2") @db.NVarChar(100)
   status       Int?      @map("Status")
   statusBy     Int?      @map("StatusBy")
-  statusReason String?   @map("StatusReason") @db.NVarChar(255)
+  statusReason String?   @map("StatusReason") @db.NVarChar(200)
   statusDate   DateTime? @map("StatusDate") @db.DateTime
   exportMarker Int?      @map("ExportMarker")
   lastupdate   DateTime? @db.DateTime
@@ -625,8 +625,8 @@ model TblDepartment {
 
 model TblDiscipline {
   discId            Int                @id(map: "PK_tblDiscipline") @default(dbgenerated("NEXT VALUE FOR [Seq_Discipline]"), map: "DF_DiscID") @map("DiscID")
-  code              String?            @map("Code") @db.NVarChar(10)
-  name              String?            @map("Name") @db.NVarChar(20)
+  code              String?            @map("Code") @db.NVarChar(100)
+  name              String?            @map("Name") @db.NVarChar(100)
   externalDisc      Int?               @map("ExternalDisc")
   parentDiscId      Int?               @map("ParentDiscID")
   deptId            Int?               @map("DeptID")
@@ -637,6 +637,7 @@ model TblDiscipline {
   tblCompTypeJobs   TblCompTypeJob[]
   tblEmployees      TblEmployee[]
   tblLogDisciplines TblLogDiscipline[]
+  tblMaintLogs      TblMaintLog[]
   tblWorkOrders     TblWorkOrder[]
 
   @@map("tblDiscipline")
@@ -644,15 +645,15 @@ model TblDiscipline {
 
 model TblEmployee {
   employeeId                                 Int                @id(map: "PK_tblEmployee") @default(dbgenerated("NEXT VALUE FOR [Seq_Employee]"), map: "DF_EmployeeID") @map("EmployeeID")
-  code                                       String?            @map("Code") @db.NVarChar(10)
-  lastName                                   String?            @map("LastName") @db.NVarChar(40)
-  firstName                                  String?            @map("FirstName") @db.NVarChar(40)
+  code                                       String?            @map("Code") @db.NVarChar(100)
+  lastName                                   String?            @map("LastName") @db.NVarChar(100)
+  firstName                                  String?            @map("FirstName") @db.NVarChar(100)
   available                                  Int?               @map("Available")
   discId                                     Int?               @map("DiscID")
   addressId                                  Int?               @map("AddressID")
-  notes                                      String?            @map("Notes") @db.NVarChar(300)
-  initials                                   String?            @map("Initials") @db.NVarChar(8)
-  empTitle                                   String?            @map("EmpTitle") @db.NVarChar(18)
+  notes                                      String?            @map("Notes") @db.NVarChar(2000)
+  initials                                   String?            @map("Initials") @db.NVarChar(100)
+  empTitle                                   String?            @map("EmpTitle") @db.NVarChar(100)
   deptId                                     Int?               @map("DeptID")
   exportMarker                               Int?               @map("ExportMarker")
   lastupdate                                 DateTime?          @db.DateTime
@@ -669,7 +670,7 @@ model TblEmployee {
 
 model TblFailureGroupFollow {
   failureGroupFollowId Int                 @id(map: "PK_tblFailureGroupFollow") @default(dbgenerated("NEXT VALUE FOR [Seq_FailureGroupFollow]"), map: "DF_FailureGroupFollow") @map("FailureGroupFollowID")
-  name                 String?             @map("Name") @db.NVarChar(30)
+  name                 String?             @map("Name") @db.NVarChar(100)
   tblFailureReports    TblFailureReports[]
 
   @@map("tblFailureGroupFollow")
@@ -698,15 +699,16 @@ model TblFailureReports {
   failureSeverityLevelId      Int?                         @map("FailureSeverityLevelID")
   failureStatusId             Int?                         @map("FailureStatusID")
   failureGroupFollowId        Int?                         @map("FailureGroupFollowID")
-  requestNo                   String?                      @map("RequestNo") @db.NVarChar(30)
+  requestNo                   String?                      @map("RequestNo") @db.NVarChar(100)
   nextFollowDate              DateTime?                    @map("NextFollowDate") @db.DateTime
   closedUserId                Int?                         @map("ClosedUserID")
   closedDateTime              DateTime?                    @map("ClosedDateTime") @db.DateTime
-  followDesc                  String?                      @map("FollowDesc") @db.Text
+  followDesc                  String?                      @map("FollowDesc") @db.NVarChar(2000)
   tblFailureReportAttachments TblFailureReportAttachment[]
   tblFailureGroupFollow       TblFailureGroupFollow?       @relation(fields: [failureGroupFollowId], references: [failureGroupFollowId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblFailureReports_tblFailureGroupFollow")
   tblFailureStatus            TblFailureStatus?            @relation(fields: [failureStatusId], references: [failureStatusId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblFailureReports_tblFailureStatus")
   tblFailureSeverityLevel     TblFailureSeverityLevel?     @relation(fields: [failureSeverityLevelId], references: [failureSeverityLevelId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblFailureReports_tblFialureSeverityLevel")
+  tblLocation                 TblLocation?                 @relation(fields: [locationId], references: [locationId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblFailureReports_tblLocation")
   tblMaintLog                 TblMaintLog?                 @relation(fields: [maintLogId], references: [maintLogId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblFailureReports_tblMaintLog")
   tblUsers                    TblUsers?                    @relation(fields: [closedUserId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblFailureReports_tblUsers1")
 
@@ -715,7 +717,7 @@ model TblFailureReports {
 
 model TblFailureSeverityLevel {
   failureSeverityLevelId Int                 @id(map: "PK_tblFialureSeverityLevel") @default(dbgenerated("NEXT VALUE FOR [Seq_FialureSeverityLevel]"), map: "DF_FialureSeverityLevel") @map("FailureSeverityLevelID")
-  name                   String?             @map("Name") @db.NVarChar(30)
+  name                   String?             @map("Name") @db.NVarChar(100)
   tblFailureReports      TblFailureReports[]
 
   @@map("tblFailureSeverityLevel")
@@ -723,7 +725,7 @@ model TblFailureSeverityLevel {
 
 model TblFailureStatus {
   failureStatusId   Int                 @id(map: "PK_tblFailureStatus") @default(dbgenerated("NEXT VALUE FOR [Seq_FailureStatus]"), map: "DF_FailureStatus") @map("FailureStatusID")
-  name              String?             @map("Name") @db.NVarChar(30)
+  name              String?             @map("Name") @db.NVarChar(100)
   tblFailureReports TblFailureReports[]
 
   @@map("tblFailureStatus")
@@ -732,7 +734,7 @@ model TblFailureStatus {
 model TblFollowStatus {
   followStatusId     Int                 @id(map: "PK_tblFollowStatus") @default(dbgenerated("NEXT VALUE FOR [Seq_FollowStatus]"), map: "DF_FollowStatusID") @map("FollowStatusID")
   fsName             String?             @map("FSName") @db.NVarChar(200)
-  fsDesc             String?             @map("FSDesc") @db.NVarChar(500)
+  fsDesc             String?             @map("FSDesc")
   fsGroup            Int?                @map("FSGroup")
   sortId             Int?                @map("SortId")
   exportMarker       Int?                @map("ExportMarker")
@@ -749,10 +751,10 @@ model TblFollowStatus {
 model TblFunctions {
   functionId        Int               @id(map: "PK_tblFunctions") @default(dbgenerated("NEXT VALUE FOR [Seq_Functions]"), map: "DF_FunctionID") @map("FunctionID")
   compId            Int?              @map("CompID")
-  funcNo            String?           @map("FuncNo") @db.NVarChar(90)
-  funcDesc          String?           @map("FuncDesc") @db.NVarChar(80)
+  funcNo            String?           @map("FuncNo") @db.NVarChar(200)
+  funcDesc          String?           @map("FuncDesc") @db.NVarChar(100)
   parentFunctionId  Int?              @map("ParentFunctionID")
-  notes             String?           @map("Notes") @db.NVarChar(300)
+  notes             String?           @map("Notes") @db.NVarChar(2000)
   statusId          Int?              @map("StatusID")
   deptId            Int?              @map("DeptID")
   exportMarker      Int?              @map("ExportMarker")
@@ -773,8 +775,8 @@ model TblJobClass {
   workflowLockTypeId       Int?                @map("WorkflowLockTypeID")
   qWorkflowInitialStatusId Int?                @map("QWorkflowInitialStatusID")
   qWorkflowLockTypeId      Int?                @map("QWorkflowLockTypeID")
-  code                     String?             @map("Code") @db.NVarChar(10)
-  name                     String?             @map("Name") @db.NVarChar(60)
+  code                     String?             @map("Code") @db.NVarChar(100)
+  name                     String?             @map("Name") @db.NVarChar(100)
   deptId                   Int?                @map("DeptID")
   exportMarker             Int?                @map("ExportMarker")
   lastupdate               DateTime?           @db.DateTime
@@ -800,7 +802,7 @@ model TblJobDescriptionAttachment {
 
 model TblJobTrigger {
   jobTriggerId           Int                     @id(map: "PK_tblJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_JobTrigger]"), map: "DF_JobTriggerID") @map("JobTriggerID")
-  descr                  String?                 @map("Descr") @db.NVarChar(300)
+  descr                  String?                 @map("Descr") @db.NVarChar(500)
   deptId                 Int?                    @map("DeptID")
   exportMarker           Int?                    @map("ExportMarker")
   lastupdate             DateTime?               @db.DateTime
@@ -865,12 +867,12 @@ model TblLogDiscipline {
 
 model TblLoginAudit {
   loginAuditId Int       @id(map: "PK_tblLoginAudit") @default(dbgenerated("NEXT VALUE FOR [Seq_LoginAudit]"), map: "DF_LoginAuditID") @map("LoginAuditID")
-  loginName    String?   @map("LoginName") @db.NVarChar(50)
+  loginName    String?   @map("LoginName") @db.NVarChar(100)
   userId       Int?      @map("UserID")
   logStatus    Int?      @map("LogStatus")
   loginTime    DateTime? @map("LoginTime") @db.DateTime
   logoutTime   DateTime? @map("LogoutTime") @db.DateTime
-  hostName     String?   @map("HostName") @db.NVarChar(40)
+  hostName     String?   @map("HostName") @db.NVarChar(200)
   instId       Int?      @map("InstID")
   exportMarker Int?      @map("ExportMarker")
   lastupdate   DateTime? @db.DateTime
@@ -883,7 +885,7 @@ model TblLoginAudit {
 
 model TblMaintCause {
   maintCauseId    Int              @id(map: "PK_tblMaintCause") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintCause]"), map: "DF_MaintCauseID") @map("MaintCauseID")
-  descr           String?          @map("Descr") @db.NVarChar(30)
+  descr           String?          @map("Descr") @db.NVarChar(100)
   deptId          Int?             @map("DeptID")
   exportMarker    Int?             @map("ExportMarker")
   lastupdate      DateTime?        @db.DateTime
@@ -898,7 +900,7 @@ model TblMaintCause {
 
 model TblMaintClass {
   maintClassId    Int              @id(map: "PK_tblMaintClass") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintClass]"), map: "DF_MaintClassID") @map("MaintClassID")
-  descr           String?          @map("Descr") @db.NVarChar(30)
+  descr           String?          @map("Descr") @db.NVarChar(100)
   deptId          Int?             @map("DeptID")
   exportMarker    Int?             @map("ExportMarker")
   lastupdate      DateTime?        @db.DateTime
@@ -929,16 +931,18 @@ model TblMaintLog {
   unexpected                                 Int?                    @map("Unexpected")
   reportedBy                                 Int?                    @map("ReportedBy")
   deptId                                     Int?                    @map("DeptID")
-  history                                    String?                 @map("History") @db.NVarChar(4000)
+  history                                    String?                 @map("History") @db.NVarChar(Max)
   maintLogFollowId                           Int?                    @map("MaintLogFollowID")
   followStatusId                             Int?                    @map("FollowStatusId")
   updatedUserId                              Int?                    @map("UpdatedUserId")
   reportedDate                               DateTime?               @map("ReportedDate") @db.DateTime
   lastupdate                                 DateTime?               @db.DateTime
+  discId                                     Int?                    @map("DiscID")
   tblFailureReports                          TblFailureReports[]
   tblLogCounters                             TblLogCounter[]
   tblLogDisciplines                          TblLogDiscipline[]
   tblComponentUnit                           TblComponentUnit?       @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblComponentUnit")
+  tblDiscipline                              TblDiscipline?          @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblDiscipline")
   tblFollowStatus                            TblFollowStatus?        @relation(fields: [followStatusId], references: [followStatusId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblFollowStatus")
   tblFunctions                               TblFunctions?           @relation(fields: [functionId], references: [functionId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblFunctions")
   tblJobDescription                          TblJobDescription?      @relation(fields: [jobDescId], references: [jobDescId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblJobDescription")
@@ -977,7 +981,7 @@ model TblMaintLogFollow {
   isRequest       Int?             @map("IsRequest") @db.TinyInt
   isWaiting       Int?             @map("IsWaiting") @db.TinyInt
   isUnPlan        Int?             @map("IsUnPlan") @db.TinyInt
-  followDesc      String?          @map("FollowDesc") @db.NVarChar(500)
+  followDesc      String?          @map("FollowDesc") @db.NVarChar(2000)
   deptId          Int?             @map("DeptID")
   exportMarker    Int?             @map("ExportMarker")
   lastupdate      DateTime?        @db.DateTime
@@ -992,7 +996,7 @@ model TblMaintLogFollow {
 
 model TblMaintType {
   maintTypeId     Int              @id(map: "PK_tblMaintType") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintType]"), map: "DF_MaintTypeID") @map("MaintTypeID")
-  descr           String?          @map("Descr") @db.NVarChar(30)
+  descr           String?          @map("Descr") @db.NVarChar(100)
   deptId          Int?             @map("DeptID")
   exportMarker    Int?             @map("ExportMarker")
   lastupdate      DateTime?        @db.DateTime
@@ -1020,23 +1024,23 @@ model TblOilSamplingLog {
   testDate             DateTime  @map("TestDate") @db.DateTime
   sendToLaboratoryDate DateTime? @map("SendToLaboratoryDate") @db.DateTime
   tankCapacity         Int?      @map("TankCapacity")
-  samplingPosition     String?   @map("SamplingPosition") @db.NVarChar(200)
-  oilGrade             String?   @map("OilGrade") @db.NVarChar(200)
+  samplingPosition     String?   @map("SamplingPosition") @db.NVarChar(500)
+  oilGrade             String?   @map("OilGrade") @db.NVarChar(100)
   responseDate         DateTime? @map("ResponseDate") @db.DateTime
   resultCompCode       Int?      @map("ResultCompCode")
-  resultCompDesc       String?   @map("ResultCompDesc") @db.NVarChar(300)
+  resultCompDesc       String?   @map("ResultCompDesc") @db.NVarChar(500)
   resultOilCode        Int?      @map("ResultOilCode")
-  resultOilDesc        String?   @map("ResultOilDesc") @db.NVarChar(300)
+  resultOilDesc        String?   @map("ResultOilDesc") @db.NVarChar(500)
   resultCode           Int?      @map("ResultCode")
-  resultDesc           String?   @map("ResultDesc") @db.NVarChar(300)
+  resultDesc           String?   @map("ResultDesc") @db.NVarChar(500)
   actionCode           Int?      @map("ActionCode")
-  actionDesc           String?   @map("ActionDesc") @db.NVarChar(300)
-  ladingBillNnumber    String?   @map("LadingBillNnumber") @db.NVarChar(50)
-  customerName         String?   @map("CustomerName") @db.NVarChar(300)
-  locationName         String?   @map("LocationName") @db.NVarChar(300)
+  actionDesc           String?   @map("ActionDesc") @db.NVarChar(500)
+  ladingBillNnumber    String?   @map("LadingBillNnumber") @db.NVarChar(100)
+  customerName         String?   @map("CustomerName") @db.NVarChar(500)
+  locationName         String?   @map("LocationName") @db.NVarChar(500)
   sampleNumber         Int?      @map("SampleNumber")
-  laboratoryCode       String?   @map("LaboratoryCode") @db.NVarChar(300)
-  userComment          String?   @map("UserComment") @db.NVarChar(300)
+  laboratoryCode       String?   @map("LaboratoryCode") @db.NVarChar(100)
+  userComment          String?   @map("UserComment") @db.NVarChar(500)
   orderNo              Int?      @map("OrderNo")
   deptId               Int?      @map("DeptID")
   exportMarker         Int?      @map("ExportMarker")
@@ -1046,9 +1050,9 @@ model TblOilSamplingLog {
 model TblParameters {
   parameterId      Int       @id(clustered: false, map: "PK_Parameters") @map("ParameterId")
   parameterGroupId Int       @map("ParameterGroupId") @db.SmallInt
-  parName          String?   @db.NVarChar(100)
-  parEnName        String?   @db.NVarChar(100)
-  parValue         String?   @db.NVarChar(Max)
+  parName          String?   @db.NVarChar(500)
+  parEnName        String?   @db.NVarChar(500)
+  parValue         String?   @db.NVarChar(500)
   parIndex         Int       @db.SmallInt
   orderNo          Int?      @map("OrderNo")
   deptId           Int?      @map("DeptID")
@@ -1062,12 +1066,12 @@ model TblPendingType {
   pendTypeId    Int            @id(map: "PK_tblPendingType") @default(dbgenerated("NEXT VALUE FOR [Seq_PendingType]"), map: "DF_PendTypeId") @map("PendTypeId")
   parentId      Int?           @default(0, map: "DF_tblPendingType_ParentId") @map("ParentId")
   groupId       Int?           @default(0, map: "DF_tblPendingType_GroupId") @map("GroupId")
-  pendTypeName  String         @map("PendTypeName") @db.NVarChar(150)
+  pendTypeName  String?        @map("PendTypeName") @db.NVarChar(100)
   deptId        Int?           @map("DeptID")
   exportMarker  Int?           @map("ExportMarker")
   lastupdate    DateTime?      @db.DateTime
   sortId        Int?           @map("SortID")
-  description   String?        @map("Description") @db.NVarChar(150)
+  description   String?        @map("Description") @db.NVarChar(2000)
   orderNo       Int?           @map("OrderNo")
   tblWorkOrders TblWorkOrder[]
 
@@ -1076,7 +1080,7 @@ model TblPendingType {
 
 model TblPeriod {
   periodId        Int              @id(map: "PK_tblPeriod") @map("PeriodID")
-  name            String           @map("Name") @db.NVarChar(50)
+  name            String?          @map("Name") @db.NVarChar(100)
   tblCompJobs     TblCompJob[]
   tblCompTypeJobs TblCompTypeJob[]
   tblMaintLogs    TblMaintLog[]
@@ -1091,7 +1095,7 @@ model TblReScheduleLog {
   toDueDate       DateTime?     @map("ToDueDate") @db.DateTime
   rescheduledBy   Int?          @map("RescheduledBy")
   rescheduledDate DateTime?     @map("RescheduledDate") @db.DateTime
-  reason          String?       @map("Reason") @db.NVarChar(300)
+  reason          String?       @map("Reason") @db.NVarChar(500)
   deptId          Int?          @map("DeptID")
   exportMarker    Int?          @map("ExportMarker")
   lastupdate      DateTime?     @db.DateTime
@@ -1110,7 +1114,7 @@ model TblRotationLog {
   userRemovedId                                  Int?              @map("UserRemovedID")
   fromDate                                       DateTime?         @map("FromDate") @db.DateTime
   toDate                                         DateTime?         @map("ToDate") @db.DateTime
-  notes                                          String?           @map("Notes") @db.NVarChar(300)
+  notes                                          String?           @map("Notes") @db.NVarChar(2000)
   deptId                                         Int?              @map("DeptID")
   exportMarker                                   Int?              @map("ExportMarker")
   lastupdate                                     DateTime?         @db.DateTime
@@ -1129,8 +1133,8 @@ model TblRound {
   maintClassId            Int?           @map("MaintClassID")
   maintTypeId             Int?           @map("MaintTypeID")
   rescheduleLimitId       Int?           @map("RescheduleLimitID")
-  roundCode               String?        @map("RoundCode") @db.NVarChar(10)
-  roundTitle              String?        @map("RoundTitle") @db.NVarChar(40)
+  roundCode               String?        @map("RoundCode") @db.NVarChar(100)
+  roundTitle              String?        @map("RoundTitle") @db.NVarChar(100)
   discId                  Int?           @map("DiscID")
   frequency               Int?           @map("Frequency")
   frequencyPeriod         Int?           @map("FrequencyPeriod")
@@ -1139,7 +1143,7 @@ model TblRound {
   reportingMethod         Int?           @map("ReportingMethod")
   lastDone                DateTime?      @map("LastDone") @db.DateTime
   nextDueDate             DateTime?      @map("NextDueDate") @db.DateTime
-  description             String?        @map("Description") @db.NVarChar(300)
+  description             String?        @map("Description") @db.NVarChar(500)
   priority                Int?           @map("Priority")
   window                  Int?           @map("Window")
   outputFormat            Int?           @map("OutputFormat")
@@ -1178,11 +1182,11 @@ model TblRoundCompJob {
 model TblSpareType {
   spareTypeId        Int            @id(map: "PK_tblSpareType") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareType]"), map: "DF_SpareType") @map("SpareTypeID")
   parentSpareTypeId  Int?           @map("ParentSpareTypeID")
-  name               String?        @db.NVarChar(200)
+  name               String?
   partTypeNo         String?        @map("PartTypeNo") @db.NVarChar(200)
   makerRefNo         String?        @map("MakerRefNo") @db.NVarChar(200)
   extraNo            String?        @map("ExtraNo") @db.NVarChar(200)
-  note               String?        @map("Note") @db.NVarChar(200)
+  note               String?        @map("Note") @db.NVarChar(4000)
   unitId             Int?           @map("UnitID")
   deptId             Int?           @map("DeptID")
   exportMarker       Int?           @map("ExportMarker")
@@ -1209,8 +1213,8 @@ model TblSpareUnit {
 
 model TblUnit {
   unitId                   Int                       @id(map: "PK_tblUnit") @default(dbgenerated("NEXT VALUE FOR [Seq_Unit]"), map: "DF_UnitID") @map("UnitID")
-  code                     String?                   @map("Code") @db.NVarChar(10)
-  name                     String?                   @map("Name") @db.NVarChar(15)
+  code                     String?                   @map("Code") @db.NVarChar(100)
+  name                     String?                   @map("Name") @db.NVarChar(100)
   allowDecimals            Int?                      @map("AllowDecimals")
   description              String?                   @map("Description") @db.NVarChar(100)
   deptId                   Int?                      @map("DeptID")
@@ -1230,13 +1234,13 @@ model TblUsers {
   employeeId                                           Int?                           @map("EmployeeID")
   addressId                                            Int?                           @map("AddressID")
   userGroupId                                          Int?                           @map("UserGroupId")
-  uUserName                                            String                         @db.NVarChar(30)
-  uPassword                                            String                         @db.NVarChar(257)
-  uName                                                String?                        @db.NVarChar(40)
-  uTitle                                               String?                        @db.NVarChar(40)
-  uComment1                                            String?                        @db.NVarChar(40)
-  uComment2                                            String?                        @db.NVarChar(40)
-  uDigitalSign                                         String?                        @db.NVarChar(40)
+  uUserName                                            String?                        @db.NVarChar(100)
+  uPassword                                            String?                        @db.NVarChar(200)
+  uName                                                String?                        @db.NVarChar(100)
+  uTitle                                               String?                        @db.NVarChar(100)
+  uComment1                                            String?                        @db.NVarChar(100)
+  uComment2                                            String?                        @db.NVarChar(100)
+  uDigitalSign                                         String?                        @db.NVarChar(100)
   uAccountDisabled                                     Boolean?
   uLogonAttempts                                       Int?                           @db.SmallInt
   uForcePasswordChange                                 Boolean?
@@ -1298,8 +1302,8 @@ model TblWorkOrder {
   compId                                  Int?                @map("CompID")
   roundId                                 Int?                @map("RoundID")
   parentWorkOrderId                       Int?                @map("ParentWorkOrderID")
-  woNo                                    String?             @map("WONo") @db.NVarChar(20)
-  title                                   String?             @map("Title")
+  woNo                                    String?             @map("WONo") @db.NVarChar(100)
+  title                                   String?             @map("Title") @db.NVarChar(200)
   priority                                Int?                @map("Priority")
   estTotalDuration                        Int?                @map("EstTotalDuration")
   dueDate                                 DateTime?           @map("DueDate") @db.DateTime
@@ -1307,7 +1311,7 @@ model TblWorkOrder {
   created                                 DateTime?           @map("Created") @db.DateTime
   started                                 DateTime?           @map("Started") @db.DateTime
   completed                               DateTime?           @map("Completed") @db.DateTime
-  description                             String?             @map("Description") @db.NVarChar(300)
+  description                             String?             @map("Description") @db.NVarChar(4000)
   filed                                   Int?                @map("Filed")
   unexpected                              Int?                @map("Unexpected")
   workOrderStatusId                       Int?                @map("WorkOrderStatusId")
@@ -1320,7 +1324,7 @@ model TblWorkOrder {
   pendingdate                             DateTime?           @map("Pendingdate") @db.Date
   orderNo                                 Int?                @map("OrderNo")
   userId                                  Int?                @map("UserID")
-  userComment                             String?             @map("UserComment") @db.NVarChar(300)
+  userComment                             String?             @map("UserComment") @db.NVarChar(4000)
   workOrderTypeId                         Int?                @map("WorkOrderTypeId")
   tblMaintLogs                            TblMaintLog[]
   tblReScheduleLogs                       TblReScheduleLog[]
@@ -1345,15 +1349,15 @@ model TblWorkOrder {
 
 model TblWorkOrderStatus {
   workOrderStatusId Int            @id(map: "PK_tblWorkOrderStatus") @map("WorkOrderStatusId")
-  name              String         @db.NVarChar(50)
+  name              String?        @db.NVarChar(100)
   tblWorkOrders     TblWorkOrder[]
 
   @@map("tblWorkOrderStatus")
 }
 
 model TblWorkOrderType {
-  workOrderTypeId Int    @id(map: "PK_tblWorkOrderType") @map("WorkOrderTypeID")
-  name            String @map("Name") @db.NVarChar(50)
+  workOrderTypeId Int     @id(map: "PK_tblWorkOrderType") @map("WorkOrderTypeID")
+  name            String? @map("Name") @db.NVarChar(100)
 
   @@map("tblWorkOrderType")
 }
@@ -1362,10 +1366,10 @@ model TblWorkShopComponent {
   wShopCompId       Int       @id(map: "PK_tblWorkShopComponent") @default(dbgenerated("NEXT VALUE FOR [Seq_WorkShopComponent]"), map: "DF_WShopCompID") @map("WShopCompID")
   wShopRequestId    Int       @map("WShopRequestID")
   compId            Int       @map("CompID")
-  compDesc          String?   @map("CompDesc") @db.NVarChar(200)
+  compDesc          String?   @map("CompDesc")
   secondaryCompId   Int?      @map("SecondaryCompID")
-  secondaryCompDesc String?   @map("SecondaryCompDesc") @db.NVarChar(200)
-  locationDesc      String?   @map("LocationDesc") @db.NVarChar(300)
+  secondaryCompDesc String?   @map("SecondaryCompDesc")
+  locationDesc      String?   @map("LocationDesc") @db.NVarChar(4000)
   orderNo           Int?      @map("OrderNo")
   userId            Int?      @map("UserID")
   deptId            Int?      @map("DeptID")
@@ -1379,8 +1383,8 @@ model TblWorkShopDone {
   wShopDoneId            Int       @id(map: "PK_tblWorkShopDone") @default(dbgenerated("NEXT VALUE FOR [Seq_WorkShopDone]"), map: "DF_WShopDoneID") @map("WShopDoneID")
   wShopRequestId         Int       @map("WShopRequestID")
   compeleteDate          DateTime? @map("CompeleteDate") @db.DateTime
-  descRepairCompelet     String?   @map("DescRepairCompelet") @db.NVarChar(300)
-  descSparePart          String?   @map("DescSparePart") @db.NVarChar(300)
+  descRepairCompelet     String?   @map("DescRepairCompelet") @db.NVarChar(500)
+  descSparePart          String?   @map("DescSparePart") @db.NVarChar(500)
   addressId              Int       @map("AddressID")
   wshopManagerName       String?   @map("WshopManagerName") @db.NVarChar(500)
   wshopAuthorityName     String?   @map("WshopAuthorityName") @db.NVarChar(500)
@@ -1392,8 +1396,8 @@ model TblWorkShopDone {
   bargeMasterApproved    Boolean?  @map("BargeMasterApproved")
   rigManagerId           Int?      @map("RigManagerID")
   rigManagerApproved     Boolean?  @map("RigManagerApproved")
-  bargeMasterComment     String?   @map("BargeMasterComment") @db.NVarChar(300)
-  rigManagerComment      String?   @map("RigManagerComment") @db.NVarChar(300)
+  bargeMasterComment     String?   @map("BargeMasterComment") @db.NVarChar(500)
+  rigManagerComment      String?   @map("RigManagerComment") @db.NVarChar(500)
   workShopTypeId         Int?      @map("WorkShopTypeID")
   orderNo                Int?      @map("OrderNo")
   userId                 Int?      @map("UserID")
@@ -1409,16 +1413,16 @@ model TblWorkShopRequest {
   rigName                       String?                        @map("RigName") @db.NVarChar(200)
   jobOrderType                  Int?                           @map("JobOrderType")
   wShopRequestNo                Int?                           @map("WShopRequestNO")
-  jobOrderNo                    String?                        @map("JobOrderNO") @db.NVarChar(50)
+  jobOrderNo                    String?                        @map("JobOrderNO") @db.NVarChar(100)
   awardingDate                  DateTime?                      @map("AwardingDate") @db.DateTime
   requestDate                   DateTime?                      @map("RequestDate") @db.DateTime
-  compDescGroup                 String?                        @map("CompDescGroup") @db.NVarChar(300)
-  secondaryCompDescGroup        String?                        @map("SecondaryCompDescGroup") @db.NVarChar(300)
-  model                         String?                        @map("Model") @db.NVarChar(300)
-  serialNo                      String?                        @map("SerialNo") @db.NVarChar(300)
-  assetNo                       String?                        @map("AssetNo") @db.NVarChar(300)
-  locationDescGroup             String?                        @map("LocationDescGroup") @db.NVarChar(300)
-  descRepairRequest             String?                        @map("DescRepairRequest") @db.NVarChar(300)
+  compDescGroup                 String?                        @map("CompDescGroup") @db.NVarChar(500)
+  secondaryCompDescGroup        String?                        @map("SecondaryCompDescGroup") @db.NVarChar(500)
+  model                         String?                        @map("Model") @db.NVarChar(500)
+  serialNo                      String?                        @map("SerialNo") @db.NVarChar(200)
+  assetNo                       String?                        @map("AssetNo") @db.NVarChar(200)
+  locationDescGroup             String?                        @map("LocationDescGroup") @db.NVarChar(500)
+  descRepairRequest             String?                        @map("DescRepairRequest") @db.NVarChar(500)
   personInChargeId              Int?                           @map("PersonInChargeID")
   personInChargeApproved        Boolean?                       @map("PersonInChargeApproved")
   supervisorId                  Int?                           @map("SupervisorID")
@@ -1427,8 +1431,8 @@ model TblWorkShopRequest {
   bargeMasterApproved           Boolean?                       @map("BargeMasterApproved")
   rigManagerId                  Int?                           @map("RigManagerID")
   rigManagerApproved            Boolean?                       @map("RigManagerApproved")
-  bargeMasterComment            String?                        @map("BargeMasterComment") @db.NVarChar(300)
-  rigManagerComment             String?                        @map("RigManagerComment") @db.NVarChar(300)
+  bargeMasterComment            String?                        @map("BargeMasterComment") @db.NVarChar(500)
+  rigManagerComment             String?                        @map("RigManagerComment") @db.NVarChar(500)
   addressId                     Int?                           @map("AddressID")
   workShopTypeId                Int?                           @map("WorkShopTypeID")
   orderNo                       Int?                           @map("OrderNo")
@@ -1458,11 +1462,11 @@ model TblWorkShopRequestAttachment {
 model TblJobDescription {
   jobDescId                    Int                           @id(map: "PK_tblJobDescription") @default(dbgenerated("NEXT VALUE FOR [Seq_JobDescription]"), map: "DF_JobDescID") @map("JobDescID")
   jobClassId                   Int?                          @map("JobClassID")
-  jobDescCode                  String?                       @map("JobDescCode") @db.NVarChar(300)
-  jobDescTitle                 String?                       @map("JobDescTitle") @db.NVarChar(250)
-  jobDesc                      String?                       @map("JobDesc") @db.NVarChar(4000)
-  revision                     String?                       @map("Revision") @db.NVarChar(30)
-  changeReason                 String?                       @map("ChangeReason") @db.NVarChar(255)
+  jobDescCode                  String?                       @map("JobDescCode") @db.NVarChar(100)
+  jobDescTitle                 String?                       @map("JobDescTitle") @db.NVarChar(200)
+  jobDesc                      String?                       @map("JobDesc") @db.NVarChar(Max)
+  revision                     String?                       @map("Revision") @db.NVarChar(100)
+  changeReason                 String?                       @map("ChangeReason") @db.NVarChar(4000)
   status                       Int?                          @map("Status")
   oldRevisionJobDescId         Int?                          @map("OldRevisionJobDescID")
   copiedFromJobDescId          Int?                          @map("CopiedFromJobDescID")
@@ -1487,9 +1491,9 @@ model TblJobDescription {
 
 model TblJobVersion {
   jobVersionId  Int       @id(map: "PK_tblJobVersion") @default(dbgenerated("NEXT VALUE FOR [Seq_JobVersion]"), map: "DF_JobVersionID") @map("JobVersionID")
-  jobVersionNo  String?   @map("JobVersionNo") @db.NVarChar(200)
+  jobVersionNo  String?   @map("JobVersionNo") @db.NVarChar(100)
   jobDescTitle  String?   @map("JobDescTitle") @db.NVarChar(200)
-  jobDesc       String?   @map("JobDesc") @db.NVarChar(300)
+  jobDesc       String?   @map("JobDesc") @db.NVarChar(4000)
   createdDate   DateTime? @map("CreatedDate") @db.DateTime
   status        Int?      @map("Status")
   jobDescId     Int?      @map("JobDescID")
@@ -1504,17 +1508,18 @@ model TblJobVersion {
 }
 
 model TblLocation {
-  locationId        Int                @id(map: "PK_tblLocation") @default(dbgenerated("NEXT VALUE FOR [Seq_Location]"), map: "DF_tbllocation_ID") @map("LocationID")
-  parentLocationId  Int?               @map("ParentLocationID")
-  name              String?            @map("Name") @db.NVarChar(60)
-  locationCode      String?            @map("LocationCode") @db.NVarChar(20)
-  deptId            Int?               @map("DeptID")
-  exportMarker      Int?               @map("ExportMarker")
-  lastupdate        DateTime?          @db.DateTime
-  orderNo           Int?               @map("OrderNo")
+  locationId        Int                 @id(map: "PK_tblLocation") @default(dbgenerated("NEXT VALUE FOR [Seq_Location]"), map: "DF_tbllocation_ID") @map("LocationID")
+  parentLocationId  Int?                @map("ParentLocationID")
+  name              String?             @map("Name") @db.NVarChar(100)
+  locationCode      String?             @map("LocationCode") @db.NVarChar(100)
+  deptId            Int?                @map("DeptID")
+  exportMarker      Int?                @map("ExportMarker")
+  lastupdate        DateTime?           @db.DateTime
+  orderNo           Int?                @map("OrderNo")
   tblComponentUnits TblComponentUnit[]
-  tblLocation       TblLocation?       @relation("tblLocationTotblLocation", fields: [parentLocationId], references: [locationId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLocation_tblLocation")
-  otherTblLocations TblLocation[]      @relation("tblLocationTotblLocation")
+  tblFailureReports TblFailureReports[]
+  tblLocation       TblLocation?        @relation("tblLocationTotblLocation", fields: [parentLocationId], references: [locationId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLocation_tblLocation")
+  otherTblLocations TblLocation[]       @relation("tblLocationTotblLocation")
 
   @@map("tblLocation")
 }

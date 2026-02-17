@@ -9,7 +9,7 @@ import {
   tblMaintLogStocks,
   TypeTblMaintLogStocks,
 } from "@/core/api/generated/api";
-import { failureReportAtom } from "../../FailureReportAtom";
+import { atomInitData } from "../../FailureReportAtom";
 
 const getRowId = (row: TypeTblMaintLogStocks) => row.maintLogStockId;
 
@@ -42,7 +42,7 @@ const StepStockUsed = () => {
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
-  const { maintLog } = useAtomValue(failureReportAtom);
+  const { maintLog } = useAtomValue(atomInitData);
   const maintLogId = maintLog?.maintLogId;
 
   const handleCreate = () => {

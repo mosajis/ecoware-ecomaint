@@ -18,7 +18,7 @@ export function buildRelation(
   }
 
   if (value === null) {
-    return {};
+    return;
   }
 
   return {

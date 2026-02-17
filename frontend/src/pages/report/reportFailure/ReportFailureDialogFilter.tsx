@@ -36,7 +36,7 @@ type FiltersState = {
   reportedBy: TypeTblUsers | null;
   severity: TypeTblFailureSeverityLevel | null;
   status: TypeTblFailureStatus | null;
-  totalWait: string;
+  downTime: string;
 };
 
 interface Props {
@@ -62,7 +62,7 @@ export default function FailureReportFilterDialog({
     reportedBy: null,
     severity: null,
     status: null,
-    totalWait: "",
+    downTime: "",
     ...initialFilters,
   });
 
@@ -71,6 +71,7 @@ export default function FailureReportFilterDialog({
   const handleApply = () => {
     const conditions: any[] = [];
 
+    // 🔹 وضعیت باز / بسته
     if (filters.statusMode === "open") {
       conditions.push({
         closedDateTime: null,
@@ -83,53 +84,62 @@ export default function FailureReportFilterDialog({
       });
     }
 
-    if (filters.component) {
-      conditions.push({ compId: filters.component.compId });
-    }
-
+    // 🔹 عنوان (مستقیم روی FailureReport)
     if (filters.title) {
       conditions.push({
         title: { contains: filters.title },
       });
     }
 
-    if (filters.dateFrom && filters.dateTo) {
-      conditions.push({
-        failureDateTime: {
-          gte: new Date(filters.dateFrom),
-          lte: new Date(filters.dateTo),
-        },
-      });
-    }
-
-    if (filters.discipline) {
-      conditions.push({
-        discId: filters.discipline.discId,
-      });
-    }
-
-    if (filters.reportedBy) {
-      conditions.push({
-        reportedUserId: filters.reportedBy.userId,
-      });
-    }
-
+    // 🔹 Severity (مستقیم)
     if (filters.severity) {
       conditions.push({
         failureSeverityLevelId: filters.severity.failureSeverityLevelId,
       });
     }
 
+    // 🔹 Status (مستقیم)
     if (filters.status) {
       conditions.push({
         failureStatusId: filters.status.failureStatusId,
       });
     }
 
-    if (filters.totalWait) {
+    // 🔹 تاریخ گزارش (داخل MaintLog)
+    if (filters.dateFrom && filters.dateTo) {
       conditions.push({
-        totalWait: {
-          gte: parseInt(filters.totalWait),
+        tblMaintLog: {
+          reportedDate: {
+            gte: new Date(filters.dateFrom),
+            lte: new Date(filters.dateTo),
+          },
+        },
+      });
+    }
+
+    // 🔹 Component (داخل MaintLog)
+    if (filters.component) {
+      conditions.push({
+        tblMaintLog: {
+          compId: filters.component.compId,
+        },
+      });
+    }
+
+    // 🔹 Discipline (داخل MaintLog)
+    if (filters.discipline) {
+      conditions.push({
+        tblMaintLog: {
+          discId: filters.discipline.discId,
+        },
+      });
+    }
+
+    // 🔹 Reported By (داخل MaintLog)
+    if (filters.reportedBy) {
+      conditions.push({
+        tblMaintLog: {
+          reportedBy: filters.reportedBy.userId,
         },
       });
     }
@@ -291,15 +301,15 @@ export default function FailureReportFilterDialog({
         </Box>
 
         {/* Total Wait */}
-        <TextField
+        {/* <TextField
           label="Total Wait"
           type="number"
           size="small"
-          value={filters.totalWait}
+          value={filters.downTime}
           onChange={(e) =>
-            setFilters((p) => ({ ...p, totalWait: e.target.value }))
+            setFilters((p) => ({ ...p, downTime: e.target.value }))
           }
-        />
+        /> */}
 
         {/* Date Range */}
         <Box display="flex" gap={1.5}>

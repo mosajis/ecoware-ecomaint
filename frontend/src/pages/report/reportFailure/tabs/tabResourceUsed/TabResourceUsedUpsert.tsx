@@ -15,7 +15,7 @@ import {
   TypeTblEmployee,
   TypeTblLogDiscipline,
 } from "@/core/api/generated/api";
-import { failureReportAtom } from "../../FailureReportAtom";
+import { atomInitData } from "../../FailureReportAtom";
 
 const schema = z.object({
   employee: z.custom<TypeTblEmployee>().nullable(),
@@ -47,7 +47,7 @@ function StepResourceUsedUpsert({
 }: Props) {
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const { maintLog } = useAtomValue(failureReportAtom);
+  const { maintLog } = useAtomValue(atomInitData);
 
   const maintLogId = maintLog?.maintLogId;
 

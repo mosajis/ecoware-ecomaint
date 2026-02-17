@@ -7,7 +7,7 @@ import TabsContainer, {
   ReusableTabItem,
 } from "@/shared/components/TabsContainer";
 import { useAtomValue } from "jotai";
-import { failureReportAtom } from "./FailureReportAtom";
+import { atomInitData } from "./FailureReportAtom";
 
 const General = lazy(() => import("./tabs/tabGeneral/TabGeneral"));
 const ResourceUsed = lazy(
@@ -23,7 +23,7 @@ type Props = {
 };
 
 const FailureReportTabs = ({ mode, failureReportId, compId }: Props) => {
-  const { maintLog } = useAtomValue(failureReportAtom);
+  const { maintLog } = useAtomValue(atomInitData);
 
   const tabs: ReusableTabItem[] = [
     {

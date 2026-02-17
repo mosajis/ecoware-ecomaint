@@ -13,12 +13,14 @@ export const columns: GridColDef<TypeTblFailureReports>[] = [
     field: "componentName",
     headerName: "Component Name",
     flex: 1,
-    valueGetter: (_, row) => row?.tblComponentUnit?.compNo,
+    // @ts-ignore
+    valueGetter: (_, row) => row?.tblMaintLog?.tblComponentUnit?.compNo,
   },
   {
     field: "failureDateTime",
     headerName: "Failure Date",
     width: 150,
+    valueGetter: (_, row) => row?.tblMaintLog?.dateDone,
     renderCell: ({ value }) => <CellDateTime value={value} />,
   },
   {
@@ -28,56 +30,52 @@ export const columns: GridColDef<TypeTblFailureReports>[] = [
     valueGetter: (_, row) => row.title,
   },
   {
-    field: "totalWait",
-    headerName: "Waiting",
+    field: "downTime",
+    headerName: "Down Time",
     flex: 1,
-    valueGetter: (_, row) => row.totalWait,
+    valueGetter: (_, row) => row.tblMaintLog?.downTime,
   },
   {
     field: "discipline",
-    headerName: "Discipline",
+    headerName: "Discipline not set",
     flex: 1,
-
-    valueGetter: (_, row) => row?.tblDiscipline?.name,
+    // @ts-ignore
+    valueGetter: (_, row) => row?.tblMaintLog?.tblDiscipline?.name,
   },
-
   {
-    field: "lastupdate",
-    headerName: "Last Updated",
+    field: "reportDate",
+    headerName: "Report Date",
     flex: 1,
+    valueGetter: (_, row) => row?.tblMaintLog?.reportedDate,
     renderCell: ({ value }) => <CellDateTime value={value} />,
   },
   {
-    field: "createdDate",
-    headerName: "Created Date",
+    field: "reportedBy",
+    headerName: "Report By",
     flex: 1,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-  {
-    field: "createdBy",
-    headerName: "Created By",
-    flex: 1,
+    valueGetter: (_, row) =>
+      // @ts-ignore
+      row?.tblMaintLog?.tblUsersTblMaintLogReportedByTotblUsers?.uName,
   },
   {
     field: "closedDateTime",
     headerName: "Close Date",
-    width: 150,
+    flex: 1,
+
     renderCell: ({ value }) => <CellDateTime value={value} />,
   },
   {
     field: "closedBy",
     headerName: "Closed By",
     flex: 1,
-    valueGetter: (_, row) =>
-      // @ts-ignore
-      row?.tblUsersTblFailureReportsClosedUserIdTotblUsers?.userName,
+    valueGetter: (_, row) => row?.tblUsers?.uName,
   },
 
   {
-    field: "nextFollow",
-    headerName: "Next Follow  (Check)",
+    field: "nextFollowDate",
+    headerName: "Next Follow Date",
     flex: 1,
-    valueGetter: (_, row) => row?.tblFailureGroupFollow?.name,
+    renderCell: ({ value }) => <CellDateTime value={value} type="DATE" />,
   },
   {
     field: "severity",
@@ -89,40 +87,21 @@ export const columns: GridColDef<TypeTblFailureReports>[] = [
   },
 
   {
-    field: "followBy",
-    headerName: "Follow By (not set)",
+    field: "followGroup",
+    headerName: "Follow Group",
     flex: 1,
+    valueGetter: (_, row) => row?.tblFailureGroupFollow?.name,
   },
   {
     field: "requestNo",
     headerName: "RequestNo",
     flex: 1,
   },
-
-  {
-    field: "jobOrderNo",
-    headerName: "Job Order No (Check)",
-    flex: 1,
-  },
   {
     field: "maintCause",
-    headerName: "Maint Cause (Check)",
+    headerName: "Maint Cause",
     flex: 1,
-  },
-  {
-    field: "reportedBy",
-    headerName: "Reported By",
-    flex: 1,
-    valueGetter: (_, row) =>
-      // @ts-ignore
-      row?.tblUsersTblFailureReportsReportedUserIdTotblUsers?.uName,
-  },
-  {
-    field: "approvedBy",
-    headerName: "Approved By",
-    flex: 1,
-    valueGetter: (_, row) =>
-      // @ts-ignore
-      row?.tblUsersTblFailureReportsApprovedUserIdTotblUsers?.userName,
+    // @ts-ignore
+    valueGetter: (_, row) => row?.tblMaintLog?.tblMaintCause?.descr,
   },
 ];

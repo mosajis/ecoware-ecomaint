@@ -2438,61 +2438,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/tblJobVersion/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get all */
-        get: operations["getTblJobVersion"];
-        put?: never;
-        /** Create */
-        post: operations["postTblJobVersion"];
-        /** Delete all */
-        delete: operations["deleteTblJobVersion"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblJobVersion/{jobVersionId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get one */
-        get: operations["getTblJobVersionByJobVersionId"];
-        /** Update */
-        put: operations["putTblJobVersionByJobVersionId"];
-        post?: never;
-        /** Delete one */
-        delete: operations["deleteTblJobVersionByJobVersionId"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblJobVersion/count": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Count */
-        get: operations["getTblJobVersionCount"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/tblLocation/": {
         parameters: {
             query?: never;
@@ -5139,7 +5084,7 @@ export interface operations {
                         items: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -5148,8 +5093,8 @@ export interface operations {
                             createdAt: string;
                             tblAttachmentType?: null | ({
                                 attachmentTypeId: number;
-                                name: string;
-                                abbreviation: string;
+                                name: null | string;
+                                abbreviation: null | string;
                                 createdBy: number;
                                 createdAt: string;
                             } & {
@@ -5160,8 +5105,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -5337,7 +5282,7 @@ export interface operations {
                     "application/json": {
                         attachmentId: number;
                         title: null | string;
-                        fileName: string;
+                        fileName: null | string;
                         attachmentTypeId: null | number;
                         path: null | string;
                         size: null | number;
@@ -5346,8 +5291,8 @@ export interface operations {
                         createdAt: string;
                         tblAttachmentType?: null | ({
                             attachmentTypeId: number;
-                            name: string;
-                            abbreviation: string;
+                            name: null | string;
+                            abbreviation: null | string;
                             createdBy: number;
                             createdAt: string;
                         } & {
@@ -5358,8 +5303,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -5446,7 +5391,7 @@ export interface operations {
             content: {
                 "application/json": {
                     title?: null | string;
-                    fileName?: string;
+                    fileName?: null | string;
                     path?: null | string;
                     size?: null | number;
                     isUserAttachment?: boolean;
@@ -5512,7 +5457,7 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     title?: null | string;
-                    fileName?: string;
+                    fileName?: null | string;
                     path?: null | string;
                     size?: null | number;
                     isUserAttachment?: boolean;
@@ -5578,7 +5523,7 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     title?: null | string;
-                    fileName?: string;
+                    fileName?: null | string;
                     path?: null | string;
                     size?: null | number;
                     isUserAttachment?: boolean;
@@ -5654,7 +5599,7 @@ export interface operations {
                     "application/json": {
                         attachmentId: number;
                         title: null | string;
-                        fileName: string;
+                        fileName: null | string;
                         attachmentTypeId: null | number;
                         path: null | string;
                         size: null | number;
@@ -5663,8 +5608,8 @@ export interface operations {
                         createdAt: string;
                         tblAttachmentType?: null | ({
                             attachmentTypeId: number;
-                            name: string;
-                            abbreviation: string;
+                            name: null | string;
+                            abbreviation: null | string;
                             createdBy: number;
                             createdAt: string;
                         } & {
@@ -5675,8 +5620,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -5831,14 +5776,14 @@ export interface operations {
                     "application/json": {
                         items: {
                             attachmentTypeId: number;
-                            name: string;
-                            abbreviation: string;
+                            name: null | string;
+                            abbreviation: null | string;
                             createdBy: number;
                             createdAt: string;
                             tblAttachments?: {
                                 attachmentId: number;
                                 title: null | string;
-                                fileName: string;
+                                fileName: null | string;
                                 attachmentTypeId: null | number;
                                 path: null | string;
                                 size: null | number;
@@ -5851,8 +5796,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -5890,8 +5835,8 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    name: string;
-                    abbreviation: string;
+                    name?: null | string;
+                    abbreviation?: null | string;
                     createdBy: number;
                     tblAttachments?: {
                         connect: {
@@ -5905,8 +5850,8 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    name: string;
-                    abbreviation: string;
+                    name?: null | string;
+                    abbreviation?: null | string;
                     createdBy: number;
                     tblAttachments?: {
                         connect: {
@@ -5920,8 +5865,8 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    name: string;
-                    abbreviation: string;
+                    name?: null | string;
+                    abbreviation?: null | string;
                     createdBy: number;
                     tblAttachments?: {
                         connect: {
@@ -5945,14 +5890,14 @@ export interface operations {
                 content: {
                     "application/json": {
                         attachmentTypeId: number;
-                        name: string;
-                        abbreviation: string;
+                        name: null | string;
+                        abbreviation: null | string;
                         createdBy: number;
                         createdAt: string;
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -5965,8 +5910,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -6042,14 +5987,14 @@ export interface operations {
                 content: {
                     "application/json": {
                         attachmentTypeId: number;
-                        name: string;
-                        abbreviation: string;
+                        name: null | string;
+                        abbreviation: null | string;
                         createdBy: number;
                         createdAt: string;
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -6062,8 +6007,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -6101,8 +6046,8 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    name?: string;
-                    abbreviation?: string;
+                    name?: null | string;
+                    abbreviation?: null | string;
                     createdBy?: number;
                     tblAttachments?: {
                         connect?: {
@@ -6119,8 +6064,8 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    name?: string;
-                    abbreviation?: string;
+                    name?: null | string;
+                    abbreviation?: null | string;
                     createdBy?: number;
                     tblAttachments?: {
                         connect?: {
@@ -6137,8 +6082,8 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    name?: string;
-                    abbreviation?: string;
+                    name?: null | string;
+                    abbreviation?: null | string;
                     createdBy?: number;
                     tblAttachments?: {
                         connect?: {
@@ -6165,14 +6110,14 @@ export interface operations {
                 content: {
                     "application/json": {
                         attachmentTypeId: number;
-                        name: string;
-                        abbreviation: string;
+                        name: null | string;
+                        abbreviation: null | string;
                         createdBy: number;
                         createdAt: string;
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -6185,8 +6130,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -6230,14 +6175,14 @@ export interface operations {
                 content: {
                     "application/json": {
                         attachmentTypeId: number;
-                        name: string;
-                        abbreviation: string;
+                        name: null | string;
+                        abbreviation: null | string;
                         createdBy: number;
                         createdAt: string;
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -6250,8 +6195,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -7506,8 +7451,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -7664,8 +7609,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -7781,8 +7726,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -7945,8 +7890,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -8030,8 +7975,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -8236,7 +8181,7 @@ export interface operations {
                             });
                             tblPeriod?: null | ({
                                 periodId: number;
-                                name: string;
+                                name: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -8245,8 +8190,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -8749,7 +8694,7 @@ export interface operations {
                         });
                         tblPeriod?: null | ({
                             periodId: number;
-                            name: string;
+                            name: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -8758,8 +8703,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -9038,7 +8983,7 @@ export interface operations {
                         });
                         tblPeriod?: null | ({
                             periodId: number;
-                            name: string;
+                            name: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -9047,8 +8992,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -9611,7 +9556,7 @@ export interface operations {
                         });
                         tblPeriod?: null | ({
                             periodId: number;
-                            name: string;
+                            name: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -9620,8 +9565,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -9868,7 +9813,7 @@ export interface operations {
                         });
                         tblPeriod?: null | ({
                             periodId: number;
-                            name: string;
+                            name: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -9877,8 +9822,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -10115,8 +10060,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -10322,8 +10267,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -10476,8 +10421,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -10692,8 +10637,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -10814,8 +10759,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -12208,8 +12153,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -12474,8 +12419,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -12645,8 +12590,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -12938,8 +12883,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -13077,8 +13022,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -13218,8 +13163,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -13385,8 +13330,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -13508,8 +13453,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -13684,8 +13629,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -13775,8 +13720,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -14934,8 +14879,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -15036,8 +14981,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -15130,8 +15075,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -15235,8 +15180,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -15297,8 +15242,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -16664,7 +16609,7 @@ export interface operations {
                             tblAttachment?: {
                                 attachmentId: number;
                                 title: null | string;
-                                fileName: string;
+                                fileName: null | string;
                                 attachmentTypeId: null | number;
                                 path: null | string;
                                 size: null | number;
@@ -16695,8 +16640,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -16806,7 +16751,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -16837,8 +16782,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -16922,7 +16867,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -16953,8 +16898,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -17064,7 +17009,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -17095,8 +17040,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -17148,7 +17093,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -17179,8 +17124,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -18036,7 +17981,7 @@ export interface operations {
                             });
                             tblPeriod?: null | ({
                                 periodId: number;
-                                name: string;
+                                name: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -18045,8 +17990,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -18466,7 +18411,7 @@ export interface operations {
                         });
                         tblPeriod?: null | ({
                             periodId: number;
-                            name: string;
+                            name: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -18475,8 +18420,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -18702,7 +18647,7 @@ export interface operations {
                         });
                         tblPeriod?: null | ({
                             periodId: number;
-                            name: string;
+                            name: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -18711,8 +18656,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -19183,7 +19128,7 @@ export interface operations {
                         });
                         tblPeriod?: null | ({
                             periodId: number;
-                            name: string;
+                            name: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -19192,8 +19137,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -19387,7 +19332,7 @@ export interface operations {
                         });
                         tblPeriod?: null | ({
                             periodId: number;
-                            name: string;
+                            name: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -19396,8 +19341,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -19604,8 +19549,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -19786,8 +19731,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -19924,8 +19869,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -20115,8 +20060,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -20221,8 +20166,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -21034,8 +20979,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -21197,8 +21142,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -21328,8 +21273,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -21500,8 +21445,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -21599,8 +21544,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -22655,34 +22600,6 @@ export interface operations {
                                 createdUserId: number;
                                 createdAt: string;
                             }[];
-                            tblFailureReports?: {
-                                failureReportId: number;
-                                compId: null | number;
-                                discId: null | number;
-                                maintLogId: null | number;
-                                failureReportDate: null | string;
-                                failureDateTime: null | string;
-                                waitDateTime: string;
-                                totalWait: null | number;
-                                title: null | string;
-                                failureDesc: null | string;
-                                failureCause: null | string;
-                                actionDesc: null | string;
-                                followDesc: null | string;
-                                reportedUserId: null | number;
-                                deptId: null | number;
-                                lastupdate: null | string;
-                                approvedUserId: null | number;
-                                stateDateTime: null | string;
-                                stateCode: null | number;
-                                closedUserId: null | number;
-                                closedDateTime: null | string;
-                                failureNumber: null | number;
-                                failureSeverityLevelId: null | number;
-                                nextFollowDate: null | string;
-                                failureGroupFollowId: null | number;
-                                failureStatusId: null | number;
-                            }[];
                             tblFunctions?: {
                                 functionId: number;
                                 compId: null | number;
@@ -22705,25 +22622,21 @@ export interface operations {
                                 jobDescId: null | number;
                                 workOrderId: null | number;
                                 compId: null | number;
-                                roundId: null | number;
                                 totalDuration: null | number;
                                 downTime: null | number;
                                 dateDone: null | string;
                                 frequency: null | number;
                                 frequencyPeriod: null | number;
                                 overdueCount: null | number;
-                                overdueReason: null | string;
                                 unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
+                                reportedBy: null | number;
                                 deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
                                 history: null | string;
-                                mlStatus: null | number;
+                                maintLogFollowId: null | number;
                                 followStatusId: null | number;
-                                orderNo: null | number;
                                 updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
                             }[];
                             tblRotationLogs?: {
                                 rotationLogId: number;
@@ -22860,11 +22773,6 @@ export interface operations {
                             componentUnitAttachmentId: number;
                         }[];
                     };
-                    tblFailureReports?: {
-                        connect: {
-                            failureReportId: number;
-                        }[];
-                    };
                     tblFunctions?: {
                         connect: {
                             functionId: number;
@@ -22949,11 +22857,6 @@ export interface operations {
                             componentUnitAttachmentId: number;
                         }[];
                     };
-                    tblFailureReports?: {
-                        connect: {
-                            failureReportId: number;
-                        }[];
-                    };
                     tblFunctions?: {
                         connect: {
                             functionId: number;
@@ -23036,11 +22939,6 @@ export interface operations {
                     tblComponentUnitAttachments?: {
                         connect: {
                             componentUnitAttachmentId: number;
-                        }[];
-                    };
-                    tblFailureReports?: {
-                        connect: {
-                            failureReportId: number;
                         }[];
                     };
                     tblFunctions?: {
@@ -23272,34 +23170,6 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblFailureReports?: {
-                            failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
-                            maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
-                            closedUserId: null | number;
-                            closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
-                        }[];
                         tblFunctions?: {
                             functionId: number;
                             compId: null | number;
@@ -23322,25 +23192,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblRotationLogs?: {
                             rotationLogId: number;
@@ -23650,34 +23516,6 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblFailureReports?: {
-                            failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
-                            maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
-                            closedUserId: null | number;
-                            closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
-                        }[];
                         tblFunctions?: {
                             functionId: number;
                             compId: null | number;
@@ -23700,25 +23538,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblRotationLogs?: {
                             rotationLogId: number;
@@ -23875,14 +23709,6 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReports?: {
-                        connect?: {
-                            failureReportId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblFunctions?: {
                         connect?: {
                             functionId: number;
@@ -23999,14 +23825,6 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReports?: {
-                        connect?: {
-                            failureReportId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblFunctions?: {
                         connect?: {
                             functionId: number;
@@ -24118,14 +23936,6 @@ export interface operations {
                     tblComponentUnitAttachments?: {
                         connect?: {
                             componentUnitAttachmentId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReports?: {
-                        connect?: {
-                            failureReportId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -24372,34 +24182,6 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblFailureReports?: {
-                            failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
-                            maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
-                            closedUserId: null | number;
-                            closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
-                        }[];
                         tblFunctions?: {
                             functionId: number;
                             compId: null | number;
@@ -24422,25 +24204,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblRotationLogs?: {
                             rotationLogId: number;
@@ -24718,34 +24496,6 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblFailureReports?: {
-                            failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
-                            maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
-                            closedUserId: null | number;
-                            closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
-                        }[];
                         tblFunctions?: {
                             functionId: number;
                             compId: null | number;
@@ -24768,25 +24518,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblRotationLogs?: {
                             rotationLogId: number;
@@ -24936,7 +24682,7 @@ export interface operations {
                             tblAttachment?: {
                                 attachmentId: number;
                                 title: null | string;
-                                fileName: string;
+                                fileName: null | string;
                                 attachmentTypeId: null | number;
                                 path: null | string;
                                 size: null | number;
@@ -24974,8 +24720,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -25085,7 +24831,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -25123,8 +24869,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -25208,7 +24954,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -25246,8 +24992,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -25357,7 +25103,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -25395,8 +25141,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -25448,7 +25194,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -25486,8 +25232,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -26870,34 +26616,6 @@ export interface operations {
                                 orderNo: null | number;
                                 createdUserId: null | number;
                             }[];
-                            tblFailureReports?: {
-                                failureReportId: number;
-                                compId: null | number;
-                                discId: null | number;
-                                maintLogId: null | number;
-                                failureReportDate: null | string;
-                                failureDateTime: null | string;
-                                waitDateTime: string;
-                                totalWait: null | number;
-                                title: null | string;
-                                failureDesc: null | string;
-                                failureCause: null | string;
-                                actionDesc: null | string;
-                                followDesc: null | string;
-                                reportedUserId: null | number;
-                                deptId: null | number;
-                                lastupdate: null | string;
-                                approvedUserId: null | number;
-                                stateDateTime: null | string;
-                                stateCode: null | number;
-                                closedUserId: null | number;
-                                closedDateTime: null | string;
-                                failureNumber: null | number;
-                                failureSeverityLevelId: null | number;
-                                nextFollowDate: null | string;
-                                failureGroupFollowId: null | number;
-                                failureStatusId: null | number;
-                            }[];
                             tblLogDisciplines?: {
                                 logDiscId: number;
                                 maintLogId: null | number;
@@ -26990,11 +26708,6 @@ export interface operations {
                             employeeId: number;
                         }[];
                     };
-                    tblFailureReports?: {
-                        connect: {
-                            failureReportId: number;
-                        }[];
-                    };
                     tblLogDisciplines?: {
                         connect: {
                             logDiscId: number;
@@ -27028,11 +26741,6 @@ export interface operations {
                             employeeId: number;
                         }[];
                     };
-                    tblFailureReports?: {
-                        connect: {
-                            failureReportId: number;
-                        }[];
-                    };
                     tblLogDisciplines?: {
                         connect: {
                             logDiscId: number;
@@ -27064,11 +26772,6 @@ export interface operations {
                     tblEmployees?: {
                         connect: {
                             employeeId: number;
-                        }[];
-                    };
-                    tblFailureReports?: {
-                        connect: {
-                            failureReportId: number;
                         }[];
                     };
                     tblLogDisciplines?: {
@@ -27182,34 +26885,6 @@ export interface operations {
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
-                        }[];
-                        tblFailureReports?: {
-                            failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
-                            maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
-                            closedUserId: null | number;
-                            closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
                         }[];
                         tblLogDisciplines?: {
                             logDiscId: number;
@@ -27410,34 +27085,6 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                         }[];
-                        tblFailureReports?: {
-                            failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
-                            maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
-                            closedUserId: null | number;
-                            closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
-                        }[];
                         tblLogDisciplines?: {
                             logDiscId: number;
                             maintLogId: null | number;
@@ -27539,14 +27186,6 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReports?: {
-                        connect?: {
-                            failureReportId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblLogDisciplines?: {
                         connect?: {
                             logDiscId: number;
@@ -27595,14 +27234,6 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReports?: {
-                        connect?: {
-                            failureReportId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblLogDisciplines?: {
                         connect?: {
                             logDiscId: number;
@@ -27646,14 +27277,6 @@ export interface operations {
                     tblEmployees?: {
                         connect?: {
                             employeeId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReports?: {
-                        connect?: {
-                            failureReportId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -27776,34 +27399,6 @@ export interface operations {
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
-                        }[];
-                        tblFailureReports?: {
-                            failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
-                            maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
-                            closedUserId: null | number;
-                            closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
                         }[];
                         tblLogDisciplines?: {
                             logDiscId: number;
@@ -27972,34 +27567,6 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                         }[];
-                        tblFailureReports?: {
-                            failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
-                            maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
-                            closedUserId: null | number;
-                            closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
-                        }[];
                         tblLogDisciplines?: {
                             logDiscId: number;
                             maintLogId: null | number;
@@ -28159,13 +27726,13 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             });
-                            tblUsers?: null | ({
+                            tblUsersTblEmployeeCreatedUserIdTotblUsers?: null | ({
                                 userId: number;
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -28200,8 +27767,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -28257,9 +27824,9 @@ export interface operations {
                             discId: number;
                         };
                     };
-                    tblUsers?: {
+                    tblUsersTblEmployeeCreatedUserIdTotblUsers?: {
                         connect: {
-                            userId: number;
+                            id: number;
                         };
                     };
                     tblLogDisciplines?: {
@@ -28294,9 +27861,9 @@ export interface operations {
                             discId: number;
                         };
                     };
-                    tblUsers?: {
+                    tblUsersTblEmployeeCreatedUserIdTotblUsers?: {
                         connect: {
-                            userId: number;
+                            id: number;
                         };
                     };
                     tblLogDisciplines?: {
@@ -28331,9 +27898,9 @@ export interface operations {
                             discId: number;
                         };
                     };
-                    tblUsers?: {
+                    tblUsersTblEmployeeCreatedUserIdTotblUsers?: {
                         connect: {
-                            userId: number;
+                            id: number;
                         };
                     };
                     tblLogDisciplines?: {
@@ -28403,13 +27970,13 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsers?: null | ({
+                        tblUsersTblEmployeeCreatedUserIdTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -28444,8 +28011,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -28564,13 +28131,13 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsers?: null | ({
+                        tblUsersTblEmployeeCreatedUserIdTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -28605,8 +28172,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -28664,9 +28231,9 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblUsers?: {
+                    tblUsersTblEmployeeCreatedUserIdTotblUsers?: {
                         connect?: {
-                            userId: number;
+                            id: number;
                         };
                         disconnect?: boolean;
                     };
@@ -28710,9 +28277,9 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblUsers?: {
+                    tblUsersTblEmployeeCreatedUserIdTotblUsers?: {
                         connect?: {
-                            userId: number;
+                            id: number;
                         };
                         disconnect?: boolean;
                     };
@@ -28756,9 +28323,9 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblUsers?: {
+                    tblUsersTblEmployeeCreatedUserIdTotblUsers?: {
                         connect?: {
-                            userId: number;
+                            id: number;
                         };
                         disconnect?: boolean;
                     };
@@ -28835,13 +28402,13 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsers?: null | ({
+                        tblUsersTblEmployeeCreatedUserIdTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -28876,8 +28443,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -28964,13 +28531,13 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsers?: null | ({
+                        tblUsersTblEmployeeCreatedUserIdTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -29005,8 +28572,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -29088,31 +28655,18 @@ export interface operations {
                             name: null | string;
                             tblFailureReports?: {
                                 failureReportId: number;
-                                compId: null | number;
-                                discId: null | number;
                                 maintLogId: null | number;
-                                failureReportDate: null | string;
-                                failureDateTime: null | string;
-                                waitDateTime: string;
-                                totalWait: null | number;
                                 title: null | string;
-                                failureDesc: null | string;
-                                failureCause: null | string;
-                                actionDesc: null | string;
-                                followDesc: null | string;
-                                reportedUserId: null | number;
-                                deptId: null | number;
-                                lastupdate: null | string;
-                                approvedUserId: null | number;
-                                stateDateTime: null | string;
-                                stateCode: null | number;
+                                failureNumber: null | number;
+                                locationId: null | number;
+                                failureSeverityLevelId: null | number;
+                                failureStatusId: null | number;
+                                failureGroupFollowId: null | number;
+                                requestNo: null | string;
+                                nextFollowDate: null | string;
                                 closedUserId: null | number;
                                 closedDateTime: null | string;
-                                failureNumber: null | number;
-                                failureSeverityLevelId: null | number;
-                                nextFollowDate: null | string;
-                                failureGroupFollowId: null | number;
-                                failureStatusId: null | number;
+                                followDesc: null | string;
                             }[];
                         }[];
                         total: number;
@@ -29171,31 +28725,18 @@ export interface operations {
                         name: null | string;
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         }[];
                     };
                 };
@@ -29258,31 +28799,18 @@ export interface operations {
                         name: null | string;
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         }[];
                     };
                 };
@@ -29350,31 +28878,18 @@ export interface operations {
                         name: null | string;
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         }[];
                     };
                 };
@@ -29405,31 +28920,18 @@ export interface operations {
                         name: null | string;
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         }[];
                     };
                 };
@@ -29502,7 +29004,7 @@ export interface operations {
                             tblAttachment?: {
                                 attachmentId: number;
                                 title: null | string;
-                                fileName: string;
+                                fileName: null | string;
                                 attachmentTypeId: null | number;
                                 path: null | string;
                                 size: null | number;
@@ -29514,31 +29016,18 @@ export interface operations {
                             };
                             tblFailureReports?: {
                                 failureReportId: number;
-                                compId: null | number;
-                                discId: null | number;
                                 maintLogId: null | number;
-                                failureReportDate: null | string;
-                                failureDateTime: null | string;
-                                waitDateTime: string;
-                                totalWait: null | number;
                                 title: null | string;
-                                failureDesc: null | string;
-                                failureCause: null | string;
-                                actionDesc: null | string;
-                                followDesc: null | string;
-                                reportedUserId: null | number;
-                                deptId: null | number;
-                                lastupdate: null | string;
-                                approvedUserId: null | number;
-                                stateDateTime: null | string;
-                                stateCode: null | number;
+                                failureNumber: null | number;
+                                locationId: null | number;
+                                failureSeverityLevelId: null | number;
+                                failureStatusId: null | number;
+                                failureGroupFollowId: null | number;
+                                requestNo: null | string;
+                                nextFollowDate: null | string;
                                 closedUserId: null | number;
                                 closedDateTime: null | string;
-                                failureNumber: null | number;
-                                failureSeverityLevelId: null | number;
-                                nextFollowDate: null | string;
-                                failureGroupFollowId: null | number;
-                                failureStatusId: null | number;
+                                followDesc: null | string;
                             } & {
                                 [key: string]: unknown;
                             };
@@ -29547,8 +29036,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -29658,7 +29147,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -29670,31 +29159,18 @@ export interface operations {
                         };
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -29703,8 +29179,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -29788,7 +29264,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -29800,31 +29276,18 @@ export interface operations {
                         };
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -29833,8 +29296,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -29944,7 +29407,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -29956,31 +29419,18 @@ export interface operations {
                         };
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -29989,8 +29439,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -30042,7 +29492,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -30054,31 +29504,18 @@ export interface operations {
                         };
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -30087,8 +29524,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -30169,31 +29606,18 @@ export interface operations {
                     "application/json": {
                         items: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                             tblFailureReportAttachments?: {
                                 failureReportAttachmentId: number;
                                 failureReportId: number;
@@ -30202,42 +29626,6 @@ export interface operations {
                                 createdUserId: number;
                                 createdAt: string;
                             }[];
-                            tblComponentUnit?: null | ({
-                                compId: number;
-                                compTypeId: null | number;
-                                locationId: null | number;
-                                parentCompId: null | number;
-                                vendorId: null | number;
-                                compNo: null | string;
-                                serialNo: null | string;
-                                statusId: null | number;
-                                notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                isCritical: null | number;
-                                orderNo: null | number;
-                                model: null | string;
-                                comment1: null | string;
-                                comment2: null | string;
-                                comment3: null | string;
-                                assetNo: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblDiscipline?: null | ({
-                                discId: number;
-                                code: null | string;
-                                name: null | string;
-                                externalDisc: null | number;
-                                parentDiscId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                                orderNo: null | number;
-                            } & {
-                                [key: string]: unknown;
-                            });
                             tblFailureGroupFollow?: null | ({
                                 failureGroupFollowId: number;
                                 name: null | string;
@@ -30265,83 +29653,31 @@ export interface operations {
                                 jobDescId: null | number;
                                 workOrderId: null | number;
                                 compId: null | number;
-                                roundId: null | number;
                                 totalDuration: null | number;
                                 downTime: null | number;
                                 dateDone: null | string;
                                 frequency: null | number;
                                 frequencyPeriod: null | number;
                                 overdueCount: null | number;
-                                overdueReason: null | string;
                                 unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
+                                reportedBy: null | number;
                                 deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
                                 history: null | string;
-                                mlStatus: null | number;
+                                maintLogFollowId: null | number;
                                 followStatusId: null | number;
-                                orderNo: null | number;
                                 updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
-                            tblUsersTblFailureReportsApprovedUserIdTotblUsers?: null | ({
+                            tblUsers?: null | ({
                                 userId: number;
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
-                                uName: null | string;
-                                uTitle: null | string;
-                                uComment1: null | string;
-                                uComment2: null | string;
-                                uDigitalSign: null | string;
-                                uAccountDisabled: null | boolean;
-                                uLogonAttempts: null | number;
-                                uForcePasswordChange: null | boolean;
-                                uLastLogin: null | string;
-                                exportMarker: null | number;
-                                uLastUpdated: null | string;
-                                orderNo: null | number;
-                                deptId: null | number;
-                                lastUpdate: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblUsersTblFailureReportsClosedUserIdTotblUsers?: null | ({
-                                userId: number;
-                                employeeId: null | number;
-                                addressId: null | number;
-                                userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
-                                uName: null | string;
-                                uTitle: null | string;
-                                uComment1: null | string;
-                                uComment2: null | string;
-                                uDigitalSign: null | string;
-                                uAccountDisabled: null | boolean;
-                                uLogonAttempts: null | number;
-                                uForcePasswordChange: null | boolean;
-                                uLastLogin: null | string;
-                                exportMarker: null | number;
-                                uLastUpdated: null | string;
-                                orderNo: null | number;
-                                deptId: null | number;
-                                lastUpdate: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblUsersTblFailureReportsReportedUserIdTotblUsers?: null | ({
-                                userId: number;
-                                employeeId: null | number;
-                                addressId: null | number;
-                                userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -30379,35 +29715,16 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    failureReportDate?: null | string;
-                    failureDateTime?: null | string;
-                    waitDateTime: string;
-                    totalWait?: null | number;
                     title?: null | string;
-                    failureDesc?: null | string;
-                    failureCause?: null | string;
-                    actionDesc?: null | string;
-                    followDesc?: null | string;
-                    lastupdate?: null | string;
-                    stateDateTime?: null | string;
-                    stateCode?: null | number;
-                    closedDateTime?: null | string;
                     failureNumber?: null | number;
+                    requestNo?: null | string;
                     nextFollowDate?: null | string;
+                    closedDateTime?: null | string;
+                    followDesc?: null | string;
                     tblFailureReportAttachments?: {
                         connect: {
                             failureReportAttachmentId: number;
                         }[];
-                    };
-                    tblComponentUnit?: {
-                        connect: {
-                            compId: number;
-                        };
-                    };
-                    tblDiscipline?: {
-                        connect: {
-                            discId: number;
-                        };
                     };
                     tblFailureGroupFollow?: {
                         connect: {
@@ -30429,52 +29746,23 @@ export interface operations {
                             maintLogId: number;
                         };
                     };
-                    tblUsersTblFailureReportsApprovedUserIdTotblUsers?: {
+                    tblUsers?: {
                         connect: {
-                            id: number;
-                        };
-                    };
-                    tblUsersTblFailureReportsClosedUserIdTotblUsers?: {
-                        connect: {
-                            id: number;
-                        };
-                    };
-                    tblUsersTblFailureReportsReportedUserIdTotblUsers?: {
-                        connect: {
-                            id: number;
+                            userId: number;
                         };
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    failureReportDate?: null | string;
-                    failureDateTime?: null | string;
-                    waitDateTime: string;
-                    totalWait?: null | number;
                     title?: null | string;
-                    failureDesc?: null | string;
-                    failureCause?: null | string;
-                    actionDesc?: null | string;
-                    followDesc?: null | string;
-                    lastupdate?: null | string;
-                    stateDateTime?: null | string;
-                    stateCode?: null | number;
-                    closedDateTime?: null | string;
                     failureNumber?: null | number;
+                    requestNo?: null | string;
                     nextFollowDate?: null | string;
+                    closedDateTime?: null | string;
+                    followDesc?: null | string;
                     tblFailureReportAttachments?: {
                         connect: {
                             failureReportAttachmentId: number;
                         }[];
-                    };
-                    tblComponentUnit?: {
-                        connect: {
-                            compId: number;
-                        };
-                    };
-                    tblDiscipline?: {
-                        connect: {
-                            discId: number;
-                        };
                     };
                     tblFailureGroupFollow?: {
                         connect: {
@@ -30496,52 +29784,23 @@ export interface operations {
                             maintLogId: number;
                         };
                     };
-                    tblUsersTblFailureReportsApprovedUserIdTotblUsers?: {
+                    tblUsers?: {
                         connect: {
-                            id: number;
-                        };
-                    };
-                    tblUsersTblFailureReportsClosedUserIdTotblUsers?: {
-                        connect: {
-                            id: number;
-                        };
-                    };
-                    tblUsersTblFailureReportsReportedUserIdTotblUsers?: {
-                        connect: {
-                            id: number;
+                            userId: number;
                         };
                     };
                 };
                 "multipart/form-data": {
-                    failureReportDate?: null | string;
-                    failureDateTime?: null | string;
-                    waitDateTime: string;
-                    totalWait?: null | number;
                     title?: null | string;
-                    failureDesc?: null | string;
-                    failureCause?: null | string;
-                    actionDesc?: null | string;
-                    followDesc?: null | string;
-                    lastupdate?: null | string;
-                    stateDateTime?: null | string;
-                    stateCode?: null | number;
-                    closedDateTime?: null | string;
                     failureNumber?: null | number;
+                    requestNo?: null | string;
                     nextFollowDate?: null | string;
+                    closedDateTime?: null | string;
+                    followDesc?: null | string;
                     tblFailureReportAttachments?: {
                         connect: {
                             failureReportAttachmentId: number;
                         }[];
-                    };
-                    tblComponentUnit?: {
-                        connect: {
-                            compId: number;
-                        };
-                    };
-                    tblDiscipline?: {
-                        connect: {
-                            discId: number;
-                        };
                     };
                     tblFailureGroupFollow?: {
                         connect: {
@@ -30563,19 +29822,9 @@ export interface operations {
                             maintLogId: number;
                         };
                     };
-                    tblUsersTblFailureReportsApprovedUserIdTotblUsers?: {
+                    tblUsers?: {
                         connect: {
-                            id: number;
-                        };
-                    };
-                    tblUsersTblFailureReportsClosedUserIdTotblUsers?: {
-                        connect: {
-                            id: number;
-                        };
-                    };
-                    tblUsersTblFailureReportsReportedUserIdTotblUsers?: {
-                        connect: {
-                            id: number;
+                            userId: number;
                         };
                     };
                 };
@@ -30590,31 +29839,18 @@ export interface operations {
                 content: {
                     "application/json": {
                         failureReportId: number;
-                        compId: null | number;
-                        discId: null | number;
                         maintLogId: null | number;
-                        failureReportDate: null | string;
-                        failureDateTime: null | string;
-                        waitDateTime: string;
-                        totalWait: null | number;
                         title: null | string;
-                        failureDesc: null | string;
-                        failureCause: null | string;
-                        actionDesc: null | string;
-                        followDesc: null | string;
-                        reportedUserId: null | number;
-                        deptId: null | number;
-                        lastupdate: null | string;
-                        approvedUserId: null | number;
-                        stateDateTime: null | string;
-                        stateCode: null | number;
+                        failureNumber: null | number;
+                        locationId: null | number;
+                        failureSeverityLevelId: null | number;
+                        failureStatusId: null | number;
+                        failureGroupFollowId: null | number;
+                        requestNo: null | string;
+                        nextFollowDate: null | string;
                         closedUserId: null | number;
                         closedDateTime: null | string;
-                        failureNumber: null | number;
-                        failureSeverityLevelId: null | number;
-                        nextFollowDate: null | string;
-                        failureGroupFollowId: null | number;
-                        failureStatusId: null | number;
+                        followDesc: null | string;
                         tblFailureReportAttachments?: {
                             failureReportAttachmentId: number;
                             failureReportId: number;
@@ -30623,42 +29859,6 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblComponentUnit?: null | ({
-                            compId: number;
-                            compTypeId: null | number;
-                            locationId: null | number;
-                            parentCompId: null | number;
-                            vendorId: null | number;
-                            compNo: null | string;
-                            serialNo: null | string;
-                            statusId: null | number;
-                            notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            isCritical: null | number;
-                            orderNo: null | number;
-                            model: null | string;
-                            comment1: null | string;
-                            comment2: null | string;
-                            comment3: null | string;
-                            assetNo: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblDiscipline?: null | ({
-                            discId: number;
-                            code: null | string;
-                            name: null | string;
-                            externalDisc: null | number;
-                            parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            orderNo: null | number;
-                        } & {
-                            [key: string]: unknown;
-                        });
                         tblFailureGroupFollow?: null | ({
                             failureGroupFollowId: number;
                             name: null | string;
@@ -30686,83 +29886,31 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblFailureReportsApprovedUserIdTotblUsers?: null | ({
+                        tblUsers?: null | ({
                             userId: number;
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblUsersTblFailureReportsClosedUserIdTotblUsers?: null | ({
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblUsersTblFailureReportsReportedUserIdTotblUsers?: null | ({
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -30838,31 +29986,18 @@ export interface operations {
                 content: {
                     "application/json": {
                         failureReportId: number;
-                        compId: null | number;
-                        discId: null | number;
                         maintLogId: null | number;
-                        failureReportDate: null | string;
-                        failureDateTime: null | string;
-                        waitDateTime: string;
-                        totalWait: null | number;
                         title: null | string;
-                        failureDesc: null | string;
-                        failureCause: null | string;
-                        actionDesc: null | string;
-                        followDesc: null | string;
-                        reportedUserId: null | number;
-                        deptId: null | number;
-                        lastupdate: null | string;
-                        approvedUserId: null | number;
-                        stateDateTime: null | string;
-                        stateCode: null | number;
+                        failureNumber: null | number;
+                        locationId: null | number;
+                        failureSeverityLevelId: null | number;
+                        failureStatusId: null | number;
+                        failureGroupFollowId: null | number;
+                        requestNo: null | string;
+                        nextFollowDate: null | string;
                         closedUserId: null | number;
                         closedDateTime: null | string;
-                        failureNumber: null | number;
-                        failureSeverityLevelId: null | number;
-                        nextFollowDate: null | string;
-                        failureGroupFollowId: null | number;
-                        failureStatusId: null | number;
+                        followDesc: null | string;
                         tblFailureReportAttachments?: {
                             failureReportAttachmentId: number;
                             failureReportId: number;
@@ -30871,42 +30006,6 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblComponentUnit?: null | ({
-                            compId: number;
-                            compTypeId: null | number;
-                            locationId: null | number;
-                            parentCompId: null | number;
-                            vendorId: null | number;
-                            compNo: null | string;
-                            serialNo: null | string;
-                            statusId: null | number;
-                            notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            isCritical: null | number;
-                            orderNo: null | number;
-                            model: null | string;
-                            comment1: null | string;
-                            comment2: null | string;
-                            comment3: null | string;
-                            assetNo: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblDiscipline?: null | ({
-                            discId: number;
-                            code: null | string;
-                            name: null | string;
-                            externalDisc: null | number;
-                            parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            orderNo: null | number;
-                        } & {
-                            [key: string]: unknown;
-                        });
                         tblFailureGroupFollow?: null | ({
                             failureGroupFollowId: number;
                             name: null | string;
@@ -30934,83 +30033,31 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblFailureReportsApprovedUserIdTotblUsers?: null | ({
+                        tblUsers?: null | ({
                             userId: number;
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblUsersTblFailureReportsClosedUserIdTotblUsers?: null | ({
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblUsersTblFailureReportsReportedUserIdTotblUsers?: null | ({
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -31048,21 +30095,12 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    failureReportDate?: null | string;
-                    failureDateTime?: null | string;
-                    waitDateTime?: string;
-                    totalWait?: null | number;
                     title?: null | string;
-                    failureDesc?: null | string;
-                    failureCause?: null | string;
-                    actionDesc?: null | string;
-                    followDesc?: null | string;
-                    lastupdate?: null | string;
-                    stateDateTime?: null | string;
-                    stateCode?: null | number;
-                    closedDateTime?: null | string;
                     failureNumber?: null | number;
+                    requestNo?: null | string;
                     nextFollowDate?: null | string;
+                    closedDateTime?: null | string;
+                    followDesc?: null | string;
                     tblFailureReportAttachments?: {
                         connect?: {
                             failureReportAttachmentId: number;
@@ -31070,18 +30108,6 @@ export interface operations {
                         disconnect?: {
                             id: number;
                         }[];
-                    };
-                    tblComponentUnit?: {
-                        connect?: {
-                            compId: number;
-                        };
-                        disconnect?: boolean;
-                    };
-                    tblDiscipline?: {
-                        connect?: {
-                            discId: number;
-                        };
-                        disconnect?: boolean;
                     };
                     tblFailureGroupFollow?: {
                         connect?: {
@@ -31107,41 +30133,20 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblUsersTblFailureReportsApprovedUserIdTotblUsers?: {
+                    tblUsers?: {
                         connect?: {
-                            id: number;
-                        };
-                        disconnect?: boolean;
-                    };
-                    tblUsersTblFailureReportsClosedUserIdTotblUsers?: {
-                        connect?: {
-                            id: number;
-                        };
-                        disconnect?: boolean;
-                    };
-                    tblUsersTblFailureReportsReportedUserIdTotblUsers?: {
-                        connect?: {
-                            id: number;
+                            userId: number;
                         };
                         disconnect?: boolean;
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    failureReportDate?: null | string;
-                    failureDateTime?: null | string;
-                    waitDateTime?: string;
-                    totalWait?: null | number;
                     title?: null | string;
-                    failureDesc?: null | string;
-                    failureCause?: null | string;
-                    actionDesc?: null | string;
-                    followDesc?: null | string;
-                    lastupdate?: null | string;
-                    stateDateTime?: null | string;
-                    stateCode?: null | number;
-                    closedDateTime?: null | string;
                     failureNumber?: null | number;
+                    requestNo?: null | string;
                     nextFollowDate?: null | string;
+                    closedDateTime?: null | string;
+                    followDesc?: null | string;
                     tblFailureReportAttachments?: {
                         connect?: {
                             failureReportAttachmentId: number;
@@ -31149,18 +30154,6 @@ export interface operations {
                         disconnect?: {
                             id: number;
                         }[];
-                    };
-                    tblComponentUnit?: {
-                        connect?: {
-                            compId: number;
-                        };
-                        disconnect?: boolean;
-                    };
-                    tblDiscipline?: {
-                        connect?: {
-                            discId: number;
-                        };
-                        disconnect?: boolean;
                     };
                     tblFailureGroupFollow?: {
                         connect?: {
@@ -31186,41 +30179,20 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblUsersTblFailureReportsApprovedUserIdTotblUsers?: {
+                    tblUsers?: {
                         connect?: {
-                            id: number;
-                        };
-                        disconnect?: boolean;
-                    };
-                    tblUsersTblFailureReportsClosedUserIdTotblUsers?: {
-                        connect?: {
-                            id: number;
-                        };
-                        disconnect?: boolean;
-                    };
-                    tblUsersTblFailureReportsReportedUserIdTotblUsers?: {
-                        connect?: {
-                            id: number;
+                            userId: number;
                         };
                         disconnect?: boolean;
                     };
                 };
                 "multipart/form-data": {
-                    failureReportDate?: null | string;
-                    failureDateTime?: null | string;
-                    waitDateTime?: string;
-                    totalWait?: null | number;
                     title?: null | string;
-                    failureDesc?: null | string;
-                    failureCause?: null | string;
-                    actionDesc?: null | string;
-                    followDesc?: null | string;
-                    lastupdate?: null | string;
-                    stateDateTime?: null | string;
-                    stateCode?: null | number;
-                    closedDateTime?: null | string;
                     failureNumber?: null | number;
+                    requestNo?: null | string;
                     nextFollowDate?: null | string;
+                    closedDateTime?: null | string;
+                    followDesc?: null | string;
                     tblFailureReportAttachments?: {
                         connect?: {
                             failureReportAttachmentId: number;
@@ -31228,18 +30200,6 @@ export interface operations {
                         disconnect?: {
                             id: number;
                         }[];
-                    };
-                    tblComponentUnit?: {
-                        connect?: {
-                            compId: number;
-                        };
-                        disconnect?: boolean;
-                    };
-                    tblDiscipline?: {
-                        connect?: {
-                            discId: number;
-                        };
-                        disconnect?: boolean;
                     };
                     tblFailureGroupFollow?: {
                         connect?: {
@@ -31265,21 +30225,9 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblUsersTblFailureReportsApprovedUserIdTotblUsers?: {
+                    tblUsers?: {
                         connect?: {
-                            id: number;
-                        };
-                        disconnect?: boolean;
-                    };
-                    tblUsersTblFailureReportsClosedUserIdTotblUsers?: {
-                        connect?: {
-                            id: number;
-                        };
-                        disconnect?: boolean;
-                    };
-                    tblUsersTblFailureReportsReportedUserIdTotblUsers?: {
-                        connect?: {
-                            id: number;
+                            userId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -31295,31 +30243,18 @@ export interface operations {
                 content: {
                     "application/json": {
                         failureReportId: number;
-                        compId: null | number;
-                        discId: null | number;
                         maintLogId: null | number;
-                        failureReportDate: null | string;
-                        failureDateTime: null | string;
-                        waitDateTime: string;
-                        totalWait: null | number;
                         title: null | string;
-                        failureDesc: null | string;
-                        failureCause: null | string;
-                        actionDesc: null | string;
-                        followDesc: null | string;
-                        reportedUserId: null | number;
-                        deptId: null | number;
-                        lastupdate: null | string;
-                        approvedUserId: null | number;
-                        stateDateTime: null | string;
-                        stateCode: null | number;
+                        failureNumber: null | number;
+                        locationId: null | number;
+                        failureSeverityLevelId: null | number;
+                        failureStatusId: null | number;
+                        failureGroupFollowId: null | number;
+                        requestNo: null | string;
+                        nextFollowDate: null | string;
                         closedUserId: null | number;
                         closedDateTime: null | string;
-                        failureNumber: null | number;
-                        failureSeverityLevelId: null | number;
-                        nextFollowDate: null | string;
-                        failureGroupFollowId: null | number;
-                        failureStatusId: null | number;
+                        followDesc: null | string;
                         tblFailureReportAttachments?: {
                             failureReportAttachmentId: number;
                             failureReportId: number;
@@ -31328,42 +30263,6 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblComponentUnit?: null | ({
-                            compId: number;
-                            compTypeId: null | number;
-                            locationId: null | number;
-                            parentCompId: null | number;
-                            vendorId: null | number;
-                            compNo: null | string;
-                            serialNo: null | string;
-                            statusId: null | number;
-                            notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            isCritical: null | number;
-                            orderNo: null | number;
-                            model: null | string;
-                            comment1: null | string;
-                            comment2: null | string;
-                            comment3: null | string;
-                            assetNo: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblDiscipline?: null | ({
-                            discId: number;
-                            code: null | string;
-                            name: null | string;
-                            externalDisc: null | number;
-                            parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            orderNo: null | number;
-                        } & {
-                            [key: string]: unknown;
-                        });
                         tblFailureGroupFollow?: null | ({
                             failureGroupFollowId: number;
                             name: null | string;
@@ -31391,83 +30290,31 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblFailureReportsApprovedUserIdTotblUsers?: null | ({
+                        tblUsers?: null | ({
                             userId: number;
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblUsersTblFailureReportsClosedUserIdTotblUsers?: null | ({
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblUsersTblFailureReportsReportedUserIdTotblUsers?: null | ({
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -31511,31 +30358,18 @@ export interface operations {
                 content: {
                     "application/json": {
                         failureReportId: number;
-                        compId: null | number;
-                        discId: null | number;
                         maintLogId: null | number;
-                        failureReportDate: null | string;
-                        failureDateTime: null | string;
-                        waitDateTime: string;
-                        totalWait: null | number;
                         title: null | string;
-                        failureDesc: null | string;
-                        failureCause: null | string;
-                        actionDesc: null | string;
-                        followDesc: null | string;
-                        reportedUserId: null | number;
-                        deptId: null | number;
-                        lastupdate: null | string;
-                        approvedUserId: null | number;
-                        stateDateTime: null | string;
-                        stateCode: null | number;
+                        failureNumber: null | number;
+                        locationId: null | number;
+                        failureSeverityLevelId: null | number;
+                        failureStatusId: null | number;
+                        failureGroupFollowId: null | number;
+                        requestNo: null | string;
+                        nextFollowDate: null | string;
                         closedUserId: null | number;
                         closedDateTime: null | string;
-                        failureNumber: null | number;
-                        failureSeverityLevelId: null | number;
-                        nextFollowDate: null | string;
-                        failureGroupFollowId: null | number;
-                        failureStatusId: null | number;
+                        followDesc: null | string;
                         tblFailureReportAttachments?: {
                             failureReportAttachmentId: number;
                             failureReportId: number;
@@ -31544,42 +30378,6 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblComponentUnit?: null | ({
-                            compId: number;
-                            compTypeId: null | number;
-                            locationId: null | number;
-                            parentCompId: null | number;
-                            vendorId: null | number;
-                            compNo: null | string;
-                            serialNo: null | string;
-                            statusId: null | number;
-                            notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            isCritical: null | number;
-                            orderNo: null | number;
-                            model: null | string;
-                            comment1: null | string;
-                            comment2: null | string;
-                            comment3: null | string;
-                            assetNo: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblDiscipline?: null | ({
-                            discId: number;
-                            code: null | string;
-                            name: null | string;
-                            externalDisc: null | number;
-                            parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            orderNo: null | number;
-                        } & {
-                            [key: string]: unknown;
-                        });
                         tblFailureGroupFollow?: null | ({
                             failureGroupFollowId: number;
                             name: null | string;
@@ -31607,83 +30405,31 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblFailureReportsApprovedUserIdTotblUsers?: null | ({
+                        tblUsers?: null | ({
                             userId: number;
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblUsersTblFailureReportsClosedUserIdTotblUsers?: null | ({
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblUsersTblFailureReportsReportedUserIdTotblUsers?: null | ({
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -31767,31 +30513,18 @@ export interface operations {
                             name: null | string;
                             tblFailureReports?: {
                                 failureReportId: number;
-                                compId: null | number;
-                                discId: null | number;
                                 maintLogId: null | number;
-                                failureReportDate: null | string;
-                                failureDateTime: null | string;
-                                waitDateTime: string;
-                                totalWait: null | number;
                                 title: null | string;
-                                failureDesc: null | string;
-                                failureCause: null | string;
-                                actionDesc: null | string;
-                                followDesc: null | string;
-                                reportedUserId: null | number;
-                                deptId: null | number;
-                                lastupdate: null | string;
-                                approvedUserId: null | number;
-                                stateDateTime: null | string;
-                                stateCode: null | number;
+                                failureNumber: null | number;
+                                locationId: null | number;
+                                failureSeverityLevelId: null | number;
+                                failureStatusId: null | number;
+                                failureGroupFollowId: null | number;
+                                requestNo: null | string;
+                                nextFollowDate: null | string;
                                 closedUserId: null | number;
                                 closedDateTime: null | string;
-                                failureNumber: null | number;
-                                failureSeverityLevelId: null | number;
-                                nextFollowDate: null | string;
-                                failureGroupFollowId: null | number;
-                                failureStatusId: null | number;
+                                followDesc: null | string;
                             }[];
                         }[];
                         total: number;
@@ -31850,31 +30583,18 @@ export interface operations {
                         name: null | string;
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         }[];
                     };
                 };
@@ -31937,31 +30657,18 @@ export interface operations {
                         name: null | string;
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         }[];
                     };
                 };
@@ -32029,31 +30736,18 @@ export interface operations {
                         name: null | string;
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         }[];
                     };
                 };
@@ -32084,31 +30778,18 @@ export interface operations {
                         name: null | string;
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         }[];
                     };
                 };
@@ -32176,31 +30857,18 @@ export interface operations {
                             name: null | string;
                             tblFailureReports?: {
                                 failureReportId: number;
-                                compId: null | number;
-                                discId: null | number;
                                 maintLogId: null | number;
-                                failureReportDate: null | string;
-                                failureDateTime: null | string;
-                                waitDateTime: string;
-                                totalWait: null | number;
                                 title: null | string;
-                                failureDesc: null | string;
-                                failureCause: null | string;
-                                actionDesc: null | string;
-                                followDesc: null | string;
-                                reportedUserId: null | number;
-                                deptId: null | number;
-                                lastupdate: null | string;
-                                approvedUserId: null | number;
-                                stateDateTime: null | string;
-                                stateCode: null | number;
+                                failureNumber: null | number;
+                                locationId: null | number;
+                                failureSeverityLevelId: null | number;
+                                failureStatusId: null | number;
+                                failureGroupFollowId: null | number;
+                                requestNo: null | string;
+                                nextFollowDate: null | string;
                                 closedUserId: null | number;
                                 closedDateTime: null | string;
-                                failureNumber: null | number;
-                                failureSeverityLevelId: null | number;
-                                nextFollowDate: null | string;
-                                failureGroupFollowId: null | number;
-                                failureStatusId: null | number;
+                                followDesc: null | string;
                             }[];
                         }[];
                         total: number;
@@ -32259,31 +30927,18 @@ export interface operations {
                         name: null | string;
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         }[];
                     };
                 };
@@ -32346,31 +31001,18 @@ export interface operations {
                         name: null | string;
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         }[];
                     };
                 };
@@ -32438,31 +31080,18 @@ export interface operations {
                         name: null | string;
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         }[];
                     };
                 };
@@ -32493,31 +31122,18 @@ export interface operations {
                         name: null | string;
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         }[];
                     };
                 };
@@ -32600,25 +31216,21 @@ export interface operations {
                                 jobDescId: null | number;
                                 workOrderId: null | number;
                                 compId: null | number;
-                                roundId: null | number;
                                 totalDuration: null | number;
                                 downTime: null | number;
                                 dateDone: null | string;
                                 frequency: null | number;
                                 frequencyPeriod: null | number;
                                 overdueCount: null | number;
-                                overdueReason: null | string;
                                 unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
+                                reportedBy: null | number;
                                 deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
                                 history: null | string;
-                                mlStatus: null | number;
+                                maintLogFollowId: null | number;
                                 followStatusId: null | number;
-                                orderNo: null | number;
                                 updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
                             }[];
                             tblMaintLogFollows?: {
                                 followId: number;
@@ -32739,25 +31351,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblMaintLogFollows?: {
                             followId: number;
@@ -32849,25 +31457,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblMaintLogFollows?: {
                             followId: number;
@@ -33006,25 +31610,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblMaintLogFollows?: {
                             followId: number;
@@ -33084,25 +31684,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblMaintLogFollows?: {
                             followId: number;
@@ -33251,25 +31847,21 @@ export interface operations {
                                 jobDescId: null | number;
                                 workOrderId: null | number;
                                 compId: null | number;
-                                roundId: null | number;
                                 totalDuration: null | number;
                                 downTime: null | number;
                                 dateDone: null | string;
                                 frequency: null | number;
                                 frequencyPeriod: null | number;
                                 overdueCount: null | number;
-                                overdueReason: null | string;
                                 unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
+                                reportedBy: null | number;
                                 deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
                                 history: null | string;
-                                mlStatus: null | number;
+                                maintLogFollowId: null | number;
                                 followStatusId: null | number;
-                                orderNo: null | number;
                                 updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
                             }[];
                             tblRotationLogs?: {
                                 rotationLogId: number;
@@ -33484,25 +32076,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblRotationLogs?: {
                             rotationLogId: number;
@@ -33646,25 +32234,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblRotationLogs?: {
                             rotationLogId: number;
@@ -33912,25 +32496,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblRotationLogs?: {
                             rotationLogId: number;
@@ -34042,25 +32622,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblRotationLogs?: {
                             rotationLogId: number;
@@ -34703,25 +33279,21 @@ export interface operations {
                                 jobDescId: null | number;
                                 workOrderId: null | number;
                                 compId: null | number;
-                                roundId: null | number;
                                 totalDuration: null | number;
                                 downTime: null | number;
                                 dateDone: null | string;
                                 frequency: null | number;
                                 frequencyPeriod: null | number;
                                 overdueCount: null | number;
-                                overdueReason: null | string;
                                 unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
+                                reportedBy: null | number;
                                 deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
                                 history: null | string;
-                                mlStatus: null | number;
+                                maintLogFollowId: null | number;
                                 followStatusId: null | number;
-                                orderNo: null | number;
                                 updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
                             }[];
                         }[];
                         total: number;
@@ -34989,25 +33561,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -35183,25 +33751,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -35508,25 +34072,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -35670,25 +34230,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -35761,7 +34317,7 @@ export interface operations {
                             tblAttachment?: {
                                 attachmentId: number;
                                 title: null | string;
-                                fileName: string;
+                                fileName: null | string;
                                 attachmentTypeId: null | number;
                                 path: null | string;
                                 size: null | number;
@@ -35800,8 +34356,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -35911,7 +34467,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -35950,8 +34506,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -36035,7 +34591,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -36074,8 +34630,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -36185,7 +34741,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -36224,8 +34780,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -36277,7 +34833,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -36316,8 +34872,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -37133,339 +35689,6 @@ export interface operations {
             };
         };
     };
-    getTblJobVersion: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            jobVersionId: number;
-                            jobVersionNo: null | string;
-                            jobDescTitle: null | string;
-                            jobDesc: null | string;
-                            createdDate: null | string;
-                            status: null | number;
-                            jobDescId: null | number;
-                            createdBy: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            createdUserId: null | number;
-                            orderNo: null | number;
-                        }[];
-                        total: number;
-                        page: number;
-                        perPage: number;
-                        totalPages: number;
-                    };
-                };
-            };
-        };
-    };
-    postTblJobVersion: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    jobVersionNo?: null | string;
-                    jobDescTitle?: null | string;
-                    jobDesc?: null | string;
-                    createdDate?: null | string;
-                    status?: null | number;
-                    createdBy?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    orderNo?: null | number;
-                };
-                "application/x-www-form-urlencoded": {
-                    jobVersionNo?: null | string;
-                    jobDescTitle?: null | string;
-                    jobDesc?: null | string;
-                    createdDate?: null | string;
-                    status?: null | number;
-                    createdBy?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    orderNo?: null | number;
-                };
-                "multipart/form-data": {
-                    jobVersionNo?: null | string;
-                    jobDescTitle?: null | string;
-                    jobDesc?: null | string;
-                    createdDate?: null | string;
-                    status?: null | number;
-                    createdBy?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    orderNo?: null | number;
-                };
-            };
-        };
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        jobVersionId: number;
-                        jobVersionNo: null | string;
-                        jobDescTitle: null | string;
-                        jobDesc: null | string;
-                        createdDate: null | string;
-                        status: null | number;
-                        jobDescId: null | number;
-                        createdBy: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
-                        createdUserId: null | number;
-                        orderNo: null | number;
-                    };
-                };
-            };
-        };
-    };
-    deleteTblJobVersion: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        deleted: number;
-                    };
-                };
-            };
-        };
-    };
-    getTblJobVersionByJobVersionId: {
-        parameters: {
-            query?: {
-                include?: string;
-                select?: string;
-            };
-            header?: never;
-            path: {
-                jobVersionId: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        jobVersionId: number;
-                        jobVersionNo: null | string;
-                        jobDescTitle: null | string;
-                        jobDesc: null | string;
-                        createdDate: null | string;
-                        status: null | number;
-                        jobDescId: null | number;
-                        createdBy: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
-                        createdUserId: null | number;
-                        orderNo: null | number;
-                    };
-                };
-            };
-        };
-    };
-    putTblJobVersionByJobVersionId: {
-        parameters: {
-            query?: {
-                include?: string;
-                select?: string;
-            };
-            header?: never;
-            path: {
-                jobVersionId: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    jobVersionNo?: null | string;
-                    jobDescTitle?: null | string;
-                    jobDesc?: null | string;
-                    createdDate?: null | string;
-                    status?: null | number;
-                    createdBy?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    orderNo?: null | number;
-                };
-                "application/x-www-form-urlencoded": {
-                    jobVersionNo?: null | string;
-                    jobDescTitle?: null | string;
-                    jobDesc?: null | string;
-                    createdDate?: null | string;
-                    status?: null | number;
-                    createdBy?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    orderNo?: null | number;
-                };
-                "multipart/form-data": {
-                    jobVersionNo?: null | string;
-                    jobDescTitle?: null | string;
-                    jobDesc?: null | string;
-                    createdDate?: null | string;
-                    status?: null | number;
-                    createdBy?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    orderNo?: null | number;
-                };
-            };
-        };
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        jobVersionId: number;
-                        jobVersionNo: null | string;
-                        jobDescTitle: null | string;
-                        jobDesc: null | string;
-                        createdDate: null | string;
-                        status: null | number;
-                        jobDescId: null | number;
-                        createdBy: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
-                        createdUserId: null | number;
-                        orderNo: null | number;
-                    };
-                };
-            };
-        };
-    };
-    deleteTblJobVersionByJobVersionId: {
-        parameters: {
-            query?: {
-                force?: boolean;
-            };
-            header?: never;
-            path: {
-                jobVersionId: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        jobVersionId: number;
-                        jobVersionNo: null | string;
-                        jobDescTitle: null | string;
-                        jobDesc: null | string;
-                        createdDate: null | string;
-                        status: null | number;
-                        jobDescId: null | number;
-                        createdBy: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
-                        createdUserId: null | number;
-                        orderNo: null | number;
-                    };
-                };
-            };
-        };
-    };
-    getTblJobVersionCount: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        count: number;
-                    };
-                };
-            };
-        };
-    };
     getTblLocation: {
         parameters: {
             query?: {
@@ -38135,25 +36358,21 @@ export interface operations {
                                 jobDescId: null | number;
                                 workOrderId: null | number;
                                 compId: null | number;
-                                roundId: null | number;
                                 totalDuration: null | number;
                                 downTime: null | number;
                                 dateDone: null | string;
                                 frequency: null | number;
                                 frequencyPeriod: null | number;
                                 overdueCount: null | number;
-                                overdueReason: null | string;
                                 unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
+                                reportedBy: null | number;
                                 deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
                                 history: null | string;
-                                mlStatus: null | number;
+                                maintLogFollowId: null | number;
                                 followStatusId: null | number;
-                                orderNo: null | number;
                                 updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -38162,8 +36381,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -38312,25 +36531,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -38339,8 +36554,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -38448,25 +36663,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -38475,8 +36686,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -38634,25 +36845,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -38661,8 +36868,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -38738,25 +36945,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -38765,8 +36968,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -38897,25 +37100,21 @@ export interface operations {
                                 jobDescId: null | number;
                                 workOrderId: null | number;
                                 compId: null | number;
-                                roundId: null | number;
                                 totalDuration: null | number;
                                 downTime: null | number;
                                 dateDone: null | string;
                                 frequency: null | number;
                                 frequencyPeriod: null | number;
                                 overdueCount: null | number;
-                                overdueReason: null | string;
                                 unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
+                                reportedBy: null | number;
                                 deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
                                 history: null | string;
-                                mlStatus: null | number;
+                                maintLogFollowId: null | number;
                                 followStatusId: null | number;
-                                orderNo: null | number;
                                 updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -38924,8 +37123,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -39101,25 +37300,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -39128,8 +37323,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -39255,25 +37450,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -39282,8 +37473,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -39471,25 +37662,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -39498,8 +37685,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -39593,25 +37780,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -39620,8 +37803,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -39718,8 +37901,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -39828,8 +38011,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -39921,8 +38104,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -40034,8 +38217,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -40095,8 +38278,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -40256,25 +38439,21 @@ export interface operations {
                                 jobDescId: null | number;
                                 workOrderId: null | number;
                                 compId: null | number;
-                                roundId: null | number;
                                 totalDuration: null | number;
                                 downTime: null | number;
                                 dateDone: null | string;
                                 frequency: null | number;
                                 frequencyPeriod: null | number;
                                 overdueCount: null | number;
-                                overdueReason: null | string;
                                 unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
+                                reportedBy: null | number;
                                 deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
                                 history: null | string;
-                                mlStatus: null | number;
+                                maintLogFollowId: null | number;
                                 followStatusId: null | number;
-                                orderNo: null | number;
                                 updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
                             }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
@@ -40502,25 +38681,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -40698,25 +38873,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -40980,25 +39151,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -41144,25 +39311,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -41345,25 +39508,21 @@ export interface operations {
                                 jobDescId: null | number;
                                 workOrderId: null | number;
                                 compId: null | number;
-                                roundId: null | number;
                                 totalDuration: null | number;
                                 downTime: null | number;
                                 dateDone: null | string;
                                 frequency: null | number;
                                 frequencyPeriod: null | number;
                                 overdueCount: null | number;
-                                overdueReason: null | string;
                                 unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
+                                reportedBy: null | number;
                                 deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
                                 history: null | string;
-                                mlStatus: null | number;
+                                maintLogFollowId: null | number;
                                 followStatusId: null | number;
-                                orderNo: null | number;
                                 updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
                             }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
@@ -41591,25 +39750,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -41787,25 +39942,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -42069,25 +40220,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -42233,25 +40380,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -42345,45 +40488,7 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: {
-                            maintLogId: number;
-                            dateDone?: string;
-                            downTime?: string;
-                            unplanned: boolean;
-                            tblComponentUnit?: {
-                                compNo: string;
-                            };
-                            tblJobDescription?: {
-                                jobDescCode: string;
-                                jobDescTitle: string;
-                            };
-                            tblWorkOrder?: {
-                                tblDiscipline?: {
-                                    name: string;
-                                };
-                            };
-                            tblFollowStatus?: {
-                                fsName: string;
-                            };
-                            tblMaintClass?: {
-                                descr?: string;
-                            };
-                        }[];
-                        total: number;
-                        page: number;
-                        perPage: number;
-                    };
-                };
-            };
-        };
+        responses: never;
     };
     postTblMaintLog: {
         parameters: {
@@ -42401,15 +40506,11 @@ export interface operations {
                     frequency?: null | number;
                     frequencyPeriod?: null | number;
                     overdueCount?: null | number;
-                    overdueReason?: null | string;
                     unexpected?: null | number;
-                    cbmStatus?: null | number;
-                    loggedBy?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
+                    reportedBy?: null | number;
                     history?: null | string;
-                    mlStatus?: null | number;
-                    orderNo?: null | number;
+                    reportedDate?: null | string;
+                    lastupdate?: null | string;
                     tblFailureReports?: {
                         connect: {
                             failureReportId: number;
@@ -42475,7 +40576,7 @@ export interface operations {
                             workOrderId: number;
                         };
                     };
-                    tblUsersTblMaintLogLoggedByTotblUsers?: {
+                    tblUsersTblMaintLogReportedByTotblUsers?: {
                         connect: {
                             id: number;
                         };
@@ -42503,15 +40604,11 @@ export interface operations {
                     frequency?: null | number;
                     frequencyPeriod?: null | number;
                     overdueCount?: null | number;
-                    overdueReason?: null | string;
                     unexpected?: null | number;
-                    cbmStatus?: null | number;
-                    loggedBy?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
+                    reportedBy?: null | number;
                     history?: null | string;
-                    mlStatus?: null | number;
-                    orderNo?: null | number;
+                    reportedDate?: null | string;
+                    lastupdate?: null | string;
                     tblFailureReports?: {
                         connect: {
                             failureReportId: number;
@@ -42577,7 +40674,7 @@ export interface operations {
                             workOrderId: number;
                         };
                     };
-                    tblUsersTblMaintLogLoggedByTotblUsers?: {
+                    tblUsersTblMaintLogReportedByTotblUsers?: {
                         connect: {
                             id: number;
                         };
@@ -42605,15 +40702,11 @@ export interface operations {
                     frequency?: null | number;
                     frequencyPeriod?: null | number;
                     overdueCount?: null | number;
-                    overdueReason?: null | string;
                     unexpected?: null | number;
-                    cbmStatus?: null | number;
-                    loggedBy?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
+                    reportedBy?: null | number;
                     history?: null | string;
-                    mlStatus?: null | number;
-                    orderNo?: null | number;
+                    reportedDate?: null | string;
+                    lastupdate?: null | string;
                     tblFailureReports?: {
                         connect: {
                             failureReportId: number;
@@ -42679,7 +40772,7 @@ export interface operations {
                             workOrderId: number;
                         };
                     };
-                    tblUsersTblMaintLogLoggedByTotblUsers?: {
+                    tblUsersTblMaintLogReportedByTotblUsers?: {
                         connect: {
                             id: number;
                         };
@@ -42718,52 +40811,35 @@ export interface operations {
                         jobDescId: null | number;
                         workOrderId: null | number;
                         compId: null | number;
-                        roundId: null | number;
                         totalDuration: null | number;
                         downTime: null | number;
                         dateDone: null | string;
                         frequency: null | number;
                         frequencyPeriod: null | number;
                         overdueCount: null | number;
-                        overdueReason: null | string;
                         unexpected: null | number;
-                        cbmStatus: null | number;
-                        loggedBy: null | number;
+                        reportedBy: null | number;
                         deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
                         history: null | string;
-                        mlStatus: null | number;
+                        maintLogFollowId: null | number;
                         followStatusId: null | number;
-                        orderNo: null | number;
                         updatedUserId: null | number;
+                        reportedDate: null | string;
+                        lastupdate: null | string;
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         }[];
                         tblLogCounters?: {
                             logCounterId: number;
@@ -42898,7 +40974,7 @@ export interface operations {
                         });
                         tblPeriod?: null | ({
                             periodId: number;
-                            name: string;
+                            name: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -42907,8 +40983,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -42967,13 +41043,13 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblMaintLogLoggedByTotblUsers?: null | ({
+                        tblUsersTblMaintLogReportedByTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -43018,7 +41094,6 @@ export interface operations {
                             maintLogId: number;
                             stockItemId: number;
                             deptId: null | number;
-                            exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -43090,52 +41165,35 @@ export interface operations {
                         jobDescId: null | number;
                         workOrderId: null | number;
                         compId: null | number;
-                        roundId: null | number;
                         totalDuration: null | number;
                         downTime: null | number;
                         dateDone: null | string;
                         frequency: null | number;
                         frequencyPeriod: null | number;
                         overdueCount: null | number;
-                        overdueReason: null | string;
                         unexpected: null | number;
-                        cbmStatus: null | number;
-                        loggedBy: null | number;
+                        reportedBy: null | number;
                         deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
                         history: null | string;
-                        mlStatus: null | number;
+                        maintLogFollowId: null | number;
                         followStatusId: null | number;
-                        orderNo: null | number;
                         updatedUserId: null | number;
+                        reportedDate: null | string;
+                        lastupdate: null | string;
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         }[];
                         tblLogCounters?: {
                             logCounterId: number;
@@ -43270,7 +41328,7 @@ export interface operations {
                         });
                         tblPeriod?: null | ({
                             periodId: number;
-                            name: string;
+                            name: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -43279,8 +41337,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -43339,13 +41397,13 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblMaintLogLoggedByTotblUsers?: null | ({
+                        tblUsersTblMaintLogReportedByTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -43390,7 +41448,6 @@ export interface operations {
                             maintLogId: number;
                             stockItemId: number;
                             deptId: null | number;
-                            exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -43423,15 +41480,11 @@ export interface operations {
                     frequency?: null | number;
                     frequencyPeriod?: null | number;
                     overdueCount?: null | number;
-                    overdueReason?: null | string;
                     unexpected?: null | number;
-                    cbmStatus?: null | number;
-                    loggedBy?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
+                    reportedBy?: null | number;
                     history?: null | string;
-                    mlStatus?: null | number;
-                    orderNo?: null | number;
+                    reportedDate?: null | string;
+                    lastupdate?: null | string;
                     tblFailureReports?: {
                         connect?: {
                             failureReportId: number;
@@ -43516,7 +41569,7 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblUsersTblMaintLogLoggedByTotblUsers?: {
+                    tblUsersTblMaintLogReportedByTotblUsers?: {
                         connect?: {
                             id: number;
                         };
@@ -43554,15 +41607,11 @@ export interface operations {
                     frequency?: null | number;
                     frequencyPeriod?: null | number;
                     overdueCount?: null | number;
-                    overdueReason?: null | string;
                     unexpected?: null | number;
-                    cbmStatus?: null | number;
-                    loggedBy?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
+                    reportedBy?: null | number;
                     history?: null | string;
-                    mlStatus?: null | number;
-                    orderNo?: null | number;
+                    reportedDate?: null | string;
+                    lastupdate?: null | string;
                     tblFailureReports?: {
                         connect?: {
                             failureReportId: number;
@@ -43647,7 +41696,7 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblUsersTblMaintLogLoggedByTotblUsers?: {
+                    tblUsersTblMaintLogReportedByTotblUsers?: {
                         connect?: {
                             id: number;
                         };
@@ -43685,15 +41734,11 @@ export interface operations {
                     frequency?: null | number;
                     frequencyPeriod?: null | number;
                     overdueCount?: null | number;
-                    overdueReason?: null | string;
                     unexpected?: null | number;
-                    cbmStatus?: null | number;
-                    loggedBy?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
+                    reportedBy?: null | number;
                     history?: null | string;
-                    mlStatus?: null | number;
-                    orderNo?: null | number;
+                    reportedDate?: null | string;
+                    lastupdate?: null | string;
                     tblFailureReports?: {
                         connect?: {
                             failureReportId: number;
@@ -43778,7 +41823,7 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblUsersTblMaintLogLoggedByTotblUsers?: {
+                    tblUsersTblMaintLogReportedByTotblUsers?: {
                         connect?: {
                             id: number;
                         };
@@ -43827,52 +41872,35 @@ export interface operations {
                         jobDescId: null | number;
                         workOrderId: null | number;
                         compId: null | number;
-                        roundId: null | number;
                         totalDuration: null | number;
                         downTime: null | number;
                         dateDone: null | string;
                         frequency: null | number;
                         frequencyPeriod: null | number;
                         overdueCount: null | number;
-                        overdueReason: null | string;
                         unexpected: null | number;
-                        cbmStatus: null | number;
-                        loggedBy: null | number;
+                        reportedBy: null | number;
                         deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
                         history: null | string;
-                        mlStatus: null | number;
+                        maintLogFollowId: null | number;
                         followStatusId: null | number;
-                        orderNo: null | number;
                         updatedUserId: null | number;
+                        reportedDate: null | string;
+                        lastupdate: null | string;
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         }[];
                         tblLogCounters?: {
                             logCounterId: number;
@@ -44007,7 +42035,7 @@ export interface operations {
                         });
                         tblPeriod?: null | ({
                             periodId: number;
-                            name: string;
+                            name: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -44016,8 +42044,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -44076,13 +42104,13 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblMaintLogLoggedByTotblUsers?: null | ({
+                        tblUsersTblMaintLogReportedByTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -44127,7 +42155,6 @@ export interface operations {
                             maintLogId: number;
                             stockItemId: number;
                             deptId: null | number;
-                            exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -44167,52 +42194,35 @@ export interface operations {
                         jobDescId: null | number;
                         workOrderId: null | number;
                         compId: null | number;
-                        roundId: null | number;
                         totalDuration: null | number;
                         downTime: null | number;
                         dateDone: null | string;
                         frequency: null | number;
                         frequencyPeriod: null | number;
                         overdueCount: null | number;
-                        overdueReason: null | string;
                         unexpected: null | number;
-                        cbmStatus: null | number;
-                        loggedBy: null | number;
+                        reportedBy: null | number;
                         deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
                         history: null | string;
-                        mlStatus: null | number;
+                        maintLogFollowId: null | number;
                         followStatusId: null | number;
-                        orderNo: null | number;
                         updatedUserId: null | number;
+                        reportedDate: null | string;
+                        lastupdate: null | string;
                         tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
+                            followDesc: null | string;
                         }[];
                         tblLogCounters?: {
                             logCounterId: number;
@@ -44347,7 +42357,7 @@ export interface operations {
                         });
                         tblPeriod?: null | ({
                             periodId: number;
-                            name: string;
+                            name: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -44356,8 +42366,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -44416,13 +42426,13 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblUsersTblMaintLogLoggedByTotblUsers?: null | ({
+                        tblUsersTblMaintLogReportedByTotblUsers?: null | ({
                             userId: number;
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -44467,7 +42477,6 @@ export interface operations {
                             maintLogId: number;
                             stockItemId: number;
                             deptId: null | number;
-                            exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -44589,7 +42598,7 @@ export interface operations {
                             tblAttachment?: {
                                 attachmentId: number;
                                 title: null | string;
-                                fileName: string;
+                                fileName: null | string;
                                 attachmentTypeId: null | number;
                                 path: null | string;
                                 size: null | number;
@@ -44608,25 +42617,21 @@ export interface operations {
                                 jobDescId: null | number;
                                 workOrderId: null | number;
                                 compId: null | number;
-                                roundId: null | number;
                                 totalDuration: null | number;
                                 downTime: null | number;
                                 dateDone: null | string;
                                 frequency: null | number;
                                 frequencyPeriod: null | number;
                                 overdueCount: null | number;
-                                overdueReason: null | string;
                                 unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
+                                reportedBy: null | number;
                                 deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
                                 history: null | string;
-                                mlStatus: null | number;
+                                maintLogFollowId: null | number;
                                 followStatusId: null | number;
-                                orderNo: null | number;
                                 updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             };
@@ -44635,8 +42640,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -44746,7 +42751,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -44765,25 +42770,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -44792,8 +42793,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -44877,7 +42878,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -44896,25 +42897,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -44923,8 +42920,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -45034,7 +43031,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -45053,25 +43050,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -45080,8 +43073,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -45133,7 +43126,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -45152,25 +43145,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -45179,8 +43168,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -45295,25 +43284,21 @@ export interface operations {
                                 jobDescId: null | number;
                                 workOrderId: null | number;
                                 compId: null | number;
-                                roundId: null | number;
                                 totalDuration: null | number;
                                 downTime: null | number;
                                 dateDone: null | string;
                                 frequency: null | number;
                                 frequencyPeriod: null | number;
                                 overdueCount: null | number;
-                                overdueReason: null | string;
                                 unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
+                                reportedBy: null | number;
                                 deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
                                 history: null | string;
-                                mlStatus: null | number;
+                                maintLogFollowId: null | number;
                                 followStatusId: null | number;
-                                orderNo: null | number;
                                 updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             };
@@ -45322,8 +43307,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -45477,25 +43462,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -45504,8 +43485,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -45615,25 +43596,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -45642,8 +43619,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -45800,25 +43777,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -45827,8 +43800,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -45906,25 +43879,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -45933,8 +43902,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -46018,7 +43987,6 @@ export interface operations {
                             maintLogId: number;
                             stockItemId: number;
                             deptId: null | number;
-                            exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -46033,25 +44001,21 @@ export interface operations {
                                 jobDescId: null | number;
                                 workOrderId: null | number;
                                 compId: null | number;
-                                roundId: null | number;
                                 totalDuration: null | number;
                                 downTime: null | number;
                                 dateDone: null | string;
                                 frequency: null | number;
                                 frequencyPeriod: null | number;
                                 overdueCount: null | number;
-                                overdueReason: null | string;
                                 unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
+                                reportedBy: null | number;
                                 deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
                                 history: null | string;
-                                mlStatus: null | number;
+                                maintLogFollowId: null | number;
                                 followStatusId: null | number;
-                                orderNo: null | number;
                                 updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             };
@@ -46083,7 +44047,6 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    exportMaker?: null | number;
                     stockCount?: null | number;
                     orderNo?: null | number;
                     exportMarker?: null | number;
@@ -46100,7 +44063,6 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    exportMaker?: null | number;
                     stockCount?: null | number;
                     orderNo?: null | number;
                     exportMarker?: null | number;
@@ -46117,7 +44079,6 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    exportMaker?: null | number;
                     stockCount?: null | number;
                     orderNo?: null | number;
                     exportMarker?: null | number;
@@ -46147,7 +44108,6 @@ export interface operations {
                         maintLogId: number;
                         stockItemId: number;
                         deptId: null | number;
-                        exportMaker: null | number;
                         stockCount: null | number;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -46162,25 +44122,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -46253,7 +44209,6 @@ export interface operations {
                         maintLogId: number;
                         stockItemId: number;
                         deptId: null | number;
-                        exportMaker: null | number;
                         stockCount: null | number;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -46268,25 +44223,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -46318,7 +44269,6 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    exportMaker?: null | number;
                     stockCount?: null | number;
                     orderNo?: null | number;
                     exportMarker?: null | number;
@@ -46335,7 +44285,6 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    exportMaker?: null | number;
                     stockCount?: null | number;
                     orderNo?: null | number;
                     exportMarker?: null | number;
@@ -46352,7 +44301,6 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    exportMaker?: null | number;
                     stockCount?: null | number;
                     orderNo?: null | number;
                     exportMarker?: null | number;
@@ -46382,7 +44330,6 @@ export interface operations {
                         maintLogId: number;
                         stockItemId: number;
                         deptId: null | number;
-                        exportMaker: null | number;
                         stockCount: null | number;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -46397,25 +44344,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -46456,7 +44399,6 @@ export interface operations {
                         maintLogId: number;
                         stockItemId: number;
                         deptId: null | number;
-                        exportMaker: null | number;
                         stockCount: null | number;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -46471,25 +44413,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -46695,25 +44633,21 @@ export interface operations {
                                 jobDescId: null | number;
                                 workOrderId: null | number;
                                 compId: null | number;
-                                roundId: null | number;
                                 totalDuration: null | number;
                                 downTime: null | number;
                                 dateDone: null | string;
                                 frequency: null | number;
                                 frequencyPeriod: null | number;
                                 overdueCount: null | number;
-                                overdueReason: null | string;
                                 unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
+                                reportedBy: null | number;
                                 deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
                                 history: null | string;
-                                mlStatus: null | number;
+                                maintLogFollowId: null | number;
                                 followStatusId: null | number;
-                                orderNo: null | number;
                                 updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
                             }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
@@ -46941,25 +44875,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -47137,25 +45067,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -47419,25 +45345,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -47583,25 +45505,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -48570,7 +46488,7 @@ export interface operations {
                             pendTypeId: number;
                             parentId: null | number;
                             groupId: null | number;
-                            pendTypeName: string;
+                            pendTypeName: null | string;
                             deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
@@ -48636,7 +46554,7 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    pendTypeName: string;
+                    pendTypeName?: null | string;
                     exportMarker?: null | number;
                     lastupdate?: null | string;
                     description?: null | string;
@@ -48648,7 +46566,7 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    pendTypeName: string;
+                    pendTypeName?: null | string;
                     exportMarker?: null | number;
                     lastupdate?: null | string;
                     description?: null | string;
@@ -48660,7 +46578,7 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    pendTypeName: string;
+                    pendTypeName?: null | string;
                     exportMarker?: null | number;
                     lastupdate?: null | string;
                     description?: null | string;
@@ -48684,7 +46602,7 @@ export interface operations {
                         pendTypeId: number;
                         parentId: null | number;
                         groupId: null | number;
-                        pendTypeName: string;
+                        pendTypeName: null | string;
                         deptId: null | number;
                         exportMarker: null | number;
                         lastupdate: null | string;
@@ -48790,7 +46708,7 @@ export interface operations {
                         pendTypeId: number;
                         parentId: null | number;
                         groupId: null | number;
-                        pendTypeName: string;
+                        pendTypeName: null | string;
                         deptId: null | number;
                         exportMarker: null | number;
                         lastupdate: null | string;
@@ -48856,7 +46774,7 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    pendTypeName?: string;
+                    pendTypeName?: null | string;
                     exportMarker?: null | number;
                     lastupdate?: null | string;
                     description?: null | string;
@@ -48871,7 +46789,7 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    pendTypeName?: string;
+                    pendTypeName?: null | string;
                     exportMarker?: null | number;
                     lastupdate?: null | string;
                     description?: null | string;
@@ -48886,7 +46804,7 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    pendTypeName?: string;
+                    pendTypeName?: null | string;
                     exportMarker?: null | number;
                     lastupdate?: null | string;
                     description?: null | string;
@@ -48913,7 +46831,7 @@ export interface operations {
                         pendTypeId: number;
                         parentId: null | number;
                         groupId: null | number;
-                        pendTypeName: string;
+                        pendTypeName: null | string;
                         deptId: null | number;
                         exportMarker: null | number;
                         lastupdate: null | string;
@@ -48987,7 +46905,7 @@ export interface operations {
                         pendTypeId: number;
                         parentId: null | number;
                         groupId: null | number;
-                        pendTypeName: string;
+                        pendTypeName: null | string;
                         deptId: null | number;
                         exportMarker: null | number;
                         lastupdate: null | string;
@@ -49096,7 +47014,7 @@ export interface operations {
                     "application/json": {
                         items: {
                             periodId: number;
-                            name: string;
+                            name: null | string;
                             tblCompJobs?: {
                                 compJobId: number;
                                 discId: null | number;
@@ -49171,25 +47089,21 @@ export interface operations {
                                 jobDescId: null | number;
                                 workOrderId: null | number;
                                 compId: null | number;
-                                roundId: null | number;
                                 totalDuration: null | number;
                                 downTime: null | number;
                                 dateDone: null | string;
                                 frequency: null | number;
                                 frequencyPeriod: null | number;
                                 overdueCount: null | number;
-                                overdueReason: null | string;
                                 unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
+                                reportedBy: null | number;
                                 deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
                                 history: null | string;
-                                mlStatus: null | number;
+                                maintLogFollowId: null | number;
                                 followStatusId: null | number;
-                                orderNo: null | number;
                                 updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
                             }[];
                         }[];
                         total: number;
@@ -49211,7 +47125,7 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    name: string;
+                    name?: null | string;
                     tblCompJobs?: {
                         connect: {
                             compJobId: number;
@@ -49229,7 +47143,7 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    name: string;
+                    name?: null | string;
                     tblCompJobs?: {
                         connect: {
                             compJobId: number;
@@ -49247,7 +47161,7 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    name: string;
+                    name?: null | string;
                     tblCompJobs?: {
                         connect: {
                             compJobId: number;
@@ -49275,7 +47189,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         periodId: number;
-                        name: string;
+                        name: null | string;
                         tblCompJobs?: {
                             compJobId: number;
                             discId: null | number;
@@ -49350,25 +47264,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -49428,7 +47338,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         periodId: number;
-                        name: string;
+                        name: null | string;
                         tblCompJobs?: {
                             compJobId: number;
                             discId: null | number;
@@ -49503,25 +47413,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -49543,7 +47449,7 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    name?: string;
+                    name?: null | string;
                     tblCompJobs?: {
                         connect?: {
                             compJobId: number;
@@ -49570,7 +47476,7 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    name?: string;
+                    name?: null | string;
                     tblCompJobs?: {
                         connect?: {
                             compJobId: number;
@@ -49597,7 +47503,7 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    name?: string;
+                    name?: null | string;
                     tblCompJobs?: {
                         connect?: {
                             compJobId: number;
@@ -49634,7 +47540,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         periodId: number;
-                        name: string;
+                        name: null | string;
                         tblCompJobs?: {
                             compJobId: number;
                             discId: null | number;
@@ -49709,25 +47615,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -49755,7 +47657,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         periodId: number;
-                        name: string;
+                        name: null | string;
                         tblCompJobs?: {
                             compJobId: number;
                             discId: null | number;
@@ -49830,25 +47732,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -49928,8 +47826,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -50093,8 +47991,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -50226,8 +48124,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -50397,8 +48295,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -50498,8 +48396,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -50675,8 +48573,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -50699,8 +48597,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -50886,8 +48784,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -50910,8 +48808,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -51041,8 +48939,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -51065,8 +48963,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -51264,8 +49162,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -51288,8 +49186,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -51387,8 +49285,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -51411,8 +49309,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -52213,8 +50111,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -52321,8 +50219,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -52415,8 +50313,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -52526,8 +50424,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -52588,8 +50486,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -53389,7 +51287,6 @@ export interface operations {
                                 maintLogId: number;
                                 stockItemId: number;
                                 deptId: null | number;
-                                exportMaker: null | number;
                                 stockCount: null | number;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -53489,7 +51386,6 @@ export interface operations {
                             maintLogId: number;
                             stockItemId: number;
                             deptId: null | number;
-                            exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -53578,7 +51474,6 @@ export interface operations {
                             maintLogId: number;
                             stockItemId: number;
                             deptId: null | number;
-                            exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -53690,7 +51585,6 @@ export interface operations {
                             maintLogId: number;
                             stockItemId: number;
                             deptId: null | number;
-                            exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -53747,7 +51641,6 @@ export interface operations {
                             maintLogId: number;
                             stockItemId: number;
                             deptId: null | number;
-                            exportMaker: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -54573,8 +52466,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -54592,7 +52485,7 @@ export interface operations {
                             tblAttachments?: {
                                 attachmentId: number;
                                 title: null | string;
-                                fileName: string;
+                                fileName: null | string;
                                 attachmentTypeId: null | number;
                                 path: null | string;
                                 size: null | number;
@@ -54602,8 +52495,8 @@ export interface operations {
                             }[];
                             tblAttachmentTypes?: {
                                 attachmentTypeId: number;
-                                name: string;
-                                abbreviation: string;
+                                name: null | string;
+                                abbreviation: null | string;
                                 createdBy: number;
                                 createdAt: string;
                             }[];
@@ -54790,7 +52683,7 @@ export interface operations {
                                 orderNo: null | number;
                                 createdUserId: null | number;
                             }[];
-                            tblEmployees?: {
+                            tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                                 employeeId: number;
                                 code: null | string;
                                 lastName: null | string;
@@ -54815,89 +52708,20 @@ export interface operations {
                                 createdUserId: number;
                                 createdAt: string;
                             }[];
-                            tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
+                            tblFailureReports?: {
                                 failureReportId: number;
-                                compId: null | number;
-                                discId: null | number;
                                 maintLogId: null | number;
-                                failureReportDate: null | string;
-                                failureDateTime: null | string;
-                                waitDateTime: string;
-                                totalWait: null | number;
                                 title: null | string;
-                                failureDesc: null | string;
-                                failureCause: null | string;
-                                actionDesc: null | string;
-                                followDesc: null | string;
-                                reportedUserId: null | number;
-                                deptId: null | number;
-                                lastupdate: null | string;
-                                approvedUserId: null | number;
-                                stateDateTime: null | string;
-                                stateCode: null | number;
+                                failureNumber: null | number;
+                                locationId: null | number;
+                                failureSeverityLevelId: null | number;
+                                failureStatusId: null | number;
+                                failureGroupFollowId: null | number;
+                                requestNo: null | string;
+                                nextFollowDate: null | string;
                                 closedUserId: null | number;
                                 closedDateTime: null | string;
-                                failureNumber: null | number;
-                                failureSeverityLevelId: null | number;
-                                nextFollowDate: null | string;
-                                failureGroupFollowId: null | number;
-                                failureStatusId: null | number;
-                            }[];
-                            tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
-                                failureReportId: number;
-                                compId: null | number;
-                                discId: null | number;
-                                maintLogId: null | number;
-                                failureReportDate: null | string;
-                                failureDateTime: null | string;
-                                waitDateTime: string;
-                                totalWait: null | number;
-                                title: null | string;
-                                failureDesc: null | string;
-                                failureCause: null | string;
-                                actionDesc: null | string;
                                 followDesc: null | string;
-                                reportedUserId: null | number;
-                                deptId: null | number;
-                                lastupdate: null | string;
-                                approvedUserId: null | number;
-                                stateDateTime: null | string;
-                                stateCode: null | number;
-                                closedUserId: null | number;
-                                closedDateTime: null | string;
-                                failureNumber: null | number;
-                                failureSeverityLevelId: null | number;
-                                nextFollowDate: null | string;
-                                failureGroupFollowId: null | number;
-                                failureStatusId: null | number;
-                            }[];
-                            tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
-                                failureReportId: number;
-                                compId: null | number;
-                                discId: null | number;
-                                maintLogId: null | number;
-                                failureReportDate: null | string;
-                                failureDateTime: null | string;
-                                waitDateTime: string;
-                                totalWait: null | number;
-                                title: null | string;
-                                failureDesc: null | string;
-                                failureCause: null | string;
-                                actionDesc: null | string;
-                                followDesc: null | string;
-                                reportedUserId: null | number;
-                                deptId: null | number;
-                                lastupdate: null | string;
-                                approvedUserId: null | number;
-                                stateDateTime: null | string;
-                                stateCode: null | number;
-                                closedUserId: null | number;
-                                closedDateTime: null | string;
-                                failureNumber: null | number;
-                                failureSeverityLevelId: null | number;
-                                nextFollowDate: null | string;
-                                failureGroupFollowId: null | number;
-                                failureStatusId: null | number;
                             }[];
                             tblJobDescriptionAttachments?: {
                                 jobDescriptionAttachmentId: number;
@@ -54955,27 +52779,23 @@ export interface operations {
                                 jobDescId: null | number;
                                 workOrderId: null | number;
                                 compId: null | number;
-                                roundId: null | number;
                                 totalDuration: null | number;
                                 downTime: null | number;
                                 dateDone: null | string;
                                 frequency: null | number;
                                 frequencyPeriod: null | number;
                                 overdueCount: null | number;
-                                overdueReason: null | string;
                                 unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
+                                reportedBy: null | number;
                                 deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
                                 history: null | string;
-                                mlStatus: null | number;
+                                maintLogFollowId: null | number;
                                 followStatusId: null | number;
-                                orderNo: null | number;
                                 updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
                             }[];
-                            tblMaintLogTblMaintLogLoggedByTotblUsers?: {
+                            tblMaintLogTblMaintLogReportedByTotblUsers?: {
                                 maintLogId: number;
                                 maintCauseId: null | number;
                                 maintTypeId: null | number;
@@ -54984,25 +52804,21 @@ export interface operations {
                                 jobDescId: null | number;
                                 workOrderId: null | number;
                                 compId: null | number;
-                                roundId: null | number;
                                 totalDuration: null | number;
                                 downTime: null | number;
                                 dateDone: null | string;
                                 frequency: null | number;
                                 frequencyPeriod: null | number;
                                 overdueCount: null | number;
-                                overdueReason: null | string;
                                 unexpected: null | number;
-                                cbmStatus: null | number;
-                                loggedBy: null | number;
+                                reportedBy: null | number;
                                 deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
                                 history: null | string;
-                                mlStatus: null | number;
+                                maintLogFollowId: null | number;
                                 followStatusId: null | number;
-                                orderNo: null | number;
                                 updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
                             }[];
                             tblMaintLogAttachments?: {
                                 maintLogAttachmentId: number;
@@ -55285,8 +53101,8 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    uUserName: string;
-                    uPassword: string;
+                    uUserName?: null | string;
+                    uPassword?: null | string;
                     uName?: null | string;
                     uTitle?: null | string;
                     uComment1?: null | string;
@@ -55365,9 +53181,9 @@ export interface operations {
                             compTypeJobTriggerId: number;
                         }[];
                     };
-                    tblEmployees?: {
+                    tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                         connect: {
-                            employeeId: number;
+                            id: number;
                         }[];
                     };
                     tblFailureReportAttachments?: {
@@ -55375,19 +53191,9 @@ export interface operations {
                             failureReportAttachmentId: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
+                    tblFailureReports?: {
                         connect: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
-                        connect: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
-                        connect: {
-                            id: number;
+                            failureReportId: number;
                         }[];
                     };
                     tblJobDescriptionAttachments?: {
@@ -55415,7 +53221,7 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblMaintLogTblMaintLogLoggedByTotblUsers?: {
+                    tblMaintLogTblMaintLogReportedByTotblUsers?: {
                         connect: {
                             id: number;
                         }[];
@@ -55482,8 +53288,8 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    uUserName: string;
-                    uPassword: string;
+                    uUserName?: null | string;
+                    uPassword?: null | string;
                     uName?: null | string;
                     uTitle?: null | string;
                     uComment1?: null | string;
@@ -55562,9 +53368,9 @@ export interface operations {
                             compTypeJobTriggerId: number;
                         }[];
                     };
-                    tblEmployees?: {
+                    tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                         connect: {
-                            employeeId: number;
+                            id: number;
                         }[];
                     };
                     tblFailureReportAttachments?: {
@@ -55572,19 +53378,9 @@ export interface operations {
                             failureReportAttachmentId: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
+                    tblFailureReports?: {
                         connect: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
-                        connect: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
-                        connect: {
-                            id: number;
+                            failureReportId: number;
                         }[];
                     };
                     tblJobDescriptionAttachments?: {
@@ -55612,7 +53408,7 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblMaintLogTblMaintLogLoggedByTotblUsers?: {
+                    tblMaintLogTblMaintLogReportedByTotblUsers?: {
                         connect: {
                             id: number;
                         }[];
@@ -55679,8 +53475,8 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    uUserName: string;
-                    uPassword: string;
+                    uUserName?: null | string;
+                    uPassword?: null | string;
                     uName?: null | string;
                     uTitle?: null | string;
                     uComment1?: null | string;
@@ -55759,9 +53555,9 @@ export interface operations {
                             compTypeJobTriggerId: number;
                         }[];
                     };
-                    tblEmployees?: {
+                    tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                         connect: {
-                            employeeId: number;
+                            id: number;
                         }[];
                     };
                     tblFailureReportAttachments?: {
@@ -55769,19 +53565,9 @@ export interface operations {
                             failureReportAttachmentId: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
+                    tblFailureReports?: {
                         connect: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
-                        connect: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
-                        connect: {
-                            id: number;
+                            failureReportId: number;
                         }[];
                     };
                     tblJobDescriptionAttachments?: {
@@ -55809,7 +53595,7 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblMaintLogTblMaintLogLoggedByTotblUsers?: {
+                    tblMaintLogTblMaintLogReportedByTotblUsers?: {
                         connect: {
                             id: number;
                         }[];
@@ -55889,8 +53675,8 @@ export interface operations {
                         employeeId: null | number;
                         addressId: null | number;
                         userGroupId: null | number;
-                        uUserName: string;
-                        uPassword: string;
+                        uUserName: null | string;
+                        uPassword: null | string;
                         uName: null | string;
                         uTitle: null | string;
                         uComment1: null | string;
@@ -55908,7 +53694,7 @@ export interface operations {
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -55918,8 +53704,8 @@ export interface operations {
                         }[];
                         tblAttachmentTypes?: {
                             attachmentTypeId: number;
-                            name: string;
-                            abbreviation: string;
+                            name: null | string;
+                            abbreviation: null | string;
                             createdBy: number;
                             createdAt: string;
                         }[];
@@ -56106,7 +53892,7 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                         }[];
-                        tblEmployees?: {
+                        tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -56131,89 +53917,20 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
+                        tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
-                        }[];
-                        tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
-                            failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
-                            maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
                             followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
-                            closedUserId: null | number;
-                            closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
-                        }[];
-                        tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
-                            failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
-                            maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
-                            closedUserId: null | number;
-                            closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
                         }[];
                         tblJobDescriptionAttachments?: {
                             jobDescriptionAttachmentId: number;
@@ -56271,27 +53988,23 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
-                        tblMaintLogTblMaintLogLoggedByTotblUsers?: {
+                        tblMaintLogTblMaintLogReportedByTotblUsers?: {
                             maintLogId: number;
                             maintCauseId: null | number;
                             maintTypeId: null | number;
@@ -56300,25 +54013,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblMaintLogAttachments?: {
                             maintLogAttachmentId: number;
@@ -56642,8 +54351,8 @@ export interface operations {
                         employeeId: null | number;
                         addressId: null | number;
                         userGroupId: null | number;
-                        uUserName: string;
-                        uPassword: string;
+                        uUserName: null | string;
+                        uPassword: null | string;
                         uName: null | string;
                         uTitle: null | string;
                         uComment1: null | string;
@@ -56661,7 +54370,7 @@ export interface operations {
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -56671,8 +54380,8 @@ export interface operations {
                         }[];
                         tblAttachmentTypes?: {
                             attachmentTypeId: number;
-                            name: string;
-                            abbreviation: string;
+                            name: null | string;
+                            abbreviation: null | string;
                             createdBy: number;
                             createdAt: string;
                         }[];
@@ -56859,7 +54568,7 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                         }[];
-                        tblEmployees?: {
+                        tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -56884,89 +54593,20 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
+                        tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
-                        }[];
-                        tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
-                            failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
-                            maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
                             followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
-                            closedUserId: null | number;
-                            closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
-                        }[];
-                        tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
-                            failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
-                            maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
-                            closedUserId: null | number;
-                            closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
                         }[];
                         tblJobDescriptionAttachments?: {
                             jobDescriptionAttachmentId: number;
@@ -57024,27 +54664,23 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
-                        tblMaintLogTblMaintLogLoggedByTotblUsers?: {
+                        tblMaintLogTblMaintLogReportedByTotblUsers?: {
                             maintLogId: number;
                             maintCauseId: null | number;
                             maintTypeId: null | number;
@@ -57053,25 +54689,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblMaintLogAttachments?: {
                             maintLogAttachmentId: number;
@@ -57354,8 +54986,8 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    uUserName?: string;
-                    uPassword?: string;
+                    uUserName?: null | string;
+                    uPassword?: null | string;
                     uName?: null | string;
                     uTitle?: null | string;
                     uComment1?: null | string;
@@ -57473,9 +55105,9 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblEmployees?: {
+                    tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                         connect?: {
-                            employeeId: number;
+                            id: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -57489,25 +55121,9 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
+                    tblFailureReports?: {
                         connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
-                        connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
-                        connect?: {
-                            id: number;
+                            failureReportId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -57553,7 +55169,7 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblMaintLogTblMaintLogLoggedByTotblUsers?: {
+                    tblMaintLogTblMaintLogReportedByTotblUsers?: {
                         connect?: {
                             id: number;
                         }[];
@@ -57657,8 +55273,8 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    uUserName?: string;
-                    uPassword?: string;
+                    uUserName?: null | string;
+                    uPassword?: null | string;
                     uName?: null | string;
                     uTitle?: null | string;
                     uComment1?: null | string;
@@ -57776,9 +55392,9 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblEmployees?: {
+                    tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                         connect?: {
-                            employeeId: number;
+                            id: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -57792,25 +55408,9 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
+                    tblFailureReports?: {
                         connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
-                        connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
-                        connect?: {
-                            id: number;
+                            failureReportId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -57856,7 +55456,7 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblMaintLogTblMaintLogLoggedByTotblUsers?: {
+                    tblMaintLogTblMaintLogReportedByTotblUsers?: {
                         connect?: {
                             id: number;
                         }[];
@@ -57960,8 +55560,8 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    uUserName?: string;
-                    uPassword?: string;
+                    uUserName?: null | string;
+                    uPassword?: null | string;
                     uName?: null | string;
                     uTitle?: null | string;
                     uComment1?: null | string;
@@ -58079,9 +55679,9 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblEmployees?: {
+                    tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                         connect?: {
-                            employeeId: number;
+                            id: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -58095,25 +55695,9 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
+                    tblFailureReports?: {
                         connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
-                        connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
-                        connect?: {
-                            id: number;
+                            failureReportId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -58159,7 +55743,7 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblMaintLogTblMaintLogLoggedByTotblUsers?: {
+                    tblMaintLogTblMaintLogReportedByTotblUsers?: {
                         connect?: {
                             id: number;
                         }[];
@@ -58276,8 +55860,8 @@ export interface operations {
                         employeeId: null | number;
                         addressId: null | number;
                         userGroupId: null | number;
-                        uUserName: string;
-                        uPassword: string;
+                        uUserName: null | string;
+                        uPassword: null | string;
                         uName: null | string;
                         uTitle: null | string;
                         uComment1: null | string;
@@ -58295,7 +55879,7 @@ export interface operations {
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -58305,8 +55889,8 @@ export interface operations {
                         }[];
                         tblAttachmentTypes?: {
                             attachmentTypeId: number;
-                            name: string;
-                            abbreviation: string;
+                            name: null | string;
+                            abbreviation: null | string;
                             createdBy: number;
                             createdAt: string;
                         }[];
@@ -58493,7 +56077,7 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                         }[];
-                        tblEmployees?: {
+                        tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -58518,89 +56102,20 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
+                        tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
-                        }[];
-                        tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
-                            failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
-                            maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
                             followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
-                            closedUserId: null | number;
-                            closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
-                        }[];
-                        tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
-                            failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
-                            maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
-                            closedUserId: null | number;
-                            closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
                         }[];
                         tblJobDescriptionAttachments?: {
                             jobDescriptionAttachmentId: number;
@@ -58658,27 +56173,23 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
-                        tblMaintLogTblMaintLogLoggedByTotblUsers?: {
+                        tblMaintLogTblMaintLogReportedByTotblUsers?: {
                             maintLogId: number;
                             maintCauseId: null | number;
                             maintTypeId: null | number;
@@ -58687,25 +56198,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblMaintLogAttachments?: {
                             maintLogAttachmentId: number;
@@ -58997,8 +56504,8 @@ export interface operations {
                         employeeId: null | number;
                         addressId: null | number;
                         userGroupId: null | number;
-                        uUserName: string;
-                        uPassword: string;
+                        uUserName: null | string;
+                        uPassword: null | string;
                         uName: null | string;
                         uTitle: null | string;
                         uComment1: null | string;
@@ -59016,7 +56523,7 @@ export interface operations {
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -59026,8 +56533,8 @@ export interface operations {
                         }[];
                         tblAttachmentTypes?: {
                             attachmentTypeId: number;
-                            name: string;
-                            abbreviation: string;
+                            name: null | string;
+                            abbreviation: null | string;
                             createdBy: number;
                             createdAt: string;
                         }[];
@@ -59214,7 +56721,7 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                         }[];
-                        tblEmployees?: {
+                        tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -59239,89 +56746,20 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblFailureReportsTblFailureReportsApprovedUserIdTotblUsers?: {
+                        tblFailureReports?: {
                             failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
                             maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
                             title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
                             closedUserId: null | number;
                             closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
-                        }[];
-                        tblFailureReportsTblFailureReportsClosedUserIdTotblUsers?: {
-                            failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
-                            maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
                             followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
-                            closedUserId: null | number;
-                            closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
-                        }[];
-                        tblFailureReportsTblFailureReportsReportedUserIdTotblUsers?: {
-                            failureReportId: number;
-                            compId: null | number;
-                            discId: null | number;
-                            maintLogId: null | number;
-                            failureReportDate: null | string;
-                            failureDateTime: null | string;
-                            waitDateTime: string;
-                            totalWait: null | number;
-                            title: null | string;
-                            failureDesc: null | string;
-                            failureCause: null | string;
-                            actionDesc: null | string;
-                            followDesc: null | string;
-                            reportedUserId: null | number;
-                            deptId: null | number;
-                            lastupdate: null | string;
-                            approvedUserId: null | number;
-                            stateDateTime: null | string;
-                            stateCode: null | number;
-                            closedUserId: null | number;
-                            closedDateTime: null | string;
-                            failureNumber: null | number;
-                            failureSeverityLevelId: null | number;
-                            nextFollowDate: null | string;
-                            failureGroupFollowId: null | number;
-                            failureStatusId: null | number;
                         }[];
                         tblJobDescriptionAttachments?: {
                             jobDescriptionAttachmentId: number;
@@ -59379,27 +56817,23 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
-                        tblMaintLogTblMaintLogLoggedByTotblUsers?: {
+                        tblMaintLogTblMaintLogReportedByTotblUsers?: {
                             maintLogId: number;
                             maintCauseId: null | number;
                             maintTypeId: null | number;
@@ -59408,25 +56842,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblMaintLogAttachments?: {
                             maintLogAttachmentId: number;
@@ -60139,25 +57569,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblReScheduleLogs?: {
                             rescheduleLogId: number;
@@ -60279,7 +57705,7 @@ export interface operations {
                             pendTypeId: number;
                             parentId: null | number;
                             groupId: null | number;
-                            pendTypeName: string;
+                            pendTypeName: null | string;
                             deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
@@ -60402,7 +57828,7 @@ export interface operations {
                         }[];
                         tblWorkOrderStatus?: null | ({
                             workOrderStatusId: number;
-                            name: string;
+                            name: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -60411,8 +57837,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -60435,8 +57861,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -60459,8 +57885,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -60483,8 +57909,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -60605,25 +58031,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblReScheduleLogs?: {
                             rescheduleLogId: number;
@@ -60745,7 +58167,7 @@ export interface operations {
                             pendTypeId: number;
                             parentId: null | number;
                             groupId: null | number;
-                            pendTypeName: string;
+                            pendTypeName: null | string;
                             deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
@@ -60868,7 +58290,7 @@ export interface operations {
                         }[];
                         tblWorkOrderStatus?: null | ({
                             workOrderStatusId: number;
-                            name: string;
+                            name: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -60877,8 +58299,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -60901,8 +58323,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -60925,8 +58347,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -60949,8 +58371,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -61442,25 +58864,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblReScheduleLogs?: {
                             rescheduleLogId: number;
@@ -61582,7 +59000,7 @@ export interface operations {
                             pendTypeId: number;
                             parentId: null | number;
                             groupId: null | number;
-                            pendTypeName: string;
+                            pendTypeName: null | string;
                             deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
@@ -61705,7 +59123,7 @@ export interface operations {
                         }[];
                         tblWorkOrderStatus?: null | ({
                             workOrderStatusId: number;
-                            name: string;
+                            name: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -61714,8 +59132,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -61738,8 +59156,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -61762,8 +59180,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -61786,8 +59204,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -61876,25 +59294,21 @@ export interface operations {
                             jobDescId: null | number;
                             workOrderId: null | number;
                             compId: null | number;
-                            roundId: null | number;
                             totalDuration: null | number;
                             downTime: null | number;
                             dateDone: null | string;
                             frequency: null | number;
                             frequencyPeriod: null | number;
                             overdueCount: null | number;
-                            overdueReason: null | string;
                             unexpected: null | number;
-                            cbmStatus: null | number;
-                            loggedBy: null | number;
+                            reportedBy: null | number;
                             deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
                             history: null | string;
-                            mlStatus: null | number;
+                            maintLogFollowId: null | number;
                             followStatusId: null | number;
-                            orderNo: null | number;
                             updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
                         }[];
                         tblReScheduleLogs?: {
                             rescheduleLogId: number;
@@ -62016,7 +59430,7 @@ export interface operations {
                             pendTypeId: number;
                             parentId: null | number;
                             groupId: null | number;
-                            pendTypeName: string;
+                            pendTypeName: null | string;
                             deptId: null | number;
                             exportMarker: null | number;
                             lastupdate: null | string;
@@ -62139,7 +59553,7 @@ export interface operations {
                         }[];
                         tblWorkOrderStatus?: null | ({
                             workOrderStatusId: number;
-                            name: string;
+                            name: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -62148,8 +59562,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -62172,8 +59586,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -62196,8 +59610,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -62220,8 +59634,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -62379,7 +59793,7 @@ export interface operations {
                     "application/json": {
                         items: {
                             workOrderStatusId: number;
-                            name: string;
+                            name: null | string;
                             tblWorkOrders?: {
                                 workOrderId: number;
                                 compJobId: null | number;
@@ -62439,7 +59853,7 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    name: string;
+                    name?: null | string;
                     tblWorkOrders?: {
                         connect: {
                             workOrderId: number;
@@ -62447,7 +59861,7 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    name: string;
+                    name?: null | string;
                     tblWorkOrders?: {
                         connect: {
                             workOrderId: number;
@@ -62455,7 +59869,7 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    name: string;
+                    name?: null | string;
                     tblWorkOrders?: {
                         connect: {
                             workOrderId: number;
@@ -62473,7 +59887,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         workOrderStatusId: number;
-                        name: string;
+                        name: null | string;
                         tblWorkOrders?: {
                             workOrderId: number;
                             compJobId: null | number;
@@ -62571,7 +59985,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         workOrderStatusId: number;
-                        name: string;
+                        name: null | string;
                         tblWorkOrders?: {
                             workOrderId: number;
                             compJobId: null | number;
@@ -62631,7 +60045,7 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    name?: string;
+                    name?: null | string;
                     tblWorkOrders?: {
                         connect?: {
                             workOrderId: number;
@@ -62642,7 +60056,7 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    name?: string;
+                    name?: null | string;
                     tblWorkOrders?: {
                         connect?: {
                             workOrderId: number;
@@ -62653,7 +60067,7 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    name?: string;
+                    name?: null | string;
                     tblWorkOrders?: {
                         connect?: {
                             workOrderId: number;
@@ -62674,7 +60088,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         workOrderStatusId: number;
-                        name: string;
+                        name: null | string;
                         tblWorkOrders?: {
                             workOrderId: number;
                             compJobId: null | number;
@@ -62740,7 +60154,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         workOrderStatusId: number;
-                        name: string;
+                        name: null | string;
                         tblWorkOrders?: {
                             workOrderId: number;
                             compJobId: null | number;
@@ -62843,7 +60257,7 @@ export interface operations {
                     "application/json": {
                         items: {
                             workOrderTypeId: number;
-                            name: string;
+                            name: null | string;
                         }[];
                         total: number;
                         page: number;
@@ -62864,13 +60278,13 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    name: string;
+                    name?: null | string;
                 };
                 "application/x-www-form-urlencoded": {
-                    name: string;
+                    name?: null | string;
                 };
                 "multipart/form-data": {
-                    name: string;
+                    name?: null | string;
                 };
             };
         };
@@ -62883,7 +60297,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         workOrderTypeId: number;
-                        name: string;
+                        name: null | string;
                     };
                 };
             };
@@ -62942,7 +60356,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         workOrderTypeId: number;
-                        name: string;
+                        name: null | string;
                     };
                 };
             };
@@ -62963,13 +60377,13 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    name?: string;
+                    name?: null | string;
                 };
                 "application/x-www-form-urlencoded": {
-                    name?: string;
+                    name?: null | string;
                 };
                 "multipart/form-data": {
-                    name?: string;
+                    name?: null | string;
                 };
             };
         };
@@ -62982,7 +60396,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         workOrderTypeId: number;
-                        name: string;
+                        name: null | string;
                     };
                 };
             };
@@ -63009,7 +60423,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         workOrderTypeId: number;
-                        name: string;
+                        name: null | string;
                     };
                 };
             };
@@ -64389,7 +61803,7 @@ export interface operations {
                             tblAttachment?: {
                                 attachmentId: number;
                                 title: null | string;
-                                fileName: string;
+                                fileName: null | string;
                                 attachmentTypeId: null | number;
                                 path: null | string;
                                 size: null | number;
@@ -64439,8 +61853,8 @@ export interface operations {
                                 employeeId: null | number;
                                 addressId: null | number;
                                 userGroupId: null | number;
-                                uUserName: string;
-                                uPassword: string;
+                                uUserName: null | string;
+                                uPassword: null | string;
                                 uName: null | string;
                                 uTitle: null | string;
                                 uComment1: null | string;
@@ -64550,7 +61964,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -64600,8 +62014,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -64685,7 +62099,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -64735,8 +62149,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -64846,7 +62260,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -64896,8 +62310,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;
@@ -64949,7 +62363,7 @@ export interface operations {
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
-                            fileName: string;
+                            fileName: null | string;
                             attachmentTypeId: null | number;
                             path: null | string;
                             size: null | number;
@@ -64999,8 +62413,8 @@ export interface operations {
                             employeeId: null | number;
                             addressId: null | number;
                             userGroupId: null | number;
-                            uUserName: string;
-                            uPassword: string;
+                            uUserName: null | string;
+                            uPassword: null | string;
                             uName: null | string;
                             uTitle: null | string;
                             uComment1: null | string;

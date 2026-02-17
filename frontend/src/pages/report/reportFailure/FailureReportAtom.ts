@@ -4,12 +4,12 @@ import {
   TypeTblFailureReports,
 } from "@/core/api/generated/api";
 
-export type FailureReportAtomType = {
+export type Type = {
   maintLog: TypeTblMaintLog | null;
   failureReport: TypeTblFailureReports | null;
 };
 
-export const failureReportAtom = atom<FailureReportAtomType>({
+export const atomInitData = atom<Type>({
   maintLog: null,
   failureReport: null,
 });

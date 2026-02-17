@@ -73,9 +73,15 @@ const TABLE_PKS = {
   TblWorkShopRequest: "WShopRequestID",
   TblUsers: "UserID",
   TblSpareUnit: "SpareUnitID",
+  TblFailureSeverityLevel: "failureSeverityLevelId",
+  TblFailureStatus: "failureStatusId",
+  TblFailureGroupFollow: "failureGroupFollowId",
 };
 
 const SPECIAL_RELATIONS = {
+  tblUsersTblMaintLogUpdatedUserIdTotblUsers: "userId",
+  tblUsersTblEmployeeCreatedUserIdTotblUsers: "userId",
+  tblUsersTblMaintLogReportedByTotblUsers: "userId",
   tblUsersTblRotationLogUserRemovedIdTotblUsers: "userId",
   tblUsersTblRotationLogUserInsertedIdTotblUsers: "userId",
 };

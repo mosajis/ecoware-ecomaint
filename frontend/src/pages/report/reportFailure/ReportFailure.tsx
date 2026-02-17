@@ -1,12 +1,14 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import FailureReportUpsert from "./ReportFailureUpsert";
 import Splitter from "@/shared/components/Splitter/Splitter";
 import AttachmentMap from "@/shared/tabs/attachmentMap/AttachmentMap";
-import FailureReportFilterDialog from "./ReportFailureDialogFilter";
+import FailureReportUpsert from "./ReportFailureUpsert";
 import FailureReportActions from "./ReportFailureActions";
-import { useCallback, useState } from "react";
-import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import ReportFailureDialogClose from "./ReportFailureDialogClose";
+import ReportFailureDialogOpen from "./ReportFailureDialogOpen";
+import FailureReportDialogFilter from "./ReportFailureDialogFilter";
+import { useCallback, useMemo, useState } from "react";
 import { FailureReportFilter } from "./ReportFailureDialogFilter";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { columns } from "./ReportFailureColumns";
 import {
   tblFailureReportAttachment,
@@ -17,16 +19,16 @@ import {
 const getRowId = (row: TypeTblFailureReports) => row.failureReportId;
 
 export default function PageReportFailure() {
-  const [label, setLabel] = useState<string | null>(null);
-
-  const [openForm, setOpenForm] = useState(false);
-  const [openFilter, setOpenFilter] = useState(true);
-
-  const [mode, setMode] = useState<"create" | "update">("create");
-
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
-
+  const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
+  const [mode, setMode] = useState<"create" | "update">("create");
   const [filter, setFilter] = useState<FailureReportFilter | null>(null);
+  const [dialogs, setDialogs] = useState({
+    form: false,
+    filter: true,
+    close: false,
+    open: false,
+  });
 
   const getAll = useCallback(
     () =>
@@ -35,69 +37,81 @@ export default function PageReportFailure() {
         include: {
           tblMaintLog: {
             include: {
-              // tblComponentUnit: true,
-              // tblDiscipline: true,
+              tblUsersTblMaintLogReportedByTotblUsers: true,
+              tblComponentUnit: true,
+              tblMaintCause: true,
+              tblDiscipline: true,
             },
           },
           tblFailureSeverityLevel: true,
           tblFailureStatus: true,
           tblFailureGroupFollow: true,
-          // tblUsersTblFailureReportsReportedUserIdTotblUsers: true,
-          // tblUsersTblFailureReportsApprovedUserIdTotblUsers: true,
-          // tblUsersTblFailureReportsClosedUserIdTotblUsers: true,
+          tblUsers: true,
         },
       }),
     [filter],
   );
 
-  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
-    getAll,
-    tblFailureReports.deleteById,
-    "failureReportId",
-    !openFilter,
-  );
+  const { rows, loading, handleRefresh, handleDelete, optimisticUpdate } =
+    useDataGrid(
+      getAll,
+      tblFailureReports.deleteById,
+      "failureReportId",
+      !dialogs.filter,
+    );
 
-  // === Handlers ===
+  const selectedRow =
+    rows.find((r) => r.failureReportId === selectedRowId) || null;
+
+  const openDialog = (key: keyof typeof dialogs) =>
+    setDialogs((p) => ({ ...p, [key]: true }));
+
+  const closeDialog = (key: keyof typeof dialogs) =>
+    setDialogs((p) => ({ ...p, [key]: false }));
+
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
     setMode("create");
-    openUpsertDialog();
+    openDialog("form");
   }, []);
 
   const handleEdit = useCallback((rowId: number) => {
     setSelectedRowId(rowId);
     setMode("update");
-    openUpsertDialog();
-  }, []);
-
-  const openUpsertDialog = useCallback(() => {
-    setOpenForm(true);
-  }, []);
-
-  const closeUpsertDialog = useCallback(() => {
-    setOpenForm(false);
+    openDialog("form");
   }, []);
 
   const handleRowClick = useCallback(
     ({ row }: { row: TypeTblFailureReports }) => {
-      setLabel(row.title);
+      console.log(row.failureReportId, selectedRowId);
+      if (row.failureReportId === selectedRowId) {
+        setSelectedRowId(null);
+        setSelectedLabel(null);
+        return;
+      }
       setSelectedRowId(row.failureReportId);
+      setSelectedLabel(row.title);
     },
-    [],
+    [selectedRowId],
   );
 
-  const openDialogFilter = useCallback(() => {
-    setOpenFilter(true);
-  }, []);
-
-  const closeDialogFilter = useCallback(() => {
-    setOpenFilter(false);
-  }, []);
-
-  const onFilterSubmit = (filter: FailureReportFilter | null) => {
-    setFilter(filter);
-    closeDialogFilter();
+  const handleFilterSubmit = (newFilter: FailureReportFilter | null) => {
+    setFilter(newFilter);
+    closeDialog("filter");
   };
+
+  const toolbar = useMemo(
+    () => (
+      <FailureReportActions
+        selectedRow={selectedRow}
+        onFilter={() => openDialog("filter")}
+        onClose={() => openDialog("close")}
+        onOpen={() => openDialog("open")}
+        onPrint={() => {}}
+      />
+    ),
+    [selectedRow],
+  );
 
   return (
     <>
@@ -109,22 +123,17 @@ export default function PageReportFailure() {
           loading={loading}
           rows={rows}
           columns={columns}
+          getRowId={getRowId}
           onRefreshClick={handleRefresh}
           onAddClick={handleCreate}
           onEditClick={handleEdit}
           onDoubleClick={handleEdit}
           onDeleteClick={handleDelete}
-          getRowId={getRowId}
           onRowClick={handleRowClick}
-          toolbarChildren={
-            <FailureReportActions
-              onFilter={openDialogFilter}
-              onPrint={() => {}}
-            />
-          }
+          toolbarChildren={toolbar}
         />
         <AttachmentMap
-          label={label || "Failure Attachments"}
+          label={selectedLabel || "Failure Attachments"}
           mapService={tblFailureReportAttachment}
           filterId={selectedRowId}
           filterKey="failureReportId"
@@ -134,17 +143,31 @@ export default function PageReportFailure() {
       </Splitter>
 
       <FailureReportUpsert
-        open={openForm}
+        open={dialogs.form}
         mode={mode}
         failureReportId={selectedRowId}
-        onClose={closeUpsertDialog}
+        onClose={() => closeDialog("form")}
         onSuccess={handleRefresh}
       />
 
-      <FailureReportFilterDialog
-        open={openFilter}
-        onClose={closeDialogFilter}
-        onSubmit={onFilterSubmit}
+      <ReportFailureDialogClose
+        open={dialogs.close}
+        failureReportId={selectedRowId}
+        onClose={() => closeDialog("close")}
+        onSuccess={(patch) => optimisticUpdate(selectedRowId!, patch)}
+      />
+
+      <ReportFailureDialogOpen
+        open={dialogs.open}
+        failureReportId={selectedRowId}
+        onClose={() => closeDialog("open")}
+        onSuccess={(patch) => optimisticUpdate(selectedRowId!, patch)}
+      />
+
+      <FailureReportDialogFilter
+        open={dialogs.filter}
+        onClose={() => closeDialog("filter")}
+        onSubmit={handleFilterSubmit}
       />
     </>
   );

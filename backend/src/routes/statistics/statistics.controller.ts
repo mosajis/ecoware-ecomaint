@@ -69,14 +69,14 @@ export const ControllerStatistics = new Elysia().group("/statistics", (app) =>
         // Last Week (failureDateTime in last 7 days)
         prisma.tblFailureReports.count({
           where: {
-            failureDateTime: { gte: sevenDaysAgo },
+            // failureDateTime: { gte: sevenDaysAgo },
           },
         }),
 
         // Last Month (failureDateTime in last 30 days)
         prisma.tblFailureReports.count({
           where: {
-            failureDateTime: { gte: thirtyDaysAgo },
+            // failureDateTime: { gte: thirtyDaysAgo },
           },
         }),
       ]);

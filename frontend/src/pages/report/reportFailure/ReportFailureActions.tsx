@@ -1,35 +1,51 @@
 import DataGridActionBar from "@/shared/components/dataGrid/DataGridActionBar";
-import Filter from "@mui/icons-material/FilterList";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
 import PrintIcon from "@mui/icons-material/Print";
+import { TypeTblFailureReports } from "@/core/api/generated/api";
 
 type Props = {
+  selectedRow: TypeTblFailureReports | null;
   onFilter: () => void;
   onPrint: () => void;
+  onClose: () => void;
+  onOpen: () => void;
 };
 
-export default function FailureReportActions({ onFilter, onPrint }: Props) {
+export default function FailureReportActions({
+  selectedRow,
+  onFilter,
+  onPrint,
+  onClose,
+  onOpen,
+}: Props) {
+  const isSelected = !!selectedRow;
+  const isClosed = !!selectedRow?.closedDateTime;
+
   const actions = [
     {
       label: "Filter",
-      icon: <Filter />,
-      isEnabled: true,
+      icon: <FilterListIcon />,
       onClick: onFilter,
-      disabled: false,
     },
     {
-      label: "Close", // closedateTime , flowDesc
-      icon: <PrintIcon />,
-      onClick: onPrint,
+      label: "Close",
+      icon: <TaskAltIcon />,
+      onClick: onClose,
+      disabled: !isSelected || isClosed,
     },
     {
-      label: "Open", // Are you shure delete close date close by
-      icon: <PrintIcon />,
-      onClick: onPrint,
+      label: "Open",
+      icon: <LockOpenIcon />,
+      onClick: onOpen,
+      disabled: !isSelected || !isClosed,
     },
     {
       label: "Print",
       icon: <PrintIcon />,
       onClick: onPrint,
+      disabled: !isSelected,
     },
   ];
 

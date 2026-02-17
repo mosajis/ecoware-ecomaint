@@ -4,11 +4,11 @@ import { useState, useCallback } from "react";
 import { useAtomValue } from "jotai";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { failureReportAtom } from "../../FailureReportAtom";
 import {
   tblLogDiscipline,
   TypeTblLogDiscipline,
 } from "@/core/api/generated/api";
+import { atomInitData } from "../../FailureReportAtom";
 
 const getRowId = (row: TypeTblLogDiscipline) => row.logDiscId;
 
@@ -40,7 +40,7 @@ const columns: GridColDef<TypeTblLogDiscipline>[] = [
 ];
 
 const StepResourceUsed = () => {
-  const { maintLog } = useAtomValue(failureReportAtom);
+  const { maintLog } = useAtomValue(atomInitData);
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);

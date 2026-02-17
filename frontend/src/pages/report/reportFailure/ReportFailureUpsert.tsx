@@ -1,12 +1,12 @@
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import { memo, useEffect } from "react";
-import { useSetAtom } from "jotai";
-import { failureReportAtom } from "./FailureReportAtom";
 import FailureReportTabs from "./FailureReportTabs";
+import DialogHeader from "@/shared/components/dialog/DialogHeader";
+import { memo, useEffect } from "react";
+import { useAtom } from "jotai";
+import { Button, DialogActions } from "@mui/material";
+import { tblFailureReports, tblMaintLog } from "@/core/api/generated/api";
+import { atomInitData } from "./FailureReportAtom";
 
 type Props = {
   open: boolean;
@@ -19,47 +19,113 @@ type Props = {
 
 function FailureReportUpsert({
   open,
-  mode,
   failureReportId,
   compId,
   onClose,
   onSuccess,
 }: Props) {
-  const setFailureReportAtom = useSetAtom(failureReportAtom);
+  const [initData, setInitData] = useAtom(atomInitData);
+
+  const mode = initData.failureReport?.failureReportId ? "update" : "create";
 
   // Reset atom when dialog closes
   useEffect(() => {
     if (!open) {
-      setFailureReportAtom({
+      setInitData({
         maintLog: null,
         failureReport: null,
       });
     }
-  }, [open, setFailureReportAtom]);
+  }, [open, setInitData]);
+
+  // 🔥 Fetch here instead of StepGeneral
+  useEffect(() => {
+    if (!open) return;
+
+    const fetchData = async () => {
+      if (mode !== "update" || !failureReportId) {
+        return;
+      }
+
+      try {
+        const failureReport = await tblFailureReports.getById(failureReportId, {
+          include: {
+            tblMaintLog: {
+              include: {
+                tblComponentUnit: true,
+                tblMaintType: true,
+                tblMaintCause: true,
+                tblMaintClass: true,
+              },
+            },
+            tblFailureSeverityLevel: true,
+            tblFailureStatus: true,
+            tblFailureGroupFollow: true,
+          },
+        });
+
+        let maintLog = null;
+        if (failureReport.maintLogId) {
+          maintLog = await tblMaintLog.getById(failureReport.maintLogId, {
+            include: {
+              tblMaintClass: true,
+              tblMaintCause: true,
+              tblMaintType: true,
+            },
+          });
+        }
+
+        setInitData({
+          maintLog,
+          failureReport,
+        });
+      } finally {
+      }
+    };
+
+    fetchData();
+  }, [open, mode, failureReportId, setInitData]);
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth>
-      <DialogTitle>
-        {mode === "create" ? "Create Failure Report" : "Update Failure Report"}
-        <IconButton
-          aria-label="close"
-          onClick={onClose}
-          sx={{
-            position: "absolute",
-            right: 8,
-            top: 8,
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-      </DialogTitle>
-      <DialogContent>
-        <FailureReportTabs
-          mode={mode}
-          failureReportId={failureReportId}
-          compId={compId}
-        />
+      <DialogHeader
+        title={
+          mode === "create" ? "Create Failure Report" : "Edit Failure Report"
+        }
+        onClose={onClose}
+      />
+
+      <DialogContent
+        dividers
+        style={{
+          height: 700,
+          padding: "4px",
+          background: "var(--template-palette-background-default)",
+        }}
+      >
+        {initData && (
+          <FailureReportTabs
+            mode={mode}
+            compId={compId}
+            failureReportId={failureReportId}
+          />
+        )}
       </DialogContent>
+
+      <DialogActions sx={{ justifyContent: "center" }}>
+        <Button variant="outlined" onClick={onClose} sx={{ width: 200 }}>
+          Close
+        </Button>
+
+        <Button
+          onClick={onSuccess}
+          sx={{ width: 200 }}
+          variant={initData?.maintLog?.maintLogId ? "contained" : "outlined"}
+          disabled={!initData?.maintLog?.maintLog}
+        >
+          Ok
+        </Button>
+      </DialogActions>
     </Dialog>
   );
 }

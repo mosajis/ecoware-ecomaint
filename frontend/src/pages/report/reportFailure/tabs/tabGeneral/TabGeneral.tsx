@@ -7,11 +7,12 @@ import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 import FieldAsyncSelect from "@/shared/components/fields/FieldAsyncSelect";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { memo, useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { schema, DEFAULT_VALUES, SchemaValue } from "./TabGeneralSchema";
 import { buildRelation } from "@/core/helper";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { atomUser, atomUserDiscipline } from "@/pages/auth/auth.atom";
+import { atomInitData } from "../../FailureReportAtom";
 import {
   tblFailureReports,
   tblComponentUnit,
@@ -24,7 +25,6 @@ import {
   tblMaintType,
   tblMaintLog,
 } from "@/core/api/generated/api";
-import { failureReportAtom } from "../../FailureReportAtom";
 
 type Props = {
   mode: "create" | "update";
@@ -35,10 +35,10 @@ type Props = {
 function StepGeneral({ mode, failureReportId, compId }: Props) {
   const user = useAtomValue(atomUser);
   const userDiscipline = useAtomValue(atomUserDiscipline);
-  const setFailureReportAtom = useSetAtom(failureReportAtom);
+
+  const [initData, setInitData] = useAtom(atomInitData);
 
   const [loading, setLoading] = useState(false);
-  const titleTouchedRef = useRef(false);
 
   const {
     control,
@@ -58,6 +58,27 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
   const component = watch("component");
   const isDisabled = loading || isSubmitting || !!compId;
 
+  useEffect(() => {
+    const { failureReport, maintLog } = initData;
+    const formData: SchemaValue = {
+      downTime: failureReport?.tblMaintLog?.downTime || 0,
+      component: (failureReport?.tblMaintLog?.tblComponentUnit as any) ?? null,
+      title: failureReport?.title ?? "",
+      requestNo: failureReport?.requestNo ?? "",
+      failureSeverity: failureReport?.tblFailureSeverityLevel ?? null,
+      failureStatus: failureReport?.tblFailureStatus ?? null,
+      failureGroupFollow: failureReport?.tblFailureGroupFollow ?? null,
+      failureDesc: failureReport?.tblMaintLog?.history ?? "",
+      followDesc: failureReport?.followDesc ?? null,
+      failureDateTime: failureReport?.tblMaintLog?.dateDone ?? new Date(),
+      nextFollowDate: failureReport?.nextFollowDate,
+      maintClass: maintLog?.tblMaintClass ?? null,
+      maintCause: maintLog?.tblMaintCause ?? null,
+      maintType: maintLog?.tblMaintType ?? null,
+    };
+
+    reset(formData);
+  }, []);
   // Load component if compId provided
   useEffect(() => {
     if (!compId) return;
@@ -76,87 +97,11 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
 
   // Auto-fill title from component
   useEffect(() => {
-    if (!component || titleTouchedRef.current) return;
+    if (!component) return;
     if (component.compNo) {
       setValue("title", `${component.compNo} - Failure Report`);
     }
   }, [component, setValue]);
-
-  // Fetch data for update mode
-  const fetchData = useCallback(async () => {
-    console.log(mode, failureReportId);
-    if (mode !== "update" || !failureReportId) {
-      reset(DEFAULT_VALUES);
-      titleTouchedRef.current = false;
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const failureReport = await tblFailureReports.getById(failureReportId, {
-        include: {
-          // tblLocation: true,
-          tblMaintLog: {
-            include: {
-              tblComponentUnit: true,
-              tblMaintType: true,
-              tblMaintCause: true,
-              tblMaintClass: true,
-            },
-          },
-          tblFailureSeverityLevel: true,
-          tblFailureStatus: true,
-          tblFailureGroupFollow: true,
-        },
-      });
-
-      // Fetch maintLog if exists
-      let maintLog = null;
-      if (failureReport.maintLogId) {
-        maintLog = await tblMaintLog.getById(failureReport.maintLogId, {
-          include: {
-            tblMaintClass: true,
-            tblMaintCause: true,
-            tblMaintType: true,
-          },
-        });
-      }
-
-      reset({
-        component: failureReport.tblComponentUnit ?? null,
-        title: failureReport.title ?? "",
-        // requestNo: failureReport.requestNo ?? null,
-        failureSeverity: failureReport.tblFailureSeverityLevel ?? null,
-        failureStatus: failureReport.tblFailureStatus ?? null,
-        failureGroupFollow: failureReport.tblFailureGroupFollow ?? null,
-        failureDesc: failureReport.failureDesc ?? null,
-        followDesc: failureReport.followDesc ?? null,
-        failureDateTime: failureReport.failureDateTime
-          ? new Date(failureReport.failureDateTime)
-          : new Date(),
-        nextFollowDate: failureReport.nextFollowDate
-          ? new Date(failureReport.nextFollowDate)
-          : null,
-        maintClass: maintLog?.tblMaintClass ?? null,
-        maintCause: maintLog?.tblMaintCause ?? null,
-        maintType: maintLog?.tblMaintType ?? null,
-      });
-
-      // Update atom
-      setFailureReportAtom({
-        maintLog: maintLog,
-        failureReport: failureReport,
-      });
-
-      titleTouchedRef.current = true;
-    } finally {
-      setLoading(false);
-    }
-  }, [mode, failureReportId, reset, setFailureReportAtom]);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
 
   const handleFormSubmit = useCallback(
     async (values: SchemaValue) => {
@@ -173,13 +118,19 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
         const failureNumber = res.count + 1;
 
         // Prepare maintLog data
-        const maintLogBody: any = {
+        const maintLogBody = {
           compId: v.component?.compId,
-          dateDone: v.failureDateTime,
+          dateDone: v.failureDateTime.toString(),
           history: v.failureDesc,
-          loggedBy: user?.userId,
-          downTime: null, // Will be calculated later
-          deptId: null,
+          downTime: v.downTime,
+          ...buildRelation("tblDiscipline", "discId", userDiscipline?.discId),
+          ...buildRelation(
+            "tblUsersTblMaintLogReportedByTotblUsers",
+            "userId",
+            user?.userId,
+          ),
+          reportedDate: now.toString(),
+          ...buildRelation("tblComponentUnit", "compId", v.component?.compId),
           ...buildRelation(
             "tblMaintClass",
             "maintClassId",
@@ -201,20 +152,13 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
         };
 
         // Prepare failureReport data
-        const failureReportBody: any = {
+        const failureReportBody = {
           title: v.title,
-          failureDesc: v.failureDesc,
           followDesc: v.followDesc,
-          failureDateTime: v.failureDateTime,
-          failureReportDate: now,
-          waitDateTime: now,
-          nextFollowDate: v.nextFollowDate,
+          nextFollowDate: v.nextFollowDate?.toString(),
           failureNumber: failureNumber,
           requestNo: v.requestNo,
-          reportedUserId: user?.userId,
-          discId: userDiscipline?.discId,
-          deptId: null,
-          ...buildRelation("tblComponentUnit", "compId", v.component?.compId),
+
           ...buildRelation(
             "tblFailureSeverityLevel",
             "failureSeverityLevelId",
@@ -232,26 +176,30 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
           ),
         };
 
-        // Add locationId from component
-        if (v.component?.tblLocation?.locationId) {
-          failureReportBody.locationId = v.component.tblLocation.locationId;
-        }
-
         let createdMaintLog;
         let createdFailureReport;
 
-        if (mode === "create") {
+        if (mode === "create" && !initData.failureReport?.failureReportId) {
           // Create maintLog first
           createdMaintLog = await tblMaintLog.create(maintLogBody);
 
           // Create failureReport with maintLogId
           createdFailureReport = await tblFailureReports.create({
             ...failureReportBody,
-            maintLogId: createdMaintLog.maintLogId,
+            ...buildRelation(
+              "tblLocation",
+              "locationId",
+              v.component.tblLocation.locationId,
+            ),
+            ...buildRelation(
+              "tblMaintLog",
+              "maintLogId",
+              createdMaintLog.maintLogId,
+            ),
           });
 
           // Update atom with created data
-          setFailureReportAtom({
+          setInitData({
             maintLog: createdMaintLog,
             failureReport: createdFailureReport,
           });
@@ -267,30 +215,16 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
               existingFailureReport.maintLogId,
               maintLogBody,
             );
-          } else {
-            // Create new maintLog if doesn't exist
-            createdMaintLog = await tblMaintLog.create(maintLogBody);
-            failureReportBody.maintLogId = createdMaintLog.maintLogId;
           }
 
           // Update failureReport
           await tblFailureReports.update(failureReportId!, failureReportBody);
-
-          // Refresh data
-          await fetchData();
         }
       } catch (error) {
         console.error("Error saving failure report:", error);
       }
     },
-    [
-      mode,
-      failureReportId,
-      user,
-      userDiscipline,
-      setFailureReportAtom,
-      fetchData,
-    ],
+    [mode, failureReportId, user, userDiscipline, setInitData],
   );
 
   return (
@@ -300,9 +234,8 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
       display="flex"
       flexDirection="column"
       gap={1.5}
-      p={2}
+      p={1}
     >
-      {/* Title & Basic Info */}
       <Box display="flex" gap={1.5}>
         <Controller
           name="title"
@@ -317,11 +250,6 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
               size="small"
               disabled={isDisabled}
               error={!!errors.title}
-              helperText={errors.title?.message}
-              onChange={(e) => {
-                titleTouchedRef.current = true;
-                field.onChange(e);
-              }}
             />
           )}
         />
@@ -332,13 +260,12 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
             render={({ field }) => (
               <TextField
                 {...field}
-                label="Request No"
+                label="Request No *"
                 value={field.value ?? ""}
                 fullWidth
                 size="small"
                 disabled={isDisabled}
                 error={!!errors.requestNo}
-                helperText={errors.requestNo?.message}
               />
             )}
           />
@@ -353,14 +280,12 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
                 disabled={isDisabled}
                 type="DATETIME"
                 error={!!errors.failureDateTime}
-                helperText={errors.failureDateTime?.message}
               />
             )}
           />
         </Box>
       </Box>
 
-      {/* User Info */}
       <Box display="flex" gap={1.5}>
         <TextField
           fullWidth
@@ -399,42 +324,39 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
 
       {/* Component & Location */}
       <Box display="flex" gap={1.5}>
-        <Box flex={1.5} display="flex" gap={1.5}>
-          <Controller
-            name="component"
-            control={control}
-            render={({ field }) => (
-              <FieldAsyncSelectGrid<TypeTblComponentUnit>
-                label="Component *"
-                columns={[{ field: "compNo", headerName: "Comp No", flex: 1 }]}
-                request={() =>
-                  tblComponentUnit.getAll({ include: { tblLocation: true } })
-                }
-                getRowId={(row) => row.compId}
-                getOptionLabel={(row) => row.compNo ?? ""}
-                onChange={field.onChange}
-                value={field.value}
-                disabled={isDisabled}
-                error={!!errors.component}
-                helperText={errors.component?.message}
-              />
-            )}
-          />
-          <TextField
-            label="Serial No"
-            value={component?.serialNo ?? ""}
-            fullWidth
-            disabled
-            size="small"
-          />
-          <TextField
-            label="Location"
-            value={component?.tblLocation?.name ?? ""}
-            fullWidth
-            disabled
-            size="small"
-          />
-        </Box>
+        <Controller
+          name="component"
+          control={control}
+          render={({ field }) => (
+            <FieldAsyncSelectGrid<TypeTblComponentUnit>
+              label="Component *"
+              columns={[{ field: "compNo", headerName: "Comp No", flex: 1 }]}
+              request={() =>
+                tblComponentUnit.getAll({ include: { tblLocation: true } })
+              }
+              getRowId={(row) => row.compId}
+              getOptionLabel={(row) => row.compNo ?? ""}
+              onChange={field.onChange}
+              value={field.value}
+              disabled={isDisabled}
+              error={!!errors.component}
+            />
+          )}
+        />
+        <TextField
+          label="Serial No"
+          value={component?.serialNo ?? ""}
+          fullWidth
+          slotProps={{ input: { readOnly: true } }}
+          size="small"
+        />
+        <TextField
+          label="Location"
+          value={component?.tblLocation?.name ?? ""}
+          fullWidth
+          slotProps={{ input: { readOnly: true } }}
+          size="small"
+        />
       </Box>
 
       {/* Status Grid */}
@@ -446,16 +368,14 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
             control={control}
             render={({ field }) => (
               <FieldAsyncSelect
-                label="Severity"
+                label="Severity *"
                 request={tblFailureSeverityLevel.getAll}
-                extractRows={(data) => data.rows}
                 getOptionKey={(r) => r.failureSeverityLevelId}
                 getOptionLabel={(r) => r.name ?? ""}
                 onChange={field.onChange}
                 value={field.value}
                 disabled={isDisabled}
                 error={!!errors.failureSeverity}
-                helperText={errors.failureSeverity?.message}
               />
             )}
           />
@@ -464,7 +384,7 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
             control={control}
             render={({ field }) => (
               <FieldAsyncSelect
-                label="Status"
+                label="Status *"
                 request={tblFailureStatus.getAll}
                 getOptionKey={(r) => r.failureStatusId}
                 getOptionLabel={(r) => r.name ?? ""}
@@ -472,7 +392,6 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
                 value={field.value}
                 disabled={isDisabled}
                 error={!!errors.failureStatus}
-                helperText={errors.failureStatus?.message}
               />
             )}
           />
@@ -484,14 +403,12 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
                 <FieldAsyncSelect
                   label="Follow By"
                   request={tblFailureGroupFollow.getAll}
-                  extractRows={(data) => data.rows}
                   getOptionKey={(r) => r.failureGroupFollowId}
                   getOptionLabel={(r) => r.name ?? ""}
                   onChange={field.onChange}
                   value={field.value}
                   disabled={isDisabled}
                   error={!!errors.failureGroupFollow}
-                  helperText={errors.failureGroupFollow?.message}
                 />
               )}
             />
@@ -505,7 +422,6 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
                   disabled={isDisabled}
                   type="DATE"
                   error={!!errors.nextFollowDate}
-                  helperText={errors.nextFollowDate?.message}
                 />
               )}
             />
@@ -521,7 +437,7 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
               <FieldAsyncSelectGrid
                 disabled={isDisabled}
                 dialogMaxWidth="sm"
-                label="Maint Class"
+                label="Maint Class *"
                 value={field.value}
                 selectionMode="single"
                 request={tblMaintClass.getAll}
@@ -531,7 +447,6 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
                 getRowId={(row) => row.maintClassId}
                 onChange={field.onChange}
                 error={!!fieldState.error?.message}
-                helperText={fieldState.error?.message}
               />
             )}
           />
@@ -542,7 +457,7 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
               <FieldAsyncSelectGrid
                 disabled={isDisabled}
                 dialogMaxWidth="sm"
-                label="Maint Cause"
+                label="Maint Cause *"
                 value={field.value}
                 selectionMode="single"
                 request={tblMaintCause.getAll}
@@ -552,7 +467,6 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
                 getRowId={(row) => row.maintCauseId}
                 onChange={field.onChange}
                 error={!!fieldState.error?.message}
-                helperText={fieldState.error?.message}
               />
             )}
           />
@@ -563,7 +477,7 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
               <FieldAsyncSelectGrid
                 disabled={isDisabled}
                 dialogMaxWidth="sm"
-                label="Maint Type"
+                label="Maint Type *"
                 value={field.value}
                 selectionMode="single"
                 request={tblMaintType.getAll}
@@ -573,7 +487,6 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
                 getRowId={(row) => row.maintTypeId}
                 onChange={field.onChange}
                 error={!!fieldState.error?.message}
-                helperText={fieldState.error?.message}
               />
             )}
           />
@@ -582,7 +495,7 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
         {/* Column 3: Additional Info */}
         <Box display="flex" gap={1.5} flexDirection="column">
           <TextField
-            label="Total Wait"
+            label="Down Time"
             value=""
             fullWidth
             disabled
@@ -605,45 +518,45 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
         </Box>
       </Box>
 
-      {/* Descriptions */}
-      <Controller
-        name="failureDesc"
-        control={control}
-        render={({ field }) => (
-          <Editor
-            {...field}
-            label="Description"
-            containerStyle={{ height: 200 }}
-            onChange={field.onChange}
-            disabled={isDisabled}
-          />
-        )}
-      />
+      <Box display={"flex"} gap={1.5} height={"280px"}>
+        {/* Descriptions */}
+        <Controller
+          name="failureDesc"
+          control={control}
+          render={({ field }) => (
+            <Editor
+              {...field}
+              label="Description"
+              onChange={field.onChange}
+              disabled={isDisabled}
+            />
+          )}
+        />
 
-      <Controller
-        name="followDesc"
-        control={control}
-        render={({ field }) => (
-          <Editor
-            {...field}
-            label="Follow Description"
-            containerStyle={{ height: 200 }}
-            onChange={field.onChange}
-            disabled={isDisabled}
-          />
-        )}
-      />
+        <Controller
+          name="followDesc"
+          control={control}
+          render={({ field }) => (
+            <Editor
+              {...field}
+              label="Follow Description"
+              onChange={field.onChange}
+              disabled={isDisabled}
+            />
+          )}
+        />
+      </Box>
 
       {/* Save Button */}
-      <Box display="flex" justifyContent="flex-end" gap={1}>
-        <Button
-          type="submit"
-          variant="contained"
-          disabled={isSubmitting || loading}
-        >
-          {isSubmitting ? "Saving..." : "Save"}
-        </Button>
-      </Box>
+      <Button
+        type="submit"
+        variant="outlined"
+        color="secondary"
+        style={{ width: "200px", marginLeft: "auto" }}
+        disabled={isDisabled}
+      >
+        {isSubmitting ? "saving ..." : "Save General"}
+      </Button>
     </Box>
   );
 }

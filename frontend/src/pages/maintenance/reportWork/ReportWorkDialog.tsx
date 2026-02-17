@@ -165,7 +165,7 @@ const ReportWorkDialog = ({
       <DialogContent
         dividers
         style={{
-          padding: "8px",
+          padding: "4px",
           height: "630px",
           background: "var(--template-palette-background-default)",
         }}
