@@ -1,7 +1,7 @@
-import { TypeTblFailureReports } from "@/core/api/generated/api";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
-import { GridColDef } from "@mui/x-data-grid";
 import CellSeverity from "../_components/CellSeverity";
+import { TypeTblFailureReports } from "@/core/api/generated/api";
+import { GridColDef } from "@mui/x-data-grid";
 
 export const columns: GridColDef<TypeTblFailureReports>[] = [
   {

@@ -1,13 +1,11 @@
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import LinearProgress from "@mui/material/LinearProgress";
+import Box from "@mui/material/Box";
 import { TypeStatistics } from "@/core/api/api";
 import { toPercent } from "@/shared/utils/zodUtils";
-import {
-  Card,
-  CardContent,
-  Typography,
-  Stack,
-  LinearProgress,
-  Box,
-} from "@mui/material";
 
 type Props = {
   title: string;

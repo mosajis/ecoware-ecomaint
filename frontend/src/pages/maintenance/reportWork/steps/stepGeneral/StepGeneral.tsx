@@ -3,12 +3,17 @@ import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 import NumberField from "@/shared/components/fields/FieldNumber";
 import Box from "@mui/material/Box";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
-import Spinner from "@/shared/components/Spinner";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Button from "@mui/material/Button";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { buildRelation } from "@/core/helper";
 import { schema, TypeValues } from "./stepGeneralSchema";
 import { useCallback, useEffect, useState } from "react";
+import { getMaintLogContext, MaintLogContext } from "@/core/api/api";
+import { useAtom } from "jotai";
+import { reportWorkAtom } from "../../ReportWorkAtom";
 import {
   tblMaintType,
   tblMaintCause,
@@ -16,10 +21,6 @@ import {
   tblMaintLog,
   tblLogCounter,
 } from "@/core/api/generated/api";
-import { Checkbox, FormControlLabel, Button } from "@mui/material";
-import { getMaintLogContext, MaintLogContext } from "@/core/api/api";
-import { useAtom } from "jotai";
-import { reportWorkAtom } from "../../ReportWorkAtom";
 
 const COUNTER_TYPE_ID = 10001;
 

@@ -2,9 +2,10 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import FailureReportTabs from "./FailureReportTabs";
 import DialogHeader from "@/shared/components/dialog/DialogHeader";
+import Button from "@mui/material/Button";
+import DialogActions from "@mui/material/DialogActions";
 import { memo, useEffect } from "react";
 import { useAtom } from "jotai";
-import { Button, DialogActions } from "@mui/material";
 import { tblFailureReports, tblMaintLog } from "@/core/api/generated/api";
 import { atomInitData } from "./FailureReportAtom";
 

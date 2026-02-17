@@ -1,15 +1,11 @@
 import TabContainer from "@/shared/components/TabContainer";
 import DataGrid from "@/shared/components/dataGrid/DataGrid";
+import LinearProgress from "@mui/material/LinearProgress";
 import { memo, useCallback, useEffect, useState } from "react";
-import {
-  tblAttachment,
-  tblAttachmentType,
-  TypeTblAttachment,
-} from "@/core/api/generated/api";
 import { attachmentColumns } from "../AttachmentColumn";
 import { GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { LinearProgress } from "@mui/material";
+import { tblAttachment, TypeTblAttachment } from "@/core/api/generated/api";
 
 const getRowId = (row: TypeTblAttachment) => row.attachmentId;
 

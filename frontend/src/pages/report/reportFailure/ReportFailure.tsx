@@ -83,7 +83,6 @@ export default function PageReportFailure() {
 
   const handleRowClick = useCallback(
     ({ row }: { row: TypeTblFailureReports }) => {
-      console.log(row.failureReportId, selectedRowId);
       if (row.failureReportId === selectedRowId) {
         setSelectedRowId(null);
         setSelectedLabel(null);

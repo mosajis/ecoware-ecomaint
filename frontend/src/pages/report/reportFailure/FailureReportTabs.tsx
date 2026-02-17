@@ -2,19 +2,19 @@ import Build from "@mui/icons-material/Build";
 import Inventory from "@mui/icons-material/Inventory";
 import AttachFile from "@mui/icons-material/AttachFile";
 import Report from "@mui/icons-material/Report";
+import { useAtomValue } from "jotai";
+import { atomInitData } from "./FailureReportAtom";
 import { lazy } from "react";
 import TabsContainer, {
   ReusableTabItem,
 } from "@/shared/components/TabsContainer";
-import { useAtomValue } from "jotai";
-import { atomInitData } from "./FailureReportAtom";
 
 const General = lazy(() => import("./tabs/tabGeneral/TabGeneral"));
+const StockUsed = lazy(() => import("./tabs/tabStockUsed/TabStockUsed"));
+const Attachments = lazy(() => import("./tabs/TabAttachment"));
 const ResourceUsed = lazy(
   () => import("./tabs/tabResourceUsed/TabResourceUsed"),
 );
-const StockUsed = lazy(() => import("./tabs/tabStockUsed/TabStockUsed"));
-const Attachments = lazy(() => import("./tabs/TabAttachment"));
 
 type Props = {
   mode: "create" | "update";
