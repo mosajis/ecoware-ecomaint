@@ -161,6 +161,13 @@ function StepStockUsedUpsert({
               request={() =>
                 tblSpareUnit.getAll({
                   include: { tblSpareType: true },
+                  filter: {
+                    NOT: {
+                      tblMaintLogStocks: {
+                        some: { maintLogId },
+                      },
+                    },
+                  },
                 })
               }
               columns={[

@@ -7,7 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import { memo, useEffect } from "react";
 import { useAtom } from "jotai";
 import { tblFailureReports, tblMaintLog } from "@/core/api/generated/api";
-import { atomInitData } from "./FailureReportAtom";
+import { atomInitData, Type } from "./FailureReportAtom";
 
 type Props = {
   open: boolean;
@@ -15,7 +15,7 @@ type Props = {
   failureReportId?: number | null;
   compId?: number;
   onClose: () => void;
-  onSuccess: () => void;
+  onSuccess: (initData: Type) => void;
 };
 
 function FailureReportUpsert({
@@ -27,7 +27,7 @@ function FailureReportUpsert({
 }: Props) {
   const [initData, setInitData] = useAtom(atomInitData);
 
-  const mode = initData.failureReport?.failureReportId ? "update" : "create";
+  const mode = failureReportId ? "update" : "create";
 
   // Reset atom when dialog closes
   useEffect(() => {
@@ -62,6 +62,7 @@ function FailureReportUpsert({
             tblFailureSeverityLevel: true,
             tblFailureStatus: true,
             tblFailureGroupFollow: true,
+            tblLocation: true,
           },
         });
 
@@ -119,10 +120,10 @@ function FailureReportUpsert({
         </Button>
 
         <Button
-          onClick={onSuccess}
+          onClick={() => onSuccess(initData)}
           sx={{ width: 200 }}
           variant={initData?.maintLog?.maintLogId ? "contained" : "outlined"}
-          disabled={!initData?.maintLog?.maintLog}
+          disabled={!initData?.maintLog?.maintLogId}
         >
           Ok
         </Button>

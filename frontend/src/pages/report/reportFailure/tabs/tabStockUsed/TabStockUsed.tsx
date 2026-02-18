@@ -37,7 +37,7 @@ const columns: GridColDef<TypeTblMaintLogStocks>[] = [
   },
 ];
 
-const StepStockUsed = () => {
+const TabStockUsed = () => {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
@@ -99,4 +99,4 @@ const StepStockUsed = () => {
   );
 };
 
-export default StepStockUsed;
+export default TabStockUsed;

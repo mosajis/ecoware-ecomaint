@@ -7,7 +7,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import RadioGroup from "@mui/material/RadioGroup";
 import Radio from "@mui/material/Radio";
 import PrintIcon from "@mui/icons-material/Print";
-import WorkOrderReport from "./print/PrintTemplate";
+import PrintTemplate from "./print/PrintTemplate";
 import { useState, useRef } from "react";
 import { BorderedBox } from "@/shared/components/BorderedBox";
 import { useReactToPrint } from "react-to-print";
@@ -117,7 +117,7 @@ export default function WorkOrderDialogPrint({
 
       {/* Hidden printable content */}
       <Box display="none">
-        <WorkOrderReport
+        <PrintTemplate
           ref={contentRef}
           workOrders={workOrders}
           outputFormat={outputFormat}

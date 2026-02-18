@@ -22637,6 +22637,7 @@ export interface operations {
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
                                 lastupdate: null | string;
+                                discId: null | number;
                             }[];
                             tblRotationLogs?: {
                                 rotationLogId: number;
@@ -23207,6 +23208,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblRotationLogs?: {
                             rotationLogId: number;
@@ -23553,6 +23555,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblRotationLogs?: {
                             rotationLogId: number;
@@ -24219,6 +24222,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblRotationLogs?: {
                             rotationLogId: number;
@@ -24533,6 +24537,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblRotationLogs?: {
                             rotationLogId: number;
@@ -26628,6 +26633,32 @@ export interface operations {
                                 createdUserId: null | number;
                                 timeSpent: null | number;
                             }[];
+                            tblMaintLogs?: {
+                                maintLogId: number;
+                                maintCauseId: null | number;
+                                maintTypeId: null | number;
+                                maintClassId: null | number;
+                                functionId: null | number;
+                                jobDescId: null | number;
+                                workOrderId: null | number;
+                                compId: null | number;
+                                totalDuration: null | number;
+                                downTime: null | number;
+                                dateDone: null | string;
+                                frequency: null | number;
+                                frequencyPeriod: null | number;
+                                overdueCount: null | number;
+                                unexpected: null | number;
+                                reportedBy: null | number;
+                                deptId: null | number;
+                                history: null | string;
+                                maintLogFollowId: null | number;
+                                followStatusId: null | number;
+                                updatedUserId: null | number;
+                                reportedDate: null | string;
+                                lastupdate: null | string;
+                                discId: null | number;
+                            }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
                                 compJobId: null | number;
@@ -26713,6 +26744,11 @@ export interface operations {
                             logDiscId: number;
                         }[];
                     };
+                    tblMaintLogs?: {
+                        connect: {
+                            maintLogId: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect: {
                             workOrderId: number;
@@ -26746,6 +26782,11 @@ export interface operations {
                             logDiscId: number;
                         }[];
                     };
+                    tblMaintLogs?: {
+                        connect: {
+                            maintLogId: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect: {
                             workOrderId: number;
@@ -26777,6 +26818,11 @@ export interface operations {
                     tblLogDisciplines?: {
                         connect: {
                             logDiscId: number;
+                        }[];
+                    };
+                    tblMaintLogs?: {
+                        connect: {
+                            maintLogId: number;
                         }[];
                     };
                     tblWorkOrders?: {
@@ -26897,6 +26943,32 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                             timeSpent: null | number;
+                        }[];
+                        tblMaintLogs?: {
+                            maintLogId: number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            maintClassId: null | number;
+                            functionId: null | number;
+                            jobDescId: null | number;
+                            workOrderId: null | number;
+                            compId: null | number;
+                            totalDuration: null | number;
+                            downTime: null | number;
+                            dateDone: null | string;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            overdueCount: null | number;
+                            unexpected: null | number;
+                            reportedBy: null | number;
+                            deptId: null | number;
+                            history: null | string;
+                            maintLogFollowId: null | number;
+                            followStatusId: null | number;
+                            updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -27097,6 +27169,32 @@ export interface operations {
                             createdUserId: null | number;
                             timeSpent: null | number;
                         }[];
+                        tblMaintLogs?: {
+                            maintLogId: number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            maintClassId: null | number;
+                            functionId: null | number;
+                            jobDescId: null | number;
+                            workOrderId: null | number;
+                            compId: null | number;
+                            totalDuration: null | number;
+                            downTime: null | number;
+                            dateDone: null | string;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            overdueCount: null | number;
+                            unexpected: null | number;
+                            reportedBy: null | number;
+                            deptId: null | number;
+                            history: null | string;
+                            maintLogFollowId: null | number;
+                            followStatusId: null | number;
+                            updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
+                            discId: null | number;
+                        }[];
                         tblWorkOrders?: {
                             workOrderId: number;
                             compJobId: null | number;
@@ -27194,6 +27292,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblMaintLogs?: {
+                        connect?: {
+                            maintLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect?: {
                             workOrderId: number;
@@ -27242,6 +27348,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblMaintLogs?: {
+                        connect?: {
+                            maintLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect?: {
                             workOrderId: number;
@@ -27285,6 +27399,14 @@ export interface operations {
                     tblLogDisciplines?: {
                         connect?: {
                             logDiscId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogs?: {
+                        connect?: {
+                            maintLogId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -27411,6 +27533,32 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                             timeSpent: null | number;
+                        }[];
+                        tblMaintLogs?: {
+                            maintLogId: number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            maintClassId: null | number;
+                            functionId: null | number;
+                            jobDescId: null | number;
+                            workOrderId: null | number;
+                            compId: null | number;
+                            totalDuration: null | number;
+                            downTime: null | number;
+                            dateDone: null | string;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            overdueCount: null | number;
+                            unexpected: null | number;
+                            reportedBy: null | number;
+                            deptId: null | number;
+                            history: null | string;
+                            maintLogFollowId: null | number;
+                            followStatusId: null | number;
+                            updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -27578,6 +27726,32 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                             timeSpent: null | number;
+                        }[];
+                        tblMaintLogs?: {
+                            maintLogId: number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            maintClassId: null | number;
+                            functionId: null | number;
+                            jobDescId: null | number;
+                            workOrderId: null | number;
+                            compId: null | number;
+                            totalDuration: null | number;
+                            downTime: null | number;
+                            dateDone: null | string;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            overdueCount: null | number;
+                            unexpected: null | number;
+                            reportedBy: null | number;
+                            deptId: null | number;
+                            history: null | string;
+                            maintLogFollowId: null | number;
+                            followStatusId: null | number;
+                            updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -27826,7 +28000,7 @@ export interface operations {
                     };
                     tblUsersTblEmployeeCreatedUserIdTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         };
                     };
                     tblLogDisciplines?: {
@@ -27863,7 +28037,7 @@ export interface operations {
                     };
                     tblUsersTblEmployeeCreatedUserIdTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         };
                     };
                     tblLogDisciplines?: {
@@ -27900,7 +28074,7 @@ export interface operations {
                     };
                     tblUsersTblEmployeeCreatedUserIdTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         };
                     };
                     tblLogDisciplines?: {
@@ -28233,7 +28407,7 @@ export interface operations {
                     };
                     tblUsersTblEmployeeCreatedUserIdTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -28279,7 +28453,7 @@ export interface operations {
                     };
                     tblUsersTblEmployeeCreatedUserIdTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -28325,7 +28499,7 @@ export interface operations {
                     };
                     tblUsersTblEmployeeCreatedUserIdTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -29644,6 +29818,18 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             });
+                            tblLocation?: null | ({
+                                locationId: number;
+                                parentLocationId: null | number;
+                                name: null | string;
+                                locationCode: null | string;
+                                deptId: null | number;
+                                exportMarker: null | number;
+                                lastupdate: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
                             tblMaintLog?: null | ({
                                 maintLogId: number;
                                 maintCauseId: null | number;
@@ -29668,6 +29854,7 @@ export interface operations {
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
                                 lastupdate: null | string;
+                                discId: null | number;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -29728,17 +29915,22 @@ export interface operations {
                     };
                     tblFailureGroupFollow?: {
                         connect: {
-                            id: number;
+                            failureGroupFollowId: number;
                         };
                     };
                     tblFailureStatus?: {
                         connect: {
-                            id: number;
+                            failureStatusId: number;
                         };
                     };
                     tblFailureSeverityLevel?: {
                         connect: {
-                            id: number;
+                            failureSeverityLevelId: number;
+                        };
+                    };
+                    tblLocation?: {
+                        connect: {
+                            locationId: number;
                         };
                     };
                     tblMaintLog?: {
@@ -29766,17 +29958,22 @@ export interface operations {
                     };
                     tblFailureGroupFollow?: {
                         connect: {
-                            id: number;
+                            failureGroupFollowId: number;
                         };
                     };
                     tblFailureStatus?: {
                         connect: {
-                            id: number;
+                            failureStatusId: number;
                         };
                     };
                     tblFailureSeverityLevel?: {
                         connect: {
-                            id: number;
+                            failureSeverityLevelId: number;
+                        };
+                    };
+                    tblLocation?: {
+                        connect: {
+                            locationId: number;
                         };
                     };
                     tblMaintLog?: {
@@ -29804,17 +30001,22 @@ export interface operations {
                     };
                     tblFailureGroupFollow?: {
                         connect: {
-                            id: number;
+                            failureGroupFollowId: number;
                         };
                     };
                     tblFailureStatus?: {
                         connect: {
-                            id: number;
+                            failureStatusId: number;
                         };
                     };
                     tblFailureSeverityLevel?: {
                         connect: {
-                            id: number;
+                            failureSeverityLevelId: number;
+                        };
+                    };
+                    tblLocation?: {
+                        connect: {
+                            locationId: number;
                         };
                     };
                     tblMaintLog?: {
@@ -29877,6 +30079,18 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblLocation?: null | ({
+                            locationId: number;
+                            parentLocationId: null | number;
+                            name: null | string;
+                            locationCode: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
                         tblMaintLog?: null | ({
                             maintLogId: number;
                             maintCauseId: null | number;
@@ -29901,6 +30115,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -30024,6 +30239,18 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblLocation?: null | ({
+                            locationId: number;
+                            parentLocationId: null | number;
+                            name: null | string;
+                            locationCode: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
                         tblMaintLog?: null | ({
                             maintLogId: number;
                             maintCauseId: null | number;
@@ -30048,6 +30275,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -30111,19 +30339,25 @@ export interface operations {
                     };
                     tblFailureGroupFollow?: {
                         connect?: {
-                            id: number;
+                            failureGroupFollowId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblFailureStatus?: {
                         connect?: {
-                            id: number;
+                            failureStatusId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblFailureSeverityLevel?: {
                         connect?: {
-                            id: number;
+                            failureSeverityLevelId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblLocation?: {
+                        connect?: {
+                            locationId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -30157,19 +30391,25 @@ export interface operations {
                     };
                     tblFailureGroupFollow?: {
                         connect?: {
-                            id: number;
+                            failureGroupFollowId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblFailureStatus?: {
                         connect?: {
-                            id: number;
+                            failureStatusId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblFailureSeverityLevel?: {
                         connect?: {
-                            id: number;
+                            failureSeverityLevelId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblLocation?: {
+                        connect?: {
+                            locationId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -30203,19 +30443,25 @@ export interface operations {
                     };
                     tblFailureGroupFollow?: {
                         connect?: {
-                            id: number;
+                            failureGroupFollowId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblFailureStatus?: {
                         connect?: {
-                            id: number;
+                            failureStatusId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblFailureSeverityLevel?: {
                         connect?: {
-                            id: number;
+                            failureSeverityLevelId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblLocation?: {
+                        connect?: {
+                            locationId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -30281,6 +30527,18 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblLocation?: null | ({
+                            locationId: number;
+                            parentLocationId: null | number;
+                            name: null | string;
+                            locationCode: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
                         tblMaintLog?: null | ({
                             maintLogId: number;
                             maintCauseId: null | number;
@@ -30305,6 +30563,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -30396,6 +30655,18 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblLocation?: null | ({
+                            locationId: number;
+                            parentLocationId: null | number;
+                            name: null | string;
+                            locationCode: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
                         tblMaintLog?: null | ({
                             maintLogId: number;
                             maintCauseId: null | number;
@@ -30420,6 +30691,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -31231,6 +31503,7 @@ export interface operations {
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
                                 lastupdate: null | string;
+                                discId: null | number;
                             }[];
                             tblMaintLogFollows?: {
                                 followId: number;
@@ -31366,6 +31639,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblMaintLogFollows?: {
                             followId: number;
@@ -31472,6 +31746,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblMaintLogFollows?: {
                             followId: number;
@@ -31625,6 +31900,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblMaintLogFollows?: {
                             followId: number;
@@ -31699,6 +31975,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblMaintLogFollows?: {
                             followId: number;
@@ -31862,6 +32139,7 @@ export interface operations {
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
                                 lastupdate: null | string;
+                                discId: null | number;
                             }[];
                             tblRotationLogs?: {
                                 rotationLogId: number;
@@ -32091,6 +32369,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblRotationLogs?: {
                             rotationLogId: number;
@@ -32249,6 +32528,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblRotationLogs?: {
                             rotationLogId: number;
@@ -32511,6 +32791,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblRotationLogs?: {
                             rotationLogId: number;
@@ -32637,6 +32918,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblRotationLogs?: {
                             rotationLogId: number;
@@ -33294,6 +33576,7 @@ export interface operations {
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
                                 lastupdate: null | string;
+                                discId: null | number;
                             }[];
                         }[];
                         total: number;
@@ -33576,6 +33859,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                     };
                 };
@@ -33766,6 +34050,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                     };
                 };
@@ -34087,6 +34372,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                     };
                 };
@@ -34245,6 +34531,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                     };
                 };
@@ -35744,6 +36031,21 @@ export interface operations {
                                 comment3: null | string;
                                 assetNo: null | string;
                             }[];
+                            tblFailureReports?: {
+                                failureReportId: number;
+                                maintLogId: null | number;
+                                title: null | string;
+                                failureNumber: null | number;
+                                locationId: null | number;
+                                failureSeverityLevelId: null | number;
+                                failureStatusId: null | number;
+                                failureGroupFollowId: null | number;
+                                requestNo: null | string;
+                                nextFollowDate: null | string;
+                                closedUserId: null | number;
+                                closedDateTime: null | string;
+                                followDesc: null | string;
+                            }[];
                             tblLocation?: null | ({
                                 locationId: number;
                                 parentLocationId: null | number;
@@ -35796,6 +36098,11 @@ export interface operations {
                             compId: number;
                         }[];
                     };
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
                     tblLocation?: {
                         connect: {
                             locationId: number;
@@ -35818,6 +36125,11 @@ export interface operations {
                             compId: number;
                         }[];
                     };
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
                     tblLocation?: {
                         connect: {
                             locationId: number;
@@ -35838,6 +36150,11 @@ export interface operations {
                     tblComponentUnits?: {
                         connect: {
                             compId: number;
+                        }[];
+                    };
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
                         }[];
                     };
                     tblLocation?: {
@@ -35889,6 +36206,21 @@ export interface operations {
                             comment2: null | string;
                             comment3: null | string;
                             assetNo: null | string;
+                        }[];
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            maintLogId: null | number;
+                            title: null | string;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
+                            closedUserId: null | number;
+                            closedDateTime: null | string;
+                            followDesc: null | string;
                         }[];
                         tblLocation?: null | ({
                             locationId: number;
@@ -35998,6 +36330,21 @@ export interface operations {
                             comment3: null | string;
                             assetNo: null | string;
                         }[];
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            maintLogId: null | number;
+                            title: null | string;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
+                            closedUserId: null | number;
+                            closedDateTime: null | string;
+                            followDesc: null | string;
+                        }[];
                         tblLocation?: null | ({
                             locationId: number;
                             parentLocationId: null | number;
@@ -36053,6 +36400,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblLocation?: {
                         connect?: {
                             locationId: number;
@@ -36082,6 +36437,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblLocation?: {
                         connect?: {
                             locationId: number;
@@ -36106,6 +36469,14 @@ export interface operations {
                     tblComponentUnits?: {
                         connect?: {
                             compId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -36164,6 +36535,21 @@ export interface operations {
                             comment2: null | string;
                             comment3: null | string;
                             assetNo: null | string;
+                        }[];
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            maintLogId: null | number;
+                            title: null | string;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
+                            closedUserId: null | number;
+                            closedDateTime: null | string;
+                            followDesc: null | string;
                         }[];
                         tblLocation?: null | ({
                             locationId: number;
@@ -36240,6 +36626,21 @@ export interface operations {
                             comment2: null | string;
                             comment3: null | string;
                             assetNo: null | string;
+                        }[];
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            maintLogId: null | number;
+                            title: null | string;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
+                            closedUserId: null | number;
+                            closedDateTime: null | string;
+                            followDesc: null | string;
                         }[];
                         tblLocation?: null | ({
                             locationId: number;
@@ -36373,6 +36774,7 @@ export interface operations {
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
                                 lastupdate: null | string;
+                                discId: null | number;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -36546,6 +36948,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -36678,6 +37081,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -36860,6 +37264,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -36960,6 +37365,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -37115,6 +37521,7 @@ export interface operations {
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
                                 lastupdate: null | string;
+                                discId: null | number;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -37315,6 +37722,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -37465,6 +37873,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -37677,6 +38086,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -37795,6 +38205,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -38454,6 +38865,7 @@ export interface operations {
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
                                 lastupdate: null | string;
+                                discId: null | number;
                             }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
@@ -38696,6 +39108,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -38888,6 +39301,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -39166,6 +39580,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -39326,6 +39741,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -39523,6 +39939,7 @@ export interface operations {
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
                                 lastupdate: null | string;
+                                discId: null | number;
                             }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
@@ -39765,6 +40182,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -39957,6 +40375,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -40235,6 +40654,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -40395,6 +40815,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -40531,6 +40952,11 @@ export interface operations {
                             compId: number;
                         };
                     };
+                    tblDiscipline?: {
+                        connect: {
+                            discId: number;
+                        };
+                    };
                     tblFollowStatus?: {
                         connect: {
                             followStatusId: number;
@@ -40568,7 +40994,7 @@ export interface operations {
                     };
                     tblUsersTblMaintLogUpdatedUserIdTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         };
                     };
                     tblWorkOrder?: {
@@ -40578,7 +41004,7 @@ export interface operations {
                     };
                     tblUsersTblMaintLogReportedByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         };
                     };
                     tblMaintLogAttachments?: {
@@ -40629,6 +41055,11 @@ export interface operations {
                             compId: number;
                         };
                     };
+                    tblDiscipline?: {
+                        connect: {
+                            discId: number;
+                        };
+                    };
                     tblFollowStatus?: {
                         connect: {
                             followStatusId: number;
@@ -40666,7 +41097,7 @@ export interface operations {
                     };
                     tblUsersTblMaintLogUpdatedUserIdTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         };
                     };
                     tblWorkOrder?: {
@@ -40676,7 +41107,7 @@ export interface operations {
                     };
                     tblUsersTblMaintLogReportedByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         };
                     };
                     tblMaintLogAttachments?: {
@@ -40727,6 +41158,11 @@ export interface operations {
                             compId: number;
                         };
                     };
+                    tblDiscipline?: {
+                        connect: {
+                            discId: number;
+                        };
+                    };
                     tblFollowStatus?: {
                         connect: {
                             followStatusId: number;
@@ -40764,7 +41200,7 @@ export interface operations {
                     };
                     tblUsersTblMaintLogUpdatedUserIdTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         };
                     };
                     tblWorkOrder?: {
@@ -40774,7 +41210,7 @@ export interface operations {
                     };
                     tblUsersTblMaintLogReportedByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         };
                     };
                     tblMaintLogAttachments?: {
@@ -40826,6 +41262,7 @@ export interface operations {
                         updatedUserId: null | number;
                         reportedDate: null | string;
                         lastupdate: null | string;
+                        discId: null | number;
                         tblFailureReports?: {
                             failureReportId: number;
                             maintLogId: null | number;
@@ -40886,6 +41323,19 @@ export interface operations {
                             comment2: null | string;
                             comment3: null | string;
                             assetNo: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblDiscipline?: null | ({
+                            discId: number;
+                            code: null | string;
+                            name: null | string;
+                            externalDisc: null | number;
+                            parentDiscId: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -41180,6 +41630,7 @@ export interface operations {
                         updatedUserId: null | number;
                         reportedDate: null | string;
                         lastupdate: null | string;
+                        discId: null | number;
                         tblFailureReports?: {
                             failureReportId: number;
                             maintLogId: null | number;
@@ -41240,6 +41691,19 @@ export interface operations {
                             comment2: null | string;
                             comment3: null | string;
                             assetNo: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblDiscipline?: null | ({
+                            discId: number;
+                            code: null | string;
+                            name: null | string;
+                            externalDisc: null | number;
+                            parentDiscId: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -41515,6 +41979,12 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblDiscipline?: {
+                        connect?: {
+                            discId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblFollowStatus?: {
                         connect?: {
                             followStatusId: number;
@@ -41559,7 +42029,7 @@ export interface operations {
                     };
                     tblUsersTblMaintLogUpdatedUserIdTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -41571,7 +42041,7 @@ export interface operations {
                     };
                     tblUsersTblMaintLogReportedByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -41642,6 +42112,12 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblDiscipline?: {
+                        connect?: {
+                            discId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblFollowStatus?: {
                         connect?: {
                             followStatusId: number;
@@ -41686,7 +42162,7 @@ export interface operations {
                     };
                     tblUsersTblMaintLogUpdatedUserIdTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -41698,7 +42174,7 @@ export interface operations {
                     };
                     tblUsersTblMaintLogReportedByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -41769,6 +42245,12 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblDiscipline?: {
+                        connect?: {
+                            discId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblFollowStatus?: {
                         connect?: {
                             followStatusId: number;
@@ -41813,7 +42295,7 @@ export interface operations {
                     };
                     tblUsersTblMaintLogUpdatedUserIdTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -41825,7 +42307,7 @@ export interface operations {
                     };
                     tblUsersTblMaintLogReportedByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -41887,6 +42369,7 @@ export interface operations {
                         updatedUserId: null | number;
                         reportedDate: null | string;
                         lastupdate: null | string;
+                        discId: null | number;
                         tblFailureReports?: {
                             failureReportId: number;
                             maintLogId: null | number;
@@ -41947,6 +42430,19 @@ export interface operations {
                             comment2: null | string;
                             comment3: null | string;
                             assetNo: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblDiscipline?: null | ({
+                            discId: number;
+                            code: null | string;
+                            name: null | string;
+                            externalDisc: null | number;
+                            parentDiscId: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -42209,6 +42705,7 @@ export interface operations {
                         updatedUserId: null | number;
                         reportedDate: null | string;
                         lastupdate: null | string;
+                        discId: null | number;
                         tblFailureReports?: {
                             failureReportId: number;
                             maintLogId: null | number;
@@ -42269,6 +42766,19 @@ export interface operations {
                             comment2: null | string;
                             comment3: null | string;
                             assetNo: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblDiscipline?: null | ({
+                            discId: number;
+                            code: null | string;
+                            name: null | string;
+                            externalDisc: null | number;
+                            parentDiscId: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -42632,6 +43142,7 @@ export interface operations {
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
                                 lastupdate: null | string;
+                                discId: null | number;
                             } & {
                                 [key: string]: unknown;
                             };
@@ -42785,6 +43296,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -42912,6 +43424,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -43065,6 +43578,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -43160,6 +43674,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -43299,6 +43814,7 @@ export interface operations {
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
                                 lastupdate: null | string;
+                                discId: null | number;
                             } & {
                                 [key: string]: unknown;
                             };
@@ -43477,6 +43993,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -43611,6 +44128,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -43792,6 +44310,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -43894,6 +44413,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -44016,6 +44536,7 @@ export interface operations {
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
                                 lastupdate: null | string;
+                                discId: null | number;
                             } & {
                                 [key: string]: unknown;
                             };
@@ -44137,6 +44658,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -44238,6 +44760,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -44359,6 +44882,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -44428,6 +44952,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -44648,6 +45173,7 @@ export interface operations {
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
                                 lastupdate: null | string;
+                                discId: null | number;
                             }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
@@ -44890,6 +45416,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -45082,6 +45609,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -45360,6 +45888,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -45520,6 +46049,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -47104,6 +47634,7 @@ export interface operations {
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
                                 lastupdate: null | string;
+                                discId: null | number;
                             }[];
                         }[];
                         total: number;
@@ -47279,6 +47810,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                     };
                 };
@@ -47428,6 +47960,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                     };
                 };
@@ -47630,6 +48163,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                     };
                 };
@@ -47747,6 +48281,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                     };
                 };
@@ -52794,6 +53329,7 @@ export interface operations {
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
                                 lastupdate: null | string;
+                                discId: null | number;
                             }[];
                             tblMaintLogTblMaintLogReportedByTotblUsers?: {
                                 maintLogId: number;
@@ -52819,6 +53355,7 @@ export interface operations {
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
                                 lastupdate: null | string;
+                                discId: null | number;
                             }[];
                             tblMaintLogAttachments?: {
                                 maintLogAttachmentId: number;
@@ -54003,6 +54540,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblMaintLogTblMaintLogReportedByTotblUsers?: {
                             maintLogId: number;
@@ -54028,6 +54566,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblMaintLogAttachments?: {
                             maintLogAttachmentId: number;
@@ -54679,6 +55218,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblMaintLogTblMaintLogReportedByTotblUsers?: {
                             maintLogId: number;
@@ -54704,6 +55244,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblMaintLogAttachments?: {
                             maintLogAttachmentId: number;
@@ -56188,6 +56729,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblMaintLogTblMaintLogReportedByTotblUsers?: {
                             maintLogId: number;
@@ -56213,6 +56755,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblMaintLogAttachments?: {
                             maintLogAttachmentId: number;
@@ -56832,6 +57375,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblMaintLogTblMaintLogReportedByTotblUsers?: {
                             maintLogId: number;
@@ -56857,6 +57401,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblMaintLogAttachments?: {
                             maintLogAttachmentId: number;
@@ -57584,6 +58129,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblReScheduleLogs?: {
                             rescheduleLogId: number;
@@ -58046,6 +58592,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblReScheduleLogs?: {
                             rescheduleLogId: number;
@@ -58879,6 +59426,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblReScheduleLogs?: {
                             rescheduleLogId: number;
@@ -59309,6 +59857,7 @@ export interface operations {
                             updatedUserId: null | number;
                             reportedDate: null | string;
                             lastupdate: null | string;
+                            discId: null | number;
                         }[];
                         tblReScheduleLogs?: {
                             rescheduleLogId: number;

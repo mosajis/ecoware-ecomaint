@@ -1,0 +1,58 @@
+/* ===== Header ===== */
+.print__header {
+  display: grid;
+  grid-template-columns: 5fr 2fr;
+  border-bottom: 2px solid #333333;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.print__title {
+  margin: 0;
+  font-size: 20px;
+}
+
+.print__subtitle {
+  margin: 4px 0 0;
+}
+
+/* ===== Footer ===== */
+.print__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #333333;
+  border-top: 2px solid #333333;
+  padding-top: 10px;
+}
+
+/* ===== Table / Box ===== */
+.print__box {
+  margin-top: 10px;
+  width: 100%;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.print__cell {
+  border: 1px solid #333;
+  padding: 4px;
+  vertical-align: top;
+}
+
+.print__head-cell {
+  padding: 4px;
+  vertical-align: top;
+}
+
+.print__label {
+  font-weight: bold;
+  background: #f0f0f0;
+}
+
+.bg--yellow {
+  background-color: #fff8b6ff;
+  font-weight: bold;
+}

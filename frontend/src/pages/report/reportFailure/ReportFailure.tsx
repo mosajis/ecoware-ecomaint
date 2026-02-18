@@ -6,6 +6,7 @@ import FailureReportActions from "./ReportFailureActions";
 import ReportFailureDialogClose from "./ReportFailureDialogClose";
 import ReportFailureDialogOpen from "./ReportFailureDialogOpen";
 import FailureReportDialogFilter from "./ReportFailureDialogFilter";
+import ReportFailureDialogPrint from "./ReportFailureDialogPrint";
 import { useCallback, useMemo, useState } from "react";
 import { FailureReportFilter } from "./ReportFailureDialogFilter";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
@@ -24,10 +25,11 @@ export default function PageReportFailure() {
   const [mode, setMode] = useState<"create" | "update">("create");
   const [filter, setFilter] = useState<FailureReportFilter | null>(null);
   const [dialogs, setDialogs] = useState({
-    form: false,
+    upsert: false,
     filter: true,
     close: false,
     open: false,
+    print: false,
   });
 
   const getAll = useCallback(
@@ -52,13 +54,19 @@ export default function PageReportFailure() {
     [filter],
   );
 
-  const { rows, loading, handleRefresh, handleDelete, optimisticUpdate } =
-    useDataGrid(
-      getAll,
-      tblFailureReports.deleteById,
-      "failureReportId",
-      !dialogs.filter,
-    );
+  const {
+    rows,
+    loading,
+    handleRefresh,
+    handleDelete,
+    optimisticUpdate,
+    optimisticReplace,
+  } = useDataGrid(
+    getAll,
+    tblFailureReports.deleteById,
+    "failureReportId",
+    !dialogs.filter,
+  );
 
   const selectedRow =
     rows.find((r) => r.failureReportId === selectedRowId) || null;
@@ -72,13 +80,13 @@ export default function PageReportFailure() {
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
     setMode("create");
-    openDialog("form");
+    openDialog("upsert");
   }, []);
 
   const handleEdit = useCallback((rowId: number) => {
     setSelectedRowId(rowId);
     setMode("update");
-    openDialog("form");
+    openDialog("upsert");
   }, []);
 
   const handleRowClick = useCallback(
@@ -106,12 +114,16 @@ export default function PageReportFailure() {
         onFilter={() => openDialog("filter")}
         onClose={() => openDialog("close")}
         onOpen={() => openDialog("open")}
-        onPrint={() => {}}
+        onPrint={() => openDialog("print")}
       />
     ),
     [selectedRow],
   );
 
+  const handleSucessUpsert = () => {
+    closeDialog("upsert");
+    handleRefresh();
+  };
   return (
     <>
       <Splitter horizontal initialPrimarySize="65%">
@@ -142,11 +154,11 @@ export default function PageReportFailure() {
       </Splitter>
 
       <FailureReportUpsert
-        open={dialogs.form}
+        open={dialogs.upsert}
         mode={mode}
         failureReportId={selectedRowId}
-        onClose={() => closeDialog("form")}
-        onSuccess={handleRefresh}
+        onClose={() => closeDialog("upsert")}
+        onSuccess={handleSucessUpsert}
       />
 
       <ReportFailureDialogClose
@@ -167,6 +179,12 @@ export default function PageReportFailure() {
         open={dialogs.filter}
         onClose={() => closeDialog("filter")}
         onSubmit={handleFilterSubmit}
+      />
+
+      <ReportFailureDialogPrint
+        failureReportId={selectedRowId!}
+        onClose={() => closeDialog("print")}
+        open={dialogs.print}
       />
     </>
   );

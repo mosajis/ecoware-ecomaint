@@ -9,13 +9,13 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { buildRelation } from "@/core/helper";
 import { useAtomValue } from "jotai";
+import { atomInitData } from "../../FailureReportAtom";
 import {
   tblEmployee,
   tblLogDiscipline,
   TypeTblEmployee,
   TypeTblLogDiscipline,
 } from "@/core/api/generated/api";
-import { atomInitData } from "../../FailureReportAtom";
 
 const schema = z.object({
   employee: z.custom<TypeTblEmployee>().nullable(),
@@ -38,7 +38,7 @@ type Props = {
   onSuccess: (data: TypeTblLogDiscipline) => void;
 };
 
-function StepResourceUsedUpsert({
+function TabResourceUsedUpsert({
   open,
   mode,
   recordId,
@@ -176,6 +176,13 @@ function StepResourceUsedUpsert({
               request={() =>
                 tblEmployee.getAll({
                   include: { tblDiscipline: true },
+                  filter: {
+                    NOT: {
+                      tblLogDisciplines: {
+                        some: { maintLogId },
+                      },
+                    },
+                  },
                 })
               }
               columns={[
@@ -237,4 +244,4 @@ function StepResourceUsedUpsert({
   );
 }
 
-export default memo(StepResourceUsedUpsert);
+export default memo(TabResourceUsedUpsert);

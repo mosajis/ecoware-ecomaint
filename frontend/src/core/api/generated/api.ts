@@ -800,24 +800,6 @@ export const tblJobTriggerLog = {
     api.delete<DynamicResponse<'deleteTblJobTriggerLog'>>('/tblJobTriggerLog', { params: stringifyQuery(query) }),
 };
 
-export type TypeTblJobVersion = DynamicResponse<'getTblJobVersion'>['items'][0];
-export const tblJobVersion = {
-  getAll: (query?: DynamicQuery<'getTblJobVersion'>) =>
-    api.get<DynamicResponse<'getTblJobVersion'>>('/tblJobVersion', { params: stringifyQuery(query) }),
-  getById: (id: number, query?: DynamicQuery<'getTblJobVersionByJobVersionId'>) =>
-    api.get<DynamicResponse<'getTblJobVersionByJobVersionId'>>(`/tblJobVersion/${id}`, { params: stringifyQuery(query) }),
-  count: (query?: DynamicQuery<'getTblJobVersionCount'>) =>
-    api.get<DynamicResponse<'getTblJobVersionCount'>>('/tblJobVersion/count', { params: stringifyQuery(query) }),
-  create: (data: DynamicCreate<'postTblJobVersion'>) =>
-    api.post<DynamicResponse<'postTblJobVersion'>>('/tblJobVersion', { data }),
-  update: (id: number, data: DynamicUpdate<'putTblJobVersionByJobVersionId'>, query?: DynamicQuery<'getTblJobVersionByJobVersionId'>) =>
-    api.put<DynamicResponse<'putTblJobVersionByJobVersionId'>>(`/tblJobVersion/${id}`, { data, params: stringifyQuery(query) }),
-  deleteById: (id: number, query?: DynamicQuery<'deleteTblJobVersionByJobVersionId'>) =>
-    api.delete<DynamicResponse<'deleteTblJobVersionByJobVersionId'>>(`/tblJobVersion/${id}`, { params: stringifyQuery(query) }),
-  deleteAll: (query?: DynamicQuery<'deleteTblJobVersion'>) =>
-    api.delete<DynamicResponse<'deleteTblJobVersion'>>('/tblJobVersion', { params: stringifyQuery(query) }),
-};
-
 export type TypeTblLocation = DynamicResponse<'getTblLocation'>['items'][0];
 export const tblLocation = {
   getAll: (query?: DynamicQuery<'getTblLocation'>) =>
@@ -942,6 +924,12 @@ export const tblMaintLog = {
     api.delete<DynamicResponse<'deleteTblMaintLogByMaintLogId'>>(`/tblMaintLog/${id}`, { params: stringifyQuery(query) }),
   deleteAll: (query?: DynamicQuery<'deleteTblMaintLog'>) =>
     api.delete<DynamicResponse<'deleteTblMaintLog'>>('/tblMaintLog', { params: stringifyQuery(query) }),
+};
+
+export type TypeTblMaintLogContext = DynamicResponse<'getTblMaintLogContext'>['items'][0];
+export const tblMaintLogContext = {
+  getAll: (query?: DynamicQuery<'getTblMaintLogContext'>) =>
+    api.get<DynamicResponse<'getTblMaintLogContext'>>('/tblMaintLogContext', { params: stringifyQuery(query) }),
 };
 
 export type TypeTblMaintLogAttachment = DynamicResponse<'getTblMaintLogAttachment'>['items'][0];

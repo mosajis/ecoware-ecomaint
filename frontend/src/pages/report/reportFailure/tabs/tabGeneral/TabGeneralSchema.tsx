@@ -13,10 +13,13 @@ export const schema = z.object({
       compNo: z.string().nullable().optional(),
       serialNo: z.string().nullable().optional(),
       functionId: z.number().nullable().optional(),
-      tblLocation: z.object({
-        locationId: z.number(),
-        name: z.string().nullable().optional(),
-      }),
+      tblLocation: z
+        .object({
+          locationId: z.number(),
+          name: z.string().nullable().optional(),
+        })
+        .nullable()
+        .optional(),
     })
     .nullable()
     .refine((val) => val !== null),

@@ -25,6 +25,7 @@ import {
   tblMaintType,
   tblMaintLog,
 } from "@/core/api/generated/api";
+import { toast } from "sonner";
 
 type Props = {
   mode: "create" | "update";
@@ -32,12 +33,11 @@ type Props = {
   compId?: number;
 };
 
-function StepGeneral({ mode, failureReportId, compId }: Props) {
+function TabGeneral({ mode, failureReportId, compId }: Props) {
   const user = useAtomValue(atomUser);
   const userDiscipline = useAtomValue(atomUserDiscipline);
 
   const [initData, setInitData] = useAtom(atomInitData);
-
   const [loading, setLoading] = useState(false);
 
   const {
@@ -46,7 +46,7 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
     reset,
     watch,
     setValue,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isDirty },
   } = useForm<SchemaValue>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -58,28 +58,35 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
   const component = watch("component");
   const isDisabled = loading || isSubmitting || !!compId;
 
+  // Populate form from initData
   useEffect(() => {
     const { failureReport, maintLog } = initData;
-    const formData: SchemaValue = {
-      downTime: failureReport?.tblMaintLog?.downTime || 0,
-      component: (failureReport?.tblMaintLog?.tblComponentUnit as any) ?? null,
+
+    reset({
       title: failureReport?.title ?? "",
       requestNo: failureReport?.requestNo ?? "",
+      failureDateTime:
+        maintLog?.dateDone ??
+        failureReport?.tblMaintLog?.dateDone ??
+        new Date(),
+      downTime: maintLog?.downTime ?? failureReport?.tblMaintLog?.downTime ?? 0,
+      component: (maintLog?.tblComponentUnit ??
+        failureReport?.tblMaintLog?.tblComponentUnit ??
+        null) as any,
       failureSeverity: failureReport?.tblFailureSeverityLevel ?? null,
       failureStatus: failureReport?.tblFailureStatus ?? null,
       failureGroupFollow: failureReport?.tblFailureGroupFollow ?? null,
-      failureDesc: failureReport?.tblMaintLog?.history ?? "",
-      followDesc: failureReport?.followDesc ?? null,
-      failureDateTime: failureReport?.tblMaintLog?.dateDone ?? new Date(),
-      nextFollowDate: failureReport?.nextFollowDate,
+      failureDesc:
+        maintLog?.history ?? failureReport?.tblMaintLog?.history ?? "",
+      followDesc: failureReport?.followDesc ?? "",
+      nextFollowDate: failureReport?.nextFollowDate ?? null,
       maintClass: maintLog?.tblMaintClass ?? null,
       maintCause: maintLog?.tblMaintCause ?? null,
       maintType: maintLog?.tblMaintType ?? null,
-    };
+    });
+  }, [initData, reset]);
 
-    reset(formData);
-  }, []);
-  // Load component if compId provided
+  // Load component when compId is provided externally
   useEffect(() => {
     if (!compId) return;
     (async () => {
@@ -95,12 +102,10 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
     })();
   }, [compId, setValue]);
 
-  // Auto-fill title from component
+  // Auto-fill title from selected component
   useEffect(() => {
-    if (!component) return;
-    if (component.compNo) {
-      setValue("title", `${component.compNo} - Failure Report`);
-    }
+    if (!component?.compNo) return;
+    setValue("title", `${component.compNo} - Failure Report`);
   }, [component, setValue]);
 
   const handleFormSubmit = useCallback(
@@ -109,28 +114,25 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
       if (!parsed.success) return;
 
       const v = parsed.data;
+      const now = new Date();
 
       try {
-        const now = new Date();
-
-        // Get failure count for failure number
-        const res = await tblFailureReports.count();
-        const failureNumber = res.count + 1;
-
-        // Prepare maintLog data
         const maintLogBody = {
           compId: v.component?.compId,
           dateDone: v.failureDateTime.toString(),
           history: v.failureDesc,
           downTime: v.downTime,
+          reportedDate: now.toString(),
+          ...(v.component?.functionId && {
+            functionId: v.component.functionId,
+          }),
           ...buildRelation("tblDiscipline", "discId", userDiscipline?.discId),
+          ...buildRelation("tblComponentUnit", "compId", v.component?.compId),
           ...buildRelation(
             "tblUsersTblMaintLogReportedByTotblUsers",
             "userId",
             user?.userId,
           ),
-          reportedDate: now.toString(),
-          ...buildRelation("tblComponentUnit", "compId", v.component?.compId),
           ...buildRelation(
             "tblMaintClass",
             "maintClassId",
@@ -146,19 +148,13 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
             "maintTypeId",
             v.maintType?.maintTypeId,
           ),
-          ...(v.component?.functionId && {
-            functionId: v.component.functionId,
-          }),
         };
 
-        // Prepare failureReport data
         const failureReportBody = {
           title: v.title,
+          requestNo: v.requestNo,
           followDesc: v.followDesc,
           nextFollowDate: v.nextFollowDate?.toString(),
-          failureNumber: failureNumber,
-          requestNo: v.requestNo,
-
           ...buildRelation(
             "tblFailureSeverityLevel",
             "failureSeverityLevelId",
@@ -176,20 +172,19 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
           ),
         };
 
-        let createdMaintLog;
-        let createdFailureReport;
-
         if (mode === "create" && !initData.failureReport?.failureReportId) {
-          // Create maintLog first
-          createdMaintLog = await tblMaintLog.create(maintLogBody);
+          const res = await tblFailureReports.count();
+          const failureNumber = res.count + 1;
 
-          // Create failureReport with maintLogId
-          createdFailureReport = await tblFailureReports.create({
+          const createdMaintLog = await tblMaintLog.create(maintLogBody);
+
+          const createdFailureReport = await tblFailureReports.create({
             ...failureReportBody,
+            failureNumber,
             ...buildRelation(
               "tblLocation",
               "locationId",
-              v.component.tblLocation.locationId,
+              v.component?.tblLocation?.locationId ?? null,
             ),
             ...buildRelation(
               "tblMaintLog",
@@ -198,33 +193,30 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
             ),
           });
 
-          // Update atom with created data
           setInitData({
             maintLog: createdMaintLog,
             failureReport: createdFailureReport,
           });
         } else {
-          // Update mode
           const existingFailureReport = await tblFailureReports.getById(
             failureReportId!,
           );
 
           if (existingFailureReport.maintLogId) {
-            // Update existing maintLog
             await tblMaintLog.update(
               existingFailureReport.maintLogId,
               maintLogBody,
             );
           }
 
-          // Update failureReport
           await tblFailureReports.update(failureReportId!, failureReportBody);
         }
+        toast.success("Failure Report saved");
       } catch (error) {
-        console.error("Error saving failure report:", error);
+        toast.error("Error saving Failure Report");
       }
     },
-    [mode, failureReportId, user, userDiscipline, setInitData],
+    [mode, failureReportId, user, userDiscipline, initData, setInitData],
   );
 
   return (
@@ -236,6 +228,7 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
       gap={1.5}
       p={1}
     >
+      {/* Row 1: Title / Request No / Date */}
       <Box display="flex" gap={1.5}>
         <Controller
           name="title"
@@ -269,7 +262,6 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
               />
             )}
           />
-
           <Controller
             name="failureDateTime"
             control={control}
@@ -286,43 +278,32 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
         </Box>
       </Box>
 
+      {/* Row 2: Discipline / Reported By / Function No */}
       <Box display="flex" gap={1.5}>
         <TextField
           fullWidth
           label="Discipline"
           value={userDiscipline?.name ?? ""}
           size="small"
-          slotProps={{
-            input: {
-              readOnly: true,
-            },
-          }}
+          slotProps={{ input: { readOnly: true } }}
         />
         <TextField
           label="Reported By"
           value={user?.uName ?? ""}
           fullWidth
           size="small"
-          slotProps={{
-            input: {
-              readOnly: true,
-            },
-          }}
+          slotProps={{ input: { readOnly: true } }}
         />
         <TextField
           label="Function No"
           value={component?.functionId ?? ""}
           fullWidth
           size="small"
-          slotProps={{
-            input: {
-              readOnly: true,
-            },
-          }}
+          slotProps={{ input: { readOnly: true } }}
         />
       </Box>
 
-      {/* Component & Location */}
+      {/* Row 3: Component / Serial No / Location */}
       <Box display="flex" gap={1.5}>
         <Controller
           name="component"
@@ -338,7 +319,7 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
               getOptionLabel={(row) => row.compNo ?? ""}
               onChange={field.onChange}
               value={field.value}
-              disabled={isDisabled}
+              disabled={isDisabled || mode === "update"}
               error={!!errors.component}
             />
           )}
@@ -352,16 +333,20 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
         />
         <TextField
           label="Location"
-          value={component?.tblLocation?.name ?? ""}
+          value={
+            initData?.failureReport?.tblLocation?.name ||
+            component?.tblLocation?.name ||
+            ""
+          }
           fullWidth
           slotProps={{ input: { readOnly: true } }}
           size="small"
         />
       </Box>
 
-      {/* Status Grid */}
+      {/* Row 4: Status / Maintenance / Additional */}
       <Box display="grid" gridTemplateColumns="1fr 1fr 1fr" gap={1.5}>
-        {/* Column 1: Status Info */}
+        {/* Col 1: Status Info */}
         <Box display="flex" gap={1.5} flexDirection="column">
           <Controller
             name="failureSeverity"
@@ -395,7 +380,7 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
               />
             )}
           />
-          <Box display="flex" gap={1.5}>
+          <Box display="grid" gridTemplateColumns="1fr 1fr" gap={1.5}>
             <Controller
               name="failureGroupFollow"
               control={control}
@@ -428,7 +413,7 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
           </Box>
         </Box>
 
-        {/* Column 2: Maintenance Info */}
+        {/* Col 2: Maintenance Info */}
         <Box display="flex" gap={1.5} flexDirection="column">
           <Controller
             name="maintClass"
@@ -492,53 +477,59 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
           />
         </Box>
 
-        {/* Column 3: Additional Info */}
+        {/* Col 3: Additional Info */}
         <Box display="flex" gap={1.5} flexDirection="column">
-          <TextField
-            label="Down Time"
-            value=""
-            fullWidth
-            disabled
-            size="small"
+          <Controller
+            name="downTime"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label="Down Time"
+                fullWidth
+                size="small"
+                type="number"
+                disabled={isDisabled}
+                error={!!errors.downTime}
+                value={field.value ?? 0}
+                onChange={(e) => field.onChange(Number(e.target.value))}
+              />
+            )}
           />
           <TextField
             label="Failure No"
-            value=""
+            value={initData.failureReport?.failureNumber ?? ""}
             fullWidth
-            disabled
             size="small"
-          />
-          <TextField
-            label="WorkShop No"
-            value=""
-            fullWidth
-            disabled
-            size="small"
+            slotProps={{ input: { readOnly: true } }}
           />
         </Box>
       </Box>
 
-      <Box display={"flex"} gap={1.5} height={"280px"}>
-        {/* Descriptions */}
+      {/* Row 5: Descriptions */}
+      <Box display="flex" gap={1.5} height="280px">
         <Controller
           name="failureDesc"
           control={control}
           render={({ field }) => (
             <Editor
               {...field}
+              initValue={field.value}
               label="Description"
               onChange={field.onChange}
               disabled={isDisabled}
+              autoSave={false}
             />
           )}
         />
-
         <Controller
           name="followDesc"
           control={control}
           render={({ field }) => (
             <Editor
               {...field}
+              initValue={field.value}
+              autoSave={false}
               label="Follow Description"
               onChange={field.onChange}
               disabled={isDisabled}
@@ -553,12 +544,12 @@ function StepGeneral({ mode, failureReportId, compId }: Props) {
         variant="outlined"
         color="secondary"
         style={{ width: "200px", marginLeft: "auto" }}
-        disabled={isDisabled}
+        disabled={isDisabled || !isDirty}
       >
-        {isSubmitting ? "saving ..." : "Save General"}
+        {isSubmitting ? "Saving..." : "Save General"}
       </Button>
     </Box>
   );
 }
 
-export default memo(StepGeneral);
+export default memo(TabGeneral);

@@ -1,7 +1,6 @@
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 import DescriptionIcon from "@mui/icons-material/Description";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
-import FolderZipIcon from "@mui/icons-material/FolderZip";
 import BuildIcon from "@mui/icons-material/Build";
 import MemoryIcon from "@mui/icons-material/Memory";
 import StraightenIcon from "@mui/icons-material/Straighten";

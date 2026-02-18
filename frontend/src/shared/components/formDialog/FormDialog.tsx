@@ -30,6 +30,7 @@ export type FormDialogWrapperProps = {
   submitText?: string;
   disabled?: boolean;
   hideHeader?: boolean;
+  hideFooter?: boolean;
   maxWidth?: DialogProps["maxWidth"];
 };
 
@@ -43,6 +44,7 @@ export default function FormDialog({
   loadingInitial = false,
   onSubmit,
   children,
+  hideFooter = false,
   hideHeader = false,
   cancelText = "Cancel",
   submitText = "Ok",
@@ -104,17 +106,19 @@ export default function FormDialog({
         <form onSubmit={handleSubmit}>
           <Suspense fallback={<Spinner />}>{children}</Suspense>
 
-          <DialogActions sx={{ p: 0, m: 0, mt: 2 }}>
-            {!readonly && (
-              <FormDialogAction
-                onCancel={onCancelClick ?? onClose}
-                submitting={submitting}
-                cancelText={cancelText}
-                submitText={submitText}
-                disabled={isDisabled}
-              />
-            )}
-          </DialogActions>
+          {!hideFooter && (
+            <DialogActions sx={{ p: 0, m: 0, mt: 2 }}>
+              {!readonly && (
+                <FormDialogAction
+                  onCancel={onCancelClick ?? onClose}
+                  submitting={submitting}
+                  cancelText={cancelText}
+                  submitText={submitText}
+                  disabled={isDisabled}
+                />
+              )}
+            </DialogActions>
+          )}
         </form>
       </DialogContent>
     </Dialog>

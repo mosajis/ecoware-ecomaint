@@ -1,10 +1,10 @@
 import PrintLayout from "@/shared/components/print/PrintLayout";
-import ReportContent from "./PrintContent";
-import { ReportHeader } from "./PrintHeader";
-import { ReportFooter } from "./PrintFooter";
+import PrintContent from "./PrintContent";
 import { forwardRef } from "react";
 import { TypeTblWorkOrderWithRels } from "../types";
 import { OutputFormat, SortOrder } from "./PrintTypes";
+import { PrintHeader } from "@/shared/components/print/_components/PrintHeader";
+import { PrintFooter } from "@/shared/components/print/_components/PrintFooter";
 
 interface PrintProps {
   workOrders: TypeTblWorkOrderWithRels[];
@@ -12,20 +12,20 @@ interface PrintProps {
   sortOrder: SortOrder;
 }
 
-const WorkOrderPrintTemplate = forwardRef<HTMLDivElement, PrintProps>(
+const PrintTemplate = forwardRef<HTMLDivElement, PrintProps>(
   ({ workOrders, outputFormat, sortOrder }, ref) => (
     <PrintLayout
       ref={ref}
       header={
-        <ReportHeader
+        <PrintHeader
           location="not set"
           title="Work Order Reports"
           totalLength={workOrders.length}
         />
       }
-      footer={<ReportFooter printedBy="Not Set" />}
+      footer={<PrintFooter printedBy="Not Set" />}
       content={
-        <ReportContent
+        <PrintContent
           workOrders={workOrders}
           outputFormat={outputFormat}
           sortOrder={sortOrder}
@@ -35,4 +35,4 @@ const WorkOrderPrintTemplate = forwardRef<HTMLDivElement, PrintProps>(
   ),
 );
 
-export default WorkOrderPrintTemplate;
+export default PrintTemplate;
