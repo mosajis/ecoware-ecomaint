@@ -1,7 +1,6 @@
 import { useState, ReactNode } from "react";
 import Stack from "@mui/material/Stack";
 import EditIcon from "@mui/icons-material/Edit";
-import Eye from "@mui/icons-material/RemoveRedEye";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DataGridActionsButton from "./DataGridActionsButton";
 import ConfirmDialog from "../ConfirmDialog";
@@ -66,7 +65,7 @@ export default function DataGridActions({
         onCancel={handleCancelDelete}
         onConfirm={handleConfirmDelete}
         title="Delete Item"
-        message="Are you certain you want to delete this item?"
+        message="Are you sure you want to delete this item?"
       />
     </>
   );

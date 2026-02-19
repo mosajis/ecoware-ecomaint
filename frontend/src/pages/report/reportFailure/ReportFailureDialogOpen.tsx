@@ -33,7 +33,7 @@ export default function ReportFailureOpenDialog({
         ...patch,
       });
 
-      toast.success("Failure Report reopened");
+      toast.success("Failure Report Open Successfully");
       onClose();
     } catch (error: any) {
       toast.error(error?.message || "Failed to reopen");

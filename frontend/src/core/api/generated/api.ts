@@ -597,22 +597,22 @@ export const tblFailureGroupFollow = {
     api.delete<DynamicResponse<'deleteTblFailureGroupFollow'>>('/tblFailureGroupFollow', { params: stringifyQuery(query) }),
 };
 
-export type TypeTblFailureReportAttachment = DynamicResponse<'getTblFailureReportAttachment'>['items'][0];
-export const tblFailureReportAttachment = {
-  getAll: (query?: DynamicQuery<'getTblFailureReportAttachment'>) =>
-    api.get<DynamicResponse<'getTblFailureReportAttachment'>>('/tblFailureReportAttachment', { params: stringifyQuery(query) }),
-  getById: (id: number, query?: DynamicQuery<'getTblFailureReportAttachmentByFailureReportAttachmentId'>) =>
-    api.get<DynamicResponse<'getTblFailureReportAttachmentByFailureReportAttachmentId'>>(`/tblFailureReportAttachment/${id}`, { params: stringifyQuery(query) }),
-  count: (query?: DynamicQuery<'getTblFailureReportAttachmentCount'>) =>
-    api.get<DynamicResponse<'getTblFailureReportAttachmentCount'>>('/tblFailureReportAttachment/count', { params: stringifyQuery(query) }),
-  create: (data: DynamicCreate<'postTblFailureReportAttachment'>) =>
-    api.post<DynamicResponse<'postTblFailureReportAttachment'>>('/tblFailureReportAttachment', { data }),
-  update: (id: number, data: DynamicUpdate<'putTblFailureReportAttachmentByFailureReportAttachmentId'>, query?: DynamicQuery<'getTblFailureReportAttachmentByFailureReportAttachmentId'>) =>
-    api.put<DynamicResponse<'putTblFailureReportAttachmentByFailureReportAttachmentId'>>(`/tblFailureReportAttachment/${id}`, { data, params: stringifyQuery(query) }),
-  deleteById: (id: number, query?: DynamicQuery<'deleteTblFailureReportAttachmentByFailureReportAttachmentId'>) =>
-    api.delete<DynamicResponse<'deleteTblFailureReportAttachmentByFailureReportAttachmentId'>>(`/tblFailureReportAttachment/${id}`, { params: stringifyQuery(query) }),
-  deleteAll: (query?: DynamicQuery<'deleteTblFailureReportAttachment'>) =>
-    api.delete<DynamicResponse<'deleteTblFailureReportAttachment'>>('/tblFailureReportAttachment', { params: stringifyQuery(query) }),
+export type TypeTblFailureReportWorkShop = DynamicResponse<'getTblFailureReportWorkShop'>['items'][0];
+export const tblFailureReportWorkShop = {
+  getAll: (query?: DynamicQuery<'getTblFailureReportWorkShop'>) =>
+    api.get<DynamicResponse<'getTblFailureReportWorkShop'>>('/tblFailureReportWorkShop', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblFailureReportWorkShopByFailureReportWorkShopId'>) =>
+    api.get<DynamicResponse<'getTblFailureReportWorkShopByFailureReportWorkShopId'>>(`/tblFailureReportWorkShop/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblFailureReportWorkShopCount'>) =>
+    api.get<DynamicResponse<'getTblFailureReportWorkShopCount'>>('/tblFailureReportWorkShop/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblFailureReportWorkShop'>) =>
+    api.post<DynamicResponse<'postTblFailureReportWorkShop'>>('/tblFailureReportWorkShop', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblFailureReportWorkShopByFailureReportWorkShopId'>, query?: DynamicQuery<'getTblFailureReportWorkShopByFailureReportWorkShopId'>) =>
+    api.put<DynamicResponse<'putTblFailureReportWorkShopByFailureReportWorkShopId'>>(`/tblFailureReportWorkShop/${id}`, { data, params: stringifyQuery(query) }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblFailureReportWorkShopByFailureReportWorkShopId'>) =>
+    api.delete<DynamicResponse<'deleteTblFailureReportWorkShopByFailureReportWorkShopId'>>(`/tblFailureReportWorkShop/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblFailureReportWorkShop'>) =>
+    api.delete<DynamicResponse<'deleteTblFailureReportWorkShop'>>('/tblFailureReportWorkShop', { params: stringifyQuery(query) }),
 };
 
 export type TypeTblFailureReports = DynamicResponse<'getTblFailureReports'>['items'][0];
@@ -798,6 +798,24 @@ export const tblJobTriggerLog = {
     api.delete<DynamicResponse<'deleteTblJobTriggerLogByJobTriggerLogId'>>(`/tblJobTriggerLog/${id}`, { params: stringifyQuery(query) }),
   deleteAll: (query?: DynamicQuery<'deleteTblJobTriggerLog'>) =>
     api.delete<DynamicResponse<'deleteTblJobTriggerLog'>>('/tblJobTriggerLog', { params: stringifyQuery(query) }),
+};
+
+export type TypeTblJobVersion = DynamicResponse<'getTblJobVersion'>['items'][0];
+export const tblJobVersion = {
+  getAll: (query?: DynamicQuery<'getTblJobVersion'>) =>
+    api.get<DynamicResponse<'getTblJobVersion'>>('/tblJobVersion', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblJobVersionByJobVersionId'>) =>
+    api.get<DynamicResponse<'getTblJobVersionByJobVersionId'>>(`/tblJobVersion/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblJobVersionCount'>) =>
+    api.get<DynamicResponse<'getTblJobVersionCount'>>('/tblJobVersion/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblJobVersion'>) =>
+    api.post<DynamicResponse<'postTblJobVersion'>>('/tblJobVersion', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblJobVersionByJobVersionId'>, query?: DynamicQuery<'getTblJobVersionByJobVersionId'>) =>
+    api.put<DynamicResponse<'putTblJobVersionByJobVersionId'>>(`/tblJobVersion/${id}`, { data, params: stringifyQuery(query) }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblJobVersionByJobVersionId'>) =>
+    api.delete<DynamicResponse<'deleteTblJobVersionByJobVersionId'>>(`/tblJobVersion/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblJobVersion'>) =>
+    api.delete<DynamicResponse<'deleteTblJobVersion'>>('/tblJobVersion', { params: stringifyQuery(query) }),
 };
 
 export type TypeTblLocation = DynamicResponse<'getTblLocation'>['items'][0];
@@ -1284,6 +1302,42 @@ export const tblWorkOrderType = {
     api.delete<DynamicResponse<'deleteTblWorkOrderType'>>('/tblWorkOrderType', { params: stringifyQuery(query) }),
 };
 
+export type TypeTblWorkShop = DynamicResponse<'getTblWorkShop'>['items'][0];
+export const tblWorkShop = {
+  getAll: (query?: DynamicQuery<'getTblWorkShop'>) =>
+    api.get<DynamicResponse<'getTblWorkShop'>>('/tblWorkShop', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblWorkShopByWorkShopId'>) =>
+    api.get<DynamicResponse<'getTblWorkShopByWorkShopId'>>(`/tblWorkShop/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblWorkShopCount'>) =>
+    api.get<DynamicResponse<'getTblWorkShopCount'>>('/tblWorkShop/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblWorkShop'>) =>
+    api.post<DynamicResponse<'postTblWorkShop'>>('/tblWorkShop', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblWorkShopByWorkShopId'>, query?: DynamicQuery<'getTblWorkShopByWorkShopId'>) =>
+    api.put<DynamicResponse<'putTblWorkShopByWorkShopId'>>(`/tblWorkShop/${id}`, { data, params: stringifyQuery(query) }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblWorkShopByWorkShopId'>) =>
+    api.delete<DynamicResponse<'deleteTblWorkShopByWorkShopId'>>(`/tblWorkShop/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblWorkShop'>) =>
+    api.delete<DynamicResponse<'deleteTblWorkShop'>>('/tblWorkShop', { params: stringifyQuery(query) }),
+};
+
+export type TypeTblWorkShopAttachment = DynamicResponse<'getTblWorkShopAttachment'>['items'][0];
+export const tblWorkShopAttachment = {
+  getAll: (query?: DynamicQuery<'getTblWorkShopAttachment'>) =>
+    api.get<DynamicResponse<'getTblWorkShopAttachment'>>('/tblWorkShopAttachment', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblWorkShopAttachmentByWorkShopAttachmentId'>) =>
+    api.get<DynamicResponse<'getTblWorkShopAttachmentByWorkShopAttachmentId'>>(`/tblWorkShopAttachment/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblWorkShopAttachmentCount'>) =>
+    api.get<DynamicResponse<'getTblWorkShopAttachmentCount'>>('/tblWorkShopAttachment/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblWorkShopAttachment'>) =>
+    api.post<DynamicResponse<'postTblWorkShopAttachment'>>('/tblWorkShopAttachment', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblWorkShopAttachmentByWorkShopAttachmentId'>, query?: DynamicQuery<'getTblWorkShopAttachmentByWorkShopAttachmentId'>) =>
+    api.put<DynamicResponse<'putTblWorkShopAttachmentByWorkShopAttachmentId'>>(`/tblWorkShopAttachment/${id}`, { data, params: stringifyQuery(query) }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblWorkShopAttachmentByWorkShopAttachmentId'>) =>
+    api.delete<DynamicResponse<'deleteTblWorkShopAttachmentByWorkShopAttachmentId'>>(`/tblWorkShopAttachment/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblWorkShopAttachment'>) =>
+    api.delete<DynamicResponse<'deleteTblWorkShopAttachment'>>('/tblWorkShopAttachment', { params: stringifyQuery(query) }),
+};
+
 export type TypeTblWorkShopComponent = DynamicResponse<'getTblWorkShopComponent'>['items'][0];
 export const tblWorkShopComponent = {
   getAll: (query?: DynamicQuery<'getTblWorkShopComponent'>) =>
@@ -1300,59 +1354,5 @@ export const tblWorkShopComponent = {
     api.delete<DynamicResponse<'deleteTblWorkShopComponentByWShopCompId'>>(`/tblWorkShopComponent/${id}`, { params: stringifyQuery(query) }),
   deleteAll: (query?: DynamicQuery<'deleteTblWorkShopComponent'>) =>
     api.delete<DynamicResponse<'deleteTblWorkShopComponent'>>('/tblWorkShopComponent', { params: stringifyQuery(query) }),
-};
-
-export type TypeTblWorkShopDone = DynamicResponse<'getTblWorkShopDone'>['items'][0];
-export const tblWorkShopDone = {
-  getAll: (query?: DynamicQuery<'getTblWorkShopDone'>) =>
-    api.get<DynamicResponse<'getTblWorkShopDone'>>('/tblWorkShopDone', { params: stringifyQuery(query) }),
-  getById: (id: number, query?: DynamicQuery<'getTblWorkShopDoneByWShopDoneId'>) =>
-    api.get<DynamicResponse<'getTblWorkShopDoneByWShopDoneId'>>(`/tblWorkShopDone/${id}`, { params: stringifyQuery(query) }),
-  count: (query?: DynamicQuery<'getTblWorkShopDoneCount'>) =>
-    api.get<DynamicResponse<'getTblWorkShopDoneCount'>>('/tblWorkShopDone/count', { params: stringifyQuery(query) }),
-  create: (data: DynamicCreate<'postTblWorkShopDone'>) =>
-    api.post<DynamicResponse<'postTblWorkShopDone'>>('/tblWorkShopDone', { data }),
-  update: (id: number, data: DynamicUpdate<'putTblWorkShopDoneByWShopDoneId'>, query?: DynamicQuery<'getTblWorkShopDoneByWShopDoneId'>) =>
-    api.put<DynamicResponse<'putTblWorkShopDoneByWShopDoneId'>>(`/tblWorkShopDone/${id}`, { data, params: stringifyQuery(query) }),
-  deleteById: (id: number, query?: DynamicQuery<'deleteTblWorkShopDoneByWShopDoneId'>) =>
-    api.delete<DynamicResponse<'deleteTblWorkShopDoneByWShopDoneId'>>(`/tblWorkShopDone/${id}`, { params: stringifyQuery(query) }),
-  deleteAll: (query?: DynamicQuery<'deleteTblWorkShopDone'>) =>
-    api.delete<DynamicResponse<'deleteTblWorkShopDone'>>('/tblWorkShopDone', { params: stringifyQuery(query) }),
-};
-
-export type TypeTblWorkShopRequest = DynamicResponse<'getTblWorkShopRequest'>['items'][0];
-export const tblWorkShopRequest = {
-  getAll: (query?: DynamicQuery<'getTblWorkShopRequest'>) =>
-    api.get<DynamicResponse<'getTblWorkShopRequest'>>('/tblWorkShopRequest', { params: stringifyQuery(query) }),
-  getById: (id: number, query?: DynamicQuery<'getTblWorkShopRequestByWShopRequestId'>) =>
-    api.get<DynamicResponse<'getTblWorkShopRequestByWShopRequestId'>>(`/tblWorkShopRequest/${id}`, { params: stringifyQuery(query) }),
-  count: (query?: DynamicQuery<'getTblWorkShopRequestCount'>) =>
-    api.get<DynamicResponse<'getTblWorkShopRequestCount'>>('/tblWorkShopRequest/count', { params: stringifyQuery(query) }),
-  create: (data: DynamicCreate<'postTblWorkShopRequest'>) =>
-    api.post<DynamicResponse<'postTblWorkShopRequest'>>('/tblWorkShopRequest', { data }),
-  update: (id: number, data: DynamicUpdate<'putTblWorkShopRequestByWShopRequestId'>, query?: DynamicQuery<'getTblWorkShopRequestByWShopRequestId'>) =>
-    api.put<DynamicResponse<'putTblWorkShopRequestByWShopRequestId'>>(`/tblWorkShopRequest/${id}`, { data, params: stringifyQuery(query) }),
-  deleteById: (id: number, query?: DynamicQuery<'deleteTblWorkShopRequestByWShopRequestId'>) =>
-    api.delete<DynamicResponse<'deleteTblWorkShopRequestByWShopRequestId'>>(`/tblWorkShopRequest/${id}`, { params: stringifyQuery(query) }),
-  deleteAll: (query?: DynamicQuery<'deleteTblWorkShopRequest'>) =>
-    api.delete<DynamicResponse<'deleteTblWorkShopRequest'>>('/tblWorkShopRequest', { params: stringifyQuery(query) }),
-};
-
-export type TypeTblWorkShopRequestAttachment = DynamicResponse<'getTblWorkShopRequestAttachment'>['items'][0];
-export const tblWorkShopRequestAttachment = {
-  getAll: (query?: DynamicQuery<'getTblWorkShopRequestAttachment'>) =>
-    api.get<DynamicResponse<'getTblWorkShopRequestAttachment'>>('/tblWorkShopRequestAttachment', { params: stringifyQuery(query) }),
-  getById: (id: number, query?: DynamicQuery<'getTblWorkShopRequestAttachmentByWShopRequestAttachmentId'>) =>
-    api.get<DynamicResponse<'getTblWorkShopRequestAttachmentByWShopRequestAttachmentId'>>(`/tblWorkShopRequestAttachment/${id}`, { params: stringifyQuery(query) }),
-  count: (query?: DynamicQuery<'getTblWorkShopRequestAttachmentCount'>) =>
-    api.get<DynamicResponse<'getTblWorkShopRequestAttachmentCount'>>('/tblWorkShopRequestAttachment/count', { params: stringifyQuery(query) }),
-  create: (data: DynamicCreate<'postTblWorkShopRequestAttachment'>) =>
-    api.post<DynamicResponse<'postTblWorkShopRequestAttachment'>>('/tblWorkShopRequestAttachment', { data }),
-  update: (id: number, data: DynamicUpdate<'putTblWorkShopRequestAttachmentByWShopRequestAttachmentId'>, query?: DynamicQuery<'getTblWorkShopRequestAttachmentByWShopRequestAttachmentId'>) =>
-    api.put<DynamicResponse<'putTblWorkShopRequestAttachmentByWShopRequestAttachmentId'>>(`/tblWorkShopRequestAttachment/${id}`, { data, params: stringifyQuery(query) }),
-  deleteById: (id: number, query?: DynamicQuery<'deleteTblWorkShopRequestAttachmentByWShopRequestAttachmentId'>) =>
-    api.delete<DynamicResponse<'deleteTblWorkShopRequestAttachmentByWShopRequestAttachmentId'>>(`/tblWorkShopRequestAttachment/${id}`, { params: stringifyQuery(query) }),
-  deleteAll: (query?: DynamicQuery<'deleteTblWorkShopRequestAttachment'>) =>
-    api.delete<DynamicResponse<'deleteTblWorkShopRequestAttachment'>>('/tblWorkShopRequestAttachment', { params: stringifyQuery(query) }),
 };
 

@@ -83,10 +83,11 @@ export default function WorkOrderActions({
       label: "Rescadule",
       icon: <AutoModeIcon />,
       isEnabled: true,
-      disabled: false,
+      // disabled: selectedStatuses.length > 0,
       onClick: onReschedule,
     },
     {
+      // disabled: selectedStatuses.length > 0,
       label: "Print",
       icon: <PrintIcon />,
       onClick: onPrint,

@@ -152,9 +152,20 @@ export default function PageComponentUnit() {
           onRowClick={handleRowClick}
           onRefreshClick={refetch}
           toolbarChildren={
-            <Button disabled={!selectedRowId} onClick={openDialogReportWork}>
-              UnPlanned Job
-            </Button>
+            <>
+              <Button disabled={!selectedRowId} onClick={openDialogReportWork}>
+                Routine Job
+              </Button>
+              <Button disabled={!selectedRowId} onClick={openDialogReportWork}>
+                None-Routine Job
+              </Button>
+              <Button disabled={!selectedRowId} onClick={openDialogReportWork}>
+                Failure Report
+              </Button>
+              <Button disabled={!selectedRowId} onClick={openDialogReportWork}>
+                WorkShop Job
+              </Button>
+            </>
           }
         />
       </Splitter>

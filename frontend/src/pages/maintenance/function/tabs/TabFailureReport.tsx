@@ -1,12 +1,12 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback } from "react";
+import { columns } from "@/pages/report/reportFailure/ReportFailureColumns";
 import {
   tblFailureReports,
   TypeTblFailureReports,
   TypeTblFunctions,
 } from "@/core/api/generated/api";
-import { columns } from "@/pages/report/reportFailure/ReportFailure";
 
 interface Props {
   recordFunction?: TypeTblFunctions;

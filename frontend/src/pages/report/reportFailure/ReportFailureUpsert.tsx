@@ -115,10 +115,6 @@ function FailureReportUpsert({
       </DialogContent>
 
       <DialogActions sx={{ justifyContent: "center" }}>
-        <Button variant="outlined" onClick={onClose} sx={{ width: 200 }}>
-          Close
-        </Button>
-
         <Button
           onClick={() => onSuccess(initData)}
           sx={{ width: 200 }}
@@ -126,6 +122,9 @@ function FailureReportUpsert({
           disabled={!initData?.maintLog?.maintLogId}
         >
           Ok
+        </Button>
+        <Button variant="outlined" onClick={onClose} sx={{ width: 200 }}>
+          Cancel
         </Button>
       </DialogActions>
     </Dialog>

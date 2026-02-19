@@ -6,7 +6,7 @@ type Props = {
   failureReport: TypeTblFailureReports;
 };
 
-const extractData = (report: TypeTblFailureReports) => ({
+const extractData = (report: any) => ({
   title: report.title ?? "-",
   //@ts-ignore
   component: report?.tblMaintLog?.tblComponentUnit?.compNo ?? "-",
@@ -16,7 +16,13 @@ const extractData = (report: TypeTblFailureReports) => ({
   serialNo: report?.tblMaintLog?.tblComponentUnit?.serialNo ?? "-",
   reportedDate: report.tblMaintLog?.reportedDate,
   downTime: report.tblMaintLog?.downTime ?? "-",
-  reportedBy: report.tblMaintLog?.reportedBy ?? "-",
+  //@ts-ignore
+  reportedBy:
+    report.tblMaintLog?.tblUsersTblMaintLogReportedByTotblUsers
+      ?.tblEmployeeTblUsersEmployeeIdTotblEmployee?.lastName +
+    " " +
+    report.tblMaintLog?.tblUsersTblMaintLogReportedByTotblUsers
+      ?.tblEmployeeTblUsersEmployeeIdTotblEmployee?.firstName,
   failureNumber: report.failureNumber ?? "-",
   description: report.tblMaintLog?.history ?? "",
   followDesc: report.followDesc ?? "",
@@ -59,7 +65,7 @@ export const PrintTable = ({ failureReport }: Props) => {
           <tr>
             <td className="print__cell print__label">Serial Number</td>
             <td className="print__cell">{val(data.serialNo)}</td>
-            <td className="print__cell print__label">Reported Date</td>
+            <td className="print__cell print__label">Failure Date</td>
             <td className="print__cell">
               {data.reportedDate
                 ? formatDateTime(data.reportedDate, "DATETIME", true)

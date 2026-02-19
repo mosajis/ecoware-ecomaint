@@ -152,11 +152,7 @@ function TabResourceUsedUpsert({
     <FormDialog
       open={open}
       onClose={onClose}
-      title={
-        mode === "create"
-          ? "Create Step Resource Used"
-          : "Edit Step Resource Used"
-      }
+      title={"Resource Used"}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}

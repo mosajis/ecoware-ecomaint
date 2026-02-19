@@ -174,14 +174,14 @@ export default function PageReportFailure() {
           getRowId={getRowId}
           onRowClick={handleRowClick}
         />
-        <AttachmentMap
+        {/* <AttachmentMap
           label={label || "Failure Attachments"}
           mapService={tblFailureReportAttachment}
           filterId={selectedRowId}
           filterKey="failureReportId"
           relName="tblFailureReports"
           tableId="failureReportAttachmentId"
-        />
+        /> */}
       </Splitter>
 
       {/* <FailureReportUpsert

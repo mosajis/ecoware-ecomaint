@@ -40,7 +40,11 @@ export default function ReportFailureDialogPrint({
             include: {
               tblMaintLog: {
                 include: {
-                  tblUsersTblMaintLogReportedByTotblUsers: true,
+                  tblUsersTblMaintLogReportedByTotblUsers: {
+                    include: {
+                      tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
+                    },
+                  },
                   tblComponentUnit: true,
                   tblMaintCause: true,
                   tblDiscipline: true,

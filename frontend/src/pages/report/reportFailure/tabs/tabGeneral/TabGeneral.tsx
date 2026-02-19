@@ -515,7 +515,7 @@ function TabGeneral({ mode, failureReportId, compId }: Props) {
             <Editor
               {...field}
               initValue={field.value}
-              label="Description"
+              label="Description / Action / Cause"
               onChange={field.onChange}
               disabled={isDisabled}
               autoSave={false}
@@ -543,7 +543,7 @@ function TabGeneral({ mode, failureReportId, compId }: Props) {
         type="submit"
         variant="outlined"
         color="secondary"
-        style={{ width: "200px", marginLeft: "auto" }}
+        style={{ margin: "auto", width: 408 }}
         disabled={isDisabled || !isDirty}
       >
         {isSubmitting ? "Saving..." : "Save General"}

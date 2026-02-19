@@ -176,7 +176,7 @@ const TreeToolbar = memo(function TreeToolbar({
           onDelete?.();
         }}
         title="Delete Item"
-        message="Are you certain you want to delete this item?"
+        message="Are you sure you want to delete this item?"
       />
     </Box>
   );

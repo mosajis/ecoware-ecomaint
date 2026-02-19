@@ -1,6 +1,6 @@
 import AttachmentMap from "@/shared/tabs/attachmentMap/AttachmentMap";
 import { useAtomValue } from "jotai";
-import { tblFailureReportAttachment } from "@/core/api/generated/api";
+import { tblMaintLogAttachment } from "@/core/api/generated/api";
 import { atomInitData } from "../FailureReportAtom";
 
 const TabAttachments = () => {
@@ -10,11 +10,11 @@ const TabAttachments = () => {
   return (
     <AttachmentMap
       filterId={failureReportId}
-      filterKey="failureReportId"
-      relName="tblFailureReports"
-      tableId="failureReportAttachmentId"
+      filterKey="maintLogId"
+      relName="tblMaintLog"
+      tableId="maintLogAttachmentId"
       label="Attachments"
-      mapService={tblFailureReportAttachment}
+      mapService={tblMaintLogAttachment}
     />
   );
 };

@@ -35,6 +35,17 @@ const columns: GridColDef<TypeTblMaintLogStocks>[] = [
     // @ts-ignore
     valueGetter: (_, row) => row?.tblSpareUnit.tblSpareType.makerRefNo,
   },
+  {
+    field: "stockCount",
+    headerName: "Count",
+    flex: 1,
+  },
+  {
+    field: "unit",
+    headerName: "Unit",
+    flex: 1,
+    valueGetter: (_, row) => row?.tblSpareUnit?.tblSpareType?.tblUnit?.name,
+  },
 ];
 
 const TabStockUsed = () => {
@@ -56,7 +67,11 @@ const TabStockUsed = () => {
       include: {
         tblSpareUnit: {
           include: {
-            tblSpareType: true,
+            tblSpareType: {
+              include: {
+                tblUnit: true,
+              },
+            },
           },
         },
       },

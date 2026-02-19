@@ -38,6 +38,9 @@ export default function WorkOrderPage() {
 
   const [filter, setFilter] = useState<WorkOrderFilter | null>(null);
 
+  const [selectedRow, setSelectedRow] =
+    useState<TypeTblWorkOrderWithRels | null>(null);
+
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>({
       type: "include",
@@ -180,13 +183,21 @@ export default function WorkOrderPage() {
   const handleConfirmPostponed = async () => {
     try {
       const updates = selectedWorkOrders.map((wo) =>
-        tblWorkOrder.update(wo.workOrderId, {
-          tblWorkOrderStatus: {
-            connect: {
-              workOrderStatusId: 8,
+        tblWorkOrder.update(
+          wo.workOrderId,
+          {
+            tblWorkOrderStatus: {
+              connect: {
+                workOrderStatusId: 8,
+              },
             },
           },
-        }),
+          {
+            include: {
+              tblWorkOrderStatus: true,
+            },
+          },
+        ),
       );
 
       const results = await Promise.all(updates);
@@ -342,6 +353,11 @@ export default function WorkOrderPage() {
       completed: record.completed,
     });
   };
+
+  const handleClick = ({ row }: any) => {
+    setSelectedRow(row);
+  };
+
   return (
     <>
       <Splitter horizontal initialPrimarySize="65%">
@@ -350,6 +366,8 @@ export default function WorkOrderPage() {
           disableEdit
           disableDelete
           checkboxSelection
+          disableRowSelectionOnClick
+          onRowClick={handleClick}
           showToolbar
           label="WorkOrders"
           rows={rows}
@@ -375,7 +393,7 @@ export default function WorkOrderPage() {
           }
         />
 
-        <TabsComponent workOrder={selectedWorkOrders[0]} />
+        <TabsComponent workOrder={selectedRow} />
       </Splitter>
 
       {/* Filter Dialog */}

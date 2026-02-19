@@ -68,7 +68,7 @@ const TABLE_PKS = {
   TblUnit: "UnitID",
   TblWorkOrder: "WorkOrderID",
   TblWorkOrderStatus: "WorkOrderStatusId",
-  TblWorkShopComponent: "WShopCompID",
+  TblWorkShopComponent: "workShopCompId",
   TblWorkShopDone: "WShopDoneID",
   TblWorkShopRequest: "WShopRequestID",
   TblUsers: "UserID",
@@ -76,14 +76,32 @@ const TABLE_PKS = {
   TblFailureSeverityLevel: "failureSeverityLevelId",
   TblFailureStatus: "failureStatusId",
   TblFailureGroupFollow: "failureGroupFollowId",
+  TblFailureReportWorkShop: "failureReportWorkShopId",
+  TblWorkShopAttachment: "workShopAttachmentId",
+  TblWorkShop: "workShopId",
 };
 
 const SPECIAL_RELATIONS = {
+  tblUsersTblWorkShopPersonInChargeIdTotblUsers: "userId",
+  tblUsersTblWorkShopClosedByIdTotblUsers: "userId",
+  tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers: "userId",
   tblUsersTblMaintLogUpdatedUserIdTotblUsers: "userId",
   tblUsersTblEmployeeCreatedUserIdTotblUsers: "userId",
   tblUsersTblMaintLogReportedByTotblUsers: "userId",
   tblUsersTblRotationLogUserRemovedIdTotblUsers: "userId",
   tblUsersTblRotationLogUserInsertedIdTotblUsers: "userId",
+  tblEmployeeTblEmployeeCreatedUserIdTotblUsers: "userId",
+  tblMaintLogTblMaintLogUpdatedUserIdTotblUsers: "userId",
+  tblMaintLogTblMaintLogReportedByTotblUsers: "userId",
+  tblRotationLogTblRotationLogUserInsertedIdTotblUsers: "userId",
+  tblRotationLogTblRotationLogUserRemovedIdTotblUsers: "userId",
+  tblWorkOrderTblWorkOrderIssuedByTotblUsers: "userId",
+  tblWorkOrderTblWorkOrderPlannedByTotblUsers: "userId",
+  tblWorkOrderTblWorkOrderCreatedByTotblUsers: "userId",
+  tblWorkOrderTblWorkOrderPendingByTotblUsers: "userId",
+  tblWorkShopTblWorkShopPersonInChargeIdTotblUsers: "userId",
+  tblWorkShopTblWorkShopClosedByIdTotblUsers: "userId",
+  tblWorkShopTblWorkShopPersonInChargeApproveIdTotblUsers: "userId",
 };
 
 const PRISMABOX_DIR = path.resolve("./orm/generated/prismabox");

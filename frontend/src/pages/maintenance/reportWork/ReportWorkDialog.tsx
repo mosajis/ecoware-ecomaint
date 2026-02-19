@@ -37,7 +37,7 @@ const ReportWorkDialog = ({
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
 
   const [reportWork, setReportWork] = useAtom(reportWorkAtom);
-  const { maintLog } = reportWork;
+  const { maintLog, workOrder } = reportWork;
 
   const user = useAtomValue(atomUser);
 
@@ -161,7 +161,11 @@ const ReportWorkDialog = ({
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="lg">
-      <DialogHeader title="Report Work" onClose={onClose} loading={isLoading} />
+      <DialogHeader
+        title={`Report Work / ${workOrder?.title}`}
+        onClose={onClose}
+        loading={isLoading}
+      />
       <DialogContent
         dividers
         style={{

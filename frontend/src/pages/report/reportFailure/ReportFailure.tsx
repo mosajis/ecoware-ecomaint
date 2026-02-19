@@ -12,8 +12,8 @@ import { FailureReportFilter } from "./ReportFailureDialogFilter";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { columns } from "./ReportFailureColumns";
 import {
-  tblFailureReportAttachment,
   tblFailureReports,
+  tblMaintLogAttachment,
   TypeTblFailureReports,
 } from "@/core/api/generated/api";
 
@@ -145,11 +145,11 @@ export default function PageReportFailure() {
         />
         <AttachmentMap
           label={selectedLabel || "Failure Attachments"}
-          mapService={tblFailureReportAttachment}
+          mapService={tblMaintLogAttachment}
           filterId={selectedRowId}
-          filterKey="failureReportId"
-          relName="tblFailureReports"
-          tableId="failureReportAttachmentId"
+          filterKey="maintLogId"
+          relName="tblMaintLog"
+          tableId="maintLogAttachmentId"
         />
       </Splitter>
 

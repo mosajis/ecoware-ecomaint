@@ -1816,7 +1816,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/tblFailureReportAttachment/": {
+    "/tblFailureReportWorkShop/": {
         parameters: {
             query?: never;
             header?: never;
@@ -1824,18 +1824,18 @@ export interface paths {
             cookie?: never;
         };
         /** Get all */
-        get: operations["getTblFailureReportAttachment"];
+        get: operations["getTblFailureReportWorkShop"];
         put?: never;
         /** Create */
-        post: operations["postTblFailureReportAttachment"];
+        post: operations["postTblFailureReportWorkShop"];
         /** Delete all */
-        delete: operations["deleteTblFailureReportAttachment"];
+        delete: operations["deleteTblFailureReportWorkShop"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/tblFailureReportAttachment/{failureReportAttachmentId}": {
+    "/tblFailureReportWorkShop/{failureReportWorkShopId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -1843,18 +1843,18 @@ export interface paths {
             cookie?: never;
         };
         /** Get one */
-        get: operations["getTblFailureReportAttachmentByFailureReportAttachmentId"];
+        get: operations["getTblFailureReportWorkShopByFailureReportWorkShopId"];
         /** Update */
-        put: operations["putTblFailureReportAttachmentByFailureReportAttachmentId"];
+        put: operations["putTblFailureReportWorkShopByFailureReportWorkShopId"];
         post?: never;
         /** Delete one */
-        delete: operations["deleteTblFailureReportAttachmentByFailureReportAttachmentId"];
+        delete: operations["deleteTblFailureReportWorkShopByFailureReportWorkShopId"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/tblFailureReportAttachment/count": {
+    "/tblFailureReportWorkShop/count": {
         parameters: {
             query?: never;
             header?: never;
@@ -1862,7 +1862,7 @@ export interface paths {
             cookie?: never;
         };
         /** Count */
-        get: operations["getTblFailureReportAttachmentCount"];
+        get: operations["getTblFailureReportWorkShopCount"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2430,6 +2430,61 @@ export interface paths {
         };
         /** Count */
         get: operations["getTblJobTriggerLogCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblJobVersion/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all */
+        get: operations["getTblJobVersion"];
+        put?: never;
+        /** Create */
+        post: operations["postTblJobVersion"];
+        /** Delete all */
+        delete: operations["deleteTblJobVersion"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblJobVersion/{jobVersionId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one */
+        get: operations["getTblJobVersionByJobVersionId"];
+        /** Update */
+        put: operations["putTblJobVersionByJobVersionId"];
+        post?: never;
+        /** Delete one */
+        delete: operations["deleteTblJobVersionByJobVersionId"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblJobVersion/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Count */
+        get: operations["getTblJobVersionCount"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3936,6 +3991,116 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/tblWorkShop/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all */
+        get: operations["getTblWorkShop"];
+        put?: never;
+        /** Create */
+        post: operations["postTblWorkShop"];
+        /** Delete all */
+        delete: operations["deleteTblWorkShop"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblWorkShop/{workShopId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one */
+        get: operations["getTblWorkShopByWorkShopId"];
+        /** Update */
+        put: operations["putTblWorkShopByWorkShopId"];
+        post?: never;
+        /** Delete one */
+        delete: operations["deleteTblWorkShopByWorkShopId"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblWorkShop/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Count */
+        get: operations["getTblWorkShopCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblWorkShopAttachment/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all */
+        get: operations["getTblWorkShopAttachment"];
+        put?: never;
+        /** Create */
+        post: operations["postTblWorkShopAttachment"];
+        /** Delete all */
+        delete: operations["deleteTblWorkShopAttachment"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblWorkShopAttachment/{workShopAttachmentId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one */
+        get: operations["getTblWorkShopAttachmentByWorkShopAttachmentId"];
+        /** Update */
+        put: operations["putTblWorkShopAttachmentByWorkShopAttachmentId"];
+        post?: never;
+        /** Delete one */
+        delete: operations["deleteTblWorkShopAttachmentByWorkShopAttachmentId"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblWorkShopAttachment/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Count */
+        get: operations["getTblWorkShopAttachmentCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tblWorkShopComponent/": {
         parameters: {
             query?: never;
@@ -3983,171 +4148,6 @@ export interface paths {
         };
         /** Count */
         get: operations["getTblWorkShopComponentCount"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblWorkShopDone/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get all */
-        get: operations["getTblWorkShopDone"];
-        put?: never;
-        /** Create */
-        post: operations["postTblWorkShopDone"];
-        /** Delete all */
-        delete: operations["deleteTblWorkShopDone"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblWorkShopDone/{wShopDoneId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get one */
-        get: operations["getTblWorkShopDoneByWShopDoneId"];
-        /** Update */
-        put: operations["putTblWorkShopDoneByWShopDoneId"];
-        post?: never;
-        /** Delete one */
-        delete: operations["deleteTblWorkShopDoneByWShopDoneId"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblWorkShopDone/count": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Count */
-        get: operations["getTblWorkShopDoneCount"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblWorkShopRequest/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get all */
-        get: operations["getTblWorkShopRequest"];
-        put?: never;
-        /** Create */
-        post: operations["postTblWorkShopRequest"];
-        /** Delete all */
-        delete: operations["deleteTblWorkShopRequest"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblWorkShopRequest/{wShopRequestId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get one */
-        get: operations["getTblWorkShopRequestByWShopRequestId"];
-        /** Update */
-        put: operations["putTblWorkShopRequestByWShopRequestId"];
-        post?: never;
-        /** Delete one */
-        delete: operations["deleteTblWorkShopRequestByWShopRequestId"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblWorkShopRequest/count": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Count */
-        get: operations["getTblWorkShopRequestCount"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblWorkShopRequestAttachment/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get all */
-        get: operations["getTblWorkShopRequestAttachment"];
-        put?: never;
-        /** Create */
-        post: operations["postTblWorkShopRequestAttachment"];
-        /** Delete all */
-        delete: operations["deleteTblWorkShopRequestAttachment"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblWorkShopRequestAttachment/{wShopRequestAttachmentId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get one */
-        get: operations["getTblWorkShopRequestAttachmentByWShopRequestAttachmentId"];
-        /** Update */
-        put: operations["putTblWorkShopRequestAttachmentByWShopRequestAttachmentId"];
-        post?: never;
-        /** Delete one */
-        delete: operations["deleteTblWorkShopRequestAttachmentByWShopRequestAttachmentId"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblWorkShopRequestAttachment/count": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Count */
-        get: operations["getTblWorkShopRequestAttachmentCount"];
         put?: never;
         post?: never;
         delete?: never;
@@ -5140,14 +5140,6 @@ export interface operations {
                                 createdUserId: number;
                                 createdAt: string;
                             }[];
-                            tblFailureReportAttachments?: {
-                                failureReportAttachmentId: number;
-                                failureReportId: number;
-                                attachmentId: number;
-                                orderNo: null | number;
-                                createdUserId: number;
-                                createdAt: string;
-                            }[];
                             tblJobDescriptionAttachments?: {
                                 jobDescriptionAttachmentId: number;
                                 jobDescId: number;
@@ -5164,11 +5156,10 @@ export interface operations {
                                 createdUserId: number;
                                 createdAt: string;
                             }[];
-                            tblWorkShopRequestAttachments?: {
-                                wShopRequestAttachmentId: number;
-                                wShopRequestId: number;
+                            tblWorkShopAttachments?: {
+                                workShopAttachmentId: number;
+                                workShopId: number;
                                 attachmentId: number;
-                                orderNo: null | number;
                                 createdUserId: number;
                                 createdAt: string;
                             }[];
@@ -5338,14 +5329,6 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblFailureReportAttachments?: {
-                            failureReportAttachmentId: number;
-                            failureReportId: number;
-                            attachmentId: number;
-                            orderNo: null | number;
-                            createdUserId: number;
-                            createdAt: string;
-                        }[];
                         tblJobDescriptionAttachments?: {
                             jobDescriptionAttachmentId: number;
                             jobDescId: number;
@@ -5362,11 +5345,10 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblWorkShopRequestAttachments?: {
-                            wShopRequestAttachmentId: number;
-                            wShopRequestId: number;
+                        tblWorkShopAttachments?: {
+                            workShopAttachmentId: number;
+                            workShopId: number;
                             attachmentId: number;
-                            orderNo: null | number;
                             createdUserId: number;
                             createdAt: string;
                         }[];
@@ -5422,14 +5404,6 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReportAttachments?: {
-                        connect?: {
-                            failureReportAttachmentId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblJobDescriptionAttachments?: {
                         connect?: {
                             jobDescriptionAttachmentId: number;
@@ -5446,9 +5420,9 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblWorkShopRequestAttachments?: {
+                    tblWorkShopAttachments?: {
                         connect?: {
-                            wShopRequestAttachmentId: number;
+                            workShopAttachmentId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -5488,14 +5462,6 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReportAttachments?: {
-                        connect?: {
-                            failureReportAttachmentId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblJobDescriptionAttachments?: {
                         connect?: {
                             jobDescriptionAttachmentId: number;
@@ -5512,9 +5478,9 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblWorkShopRequestAttachments?: {
+                    tblWorkShopAttachments?: {
                         connect?: {
-                            wShopRequestAttachmentId: number;
+                            workShopAttachmentId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -5554,14 +5520,6 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblFailureReportAttachments?: {
-                        connect?: {
-                            failureReportAttachmentId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblJobDescriptionAttachments?: {
                         connect?: {
                             jobDescriptionAttachmentId: number;
@@ -5578,9 +5536,9 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblWorkShopRequestAttachments?: {
+                    tblWorkShopAttachments?: {
                         connect?: {
-                            wShopRequestAttachmentId: number;
+                            workShopAttachmentId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -5655,14 +5613,6 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblFailureReportAttachments?: {
-                            failureReportAttachmentId: number;
-                            failureReportId: number;
-                            attachmentId: number;
-                            orderNo: null | number;
-                            createdUserId: number;
-                            createdAt: string;
-                        }[];
                         tblJobDescriptionAttachments?: {
                             jobDescriptionAttachmentId: number;
                             jobDescId: number;
@@ -5679,11 +5629,10 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblWorkShopRequestAttachments?: {
-                            wShopRequestAttachmentId: number;
-                            wShopRequestId: number;
+                        tblWorkShopAttachments?: {
+                            workShopAttachmentId: number;
+                            workShopId: number;
                             attachmentId: number;
-                            orderNo: null | number;
                             createdUserId: number;
                             createdAt: string;
                         }[];
@@ -22692,6 +22641,14 @@ export interface operations {
                                 userComment: null | string;
                                 workOrderTypeId: null | number;
                             }[];
+                            tblWorkShopComponents?: {
+                                workShopCompId: number;
+                                workShopId: number;
+                                compId: number;
+                                functionId: null | number;
+                                locationId: null | number;
+                                lastupdate: null | string;
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -22794,6 +22751,11 @@ export interface operations {
                             workOrderId: number;
                         }[];
                     };
+                    tblWorkShopComponents?: {
+                        connect: {
+                            wShopCompId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     compNo?: null | string;
@@ -22878,6 +22840,11 @@ export interface operations {
                             workOrderId: number;
                         }[];
                     };
+                    tblWorkShopComponents?: {
+                        connect: {
+                            wShopCompId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     compNo?: null | string;
@@ -22960,6 +22927,11 @@ export interface operations {
                     tblWorkOrders?: {
                         connect: {
                             workOrderId: number;
+                        }[];
+                    };
+                    tblWorkShopComponents?: {
+                        connect: {
+                            wShopCompId: number;
                         }[];
                     };
                 };
@@ -23262,6 +23234,14 @@ export interface operations {
                             userId: null | number;
                             userComment: null | string;
                             workOrderTypeId: null | number;
+                        }[];
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -23610,6 +23590,14 @@ export interface operations {
                             userComment: null | string;
                             workOrderTypeId: null | number;
                         }[];
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastupdate: null | string;
+                        }[];
                     };
                 };
             };
@@ -23744,6 +23732,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkShopComponents?: {
+                        connect?: {
+                            wShopCompId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     compNo?: null | string;
@@ -23860,6 +23856,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkShopComponents?: {
+                        connect?: {
+                            wShopCompId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     compNo?: null | string;
@@ -23971,6 +23975,14 @@ export interface operations {
                     tblWorkOrders?: {
                         connect?: {
                             workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopComponents?: {
+                        connect?: {
+                            wShopCompId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -24276,6 +24288,14 @@ export interface operations {
                             userId: null | number;
                             userComment: null | string;
                             workOrderTypeId: null | number;
+                        }[];
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -24591,6 +24611,14 @@ export interface operations {
                             userId: null | number;
                             userComment: null | string;
                             workOrderTypeId: null | number;
+                        }[];
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -26698,6 +26726,21 @@ export interface operations {
                                 userComment: null | string;
                                 workOrderTypeId: null | number;
                             }[];
+                            tblWorkShops?: {
+                                workShopId: number;
+                                title: string;
+                                workShopNo: null | string;
+                                awardingDate: null | string;
+                                createdDate: null | string;
+                                personInChargeId: null | number;
+                                discId: null | number;
+                                repairDescription: null | string;
+                                personInChargeApproveId: null | number;
+                                followDesc: null | string;
+                                closedDate: null | string;
+                                closedById: null | number;
+                                lastupdate: null | string;
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -26754,6 +26797,11 @@ export interface operations {
                             workOrderId: number;
                         }[];
                     };
+                    tblWorkShops?: {
+                        connect: {
+                            workShopId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     code?: null | string;
@@ -26792,6 +26840,11 @@ export interface operations {
                             workOrderId: number;
                         }[];
                     };
+                    tblWorkShops?: {
+                        connect: {
+                            workShopId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     code?: null | string;
@@ -26828,6 +26881,11 @@ export interface operations {
                     tblWorkOrders?: {
                         connect: {
                             workOrderId: number;
+                        }[];
+                    };
+                    tblWorkShops?: {
+                        connect: {
+                            workShopId: number;
                         }[];
                     };
                 };
@@ -27008,6 +27066,21 @@ export interface operations {
                             userId: null | number;
                             userComment: null | string;
                             workOrderTypeId: null | number;
+                        }[];
+                        tblWorkShops?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -27234,6 +27307,21 @@ export interface operations {
                             userComment: null | string;
                             workOrderTypeId: null | number;
                         }[];
+                        tblWorkShops?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        }[];
                     };
                 };
             };
@@ -27308,6 +27396,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkShops?: {
+                        connect?: {
+                            workShopId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     code?: null | string;
@@ -27364,6 +27460,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkShops?: {
+                        connect?: {
+                            workShopId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     code?: null | string;
@@ -27415,6 +27519,14 @@ export interface operations {
                     tblWorkOrders?: {
                         connect?: {
                             workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShops?: {
+                        connect?: {
+                            workShopId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -27598,6 +27710,21 @@ export interface operations {
                             userId: null | number;
                             userComment: null | string;
                             workOrderTypeId: null | number;
+                        }[];
+                        tblWorkShops?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -27791,6 +27918,21 @@ export interface operations {
                             userId: null | number;
                             userComment: null | string;
                             workOrderTypeId: null | number;
+                        }[];
+                        tblWorkShops?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -29143,7 +29285,7 @@ export interface operations {
             };
         };
     };
-    getTblFailureReportAttachment: {
+    getTblFailureReportWorkShop: {
         parameters: {
             query?: {
                 page?: number;
@@ -29169,25 +29311,9 @@ export interface operations {
                 content: {
                     "application/json": {
                         items: {
-                            failureReportAttachmentId: number;
+                            failureReportWorkShopId: number;
                             failureReportId: number;
-                            attachmentId: number;
-                            orderNo: null | number;
-                            createdUserId: number;
-                            createdAt: string;
-                            tblAttachment?: {
-                                attachmentId: number;
-                                title: null | string;
-                                fileName: null | string;
-                                attachmentTypeId: null | number;
-                                path: null | string;
-                                size: null | number;
-                                isUserAttachment: boolean;
-                                createdUserId: number;
-                                createdAt: string;
-                            } & {
-                                [key: string]: unknown;
-                            };
+                            workShopId: number;
                             tblFailureReports?: {
                                 failureReportId: number;
                                 maintLogId: null | number;
@@ -29205,27 +29331,20 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             };
-                            tblUsers?: {
-                                userId: number;
-                                employeeId: null | number;
-                                addressId: null | number;
-                                userGroupId: null | number;
-                                uUserName: null | string;
-                                uPassword: null | string;
-                                uName: null | string;
-                                uTitle: null | string;
-                                uComment1: null | string;
-                                uComment2: null | string;
-                                uDigitalSign: null | string;
-                                uAccountDisabled: null | boolean;
-                                uLogonAttempts: null | number;
-                                uForcePasswordChange: null | boolean;
-                                uLastLogin: null | string;
-                                exportMarker: null | number;
-                                uLastUpdated: null | string;
-                                orderNo: null | number;
-                                deptId: null | number;
-                                lastUpdate: null | string;
+                            tblWorkShop?: {
+                                workShopId: number;
+                                title: string;
+                                workShopNo: null | string;
+                                awardingDate: null | string;
+                                createdDate: null | string;
+                                personInChargeId: null | number;
+                                discId: null | number;
+                                repairDescription: null | string;
+                                personInChargeApproveId: null | number;
+                                followDesc: null | string;
+                                closedDate: null | string;
+                                closedById: null | number;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             };
@@ -29239,7 +29358,7 @@ export interface operations {
             };
         };
     };
-    postTblFailureReportAttachment: {
+    postTblFailureReportWorkShop: {
         parameters: {
             query?: never;
             header?: never;
@@ -29249,56 +29368,38 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    orderNo?: null | number;
-                    tblAttachment: {
-                        connect: {
-                            attachmentId: number;
-                        };
-                    };
                     tblFailureReports: {
                         connect: {
                             failureReportId: number;
                         };
                     };
-                    tblUsers: {
+                    tblWorkShop: {
                         connect: {
-                            userId: number;
+                            workShopId: number;
                         };
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    orderNo?: null | number;
-                    tblAttachment: {
-                        connect: {
-                            attachmentId: number;
-                        };
-                    };
                     tblFailureReports: {
                         connect: {
                             failureReportId: number;
                         };
                     };
-                    tblUsers: {
+                    tblWorkShop: {
                         connect: {
-                            userId: number;
+                            workShopId: number;
                         };
                     };
                 };
                 "multipart/form-data": {
-                    orderNo?: null | number;
-                    tblAttachment: {
-                        connect: {
-                            attachmentId: number;
-                        };
-                    };
                     tblFailureReports: {
                         connect: {
                             failureReportId: number;
                         };
                     };
-                    tblUsers: {
+                    tblWorkShop: {
                         connect: {
-                            userId: number;
+                            workShopId: number;
                         };
                     };
                 };
@@ -29312,25 +29413,9 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        failureReportAttachmentId: number;
+                        failureReportWorkShopId: number;
                         failureReportId: number;
-                        attachmentId: number;
-                        orderNo: null | number;
-                        createdUserId: number;
-                        createdAt: string;
-                        tblAttachment?: {
-                            attachmentId: number;
-                            title: null | string;
-                            fileName: null | string;
-                            attachmentTypeId: null | number;
-                            path: null | string;
-                            size: null | number;
-                            isUserAttachment: boolean;
-                            createdUserId: number;
-                            createdAt: string;
-                        } & {
-                            [key: string]: unknown;
-                        };
+                        workShopId: number;
                         tblFailureReports?: {
                             failureReportId: number;
                             maintLogId: null | number;
@@ -29348,27 +29433,20 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         };
-                        tblUsers?: {
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: null | string;
-                            uPassword: null | string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
+                        tblWorkShop?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -29377,7 +29455,7 @@ export interface operations {
             };
         };
     };
-    deleteTblFailureReportAttachment: {
+    deleteTblFailureReportWorkShop: {
         parameters: {
             query?: {
                 page?: number;
@@ -29408,7 +29486,7 @@ export interface operations {
             };
         };
     };
-    getTblFailureReportAttachmentByFailureReportAttachmentId: {
+    getTblFailureReportWorkShopByFailureReportWorkShopId: {
         parameters: {
             query?: {
                 include?: string;
@@ -29416,7 +29494,7 @@ export interface operations {
             };
             header?: never;
             path: {
-                failureReportAttachmentId: number;
+                failureReportWorkShopId: number;
             };
             cookie?: never;
         };
@@ -29429,25 +29507,9 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        failureReportAttachmentId: number;
+                        failureReportWorkShopId: number;
                         failureReportId: number;
-                        attachmentId: number;
-                        orderNo: null | number;
-                        createdUserId: number;
-                        createdAt: string;
-                        tblAttachment?: {
-                            attachmentId: number;
-                            title: null | string;
-                            fileName: null | string;
-                            attachmentTypeId: null | number;
-                            path: null | string;
-                            size: null | number;
-                            isUserAttachment: boolean;
-                            createdUserId: number;
-                            createdAt: string;
-                        } & {
-                            [key: string]: unknown;
-                        };
+                        workShopId: number;
                         tblFailureReports?: {
                             failureReportId: number;
                             maintLogId: null | number;
@@ -29465,27 +29527,20 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         };
-                        tblUsers?: {
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: null | string;
-                            uPassword: null | string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
+                        tblWorkShop?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -29494,7 +29549,7 @@ export interface operations {
             };
         };
     };
-    putTblFailureReportAttachmentByFailureReportAttachmentId: {
+    putTblFailureReportWorkShopByFailureReportWorkShopId: {
         parameters: {
             query?: {
                 include?: string;
@@ -29502,63 +29557,45 @@ export interface operations {
             };
             header?: never;
             path: {
-                failureReportAttachmentId: number;
+                failureReportWorkShopId: number;
             };
             cookie?: never;
         };
         requestBody: {
             content: {
                 "application/json": {
-                    orderNo?: null | number;
-                    tblAttachment?: {
-                        connect: {
-                            attachmentId: number;
-                        };
-                    };
                     tblFailureReports?: {
                         connect: {
                             failureReportId: number;
                         };
                     };
-                    tblUsers?: {
+                    tblWorkShop?: {
                         connect: {
-                            userId: number;
+                            workShopId: number;
                         };
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    orderNo?: null | number;
-                    tblAttachment?: {
-                        connect: {
-                            attachmentId: number;
-                        };
-                    };
                     tblFailureReports?: {
                         connect: {
                             failureReportId: number;
                         };
                     };
-                    tblUsers?: {
+                    tblWorkShop?: {
                         connect: {
-                            userId: number;
+                            workShopId: number;
                         };
                     };
                 };
                 "multipart/form-data": {
-                    orderNo?: null | number;
-                    tblAttachment?: {
-                        connect: {
-                            attachmentId: number;
-                        };
-                    };
                     tblFailureReports?: {
                         connect: {
                             failureReportId: number;
                         };
                     };
-                    tblUsers?: {
+                    tblWorkShop?: {
                         connect: {
-                            userId: number;
+                            workShopId: number;
                         };
                     };
                 };
@@ -29572,25 +29609,9 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        failureReportAttachmentId: number;
+                        failureReportWorkShopId: number;
                         failureReportId: number;
-                        attachmentId: number;
-                        orderNo: null | number;
-                        createdUserId: number;
-                        createdAt: string;
-                        tblAttachment?: {
-                            attachmentId: number;
-                            title: null | string;
-                            fileName: null | string;
-                            attachmentTypeId: null | number;
-                            path: null | string;
-                            size: null | number;
-                            isUserAttachment: boolean;
-                            createdUserId: number;
-                            createdAt: string;
-                        } & {
-                            [key: string]: unknown;
-                        };
+                        workShopId: number;
                         tblFailureReports?: {
                             failureReportId: number;
                             maintLogId: null | number;
@@ -29608,27 +29629,20 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         };
-                        tblUsers?: {
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: null | string;
-                            uPassword: null | string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
+                        tblWorkShop?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -29637,14 +29651,14 @@ export interface operations {
             };
         };
     };
-    deleteTblFailureReportAttachmentByFailureReportAttachmentId: {
+    deleteTblFailureReportWorkShopByFailureReportWorkShopId: {
         parameters: {
             query?: {
                 force?: boolean;
             };
             header?: never;
             path: {
-                failureReportAttachmentId: number;
+                failureReportWorkShopId: number;
             };
             cookie?: never;
         };
@@ -29657,25 +29671,9 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        failureReportAttachmentId: number;
+                        failureReportWorkShopId: number;
                         failureReportId: number;
-                        attachmentId: number;
-                        orderNo: null | number;
-                        createdUserId: number;
-                        createdAt: string;
-                        tblAttachment?: {
-                            attachmentId: number;
-                            title: null | string;
-                            fileName: null | string;
-                            attachmentTypeId: null | number;
-                            path: null | string;
-                            size: null | number;
-                            isUserAttachment: boolean;
-                            createdUserId: number;
-                            createdAt: string;
-                        } & {
-                            [key: string]: unknown;
-                        };
+                        workShopId: number;
                         tblFailureReports?: {
                             failureReportId: number;
                             maintLogId: null | number;
@@ -29693,27 +29691,20 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         };
-                        tblUsers?: {
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: null | string;
-                            uPassword: null | string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
+                        tblWorkShop?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -29722,7 +29713,7 @@ export interface operations {
             };
         };
     };
-    getTblFailureReportAttachmentCount: {
+    getTblFailureReportWorkShopCount: {
         parameters: {
             query?: {
                 page?: number;
@@ -29792,14 +29783,6 @@ export interface operations {
                             closedUserId: null | number;
                             closedDateTime: null | string;
                             followDesc: null | string;
-                            tblFailureReportAttachments?: {
-                                failureReportAttachmentId: number;
-                                failureReportId: number;
-                                attachmentId: number;
-                                orderNo: null | number;
-                                createdUserId: number;
-                                createdAt: string;
-                            }[];
                             tblFailureGroupFollow?: null | ({
                                 failureGroupFollowId: number;
                                 name: null | string;
@@ -29882,6 +29865,11 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             });
+                            tblFailureReportWorkShops?: {
+                                failureReportWorkShopId: number;
+                                failureReportId: number;
+                                workShopId: number;
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -29908,11 +29896,6 @@ export interface operations {
                     nextFollowDate?: null | string;
                     closedDateTime?: null | string;
                     followDesc?: null | string;
-                    tblFailureReportAttachments?: {
-                        connect: {
-                            failureReportAttachmentId: number;
-                        }[];
-                    };
                     tblFailureGroupFollow?: {
                         connect: {
                             failureGroupFollowId: number;
@@ -29942,6 +29925,11 @@ export interface operations {
                         connect: {
                             userId: number;
                         };
+                    };
+                    tblFailureReportWorkShops?: {
+                        connect: {
+                            failureReportWorkShopId: number;
+                        }[];
                     };
                 };
                 "application/x-www-form-urlencoded": {
@@ -29951,11 +29939,6 @@ export interface operations {
                     nextFollowDate?: null | string;
                     closedDateTime?: null | string;
                     followDesc?: null | string;
-                    tblFailureReportAttachments?: {
-                        connect: {
-                            failureReportAttachmentId: number;
-                        }[];
-                    };
                     tblFailureGroupFollow?: {
                         connect: {
                             failureGroupFollowId: number;
@@ -29985,6 +29968,11 @@ export interface operations {
                         connect: {
                             userId: number;
                         };
+                    };
+                    tblFailureReportWorkShops?: {
+                        connect: {
+                            failureReportWorkShopId: number;
+                        }[];
                     };
                 };
                 "multipart/form-data": {
@@ -29994,11 +29982,6 @@ export interface operations {
                     nextFollowDate?: null | string;
                     closedDateTime?: null | string;
                     followDesc?: null | string;
-                    tblFailureReportAttachments?: {
-                        connect: {
-                            failureReportAttachmentId: number;
-                        }[];
-                    };
                     tblFailureGroupFollow?: {
                         connect: {
                             failureGroupFollowId: number;
@@ -30028,6 +30011,11 @@ export interface operations {
                         connect: {
                             userId: number;
                         };
+                    };
+                    tblFailureReportWorkShops?: {
+                        connect: {
+                            failureReportWorkShopId: number;
+                        }[];
                     };
                 };
             };
@@ -30053,14 +30041,6 @@ export interface operations {
                         closedUserId: null | number;
                         closedDateTime: null | string;
                         followDesc: null | string;
-                        tblFailureReportAttachments?: {
-                            failureReportAttachmentId: number;
-                            failureReportId: number;
-                            attachmentId: number;
-                            orderNo: null | number;
-                            createdUserId: number;
-                            createdAt: string;
-                        }[];
                         tblFailureGroupFollow?: null | ({
                             failureGroupFollowId: number;
                             name: null | string;
@@ -30143,6 +30123,11 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblFailureReportWorkShops?: {
+                            failureReportWorkShopId: number;
+                            failureReportId: number;
+                            workShopId: number;
+                        }[];
                     };
                 };
             };
@@ -30213,14 +30198,6 @@ export interface operations {
                         closedUserId: null | number;
                         closedDateTime: null | string;
                         followDesc: null | string;
-                        tblFailureReportAttachments?: {
-                            failureReportAttachmentId: number;
-                            failureReportId: number;
-                            attachmentId: number;
-                            orderNo: null | number;
-                            createdUserId: number;
-                            createdAt: string;
-                        }[];
                         tblFailureGroupFollow?: null | ({
                             failureGroupFollowId: number;
                             name: null | string;
@@ -30303,6 +30280,11 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblFailureReportWorkShops?: {
+                            failureReportWorkShopId: number;
+                            failureReportId: number;
+                            workShopId: number;
+                        }[];
                     };
                 };
             };
@@ -30329,14 +30311,6 @@ export interface operations {
                     nextFollowDate?: null | string;
                     closedDateTime?: null | string;
                     followDesc?: null | string;
-                    tblFailureReportAttachments?: {
-                        connect?: {
-                            failureReportAttachmentId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblFailureGroupFollow?: {
                         connect?: {
                             failureGroupFollowId: number;
@@ -30372,6 +30346,14 @@ export interface operations {
                             userId: number;
                         };
                         disconnect?: boolean;
+                    };
+                    tblFailureReportWorkShops?: {
+                        connect?: {
+                            failureReportWorkShopId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
                     };
                 };
                 "application/x-www-form-urlencoded": {
@@ -30381,14 +30363,6 @@ export interface operations {
                     nextFollowDate?: null | string;
                     closedDateTime?: null | string;
                     followDesc?: null | string;
-                    tblFailureReportAttachments?: {
-                        connect?: {
-                            failureReportAttachmentId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblFailureGroupFollow?: {
                         connect?: {
                             failureGroupFollowId: number;
@@ -30424,6 +30398,14 @@ export interface operations {
                             userId: number;
                         };
                         disconnect?: boolean;
+                    };
+                    tblFailureReportWorkShops?: {
+                        connect?: {
+                            failureReportWorkShopId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
                     };
                 };
                 "multipart/form-data": {
@@ -30433,14 +30415,6 @@ export interface operations {
                     nextFollowDate?: null | string;
                     closedDateTime?: null | string;
                     followDesc?: null | string;
-                    tblFailureReportAttachments?: {
-                        connect?: {
-                            failureReportAttachmentId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblFailureGroupFollow?: {
                         connect?: {
                             failureGroupFollowId: number;
@@ -30476,6 +30450,14 @@ export interface operations {
                             userId: number;
                         };
                         disconnect?: boolean;
+                    };
+                    tblFailureReportWorkShops?: {
+                        connect?: {
+                            failureReportWorkShopId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
                     };
                 };
             };
@@ -30501,14 +30483,6 @@ export interface operations {
                         closedUserId: null | number;
                         closedDateTime: null | string;
                         followDesc: null | string;
-                        tblFailureReportAttachments?: {
-                            failureReportAttachmentId: number;
-                            failureReportId: number;
-                            attachmentId: number;
-                            orderNo: null | number;
-                            createdUserId: number;
-                            createdAt: string;
-                        }[];
                         tblFailureGroupFollow?: null | ({
                             failureGroupFollowId: number;
                             name: null | string;
@@ -30591,6 +30565,11 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblFailureReportWorkShops?: {
+                            failureReportWorkShopId: number;
+                            failureReportId: number;
+                            workShopId: number;
+                        }[];
                     };
                 };
             };
@@ -30629,14 +30608,6 @@ export interface operations {
                         closedUserId: null | number;
                         closedDateTime: null | string;
                         followDesc: null | string;
-                        tblFailureReportAttachments?: {
-                            failureReportAttachmentId: number;
-                            failureReportId: number;
-                            attachmentId: number;
-                            orderNo: null | number;
-                            createdUserId: number;
-                            createdAt: string;
-                        }[];
                         tblFailureGroupFollow?: null | ({
                             failureGroupFollowId: number;
                             name: null | string;
@@ -30719,6 +30690,11 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblFailureReportWorkShops?: {
+                            failureReportWorkShopId: number;
+                            failureReportId: number;
+                            workShopId: number;
+                        }[];
                     };
                 };
             };
@@ -32155,6 +32131,14 @@ export interface operations {
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
+                            tblWorkShopComponents?: {
+                                workShopCompId: number;
+                                workShopId: number;
+                                compId: number;
+                                functionId: null | number;
+                                locationId: null | number;
+                                lastupdate: null | string;
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -32206,6 +32190,11 @@ export interface operations {
                             rotationLogId: number;
                         }[];
                     };
+                    tblWorkShopComponents?: {
+                        connect: {
+                            wShopCompId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     funcNo?: null | string;
@@ -32239,6 +32228,11 @@ export interface operations {
                             rotationLogId: number;
                         }[];
                     };
+                    tblWorkShopComponents?: {
+                        connect: {
+                            wShopCompId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     funcNo?: null | string;
@@ -32270,6 +32264,11 @@ export interface operations {
                     tblRotationLogs?: {
                         connect: {
                             rotationLogId: number;
+                        }[];
+                    };
+                    tblWorkShopComponents?: {
+                        connect: {
+                            wShopCompId: number;
                         }[];
                     };
                 };
@@ -32384,6 +32383,14 @@ export interface operations {
                             exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
+                        }[];
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -32544,6 +32551,14 @@ export interface operations {
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastupdate: null | string;
+                        }[];
                     };
                 };
             };
@@ -32606,6 +32621,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkShopComponents?: {
+                        connect?: {
+                            wShopCompId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     funcNo?: null | string;
@@ -32650,6 +32673,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkShopComponents?: {
+                        connect?: {
+                            wShopCompId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     funcNo?: null | string;
@@ -32689,6 +32720,14 @@ export interface operations {
                     tblRotationLogs?: {
                         connect?: {
                             rotationLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopComponents?: {
+                        connect?: {
+                            wShopCompId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -32806,6 +32845,14 @@ export interface operations {
                             exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
+                        }[];
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -32933,6 +32980,14 @@ export interface operations {
                             exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
+                        }[];
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -35976,6 +36031,339 @@ export interface operations {
             };
         };
     };
+    getTblJobVersion: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            jobVersionId: number;
+                            jobVersionNo: null | string;
+                            jobDescTitle: null | string;
+                            jobDesc: null | string;
+                            createdDate: null | string;
+                            status: null | number;
+                            jobDescId: null | number;
+                            createdBy: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            createdUserId: null | number;
+                            orderNo: null | number;
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
+    };
+    postTblJobVersion: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    jobVersionNo?: null | string;
+                    jobDescTitle?: null | string;
+                    jobDesc?: null | string;
+                    createdDate?: null | string;
+                    status?: null | number;
+                    createdBy?: null | number;
+                    exportMarker?: null | number;
+                    lastupdate?: null | string;
+                    orderNo?: null | number;
+                };
+                "application/x-www-form-urlencoded": {
+                    jobVersionNo?: null | string;
+                    jobDescTitle?: null | string;
+                    jobDesc?: null | string;
+                    createdDate?: null | string;
+                    status?: null | number;
+                    createdBy?: null | number;
+                    exportMarker?: null | number;
+                    lastupdate?: null | string;
+                    orderNo?: null | number;
+                };
+                "multipart/form-data": {
+                    jobVersionNo?: null | string;
+                    jobDescTitle?: null | string;
+                    jobDesc?: null | string;
+                    createdDate?: null | string;
+                    status?: null | number;
+                    createdBy?: null | number;
+                    exportMarker?: null | number;
+                    lastupdate?: null | string;
+                    orderNo?: null | number;
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        jobVersionId: number;
+                        jobVersionNo: null | string;
+                        jobDescTitle: null | string;
+                        jobDesc: null | string;
+                        createdDate: null | string;
+                        status: null | number;
+                        jobDescId: null | number;
+                        createdBy: null | number;
+                        deptId: null | number;
+                        exportMarker: null | number;
+                        lastupdate: null | string;
+                        createdUserId: null | number;
+                        orderNo: null | number;
+                    };
+                };
+            };
+        };
+    };
+    deleteTblJobVersion: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        deleted: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblJobVersionByJobVersionId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                jobVersionId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        jobVersionId: number;
+                        jobVersionNo: null | string;
+                        jobDescTitle: null | string;
+                        jobDesc: null | string;
+                        createdDate: null | string;
+                        status: null | number;
+                        jobDescId: null | number;
+                        createdBy: null | number;
+                        deptId: null | number;
+                        exportMarker: null | number;
+                        lastupdate: null | string;
+                        createdUserId: null | number;
+                        orderNo: null | number;
+                    };
+                };
+            };
+        };
+    };
+    putTblJobVersionByJobVersionId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                jobVersionId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    jobVersionNo?: null | string;
+                    jobDescTitle?: null | string;
+                    jobDesc?: null | string;
+                    createdDate?: null | string;
+                    status?: null | number;
+                    createdBy?: null | number;
+                    exportMarker?: null | number;
+                    lastupdate?: null | string;
+                    orderNo?: null | number;
+                };
+                "application/x-www-form-urlencoded": {
+                    jobVersionNo?: null | string;
+                    jobDescTitle?: null | string;
+                    jobDesc?: null | string;
+                    createdDate?: null | string;
+                    status?: null | number;
+                    createdBy?: null | number;
+                    exportMarker?: null | number;
+                    lastupdate?: null | string;
+                    orderNo?: null | number;
+                };
+                "multipart/form-data": {
+                    jobVersionNo?: null | string;
+                    jobDescTitle?: null | string;
+                    jobDesc?: null | string;
+                    createdDate?: null | string;
+                    status?: null | number;
+                    createdBy?: null | number;
+                    exportMarker?: null | number;
+                    lastupdate?: null | string;
+                    orderNo?: null | number;
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        jobVersionId: number;
+                        jobVersionNo: null | string;
+                        jobDescTitle: null | string;
+                        jobDesc: null | string;
+                        createdDate: null | string;
+                        status: null | number;
+                        jobDescId: null | number;
+                        createdBy: null | number;
+                        deptId: null | number;
+                        exportMarker: null | number;
+                        lastupdate: null | string;
+                        createdUserId: null | number;
+                        orderNo: null | number;
+                    };
+                };
+            };
+        };
+    };
+    deleteTblJobVersionByJobVersionId: {
+        parameters: {
+            query?: {
+                force?: boolean;
+            };
+            header?: never;
+            path: {
+                jobVersionId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        jobVersionId: number;
+                        jobVersionNo: null | string;
+                        jobDescTitle: null | string;
+                        jobDesc: null | string;
+                        createdDate: null | string;
+                        status: null | number;
+                        jobDescId: null | number;
+                        createdBy: null | number;
+                        deptId: null | number;
+                        exportMarker: null | number;
+                        lastupdate: null | string;
+                        createdUserId: null | number;
+                        orderNo: null | number;
+                    };
+                };
+            };
+        };
+    };
+    getTblJobVersionCount: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
     getTblLocation: {
         parameters: {
             query?: {
@@ -36068,6 +36456,14 @@ export interface operations {
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
+                            tblWorkShopComponents?: {
+                                workShopCompId: number;
+                                workShopId: number;
+                                compId: number;
+                                functionId: null | number;
+                                locationId: null | number;
+                                lastupdate: null | string;
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -36113,6 +36509,11 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkShopComponents?: {
+                        connect: {
+                            wShopCompId: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     name?: null | string;
@@ -36140,6 +36541,11 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkShopComponents?: {
+                        connect: {
+                            wShopCompId: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     name?: null | string;
@@ -36165,6 +36571,11 @@ export interface operations {
                     otherTblLocations?: {
                         connect: {
                             id: number;
+                        }[];
+                    };
+                    tblWorkShopComponents?: {
+                        connect: {
+                            wShopCompId: number;
                         }[];
                     };
                 };
@@ -36243,6 +36654,14 @@ export interface operations {
                             exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
+                        }[];
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -36367,6 +36786,14 @@ export interface operations {
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastupdate: null | string;
+                        }[];
                     };
                 };
             };
@@ -36422,6 +36849,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkShopComponents?: {
+                        connect?: {
+                            wShopCompId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     name?: null | string;
@@ -36459,6 +36894,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWorkShopComponents?: {
+                        connect?: {
+                            wShopCompId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                 };
                 "multipart/form-data": {
                     name?: null | string;
@@ -36491,6 +36934,14 @@ export interface operations {
                     otherTblLocations?: {
                         connect?: {
                             id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopComponents?: {
+                        connect?: {
+                            wShopCompId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -36572,6 +37023,14 @@ export interface operations {
                             exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
+                        }[];
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -36663,6 +37122,14 @@ export interface operations {
                             exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
+                        }[];
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -53235,14 +53702,6 @@ export interface operations {
                                 orderNo: null | number;
                                 createdUserId: null | number;
                             }[];
-                            tblFailureReportAttachments?: {
-                                failureReportAttachmentId: number;
-                                failureReportId: number;
-                                attachmentId: number;
-                                orderNo: null | number;
-                                createdUserId: number;
-                                createdAt: string;
-                            }[];
                             tblFailureReports?: {
                                 failureReportId: number;
                                 maintLogId: null | number;
@@ -53610,11 +54069,55 @@ export interface operations {
                                 userComment: null | string;
                                 workOrderTypeId: null | number;
                             }[];
-                            tblWorkShopRequestAttachments?: {
-                                wShopRequestAttachmentId: number;
-                                wShopRequestId: number;
+                            tblWorkShopTblWorkShopPersonInChargeIdTotblUsers?: {
+                                workShopId: number;
+                                title: string;
+                                workShopNo: null | string;
+                                awardingDate: null | string;
+                                createdDate: null | string;
+                                personInChargeId: null | number;
+                                discId: null | number;
+                                repairDescription: null | string;
+                                personInChargeApproveId: null | number;
+                                followDesc: null | string;
+                                closedDate: null | string;
+                                closedById: null | number;
+                                lastupdate: null | string;
+                            }[];
+                            tblWorkShopTblWorkShopClosedByIdTotblUsers?: {
+                                workShopId: number;
+                                title: string;
+                                workShopNo: null | string;
+                                awardingDate: null | string;
+                                createdDate: null | string;
+                                personInChargeId: null | number;
+                                discId: null | number;
+                                repairDescription: null | string;
+                                personInChargeApproveId: null | number;
+                                followDesc: null | string;
+                                closedDate: null | string;
+                                closedById: null | number;
+                                lastupdate: null | string;
+                            }[];
+                            tblWorkShopTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                                workShopId: number;
+                                title: string;
+                                workShopNo: null | string;
+                                awardingDate: null | string;
+                                createdDate: null | string;
+                                personInChargeId: null | number;
+                                discId: null | number;
+                                repairDescription: null | string;
+                                personInChargeApproveId: null | number;
+                                followDesc: null | string;
+                                closedDate: null | string;
+                                closedById: null | number;
+                                lastupdate: null | string;
+                            }[];
+                            tblWorkShopAttachments?: {
+                                workShopAttachmentId: number;
+                                workShopId: number;
                                 attachmentId: number;
-                                orderNo: null | number;
                                 createdUserId: number;
                                 createdAt: string;
                             }[];
@@ -53720,12 +54223,7 @@ export interface operations {
                     };
                     tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                         connect: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportAttachments?: {
-                        connect: {
-                            failureReportAttachmentId: number;
+                            userId: number;
                         }[];
                     };
                     tblFailureReports?: {
@@ -53755,12 +54253,12 @@ export interface operations {
                     };
                     tblMaintLogTblMaintLogUpdatedUserIdTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblMaintLogTblMaintLogReportedByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblMaintLogAttachments?: {
@@ -53780,12 +54278,12 @@ export interface operations {
                     };
                     tblRotationLogTblRotationLogUserInsertedIdTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblRotationLogTblRotationLogUserRemovedIdTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblRoundCompJobs?: {
@@ -53800,27 +54298,42 @@ export interface operations {
                     };
                     tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblWorkOrderTblWorkOrderPlannedByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblWorkOrderTblWorkOrderCreatedByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblWorkOrderTblWorkOrderPendingByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
-                    tblWorkShopRequestAttachments?: {
+                    tblWorkShopTblWorkShopPersonInChargeIdTotblUsers?: {
                         connect: {
-                            wShopRequestAttachmentId: number;
+                            userId: number;
+                        }[];
+                    };
+                    tblWorkShopTblWorkShopClosedByIdTotblUsers?: {
+                        connect: {
+                            userId: number;
+                        }[];
+                    };
+                    tblWorkShopTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                        connect: {
+                            userId: number;
+                        }[];
+                    };
+                    tblWorkShopAttachments?: {
+                        connect: {
+                            workShopAttachmentId: number;
                         }[];
                     };
                 };
@@ -53907,12 +54420,7 @@ export interface operations {
                     };
                     tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                         connect: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportAttachments?: {
-                        connect: {
-                            failureReportAttachmentId: number;
+                            userId: number;
                         }[];
                     };
                     tblFailureReports?: {
@@ -53942,12 +54450,12 @@ export interface operations {
                     };
                     tblMaintLogTblMaintLogUpdatedUserIdTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblMaintLogTblMaintLogReportedByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblMaintLogAttachments?: {
@@ -53967,12 +54475,12 @@ export interface operations {
                     };
                     tblRotationLogTblRotationLogUserInsertedIdTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblRotationLogTblRotationLogUserRemovedIdTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblRoundCompJobs?: {
@@ -53987,27 +54495,42 @@ export interface operations {
                     };
                     tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblWorkOrderTblWorkOrderPlannedByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblWorkOrderTblWorkOrderCreatedByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblWorkOrderTblWorkOrderPendingByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
-                    tblWorkShopRequestAttachments?: {
+                    tblWorkShopTblWorkShopPersonInChargeIdTotblUsers?: {
                         connect: {
-                            wShopRequestAttachmentId: number;
+                            userId: number;
+                        }[];
+                    };
+                    tblWorkShopTblWorkShopClosedByIdTotblUsers?: {
+                        connect: {
+                            userId: number;
+                        }[];
+                    };
+                    tblWorkShopTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                        connect: {
+                            userId: number;
+                        }[];
+                    };
+                    tblWorkShopAttachments?: {
+                        connect: {
+                            workShopAttachmentId: number;
                         }[];
                     };
                 };
@@ -54094,12 +54617,7 @@ export interface operations {
                     };
                     tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                         connect: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportAttachments?: {
-                        connect: {
-                            failureReportAttachmentId: number;
+                            userId: number;
                         }[];
                     };
                     tblFailureReports?: {
@@ -54129,12 +54647,12 @@ export interface operations {
                     };
                     tblMaintLogTblMaintLogUpdatedUserIdTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblMaintLogTblMaintLogReportedByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblMaintLogAttachments?: {
@@ -54154,12 +54672,12 @@ export interface operations {
                     };
                     tblRotationLogTblRotationLogUserInsertedIdTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblRotationLogTblRotationLogUserRemovedIdTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblRoundCompJobs?: {
@@ -54174,27 +54692,42 @@ export interface operations {
                     };
                     tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblWorkOrderTblWorkOrderPlannedByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblWorkOrderTblWorkOrderCreatedByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
                     tblWorkOrderTblWorkOrderPendingByTotblUsers?: {
                         connect: {
-                            id: number;
+                            userId: number;
                         }[];
                     };
-                    tblWorkShopRequestAttachments?: {
+                    tblWorkShopTblWorkShopPersonInChargeIdTotblUsers?: {
                         connect: {
-                            wShopRequestAttachmentId: number;
+                            userId: number;
+                        }[];
+                    };
+                    tblWorkShopTblWorkShopClosedByIdTotblUsers?: {
+                        connect: {
+                            userId: number;
+                        }[];
+                    };
+                    tblWorkShopTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                        connect: {
+                            userId: number;
+                        }[];
+                    };
+                    tblWorkShopAttachments?: {
+                        connect: {
+                            workShopAttachmentId: number;
                         }[];
                     };
                 };
@@ -54445,14 +54978,6 @@ export interface operations {
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
-                        }[];
-                        tblFailureReportAttachments?: {
-                            failureReportAttachmentId: number;
-                            failureReportId: number;
-                            attachmentId: number;
-                            orderNo: null | number;
-                            createdUserId: number;
-                            createdAt: string;
                         }[];
                         tblFailureReports?: {
                             failureReportId: number;
@@ -54821,11 +55346,55 @@ export interface operations {
                             userComment: null | string;
                             workOrderTypeId: null | number;
                         }[];
-                        tblWorkShopRequestAttachments?: {
-                            wShopRequestAttachmentId: number;
-                            wShopRequestId: number;
+                        tblWorkShopTblWorkShopPersonInChargeIdTotblUsers?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        }[];
+                        tblWorkShopTblWorkShopClosedByIdTotblUsers?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        }[];
+                        tblWorkShopTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        }[];
+                        tblWorkShopAttachments?: {
+                            workShopAttachmentId: number;
+                            workShopId: number;
                             attachmentId: number;
-                            orderNo: null | number;
                             createdUserId: number;
                             createdAt: string;
                         }[];
@@ -55124,14 +55693,6 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                         }[];
-                        tblFailureReportAttachments?: {
-                            failureReportAttachmentId: number;
-                            failureReportId: number;
-                            attachmentId: number;
-                            orderNo: null | number;
-                            createdUserId: number;
-                            createdAt: string;
-                        }[];
                         tblFailureReports?: {
                             failureReportId: number;
                             maintLogId: null | number;
@@ -55499,11 +56060,55 @@ export interface operations {
                             userComment: null | string;
                             workOrderTypeId: null | number;
                         }[];
-                        tblWorkShopRequestAttachments?: {
-                            wShopRequestAttachmentId: number;
-                            wShopRequestId: number;
+                        tblWorkShopTblWorkShopPersonInChargeIdTotblUsers?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        }[];
+                        tblWorkShopTblWorkShopClosedByIdTotblUsers?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        }[];
+                        tblWorkShopTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        }[];
+                        tblWorkShopAttachments?: {
+                            workShopAttachmentId: number;
+                            workShopId: number;
                             attachmentId: number;
-                            orderNo: null | number;
                             createdUserId: number;
                             createdAt: string;
                         }[];
@@ -55648,15 +56253,7 @@ export interface operations {
                     };
                     tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                         connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportAttachments?: {
-                        connect?: {
-                            failureReportAttachmentId: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -55704,7 +56301,7 @@ export interface operations {
                     };
                     tblMaintLogTblMaintLogUpdatedUserIdTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -55712,7 +56309,7 @@ export interface operations {
                     };
                     tblMaintLogTblMaintLogReportedByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -55744,7 +56341,7 @@ export interface operations {
                     };
                     tblRotationLogTblRotationLogUserInsertedIdTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -55752,7 +56349,7 @@ export interface operations {
                     };
                     tblRotationLogTblRotationLogUserRemovedIdTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -55774,7 +56371,7 @@ export interface operations {
                     };
                     tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -55782,7 +56379,7 @@ export interface operations {
                     };
                     tblWorkOrderTblWorkOrderPlannedByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -55790,7 +56387,7 @@ export interface operations {
                     };
                     tblWorkOrderTblWorkOrderCreatedByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -55798,15 +56395,39 @@ export interface operations {
                     };
                     tblWorkOrderTblWorkOrderPendingByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
                         }[];
                     };
-                    tblWorkShopRequestAttachments?: {
+                    tblWorkShopTblWorkShopPersonInChargeIdTotblUsers?: {
                         connect?: {
-                            wShopRequestAttachmentId: number;
+                            userId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopTblWorkShopClosedByIdTotblUsers?: {
+                        connect?: {
+                            userId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                        connect?: {
+                            userId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopAttachments?: {
+                        connect?: {
+                            workShopAttachmentId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -55935,15 +56556,7 @@ export interface operations {
                     };
                     tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                         connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportAttachments?: {
-                        connect?: {
-                            failureReportAttachmentId: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -55991,7 +56604,7 @@ export interface operations {
                     };
                     tblMaintLogTblMaintLogUpdatedUserIdTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -55999,7 +56612,7 @@ export interface operations {
                     };
                     tblMaintLogTblMaintLogReportedByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56031,7 +56644,7 @@ export interface operations {
                     };
                     tblRotationLogTblRotationLogUserInsertedIdTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56039,7 +56652,7 @@ export interface operations {
                     };
                     tblRotationLogTblRotationLogUserRemovedIdTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56061,7 +56674,7 @@ export interface operations {
                     };
                     tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56069,7 +56682,7 @@ export interface operations {
                     };
                     tblWorkOrderTblWorkOrderPlannedByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56077,7 +56690,7 @@ export interface operations {
                     };
                     tblWorkOrderTblWorkOrderCreatedByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56085,15 +56698,39 @@ export interface operations {
                     };
                     tblWorkOrderTblWorkOrderPendingByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
                         }[];
                     };
-                    tblWorkShopRequestAttachments?: {
+                    tblWorkShopTblWorkShopPersonInChargeIdTotblUsers?: {
                         connect?: {
-                            wShopRequestAttachmentId: number;
+                            userId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopTblWorkShopClosedByIdTotblUsers?: {
+                        connect?: {
+                            userId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                        connect?: {
+                            userId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopAttachments?: {
+                        connect?: {
+                            workShopAttachmentId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56222,15 +56859,7 @@ export interface operations {
                     };
                     tblEmployeeTblEmployeeCreatedUserIdTotblUsers?: {
                         connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblFailureReportAttachments?: {
-                        connect?: {
-                            failureReportAttachmentId: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56278,7 +56907,7 @@ export interface operations {
                     };
                     tblMaintLogTblMaintLogUpdatedUserIdTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56286,7 +56915,7 @@ export interface operations {
                     };
                     tblMaintLogTblMaintLogReportedByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56318,7 +56947,7 @@ export interface operations {
                     };
                     tblRotationLogTblRotationLogUserInsertedIdTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56326,7 +56955,7 @@ export interface operations {
                     };
                     tblRotationLogTblRotationLogUserRemovedIdTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56348,7 +56977,7 @@ export interface operations {
                     };
                     tblWorkOrderTblWorkOrderIssuedByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56356,7 +56985,7 @@ export interface operations {
                     };
                     tblWorkOrderTblWorkOrderPlannedByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56364,7 +56993,7 @@ export interface operations {
                     };
                     tblWorkOrderTblWorkOrderCreatedByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56372,15 +57001,39 @@ export interface operations {
                     };
                     tblWorkOrderTblWorkOrderPendingByTotblUsers?: {
                         connect?: {
-                            id: number;
+                            userId: number;
                         }[];
                         disconnect?: {
                             id: number;
                         }[];
                     };
-                    tblWorkShopRequestAttachments?: {
+                    tblWorkShopTblWorkShopPersonInChargeIdTotblUsers?: {
                         connect?: {
-                            wShopRequestAttachmentId: number;
+                            userId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopTblWorkShopClosedByIdTotblUsers?: {
+                        connect?: {
+                            userId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                        connect?: {
+                            userId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopAttachments?: {
+                        connect?: {
+                            workShopAttachmentId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56635,14 +57288,6 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                         }[];
-                        tblFailureReportAttachments?: {
-                            failureReportAttachmentId: number;
-                            failureReportId: number;
-                            attachmentId: number;
-                            orderNo: null | number;
-                            createdUserId: number;
-                            createdAt: string;
-                        }[];
                         tblFailureReports?: {
                             failureReportId: number;
                             maintLogId: null | number;
@@ -57010,11 +57655,55 @@ export interface operations {
                             userComment: null | string;
                             workOrderTypeId: null | number;
                         }[];
-                        tblWorkShopRequestAttachments?: {
-                            wShopRequestAttachmentId: number;
-                            wShopRequestId: number;
+                        tblWorkShopTblWorkShopPersonInChargeIdTotblUsers?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        }[];
+                        tblWorkShopTblWorkShopClosedByIdTotblUsers?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        }[];
+                        tblWorkShopTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        }[];
+                        tblWorkShopAttachments?: {
+                            workShopAttachmentId: number;
+                            workShopId: number;
                             attachmentId: number;
-                            orderNo: null | number;
                             createdUserId: number;
                             createdAt: string;
                         }[];
@@ -57281,14 +57970,6 @@ export interface operations {
                             orderNo: null | number;
                             createdUserId: null | number;
                         }[];
-                        tblFailureReportAttachments?: {
-                            failureReportAttachmentId: number;
-                            failureReportId: number;
-                            attachmentId: number;
-                            orderNo: null | number;
-                            createdUserId: number;
-                            createdAt: string;
-                        }[];
                         tblFailureReports?: {
                             failureReportId: number;
                             maintLogId: null | number;
@@ -57656,11 +58337,55 @@ export interface operations {
                             userComment: null | string;
                             workOrderTypeId: null | number;
                         }[];
-                        tblWorkShopRequestAttachments?: {
-                            wShopRequestAttachmentId: number;
-                            wShopRequestId: number;
+                        tblWorkShopTblWorkShopPersonInChargeIdTotblUsers?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        }[];
+                        tblWorkShopTblWorkShopClosedByIdTotblUsers?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        }[];
+                        tblWorkShopTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        }[];
+                        tblWorkShopAttachments?: {
+                            workShopAttachmentId: number;
+                            workShopId: number;
                             attachmentId: number;
-                            orderNo: null | number;
                             createdUserId: number;
                             createdAt: string;
                         }[];
@@ -61009,6 +61734,1523 @@ export interface operations {
             };
         };
     };
+    getTblWorkShop: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                            tblFailureReportWorkShops?: {
+                                failureReportWorkShopId: number;
+                                failureReportId: number;
+                                workShopId: number;
+                            }[];
+                            tblDiscipline?: null | ({
+                                discId: number;
+                                code: null | string;
+                                name: null | string;
+                                externalDisc: null | number;
+                                parentDiscId: null | number;
+                                deptId: null | number;
+                                exportMarker: null | number;
+                                lastupdate: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblUsersTblWorkShopPersonInChargeIdTotblUsers?: null | ({
+                                userId: number;
+                                employeeId: null | number;
+                                addressId: null | number;
+                                userGroupId: null | number;
+                                uUserName: null | string;
+                                uPassword: null | string;
+                                uName: null | string;
+                                uTitle: null | string;
+                                uComment1: null | string;
+                                uComment2: null | string;
+                                uDigitalSign: null | string;
+                                uAccountDisabled: null | boolean;
+                                uLogonAttempts: null | number;
+                                uForcePasswordChange: null | boolean;
+                                uLastLogin: null | string;
+                                exportMarker: null | number;
+                                uLastUpdated: null | string;
+                                orderNo: null | number;
+                                deptId: null | number;
+                                lastUpdate: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblUsersTblWorkShopClosedByIdTotblUsers?: null | ({
+                                userId: number;
+                                employeeId: null | number;
+                                addressId: null | number;
+                                userGroupId: null | number;
+                                uUserName: null | string;
+                                uPassword: null | string;
+                                uName: null | string;
+                                uTitle: null | string;
+                                uComment1: null | string;
+                                uComment2: null | string;
+                                uDigitalSign: null | string;
+                                uAccountDisabled: null | boolean;
+                                uLogonAttempts: null | number;
+                                uForcePasswordChange: null | boolean;
+                                uLastLogin: null | string;
+                                exportMarker: null | number;
+                                uLastUpdated: null | string;
+                                orderNo: null | number;
+                                deptId: null | number;
+                                lastUpdate: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers?: null | ({
+                                userId: number;
+                                employeeId: null | number;
+                                addressId: null | number;
+                                userGroupId: null | number;
+                                uUserName: null | string;
+                                uPassword: null | string;
+                                uName: null | string;
+                                uTitle: null | string;
+                                uComment1: null | string;
+                                uComment2: null | string;
+                                uDigitalSign: null | string;
+                                uAccountDisabled: null | boolean;
+                                uLogonAttempts: null | number;
+                                uForcePasswordChange: null | boolean;
+                                uLastLogin: null | string;
+                                exportMarker: null | number;
+                                uLastUpdated: null | string;
+                                orderNo: null | number;
+                                deptId: null | number;
+                                lastUpdate: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblWorkShopComponents?: {
+                                workShopCompId: number;
+                                workShopId: number;
+                                compId: number;
+                                functionId: null | number;
+                                locationId: null | number;
+                                lastupdate: null | string;
+                            }[];
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
+    };
+    postTblWorkShop: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title: string;
+                    workShopNo?: null | string;
+                    awardingDate?: null | string;
+                    createdDate?: null | string;
+                    repairDescription?: null | string;
+                    followDesc?: null | string;
+                    closedDate?: null | string;
+                    lastupdate?: null | string;
+                    tblFailureReportWorkShops?: {
+                        connect: {
+                            failureReportWorkShopId: number;
+                        }[];
+                    };
+                    tblDiscipline?: {
+                        connect: {
+                            discId: number;
+                        };
+                    };
+                    tblUsersTblWorkShopPersonInChargeIdTotblUsers?: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                    tblUsersTblWorkShopClosedByIdTotblUsers?: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                    tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                    tblWorkShopComponents?: {
+                        connect: {
+                            wShopCompId: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    title: string;
+                    workShopNo?: null | string;
+                    awardingDate?: null | string;
+                    createdDate?: null | string;
+                    repairDescription?: null | string;
+                    followDesc?: null | string;
+                    closedDate?: null | string;
+                    lastupdate?: null | string;
+                    tblFailureReportWorkShops?: {
+                        connect: {
+                            failureReportWorkShopId: number;
+                        }[];
+                    };
+                    tblDiscipline?: {
+                        connect: {
+                            discId: number;
+                        };
+                    };
+                    tblUsersTblWorkShopPersonInChargeIdTotblUsers?: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                    tblUsersTblWorkShopClosedByIdTotblUsers?: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                    tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                    tblWorkShopComponents?: {
+                        connect: {
+                            wShopCompId: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    title: string;
+                    workShopNo?: null | string;
+                    awardingDate?: null | string;
+                    createdDate?: null | string;
+                    repairDescription?: null | string;
+                    followDesc?: null | string;
+                    closedDate?: null | string;
+                    lastupdate?: null | string;
+                    tblFailureReportWorkShops?: {
+                        connect: {
+                            failureReportWorkShopId: number;
+                        }[];
+                    };
+                    tblDiscipline?: {
+                        connect: {
+                            discId: number;
+                        };
+                    };
+                    tblUsersTblWorkShopPersonInChargeIdTotblUsers?: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                    tblUsersTblWorkShopClosedByIdTotblUsers?: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                    tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                    tblWorkShopComponents?: {
+                        connect: {
+                            wShopCompId: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workShopId: number;
+                        title: string;
+                        workShopNo: null | string;
+                        awardingDate: null | string;
+                        createdDate: null | string;
+                        personInChargeId: null | number;
+                        discId: null | number;
+                        repairDescription: null | string;
+                        personInChargeApproveId: null | number;
+                        followDesc: null | string;
+                        closedDate: null | string;
+                        closedById: null | number;
+                        lastupdate: null | string;
+                        tblFailureReportWorkShops?: {
+                            failureReportWorkShopId: number;
+                            failureReportId: number;
+                            workShopId: number;
+                        }[];
+                        tblDiscipline?: null | ({
+                            discId: number;
+                            code: null | string;
+                            name: null | string;
+                            externalDisc: null | number;
+                            parentDiscId: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblUsersTblWorkShopPersonInChargeIdTotblUsers?: null | ({
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: null | string;
+                            uPassword: null | string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblUsersTblWorkShopClosedByIdTotblUsers?: null | ({
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: null | string;
+                            uPassword: null | string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers?: null | ({
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: null | string;
+                            uPassword: null | string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastupdate: null | string;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblWorkShop: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        deleted: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblWorkShopByWorkShopId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                workShopId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workShopId: number;
+                        title: string;
+                        workShopNo: null | string;
+                        awardingDate: null | string;
+                        createdDate: null | string;
+                        personInChargeId: null | number;
+                        discId: null | number;
+                        repairDescription: null | string;
+                        personInChargeApproveId: null | number;
+                        followDesc: null | string;
+                        closedDate: null | string;
+                        closedById: null | number;
+                        lastupdate: null | string;
+                        tblFailureReportWorkShops?: {
+                            failureReportWorkShopId: number;
+                            failureReportId: number;
+                            workShopId: number;
+                        }[];
+                        tblDiscipline?: null | ({
+                            discId: number;
+                            code: null | string;
+                            name: null | string;
+                            externalDisc: null | number;
+                            parentDiscId: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblUsersTblWorkShopPersonInChargeIdTotblUsers?: null | ({
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: null | string;
+                            uPassword: null | string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblUsersTblWorkShopClosedByIdTotblUsers?: null | ({
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: null | string;
+                            uPassword: null | string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers?: null | ({
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: null | string;
+                            uPassword: null | string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastupdate: null | string;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    putTblWorkShopByWorkShopId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                workShopId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title?: string;
+                    workShopNo?: null | string;
+                    awardingDate?: null | string;
+                    createdDate?: null | string;
+                    repairDescription?: null | string;
+                    followDesc?: null | string;
+                    closedDate?: null | string;
+                    lastupdate?: null | string;
+                    tblFailureReportWorkShops?: {
+                        connect?: {
+                            failureReportWorkShopId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblDiscipline?: {
+                        connect?: {
+                            discId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblUsersTblWorkShopPersonInChargeIdTotblUsers?: {
+                        connect?: {
+                            userId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblUsersTblWorkShopClosedByIdTotblUsers?: {
+                        connect?: {
+                            userId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                        connect?: {
+                            userId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblWorkShopComponents?: {
+                        connect?: {
+                            wShopCompId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    title?: string;
+                    workShopNo?: null | string;
+                    awardingDate?: null | string;
+                    createdDate?: null | string;
+                    repairDescription?: null | string;
+                    followDesc?: null | string;
+                    closedDate?: null | string;
+                    lastupdate?: null | string;
+                    tblFailureReportWorkShops?: {
+                        connect?: {
+                            failureReportWorkShopId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblDiscipline?: {
+                        connect?: {
+                            discId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblUsersTblWorkShopPersonInChargeIdTotblUsers?: {
+                        connect?: {
+                            userId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblUsersTblWorkShopClosedByIdTotblUsers?: {
+                        connect?: {
+                            userId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                        connect?: {
+                            userId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblWorkShopComponents?: {
+                        connect?: {
+                            wShopCompId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    title?: string;
+                    workShopNo?: null | string;
+                    awardingDate?: null | string;
+                    createdDate?: null | string;
+                    repairDescription?: null | string;
+                    followDesc?: null | string;
+                    closedDate?: null | string;
+                    lastupdate?: null | string;
+                    tblFailureReportWorkShops?: {
+                        connect?: {
+                            failureReportWorkShopId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblDiscipline?: {
+                        connect?: {
+                            discId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblUsersTblWorkShopPersonInChargeIdTotblUsers?: {
+                        connect?: {
+                            userId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblUsersTblWorkShopClosedByIdTotblUsers?: {
+                        connect?: {
+                            userId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers?: {
+                        connect?: {
+                            userId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblWorkShopComponents?: {
+                        connect?: {
+                            wShopCompId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workShopId: number;
+                        title: string;
+                        workShopNo: null | string;
+                        awardingDate: null | string;
+                        createdDate: null | string;
+                        personInChargeId: null | number;
+                        discId: null | number;
+                        repairDescription: null | string;
+                        personInChargeApproveId: null | number;
+                        followDesc: null | string;
+                        closedDate: null | string;
+                        closedById: null | number;
+                        lastupdate: null | string;
+                        tblFailureReportWorkShops?: {
+                            failureReportWorkShopId: number;
+                            failureReportId: number;
+                            workShopId: number;
+                        }[];
+                        tblDiscipline?: null | ({
+                            discId: number;
+                            code: null | string;
+                            name: null | string;
+                            externalDisc: null | number;
+                            parentDiscId: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblUsersTblWorkShopPersonInChargeIdTotblUsers?: null | ({
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: null | string;
+                            uPassword: null | string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblUsersTblWorkShopClosedByIdTotblUsers?: null | ({
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: null | string;
+                            uPassword: null | string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers?: null | ({
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: null | string;
+                            uPassword: null | string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastupdate: null | string;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblWorkShopByWorkShopId: {
+        parameters: {
+            query?: {
+                force?: boolean;
+            };
+            header?: never;
+            path: {
+                workShopId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workShopId: number;
+                        title: string;
+                        workShopNo: null | string;
+                        awardingDate: null | string;
+                        createdDate: null | string;
+                        personInChargeId: null | number;
+                        discId: null | number;
+                        repairDescription: null | string;
+                        personInChargeApproveId: null | number;
+                        followDesc: null | string;
+                        closedDate: null | string;
+                        closedById: null | number;
+                        lastupdate: null | string;
+                        tblFailureReportWorkShops?: {
+                            failureReportWorkShopId: number;
+                            failureReportId: number;
+                            workShopId: number;
+                        }[];
+                        tblDiscipline?: null | ({
+                            discId: number;
+                            code: null | string;
+                            name: null | string;
+                            externalDisc: null | number;
+                            parentDiscId: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblUsersTblWorkShopPersonInChargeIdTotblUsers?: null | ({
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: null | string;
+                            uPassword: null | string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblUsersTblWorkShopClosedByIdTotblUsers?: null | ({
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: null | string;
+                            uPassword: null | string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers?: null | ({
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: null | string;
+                            uPassword: null | string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastupdate: null | string;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    getTblWorkShopCount: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblWorkShopAttachment: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            workShopAttachmentId: number;
+                            workShopId: number;
+                            attachmentId: number;
+                            createdUserId: number;
+                            createdAt: string;
+                            tblAttachment?: {
+                                attachmentId: number;
+                                title: null | string;
+                                fileName: null | string;
+                                attachmentTypeId: null | number;
+                                path: null | string;
+                                size: null | number;
+                                isUserAttachment: boolean;
+                                createdUserId: number;
+                                createdAt: string;
+                            } & {
+                                [key: string]: unknown;
+                            };
+                            tblUsers?: {
+                                userId: number;
+                                employeeId: null | number;
+                                addressId: null | number;
+                                userGroupId: null | number;
+                                uUserName: null | string;
+                                uPassword: null | string;
+                                uName: null | string;
+                                uTitle: null | string;
+                                uComment1: null | string;
+                                uComment2: null | string;
+                                uDigitalSign: null | string;
+                                uAccountDisabled: null | boolean;
+                                uLogonAttempts: null | number;
+                                uForcePasswordChange: null | boolean;
+                                uLastLogin: null | string;
+                                exportMarker: null | number;
+                                uLastUpdated: null | string;
+                                orderNo: null | number;
+                                deptId: null | number;
+                                lastUpdate: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            };
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
+    };
+    postTblWorkShopAttachment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    createdAt: string;
+                    tblAttachment: {
+                        connect: {
+                            attachmentId: number;
+                        };
+                    };
+                    tblUsers: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    createdAt: string;
+                    tblAttachment: {
+                        connect: {
+                            attachmentId: number;
+                        };
+                    };
+                    tblUsers: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                };
+                "multipart/form-data": {
+                    createdAt: string;
+                    tblAttachment: {
+                        connect: {
+                            attachmentId: number;
+                        };
+                    };
+                    tblUsers: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workShopAttachmentId: number;
+                        workShopId: number;
+                        attachmentId: number;
+                        createdUserId: number;
+                        createdAt: string;
+                        tblAttachment?: {
+                            attachmentId: number;
+                            title: null | string;
+                            fileName: null | string;
+                            attachmentTypeId: null | number;
+                            path: null | string;
+                            size: null | number;
+                            isUserAttachment: boolean;
+                            createdUserId: number;
+                            createdAt: string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblUsers?: {
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: null | string;
+                            uPassword: null | string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteTblWorkShopAttachment: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        deleted: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblWorkShopAttachmentByWorkShopAttachmentId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                workShopAttachmentId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workShopAttachmentId: number;
+                        workShopId: number;
+                        attachmentId: number;
+                        createdUserId: number;
+                        createdAt: string;
+                        tblAttachment?: {
+                            attachmentId: number;
+                            title: null | string;
+                            fileName: null | string;
+                            attachmentTypeId: null | number;
+                            path: null | string;
+                            size: null | number;
+                            isUserAttachment: boolean;
+                            createdUserId: number;
+                            createdAt: string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblUsers?: {
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: null | string;
+                            uPassword: null | string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    putTblWorkShopAttachmentByWorkShopAttachmentId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                workShopAttachmentId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    createdAt?: string;
+                    tblAttachment?: {
+                        connect: {
+                            attachmentId: number;
+                        };
+                    };
+                    tblUsers?: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    createdAt?: string;
+                    tblAttachment?: {
+                        connect: {
+                            attachmentId: number;
+                        };
+                    };
+                    tblUsers?: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                };
+                "multipart/form-data": {
+                    createdAt?: string;
+                    tblAttachment?: {
+                        connect: {
+                            attachmentId: number;
+                        };
+                    };
+                    tblUsers?: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workShopAttachmentId: number;
+                        workShopId: number;
+                        attachmentId: number;
+                        createdUserId: number;
+                        createdAt: string;
+                        tblAttachment?: {
+                            attachmentId: number;
+                            title: null | string;
+                            fileName: null | string;
+                            attachmentTypeId: null | number;
+                            path: null | string;
+                            size: null | number;
+                            isUserAttachment: boolean;
+                            createdUserId: number;
+                            createdAt: string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblUsers?: {
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: null | string;
+                            uPassword: null | string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteTblWorkShopAttachmentByWorkShopAttachmentId: {
+        parameters: {
+            query?: {
+                force?: boolean;
+            };
+            header?: never;
+            path: {
+                workShopAttachmentId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workShopAttachmentId: number;
+                        workShopId: number;
+                        attachmentId: number;
+                        createdUserId: number;
+                        createdAt: string;
+                        tblAttachment?: {
+                            attachmentId: number;
+                            title: null | string;
+                            fileName: null | string;
+                            attachmentTypeId: null | number;
+                            path: null | string;
+                            size: null | number;
+                            isUserAttachment: boolean;
+                            createdUserId: number;
+                            createdAt: string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblUsers?: {
+                            userId: number;
+                            employeeId: null | number;
+                            addressId: null | number;
+                            userGroupId: null | number;
+                            uUserName: null | string;
+                            uPassword: null | string;
+                            uName: null | string;
+                            uTitle: null | string;
+                            uComment1: null | string;
+                            uComment2: null | string;
+                            uDigitalSign: null | string;
+                            uAccountDisabled: null | boolean;
+                            uLogonAttempts: null | number;
+                            uForcePasswordChange: null | boolean;
+                            uLastLogin: null | string;
+                            exportMarker: null | number;
+                            uLastUpdated: null | string;
+                            orderNo: null | number;
+                            deptId: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    getTblWorkShopAttachmentCount: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
     getTblWorkShopComponent: {
         parameters: {
             query?: {
@@ -61035,18 +63277,79 @@ export interface operations {
                 content: {
                     "application/json": {
                         items: {
-                            wShopCompId: number;
-                            wShopRequestId: number;
+                            workShopCompId: number;
+                            workShopId: number;
                             compId: number;
-                            compDesc: null | string;
-                            secondaryCompId: null | number;
-                            secondaryCompDesc: null | string;
-                            locationDesc: null | string;
-                            orderNo: null | number;
-                            userId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
+                            functionId: null | number;
+                            locationId: null | number;
                             lastupdate: null | string;
+                            tblComponentUnit?: {
+                                compId: number;
+                                compTypeId: null | number;
+                                locationId: null | number;
+                                parentCompId: null | number;
+                                vendorId: null | number;
+                                compNo: null | string;
+                                serialNo: null | string;
+                                statusId: null | number;
+                                notes: null | string;
+                                deptId: null | number;
+                                exportMarker: null | number;
+                                lastupdate: null | string;
+                                isCritical: null | number;
+                                orderNo: null | number;
+                                model: null | string;
+                                comment1: null | string;
+                                comment2: null | string;
+                                comment3: null | string;
+                                assetNo: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            };
+                            tblFunctions?: null | ({
+                                functionId: number;
+                                compId: null | number;
+                                funcNo: null | string;
+                                funcDesc: null | string;
+                                parentFunctionId: null | number;
+                                notes: null | string;
+                                statusId: null | number;
+                                deptId: null | number;
+                                exportMarker: null | number;
+                                lastupdate: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblLocation?: null | ({
+                                locationId: number;
+                                parentLocationId: null | number;
+                                name: null | string;
+                                locationCode: null | string;
+                                deptId: null | number;
+                                exportMarker: null | number;
+                                lastupdate: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblWorkShop?: {
+                                workShopId: number;
+                                title: string;
+                                workShopNo: null | string;
+                                awardingDate: null | string;
+                                createdDate: null | string;
+                                personInChargeId: null | number;
+                                discId: null | number;
+                                repairDescription: null | string;
+                                personInChargeApproveId: null | number;
+                                followDesc: null | string;
+                                closedDate: null | string;
+                                closedById: null | number;
+                                lastupdate: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            };
                         }[];
                         total: number;
                         page: number;
@@ -61067,28 +63370,73 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    compDesc?: null | string;
-                    secondaryCompDesc?: null | string;
-                    locationDesc?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
+                    tblComponentUnit: {
+                        connect: {
+                            compId: number;
+                        };
+                    };
+                    tblFunctions?: {
+                        connect: {
+                            functionId: number;
+                        };
+                    };
+                    tblLocation?: {
+                        connect: {
+                            locationId: number;
+                        };
+                    };
+                    tblWorkShop: {
+                        connect: {
+                            workShopId: number;
+                        };
+                    };
                 };
                 "application/x-www-form-urlencoded": {
-                    compDesc?: null | string;
-                    secondaryCompDesc?: null | string;
-                    locationDesc?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
+                    tblComponentUnit: {
+                        connect: {
+                            compId: number;
+                        };
+                    };
+                    tblFunctions?: {
+                        connect: {
+                            functionId: number;
+                        };
+                    };
+                    tblLocation?: {
+                        connect: {
+                            locationId: number;
+                        };
+                    };
+                    tblWorkShop: {
+                        connect: {
+                            workShopId: number;
+                        };
+                    };
                 };
                 "multipart/form-data": {
-                    compDesc?: null | string;
-                    secondaryCompDesc?: null | string;
-                    locationDesc?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
+                    tblComponentUnit: {
+                        connect: {
+                            compId: number;
+                        };
+                    };
+                    tblFunctions?: {
+                        connect: {
+                            functionId: number;
+                        };
+                    };
+                    tblLocation?: {
+                        connect: {
+                            locationId: number;
+                        };
+                    };
+                    tblWorkShop: {
+                        connect: {
+                            workShopId: number;
+                        };
+                    };
                 };
             };
         };
@@ -61100,18 +63448,79 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        wShopCompId: number;
-                        wShopRequestId: number;
+                        workShopCompId: number;
+                        workShopId: number;
                         compId: number;
-                        compDesc: null | string;
-                        secondaryCompId: null | number;
-                        secondaryCompDesc: null | string;
-                        locationDesc: null | string;
-                        orderNo: null | number;
-                        userId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
+                        functionId: null | number;
+                        locationId: null | number;
                         lastupdate: null | string;
+                        tblComponentUnit?: {
+                            compId: number;
+                            compTypeId: null | number;
+                            locationId: null | number;
+                            parentCompId: null | number;
+                            vendorId: null | number;
+                            compNo: null | string;
+                            serialNo: null | string;
+                            statusId: null | number;
+                            notes: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            isCritical: null | number;
+                            orderNo: null | number;
+                            model: null | string;
+                            comment1: null | string;
+                            comment2: null | string;
+                            comment3: null | string;
+                            assetNo: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblFunctions?: null | ({
+                            functionId: number;
+                            compId: null | number;
+                            funcNo: null | string;
+                            funcDesc: null | string;
+                            parentFunctionId: null | number;
+                            notes: null | string;
+                            statusId: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblLocation?: null | ({
+                            locationId: number;
+                            parentLocationId: null | number;
+                            name: null | string;
+                            locationCode: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblWorkShop?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
                     };
                 };
             };
@@ -61169,18 +63578,79 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        wShopCompId: number;
-                        wShopRequestId: number;
+                        workShopCompId: number;
+                        workShopId: number;
                         compId: number;
-                        compDesc: null | string;
-                        secondaryCompId: null | number;
-                        secondaryCompDesc: null | string;
-                        locationDesc: null | string;
-                        orderNo: null | number;
-                        userId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
+                        functionId: null | number;
+                        locationId: null | number;
                         lastupdate: null | string;
+                        tblComponentUnit?: {
+                            compId: number;
+                            compTypeId: null | number;
+                            locationId: null | number;
+                            parentCompId: null | number;
+                            vendorId: null | number;
+                            compNo: null | string;
+                            serialNo: null | string;
+                            statusId: null | number;
+                            notes: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            isCritical: null | number;
+                            orderNo: null | number;
+                            model: null | string;
+                            comment1: null | string;
+                            comment2: null | string;
+                            comment3: null | string;
+                            assetNo: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblFunctions?: null | ({
+                            functionId: number;
+                            compId: null | number;
+                            funcNo: null | string;
+                            funcDesc: null | string;
+                            parentFunctionId: null | number;
+                            notes: null | string;
+                            statusId: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblLocation?: null | ({
+                            locationId: number;
+                            parentLocationId: null | number;
+                            name: null | string;
+                            locationCode: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblWorkShop?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
                     };
                 };
             };
@@ -61201,28 +63671,79 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    compDesc?: null | string;
-                    secondaryCompDesc?: null | string;
-                    locationDesc?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
+                    tblComponentUnit?: {
+                        connect: {
+                            compId: number;
+                        };
+                    };
+                    tblFunctions?: {
+                        connect?: {
+                            functionId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblLocation?: {
+                        connect?: {
+                            locationId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblWorkShop?: {
+                        connect: {
+                            workShopId: number;
+                        };
+                    };
                 };
                 "application/x-www-form-urlencoded": {
-                    compDesc?: null | string;
-                    secondaryCompDesc?: null | string;
-                    locationDesc?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
+                    tblComponentUnit?: {
+                        connect: {
+                            compId: number;
+                        };
+                    };
+                    tblFunctions?: {
+                        connect?: {
+                            functionId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblLocation?: {
+                        connect?: {
+                            locationId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblWorkShop?: {
+                        connect: {
+                            workShopId: number;
+                        };
+                    };
                 };
                 "multipart/form-data": {
-                    compDesc?: null | string;
-                    secondaryCompDesc?: null | string;
-                    locationDesc?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
+                    tblComponentUnit?: {
+                        connect: {
+                            compId: number;
+                        };
+                    };
+                    tblFunctions?: {
+                        connect?: {
+                            functionId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblLocation?: {
+                        connect?: {
+                            locationId: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    tblWorkShop?: {
+                        connect: {
+                            workShopId: number;
+                        };
+                    };
                 };
             };
         };
@@ -61234,18 +63755,79 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        wShopCompId: number;
-                        wShopRequestId: number;
+                        workShopCompId: number;
+                        workShopId: number;
                         compId: number;
-                        compDesc: null | string;
-                        secondaryCompId: null | number;
-                        secondaryCompDesc: null | string;
-                        locationDesc: null | string;
-                        orderNo: null | number;
-                        userId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
+                        functionId: null | number;
+                        locationId: null | number;
                         lastupdate: null | string;
+                        tblComponentUnit?: {
+                            compId: number;
+                            compTypeId: null | number;
+                            locationId: null | number;
+                            parentCompId: null | number;
+                            vendorId: null | number;
+                            compNo: null | string;
+                            serialNo: null | string;
+                            statusId: null | number;
+                            notes: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            isCritical: null | number;
+                            orderNo: null | number;
+                            model: null | string;
+                            comment1: null | string;
+                            comment2: null | string;
+                            comment3: null | string;
+                            assetNo: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblFunctions?: null | ({
+                            functionId: number;
+                            compId: null | number;
+                            funcNo: null | string;
+                            funcDesc: null | string;
+                            parentFunctionId: null | number;
+                            notes: null | string;
+                            statusId: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblLocation?: null | ({
+                            locationId: number;
+                            parentLocationId: null | number;
+                            name: null | string;
+                            locationCode: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblWorkShop?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
                     };
                 };
             };
@@ -61271,1722 +63853,85 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        wShopCompId: number;
-                        wShopRequestId: number;
+                        workShopCompId: number;
+                        workShopId: number;
                         compId: number;
-                        compDesc: null | string;
-                        secondaryCompId: null | number;
-                        secondaryCompDesc: null | string;
-                        locationDesc: null | string;
-                        orderNo: null | number;
-                        userId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
+                        functionId: null | number;
+                        locationId: null | number;
                         lastupdate: null | string;
+                        tblComponentUnit?: {
+                            compId: number;
+                            compTypeId: null | number;
+                            locationId: null | number;
+                            parentCompId: null | number;
+                            vendorId: null | number;
+                            compNo: null | string;
+                            serialNo: null | string;
+                            statusId: null | number;
+                            notes: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            isCritical: null | number;
+                            orderNo: null | number;
+                            model: null | string;
+                            comment1: null | string;
+                            comment2: null | string;
+                            comment3: null | string;
+                            assetNo: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblFunctions?: null | ({
+                            functionId: number;
+                            compId: null | number;
+                            funcNo: null | string;
+                            funcDesc: null | string;
+                            parentFunctionId: null | number;
+                            notes: null | string;
+                            statusId: null | number;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblLocation?: null | ({
+                            locationId: number;
+                            parentLocationId: null | number;
+                            name: null | string;
+                            locationCode: null | string;
+                            deptId: null | number;
+                            exportMarker: null | number;
+                            lastupdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblWorkShop?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
                     };
                 };
             };
         };
     };
     getTblWorkShopComponentCount: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        count: number;
-                    };
-                };
-            };
-        };
-    };
-    getTblWorkShopDone: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            wShopDoneId: number;
-                            wShopRequestId: number;
-                            compeleteDate: null | string;
-                            descRepairCompelet: null | string;
-                            descSparePart: null | string;
-                            addressId: number;
-                            wshopManagerName: null | string;
-                            wshopAuthorityName: null | string;
-                            personInChargeId: null | number;
-                            personInChargeApproved: null | boolean;
-                            supervisorId: null | number;
-                            supervisorApproved: null | boolean;
-                            bargeMasterId: null | number;
-                            bargeMasterApproved: null | boolean;
-                            rigManagerId: null | number;
-                            rigManagerApproved: null | boolean;
-                            bargeMasterComment: null | string;
-                            rigManagerComment: null | string;
-                            workShopTypeId: null | number;
-                            orderNo: null | number;
-                            userId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                        }[];
-                        total: number;
-                        page: number;
-                        perPage: number;
-                        totalPages: number;
-                    };
-                };
-            };
-        };
-    };
-    postTblWorkShopDone: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    compeleteDate?: null | string;
-                    descRepairCompelet?: null | string;
-                    descSparePart?: null | string;
-                    wshopManagerName?: null | string;
-                    wshopAuthorityName?: null | string;
-                    personInChargeApproved?: null | boolean;
-                    supervisorApproved?: null | boolean;
-                    bargeMasterApproved?: null | boolean;
-                    rigManagerApproved?: null | boolean;
-                    bargeMasterComment?: null | string;
-                    rigManagerComment?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                };
-                "application/x-www-form-urlencoded": {
-                    compeleteDate?: null | string;
-                    descRepairCompelet?: null | string;
-                    descSparePart?: null | string;
-                    wshopManagerName?: null | string;
-                    wshopAuthorityName?: null | string;
-                    personInChargeApproved?: null | boolean;
-                    supervisorApproved?: null | boolean;
-                    bargeMasterApproved?: null | boolean;
-                    rigManagerApproved?: null | boolean;
-                    bargeMasterComment?: null | string;
-                    rigManagerComment?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                };
-                "multipart/form-data": {
-                    compeleteDate?: null | string;
-                    descRepairCompelet?: null | string;
-                    descSparePart?: null | string;
-                    wshopManagerName?: null | string;
-                    wshopAuthorityName?: null | string;
-                    personInChargeApproved?: null | boolean;
-                    supervisorApproved?: null | boolean;
-                    bargeMasterApproved?: null | boolean;
-                    rigManagerApproved?: null | boolean;
-                    bargeMasterComment?: null | string;
-                    rigManagerComment?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                };
-            };
-        };
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        wShopDoneId: number;
-                        wShopRequestId: number;
-                        compeleteDate: null | string;
-                        descRepairCompelet: null | string;
-                        descSparePart: null | string;
-                        addressId: number;
-                        wshopManagerName: null | string;
-                        wshopAuthorityName: null | string;
-                        personInChargeId: null | number;
-                        personInChargeApproved: null | boolean;
-                        supervisorId: null | number;
-                        supervisorApproved: null | boolean;
-                        bargeMasterId: null | number;
-                        bargeMasterApproved: null | boolean;
-                        rigManagerId: null | number;
-                        rigManagerApproved: null | boolean;
-                        bargeMasterComment: null | string;
-                        rigManagerComment: null | string;
-                        workShopTypeId: null | number;
-                        orderNo: null | number;
-                        userId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
-                    };
-                };
-            };
-        };
-    };
-    deleteTblWorkShopDone: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        deleted: number;
-                    };
-                };
-            };
-        };
-    };
-    getTblWorkShopDoneByWShopDoneId: {
-        parameters: {
-            query?: {
-                include?: string;
-                select?: string;
-            };
-            header?: never;
-            path: {
-                wShopDoneId: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        wShopDoneId: number;
-                        wShopRequestId: number;
-                        compeleteDate: null | string;
-                        descRepairCompelet: null | string;
-                        descSparePart: null | string;
-                        addressId: number;
-                        wshopManagerName: null | string;
-                        wshopAuthorityName: null | string;
-                        personInChargeId: null | number;
-                        personInChargeApproved: null | boolean;
-                        supervisorId: null | number;
-                        supervisorApproved: null | boolean;
-                        bargeMasterId: null | number;
-                        bargeMasterApproved: null | boolean;
-                        rigManagerId: null | number;
-                        rigManagerApproved: null | boolean;
-                        bargeMasterComment: null | string;
-                        rigManagerComment: null | string;
-                        workShopTypeId: null | number;
-                        orderNo: null | number;
-                        userId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
-                    };
-                };
-            };
-        };
-    };
-    putTblWorkShopDoneByWShopDoneId: {
-        parameters: {
-            query?: {
-                include?: string;
-                select?: string;
-            };
-            header?: never;
-            path: {
-                wShopDoneId: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    compeleteDate?: null | string;
-                    descRepairCompelet?: null | string;
-                    descSparePart?: null | string;
-                    wshopManagerName?: null | string;
-                    wshopAuthorityName?: null | string;
-                    personInChargeApproved?: null | boolean;
-                    supervisorApproved?: null | boolean;
-                    bargeMasterApproved?: null | boolean;
-                    rigManagerApproved?: null | boolean;
-                    bargeMasterComment?: null | string;
-                    rigManagerComment?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                };
-                "application/x-www-form-urlencoded": {
-                    compeleteDate?: null | string;
-                    descRepairCompelet?: null | string;
-                    descSparePart?: null | string;
-                    wshopManagerName?: null | string;
-                    wshopAuthorityName?: null | string;
-                    personInChargeApproved?: null | boolean;
-                    supervisorApproved?: null | boolean;
-                    bargeMasterApproved?: null | boolean;
-                    rigManagerApproved?: null | boolean;
-                    bargeMasterComment?: null | string;
-                    rigManagerComment?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                };
-                "multipart/form-data": {
-                    compeleteDate?: null | string;
-                    descRepairCompelet?: null | string;
-                    descSparePart?: null | string;
-                    wshopManagerName?: null | string;
-                    wshopAuthorityName?: null | string;
-                    personInChargeApproved?: null | boolean;
-                    supervisorApproved?: null | boolean;
-                    bargeMasterApproved?: null | boolean;
-                    rigManagerApproved?: null | boolean;
-                    bargeMasterComment?: null | string;
-                    rigManagerComment?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                };
-            };
-        };
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        wShopDoneId: number;
-                        wShopRequestId: number;
-                        compeleteDate: null | string;
-                        descRepairCompelet: null | string;
-                        descSparePart: null | string;
-                        addressId: number;
-                        wshopManagerName: null | string;
-                        wshopAuthorityName: null | string;
-                        personInChargeId: null | number;
-                        personInChargeApproved: null | boolean;
-                        supervisorId: null | number;
-                        supervisorApproved: null | boolean;
-                        bargeMasterId: null | number;
-                        bargeMasterApproved: null | boolean;
-                        rigManagerId: null | number;
-                        rigManagerApproved: null | boolean;
-                        bargeMasterComment: null | string;
-                        rigManagerComment: null | string;
-                        workShopTypeId: null | number;
-                        orderNo: null | number;
-                        userId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
-                    };
-                };
-            };
-        };
-    };
-    deleteTblWorkShopDoneByWShopDoneId: {
-        parameters: {
-            query?: {
-                force?: boolean;
-            };
-            header?: never;
-            path: {
-                wShopDoneId: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        wShopDoneId: number;
-                        wShopRequestId: number;
-                        compeleteDate: null | string;
-                        descRepairCompelet: null | string;
-                        descSparePart: null | string;
-                        addressId: number;
-                        wshopManagerName: null | string;
-                        wshopAuthorityName: null | string;
-                        personInChargeId: null | number;
-                        personInChargeApproved: null | boolean;
-                        supervisorId: null | number;
-                        supervisorApproved: null | boolean;
-                        bargeMasterId: null | number;
-                        bargeMasterApproved: null | boolean;
-                        rigManagerId: null | number;
-                        rigManagerApproved: null | boolean;
-                        bargeMasterComment: null | string;
-                        rigManagerComment: null | string;
-                        workShopTypeId: null | number;
-                        orderNo: null | number;
-                        userId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
-                    };
-                };
-            };
-        };
-    };
-    getTblWorkShopDoneCount: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        count: number;
-                    };
-                };
-            };
-        };
-    };
-    getTblWorkShopRequest: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            wShopRequestId: number;
-                            rigName: null | string;
-                            jobOrderType: null | number;
-                            wShopRequestNo: null | number;
-                            jobOrderNo: null | string;
-                            awardingDate: null | string;
-                            requestDate: null | string;
-                            compDescGroup: null | string;
-                            secondaryCompDescGroup: null | string;
-                            model: null | string;
-                            serialNo: null | string;
-                            assetNo: null | string;
-                            locationDescGroup: null | string;
-                            descRepairRequest: null | string;
-                            personInChargeId: null | number;
-                            personInChargeApproved: null | boolean;
-                            supervisorId: null | number;
-                            supervisorApproved: null | boolean;
-                            bargeMasterId: null | number;
-                            bargeMasterApproved: null | boolean;
-                            rigManagerId: null | number;
-                            rigManagerApproved: null | boolean;
-                            bargeMasterComment: null | string;
-                            rigManagerComment: null | string;
-                            addressId: null | number;
-                            workShopTypeId: null | number;
-                            orderNo: null | number;
-                            userId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            tblWorkShopRequestAttachments?: {
-                                wShopRequestAttachmentId: number;
-                                wShopRequestId: number;
-                                attachmentId: number;
-                                orderNo: null | number;
-                                createdUserId: number;
-                                createdAt: string;
-                            }[];
-                        }[];
-                        total: number;
-                        page: number;
-                        perPage: number;
-                        totalPages: number;
-                    };
-                };
-            };
-        };
-    };
-    postTblWorkShopRequest: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    rigName?: null | string;
-                    jobOrderType?: null | number;
-                    wShopRequestNo?: null | number;
-                    jobOrderNo?: null | string;
-                    awardingDate?: null | string;
-                    requestDate?: null | string;
-                    compDescGroup?: null | string;
-                    secondaryCompDescGroup?: null | string;
-                    model?: null | string;
-                    serialNo?: null | string;
-                    assetNo?: null | string;
-                    locationDescGroup?: null | string;
-                    descRepairRequest?: null | string;
-                    personInChargeApproved?: null | boolean;
-                    supervisorApproved?: null | boolean;
-                    bargeMasterApproved?: null | boolean;
-                    rigManagerApproved?: null | boolean;
-                    bargeMasterComment?: null | string;
-                    rigManagerComment?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    tblWorkShopRequestAttachments?: {
-                        connect: {
-                            wShopRequestAttachmentId: number;
-                        }[];
-                    };
-                };
-                "application/x-www-form-urlencoded": {
-                    rigName?: null | string;
-                    jobOrderType?: null | number;
-                    wShopRequestNo?: null | number;
-                    jobOrderNo?: null | string;
-                    awardingDate?: null | string;
-                    requestDate?: null | string;
-                    compDescGroup?: null | string;
-                    secondaryCompDescGroup?: null | string;
-                    model?: null | string;
-                    serialNo?: null | string;
-                    assetNo?: null | string;
-                    locationDescGroup?: null | string;
-                    descRepairRequest?: null | string;
-                    personInChargeApproved?: null | boolean;
-                    supervisorApproved?: null | boolean;
-                    bargeMasterApproved?: null | boolean;
-                    rigManagerApproved?: null | boolean;
-                    bargeMasterComment?: null | string;
-                    rigManagerComment?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    tblWorkShopRequestAttachments?: {
-                        connect: {
-                            wShopRequestAttachmentId: number;
-                        }[];
-                    };
-                };
-                "multipart/form-data": {
-                    rigName?: null | string;
-                    jobOrderType?: null | number;
-                    wShopRequestNo?: null | number;
-                    jobOrderNo?: null | string;
-                    awardingDate?: null | string;
-                    requestDate?: null | string;
-                    compDescGroup?: null | string;
-                    secondaryCompDescGroup?: null | string;
-                    model?: null | string;
-                    serialNo?: null | string;
-                    assetNo?: null | string;
-                    locationDescGroup?: null | string;
-                    descRepairRequest?: null | string;
-                    personInChargeApproved?: null | boolean;
-                    supervisorApproved?: null | boolean;
-                    bargeMasterApproved?: null | boolean;
-                    rigManagerApproved?: null | boolean;
-                    bargeMasterComment?: null | string;
-                    rigManagerComment?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    tblWorkShopRequestAttachments?: {
-                        connect: {
-                            wShopRequestAttachmentId: number;
-                        }[];
-                    };
-                };
-            };
-        };
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        wShopRequestId: number;
-                        rigName: null | string;
-                        jobOrderType: null | number;
-                        wShopRequestNo: null | number;
-                        jobOrderNo: null | string;
-                        awardingDate: null | string;
-                        requestDate: null | string;
-                        compDescGroup: null | string;
-                        secondaryCompDescGroup: null | string;
-                        model: null | string;
-                        serialNo: null | string;
-                        assetNo: null | string;
-                        locationDescGroup: null | string;
-                        descRepairRequest: null | string;
-                        personInChargeId: null | number;
-                        personInChargeApproved: null | boolean;
-                        supervisorId: null | number;
-                        supervisorApproved: null | boolean;
-                        bargeMasterId: null | number;
-                        bargeMasterApproved: null | boolean;
-                        rigManagerId: null | number;
-                        rigManagerApproved: null | boolean;
-                        bargeMasterComment: null | string;
-                        rigManagerComment: null | string;
-                        addressId: null | number;
-                        workShopTypeId: null | number;
-                        orderNo: null | number;
-                        userId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
-                        tblWorkShopRequestAttachments?: {
-                            wShopRequestAttachmentId: number;
-                            wShopRequestId: number;
-                            attachmentId: number;
-                            orderNo: null | number;
-                            createdUserId: number;
-                            createdAt: string;
-                        }[];
-                    };
-                };
-            };
-        };
-    };
-    deleteTblWorkShopRequest: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        deleted: number;
-                    };
-                };
-            };
-        };
-    };
-    getTblWorkShopRequestByWShopRequestId: {
-        parameters: {
-            query?: {
-                include?: string;
-                select?: string;
-            };
-            header?: never;
-            path: {
-                wShopRequestId: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        wShopRequestId: number;
-                        rigName: null | string;
-                        jobOrderType: null | number;
-                        wShopRequestNo: null | number;
-                        jobOrderNo: null | string;
-                        awardingDate: null | string;
-                        requestDate: null | string;
-                        compDescGroup: null | string;
-                        secondaryCompDescGroup: null | string;
-                        model: null | string;
-                        serialNo: null | string;
-                        assetNo: null | string;
-                        locationDescGroup: null | string;
-                        descRepairRequest: null | string;
-                        personInChargeId: null | number;
-                        personInChargeApproved: null | boolean;
-                        supervisorId: null | number;
-                        supervisorApproved: null | boolean;
-                        bargeMasterId: null | number;
-                        bargeMasterApproved: null | boolean;
-                        rigManagerId: null | number;
-                        rigManagerApproved: null | boolean;
-                        bargeMasterComment: null | string;
-                        rigManagerComment: null | string;
-                        addressId: null | number;
-                        workShopTypeId: null | number;
-                        orderNo: null | number;
-                        userId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
-                        tblWorkShopRequestAttachments?: {
-                            wShopRequestAttachmentId: number;
-                            wShopRequestId: number;
-                            attachmentId: number;
-                            orderNo: null | number;
-                            createdUserId: number;
-                            createdAt: string;
-                        }[];
-                    };
-                };
-            };
-        };
-    };
-    putTblWorkShopRequestByWShopRequestId: {
-        parameters: {
-            query?: {
-                include?: string;
-                select?: string;
-            };
-            header?: never;
-            path: {
-                wShopRequestId: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    rigName?: null | string;
-                    jobOrderType?: null | number;
-                    wShopRequestNo?: null | number;
-                    jobOrderNo?: null | string;
-                    awardingDate?: null | string;
-                    requestDate?: null | string;
-                    compDescGroup?: null | string;
-                    secondaryCompDescGroup?: null | string;
-                    model?: null | string;
-                    serialNo?: null | string;
-                    assetNo?: null | string;
-                    locationDescGroup?: null | string;
-                    descRepairRequest?: null | string;
-                    personInChargeApproved?: null | boolean;
-                    supervisorApproved?: null | boolean;
-                    bargeMasterApproved?: null | boolean;
-                    rigManagerApproved?: null | boolean;
-                    bargeMasterComment?: null | string;
-                    rigManagerComment?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    tblWorkShopRequestAttachments?: {
-                        connect?: {
-                            wShopRequestAttachmentId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                };
-                "application/x-www-form-urlencoded": {
-                    rigName?: null | string;
-                    jobOrderType?: null | number;
-                    wShopRequestNo?: null | number;
-                    jobOrderNo?: null | string;
-                    awardingDate?: null | string;
-                    requestDate?: null | string;
-                    compDescGroup?: null | string;
-                    secondaryCompDescGroup?: null | string;
-                    model?: null | string;
-                    serialNo?: null | string;
-                    assetNo?: null | string;
-                    locationDescGroup?: null | string;
-                    descRepairRequest?: null | string;
-                    personInChargeApproved?: null | boolean;
-                    supervisorApproved?: null | boolean;
-                    bargeMasterApproved?: null | boolean;
-                    rigManagerApproved?: null | boolean;
-                    bargeMasterComment?: null | string;
-                    rigManagerComment?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    tblWorkShopRequestAttachments?: {
-                        connect?: {
-                            wShopRequestAttachmentId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                };
-                "multipart/form-data": {
-                    rigName?: null | string;
-                    jobOrderType?: null | number;
-                    wShopRequestNo?: null | number;
-                    jobOrderNo?: null | string;
-                    awardingDate?: null | string;
-                    requestDate?: null | string;
-                    compDescGroup?: null | string;
-                    secondaryCompDescGroup?: null | string;
-                    model?: null | string;
-                    serialNo?: null | string;
-                    assetNo?: null | string;
-                    locationDescGroup?: null | string;
-                    descRepairRequest?: null | string;
-                    personInChargeApproved?: null | boolean;
-                    supervisorApproved?: null | boolean;
-                    bargeMasterApproved?: null | boolean;
-                    rigManagerApproved?: null | boolean;
-                    bargeMasterComment?: null | string;
-                    rigManagerComment?: null | string;
-                    orderNo?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    tblWorkShopRequestAttachments?: {
-                        connect?: {
-                            wShopRequestAttachmentId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                };
-            };
-        };
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        wShopRequestId: number;
-                        rigName: null | string;
-                        jobOrderType: null | number;
-                        wShopRequestNo: null | number;
-                        jobOrderNo: null | string;
-                        awardingDate: null | string;
-                        requestDate: null | string;
-                        compDescGroup: null | string;
-                        secondaryCompDescGroup: null | string;
-                        model: null | string;
-                        serialNo: null | string;
-                        assetNo: null | string;
-                        locationDescGroup: null | string;
-                        descRepairRequest: null | string;
-                        personInChargeId: null | number;
-                        personInChargeApproved: null | boolean;
-                        supervisorId: null | number;
-                        supervisorApproved: null | boolean;
-                        bargeMasterId: null | number;
-                        bargeMasterApproved: null | boolean;
-                        rigManagerId: null | number;
-                        rigManagerApproved: null | boolean;
-                        bargeMasterComment: null | string;
-                        rigManagerComment: null | string;
-                        addressId: null | number;
-                        workShopTypeId: null | number;
-                        orderNo: null | number;
-                        userId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
-                        tblWorkShopRequestAttachments?: {
-                            wShopRequestAttachmentId: number;
-                            wShopRequestId: number;
-                            attachmentId: number;
-                            orderNo: null | number;
-                            createdUserId: number;
-                            createdAt: string;
-                        }[];
-                    };
-                };
-            };
-        };
-    };
-    deleteTblWorkShopRequestByWShopRequestId: {
-        parameters: {
-            query?: {
-                force?: boolean;
-            };
-            header?: never;
-            path: {
-                wShopRequestId: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        wShopRequestId: number;
-                        rigName: null | string;
-                        jobOrderType: null | number;
-                        wShopRequestNo: null | number;
-                        jobOrderNo: null | string;
-                        awardingDate: null | string;
-                        requestDate: null | string;
-                        compDescGroup: null | string;
-                        secondaryCompDescGroup: null | string;
-                        model: null | string;
-                        serialNo: null | string;
-                        assetNo: null | string;
-                        locationDescGroup: null | string;
-                        descRepairRequest: null | string;
-                        personInChargeId: null | number;
-                        personInChargeApproved: null | boolean;
-                        supervisorId: null | number;
-                        supervisorApproved: null | boolean;
-                        bargeMasterId: null | number;
-                        bargeMasterApproved: null | boolean;
-                        rigManagerId: null | number;
-                        rigManagerApproved: null | boolean;
-                        bargeMasterComment: null | string;
-                        rigManagerComment: null | string;
-                        addressId: null | number;
-                        workShopTypeId: null | number;
-                        orderNo: null | number;
-                        userId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
-                        tblWorkShopRequestAttachments?: {
-                            wShopRequestAttachmentId: number;
-                            wShopRequestId: number;
-                            attachmentId: number;
-                            orderNo: null | number;
-                            createdUserId: number;
-                            createdAt: string;
-                        }[];
-                    };
-                };
-            };
-        };
-    };
-    getTblWorkShopRequestCount: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        count: number;
-                    };
-                };
-            };
-        };
-    };
-    getTblWorkShopRequestAttachment: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            wShopRequestAttachmentId: number;
-                            wShopRequestId: number;
-                            attachmentId: number;
-                            orderNo: null | number;
-                            createdUserId: number;
-                            createdAt: string;
-                            tblAttachment?: {
-                                attachmentId: number;
-                                title: null | string;
-                                fileName: null | string;
-                                attachmentTypeId: null | number;
-                                path: null | string;
-                                size: null | number;
-                                isUserAttachment: boolean;
-                                createdUserId: number;
-                                createdAt: string;
-                            } & {
-                                [key: string]: unknown;
-                            };
-                            tblWorkShopRequest?: {
-                                wShopRequestId: number;
-                                rigName: null | string;
-                                jobOrderType: null | number;
-                                wShopRequestNo: null | number;
-                                jobOrderNo: null | string;
-                                awardingDate: null | string;
-                                requestDate: null | string;
-                                compDescGroup: null | string;
-                                secondaryCompDescGroup: null | string;
-                                model: null | string;
-                                serialNo: null | string;
-                                assetNo: null | string;
-                                locationDescGroup: null | string;
-                                descRepairRequest: null | string;
-                                personInChargeId: null | number;
-                                personInChargeApproved: null | boolean;
-                                supervisorId: null | number;
-                                supervisorApproved: null | boolean;
-                                bargeMasterId: null | number;
-                                bargeMasterApproved: null | boolean;
-                                rigManagerId: null | number;
-                                rigManagerApproved: null | boolean;
-                                bargeMasterComment: null | string;
-                                rigManagerComment: null | string;
-                                addressId: null | number;
-                                workShopTypeId: null | number;
-                                orderNo: null | number;
-                                userId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
-                                lastupdate: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            };
-                            tblUsers?: {
-                                userId: number;
-                                employeeId: null | number;
-                                addressId: null | number;
-                                userGroupId: null | number;
-                                uUserName: null | string;
-                                uPassword: null | string;
-                                uName: null | string;
-                                uTitle: null | string;
-                                uComment1: null | string;
-                                uComment2: null | string;
-                                uDigitalSign: null | string;
-                                uAccountDisabled: null | boolean;
-                                uLogonAttempts: null | number;
-                                uForcePasswordChange: null | boolean;
-                                uLastLogin: null | string;
-                                exportMarker: null | number;
-                                uLastUpdated: null | string;
-                                orderNo: null | number;
-                                deptId: null | number;
-                                lastUpdate: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            };
-                        }[];
-                        total: number;
-                        page: number;
-                        perPage: number;
-                        totalPages: number;
-                    };
-                };
-            };
-        };
-    };
-    postTblWorkShopRequestAttachment: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    orderNo?: null | number;
-                    tblAttachment: {
-                        connect: {
-                            attachmentId: number;
-                        };
-                    };
-                    tblWorkShopRequest: {
-                        connect: {
-                            wShopRequestId: number;
-                        };
-                    };
-                    tblUsers: {
-                        connect: {
-                            userId: number;
-                        };
-                    };
-                };
-                "application/x-www-form-urlencoded": {
-                    orderNo?: null | number;
-                    tblAttachment: {
-                        connect: {
-                            attachmentId: number;
-                        };
-                    };
-                    tblWorkShopRequest: {
-                        connect: {
-                            wShopRequestId: number;
-                        };
-                    };
-                    tblUsers: {
-                        connect: {
-                            userId: number;
-                        };
-                    };
-                };
-                "multipart/form-data": {
-                    orderNo?: null | number;
-                    tblAttachment: {
-                        connect: {
-                            attachmentId: number;
-                        };
-                    };
-                    tblWorkShopRequest: {
-                        connect: {
-                            wShopRequestId: number;
-                        };
-                    };
-                    tblUsers: {
-                        connect: {
-                            userId: number;
-                        };
-                    };
-                };
-            };
-        };
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        wShopRequestAttachmentId: number;
-                        wShopRequestId: number;
-                        attachmentId: number;
-                        orderNo: null | number;
-                        createdUserId: number;
-                        createdAt: string;
-                        tblAttachment?: {
-                            attachmentId: number;
-                            title: null | string;
-                            fileName: null | string;
-                            attachmentTypeId: null | number;
-                            path: null | string;
-                            size: null | number;
-                            isUserAttachment: boolean;
-                            createdUserId: number;
-                            createdAt: string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                        tblWorkShopRequest?: {
-                            wShopRequestId: number;
-                            rigName: null | string;
-                            jobOrderType: null | number;
-                            wShopRequestNo: null | number;
-                            jobOrderNo: null | string;
-                            awardingDate: null | string;
-                            requestDate: null | string;
-                            compDescGroup: null | string;
-                            secondaryCompDescGroup: null | string;
-                            model: null | string;
-                            serialNo: null | string;
-                            assetNo: null | string;
-                            locationDescGroup: null | string;
-                            descRepairRequest: null | string;
-                            personInChargeId: null | number;
-                            personInChargeApproved: null | boolean;
-                            supervisorId: null | number;
-                            supervisorApproved: null | boolean;
-                            bargeMasterId: null | number;
-                            bargeMasterApproved: null | boolean;
-                            rigManagerId: null | number;
-                            rigManagerApproved: null | boolean;
-                            bargeMasterComment: null | string;
-                            rigManagerComment: null | string;
-                            addressId: null | number;
-                            workShopTypeId: null | number;
-                            orderNo: null | number;
-                            userId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                        tblUsers?: {
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: null | string;
-                            uPassword: null | string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                    };
-                };
-            };
-        };
-    };
-    deleteTblWorkShopRequestAttachment: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        deleted: number;
-                    };
-                };
-            };
-        };
-    };
-    getTblWorkShopRequestAttachmentByWShopRequestAttachmentId: {
-        parameters: {
-            query?: {
-                include?: string;
-                select?: string;
-            };
-            header?: never;
-            path: {
-                wShopRequestAttachmentId: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        wShopRequestAttachmentId: number;
-                        wShopRequestId: number;
-                        attachmentId: number;
-                        orderNo: null | number;
-                        createdUserId: number;
-                        createdAt: string;
-                        tblAttachment?: {
-                            attachmentId: number;
-                            title: null | string;
-                            fileName: null | string;
-                            attachmentTypeId: null | number;
-                            path: null | string;
-                            size: null | number;
-                            isUserAttachment: boolean;
-                            createdUserId: number;
-                            createdAt: string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                        tblWorkShopRequest?: {
-                            wShopRequestId: number;
-                            rigName: null | string;
-                            jobOrderType: null | number;
-                            wShopRequestNo: null | number;
-                            jobOrderNo: null | string;
-                            awardingDate: null | string;
-                            requestDate: null | string;
-                            compDescGroup: null | string;
-                            secondaryCompDescGroup: null | string;
-                            model: null | string;
-                            serialNo: null | string;
-                            assetNo: null | string;
-                            locationDescGroup: null | string;
-                            descRepairRequest: null | string;
-                            personInChargeId: null | number;
-                            personInChargeApproved: null | boolean;
-                            supervisorId: null | number;
-                            supervisorApproved: null | boolean;
-                            bargeMasterId: null | number;
-                            bargeMasterApproved: null | boolean;
-                            rigManagerId: null | number;
-                            rigManagerApproved: null | boolean;
-                            bargeMasterComment: null | string;
-                            rigManagerComment: null | string;
-                            addressId: null | number;
-                            workShopTypeId: null | number;
-                            orderNo: null | number;
-                            userId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                        tblUsers?: {
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: null | string;
-                            uPassword: null | string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                    };
-                };
-            };
-        };
-    };
-    putTblWorkShopRequestAttachmentByWShopRequestAttachmentId: {
-        parameters: {
-            query?: {
-                include?: string;
-                select?: string;
-            };
-            header?: never;
-            path: {
-                wShopRequestAttachmentId: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    orderNo?: null | number;
-                    tblAttachment?: {
-                        connect: {
-                            attachmentId: number;
-                        };
-                    };
-                    tblWorkShopRequest?: {
-                        connect: {
-                            wShopRequestId: number;
-                        };
-                    };
-                    tblUsers?: {
-                        connect: {
-                            userId: number;
-                        };
-                    };
-                };
-                "application/x-www-form-urlencoded": {
-                    orderNo?: null | number;
-                    tblAttachment?: {
-                        connect: {
-                            attachmentId: number;
-                        };
-                    };
-                    tblWorkShopRequest?: {
-                        connect: {
-                            wShopRequestId: number;
-                        };
-                    };
-                    tblUsers?: {
-                        connect: {
-                            userId: number;
-                        };
-                    };
-                };
-                "multipart/form-data": {
-                    orderNo?: null | number;
-                    tblAttachment?: {
-                        connect: {
-                            attachmentId: number;
-                        };
-                    };
-                    tblWorkShopRequest?: {
-                        connect: {
-                            wShopRequestId: number;
-                        };
-                    };
-                    tblUsers?: {
-                        connect: {
-                            userId: number;
-                        };
-                    };
-                };
-            };
-        };
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        wShopRequestAttachmentId: number;
-                        wShopRequestId: number;
-                        attachmentId: number;
-                        orderNo: null | number;
-                        createdUserId: number;
-                        createdAt: string;
-                        tblAttachment?: {
-                            attachmentId: number;
-                            title: null | string;
-                            fileName: null | string;
-                            attachmentTypeId: null | number;
-                            path: null | string;
-                            size: null | number;
-                            isUserAttachment: boolean;
-                            createdUserId: number;
-                            createdAt: string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                        tblWorkShopRequest?: {
-                            wShopRequestId: number;
-                            rigName: null | string;
-                            jobOrderType: null | number;
-                            wShopRequestNo: null | number;
-                            jobOrderNo: null | string;
-                            awardingDate: null | string;
-                            requestDate: null | string;
-                            compDescGroup: null | string;
-                            secondaryCompDescGroup: null | string;
-                            model: null | string;
-                            serialNo: null | string;
-                            assetNo: null | string;
-                            locationDescGroup: null | string;
-                            descRepairRequest: null | string;
-                            personInChargeId: null | number;
-                            personInChargeApproved: null | boolean;
-                            supervisorId: null | number;
-                            supervisorApproved: null | boolean;
-                            bargeMasterId: null | number;
-                            bargeMasterApproved: null | boolean;
-                            rigManagerId: null | number;
-                            rigManagerApproved: null | boolean;
-                            bargeMasterComment: null | string;
-                            rigManagerComment: null | string;
-                            addressId: null | number;
-                            workShopTypeId: null | number;
-                            orderNo: null | number;
-                            userId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                        tblUsers?: {
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: null | string;
-                            uPassword: null | string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                    };
-                };
-            };
-        };
-    };
-    deleteTblWorkShopRequestAttachmentByWShopRequestAttachmentId: {
-        parameters: {
-            query?: {
-                force?: boolean;
-            };
-            header?: never;
-            path: {
-                wShopRequestAttachmentId: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        wShopRequestAttachmentId: number;
-                        wShopRequestId: number;
-                        attachmentId: number;
-                        orderNo: null | number;
-                        createdUserId: number;
-                        createdAt: string;
-                        tblAttachment?: {
-                            attachmentId: number;
-                            title: null | string;
-                            fileName: null | string;
-                            attachmentTypeId: null | number;
-                            path: null | string;
-                            size: null | number;
-                            isUserAttachment: boolean;
-                            createdUserId: number;
-                            createdAt: string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                        tblWorkShopRequest?: {
-                            wShopRequestId: number;
-                            rigName: null | string;
-                            jobOrderType: null | number;
-                            wShopRequestNo: null | number;
-                            jobOrderNo: null | string;
-                            awardingDate: null | string;
-                            requestDate: null | string;
-                            compDescGroup: null | string;
-                            secondaryCompDescGroup: null | string;
-                            model: null | string;
-                            serialNo: null | string;
-                            assetNo: null | string;
-                            locationDescGroup: null | string;
-                            descRepairRequest: null | string;
-                            personInChargeId: null | number;
-                            personInChargeApproved: null | boolean;
-                            supervisorId: null | number;
-                            supervisorApproved: null | boolean;
-                            bargeMasterId: null | number;
-                            bargeMasterApproved: null | boolean;
-                            rigManagerId: null | number;
-                            rigManagerApproved: null | boolean;
-                            bargeMasterComment: null | string;
-                            rigManagerComment: null | string;
-                            addressId: null | number;
-                            workShopTypeId: null | number;
-                            orderNo: null | number;
-                            userId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                        tblUsers?: {
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: null | string;
-                            uPassword: null | string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                    };
-                };
-            };
-        };
-    };
-    getTblWorkShopRequestAttachmentCount: {
         parameters: {
             query?: {
                 page?: number;
