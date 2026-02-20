@@ -1,12 +1,12 @@
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 import { t } from "elysia";
+import { BaseService } from "@/utils/base.service";
 import {
   BaseController,
   parseSortString,
   querySchema,
 } from "@/utils/base.controller";
-import { BaseService } from "@/utils/base.service";
 import {
   TblMaintLog,
   TblMaintLogInputCreate,
@@ -14,23 +14,20 @@ import {
   TblMaintLogPlain,
 } from "orm/generated/prismabox/TblMaintLog";
 
-/**
- * Item schema for list response
- */
 const MaintLogItemSchema = t.Object({
   maintLogId: t.Number(),
-  dateDone: t.Optional(t.String()),
-  downTime: t.Optional(t.String()),
-  unplanned: t.Boolean(),
+  dateDone: t.Any(),
+  downTime: t.Any(),
+  unexpected: t.Optional(t.Union([t.Boolean(), t.Number(), t.Null()])),
   tblComponentUnit: t.Optional(
     t.Object({
-      compNo: t.String(),
+      compNo: t.Optional(t.String()),
     }),
   ),
   tblJobDescription: t.Optional(
     t.Object({
-      jobDescCode: t.String(),
-      jobDescTitle: t.String(),
+      jobDescCode: t.Optional(t.String()),
+      jobDescTitle: t.Optional(t.String()),
     }),
   ),
   tblWorkOrder: t.Optional(
@@ -44,7 +41,7 @@ const MaintLogItemSchema = t.Object({
   ),
   tblFollowStatus: t.Optional(
     t.Object({
-      fsName: t.String(),
+      fsName: t.Optional(t.String()),
     }),
   ),
   tblMaintClass: t.Optional(
@@ -54,11 +51,12 @@ const MaintLogItemSchema = t.Object({
   ),
 });
 
-export const MaintLogListResponseSchema = t.Object({
-  data: t.Array(MaintLogItemSchema),
+const MaintLogListResponseSchema = t.Object({
+  items: t.Array(MaintLogItemSchema),
   total: t.Number(),
   page: t.Number(),
   perPage: t.Number(),
+  totalPages: t.Number(),
 });
 
 const ServiceTblMaintLog = new BaseService(prisma.tblMaintLog);
@@ -88,7 +86,7 @@ const ControllerTblMaintLog = new BaseController({
 
         const parsedFilter = filter ? JSON.parse(filter) : {};
         const sortObj = parseSortString(sort);
-        const usePagination = paginate === true;
+        const usePagination = false;
 
         return ServiceTblMaintLog.findAll({
           where: parsedFilter,
@@ -129,15 +127,12 @@ const ControllerTblMaintLog = new BaseController({
       },
       {
         tags: ["tblMaintLog"],
-        detail: { summary: "Get maintenance logs with custom fields" },
+        detail: { summary: "Get all" },
         query: querySchema,
-        response: t.Any(),
+        response: MaintLogListResponseSchema,
       },
     );
 
-    // ────────────────────────────────────────────────
-    // Endpoint برای گرفتن context (planned / unplanned / edit)
-    // ────────────────────────────────────────────────
     app.get(
       "/context",
       async ({ query }) => {

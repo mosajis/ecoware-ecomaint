@@ -88,7 +88,6 @@ const ControllerTblJobTrigger = new BaseController({
             created: now,
             lastupdate: now,
             workOrderStatusId: 2,
-            exportMarker: 0,
             workOrderTypeId: 3,
           }));
 
@@ -125,7 +124,7 @@ const ControllerTblJobTrigger = new BaseController({
           updatedCompJobs: t.Number(),
         }),
         detail: {
-          tags: ["WorkOrder"],
+          tags: ["tblJobTrigger"],
           summary: "Generate WorkOrders from JobTrigger",
         },
       },

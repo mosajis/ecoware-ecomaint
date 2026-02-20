@@ -31,7 +31,6 @@ export async function effectCompTypeCounter({
       counterTypeId,
       averageCountRate,
       useCalcAverage,
-      deptId,
       orderNo,
     } = ctc;
 
@@ -56,7 +55,6 @@ export async function effectCompTypeCounter({
       counterTypeId,
       averageCountRate,
       useCalcAverage,
-      deptId,
       orderNo,
     };
 

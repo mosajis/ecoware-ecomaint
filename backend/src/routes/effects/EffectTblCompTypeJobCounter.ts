@@ -35,7 +35,6 @@ export async function effectCompTypeJobCounter({
       compTypeCounterId,
       frequency,
       window,
-      deptId,
       showInAlert,
       updateByFunction,
       orderNo,
@@ -91,7 +90,6 @@ export async function effectCompTypeJobCounter({
     const baseData = {
       frequency,
       window,
-      deptId,
       showInAlert,
       updateByFunction,
       orderNo,

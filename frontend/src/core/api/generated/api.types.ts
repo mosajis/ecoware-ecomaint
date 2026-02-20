@@ -2383,61 +2383,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/tblJobTriggerLog/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get all */
-        get: operations["getTblJobTriggerLog"];
-        put?: never;
-        /** Create */
-        post: operations["postTblJobTriggerLog"];
-        /** Delete all */
-        delete: operations["deleteTblJobTriggerLog"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblJobTriggerLog/{jobTriggerLogId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get one */
-        get: operations["getTblJobTriggerLogByJobTriggerLogId"];
-        /** Update */
-        put: operations["putTblJobTriggerLogByJobTriggerLogId"];
-        post?: never;
-        /** Delete one */
-        delete: operations["deleteTblJobTriggerLogByJobTriggerLogId"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblJobTriggerLog/count": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Count */
-        get: operations["getTblJobTriggerLogCount"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/tblJobVersion/": {
         parameters: {
             query?: never;
@@ -2830,7 +2775,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get maintenance logs with custom fields */
+        /** Get all */
         get: operations["getTblMaintLog"];
         put?: never;
         /** Create */
@@ -4120,7 +4065,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/tblWorkShopComponent/{wShopCompId}": {
+    "/tblWorkShopComponent/{workShopCompId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -4128,12 +4073,12 @@ export interface paths {
             cookie?: never;
         };
         /** Get one */
-        get: operations["getTblWorkShopComponentByWShopCompId"];
+        get: operations["getTblWorkShopComponentByWorkShopCompId"];
         /** Update */
-        put: operations["putTblWorkShopComponentByWShopCompId"];
+        put: operations["putTblWorkShopComponentByWorkShopCompId"];
         post?: never;
         /** Delete one */
-        delete: operations["deleteTblWorkShopComponentByWShopCompId"];
+        delete: operations["deleteTblWorkShopComponentByWorkShopCompId"];
         options?: never;
         head?: never;
         patch?: never;
@@ -4354,7 +4299,6 @@ export interface operations {
                             contact: null | string;
                             eMail: null | string;
                             notes: null | string;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblComponentUnits?: {
@@ -4367,8 +4311,6 @@ export interface operations {
                                 serialNo: null | string;
                                 statusId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 isCritical: null | number;
                                 orderNo: null | number;
@@ -4387,8 +4329,6 @@ export interface operations {
                                 compTypeModel: null | string;
                                 makerId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -4403,8 +4343,6 @@ export interface operations {
                                 notes: null | string;
                                 initials: null | string;
                                 empTitle: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -4439,7 +4377,6 @@ export interface operations {
                     contact?: null | string;
                     eMail?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -4469,7 +4406,6 @@ export interface operations {
                     contact?: null | string;
                     eMail?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -4499,7 +4435,6 @@ export interface operations {
                     contact?: null | string;
                     eMail?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -4539,7 +4474,6 @@ export interface operations {
                         contact: null | string;
                         eMail: null | string;
                         notes: null | string;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnits?: {
@@ -4552,8 +4486,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -4572,8 +4504,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -4588,8 +4518,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -4662,7 +4590,6 @@ export interface operations {
                         contact: null | string;
                         eMail: null | string;
                         notes: null | string;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnits?: {
@@ -4675,8 +4602,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -4695,8 +4620,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -4711,8 +4634,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -4747,7 +4668,6 @@ export interface operations {
                     contact?: null | string;
                     eMail?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -4786,7 +4706,6 @@ export interface operations {
                     contact?: null | string;
                     eMail?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -4825,7 +4744,6 @@ export interface operations {
                     contact?: null | string;
                     eMail?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -4874,7 +4792,6 @@ export interface operations {
                         contact: null | string;
                         eMail: null | string;
                         notes: null | string;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnits?: {
@@ -4887,8 +4804,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -4907,8 +4822,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -4923,8 +4836,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -4965,7 +4876,6 @@ export interface operations {
                         contact: null | string;
                         eMail: null | string;
                         notes: null | string;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnits?: {
@@ -4978,8 +4888,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -4998,8 +4906,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -5014,8 +4920,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -5094,7 +4998,7 @@ export interface operations {
                             tblAttachmentType?: null | ({
                                 attachmentTypeId: number;
                                 name: null | string;
-                                abbreviation: null | string;
+                                orderNo: null | number;
                                 createdBy: number;
                                 createdAt: string;
                             } & {
@@ -5116,10 +5020,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -5283,7 +5185,7 @@ export interface operations {
                         tblAttachmentType?: null | ({
                             attachmentTypeId: number;
                             name: null | string;
-                            abbreviation: null | string;
+                            orderNo: null | number;
                             createdBy: number;
                             createdAt: string;
                         } & {
@@ -5305,10 +5207,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -5567,7 +5467,7 @@ export interface operations {
                         tblAttachmentType?: null | ({
                             attachmentTypeId: number;
                             name: null | string;
-                            abbreviation: null | string;
+                            orderNo: null | number;
                             createdBy: number;
                             createdAt: string;
                         } & {
@@ -5589,10 +5489,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -5726,7 +5624,7 @@ export interface operations {
                         items: {
                             attachmentTypeId: number;
                             name: null | string;
-                            abbreviation: null | string;
+                            orderNo: null | number;
                             createdBy: number;
                             createdAt: string;
                             tblAttachments?: {
@@ -5740,30 +5638,6 @@ export interface operations {
                                 createdUserId: number;
                                 createdAt: string;
                             }[];
-                            tblUsers?: {
-                                userId: number;
-                                employeeId: null | number;
-                                addressId: null | number;
-                                userGroupId: null | number;
-                                uUserName: null | string;
-                                uPassword: null | string;
-                                uName: null | string;
-                                uTitle: null | string;
-                                uComment1: null | string;
-                                uComment2: null | string;
-                                uDigitalSign: null | string;
-                                uAccountDisabled: null | boolean;
-                                uLogonAttempts: null | number;
-                                uForcePasswordChange: null | boolean;
-                                uLastLogin: null | string;
-                                exportMarker: null | number;
-                                uLastUpdated: null | string;
-                                orderNo: null | number;
-                                deptId: null | number;
-                                lastUpdate: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            };
                         }[];
                         total: number;
                         page: number;
@@ -5785,47 +5659,32 @@ export interface operations {
             content: {
                 "application/json": {
                     name?: null | string;
-                    abbreviation?: null | string;
+                    orderNo?: null | number;
                     createdBy: number;
                     tblAttachments?: {
                         connect: {
                             attachmentId: number;
                         }[];
-                    };
-                    tblUsers: {
-                        connect: {
-                            userId: number;
-                        };
                     };
                 };
                 "application/x-www-form-urlencoded": {
                     name?: null | string;
-                    abbreviation?: null | string;
+                    orderNo?: null | number;
                     createdBy: number;
                     tblAttachments?: {
                         connect: {
                             attachmentId: number;
                         }[];
-                    };
-                    tblUsers: {
-                        connect: {
-                            userId: number;
-                        };
                     };
                 };
                 "multipart/form-data": {
                     name?: null | string;
-                    abbreviation?: null | string;
+                    orderNo?: null | number;
                     createdBy: number;
                     tblAttachments?: {
                         connect: {
                             attachmentId: number;
                         }[];
-                    };
-                    tblUsers: {
-                        connect: {
-                            userId: number;
-                        };
                     };
                 };
             };
@@ -5840,7 +5699,7 @@ export interface operations {
                     "application/json": {
                         attachmentTypeId: number;
                         name: null | string;
-                        abbreviation: null | string;
+                        orderNo: null | number;
                         createdBy: number;
                         createdAt: string;
                         tblAttachments?: {
@@ -5854,30 +5713,6 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblUsers?: {
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: null | string;
-                            uPassword: null | string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
                     };
                 };
             };
@@ -5937,7 +5772,7 @@ export interface operations {
                     "application/json": {
                         attachmentTypeId: number;
                         name: null | string;
-                        abbreviation: null | string;
+                        orderNo: null | number;
                         createdBy: number;
                         createdAt: string;
                         tblAttachments?: {
@@ -5951,30 +5786,6 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblUsers?: {
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: null | string;
-                            uPassword: null | string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
                     };
                 };
             };
@@ -5996,7 +5807,7 @@ export interface operations {
             content: {
                 "application/json": {
                     name?: null | string;
-                    abbreviation?: null | string;
+                    orderNo?: null | number;
                     createdBy?: number;
                     tblAttachments?: {
                         connect?: {
@@ -6005,16 +5816,11 @@ export interface operations {
                         disconnect?: {
                             id: number;
                         }[];
-                    };
-                    tblUsers?: {
-                        connect: {
-                            userId: number;
-                        };
                     };
                 };
                 "application/x-www-form-urlencoded": {
                     name?: null | string;
-                    abbreviation?: null | string;
+                    orderNo?: null | number;
                     createdBy?: number;
                     tblAttachments?: {
                         connect?: {
@@ -6023,16 +5829,11 @@ export interface operations {
                         disconnect?: {
                             id: number;
                         }[];
-                    };
-                    tblUsers?: {
-                        connect: {
-                            userId: number;
-                        };
                     };
                 };
                 "multipart/form-data": {
                     name?: null | string;
-                    abbreviation?: null | string;
+                    orderNo?: null | number;
                     createdBy?: number;
                     tblAttachments?: {
                         connect?: {
@@ -6041,11 +5842,6 @@ export interface operations {
                         disconnect?: {
                             id: number;
                         }[];
-                    };
-                    tblUsers?: {
-                        connect: {
-                            userId: number;
-                        };
                     };
                 };
             };
@@ -6060,7 +5856,7 @@ export interface operations {
                     "application/json": {
                         attachmentTypeId: number;
                         name: null | string;
-                        abbreviation: null | string;
+                        orderNo: null | number;
                         createdBy: number;
                         createdAt: string;
                         tblAttachments?: {
@@ -6074,30 +5870,6 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblUsers?: {
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: null | string;
-                            uPassword: null | string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
                     };
                 };
             };
@@ -6125,7 +5897,7 @@ export interface operations {
                     "application/json": {
                         attachmentTypeId: number;
                         name: null | string;
-                        abbreviation: null | string;
+                        orderNo: null | number;
                         createdBy: number;
                         createdAt: string;
                         tblAttachments?: {
@@ -6139,30 +5911,6 @@ export interface operations {
                             createdUserId: number;
                             createdAt: string;
                         }[];
-                        tblUsers?: {
-                            userId: number;
-                            employeeId: null | number;
-                            addressId: null | number;
-                            userGroupId: null | number;
-                            uUserName: null | string;
-                            uPassword: null | string;
-                            uName: null | string;
-                            uTitle: null | string;
-                            uComment1: null | string;
-                            uComment2: null | string;
-                            uDigitalSign: null | string;
-                            uAccountDisabled: null | boolean;
-                            uLogonAttempts: null | number;
-                            uForcePasswordChange: null | boolean;
-                            uLastLogin: null | string;
-                            exportMarker: null | number;
-                            uLastUpdated: null | string;
-                            orderNo: null | number;
-                            deptId: null | number;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
                     };
                 };
             };
@@ -6238,8 +5986,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblCompCounter?: null | ({
@@ -6256,8 +6002,6 @@ export interface operations {
                                 zeroedDate: null | string;
                                 averageCountRate: null | number;
                                 useCalcAverage: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -6277,8 +6021,6 @@ export interface operations {
                                 zeroedDate: null | string;
                                 averageCountRate: null | number;
                                 useCalcAverage: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -6292,8 +6034,6 @@ export interface operations {
                                 serialNo: null | string;
                                 statusId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 isCritical: null | number;
                                 orderNo: null | number;
@@ -6311,8 +6051,6 @@ export interface operations {
                                 name: null | string;
                                 maxDailyValue: null | number;
                                 type: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -6330,8 +6068,6 @@ export interface operations {
                                 lastZeroedValue: null | number;
                                 changedBy: null | number;
                                 changedDate: null | string;
-                                deptId: number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -6343,8 +6079,6 @@ export interface operations {
                                 lastDoneCount: null | number;
                                 nextDueCount: null | number;
                                 window: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 showInAlert: null | boolean;
                                 updateByFunction: null | boolean;
@@ -6381,7 +6115,6 @@ export interface operations {
                     zeroedDate?: null | string;
                     averageCountRate?: null | number;
                     useCalcAverage?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounter?: {
@@ -6425,7 +6158,6 @@ export interface operations {
                     zeroedDate?: null | string;
                     averageCountRate?: null | number;
                     useCalcAverage?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounter?: {
@@ -6469,7 +6201,6 @@ export interface operations {
                     zeroedDate?: null | string;
                     averageCountRate?: null | number;
                     useCalcAverage?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounter?: {
@@ -6526,8 +6257,6 @@ export interface operations {
                         zeroedDate: null | string;
                         averageCountRate: null | number;
                         useCalcAverage: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompCounter?: null | ({
@@ -6544,8 +6273,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -6565,8 +6292,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -6580,8 +6305,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -6599,8 +6322,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -6618,8 +6339,6 @@ export interface operations {
                             lastZeroedValue: null | number;
                             changedBy: null | number;
                             changedDate: null | string;
-                            deptId: number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -6631,8 +6350,6 @@ export interface operations {
                             lastDoneCount: null | number;
                             nextDueCount: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -6710,8 +6427,6 @@ export interface operations {
                         zeroedDate: null | string;
                         averageCountRate: null | number;
                         useCalcAverage: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompCounter?: null | ({
@@ -6728,8 +6443,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -6749,8 +6462,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -6764,8 +6475,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -6783,8 +6492,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -6802,8 +6509,6 @@ export interface operations {
                             lastZeroedValue: null | number;
                             changedBy: null | number;
                             changedDate: null | string;
-                            deptId: number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -6815,8 +6520,6 @@ export interface operations {
                             lastDoneCount: null | number;
                             nextDueCount: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -6850,7 +6553,6 @@ export interface operations {
                     zeroedDate?: null | string;
                     averageCountRate?: null | number;
                     useCalcAverage?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounter?: {
@@ -6906,7 +6608,6 @@ export interface operations {
                     zeroedDate?: null | string;
                     averageCountRate?: null | number;
                     useCalcAverage?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounter?: {
@@ -6962,7 +6663,6 @@ export interface operations {
                     zeroedDate?: null | string;
                     averageCountRate?: null | number;
                     useCalcAverage?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounter?: {
@@ -7031,8 +6731,6 @@ export interface operations {
                         zeroedDate: null | string;
                         averageCountRate: null | number;
                         useCalcAverage: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompCounter?: null | ({
@@ -7049,8 +6747,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -7070,8 +6766,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -7085,8 +6779,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -7104,8 +6796,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -7123,8 +6813,6 @@ export interface operations {
                             lastZeroedValue: null | number;
                             changedBy: null | number;
                             changedDate: null | string;
-                            deptId: number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -7136,8 +6824,6 @@ export interface operations {
                             lastDoneCount: null | number;
                             nextDueCount: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -7183,8 +6869,6 @@ export interface operations {
                         zeroedDate: null | string;
                         averageCountRate: null | number;
                         useCalcAverage: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompCounter?: null | ({
@@ -7201,8 +6885,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -7222,8 +6904,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -7237,8 +6917,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -7256,8 +6934,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -7275,8 +6951,6 @@ export interface operations {
                             lastZeroedValue: null | number;
                             changedBy: null | number;
                             changedDate: null | string;
-                            deptId: number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -7288,8 +6962,6 @@ export interface operations {
                             lastDoneCount: null | number;
                             nextDueCount: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -7370,8 +7042,6 @@ export interface operations {
                             lastZeroedValue: null | number;
                             changedBy: null | number;
                             changedDate: null | string;
-                            deptId: number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblCompCounter?: null | ({
@@ -7388,8 +7058,6 @@ export interface operations {
                                 zeroedDate: null | string;
                                 averageCountRate: null | number;
                                 useCalcAverage: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -7411,10 +7079,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -7447,7 +7113,6 @@ export interface operations {
                     lastZeroedValue?: null | number;
                     changedBy?: null | number;
                     changedDate?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounter?: {
@@ -7470,7 +7135,6 @@ export interface operations {
                     lastZeroedValue?: null | number;
                     changedBy?: null | number;
                     changedDate?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounter?: {
@@ -7493,7 +7157,6 @@ export interface operations {
                     lastZeroedValue?: null | number;
                     changedBy?: null | number;
                     changedDate?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounter?: {
@@ -7528,8 +7191,6 @@ export interface operations {
                         lastZeroedValue: null | number;
                         changedBy: null | number;
                         changedDate: null | string;
-                        deptId: number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompCounter?: null | ({
@@ -7546,8 +7207,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -7569,10 +7228,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -7645,8 +7302,6 @@ export interface operations {
                         lastZeroedValue: null | number;
                         changedBy: null | number;
                         changedDate: null | string;
-                        deptId: number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompCounter?: null | ({
@@ -7663,8 +7318,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -7686,10 +7339,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -7722,7 +7373,6 @@ export interface operations {
                     lastZeroedValue?: null | number;
                     changedBy?: null | number;
                     changedDate?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounter?: {
@@ -7747,7 +7397,6 @@ export interface operations {
                     lastZeroedValue?: null | number;
                     changedBy?: null | number;
                     changedDate?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounter?: {
@@ -7772,7 +7421,6 @@ export interface operations {
                     lastZeroedValue?: null | number;
                     changedBy?: null | number;
                     changedDate?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounter?: {
@@ -7809,8 +7457,6 @@ export interface operations {
                         lastZeroedValue: null | number;
                         changedBy: null | number;
                         changedDate: null | string;
-                        deptId: number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompCounter?: null | ({
@@ -7827,8 +7473,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -7850,10 +7494,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -7894,8 +7536,6 @@ export interface operations {
                         lastZeroedValue: null | number;
                         changedBy: null | number;
                         changedDate: null | string;
-                        deptId: number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompCounter?: null | ({
@@ -7912,8 +7552,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -7935,10 +7573,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -8031,8 +7667,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -8048,8 +7682,6 @@ export interface operations {
                                 serialNo: null | string;
                                 statusId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 isCritical: null | number;
                                 orderNo: null | number;
@@ -8067,8 +7699,6 @@ export interface operations {
                                 name: null | string;
                                 externalDisc: null | number;
                                 parentDiscId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -8086,12 +7716,9 @@ export interface operations {
                                 oldRevisionJobDescId: null | number;
                                 copiedFromJobDescId: null | number;
                                 createdDate: null | string;
-                                createdBy: null | number;
                                 approvedDate: null | string;
                                 approvedBy: null | number;
                                 applicationId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -8101,8 +7728,6 @@ export interface operations {
                             tblMaintCause?: null | ({
                                 maintCauseId: number;
                                 descr: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -8111,8 +7736,6 @@ export interface operations {
                             tblMaintClass?: null | ({
                                 maintClassId: number;
                                 descr: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -8121,8 +7744,6 @@ export interface operations {
                             tblMaintType?: null | ({
                                 maintTypeId: number;
                                 descr: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -8150,10 +7771,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -8166,8 +7785,6 @@ export interface operations {
                                 lastDoneCount: null | number;
                                 nextDueCount: null | number;
                                 window: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 showInAlert: null | boolean;
                                 updateByFunction: null | boolean;
@@ -8184,8 +7801,6 @@ export interface operations {
                                 minValue: null | number;
                                 maxValue: null | number;
                                 updateOnReport: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -8193,8 +7808,6 @@ export interface operations {
                                 compJobTriggerId: number;
                                 jobTriggerId: null | number;
                                 compJobId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -8225,8 +7838,6 @@ export interface operations {
                                 filed: null | number;
                                 unexpected: null | number;
                                 workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 reportingMethod: null | number;
                                 pendingBy: null | number;
@@ -8274,7 +7885,6 @@ export interface operations {
                     active?: null | number;
                     mandatoryHistory?: null | number;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryResource?: null | number;
                     mandatoryStockUsage?: null | number;
@@ -8358,7 +7968,6 @@ export interface operations {
                     active?: null | number;
                     mandatoryHistory?: null | number;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryResource?: null | number;
                     mandatoryStockUsage?: null | number;
@@ -8442,7 +8051,6 @@ export interface operations {
                     active?: null | number;
                     mandatoryHistory?: null | number;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryResource?: null | number;
                     mandatoryStockUsage?: null | number;
@@ -8544,8 +8152,6 @@ export interface operations {
                         active: null | number;
                         mandatoryHistory: null | number;
                         notes: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         mandatoryResource: null | number;
                         mandatoryStockUsage: null | number;
@@ -8561,8 +8167,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -8580,8 +8184,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -8599,12 +8201,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -8614,8 +8213,6 @@ export interface operations {
                         tblMaintCause?: null | ({
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -8624,8 +8221,6 @@ export interface operations {
                         tblMaintClass?: null | ({
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -8634,8 +8229,6 @@ export interface operations {
                         tblMaintType?: null | ({
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -8663,10 +8256,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -8679,8 +8270,6 @@ export interface operations {
                             lastDoneCount: null | number;
                             nextDueCount: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -8697,8 +8286,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -8706,8 +8293,6 @@ export interface operations {
                             compJobTriggerId: number;
                             jobTriggerId: null | number;
                             compJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -8738,8 +8323,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -8833,8 +8416,6 @@ export interface operations {
                         active: null | number;
                         mandatoryHistory: null | number;
                         notes: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         mandatoryResource: null | number;
                         mandatoryStockUsage: null | number;
@@ -8850,8 +8431,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -8869,8 +8448,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -8888,12 +8465,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -8903,8 +8477,6 @@ export interface operations {
                         tblMaintCause?: null | ({
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -8913,8 +8485,6 @@ export interface operations {
                         tblMaintClass?: null | ({
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -8923,8 +8493,6 @@ export interface operations {
                         tblMaintType?: null | ({
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -8952,10 +8520,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -8968,8 +8534,6 @@ export interface operations {
                             lastDoneCount: null | number;
                             nextDueCount: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -8986,8 +8550,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -8995,8 +8557,6 @@ export interface operations {
                             compJobTriggerId: number;
                             jobTriggerId: null | number;
                             compJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -9027,8 +8587,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -9076,7 +8634,6 @@ export interface operations {
                     active?: null | number;
                     mandatoryHistory?: null | number;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryResource?: null | number;
                     mandatoryStockUsage?: null | number;
@@ -9180,7 +8737,6 @@ export interface operations {
                     active?: null | number;
                     mandatoryHistory?: null | number;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryResource?: null | number;
                     mandatoryStockUsage?: null | number;
@@ -9284,7 +8840,6 @@ export interface operations {
                     active?: null | number;
                     mandatoryHistory?: null | number;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryResource?: null | number;
                     mandatoryStockUsage?: null | number;
@@ -9406,8 +8961,6 @@ export interface operations {
                         active: null | number;
                         mandatoryHistory: null | number;
                         notes: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         mandatoryResource: null | number;
                         mandatoryStockUsage: null | number;
@@ -9423,8 +8976,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -9442,8 +8993,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -9461,12 +9010,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -9476,8 +9022,6 @@ export interface operations {
                         tblMaintCause?: null | ({
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -9486,8 +9030,6 @@ export interface operations {
                         tblMaintClass?: null | ({
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -9496,8 +9038,6 @@ export interface operations {
                         tblMaintType?: null | ({
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -9525,10 +9065,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -9541,8 +9079,6 @@ export interface operations {
                             lastDoneCount: null | number;
                             nextDueCount: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -9559,8 +9095,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -9568,8 +9102,6 @@ export interface operations {
                             compJobTriggerId: number;
                             jobTriggerId: null | number;
                             compJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -9600,8 +9132,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -9663,8 +9193,6 @@ export interface operations {
                         active: null | number;
                         mandatoryHistory: null | number;
                         notes: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         mandatoryResource: null | number;
                         mandatoryStockUsage: null | number;
@@ -9680,8 +9208,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -9699,8 +9225,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -9718,12 +9242,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -9733,8 +9254,6 @@ export interface operations {
                         tblMaintCause?: null | ({
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -9743,8 +9262,6 @@ export interface operations {
                         tblMaintClass?: null | ({
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -9753,8 +9270,6 @@ export interface operations {
                         tblMaintType?: null | ({
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -9782,10 +9297,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -9798,8 +9311,6 @@ export interface operations {
                             lastDoneCount: null | number;
                             nextDueCount: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -9816,8 +9327,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -9825,8 +9334,6 @@ export interface operations {
                             compJobTriggerId: number;
                             jobTriggerId: null | number;
                             compJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -9857,8 +9364,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -9938,8 +9443,6 @@ export interface operations {
                             lastDoneCount: null | number;
                             nextDueCount: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -9960,8 +9463,6 @@ export interface operations {
                                 zeroedDate: null | string;
                                 averageCountRate: null | number;
                                 useCalcAverage: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -9994,8 +9495,6 @@ export interface operations {
                                 active: null | number;
                                 mandatoryHistory: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -10020,10 +9519,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -10052,7 +9549,6 @@ export interface operations {
                     lastDoneCount?: null | number;
                     nextDueCount?: null | number;
                     window?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     showInAlert?: null | boolean;
                     updateByFunction?: null | boolean;
@@ -10079,7 +9575,6 @@ export interface operations {
                     lastDoneCount?: null | number;
                     nextDueCount?: null | number;
                     window?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     showInAlert?: null | boolean;
                     updateByFunction?: null | boolean;
@@ -10106,7 +9601,6 @@ export interface operations {
                     lastDoneCount?: null | number;
                     nextDueCount?: null | number;
                     window?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     showInAlert?: null | boolean;
                     updateByFunction?: null | boolean;
@@ -10145,8 +9639,6 @@ export interface operations {
                         lastDoneCount: null | number;
                         nextDueCount: null | number;
                         window: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         showInAlert: null | boolean;
                         updateByFunction: null | boolean;
@@ -10167,8 +9659,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -10201,8 +9691,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -10227,10 +9715,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -10299,8 +9785,6 @@ export interface operations {
                         lastDoneCount: null | number;
                         nextDueCount: null | number;
                         window: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         showInAlert: null | boolean;
                         updateByFunction: null | boolean;
@@ -10321,8 +9805,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -10355,8 +9837,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -10381,10 +9861,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -10413,7 +9891,6 @@ export interface operations {
                     lastDoneCount?: null | number;
                     nextDueCount?: null | number;
                     window?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     showInAlert?: null | boolean;
                     updateByFunction?: null | boolean;
@@ -10443,7 +9920,6 @@ export interface operations {
                     lastDoneCount?: null | number;
                     nextDueCount?: null | number;
                     window?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     showInAlert?: null | boolean;
                     updateByFunction?: null | boolean;
@@ -10473,7 +9949,6 @@ export interface operations {
                     lastDoneCount?: null | number;
                     nextDueCount?: null | number;
                     window?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     showInAlert?: null | boolean;
                     updateByFunction?: null | boolean;
@@ -10515,8 +9990,6 @@ export interface operations {
                         lastDoneCount: null | number;
                         nextDueCount: null | number;
                         window: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         showInAlert: null | boolean;
                         updateByFunction: null | boolean;
@@ -10537,8 +10010,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -10571,8 +10042,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -10597,10 +10066,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -10637,8 +10104,6 @@ export interface operations {
                         lastDoneCount: null | number;
                         nextDueCount: null | number;
                         window: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         showInAlert: null | boolean;
                         updateByFunction: null | boolean;
@@ -10659,8 +10124,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -10693,8 +10156,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -10719,10 +10180,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -10797,8 +10256,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblCompJob?: null | ({
@@ -10828,8 +10285,6 @@ export interface operations {
                                 active: null | number;
                                 mandatoryHistory: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -10849,8 +10304,6 @@ export interface operations {
                                 setValue: null | number;
                                 operationalMinValue: null | number;
                                 operationalMaxValue: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -10881,7 +10334,6 @@ export interface operations {
                     minValue?: null | number;
                     maxValue?: null | number;
                     updateOnReport?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJob?: {
@@ -10901,7 +10353,6 @@ export interface operations {
                     minValue?: null | number;
                     maxValue?: null | number;
                     updateOnReport?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJob?: {
@@ -10921,7 +10372,6 @@ export interface operations {
                     minValue?: null | number;
                     maxValue?: null | number;
                     updateOnReport?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJob?: {
@@ -10953,8 +10403,6 @@ export interface operations {
                         minValue: null | number;
                         maxValue: null | number;
                         updateOnReport: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJob?: null | ({
@@ -10984,8 +10432,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -11005,8 +10451,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -11077,8 +10521,6 @@ export interface operations {
                         minValue: null | number;
                         maxValue: null | number;
                         updateOnReport: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJob?: null | ({
@@ -11108,8 +10550,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -11129,8 +10569,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -11161,7 +10599,6 @@ export interface operations {
                     minValue?: null | number;
                     maxValue?: null | number;
                     updateOnReport?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJob?: {
@@ -11183,7 +10620,6 @@ export interface operations {
                     minValue?: null | number;
                     maxValue?: null | number;
                     updateOnReport?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJob?: {
@@ -11205,7 +10641,6 @@ export interface operations {
                     minValue?: null | number;
                     maxValue?: null | number;
                     updateOnReport?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJob?: {
@@ -11239,8 +10674,6 @@ export interface operations {
                         minValue: null | number;
                         maxValue: null | number;
                         updateOnReport: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJob?: null | ({
@@ -11270,8 +10703,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -11291,8 +10722,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -11331,8 +10760,6 @@ export interface operations {
                         minValue: null | number;
                         maxValue: null | number;
                         updateOnReport: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJob?: null | ({
@@ -11362,8 +10789,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -11383,8 +10808,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -11455,8 +10878,6 @@ export interface operations {
                             compJobTriggerId: number;
                             jobTriggerId: null | number;
                             compJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblCompJob?: null | ({
@@ -11486,8 +10907,6 @@ export interface operations {
                                 active: null | number;
                                 mandatoryHistory: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -11499,8 +10918,6 @@ export interface operations {
                             tblJobTrigger?: null | ({
                                 jobTriggerId: number;
                                 descr: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -11526,7 +10943,6 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJob?: {
@@ -11541,7 +10957,6 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJob?: {
@@ -11556,7 +10971,6 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJob?: {
@@ -11583,8 +10997,6 @@ export interface operations {
                         compJobTriggerId: number;
                         jobTriggerId: null | number;
                         compJobId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJob?: null | ({
@@ -11614,8 +11026,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -11627,8 +11037,6 @@ export interface operations {
                         tblJobTrigger?: null | ({
                             jobTriggerId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -11694,8 +11102,6 @@ export interface operations {
                         compJobTriggerId: number;
                         jobTriggerId: null | number;
                         compJobId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJob?: null | ({
@@ -11725,8 +11131,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -11738,8 +11142,6 @@ export interface operations {
                         tblJobTrigger?: null | ({
                             jobTriggerId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -11765,7 +11167,6 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJob?: {
@@ -11782,7 +11183,6 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJob?: {
@@ -11799,7 +11199,6 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJob?: {
@@ -11828,8 +11227,6 @@ export interface operations {
                         compJobTriggerId: number;
                         jobTriggerId: null | number;
                         compJobId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJob?: null | ({
@@ -11859,8 +11256,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -11872,8 +11267,6 @@ export interface operations {
                         tblJobTrigger?: null | ({
                             jobTriggerId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -11907,8 +11300,6 @@ export interface operations {
                         compJobTriggerId: number;
                         jobTriggerId: null | number;
                         compJobId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJob?: null | ({
@@ -11938,8 +11329,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -11951,8 +11340,6 @@ export interface operations {
                         tblJobTrigger?: null | ({
                             jobTriggerId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -12030,8 +11417,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblCompJobMeasurePoints?: {
@@ -12043,8 +11428,6 @@ export interface operations {
                                 minValue: null | number;
                                 maxValue: null | number;
                                 updateOnReport: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -12058,8 +11441,6 @@ export interface operations {
                                 serialNo: null | string;
                                 statusId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 isCritical: null | number;
                                 orderNo: null | number;
@@ -12077,8 +11458,6 @@ export interface operations {
                                 name: null | string;
                                 maxDailyValue: null | number;
                                 type: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -12090,8 +11469,6 @@ export interface operations {
                                 name: null | string;
                                 allowDecimals: null | number;
                                 description: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -12113,10 +11490,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -12129,8 +11504,6 @@ export interface operations {
                                 currentDate: null | string;
                                 unitId: null | number;
                                 currentValue: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -12160,7 +11533,6 @@ export interface operations {
                     setValue?: null | number;
                     operationalMinValue?: null | number;
                     operationalMaxValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobMeasurePoints?: {
@@ -12201,7 +11573,6 @@ export interface operations {
                     setValue?: null | number;
                     operationalMinValue?: null | number;
                     operationalMaxValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobMeasurePoints?: {
@@ -12242,7 +11613,6 @@ export interface operations {
                     setValue?: null | number;
                     operationalMinValue?: null | number;
                     operationalMaxValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobMeasurePoints?: {
@@ -12296,8 +11666,6 @@ export interface operations {
                         setValue: null | number;
                         operationalMinValue: null | number;
                         operationalMaxValue: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobMeasurePoints?: {
@@ -12309,8 +11677,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -12324,8 +11690,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -12343,8 +11707,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -12356,8 +11718,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -12379,10 +11739,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -12395,8 +11753,6 @@ export interface operations {
                             currentDate: null | string;
                             unitId: null | number;
                             currentValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -12467,8 +11823,6 @@ export interface operations {
                         setValue: null | number;
                         operationalMinValue: null | number;
                         operationalMaxValue: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobMeasurePoints?: {
@@ -12480,8 +11834,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -12495,8 +11847,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -12514,8 +11864,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -12527,8 +11875,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -12550,10 +11896,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -12566,8 +11910,6 @@ export interface operations {
                             currentDate: null | string;
                             unitId: null | number;
                             currentValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -12594,7 +11936,6 @@ export interface operations {
                     setValue?: null | number;
                     operationalMinValue?: null | number;
                     operationalMaxValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobMeasurePoints?: {
@@ -12645,7 +11986,6 @@ export interface operations {
                     setValue?: null | number;
                     operationalMinValue?: null | number;
                     operationalMaxValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobMeasurePoints?: {
@@ -12696,7 +12036,6 @@ export interface operations {
                     setValue?: null | number;
                     operationalMinValue?: null | number;
                     operationalMaxValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobMeasurePoints?: {
@@ -12760,8 +12099,6 @@ export interface operations {
                         setValue: null | number;
                         operationalMinValue: null | number;
                         operationalMaxValue: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobMeasurePoints?: {
@@ -12773,8 +12110,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -12788,8 +12123,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -12807,8 +12140,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -12820,8 +12151,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -12843,10 +12172,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -12859,8 +12186,6 @@ export interface operations {
                             currentDate: null | string;
                             unitId: null | number;
                             currentValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -12899,8 +12224,6 @@ export interface operations {
                         setValue: null | number;
                         operationalMinValue: null | number;
                         operationalMaxValue: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobMeasurePoints?: {
@@ -12912,8 +12235,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -12927,8 +12248,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -12946,8 +12265,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -12959,8 +12276,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -12982,10 +12297,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -12998,8 +12311,6 @@ export interface operations {
                             currentDate: null | string;
                             unitId: null | number;
                             currentValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -13072,8 +12383,6 @@ export interface operations {
                             currentDate: null | string;
                             unitId: null | number;
                             currentValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblCompMeasurePoint?: null | ({
@@ -13087,8 +12396,6 @@ export interface operations {
                                 setValue: null | number;
                                 operationalMinValue: null | number;
                                 operationalMaxValue: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -13100,8 +12407,6 @@ export interface operations {
                                 name: null | string;
                                 allowDecimals: null | number;
                                 description: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -13123,10 +12428,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -13155,7 +12458,6 @@ export interface operations {
                     changedDate?: null | string;
                     currentDate?: null | string;
                     currentValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompMeasurePoint?: {
@@ -13179,7 +12481,6 @@ export interface operations {
                     changedDate?: null | string;
                     currentDate?: null | string;
                     currentValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompMeasurePoint?: {
@@ -13203,7 +12504,6 @@ export interface operations {
                     changedDate?: null | string;
                     currentDate?: null | string;
                     currentValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompMeasurePoint?: {
@@ -13239,8 +12539,6 @@ export interface operations {
                         currentDate: null | string;
                         unitId: null | number;
                         currentValue: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompMeasurePoint?: null | ({
@@ -13254,8 +12552,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -13267,8 +12563,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -13290,10 +12584,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -13362,8 +12654,6 @@ export interface operations {
                         currentDate: null | string;
                         unitId: null | number;
                         currentValue: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompMeasurePoint?: null | ({
@@ -13377,8 +12667,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -13390,8 +12678,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -13413,10 +12699,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -13445,7 +12729,6 @@ export interface operations {
                     changedDate?: null | string;
                     currentDate?: null | string;
                     currentValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompMeasurePoint?: {
@@ -13472,7 +12755,6 @@ export interface operations {
                     changedDate?: null | string;
                     currentDate?: null | string;
                     currentValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompMeasurePoint?: {
@@ -13499,7 +12781,6 @@ export interface operations {
                     changedDate?: null | string;
                     currentDate?: null | string;
                     currentValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompMeasurePoint?: {
@@ -13538,8 +12819,6 @@ export interface operations {
                         currentDate: null | string;
                         unitId: null | number;
                         currentValue: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompMeasurePoint?: null | ({
@@ -13553,8 +12832,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -13566,8 +12843,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -13589,10 +12864,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -13629,8 +12902,6 @@ export interface operations {
                         currentDate: null | string;
                         unitId: null | number;
                         currentValue: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompMeasurePoint?: null | ({
@@ -13644,8 +12915,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -13657,8 +12926,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -13680,10 +12947,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -13760,8 +13025,6 @@ export interface operations {
                             oilGrade: null | string;
                             orderNo: null | number;
                             userId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             spareTypeId: null | number;
                         }[];
@@ -13789,7 +13052,6 @@ export interface operations {
                     samplingPosition?: null | string;
                     oilGrade?: null | string;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                 };
                 "application/x-www-form-urlencoded": {
@@ -13798,7 +13060,6 @@ export interface operations {
                     samplingPosition?: null | string;
                     oilGrade?: null | string;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                 };
                 "multipart/form-data": {
@@ -13807,7 +13068,6 @@ export interface operations {
                     samplingPosition?: null | string;
                     oilGrade?: null | string;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                 };
             };
@@ -13830,8 +13090,6 @@ export interface operations {
                         oilGrade: null | string;
                         orderNo: null | number;
                         userId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         spareTypeId: null | number;
                     };
@@ -13901,8 +13159,6 @@ export interface operations {
                         oilGrade: null | string;
                         orderNo: null | number;
                         userId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         spareTypeId: null | number;
                     };
@@ -13930,7 +13186,6 @@ export interface operations {
                     samplingPosition?: null | string;
                     oilGrade?: null | string;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                 };
                 "application/x-www-form-urlencoded": {
@@ -13939,7 +13194,6 @@ export interface operations {
                     samplingPosition?: null | string;
                     oilGrade?: null | string;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                 };
                 "multipart/form-data": {
@@ -13948,7 +13202,6 @@ export interface operations {
                     samplingPosition?: null | string;
                     oilGrade?: null | string;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                 };
             };
@@ -13971,8 +13224,6 @@ export interface operations {
                         oilGrade: null | string;
                         orderNo: null | number;
                         userId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         spareTypeId: null | number;
                     };
@@ -14010,8 +13261,6 @@ export interface operations {
                         oilGrade: null | string;
                         orderNo: null | number;
                         userId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         spareTypeId: null | number;
                     };
@@ -14082,8 +13331,6 @@ export interface operations {
                             drawingNo: null | string;
                             position: null | string;
                             oldPartNo: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             spareTypeId: null | number;
@@ -14111,7 +13358,6 @@ export interface operations {
                     drawingNo?: null | string;
                     position?: null | string;
                     oldPartNo?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -14120,7 +13366,6 @@ export interface operations {
                     drawingNo?: null | string;
                     position?: null | string;
                     oldPartNo?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -14129,7 +13374,6 @@ export interface operations {
                     drawingNo?: null | string;
                     position?: null | string;
                     oldPartNo?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -14149,8 +13393,6 @@ export interface operations {
                         drawingNo: null | string;
                         position: null | string;
                         oldPartNo: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         spareTypeId: null | number;
@@ -14217,8 +13459,6 @@ export interface operations {
                         drawingNo: null | string;
                         position: null | string;
                         oldPartNo: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         spareTypeId: null | number;
@@ -14246,7 +13486,6 @@ export interface operations {
                     drawingNo?: null | string;
                     position?: null | string;
                     oldPartNo?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -14255,7 +13494,6 @@ export interface operations {
                     drawingNo?: null | string;
                     position?: null | string;
                     oldPartNo?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -14264,7 +13502,6 @@ export interface operations {
                     drawingNo?: null | string;
                     position?: null | string;
                     oldPartNo?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -14284,8 +13521,6 @@ export interface operations {
                         drawingNo: null | string;
                         position: null | string;
                         oldPartNo: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         spareTypeId: null | number;
@@ -14320,8 +13555,6 @@ export interface operations {
                         drawingNo: null | string;
                         position: null | string;
                         oldPartNo: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         spareTypeId: null | number;
@@ -14391,8 +13624,6 @@ export interface operations {
                             compStatusName: null | string;
                             compStatusGroup: null | number;
                             orderNo: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             tblComponentUnits?: {
                                 compId: number;
@@ -14404,8 +13635,6 @@ export interface operations {
                                 serialNo: null | string;
                                 statusId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 isCritical: null | number;
                                 orderNo: null | number;
@@ -14438,7 +13667,6 @@ export interface operations {
                     compStatusName?: null | string;
                     compStatusGroup?: null | number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     tblComponentUnits?: {
                         connect: {
@@ -14450,7 +13678,6 @@ export interface operations {
                     compStatusName?: null | string;
                     compStatusGroup?: null | number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     tblComponentUnits?: {
                         connect: {
@@ -14462,7 +13689,6 @@ export interface operations {
                     compStatusName?: null | string;
                     compStatusGroup?: null | number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     tblComponentUnits?: {
                         connect: {
@@ -14484,8 +13710,6 @@ export interface operations {
                         compStatusName: null | string;
                         compStatusGroup: null | number;
                         orderNo: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         tblComponentUnits?: {
                             compId: number;
@@ -14497,8 +13721,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -14569,8 +13791,6 @@ export interface operations {
                         compStatusName: null | string;
                         compStatusGroup: null | number;
                         orderNo: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         tblComponentUnits?: {
                             compId: number;
@@ -14582,8 +13802,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -14616,7 +13834,6 @@ export interface operations {
                     compStatusName?: null | string;
                     compStatusGroup?: null | number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     tblComponentUnits?: {
                         connect?: {
@@ -14631,7 +13848,6 @@ export interface operations {
                     compStatusName?: null | string;
                     compStatusGroup?: null | number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     tblComponentUnits?: {
                         connect?: {
@@ -14646,7 +13862,6 @@ export interface operations {
                     compStatusName?: null | string;
                     compStatusGroup?: null | number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     tblComponentUnits?: {
                         connect?: {
@@ -14671,8 +13886,6 @@ export interface operations {
                         compStatusName: null | string;
                         compStatusGroup: null | number;
                         orderNo: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         tblComponentUnits?: {
                             compId: number;
@@ -14684,8 +13897,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -14724,8 +13935,6 @@ export interface operations {
                         compStatusName: null | string;
                         compStatusGroup: null | number;
                         orderNo: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         tblComponentUnits?: {
                             compId: number;
@@ -14737,8 +13946,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -14819,8 +14026,6 @@ export interface operations {
                             workOrderId: null | number;
                             fromDeptId: null | number;
                             changedTime: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblUsers?: null | ({
@@ -14839,10 +14044,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -14869,7 +14072,6 @@ export interface operations {
                 "application/json": {
                     changedBy?: null | number;
                     changedTime?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -14881,7 +14083,6 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     changedBy?: null | number;
                     changedTime?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -14893,7 +14094,6 @@ export interface operations {
                 "multipart/form-data": {
                     changedBy?: null | number;
                     changedTime?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -14921,8 +14121,6 @@ export interface operations {
                         workOrderId: null | number;
                         fromDeptId: null | number;
                         changedTime: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblUsers?: null | ({
@@ -14941,10 +14139,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -15015,8 +14211,6 @@ export interface operations {
                         workOrderId: null | number;
                         fromDeptId: null | number;
                         changedTime: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblUsers?: null | ({
@@ -15035,10 +14229,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -15065,7 +14257,6 @@ export interface operations {
                 "application/json": {
                     changedBy?: null | number;
                     changedTime?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -15078,7 +14269,6 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     changedBy?: null | number;
                     changedTime?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -15091,7 +14281,6 @@ export interface operations {
                 "multipart/form-data": {
                     changedBy?: null | number;
                     changedTime?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -15120,8 +14309,6 @@ export interface operations {
                         workOrderId: null | number;
                         fromDeptId: null | number;
                         changedTime: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblUsers?: null | ({
@@ -15140,10 +14327,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -15182,8 +14367,6 @@ export interface operations {
                         workOrderId: null | number;
                         fromDeptId: null | number;
                         changedTime: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblUsers?: null | ({
@@ -15202,10 +14385,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -15280,8 +14461,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblComponentUnits?: {
@@ -15294,8 +14473,6 @@ export interface operations {
                                 serialNo: null | string;
                                 statusId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 isCritical: null | number;
                                 orderNo: null | number;
@@ -15317,7 +14494,6 @@ export interface operations {
                                 contact: null | string;
                                 eMail: null | string;
                                 notes: null | string;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -15332,8 +14508,6 @@ export interface operations {
                                 compTypeModel: null | string;
                                 makerId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -15348,8 +14522,6 @@ export interface operations {
                                 compTypeModel: null | string;
                                 makerId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -15367,8 +14539,6 @@ export interface operations {
                                 counterTypeId: null | number;
                                 averageCountRate: null | number;
                                 useCalcAverage: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -15394,8 +14564,6 @@ export interface operations {
                                 window: null | number;
                                 active: null | number;
                                 mandatoryHistory: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -15410,8 +14578,6 @@ export interface operations {
                                 setValue: null | number;
                                 operationalMinValue: null | number;
                                 operationalMaxValue: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -15440,7 +14606,6 @@ export interface operations {
                     compType?: null | string;
                     compTypeModel?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -15490,7 +14655,6 @@ export interface operations {
                     compType?: null | string;
                     compTypeModel?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -15540,7 +14704,6 @@ export interface operations {
                     compType?: null | string;
                     compTypeModel?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -15602,8 +14765,6 @@ export interface operations {
                         compTypeModel: null | string;
                         makerId: null | number;
                         notes: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnits?: {
@@ -15616,8 +14777,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -15639,7 +14798,6 @@ export interface operations {
                             contact: null | string;
                             eMail: null | string;
                             notes: null | string;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -15654,8 +14812,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -15670,8 +14826,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -15689,8 +14843,6 @@ export interface operations {
                             counterTypeId: null | number;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -15716,8 +14868,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -15732,8 +14882,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -15802,8 +14950,6 @@ export interface operations {
                         compTypeModel: null | string;
                         makerId: null | number;
                         notes: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnits?: {
@@ -15816,8 +14962,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -15839,7 +14983,6 @@ export interface operations {
                             contact: null | string;
                             eMail: null | string;
                             notes: null | string;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -15854,8 +14997,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -15870,8 +15011,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -15889,8 +15028,6 @@ export interface operations {
                             counterTypeId: null | number;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -15916,8 +15053,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -15932,8 +15067,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -15962,7 +15095,6 @@ export interface operations {
                     compType?: null | string;
                     compTypeModel?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -16032,7 +15164,6 @@ export interface operations {
                     compType?: null | string;
                     compTypeModel?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -16102,7 +15233,6 @@ export interface operations {
                     compType?: null | string;
                     compTypeModel?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -16184,8 +15314,6 @@ export interface operations {
                         compTypeModel: null | string;
                         makerId: null | number;
                         notes: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnits?: {
@@ -16198,8 +15326,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -16221,7 +15347,6 @@ export interface operations {
                             contact: null | string;
                             eMail: null | string;
                             notes: null | string;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -16236,8 +15361,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -16252,8 +15375,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -16271,8 +15392,6 @@ export interface operations {
                             counterTypeId: null | number;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -16298,8 +15417,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -16314,8 +15431,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -16352,8 +15467,6 @@ export interface operations {
                         compTypeModel: null | string;
                         makerId: null | number;
                         notes: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnits?: {
@@ -16366,8 +15479,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -16389,7 +15500,6 @@ export interface operations {
                             contact: null | string;
                             eMail: null | string;
                             notes: null | string;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -16404,8 +15514,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -16420,8 +15528,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -16439,8 +15545,6 @@ export interface operations {
                             counterTypeId: null | number;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -16466,8 +15570,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -16482,8 +15584,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -16577,8 +15677,6 @@ export interface operations {
                                 compTypeModel: null | string;
                                 makerId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -16600,10 +15698,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -16719,8 +15815,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -16742,10 +15836,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -16835,8 +15927,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -16858,10 +15948,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -16977,8 +16065,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -17000,10 +16086,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -17061,8 +16145,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -17084,10 +16166,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -17186,8 +16266,6 @@ export interface operations {
                             counterTypeId: null | number;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblCompType?: null | ({
@@ -17199,8 +16277,6 @@ export interface operations {
                                 compTypeModel: null | string;
                                 makerId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -17212,8 +16288,6 @@ export interface operations {
                                 name: null | string;
                                 maxDailyValue: null | number;
                                 type: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -17225,8 +16299,6 @@ export interface operations {
                                 compTypeCounterId: null | number;
                                 frequency: null | number;
                                 window: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 showInAlert: null | boolean;
                                 updateByFunction: null | boolean;
@@ -17255,7 +16327,6 @@ export interface operations {
                 "application/json": {
                     averageCountRate?: null | number;
                     useCalcAverage?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompType?: {
@@ -17277,7 +16348,6 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     averageCountRate?: null | number;
                     useCalcAverage?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompType?: {
@@ -17299,7 +16369,6 @@ export interface operations {
                 "multipart/form-data": {
                     averageCountRate?: null | number;
                     useCalcAverage?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompType?: {
@@ -17333,8 +16402,6 @@ export interface operations {
                         counterTypeId: null | number;
                         averageCountRate: null | number;
                         useCalcAverage: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompType?: null | ({
@@ -17346,8 +16413,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -17359,8 +16424,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -17372,8 +16435,6 @@ export interface operations {
                             compTypeCounterId: null | number;
                             frequency: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -17442,8 +16503,6 @@ export interface operations {
                         counterTypeId: null | number;
                         averageCountRate: null | number;
                         useCalcAverage: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompType?: null | ({
@@ -17455,8 +16514,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -17468,8 +16525,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -17481,8 +16536,6 @@ export interface operations {
                             compTypeCounterId: null | number;
                             frequency: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -17511,7 +16564,6 @@ export interface operations {
                 "application/json": {
                     averageCountRate?: null | number;
                     useCalcAverage?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompType?: {
@@ -17538,7 +16590,6 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     averageCountRate?: null | number;
                     useCalcAverage?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompType?: {
@@ -17565,7 +16616,6 @@ export interface operations {
                 "multipart/form-data": {
                     averageCountRate?: null | number;
                     useCalcAverage?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompType?: {
@@ -17604,8 +16654,6 @@ export interface operations {
                         counterTypeId: null | number;
                         averageCountRate: null | number;
                         useCalcAverage: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompType?: null | ({
@@ -17617,8 +16665,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -17630,8 +16676,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -17643,8 +16687,6 @@ export interface operations {
                             compTypeCounterId: null | number;
                             frequency: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -17681,8 +16723,6 @@ export interface operations {
                         counterTypeId: null | number;
                         averageCountRate: null | number;
                         useCalcAverage: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompType?: null | ({
@@ -17694,8 +16734,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -17707,8 +16745,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -17720,8 +16756,6 @@ export interface operations {
                             compTypeCounterId: null | number;
                             frequency: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -17838,8 +16872,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -17854,8 +16886,6 @@ export interface operations {
                                 compTypeModel: null | string;
                                 makerId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -17867,8 +16897,6 @@ export interface operations {
                                 name: null | string;
                                 externalDisc: null | number;
                                 parentDiscId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -17886,12 +16914,9 @@ export interface operations {
                                 oldRevisionJobDescId: null | number;
                                 copiedFromJobDescId: null | number;
                                 createdDate: null | string;
-                                createdBy: null | number;
                                 approvedDate: null | string;
                                 approvedBy: null | number;
                                 applicationId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -17901,8 +16926,6 @@ export interface operations {
                             tblMaintCause?: null | ({
                                 maintCauseId: number;
                                 descr: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -17911,8 +16934,6 @@ export interface operations {
                             tblMaintClass?: null | ({
                                 maintClassId: number;
                                 descr: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -17921,8 +16942,6 @@ export interface operations {
                             tblMaintType?: null | ({
                                 maintTypeId: number;
                                 descr: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -17950,10 +16969,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -17964,8 +16981,6 @@ export interface operations {
                                 compTypeCounterId: null | number;
                                 frequency: null | number;
                                 window: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 showInAlert: null | boolean;
                                 updateByFunction: null | boolean;
@@ -17981,8 +16996,6 @@ export interface operations {
                                 minValue: null | number;
                                 maxValue: null | number;
                                 updateOnReport: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -17990,8 +17003,6 @@ export interface operations {
                                 compTypeJobTriggerId: number;
                                 jobTriggerId: null | number;
                                 compTypeJobId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -18028,7 +17039,6 @@ export interface operations {
                     window?: null | number;
                     active?: null | number;
                     mandatoryHistory?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryResource?: null | number;
                     mandatoryStockUsage?: null | number;
@@ -18102,7 +17112,6 @@ export interface operations {
                     window?: null | number;
                     active?: null | number;
                     mandatoryHistory?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryResource?: null | number;
                     mandatoryStockUsage?: null | number;
@@ -18176,7 +17185,6 @@ export interface operations {
                     window?: null | number;
                     active?: null | number;
                     mandatoryHistory?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryResource?: null | number;
                     mandatoryStockUsage?: null | number;
@@ -18268,8 +17276,6 @@ export interface operations {
                         window: null | number;
                         active: null | number;
                         mandatoryHistory: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         mandatoryResource: null | number;
                         mandatoryStockUsage: null | number;
@@ -18284,8 +17290,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -18297,8 +17301,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -18316,12 +17318,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -18331,8 +17330,6 @@ export interface operations {
                         tblMaintCause?: null | ({
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -18341,8 +17338,6 @@ export interface operations {
                         tblMaintClass?: null | ({
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -18351,8 +17346,6 @@ export interface operations {
                         tblMaintType?: null | ({
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -18380,10 +17373,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -18394,8 +17385,6 @@ export interface operations {
                             compTypeCounterId: null | number;
                             frequency: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -18411,8 +17400,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -18420,8 +17407,6 @@ export interface operations {
                             compTypeJobTriggerId: number;
                             jobTriggerId: null | number;
                             compTypeJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -18504,8 +17489,6 @@ export interface operations {
                         window: null | number;
                         active: null | number;
                         mandatoryHistory: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         mandatoryResource: null | number;
                         mandatoryStockUsage: null | number;
@@ -18520,8 +17503,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -18533,8 +17514,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -18552,12 +17531,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -18567,8 +17543,6 @@ export interface operations {
                         tblMaintCause?: null | ({
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -18577,8 +17551,6 @@ export interface operations {
                         tblMaintClass?: null | ({
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -18587,8 +17559,6 @@ export interface operations {
                         tblMaintType?: null | ({
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -18616,10 +17586,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -18630,8 +17598,6 @@ export interface operations {
                             compTypeCounterId: null | number;
                             frequency: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -18647,8 +17613,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -18656,8 +17620,6 @@ export interface operations {
                             compTypeJobTriggerId: number;
                             jobTriggerId: null | number;
                             compTypeJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -18694,7 +17656,6 @@ export interface operations {
                     window?: null | number;
                     active?: null | number;
                     mandatoryHistory?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryResource?: null | number;
                     mandatoryStockUsage?: null | number;
@@ -18785,7 +17746,6 @@ export interface operations {
                     window?: null | number;
                     active?: null | number;
                     mandatoryHistory?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryResource?: null | number;
                     mandatoryStockUsage?: null | number;
@@ -18876,7 +17836,6 @@ export interface operations {
                     window?: null | number;
                     active?: null | number;
                     mandatoryHistory?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryResource?: null | number;
                     mandatoryStockUsage?: null | number;
@@ -18985,8 +17944,6 @@ export interface operations {
                         window: null | number;
                         active: null | number;
                         mandatoryHistory: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         mandatoryResource: null | number;
                         mandatoryStockUsage: null | number;
@@ -19001,8 +17958,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -19014,8 +17969,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -19033,12 +17986,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -19048,8 +17998,6 @@ export interface operations {
                         tblMaintCause?: null | ({
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -19058,8 +18006,6 @@ export interface operations {
                         tblMaintClass?: null | ({
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -19068,8 +18014,6 @@ export interface operations {
                         tblMaintType?: null | ({
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -19097,10 +18041,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -19111,8 +18053,6 @@ export interface operations {
                             compTypeCounterId: null | number;
                             frequency: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -19128,8 +18068,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -19137,8 +18075,6 @@ export interface operations {
                             compTypeJobTriggerId: number;
                             jobTriggerId: null | number;
                             compTypeJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -19189,8 +18125,6 @@ export interface operations {
                         window: null | number;
                         active: null | number;
                         mandatoryHistory: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         mandatoryResource: null | number;
                         mandatoryStockUsage: null | number;
@@ -19205,8 +18139,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -19218,8 +18150,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -19237,12 +18167,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -19252,8 +18179,6 @@ export interface operations {
                         tblMaintCause?: null | ({
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -19262,8 +18187,6 @@ export interface operations {
                         tblMaintClass?: null | ({
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -19272,8 +18195,6 @@ export interface operations {
                         tblMaintType?: null | ({
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -19301,10 +18222,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -19315,8 +18234,6 @@ export interface operations {
                             compTypeCounterId: null | number;
                             frequency: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -19332,8 +18249,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -19341,8 +18256,6 @@ export interface operations {
                             compTypeJobTriggerId: number;
                             jobTriggerId: null | number;
                             compTypeJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -19441,8 +18354,6 @@ export interface operations {
                             compTypeCounterId: null | number;
                             frequency: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -19454,8 +18365,6 @@ export interface operations {
                                 counterTypeId: null | number;
                                 averageCountRate: null | number;
                                 useCalcAverage: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -19483,8 +18392,6 @@ export interface operations {
                                 window: null | number;
                                 active: null | number;
                                 mandatoryHistory: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -19509,10 +18416,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -19539,7 +18444,6 @@ export interface operations {
                 "application/json": {
                     frequency?: null | number;
                     window?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     showInAlert?: null | boolean;
                     updateByFunction?: null | boolean;
@@ -19563,7 +18467,6 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     frequency?: null | number;
                     window?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     showInAlert?: null | boolean;
                     updateByFunction?: null | boolean;
@@ -19587,7 +18490,6 @@ export interface operations {
                 "multipart/form-data": {
                     frequency?: null | number;
                     window?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     showInAlert?: null | boolean;
                     updateByFunction?: null | boolean;
@@ -19623,8 +18525,6 @@ export interface operations {
                         compTypeCounterId: null | number;
                         frequency: null | number;
                         window: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         showInAlert: null | boolean;
                         updateByFunction: null | boolean;
@@ -19636,8 +18536,6 @@ export interface operations {
                             counterTypeId: null | number;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -19665,8 +18563,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -19691,10 +18587,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -19761,8 +18655,6 @@ export interface operations {
                         compTypeCounterId: null | number;
                         frequency: null | number;
                         window: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         showInAlert: null | boolean;
                         updateByFunction: null | boolean;
@@ -19774,8 +18666,6 @@ export interface operations {
                             counterTypeId: null | number;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -19803,8 +18693,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -19829,10 +18717,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -19859,7 +18745,6 @@ export interface operations {
                 "application/json": {
                     frequency?: null | number;
                     window?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     showInAlert?: null | boolean;
                     updateByFunction?: null | boolean;
@@ -19886,7 +18771,6 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     frequency?: null | number;
                     window?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     showInAlert?: null | boolean;
                     updateByFunction?: null | boolean;
@@ -19913,7 +18797,6 @@ export interface operations {
                 "multipart/form-data": {
                     frequency?: null | number;
                     window?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     showInAlert?: null | boolean;
                     updateByFunction?: null | boolean;
@@ -19952,8 +18835,6 @@ export interface operations {
                         compTypeCounterId: null | number;
                         frequency: null | number;
                         window: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         showInAlert: null | boolean;
                         updateByFunction: null | boolean;
@@ -19965,8 +18846,6 @@ export interface operations {
                             counterTypeId: null | number;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -19994,8 +18873,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -20020,10 +18897,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -20058,8 +18933,6 @@ export interface operations {
                         compTypeCounterId: null | number;
                         frequency: null | number;
                         window: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         showInAlert: null | boolean;
                         updateByFunction: null | boolean;
@@ -20071,8 +18944,6 @@ export interface operations {
                             counterTypeId: null | number;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -20100,8 +18971,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -20126,10 +18995,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -20231,8 +19098,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblCompTypeJob?: null | ({
@@ -20257,8 +19122,6 @@ export interface operations {
                                 window: null | number;
                                 active: null | number;
                                 mandatoryHistory: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -20275,8 +19138,6 @@ export interface operations {
                                 setValue: null | number;
                                 operationalMinValue: null | number;
                                 operationalMaxValue: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -20307,7 +19168,6 @@ export interface operations {
                     minValue?: null | number;
                     maxValue?: null | number;
                     updateOnReport?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJob?: {
@@ -20327,7 +19187,6 @@ export interface operations {
                     minValue?: null | number;
                     maxValue?: null | number;
                     updateOnReport?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJob?: {
@@ -20347,7 +19206,6 @@ export interface operations {
                     minValue?: null | number;
                     maxValue?: null | number;
                     updateOnReport?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJob?: {
@@ -20379,8 +19237,6 @@ export interface operations {
                         minValue: null | number;
                         maxValue: null | number;
                         updateOnReport: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompTypeJob?: null | ({
@@ -20405,8 +19261,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -20423,8 +19277,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -20495,8 +19347,6 @@ export interface operations {
                         minValue: null | number;
                         maxValue: null | number;
                         updateOnReport: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompTypeJob?: null | ({
@@ -20521,8 +19371,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -20539,8 +19387,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -20571,7 +19417,6 @@ export interface operations {
                     minValue?: null | number;
                     maxValue?: null | number;
                     updateOnReport?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJob?: {
@@ -20593,7 +19438,6 @@ export interface operations {
                     minValue?: null | number;
                     maxValue?: null | number;
                     updateOnReport?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJob?: {
@@ -20615,7 +19459,6 @@ export interface operations {
                     minValue?: null | number;
                     maxValue?: null | number;
                     updateOnReport?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJob?: {
@@ -20649,8 +19492,6 @@ export interface operations {
                         minValue: null | number;
                         maxValue: null | number;
                         updateOnReport: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompTypeJob?: null | ({
@@ -20675,8 +19516,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -20693,8 +19532,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -20733,8 +19570,6 @@ export interface operations {
                         minValue: null | number;
                         maxValue: null | number;
                         updateOnReport: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompTypeJob?: null | ({
@@ -20759,8 +19594,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -20777,8 +19610,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -20876,8 +19707,6 @@ export interface operations {
                             compTypeJobTriggerId: number;
                             jobTriggerId: null | number;
                             compTypeJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -20903,8 +19732,6 @@ export interface operations {
                                 window: null | number;
                                 active: null | number;
                                 mandatoryHistory: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -20916,8 +19743,6 @@ export interface operations {
                             tblJobTrigger?: null | ({
                                 jobTriggerId: number;
                                 descr: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -20939,10 +19764,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -20967,7 +19790,6 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJob?: {
@@ -20987,7 +19809,6 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJob?: {
@@ -21007,7 +19828,6 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJob?: {
@@ -21039,8 +19859,6 @@ export interface operations {
                         compTypeJobTriggerId: number;
                         jobTriggerId: null | number;
                         compTypeJobId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -21066,8 +19884,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -21079,8 +19895,6 @@ export interface operations {
                         tblJobTrigger?: null | ({
                             jobTriggerId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -21102,10 +19916,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -21170,8 +19982,6 @@ export interface operations {
                         compTypeJobTriggerId: number;
                         jobTriggerId: null | number;
                         compTypeJobId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -21197,8 +20007,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -21210,8 +20018,6 @@ export interface operations {
                         tblJobTrigger?: null | ({
                             jobTriggerId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -21233,10 +20039,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -21261,7 +20065,6 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJob?: {
@@ -21284,7 +20087,6 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJob?: {
@@ -21307,7 +20109,6 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJob?: {
@@ -21342,8 +20143,6 @@ export interface operations {
                         compTypeJobTriggerId: number;
                         jobTriggerId: null | number;
                         compTypeJobId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -21369,8 +20168,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -21382,8 +20179,6 @@ export interface operations {
                         tblJobTrigger?: null | ({
                             jobTriggerId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -21405,10 +20200,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -21441,8 +20234,6 @@ export interface operations {
                         compTypeJobTriggerId: number;
                         jobTriggerId: null | number;
                         compTypeJobId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -21468,8 +20259,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -21481,8 +20270,6 @@ export interface operations {
                         tblJobTrigger?: null | ({
                             jobTriggerId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -21504,10 +20291,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -21608,8 +20393,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblCompTypeJobMeasurePoints?: {
@@ -21621,8 +20404,6 @@ export interface operations {
                                 minValue: null | number;
                                 maxValue: null | number;
                                 updateOnReport: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -21635,8 +20416,6 @@ export interface operations {
                                 compTypeModel: null | string;
                                 makerId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -21648,8 +20427,6 @@ export interface operations {
                                 name: null | string;
                                 maxDailyValue: null | number;
                                 type: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -21661,8 +20438,6 @@ export interface operations {
                                 name: null | string;
                                 allowDecimals: null | number;
                                 description: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -21691,7 +20466,6 @@ export interface operations {
                     setValue?: null | number;
                     operationalMinValue?: null | number;
                     operationalMaxValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJobMeasurePoints?: {
@@ -21719,7 +20493,6 @@ export interface operations {
                     setValue?: null | number;
                     operationalMinValue?: null | number;
                     operationalMaxValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJobMeasurePoints?: {
@@ -21747,7 +20520,6 @@ export interface operations {
                     setValue?: null | number;
                     operationalMinValue?: null | number;
                     operationalMaxValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJobMeasurePoints?: {
@@ -21788,8 +20560,6 @@ export interface operations {
                         setValue: null | number;
                         operationalMinValue: null | number;
                         operationalMaxValue: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompTypeJobMeasurePoints?: {
@@ -21801,8 +20571,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -21815,8 +20583,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -21828,8 +20594,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -21841,8 +20605,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -21912,8 +20674,6 @@ export interface operations {
                         setValue: null | number;
                         operationalMinValue: null | number;
                         operationalMaxValue: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompTypeJobMeasurePoints?: {
@@ -21925,8 +20685,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -21939,8 +20697,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -21952,8 +20708,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -21965,8 +20719,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -21995,7 +20747,6 @@ export interface operations {
                     setValue?: null | number;
                     operationalMinValue?: null | number;
                     operationalMaxValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJobMeasurePoints?: {
@@ -22029,7 +20780,6 @@ export interface operations {
                     setValue?: null | number;
                     operationalMinValue?: null | number;
                     operationalMaxValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJobMeasurePoints?: {
@@ -22063,7 +20813,6 @@ export interface operations {
                     setValue?: null | number;
                     operationalMinValue?: null | number;
                     operationalMaxValue?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompTypeJobMeasurePoints?: {
@@ -22110,8 +20859,6 @@ export interface operations {
                         setValue: null | number;
                         operationalMinValue: null | number;
                         operationalMaxValue: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompTypeJobMeasurePoints?: {
@@ -22123,8 +20870,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -22137,8 +20882,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -22150,8 +20893,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -22163,8 +20904,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -22202,8 +20941,6 @@ export interface operations {
                         setValue: null | number;
                         operationalMinValue: null | number;
                         operationalMaxValue: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompTypeJobMeasurePoints?: {
@@ -22215,8 +20952,6 @@ export interface operations {
                             minValue: null | number;
                             maxValue: null | number;
                             updateOnReport: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -22229,8 +20964,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -22242,8 +20975,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -22255,8 +20986,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -22360,8 +21089,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -22384,8 +21111,6 @@ export interface operations {
                                 zeroedDate: null | string;
                                 averageCountRate: null | number;
                                 useCalcAverage: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -22416,8 +21141,6 @@ export interface operations {
                                 active: null | number;
                                 mandatoryHistory: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -22435,8 +21158,6 @@ export interface operations {
                                 setValue: null | number;
                                 operationalMinValue: null | number;
                                 operationalMaxValue: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -22452,7 +21173,6 @@ export interface operations {
                                 contact: null | string;
                                 eMail: null | string;
                                 notes: null | string;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -22468,8 +21188,6 @@ export interface operations {
                                 serialNo: null | string;
                                 statusId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 isCritical: null | number;
                                 orderNo: null | number;
@@ -22491,8 +21209,6 @@ export interface operations {
                                 serialNo: null | string;
                                 statusId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 isCritical: null | number;
                                 orderNo: null | number;
@@ -22507,8 +21223,6 @@ export interface operations {
                                 compStatusName: null | string;
                                 compStatusGroup: null | number;
                                 orderNo: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -22522,8 +21236,6 @@ export interface operations {
                                 compTypeModel: null | string;
                                 makerId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -22534,8 +21246,6 @@ export interface operations {
                                 parentLocationId: null | number;
                                 name: null | string;
                                 locationCode: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -22557,8 +21267,6 @@ export interface operations {
                                 parentFunctionId: null | number;
                                 notes: null | string;
                                 statusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -22579,9 +21287,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -22597,8 +21304,6 @@ export interface operations {
                                 fromDate: null | string;
                                 toDate: null | string;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -22629,8 +21334,6 @@ export interface operations {
                                 filed: null | number;
                                 unexpected: null | number;
                                 workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 reportingMethod: null | number;
                                 pendingBy: null | number;
@@ -22672,7 +21375,6 @@ export interface operations {
                     compNo?: null | string;
                     serialNo?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     isCritical?: null | number;
                     orderNo?: null | number;
@@ -22753,7 +21455,7 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                     };
                 };
@@ -22761,7 +21463,6 @@ export interface operations {
                     compNo?: null | string;
                     serialNo?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     isCritical?: null | number;
                     orderNo?: null | number;
@@ -22842,7 +21543,7 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                     };
                 };
@@ -22850,7 +21551,6 @@ export interface operations {
                     compNo?: null | string;
                     serialNo?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     isCritical?: null | number;
                     orderNo?: null | number;
@@ -22931,7 +21631,7 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                     };
                 };
@@ -22954,8 +21654,6 @@ export interface operations {
                         serialNo: null | string;
                         statusId: null | number;
                         notes: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         isCritical: null | number;
                         orderNo: null | number;
@@ -22978,8 +21676,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -23010,8 +21706,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -23029,8 +21723,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -23046,7 +21738,6 @@ export interface operations {
                             contact: null | string;
                             eMail: null | string;
                             notes: null | string;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -23062,8 +21753,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -23085,8 +21774,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -23101,8 +21788,6 @@ export interface operations {
                             compStatusName: null | string;
                             compStatusGroup: null | number;
                             orderNo: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -23116,8 +21801,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -23128,8 +21811,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -23151,8 +21832,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -23173,9 +21852,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -23191,8 +21869,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -23223,8 +21899,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -23309,8 +21983,6 @@ export interface operations {
                         serialNo: null | string;
                         statusId: null | number;
                         notes: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         isCritical: null | number;
                         orderNo: null | number;
@@ -23333,8 +22005,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -23365,8 +22035,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -23384,8 +22052,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -23401,7 +22067,6 @@ export interface operations {
                             contact: null | string;
                             eMail: null | string;
                             notes: null | string;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -23417,8 +22082,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -23440,8 +22103,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -23456,8 +22117,6 @@ export interface operations {
                             compStatusName: null | string;
                             compStatusGroup: null | number;
                             orderNo: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -23471,8 +22130,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -23483,8 +22140,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -23506,8 +22161,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -23528,9 +22181,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -23546,8 +22198,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -23578,8 +22228,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -23621,7 +22269,6 @@ export interface operations {
                     compNo?: null | string;
                     serialNo?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     isCritical?: null | number;
                     orderNo?: null | number;
@@ -23734,7 +22381,7 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect?: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -23745,7 +22392,6 @@ export interface operations {
                     compNo?: null | string;
                     serialNo?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     isCritical?: null | number;
                     orderNo?: null | number;
@@ -23858,7 +22504,7 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect?: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -23869,7 +22515,6 @@ export interface operations {
                     compNo?: null | string;
                     serialNo?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     isCritical?: null | number;
                     orderNo?: null | number;
@@ -23982,7 +22627,7 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect?: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -24008,8 +22653,6 @@ export interface operations {
                         serialNo: null | string;
                         statusId: null | number;
                         notes: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         isCritical: null | number;
                         orderNo: null | number;
@@ -24032,8 +22675,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -24064,8 +22705,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -24083,8 +22722,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -24100,7 +22737,6 @@ export interface operations {
                             contact: null | string;
                             eMail: null | string;
                             notes: null | string;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -24116,8 +22752,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -24139,8 +22773,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -24155,8 +22787,6 @@ export interface operations {
                             compStatusName: null | string;
                             compStatusGroup: null | number;
                             orderNo: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -24170,8 +22800,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -24182,8 +22810,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -24205,8 +22831,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -24227,9 +22851,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -24245,8 +22868,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -24277,8 +22898,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -24331,8 +22950,6 @@ export interface operations {
                         serialNo: null | string;
                         statusId: null | number;
                         notes: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         isCritical: null | number;
                         orderNo: null | number;
@@ -24355,8 +22972,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -24387,8 +23002,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -24406,8 +23019,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -24423,7 +23034,6 @@ export interface operations {
                             contact: null | string;
                             eMail: null | string;
                             notes: null | string;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -24439,8 +23049,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -24462,8 +23070,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -24478,8 +23084,6 @@ export interface operations {
                             compStatusName: null | string;
                             compStatusGroup: null | number;
                             orderNo: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -24493,8 +23097,6 @@ export interface operations {
                             compTypeModel: null | string;
                             makerId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -24505,8 +23107,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -24528,8 +23128,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -24550,9 +23148,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -24568,8 +23165,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -24600,8 +23195,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -24735,8 +23328,6 @@ export interface operations {
                                 serialNo: null | string;
                                 statusId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 isCritical: null | number;
                                 orderNo: null | number;
@@ -24764,10 +23355,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -24884,8 +23473,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -24913,10 +23500,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -25007,8 +23592,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -25036,10 +23619,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -25156,8 +23737,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -25185,10 +23764,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -25247,8 +23824,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -25276,10 +23851,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -25351,8 +23924,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblCompCounters?: {
@@ -25369,8 +23940,6 @@ export interface operations {
                                 zeroedDate: null | string;
                                 averageCountRate: null | number;
                                 useCalcAverage: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -25385,8 +23954,6 @@ export interface operations {
                                 setValue: null | number;
                                 operationalMinValue: null | number;
                                 operationalMaxValue: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -25396,8 +23963,6 @@ export interface operations {
                                 counterTypeId: null | number;
                                 averageCountRate: null | number;
                                 useCalcAverage: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -25409,8 +23974,6 @@ export interface operations {
                                 setValue: null | number;
                                 operationalMinValue: null | number;
                                 operationalMaxValue: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -25421,8 +23984,6 @@ export interface operations {
                                 frequency: null | number;
                                 reportedCount: null | number;
                                 overdueCount: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -25451,7 +24012,6 @@ export interface operations {
                     name?: null | string;
                     maxDailyValue?: null | number;
                     type?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounters?: {
@@ -25485,7 +24045,6 @@ export interface operations {
                     name?: null | string;
                     maxDailyValue?: null | number;
                     type?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounters?: {
@@ -25519,7 +24078,6 @@ export interface operations {
                     name?: null | string;
                     maxDailyValue?: null | number;
                     type?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounters?: {
@@ -25563,8 +24121,6 @@ export interface operations {
                         name: null | string;
                         maxDailyValue: null | number;
                         type: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompCounters?: {
@@ -25581,8 +24137,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -25597,8 +24151,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -25608,8 +24160,6 @@ export interface operations {
                             counterTypeId: null | number;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -25621,8 +24171,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -25633,8 +24181,6 @@ export interface operations {
                             frequency: null | number;
                             reportedCount: null | number;
                             overdueCount: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -25701,8 +24247,6 @@ export interface operations {
                         name: null | string;
                         maxDailyValue: null | number;
                         type: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompCounters?: {
@@ -25719,8 +24263,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -25735,8 +24277,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -25746,8 +24286,6 @@ export interface operations {
                             counterTypeId: null | number;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -25759,8 +24297,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -25771,8 +24307,6 @@ export interface operations {
                             frequency: null | number;
                             reportedCount: null | number;
                             overdueCount: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -25801,7 +24335,6 @@ export interface operations {
                     name?: null | string;
                     maxDailyValue?: null | number;
                     type?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounters?: {
@@ -25850,7 +24383,6 @@ export interface operations {
                     name?: null | string;
                     maxDailyValue?: null | number;
                     type?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounters?: {
@@ -25899,7 +24431,6 @@ export interface operations {
                     name?: null | string;
                     maxDailyValue?: null | number;
                     type?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompCounters?: {
@@ -25958,8 +24489,6 @@ export interface operations {
                         name: null | string;
                         maxDailyValue: null | number;
                         type: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompCounters?: {
@@ -25976,8 +24505,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -25992,8 +24519,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -26003,8 +24528,6 @@ export interface operations {
                             counterTypeId: null | number;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -26016,8 +24539,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -26028,8 +24549,6 @@ export interface operations {
                             frequency: null | number;
                             reportedCount: null | number;
                             overdueCount: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -26064,8 +24583,6 @@ export interface operations {
                         name: null | string;
                         maxDailyValue: null | number;
                         type: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompCounters?: {
@@ -26082,8 +24599,6 @@ export interface operations {
                             zeroedDate: null | string;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -26098,8 +24613,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -26109,8 +24622,6 @@ export interface operations {
                             counterTypeId: null | number;
                             averageCountRate: null | number;
                             useCalcAverage: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -26122,8 +24633,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -26134,8 +24643,6 @@ export interface operations {
                             frequency: null | number;
                             reportedCount: null | number;
                             overdueCount: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -26213,7 +24720,6 @@ export interface operations {
                             statusBy: null | number;
                             statusReason: null | string;
                             statusDate: null | string;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -26245,7 +24751,6 @@ export interface operations {
                     statusBy?: null | number;
                     statusReason?: null | string;
                     statusDate?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -26259,7 +24764,6 @@ export interface operations {
                     statusBy?: null | number;
                     statusReason?: null | string;
                     statusDate?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -26273,7 +24777,6 @@ export interface operations {
                     statusBy?: null | number;
                     statusReason?: null | string;
                     statusDate?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -26298,7 +24801,6 @@ export interface operations {
                         statusBy: null | number;
                         statusReason: null | string;
                         statusDate: null | string;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                     };
@@ -26369,7 +24871,6 @@ export interface operations {
                         statusBy: null | number;
                         statusReason: null | string;
                         statusDate: null | string;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                     };
@@ -26401,7 +24902,6 @@ export interface operations {
                     statusBy?: null | number;
                     statusReason?: null | string;
                     statusDate?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -26415,7 +24915,6 @@ export interface operations {
                     statusBy?: null | number;
                     statusReason?: null | string;
                     statusDate?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -26429,7 +24928,6 @@ export interface operations {
                     statusBy?: null | number;
                     statusReason?: null | string;
                     statusDate?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -26454,7 +24952,6 @@ export interface operations {
                         statusBy: null | number;
                         statusReason: null | string;
                         statusDate: null | string;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                     };
@@ -26493,7 +24990,6 @@ export interface operations {
                         statusBy: null | number;
                         statusReason: null | string;
                         statusDate: null | string;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                     };
@@ -26563,8 +25059,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblCompJobs?: {
@@ -26594,8 +25088,6 @@ export interface operations {
                                 active: null | number;
                                 mandatoryHistory: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -26624,8 +25116,6 @@ export interface operations {
                                 window: null | number;
                                 active: null | number;
                                 mandatoryHistory: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -26643,8 +25133,6 @@ export interface operations {
                                 notes: null | string;
                                 initials: null | string;
                                 empTitle: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -26654,8 +25142,6 @@ export interface operations {
                                 maintLogId: null | number;
                                 employeeId: null | number;
                                 discId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -26678,9 +25164,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -26714,8 +25199,6 @@ export interface operations {
                                 filed: null | number;
                                 unexpected: null | number;
                                 workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 reportingMethod: null | number;
                                 pendingBy: null | number;
@@ -26764,7 +25247,6 @@ export interface operations {
                     code?: null | string;
                     name?: null | string;
                     externalDisc?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -26807,7 +25289,6 @@ export interface operations {
                     code?: null | string;
                     name?: null | string;
                     externalDisc?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -26850,7 +25331,6 @@ export interface operations {
                     code?: null | string;
                     name?: null | string;
                     externalDisc?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -26904,8 +25384,6 @@ export interface operations {
                         name: null | string;
                         externalDisc: null | number;
                         parentDiscId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobs?: {
@@ -26935,8 +25413,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -26965,8 +25441,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -26984,8 +25458,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -26995,8 +25467,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -27019,9 +25489,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -27055,8 +25524,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -27144,8 +25611,6 @@ export interface operations {
                         name: null | string;
                         externalDisc: null | number;
                         parentDiscId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobs?: {
@@ -27175,8 +25640,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -27205,8 +25668,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -27224,8 +25685,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -27235,8 +25694,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -27259,9 +25716,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -27295,8 +25751,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -27345,7 +25799,6 @@ export interface operations {
                     code?: null | string;
                     name?: null | string;
                     externalDisc?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -27409,7 +25862,6 @@ export interface operations {
                     code?: null | string;
                     name?: null | string;
                     externalDisc?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -27473,7 +25925,6 @@ export interface operations {
                     code?: null | string;
                     name?: null | string;
                     externalDisc?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -27548,8 +25999,6 @@ export interface operations {
                         name: null | string;
                         externalDisc: null | number;
                         parentDiscId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobs?: {
@@ -27579,8 +26028,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -27609,8 +26056,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -27628,8 +26073,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -27639,8 +26082,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -27663,9 +26104,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -27699,8 +26139,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -27756,8 +26194,6 @@ export interface operations {
                         name: null | string;
                         externalDisc: null | number;
                         parentDiscId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobs?: {
@@ -27787,8 +26223,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -27817,8 +26251,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -27836,8 +26268,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -27847,8 +26277,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -27871,9 +26299,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -27907,8 +26334,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -28006,8 +26431,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -28023,7 +26446,6 @@ export interface operations {
                                 contact: null | string;
                                 eMail: null | string;
                                 notes: null | string;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -28035,8 +26457,6 @@ export interface operations {
                                 name: null | string;
                                 externalDisc: null | number;
                                 parentDiscId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -28058,10 +26478,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -28071,8 +26489,6 @@ export interface operations {
                                 maintLogId: null | number;
                                 employeeId: null | number;
                                 discId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -28094,10 +26510,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             }[];
                         }[];
@@ -28127,7 +26541,6 @@ export interface operations {
                     notes?: null | string;
                     initials?: null | string;
                     empTitle?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblAddress?: {
@@ -28164,7 +26577,6 @@ export interface operations {
                     notes?: null | string;
                     initials?: null | string;
                     empTitle?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblAddress?: {
@@ -28201,7 +26613,6 @@ export interface operations {
                     notes?: null | string;
                     initials?: null | string;
                     empTitle?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblAddress?: {
@@ -28250,8 +26661,6 @@ export interface operations {
                         notes: null | string;
                         initials: null | string;
                         empTitle: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -28267,7 +26676,6 @@ export interface operations {
                             contact: null | string;
                             eMail: null | string;
                             notes: null | string;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -28279,8 +26687,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -28302,10 +26708,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -28315,8 +26719,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -28338,10 +26740,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         }[];
                     };
@@ -28411,8 +26811,6 @@ export interface operations {
                         notes: null | string;
                         initials: null | string;
                         empTitle: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -28428,7 +26826,6 @@ export interface operations {
                             contact: null | string;
                             eMail: null | string;
                             notes: null | string;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -28440,8 +26837,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -28463,10 +26858,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -28476,8 +26869,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -28499,10 +26890,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         }[];
                     };
@@ -28532,7 +26921,6 @@ export interface operations {
                     notes?: null | string;
                     initials?: null | string;
                     empTitle?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblAddress?: {
@@ -28578,7 +26966,6 @@ export interface operations {
                     notes?: null | string;
                     initials?: null | string;
                     empTitle?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblAddress?: {
@@ -28624,7 +27011,6 @@ export interface operations {
                     notes?: null | string;
                     initials?: null | string;
                     empTitle?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblAddress?: {
@@ -28682,8 +27068,6 @@ export interface operations {
                         notes: null | string;
                         initials: null | string;
                         empTitle: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -28699,7 +27083,6 @@ export interface operations {
                             contact: null | string;
                             eMail: null | string;
                             notes: null | string;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -28711,8 +27094,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -28734,10 +27115,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -28747,8 +27126,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -28770,10 +27147,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         }[];
                     };
@@ -28811,8 +27186,6 @@ export interface operations {
                         notes: null | string;
                         initials: null | string;
                         empTitle: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -28828,7 +27201,6 @@ export interface operations {
                             contact: null | string;
                             eMail: null | string;
                             notes: null | string;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -28840,8 +27212,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -28863,10 +27233,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -28876,8 +27244,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -28899,10 +27265,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         }[];
                     };
@@ -29806,8 +28170,6 @@ export interface operations {
                                 parentLocationId: null | number;
                                 name: null | string;
                                 locationCode: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -29830,9 +28192,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -29857,10 +28218,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -30064,8 +28423,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -30088,9 +28445,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -30115,10 +28471,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -30221,8 +28575,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -30245,9 +28597,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -30272,10 +28623,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -30506,8 +28855,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -30530,9 +28877,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -30557,10 +28903,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -30631,8 +28975,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -30655,9 +28997,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -30682,10 +29023,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -31450,11 +29789,9 @@ export interface operations {
                             fsDesc: null | string;
                             fsGroup: null | number;
                             sortId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId1: null | number;
                             orderNo: null | number;
-                            deptId: null | number;
                             tblMaintLogs?: {
                                 maintLogId: number;
                                 maintCauseId: null | number;
@@ -31472,9 +29809,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -31489,8 +29825,6 @@ export interface operations {
                                 isWaiting: null | number;
                                 isUnPlan: null | number;
                                 followDesc: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 followStatuseId: null | number;
                                 orderNo: null | number;
@@ -31518,7 +29852,6 @@ export interface operations {
                     fsName?: null | string;
                     fsDesc?: null | string;
                     fsGroup?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     followStatuseId1?: null | number;
                     orderNo?: null | number;
@@ -31537,7 +29870,6 @@ export interface operations {
                     fsName?: null | string;
                     fsDesc?: null | string;
                     fsGroup?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     followStatuseId1?: null | number;
                     orderNo?: null | number;
@@ -31556,7 +29888,6 @@ export interface operations {
                     fsName?: null | string;
                     fsDesc?: null | string;
                     fsGroup?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     followStatuseId1?: null | number;
                     orderNo?: null | number;
@@ -31586,11 +29917,9 @@ export interface operations {
                         fsDesc: null | string;
                         fsGroup: null | number;
                         sortId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         followStatuseId1: null | number;
                         orderNo: null | number;
-                        deptId: null | number;
                         tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | number;
@@ -31608,9 +29937,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -31625,8 +29953,6 @@ export interface operations {
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
                             orderNo: null | number;
@@ -31693,11 +30019,9 @@ export interface operations {
                         fsDesc: null | string;
                         fsGroup: null | number;
                         sortId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         followStatuseId1: null | number;
                         orderNo: null | number;
-                        deptId: null | number;
                         tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | number;
@@ -31715,9 +30039,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -31732,8 +30055,6 @@ export interface operations {
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
                             orderNo: null | number;
@@ -31761,7 +30082,6 @@ export interface operations {
                     fsName?: null | string;
                     fsDesc?: null | string;
                     fsGroup?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     followStatuseId1?: null | number;
                     orderNo?: null | number;
@@ -31786,7 +30106,6 @@ export interface operations {
                     fsName?: null | string;
                     fsDesc?: null | string;
                     fsGroup?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     followStatuseId1?: null | number;
                     orderNo?: null | number;
@@ -31811,7 +30130,6 @@ export interface operations {
                     fsName?: null | string;
                     fsDesc?: null | string;
                     fsGroup?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     followStatuseId1?: null | number;
                     orderNo?: null | number;
@@ -31847,11 +30165,9 @@ export interface operations {
                         fsDesc: null | string;
                         fsGroup: null | number;
                         sortId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         followStatuseId1: null | number;
                         orderNo: null | number;
-                        deptId: null | number;
                         tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | number;
@@ -31869,9 +30185,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -31886,8 +30201,6 @@ export interface operations {
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
                             orderNo: null | number;
@@ -31922,11 +30235,9 @@ export interface operations {
                         fsDesc: null | string;
                         fsGroup: null | number;
                         sortId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         followStatuseId1: null | number;
                         orderNo: null | number;
-                        deptId: null | number;
                         tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | number;
@@ -31944,9 +30255,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -31961,8 +30271,6 @@ export interface operations {
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
                             orderNo: null | number;
@@ -32036,8 +30344,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblComponentUnit?: null | ({
@@ -32050,8 +30356,6 @@ export interface operations {
                                 serialNo: null | string;
                                 statusId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 isCritical: null | number;
                                 orderNo: null | number;
@@ -32071,8 +30375,6 @@ export interface operations {
                                 parentFunctionId: null | number;
                                 notes: null | string;
                                 statusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -32086,8 +30388,6 @@ export interface operations {
                                 parentFunctionId: null | number;
                                 notes: null | string;
                                 statusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -32108,9 +30408,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -32126,8 +30425,6 @@ export interface operations {
                                 fromDate: null | string;
                                 toDate: null | string;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -32162,7 +30459,6 @@ export interface operations {
                     funcNo?: null | string;
                     funcDesc?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnit?: {
@@ -32192,7 +30488,7 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                     };
                 };
@@ -32200,7 +30496,6 @@ export interface operations {
                     funcNo?: null | string;
                     funcDesc?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnit?: {
@@ -32230,7 +30525,7 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                     };
                 };
@@ -32238,7 +30533,6 @@ export interface operations {
                     funcNo?: null | string;
                     funcDesc?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnit?: {
@@ -32268,7 +30562,7 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                     };
                 };
@@ -32289,8 +30583,6 @@ export interface operations {
                         parentFunctionId: null | number;
                         notes: null | string;
                         statusId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnit?: null | ({
@@ -32303,8 +30595,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -32324,8 +30614,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -32339,8 +30627,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -32361,9 +30647,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -32379,8 +30664,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -32456,8 +30739,6 @@ export interface operations {
                         parentFunctionId: null | number;
                         notes: null | string;
                         statusId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnit?: null | ({
@@ -32470,8 +30751,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -32491,8 +30770,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -32506,8 +30783,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -32528,9 +30803,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -32546,8 +30820,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -32582,7 +30854,6 @@ export interface operations {
                     funcNo?: null | string;
                     funcDesc?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnit?: {
@@ -32623,7 +30894,7 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect?: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -32634,7 +30905,6 @@ export interface operations {
                     funcNo?: null | string;
                     funcDesc?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnit?: {
@@ -32675,7 +30945,7 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect?: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -32686,7 +30956,6 @@ export interface operations {
                     funcNo?: null | string;
                     funcDesc?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnit?: {
@@ -32727,7 +30996,7 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect?: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -32751,8 +31020,6 @@ export interface operations {
                         parentFunctionId: null | number;
                         notes: null | string;
                         statusId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnit?: null | ({
@@ -32765,8 +31032,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -32786,8 +31051,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -32801,8 +31064,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -32823,9 +31084,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -32841,8 +31101,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -32886,8 +31144,6 @@ export interface operations {
                         parentFunctionId: null | number;
                         notes: null | string;
                         statusId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnit?: null | ({
@@ -32900,8 +31156,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -32921,8 +31175,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -32936,8 +31188,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -32958,9 +31208,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -32976,8 +31225,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -33058,8 +31305,6 @@ export interface operations {
                             qWorkflowLockTypeId: null | number;
                             code: null | string;
                             name: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblJobDescriptions?: {
@@ -33074,12 +31319,9 @@ export interface operations {
                                 oldRevisionJobDescId: null | number;
                                 copiedFromJobDescId: null | number;
                                 createdDate: null | string;
-                                createdBy: null | number;
                                 approvedDate: null | string;
                                 approvedBy: null | number;
                                 applicationId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -33106,7 +31348,6 @@ export interface operations {
                 "application/json": {
                     code?: null | string;
                     name?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblJobDescriptions?: {
@@ -33118,7 +31359,6 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     code?: null | string;
                     name?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblJobDescriptions?: {
@@ -33130,7 +31370,6 @@ export interface operations {
                 "multipart/form-data": {
                     code?: null | string;
                     name?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblJobDescriptions?: {
@@ -33156,8 +31395,6 @@ export interface operations {
                         qWorkflowLockTypeId: null | number;
                         code: null | string;
                         name: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblJobDescriptions?: {
@@ -33172,12 +31409,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -33246,8 +31480,6 @@ export interface operations {
                         qWorkflowLockTypeId: null | number;
                         code: null | string;
                         name: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblJobDescriptions?: {
@@ -33262,12 +31494,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -33294,7 +31523,6 @@ export interface operations {
                 "application/json": {
                     code?: null | string;
                     name?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblJobDescriptions?: {
@@ -33309,7 +31537,6 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     code?: null | string;
                     name?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblJobDescriptions?: {
@@ -33324,7 +31551,6 @@ export interface operations {
                 "multipart/form-data": {
                     code?: null | string;
                     name?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblJobDescriptions?: {
@@ -33353,8 +31579,6 @@ export interface operations {
                         qWorkflowLockTypeId: null | number;
                         code: null | string;
                         name: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblJobDescriptions?: {
@@ -33369,12 +31593,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -33411,8 +31632,6 @@ export interface operations {
                         qWorkflowLockTypeId: null | number;
                         code: null | string;
                         name: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblJobDescriptions?: {
@@ -33427,12 +31646,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -33510,12 +31726,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -33546,8 +31759,6 @@ export interface operations {
                                 active: null | number;
                                 mandatoryHistory: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -33576,8 +31787,6 @@ export interface operations {
                                 window: null | number;
                                 active: null | number;
                                 mandatoryHistory: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -33592,8 +31801,6 @@ export interface operations {
                                 qWorkflowLockTypeId: null | number;
                                 code: null | string;
                                 name: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -33624,9 +31831,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -33660,10 +31866,8 @@ export interface operations {
                     changeReason?: null | string;
                     status?: null | number;
                     createdDate?: null | string;
-                    createdBy?: null | number;
                     approvedDate?: null | string;
                     approvedBy?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -33700,10 +31904,8 @@ export interface operations {
                     changeReason?: null | string;
                     status?: null | number;
                     createdDate?: null | string;
-                    createdBy?: null | number;
                     approvedDate?: null | string;
                     approvedBy?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -33740,10 +31942,8 @@ export interface operations {
                     changeReason?: null | string;
                     status?: null | number;
                     createdDate?: null | string;
-                    createdBy?: null | number;
                     approvedDate?: null | string;
                     approvedBy?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -33793,12 +31993,9 @@ export interface operations {
                         oldRevisionJobDescId: null | number;
                         copiedFromJobDescId: null | number;
                         createdDate: null | string;
-                        createdBy: null | number;
                         approvedDate: null | string;
                         approvedBy: null | number;
                         applicationId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -33829,8 +32026,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -33859,8 +32054,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -33875,8 +32068,6 @@ export interface operations {
                             qWorkflowLockTypeId: null | number;
                             code: null | string;
                             name: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -33907,9 +32098,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -33984,12 +32174,9 @@ export interface operations {
                         oldRevisionJobDescId: null | number;
                         copiedFromJobDescId: null | number;
                         createdDate: null | string;
-                        createdBy: null | number;
                         approvedDate: null | string;
                         approvedBy: null | number;
                         applicationId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -34020,8 +32207,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -34050,8 +32235,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -34066,8 +32249,6 @@ export interface operations {
                             qWorkflowLockTypeId: null | number;
                             code: null | string;
                             name: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -34098,9 +32279,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -34134,10 +32314,8 @@ export interface operations {
                     changeReason?: null | string;
                     status?: null | number;
                     createdDate?: null | string;
-                    createdBy?: null | number;
                     approvedDate?: null | string;
                     approvedBy?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -34187,10 +32365,8 @@ export interface operations {
                     changeReason?: null | string;
                     status?: null | number;
                     createdDate?: null | string;
-                    createdBy?: null | number;
                     approvedDate?: null | string;
                     approvedBy?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -34240,10 +32416,8 @@ export interface operations {
                     changeReason?: null | string;
                     status?: null | number;
                     createdDate?: null | string;
-                    createdBy?: null | number;
                     approvedDate?: null | string;
                     approvedBy?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -34306,12 +32480,9 @@ export interface operations {
                         oldRevisionJobDescId: null | number;
                         copiedFromJobDescId: null | number;
                         createdDate: null | string;
-                        createdBy: null | number;
                         approvedDate: null | string;
                         approvedBy: null | number;
                         applicationId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -34342,8 +32513,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -34372,8 +32541,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -34388,8 +32555,6 @@ export interface operations {
                             qWorkflowLockTypeId: null | number;
                             code: null | string;
                             name: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -34420,9 +32585,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -34465,12 +32629,9 @@ export interface operations {
                         oldRevisionJobDescId: null | number;
                         copiedFromJobDescId: null | number;
                         createdDate: null | string;
-                        createdBy: null | number;
                         approvedDate: null | string;
                         approvedBy: null | number;
                         applicationId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -34501,8 +32662,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -34531,8 +32690,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -34547,8 +32704,6 @@ export interface operations {
                             qWorkflowLockTypeId: null | number;
                             code: null | string;
                             name: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -34579,9 +32734,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -34681,12 +32835,9 @@ export interface operations {
                                 oldRevisionJobDescId: null | number;
                                 copiedFromJobDescId: null | number;
                                 createdDate: null | string;
-                                createdBy: null | number;
                                 approvedDate: null | string;
                                 approvedBy: null | number;
                                 applicationId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -34709,10 +32860,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -34831,12 +32980,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -34859,10 +33005,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -34955,12 +33099,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -34983,10 +33124,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -35105,12 +33244,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -35133,10 +33269,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -35197,12 +33331,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -35225,10 +33356,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -35297,16 +33426,12 @@ export interface operations {
                         items: {
                             jobTriggerId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblCompJobTriggers?: {
                                 compJobTriggerId: number;
                                 jobTriggerId: null | number;
                                 compJobId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -35314,8 +33439,6 @@ export interface operations {
                                 compTypeJobTriggerId: number;
                                 jobTriggerId: null | number;
                                 compTypeJobId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -35341,7 +33464,6 @@ export interface operations {
             content: {
                 "application/json": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobTriggers?: {
@@ -35357,7 +33479,6 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobTriggers?: {
@@ -35373,7 +33494,6 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobTriggers?: {
@@ -35399,16 +33519,12 @@ export interface operations {
                     "application/json": {
                         jobTriggerId: number;
                         descr: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobTriggers?: {
                             compJobTriggerId: number;
                             jobTriggerId: null | number;
                             compJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -35416,8 +33532,6 @@ export interface operations {
                             compTypeJobTriggerId: number;
                             jobTriggerId: null | number;
                             compTypeJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -35481,16 +33595,12 @@ export interface operations {
                     "application/json": {
                         jobTriggerId: number;
                         descr: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobTriggers?: {
                             compJobTriggerId: number;
                             jobTriggerId: null | number;
                             compJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -35498,8 +33608,6 @@ export interface operations {
                             compTypeJobTriggerId: number;
                             jobTriggerId: null | number;
                             compTypeJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -35525,7 +33633,6 @@ export interface operations {
             content: {
                 "application/json": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobTriggers?: {
@@ -35547,7 +33654,6 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobTriggers?: {
@@ -35569,7 +33675,6 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobTriggers?: {
@@ -35601,16 +33706,12 @@ export interface operations {
                     "application/json": {
                         jobTriggerId: number;
                         descr: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobTriggers?: {
                             compJobTriggerId: number;
                             jobTriggerId: null | number;
                             compJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -35618,8 +33719,6 @@ export interface operations {
                             compTypeJobTriggerId: number;
                             jobTriggerId: null | number;
                             compTypeJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -35651,16 +33750,12 @@ export interface operations {
                     "application/json": {
                         jobTriggerId: number;
                         descr: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobTriggers?: {
                             compJobTriggerId: number;
                             jobTriggerId: null | number;
                             compJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -35668,8 +33763,6 @@ export interface operations {
                             compTypeJobTriggerId: number;
                             jobTriggerId: null | number;
                             compTypeJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -35748,289 +33841,6 @@ export interface operations {
             };
         };
     };
-    getTblJobTriggerLog: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            jobTriggerLogId: number;
-                            jobTriggerId: number;
-                            workOrderId: number;
-                            createdUserId: null | number;
-                            isCreated: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
-                            lastupdate: null | string;
-                            orderNo: null | number;
-                        }[];
-                        total: number;
-                        page: number;
-                        perPage: number;
-                        totalPages: number;
-                    };
-                };
-            };
-        };
-    };
-    postTblJobTriggerLog: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    isCreated?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    orderNo?: null | number;
-                };
-                "application/x-www-form-urlencoded": {
-                    isCreated?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    orderNo?: null | number;
-                };
-                "multipart/form-data": {
-                    isCreated?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    orderNo?: null | number;
-                };
-            };
-        };
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        jobTriggerLogId: number;
-                        jobTriggerId: number;
-                        workOrderId: number;
-                        createdUserId: null | number;
-                        isCreated: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
-                        orderNo: null | number;
-                    };
-                };
-            };
-        };
-    };
-    deleteTblJobTriggerLog: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        deleted: number;
-                    };
-                };
-            };
-        };
-    };
-    getTblJobTriggerLogByJobTriggerLogId: {
-        parameters: {
-            query?: {
-                include?: string;
-                select?: string;
-            };
-            header?: never;
-            path: {
-                jobTriggerLogId: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        jobTriggerLogId: number;
-                        jobTriggerId: number;
-                        workOrderId: number;
-                        createdUserId: null | number;
-                        isCreated: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
-                        orderNo: null | number;
-                    };
-                };
-            };
-        };
-    };
-    putTblJobTriggerLogByJobTriggerLogId: {
-        parameters: {
-            query?: {
-                include?: string;
-                select?: string;
-            };
-            header?: never;
-            path: {
-                jobTriggerLogId: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    isCreated?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    orderNo?: null | number;
-                };
-                "application/x-www-form-urlencoded": {
-                    isCreated?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    orderNo?: null | number;
-                };
-                "multipart/form-data": {
-                    isCreated?: null | number;
-                    exportMarker?: null | number;
-                    lastupdate?: null | string;
-                    orderNo?: null | number;
-                };
-            };
-        };
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        jobTriggerLogId: number;
-                        jobTriggerId: number;
-                        workOrderId: number;
-                        createdUserId: null | number;
-                        isCreated: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
-                        orderNo: null | number;
-                    };
-                };
-            };
-        };
-    };
-    deleteTblJobTriggerLogByJobTriggerLogId: {
-        parameters: {
-            query?: {
-                force?: boolean;
-            };
-            header?: never;
-            path: {
-                jobTriggerLogId: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        jobTriggerLogId: number;
-                        jobTriggerId: number;
-                        workOrderId: number;
-                        createdUserId: null | number;
-                        isCreated: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
-                        lastupdate: null | string;
-                        orderNo: null | number;
-                    };
-                };
-            };
-        };
-    };
-    getTblJobTriggerLogCount: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        count: number;
-                    };
-                };
-            };
-        };
-    };
     getTblJobVersion: {
         parameters: {
             query?: {
@@ -36065,8 +33875,6 @@ export interface operations {
                             status: null | number;
                             jobDescId: null | number;
                             createdBy: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             createdUserId: null | number;
                             orderNo: null | number;
@@ -36096,7 +33904,6 @@ export interface operations {
                     createdDate?: null | string;
                     status?: null | number;
                     createdBy?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -36107,7 +33914,6 @@ export interface operations {
                     createdDate?: null | string;
                     status?: null | number;
                     createdBy?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -36118,7 +33924,6 @@ export interface operations {
                     createdDate?: null | string;
                     status?: null | number;
                     createdBy?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -36140,8 +33945,6 @@ export interface operations {
                         status: null | number;
                         jobDescId: null | number;
                         createdBy: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         createdUserId: null | number;
                         orderNo: null | number;
@@ -36210,8 +34013,6 @@ export interface operations {
                         status: null | number;
                         jobDescId: null | number;
                         createdBy: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         createdUserId: null | number;
                         orderNo: null | number;
@@ -36241,7 +34042,6 @@ export interface operations {
                     createdDate?: null | string;
                     status?: null | number;
                     createdBy?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -36252,7 +34052,6 @@ export interface operations {
                     createdDate?: null | string;
                     status?: null | number;
                     createdBy?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -36263,7 +34062,6 @@ export interface operations {
                     createdDate?: null | string;
                     status?: null | number;
                     createdBy?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                 };
@@ -36285,8 +34083,6 @@ export interface operations {
                         status: null | number;
                         jobDescId: null | number;
                         createdBy: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         createdUserId: null | number;
                         orderNo: null | number;
@@ -36323,8 +34119,6 @@ export interface operations {
                         status: null | number;
                         jobDescId: null | number;
                         createdBy: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         createdUserId: null | number;
                         orderNo: null | number;
@@ -36394,8 +34188,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblComponentUnits?: {
@@ -36408,8 +34200,6 @@ export interface operations {
                                 serialNo: null | string;
                                 statusId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 isCritical: null | number;
                                 orderNo: null | number;
@@ -36439,8 +34229,6 @@ export interface operations {
                                 parentLocationId: null | number;
                                 name: null | string;
                                 locationCode: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -36451,8 +34239,6 @@ export interface operations {
                                 parentLocationId: null | number;
                                 name: null | string;
                                 locationCode: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -36486,7 +34272,6 @@ export interface operations {
                 "application/json": {
                     name?: null | string;
                     locationCode?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -36511,14 +34296,13 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                     };
                 };
                 "application/x-www-form-urlencoded": {
                     name?: null | string;
                     locationCode?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -36543,14 +34327,13 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                     };
                 };
                 "multipart/form-data": {
                     name?: null | string;
                     locationCode?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -36575,7 +34358,7 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                     };
                 };
@@ -36593,8 +34376,6 @@ export interface operations {
                         parentLocationId: null | number;
                         name: null | string;
                         locationCode: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnits?: {
@@ -36607,8 +34388,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -36638,8 +34417,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -36650,8 +34427,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -36724,8 +34499,6 @@ export interface operations {
                         parentLocationId: null | number;
                         name: null | string;
                         locationCode: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnits?: {
@@ -36738,8 +34511,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -36769,8 +34540,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -36781,8 +34550,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -36816,7 +34583,6 @@ export interface operations {
                 "application/json": {
                     name?: null | string;
                     locationCode?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -36851,7 +34617,7 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect?: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -36861,7 +34627,6 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     name?: null | string;
                     locationCode?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -36896,7 +34661,7 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect?: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -36906,7 +34671,6 @@ export interface operations {
                 "multipart/form-data": {
                     name?: null | string;
                     locationCode?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnits?: {
@@ -36941,7 +34705,7 @@ export interface operations {
                     };
                     tblWorkShopComponents?: {
                         connect?: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -36962,8 +34726,6 @@ export interface operations {
                         parentLocationId: null | number;
                         name: null | string;
                         locationCode: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnits?: {
@@ -36976,8 +34738,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -37007,8 +34767,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -37019,8 +34777,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -37061,8 +34817,6 @@ export interface operations {
                         parentLocationId: null | number;
                         name: null | string;
                         locationCode: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnits?: {
@@ -37075,8 +34829,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -37106,8 +34858,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -37118,8 +34868,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -37199,8 +34947,6 @@ export interface operations {
                             frequency: null | number;
                             reportedCount: null | number;
                             overdueCount: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -37210,8 +34956,6 @@ export interface operations {
                                 name: null | string;
                                 maxDailyValue: null | number;
                                 type: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -37234,9 +34978,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -37261,10 +35004,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -37292,7 +35033,6 @@ export interface operations {
                     frequency?: null | number;
                     reportedCount?: null | number;
                     overdueCount?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCounterType?: {
@@ -37315,7 +35055,6 @@ export interface operations {
                     frequency?: null | number;
                     reportedCount?: null | number;
                     overdueCount?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCounterType?: {
@@ -37338,7 +35077,6 @@ export interface operations {
                     frequency?: null | number;
                     reportedCount?: null | number;
                     overdueCount?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCounterType?: {
@@ -37373,8 +35111,6 @@ export interface operations {
                         frequency: null | number;
                         reportedCount: null | number;
                         overdueCount: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -37384,8 +35120,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -37408,9 +35142,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -37435,10 +35168,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -37506,8 +35237,6 @@ export interface operations {
                         frequency: null | number;
                         reportedCount: null | number;
                         overdueCount: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -37517,8 +35246,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -37541,9 +35268,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -37568,10 +35294,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -37599,7 +35323,6 @@ export interface operations {
                     frequency?: null | number;
                     reportedCount?: null | number;
                     overdueCount?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCounterType?: {
@@ -37625,7 +35348,6 @@ export interface operations {
                     frequency?: null | number;
                     reportedCount?: null | number;
                     overdueCount?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCounterType?: {
@@ -37651,7 +35373,6 @@ export interface operations {
                     frequency?: null | number;
                     reportedCount?: null | number;
                     overdueCount?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCounterType?: {
@@ -37689,8 +35410,6 @@ export interface operations {
                         frequency: null | number;
                         reportedCount: null | number;
                         overdueCount: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -37700,8 +35419,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -37724,9 +35441,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -37751,10 +35467,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -37790,8 +35504,6 @@ export interface operations {
                         frequency: null | number;
                         reportedCount: null | number;
                         overdueCount: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -37801,8 +35513,6 @@ export interface operations {
                             name: null | string;
                             maxDailyValue: null | number;
                             type: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -37825,9 +35535,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -37852,10 +35561,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -37926,8 +35633,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -37938,8 +35643,6 @@ export interface operations {
                                 name: null | string;
                                 externalDisc: null | number;
                                 parentDiscId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -37956,8 +35659,6 @@ export interface operations {
                                 notes: null | string;
                                 initials: null | string;
                                 empTitle: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -37981,9 +35682,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -38008,10 +35708,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -38036,7 +35734,6 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     timeSpent?: null | number;
@@ -38062,7 +35759,6 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     timeSpent?: null | number;
@@ -38088,7 +35784,6 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     timeSpent?: null | number;
@@ -38127,8 +35822,6 @@ export interface operations {
                         maintLogId: null | number;
                         employeeId: null | number;
                         discId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -38139,8 +35832,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -38157,8 +35848,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -38182,9 +35871,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -38209,10 +35897,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -38278,8 +35964,6 @@ export interface operations {
                         maintLogId: null | number;
                         employeeId: null | number;
                         discId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -38290,8 +35974,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -38308,8 +35990,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -38333,9 +36013,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -38360,10 +36039,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -38388,7 +36065,6 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     timeSpent?: null | number;
@@ -38418,7 +36094,6 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     timeSpent?: null | number;
@@ -38448,7 +36123,6 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     timeSpent?: null | number;
@@ -38491,8 +36165,6 @@ export interface operations {
                         maintLogId: null | number;
                         employeeId: null | number;
                         discId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -38503,8 +36175,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -38521,8 +36191,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -38546,9 +36214,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -38573,10 +36240,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -38610,8 +36275,6 @@ export interface operations {
                         maintLogId: null | number;
                         employeeId: null | number;
                         discId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         createdUserId: null | number;
@@ -38622,8 +36285,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -38640,8 +36301,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -38665,9 +36324,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -38692,10 +36350,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -38770,10 +36426,8 @@ export interface operations {
                             logoutTime: null | string;
                             hostName: null | string;
                             instId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             tblUsers?: null | ({
                                 userId: number;
                                 employeeId: null | number;
@@ -38790,10 +36444,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -38823,7 +36475,6 @@ export interface operations {
                     loginTime?: null | string;
                     logoutTime?: null | string;
                     hostName?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -38838,7 +36489,6 @@ export interface operations {
                     loginTime?: null | string;
                     logoutTime?: null | string;
                     hostName?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -38853,7 +36503,6 @@ export interface operations {
                     loginTime?: null | string;
                     logoutTime?: null | string;
                     hostName?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -38880,10 +36529,8 @@ export interface operations {
                         logoutTime: null | string;
                         hostName: null | string;
                         instId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
-                        deptId: null | number;
                         tblUsers?: null | ({
                             userId: number;
                             employeeId: null | number;
@@ -38900,10 +36547,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -38973,10 +36618,8 @@ export interface operations {
                         logoutTime: null | string;
                         hostName: null | string;
                         instId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
-                        deptId: null | number;
                         tblUsers?: null | ({
                             userId: number;
                             employeeId: null | number;
@@ -38993,10 +36636,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -39026,7 +36667,6 @@ export interface operations {
                     loginTime?: null | string;
                     logoutTime?: null | string;
                     hostName?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -39042,7 +36682,6 @@ export interface operations {
                     loginTime?: null | string;
                     logoutTime?: null | string;
                     hostName?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -39058,7 +36697,6 @@ export interface operations {
                     loginTime?: null | string;
                     logoutTime?: null | string;
                     hostName?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -39086,10 +36724,8 @@ export interface operations {
                         logoutTime: null | string;
                         hostName: null | string;
                         instId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
-                        deptId: null | number;
                         tblUsers?: null | ({
                             userId: number;
                             employeeId: null | number;
@@ -39106,10 +36742,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -39147,10 +36781,8 @@ export interface operations {
                         logoutTime: null | string;
                         hostName: null | string;
                         instId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
-                        deptId: null | number;
                         tblUsers?: null | ({
                             userId: number;
                             employeeId: null | number;
@@ -39167,10 +36799,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -39239,8 +36869,6 @@ export interface operations {
                         items: {
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblCompJobs?: {
@@ -39270,8 +36898,6 @@ export interface operations {
                                 active: null | number;
                                 mandatoryHistory: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -39300,8 +36926,6 @@ export interface operations {
                                 window: null | number;
                                 active: null | number;
                                 mandatoryHistory: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -39325,9 +36949,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -39361,8 +36984,6 @@ export interface operations {
                                 filed: null | number;
                                 unexpected: null | number;
                                 workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 reportingMethod: null | number;
                                 pendingBy: null | number;
@@ -39394,7 +37015,6 @@ export interface operations {
             content: {
                 "application/json": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -39420,7 +37040,6 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -39446,7 +37065,6 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -39482,8 +37100,6 @@ export interface operations {
                     "application/json": {
                         maintCauseId: number;
                         descr: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobs?: {
@@ -39513,8 +37129,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -39543,8 +37157,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -39568,9 +37180,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -39604,8 +37215,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -39675,8 +37284,6 @@ export interface operations {
                     "application/json": {
                         maintCauseId: number;
                         descr: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobs?: {
@@ -39706,8 +37313,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -39736,8 +37341,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -39761,9 +37364,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -39797,8 +37399,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -39830,7 +37430,6 @@ export interface operations {
             content: {
                 "application/json": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -39868,7 +37467,6 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -39906,7 +37504,6 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -39954,8 +37551,6 @@ export interface operations {
                     "application/json": {
                         maintCauseId: number;
                         descr: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobs?: {
@@ -39985,8 +37580,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -40015,8 +37608,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -40040,9 +37631,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -40076,8 +37666,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -40115,8 +37703,6 @@ export interface operations {
                     "application/json": {
                         maintCauseId: number;
                         descr: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobs?: {
@@ -40146,8 +37732,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -40176,8 +37760,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -40201,9 +37783,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -40237,8 +37818,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -40313,8 +37892,6 @@ export interface operations {
                         items: {
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblCompJobs?: {
@@ -40344,8 +37921,6 @@ export interface operations {
                                 active: null | number;
                                 mandatoryHistory: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -40374,8 +37949,6 @@ export interface operations {
                                 window: null | number;
                                 active: null | number;
                                 mandatoryHistory: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -40399,9 +37972,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -40435,8 +38007,6 @@ export interface operations {
                                 filed: null | number;
                                 unexpected: null | number;
                                 workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 reportingMethod: null | number;
                                 pendingBy: null | number;
@@ -40468,7 +38038,6 @@ export interface operations {
             content: {
                 "application/json": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -40494,7 +38063,6 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -40520,7 +38088,6 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -40556,8 +38123,6 @@ export interface operations {
                     "application/json": {
                         maintClassId: number;
                         descr: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobs?: {
@@ -40587,8 +38152,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -40617,8 +38180,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -40642,9 +38203,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -40678,8 +38238,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -40749,8 +38307,6 @@ export interface operations {
                     "application/json": {
                         maintClassId: number;
                         descr: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobs?: {
@@ -40780,8 +38336,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -40810,8 +38364,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -40835,9 +38387,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -40871,8 +38422,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -40904,7 +38453,6 @@ export interface operations {
             content: {
                 "application/json": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -40942,7 +38490,6 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -40980,7 +38527,6 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -41028,8 +38574,6 @@ export interface operations {
                     "application/json": {
                         maintClassId: number;
                         descr: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobs?: {
@@ -41059,8 +38603,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -41089,8 +38631,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -41114,9 +38654,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -41150,8 +38689,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -41189,8 +38726,6 @@ export interface operations {
                     "application/json": {
                         maintClassId: number;
                         descr: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobs?: {
@@ -41220,8 +38755,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -41250,8 +38783,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -41275,9 +38806,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -41311,8 +38841,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -41376,7 +38904,46 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
-        responses: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            maintLogId: number;
+                            dateDone: unknown;
+                            downTime: unknown;
+                            unexpected?: boolean | number | null;
+                            tblComponentUnit?: {
+                                compNo?: string;
+                            };
+                            tblJobDescription?: {
+                                jobDescCode?: string;
+                                jobDescTitle?: string;
+                            };
+                            tblWorkOrder?: {
+                                tblDiscipline?: {
+                                    name: string;
+                                };
+                            };
+                            tblFollowStatus?: {
+                                fsName?: string;
+                            };
+                            tblMaintClass?: {
+                                descr?: string;
+                            };
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
     };
     postTblMaintLog: {
         parameters: {
@@ -41722,9 +39289,8 @@ export interface operations {
                         overdueCount: null | number;
                         unexpected: null | number;
                         reportedBy: null | number;
-                        deptId: null | number;
                         history: null | string;
-                        maintLogFollowId: null | number;
+                        workOrderStatusId: null | number;
                         followStatusId: null | number;
                         updatedUserId: null | number;
                         reportedDate: null | string;
@@ -41752,8 +39318,6 @@ export interface operations {
                             frequency: null | number;
                             reportedCount: null | number;
                             overdueCount: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -41763,8 +39327,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -41780,8 +39342,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -41799,8 +39359,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -41812,11 +39370,9 @@ export interface operations {
                             fsDesc: null | string;
                             fsGroup: null | number;
                             sortId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId1: null | number;
                             orderNo: null | number;
-                            deptId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -41828,8 +39384,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -41847,12 +39401,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -41862,8 +39413,6 @@ export interface operations {
                         tblMaintCause?: null | ({
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -41872,8 +39421,6 @@ export interface operations {
                         tblMaintClass?: null | ({
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -41882,8 +39429,6 @@ export interface operations {
                         tblMaintType?: null | ({
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -41911,10 +39456,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -41946,8 +39489,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -41976,10 +39517,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -42000,8 +39539,6 @@ export interface operations {
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
                             orderNo: null | number;
@@ -42010,11 +39547,9 @@ export interface operations {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                         }[];
                     };
@@ -42090,9 +39625,8 @@ export interface operations {
                         overdueCount: null | number;
                         unexpected: null | number;
                         reportedBy: null | number;
-                        deptId: null | number;
                         history: null | string;
-                        maintLogFollowId: null | number;
+                        workOrderStatusId: null | number;
                         followStatusId: null | number;
                         updatedUserId: null | number;
                         reportedDate: null | string;
@@ -42120,8 +39654,6 @@ export interface operations {
                             frequency: null | number;
                             reportedCount: null | number;
                             overdueCount: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -42131,8 +39663,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -42148,8 +39678,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -42167,8 +39695,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -42180,11 +39706,9 @@ export interface operations {
                             fsDesc: null | string;
                             fsGroup: null | number;
                             sortId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId1: null | number;
                             orderNo: null | number;
-                            deptId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -42196,8 +39720,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -42215,12 +39737,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -42230,8 +39749,6 @@ export interface operations {
                         tblMaintCause?: null | ({
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -42240,8 +39757,6 @@ export interface operations {
                         tblMaintClass?: null | ({
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -42250,8 +39765,6 @@ export interface operations {
                         tblMaintType?: null | ({
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -42279,10 +39792,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -42314,8 +39825,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -42344,10 +39853,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -42368,8 +39875,6 @@ export interface operations {
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
                             orderNo: null | number;
@@ -42378,11 +39883,9 @@ export interface operations {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                         }[];
                     };
@@ -42829,9 +40332,8 @@ export interface operations {
                         overdueCount: null | number;
                         unexpected: null | number;
                         reportedBy: null | number;
-                        deptId: null | number;
                         history: null | string;
-                        maintLogFollowId: null | number;
+                        workOrderStatusId: null | number;
                         followStatusId: null | number;
                         updatedUserId: null | number;
                         reportedDate: null | string;
@@ -42859,8 +40361,6 @@ export interface operations {
                             frequency: null | number;
                             reportedCount: null | number;
                             overdueCount: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -42870,8 +40370,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -42887,8 +40385,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -42906,8 +40402,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -42919,11 +40413,9 @@ export interface operations {
                             fsDesc: null | string;
                             fsGroup: null | number;
                             sortId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId1: null | number;
                             orderNo: null | number;
-                            deptId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -42935,8 +40427,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -42954,12 +40444,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -42969,8 +40456,6 @@ export interface operations {
                         tblMaintCause?: null | ({
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -42979,8 +40464,6 @@ export interface operations {
                         tblMaintClass?: null | ({
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -42989,8 +40472,6 @@ export interface operations {
                         tblMaintType?: null | ({
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -43018,10 +40499,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -43053,8 +40532,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -43083,10 +40560,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -43107,8 +40582,6 @@ export interface operations {
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
                             orderNo: null | number;
@@ -43117,11 +40590,9 @@ export interface operations {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                         }[];
                     };
@@ -43165,9 +40636,8 @@ export interface operations {
                         overdueCount: null | number;
                         unexpected: null | number;
                         reportedBy: null | number;
-                        deptId: null | number;
                         history: null | string;
-                        maintLogFollowId: null | number;
+                        workOrderStatusId: null | number;
                         followStatusId: null | number;
                         updatedUserId: null | number;
                         reportedDate: null | string;
@@ -43195,8 +40665,6 @@ export interface operations {
                             frequency: null | number;
                             reportedCount: null | number;
                             overdueCount: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -43206,8 +40674,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -43223,8 +40689,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -43242,8 +40706,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -43255,11 +40717,9 @@ export interface operations {
                             fsDesc: null | string;
                             fsGroup: null | number;
                             sortId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId1: null | number;
                             orderNo: null | number;
-                            deptId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -43271,8 +40731,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -43290,12 +40748,9 @@ export interface operations {
                             oldRevisionJobDescId: null | number;
                             copiedFromJobDescId: null | number;
                             createdDate: null | string;
-                            createdBy: null | number;
                             approvedDate: null | string;
                             approvedBy: null | number;
                             applicationId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -43305,8 +40760,6 @@ export interface operations {
                         tblMaintCause?: null | ({
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -43315,8 +40768,6 @@ export interface operations {
                         tblMaintClass?: null | ({
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -43325,8 +40776,6 @@ export interface operations {
                         tblMaintType?: null | ({
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -43354,10 +40803,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -43389,8 +40836,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -43419,10 +40864,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -43443,8 +40886,6 @@ export interface operations {
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
                             orderNo: null | number;
@@ -43453,11 +40894,9 @@ export interface operations {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                         }[];
                     };
@@ -43602,9 +41041,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -43629,10 +41067,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -43756,9 +41192,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -43783,10 +41218,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -43884,9 +41317,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -43911,10 +41343,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -44038,9 +41468,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -44065,10 +41494,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -44134,9 +41561,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -44161,10 +41587,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -44238,8 +41662,6 @@ export interface operations {
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
                             orderNo: null | number;
@@ -44249,11 +41671,9 @@ export interface operations {
                                 fsDesc: null | string;
                                 fsGroup: null | number;
                                 sortId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 followStatuseId1: null | number;
                                 orderNo: null | number;
-                                deptId: null | number;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -44274,9 +41694,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -44301,10 +41720,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -44333,7 +41750,6 @@ export interface operations {
                     isWaiting?: null | number;
                     isUnPlan?: null | number;
                     followDesc?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblFollowStatus?: {
@@ -44357,7 +41773,6 @@ export interface operations {
                     isWaiting?: null | number;
                     isUnPlan?: null | number;
                     followDesc?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblFollowStatus?: {
@@ -44381,7 +41796,6 @@ export interface operations {
                     isWaiting?: null | number;
                     isUnPlan?: null | number;
                     followDesc?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblFollowStatus?: {
@@ -44417,8 +41831,6 @@ export interface operations {
                         isWaiting: null | number;
                         isUnPlan: null | number;
                         followDesc: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         followStatuseId: null | number;
                         orderNo: null | number;
@@ -44428,11 +41840,9 @@ export interface operations {
                             fsDesc: null | string;
                             fsGroup: null | number;
                             sortId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId1: null | number;
                             orderNo: null | number;
-                            deptId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -44453,9 +41863,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -44480,10 +41889,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -44552,8 +41959,6 @@ export interface operations {
                         isWaiting: null | number;
                         isUnPlan: null | number;
                         followDesc: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         followStatuseId: null | number;
                         orderNo: null | number;
@@ -44563,11 +41968,9 @@ export interface operations {
                             fsDesc: null | string;
                             fsGroup: null | number;
                             sortId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId1: null | number;
                             orderNo: null | number;
-                            deptId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -44588,9 +41991,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -44615,10 +42017,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -44647,7 +42047,6 @@ export interface operations {
                     isWaiting?: null | number;
                     isUnPlan?: null | number;
                     followDesc?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblFollowStatus?: {
@@ -44672,7 +42071,6 @@ export interface operations {
                     isWaiting?: null | number;
                     isUnPlan?: null | number;
                     followDesc?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblFollowStatus?: {
@@ -44697,7 +42095,6 @@ export interface operations {
                     isWaiting?: null | number;
                     isUnPlan?: null | number;
                     followDesc?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblFollowStatus?: {
@@ -44734,8 +42131,6 @@ export interface operations {
                         isWaiting: null | number;
                         isUnPlan: null | number;
                         followDesc: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         followStatuseId: null | number;
                         orderNo: null | number;
@@ -44745,11 +42140,9 @@ export interface operations {
                             fsDesc: null | string;
                             fsGroup: null | number;
                             sortId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId1: null | number;
                             orderNo: null | number;
-                            deptId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -44770,9 +42163,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -44797,10 +42189,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -44837,8 +42227,6 @@ export interface operations {
                         isWaiting: null | number;
                         isUnPlan: null | number;
                         followDesc: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         followStatuseId: null | number;
                         orderNo: null | number;
@@ -44848,11 +42236,9 @@ export interface operations {
                             fsDesc: null | string;
                             fsGroup: null | number;
                             sortId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId1: null | number;
                             orderNo: null | number;
-                            deptId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -44873,9 +42259,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -44900,10 +42285,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -44973,11 +42356,9 @@ export interface operations {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             tblMaintLog?: {
                                 maintLogId: number;
@@ -44996,9 +42377,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -45010,7 +42390,6 @@ export interface operations {
                             tblSpareUnit?: {
                                 spareUnitId: number;
                                 spareTypeId: null | number;
-                                deptId: null | number;
                                 lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -45037,7 +42416,6 @@ export interface operations {
                 "application/json": {
                     stockCount?: null | number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     tblMaintLog: {
                         connect: {
@@ -45053,7 +42431,6 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     stockCount?: null | number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     tblMaintLog: {
                         connect: {
@@ -45069,7 +42446,6 @@ export interface operations {
                 "multipart/form-data": {
                     stockCount?: null | number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     tblMaintLog: {
                         connect: {
@@ -45095,11 +42471,9 @@ export interface operations {
                         maintLogStockId: number;
                         maintLogId: number;
                         stockItemId: number;
-                        deptId: null | number;
                         stockCount: null | number;
                         orderNo: null | number;
                         createdUserId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         tblMaintLog?: {
                             maintLogId: number;
@@ -45118,9 +42492,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -45132,7 +42505,6 @@ export interface operations {
                         tblSpareUnit?: {
                             spareUnitId: number;
                             spareTypeId: null | number;
-                            deptId: null | number;
                             lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -45197,11 +42569,9 @@ export interface operations {
                         maintLogStockId: number;
                         maintLogId: number;
                         stockItemId: number;
-                        deptId: null | number;
                         stockCount: null | number;
                         orderNo: null | number;
                         createdUserId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         tblMaintLog?: {
                             maintLogId: number;
@@ -45220,9 +42590,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -45234,7 +42603,6 @@ export interface operations {
                         tblSpareUnit?: {
                             spareUnitId: number;
                             spareTypeId: null | number;
-                            deptId: null | number;
                             lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -45261,7 +42629,6 @@ export interface operations {
                 "application/json": {
                     stockCount?: null | number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     tblMaintLog?: {
                         connect: {
@@ -45277,7 +42644,6 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     stockCount?: null | number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     tblMaintLog?: {
                         connect: {
@@ -45293,7 +42659,6 @@ export interface operations {
                 "multipart/form-data": {
                     stockCount?: null | number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     tblMaintLog?: {
                         connect: {
@@ -45319,11 +42684,9 @@ export interface operations {
                         maintLogStockId: number;
                         maintLogId: number;
                         stockItemId: number;
-                        deptId: null | number;
                         stockCount: null | number;
                         orderNo: null | number;
                         createdUserId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         tblMaintLog?: {
                             maintLogId: number;
@@ -45342,9 +42705,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -45356,7 +42718,6 @@ export interface operations {
                         tblSpareUnit?: {
                             spareUnitId: number;
                             spareTypeId: null | number;
-                            deptId: null | number;
                             lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -45389,11 +42750,9 @@ export interface operations {
                         maintLogStockId: number;
                         maintLogId: number;
                         stockItemId: number;
-                        deptId: null | number;
                         stockCount: null | number;
                         orderNo: null | number;
                         createdUserId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         tblMaintLog?: {
                             maintLogId: number;
@@ -45412,9 +42771,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -45426,7 +42784,6 @@ export interface operations {
                         tblSpareUnit?: {
                             spareUnitId: number;
                             spareTypeId: null | number;
-                            deptId: null | number;
                             lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -45547,8 +42904,6 @@ export interface operations {
                         items: {
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblCompJobs?: {
@@ -45578,8 +42933,6 @@ export interface operations {
                                 active: null | number;
                                 mandatoryHistory: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -45608,8 +42961,6 @@ export interface operations {
                                 window: null | number;
                                 active: null | number;
                                 mandatoryHistory: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -45633,9 +42984,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -45669,8 +43019,6 @@ export interface operations {
                                 filed: null | number;
                                 unexpected: null | number;
                                 workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 reportingMethod: null | number;
                                 pendingBy: null | number;
@@ -45702,7 +43050,6 @@ export interface operations {
             content: {
                 "application/json": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -45728,7 +43075,6 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -45754,7 +43100,6 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -45790,8 +43135,6 @@ export interface operations {
                     "application/json": {
                         maintTypeId: number;
                         descr: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobs?: {
@@ -45821,8 +43164,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -45851,8 +43192,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -45876,9 +43215,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -45912,8 +43250,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -45983,8 +43319,6 @@ export interface operations {
                     "application/json": {
                         maintTypeId: number;
                         descr: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobs?: {
@@ -46014,8 +43348,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -46044,8 +43376,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -46069,9 +43399,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -46105,8 +43434,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -46138,7 +43465,6 @@ export interface operations {
             content: {
                 "application/json": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -46176,7 +43502,6 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -46214,7 +43539,6 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     descr?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompJobs?: {
@@ -46262,8 +43586,6 @@ export interface operations {
                     "application/json": {
                         maintTypeId: number;
                         descr: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobs?: {
@@ -46293,8 +43615,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -46323,8 +43643,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -46348,9 +43666,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -46384,8 +43701,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -46423,8 +43738,6 @@ export interface operations {
                     "application/json": {
                         maintTypeId: number;
                         descr: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompJobs?: {
@@ -46454,8 +43767,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -46484,8 +43795,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -46509,9 +43818,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -46545,8 +43853,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -46651,8 +43957,6 @@ export interface operations {
                             laboratoryCode: null | string;
                             userComment: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                         }[];
                         total: number;
@@ -46700,7 +44004,6 @@ export interface operations {
                     laboratoryCode?: null | string;
                     userComment?: null | string;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                 };
                 "application/x-www-form-urlencoded": {
@@ -46730,7 +44033,6 @@ export interface operations {
                     laboratoryCode?: null | string;
                     userComment?: null | string;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                 };
                 "multipart/form-data": {
@@ -46760,7 +44062,6 @@ export interface operations {
                     laboratoryCode?: null | string;
                     userComment?: null | string;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                 };
             };
@@ -46805,8 +44106,6 @@ export interface operations {
                         laboratoryCode: null | string;
                         userComment: null | string;
                         orderNo: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                     };
                 };
@@ -46897,8 +44196,6 @@ export interface operations {
                         laboratoryCode: null | string;
                         userComment: null | string;
                         orderNo: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                     };
                 };
@@ -46946,7 +44243,6 @@ export interface operations {
                     laboratoryCode?: null | string;
                     userComment?: null | string;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                 };
                 "application/x-www-form-urlencoded": {
@@ -46976,7 +44272,6 @@ export interface operations {
                     laboratoryCode?: null | string;
                     userComment?: null | string;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                 };
                 "multipart/form-data": {
@@ -47006,7 +44301,6 @@ export interface operations {
                     laboratoryCode?: null | string;
                     userComment?: null | string;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                 };
             };
@@ -47051,8 +44345,6 @@ export interface operations {
                         laboratoryCode: null | string;
                         userComment: null | string;
                         orderNo: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                     };
                 };
@@ -47111,8 +44403,6 @@ export interface operations {
                         laboratoryCode: null | string;
                         userComment: null | string;
                         orderNo: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                     };
                 };
@@ -47183,8 +44473,6 @@ export interface operations {
                             parValue: null | string;
                             parIndex: number;
                             orderNo: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastUpdate: null | string;
                         }[];
                         total: number;
@@ -47211,7 +44499,6 @@ export interface operations {
                     parValue?: null | string;
                     parIndex: number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastUpdate?: null | string;
                 };
                 "application/x-www-form-urlencoded": {
@@ -47220,7 +44507,6 @@ export interface operations {
                     parValue?: null | string;
                     parIndex: number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastUpdate?: null | string;
                 };
                 "multipart/form-data": {
@@ -47229,7 +44515,6 @@ export interface operations {
                     parValue?: null | string;
                     parIndex: number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastUpdate?: null | string;
                 };
             };
@@ -47249,8 +44534,6 @@ export interface operations {
                         parValue: null | string;
                         parIndex: number;
                         orderNo: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastUpdate: null | string;
                     };
                 };
@@ -47316,8 +44599,6 @@ export interface operations {
                         parValue: null | string;
                         parIndex: number;
                         orderNo: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastUpdate: null | string;
                     };
                 };
@@ -47344,7 +44625,6 @@ export interface operations {
                     parValue?: null | string;
                     parIndex?: number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastUpdate?: null | string;
                 };
                 "application/x-www-form-urlencoded": {
@@ -47353,7 +44633,6 @@ export interface operations {
                     parValue?: null | string;
                     parIndex?: number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastUpdate?: null | string;
                 };
                 "multipart/form-data": {
@@ -47362,7 +44641,6 @@ export interface operations {
                     parValue?: null | string;
                     parIndex?: number;
                     orderNo?: null | number;
-                    exportMarker?: null | number;
                     lastUpdate?: null | string;
                 };
             };
@@ -47382,8 +44660,6 @@ export interface operations {
                         parValue: null | string;
                         parIndex: number;
                         orderNo: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastUpdate: null | string;
                     };
                 };
@@ -47417,8 +44693,6 @@ export interface operations {
                         parValue: null | string;
                         parIndex: number;
                         orderNo: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastUpdate: null | string;
                     };
                 };
@@ -47486,8 +44760,6 @@ export interface operations {
                             parentId: null | number;
                             groupId: null | number;
                             pendTypeName: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             sortId: null | number;
                             description: null | string;
@@ -47519,8 +44791,6 @@ export interface operations {
                                 filed: null | number;
                                 unexpected: null | number;
                                 workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 reportingMethod: null | number;
                                 pendingBy: null | number;
@@ -47552,7 +44822,6 @@ export interface operations {
             content: {
                 "application/json": {
                     pendTypeName?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     description?: null | string;
                     orderNo?: null | number;
@@ -47564,7 +44833,6 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     pendTypeName?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     description?: null | string;
                     orderNo?: null | number;
@@ -47576,7 +44844,6 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     pendTypeName?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     description?: null | string;
                     orderNo?: null | number;
@@ -47600,8 +44867,6 @@ export interface operations {
                         parentId: null | number;
                         groupId: null | number;
                         pendTypeName: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         sortId: null | number;
                         description: null | string;
@@ -47633,8 +44898,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -47706,8 +44969,6 @@ export interface operations {
                         parentId: null | number;
                         groupId: null | number;
                         pendTypeName: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         sortId: null | number;
                         description: null | string;
@@ -47739,8 +45000,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -47772,7 +45031,6 @@ export interface operations {
             content: {
                 "application/json": {
                     pendTypeName?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     description?: null | string;
                     orderNo?: null | number;
@@ -47787,7 +45045,6 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     pendTypeName?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     description?: null | string;
                     orderNo?: null | number;
@@ -47802,7 +45059,6 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     pendTypeName?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     description?: null | string;
                     orderNo?: null | number;
@@ -47829,8 +45085,6 @@ export interface operations {
                         parentId: null | number;
                         groupId: null | number;
                         pendTypeName: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         sortId: null | number;
                         description: null | string;
@@ -47862,8 +45116,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -47903,8 +45155,6 @@ export interface operations {
                         parentId: null | number;
                         groupId: null | number;
                         pendTypeName: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         sortId: null | number;
                         description: null | string;
@@ -47936,8 +45186,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -48039,8 +45287,6 @@ export interface operations {
                                 active: null | number;
                                 mandatoryHistory: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -48069,8 +45315,6 @@ export interface operations {
                                 window: null | number;
                                 active: null | number;
                                 mandatoryHistory: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -48094,9 +45338,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -48215,8 +45458,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -48245,8 +45486,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -48270,9 +45509,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -48365,8 +45603,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -48395,8 +45631,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -48420,9 +45654,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -48568,8 +45801,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -48598,8 +45829,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -48623,9 +45852,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -48686,8 +45914,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -48716,8 +45942,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -48741,9 +45965,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -48819,8 +46042,6 @@ export interface operations {
                             rescheduledBy: null | number;
                             rescheduledDate: null | string;
                             reason: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblUsers?: null | ({
@@ -48839,10 +46060,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -48874,8 +46093,6 @@ export interface operations {
                                 filed: null | number;
                                 unexpected: null | number;
                                 workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 reportingMethod: null | number;
                                 pendingBy: null | number;
@@ -48913,7 +46130,6 @@ export interface operations {
                     rescheduledBy?: null | number;
                     rescheduledDate?: null | string;
                     reason?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -48933,7 +46149,6 @@ export interface operations {
                     rescheduledBy?: null | number;
                     rescheduledDate?: null | string;
                     reason?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -48953,7 +46168,6 @@ export interface operations {
                     rescheduledBy?: null | number;
                     rescheduledDate?: null | string;
                     reason?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -48984,8 +46198,6 @@ export interface operations {
                         rescheduledBy: null | number;
                         rescheduledDate: null | string;
                         reason: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblUsers?: null | ({
@@ -49004,10 +46216,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -49039,8 +46249,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -49117,8 +46325,6 @@ export interface operations {
                         rescheduledBy: null | number;
                         rescheduledDate: null | string;
                         reason: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblUsers?: null | ({
@@ -49137,10 +46343,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -49172,8 +46376,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -49211,7 +46413,6 @@ export interface operations {
                     rescheduledBy?: null | number;
                     rescheduledDate?: null | string;
                     reason?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -49233,7 +46434,6 @@ export interface operations {
                     rescheduledBy?: null | number;
                     rescheduledDate?: null | string;
                     reason?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -49255,7 +46455,6 @@ export interface operations {
                     rescheduledBy?: null | number;
                     rescheduledDate?: null | string;
                     reason?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUsers?: {
@@ -49288,8 +46487,6 @@ export interface operations {
                         rescheduledBy: null | number;
                         rescheduledDate: null | string;
                         reason: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblUsers?: null | ({
@@ -49308,10 +46505,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -49343,8 +46538,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -49389,8 +46582,6 @@ export interface operations {
                         rescheduledBy: null | number;
                         rescheduledDate: null | string;
                         reason: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblUsers?: null | ({
@@ -49409,10 +46600,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -49444,8 +46633,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -49528,8 +46715,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblComponentUnit?: null | ({
@@ -49542,8 +46727,6 @@ export interface operations {
                                 serialNo: null | string;
                                 statusId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 isCritical: null | number;
                                 orderNo: null | number;
@@ -49563,8 +46746,6 @@ export interface operations {
                                 parentFunctionId: null | number;
                                 notes: null | string;
                                 statusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -49586,10 +46767,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -49610,10 +46789,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -49641,7 +46818,6 @@ export interface operations {
                     fromDate?: null | string;
                     toDate?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnit?: {
@@ -49669,7 +46845,6 @@ export interface operations {
                     fromDate?: null | string;
                     toDate?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnit?: {
@@ -49697,7 +46872,6 @@ export interface operations {
                     fromDate?: null | string;
                     toDate?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnit?: {
@@ -49739,8 +46913,6 @@ export interface operations {
                         fromDate: null | string;
                         toDate: null | string;
                         notes: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnit?: null | ({
@@ -49753,8 +46925,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -49774,8 +46944,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -49797,10 +46965,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -49821,10 +46987,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -49894,8 +47058,6 @@ export interface operations {
                         fromDate: null | string;
                         toDate: null | string;
                         notes: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnit?: null | ({
@@ -49908,8 +47070,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -49929,8 +47089,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -49952,10 +47110,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -49976,10 +47132,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -50007,7 +47161,6 @@ export interface operations {
                     fromDate?: null | string;
                     toDate?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnit?: {
@@ -50039,7 +47192,6 @@ export interface operations {
                     fromDate?: null | string;
                     toDate?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnit?: {
@@ -50071,7 +47223,6 @@ export interface operations {
                     fromDate?: null | string;
                     toDate?: null | string;
                     notes?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblComponentUnit?: {
@@ -50117,8 +47268,6 @@ export interface operations {
                         fromDate: null | string;
                         toDate: null | string;
                         notes: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnit?: null | ({
@@ -50131,8 +47280,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -50152,8 +47299,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -50175,10 +47320,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -50199,10 +47342,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -50240,8 +47381,6 @@ export interface operations {
                         fromDate: null | string;
                         toDate: null | string;
                         notes: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblComponentUnit?: null | ({
@@ -50254,8 +47393,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -50275,8 +47412,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -50298,10 +47433,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -50322,10 +47455,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -50411,8 +47542,6 @@ export interface operations {
                             priority: null | number;
                             window: null | number;
                             outputFormat: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryHistory: null | number;
                             mandatoryResource: null | number;
@@ -50446,8 +47575,6 @@ export interface operations {
                                 filed: null | number;
                                 unexpected: null | number;
                                 workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 reportingMethod: null | number;
                                 pendingBy: null | number;
@@ -50491,7 +47618,6 @@ export interface operations {
                     priority?: null | number;
                     window?: null | number;
                     outputFormat?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryHistory?: null | number;
                     mandatoryResource?: null | number;
@@ -50518,7 +47644,6 @@ export interface operations {
                     priority?: null | number;
                     window?: null | number;
                     outputFormat?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryHistory?: null | number;
                     mandatoryResource?: null | number;
@@ -50545,7 +47670,6 @@ export interface operations {
                     priority?: null | number;
                     window?: null | number;
                     outputFormat?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryHistory?: null | number;
                     mandatoryResource?: null | number;
@@ -50587,8 +47711,6 @@ export interface operations {
                         priority: null | number;
                         window: null | number;
                         outputFormat: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         mandatoryHistory: null | number;
                         mandatoryResource: null | number;
@@ -50622,8 +47744,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -50710,8 +47830,6 @@ export interface operations {
                         priority: null | number;
                         window: null | number;
                         outputFormat: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         mandatoryHistory: null | number;
                         mandatoryResource: null | number;
@@ -50745,8 +47863,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -50790,7 +47906,6 @@ export interface operations {
                     priority?: null | number;
                     window?: null | number;
                     outputFormat?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryHistory?: null | number;
                     mandatoryResource?: null | number;
@@ -50820,7 +47935,6 @@ export interface operations {
                     priority?: null | number;
                     window?: null | number;
                     outputFormat?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryHistory?: null | number;
                     mandatoryResource?: null | number;
@@ -50850,7 +47964,6 @@ export interface operations {
                     priority?: null | number;
                     window?: null | number;
                     outputFormat?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     mandatoryHistory?: null | number;
                     mandatoryResource?: null | number;
@@ -50895,8 +48008,6 @@ export interface operations {
                         priority: null | number;
                         window: null | number;
                         outputFormat: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         mandatoryHistory: null | number;
                         mandatoryResource: null | number;
@@ -50930,8 +48041,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -50986,8 +48095,6 @@ export interface operations {
                         priority: null | number;
                         window: null | number;
                         outputFormat: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         mandatoryHistory: null | number;
                         mandatoryResource: null | number;
@@ -51021,8 +48128,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -51099,8 +48204,6 @@ export interface operations {
                             compJobId: number;
                             roundId: number;
                             jobSequence: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             active: null | number;
                             functionDriven: null | number;
@@ -51124,10 +48227,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -51153,7 +48254,6 @@ export interface operations {
             content: {
                 "application/json": {
                     jobSequence?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     active?: null | number;
                     functionDriven?: null | number;
@@ -51167,7 +48267,6 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     jobSequence?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     active?: null | number;
                     functionDriven?: null | number;
@@ -51181,7 +48280,6 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     jobSequence?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     active?: null | number;
                     functionDriven?: null | number;
@@ -51207,8 +48305,6 @@ export interface operations {
                         compJobId: number;
                         roundId: number;
                         jobSequence: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         active: null | number;
                         functionDriven: null | number;
@@ -51232,10 +48328,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -51301,8 +48395,6 @@ export interface operations {
                         compJobId: number;
                         roundId: number;
                         jobSequence: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         active: null | number;
                         functionDriven: null | number;
@@ -51326,10 +48418,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -51355,7 +48445,6 @@ export interface operations {
             content: {
                 "application/json": {
                     jobSequence?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     active?: null | number;
                     functionDriven?: null | number;
@@ -51370,7 +48459,6 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     jobSequence?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     active?: null | number;
                     functionDriven?: null | number;
@@ -51385,7 +48473,6 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     jobSequence?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     active?: null | number;
                     functionDriven?: null | number;
@@ -51412,8 +48499,6 @@ export interface operations {
                         compJobId: number;
                         roundId: number;
                         jobSequence: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         active: null | number;
                         functionDriven: null | number;
@@ -51437,10 +48522,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -51474,8 +48557,6 @@ export interface operations {
                         compJobId: number;
                         roundId: number;
                         jobSequence: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         active: null | number;
                         functionDriven: null | number;
@@ -51499,10 +48580,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -51577,8 +48656,6 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblUnit?: null | ({
@@ -51587,8 +48664,6 @@ export interface operations {
                                 name: null | string;
                                 allowDecimals: null | number;
                                 description: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -51603,8 +48678,6 @@ export interface operations {
                                 extraNo: null | string;
                                 note: null | string;
                                 unitId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -51619,15 +48692,12 @@ export interface operations {
                                 extraNo: null | string;
                                 note: null | string;
                                 unitId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
                             tblSpareUnits?: {
                                 spareUnitId: number;
                                 spareTypeId: null | number;
-                                deptId: null | number;
                                 lastupdate: null | string;
                             }[];
                         }[];
@@ -51655,7 +48725,6 @@ export interface operations {
                     makerRefNo?: null | string;
                     extraNo?: null | string;
                     note?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUnit?: {
@@ -51685,7 +48754,6 @@ export interface operations {
                     makerRefNo?: null | string;
                     extraNo?: null | string;
                     note?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUnit?: {
@@ -51715,7 +48783,6 @@ export interface operations {
                     makerRefNo?: null | string;
                     extraNo?: null | string;
                     note?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUnit?: {
@@ -51757,8 +48824,6 @@ export interface operations {
                         extraNo: null | string;
                         note: null | string;
                         unitId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblUnit?: null | ({
@@ -51767,8 +48832,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -51783,8 +48846,6 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -51799,15 +48860,12 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
                         tblSpareUnits?: {
                             spareUnitId: number;
                             spareTypeId: null | number;
-                            deptId: null | number;
                             lastupdate: null | string;
                         }[];
                     };
@@ -51875,8 +48933,6 @@ export interface operations {
                         extraNo: null | string;
                         note: null | string;
                         unitId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblUnit?: null | ({
@@ -51885,8 +48941,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -51901,8 +48955,6 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -51917,15 +48969,12 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
                         tblSpareUnits?: {
                             spareUnitId: number;
                             spareTypeId: null | number;
-                            deptId: null | number;
                             lastupdate: null | string;
                         }[];
                     };
@@ -51953,7 +49002,6 @@ export interface operations {
                     makerRefNo?: null | string;
                     extraNo?: null | string;
                     note?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUnit?: {
@@ -51991,7 +49039,6 @@ export interface operations {
                     makerRefNo?: null | string;
                     extraNo?: null | string;
                     note?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUnit?: {
@@ -52029,7 +49076,6 @@ export interface operations {
                     makerRefNo?: null | string;
                     extraNo?: null | string;
                     note?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblUnit?: {
@@ -52079,8 +49125,6 @@ export interface operations {
                         extraNo: null | string;
                         note: null | string;
                         unitId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblUnit?: null | ({
@@ -52089,8 +49133,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -52105,8 +49147,6 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -52121,15 +49161,12 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
                         tblSpareUnits?: {
                             spareUnitId: number;
                             spareTypeId: null | number;
-                            deptId: null | number;
                             lastupdate: null | string;
                         }[];
                     };
@@ -52165,8 +49202,6 @@ export interface operations {
                         extraNo: null | string;
                         note: null | string;
                         unitId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblUnit?: null | ({
@@ -52175,8 +49210,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -52191,8 +49224,6 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -52207,15 +49238,12 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
                         tblSpareUnits?: {
                             spareUnitId: number;
                             spareTypeId: null | number;
-                            deptId: null | number;
                             lastupdate: null | string;
                         }[];
                     };
@@ -52282,17 +49310,14 @@ export interface operations {
                         items: {
                             spareUnitId: number;
                             spareTypeId: null | number;
-                            deptId: null | number;
                             lastupdate: null | string;
                             tblMaintLogStocks?: {
                                 maintLogStockId: number;
                                 maintLogId: number;
                                 stockItemId: number;
-                                deptId: null | number;
                                 stockCount: null | number;
                                 orderNo: null | number;
                                 createdUserId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                             }[];
                             tblSpareType?: null | ({
@@ -52304,8 +49329,6 @@ export interface operations {
                                 extraNo: null | string;
                                 note: null | string;
                                 unitId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -52381,17 +49404,14 @@ export interface operations {
                     "application/json": {
                         spareUnitId: number;
                         spareTypeId: null | number;
-                        deptId: null | number;
                         lastupdate: null | string;
                         tblMaintLogStocks?: {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                         }[];
                         tblSpareType?: null | ({
@@ -52403,8 +49423,6 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -52469,17 +49487,14 @@ export interface operations {
                     "application/json": {
                         spareUnitId: number;
                         spareTypeId: null | number;
-                        deptId: null | number;
                         lastupdate: null | string;
                         tblMaintLogStocks?: {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                         }[];
                         tblSpareType?: null | ({
@@ -52491,8 +49506,6 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -52580,17 +49593,14 @@ export interface operations {
                     "application/json": {
                         spareUnitId: number;
                         spareTypeId: null | number;
-                        deptId: null | number;
                         lastupdate: null | string;
                         tblMaintLogStocks?: {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                         }[];
                         tblSpareType?: null | ({
@@ -52602,8 +49612,6 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -52636,17 +49644,14 @@ export interface operations {
                     "application/json": {
                         spareUnitId: number;
                         spareTypeId: null | number;
-                        deptId: null | number;
                         lastupdate: null | string;
                         tblMaintLogStocks?: {
                             maintLogStockId: number;
                             maintLogId: number;
                             stockItemId: number;
-                            deptId: null | number;
                             stockCount: null | number;
                             orderNo: null | number;
                             createdUserId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                         }[];
                         tblSpareType?: null | ({
@@ -52658,8 +49663,6 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -52732,8 +49735,6 @@ export interface operations {
                             name: null | string;
                             allowDecimals: null | number;
                             description: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             tblCompMeasurePoints?: {
@@ -52747,8 +49748,6 @@ export interface operations {
                                 setValue: null | number;
                                 operationalMinValue: null | number;
                                 operationalMaxValue: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -52760,8 +49759,6 @@ export interface operations {
                                 currentDate: null | string;
                                 unitId: null | number;
                                 currentValue: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -52773,8 +49770,6 @@ export interface operations {
                                 setValue: null | number;
                                 operationalMinValue: null | number;
                                 operationalMaxValue: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -52787,8 +49782,6 @@ export interface operations {
                                 extraNo: null | string;
                                 note: null | string;
                                 unitId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -52816,7 +49809,6 @@ export interface operations {
                     name?: null | string;
                     allowDecimals?: null | number;
                     description?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompMeasurePoints?: {
@@ -52845,7 +49837,6 @@ export interface operations {
                     name?: null | string;
                     allowDecimals?: null | number;
                     description?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompMeasurePoints?: {
@@ -52874,7 +49865,6 @@ export interface operations {
                     name?: null | string;
                     allowDecimals?: null | number;
                     description?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompMeasurePoints?: {
@@ -52913,8 +49903,6 @@ export interface operations {
                         name: null | string;
                         allowDecimals: null | number;
                         description: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompMeasurePoints?: {
@@ -52928,8 +49916,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -52941,8 +49927,6 @@ export interface operations {
                             currentDate: null | string;
                             unitId: null | number;
                             currentValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -52954,8 +49938,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -52968,8 +49950,6 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -53035,8 +50015,6 @@ export interface operations {
                         name: null | string;
                         allowDecimals: null | number;
                         description: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompMeasurePoints?: {
@@ -53050,8 +50028,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -53063,8 +50039,6 @@ export interface operations {
                             currentDate: null | string;
                             unitId: null | number;
                             currentValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -53076,8 +50050,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -53090,8 +50062,6 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -53119,7 +50089,6 @@ export interface operations {
                     name?: null | string;
                     allowDecimals?: null | number;
                     description?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompMeasurePoints?: {
@@ -53160,7 +50129,6 @@ export interface operations {
                     name?: null | string;
                     allowDecimals?: null | number;
                     description?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompMeasurePoints?: {
@@ -53201,7 +50169,6 @@ export interface operations {
                     name?: null | string;
                     allowDecimals?: null | number;
                     description?: null | string;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     orderNo?: null | number;
                     tblCompMeasurePoints?: {
@@ -53252,8 +50219,6 @@ export interface operations {
                         name: null | string;
                         allowDecimals: null | number;
                         description: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompMeasurePoints?: {
@@ -53267,8 +50232,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -53280,8 +50243,6 @@ export interface operations {
                             currentDate: null | string;
                             unitId: null | number;
                             currentValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -53293,8 +50254,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -53307,8 +50266,6 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -53342,8 +50299,6 @@ export interface operations {
                         name: null | string;
                         allowDecimals: null | number;
                         description: null | string;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         orderNo: null | number;
                         tblCompMeasurePoints?: {
@@ -53357,8 +50312,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -53370,8 +50323,6 @@ export interface operations {
                             currentDate: null | string;
                             unitId: null | number;
                             currentValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -53383,8 +50334,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -53397,8 +50346,6 @@ export interface operations {
                             extraNo: null | string;
                             note: null | string;
                             unitId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -53479,10 +50426,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                             tblAttachments?: {
                                 attachmentId: number;
@@ -53493,13 +50438,6 @@ export interface operations {
                                 size: null | number;
                                 isUserAttachment: boolean;
                                 createdUserId: number;
-                                createdAt: string;
-                            }[];
-                            tblAttachmentTypes?: {
-                                attachmentTypeId: number;
-                                name: null | string;
-                                abbreviation: null | string;
-                                createdBy: number;
                                 createdAt: string;
                             }[];
                             tblCompCounterLogs?: {
@@ -53514,8 +50452,6 @@ export interface operations {
                                 lastZeroedValue: null | number;
                                 changedBy: null | number;
                                 changedDate: null | string;
-                                deptId: number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -53546,8 +50482,6 @@ export interface operations {
                                 active: null | number;
                                 mandatoryHistory: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -53562,8 +50496,6 @@ export interface operations {
                                 lastDoneCount: null | number;
                                 nextDueCount: null | number;
                                 window: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 showInAlert: null | boolean;
                                 updateByFunction: null | boolean;
@@ -53582,8 +50514,6 @@ export interface operations {
                                 setValue: null | number;
                                 operationalMinValue: null | number;
                                 operationalMaxValue: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -53595,8 +50525,6 @@ export interface operations {
                                 currentDate: null | string;
                                 unitId: null | number;
                                 currentValue: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -53618,8 +50546,6 @@ export interface operations {
                                 workOrderId: null | number;
                                 fromDeptId: null | number;
                                 changedTime: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -53653,8 +50579,6 @@ export interface operations {
                                 window: null | number;
                                 active: null | number;
                                 mandatoryHistory: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 mandatoryResource: null | number;
                                 mandatoryStockUsage: null | number;
@@ -53667,8 +50591,6 @@ export interface operations {
                                 compTypeCounterId: null | number;
                                 frequency: null | number;
                                 window: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 showInAlert: null | boolean;
                                 updateByFunction: null | boolean;
@@ -53679,8 +50601,6 @@ export interface operations {
                                 compTypeJobTriggerId: number;
                                 jobTriggerId: null | number;
                                 compTypeJobId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -53696,8 +50616,6 @@ export interface operations {
                                 notes: null | string;
                                 initials: null | string;
                                 empTitle: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -53732,8 +50650,6 @@ export interface operations {
                                 frequency: null | number;
                                 reportedCount: null | number;
                                 overdueCount: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -53743,8 +50659,6 @@ export interface operations {
                                 maintLogId: null | number;
                                 employeeId: null | number;
                                 discId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -53759,10 +50673,8 @@ export interface operations {
                                 logoutTime: null | string;
                                 hostName: null | string;
                                 instId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                             }[];
                             tblMaintLogTblMaintLogUpdatedUserIdTotblUsers?: {
                                 maintLogId: number;
@@ -53781,9 +50693,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -53807,9 +50718,8 @@ export interface operations {
                                 overdueCount: null | number;
                                 unexpected: null | number;
                                 reportedBy: null | number;
-                                deptId: null | number;
                                 history: null | string;
-                                maintLogFollowId: null | number;
+                                workOrderStatusId: null | number;
                                 followStatusId: null | number;
                                 updatedUserId: null | number;
                                 reportedDate: null | string;
@@ -53832,8 +50742,6 @@ export interface operations {
                                 isWaiting: null | number;
                                 isUnPlan: null | number;
                                 followDesc: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 followStatuseId: null | number;
                                 orderNo: null | number;
@@ -53846,8 +50754,6 @@ export interface operations {
                                 rescheduledBy: null | number;
                                 rescheduledDate: null | string;
                                 reason: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -53860,8 +50766,6 @@ export interface operations {
                                 fromDate: null | string;
                                 toDate: null | string;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -53874,8 +50778,6 @@ export interface operations {
                                 fromDate: null | string;
                                 toDate: null | string;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             }[];
@@ -53884,8 +50786,6 @@ export interface operations {
                                 compJobId: number;
                                 roundId: number;
                                 jobSequence: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 active: null | number;
                                 functionDriven: null | number;
@@ -53905,8 +50805,6 @@ export interface operations {
                                 notes: null | string;
                                 initials: null | string;
                                 empTitle: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                                 createdUserId: null | number;
@@ -53940,8 +50838,6 @@ export interface operations {
                                 filed: null | number;
                                 unexpected: null | number;
                                 workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 reportingMethod: null | number;
                                 pendingBy: null | number;
@@ -53979,8 +50875,6 @@ export interface operations {
                                 filed: null | number;
                                 unexpected: null | number;
                                 workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 reportingMethod: null | number;
                                 pendingBy: null | number;
@@ -54018,8 +50912,6 @@ export interface operations {
                                 filed: null | number;
                                 unexpected: null | number;
                                 workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 reportingMethod: null | number;
                                 pendingBy: null | number;
@@ -54057,8 +50949,6 @@ export interface operations {
                                 filed: null | number;
                                 unexpected: null | number;
                                 workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 reportingMethod: null | number;
                                 pendingBy: null | number;
@@ -54152,18 +51042,12 @@ export interface operations {
                     uLogonAttempts?: null | number;
                     uForcePasswordChange?: null | boolean;
                     uLastLogin?: null | string;
-                    exportMarker?: null | number;
                     uLastUpdated?: null | string;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblAttachments?: {
                         connect: {
                             attachmentId: number;
-                        }[];
-                    };
-                    tblAttachmentTypes?: {
-                        connect: {
-                            attachmentTypeId: number;
                         }[];
                     };
                     tblCompCounterLogs?: {
@@ -54349,18 +51233,12 @@ export interface operations {
                     uLogonAttempts?: null | number;
                     uForcePasswordChange?: null | boolean;
                     uLastLogin?: null | string;
-                    exportMarker?: null | number;
                     uLastUpdated?: null | string;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblAttachments?: {
                         connect: {
                             attachmentId: number;
-                        }[];
-                    };
-                    tblAttachmentTypes?: {
-                        connect: {
-                            attachmentTypeId: number;
                         }[];
                     };
                     tblCompCounterLogs?: {
@@ -54546,18 +51424,12 @@ export interface operations {
                     uLogonAttempts?: null | number;
                     uForcePasswordChange?: null | boolean;
                     uLastLogin?: null | string;
-                    exportMarker?: null | number;
                     uLastUpdated?: null | string;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblAttachments?: {
                         connect: {
                             attachmentId: number;
-                        }[];
-                    };
-                    tblAttachmentTypes?: {
-                        connect: {
-                            attachmentTypeId: number;
                         }[];
                     };
                     tblCompCounterLogs?: {
@@ -54756,10 +51628,8 @@ export interface operations {
                         uLogonAttempts: null | number;
                         uForcePasswordChange: null | boolean;
                         uLastLogin: null | string;
-                        exportMarker: null | number;
                         uLastUpdated: null | string;
                         orderNo: null | number;
-                        deptId: null | number;
                         lastUpdate: null | string;
                         tblAttachments?: {
                             attachmentId: number;
@@ -54770,13 +51640,6 @@ export interface operations {
                             size: null | number;
                             isUserAttachment: boolean;
                             createdUserId: number;
-                            createdAt: string;
-                        }[];
-                        tblAttachmentTypes?: {
-                            attachmentTypeId: number;
-                            name: null | string;
-                            abbreviation: null | string;
-                            createdBy: number;
                             createdAt: string;
                         }[];
                         tblCompCounterLogs?: {
@@ -54791,8 +51654,6 @@ export interface operations {
                             lastZeroedValue: null | number;
                             changedBy: null | number;
                             changedDate: null | string;
-                            deptId: number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -54823,8 +51684,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -54839,8 +51698,6 @@ export interface operations {
                             lastDoneCount: null | number;
                             nextDueCount: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -54859,8 +51716,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -54872,8 +51727,6 @@ export interface operations {
                             currentDate: null | string;
                             unitId: null | number;
                             currentValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -54895,8 +51748,6 @@ export interface operations {
                             workOrderId: null | number;
                             fromDeptId: null | number;
                             changedTime: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -54930,8 +51781,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -54944,8 +51793,6 @@ export interface operations {
                             compTypeCounterId: null | number;
                             frequency: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -54956,8 +51803,6 @@ export interface operations {
                             compTypeJobTriggerId: number;
                             jobTriggerId: null | number;
                             compTypeJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -54973,8 +51818,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -55009,8 +51852,6 @@ export interface operations {
                             frequency: null | number;
                             reportedCount: null | number;
                             overdueCount: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -55020,8 +51861,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -55036,10 +51875,8 @@ export interface operations {
                             logoutTime: null | string;
                             hostName: null | string;
                             instId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                         }[];
                         tblMaintLogTblMaintLogUpdatedUserIdTotblUsers?: {
                             maintLogId: number;
@@ -55058,9 +51895,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -55084,9 +51920,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -55109,8 +51944,6 @@ export interface operations {
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
                             orderNo: null | number;
@@ -55123,8 +51956,6 @@ export interface operations {
                             rescheduledBy: null | number;
                             rescheduledDate: null | string;
                             reason: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -55137,8 +51968,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -55151,8 +51980,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -55161,8 +51988,6 @@ export interface operations {
                             compJobId: number;
                             roundId: number;
                             jobSequence: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             active: null | number;
                             functionDriven: null | number;
@@ -55182,8 +52007,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -55217,8 +52040,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -55256,8 +52077,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -55295,8 +52114,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -55334,8 +52151,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -55470,10 +52285,8 @@ export interface operations {
                         uLogonAttempts: null | number;
                         uForcePasswordChange: null | boolean;
                         uLastLogin: null | string;
-                        exportMarker: null | number;
                         uLastUpdated: null | string;
                         orderNo: null | number;
-                        deptId: null | number;
                         lastUpdate: null | string;
                         tblAttachments?: {
                             attachmentId: number;
@@ -55484,13 +52297,6 @@ export interface operations {
                             size: null | number;
                             isUserAttachment: boolean;
                             createdUserId: number;
-                            createdAt: string;
-                        }[];
-                        tblAttachmentTypes?: {
-                            attachmentTypeId: number;
-                            name: null | string;
-                            abbreviation: null | string;
-                            createdBy: number;
                             createdAt: string;
                         }[];
                         tblCompCounterLogs?: {
@@ -55505,8 +52311,6 @@ export interface operations {
                             lastZeroedValue: null | number;
                             changedBy: null | number;
                             changedDate: null | string;
-                            deptId: number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -55537,8 +52341,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -55553,8 +52355,6 @@ export interface operations {
                             lastDoneCount: null | number;
                             nextDueCount: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -55573,8 +52373,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -55586,8 +52384,6 @@ export interface operations {
                             currentDate: null | string;
                             unitId: null | number;
                             currentValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -55609,8 +52405,6 @@ export interface operations {
                             workOrderId: null | number;
                             fromDeptId: null | number;
                             changedTime: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -55644,8 +52438,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -55658,8 +52450,6 @@ export interface operations {
                             compTypeCounterId: null | number;
                             frequency: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -55670,8 +52460,6 @@ export interface operations {
                             compTypeJobTriggerId: number;
                             jobTriggerId: null | number;
                             compTypeJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -55687,8 +52475,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -55723,8 +52509,6 @@ export interface operations {
                             frequency: null | number;
                             reportedCount: null | number;
                             overdueCount: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -55734,8 +52518,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -55750,10 +52532,8 @@ export interface operations {
                             logoutTime: null | string;
                             hostName: null | string;
                             instId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                         }[];
                         tblMaintLogTblMaintLogUpdatedUserIdTotblUsers?: {
                             maintLogId: number;
@@ -55772,9 +52552,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -55798,9 +52577,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -55823,8 +52601,6 @@ export interface operations {
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
                             orderNo: null | number;
@@ -55837,8 +52613,6 @@ export interface operations {
                             rescheduledBy: null | number;
                             rescheduledDate: null | string;
                             reason: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -55851,8 +52625,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -55865,8 +52637,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -55875,8 +52645,6 @@ export interface operations {
                             compJobId: number;
                             roundId: number;
                             jobSequence: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             active: null | number;
                             functionDriven: null | number;
@@ -55896,8 +52664,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -55931,8 +52697,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -55970,8 +52734,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -56009,8 +52771,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -56048,8 +52808,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -56143,21 +52901,12 @@ export interface operations {
                     uLogonAttempts?: null | number;
                     uForcePasswordChange?: null | boolean;
                     uLastLogin?: null | string;
-                    exportMarker?: null | number;
                     uLastUpdated?: null | string;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblAttachments?: {
                         connect?: {
                             attachmentId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblAttachmentTypes?: {
-                        connect?: {
-                            attachmentTypeId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56446,21 +53195,12 @@ export interface operations {
                     uLogonAttempts?: null | number;
                     uForcePasswordChange?: null | boolean;
                     uLastLogin?: null | string;
-                    exportMarker?: null | number;
                     uLastUpdated?: null | string;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblAttachments?: {
                         connect?: {
                             attachmentId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblAttachmentTypes?: {
-                        connect?: {
-                            attachmentTypeId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -56749,21 +53489,12 @@ export interface operations {
                     uLogonAttempts?: null | number;
                     uForcePasswordChange?: null | boolean;
                     uLastLogin?: null | string;
-                    exportMarker?: null | number;
                     uLastUpdated?: null | string;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblAttachments?: {
                         connect?: {
                             attachmentId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblAttachmentTypes?: {
-                        connect?: {
-                            attachmentTypeId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -57065,10 +53796,8 @@ export interface operations {
                         uLogonAttempts: null | number;
                         uForcePasswordChange: null | boolean;
                         uLastLogin: null | string;
-                        exportMarker: null | number;
                         uLastUpdated: null | string;
                         orderNo: null | number;
-                        deptId: null | number;
                         lastUpdate: null | string;
                         tblAttachments?: {
                             attachmentId: number;
@@ -57079,13 +53808,6 @@ export interface operations {
                             size: null | number;
                             isUserAttachment: boolean;
                             createdUserId: number;
-                            createdAt: string;
-                        }[];
-                        tblAttachmentTypes?: {
-                            attachmentTypeId: number;
-                            name: null | string;
-                            abbreviation: null | string;
-                            createdBy: number;
                             createdAt: string;
                         }[];
                         tblCompCounterLogs?: {
@@ -57100,8 +53822,6 @@ export interface operations {
                             lastZeroedValue: null | number;
                             changedBy: null | number;
                             changedDate: null | string;
-                            deptId: number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -57132,8 +53852,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -57148,8 +53866,6 @@ export interface operations {
                             lastDoneCount: null | number;
                             nextDueCount: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -57168,8 +53884,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -57181,8 +53895,6 @@ export interface operations {
                             currentDate: null | string;
                             unitId: null | number;
                             currentValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -57204,8 +53916,6 @@ export interface operations {
                             workOrderId: null | number;
                             fromDeptId: null | number;
                             changedTime: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -57239,8 +53949,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -57253,8 +53961,6 @@ export interface operations {
                             compTypeCounterId: null | number;
                             frequency: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -57265,8 +53971,6 @@ export interface operations {
                             compTypeJobTriggerId: number;
                             jobTriggerId: null | number;
                             compTypeJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -57282,8 +53986,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -57318,8 +54020,6 @@ export interface operations {
                             frequency: null | number;
                             reportedCount: null | number;
                             overdueCount: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -57329,8 +54029,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -57345,10 +54043,8 @@ export interface operations {
                             logoutTime: null | string;
                             hostName: null | string;
                             instId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                         }[];
                         tblMaintLogTblMaintLogUpdatedUserIdTotblUsers?: {
                             maintLogId: number;
@@ -57367,9 +54063,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -57393,9 +54088,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -57418,8 +54112,6 @@ export interface operations {
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
                             orderNo: null | number;
@@ -57432,8 +54124,6 @@ export interface operations {
                             rescheduledBy: null | number;
                             rescheduledDate: null | string;
                             reason: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -57446,8 +54136,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -57460,8 +54148,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -57470,8 +54156,6 @@ export interface operations {
                             compJobId: number;
                             roundId: number;
                             jobSequence: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             active: null | number;
                             functionDriven: null | number;
@@ -57491,8 +54175,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -57526,8 +54208,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -57565,8 +54245,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -57604,8 +54282,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -57643,8 +54319,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -57747,10 +54421,8 @@ export interface operations {
                         uLogonAttempts: null | number;
                         uForcePasswordChange: null | boolean;
                         uLastLogin: null | string;
-                        exportMarker: null | number;
                         uLastUpdated: null | string;
                         orderNo: null | number;
-                        deptId: null | number;
                         lastUpdate: null | string;
                         tblAttachments?: {
                             attachmentId: number;
@@ -57761,13 +54433,6 @@ export interface operations {
                             size: null | number;
                             isUserAttachment: boolean;
                             createdUserId: number;
-                            createdAt: string;
-                        }[];
-                        tblAttachmentTypes?: {
-                            attachmentTypeId: number;
-                            name: null | string;
-                            abbreviation: null | string;
-                            createdBy: number;
                             createdAt: string;
                         }[];
                         tblCompCounterLogs?: {
@@ -57782,8 +54447,6 @@ export interface operations {
                             lastZeroedValue: null | number;
                             changedBy: null | number;
                             changedDate: null | string;
-                            deptId: number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -57814,8 +54477,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -57830,8 +54491,6 @@ export interface operations {
                             lastDoneCount: null | number;
                             nextDueCount: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -57850,8 +54509,6 @@ export interface operations {
                             setValue: null | number;
                             operationalMinValue: null | number;
                             operationalMaxValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -57863,8 +54520,6 @@ export interface operations {
                             currentDate: null | string;
                             unitId: null | number;
                             currentValue: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -57886,8 +54541,6 @@ export interface operations {
                             workOrderId: null | number;
                             fromDeptId: null | number;
                             changedTime: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -57921,8 +54574,6 @@ export interface operations {
                             window: null | number;
                             active: null | number;
                             mandatoryHistory: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -57935,8 +54586,6 @@ export interface operations {
                             compTypeCounterId: null | number;
                             frequency: null | number;
                             window: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             showInAlert: null | boolean;
                             updateByFunction: null | boolean;
@@ -57947,8 +54596,6 @@ export interface operations {
                             compTypeJobTriggerId: number;
                             jobTriggerId: null | number;
                             compTypeJobId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -57964,8 +54611,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -58000,8 +54645,6 @@ export interface operations {
                             frequency: null | number;
                             reportedCount: null | number;
                             overdueCount: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -58011,8 +54654,6 @@ export interface operations {
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -58027,10 +54668,8 @@ export interface operations {
                             logoutTime: null | string;
                             hostName: null | string;
                             instId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                         }[];
                         tblMaintLogTblMaintLogUpdatedUserIdTotblUsers?: {
                             maintLogId: number;
@@ -58049,9 +54688,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -58075,9 +54713,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -58100,8 +54737,6 @@ export interface operations {
                             isWaiting: null | number;
                             isUnPlan: null | number;
                             followDesc: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             followStatuseId: null | number;
                             orderNo: null | number;
@@ -58114,8 +54749,6 @@ export interface operations {
                             rescheduledBy: null | number;
                             rescheduledDate: null | string;
                             reason: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -58128,8 +54761,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -58142,8 +54773,6 @@ export interface operations {
                             fromDate: null | string;
                             toDate: null | string;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -58152,8 +54781,6 @@ export interface operations {
                             compJobId: number;
                             roundId: number;
                             jobSequence: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             active: null | number;
                             functionDriven: null | number;
@@ -58173,8 +54800,6 @@ export interface operations {
                             notes: null | string;
                             initials: null | string;
                             empTitle: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                             createdUserId: null | number;
@@ -58208,8 +54833,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -58247,8 +54870,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -58286,8 +54907,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -58325,8 +54944,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -58442,7 +55059,61 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
-        responses: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            workOrderId: number;
+                            compId: number;
+                            title: string;
+                            priority?: string;
+                            description?: string;
+                            userComment?: string;
+                            dueDate?: string;
+                            created?: string;
+                            started?: string;
+                            completed?: string;
+                            tblComponentUnit?: {
+                                compId: number;
+                                compNo: string;
+                                tblLocation?: {
+                                    name: string;
+                                };
+                            };
+                            tblCompJob?: {
+                                compJobId: number;
+                                nextDueDate?: string;
+                                tblJobDescription?: {
+                                    jobDescCode: string;
+                                    jobDescTitle: string;
+                                };
+                                tblPeriod?: {
+                                    name: string;
+                                };
+                            };
+                            tblPendingType?: {
+                                pendTypeName: string;
+                            };
+                            tblDiscipline?: {
+                                name: string;
+                            };
+                            tblWorkOrderStatus?: {
+                                name: string;
+                            };
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
     };
     postTblWorkOrder: {
         parameters: {
@@ -58470,7 +55141,6 @@ export interface operations {
                     description?: null | string;
                     filed?: null | number;
                     unexpected?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     reportingMethod?: null | number;
                     pendingBy?: null | number;
@@ -58580,7 +55250,6 @@ export interface operations {
                     description?: null | string;
                     filed?: null | number;
                     unexpected?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     reportingMethod?: null | number;
                     pendingBy?: null | number;
@@ -58690,7 +55359,6 @@ export interface operations {
                     description?: null | string;
                     filed?: null | number;
                     unexpected?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     reportingMethod?: null | number;
                     pendingBy?: null | number;
@@ -58819,8 +55487,6 @@ export interface operations {
                         filed: null | number;
                         unexpected: null | number;
                         workOrderStatusId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         reportingMethod: null | number;
                         pendingBy: null | number;
@@ -58847,9 +55513,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -58864,8 +55529,6 @@ export interface operations {
                             rescheduledBy: null | number;
                             rescheduledDate: null | string;
                             reason: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -58896,8 +55559,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -58916,8 +55577,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -58935,8 +55594,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -58945,8 +55602,6 @@ export interface operations {
                         tblMaintCause?: null | ({
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -58955,8 +55610,6 @@ export interface operations {
                         tblMaintClass?: null | ({
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -58965,8 +55618,6 @@ export interface operations {
                         tblMaintType?: null | ({
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -58977,8 +55628,6 @@ export interface operations {
                             parentId: null | number;
                             groupId: null | number;
                             pendTypeName: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             sortId: null | number;
                             description: null | string;
@@ -59006,8 +55655,6 @@ export interface operations {
                             priority: null | number;
                             window: null | number;
                             outputFormat: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryHistory: null | number;
                             mandatoryResource: null | number;
@@ -59044,8 +55691,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -59085,8 +55730,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -59119,10 +55762,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -59143,10 +55784,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -59167,10 +55806,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -59191,10 +55828,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -59282,8 +55917,6 @@ export interface operations {
                         filed: null | number;
                         unexpected: null | number;
                         workOrderStatusId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         reportingMethod: null | number;
                         pendingBy: null | number;
@@ -59310,9 +55943,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -59327,8 +55959,6 @@ export interface operations {
                             rescheduledBy: null | number;
                             rescheduledDate: null | string;
                             reason: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -59359,8 +55989,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -59379,8 +56007,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -59398,8 +56024,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -59408,8 +56032,6 @@ export interface operations {
                         tblMaintCause?: null | ({
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -59418,8 +56040,6 @@ export interface operations {
                         tblMaintClass?: null | ({
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -59428,8 +56048,6 @@ export interface operations {
                         tblMaintType?: null | ({
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -59440,8 +56058,6 @@ export interface operations {
                             parentId: null | number;
                             groupId: null | number;
                             pendTypeName: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             sortId: null | number;
                             description: null | string;
@@ -59469,8 +56085,6 @@ export interface operations {
                             priority: null | number;
                             window: null | number;
                             outputFormat: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryHistory: null | number;
                             mandatoryResource: null | number;
@@ -59507,8 +56121,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -59548,8 +56160,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -59582,10 +56192,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -59606,10 +56214,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -59630,10 +56236,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -59654,10 +56258,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -59698,7 +56300,6 @@ export interface operations {
                     description?: null | string;
                     filed?: null | number;
                     unexpected?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     reportingMethod?: null | number;
                     pendingBy?: null | number;
@@ -59831,7 +56432,6 @@ export interface operations {
                     description?: null | string;
                     filed?: null | number;
                     unexpected?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     reportingMethod?: null | number;
                     pendingBy?: null | number;
@@ -59964,7 +56564,6 @@ export interface operations {
                     description?: null | string;
                     filed?: null | number;
                     unexpected?: null | number;
-                    exportMarker?: null | number;
                     lastupdate?: null | string;
                     reportingMethod?: null | number;
                     pendingBy?: null | number;
@@ -60116,8 +56715,6 @@ export interface operations {
                         filed: null | number;
                         unexpected: null | number;
                         workOrderStatusId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         reportingMethod: null | number;
                         pendingBy: null | number;
@@ -60144,9 +56741,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -60161,8 +56757,6 @@ export interface operations {
                             rescheduledBy: null | number;
                             rescheduledDate: null | string;
                             reason: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -60193,8 +56787,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -60213,8 +56805,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -60232,8 +56822,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -60242,8 +56830,6 @@ export interface operations {
                         tblMaintCause?: null | ({
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -60252,8 +56838,6 @@ export interface operations {
                         tblMaintClass?: null | ({
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -60262,8 +56846,6 @@ export interface operations {
                         tblMaintType?: null | ({
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -60274,8 +56856,6 @@ export interface operations {
                             parentId: null | number;
                             groupId: null | number;
                             pendTypeName: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             sortId: null | number;
                             description: null | string;
@@ -60303,8 +56883,6 @@ export interface operations {
                             priority: null | number;
                             window: null | number;
                             outputFormat: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryHistory: null | number;
                             mandatoryResource: null | number;
@@ -60341,8 +56919,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -60382,8 +56958,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -60416,10 +56990,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -60440,10 +57012,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -60464,10 +57034,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -60488,10 +57056,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -60547,8 +57113,6 @@ export interface operations {
                         filed: null | number;
                         unexpected: null | number;
                         workOrderStatusId: null | number;
-                        deptId: null | number;
-                        exportMarker: null | number;
                         lastupdate: null | string;
                         reportingMethod: null | number;
                         pendingBy: null | number;
@@ -60575,9 +57139,8 @@ export interface operations {
                             overdueCount: null | number;
                             unexpected: null | number;
                             reportedBy: null | number;
-                            deptId: null | number;
                             history: null | string;
-                            maintLogFollowId: null | number;
+                            workOrderStatusId: null | number;
                             followStatusId: null | number;
                             updatedUserId: null | number;
                             reportedDate: null | string;
@@ -60592,8 +57155,6 @@ export interface operations {
                             rescheduledBy: null | number;
                             rescheduledDate: null | string;
                             reason: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         }[];
@@ -60624,8 +57185,6 @@ export interface operations {
                             active: null | number;
                             mandatoryHistory: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryResource: null | number;
                             mandatoryStockUsage: null | number;
@@ -60644,8 +57203,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -60663,8 +57220,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -60673,8 +57228,6 @@ export interface operations {
                         tblMaintCause?: null | ({
                             maintCauseId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -60683,8 +57236,6 @@ export interface operations {
                         tblMaintClass?: null | ({
                             maintClassId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -60693,8 +57244,6 @@ export interface operations {
                         tblMaintType?: null | ({
                             maintTypeId: number;
                             descr: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -60705,8 +57254,6 @@ export interface operations {
                             parentId: null | number;
                             groupId: null | number;
                             pendTypeName: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             sortId: null | number;
                             description: null | string;
@@ -60734,8 +57281,6 @@ export interface operations {
                             priority: null | number;
                             window: null | number;
                             outputFormat: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             mandatoryHistory: null | number;
                             mandatoryResource: null | number;
@@ -60772,8 +57317,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -60813,8 +57356,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -60847,10 +57388,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -60871,10 +57410,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -60895,10 +57432,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -60919,10 +57454,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -61095,8 +57628,6 @@ export interface operations {
                                 filed: null | number;
                                 unexpected: null | number;
                                 workOrderStatusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 reportingMethod: null | number;
                                 pendingBy: null | number;
@@ -61189,8 +57720,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -61287,8 +57816,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -61390,8 +57917,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -61456,8 +57981,6 @@ export interface operations {
                             filed: null | number;
                             unexpected: null | number;
                             workOrderStatusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             reportingMethod: null | number;
                             pendingBy: null | number;
@@ -61784,8 +58307,6 @@ export interface operations {
                                 name: null | string;
                                 externalDisc: null | number;
                                 parentDiscId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -61807,10 +58328,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -61831,10 +58350,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -61855,14 +58372,19 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
+                            tblWorkShopAttachments?: {
+                                workShopAttachmentId: number;
+                                workShopId: number;
+                                attachmentId: number;
+                                createdUserId: number;
+                                createdAt: string;
+                            }[];
                             tblWorkShopComponents?: {
                                 workShopCompId: number;
                                 workShopId: number;
@@ -61924,9 +58446,14 @@ export interface operations {
                             userId: number;
                         };
                     };
+                    tblWorkShopAttachments?: {
+                        connect: {
+                            workShopAttachmentId: number;
+                        }[];
+                    };
                     tblWorkShopComponents?: {
                         connect: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                     };
                 };
@@ -61964,9 +58491,14 @@ export interface operations {
                             userId: number;
                         };
                     };
+                    tblWorkShopAttachments?: {
+                        connect: {
+                            workShopAttachmentId: number;
+                        }[];
+                    };
                     tblWorkShopComponents?: {
                         connect: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                     };
                 };
@@ -62004,9 +58536,14 @@ export interface operations {
                             userId: number;
                         };
                     };
+                    tblWorkShopAttachments?: {
+                        connect: {
+                            workShopAttachmentId: number;
+                        }[];
+                    };
                     tblWorkShopComponents?: {
                         connect: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                     };
                 };
@@ -62044,8 +58581,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -62067,10 +58602,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -62091,10 +58624,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -62115,14 +58646,19 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
+                        tblWorkShopAttachments?: {
+                            workShopAttachmentId: number;
+                            workShopId: number;
+                            attachmentId: number;
+                            createdUserId: number;
+                            createdAt: string;
+                        }[];
                         tblWorkShopComponents?: {
                             workShopCompId: number;
                             workShopId: number;
@@ -62212,8 +58748,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -62235,10 +58769,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -62259,10 +58791,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -62283,14 +58813,19 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
+                        tblWorkShopAttachments?: {
+                            workShopAttachmentId: number;
+                            workShopId: number;
+                            attachmentId: number;
+                            createdUserId: number;
+                            createdAt: string;
+                        }[];
                         tblWorkShopComponents?: {
                             workShopCompId: number;
                             workShopId: number;
@@ -62359,9 +58894,17 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblWorkShopAttachments?: {
+                        connect?: {
+                            workShopAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkShopComponents?: {
                         connect?: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -62409,9 +58952,17 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblWorkShopAttachments?: {
+                        connect?: {
+                            workShopAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkShopComponents?: {
                         connect?: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -62459,9 +59010,17 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblWorkShopAttachments?: {
+                        connect?: {
+                            workShopAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkShopComponents?: {
                         connect?: {
-                            wShopCompId: number;
+                            workShopCompId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -62502,8 +59061,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -62525,10 +59082,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -62549,10 +59104,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -62573,14 +59126,19 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
+                        tblWorkShopAttachments?: {
+                            workShopAttachmentId: number;
+                            workShopId: number;
+                            attachmentId: number;
+                            createdUserId: number;
+                            createdAt: string;
+                        }[];
                         tblWorkShopComponents?: {
                             workShopCompId: number;
                             workShopId: number;
@@ -62638,8 +59196,6 @@ export interface operations {
                             name: null | string;
                             externalDisc: null | number;
                             parentDiscId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -62661,10 +59217,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -62685,10 +59239,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -62709,14 +59261,19 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
+                        tblWorkShopAttachments?: {
+                            workShopAttachmentId: number;
+                            workShopId: number;
+                            attachmentId: number;
+                            createdUserId: number;
+                            createdAt: string;
+                        }[];
                         tblWorkShopComponents?: {
                             workShopCompId: number;
                             workShopId: number;
@@ -62792,6 +59349,23 @@ export interface operations {
                             attachmentId: number;
                             createdUserId: number;
                             createdAt: string;
+                            tblWorkShop?: {
+                                workShopId: number;
+                                title: string;
+                                workShopNo: null | string;
+                                awardingDate: null | string;
+                                createdDate: null | string;
+                                personInChargeId: null | number;
+                                discId: null | number;
+                                repairDescription: null | string;
+                                personInChargeApproveId: null | number;
+                                followDesc: null | string;
+                                closedDate: null | string;
+                                closedById: null | number;
+                                lastupdate: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            };
                             tblAttachment?: {
                                 attachmentId: number;
                                 title: null | string;
@@ -62821,10 +59395,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                exportMarker: null | number;
                                 uLastUpdated: null | string;
                                 orderNo: null | number;
-                                deptId: null | number;
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
@@ -62849,7 +59421,11 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    createdAt: string;
+                    tblWorkShop: {
+                        connect: {
+                            workShopId: number;
+                        };
+                    };
                     tblAttachment: {
                         connect: {
                             attachmentId: number;
@@ -62862,7 +59438,11 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    createdAt: string;
+                    tblWorkShop: {
+                        connect: {
+                            workShopId: number;
+                        };
+                    };
                     tblAttachment: {
                         connect: {
                             attachmentId: number;
@@ -62875,7 +59455,11 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    createdAt: string;
+                    tblWorkShop: {
+                        connect: {
+                            workShopId: number;
+                        };
+                    };
                     tblAttachment: {
                         connect: {
                             attachmentId: number;
@@ -62902,6 +59486,23 @@ export interface operations {
                         attachmentId: number;
                         createdUserId: number;
                         createdAt: string;
+                        tblWorkShop?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
@@ -62931,10 +59532,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -63001,6 +59600,23 @@ export interface operations {
                         attachmentId: number;
                         createdUserId: number;
                         createdAt: string;
+                        tblWorkShop?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
@@ -63030,10 +59646,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -63058,7 +59672,11 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    createdAt?: string;
+                    tblWorkShop?: {
+                        connect: {
+                            workShopId: number;
+                        };
+                    };
                     tblAttachment?: {
                         connect: {
                             attachmentId: number;
@@ -63071,7 +59689,11 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    createdAt?: string;
+                    tblWorkShop?: {
+                        connect: {
+                            workShopId: number;
+                        };
+                    };
                     tblAttachment?: {
                         connect: {
                             attachmentId: number;
@@ -63084,7 +59706,11 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    createdAt?: string;
+                    tblWorkShop?: {
+                        connect: {
+                            workShopId: number;
+                        };
+                    };
                     tblAttachment?: {
                         connect: {
                             attachmentId: number;
@@ -63111,6 +59737,23 @@ export interface operations {
                         attachmentId: number;
                         createdUserId: number;
                         createdAt: string;
+                        tblWorkShop?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
@@ -63140,10 +59783,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -63178,6 +59819,23 @@ export interface operations {
                         attachmentId: number;
                         createdUserId: number;
                         createdAt: string;
+                        tblWorkShop?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastupdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
                         tblAttachment?: {
                             attachmentId: number;
                             title: null | string;
@@ -63207,10 +59865,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            exportMarker: null | number;
                             uLastUpdated: null | string;
                             orderNo: null | number;
-                            deptId: null | number;
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
@@ -63293,8 +59949,6 @@ export interface operations {
                                 serialNo: null | string;
                                 statusId: null | number;
                                 notes: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 isCritical: null | number;
                                 orderNo: null | number;
@@ -63314,8 +59968,6 @@ export interface operations {
                                 parentFunctionId: null | number;
                                 notes: null | string;
                                 statusId: null | number;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -63326,8 +59978,6 @@ export interface operations {
                                 parentLocationId: null | number;
                                 name: null | string;
                                 locationCode: null | string;
-                                deptId: null | number;
-                                exportMarker: null | number;
                                 lastupdate: null | string;
                                 orderNo: null | number;
                             } & {
@@ -63464,8 +60114,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -63485,8 +60133,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -63497,8 +60143,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -63557,7 +60201,7 @@ export interface operations {
             };
         };
     };
-    getTblWorkShopComponentByWShopCompId: {
+    getTblWorkShopComponentByWorkShopCompId: {
         parameters: {
             query?: {
                 include?: string;
@@ -63565,7 +60209,7 @@ export interface operations {
             };
             header?: never;
             path: {
-                wShopCompId: number;
+                workShopCompId: number;
             };
             cookie?: never;
         };
@@ -63594,8 +60238,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -63615,8 +60257,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -63627,8 +60267,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -63656,7 +60294,7 @@ export interface operations {
             };
         };
     };
-    putTblWorkShopComponentByWShopCompId: {
+    putTblWorkShopComponentByWorkShopCompId: {
         parameters: {
             query?: {
                 include?: string;
@@ -63664,7 +60302,7 @@ export interface operations {
             };
             header?: never;
             path: {
-                wShopCompId: number;
+                workShopCompId: number;
             };
             cookie?: never;
         };
@@ -63771,8 +60409,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -63792,8 +60428,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -63804,8 +60438,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -63833,14 +60465,14 @@ export interface operations {
             };
         };
     };
-    deleteTblWorkShopComponentByWShopCompId: {
+    deleteTblWorkShopComponentByWorkShopCompId: {
         parameters: {
             query?: {
                 force?: boolean;
             };
             header?: never;
             path: {
-                wShopCompId: number;
+                workShopCompId: number;
             };
             cookie?: never;
         };
@@ -63869,8 +60501,6 @@ export interface operations {
                             serialNo: null | string;
                             statusId: null | number;
                             notes: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             isCritical: null | number;
                             orderNo: null | number;
@@ -63890,8 +60520,6 @@ export interface operations {
                             parentFunctionId: null | number;
                             notes: null | string;
                             statusId: null | number;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {
@@ -63902,8 +60530,6 @@ export interface operations {
                             parentLocationId: null | number;
                             name: null | string;
                             locationCode: null | string;
-                            deptId: null | number;
-                            exportMarker: null | number;
                             lastupdate: null | string;
                             orderNo: null | number;
                         } & {

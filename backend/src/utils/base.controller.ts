@@ -8,7 +8,7 @@ export const querySchema = t.Object({
   sort: t.Optional(t.String()),
   filter: t.Optional(t.String()),
   include: t.Optional(t.String()),
-  select: t.Optional(t.String()), // 🆕 اضافه شد
+  select: t.Optional(t.String()),
   paginate: t.Optional(t.Boolean()),
   force: t.Optional(t.Boolean()),
 });

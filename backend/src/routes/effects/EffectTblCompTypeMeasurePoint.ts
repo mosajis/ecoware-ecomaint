@@ -33,7 +33,6 @@ export async function effectCompTypeMeasurePoint({
       setValue,
       operationalMinValue,
       operationalMaxValue,
-      deptId,
       orderNo,
     } = ctmp;
 
@@ -60,7 +59,6 @@ export async function effectCompTypeMeasurePoint({
       setValue,
       operationalMinValue,
       operationalMaxValue,
-      deptId,
       orderNo,
     };
 

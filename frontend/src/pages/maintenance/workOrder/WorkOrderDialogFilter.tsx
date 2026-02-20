@@ -156,7 +156,7 @@ export default function WorkOrderFilterDialog({
     dueFrom: "",
     dueTo: "",
     criticalComponent: false,
-    ...initialFilters, // 🔹 اعمال مقادیر اولیه از parent
+    ...initialFilters,
   });
 
   // 🔹 استفاده از controlled state به جای ref

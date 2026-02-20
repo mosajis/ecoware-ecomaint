@@ -49,7 +49,6 @@ model TblAddress {
   contact           String?            @map("Contact") @db.NVarChar(100)
   eMail             String?            @map("EMail") @db.NVarChar(100)
   notes             String?            @map("Notes") @db.NVarChar(4000)
-  exportMarker      Int?               @map("ExportMarker")
   lastupdate        DateTime?          @db.DateTime
   orderNo           Int?               @map("OrderNo")
   tblComponentUnits TblComponentUnit[]
@@ -68,7 +67,7 @@ model TblAttachment {
   size                         Int?                          @map("Size")
   isUserAttachment             Boolean                       @map("IsUserAttachment")
   createdUserId                Int                           @map("CreatedUserId")
-  createdAt                    DateTime                      @default(now()) @map("created_at")
+  createdAt                    DateTime                      @default(now()) @map("created_at") @db.DateTime
   tblAttachmentType            TblAttachmentType?            @relation(fields: [attachmentTypeId], references: [attachmentTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblAttachment_tblAttachmentType")
   tblUsers                     TblUsers                      @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblAttachment_Users")
   tblComponentUnitAttachments  TblComponentUnitAttachment[]
@@ -83,11 +82,10 @@ model TblAttachment {
 model TblAttachmentType {
   attachmentTypeId Int             @id(map: "PK_tblAttachmentType1") @default(dbgenerated("NEXT VALUE FOR [Seq_AttachmentType]"), map: "DF_AttachmentTypeID") @map("AttachmentTypeID")
   name             String?         @map("Name") @db.NVarChar(100)
-  abbreviation     String?         @map("Abbreviation") @db.NVarChar(100)
+  orderNo          Int?            @map("OrderNo")
   createdBy        Int             @map("Created_By")
-  createdAt        DateTime        @default(now()) @map("created_at")
+  createdAt        DateTime        @default(now()) @map("created_at") @db.DateTime
   tblAttachments   TblAttachment[]
-  tblUsers         TblUsers        @relation(fields: [createdBy], references: [userId], onUpdate: NoAction, map: "FK_tblAttachmentType_Users")
 
   @@map("tblAttachmentType")
 }
@@ -106,8 +104,6 @@ model TblCompCounter {
   zeroedDate           DateTime?           @map("ZeroedDate") @db.DateTime
   averageCountRate     Int?                @map("AverageCountRate")
   useCalcAverage       Int?                @map("UseCalcAverage")
-  deptId               Int?                @map("DeptID")
-  exportMarker         Int?                @map("ExportMarker")
   lastupdate           DateTime?           @db.DateTime
   orderNo              Int?                @map("OrderNo")
   tblCompCounter       TblCompCounter?     @relation("tblCompCounterTotblCompCounter", fields: [dependsOnId], references: [compCounterId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompCounter_tblCompCounter")
@@ -132,8 +128,6 @@ model TblCompCounterLog {
   lastZeroedValue  Int?            @map("LastZeroedValue")
   changedBy        Int?            @map("ChangedBy")
   changedDate      DateTime?       @map("ChangedDate") @db.DateTime
-  deptId           Int             @map("DeptID")
-  exportMarker     Int?            @map("ExportMarker")
   lastupdate       DateTime?       @db.DateTime
   orderNo          Int?            @map("OrderNo")
   tblCompCounter   TblCompCounter? @relation(fields: [compCounterId], references: [compCounterId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompCounterLog_tblCompCounter")
@@ -169,8 +163,6 @@ model TblCompJob {
   active                  Int?                     @map("Active")
   mandatoryHistory        Int?                     @map("MandatoryHistory")
   notes                   String?                  @map("Notes") @db.NVarChar(4000)
-  deptId                  Int?                     @map("DeptID")
-  exportMarker            Int?                     @map("ExportMarker")
   lastupdate              DateTime?                @db.DateTime
   mandatoryResource       Int?                     @map("MandatoryResource")
   mandatoryStockUsage     Int?                     @map("MandatoryStockUsage")
@@ -200,8 +192,6 @@ model TblCompJobCounter {
   lastDoneCount    Int?            @map("LastDoneCount")
   nextDueCount     Int?            @map("NextDueCount")
   window           Int?            @map("Window")
-  deptId           Int?            @map("DeptID")
-  exportMarker     Int?            @map("ExportMarker")
   lastupdate       DateTime?       @db.DateTime
   showInAlert      Boolean?        @map("ShowInAlert")
   updateByFunction Boolean?        @map("UpdateByFunction")
@@ -224,8 +214,6 @@ model TblCompJobMeasurePoint {
   minValue              Int?                 @map("MinValue")
   maxValue              Int?                 @map("MaxValue")
   updateOnReport        Int?                 @map("UpdateOnReport")
-  deptId                Int?                 @map("DeptID")
-  exportMarker          Int?                 @map("ExportMarker")
   lastupdate            DateTime?            @db.DateTime
   orderNo               Int?                 @map("OrderNo")
   tblCompJob            TblCompJob?          @relation(fields: [compJobId], references: [compJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJobMeasurePoint_tblCompJob")
@@ -238,8 +226,6 @@ model TblCompJobTrigger {
   compJobTriggerId Int            @id(map: "PK_tblCompJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_CompJobTrigger]"), map: "DF_CompJobTriggerID") @map("CompJobTriggerID")
   jobTriggerId     Int?           @map("JobTriggerID")
   compJobId        Int?           @map("CompJobID")
-  deptId           Int?           @map("DeptID")
-  exportMarker     Int?           @map("ExportMarker")
   lastupdate       DateTime?      @db.DateTime
   orderNo          Int?           @map("OrderNo")
   tblCompJob       TblCompJob?    @relation(fields: [compJobId], references: [compJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJobTrigger_tblCompJob")
@@ -259,8 +245,6 @@ model TblCompMeasurePoint {
   setValue                Int?                     @map("SetValue")
   operationalMinValue     Int?                     @map("OperationalMinValue")
   operationalMaxValue     Int?                     @map("OperationalMaxValue")
-  deptId                  Int?                     @map("DeptID")
-  exportMarker            Int?                     @map("ExportMarker")
   lastupdate              DateTime?                @db.DateTime
   orderNo                 Int?                     @map("OrderNo")
   tblCompJobMeasurePoints TblCompJobMeasurePoint[]
@@ -281,8 +265,6 @@ model TblCompMeasurePointLog {
   currentDate           DateTime?            @map("CurrentDate") @db.DateTime
   unitId                Int?                 @map("UnitID")
   currentValue          Int?                 @map("CurrentValue")
-  deptId                Int?                 @map("DeptID")
-  exportMarker          Int?                 @map("ExportMarker")
   lastupdate            DateTime?            @db.DateTime
   orderNo               Int?                 @map("OrderNo")
   tblCompMeasurePoint   TblCompMeasurePoint? @relation(fields: [compMeasurePointId], references: [compMeasurePointId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompMeasurePointLog_tblCompMeasurePoint")
@@ -303,8 +285,6 @@ model TblCompOilInfo {
   oilGrade         String?   @map("OilGrade") @db.NVarChar(100)
   orderNo          Int?      @map("OrderNo")
   userId           Int?      @map("UserID")
-  deptId           Int?      @map("DeptID")
-  exportMarker     Int?      @map("ExportMarker")
   lastupdate       DateTime? @db.DateTime
   spareTypeId      Int?      @map("SpareTypeID")
 }
@@ -319,8 +299,6 @@ model TblComponentUnit {
   serialNo                    String?                      @map("SerialNo") @db.NVarChar(200)
   statusId                    Int?                         @map("StatusID")
   notes                       String?                      @map("Notes") @db.NVarChar(4000)
-  deptId                      Int?                         @map("DeptID")
-  exportMarker                Int?                         @map("ExportMarker")
   lastupdate                  DateTime?                    @db.DateTime
   isCritical                  Int?                         @map("IsCritical") @db.TinyInt
   orderNo                     Int?                         @map("OrderNo")
@@ -354,7 +332,7 @@ model TblComponentUnitAttachment {
   attachmentId              Int              @map("AttachmentId")
   orderNo                   Int?             @map("OrderNo")
   createdUserId             Int              @map("CreatedUserId")
-  createdAt                 DateTime         @default(now()) @map("created_at")
+  createdAt                 DateTime         @default(now()) @map("created_at") @db.DateTime
   tblAttachment             TblAttachment    @relation(fields: [attachmentId], references: [attachmentId], onDelete: Cascade, onUpdate: NoAction, map: "FK_tblComponentUnitAttachment_tblAttachment")
   tblComponentUnit          TblComponentUnit @relation(fields: [compId], references: [compId], onUpdate: NoAction, map: "FK_tblComponentUnitAttachment_tblComponentUnit")
   tblUsers                  TblUsers         @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblComponentUnitAttachment_Users")
@@ -363,28 +341,24 @@ model TblComponentUnitAttachment {
 }
 
 model TblCompSpare {
-  compSpareId  Int       @id(map: "PK_tblCompSpare") @default(dbgenerated("NEXT VALUE FOR [Seq_CompSpare]"), map: "DF_CompSpareID") @map("CompSpareID")
-  compTypeId   Int?      @map("CompTypeID")
-  quantity     Int?      @map("Quantity")
-  drawingNo    String?   @map("DrawingNo") @db.NVarChar(200)
-  position     String?   @map("Position") @db.NVarChar(200)
-  oldPartNo    String?   @map("OldPartNo") @db.NVarChar(100)
-  deptId       Int?      @map("DeptID")
-  exportMarker Int?      @map("ExportMarker")
-  lastupdate   DateTime? @db.DateTime
-  orderNo      Int?      @map("OrderNo")
-  spareTypeId  Int?      @map("SpareTypeID")
+  compSpareId Int       @id(map: "PK_tblCompSpare") @default(dbgenerated("NEXT VALUE FOR [Seq_CompSpare]"), map: "DF_CompSpareID") @map("CompSpareID")
+  compTypeId  Int?      @map("CompTypeID")
+  quantity    Int?      @map("Quantity")
+  drawingNo   String?   @map("DrawingNo") @db.NVarChar(200)
+  position    String?   @map("Position") @db.NVarChar(200)
+  oldPartNo   String?   @map("OldPartNo") @db.NVarChar(100)
+  lastupdate  DateTime? @db.DateTime
+  orderNo     Int?      @map("OrderNo")
+  spareTypeId Int?      @map("SpareTypeID")
 
   @@map("tblCompSpare")
 }
 
 model TblCompStatus {
-  compStatusId      Int                @id(map: "PK_CompStatus") @default(dbgenerated("NEXT VALUE FOR [Seq_CompStatus]"), map: "DF_CompStatusId") @map("CompStatusId")
+  compStatusId      Int                @id(map: "PK_CompStatus") @map("CompStatusId")
   compStatusName    String?            @map("CompStatusName") @db.NVarChar(500)
   compStatusGroup   Int?               @map("CompStatusGroup")
   orderNo           Int?               @map("OrderNo")
-  deptId            Int?               @map("DeptID")
-  exportMarker      Int?               @map("ExportMarker")
   lastupdate        DateTime?          @db.DateTime
   tblComponentUnits TblComponentUnit[]
 
@@ -401,8 +375,6 @@ model TblCompStatusLog {
   workOrderId      Int?      @map("WorkOrderID")
   fromDeptId       Int?      @map("FromDeptID")
   changedTime      DateTime? @map("ChangedTime") @db.DateTime
-  deptId           Int?      @map("DeptID")
-  exportMarker     Int?      @map("ExportMarker")
   lastupdate       DateTime? @db.DateTime
   orderNo          Int?      @map("OrderNo")
   tblUsers         TblUsers? @relation(fields: [changedBy], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompStatusLog_tblUsers")
@@ -419,8 +391,6 @@ model TblCompType {
   compTypeModel            String?                   @map("CompTypeModel") @db.NVarChar(200)
   makerId                  Int?                      @map("MakerID")
   notes                    String?                   @map("Notes") @db.NVarChar(4000)
-  deptId                   Int?                      @map("DeptID")
-  exportMarker             Int?                      @map("ExportMarker")
   lastupdate               DateTime?                 @db.DateTime
   orderNo                  Int?                      @map("OrderNo")
   tblComponentUnits        TblComponentUnit[]
@@ -441,7 +411,7 @@ model TblCompTypeAttachment {
   attachmentId         Int           @map("AttachmentId")
   orderNo              Int?          @map("OrderNo")
   createdUserId        Int           @map("CreatedUserId")
-  createdAt            DateTime      @default(now()) @map("created_at")
+  createdAt            DateTime      @default(now()) @map("created_at") @db.DateTime
   tblAttachment        TblAttachment @relation(fields: [attachmentId], references: [attachmentId], onDelete: Cascade, onUpdate: NoAction, map: "FK_tblCompTypeAttachment_tblAttachment")
   tblCompType          TblCompType   @relation(fields: [compTypeId], references: [compTypeId], onUpdate: NoAction, map: "FK_tblCompTypeAttachment_tblCompType")
   tblUsers             TblUsers      @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblCompTypeAttachment_Users")
@@ -455,8 +425,6 @@ model TblCompTypeCounter {
   counterTypeId          Int?                    @map("CounterTypeID")
   averageCountRate       Int?                    @map("AverageCountRate")
   useCalcAverage         Int?                    @map("UseCalcAverage")
-  deptId                 Int?                    @map("DeptID")
-  exportMarker           Int?                    @map("ExportMarker")
   lastupdate             DateTime?               @db.DateTime
   orderNo                Int?                    @map("OrderNo")
   tblCompType            TblCompType?            @relation(fields: [compTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeCounter_tblCompType")
@@ -488,8 +456,6 @@ model TblCompTypeJob {
   window                      Int?                         @map("Window")
   active                      Int?                         @map("Active")
   mandatoryHistory            Int?                         @map("MandatoryHistory")
-  deptId                      Int?                         @map("DeptID")
-  exportMarker                Int?                         @map("ExportMarker")
   lastupdate                  DateTime?                    @db.DateTime
   mandatoryResource           Int?                         @map("MandatoryResource")
   mandatoryStockUsage         Int?                         @map("MandatoryStockUsage")
@@ -516,8 +482,6 @@ model TblCompTypeJobCounter {
   compTypeCounterId    Int?                @map("CompTypeCounterID")
   frequency            Int?                @map("Frequency")
   window               Int?                @map("Window")
-  deptId               Int?                @map("DeptID")
-  exportMarker         Int?                @map("ExportMarker")
   lastupdate           DateTime?           @db.DateTime
   showInAlert          Boolean?            @map("ShowInAlert")
   updateByFunction     Boolean?            @map("UpdateByFunction")
@@ -539,8 +503,6 @@ model TblCompTypeJobMeasurePoint {
   minValue                  Int?                     @map("MinValue")
   maxValue                  Int?                     @map("MaxValue")
   updateOnReport            Int?                     @map("UpdateOnReport")
-  deptId                    Int?                     @map("DeptID")
-  exportMarker              Int?                     @map("ExportMarker")
   lastupdate                DateTime?                @db.DateTime
   orderNo                   Int?                     @map("OrderNo")
   tblCompTypeJob            TblCompTypeJob?          @relation(fields: [compTypeJobId], references: [compTypeJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJobMeasurePoint_tblCompTypeJob")
@@ -553,8 +515,6 @@ model TblCompTypeJobTrigger {
   compTypeJobTriggerId Int             @id(map: "PK_tblCompTypeJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_CompTypeJobTrigger]"), map: "DF_CompTypeJobTriggerID") @map("CompTypeJobTriggerID")
   jobTriggerId         Int?            @map("JobTriggerID")
   compTypeJobId        Int?            @map("CompTypeJobID")
-  deptId               Int?            @map("DeptID")
-  exportMarker         Int?            @map("ExportMarker")
   lastupdate           DateTime?       @db.DateTime
   orderNo              Int?            @map("OrderNo")
   createdUserId        Int?            @map("CreatedUserId")
@@ -573,8 +533,6 @@ model TblCompTypeMeasurePoint {
   setValue                    Int?                         @map("SetValue")
   operationalMinValue         Int?                         @map("OperationalMinValue")
   operationalMaxValue         Int?                         @map("OperationalMaxValue")
-  deptId                      Int?                         @map("DeptID")
-  exportMarker                Int?                         @map("ExportMarker")
   lastupdate                  DateTime?                    @db.DateTime
   orderNo                     Int?                         @map("OrderNo")
   tblCompTypeJobMeasurePoints TblCompTypeJobMeasurePoint[]
@@ -591,8 +549,6 @@ model TblCounterType {
   name                     String?                   @map("Name") @db.NVarChar(100)
   maxDailyValue            Int?                      @map("MaxDailyValue")
   type                     Int?                      @map("Type")
-  deptId                   Int?                      @map("DeptID")
-  exportMarker             Int?                      @map("ExportMarker")
   lastupdate               DateTime?                 @db.DateTime
   orderNo                  Int?                      @map("OrderNo")
   tblCompCounters          TblCompCounter[]
@@ -605,7 +561,7 @@ model TblCounterType {
 }
 
 model TblDepartment {
-  deptId       Int       @id(map: "PK_tblDepartment") @default(dbgenerated("NEXT VALUE FOR [Seq_Department]"), map: "DF_DeptID") @map("DeptID")
+  deptId       Int       @id(map: "PK_tblDepartment") @map("DeptID")
   deptCode     Int?      @map("DeptCode")
   instId       Int?      @map("InstID")
   deptName     String?   @map("DeptName") @db.NVarChar(100)
@@ -616,7 +572,6 @@ model TblDepartment {
   statusBy     Int?      @map("StatusBy")
   statusReason String?   @map("StatusReason") @db.NVarChar(200)
   statusDate   DateTime? @map("StatusDate") @db.DateTime
-  exportMarker Int?      @map("ExportMarker")
   lastupdate   DateTime? @db.DateTime
   orderNo      Int?      @map("OrderNo")
 
@@ -629,8 +584,6 @@ model TblDiscipline {
   name              String?            @map("Name") @db.NVarChar(100)
   externalDisc      Int?               @map("ExternalDisc")
   parentDiscId      Int?               @map("ParentDiscID")
-  deptId            Int?               @map("DeptID")
-  exportMarker      Int?               @map("ExportMarker")
   lastupdate        DateTime?          @db.DateTime
   orderNo           Int?               @map("OrderNo")
   tblCompJobs       TblCompJob[]
@@ -655,8 +608,6 @@ model TblEmployee {
   notes                                      String?            @map("Notes") @db.NVarChar(2000)
   initials                                   String?            @map("Initials") @db.NVarChar(100)
   empTitle                                   String?            @map("EmpTitle") @db.NVarChar(100)
-  deptId                                     Int?               @map("DeptID")
-  exportMarker                               Int?               @map("ExportMarker")
   lastupdate                                 DateTime?          @db.DateTime
   orderNo                                    Int?               @map("OrderNo")
   createdUserId                              Int?               @map("CreatedUserId")
@@ -670,7 +621,7 @@ model TblEmployee {
 }
 
 model TblFailureGroupFollow {
-  failureGroupFollowId Int                 @id(map: "PK_tblFailureGroupFollow") @default(dbgenerated("NEXT VALUE FOR [Seq_FailureGroupFollow]"), map: "DF_FailureGroupFollowID") @map("FailureGroupFollowID")
+  failureGroupFollowId Int                 @id(map: "PK_tblFailureGroupFollow") @map("FailureGroupFollowID")
   name                 String?             @map("Name") @db.NVarChar(100)
   tblFailureReports    TblFailureReports[]
 
@@ -703,7 +654,7 @@ model TblFailureReports {
 }
 
 model TblFailureSeverityLevel {
-  failureSeverityLevelId Int                 @id(map: "PK_tblFialureSeverityLevel") @default(dbgenerated("NEXT VALUE FOR [Seq_FialureSeverityLevel]"), map: "DF_FialureSeverityLevel") @map("FailureSeverityLevelID")
+  failureSeverityLevelId Int                 @id(map: "PK_tblFialureSeverityLevel") @map("FailureSeverityLevelID")
   name                   String?             @map("Name") @db.NVarChar(100)
   tblFailureReports      TblFailureReports[]
 
@@ -711,7 +662,7 @@ model TblFailureSeverityLevel {
 }
 
 model TblFailureStatus {
-  failureStatusId   Int                 @id(map: "PK_tblFailureStatus") @default(dbgenerated("NEXT VALUE FOR [Seq_FailureStatus]"), map: "DF_FailureStatusID") @map("FailureStatusID")
+  failureStatusId   Int                 @id(map: "PK_tblFailureStatus") @map("FailureStatusID")
   name              String?             @map("Name") @db.NVarChar(100)
   tblFailureReports TblFailureReports[]
 
@@ -719,16 +670,14 @@ model TblFailureStatus {
 }
 
 model TblFollowStatus {
-  followStatusId     Int                 @id(map: "PK_tblFollowStatus") @default(dbgenerated("NEXT VALUE FOR [Seq_FollowStatus]"), map: "DF_FollowStatusID") @map("FollowStatusID")
+  followStatusId     Int                 @id(map: "PK_tblFollowStatus") @map("FollowStatusID")
   fsName             String?             @map("FSName") @db.NVarChar(200)
   fsDesc             String?             @map("FSDesc")
   fsGroup            Int?                @map("FSGroup")
   sortId             Int?                @map("SortId")
-  exportMarker       Int?                @map("ExportMarker")
   lastupdate         DateTime?           @db.DateTime
   followStatuseId1   Int?                @map("FollowStatuseID1")
   orderNo            Int?                @map("OrderNo")
-  deptId             Int?                @map("DeptID")
   tblMaintLogs       TblMaintLog[]
   tblMaintLogFollows TblMaintLogFollow[]
 
@@ -743,8 +692,6 @@ model TblFunctions {
   parentFunctionId      Int?                   @map("ParentFunctionID")
   notes                 String?                @map("Notes") @db.NVarChar(2000)
   statusId              Int?                   @map("StatusID")
-  deptId                Int?                   @map("DeptID")
-  exportMarker          Int?                   @map("ExportMarker")
   lastupdate            DateTime?              @db.DateTime
   orderNo               Int?                   @map("OrderNo")
   tblComponentUnit      TblComponentUnit?      @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblFunctions_tblComponentUnit")
@@ -765,8 +712,6 @@ model TblJobClass {
   qWorkflowLockTypeId      Int?                @map("QWorkflowLockTypeID")
   code                     String?             @map("Code") @db.NVarChar(100)
   name                     String?             @map("Name") @db.NVarChar(100)
-  deptId                   Int?                @map("DeptID")
-  exportMarker             Int?                @map("ExportMarker")
   lastupdate               DateTime?           @db.DateTime
   orderNo                  Int?                @map("OrderNo")
   tblJobDescriptions       TblJobDescription[]
@@ -780,7 +725,7 @@ model TblJobDescriptionAttachment {
   attachmentId               Int               @map("AttachmentId")
   orderNo                    Int?              @map("OrderNo")
   createdUserId              Int               @map("CreatedUserId")
-  createdAt                  DateTime          @default(now()) @map("created_at")
+  createdAt                  DateTime          @default(now()) @map("created_at") @db.DateTime
   tblAttachment              TblAttachment     @relation(fields: [attachmentId], references: [attachmentId], onDelete: Cascade, onUpdate: NoAction, map: "FK_tblJobDescriptionAttachment_tblAttachment")
   tblJobDescription          TblJobDescription @relation(fields: [jobDescId], references: [jobDescId], onUpdate: NoAction, map: "FK_tblJobDescriptionAttachment_tblJobDescription")
   tblUsers                   TblUsers          @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblJobDescriptionAttachment_Users")
@@ -791,28 +736,12 @@ model TblJobDescriptionAttachment {
 model TblJobTrigger {
   jobTriggerId           Int                     @id(map: "PK_tblJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_JobTrigger]"), map: "DF_JobTriggerID") @map("JobTriggerID")
   descr                  String?                 @map("Descr") @db.NVarChar(500)
-  deptId                 Int?                    @map("DeptID")
-  exportMarker           Int?                    @map("ExportMarker")
   lastupdate             DateTime?               @db.DateTime
   orderNo                Int?                    @map("OrderNo")
   tblCompJobTriggers     TblCompJobTrigger[]
   tblCompTypeJobTriggers TblCompTypeJobTrigger[]
 
   @@map("tblJobTrigger")
-}
-
-model TblJobTriggerLog {
-  jobTriggerLogId Int       @id(map: "PK_tblJobTrigger_Log") @default(dbgenerated("NEXT VALUE FOR [Seq_JobTrigger_Log]"), map: "DF_JobTriggerLogID") @map("JobTriggerLogID")
-  jobTriggerId    Int       @map("JobTriggerID")
-  workOrderId     Int       @map("WorkOrderID")
-  createdUserId   Int?      @map("CreatedUserId")
-  isCreated       Int?      @map("IsCreated")
-  deptId          Int?      @map("DeptID")
-  exportMarker    Int?      @map("ExportMarker")
-  lastupdate      DateTime? @db.DateTime
-  orderNo         Int?      @map("OrderNo")
-
-  @@map("tblJobTrigger_Log")
 }
 
 model TblLogCounter {
@@ -822,8 +751,6 @@ model TblLogCounter {
   frequency      Int?            @map("Frequency")
   reportedCount  Int?            @map("ReportedCount")
   overdueCount   Int?            @map("OverdueCount")
-  deptId         Int?            @map("DeptID")
-  exportMarker   Int?            @map("ExportMarker")
   lastupdate     DateTime?       @db.DateTime
   orderNo        Int?            @map("OrderNo")
   createdUserId  Int?            @map("CreatedUserId")
@@ -839,8 +766,6 @@ model TblLogDiscipline {
   maintLogId    Int?           @map("MaintLogID")
   employeeId    Int?           @map("EmployeeID")
   discId        Int?           @map("DiscID")
-  deptId        Int?           @map("DeptID")
-  exportMarker  Int?           @map("ExportMarker")
   lastupdate    DateTime?      @db.DateTime
   orderNo       Int?           @map("OrderNo")
   createdUserId Int?           @map("CreatedUserId")
@@ -862,10 +787,8 @@ model TblLoginAudit {
   logoutTime   DateTime? @map("LogoutTime") @db.DateTime
   hostName     String?   @map("HostName") @db.NVarChar(200)
   instId       Int?      @map("InstID")
-  exportMarker Int?      @map("ExportMarker")
   lastupdate   DateTime? @db.DateTime
   orderNo      Int?      @map("OrderNo")
-  deptId       Int?      @map("DeptID")
   tblUsers     TblUsers? @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLoginAudit_tblUsers")
 
   @@map("tblLoginAudit")
@@ -874,8 +797,6 @@ model TblLoginAudit {
 model TblMaintCause {
   maintCauseId    Int              @id(map: "PK_tblMaintCause") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintCause]"), map: "DF_MaintCauseID") @map("MaintCauseID")
   descr           String?          @map("Descr") @db.NVarChar(100)
-  deptId          Int?             @map("DeptID")
-  exportMarker    Int?             @map("ExportMarker")
   lastupdate      DateTime?        @db.DateTime
   orderNo         Int?             @map("OrderNo")
   tblCompJobs     TblCompJob[]
@@ -889,8 +810,6 @@ model TblMaintCause {
 model TblMaintClass {
   maintClassId    Int              @id(map: "PK_tblMaintClass") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintClass]"), map: "DF_MaintClassID") @map("MaintClassID")
   descr           String?          @map("Descr") @db.NVarChar(100)
-  deptId          Int?             @map("DeptID")
-  exportMarker    Int?             @map("ExportMarker")
   lastupdate      DateTime?        @db.DateTime
   orderNo         Int?             @map("OrderNo")
   tblCompJobs     TblCompJob[]
@@ -918,9 +837,8 @@ model TblMaintLog {
   overdueCount                               Int?                    @map("OverdueCount")
   unexpected                                 Int?                    @map("Unexpected")
   reportedBy                                 Int?                    @map("ReportedBy")
-  deptId                                     Int?                    @map("DeptID")
   history                                    String?                 @map("History") @db.NVarChar(Max)
-  maintLogFollowId                           Int?                    @map("MaintLogFollowID")
+  workOrderStatusId                          Int?                    @map("WorkOrderStatusId")
   followStatusId                             Int?                    @map("FollowStatusId")
   updatedUserId                              Int?                    @map("UpdatedUserId")
   reportedDate                               DateTime?               @map("ReportedDate") @db.DateTime
@@ -954,7 +872,7 @@ model TblMaintLogAttachment {
   attachmentId         Int           @map("AttachmentId")
   orderNo              Int?          @map("OrderNo")
   createdUserId        Int           @map("CreatedUserId")
-  createdAt            DateTime      @default(now()) @map("created_at")
+  createdAt            DateTime      @default(now()) @map("created_at") @db.DateTime
   tblAttachment        TblAttachment @relation(fields: [attachmentId], references: [attachmentId], onDelete: Cascade, onUpdate: NoAction, map: "FK_tblMaintLogAttachment_tblAttachment")
   tblMaintLog          TblMaintLog   @relation(fields: [maintLogId], references: [maintLogId], onUpdate: NoAction, map: "FK_tblMaintLogAttachment_tblMaintLog")
   tblUsers             TblUsers      @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblMaintLogAttachment_tblUsers")
@@ -970,8 +888,6 @@ model TblMaintLogFollow {
   isWaiting       Int?             @map("IsWaiting") @db.TinyInt
   isUnPlan        Int?             @map("IsUnPlan") @db.TinyInt
   followDesc      String?          @map("FollowDesc") @db.NVarChar(2000)
-  deptId          Int?             @map("DeptID")
-  exportMarker    Int?             @map("ExportMarker")
   lastupdate      DateTime?        @db.DateTime
   followStatuseId Int?             @map("FollowStatuseID")
   orderNo         Int?             @map("OrderNo")
@@ -985,8 +901,6 @@ model TblMaintLogFollow {
 model TblMaintType {
   maintTypeId     Int              @id(map: "PK_tblMaintType") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintType]"), map: "DF_MaintTypeID") @map("MaintTypeID")
   descr           String?          @map("Descr") @db.NVarChar(100)
-  deptId          Int?             @map("DeptID")
-  exportMarker    Int?             @map("ExportMarker")
   lastupdate      DateTime?        @db.DateTime
   orderNo         Int?             @map("OrderNo")
   tblCompJobs     TblCompJob[]
@@ -1030,33 +944,14 @@ model TblOilSamplingLog {
   laboratoryCode       String?   @map("LaboratoryCode") @db.NVarChar(100)
   userComment          String?   @map("UserComment") @db.NVarChar(500)
   orderNo              Int?      @map("OrderNo")
-  deptId               Int?      @map("DeptID")
-  exportMarker         Int?      @map("ExportMarker")
   lastupdate           DateTime? @db.DateTime
-}
-
-model TblParameters {
-  parameterId      Int       @id(clustered: false, map: "PK_Parameters") @map("ParameterId")
-  parameterGroupId Int       @map("ParameterGroupId") @db.SmallInt
-  parName          String?   @db.NVarChar(500)
-  parEnName        String?   @db.NVarChar(500)
-  parValue         String?   @db.NVarChar(500)
-  parIndex         Int       @db.SmallInt
-  orderNo          Int?      @map("OrderNo")
-  deptId           Int?      @map("DeptID")
-  exportMarker     Int?      @map("ExportMarker")
-  lastUpdate       DateTime? @map("LastUpdate") @db.DateTime
-
-  @@map("tblParameters")
 }
 
 model TblPendingType {
   pendTypeId    Int            @id(map: "PK_tblPendingType") @default(dbgenerated("NEXT VALUE FOR [Seq_PendingType]"), map: "DF_PendTypeId") @map("PendTypeId")
-  parentId      Int?           @default(0, map: "DF_tblPendingType_ParentId") @map("ParentId")
-  groupId       Int?           @default(0, map: "DF_tblPendingType_GroupId") @map("GroupId")
+  parentId      Int?           @map("ParentId")
+  groupId       Int?           @map("GroupId")
   pendTypeName  String?        @map("PendTypeName") @db.NVarChar(100)
-  deptId        Int?           @map("DeptID")
-  exportMarker  Int?           @map("ExportMarker")
   lastupdate    DateTime?      @db.DateTime
   sortId        Int?           @map("SortID")
   description   String?        @map("Description") @db.NVarChar(2000)
@@ -1084,8 +979,6 @@ model TblReScheduleLog {
   rescheduledBy   Int?          @map("RescheduledBy")
   rescheduledDate DateTime?     @map("RescheduledDate") @db.DateTime
   reason          String?       @map("Reason") @db.NVarChar(500)
-  deptId          Int?          @map("DeptID")
-  exportMarker    Int?          @map("ExportMarker")
   lastupdate      DateTime?     @db.DateTime
   orderNo         Int?          @map("OrderNo")
   tblUsers        TblUsers?     @relation(fields: [rescheduledBy], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblReScheduleLog_tblUsers")
@@ -1103,8 +996,6 @@ model TblRotationLog {
   fromDate                                       DateTime?         @map("FromDate") @db.DateTime
   toDate                                         DateTime?         @map("ToDate") @db.DateTime
   notes                                          String?           @map("Notes") @db.NVarChar(2000)
-  deptId                                         Int?              @map("DeptID")
-  exportMarker                                   Int?              @map("ExportMarker")
   lastupdate                                     DateTime?         @db.DateTime
   orderNo                                        Int?              @map("OrderNo")
   tblComponentUnit                               TblComponentUnit? @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRotationLog_tblComponentUnit")
@@ -1135,8 +1026,6 @@ model TblRound {
   priority                Int?           @map("Priority")
   window                  Int?           @map("Window")
   outputFormat            Int?           @map("OutputFormat")
-  deptId                  Int?           @map("DeptID")
-  exportMarker            Int?           @map("ExportMarker")
   lastupdate              DateTime?      @db.DateTime
   mandatoryHistory        Int?           @map("MandatoryHistory")
   mandatoryResource       Int?           @map("MandatoryResource")
@@ -1153,8 +1042,6 @@ model TblRoundCompJob {
   compJobId        Int       @map("CompJobID")
   roundId          Int       @map("RoundID")
   jobSequence      Int?      @map("JobSequence")
-  deptId           Int?      @map("DeptID")
-  exportMarker     Int?      @map("ExportMarker")
   lastupdate       DateTime? @db.DateTime
   active           Int?      @map("Active")
   functionDriven   Int?      @map("FunctionDriven")
@@ -1176,8 +1063,6 @@ model TblSpareType {
   extraNo            String?        @map("ExtraNo") @db.NVarChar(200)
   note               String?        @map("Note") @db.NVarChar(4000)
   unitId             Int?           @map("UnitID")
-  deptId             Int?           @map("DeptID")
-  exportMarker       Int?           @map("ExportMarker")
   lastupdate         DateTime?      @db.DateTime
   orderNo            Int?           @map("OrderNo")
   tblUnit            TblUnit?       @relation(fields: [unitId], references: [unitId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblSpareType_tblUnit")
@@ -1191,7 +1076,6 @@ model TblSpareType {
 model TblSpareUnit {
   spareUnitId       Int                 @id(map: "PK_tblSpareUnit") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareUnit]"), map: "DF_SpareUnitID") @map("SpareUnitID")
   spareTypeId       Int?                @map("SpareTypeID")
-  deptId            Int?                @map("DeptID")
   lastupdate        DateTime?           @db.DateTime
   tblMaintLogStocks TblMaintLogStocks[]
   tblSpareType      TblSpareType?       @relation(fields: [spareTypeId], references: [spareTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblStockItem_tblStockType")
@@ -1205,8 +1089,6 @@ model TblUnit {
   name                     String?                   @map("Name") @db.NVarChar(100)
   allowDecimals            Int?                      @map("AllowDecimals")
   description              String?                   @map("Description") @db.NVarChar(100)
-  deptId                   Int?                      @map("DeptID")
-  exportMarker             Int?                      @map("ExportMarker")
   lastupdate               DateTime?                 @db.DateTime
   orderNo                  Int?                      @map("OrderNo")
   tblCompMeasurePoints     TblCompMeasurePoint[]
@@ -1233,13 +1115,9 @@ model TblUsers {
   uLogonAttempts                                          Int?                          @db.SmallInt
   uForcePasswordChange                                    Boolean?
   uLastLogin                                              DateTime?                     @db.DateTime
-  exportMarker                                            Int?                          @map("ExportMarker")
-  uLastUpdated                                            DateTime?                     @db.DateTime
   orderNo                                                 Int?                          @map("OrderNo")
-  deptId                                                  Int?                          @map("DeptID")
-  lastUpdate                                              DateTime?                     @map("LastUpdate") @db.DateTime
+  lastupdate                                              DateTime?                     @db.DateTime
   tblAttachments                                          TblAttachment[]
-  tblAttachmentTypes                                      TblAttachmentType[]
   tblCompCounterLogs                                      TblCompCounterLog[]
   tblCompJobs                                             TblCompJob[]
   tblCompJobCounters                                      TblCompJobCounter[]
@@ -1305,8 +1183,6 @@ model TblWorkOrder {
   filed                                   Int?                @map("Filed")
   unexpected                              Int?                @map("Unexpected")
   workOrderStatusId                       Int?                @map("WorkOrderStatusId")
-  deptId                                  Int?                @map("DeptID")
-  exportMarker                            Int?                @map("ExportMarker")
   lastupdate                              DateTime?           @db.DateTime
   reportingMethod                         Int?                @map("ReportingMethod")
   pendingBy                               Int?                @map("PendingBy")
@@ -1379,12 +1255,9 @@ model TblJobDescription {
   oldRevisionJobDescId         Int?                          @map("OldRevisionJobDescID")
   copiedFromJobDescId          Int?                          @map("CopiedFromJobDescID")
   createdDate                  DateTime?                     @map("CreatedDate") @db.DateTime
-  createdBy                    Int?                          @map("CreatedBy")
   approvedDate                 DateTime?                     @map("ApprovedDate") @db.DateTime
   approvedBy                   Int?                          @map("ApprovedBy")
   applicationId                Int?                          @map("ApplicationID")
-  deptId                       Int?                          @map("DeptID")
-  exportMarker                 Int?                          @map("ExportMarker")
   lastupdate                   DateTime?                     @db.DateTime
   orderNo                      Int?                          @map("OrderNo")
   createdUserId                Int?                          @map("CreatedUserId")
@@ -1401,13 +1274,11 @@ model TblJobVersion {
   jobVersionId  Int       @id(map: "PK_tblJobVersion") @default(dbgenerated("NEXT VALUE FOR [Seq_JobVersion]"), map: "DF_JobVersionID") @map("JobVersionID")
   jobVersionNo  String?   @map("JobVersionNo") @db.NVarChar(100)
   jobDescTitle  String?   @map("JobDescTitle") @db.NVarChar(200)
-  jobDesc       String?   @map("JobDesc") @db.NVarChar(4000)
+  jobDesc       String?   @map("JobDesc") @db.NVarChar(Max)
   createdDate   DateTime? @map("CreatedDate") @db.DateTime
   status        Int?      @map("Status")
   jobDescId     Int?      @map("JobDescID")
   createdBy     Int?      @map("CreatedBy")
-  deptId        Int?      @map("DeptID")
-  exportMarker  Int?      @map("ExportMarker")
   lastupdate    DateTime? @db.DateTime
   createdUserId Int?      @map("CreatedUserId")
   orderNo       Int?      @map("OrderNo")
@@ -1420,8 +1291,6 @@ model TblLocation {
   parentLocationId      Int?                   @map("ParentLocationID")
   name                  String?                @map("Name") @db.NVarChar(100)
   locationCode          String?                @map("LocationCode") @db.NVarChar(100)
-  deptId                Int?                   @map("DeptID")
-  exportMarker          Int?                   @map("ExportMarker")
   lastupdate            DateTime?              @db.DateTime
   orderNo               Int?                   @map("OrderNo")
   tblComponentUnits     TblComponentUnit[]
@@ -1437,11 +1306,9 @@ model TblMaintLogStocks {
   maintLogStockId Int          @id(map: "PK_tblMaintLog_Stocks") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintLogStocks]"), map: "DF_MaintLogStockID") @map("MaintLogStockID")
   maintLogId      Int          @map("MaintLogID")
   stockItemId     Int          @map("StockItemID")
-  deptId          Int?         @default(300, map: "DF_tblMaintLogStocks_DeptId") @map("DeptId")
   stockCount      Float?       @map("StockCount")
   orderNo         Int?         @map("OrderNo")
   createdUserId   Int?         @map("CreatedUserId")
-  exportMarker    Int?         @map("ExportMarker")
   lastupdate      DateTime?    @db.DateTime
   tblMaintLog     TblMaintLog  @relation(fields: [maintLogId], references: [maintLogId], onUpdate: NoAction, map: "FK_tblMaintLogStocks_tblMaintLog")
   tblSpareUnit    TblSpareUnit @relation(fields: [stockItemId], references: [spareUnitId], onUpdate: NoAction, map: "FK_tblMaintLogStocks_tblStockItem")
@@ -1489,7 +1356,7 @@ model TblWorkShopAttachment {
   workShopId           Int           @map("WorkShopId")
   attachmentId         Int           @map("AttachmentId")
   createdUserId        Int           @map("CreatedUserId")
-  createdAt            DateTime      @default(now()) @map("created_at")
+  createdAt            DateTime      @default(now()) @map("created_at") @db.DateTime
   tblWorkShop          TblWorkShop   @relation(fields: [workShopId], references: [workShopId], onUpdate: NoAction, map: "FK_tblWorkShopAttachment_tblWorkShop")
   tblAttachment        TblAttachment @relation(fields: [attachmentId], references: [attachmentId], onDelete: Cascade, onUpdate: NoAction, map: "FK_tblWorkShopRequestAttachment_tblAttachment")
   tblUsers             TblUsers      @relation(fields: [createdUserId], references: [userId], onUpdate: NoAction, map: "FK_tblWorkShopRequestAttachment_Users")

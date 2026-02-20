@@ -56,7 +56,6 @@ export class AuthService {
         uPassword: hashedPassword,
         userGroupId: 3,
         uLastLogin: new Date().toISOString(),
-        userId: 888,
       },
     });
 

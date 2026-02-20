@@ -44,8 +44,6 @@ const ControllerTblCompCounter = new BaseController({
               currentValue: null,
               lastupdate: null,
               lastZeroedValue: null,
-              deptId: 0,
-              exportMarker: 0,
             },
           });
           await effectCompCounter(tx, counter);

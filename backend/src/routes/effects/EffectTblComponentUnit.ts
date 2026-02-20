@@ -55,7 +55,6 @@ export async function effectComponentUnitChange({
     await tx.tblCompJob.createMany({
       data: compTypeJobs.map((j) => ({
         compId,
-        exportMarker: 0,
         lastupdate: now,
         orderNo: j.orderNo,
         discId: j.discId,
@@ -77,7 +76,6 @@ export async function effectComponentUnitChange({
         window: j.window,
         active: j.active,
         mandatoryHistory: j.mandatoryHistory,
-        deptId: j.deptId,
         mandatoryResource: j.mandatoryResource,
         mandatoryStockUsage: j.mandatoryStockUsage,
         createdUserId: userId,
@@ -142,11 +140,10 @@ export async function effectComponentUnitChange({
         setValue: m.setValue,
         operationalMinValue: m.operationalMinValue,
         operationalMaxValue: m.operationalMaxValue,
-        deptId: m.deptId,
+
         orderNo: m.orderNo,
         lastupdate: now,
         currentValue: 0,
-        exportMarker: 0,
       })),
     });
 
@@ -157,11 +154,10 @@ export async function effectComponentUnitChange({
       data: compTypeCounters.map((c) => ({
         compId,
         counterTypeId: c.counterTypeId,
-        deptId: c.deptId,
+
         orderNo: c.orderNo,
         averageCountRate: c.averageCountRate,
         useCalcAverage: c.useCalcAverage,
-        exportMarker: 0,
         lastupdate: now,
         currentValue: 0,
       })),
@@ -218,11 +214,9 @@ export async function effectComponentUnitChange({
           compCounterId: counter.compCounterId,
           frequency: jc.frequency,
           window: jc.window,
-          deptId: jc.deptId,
           orderNo: jc.orderNo,
           updateByFunction: jc.updateByFunction,
           showInAlert: jc.showInAlert,
-          exportMarker: 0,
           lastupdate: now,
           createdUserId: userId,
           orderNumber: 0,

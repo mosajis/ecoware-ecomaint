@@ -79,6 +79,14 @@ export const WorkOrderItemSchema = t.Object({
   ),
 });
 
+export const WorkOrderListResponseSchema = t.Object({
+  items: t.Array(WorkOrderItemSchema),
+  total: t.Number(),
+  page: t.Number(),
+  perPage: t.Number(),
+  totalPages: t.Number(),
+});
+
 const ControllerTblWorkOrder = new BaseController({
   prefix: "/tblWorkOrder",
   swagger: {
@@ -102,44 +110,38 @@ const ControllerTblWorkOrder = new BaseController({
         } = query;
 
         const parsedFilter = filter ? JSON.parse(filter) : {};
-
         const sortObj = parseSortString(sort);
         const usePagination = !!paginate;
 
         return await ServiceTblWorkOrder.findAll({
           where: parsedFilter,
           orderBy: sortObj,
-          page: usePagination ? Number(page) : 1,
-          perPage: usePagination ? Number(perPage) : Number.MAX_SAFE_INTEGER,
+          page: usePagination ? Number(page) : undefined,
+          perPage: usePagination ? Number(perPage) : 250_000,
           select: {
-            // Primary Keys
             workOrderId: true,
             compId: true,
 
-            // Main Fields
             title: true,
             priority: true,
             description: true,
             userComment: true,
 
-            // Date Fields
             dueDate: true,
             created: true,
             started: true,
             completed: true,
 
-            // Relations
             tblComponentUnit: {
               select: {
                 compId: true,
                 compNo: true,
                 tblLocation: {
-                  select: {
-                    name: true,
-                  },
+                  select: { name: true },
                 },
               },
             },
+
             tblCompJob: {
               select: {
                 compJobId: true,
@@ -148,30 +150,24 @@ const ControllerTblWorkOrder = new BaseController({
                   select: {
                     jobDescCode: true,
                     jobDescTitle: true,
-                    jobDesc: true,
                   },
                 },
                 tblPeriod: {
-                  select: {
-                    name: true,
-                  },
+                  select: { name: true },
                 },
               },
             },
+
             tblPendingType: {
-              select: {
-                pendTypeName: true,
-              },
+              select: { pendTypeName: true },
             },
+
             tblDiscipline: {
-              select: {
-                name: true,
-              },
+              select: { name: true },
             },
+
             tblWorkOrderStatus: {
-              select: {
-                name: true,
-              },
+              select: { name: true },
             },
           },
         });
@@ -180,7 +176,7 @@ const ControllerTblWorkOrder = new BaseController({
         tags: ["tblWorkOrder"],
         detail: { summary: "Get all with custom select" },
         query: querySchema,
-        data: t.Array(WorkOrderItemSchema),
+        response: WorkOrderListResponseSchema,
       },
     );
 
@@ -234,7 +230,6 @@ const ControllerTblWorkOrder = new BaseController({
             created: now,
             lastupdate: now,
             workOrderStatusId: 2,
-            exportMarker: 0,
             workOrderTypeId: 2,
           }));
 
@@ -269,7 +264,7 @@ const ControllerTblWorkOrder = new BaseController({
           updatedCompJobs: t.Number(),
         }),
         detail: {
-          tags: ["WorkOrder"],
+          tags: ["tblWorkOrder"],
           summary: "Generate WorkOrders from CompJobs",
         },
       },
@@ -423,7 +418,6 @@ const ControllerTblWorkOrder = new BaseController({
               lastupdate: now,
               workOrderStatusId: 2,
               workOrderTypeId: 1,
-              exportMarker: 0,
             },
           });
 

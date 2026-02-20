@@ -17,9 +17,7 @@ export async function effectCompMeasurePoint(
       changedBy: measurePoint.changedBy ?? null,
       changedDate: new Date(),
       orderNo: measurePoint.orderNo,
-      deptId: measurePoint.deptId ?? 0,
       unitId: measurePoint.unitId ?? null,
-      exportMarker: measurePoint.exportMarker ?? 0,
       lastupdate: new Date(),
     },
   });

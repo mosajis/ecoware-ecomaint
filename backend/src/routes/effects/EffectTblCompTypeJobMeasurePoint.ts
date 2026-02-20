@@ -38,7 +38,6 @@ export async function effectCompTypeJobMeasurePoint({
       minValue,
       maxValue,
       updateOnReport,
-      deptId,
       orderNo,
     } = ctjmp;
 
@@ -94,7 +93,6 @@ export async function effectCompTypeJobMeasurePoint({
       minValue,
       maxValue,
       updateOnReport,
-      deptId,
       orderNo,
     };
 

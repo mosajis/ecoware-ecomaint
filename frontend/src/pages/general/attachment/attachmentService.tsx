@@ -1,7 +1,7 @@
 // attachmentService.ts
 import { TypeTblAttachment } from "@/core/api/generated/api";
-import { api } from "@/service/axios";
 import axios from "axios";
+import { api } from "@/service/axios";
 import { toast } from "sonner";
 
 export type CreateAttachmentPayload = {
@@ -27,7 +27,7 @@ export async function createAttachment(
 
   try {
     const res = await axios.post<TypeTblAttachment>(
-      "http://localhost:5273/tblAttachment",
+      "http://185.105.239.12:5273/tblAttachment",
       form,
     );
     return res.data;
@@ -42,5 +42,8 @@ export async function createAttachment(
 }
 
 export function downloadAttachment(id: number) {
-  window.open(`http://localhost:5273/tblAttachment/${id}/download`, "_blank");
+  window.open(
+    `http://185.105.239.12:5273/tblAttachment/${id}/download`,
+    "_blank",
+  );
 }

@@ -36,7 +36,6 @@ export { default as ControllerTblFunctions } from "./tblFunctions.controller";
 export { default as ControllerTblJobClass } from "./tblJobClass.controller";
 export { default as ControllerTblJobDescriptionAttachment } from "./tblJobDescriptionAttachment.controller";
 export { default as ControllerTblJobTrigger } from "./tblJobTrigger.controller";
-export { default as ControllerTblJobTriggerLog } from "./tblJobTriggerLog.controller";
 export { default as ControllerTblLogCounter } from "./tblLogCounter.controller";
 export { default as ControllerTblLogDiscipline } from "./tblLogDiscipline.controller";
 export { default as ControllerTblLoginAudit } from "./tblLoginAudit.controller";
@@ -47,7 +46,6 @@ export { default as ControllerTblMaintLogAttachment } from "./tblMaintLogAttachm
 export { default as ControllerTblMaintLogFollow } from "./tblMaintLogFollow.controller";
 export { default as ControllerTblMaintType } from "./tblMaintType.controller";
 export { default as ControllerTblOilSamplingLog } from "./tblOilSamplingLog.controller";
-export { default as ControllerTblParameters } from "./tblParameters.controller";
 export { default as ControllerTblPendingType } from "./tblPendingType.controller";
 export { default as ControllerTblPeriod } from "./tblPeriod.controller";
 export { default as ControllerTblReScheduleLog } from "./tblReScheduleLog.controller";

@@ -1,9 +1,8 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import TabsComponent from "./MaintLogTabs";
 import Splitter from "@/shared/components/Splitter/Splitter";
-import ReportWorkDialog from "../reportWork/ReportWorkDialog";
-import MaintLogFollowDialog from "./maintLogDialogFollow";
-import MaintLogActions from "./maintLogActions";
+import MaintLogFollowDialog from "./MaintLogDialogFollow";
+import MaintLogActions from "./MaintLogActions";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback, useState } from "react";
 import { columns } from "./MaintLogColumns";
@@ -14,7 +13,7 @@ import {
 } from "@/core/api/generated/api";
 import MaintLogFilterDialog, {
   type MaintLogFilter,
-} from "./maintLogDialogFilter";
+} from "./MaintLogDialogFilter";
 
 const getRowId = (row: TypeTblMaintLog) => row.maintLogId;
 
@@ -138,11 +137,11 @@ export default function PageMaintLog() {
         />
         <TabsComponent selectedMaintLog={selectedRow} />
       </Splitter>
-      <ReportWorkDialog
+      {/* <ReportWorkDialog
         open={dialogReportWork}
         onClose={handleReportWorkClose}
         maintLogId={mode === "update" ? selectedRow?.maintLogId : undefined}
-      />
+      /> */}
 
       <MaintLogFilterDialog
         open={dialogFilter}
