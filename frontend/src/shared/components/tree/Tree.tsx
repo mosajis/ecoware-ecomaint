@@ -7,7 +7,6 @@ import {
   syncDataLoaderFeature,
   selectionFeature,
   hotkeysCoreFeature,
-  TreeState,
 } from "@headless-tree/core";
 
 import "./tree.css";
@@ -24,7 +23,6 @@ interface GenericTreeProps<T> {
   onEdit?: (itemId: number) => void;
   onDelete?: (itemId: number) => void;
   loading?: boolean;
-  initialState?: Partial<TreeState<T>>;
 }
 
 export function GenericTree<T>({
@@ -45,110 +43,68 @@ export function GenericTree<T>({
   const [focusedItem, setFocusedItem] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { itemsMap, childrenMap, rootIds } = data;
-
+  const initializedRef = useRef(false);
+  const prevItemsSizeRef = useRef(0);
   const clickTimerRef = useRef<number | null>(null);
   const CLICK_DELAY = 200;
 
-  // ✅ Cache parent-child relationships for O(1) lookup
+  const { itemsMap, childrenMap, rootIds } = data;
+
+  // ✅ فقط اولین بار که rootIds می‌آد expand کن
+  useEffect(() => {
+    if (rootIds.length > 0 && !initializedRef.current) {
+      setExpandedItems(rootIds.map(String));
+      initializedRef.current = true;
+      prevItemsSizeRef.current = itemsMap.size;
+    }
+  }, [rootIds]);
+
+  // ✅ بعد از CRUD داده آپدیت میشه — expanded کاربر حفظ میشه
+  // فقط root های جدید اضافه میشن و invalid ids پاک میشن
+  useEffect(() => {
+    if (!initializedRef.current) return;
+    if (itemsMap.size === prevItemsSizeRef.current) return;
+
+    prevItemsSizeRef.current = itemsMap.size;
+
+    const validIds = new Set(Array.from(itemsMap.keys()).map(String));
+
+    setExpandedItems((prev) => {
+      const cleaned = prev.filter((id) => validIds.has(id));
+      const newRoots = rootIds
+        .map(String)
+        .filter((id) => !cleaned.includes(id));
+      return newRoots.length > 0 ? [...cleaned, ...newRoots] : cleaned;
+    });
+
+    setSelectedItems((prev) => prev.filter((id) => validIds.has(id)));
+    setFocusedItem((prev) => (prev && validIds.has(prev) ? prev : null));
+  }, [itemsMap, rootIds]);
+
+  // ✅ Parent map for ancestor lookup
   const parentMap = useMemo(() => {
     const map = new Map<number, number>();
     childrenMap.forEach((children, parentId) => {
-      children.forEach((childId) => {
-        map.set(childId, parentId);
-      });
+      children.forEach((childId) => map.set(childId, parentId));
     });
     return map;
   }, [childrenMap]);
 
-  // ✅ Save previous expanded state
-  const [previousExpandedItems, setPreviousExpandedItems] = useState<string[]>(
-    [],
-  );
-
-  // ✅ هنگام تغییر داده‌ها، وضعیت expanded را ذخیره کنیم
-  useEffect(() => {
-    if (rootIds.length > 0) {
-      // قبل از بارگذاری داده‌ها، وضعیت expandedItems رو ذخیره کنیم
-      setPreviousExpandedItems(expandedItems);
-      setExpandedItems(rootIds.map(String)); // ریشه‌ها رو باز کنیم
-    }
-  }, [rootIds]); // اگر rootIds تغییر کرد
-
-  // ✅ زمانی که داده‌ها تغییر می‌کنند، وضعیت expandedItems را دوباره بازیابی کنیم
-  useEffect(() => {
-    if (rootIds.length > 0 && previousExpandedItems.length > 0) {
-      setExpandedItems((prev) => {
-        // اگر داده‌ها تغییر کرده باشند، وضعیت expandedItems رو از حافظه قبلی بازیابی کنیم
-        const nextExpanded = [
-          ...new Set([...previousExpandedItems, ...rootIds.map(String)]),
-        ];
-        return nextExpanded;
-      });
-    }
-  }, [rootIds, previousExpandedItems]);
-
-  const handleRefresh = useCallback(() => {
-    // ابتدا داده‌ها را دوباره بارگذاری کن
-    onRefresh?.();
-
-    // پس از رفرش، اطمینان حاصل کن که expandedItems به روز می‌شود
-    setExpandedItems((prev) => {
-      // اگر ریشه‌ها تغییر کرده‌اند، وضعیت expandedItems را بازنشانی می‌کنیم
-      if (rootIds.length !== prev.length) {
-        return rootIds.map(String);
-      }
-      return prev;
-    });
-  }, [onRefresh, rootIds]);
-
-  useEffect(() => {
-    if (rootIds.length > 0) {
-      // زمانی که داده‌ها بارگذاری می‌شوند، همه‌ی rootItems را expand کن
-      setExpandedItems(rootIds.map(String));
-    }
-  }, [rootIds]); // اگر rootIds تغییر کند، expandedItems به روز می‌شود
-
-  // ✅ Optimized getAncestorIds with O(log n) instead of O(n²)
   const getAncestorIds = useCallback(
     (id: number): string[] => {
       const result: string[] = [];
       let currentId: number | undefined = id;
-
       while (currentId != null) {
         const parentId = parentMap.get(currentId);
         if (parentId == null) break;
-
         result.push(String(parentId));
         currentId = parentId;
       }
-
       return result;
     },
     [parentMap],
   );
 
-  // ✅ Memoize valid IDs set
-  const validIdsSet = useMemo(() => {
-    return new Set(Array.from(itemsMap.keys()).map(String));
-  }, [itemsMap]);
-
-  // ✅ Clean up state when items are removed - optimized
-  useEffect(() => {
-    setExpandedItems((prev) => {
-      const filtered = prev.filter((id) => validIdsSet.has(id));
-      return filtered.length === prev.length ? prev : filtered;
-    });
-
-    setSelectedItems((prev) => {
-      const filtered = prev.filter((id) => validIdsSet.has(id));
-      return filtered.length === prev.length ? prev : filtered;
-    });
-
-    setFocusedItem((prev) => (prev && validIdsSet.has(prev) ? prev : null));
-  }, [validIdsSet]);
-
-  // ✅ Memoize tree configuration
   const treeConfig = useMemo(
     () => ({
       rootItemId: "root" as const,
@@ -158,12 +114,10 @@ export function GenericTree<T>({
       setFocusedItem,
       getItemName: (item: any) => getItemName(item.getItemData()),
       isItemFolder: (item: any) => {
-        const data = item.getItemData();
-        if (!data) return false;
-
-        const id = Number(getItemId(data));
+        const d = item.getItemData();
+        if (!d) return false;
+        const id = Number(getItemId(d));
         if (Number.isNaN(id)) return false;
-
         return (childrenMap.get(id)?.length ?? 0) > 0;
       },
       dataLoader: {
@@ -193,48 +147,31 @@ export function GenericTree<T>({
 
   const tree = useTree<T>(treeConfig);
 
-  // ✅ Auto-expand root items - optimized
-  useEffect(() => {
-    if (!rootIds.length || expandedItems.length > 0) return;
-
-    setExpandedItems(rootIds.map(String));
-  }, [rootIds, expandedItems.length]);
-
-  // ✅ Memoize tree items getter
   const getTreeItems = useCallback(() => tree.getItems(), [tree]);
 
-  // ✅ Expand / Collapse all - optimized
   const handleExpandAll = useCallback(() => {
-    const items = getTreeItems();
-    items.forEach((item) => {
+    getTreeItems().forEach((item) => {
       if (item.isFolder()) item.expand();
     });
   }, [getTreeItems]);
 
   const handleCollapseAll = useCallback(() => {
-    const items = getTreeItems();
-    items.forEach((item) => item.collapse());
+    getTreeItems().forEach((item) => item.collapse());
   }, [getTreeItems]);
 
-  // ✅ Optimized handlers
   const handleEdit = useCallback(() => {
     const firstSelected = selectedItems[0];
-    if (firstSelected) {
-      onEdit?.(Number(firstSelected));
-    }
+    if (firstSelected) onEdit?.(Number(firstSelected));
   }, [selectedItems, onEdit]);
 
   const handleDelete = useCallback(() => {
     const firstSelected = selectedItems[0];
-    if (firstSelected) {
-      onDelete?.(Number(firstSelected));
-    }
+    if (firstSelected) onDelete?.(Number(firstSelected));
   }, [selectedItems, onDelete]);
 
   const handleItemClick = useCallback(
     (item: T) => {
       if (clickTimerRef.current) return;
-
       clickTimerRef.current = window.setTimeout(() => {
         clickTimerRef.current = null;
         onItemSelect?.(item);
@@ -249,13 +186,11 @@ export function GenericTree<T>({
         clearTimeout(clickTimerRef.current);
         clickTimerRef.current = null;
       }
-
       onDoubleClick?.(itemId);
     },
     [onDoubleClick],
   );
 
-  // ✅ Heavily optimized search with early exits and batched updates
   const handleSearch = useCallback(
     (txt: string) => {
       const q = txt.trim().toLowerCase();
@@ -268,19 +203,14 @@ export function GenericTree<T>({
       setSearchQuery(q);
 
       const nextExpanded = new Set<string>();
-      const itemsArray = Array.from(itemsMap.entries());
 
-      // ✅ Single pass through items
-      for (const [id, item] of itemsArray) {
+      for (const [id, item] of Array.from(itemsMap.entries())) {
         const name = getItemName(item).toLowerCase();
         if (!name.includes(q)) continue;
-
-        const idStr = String(id);
-        nextExpanded.add(idStr);
-
-        // ✅ Add ancestors in one go
-        const ancestors = getAncestorIds(id);
-        ancestors.forEach((ancestorId) => nextExpanded.add(ancestorId));
+        nextExpanded.add(String(id));
+        getAncestorIds(id).forEach((ancestorId) =>
+          nextExpanded.add(ancestorId),
+        );
       }
 
       if (nextExpanded.size > 0) {
@@ -298,7 +228,7 @@ export function GenericTree<T>({
         onDelete={handleDelete}
         onEdit={handleEdit}
         onAdd={onAdd}
-        onRefresh={handleRefresh}
+        onRefresh={onRefresh}
         onExpandAll={handleExpandAll}
         onCollapseAll={handleCollapseAll}
         loading={loading}

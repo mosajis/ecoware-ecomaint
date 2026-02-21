@@ -3,7 +3,7 @@ import { generalRoute } from "@/app/router/routes/general.routes";
 import { createRoute } from "@tanstack/react-router";
 import { lazy } from "react";
 
-const Page = lazy(() => import("@/pages/general/address/Address"));
+const Page = lazy(() => import("./Address"));
 
 export default createRoute({
   getParentRoute: () => generalRoute,

@@ -13,8 +13,8 @@ import {
 } from "@/core/api/generated/api";
 import { useAtom, useAtomValue } from "jotai";
 import { reportWorkAtom } from "./ReportWorkAtom";
-import { logicTblMaintLog } from "@/core/api/api";
 import { atomUser } from "@/pages/auth/auth.atom";
+import { generateNextWorkORder } from "@/core/api/api";
 
 type Props = {
   open: boolean;
@@ -148,10 +148,7 @@ const ReportWorkDialog = ({
       );
 
       if (record.workOrderTypeId === 1 && reportWork.maintLog.maintLogId) {
-        await logicTblMaintLog.generateNextWorkOrder(
-          reportWork.maintLog.maintLogId,
-          userId,
-        );
+        await generateNextWorkORder(reportWork.maintLog.maintLogId, userId);
       }
       setIsLoadingSubmit(false);
       onSuccess(record);

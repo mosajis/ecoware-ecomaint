@@ -1,6 +1,8 @@
 import { TypeTblAddress } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 
+export const getRowId = (row: TypeTblAddress) => row.addressId;
+
 export const columns: GridColDef<TypeTblAddress>[] = [
   { field: "code", headerName: "Code", width: 60 },
   { field: "name", headerName: "Name", flex: 1 },

@@ -4,8 +4,8 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
-import { TypeStatistics } from "@/core/api/api";
 import { toPercent } from "@/shared/utils/zodUtils";
+import { TypeStatistics } from "@/core/api/api.types";
 
 type Props = {
   title: string;
@@ -53,7 +53,7 @@ const DisciplineCard = ({ title, counts }: Props) => {
   ];
 
   return (
-    <Card variant="outlined">
+    <Card>
       <CardContent>
         <Stack spacing={1.5}>
           <Typography variant="h6" fontWeight={"bold"}>

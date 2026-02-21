@@ -19,26 +19,32 @@ export default function MenuContent() {
 
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
 
+  // ================= ACTIVE HELPERS =================
+  const isExactMatch = (path?: string) => (path ? currentPath === path : false);
+  const isNestedMatch = (path?: string) =>
+    path ? currentPath.startsWith(path + "/") : false;
+
+  // ================= AUTO EXPAND =================
   useEffect(() => {
     const newOpen: Record<string, boolean> = {};
+
     menuContentItems.forEach((section) => {
-      if (
-        section.items?.some((item) =>
-          item.children
-            ? item.children.some((child) => currentPath.startsWith(child.path))
-            : currentPath.startsWith(item.path),
-        )
-      ) {
-        newOpen[section.title] = true;
-        section.items?.forEach((item) => {
-          if (
-            item.children?.some((child) => currentPath.startsWith(child.path))
-          ) {
-            newOpen[item.id || item.text] = true;
-          }
-        });
-      }
+      section.items?.forEach((item) => {
+        const matchItem = isExactMatch(item.path) || isNestedMatch(item.path);
+        const matchChild = item.children?.some(
+          (child) => isExactMatch(child.path) || isNestedMatch(child.path),
+        );
+
+        if (!section.noActiveHighlight && (matchItem || matchChild)) {
+          newOpen[section.title] = true;
+        }
+
+        if (matchChild) {
+          newOpen[item.id || item.text] = true;
+        }
+      });
     });
+
     setOpenSections(newOpen);
   }, [currentPath]);
 
@@ -46,27 +52,41 @@ export default function MenuContent() {
     setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const handleNavigate = (path?: string) => {
-    if (path) router.navigate({ to: path });
+  // ================= SPA LINK HANDLER =================
+  const handleLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    path?: string,
+  ) => {
+    if (!path) return;
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return;
+    e.preventDefault();
+    router.navigate({ to: path });
   };
 
-  const renderItem = (item: MenuItem, level: number = 2) => {
-    const hasChildren = item.children && item.children.length > 0;
-    const isActive = currentPath === item.path;
+  // ================= RECURSIVE ITEM =================
+  const renderItem = (
+    item: MenuItem,
+    level: number = 2,
+    noActive?: boolean,
+  ) => {
+    const hasChildren = !!item.children?.length;
+    const isActive = noActive
+      ? false
+      : isExactMatch(item.path) || isNestedMatch(item.path);
 
     return (
       <Fragment key={item.id || item.text}>
         <ListItem disablePadding>
           <ListItemButton
-            sx={{
-              gap: "10px !important",
-            }}
-            onClick={() =>
+            component={hasChildren ? "div" : "a"}
+            href={!hasChildren ? item.path : undefined}
+            onClick={
               hasChildren
-                ? handleToggle(item.id || item.text)
-                : handleNavigate(item.path)
+                ? () => handleToggle(item.id || item.text)
+                : (e: any) => handleLinkClick(e, item.path)
             }
             selected={isActive}
+            sx={{ pl: level, gap: 1 }}
           >
             {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
             <ListItemText primary={item.text} />
@@ -85,13 +105,10 @@ export default function MenuContent() {
             timeout="auto"
             unmountOnExit
           >
-            <List
-              component="div"
-              disablePadding
-              dense
-              sx={{ p: 0.5, pl: level }}
-            >
-              {item.children!.map((child) => renderItem(child, level + 1))}
+            <List dense disablePadding>
+              {item.children!.map((child) =>
+                renderItem(child, level + 2, noActive),
+              )}
             </List>
           </Collapse>
         )}
@@ -102,27 +119,32 @@ export default function MenuContent() {
   return (
     <Stack sx={{ flexGrow: 1, p: 1 }}>
       {menuContentItems.map((section, index) => {
-        const isActiveParent =
-          currentPath === section.path ||
-          section.items?.some((item) =>
-            item.children
-              ? item.children.some((child) =>
-                  currentPath.startsWith(child.path),
-                )
-              : currentPath.startsWith(item.path),
-          );
+        const hasItems = !!section.items?.length;
 
-        const hasItems = section.items && section.items.length > 0;
+        const isActiveParent =
+          !section.noActiveHighlight &&
+          (isExactMatch(section.path) ||
+            isNestedMatch(section.path) ||
+            section.items?.some((item) =>
+              item.children
+                ? item.children.some(
+                    (child) =>
+                      isExactMatch(child.path) || isNestedMatch(child.path),
+                  )
+                : isExactMatch(item.path) || isNestedMatch(item.path),
+            ));
 
         return (
           <Fragment key={section.title}>
-            {/* سطح اول */}
-            <ListItem disablePadding sx={{ display: "block" }}>
+            {/* ===== SECTION LEVEL ===== */}
+            <ListItem disablePadding>
               <ListItemButton
-                onClick={() =>
+                component={!hasItems ? "a" : "div"}
+                href={!hasItems ? section.path : undefined}
+                onClick={
                   hasItems
-                    ? handleToggle(section.title)
-                    : handleNavigate(section.path)
+                    ? () => handleToggle(section.title)
+                    : (e: any) => handleLinkClick(e, section.path)
                 }
                 selected={isActiveParent}
                 sx={{ borderRadius: 1 }}
@@ -138,20 +160,17 @@ export default function MenuContent() {
               </ListItemButton>
             </ListItem>
 
-            {/* سطح دوم و سوم */}
+            {/* ===== CHILDREN ===== */}
             {hasItems && (
               <Collapse
                 in={openSections[section.title]}
                 timeout="auto"
                 unmountOnExit
               >
-                <List
-                  component="div"
-                  disablePadding
-                  dense
-                  sx={{ pl: 1.5, pr: 0 }}
-                >
-                  {section.items.map((item) => renderItem(item, 2))}
+                <List dense disablePadding>
+                  {section.items.map((item) =>
+                    renderItem(item, 2, section.noActiveHighlight),
+                  )}
                 </List>
               </Collapse>
             )}

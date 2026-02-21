@@ -3,7 +3,6 @@ import Upsert from "./JobTriggerUpsert";
 import Splitter from "@/shared/components/Splitter/Splitter";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { type GridColDef } from "@mui/x-data-grid";
 import { useCallback, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { tblJobTrigger, TypeTblJobTrigger } from "@/core/api/generated/api";
@@ -12,20 +11,18 @@ import { logicTblJobTrigger } from "@/core/api/api";
 import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
 import { toast } from "sonner";
-
-const getRowId = (row: TypeTblJobTrigger) => row.jobTriggerId;
-
-const columns: GridColDef<TypeTblJobTrigger>[] = [
-  { field: "descr", headerName: "Description", flex: 1 },
-  { field: "orderNo", headerName: "Order No", width: 100 },
-];
+import { columns, getRowId } from "./JobTriggerColumns";
+import { useDialogs } from "@/shared/hooks/useDialogs";
 
 export default function PageJobTrigger() {
-  const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
-  const [openForm, setOpenForm] = useState(false);
   const [_loading, setLoading] = useState(false);
+  const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [label, setLabel] = useState<string | null>(null);
+
+  const { dialogs, openDialog, closeDialog } = useDialogs({
+    upsert: false,
+  });
 
   const user = useAtomValue(atomUser);
   const userId = user?.userId as number;
@@ -41,21 +38,13 @@ export default function PageJobTrigger() {
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
     setMode("create");
-    handleUpsertOpen();
+    openDialog("upsert");
   }, []);
 
   const handleEdit = useCallback((rowId: number) => {
     setSelectedRowId(rowId);
     setMode("update");
-    handleUpsertOpen();
-  }, []);
-
-  const handleUpsertClose = useCallback(() => {
-    setOpenForm(false);
-  }, []);
-
-  const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true);
+    openDialog("upsert");
   }, []);
 
   const handleRowClick = useCallback(({ row }: { row: TypeTblJobTrigger }) => {
@@ -68,12 +57,13 @@ export default function PageJobTrigger() {
       setLoading(true);
       logicTblJobTrigger
         .effectFireTrigger(userId, selectedRowId)
-        .then(() => {
-          toast.success("Trigger fired successfully");
+        .then((res) => {
+          toast.success(res.message);
         })
-        .catch(() => {})
-        .finally(() => {
+        .catch(() => {
           toast.error("Failed to fire trigger");
+        })
+        .finally(() => {
           setLoading(false);
         });
     }
@@ -112,10 +102,10 @@ export default function PageJobTrigger() {
       </Splitter>
 
       <Upsert
-        open={openForm}
+        open={dialogs.upsert}
         mode={mode}
         recordId={selectedRowId}
-        onClose={handleUpsertClose}
+        onClose={() => closeDialog("upsert")}
         onSuccess={handleRefresh}
       />
     </Box>

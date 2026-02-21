@@ -1016,24 +1016,6 @@ export const tblOilSamplingLog = {
     api.delete<DynamicResponse<'deleteTblOilSamplingLog'>>('/tblOilSamplingLog', { params: stringifyQuery(query) }),
 };
 
-export type TypeTblParameters = DynamicResponse<'getTblParameters'>['items'][0];
-export const tblParameters = {
-  getAll: (query?: DynamicQuery<'getTblParameters'>) =>
-    api.get<DynamicResponse<'getTblParameters'>>('/tblParameters', { params: stringifyQuery(query) }),
-  getById: (id: number, query?: DynamicQuery<'getTblParametersByParameterId'>) =>
-    api.get<DynamicResponse<'getTblParametersByParameterId'>>(`/tblParameters/${id}`, { params: stringifyQuery(query) }),
-  count: (query?: DynamicQuery<'getTblParametersCount'>) =>
-    api.get<DynamicResponse<'getTblParametersCount'>>('/tblParameters/count', { params: stringifyQuery(query) }),
-  create: (data: DynamicCreate<'postTblParameters'>) =>
-    api.post<DynamicResponse<'postTblParameters'>>('/tblParameters', { data }),
-  update: (id: number, data: DynamicUpdate<'putTblParametersByParameterId'>, query?: DynamicQuery<'getTblParametersByParameterId'>) =>
-    api.put<DynamicResponse<'putTblParametersByParameterId'>>(`/tblParameters/${id}`, { data, params: stringifyQuery(query) }),
-  deleteById: (id: number, query?: DynamicQuery<'deleteTblParametersByParameterId'>) =>
-    api.delete<DynamicResponse<'deleteTblParametersByParameterId'>>(`/tblParameters/${id}`, { params: stringifyQuery(query) }),
-  deleteAll: (query?: DynamicQuery<'deleteTblParameters'>) =>
-    api.delete<DynamicResponse<'deleteTblParameters'>>('/tblParameters', { params: stringifyQuery(query) }),
-};
-
 export type TypeTblPendingType = DynamicResponse<'getTblPendingType'>['items'][0];
 export const tblPendingType = {
   getAll: (query?: DynamicQuery<'getTblPendingType'>) =>

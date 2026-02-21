@@ -2,42 +2,10 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import StepResourceUsedUpsert from "./TabResourceUsedUpsert";
 import { useState, useCallback } from "react";
 import { useAtomValue } from "jotai";
-import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import {
-  tblLogDiscipline,
-  TypeTblLogDiscipline,
-} from "@/core/api/generated/api";
 import { atomInitData } from "../../FailureReportAtom";
-
-const getRowId = (row: TypeTblLogDiscipline) => row.logDiscId;
-
-const columns: GridColDef<TypeTblLogDiscipline>[] = [
-  {
-    field: "logDiscId",
-    headerName: "Id",
-    width: 80,
-  },
-  {
-    field: "name",
-    headerName: "Resource Name",
-    flex: 1,
-    valueGetter: (_, row) =>
-      `${row?.tblEmployee?.firstName} ${row?.tblEmployee?.lastName}`,
-  },
-  {
-    field: "discipline",
-    headerName: "Discipline",
-    flex: 1,
-    valueGetter: (_, row) => row.tblDiscipline?.name,
-  },
-  {
-    field: "timeSpent",
-    headerName: "Time Spent (min)",
-    flex: 1,
-    valueGetter: (_, row) => row.timeSpent || "--",
-  },
-];
+import { columns, getRowId } from "./TabResourceUsedColumns";
+import { tblLogDiscipline } from "@/core/api/generated/api";
 
 const StepResourceUsed = () => {
   const { maintLog } = useAtomValue(atomInitData);
@@ -51,12 +19,6 @@ const StepResourceUsed = () => {
     if (!maintLogId) return;
     setSelectedRowId(null);
     setMode("create");
-    setOpenForm(true);
-  };
-
-  const handleEdit = (row: TypeTblLogDiscipline) => {
-    setSelectedRowId(row.logDiscId);
-    setMode("update");
     setOpenForm(true);
   };
 

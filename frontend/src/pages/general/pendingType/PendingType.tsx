@@ -1,22 +1,18 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import PendingTypeUpsert from "./PendingTypeUpsert";
 import { useState, useCallback } from "react";
-import { tblPendingType, TypeTblPendingType } from "@/core/api/generated/api";
-import { GridColDef } from "@mui/x-data-grid";
+import { tblPendingType } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-
-const getRowId = (row: TypeTblPendingType) => row.pendTypeId;
-
-const columns: GridColDef<TypeTblPendingType>[] = [
-  { field: "pendTypeName", headerName: "Name", flex: 2 },
-  { field: "description", headerName: "Description", flex: 2 },
-  { field: "orderNo", headerName: "Order No", width: 120 },
-];
+import { useDialogs } from "@/shared/hooks/useDialogs";
+import { columns, getRowId } from "./PendingTypeColumns";
 
 export default function PagePendingType() {
-  const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+
+  const { dialogs, openDialog, closeDialog } = useDialogs({
+    upsert: false,
+  });
 
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
     tblPendingType.getAll,
@@ -27,21 +23,13 @@ export default function PagePendingType() {
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
     setMode("create");
-    handleUpsertOpen();
+    openDialog("upsert");
   }, []);
 
   const handleEdit = useCallback((rowId: number) => {
     setSelectedRowId(rowId);
     setMode("update");
-    handleUpsertOpen();
-  }, []);
-
-  const handleUpsertClose = useCallback(() => {
-    setOpenForm(false);
-  }, []);
-
-  const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true);
+    openDialog("upsert");
   }, []);
 
   return (
@@ -60,10 +48,10 @@ export default function PagePendingType() {
       />
 
       <PendingTypeUpsert
-        open={openForm}
+        open={dialogs.upsert}
         mode={mode}
         recordId={selectedRowId}
-        onClose={handleUpsertClose}
+        onClose={() => closeDialog("upsert")}
         onSuccess={handleRefresh}
       />
     </>

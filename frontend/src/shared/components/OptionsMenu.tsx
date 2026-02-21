@@ -3,7 +3,7 @@ import Divider from "@mui/material/Divider";
 import Menu from "@mui/material/Menu";
 import MuiMenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
-import ListItemIcon, { listItemIconClasses } from "@mui/material/ListItemIcon";
+import ListItemIcon from "@mui/material/ListItemIcon";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
 import MenuButton from "./layout/MenuButton";
@@ -42,6 +42,12 @@ export default function OptionsMenu() {
             <AccountBox fontSize="small" />
           </ListItemIcon>
           <ListItemText>Profile</ListItemText>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <AccountBox fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>Chnage Password</ListItemText>
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>

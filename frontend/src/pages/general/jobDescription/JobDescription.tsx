@@ -1,35 +1,24 @@
 import Splitter from "@/shared/components/Splitter/Splitter";
 import JobDescriptionUpsert from "./JobDescriptionUpsert";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { GridColDef } from "@mui/x-data-grid";
 import { useCallback, useState } from "react";
 import { Tabs } from "./JobDescriptionTabs";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { columns, getRowId } from "./JobDescriptionColumns";
+import { useDialogs } from "@/shared/hooks/useDialogs";
 import {
   tblJobDescription,
   TypeTblJobDescription,
 } from "@/core/api/generated/api";
 
-const getRowId = (row: TypeTblJobDescription) => row.jobDescId;
-
-// === Columns ===
-const columns: GridColDef<TypeTblJobDescription>[] = [
-  { field: "jobDescCode", headerName: "Code", width: 120 },
-  { field: "jobDescTitle", headerName: "JobTitle", flex: 2 },
-  {
-    field: "jobClass",
-    headerName: "JobClass",
-    flex: 1,
-    valueGetter: (value, row) => row?.tblJobClass?.name,
-  },
-  { field: "changeReason", headerName: "ChangeReason", flex: 1 },
-];
-
 export default function PageJobDescription() {
-  const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   const [label, setLabel] = useState<string | null>(null);
+
+  const { dialogs, openDialog, closeDialog } = useDialogs({
+    upsert: false,
+  });
 
   // === DataGrid ===
   const getAll = useCallback(() => {
@@ -48,21 +37,13 @@ export default function PageJobDescription() {
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
     setMode("create");
-    handleUpsertOpen();
+    openDialog("upsert");
   }, []);
 
   const handleEdit = useCallback((rowId: number) => {
     setSelectedRowId(rowId);
     setMode("update");
-    handleUpsertOpen();
-  }, []);
-
-  const handleUpsertClose = useCallback(() => {
-    setOpenForm(false);
-  }, []);
-
-  const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true);
+    openDialog("upsert");
   }, []);
 
   const handleRowClick = useCallback(
@@ -98,10 +79,10 @@ export default function PageJobDescription() {
       </Splitter>
 
       <JobDescriptionUpsert
-        open={openForm}
+        open={dialogs.upsert}
         mode={mode}
         recordId={selectedRowId}
-        onClose={handleUpsertClose}
+        onClose={() => closeDialog("upsert")}
         onSuccess={handleRefresh}
       />
     </>

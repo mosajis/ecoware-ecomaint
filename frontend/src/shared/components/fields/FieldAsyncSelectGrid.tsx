@@ -11,20 +11,17 @@ type BaseFieldAsyncSelectGridProps<TItem extends Record<string, any>> = {
   label?: string;
   placeholder?: string;
   disabled?: boolean;
+  readOnly?: boolean; // ← اضافه شد
   columns: any[];
   error?: boolean;
   helperText?: string;
-
   request: () => Promise<any>;
   extractRows?: (data: any) => TItem[];
-
   getRowId: (row: TItem) => GridRowId;
   getOptionLabel?: (item: TItem) => string | null | undefined;
-
   dialogHeight?: number | string;
   dialogMaxWidth?: "xs" | "sm" | "md" | "lg" | "xl" | false;
 };
-
 // ---------------- Single / Multiple Props ----------------
 type AsyncSelectSingleProps<TItem extends Record<string, any>> =
   BaseFieldAsyncSelectGridProps<TItem> & {
@@ -52,6 +49,7 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
   helperText,
   columns,
   disabled = false,
+  readOnly = false,
   selectionMode = "single",
   request,
   extractRows = (data) => data.items ?? [],
@@ -62,6 +60,8 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
   dialogMaxWidth = "sm",
 }: FieldAsyncSelectGridProps<TItem>) {
   const [dialogOpen, setDialogOpen] = useState(false);
+
+  const isInteractive = !disabled && !readOnly;
 
   const displayValue =
     selectionMode === "single"
@@ -87,6 +87,7 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
   };
 
   const handleClear = (e: React.MouseEvent) => {
+    if (!isInteractive) return;
     e.stopPropagation();
     if (selectionMode === "multiple") {
       (onChange as (v: TItem[] | null) => void)(null);
@@ -110,12 +111,29 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
         InputProps={{
           endAdornment: (
             <>
-              {hasValue && !disabled && (
+              {hasValue &&
+                isInteractive && ( // ← آپدیت
+                  <IconButton
+                    size="small"
+                    onClick={handleClear}
+                    sx={{
+                      mr: 0.2,
+                      width: "30px",
+                      height: "30px",
+                      borderRadius: "20px",
+                      border: 0,
+                    }}
+                    edge="end"
+                  >
+                    <ClearIcon fontSize="small" />
+                  </IconButton>
+                )}
+              {!readOnly && ( // ← دکمه ... در readOnly مخفی میشه
                 <IconButton
                   size="small"
-                  onClick={handleClear}
+                  onClick={() => isInteractive && setDialogOpen(true)}
+                  disabled={disabled}
                   sx={{
-                    mr: 0.2,
                     width: "30px",
                     height: "30px",
                     borderRadius: "20px",
@@ -123,23 +141,9 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
                   }}
                   edge="end"
                 >
-                  <ClearIcon fontSize="small" />
+                  <MoreHorizIcon fontSize="small" />
                 </IconButton>
               )}
-              <IconButton
-                size="small"
-                onClick={() => !disabled && setDialogOpen(true)}
-                disabled={disabled}
-                sx={{
-                  width: "30px",
-                  height: "30px",
-                  borderRadius: "20px",
-                  border: 0,
-                }}
-                edge="end"
-              >
-                <MoreHorizIcon fontSize="small" />
-              </IconButton>
             </>
           ),
           readOnly: true,

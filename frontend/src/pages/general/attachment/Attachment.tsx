@@ -1,55 +1,17 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import AttachmentUpsert from "./AttachmentUpsert";
-import CellFileSize from "@/shared/components/dataGrid/cells/CellFileSize";
-import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
-import CellDownload from "@/shared/components/dataGrid/cells/CellDownload";
-import { type GridColDef } from "@mui/x-data-grid";
 import { useCallback, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { tblAttachment, TypeTblAttachment } from "@/core/api/generated/api";
-
-const getRowId = (row: TypeTblAttachment) => row.attachmentId;
-
-// === Columns ===
-const columns: GridColDef<TypeTblAttachment>[] = [
-  {
-    field: "Link",
-    headerName: "Link",
-    width: 55,
-    renderCell: ({ row }) => <CellDownload attachmentId={row.attachmentId} />,
-  },
-  { field: "title", headerName: "Title", flex: 1 },
-  { field: "fileName", headerName: "File Name", flex: 1 },
-  {
-    field: "attachmentType",
-    headerName: "Attachment Type",
-    width: 200,
-    valueGetter: (_, row) => row?.tblAttachmentType?.name,
-  },
-  {
-    field: "size",
-    headerName: "Size",
-    width: 100,
-    renderCell: ({ value }) => <CellFileSize value={value} />,
-  },
-  {
-    field: "isUserAttachment",
-    headerName: "User Attachment",
-    type: "boolean",
-    width: 135,
-  },
-  {
-    field: "createdAt",
-    headerName: "Created At",
-    width: 150,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-];
+import { tblAttachment } from "@/core/api/generated/api";
+import { useDialogs } from "@/shared/hooks/useDialogs";
+import { columns, getRowId } from "./AttachmentColumns";
 
 export default function PageAttachment() {
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
-  const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
+  const { dialogs, openDialog, closeDialog } = useDialogs({
+    upsert: false,
+  });
 
   const getAll = useCallback(
     () => tblAttachment.getAll({ include: { tblAttachmentType: true } }),
@@ -66,15 +28,7 @@ export default function PageAttachment() {
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
     setMode("create");
-    handleUpsertOpen();
-  }, []);
-
-  const handleUpsertClose = useCallback(() => {
-    setOpenForm(false);
-  }, []);
-
-  const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true);
+    openDialog("upsert");
   }, []);
 
   return (
@@ -94,10 +48,10 @@ export default function PageAttachment() {
       />
 
       <AttachmentUpsert
-        open={openForm}
+        open={dialogs.upsert}
         mode={mode}
         recordId={selectedRowId}
-        onClose={handleUpsertClose}
+        onClose={() => closeDialog("upsert")}
         onSuccess={handleRefresh}
       />
     </>

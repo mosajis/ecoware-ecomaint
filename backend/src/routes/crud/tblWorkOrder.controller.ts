@@ -21,14 +21,14 @@ export const WorkOrderItemSchema = t.Object({
   compId: t.Number(),
 
   title: t.String(),
-  priority: t.Optional(t.String()),
-  description: t.Optional(t.String()),
-  userComment: t.Optional(t.String()),
+  priority: t.Nullable(t.Number()),
+  description: t.Nullable(t.String()),
+  userComment: t.Nullable(t.String()),
 
-  dueDate: t.Optional(t.String()),
-  created: t.Optional(t.String()),
-  started: t.Optional(t.String()),
-  completed: t.Optional(t.String()),
+  dueDate: t.Nullable(t.Date()),
+  created: t.Nullable(t.Date()),
+  started: t.Nullable(t.Date()),
+  completed: t.Nullable(t.Date()),
 
   tblComponentUnit: t.Optional(
     t.Object({
@@ -36,7 +36,7 @@ export const WorkOrderItemSchema = t.Object({
       compNo: t.String(),
       tblLocation: t.Optional(
         t.Object({
-          name: t.String(),
+          name: t.Optional(t.String()),
         }),
       ),
     }),
@@ -45,7 +45,7 @@ export const WorkOrderItemSchema = t.Object({
   tblCompJob: t.Optional(
     t.Object({
       compJobId: t.Number(),
-      nextDueDate: t.Optional(t.String()),
+      nextDueDate: t.Optional(t.Date()),
       tblJobDescription: t.Optional(
         t.Object({
           jobDescCode: t.String(),
@@ -62,7 +62,7 @@ export const WorkOrderItemSchema = t.Object({
 
   tblPendingType: t.Optional(
     t.Object({
-      pendTypeName: t.String(),
+      pendTypeName: t.Optional(t.String()),
     }),
   ),
 

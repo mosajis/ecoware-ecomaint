@@ -7,10 +7,11 @@ import DisciplineCard from "./_components/CardDiscipline";
 import CardSection from "./_components/CardSection";
 import { useEffect, useState } from "react";
 import { PageHeader } from "../../shared/components/PageHeader";
-import { getStatistics, TypeStatistics } from "@/core/api/api";
+import { getStatistics } from "@/core/api/api";
 import { buildWorkOrderCardsData } from "./cards/cardsWorkOrder";
 import { buildFailureCardsData } from "./cards/cardsFailure";
 import { buildUnplannedCardsData } from "./cards/cardsUnplanned";
+import { TypeStatistics } from "@/core/api/api.types";
 
 const Dashboard = () => {
   const [counts, setCounts] = useState<TypeStatistics | null>(null);

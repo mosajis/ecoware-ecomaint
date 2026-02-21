@@ -1,7 +1,6 @@
-// cardsWorkOrder.ts
 import { toPercent } from "@/shared/utils/zodUtils";
 import { KPI_COLORS } from "../_consts/colors";
-import { TypeStatistics } from "@/core/api/api";
+import { TypeStatistics } from "@/core/api/api.types";
 
 export const buildWorkOrderCardsData = (counts: TypeStatistics) => [
   {

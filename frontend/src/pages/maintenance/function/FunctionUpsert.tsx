@@ -2,13 +2,13 @@ import * as z from "zod";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
+import NumberField from "@/shared/components/fields/FieldNumber";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { buildRelation, requiredStringField } from "@/core/helper";
-import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { memo, useCallback, useEffect, useState } from "react";
 import { tblFunctions, TypeTblFunctions } from "@/core/api/generated/api";
-import NumberField from "@/shared/components/fields/FieldNumber";
 
 const schema = z.object({
   funcNo: requiredStringField(),
@@ -105,7 +105,11 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           funcNo: d.funcNo,
           funcDesc: d.funcDesc,
           orderNo: d.orderNo,
-          ...buildRelation("tblFunctions", "functionId", d.parent?.functionId),
+          ...buildRelation(
+            "tblFunctions",
+            "functionId",
+            d.parent?.functionId ?? null,
+          ),
         };
 
         let result: TypeTblFunctions;

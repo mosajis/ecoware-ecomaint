@@ -1,6 +1,4 @@
-// cardsFailure.ts
-import { TypeStatistics } from "@/core/api/api";
-import { KPI_COLORS } from "../_consts/colors";
+import { TypeStatistics } from "@/core/api/api.types";
 
 export const buildFailureCardsData = (counts: TypeStatistics) => [
   {

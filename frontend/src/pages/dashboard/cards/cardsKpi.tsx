@@ -1,5 +1,5 @@
+import { TypeStatistics } from "@/core/api/api.types";
 import { KPI_COLORS } from "../_consts/colors";
-import { TypeStatistics } from "@/core/api/api";
 
 export const buildKpiCardsData = (counts: TypeStatistics) => [
   {

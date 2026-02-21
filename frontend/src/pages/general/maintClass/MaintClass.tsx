@@ -1,30 +1,29 @@
-import MaintClassFormDialog from "./MaintClassUpsert.js";
-import MaintTypeFormDialog from "./MaintTypeUpsert.js";
-import MaintCauseFormDialog from "./MaintCauseUpsert.js";
+import MaintClassUpsert from "./MaintClassUpsert.js";
+import MaintTypeUpsert from "./MaintTypeUpsert.js";
+import MaintCauseUpsert from "./MaintCauseUpsert.js";
 import Splitter from "@/shared/components/Splitter/Splitter.js";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import { useDialogs } from "@/shared/hooks/useDialogs.js";
 import { useState, useCallback } from "react";
-import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid.js";
 import {
   tblMaintType,
   tblMaintClass,
   tblMaintCause,
-  TypeTblMaintCause,
-  TypeTblMaintType,
-  TypeTblMaintClass,
 } from "@/core/api/generated/api";
-
-const getRowIdClass = (row: TypeTblMaintClass) => row.maintClassId;
-const getRowIdCause = (row: TypeTblMaintCause) => row.maintCauseId;
-const getRowIdType = (row: TypeTblMaintType) => row.maintTypeId;
-
-const columns: GridColDef<any>[] = [
-  { field: "descr", headerName: "Description", flex: 1 },
-  { field: "orderNo", headerName: "Order No", width: 80 },
-];
+import {
+  columns,
+  getRowIdCause,
+  getRowIdClass,
+  getRowIdType,
+} from "./MaintColumns.js";
 
 export default function PageMaintClass() {
+  const { dialogs, openDialog, closeDialog } = useDialogs({
+    upsertType: false,
+    upsertCause: false,
+    upsertClass: false,
+  });
   // ---------------- Maint Type ----------------
   const {
     rows: typeRows,
@@ -33,7 +32,6 @@ export default function PageMaintClass() {
     handleRefresh: refreshType,
   } = useDataGrid(tblMaintType.getAll, tblMaintType.deleteById, "maintTypeId");
 
-  const [openType, setOpenType] = useState(false);
   const [modeType, setModeType] = useState<"create" | "update">("create");
   const [selectedTypeId, setSelectedTypeId] = useState<number | null>(null);
 
@@ -41,14 +39,10 @@ export default function PageMaintClass() {
     (mode: "create" | "update" = "create", id?: number) => {
       setModeType(mode);
       setSelectedTypeId(id ?? null);
-      setOpenType(true);
+      openDialog("upsertType");
     },
     [],
   );
-
-  const closeUpsertMaintType = useCallback(() => {
-    setOpenType(false);
-  }, []);
 
   // ---------------- Maint Class ----------------
   const {
@@ -62,7 +56,6 @@ export default function PageMaintClass() {
     "maintClassId",
   );
 
-  const [openClass, setOpenClass] = useState(false);
   const [modeClass, setModeClass] = useState<"create" | "update">("create");
   const [selectedClassId, setSelectedClassId] = useState<number | null>(null);
 
@@ -70,14 +63,10 @@ export default function PageMaintClass() {
     (mode: "create" | "update" = "create", id?: number) => {
       setModeClass(mode);
       setSelectedClassId(id ?? null);
-      setOpenClass(true);
+      openDialog("upsertClass");
     },
     [],
   );
-
-  const closeUpsertMaintClass = useCallback(() => {
-    setOpenClass(false);
-  }, []);
 
   // ---------------- Maint Cause ----------------
 
@@ -92,7 +81,6 @@ export default function PageMaintClass() {
     "maintCauseId",
   );
 
-  const [openCause, setOpenCause] = useState(false);
   const [modeCause, setModeCause] = useState<"create" | "update">("create");
   const [selectedCauseId, setSelectedCauseId] = useState<number | null>(null);
 
@@ -100,14 +88,10 @@ export default function PageMaintClass() {
     (mode: "create" | "update" = "create", id?: number) => {
       setModeCause(mode);
       setSelectedCauseId(id ?? null);
-      setOpenCause(true);
+      openDialog("upsertCause");
     },
     [],
   );
-
-  const closeUpsertMaintCause = useCallback(() => {
-    setOpenCause(false);
-  }, []);
 
   return (
     <>
@@ -166,27 +150,27 @@ export default function PageMaintClass() {
         </Splitter>
       </Splitter>
 
-      <MaintTypeFormDialog
-        open={openType}
+      <MaintTypeUpsert
+        open={dialogs.upsertType}
         mode={modeType}
         recordId={selectedTypeId}
-        onClose={closeUpsertMaintType}
+        onClose={() => closeDialog("upsertType")}
         onSuccess={refreshType}
       />
 
-      <MaintClassFormDialog
-        open={openClass}
+      <MaintClassUpsert
+        open={dialogs.upsertClass}
         mode={modeClass}
         recordId={selectedClassId}
-        onClose={closeUpsertMaintClass}
+        onClose={() => closeDialog("upsertClass")}
         onSuccess={refreshClass}
       />
 
-      <MaintCauseFormDialog
-        open={openCause}
+      <MaintCauseUpsert
+        open={dialogs.upsertCause}
         mode={modeCause}
         recordId={selectedCauseId}
-        onClose={closeUpsertMaintCause}
+        onClose={() => closeDialog("upsertCause")}
         onSuccess={refreshCause}
       />
     </>

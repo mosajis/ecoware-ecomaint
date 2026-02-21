@@ -2,55 +2,34 @@ import Splitter from "@/shared/components/Splitter/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import FunctionUpsert from "./FunctionUpsert";
 import DialogInstallRemoveComponent from "./_components/DialogInstallRemoveComponent";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import Add from "@mui/icons-material/Add";
-import Remove from "@mui/icons-material/Remove";
+import FunctionActions from "./FunctionActions";
 import { useRouter } from "@tanstack/react-router";
 import { useDataTree } from "@/shared/hooks/useDataTree";
 import { mapToTree } from "@/shared/components/tree/TreeUtil";
 import { GenericTree } from "@/shared/components/tree/Tree";
-import { GridColDef } from "@mui/x-data-grid";
+import { useDialogs } from "@/shared/hooks/useDialogs";
 import { useCallback, useState, useMemo } from "react";
 import { tblFunctions, TypeTblFunctions } from "@/core/api/generated/api";
 import { routeDetail } from "./FunctionRoutes";
-
-const getRowId = (row: TypeTblFunctions) => row.functionId;
-const getItemName = (row: TypeTblFunctions) => row.funcNo || "-";
-
-const columns: GridColDef<TypeTblFunctions>[] = [
-  { field: "funcNo", headerName: "Function No", flex: 1 },
-  { field: "funcDesc", headerName: "Function Desc", flex: 1 },
-  {
-    field: "component",
-    headerName: "Component",
-    flex: 1,
-    valueGetter: (_, row) => row.tblComponentUnit?.compNo,
-  },
-  { field: "orderNo", headerName: "Order No", width: 85 },
-];
+import { columns, getItemName, getRowId } from "./FunctionColumn";
 
 export default function PageFunction() {
   const router = useRouter();
 
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
-  const [openForm, setOpenForm] = useState(false);
-  const [mode, setMode] = useState<"create" | "update">("create");
 
-  const [componentDialog, setComponentDialog] = useState<{
-    open: boolean;
-    mode: "install" | "remove";
-  } | null>(null);
+  const { dialogs, openDialog, closeDialog } = useDialogs({
+    upsert: false,
+    install: false,
+    remove: false,
+  });
 
   const getAll = useCallback(() => {
     return tblFunctions.getAll({
-      include: {
-        tblComponentUnit: true,
-      },
+      include: { tblComponentUnit: true },
     });
   }, []);
 
-  // === tree mapper ===
   const treeMapper = useCallback(
     (items: TypeTblFunctions[]) =>
       mapToTree(items, "functionId", "parentFunctionId"),
@@ -76,25 +55,18 @@ export default function PageFunction() {
 
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
-    setMode("create");
-    setOpenForm(true);
+    openDialog("upsert");
   }, []);
 
   const handleEdit = useCallback((rowId: number) => {
     setSelectedRowId(rowId);
-    setMode("update");
-    setOpenForm(true);
-  }, []);
-
-  const handleUpsertClose = useCallback(() => {
-    setOpenForm(false);
+    openDialog("upsert");
   }, []);
 
   const handleRowDoubleClick = useCallback(
     (rowId: number) => {
       const row = rows.find((i) => i.functionId === rowId);
       if (!row) return;
-
       router.navigate({
         to: routeDetail.to,
         params: { id: rowId },
@@ -132,51 +104,43 @@ export default function PageFunction() {
           onRefreshClick={refetch}
           onRowClick={handleRowClick}
           toolbarChildren={
-            <Box display={"flex"}>
-              <Button
-                disabled={!selectedRow || !!selectedRow?.compId}
-                size="small"
-                startIcon={<Add />}
-                onClick={() =>
-                  setComponentDialog({ open: true, mode: "install" })
-                }
-              >
-                Install Component
-              </Button>
-
-              <Button
-                color="error"
-                size="small"
-                startIcon={<Remove />}
-                disabled={!selectedRow || !selectedRow?.compId}
-                onClick={() =>
-                  setComponentDialog({ open: true, mode: "remove" })
-                }
-              >
-                Remove Component
-              </Button>
-            </Box>
+            <FunctionActions
+              selectedRow={selectedRow}
+              onInstall={() => openDialog("install")}
+              onRemove={() => openDialog("remove")}
+            />
           }
         />
       </Splitter>
 
       <FunctionUpsert
-        open={openForm}
-        mode={mode}
+        open={dialogs.upsert}
+        mode={selectedRowId ? "update" : "create"}
         recordId={selectedRowId}
-        onClose={handleUpsertClose}
+        onClose={() => closeDialog("upsert")}
         onSuccess={refetch}
       />
 
-      {componentDialog && selectedRow && (
-        <DialogInstallRemoveComponent
-          open={componentDialog.open}
-          mode={componentDialog.mode}
-          functionId={selectedRow.functionId}
-          compId={selectedRow.compId}
-          onClose={() => setComponentDialog(null)}
-          onSuccess={refetch}
-        />
+      {selectedRow && (
+        <>
+          <DialogInstallRemoveComponent
+            open={dialogs.install}
+            mode="install"
+            functionId={selectedRow.functionId}
+            compId={selectedRow.compId}
+            onClose={() => closeDialog("install")}
+            onSuccess={refetch}
+          />
+
+          <DialogInstallRemoveComponent
+            open={dialogs.remove}
+            mode="remove"
+            functionId={selectedRow.functionId}
+            compId={selectedRow.compId}
+            onClose={() => closeDialog("remove")}
+            onSuccess={refetch}
+          />
+        </>
       )}
     </>
   );

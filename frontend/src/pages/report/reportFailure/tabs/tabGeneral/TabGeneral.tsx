@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { memo, useCallback, useEffect, useState } from "react";
 import { schema, DEFAULT_VALUES, SchemaValue } from "./TabGeneralSchema";
 import { buildRelation } from "@/core/helper";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { atomUser, atomUserDiscipline } from "@/pages/auth/auth.atom";
 import { atomInitData } from "../../FailureReportAtom";
 import {
@@ -40,6 +40,9 @@ function TabGeneral({ mode, failureReportId, compId }: Props) {
   const [initData, setInitData] = useAtom(atomInitData);
   const [loading, setLoading] = useState(false);
 
+  const _failureReportId =
+    failureReportId ?? initData.failureReport?.failureReportId;
+
   const {
     control,
     handleSubmit,
@@ -56,7 +59,7 @@ function TabGeneral({ mode, failureReportId, compId }: Props) {
   });
 
   const component = watch("component");
-  const isDisabled = loading || isSubmitting || !!compId;
+  const isDisabled = loading || isSubmitting;
 
   // Populate form from initData
   useEffect(() => {
@@ -76,8 +79,7 @@ function TabGeneral({ mode, failureReportId, compId }: Props) {
       failureSeverity: failureReport?.tblFailureSeverityLevel ?? null,
       failureStatus: failureReport?.tblFailureStatus ?? null,
       failureGroupFollow: failureReport?.tblFailureGroupFollow ?? null,
-      failureDesc:
-        maintLog?.history ?? failureReport?.tblMaintLog?.history ?? "",
+      failureDesc: failureReport?.tblMaintLog?.history ?? "",
       followDesc: failureReport?.followDesc ?? "",
       nextFollowDate: failureReport?.nextFollowDate ?? null,
       maintClass: maintLog?.tblMaintClass ?? null,
@@ -172,7 +174,7 @@ function TabGeneral({ mode, failureReportId, compId }: Props) {
           ),
         };
 
-        if (mode === "create" && !initData.failureReport?.failureReportId) {
+        if (mode === "create" && !_failureReportId) {
           const res = await tblFailureReports.count();
           const failureNumber = res.count + 1;
 
@@ -193,30 +195,63 @@ function TabGeneral({ mode, failureReportId, compId }: Props) {
             ),
           });
 
+          const [fullMaintLog, fullFailureReport] = await Promise.all([
+            tblMaintLog.getById(createdMaintLog.maintLogId, {
+              include: {
+                tblComponentUnit: { include: { tblLocation: true } },
+                tblMaintClass: true,
+                tblMaintCause: true,
+                tblMaintType: true,
+                tblDiscipline: true,
+              },
+            }),
+            tblFailureReports.getById(createdFailureReport.failureReportId, {
+              include: {
+                tblFailureSeverityLevel: true,
+                tblFailureStatus: true,
+                tblFailureGroupFollow: true,
+                tblLocation: true,
+                tblMaintLog: {
+                  include: {
+                    tblComponentUnit: { include: { tblLocation: true } },
+                  },
+                },
+              },
+            }),
+          ]);
+
           setInitData({
-            maintLog: createdMaintLog,
-            failureReport: createdFailureReport,
+            maintLog: fullMaintLog as any,
+            failureReport: fullFailureReport,
           });
         } else {
-          const existingFailureReport = await tblFailureReports.getById(
-            failureReportId!,
-          );
+          // ✅ Bug Fix 1: از _failureReportId برای هر دو استفاده می‌کنیم
+          if (_failureReportId) {
+            const existingFailureReport =
+              await tblFailureReports.getById(_failureReportId);
 
-          if (existingFailureReport.maintLogId) {
-            await tblMaintLog.update(
-              existingFailureReport.maintLogId,
-              maintLogBody,
-            );
+            if (existingFailureReport.maintLogId) {
+              await tblMaintLog.update(
+                existingFailureReport.maintLogId,
+                maintLogBody,
+              );
+            }
+
+            // ✅ Bug Fix 1: قبلاً `failureReportId` (prop) بود، الان `_failureReportId` هست
+            await tblFailureReports.update(_failureReportId, failureReportBody);
           }
 
-          await tblFailureReports.update(failureReportId!, failureReportBody);
+          // ✅ Bug Fix 2: بعد از update فرم رو reset می‌کنیم تا isDirty برگرده به false
+          reset(values, { keepValues: true });
         }
+
         toast.success("Failure Report saved");
       } catch (error) {
         toast.error("Error saving Failure Report");
       }
     },
-    [mode, failureReportId, user, userDiscipline, initData, setInitData],
+    // ✅ Bug Fix 3: _failureReportId به deps اضافه شد
+    [mode, _failureReportId, user, userDiscipline, setInitData, reset],
   );
 
   return (

@@ -4,12 +4,12 @@ import { tblMaintLogAttachment } from "@/core/api/generated/api";
 import { atomInitData } from "../FailureReportAtom";
 
 const TabAttachments = () => {
-  const { failureReport } = useAtomValue(atomInitData);
-  const failureReportId = failureReport?.failureReportId;
+  const { maintLog } = useAtomValue(atomInitData);
+  const maintLogId = maintLog?.maintLogId;
 
   return (
     <AttachmentMap
-      filterId={failureReportId}
+      filterId={maintLogId}
       filterKey="maintLogId"
       relName="tblMaintLog"
       tableId="maintLogAttachmentId"

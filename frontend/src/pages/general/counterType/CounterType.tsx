@@ -5,21 +5,7 @@ import CounterTypeUpsert from "./CounterTypeUpsert";
 import { useState, useCallback } from "react";
 import { tblCounterType, TypeTblCounterType } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { GridColDef } from "@mui/x-data-grid";
-
-const getRowId = (row: TypeTblCounterType) => row.counterTypeId;
-
-const columns: GridColDef<TypeTblCounterType>[] = [
-  { field: "name", headerName: "Name", flex: 1 },
-
-  {
-    field: "type",
-    headerName: "Type",
-    width: 120,
-    valueGetter: (_, row) => (row.type === 3 ? "Measure Point" : "Counter"),
-  },
-  { field: "orderNo", headerName: "Order No", width: 80 },
-];
+import { columns, getRowId } from "./CounterTypeColumns";
 
 export default function PageCounterType() {
   const [openForm, setOpenForm] = useState(false);

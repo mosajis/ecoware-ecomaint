@@ -16,42 +16,52 @@ import {
 
 const MaintLogItemSchema = t.Object({
   maintLogId: t.Number(),
-  dateDone: t.Any(),
-  downTime: t.Any(),
-  unexpected: t.Optional(t.Union([t.Boolean(), t.Number(), t.Null()])),
+  dateDone: t.Nullable(t.Date()),
+  downTime: t.Nullable(t.Number()),
+  unexpected: t.Nullable(t.Union([t.Boolean(), t.Number(), t.Null()])),
   tblComponentUnit: t.Optional(
-    t.Object({
-      compNo: t.Optional(t.String()),
-    }),
+    t.Nullable(
+      t.Object({
+        compNo: t.Nullable(t.String()),
+      }),
+    ),
   ),
-  tblJobDescription: t.Optional(
+  tblJobDescription: t.Nullable(
     t.Object({
-      jobDescCode: t.Optional(t.String()),
-      jobDescTitle: t.Optional(t.String()),
+      jobDescCode: t.Nullable(t.String()),
+      jobDescTitle: t.Nullable(t.String()),
     }),
   ),
   tblWorkOrder: t.Optional(
+    t.Nullable(
+      t.Object({
+        description: t.Nullable(t.String()),
+      }),
+    ),
+  ),
+  tblFollowStatus: t.Nullable(
     t.Object({
-      tblDiscipline: t.Optional(
-        t.Object({
-          name: t.String(),
-        }),
-      ),
+      fsName: t.Nullable(t.String()),
     }),
   ),
-  tblFollowStatus: t.Optional(
+  tblMaintClass: t.Nullable(
     t.Object({
-      fsName: t.Optional(t.String()),
+      descr: t.Nullable(t.String()),
     }),
   ),
-  tblMaintClass: t.Optional(
+  tblMaintType: t.Nullable(
     t.Object({
-      descr: t.Optional(t.String()),
+      descr: t.Nullable(t.String()),
     }),
   ),
-  tblDiscipline: t.Optional(
+  tblMaintCause: t.Nullable(
     t.Object({
-      name: t.Optional(t.String()),
+      descr: t.Nullable(t.String()),
+    }),
+  ),
+  tblDiscipline: t.Nullable(
+    t.Object({
+      name: t.Nullable(t.String()),
     }),
   ),
 });
@@ -124,6 +134,12 @@ const ControllerTblMaintLog = new BaseController({
               select: { fsName: true },
             },
             tblMaintClass: {
+              select: { descr: true },
+            },
+            tblMaintType: {
+              select: { descr: true },
+            },
+            tblMaintCause: {
               select: { descr: true },
             },
           },

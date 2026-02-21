@@ -4,15 +4,15 @@ import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import NumberField from "@/shared/components/fields/FieldNumber";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { memo, useEffect, useState, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
 import { DEFAULT_VALUES, schema, SchemaValue } from "./ComponentUnitSchema";
 import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
-import { logicTblComponentUnit } from "@/core/api/api";
+import { effectTblComponentUnit } from "@/core/api/apiEffects";
 import {
   tblAddress,
   tblComponentUnit,
@@ -137,18 +137,27 @@ function ComponentUnitUpsert({
           isCritical: v.isCritical ? 1 : 0,
           orderNo: v.orderNo ?? null,
           ...buildRelation("tblCompType", "compTypeId", v.compType?.compTypeId),
-          ...buildRelation("tblLocation", "locationId", v.location?.locationId),
+          ...buildRelation(
+            "tblLocation",
+            "locationId",
+            v.location?.locationId ?? null,
+          ),
           ...buildRelation("tblCompStatus", "compStatusId", 1),
-          ...buildRelation("tblAddress", "addressId", v.vendor?.addressId),
-          ...buildRelation("tblComponentUnit", "compId", v.parentComp?.compId),
+          ...buildRelation(
+            "tblAddress",
+            "addressId",
+            v.vendor?.addressId ?? null,
+          ),
+          ...buildRelation(
+            "tblComponentUnit",
+            "compId",
+            v.parentComp?.compId ?? null,
+          ),
         };
 
         if (mode === "create") {
           const result = await tblComponentUnit.create(body);
-          await logicTblComponentUnit.effect(
-            result.compId,
-            user?.userId as number,
-          );
+          await effectTblComponentUnit(result.compId, user?.userId as number);
         } else {
           await tblComponentUnit.update(recordId!, body);
         }

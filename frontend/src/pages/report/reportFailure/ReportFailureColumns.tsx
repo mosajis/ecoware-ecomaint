@@ -2,12 +2,15 @@ import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import CellSeverity from "../_components/CellSeverity";
 import { TypeTblFailureReports } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
+import CellFullName from "@/shared/components/dataGrid/cells/CellFullName";
 
 export const columns: GridColDef<TypeTblFailureReports>[] = [
   {
     field: "failureNumber",
     headerName: "No",
     width: 50,
+    align: "center",
+    headerAlign: "center",
   },
   {
     field: "componentName",
@@ -37,7 +40,7 @@ export const columns: GridColDef<TypeTblFailureReports>[] = [
   },
   {
     field: "discipline",
-    headerName: "Discipline not set",
+    headerName: "Discipline",
     flex: 1,
     // @ts-ignore
     valueGetter: (_, row) => row?.tblMaintLog?.tblDiscipline?.name,
@@ -54,8 +57,8 @@ export const columns: GridColDef<TypeTblFailureReports>[] = [
     headerName: "Report By",
     flex: 1,
     valueGetter: (_, row) =>
-      // @ts-ignore
-      row?.tblMaintLog?.tblUsersTblMaintLogReportedByTotblUsers?.uName,
+      row?.tblMaintLog?.tblUsersTblMaintLogReportedByTotblUsers,
+    renderCell: ({ value }) => <CellFullName value={value} />,
   },
   {
     field: "closedDateTime",
@@ -69,6 +72,7 @@ export const columns: GridColDef<TypeTblFailureReports>[] = [
     headerName: "Closed By",
     flex: 1,
     valueGetter: (_, row) => row?.tblUsers?.uName,
+    renderCell: ({ value }) => <CellFullName value={value} />,
   },
 
   {

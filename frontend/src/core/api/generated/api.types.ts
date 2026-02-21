@@ -38766,30 +38766,34 @@ export interface operations {
                     "application/json": {
                         items: {
                             maintLogId: number;
-                            dateDone: unknown;
-                            downTime: unknown;
-                            unexpected?: boolean | number | null;
-                            tblComponentUnit?: {
-                                compNo?: string;
-                            };
-                            tblJobDescription?: {
-                                jobDescCode?: string;
-                                jobDescTitle?: string;
-                            };
-                            tblWorkOrder?: {
-                                tblDiscipline?: {
-                                    name: string;
-                                };
-                            };
-                            tblFollowStatus?: {
-                                fsName?: string;
-                            };
-                            tblMaintClass?: {
-                                descr?: string;
-                            };
-                            tblDiscipline?: {
-                                name?: string;
-                            };
+                            dateDone: (string | null) | null;
+                            downTime: (number | null) | null;
+                            unexpected: ((boolean | number | null) | null) | null;
+                            tblComponentUnit?: ({
+                                compNo: (string | null) | null;
+                            } | null) | null;
+                            tblJobDescription: ({
+                                jobDescCode: (string | null) | null;
+                                jobDescTitle: (string | null) | null;
+                            } | null) | null;
+                            tblWorkOrder?: ({
+                                description: (string | null) | null;
+                            } | null) | null;
+                            tblFollowStatus: ({
+                                fsName: (string | null) | null;
+                            } | null) | null;
+                            tblMaintClass: ({
+                                descr: (string | null) | null;
+                            } | null) | null;
+                            tblMaintType: ({
+                                descr: (string | null) | null;
+                            } | null) | null;
+                            tblMaintCause: ({
+                                descr: (string | null) | null;
+                            } | null) | null;
+                            tblDiscipline: ({
+                                name: (string | null) | null;
+                            } | null) | null;
                         }[];
                         total: number;
                         page: number;
@@ -54587,18 +54591,18 @@ export interface operations {
                             workOrderId: number;
                             compId: number;
                             title: string;
-                            priority?: string;
-                            description?: string;
-                            userComment?: string;
-                            dueDate?: string;
-                            created?: string;
-                            started?: string;
-                            completed?: string;
+                            priority: (number | null) | null;
+                            description: (string | null) | null;
+                            userComment: (string | null) | null;
+                            dueDate: (string | null) | null;
+                            created: (string | null) | null;
+                            started: (string | null) | null;
+                            completed: (string | null) | null;
                             tblComponentUnit?: {
                                 compId: number;
                                 compNo: string;
                                 tblLocation?: {
-                                    name: string;
+                                    name?: string;
                                 };
                             };
                             tblCompJob?: {
@@ -54613,7 +54617,7 @@ export interface operations {
                                 };
                             };
                             tblPendingType?: {
-                                pendTypeName: string;
+                                pendTypeName?: string;
                             };
                             tblDiscipline?: {
                                 name: string;
@@ -60178,6 +60182,8 @@ export interface operations {
                     "application/json": {
                         workOrder: {
                             total: number;
+                            plan: number;
+                            issue: number;
                             open: number;
                             completed: number;
                             overdue: number;

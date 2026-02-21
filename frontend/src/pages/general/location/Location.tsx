@@ -2,29 +2,20 @@ import Splitter from "@/shared/components/Splitter/Splitter";
 import LocationUpsert from "./LocationUpsert";
 import GenericDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { tblLocation, TypeTblLocation } from "@/core/api/generated/api";
-import { GridColDef } from "@mui/x-data-grid";
 import { useDataTree } from "@/shared/hooks/useDataTree";
 import { useState, useCallback } from "react";
 import { GenericTree } from "@/shared/components/tree/Tree";
 import { mapToTree } from "@/shared/components/tree/TreeUtil";
+import { useDialogs } from "@/shared/hooks/useDialogs";
+import { columns, getRowId } from "./LocationColumns";
 
-const getRowId = (row: TypeTblLocation) => row.locationId;
 const getItemName = (row: TypeTblLocation) => row.name || "-";
 
-const columns: GridColDef<TypeTblLocation>[] = [
-  { field: "locationCode", headerName: "Code", width: 60 },
-  { field: "name", headerName: "Name", flex: 1 },
-  {
-    field: "parentLocation",
-    headerName: "Parent",
-    flex: 1,
-    valueGetter: (_, row) => row?.tblLocation?.name,
-  },
-  { field: "orderNo", headerName: "Order No", width: 80 },
-];
-
 export default function PageLocation() {
-  const [openForm, setOpenForm] = useState(false);
+  const { dialogs, openDialog, closeDialog } = useDialogs({
+    upsert: false,
+  });
+
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
@@ -55,21 +46,13 @@ export default function PageLocation() {
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
     setMode("create");
-    handleUpsertOpen();
+    openDialog("upsert");
   }, []);
 
   const handleEdit = useCallback((rowId: number) => {
     setSelectedRowId(rowId);
     setMode("update");
-    handleUpsertOpen();
-  }, []);
-
-  const handleUpsertClose = useCallback(() => {
-    setOpenForm(false);
-  }, []);
-
-  const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true);
+    openDialog("upsert");
   }, []);
 
   return (
@@ -105,10 +88,10 @@ export default function PageLocation() {
       </Splitter>
 
       <LocationUpsert
-        open={openForm}
+        open={dialogs.upsert}
         mode={mode}
         recordId={selectedRowId}
-        onClose={handleUpsertClose}
+        onClose={() => closeDialog("upsert")}
         onSuccess={refetch}
       />
     </>

@@ -212,7 +212,7 @@ function TabResourceUsedUpsert({
             <TextField
               label="Discipline"
               size="small"
-              disabled
+              slotProps={{ input: { readOnly: true } }}
               value={field.value?.name ?? ""}
             />
           )}

@@ -1,6 +1,4 @@
-// cardsUnplanned.ts
-import { TypeStatistics } from "@/core/api/api";
-import { KPI_COLORS } from "../_consts/colors";
+import { TypeStatistics } from "@/core/api/api.types";
 
 export const buildUnplannedCardsData = (counts: TypeStatistics) => [
   {

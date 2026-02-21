@@ -1,44 +1,17 @@
 import RouteAddress from "@/pages/general/address/AddressRoute";
+import RouteCounterType from "@/pages/general/counterType/CounterTypeRoute";
+import RouteLocation from "@/pages/general/location/LocationRoute";
+import RouteEmployee from "@/pages/general/employee/EmployeeRoute";
+import RouteDiscipline from "@/pages/general/discipline/DisciplineRoute";
+import RouteMaintClass from "@/pages/general/maintClass/MaintClassRoute";
+import RouteFollowStatus from "@/pages/general/followStatus/FollowStatusRoute";
+import RoutePendingType from "@/pages/general/pendingType/PendingTypeRoute";
+import RouteJobClass from "@/pages/general/jobClass/JobClassRoute";
+import RouteJobDescription from "@/pages/general/jobDescription/JobDescriptionRoute";
+import RouteJobTrigger from "@/pages/general/jobTrigger/JobTriggerRoute";
+import RouteAttachment from "@/pages/general/attachment/AttachmentRoute";
 import { createRoute, Outlet } from "@tanstack/react-router";
-import { LazyRoute } from "./_components/lazyRoute";
 import { protectedRoute } from "./protected.routes";
-import { lazy } from "react";
-
-// --- Lazy pages ---
-export const PageAttachment = lazy(
-  () => import("@/pages/general/attachment/Attachment"),
-);
-
-export const PageLocation = lazy(
-  () => import("@/pages/general/location/Location"),
-);
-export const PageEmployee = lazy(
-  () => import("@/pages/general/employee/Employee"),
-);
-export const PageDiscipline = lazy(
-  () => import("@/pages/general/discipline/Discipline"),
-);
-export const PageCounterType = lazy(
-  () => import("@/pages/general/counterType/CounterType"),
-);
-export const PageMaintClass = lazy(
-  () => import("@/pages/general/maintClass/MaintClass"),
-);
-export const PageFollowStatus = lazy(
-  () => import("@/pages/general/followStatus/FollowStatus"),
-);
-export const PagePendingType = lazy(
-  () => import("@/pages/general/pendingType/PendingType"),
-);
-export const PageJobClass = lazy(
-  () => import("@/pages/general/jobClass/JobClass"),
-);
-export const PageJobDescription = lazy(
-  () => import("@/pages/general/jobDescription/JobDescription"),
-);
-export const PageJobTrigger = lazy(
-  () => import("@/pages/general/jobTrigger/JobTrigger"),
-);
 
 // --- General parent route ---
 export const generalRoute = createRoute({
@@ -48,96 +21,19 @@ export const generalRoute = createRoute({
   beforeLoad: () => ({ breadcrumb: "General" }),
 });
 
-// --- General children ---
-export const generalAttachmentRoute = createRoute({
-  getParentRoute: () => generalRoute,
-  path: "attachment",
-  component: () => <LazyRoute Component={PageAttachment} />,
-  beforeLoad: () => ({ breadcrumb: "Attachment" }),
-});
-
-export const generalLocationRoute = createRoute({
-  getParentRoute: () => generalRoute,
-  path: "location",
-  component: () => <LazyRoute Component={PageLocation} />,
-  beforeLoad: () => ({ breadcrumb: "Location" }),
-});
-
-export const generalEmployeeRoute = createRoute({
-  getParentRoute: () => generalRoute,
-  path: "employee",
-  component: () => <LazyRoute Component={PageEmployee} />,
-  beforeLoad: () => ({ breadcrumb: "Employee" }),
-});
-
-export const generalDisciplineRoute = createRoute({
-  getParentRoute: () => generalRoute,
-  path: "discipline",
-  component: () => <LazyRoute Component={PageDiscipline} />,
-  beforeLoad: () => ({ breadcrumb: "Discipline" }),
-});
-
-export const generalCounterTypeRoute = createRoute({
-  getParentRoute: () => generalRoute,
-  path: "counter-type",
-  component: () => <LazyRoute Component={PageCounterType} />,
-  beforeLoad: () => ({ breadcrumb: "Counter Type" }),
-});
-
-export const generalMaintClassRoute = createRoute({
-  getParentRoute: () => generalRoute,
-  path: "maint-class",
-  component: () => <LazyRoute Component={PageMaintClass} />,
-  beforeLoad: () => ({ breadcrumb: "Maint Class" }),
-});
-
-export const generalFollowStatusRoute = createRoute({
-  getParentRoute: () => generalRoute,
-  path: "follow-status",
-  component: () => <LazyRoute Component={PageFollowStatus} />,
-  beforeLoad: () => ({ breadcrumb: "Follow Status" }),
-});
-
-export const generalPendingTypeRoute = createRoute({
-  getParentRoute: () => generalRoute,
-  path: "pending-type",
-  component: () => <LazyRoute Component={PagePendingType} />,
-  beforeLoad: () => ({ breadcrumb: "Pending Type" }),
-});
-
-export const generalJobClassRoute = createRoute({
-  getParentRoute: () => generalRoute,
-  path: "job-class",
-  component: () => <LazyRoute Component={PageJobClass} />,
-  beforeLoad: () => ({ breadcrumb: "Job Class" }),
-});
-
-export const generalJobDescriptionRoute = createRoute({
-  getParentRoute: () => generalRoute,
-  path: "job-description",
-  component: () => <LazyRoute Component={PageJobDescription} />,
-  beforeLoad: () => ({ breadcrumb: "Job Description" }),
-});
-
-export const generalJobTriggerRoute = createRoute({
-  getParentRoute: () => generalRoute,
-  path: "job-trigger",
-  component: () => <LazyRoute Component={PageJobTrigger} />,
-  beforeLoad: () => ({ breadcrumb: "Job Trigger" }),
-});
-
-// --- Add all children to parent ---
-export const generalRouteTree = generalRoute.addChildren([
+generalRoute.addChildren([
   RouteAddress,
-  generalAttachmentRoute,
-  generalLocationRoute,
-  generalEmployeeRoute,
-  generalDisciplineRoute,
-  generalCounterTypeRoute,
-  generalMaintClassRoute,
-  generalFollowStatusRoute,
-  generalPendingTypeRoute,
-  generalJobClassRoute,
-  generalJobDescriptionRoute,
-  generalJobTriggerRoute,
+  RouteCounterType,
+  RouteLocation,
+  RouteEmployee,
+  RouteDiscipline,
+  RouteMaintClass,
+  RouteFollowStatus,
+  RoutePendingType,
+  RouteJobClass,
+  RouteJobDescription,
+  RouteJobTrigger,
+  RouteAttachment,
 ]);
+
+export default generalRoute;

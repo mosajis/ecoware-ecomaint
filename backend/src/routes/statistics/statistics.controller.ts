@@ -11,47 +11,75 @@ export const ControllerStatistics = new Elysia().group("/statistics", (app) =>
       const now = new Date();
 
       // === Work Order Statistics ===
-      const [total, completed, overdue, pending, current, postponed] =
-        await Promise.all([
-          // Total
-          prisma.tblWorkOrder.count(),
+      const [
+        total,
+        completed,
+        overdue,
+        pending,
+        current,
+        postponed,
+        plan,
+        issue,
+      ] = await Promise.all([
+        // Total
+        prisma.tblWorkOrder.count(),
 
-          // Completed
-          prisma.tblMaintLog.count(),
+        // Completed
+        prisma.tblMaintLog.count(),
 
-          // OverDue
-          prisma.tblWorkOrder.count({
-            where: {
-              dueDate: { lt: sevenDaysAgo },
-              workOrderStatusId: { in: [2, 3, 4] },
+        // OverDue
+        prisma.tblWorkOrder.count({
+          where: {
+            dueDate: { lt: sevenDaysAgo },
+            workOrderStatusId: { in: [2, 3, 4] },
+          },
+        }),
+
+        // Pending
+        prisma.tblWorkOrder.count({
+          where: {
+            workOrderStatusId: 4,
+          },
+        }),
+
+        // Current
+        prisma.tblWorkOrder.count({
+          where: {
+            dueDate: {
+              gt: sevenDaysAgo,
+              lt: now,
             },
-          }),
+            workOrderStatusId: { in: [2, 3, 4] },
+          },
+        }),
 
-          // Pending
-          prisma.tblWorkOrder.count({
-            where: {
-              workOrderStatusId: 4,
-            },
-          }),
+        // PostPoned
+        prisma.tblWorkOrder.count({
+          where: {
+            workOrderStatusId: 8,
+          },
+        }),
 
-          // Current
-          prisma.tblWorkOrder.count({
-            where: {
-              dueDate: {
-                gt: sevenDaysAgo,
-                lt: now,
-              },
-              workOrderStatusId: { in: [2, 3, 4] },
+        // Plan
+        prisma.tblWorkOrder.count({
+          where: {
+            dueDate: {
+              lt: now,
             },
-          }),
+            workOrderStatusId: 2,
+          },
+        }),
 
-          // PostPoned
-          prisma.tblWorkOrder.count({
-            where: {
-              workOrderStatusId: 8,
+        // Issue
+        prisma.tblWorkOrder.count({
+          where: {
+            dueDate: {
+              lt: now,
             },
-          }),
-        ]);
+            workOrderStatusId: 3,
+          },
+        }),
+      ]);
 
       // === Failure Report Statistics ===
       const [
@@ -175,6 +203,8 @@ export const ControllerStatistics = new Elysia().group("/statistics", (app) =>
 
       return {
         workOrder: {
+          plan,
+          issue,
           total,
           open: overdue + current,
           completed,
@@ -201,6 +231,8 @@ export const ControllerStatistics = new Elysia().group("/statistics", (app) =>
       response: t.Object({
         workOrder: t.Object({
           total: t.Number(),
+          plan: t.Number(),
+          issue: t.Number(),
           open: t.Number(),
           completed: t.Number(),
           overdue: t.Number(),

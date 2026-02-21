@@ -7,6 +7,7 @@ import { lazy } from "react";
 export const PageReportDaily = lazy(
   () => import("@/pages/report/reportDaily/ReportDaily"),
 );
+
 export const PageReportFailure = lazy(
   () => import("@/pages/report/reportFailure/ReportFailure"),
 );

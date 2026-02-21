@@ -1,56 +1,34 @@
 import Splitter from "@/shared/components/Splitter/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import ComponentUnitUpsert from "./ComponentUnitUpsert";
-import DataGridToolbar from "@/shared/components/dataGrid/DataGridToolbar";
 import ReportWorkDialog from "../reportWork/ReportWorkDialog";
-import Button from "@mui/material/Button";
+import ComponentUnitActions from "./ComponentUnitActions";
 import { useRouter } from "@tanstack/react-router";
 import { routeComponentUnitDetail } from "./ComponentUnitRoutes";
 import { useDataTree } from "@/shared/hooks/useDataTree";
 import { mapToTree } from "@/shared/components/tree/TreeUtil";
 import { GenericTree } from "@/shared/components/tree/Tree";
-import { GridColDef } from "@mui/x-data-grid";
 import { useCallback, useState } from "react";
+import { columns, getItemName, getRowId } from "./ComponentUnitColumns";
+import { useDialogs } from "@/shared/hooks/useDialogs";
 import {
   tblComponentUnit,
   TypeTblComponentUnit,
 } from "@/core/api/generated/api";
-
-const getRowId = (row: TypeTblComponentUnit) => row.compId;
-const getItemName = (row: TypeTblComponentUnit) => row.compNo || "-";
-
-const columns: GridColDef<TypeTblComponentUnit>[] = [
-  { field: "compNo", headerName: "Component No", width: 280 },
-  {
-    field: "compType",
-    headerName: "Component Type",
-    flex: 1,
-    valueGetter: (_, row) => row.tblCompType?.compName ?? "",
-  },
-  { field: "model", headerName: "Model / Type", flex: 1 },
-  {
-    field: "locationId",
-    headerName: "Location",
-    flex: 1,
-    valueGetter: (_, row) => row.tblLocation?.name ?? "",
-  },
-  { field: "serialNo", headerName: "Serial No", flex: 1 },
-  {
-    field: "statusId",
-    headerName: "Status",
-    width: 120,
-    valueGetter: (_, row) => row.tblCompStatus?.compStatusName ?? "",
-  },
-  { field: "orderNo", headerName: "Order No", width: 85 },
-];
+import ReportFailureUpsert from "@/pages/report/reportFailure/ReportFailureUpsert";
 
 export default function PageComponentUnit() {
   const router = useRouter();
 
-  const [reportWork, setReportWork] = useState(false);
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
-  const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
+
+  const { dialogs, openDialog, closeDialog } = useDialogs({
+    upsert: false,
+    reportWork: false,
+    workShop: false,
+    failureReport: false,
+  });
 
   const getAll = useCallback(() => {
     return tblComponentUnit.getAll({
@@ -79,30 +57,13 @@ export default function PageComponentUnit() {
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
     setMode("create");
-    handleUpsertOpen();
+    openDialog("upsert");
   }, []);
 
   const handleEdit = useCallback((rowId: number) => {
     setSelectedRowId(rowId);
     setMode("update");
-    handleUpsertOpen();
-  }, []);
-
-  const handleUpsertClose = useCallback(() => {
-    setOpenForm(false);
-  }, []);
-
-  const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true);
-  }, []);
-
-  const openDialogReportWork = useCallback(() => {
-    if (!selectedRowId) return;
-    setReportWork(true);
-  }, [selectedRowId]);
-
-  const closeDialogReportWork = useCallback(() => {
-    setReportWork(false);
+    openDialog("upsert");
   }, []);
 
   const handleRowDoubleClick = useCallback(
@@ -122,6 +83,11 @@ export default function PageComponentUnit() {
   const handleRowClick = ({ row }: { row: TypeTblComponentUnit }) => {
     setSelectedRowId(row.compId);
   };
+
+  const handleRoutineClick = () => {};
+
+  const selectedRow = rows.find((r) => r.compId === selectedRowId) || null;
+
   return (
     <>
       <Splitter initialPrimarySize="30%">
@@ -152,40 +118,38 @@ export default function PageComponentUnit() {
           onRowClick={handleRowClick}
           onRefreshClick={refetch}
           toolbarChildren={
-            <>
-              <Button disabled={!selectedRowId} onClick={openDialogReportWork}>
-                Routine Job
-              </Button>
-              <Button disabled={!selectedRowId} onClick={openDialogReportWork}>
-                None-Routine Job
-              </Button>
-              <Button disabled={!selectedRowId} onClick={openDialogReportWork}>
-                Failure Report
-              </Button>
-              <Button disabled={!selectedRowId} onClick={openDialogReportWork}>
-                WorkShop Job
-              </Button>
-            </>
+            <ComponentUnitActions
+              selectedRow={selectedRow}
+              onWorkShop={() => openDialog("workShop")}
+              onFailureReport={() => openDialog("failureReport")}
+              onNoneRoutine={() => openDialog("reportWork")}
+              onRoutine={handleRoutineClick}
+            />
           }
         />
       </Splitter>
 
       <ComponentUnitUpsert
-        open={openForm}
+        open={dialogs.upsert}
         mode={mode}
         recordId={selectedRowId}
-        onClose={handleUpsertClose}
+        onClose={() => closeDialog("upsert")}
         onSuccess={refetch}
       />
 
       <ReportWorkDialog
-        open={reportWork}
-        onClose={closeDialogReportWork}
-        onSuccess={() => {
-          closeDialogReportWork();
-          refetch();
-        }}
+        open={dialogs.reportWork}
+        onClose={() => closeDialog("reportWork")}
+        onSuccess={() => closeDialog("reportWork")}
         componentUnitId={selectedRowId ?? undefined}
+      />
+
+      <ReportFailureUpsert
+        open={dialogs.failureReport}
+        mode={"create"}
+        compId={selectedRowId!}
+        onClose={() => closeDialog("failureReport")}
+        onSuccess={() => closeDialog("failureReport")}
       />
     </>
   );

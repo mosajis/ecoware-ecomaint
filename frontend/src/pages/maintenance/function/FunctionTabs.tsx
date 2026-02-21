@@ -11,12 +11,14 @@ import { lazy } from "react";
 import { TypeTblFunctions } from "@/core/api/generated/api";
 
 // Lazy-loaded components
-const TabJob = lazy(() => import("./tabs/TabJob"));
-const TabCounter = lazy(() => import("./tabs/TabCounter"));
-const TabWorkOrder = lazy(() => import("./tabs/TabWorkOrder"));
+const TabJob = lazy(() => import("./tabs/tabJob/TabJob"));
+const TabCounter = lazy(() => import("./tabs/tabCounter/TabCounter"));
+const TabWorkOrder = lazy(() => import("./tabs/tabWorkOrder/TabWorkOrder"));
 const TabMaintLog = lazy(() => import("./tabs/TabMaintLog"));
 const TabFailureReport = lazy(() => import("./tabs/TabFailureReport"));
-const TabRotationLog = lazy(() => import("./tabs/TabRotationLog"));
+const TabRotationLog = lazy(
+  () => import("./tabs/tabRotationLog/TabRotationLog"),
+);
 
 type Props = {
   recordFunction?: TypeTblFunctions;

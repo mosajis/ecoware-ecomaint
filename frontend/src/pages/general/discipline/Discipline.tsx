@@ -1,22 +1,18 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import DisciplineFormDialog from "./DisciplineUpsert";
 import { useState, useCallback } from "react";
-import { tblDiscipline, TypeTblDiscipline } from "@/core/api/generated/api";
-import { GridColDef } from "@mui/x-data-grid";
+import { tblDiscipline } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-
-const getRowId = (row: TypeTblDiscipline) => row.discId;
-
-// === Columns ===
-const columns: GridColDef<TypeTblDiscipline>[] = [
-  { field: "name", headerName: "Name", flex: 1 },
-  { field: "orderNo", headerName: "Order No", width: 80 },
-];
+import { useDialogs } from "@/shared/hooks/useDialogs";
+import { columns, getRowId } from "./DisciplineColumns";
 
 export default function PageDiscipline() {
-  const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+
+  const { dialogs, openDialog, closeDialog } = useDialogs({
+    upsert: false,
+  });
 
   // === Hook ===
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
@@ -29,21 +25,13 @@ export default function PageDiscipline() {
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
     setMode("create");
-    handleUpsertOpen();
+    openDialog("upsert");
   }, []);
 
   const handleEdit = useCallback((rowId: number) => {
     setSelectedRowId(rowId);
     setMode("update");
-    handleUpsertOpen();
-  }, []);
-
-  const handleUpsertClose = useCallback(() => {
-    setOpenForm(false);
-  }, []);
-
-  const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true);
+    openDialog("upsert");
   }, []);
 
   return (
@@ -62,10 +50,10 @@ export default function PageDiscipline() {
       />
 
       <DisciplineFormDialog
-        open={openForm}
+        open={dialogs.upsert}
         mode={mode}
         recordId={selectedRowId}
-        onClose={handleUpsertClose}
+        onClose={() => closeDialog("upsert")}
         onSuccess={handleRefresh}
       />
     </>

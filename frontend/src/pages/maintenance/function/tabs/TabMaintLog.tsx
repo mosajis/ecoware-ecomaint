@@ -25,17 +25,6 @@ const TabMaintLog = (props: Props) => {
         filter: {
           compId: compId,
         },
-        include: {
-          tblWorkOrder: {
-            include: {
-              tblDiscipline: true,
-            },
-          },
-          tblFollowStatus: true,
-          tblComponentUnit: true,
-          tblMaintClass: true,
-          tblJobDescription: true,
-        },
       }),
     [compId],
   );

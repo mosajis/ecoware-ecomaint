@@ -1,278 +1,355 @@
+import React from "react";
+import type { ReactNode } from "react";
+// ================= ICONS =================
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
+import CategoryRoundedIcon from "@mui/icons-material/CategoryRounded";
 import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
 import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded";
 import BadgeRoundedIcon from "@mui/icons-material/BadgeRounded";
-import CategoryRoundedIcon from "@mui/icons-material/CategoryRounded";
-import BuildRoundedIcon from "@mui/icons-material/BuildRounded";
-import ShapeLineIcon from "@mui/icons-material/ShapeLine";
-import Inventory2RoundedIcon from "@mui/icons-material/Inventory2Rounded";
-import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
-import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
-import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
-import PrecisionManufacturingRoundedIcon from "@mui/icons-material/PrecisionManufacturingRounded";
-import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
-import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
-import LoopRoundedIcon from "@mui/icons-material/LoopRounded";
-import PostAddRoundedIcon from "@mui/icons-material/PostAddRounded";
-import FlashOnRoundedIcon from "@mui/icons-material/FlashOnRounded";
-import UpdateRoundedIcon from "@mui/icons-material/UpdateRounded";
-import HistoryRoundedIcon from "@mui/icons-material/HistoryRounded";
-import ExploreRoundedIcon from "@mui/icons-material/ExploreRounded";
-import ListAltRoundedIcon from "@mui/icons-material/ListAltRounded";
-import WorkHistoryRoundedIcon from "@mui/icons-material/WorkHistoryRounded";
+import HubRoundedIcon from "@mui/icons-material/HubRounded";
+import NumbersRoundedIcon from "@mui/icons-material/NumbersRounded";
+import AutorenewRoundedIcon from "@mui/icons-material/AutorenewRounded";
+import HourglassBottomRoundedIcon from "@mui/icons-material/HourglassBottomRounded";
+import WorkOutlineRoundedIcon from "@mui/icons-material/WorkOutlineRounded";
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
-import HourglassEmptyRoundedIcon from "@mui/icons-material/HourglassEmptyRounded";
-import BrightnessAutoIcon from "@mui/icons-material/BrightnessAuto";
-import Box from "@mui/material/Box";
-import DoneAllIcon from "@mui/icons-material/DoneAll";
-import Upload from "@mui/icons-material/Upload";
-import TodayRoundedIcon from "@mui/icons-material/TodayRounded";
+import FlashOnRoundedIcon from "@mui/icons-material/FlashOnRounded";
+import AttachFileRoundedIcon from "@mui/icons-material/AttachFileRounded";
+import StartIcon from "@mui/icons-material/Star";
+import ApartmentIcon from "@mui/icons-material/Apartment";
+import BuildRoundedIcon from "@mui/icons-material/BuildRounded";
+import SettingsSuggestRoundedIcon from "@mui/icons-material/SettingsSuggestRounded";
+import PrecisionManufacturingRoundedIcon from "@mui/icons-material/PrecisionManufacturingRounded";
+import WidgetsRoundedIcon from "@mui/icons-material/WidgetsRounded";
+import BuildCircleRoundedIcon from "@mui/icons-material/BuildCircleRounded";
+import AssignmentTurnedInRoundedIcon from "@mui/icons-material/AssignmentTurnedInRounded";
+import SyncRoundedIcon from "@mui/icons-material/SyncRounded";
+import UpdateRoundedIcon from "@mui/icons-material/UpdateRounded";
+import WarningAmberRoundedIcon from "@mui/icons-material/WarningAmberRounded";
+import HistoryRoundedIcon from "@mui/icons-material/HistoryRounded";
+import SpeedRoundedIcon from "@mui/icons-material/SpeedRounded";
+import AnalyticsRoundedIcon from "@mui/icons-material/AnalyticsRounded";
+import ReceiptLongRoundedIcon from "@mui/icons-material/ReceiptLongRounded";
+import EngineeringRoundedIcon from "@mui/icons-material/EngineeringRounded";
+
+import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
+import StraightenRoundedIcon from "@mui/icons-material/StraightenRounded";
+import DoneAllRoundedIcon from "@mui/icons-material/DoneAllRounded";
+
+import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
 import ReportProblemRoundedIcon from "@mui/icons-material/ReportProblemRounded";
-import WorkRoundedIcon from "@mui/icons-material/WorkRounded";
-import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
-import CommitIcon from "@mui/icons-material/Commit";
+import TodayRoundedIcon from "@mui/icons-material/TodayRounded";
+import DateRangeRoundedIcon from "@mui/icons-material/DateRangeRounded";
+import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
 
-const BulletIcon = () => (
-  <Box
-    component="span"
-    sx={{
-      minWidth: "6px",
-      width: "6px !important",
-      height: "6px !important",
-      borderRadius: "50%",
-      bgcolor: "text.primary",
-      flexShrink: 0,
-    }}
-  />
-);
+import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 
+// ================= TYPES =================
 export type MenuItem = {
   text: string;
-  icon?: React.ReactNode;
-  children?: MenuItem[];
-  id?: string;
   path: string;
+  id?: string;
+  icon?: ReactNode;
+  children?: MenuItem[];
 };
 
-export const menuContentItems: {
+export type MenuSection = {
   title: string;
-  icon: React.ReactNode;
-  items: MenuItem[];
+  icon: ReactNode;
   path?: string;
-}[] = [
+  items: MenuItem[];
+  noActiveHighlight?: boolean; // ← اضافه کن
+};
+
+// ================= ICON STYLE =================
+const iconStyle = {
+  fontSize: 20,
+};
+
+// ================= MENU =================
+export const menuContentItems: MenuSection[] = [
+  // ================= DASHBOARD =================
   {
     title: "Dashboard",
-    icon: <DashboardRoundedIcon />,
-    items: [],
+    icon: <DashboardRoundedIcon sx={iconStyle} />,
     path: "/dashboard",
+    items: [],
   },
+
+  // ================= QUICK ACCESS =================
   {
-    title: "General",
-    icon: <CategoryRoundedIcon />,
+    title: "Quick Access",
+    icon: <StartIcon sx={iconStyle} />,
+    noActiveHighlight: true,
     items: [
       {
-        text: "Address",
-        icon: <LocationOnRoundedIcon />,
-        id: "general:address",
-        path: "/general/address",
-      },
-      {
-        text: "Location",
-        icon: <BusinessRoundedIcon />,
-        id: "general:location",
-        path: "/general/location",
-      },
-      {
-        text: "Employee",
-        icon: <PeopleRoundedIcon />,
-        id: "general:employee",
-        path: "/general/employee",
-      },
-      {
-        text: "Discipline",
-        icon: <BrightnessAutoIcon />,
-        id: "general:discipline",
-        path: "/general/discipline",
-      },
-      {
-        text: "Counter Type",
-        icon: <BadgeRoundedIcon />,
-        id: "general:counterType",
-        path: "/general/counter-type",
-      },
-
-      {
-        text: "Maint Class +",
-        icon: <PrecisionManufacturingRoundedIcon />,
-        id: "general:maint-class",
-        path: "/general/maint-class",
-      },
-
-      {
-        text: "Follow Status",
-        icon: <LoopRoundedIcon />,
-        id: "general:followStatus",
-        path: "/general/follow-status",
-      },
-      {
-        text: "Pending Type",
-        icon: <HourglassEmptyRoundedIcon />,
-        id: "general:pendingType",
-        path: "/general/pending-type",
-      },
-      {
-        text: "Job Class",
-        icon: <WorkHistoryRoundedIcon />,
-        id: "general:jobClass",
-        path: "/general/job-class",
-      },
-      {
-        text: "Job Description",
-        icon: <DescriptionRoundedIcon />,
-        id: "general:jobDescription",
-        path: "/general/job-description",
-      },
-      {
-        text: "Job Trigger",
-        icon: <CommitIcon />,
-        id: "general:jobTrigger",
-        path: "/general/job-trigger",
-      },
-      {
-        text: "Attachment",
-        icon: <Upload />,
-        id: "general:attachment",
-        path: "/general/attachment",
-      },
-    ],
-  },
-  {
-    title: "Maintenance",
-    icon: <BuildRoundedIcon />,
-    items: [
-      {
-        text: "Function",
-        icon: <SettingsRoundedIcon />,
-        id: "maint:function",
-        path: "/maintenance/function",
-      },
-      {
-        text: "Component Unit",
-        icon: <Inventory2RoundedIcon />,
-        id: "maint:componentUnit:component",
+        text: "Component",
         path: "/maintenance/component-unit",
+        id: "quick:component",
+        icon: <PrecisionManufacturingRoundedIcon sx={iconStyle} />,
       },
-      {
-        text: "Component Type",
-        icon: <PrecisionManufacturingRoundedIcon />,
-        id: "maint:componentType",
-        path: "/maintenance/component-type",
-      },
-
       {
         text: "Work Order",
-        icon: <AssignmentRoundedIcon />,
-        id: "maint:workOrder",
         path: "/maintenance/work-order",
-      },
-      {
-        text: "Round",
-        icon: <LoopRoundedIcon />,
-        id: "maint:round",
-        path: "/maintenance/round",
-      },
-      {
-        text: "Requisition Work",
-        icon: <PostAddRoundedIcon />,
-        id: "maint:requisitionWork",
-        path: "/maintenance/requisition-work",
+        id: "quick:workOrder",
+        icon: <AssignmentTurnedInRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Update Counter",
-        icon: <UpdateRoundedIcon />,
-        id: "maint:counters",
         path: "/maintenance/counters",
-      },
-      {
-        text: "Counters Logs",
-        icon: <HistoryRoundedIcon />,
-        id: "maint:counterLog",
-        path: "/maintenance/counters-logs",
-      },
-      {
-        text: "Measure Points",
-        icon: <ExploreRoundedIcon />,
-        id: "maint:measurePoints",
-        path: "/maintenance/measure-points",
-      },
-      {
-        text: "Measure Points Logs",
-        icon: <ListAltRoundedIcon />,
-        id: "maint:measurePointsLogs",
-        path: "/maintenance/measure-points-logs",
+        id: "quick:updateCounter",
+        icon: <UpdateRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Maint Log",
-        icon: <ArticleRoundedIcon />,
-        id: "maint:maintLog",
         path: "/maintenance/maint-log",
+        id: "quick:maintLog",
+        icon: <ReceiptLongRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Failure Report",
+        path: "/report/failure",
+        id: "quick:failureReport",
+        icon: <ReportProblemRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Workshop",
+        path: "/maintenance/workshop",
+        id: "quick:workshop",
+        icon: <EngineeringRoundedIcon sx={iconStyle} />,
       },
     ],
   },
 
+  // ================= GENERAL =================
   {
-    title: "Spare",
-    icon: <Inventory2RoundedIcon />,
+    title: "General",
+    icon: <ApartmentIcon sx={iconStyle} />,
     items: [
       {
-        text: "Spare Type",
-        icon: <CategoryRoundedIcon />,
-        id: "spare:type",
-        path: "/spare/type",
+        text: "Address",
+        path: "/general/address",
+        id: "general:address",
+        icon: <LocationOnRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Spare Unit",
-        icon: <ShapeLineIcon />,
-        id: "spare:unit",
-        path: "/spare/unit",
+        text: "Location",
+        path: "/general/location",
+        id: "general:location",
+        icon: <BusinessRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Spare Used",
-        icon: <DoneAllIcon />,
-        id: "spare:spare-used",
-        path: "/spare/used",
+        text: "Employee",
+        path: "/general/employee",
+        id: "general:employee",
+        icon: <BadgeRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Discipline",
+        path: "/general/discipline",
+        id: "general:discipline",
+        icon: <HubRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Counter Type",
+        path: "/general/counter-type",
+        id: "general:counterType",
+        icon: <NumbersRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Maint Class",
+        path: "/general/maint-class",
+        id: "general:maintClass",
+        icon: <CategoryRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Follow Status",
+        path: "/general/follow-status",
+        id: "general:followStatus",
+        icon: <AutorenewRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Pending Type",
+        path: "/general/pending-type",
+        id: "general:pendingType",
+        icon: <HourglassBottomRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Job Class",
+        path: "/general/job-class",
+        id: "general:jobClass",
+        icon: <WorkOutlineRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Job Description",
+        path: "/general/job-description",
+        id: "general:jobDescription",
+        icon: <DescriptionRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Job Trigger",
+        path: "/general/job-trigger",
+        id: "general:jobTrigger",
+        icon: <FlashOnRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Attachment",
+        path: "/general/attachment",
+        id: "general:attachment",
+        icon: <AttachFileRoundedIcon sx={iconStyle} />,
       },
     ],
   },
+
+  // ================= MAINTENANCE =================
   {
-    title: "Report / Form",
-    icon: <AssessmentRoundedIcon />,
+    title: "Maintenance",
+    icon: <BuildRoundedIcon sx={iconStyle} />,
+    items: [
+      {
+        text: "Function",
+        path: "/maintenance/function",
+        id: "maint:function",
+        icon: <SettingsSuggestRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Component",
+        path: "/maintenance/component-unit",
+        id: "maint:component",
+        icon: <PrecisionManufacturingRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Component Type",
+        path: "/maintenance/component-type",
+        id: "maint:componentType",
+        icon: <WidgetsRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Component Job",
+        path: "/maintenance/component-job",
+        id: "maint:componentJob",
+        icon: <BuildCircleRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Work Order",
+        path: "/maintenance/work-order",
+        id: "maint:workOrder",
+        icon: <AssignmentTurnedInRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Round",
+        path: "/maintenance/round",
+        id: "maint:round",
+        icon: <SyncRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Workshop",
+        path: "/maintenance/workshop",
+        id: "maint:workshop",
+        icon: <EngineeringRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Update Counter",
+        path: "/maintenance/counters",
+        id: "maint:counters",
+        icon: <UpdateRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Counters Alert",
+        path: "/maintenance/counters-alert",
+        id: "maint:counterAlert",
+        icon: <WarningAmberRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Counters Logs",
+        path: "/maintenance/counters-logs",
+        id: "maint:counterLogs",
+        icon: <HistoryRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Measure Points",
+        path: "/maintenance/measure-points",
+        id: "maint:measurePoints",
+        icon: <SpeedRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Measure Points Logs",
+        path: "/maintenance/measure-points-logs",
+        id: "maint:measurePointsLogs",
+        icon: <AnalyticsRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Maint Log",
+        path: "/maintenance/maint-log",
+        id: "maint:maintLog",
+        icon: <ReceiptLongRoundedIcon sx={iconStyle} />,
+      },
+    ],
+  },
+
+  // ================= SPARE =================
+  {
+    title: "Spare",
+    icon: <InventoryRoundedIcon sx={iconStyle} />,
+    items: [
+      {
+        text: "Spare Type",
+        path: "/spare/type",
+        id: "spare:type",
+        icon: <CategoryRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Spare Unit",
+        path: "/spare/unit",
+        id: "spare:unit",
+        icon: <StraightenRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "Spare Used",
+        path: "/spare/used",
+        id: "spare:used",
+        icon: <DoneAllRoundedIcon sx={iconStyle} />,
+      },
+    ],
+  },
+
+  // ================= REPORT =================
+  {
+    title: "Report",
+    icon: <AssessmentRoundedIcon sx={iconStyle} />,
     path: "/report",
     items: [
       {
         text: "Failure Report",
-        icon: <ReportProblemRoundedIcon />,
-        id: "report:failure",
         path: "/report/failure",
+        id: "report:failure",
+        icon: <ReportProblemRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "WorkShop Job",
-        icon: <CalendarMonthRoundedIcon />,
-        id: "report:workshop",
-        path: "/report/workshop",
+        text: "Daily Report",
+        path: "/report/daily",
+        id: "report:daily",
+        icon: <TodayRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Component Job",
-        icon: <BuildRoundedIcon />,
-        id: "maint:componentType:componentJob",
-        path: "/maintenance/component-job",
+        text: "Monthly Report",
+        path: "/report/monthly",
+        id: "report:monthly",
+        icon: <DateRangeRoundedIcon sx={iconStyle} />,
+      },
+      {
+        text: "KPI Report",
+        path: "/report/kpi",
+        id: "report:kpi",
+        icon: <TrendingUpRoundedIcon sx={iconStyle} />,
       },
     ],
   },
+
+  // ================= USERS =================
   {
     title: "Users",
-    icon: <PeopleRoundedIcon />,
-    items: [],
+    icon: <PeopleRoundedIcon sx={iconStyle} />,
     path: "/users",
+    items: [],
   },
 ];

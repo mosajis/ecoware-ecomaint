@@ -2,20 +2,18 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import AddressUpsert from "./AddressUpsert";
 
 import { useCallback, useState } from "react";
-import { tblAddress, TypeTblAddress } from "@/core/api/generated/api";
+import { tblAddress } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { columns } from "./AddressColumns";
+import { columns, getRowId } from "./AddressColumns";
 import { useDialogs } from "@/shared/hooks/useDialogs";
-
-const getRowId = (row: TypeTblAddress) => row.addressId;
 
 export default function PageAddress() {
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
+  const [mode, setMode] = useState<"create" | "update">("create");
+
   const { dialogs, openDialog, closeDialog } = useDialogs({
     upsert: false,
   });
-
-  const [mode, setMode] = useState<"create" | "update">("create");
 
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     tblAddress.getAll,

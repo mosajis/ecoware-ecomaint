@@ -39,7 +39,9 @@ export default function PageReportFailure() {
         include: {
           tblMaintLog: {
             include: {
-              tblUsersTblMaintLogReportedByTotblUsers: true,
+              tblUsersTblMaintLogReportedByTotblUsers: {
+                include: { tblEmployeeTblUsersEmployeeIdTotblEmployee: true },
+              },
               tblComponentUnit: true,
               tblMaintCause: true,
               tblDiscipline: true,
@@ -146,7 +148,7 @@ export default function PageReportFailure() {
         <AttachmentMap
           label={selectedLabel || "Failure Attachments"}
           mapService={tblMaintLogAttachment}
-          filterId={selectedRowId}
+          filterId={selectedRow?.maintLogId}
           filterKey="maintLogId"
           relName="tblMaintLog"
           tableId="maintLogAttachmentId"
