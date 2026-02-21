@@ -3132,61 +3132,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/tblParameters/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get all */
-        get: operations["getTblParameters"];
-        put?: never;
-        /** Create */
-        post: operations["postTblParameters"];
-        /** Delete all */
-        delete: operations["deleteTblParameters"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblParameters/{parameterId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get one */
-        get: operations["getTblParametersByParameterId"];
-        /** Update */
-        put: operations["putTblParametersByParameterId"];
-        post?: never;
-        /** Delete one */
-        delete: operations["deleteTblParametersByParameterId"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/tblParameters/count": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Count */
-        get: operations["getTblParametersCount"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/tblPendingType/": {
         parameters: {
             query?: never;
@@ -5020,9 +4965,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             };
@@ -5207,9 +5151,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -5489,9 +5432,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -7079,9 +7021,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -7228,9 +7169,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -7339,9 +7279,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -7494,9 +7433,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -7573,9 +7511,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -7771,9 +7708,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -8256,9 +8192,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -8520,9 +8455,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -9065,9 +8999,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -9297,9 +9230,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -9519,9 +9451,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -9715,9 +9646,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -9861,9 +9791,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -10066,9 +9995,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -10180,9 +10108,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -11490,9 +11417,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -11739,9 +11665,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -11896,9 +11821,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -12172,9 +12096,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -12297,9 +12220,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -12428,9 +12350,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -12584,9 +12505,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -12699,9 +12619,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -12864,9 +12783,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -12947,9 +12865,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -14044,9 +13961,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -14139,9 +14055,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -14229,9 +14144,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -14327,9 +14241,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -14385,9 +14298,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -15698,9 +15610,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             };
@@ -15836,9 +15747,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -15948,9 +15858,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -16086,9 +15995,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -16166,9 +16074,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -16969,9 +16876,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -17373,9 +17279,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -17586,9 +17491,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -18041,9 +17945,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -18222,9 +18125,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -18416,9 +18318,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -18587,9 +18488,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -18717,9 +18617,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -18897,9 +18796,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -18995,9 +18893,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -19764,9 +19661,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -19916,9 +19812,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -20039,9 +19934,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -20200,9 +20094,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -20291,9 +20184,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -23355,9 +23247,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             };
@@ -23500,9 +23391,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -23619,9 +23509,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -23764,9 +23653,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -23851,9 +23739,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -26478,9 +26365,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -26510,9 +26396,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             }[];
                         }[];
                         total: number;
@@ -26708,9 +26593,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -26740,9 +26624,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -26858,9 +26741,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -26890,9 +26772,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -27115,9 +26996,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -27147,9 +27027,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -27233,9 +27112,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -27265,9 +27143,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         }[];
                     };
                 };
@@ -28218,9 +28095,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -28471,9 +28347,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -28623,9 +28498,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -28903,9 +28777,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -29023,9 +28896,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -32860,9 +32732,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             };
@@ -33005,9 +32876,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -33124,9 +32994,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -33269,9 +33138,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -33356,9 +33224,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -35004,9 +34871,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -35168,9 +35034,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -35294,9 +35159,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -35467,9 +35331,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -35561,9 +35424,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -35708,9 +35570,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -35897,9 +35758,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -36039,9 +35899,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -36240,9 +36099,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -36350,9 +36208,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -36444,9 +36301,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -36547,9 +36403,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -36636,9 +36491,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -36742,9 +36596,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -36799,9 +36652,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -38935,6 +38787,9 @@ export interface operations {
                             tblMaintClass?: {
                                 descr?: string;
                             };
+                            tblDiscipline?: {
+                                name?: string;
+                            };
                         }[];
                         total: number;
                         page: number;
@@ -39456,9 +39311,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -39517,9 +39371,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -39792,9 +39645,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -39853,9 +39705,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -40499,9 +40350,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -40560,9 +40410,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -40803,9 +40652,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -40864,9 +40712,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -41067,9 +40914,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             };
@@ -41218,9 +41064,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -41343,9 +41188,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -41494,9 +41338,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -41587,9 +41430,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -41720,9 +41562,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             };
@@ -41889,9 +41730,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -42017,9 +41857,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -42189,9 +42028,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -42285,9 +42123,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -44440,296 +44277,6 @@ export interface operations {
             };
         };
     };
-    getTblParameters: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            parameterId: number;
-                            parameterGroupId: number;
-                            parName: null | string;
-                            parEnName: null | string;
-                            parValue: null | string;
-                            parIndex: number;
-                            orderNo: null | number;
-                            lastUpdate: null | string;
-                        }[];
-                        total: number;
-                        page: number;
-                        perPage: number;
-                        totalPages: number;
-                    };
-                };
-            };
-        };
-    };
-    postTblParameters: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    parName?: null | string;
-                    parEnName?: null | string;
-                    parValue?: null | string;
-                    parIndex: number;
-                    orderNo?: null | number;
-                    lastUpdate?: null | string;
-                };
-                "application/x-www-form-urlencoded": {
-                    parName?: null | string;
-                    parEnName?: null | string;
-                    parValue?: null | string;
-                    parIndex: number;
-                    orderNo?: null | number;
-                    lastUpdate?: null | string;
-                };
-                "multipart/form-data": {
-                    parName?: null | string;
-                    parEnName?: null | string;
-                    parValue?: null | string;
-                    parIndex: number;
-                    orderNo?: null | number;
-                    lastUpdate?: null | string;
-                };
-            };
-        };
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        parameterId: number;
-                        parameterGroupId: number;
-                        parName: null | string;
-                        parEnName: null | string;
-                        parValue: null | string;
-                        parIndex: number;
-                        orderNo: null | number;
-                        lastUpdate: null | string;
-                    };
-                };
-            };
-        };
-    };
-    deleteTblParameters: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        deleted: number;
-                    };
-                };
-            };
-        };
-    };
-    getTblParametersByParameterId: {
-        parameters: {
-            query?: {
-                include?: string;
-                select?: string;
-            };
-            header?: never;
-            path: {
-                parameterId: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        parameterId: number;
-                        parameterGroupId: number;
-                        parName: null | string;
-                        parEnName: null | string;
-                        parValue: null | string;
-                        parIndex: number;
-                        orderNo: null | number;
-                        lastUpdate: null | string;
-                    };
-                };
-            };
-        };
-    };
-    putTblParametersByParameterId: {
-        parameters: {
-            query?: {
-                include?: string;
-                select?: string;
-            };
-            header?: never;
-            path: {
-                parameterId: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    parName?: null | string;
-                    parEnName?: null | string;
-                    parValue?: null | string;
-                    parIndex?: number;
-                    orderNo?: null | number;
-                    lastUpdate?: null | string;
-                };
-                "application/x-www-form-urlencoded": {
-                    parName?: null | string;
-                    parEnName?: null | string;
-                    parValue?: null | string;
-                    parIndex?: number;
-                    orderNo?: null | number;
-                    lastUpdate?: null | string;
-                };
-                "multipart/form-data": {
-                    parName?: null | string;
-                    parEnName?: null | string;
-                    parValue?: null | string;
-                    parIndex?: number;
-                    orderNo?: null | number;
-                    lastUpdate?: null | string;
-                };
-            };
-        };
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        parameterId: number;
-                        parameterGroupId: number;
-                        parName: null | string;
-                        parEnName: null | string;
-                        parValue: null | string;
-                        parIndex: number;
-                        orderNo: null | number;
-                        lastUpdate: null | string;
-                    };
-                };
-            };
-        };
-    };
-    deleteTblParametersByParameterId: {
-        parameters: {
-            query?: {
-                force?: boolean;
-            };
-            header?: never;
-            path: {
-                parameterId: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        parameterId: number;
-                        parameterGroupId: number;
-                        parName: null | string;
-                        parEnName: null | string;
-                        parValue: null | string;
-                        parIndex: number;
-                        orderNo: null | number;
-                        lastUpdate: null | string;
-                    };
-                };
-            };
-        };
-    };
-    getTblParametersCount: {
-        parameters: {
-            query?: {
-                page?: number;
-                perPage?: number;
-                sort?: string;
-                filter?: string;
-                include?: string;
-                select?: string;
-                paginate?: boolean;
-                force?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        count: number;
-                    };
-                };
-            };
-        };
-    };
     getTblPendingType: {
         parameters: {
             query?: {
@@ -46060,9 +45607,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -46216,9 +45762,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -46343,9 +45888,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -46505,9 +46049,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -46600,9 +46143,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -46767,9 +46309,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -46789,9 +46330,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -46965,9 +46505,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -46987,9 +46526,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -47110,9 +46648,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -47132,9 +46669,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -47320,9 +46856,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -47342,9 +46877,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -47433,9 +46967,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -47455,9 +46988,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -48227,9 +47759,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -48328,9 +47859,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -48418,9 +47948,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -48522,9 +48051,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -48580,9 +48108,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -50426,9 +49953,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                             tblAttachments?: {
                                 attachmentId: number;
                                 title: null | string;
@@ -51042,9 +50568,8 @@ export interface operations {
                     uLogonAttempts?: null | number;
                     uForcePasswordChange?: null | boolean;
                     uLastLogin?: null | string;
-                    uLastUpdated?: null | string;
                     orderNo?: null | number;
-                    lastUpdate?: null | string;
+                    lastupdate?: null | string;
                     tblAttachments?: {
                         connect: {
                             attachmentId: number;
@@ -51233,9 +50758,8 @@ export interface operations {
                     uLogonAttempts?: null | number;
                     uForcePasswordChange?: null | boolean;
                     uLastLogin?: null | string;
-                    uLastUpdated?: null | string;
                     orderNo?: null | number;
-                    lastUpdate?: null | string;
+                    lastupdate?: null | string;
                     tblAttachments?: {
                         connect: {
                             attachmentId: number;
@@ -51424,9 +50948,8 @@ export interface operations {
                     uLogonAttempts?: null | number;
                     uForcePasswordChange?: null | boolean;
                     uLastLogin?: null | string;
-                    uLastUpdated?: null | string;
                     orderNo?: null | number;
-                    lastUpdate?: null | string;
+                    lastupdate?: null | string;
                     tblAttachments?: {
                         connect: {
                             attachmentId: number;
@@ -51628,9 +51151,8 @@ export interface operations {
                         uLogonAttempts: null | number;
                         uForcePasswordChange: null | boolean;
                         uLastLogin: null | string;
-                        uLastUpdated: null | string;
                         orderNo: null | number;
-                        lastUpdate: null | string;
+                        lastupdate: null | string;
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
@@ -52285,9 +51807,8 @@ export interface operations {
                         uLogonAttempts: null | number;
                         uForcePasswordChange: null | boolean;
                         uLastLogin: null | string;
-                        uLastUpdated: null | string;
                         orderNo: null | number;
-                        lastUpdate: null | string;
+                        lastupdate: null | string;
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
@@ -52901,9 +52422,8 @@ export interface operations {
                     uLogonAttempts?: null | number;
                     uForcePasswordChange?: null | boolean;
                     uLastLogin?: null | string;
-                    uLastUpdated?: null | string;
                     orderNo?: null | number;
-                    lastUpdate?: null | string;
+                    lastupdate?: null | string;
                     tblAttachments?: {
                         connect?: {
                             attachmentId: number;
@@ -53195,9 +52715,8 @@ export interface operations {
                     uLogonAttempts?: null | number;
                     uForcePasswordChange?: null | boolean;
                     uLastLogin?: null | string;
-                    uLastUpdated?: null | string;
                     orderNo?: null | number;
-                    lastUpdate?: null | string;
+                    lastupdate?: null | string;
                     tblAttachments?: {
                         connect?: {
                             attachmentId: number;
@@ -53489,9 +53008,8 @@ export interface operations {
                     uLogonAttempts?: null | number;
                     uForcePasswordChange?: null | boolean;
                     uLastLogin?: null | string;
-                    uLastUpdated?: null | string;
                     orderNo?: null | number;
-                    lastUpdate?: null | string;
+                    lastupdate?: null | string;
                     tblAttachments?: {
                         connect?: {
                             attachmentId: number;
@@ -53796,9 +53314,8 @@ export interface operations {
                         uLogonAttempts: null | number;
                         uForcePasswordChange: null | boolean;
                         uLastLogin: null | string;
-                        uLastUpdated: null | string;
                         orderNo: null | number;
-                        lastUpdate: null | string;
+                        lastupdate: null | string;
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
@@ -54421,9 +53938,8 @@ export interface operations {
                         uLogonAttempts: null | number;
                         uForcePasswordChange: null | boolean;
                         uLastLogin: null | string;
-                        uLastUpdated: null | string;
                         orderNo: null | number;
-                        lastUpdate: null | string;
+                        lastupdate: null | string;
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
@@ -55762,9 +55278,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -55784,9 +55299,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -55806,9 +55320,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -55828,9 +55341,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -56192,9 +55704,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -56214,9 +55725,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -56236,9 +55746,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -56258,9 +55767,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -56990,9 +56498,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -57012,9 +56519,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -57034,9 +56540,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -57056,9 +56561,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -57388,9 +56892,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -57410,9 +56913,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -57432,9 +56934,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -57454,9 +56955,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -58328,9 +57828,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -58350,9 +57849,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -58372,9 +57870,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -58602,9 +58099,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -58624,9 +58120,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -58646,9 +58141,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -58769,9 +58263,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -58791,9 +58284,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -58813,9 +58305,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -59082,9 +58573,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -59104,9 +58594,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -59126,9 +58615,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -59217,9 +58705,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -59239,9 +58726,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -59261,9 +58747,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -59395,9 +58880,8 @@ export interface operations {
                                 uLogonAttempts: null | number;
                                 uForcePasswordChange: null | boolean;
                                 uLastLogin: null | string;
-                                uLastUpdated: null | string;
                                 orderNo: null | number;
-                                lastUpdate: null | string;
+                                lastupdate: null | string;
                             } & {
                                 [key: string]: unknown;
                             };
@@ -59532,9 +59016,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -59646,9 +59129,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -59783,9 +59265,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -59865,9 +59346,8 @@ export interface operations {
                             uLogonAttempts: null | number;
                             uForcePasswordChange: null | boolean;
                             uLastLogin: null | string;
-                            uLastUpdated: null | string;
                             orderNo: null | number;
-                            lastUpdate: null | string;
+                            lastupdate: null | string;
                         } & {
                             [key: string]: unknown;
                         };
@@ -60703,6 +60183,7 @@ export interface operations {
                             overdue: number;
                             pending: number;
                             current: number;
+                            postponed: number;
                         };
                         failure: {
                             total: number;

@@ -5,11 +5,6 @@ import { TypeStatistics } from "@/core/api/api";
 
 export const buildWorkOrderCardsData = (counts: TypeStatistics) => [
   {
-    label: "Total",
-    value: counts.workOrder.total,
-    color: KPI_COLORS.blue,
-  },
-  {
     label: "Open",
     value: counts.workOrder.open,
     color: KPI_COLORS.blue,
@@ -21,19 +16,25 @@ export const buildWorkOrderCardsData = (counts: TypeStatistics) => [
     percent: toPercent(counts.workOrder.current, counts.workOrder.open),
   },
   {
+    label: "Overdue",
+    value: counts.workOrder.overdue,
+    color: KPI_COLORS.red,
+    percent: toPercent(counts.workOrder.overdue, counts.workOrder.open),
+  },
+
+  {
     label: "Pend",
     value: counts.workOrder.pending,
     color: KPI_COLORS.yellow,
     percent: toPercent(counts.workOrder.pending, counts.workOrder.open),
   },
   {
-    label: "Overdue",
-    value: counts.workOrder.overdue,
+    label: "PostPoned",
+    value: counts.workOrder.postponed,
     color: KPI_COLORS.red,
-    percent: toPercent(counts.workOrder.overdue, counts.workOrder.open),
   },
   {
-    label: "Completed",
+    label: "Completed (plan, unPlanned)",
     value: counts.workOrder.completed,
     color: KPI_COLORS.green,
   },

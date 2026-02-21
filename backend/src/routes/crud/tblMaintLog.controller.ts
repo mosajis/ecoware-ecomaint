@@ -49,6 +49,11 @@ const MaintLogItemSchema = t.Object({
       descr: t.Optional(t.String()),
     }),
   ),
+  tblDiscipline: t.Optional(
+    t.Object({
+      name: t.Optional(t.String()),
+    }),
+  ),
 });
 
 const MaintLogListResponseSchema = t.Object({
@@ -100,6 +105,9 @@ const ControllerTblMaintLog = new BaseController({
             downTime: true,
             unexpected: true,
             history: true,
+            tblWorkOrder: {
+              select: { description: true },
+            },
             tblComponentUnit: {
               select: { compNo: true },
             },
@@ -109,12 +117,8 @@ const ControllerTblMaintLog = new BaseController({
                 jobDescTitle: true,
               },
             },
-            tblWorkOrder: {
-              select: {
-                tblDiscipline: {
-                  select: { name: true },
-                },
-              },
+            tblDiscipline: {
+              select: { name: true },
             },
             tblFollowStatus: {
               select: { fsName: true },

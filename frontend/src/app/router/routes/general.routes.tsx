@@ -1,3 +1,4 @@
+import RouteAddress from "@/pages/general/address/AddressRoute";
 import { createRoute, Outlet } from "@tanstack/react-router";
 import { LazyRoute } from "./_components/lazyRoute";
 import { protectedRoute } from "./protected.routes";
@@ -7,9 +8,7 @@ import { lazy } from "react";
 export const PageAttachment = lazy(
   () => import("@/pages/general/attachment/Attachment"),
 );
-export const PageAddress = lazy(
-  () => import("@/pages/general/address/Address"),
-);
+
 export const PageLocation = lazy(
   () => import("@/pages/general/location/Location"),
 );
@@ -55,12 +54,6 @@ export const generalAttachmentRoute = createRoute({
   path: "attachment",
   component: () => <LazyRoute Component={PageAttachment} />,
   beforeLoad: () => ({ breadcrumb: "Attachment" }),
-});
-export const generalAddressRoute = createRoute({
-  getParentRoute: () => generalRoute,
-  path: "address",
-  component: () => <LazyRoute Component={PageAddress} />,
-  beforeLoad: () => ({ breadcrumb: "Address" }),
 });
 
 export const generalLocationRoute = createRoute({
@@ -135,8 +128,8 @@ export const generalJobTriggerRoute = createRoute({
 
 // --- Add all children to parent ---
 export const generalRouteTree = generalRoute.addChildren([
+  RouteAddress,
   generalAttachmentRoute,
-  generalAddressRoute,
   generalLocationRoute,
   generalEmployeeRoute,
   generalDisciplineRoute,

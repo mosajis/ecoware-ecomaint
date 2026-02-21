@@ -31,12 +31,12 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
   {
     field: "discipline",
     headerName: "Discipline",
-    // @ts-ignore
-    valueGetter: (_, row) => row?.tblWorkOrder?.tblDiscipline?.name,
+    valueGetter: (_, row) => row?.tblDiscipline?.name,
   },
   {
     field: "followStatus",
     headerName: "Follow Status",
+    width: 130,
     valueGetter: (_, row) => row?.tblFollowStatus?.fsName,
   },
   {

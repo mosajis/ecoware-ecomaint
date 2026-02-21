@@ -8,6 +8,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { tblAddress, TypeTblAddress } from "@/core/api/generated/api";
 import { requiredStringField } from "@/core/helper";
+import { toast } from "sonner";
 
 // === Validation Schema with Zod ===
 const schema = z.object({
@@ -110,7 +111,7 @@ function AddressUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           onClose();
         }
       } catch (err) {
-        console.error("Failed to submit address form", err);
+        toast.error("Failed to submit address form");
       } finally {
         setSubmitting(false);
       }

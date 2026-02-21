@@ -25,9 +25,9 @@ const DisciplineCard = ({ title, counts }: Props) => {
   const items = [
     {
       label: "Open",
-      value: disciplineStats.open,
+      value: totalOpen,
       color: "info",
-      total: counts.workOrder.total,
+      total: counts.workOrder.open,
       sx: {
         marginBottom: 2,
       },
@@ -39,15 +39,15 @@ const DisciplineCard = ({ title, counts }: Props) => {
       total: totalOpen,
     },
     {
-      label: "Pending",
-      value: disciplineStats.pending,
-      color: "warning",
-      total: totalOpen,
-    },
-    {
       label: "Overdue",
       value: disciplineStats.overdue,
       color: "error",
+      total: totalOpen,
+    },
+    {
+      label: "Pending",
+      value: disciplineStats.pending,
+      color: "warning",
       total: totalOpen,
     },
   ];

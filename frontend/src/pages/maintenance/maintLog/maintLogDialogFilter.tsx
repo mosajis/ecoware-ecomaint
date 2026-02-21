@@ -1,5 +1,5 @@
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import TextField from "@mui/material/TextField";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -44,13 +44,10 @@ type FiltersState = {
   workOrder: TypeTblWorkOrder | null;
 
   jobCode: string;
-
   doneFrom: string;
   doneTo: string;
-
   reportFrom: string;
   reportTo: string;
-
   unplanned: boolean;
   control: boolean;
 };
@@ -59,41 +56,129 @@ interface MaintLogFilterDialogProps {
   open: boolean;
   onClose: () => void;
   onSubmit: (filter: MaintLogFilter | null) => void;
-  initialFilters?: Partial<FiltersState>;
+  initialValue?: MaintLogFilter | null;
 }
 
 export default function MaintLogFilterDialog({
   open,
   onClose,
   onSubmit,
-  initialFilters,
+  initialValue,
 }: MaintLogFilterDialogProps) {
-  const getDefaultFilters = (): FiltersState => ({
-    maintClass: null,
-    maintType: null,
-    maintCause: null,
-    jobClass: null,
-    discipline: null,
-    component: null,
-    reporter: null,
-    workOrder: null,
+  const deserializeFilter = (filter?: MaintLogFilter | null): FiltersState => {
+    const base: FiltersState = {
+      maintClass: null,
+      maintType: null,
+      maintCause: null,
+      jobClass: null,
+      discipline: null,
+      component: null,
+      reporter: null,
+      workOrder: null,
+      jobCode: "",
+      doneFrom: "",
+      doneTo: "",
+      reportFrom: "",
+      reportTo: "",
+      unplanned: false,
+      control: false,
+    };
 
-    jobCode: "",
+    if (!filter?.AND || !Array.isArray(filter.AND)) {
+      return base;
+    }
 
-    doneFrom: "",
-    doneTo: "",
+    const conditions = filter.AND;
 
-    reportFrom: "",
-    reportTo: "",
+    for (const c of conditions) {
+      // ----------- Simple IDs -----------
 
-    unplanned: false,
-    control: false,
+      if ("maintClassId" in c) {
+        base.maintClass = { maintClassId: c.maintClassId } as any;
+      }
 
-    ...initialFilters,
-  });
+      if ("maintTypeId" in c) {
+        base.maintType = { maintTypeId: c.maintTypeId } as any;
+      }
 
-  const [filters, setFilters] = useState<FiltersState>(getDefaultFilters());
+      if ("maintCauseId" in c) {
+        base.maintCause = { maintCauseId: c.maintCauseId } as any;
+      }
 
+      if ("compId" in c) {
+        base.component = { compId: c.compId } as any;
+      }
+
+      if ("reporterId" in c) {
+        base.reporter = { userId: c.reporterId } as any;
+      }
+
+      if ("workOrderId" in c) {
+        base.workOrder = { workOrderId: c.workOrderId } as any;
+      }
+
+      // ----------- Nested -----------
+
+      if (c.tblDiscipline?.disciplineId) {
+        base.discipline = {
+          disciplineId: c.tblDiscipline.disciplineId,
+        } as any;
+      }
+
+      if (
+        c.tblWorkOrder?.tblCompJob?.tblJobDescription?.jobDescCode?.contains
+      ) {
+        base.jobCode =
+          c.tblWorkOrder.tblCompJob.tblJobDescription.jobDescCode.contains;
+      }
+
+      // ----------- Dates -----------
+
+      if (c.dateDone) {
+        if (c.dateDone.gte)
+          base.doneFrom = new Date(c.dateDone.gte).toISOString().slice(0, 10);
+
+        if (c.dateDone.lte)
+          base.doneTo = new Date(c.dateDone.lte).toISOString().slice(0, 10);
+      }
+
+      if (c.reportDate) {
+        if (c.reportDate.gte)
+          base.reportFrom = new Date(c.reportDate.gte)
+            .toISOString()
+            .slice(0, 10);
+
+        if (c.reportDate.lte)
+          base.reportTo = new Date(c.reportDate.lte).toISOString().slice(0, 10);
+      }
+
+      // ----------- Booleans -----------
+
+      if (c.isPlanned === false) {
+        base.unplanned = true;
+      }
+
+      if (c.isControl === true) {
+        base.control = true;
+      }
+    }
+
+    return base;
+  };
+
+  const [filters, setFilters] = useState<FiltersState>(
+    deserializeFilter(initialValue),
+  );
+
+  // 🔥 مهم: sync با route وقتی filter عوض شد
+  useEffect(() => {
+    console.log(initialValue);
+    setFilters(deserializeFilter(initialValue));
+  }, [initialValue]);
+
+  // ---------------------------
+  // Build Prisma Filter
+  // ---------------------------
   const handleApply = () => {
     const conditions: any[] = [];
 
@@ -107,16 +192,6 @@ export default function MaintLogFilterDialog({
 
     if (filters.maintCause) {
       conditions.push({ maintCauseId: filters.maintCause.maintCauseId });
-    }
-
-    if (filters.jobClass) {
-      conditions.push({
-        tblWorkOrder: {
-          tblDiscipline: {
-            disciplineId: filters.jobClass.jobClassId,
-          },
-        },
-      });
     }
 
     if (filters.discipline) {
@@ -146,7 +221,6 @@ export default function MaintLogFilterDialog({
             tblJobDescription: {
               jobDescCode: {
                 contains: filters.jobCode,
-                mode: "insensitive",
               },
             },
           },
@@ -185,11 +259,11 @@ export default function MaintLogFilterDialog({
     };
 
     onSubmit(prismaFilter);
-    onClose();
   };
 
   const handleClearFilter = () => {
-    setFilters(getDefaultFilters());
+    setFilters(deserializeFilter(null));
+    onSubmit(null);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -202,10 +276,10 @@ export default function MaintLogFilterDialog({
       open={open}
       title="Maint Log Filter"
       maxWidth="md"
-      onClose={onClose}
-      onSubmit={handleSubmit}
       submitText="Ok"
       cancelText="Clear"
+      onClose={onClose}
+      onSubmit={handleSubmit}
       onCancelClick={handleClearFilter}
     >
       <Box display="flex" flexDirection="column" gap={2}>
@@ -257,11 +331,12 @@ export default function MaintLogFilterDialog({
             }
           />
 
-          <FieldAsyncSelectGrid
+          <FieldAsyncSelectGrid<TypeTblComponentUnit>
             columns={[{ field: "compNo", headerName: "Component", flex: 1 }]}
             label="Component"
             value={filters.component}
             selectionMode="single"
+            getOptionLabel={(row) => row.compNo}
             request={tblComponentUnit.getAll}
             getRowId={(r) => r.compId}
             onChange={(v) => setFilters((p) => ({ ...p, component: v as any }))}

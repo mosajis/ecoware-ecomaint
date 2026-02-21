@@ -3,8 +3,10 @@ import TabsComponent from "./MaintLogTabs";
 import Splitter from "@/shared/components/Splitter/Splitter";
 import MaintLogFollowDialog from "./MaintLogDialogFollow";
 import MaintLogActions from "./MaintLogActions";
+import MaintLogDialogPrint from "./MaintLogDialogPrint";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
+import { GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
 import { columns } from "./MaintLogColumns";
 import {
   tblMaintLog,
@@ -14,47 +16,30 @@ import {
 import MaintLogFilterDialog, {
   type MaintLogFilter,
 } from "./MaintLogDialogFilter";
+import { useDialogs } from "@/shared/hooks/useDialogs";
 
 const getRowId = (row: TypeTblMaintLog) => row.maintLogId;
 
 export default function PageMaintLog() {
-  const [dialogReportWork, setDialogReportWork] = useState(false);
-  const [dialogFilter, setDialogFilter] = useState(false);
-  const [dialogFollow, setDialogFollow] = useState(false);
+  const { dialogs, openDialog, closeDialog, closeAllDialogs, isAnyOpen } =
+    useDialogs({
+      filter: false,
+      follow: false,
+      print: false,
+    });
 
   const [selectedRow, setSelectedRow] = useState<TypeTblMaintLog | null>(null);
-  const [mode, setMode] = useState<"create" | "update">("create");
-
+  const [selectionModel, setSelectionModel] = useState<GridRowSelectionModel>({
+    type: "include",
+    ids: new Set(),
+  });
   const [filter, setFilter] = useState<MaintLogFilter | null>(null);
 
-  const handleEdit = (rowId: Number) => {
-    setMode("update");
-    // setSelectedRow(row);
-    handleReportWorkOpen();
-  };
-
-  const handleRowClick = (params: any) => {
-    setSelectedRow(params.row);
-  };
-
-  const handleAddClick = () => {
-    setMode("create");
-    handleReportWorkOpen();
-  };
+  const hasFilter = Array.isArray(filter?.AND) && filter.AND.length > 0;
 
   const getAll = useCallback(() => {
     return tblMaintLog.getAll({
-      // filter: filter ?? undefined,
-      include: {
-        tblComponentUnit: {
-          include: {
-            tblCompStatus: true,
-          },
-        },
-        tblWorkOrder: true,
-        tblMaintClass: true,
-        tblJobDescription: true,
-      },
+      filter: filter ?? undefined,
     });
   }, [filter]);
 
@@ -64,96 +49,94 @@ export default function PageMaintLog() {
     "maintLogId",
   );
 
-  // Submit Handlers
-  const handleFollowOpen = useCallback(() => {
-    setDialogFollow(true);
+  const selectedRows = useMemo<TypeTblMaintLog[]>(() => {
+    const hasId = (id: number) =>
+      selectionModel.ids.has(id) || selectionModel.ids.has(String(id));
+
+    if (selectionModel.type === "include") {
+      return rows.filter((r) => hasId(r.maintLogId));
+    } else {
+      return rows.filter((r) => !hasId(r.maintLogId));
+    }
+  }, [selectionModel, rows]);
+
+  // Row
+  const handleRowClick = useCallback((params: any) => {
+    setSelectedRow(params.row);
   }, []);
 
-  const handleFollowClose = useCallback(() => {
-    setDialogFollow(false);
+  const handleSelectionChange = useCallback((m: GridRowSelectionModel) => {
+    setSelectionModel(m as GridRowSelectionModel);
   }, []);
 
-  const handleSubmitFilter = (filter: MaintLogFilter | null) => {
-    setFilter(filter);
-    handleFilterClose();
-  };
+  // Filter
+  const handleSubmitFilter = useCallback(
+    (f: MaintLogFilter | null) => {
+      setFilter(f);
+      closeDialog("filter");
+    },
+    [closeDialog],
+  );
 
-  const handleReportWorkClose = useCallback(() => {
-    setDialogReportWork(false);
-  }, []);
-
-  const handleReportWorkOpen = useCallback(() => {
-    setDialogReportWork(true);
-  }, []);
-
-  const handleFilterClose = useCallback(() => {
-    setDialogFilter(false);
-  }, []);
-
-  const handleFilterOpen = useCallback(() => {
-    setDialogFilter(true);
-  }, []);
-
+  // Follow
   const handleFollowSuccess = useCallback(
     (selectedFollowStatus: TypeTblFollowStatus) => {
       if (!selectedRow?.maintLogId) return;
-
-      // Optimistic update
-      // optimisticUpdate(selectedRow.maintLogId, {
-      //   followStatusId: selectedFollowStatus.followStatusId,
-      //   // If you have the relation loaded in your getAll include:
-      //   tblFollowStatus: selectedFollowStatus,
-      // });
-
-      // // Optional: background refresh after a short delay
-      // setTimeout(() => {
-      //   handleRefresh();
-      // }, 1800);
-
-      // Optional: toast.success("Follow-up recorded");
+      optimisticUpdate(selectedRow.maintLogId, {
+        // followStatusId: selectedFollowStatus.followStatusId,
+        // tblFollowStatus: selectedFollowStatus,
+      });
+      setTimeout(() => handleRefresh(), 1800);
     },
     [selectedRow?.maintLogId, optimisticUpdate, handleRefresh],
   );
+
   return (
     <>
       <Splitter horizontal>
         <CustomizedDataGrid
           showToolbar
-          label={"Maintenance Log"}
+          label="Maintenance Log"
           rows={rows}
           columns={columns}
           loading={loading}
-          onEditClick={handleEdit}
-          onAddClick={handleAddClick}
           onRowClick={handleRowClick}
           onRefreshClick={handleRefresh}
           getRowId={getRowId}
+          checkboxSelection
+          disableRowSelectionOnClick
+          rowSelectionModel={selectionModel}
+          onRowSelectionModelChange={handleSelectionChange}
           toolbarChildren={
             <MaintLogActions
-              onFilter={handleFilterOpen}
-              onFollow={handleFollowOpen}
+              onFilter={() => openDialog("filter")}
+              onFollow={() => openDialog("follow")}
+              onPrint={() => openDialog("print")}
+              hasFilter={hasFilter}
+              selectedCount={selectedRows.length}
             />
           }
         />
         <TabsComponent selectedMaintLog={selectedRow} />
       </Splitter>
-      {/* <ReportWorkDialog
-        open={dialogReportWork}
-        onClose={handleReportWorkClose}
-        maintLogId={mode === "update" ? selectedRow?.maintLogId : undefined}
-      /> */}
 
       <MaintLogFilterDialog
-        open={dialogFilter}
-        onClose={handleFilterClose}
+        open={dialogs.filter}
+        onClose={() => closeDialog("filter")}
         onSubmit={handleSubmitFilter}
       />
 
       <MaintLogFollowDialog
-        open={dialogFollow}
-        maintLogId={selectedRow?.maintLogId!}
-        onClose={handleFollowClose}
+        open={dialogs.follow}
+        onClose={() => closeDialog("follow")}
+        maintLogId={selectedRow?.maintLogId! ?? null}
         onSuccess={handleFollowSuccess}
+      />
+
+      <MaintLogDialogPrint
+        open={dialogs.print}
+        onClose={() => closeDialog("print")}
+        rows={selectedRows}
       />
     </>
   );

@@ -6,6 +6,7 @@ import { routeComponentType } from "@/pages/maintenance/componentType/ComponentT
 import { NotFound } from "@/pages/NotFound";
 import routeComponentUnit from "@/pages/maintenance/componentUnit/ComponentUnitRoutes";
 import routeFunction from "@/pages/maintenance/function/FunctionRoutes";
+import routeMaintLog from "@/pages/maintenance/maintLog/MaintLogRoute";
 
 //  Lazy pages ---
 
@@ -25,9 +26,7 @@ const PageMeasurePointsLogs = lazy(
 const PageCountersLog = lazy(
   () => import("@/pages/maintenance/countersLogs/CountersLogs"),
 );
-const PageMaintLog = lazy(
-  () => import("@/pages/maintenance/maintLog/MaintLog"),
-);
+
 const PageCounterUpdate = lazy(
   () => import("@/pages/maintenance/counters/Counters"),
 );
@@ -77,12 +76,6 @@ export const routeCountersLog = createRoute({
   path: "counters-logs",
   component: () => <LazyRoute Component={PageCountersLog} />,
   beforeLoad: () => ({ breadcrumb: "Counters Logs" }),
-});
-export const routeMaintLog = createRoute({
-  getParentRoute: () => routeMaintenance,
-  path: "maint-log",
-  component: () => <LazyRoute Component={PageMaintLog} />,
-  beforeLoad: () => ({ breadcrumb: "Maint Logs" }),
 });
 
 // --- Counter Update ---

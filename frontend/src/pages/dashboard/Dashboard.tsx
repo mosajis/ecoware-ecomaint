@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import { PageHeader } from "../../shared/components/PageHeader";
 import { getStatistics, TypeStatistics } from "@/core/api/api";
 import { buildWorkOrderCardsData } from "./cards/cardsWorkOrder";
-import { buildKpiCardsData } from "./cards/cardsKpi";
 import { buildFailureCardsData } from "./cards/cardsFailure";
 import { buildUnplannedCardsData } from "./cards/cardsUnplanned";
 
@@ -58,10 +57,7 @@ const Dashboard = () => {
             divider={<Divider orientation="vertical" />}
           >
             <Box p={1.5}>
-              <PageHeader
-                title="WorkOrder"
-                subtitle="Current workload and completion status"
-              />
+              <PageHeader title="WorkOrder" subtitle="Open work order status" />
               <WorkOrdersPieChart counts={counts} />
             </Box>
 
