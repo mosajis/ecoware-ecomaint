@@ -110,12 +110,12 @@ function ComponentTypeUpsert({
         const makerRel = buildRelation(
           "tblAddress",
           "addressId",
-          parsed.data.maker?.addressId,
+          parsed.data.maker?.addressId ?? null,
         );
         const parentRel = buildRelation(
           "tblCompType",
           "compTypeId",
-          parsed.data.tblCompType?.compTypeId,
+          parsed.data.tblCompType?.compTypeId ?? null,
         );
         const payload = {
           compTypeNo: parsed.data.compTypeNo,

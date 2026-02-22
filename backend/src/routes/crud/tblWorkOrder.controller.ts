@@ -23,9 +23,11 @@ export const WorkOrderItemSchema = t.Object({
   title: t.String(),
   priority: t.Nullable(t.Number()),
   description: t.Nullable(t.String()),
+  window: t.Nullable(t.Number()),
   userComment: t.Nullable(t.String()),
 
   dueDate: t.Nullable(t.Date()),
+  pendingdate: t.Nullable(t.Date()),
   created: t.Nullable(t.Date()),
   started: t.Nullable(t.Date()),
   completed: t.Nullable(t.Date()),
@@ -42,22 +44,26 @@ export const WorkOrderItemSchema = t.Object({
     }),
   ),
 
-  tblCompJob: t.Optional(
-    t.Object({
-      compJobId: t.Number(),
-      nextDueDate: t.Optional(t.Date()),
-      tblJobDescription: t.Optional(
-        t.Object({
-          jobDescCode: t.String(),
-          jobDescTitle: t.String(),
-        }),
-      ),
-      tblPeriod: t.Optional(
-        t.Object({
-          name: t.String(),
-        }),
-      ),
-    }),
+  tblCompJob: t.Nullable(
+    t.Optional(
+      t.Object({
+        compJobId: t.Number(),
+        frequency: t.Nullable(t.Number()),
+        nextDueDate: t.Optional(t.Date()),
+        tblJobDescription: t.Optional(
+          t.Object({
+            jobDescCode: t.String(),
+            jobDescTitle: t.String(),
+            jobDesc: t.String(),
+          }),
+        ),
+        tblPeriod: t.Optional(
+          t.Object({
+            name: t.String(),
+          }),
+        ),
+      }),
+    ),
   ),
 
   tblPendingType: t.Optional(
@@ -121,12 +127,12 @@ const ControllerTblWorkOrder = new BaseController({
           select: {
             workOrderId: true,
             compId: true,
-
+            pendingdate: true,
             title: true,
             priority: true,
             description: true,
             userComment: true,
-
+            window: true,
             dueDate: true,
             created: true,
             started: true,
@@ -144,12 +150,14 @@ const ControllerTblWorkOrder = new BaseController({
 
             tblCompJob: {
               select: {
+                frequency: true,
                 compJobId: true,
                 nextDueDate: true,
                 tblJobDescription: {
                   select: {
                     jobDescCode: true,
                     jobDescTitle: true,
+                    jobDesc: true,
                   },
                 },
                 tblPeriod: {

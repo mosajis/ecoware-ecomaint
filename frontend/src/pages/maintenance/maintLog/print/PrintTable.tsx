@@ -16,7 +16,7 @@ const extractData = (row: TypeTblMaintLog) => ({
   followStatus: row.tblFollowStatus?.fsName ?? "-",
   downTime: row.downTime,
   unexpected: row.unexpected,
-  description: (row as any).description ?? "",
+  description: row.history ?? "",
 });
 
 export const MaintLogPrintTable = ({ row }: Props) => {
@@ -65,12 +65,8 @@ export const MaintLogPrintTable = ({ row }: Props) => {
           </tr>
           <tr>
             <td className="print__cell print__label">Down Time</td>
-            <td className="print__cell">
-              {data.downTime
-                ? formatDateTime(data.downTime, "DATETIME", true)
-                : "-"}
-            </td>
-            <td className="print__cell print__label">Unplanned</td>
+            <td className="print__cell">{data.downTime}</td>
+            <td className="print__cell print__label">UnExpected</td>
             <td className="print__cell">{data.unexpected ? "Yes" : "No"}</td>
           </tr>
 

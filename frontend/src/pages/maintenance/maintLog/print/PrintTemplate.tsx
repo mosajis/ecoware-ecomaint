@@ -4,28 +4,35 @@ import { forwardRef } from "react";
 import { TypeTblMaintLog } from "@/core/api/generated/api";
 import { PrintHeader } from "@/shared/components/print/_components/PrintHeader";
 import { PrintFooter } from "@/shared/components/print/_components/PrintFooter";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
+import { extractFullName } from "@/core/helper";
 
 interface Props {
   rows: TypeTblMaintLog[];
 }
 
 const MaintLogPrintTemplate = forwardRef<HTMLDivElement, Props>(
-  ({ rows }, ref) => (
-    <PrintLayout
-      ref={ref}
-      header={
-        <PrintHeader
-          location="not set"
-          title="Maintenance Log Report"
-          totalLength={rows.length}
-        />
-      }
-      footer={<PrintFooter printedBy="Not Set" />}
-      content={rows.map((row) => (
-        <PrintTable key={row.maintLogId} row={row} />
-      ))}
-    />
-  ),
+  ({ rows }, ref) => {
+    const user = useAtomValue(atomUser);
+
+    return (
+      <PrintLayout
+        ref={ref}
+        header={
+          <PrintHeader
+            location="o3"
+            title="Maintenance Log Report"
+            totalLength={rows.length}
+          />
+        }
+        footer={<PrintFooter printedBy={extractFullName(user!)} />}
+        content={rows.map((row) => (
+          <PrintTable key={row.maintLogId} row={row} />
+        ))}
+      />
+    );
+  },
 );
 
 export default MaintLogPrintTemplate;

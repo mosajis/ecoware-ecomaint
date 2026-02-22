@@ -20,10 +20,6 @@ export const PageReportMounthly = lazy(
   () => import("@/pages/report/reportMounthly/ReportMounthly"),
 );
 
-export const PageWorkShop = lazy(
-  () => import("@/pages/form/workShop/WorkShop"),
-);
-
 // --- General parent route ---
 export const ReportRoute = createRoute({
   getParentRoute: () => protectedRoute,
@@ -54,13 +50,6 @@ export const ReportMounthlyRoute = createRoute({
   beforeLoad: () => ({ breadcrumb: "Monthly" }),
 });
 
-export const ReportWorkShopJobRoute = createRoute({
-  getParentRoute: () => ReportRoute,
-  path: "workshop",
-  component: () => <LazyRoute Component={PageWorkShop} />,
-  beforeLoad: () => ({ breadcrumb: "WorkShop" }),
-});
-
 export const ReportFailureRoute = createRoute({
   getParentRoute: () => ReportRoute,
   path: "failure",
@@ -73,5 +62,4 @@ export const reportRouteTree = ReportRoute.addChildren([
   ReportJobRoute,
   ReportDailyRoute,
   ReportFailureRoute,
-  ReportWorkShopJobRoute,
 ]);

@@ -32,9 +32,7 @@ const TabsContainer = ({
   const current = router.state.location.pathname;
   const navigate = useNavigate({ from: current });
 
-  // تمام query params رو بخون
   const allSearch = useSearch({ strict: false });
-
   const searchTab = useSearch({
     strict: false,
     select: (search) => search[queryParamKey],
@@ -44,14 +42,22 @@ const TabsContainer = ({
     persistInUrl && searchTab ? searchTab : tabs[0].label,
   );
 
+  // ✅ تب‌هایی که حداقل یه بار باز شدن رو track میکنیم
+  const [mountedTabs, setMountedTabs] = useState<Set<string>>(
+    new Set([activeTab]),
+  );
+
   useEffect(() => {
     if (persistInUrl && searchTab && searchTab !== activeTab) {
       setActiveTab(searchTab);
+      setMountedTabs((prev) => new Set(prev).add(searchTab));
     }
   }, [searchTab, persistInUrl, activeTab]);
 
   const handleChange = (_: any, newValue: string) => {
     setActiveTab(newValue);
+    // ✅ تب جدید رو به mounted اضافه کن
+    setMountedTabs((prev) => new Set(prev).add(newValue));
 
     if (persistInUrl) {
       navigate({
@@ -62,8 +68,6 @@ const TabsContainer = ({
       });
     }
   };
-
-  const ActiveComponent = tabs.find((t) => t.label === activeTab)?.component;
 
   return (
     <div
@@ -93,15 +97,25 @@ const TabsContainer = ({
         ))}
       </Tabs>
 
-      <TabContainer
-        {...tabs.find((t) => t.label === activeTab)?.containerProps}
-      >
-        {ActiveComponent && (
-          <Suspense fallback={<Spinner />}>
-            <ActiveComponent {...tabProps} />
-          </Suspense>
-        )}
-      </TabContainer>
+      {tabs.map((tab) => {
+        const isActive = tab.label === activeTab;
+        const isMounted = mountedTabs.has(tab.label);
+        const TabComponent = tab.component;
+
+        return (
+          <TabContainer
+            key={tab.label}
+            {...tab.containerProps}
+            style={{ display: isActive ? undefined : "none" }}
+          >
+            {isMounted && TabComponent && (
+              <Suspense fallback={<Spinner />}>
+                <TabComponent {...tabProps} />
+              </Suspense>
+            )}
+          </TabContainer>
+        );
+      })}
     </div>
   );
 };

@@ -1,7 +1,5 @@
-import { lazy } from "react";
 import AccountTree from "@mui/icons-material/AccountTree";
 import AttachFile from "@mui/icons-material/AttachFile";
-import Timeline from "@mui/icons-material/Timeline";
 import Inventory from "@mui/icons-material/Inventory";
 import TrackChanges from "@mui/icons-material/TrackChanges";
 import ReportProblem from "@mui/icons-material/ReportProblem";
@@ -11,20 +9,24 @@ import Straighten from "@mui/icons-material/Straighten";
 import Work from "@mui/icons-material/Work";
 import Comment from "@mui/icons-material/Comment";
 import Folder from "@mui/icons-material/Folder";
-
+import { lazy, memo, useMemo } from "react";
+import { TypeTblMaintLog } from "@/core/api/generated/api";
 import TabsContainer, {
   ReusableTabItem,
 } from "@/shared/components/TabsContainer";
-import { TypeTblMaintLog } from "@/core/api/generated/api";
 
 // Lazy imports
 const TabHistory = lazy(() => import("./tabs/TabHistory"));
-const TabStockUsed = lazy(() => import("./tabs/TabStockUsed"));
-const TabFollow = lazy(() => import("./tabs/TabFollow"));
+const TabStockUsed = lazy(() => import("./tabs/tabStockUsed/TabStockUsed"));
+const TabFollow = lazy(() => import("./tabs/tabFollow/TabFollow"));
 const TabFailureReport = lazy(() => import("./tabs/TabFailureReport"));
-const TabResourceUsed = lazy(() => import("./tabs/TabResourceUsed"));
+const TabResourceUsed = lazy(
+  () => import("./tabs/tabResourceUsed/TabResourceUsed"),
+);
 const TabLogCounter = lazy(() => import("./tabs/TabLogCounter"));
-const TabMeasurePoint = lazy(() => import("./tabs/TabMeasurePoint"));
+const TabMeasurePoint = lazy(
+  () => import("./tabs/tabMeasurePoint/TabMeasurePoint"),
+);
 const TabWorkOrders = lazy(() => import("./tabs/TabWorkOrders"));
 const TabComments = lazy(() => import("./tabs/TabComments"));
 const TabCompAttach = lazy(() => import("./tabs/TabCompAttach"));
@@ -44,12 +46,12 @@ const tabs: ReusableTabItem[] = [
   { label: "Log Counter", icon: <Speed />, component: TabLogCounter },
   { label: "Measure Point", icon: <Straighten />, component: TabMeasurePoint },
   { label: "WorkOrders", icon: <Work />, component: TabWorkOrders },
-  {
-    label: "Comment (OverDue Rea.)",
-    icon: <Comment />,
-    component: TabComments,
-  },
-  { label: "Comp Attach", icon: <Folder />, component: TabCompAttach },
+  // {
+  //   label: "Comment (OverDue Rea.)",
+  //   icon: <Comment />,
+  //   component: TabComments,
+  // },
+  // { label: "Comp Attach", icon: <Folder />, component: TabCompAttach },
   { label: "Attachment", icon: <AttachFile />, component: TabAttachment },
 ];
 
@@ -58,15 +60,14 @@ type Props = {
 };
 
 const TabsComponent = ({ selectedMaintLog }: Props) => {
-  return (
-    <TabsContainer
-      tabs={tabs}
-      tabProps={{
-        selected: selectedMaintLog,
-        label: selectedMaintLog?.tblComponentUnit?.compNo,
-      }}
-    />
+  const tabProps = useMemo(
+    () => ({
+      selected: selectedMaintLog,
+      label: selectedMaintLog?.tblComponentUnit?.compNo,
+    }),
+    [selectedMaintLog?.maintLogId],
   );
+  return <TabsContainer tabs={tabs} tabProps={tabProps} />;
 };
 
-export default TabsComponent;
+export default memo(TabsComponent);

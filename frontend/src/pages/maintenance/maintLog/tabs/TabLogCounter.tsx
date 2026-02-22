@@ -4,6 +4,7 @@ import {
   TypeTblMaintLog,
 } from "@/core/api/generated/api";
 import { formatDateTime } from "@/core/helper";
+import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
@@ -35,8 +36,8 @@ const TabLogCounter = (props: Props) => {
 
   const columns: GridColDef<TypeTblLogCounter>[] = [
     { field: "frequency", headerName: "Frequency", flex: 1 },
-    { field: "reportedCount", headerName: "ReportedCount", flex: 1 },
-    { field: "overdueCount", headerName: "OverDueCounter", flex: 1 },
+    { field: "reportedCount", headerName: "Reported Count", flex: 1 },
+    { field: "overdueCount", headerName: "OverDue Count", flex: 1 },
     {
       field: "CounterTypeName",
       headerName: "CounterTypeName",
@@ -45,9 +46,9 @@ const TabLogCounter = (props: Props) => {
     },
     {
       field: "lastupdate",
-      headerName: "lastUpdated",
+      headerName: "Last Update",
       flex: 1,
-      valueFormatter: (value) => (value ? formatDateTime(value) : ""),
+      renderCell: ({ value }) => <CellDateTime value={value} />,
     },
   ];
 

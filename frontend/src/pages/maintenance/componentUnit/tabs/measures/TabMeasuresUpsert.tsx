@@ -132,7 +132,6 @@ function CompMeasurePointUpsert({
           ...buildRelation("tblUnit", "unitId", values.unit.unitId),
           ...buildRelation("tblComponentUnit", "compId", compId),
         };
-        console.log(payload);
         const result =
           mode === "create"
             ? await tblCompMeasurePoint.create(payload)

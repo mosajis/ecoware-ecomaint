@@ -24,7 +24,7 @@ export default function MaintLogActions({
       label: "Filter",
       icon: (
         <Badge color="warning" variant="dot" invisible={!hasFilter}>
-          <FilterList />
+          <FilterList fontSize="small" />
         </Badge>
       ),
       isEnabled: true,
@@ -33,14 +33,13 @@ export default function MaintLogActions({
     },
     {
       label: "Follow",
-      icon: <FollowTheSignsIcon />,
-      isEnabled: true,
+      icon: <FollowTheSignsIcon fontSize="small" />,
       onClick: onFollow,
-      disabled: false,
+      disabled: selectedCount === 0,
     },
     {
       label: `Print (${selectedCount})`,
-      icon: <PrintIcon />,
+      icon: <PrintIcon fontSize="small" />,
       isEnabled: true,
       onClick: onPrint,
       disabled: selectedCount === 0,

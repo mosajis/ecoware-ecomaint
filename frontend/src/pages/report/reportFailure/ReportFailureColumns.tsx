@@ -4,6 +4,7 @@ import { TypeTblFailureReports } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 import CellFullName from "@/shared/components/dataGrid/cells/CellFullName";
 
+export const getRowId = (row: TypeTblFailureReports) => row.failureReportId;
 export const columns: GridColDef<TypeTblFailureReports>[] = [
   {
     field: "failureNumber",
@@ -71,7 +72,7 @@ export const columns: GridColDef<TypeTblFailureReports>[] = [
     field: "closedBy",
     headerName: "Closed By",
     flex: 1,
-    valueGetter: (_, row) => row?.tblUsers?.uName,
+    valueGetter: (_, row) => row?.tblUsers,
     renderCell: ({ value }) => <CellFullName value={value} />,
   },
 

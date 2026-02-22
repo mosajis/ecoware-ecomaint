@@ -7,12 +7,12 @@ import { useCallback, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { tblJobTrigger, TypeTblJobTrigger } from "@/core/api/generated/api";
 import { Tabs } from "./JobTriggerTabs";
-import { logicTblJobTrigger } from "@/core/api/api";
 import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
 import { toast } from "sonner";
 import { columns, getRowId } from "./JobTriggerColumns";
 import { useDialogs } from "@/shared/hooks/useDialogs";
+import { effectTblCompTypeJobTrigger } from "@/core/api/apiEffects";
 
 export default function PageJobTrigger() {
   const [_loading, setLoading] = useState(false);
@@ -55,8 +55,7 @@ export default function PageJobTrigger() {
   const onFireTrigger = async () => {
     if (selectedRowId) {
       setLoading(true);
-      logicTblJobTrigger
-        .effectFireTrigger(userId, selectedRowId)
+      effectTblCompTypeJobTrigger(userId, selectedRowId as any)
         .then((res) => {
           toast.success(res.message);
         })

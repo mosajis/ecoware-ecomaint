@@ -50,25 +50,21 @@ export default function PageReportFailure() {
           tblFailureSeverityLevel: true,
           tblFailureStatus: true,
           tblFailureGroupFollow: true,
-          tblUsers: true,
+          tblUsers: {
+            include: { tblEmployeeTblUsersEmployeeIdTotblEmployee: true },
+          },
         },
       }),
     [filter],
   );
 
-  const {
-    rows,
-    loading,
-    handleRefresh,
-    handleDelete,
-    optimisticUpdate,
-    optimisticReplace,
-  } = useDataGrid(
-    getAll,
-    tblFailureReports.deleteById,
-    "failureReportId",
-    !dialogs.filter,
-  );
+  const { rows, loading, handleRefresh, handleDelete, optimisticUpdate } =
+    useDataGrid(
+      getAll,
+      tblFailureReports.deleteById,
+      "failureReportId",
+      !dialogs.filter,
+    );
 
   const selectedRow =
     rows.find((r) => r.failureReportId === selectedRowId) || null;

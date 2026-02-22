@@ -6,13 +6,13 @@ import { useCallback, useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { toast } from "sonner";
-import { logicTblCompTypeMeasurePoint } from "@/core/api/api";
 import {
   tblCompTypeMeasurePoint,
   TypeTblCompType,
   TypeTblCompTypeMeasurePoint,
 } from "@/core/api/generated/api";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
+import { effectTblCompTypeMeasurePoint } from "@/core/api/apiEffects";
 
 type Props = {
   compType?: TypeTblCompType | null;
@@ -141,7 +141,7 @@ const TabMeasuresPage = ({ compType, label }: Props) => {
   const handleConfirmYes = async () => {
     try {
       if (effectId !== null && effectOperation !== null) {
-        await logicTblCompTypeMeasurePoint.effect(effectId, effectOperation);
+        await effectTblCompTypeMeasurePoint(effectId, effectOperation);
       }
 
       if (effectOperation === 2 && pendingDeleteRow) {

@@ -32,6 +32,7 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
     field: "discipline",
     headerName: "Discipline",
     valueGetter: (_, row) => row?.tblDiscipline?.name,
+    flex: 1,
   },
   {
     field: "followStatus",
@@ -43,16 +44,17 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
     field: "maintClass",
     headerName: "Maint Class",
     valueGetter: (_, row) => row?.tblMaintClass?.descr ?? "",
+    flex: 1,
   },
   {
     field: "downTime",
     headerName: "DownTime",
-    renderCell: ({ value }) => <CellDateTime value={value} />,
+    flex: 1,
   },
 
   {
-    field: "unplanned",
-    headerName: "Unplanned",
+    field: "unexpected",
+    headerName: "unExpected",
     type: "boolean",
     width: 95,
   },

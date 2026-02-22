@@ -11,7 +11,8 @@ import { tblCompJob, TypeTblCompJob } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
-import { logicTblWorkOrder } from "@/core/api/api";
+import { generateWorkOrder } from "@/core/api/api";
+import { toast } from "sonner";
 
 const columns: GridColDef<TypeTblCompJob>[] = [
   {
@@ -104,7 +105,13 @@ export default function PageComponentJob() {
   }, []);
 
   const onGenerateWorkOrder = async () => {
-    await logicTblWorkOrder.effectGenerateWorkOrder(userId);
+    generateWorkOrder(userId)
+      .then((res) => {
+        toast.success(`Generated SuccessFuly (${res.createdWorkOrders})`);
+      })
+      .catch(() => {
+        toast.error("Faild Generation");
+      });
   };
 
   return (

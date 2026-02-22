@@ -18,12 +18,18 @@ import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
 import { TypeTblWorkOrderWithRels } from "./types";
 import { atomUser } from "@/pages/auth/auth.atom";
+import { useDialogs } from "@/shared/hooks/useDialogs";
+import WorkOrderDetailDialog from "./WorkOrderDialogDetail";
 
 const getRowId = (row: TypeTblWorkOrder) => row.workOrderId;
 
 export default function WorkOrderPage() {
   const user = useAtomValue(atomUser);
   const userId = user?.userId as number;
+
+  const { dialogs, openDialog, closeDialog } = useDialogs({
+    workOrderDetail: false,
+  });
 
   // Dialog States
   const [dialogIssue, setDialogIssue] = useState(false);
@@ -41,6 +47,7 @@ export default function WorkOrderPage() {
   const [selectedRow, setSelectedRow] =
     useState<TypeTblWorkOrderWithRels | null>(null);
 
+  const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>({
       type: "include",
@@ -358,6 +365,10 @@ export default function WorkOrderPage() {
     setSelectedRow(row);
   };
 
+  const handleDoubleClick = (rowId: number) => {
+    openDialog("workOrderDetail");
+    setSelectedRowId(rowId);
+  };
   return (
     <>
       <Splitter horizontal initialPrimarySize="65%">
@@ -368,6 +379,7 @@ export default function WorkOrderPage() {
           checkboxSelection
           disableRowSelectionOnClick
           onRowClick={handleClick}
+          onDoubleClick={handleDoubleClick}
           showToolbar
           label="WorkOrders"
           rows={rows}
@@ -477,6 +489,12 @@ export default function WorkOrderPage() {
         open={dialogReschedule}
         onClose={closeDialogReschedule}
         onSuccess={successReschedule}
+      />
+
+      <WorkOrderDetailDialog
+        open={dialogs.workOrderDetail}
+        onClose={() => closeDialog("workOrderDetail")}
+        workOrderId={selectedRowId}
       />
     </>
   );

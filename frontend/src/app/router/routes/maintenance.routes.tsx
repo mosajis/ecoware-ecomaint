@@ -7,6 +7,7 @@ import { NotFound } from "@/pages/NotFound";
 import routeComponentUnit from "@/pages/maintenance/componentUnit/ComponentUnitRoutes";
 import routeFunction from "@/pages/maintenance/function/FunctionRoutes";
 import routeMaintLog from "@/pages/maintenance/maintLog/MaintLogRoute";
+import routeWorkShop from "@/pages/maintenance/workShop/WorkShopRoutes";
 
 //  Lazy pages ---
 
@@ -105,4 +106,5 @@ export const maintenanceRoutesTree = routeMaintenance.addChildren([
   routeCountersLog,
   routeCounterUpdate,
   routeMaintLog,
+  routeWorkShop,
 ]);

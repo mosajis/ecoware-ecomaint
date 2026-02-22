@@ -12,7 +12,7 @@ import {
   TypeTblCompTypeJob,
   TypeTblCompTypeJobTrigger,
 } from "@/core/api/generated/api";
-import { logicTblCompTypeJobTrigger } from "@/core/api/api";
+import { effectTblCompTypeJobTrigger } from "@/core/api/apiEffects";
 
 type Props = {
   compTypeJob?: TypeTblCompTypeJob;
@@ -111,7 +111,7 @@ const TabTrigger = ({ compTypeJob }: Props) => {
   const handleConfirmYes = async () => {
     try {
       if (effectId !== null && effectOperation !== null) {
-        await logicTblCompTypeJobTrigger.effect(effectId, effectOperation);
+        await effectTblCompTypeJobTrigger(effectId, effectOperation);
       }
 
       if (effectOperation === 2 && pendingDeleteId !== null) {

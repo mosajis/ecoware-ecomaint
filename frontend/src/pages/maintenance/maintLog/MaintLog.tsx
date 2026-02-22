@@ -1,3 +1,4 @@
+import ReportWorkDialog from "../reportWork/ReportWorkDialog";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import TabsComponent from "./MaintLogTabs";
 import Splitter from "@/shared/components/Splitter/Splitter";
@@ -6,7 +7,8 @@ import MaintLogActions from "./MaintLogActions";
 import MaintLogDialogPrint from "./MaintLogDialogPrint";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback, useMemo, useState } from "react";
-import { GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
+import { GridRowSelectionModel } from "@mui/x-data-grid";
+import { useDialogs } from "@/shared/hooks/useDialogs";
 import { columns } from "./MaintLogColumns";
 import {
   tblMaintLog,
@@ -16,17 +18,16 @@ import {
 import MaintLogFilterDialog, {
   type MaintLogFilter,
 } from "./MaintLogDialogFilter";
-import { useDialogs } from "@/shared/hooks/useDialogs";
 
 const getRowId = (row: TypeTblMaintLog) => row.maintLogId;
 
 export default function PageMaintLog() {
-  const { dialogs, openDialog, closeDialog, closeAllDialogs, isAnyOpen } =
-    useDialogs({
-      filter: false,
-      follow: false,
-      print: false,
-    });
+  const { dialogs, openDialog, closeDialog } = useDialogs({
+    filter: false,
+    follow: false,
+    print: false,
+    reportWork: false,
+  });
 
   const [selectedRow, setSelectedRow] = useState<TypeTblMaintLog | null>(null);
   const [selectionModel, setSelectionModel] = useState<GridRowSelectionModel>({
@@ -43,11 +44,8 @@ export default function PageMaintLog() {
     });
   }, [filter]);
 
-  const { rows, loading, handleRefresh, optimisticUpdate } = useDataGrid(
-    getAll,
-    tblMaintLog.deleteById,
-    "maintLogId",
-  );
+  const { rows, loading, handleRefresh, optimisticUpdate, handleDelete } =
+    useDataGrid(getAll, tblMaintLog.deleteById, "maintLogId");
 
   const selectedRows = useMemo<TypeTblMaintLog[]>(() => {
     const hasId = (id: number) =>
@@ -83,28 +81,38 @@ export default function PageMaintLog() {
     (selectedFollowStatus: TypeTblFollowStatus) => {
       if (!selectedRow?.maintLogId) return;
       optimisticUpdate(selectedRow.maintLogId, {
-        // followStatusId: selectedFollowStatus.followStatusId,
-        // tblFollowStatus: selectedFollowStatus,
+        tblFollowStatus: {
+          fsName: selectedFollowStatus.fsName,
+        },
       });
       setTimeout(() => handleRefresh(), 1800);
     },
     [selectedRow?.maintLogId, optimisticUpdate, handleRefresh],
   );
 
+  const handleEdit = () => {
+    if (!selectedRow) return;
+    openDialog("reportWork");
+  };
   return (
     <>
       <Splitter horizontal>
         <CustomizedDataGrid
           showToolbar
+          checkboxSelection
+          disableRowSelectionOnClick
           label="Maintenance Log"
+          rowSelection
           rows={rows}
           columns={columns}
           loading={loading}
+          onDoubleClick={handleEdit}
+          disableEdit
+          disableDelete
+          onDeleteClick={handleDelete}
           onRowClick={handleRowClick}
           onRefreshClick={handleRefresh}
           getRowId={getRowId}
-          checkboxSelection
-          disableRowSelectionOnClick
           rowSelectionModel={selectionModel}
           onRowSelectionModelChange={handleSelectionChange}
           toolbarChildren={
@@ -120,6 +128,15 @@ export default function PageMaintLog() {
         <TabsComponent selectedMaintLog={selectedRow} />
       </Splitter>
 
+      <ReportWorkDialog
+        open={dialogs.reportWork}
+        onClose={() => closeDialog("reportWork")}
+        onSuccess={() => {
+          closeDialog("reportWork");
+          handleRefresh();
+        }}
+        maintLogId={selectedRow?.maintLogId}
+      />
       <MaintLogFilterDialog
         open={dialogs.filter}
         onClose={() => closeDialog("filter")}

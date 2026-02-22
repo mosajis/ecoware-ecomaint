@@ -6,15 +6,18 @@ import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import { useEffect, useState } from "react";
-import {
-  tblComponentUnit,
-  tblMaintLog,
-  tblWorkOrder,
-} from "@/core/api/generated/api";
 import { useAtom, useAtomValue } from "jotai";
 import { reportWorkAtom } from "./ReportWorkAtom";
 import { atomUser } from "@/pages/auth/auth.atom";
 import { generateNextWorkORder } from "@/core/api/api";
+import {
+  tblComponentUnit,
+  tblMaintLog,
+  tblWorkOrder,
+  TypeTblComponentUnit,
+  TypeTblMaintLog,
+  TypeTblWorkOrder,
+} from "@/core/api/generated/api";
 
 type Props = {
   open: boolean;
@@ -50,6 +53,7 @@ const ReportWorkDialog = ({
         workOrder: null,
         componentUnit: null,
       });
+      return;
     }
 
     const fetchData = async () => {
@@ -69,9 +73,9 @@ const ReportWorkDialog = ({
             },
           });
 
-          const maintLog = { ...result, tblComponentUnit: null };
-          const componentUnit = result.tblComponentUnit || null;
-          const workOrder = result.tblWorkOrder;
+          const maintLog = { ...result } as TypeTblMaintLog;
+          const componentUnit = result.tblComponentUnit as TypeTblComponentUnit;
+          const workOrder = result.tblWorkOrder as any;
 
           setReportWork({
             maintLog,
@@ -108,9 +112,9 @@ const ReportWorkDialog = ({
           };
 
           setReportWork({
-            maintLog,
+            maintLog: maintLog as any,
             componentUnit,
-            workOrder,
+            workOrder: workOrder as any,
           });
         }
 
@@ -147,7 +151,7 @@ const ReportWorkDialog = ({
         { include: { tblWorkOrderStatus: true } },
       );
 
-      if (record.workOrderTypeId === 1 && reportWork.maintLog.maintLogId) {
+      if (record.workOrderTypeId === 1 && reportWork?.maintLog?.maintLogId) {
         await generateNextWorkORder(reportWork.maintLog.maintLogId, userId);
       }
       setIsLoadingSubmit(false);
@@ -159,7 +163,7 @@ const ReportWorkDialog = ({
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="lg">
       <DialogHeader
-        title={`Report Work / ${workOrder?.title}`}
+        title={`Report Work / ${workOrder?.title ?? reportWork.componentUnit?.compNo ?? ""}`}
         onClose={onClose}
         loading={isLoading}
       />
@@ -173,18 +177,21 @@ const ReportWorkDialog = ({
       >
         {isLoading ? <Spinner /> : <ReportWorkTabs />}
       </DialogContent>
-      <DialogActions>
+      <DialogActions sx={{ justifyContent: "center" }}>
         <Button
           onClick={handleSuccess}
           type="submit"
           color="secondary"
           style={{ width: 200 }}
           variant={
-            maintLog?.maintLogId && !isLoadingSubmit ? "contained" : "text"
+            maintLog?.maintLogId && !isLoadingSubmit ? "contained" : "outlined"
           }
           disabled={!maintLog?.maintLogId || isLoadingSubmit}
         >
-          {isLoadingSubmit ? "submitting ..." : "submit"}
+          {isLoadingSubmit ? "Saving ..." : "Ok"}
+        </Button>
+        <Button variant="outlined" onClick={onClose} sx={{ width: 200 }}>
+          Cancel
         </Button>
       </DialogActions>
     </Dialog>

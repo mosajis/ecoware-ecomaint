@@ -5,6 +5,7 @@ import ComponentTypeJobUpsert from "./TabJobUpsert";
 import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import ConfirmDialog from "@/shared/components/ConfirmDialog";
 import CellFrequency from "@/shared/components/dataGrid/cells/CellFrequency";
+import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import { toast } from "sonner";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
@@ -14,8 +15,7 @@ import {
   TypeTblCompType,
   TypeTblCompTypeJob,
 } from "@/core/api/generated/api";
-import { logicTblCompTypeJob } from "@/core/api/api";
-import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
+import { effectTblCompTypeJob } from "@/core/api/apiEffects";
 
 // ================= Columns =================
 
@@ -205,7 +205,7 @@ const TabJob = ({ compType, label }: Props) => {
   const handleConfirmYes = async () => {
     try {
       if (effectJobId !== null && effectOperation !== null) {
-        await logicTblCompTypeJob.effect(effectJobId, effectOperation);
+        await effectTblCompTypeJob(effectJobId, effectOperation);
       }
 
       if (effectOperation === 2 && pendingDeleteRow) {

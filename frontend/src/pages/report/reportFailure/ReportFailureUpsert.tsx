@@ -68,13 +68,13 @@ function FailureReportUpsert({
 
         let maintLog = null;
         if (failureReport.maintLogId) {
-          maintLog = await tblMaintLog.getById(failureReport.maintLogId, {
+          maintLog = (await tblMaintLog.getById(failureReport.maintLogId, {
             include: {
               tblMaintClass: true,
               tblMaintCause: true,
               tblMaintType: true,
             },
-          });
+          })) as any;
         }
 
         setInitData({

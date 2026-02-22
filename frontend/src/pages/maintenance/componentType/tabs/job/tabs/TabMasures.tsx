@@ -6,12 +6,12 @@ import { useCallback, useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { toast } from "sonner";
-import { logicTblCompTypeJobMeasurePoint } from "@/core/api/api";
 import {
   tblCompTypeJobMeasurePoint,
   TypeTblCompTypeJob,
   TypeTblCompTypeJobMeasurePoint,
 } from "@/core/api/generated/api";
+import { effectTblCompTypeJobMeasurePoint } from "@/core/api/apiEffects";
 
 type Props = {
   compTypeJob?: TypeTblCompTypeJob;
@@ -145,7 +145,7 @@ const TabMeasuresPage = ({ compTypeJob }: Props) => {
   const handleConfirmYes = async () => {
     try {
       if (effectId !== null && effectOperation !== null) {
-        await logicTblCompTypeJobMeasurePoint.effect(effectId, effectOperation);
+        await effectTblCompTypeJobMeasurePoint(effectId, effectOperation);
       }
 
       if (effectOperation === 2 && pendingDeleteId !== null) {

@@ -12,7 +12,7 @@ import {
   TypeTblCompTypeCounter,
 } from "@/core/api/generated/api";
 import { toast } from "sonner";
-import { logicTblCompTypeCounter } from "@/core/api/api";
+import { effectTblCompTypeCounter } from "@/core/api/apiEffects";
 
 type Props = {
   compType?: TypeTblCompType;
@@ -141,7 +141,7 @@ const TabCounter = ({ compType, label }: Props) => {
   const handleConfirmYes = async () => {
     try {
       if (effectId !== null && effectOperation !== null) {
-        await logicTblCompTypeCounter.effect(effectId, effectOperation);
+        await effectTblCompTypeCounter(effectId, effectOperation);
       }
 
       if (effectOperation === 2 && pendingDeleteId) {

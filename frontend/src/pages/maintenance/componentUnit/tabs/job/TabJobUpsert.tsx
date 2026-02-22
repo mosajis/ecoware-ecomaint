@@ -13,6 +13,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BorderedBox } from "@/shared/components/BorderedBox";
 import { buildRelation } from "@/core/helper";
+import FieldAsyncSelect from "@/shared/components/fields/FieldAsyncSelect";
 import {
   tblCompJob,
   tblJobDescription,
@@ -24,7 +25,6 @@ import {
   TypeTblCompJob,
   TypeTblDiscipline,
 } from "@/core/api/generated/api";
-import FieldAsyncSelect from "@/shared/components/fields/FieldAsyncSelect";
 
 /* ================= Schema ================= */
 
@@ -80,7 +80,7 @@ const schema = z.object({
   frequencyPeriod: z
     .object({
       periodId: z.number(),
-      name: z.string(),
+      name: z.string().nullable().optional(),
     })
     .nullable()
     .optional(),
@@ -299,7 +299,17 @@ function ComponentJobUpsert({
                 label="Job Description *"
                 value={field.value}
                 selectionMode="single"
-                request={tblJobDescription.getAll}
+                request={() =>
+                  tblJobDescription.getAll({
+                    filter: {
+                      NOT: {
+                        tblCompJobs: {
+                          some: { compId },
+                        },
+                      },
+                    },
+                  })
+                }
                 columns={[
                   { field: "jobDescTitle", headerName: "Title", flex: 1 },
                 ]}

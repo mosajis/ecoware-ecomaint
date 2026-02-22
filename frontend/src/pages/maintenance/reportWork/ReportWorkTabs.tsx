@@ -4,20 +4,20 @@ import Inventory from "@mui/icons-material/Inventory";
 import AttachFile from "@mui/icons-material/AttachFile";
 import Straighten from "@mui/icons-material/Straighten";
 import { lazy } from "react";
+import { useAtom } from "jotai";
+import { reportWorkAtom } from "./ReportWorkAtom";
 import TabsContainer, {
   ReusableTabItem,
 } from "@/shared/components/TabsContainer";
-import { useAtom } from "jotai";
-import { reportWorkAtom } from "./ReportWorkAtom";
 
 // Lazy imports
-const General = lazy(() => import("./steps/stepGeneral/StepGeneral"));
+const General = lazy(() => import("./tabs/tabGeneral/TabGeneral"));
 const ResourceUsed = lazy(
-  () => import("./steps/stepResourceUsed/StepResourceUsed"),
+  () => import("./tabs/tabResourceUsed/TabResourceUsed"),
 );
-const StockUsed = lazy(() => import("./steps/stepStockUsed/StepStockUsed"));
-const Attachments = lazy(() => import("./steps/StepAttachments"));
-const MeasurePoints = lazy(() => import("./steps/StepMeasurePoints"));
+const StockUsed = lazy(() => import("./tabs/tabStockUsed/TabStockUsed"));
+const Attachments = lazy(() => import("./tabs/TabAttachments"));
+const MeasurePoints = lazy(() => import("./tabs/TabMeasurePoints"));
 
 const ReportWorkTabs = () => {
   const [reportWork, setReportWork] = useAtom(reportWorkAtom);

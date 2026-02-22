@@ -20,19 +20,24 @@ export default function ReportFailureOpenDialog({
   const handleConfirm = async () => {
     if (!failureReportId) return;
 
-    const patch = {
-      closedDateTime: null,
-      tblUsers: buildRelation("tblUsers", "userId", undefined),
-    };
-
-    // ✅ optimistic
-    onSuccess(patch);
-
     try {
-      await tblFailureReports.update(failureReportId, {
-        ...patch,
-      });
-
+      const res = await tblFailureReports.update(
+        failureReportId,
+        {
+          closedDateTime: null,
+          ...buildRelation("tblUsers", "userId", undefined),
+        },
+        {
+          include: {
+            tblUsers: {
+              include: {
+                tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
+              },
+            },
+          },
+        },
+      );
+      onSuccess(res);
       toast.success("Failure Report Open Successfully");
       onClose();
     } catch (error: any) {

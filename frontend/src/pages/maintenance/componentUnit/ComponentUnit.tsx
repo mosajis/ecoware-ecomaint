@@ -3,6 +3,7 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import ComponentUnitUpsert from "./ComponentUnitUpsert";
 import ReportWorkDialog from "../reportWork/ReportWorkDialog";
 import ComponentUnitActions from "./ComponentUnitActions";
+import ReportFailureUpsert from "@/pages/report/reportFailure/ReportFailureUpsert";
 import { useRouter } from "@tanstack/react-router";
 import { routeComponentUnitDetail } from "./ComponentUnitRoutes";
 import { useDataTree } from "@/shared/hooks/useDataTree";
@@ -15,7 +16,7 @@ import {
   tblComponentUnit,
   TypeTblComponentUnit,
 } from "@/core/api/generated/api";
-import ReportFailureUpsert from "@/pages/report/reportFailure/ReportFailureUpsert";
+import WorkShopUpsert from "../workShop/WorkShopUpsert";
 
 export default function PageComponentUnit() {
   const router = useRouter();
@@ -150,6 +151,13 @@ export default function PageComponentUnit() {
         compId={selectedRowId!}
         onClose={() => closeDialog("failureReport")}
         onSuccess={() => closeDialog("failureReport")}
+      />
+
+      <WorkShopUpsert
+        open={dialogs.workShop}
+        mode={"create"}
+        onClose={() => closeDialog("workShop")}
+        onSuccess={() => closeDialog("workShop")}
       />
     </>
   );

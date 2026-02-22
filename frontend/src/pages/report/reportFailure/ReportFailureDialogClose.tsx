@@ -4,7 +4,7 @@ import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 import Box from "@mui/material/Box";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
-import { tblFailureReports } from "@/core/api/generated/api";
+import { tblFailureReports, tblUsers } from "@/core/api/generated/api";
 import { buildRelation } from "@/core/helper";
 import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
@@ -65,13 +65,25 @@ export default function ReportFailureCloseDialog({
     setLoading(true);
 
     try {
-      const record = await tblFailureReports.update(failureReportId, {
-        closedDateTime: closedDateTime?.toString(),
-        followDesc,
-        tblUsers: buildRelation("tblUsers", "userId", userId),
-      });
+      const record = await tblFailureReports.update(
+        failureReportId,
+        {
+          closedDateTime: closedDateTime?.toString(),
+          followDesc,
+          ...buildRelation("tblUsers", "userId", userId),
+        },
+        {
+          include: {
+            tblUsers: {
+              include: {
+                tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
+              },
+            },
+          },
+        },
+      );
 
-      onSuccess({ ...record, tblUsers: { userId, uName: user?.uName } });
+      onSuccess(record);
       toast.success("Failure Report closed");
       onClose();
     } catch (error: any) {

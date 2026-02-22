@@ -6,8 +6,8 @@ import {
   tblCompTypeAttachment,
   TypeTblCompType,
 } from "@/core/api/generated/api";
-import { logicTblCompTypeAttachment } from "@/core/api/api";
 import { toast } from "sonner";
+import { effectTblCompTypeAttachment } from "@/core/api/apiEffects";
 
 type Props = {
   compType?: TypeTblCompType | null;
@@ -33,7 +33,7 @@ export function TabCompTypeAttachment({ compType, label }: Props) {
   const handleConfirmYes = async () => {
     try {
       if (effectId !== null && effectOperation !== null) {
-        await logicTblCompTypeAttachment.effect(effectId, effectOperation);
+        await effectTblCompTypeAttachment(effectId, effectOperation);
       }
 
       // اگر delete بود، حالا باید پاک کنیم

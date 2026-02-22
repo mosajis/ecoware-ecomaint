@@ -5,13 +5,13 @@ import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import { useCallback, useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { logicTblCompTypeJobCounter } from "@/core/api/api";
 import { toast } from "sonner";
 import {
   tblCompTypeJobCounter,
   TypeTblCompTypeJob,
   TypeTblCompTypeJobCounter,
 } from "@/core/api/generated/api";
+import { effectTblCompTypeJobCounter } from "@/core/api/apiEffects";
 
 type Props = {
   compTypeJob?: TypeTblCompTypeJob;
@@ -130,7 +130,7 @@ const TabCounter = ({ compTypeJob }: Props) => {
   const handleConfirmYes = async () => {
     try {
       if (effectId !== null && effectOperation !== null) {
-        await logicTblCompTypeJobCounter.effect(effectId, effectOperation);
+        await effectTblCompTypeJobCounter(effectId, effectOperation);
       }
 
       if (effectOperation === 2 && pendingDeleteId !== null) {

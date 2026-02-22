@@ -79,7 +79,7 @@ export default function WorkOrderPendingDialog({
         },
       );
 
-      onSuccess(result);
+      onSuccess(result as any);
       handleClose();
     } catch {
       toast.error("Failed to update work order");

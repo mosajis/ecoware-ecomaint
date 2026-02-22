@@ -38768,9 +38768,12 @@ export interface operations {
                             maintLogId: number;
                             dateDone: (string | null) | null;
                             downTime: (number | null) | null;
+                            totalDuration: (number | null) | null;
+                            history: (string | null) | null;
                             unexpected: ((boolean | number | null) | null) | null;
                             tblComponentUnit?: ({
                                 compNo: (string | null) | null;
+                                compId: (number | null) | null;
                             } | null) | null;
                             tblJobDescription: ({
                                 jobDescCode: (string | null) | null;
@@ -40824,7 +40827,285 @@ export interface operations {
                                 name: (string | null) | null;
                             } | null) | null;
                         };
-                        maintLog: (unknown | null) | null;
+                        maintLog: ({
+                            maintLogId: number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            maintClassId: null | number;
+                            functionId: null | number;
+                            jobDescId: null | number;
+                            workOrderId: null | number;
+                            compId: null | number;
+                            totalDuration: null | number;
+                            downTime: null | number;
+                            dateDone: null | string;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            overdueCount: null | number;
+                            unexpected: null | number;
+                            reportedBy: null | number;
+                            history: null | string;
+                            workOrderStatusId: null | number;
+                            followStatusId: null | number;
+                            updatedUserId: null | number;
+                            reportedDate: null | string;
+                            lastupdate: null | string;
+                            discId: null | number;
+                            tblFailureReports?: {
+                                failureReportId: number;
+                                maintLogId: null | number;
+                                title: null | string;
+                                failureNumber: null | number;
+                                locationId: null | number;
+                                failureSeverityLevelId: null | number;
+                                failureStatusId: null | number;
+                                failureGroupFollowId: null | number;
+                                requestNo: null | string;
+                                nextFollowDate: null | string;
+                                closedUserId: null | number;
+                                closedDateTime: null | string;
+                                followDesc: null | string;
+                            }[];
+                            tblLogCounters?: {
+                                logCounterId: number;
+                                maintLogId: null | number;
+                                counterTypeId: null | number;
+                                frequency: null | number;
+                                reportedCount: null | number;
+                                overdueCount: null | number;
+                                lastupdate: null | string;
+                                orderNo: null | number;
+                                createdUserId: null | number;
+                            }[];
+                            tblLogDisciplines?: {
+                                logDiscId: number;
+                                maintLogId: null | number;
+                                employeeId: null | number;
+                                discId: null | number;
+                                lastupdate: null | string;
+                                orderNo: null | number;
+                                createdUserId: null | number;
+                                timeSpent: null | number;
+                            }[];
+                            tblComponentUnit?: null | ({
+                                compId: number;
+                                compTypeId: null | number;
+                                locationId: null | number;
+                                parentCompId: null | number;
+                                vendorId: null | number;
+                                compNo: null | string;
+                                serialNo: null | string;
+                                statusId: null | number;
+                                notes: null | string;
+                                lastupdate: null | string;
+                                isCritical: null | number;
+                                orderNo: null | number;
+                                model: null | string;
+                                comment1: null | string;
+                                comment2: null | string;
+                                comment3: null | string;
+                                assetNo: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblDiscipline?: null | ({
+                                discId: number;
+                                code: null | string;
+                                name: null | string;
+                                externalDisc: null | number;
+                                parentDiscId: null | number;
+                                lastupdate: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblFollowStatus?: null | ({
+                                followStatusId: number;
+                                fsName: null | string;
+                                fsDesc: null | string;
+                                fsGroup: null | number;
+                                sortId: null | number;
+                                lastupdate: null | string;
+                                followStatuseId1: null | number;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblFunctions?: null | ({
+                                functionId: number;
+                                compId: null | number;
+                                funcNo: null | string;
+                                funcDesc: null | string;
+                                parentFunctionId: null | number;
+                                notes: null | string;
+                                statusId: null | number;
+                                lastupdate: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblJobDescription?: null | ({
+                                jobDescId: number;
+                                jobClassId: null | number;
+                                jobDescCode: null | string;
+                                jobDescTitle: null | string;
+                                jobDesc: null | string;
+                                revision: null | string;
+                                changeReason: null | string;
+                                status: null | number;
+                                oldRevisionJobDescId: null | number;
+                                copiedFromJobDescId: null | number;
+                                createdDate: null | string;
+                                approvedDate: null | string;
+                                approvedBy: null | number;
+                                applicationId: null | number;
+                                lastupdate: null | string;
+                                orderNo: null | number;
+                                createdUserId: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblMaintCause?: null | ({
+                                maintCauseId: number;
+                                descr: null | string;
+                                lastupdate: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblMaintClass?: null | ({
+                                maintClassId: number;
+                                descr: null | string;
+                                lastupdate: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblMaintType?: null | ({
+                                maintTypeId: number;
+                                descr: null | string;
+                                lastupdate: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblPeriod?: null | ({
+                                periodId: number;
+                                name: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblUsersTblMaintLogUpdatedUserIdTotblUsers?: null | ({
+                                userId: number;
+                                employeeId: null | number;
+                                addressId: null | number;
+                                userGroupId: null | number;
+                                uUserName: null | string;
+                                uPassword: null | string;
+                                uName: null | string;
+                                uTitle: null | string;
+                                uComment1: null | string;
+                                uComment2: null | string;
+                                uDigitalSign: null | string;
+                                uAccountDisabled: null | boolean;
+                                uLogonAttempts: null | number;
+                                uForcePasswordChange: null | boolean;
+                                uLastLogin: null | string;
+                                orderNo: null | number;
+                                lastupdate: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblWorkOrder?: null | ({
+                                workOrderId: number;
+                                compJobId: null | number;
+                                maintClassId: null | number;
+                                maintTypeId: null | number;
+                                maintCauseId: null | number;
+                                createdBy: null | number;
+                                issuedBy: null | number;
+                                plannedBy: null | number;
+                                issuedDate: null | string;
+                                respDiscId: null | number;
+                                compId: null | number;
+                                roundId: null | number;
+                                parentWorkOrderId: null | number;
+                                woNo: null | string;
+                                title: null | string;
+                                priority: null | number;
+                                estTotalDuration: null | number;
+                                dueDate: null | string;
+                                window: null | number;
+                                created: null | string;
+                                started: null | string;
+                                completed: null | string;
+                                description: null | string;
+                                filed: null | number;
+                                unexpected: null | number;
+                                workOrderStatusId: null | number;
+                                lastupdate: null | string;
+                                reportingMethod: null | number;
+                                pendingBy: null | number;
+                                pendTypeId: null | number;
+                                pendingdate: null | string;
+                                orderNo: null | number;
+                                userId: null | number;
+                                userComment: null | string;
+                                workOrderTypeId: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblUsersTblMaintLogReportedByTotblUsers?: null | ({
+                                userId: number;
+                                employeeId: null | number;
+                                addressId: null | number;
+                                userGroupId: null | number;
+                                uUserName: null | string;
+                                uPassword: null | string;
+                                uName: null | string;
+                                uTitle: null | string;
+                                uComment1: null | string;
+                                uComment2: null | string;
+                                uDigitalSign: null | string;
+                                uAccountDisabled: null | boolean;
+                                uLogonAttempts: null | number;
+                                uForcePasswordChange: null | boolean;
+                                uLastLogin: null | string;
+                                orderNo: null | number;
+                                lastupdate: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblMaintLogAttachments?: {
+                                maintLogAttachmentId: number;
+                                maintLogId: number;
+                                attachmentId: number;
+                                orderNo: null | number;
+                                createdUserId: number;
+                                createdAt: string;
+                            }[];
+                            tblMaintLogFollows?: {
+                                followId: number;
+                                userId: number;
+                                maintLogId: number;
+                                isRequest: null | number;
+                                isWaiting: null | number;
+                                isUnPlan: null | number;
+                                followDesc: null | string;
+                                lastupdate: null | string;
+                                followStatuseId: null | number;
+                                orderNo: null | number;
+                            }[];
+                            tblMaintLogStocks?: {
+                                maintLogStockId: number;
+                                maintLogId: number;
+                                stockItemId: number;
+                                stockCount: null | number;
+                                orderNo: null | number;
+                                createdUserId: null | number;
+                                lastupdate: null | string;
+                            }[];
+                        } | null) | null;
                     };
                 };
             };
@@ -54593,8 +54874,10 @@ export interface operations {
                             title: string;
                             priority: (number | null) | null;
                             description: (string | null) | null;
+                            window: (number | null) | null;
                             userComment: (string | null) | null;
                             dueDate: (string | null) | null;
+                            pendingdate: (string | null) | null;
                             created: (string | null) | null;
                             started: (string | null) | null;
                             completed: (string | null) | null;
@@ -54605,8 +54888,9 @@ export interface operations {
                                     name?: string;
                                 };
                             };
-                            tblCompJob?: {
+                            tblCompJob: ({
                                 compJobId: number;
+                                frequency: (number | null) | null;
                                 nextDueDate?: string;
                                 tblJobDescription?: {
                                     jobDescCode: string;
@@ -54615,7 +54899,7 @@ export interface operations {
                                 tblPeriod?: {
                                     name: string;
                                 };
-                            };
+                            } | null) | null;
                             tblPendingType?: {
                                 pendTypeName?: string;
                             };

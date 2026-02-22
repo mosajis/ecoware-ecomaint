@@ -18,11 +18,14 @@ const MaintLogItemSchema = t.Object({
   maintLogId: t.Number(),
   dateDone: t.Nullable(t.Date()),
   downTime: t.Nullable(t.Number()),
+  totalDuration: t.Nullable(t.Number()),
+  history: t.Nullable(t.String()),
   unexpected: t.Nullable(t.Union([t.Boolean(), t.Number(), t.Null()])),
   tblComponentUnit: t.Optional(
     t.Nullable(
       t.Object({
         compNo: t.Nullable(t.String()),
+        compId: t.Nullable(t.Number()),
       }),
     ),
   ),
@@ -115,11 +118,12 @@ const ControllerTblMaintLog = new BaseController({
             downTime: true,
             unexpected: true,
             history: true,
+            totalDuration: true,
             tblWorkOrder: {
               select: { description: true },
             },
             tblComponentUnit: {
-              select: { compNo: true },
+              select: { compNo: true, compId: true },
             },
             tblJobDescription: {
               select: {
@@ -375,7 +379,9 @@ const ControllerTblMaintLog = new BaseController({
               }),
             ),
           }),
-          maintLog: t.Nullable(t.Any()),
+          maintLog: t.Nullable(
+            buildResponseSchema(TblMaintLogPlain, TblMaintLog),
+          ),
         }),
       },
     );

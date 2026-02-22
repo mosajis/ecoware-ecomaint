@@ -23,6 +23,9 @@ const TabWorkOrder = ({ componentUnit, label }: Props) => {
       tblWorkOrder.getAll({
         filter: {
           compId,
+          tblWorkOrderStatus: {
+            workOrderStatusId: { notIn: [5, 6] },
+          },
         },
         include: {
           tblComponentUnit: {

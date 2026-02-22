@@ -165,16 +165,15 @@ export default function WorkOrderFilterDialog({
   const handleApply = () => {
     const conditions: any[] = [];
 
-    // 🔹 استفاده مستقیم از filters.number به جای textInputRefs
     if (filters.number) {
       conditions.push({
-        woNo: { contains: filters.number, mode: "insensitive" },
+        woNo: { contains: filters.number },
       });
     }
 
     if (filters.title) {
       conditions.push({
-        title: { contains: filters.title, mode: "insensitive" },
+        title: { contains: filters.title },
       });
     }
 

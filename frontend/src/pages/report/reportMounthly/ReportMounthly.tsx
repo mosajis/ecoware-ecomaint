@@ -20,10 +20,6 @@ const columns: GridColDef<TypeTblSpareType>[] = [
   { field: "changeReason", headerName: "Total Wait", flex: 1 },
   { field: "notes", headerName: "Disc. Name", flex: 1 },
   { field: "description", headerName: "Last Updated", flex: 1 },
-  { field: "farsiDescription", headerName: "Loged By", flex: 1 },
-  { field: "farsiDescription", headerName: "Approved By", flex: 1 },
-  { field: "farsiDescription", headerName: "Closed By", flex: 1 },
-  { field: "farsiDescription", headerName: "Closed Date", flex: 1 },
 ];
 
 export default function PageReportMounthly() {

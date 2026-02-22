@@ -1,5 +1,4 @@
 import { FC } from "react";
-import Box from "@mui/material/Box";
 import { TypeTblUsers } from "@/core/api/generated/api";
 
 type CellFullNameProps = {
@@ -12,7 +11,7 @@ const CellFullName: FC<CellFullNameProps> = ({ value }) => {
     ? [employee.firstName, employee.lastName].filter(Boolean).join(" ")
     : "";
 
-  return <Box>{fullName}</Box>;
+  return fullName;
 };
 
 export default CellFullName;
