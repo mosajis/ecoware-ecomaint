@@ -22,21 +22,22 @@ function WorkShopUpsert({ open, workShopId, onClose, onSuccess }: Props) {
   const [initData, setInitData] = useAtom(atomInitData);
   const [loading, setLoading] = useState(false);
 
-  const mode = workShopId ? "update" : "create";
+  const _workShopId = workShopId ?? initData.workShop?.workShopId;
+  const mode = _workShopId ? "update" : "create";
 
   useEffect(() => {
     if (!open) {
       setInitData({ workShop: null });
     }
-  }, [open, setInitData]);
+  }, [open]);
 
   useEffect(() => {
-    if (!open || mode !== "update" || !workShopId) return;
+    if (!open || mode !== "update" || !_workShopId) return;
 
     const fetchData = async () => {
       try {
         setLoading(true);
-        const workShop = await tblWorkShop.getById(workShopId, {
+        const workShop = await tblWorkShop.getById(_workShopId, {
           include: {
             tblDiscipline: true,
             tblUsersTblWorkShopPersonInChargeIdTotblUsers: {
@@ -64,7 +65,7 @@ function WorkShopUpsert({ open, workShopId, onClose, onSuccess }: Props) {
     };
 
     fetchData();
-  }, [open, mode, workShopId, setInitData]);
+  }, [open, mode, _workShopId, setInitData]);
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth>
@@ -81,19 +82,15 @@ function WorkShopUpsert({ open, workShopId, onClose, onSuccess }: Props) {
           background: "var(--template-palette-background-default)",
         }}
       >
-        {loading ? (
-          <Spinner />
-        ) : (
-          <WorkShopTabs mode={mode} workShopId={workShopId} />
-        )}
+        <WorkShopTabs mode={mode} workShopId={_workShopId} />
       </DialogContent>
 
       <DialogActions sx={{ justifyContent: "center" }}>
         <Button
           onClick={() => onSuccess(initData)}
           sx={{ width: 200 }}
-          variant={initData?.workShop?.workShopId ? "contained" : "outlined"}
-          disabled={!initData?.workShop?.workShopId}
+          variant={_workShopId ? "contained" : "outlined"}
+          disabled={!_workShopId}
         >
           Ok
         </Button>

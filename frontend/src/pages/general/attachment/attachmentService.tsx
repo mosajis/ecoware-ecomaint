@@ -1,8 +1,10 @@
-// attachmentService.ts
+import Axios from "axios";
 import { TypeTblAttachment } from "@/core/api/generated/api";
-import axios from "axios";
-import { api } from "@/service/axios";
-import { toast } from "sonner";
+import { configAxios } from "@/config";
+
+const axios = Axios.create({
+  baseURL: configAxios.httpURL,
+});
 
 export type CreateAttachmentPayload = {
   file: File;

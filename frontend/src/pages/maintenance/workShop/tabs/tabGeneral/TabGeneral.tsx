@@ -80,7 +80,11 @@ function TabGeneral({ mode, workShopId }: Props) {
           awardingDate: v.awardingDate?.toString(),
           repairDescription: v.repairDescription,
           followDesc: v.followDesc,
-          ...buildRelation("tblDiscipline", "discId", v.discipline?.discId),
+          ...buildRelation(
+            "tblDiscipline",
+            "discId",
+            v.discipline?.discId ?? userDiscipline.discId ?? null,
+          ),
           ...buildRelation(
             "tblUsersTblWorkShopPersonInChargeIdTotblUsers",
             "userId",
@@ -101,7 +105,27 @@ function TabGeneral({ mode, workShopId }: Props) {
             workShopNo: nextNumber,
             createdDate: new Date().toString(),
           });
-          setInitData({ workShop: created });
+          const record = await tblWorkShop.getById(created.workShopId, {
+            include: {
+              tblDiscipline: true,
+              tblUsersTblWorkShopPersonInChargeIdTotblUsers: {
+                include: {
+                  tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
+                },
+              },
+              tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers: {
+                include: {
+                  tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
+                },
+              },
+              tblUsersTblWorkShopClosedByIdTotblUsers: {
+                include: {
+                  tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
+                },
+              },
+            },
+          });
+          setInitData({ workShop: record });
         } else {
           const updated = await tblWorkShop.update(workShopId!, body, {
             include: {

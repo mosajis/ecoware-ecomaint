@@ -87,7 +87,6 @@ const StepGeneral = () => {
   });
 
   useEffect(() => {
-    if (!context) return;
     const values = {
       dateDone: maintLog?.dateDone ? new Date(maintLog.dateDone) : new Date(),
       totalDuration: maintLog?.totalDuration ?? 0,
@@ -97,7 +96,7 @@ const StepGeneral = () => {
       maintClass: maintLog?.tblMaintClass ?? null,
       history: maintLog?.history ?? "",
       unexpected: !context?.isPlanned,
-      reportedCount: context.reportedCount ?? 0,
+      reportedCount: context?.reportedCount ?? 0,
     };
 
     reset(values);
@@ -110,12 +109,13 @@ const StepGeneral = () => {
       if (!context) return;
 
       const payload = {
-        totalDuration: values.totalDuration ?? 0,
-        downTime: values.waitingMin ?? 0,
         dateDone: values.dateDone?.toString(),
-        unexpected: context.isPlanned ? 0 : 1,
+        downTime: values.waitingMin ?? 0,
+        totalDuration: values.totalDuration ?? 0,
+        unexpected: values.unexpected ? 0 : 1,
         history: values.history ?? "",
         lastUpdate: new Date(),
+        frequency: 0,
 
         ...(!maintLogId && { compId }),
 
@@ -124,11 +124,11 @@ const StepGeneral = () => {
           "maintTypeId",
           values.maintType?.maintTypeId,
         ),
-        // ...buildRelation(
-        //   "tblJobDescription",
-        //   "jobDescId",
-        //   workOrder?.,
-        // ),
+        ...buildRelation(
+          "tblMaintType",
+          "tblJobDescription",
+          (workOrder?.tblCompJob?.tblJobDescription as any).jobDescId,
+        ),
         ...buildRelation(
           "tblMaintCause",
           "maintCauseId",
@@ -145,7 +145,9 @@ const StepGeneral = () => {
 
       const saved = maintLogId
         ? await tblMaintLog.update(maintLogId, payload)
-        : await tblMaintLog.create(payload);
+        : await tblMaintLog.create({
+            ...payload,
+          });
       const recordMaintLog = await tblMaintLog.getById(saved.maintLogId, {
         include: {
           tblComponentUnit: true,

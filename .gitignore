@@ -60,3 +60,4 @@ backend/uploads/**
 backend/uploads/*
 *dist-stats.html
 deploy/build.zip
+frontend/dist-stats.html

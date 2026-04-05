@@ -16,7 +16,6 @@ import {
   tblWorkOrder,
   TypeTblComponentUnit,
   TypeTblMaintLog,
-  TypeTblWorkOrder,
 } from "@/core/api/generated/api";
 
 type Props = {
@@ -193,6 +192,7 @@ const ReportWorkDialog = ({
         <Button variant="outlined" onClick={onClose} sx={{ width: 200 }}>
           Cancel
         </Button>
+        <div>{JSON.stringify(reportWork)}</div>
       </DialogActions>
     </Dialog>
   );
