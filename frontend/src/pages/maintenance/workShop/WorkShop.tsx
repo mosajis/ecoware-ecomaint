@@ -6,7 +6,7 @@ import WorkShopActions from "./WorkShopActions";
 import WorkShopDialogComplete from "./WorkShopDialogClose";
 import { useCallback, useMemo, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { columns } from "./WorkShopColumns";
+import { columns, getRowId } from "./WorkShopColumns";
 import {
   tblWorkShop,
   tblWorkShopAttachment,
@@ -15,8 +15,6 @@ import {
 import WorkShopDialogOpen from "./WorkShopDialogOpen";
 import WorkShopDialogFilter, { WorkShopFilter } from "./WorkShopDialogFilter";
 import WorkShopDialogPrint from "./WorkShopDialogPrint";
-
-const getRowId = (row: TypeTblWorkShop) => row.workShopId;
 
 export default function PageWorkShop() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);

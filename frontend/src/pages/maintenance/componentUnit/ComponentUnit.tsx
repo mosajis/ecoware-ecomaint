@@ -3,6 +3,7 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import ComponentUnitUpsert from "./ComponentUnitUpsert";
 import ReportWorkDialog from "../reportWork/ReportWorkDialog";
 import ComponentUnitActions from "./ComponentUnitActions";
+import WorkShopUpsert from "../workShop/WorkShopUpsert";
 import ReportFailureUpsert from "@/pages/report/reportFailure/ReportFailureUpsert";
 import { useRouter } from "@tanstack/react-router";
 import { routeComponentUnitDetail } from "./ComponentUnitRoutes";
@@ -16,7 +17,6 @@ import {
   tblComponentUnit,
   TypeTblComponentUnit,
 } from "@/core/api/generated/api";
-import WorkShopUpsert from "../workShop/WorkShopUpsert";
 
 export default function PageComponentUnit() {
   const router = useRouter();

@@ -24,9 +24,12 @@ export const generateNextWorkORder = async (
     data: { maintLogId, userId },
   });
 
-export const tblMaintLogStocksBySpareUnitId =
-  (): Promise<TypeMaintLogStocksBySpareUnitId> =>
-    api.get(`/tblMaintLogStocks/uniqueSpareUnit`);
+export const tblMaintLogStocksBySpareUnitId = (
+  compId?: number,
+): Promise<TypeMaintLogStocksBySpareUnitId> => {
+  const query = compId ? `?compId=${compId}` : "";
+  return api.get(`/tblMaintLogStocks/uniqueSpareUnit${query}`);
+};
 
 export const getMaintLogContext = async (
   params: MaintLogContextParams,
@@ -43,3 +46,6 @@ export const getMaintLogContext = async (
 
 export const getStatistics = (): Promise<TypeStatistics> =>
   api.get(`/statistics/`);
+
+export const getCountersAlert = (): Promise<TypeStatistics> =>
+  api.get(`/tblCompJobCounter/alert`);

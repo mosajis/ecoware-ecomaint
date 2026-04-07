@@ -71,6 +71,8 @@ const ControllerTblMaintLogStocks = new BaseController({
     app.get(
       "/uniqueSpareUnit",
       async ({ query }) => {
+        const compId = Number(query.compId) ?? null;
+
         const page = query.page ?? 1;
         const perPage = query.perPage ?? 20;
         const paginate = query.paginate !== false;
@@ -89,7 +91,10 @@ const ControllerTblMaintLogStocks = new BaseController({
 
         // 2) گرفتن رکوردهای maintLogStocks مربوط به stockItemId های یکتا
         const records = await prisma.tblMaintLogStocks.findMany({
-          where: { stockItemId: { in: stockItemIds } },
+          where: {
+            stockItemId: { in: stockItemIds },
+            tblMaintLog: { compId: compId },
+          },
           include: {
             tblSpareUnit: {
               include: {
@@ -161,7 +166,17 @@ const ControllerTblMaintLogStocks = new BaseController({
         detail: {
           summary: "Get unique spare units by stockItemId",
         },
-        query: querySchema,
+        query: t.Object({
+          compId: t.Optional(t.Number()),
+          page: t.Optional(t.Number()),
+          perPage: t.Optional(t.Number()),
+          sort: t.Optional(t.String()),
+          filter: t.Optional(t.String()),
+          include: t.Optional(t.String()),
+          select: t.Optional(t.String()),
+          paginate: t.Optional(t.Boolean()),
+          force: t.Optional(t.Boolean()),
+        }),
         response: t.Object({
           items: t.Array(MaintLogStockWithTotalsSchema),
           total: t.Integer(),

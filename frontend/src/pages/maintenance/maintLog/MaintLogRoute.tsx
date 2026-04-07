@@ -8,7 +8,7 @@ const searchSchema = z.object({
   filter: z.string().optional(),
 });
 
-export default createRoute({
+const maintLog = createRoute({
   getParentRoute: () => routeMaintenance,
   path: "maint-log",
   validateSearch: searchSchema,
@@ -19,3 +19,7 @@ export default createRoute({
   ),
   beforeLoad: () => ({ breadcrumb: "Maint Logs" }),
 });
+
+const routes = maintLog;
+
+export default routes;

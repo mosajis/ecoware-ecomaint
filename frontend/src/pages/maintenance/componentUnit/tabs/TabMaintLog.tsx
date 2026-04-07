@@ -1,5 +1,6 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { useCallback } from "react";
+import TabsComponent from "../../maintLog/MaintLogTabs";
+import { useCallback, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { columns } from "../../maintLog/MaintLogColumns";
 import {
@@ -7,6 +8,7 @@ import {
   TypeTblComponentUnit,
   TypeTblMaintLog,
 } from "@/core/api/generated/api";
+import Splitter from "@/shared/components/Splitter/Splitter";
 
 interface Props {
   componentUnit?: TypeTblComponentUnit;
@@ -16,6 +18,8 @@ interface Props {
 const getRowId = (row: TypeTblMaintLog) => row.maintLogId;
 
 const TabMaintLog = ({ componentUnit, label }: Props) => {
+  const [selectedRow, setSelectedRow] = useState<TypeTblMaintLog | null>(null);
+
   const compId = componentUnit?.compId;
 
   const getAll = useCallback(() => {
@@ -44,20 +48,27 @@ const TabMaintLog = ({ componentUnit, label }: Props) => {
     !!compId,
   );
 
+  const handleRowClick = useCallback((params: any) => {
+    setSelectedRow(params.row);
+  }, []);
+
   return (
-    <CustomizedDataGrid
-      disableEdit
-      disableAdd
-      disableDelete
-      disableRowNumber
-      label={label}
-      showToolbar={!!label}
-      rows={rows}
-      columns={columns}
-      loading={loading}
-      onRefreshClick={handleRefresh}
-      getRowId={getRowId}
-    />
+    <Splitter horizontal>
+      <CustomizedDataGrid
+        disableEdit
+        disableDelete
+        disableAdd
+        showToolbar
+        label="Maintenance Log"
+        rows={rows}
+        columns={columns}
+        loading={loading}
+        onRefreshClick={handleRefresh}
+        getRowId={getRowId}
+        onRowClick={handleRowClick}
+      />
+      <TabsComponent selectedMaintLog={selectedRow} persistInUrl={false} />
+    </Splitter>
   );
 };
 

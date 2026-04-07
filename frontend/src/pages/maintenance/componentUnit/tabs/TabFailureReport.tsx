@@ -1,5 +1,8 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { useCallback } from "react";
+import FailureReportUpsert from "@/pages/report/reportFailure/ReportFailureUpsert";
+import Splitter from "@/shared/components/Splitter/Splitter";
+import AttachmentMap from "@/shared/tabs/attachmentMap/AttachmentMap";
+import { useCallback, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
   columns,
@@ -7,7 +10,9 @@ import {
 } from "@/pages/report/reportFailure/ReportFailureColumns";
 import {
   tblFailureReports,
+  tblMaintLogAttachment,
   TypeTblComponentUnit,
+  TypeTblFailureReports,
 } from "@/core/api/generated/api";
 
 interface TabFailureReportProps {
@@ -17,6 +22,30 @@ interface TabFailureReportProps {
 
 const TabFailureReport = ({ componentUnit, label }: TabFailureReportProps) => {
   const compId = componentUnit?.compId;
+
+  const [selectedRow, setSelectedRow] = useState<TypeTblFailureReports | null>(
+    null,
+  );
+  const [dialogs, setDialogs] = useState({
+    upsert: false,
+  });
+
+  const handleRowClick = useCallback(
+    ({ row }: { row: TypeTblFailureReports }) => {
+      if (row.failureReportId === selectedRow?.failureReportId) {
+        setSelectedRow(null);
+        return;
+      }
+      setSelectedRow(row);
+    },
+    [selectedRow],
+  );
+
+  const openDialog = (key: keyof typeof dialogs) =>
+    setDialogs((p) => ({ ...p, [key]: true }));
+
+  const closeDialog = (key: keyof typeof dialogs) =>
+    setDialogs((p) => ({ ...p, [key]: false }));
 
   const getAll = useCallback(() => {
     return tblFailureReports.getAll({
@@ -53,19 +82,49 @@ const TabFailureReport = ({ componentUnit, label }: TabFailureReportProps) => {
     !!compId,
   );
 
+  const handleSucessUpsert = () => {
+    closeDialog("upsert");
+    handleRefresh();
+  };
+
+  const handleDoubleClick = (rowId: number) => {
+    setSelectedRow({ ...selectedRow, failureReportId: rowId } as any);
+    openDialog("upsert");
+  };
   return (
-    <CustomizedDataGrid
-      disableAdd
-      disableEdit
-      disableDelete
-      label={label}
-      showToolbar={!!label}
-      rows={rows}
-      columns={columns}
-      loading={loading}
-      onRefreshClick={handleRefresh}
-      getRowId={getRowId}
-    />
+    <>
+      <Splitter horizontal>
+        <CustomizedDataGrid
+          disableAdd
+          disableEdit
+          disableDelete
+          label={label}
+          showToolbar={!!label}
+          rows={rows}
+          columns={columns}
+          loading={loading}
+          onDoubleClick={handleDoubleClick}
+          onRowClick={handleRowClick}
+          onRefreshClick={handleRefresh}
+          getRowId={getRowId}
+        />
+        <AttachmentMap
+          mapService={tblMaintLogAttachment}
+          filterId={selectedRow?.maintLogId}
+          label={"Failure Attachments"}
+          filterKey="maintLogId"
+          relName="tblMaintLog"
+          tableId="maintLogAttachmentId"
+        />
+      </Splitter>
+      <FailureReportUpsert
+        open={dialogs.upsert}
+        mode={"update"}
+        failureReportId={selectedRow?.failureReportId}
+        onClose={() => closeDialog("upsert")}
+        onSuccess={handleSucessUpsert}
+      />
+    </>
   );
 };
 

@@ -1,7 +1,9 @@
+import CellFullName from "@/shared/components/dataGrid/cells/CellFullName";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import { TypeTblWorkShop } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
-import CellFullName from "@/shared/components/dataGrid/cells/CellFullName";
+
+export const getRowId = (row: TypeTblWorkShop) => row.workShopId;
 
 export const columns: GridColDef<TypeTblWorkShop>[] = [
   {

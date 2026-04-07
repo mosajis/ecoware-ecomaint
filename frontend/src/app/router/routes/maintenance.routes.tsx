@@ -1,16 +1,16 @@
+import routeComponentUnit from "@/pages/maintenance/componentUnit/ComponentUnitRoutes";
+import routeFunction from "@/pages/maintenance/function/FunctionRoutes";
+import routeMaintLog from "@/pages/maintenance/maintLog/MaintLogRoute";
+import routeWorkShop from "@/pages/maintenance/workShop/WorkShopRoutes";
+import routeCountersAlert from "@/pages/maintenance/countersAlert/CountersAlertRoutes";
 import { lazy } from "react";
 import { createRoute, Outlet } from "@tanstack/react-router";
 import { protectedRoute } from "./protected.routes";
 import { LazyRoute } from "./_components/lazyRoute";
 import { routeComponentType } from "@/pages/maintenance/componentType/ComponentTypeRoutes";
 import { NotFound } from "@/pages/NotFound";
-import routeComponentUnit from "@/pages/maintenance/componentUnit/ComponentUnitRoutes";
-import routeFunction from "@/pages/maintenance/function/FunctionRoutes";
-import routeMaintLog from "@/pages/maintenance/maintLog/MaintLogRoute";
-import routeWorkShop from "@/pages/maintenance/workShop/WorkShopRoutes";
 
 //  Lazy pages ---
-
 const PageComponentJob = lazy(
   () => import("@/pages/maintenance/componentJob/ComponentJob"),
 );
@@ -106,5 +106,6 @@ export const maintenanceRoutesTree = routeMaintenance.addChildren([
   routeCountersLog,
   routeCounterUpdate,
   routeMaintLog,
+  routeCountersAlert,
   routeWorkShop,
 ]);

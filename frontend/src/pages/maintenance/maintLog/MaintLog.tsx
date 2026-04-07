@@ -125,7 +125,7 @@ export default function PageMaintLog() {
             />
           }
         />
-        <TabsComponent selectedMaintLog={selectedRow} />
+        <TabsComponent selectedMaintLog={selectedRow} persistInUrl={true} />
       </Splitter>
 
       <ReportWorkDialog
