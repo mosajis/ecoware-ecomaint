@@ -10,3 +10,8 @@ export const periodToDays = (periodId: number): number => {
   };
   return map[periodId] || 1;
 };
+
+export const diffHours = (d1: any, d2: any) => {
+  const dm = new Date(d2).getTime() - new Date(d1).getTime();
+  return dm / (1000 * 60 * 60);
+};

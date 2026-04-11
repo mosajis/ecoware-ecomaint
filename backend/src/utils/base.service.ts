@@ -57,13 +57,23 @@ export class BaseService<T extends { id: any }> {
     const safeSkip =
       skip ?? (page && perPage ? (page - 1) * safePerPage : undefined);
 
-    // 🆕 اگر orderNo وجود دارد، آن را بر defaultSort اولویت دهید
-    let finalOrderBy = orderBy;
+    let finalOrderBy: any[] = [];
+
+    // اولویت اول: آیتم‌هایی که کاربر صراحتاً در ورودی orderBy فرستاده است
+    if (orderBy && Object.keys(orderBy).length > 0) {
+      finalOrderBy = Object.entries(orderBy).map(([field, order]) => ({
+        [field]: order,
+      }));
+    }
+
+    // اولویت دوم: افزودن orderNo به عنوان مرتب‌سازی ثانویه (اگر کاربر خودش آن را تنظیم نکرده باشد)
     if (await this.hasField("orderNo")) {
-      finalOrderBy = {
-        orderNo: { sort: "asc", nulls: "last" },
-        ...orderBy,
-      };
+      const hasOrderNoInInput = Object.keys(orderBy || {}).includes("orderNo");
+      if (!hasOrderNoInInput) {
+        finalOrderBy.push({
+          orderNo: { sort: "asc", nulls: "last" },
+        });
+      }
     }
 
     // 🆕 اگر select و include هر دو وجود دارند، select اولویت دارد

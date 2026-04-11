@@ -1,13 +1,13 @@
 import Splitter from "@/shared/components/Splitter/Splitter";
-import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import CountersUpdate from "./CountersUpdate";
 import Checkbox from "@mui/material/Checkbox";
-import { GridColDef, GridRowSelectionModel } from "@mui/x-data-grid";
-import { useCallback, useMemo, useState } from "react";
+import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { useCallback, useMemo, useState } from "react";
+import { columns, getRowId } from "./CountersColumns";
 import {
   columns as logColumns,
   getRowId as logGetRowId,
@@ -15,66 +15,9 @@ import {
 import {
   tblCompCounter,
   tblCompCounterLog,
-  tblComponentUnit,
   tblCounterType,
-  TypeTblCompCounter,
-  TypeTblCompCounterLog,
 } from "@/core/api/generated/api";
 
-const getRowId = (row: TypeTblCompCounter) => row.compCounterId;
-
-const columns: GridColDef<TypeTblCompCounter>[] = [
-  {
-    field: "component",
-    headerName: "component",
-    flex: 1,
-    valueGetter: (_, row) => row.tblComponentUnit?.compNo,
-  },
-  {
-    field: "counterType",
-    headerName: "Counter Type",
-    flex: 1,
-    valueGetter: (_, row) => row.tblCounterType?.name || "",
-  },
-  {
-    field: "currentDate",
-    headerName: "Current Date",
-    flex: 1,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-  {
-    field: "currentValue",
-    headerName: "Current Value",
-    flex: 1,
-  },
-  {
-    field: "startDate",
-    headerName: "Start Date",
-    flex: 1,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-  {
-    field: "startValue",
-    headerName: "Start Value",
-    flex: 1,
-  },
-  {
-    field: "useCalcAverage",
-    headerName: "Use Calc Avg",
-    width: 120,
-    type: "boolean",
-  },
-  {
-    field: "averageCountRate",
-    headerName: "Avg Rate",
-    flex: 1,
-  },
-  {
-    field: "orderNo",
-    headerName: "Order No",
-    width: 85,
-  },
-];
 /* ================= Page ================= */
 export default function PageCounterUpdate() {
   const [showAll, setShowAll] = useState(false);
@@ -124,6 +67,7 @@ export default function PageCounterUpdate() {
       filter: {
         compCounterId: selectedRowId,
       },
+      sort: "compCounterLogId:desc",
       include: {
         tblCompCounter: {
           include: {
@@ -173,7 +117,7 @@ export default function PageCounterUpdate() {
           toolbarChildren={
             <>
               <Button
-                sx={{ ml: 3 }}
+                sx={{ m: 1 }}
                 onClick={() => setOpenForm(true)}
                 disabled={!selectedRowId}
                 variant={!selectedRow ? "text" : "contained"}
