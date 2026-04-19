@@ -174,6 +174,7 @@ const ControllerTblMaintLog = new BaseController({
         let jobDescription = {
           title: null as string | null,
           content: null as string | null,
+          jobDescId: null as number | null,
         };
         let frequency = {
           value: null as number | null,
@@ -212,6 +213,7 @@ const ControllerTblMaintLog = new BaseController({
               jobDescription = {
                 title: compJob.tblJobDescription.jobDescTitle ?? null,
                 content: compJob.tblJobDescription.jobDesc ?? null,
+                jobDescId: compJob.tblJobDescription.jobDescId ?? null,
               };
             }
 
@@ -267,6 +269,7 @@ const ControllerTblMaintLog = new BaseController({
             jobDescription = {
               title: compJob.tblJobDescription?.jobDescTitle ?? null,
               content: compJob.tblJobDescription?.jobDesc ?? null,
+              jobDescId: compJob.tblJobDescription?.jobDescId ?? null,
             };
 
             // Frequency
@@ -369,6 +372,7 @@ const ControllerTblMaintLog = new BaseController({
           jobDescription: t.Object({
             title: t.Nullable(t.String()),
             content: t.Nullable(t.String()),
+            jobDescId: t.Nullable(t.Number()),
           }),
           frequency: t.Object({
             value: t.Nullable(t.Number()),
@@ -383,6 +387,96 @@ const ControllerTblMaintLog = new BaseController({
             buildResponseSchema(TblMaintLogPlain, TblMaintLog),
           ),
         }),
+      },
+    );
+
+    app.post(
+      "/",
+      async ({ body }) => {
+        const {
+          reportedCount, // برای جدول tblLogCounter
+          discId,
+          periodId,
+          jobDescId,
+          maintClassId,
+          maintTypeId,
+          maintCauseId,
+          fsId,
+          workOrderId,
+          compId,
+          ...restData
+        } = body;
+
+        // ایجاد رکورد اصلی در tblMaintLog
+        // const newLog = await prisma.tblMaintLog.create({
+        //   data: {
+        //     ...restData,
+        //     // مدیریت روابط به صورت ایمن
+        //     ...(compId && {
+        //       tblComponentUnit: { connect: { compId: Number(compId) } },
+        //     }),
+        //     ...(workOrderId && {
+        //       tblWorkOrder: { connect: { workOrderId: Number(workOrderId) } },
+        //     }),
+        //     ...(jobDescId && {
+        //       tblJobDescription: { connect: { jobDescId: Number(jobDescId) } },
+        //     }),
+        //     ...(discId && {
+        //       tblDiscipline: { connect: { discId: Number(discId) } },
+        //     }),
+        //     ...(periodId && {
+        //       tblPeriod: { connect: { periodId: Number(periodId) } },
+        //     }),
+        //     ...(maintClassId && {
+        //       tblMaintClass: {
+        //         connect: { maintClassId: Number(maintClassId) },
+        //       },
+        //     }),
+        //     ...(maintTypeId && {
+        //       tblMaintType: { connect: { maintTypeId: Number(maintTypeId) } },
+        //     }),
+        //     ...(maintCauseId && {
+        //       tblMaintCause: {
+        //         connect: { maintCauseId: Number(maintCauseId) },
+        //       },
+        //     }),
+        //     ...(fsId && {
+        //       tblFollowStatus: { connect: { fsId: Number(fsId) } },
+        //     }),
+
+        //     // ...(reportedCount !== undefined && {
+        //     //   tblLogCounter: {
+        //     //     create: {
+        //     //       reportedCount: Number(reportedCount),
+        //     //       compId: Number(compId),
+        //     //     },
+        //     //   },
+        //     // }),
+        //   },
+        // });
+
+        // return newLog;
+      },
+      {
+        tags: ["tblMaintLog"],
+        body: t.Object({
+          dateDone: t.String(),
+          downTime: t.Optional(t.Number()),
+          totalDuration: t.Optional(t.Number()),
+          unexpected: t.Optional(t.Boolean()),
+          history: t.Optional(t.String()),
+          compId: t.Optional(t.Number()),
+          workOrderId: t.Optional(t.Number()),
+          discId: t.Optional(t.Number()),
+          periodId: t.Optional(t.Number()),
+          jobDescId: t.Optional(t.Number()),
+          maintClassId: t.Optional(t.Number()),
+          maintTypeId: t.Optional(t.Number()),
+          maintCauseId: t.Optional(t.Number()),
+          fsId: t.Optional(t.Number()),
+          reportedCount: t.Optional(t.Number()),
+        }),
+        detail: { summary: "Create" },
       },
     );
   },

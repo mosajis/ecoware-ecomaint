@@ -1,5 +1,5 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import FailureReportUpsert from "@/pages/report/reportFailure/ReportFailureUpsert";
+import FailureReportUpsert from "@/pages/report/reportFailure/ReportFailureModal";
 import Splitter from "@/shared/components/Splitter/Splitter";
 import AttachmentMap from "@/shared/tabs/attachmentMap/AttachmentMap";
 import { useCallback, useState } from "react";

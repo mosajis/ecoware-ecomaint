@@ -193,7 +193,11 @@ export default function WorkOrderDetailDialog({
             include: { tblFollowStatus: true },
           },
           tblReScheduleLogs: true,
-          tblCompJob: {},
+          // tblCompJob: {
+          // include: {
+          // tblCompJobCounters: true,
+          // },
+          // },
           tblComponentUnit: true,
           tblDiscipline: true,
           tblMaintCause: true,
@@ -315,7 +319,7 @@ export default function WorkOrderDetailDialog({
               <DetailRow label="Due Date" value={fmt(wo.dueDate)} />
               <DetailRow
                 label="Due Count"
-                value={wo?.tblCompJob?.tblCompJobCounter?.dueCount}
+                value={wo?.tblCompJob?.tblCompJobCounter?.nextDueCount}
               />
               <DetailRow label="Created" value={fmt(wo.created)} />
               <DetailRow label="Started" value={fmt(wo.started)} />

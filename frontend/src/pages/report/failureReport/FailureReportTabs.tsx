@@ -38,7 +38,7 @@ const FailureReportTabs = ({ mode, failureReportId, compId }: Props) => {
       disabled: !maintLog?.maintLogId,
     },
     {
-      label: "Stock Used",
+      label: "Spare Used",
       icon: <Inventory />,
       component: StockUsed,
       disabled: !maintLog?.maintLogId,

@@ -5,19 +5,19 @@ import { lazy } from "react";
 
 // --- Lazy pages ---
 export const PageReportDaily = lazy(
-  () => import("@/pages/report/reportDaily/ReportDaily"),
+  () => import("@/pages/report/dailyReport/ReportDaily"),
 );
 
 export const PageReportFailure = lazy(
-  () => import("@/pages/report/reportFailure/ReportFailure"),
+  () => import("@/pages/report/failureReport/FailureReport"),
 );
 
 export const PageReportJob = lazy(
-  () => import("@/pages/report/reportJob/ReportJob"),
+  () => import("@/pages/report/jobReport/ReportJob"),
 );
 
 export const PageReportMounthly = lazy(
-  () => import("@/pages/report/reportMounthly/ReportMounthly"),
+  () => import("@/pages/report/mounthlyReport/ReportMounthly"),
 );
 
 // --- General parent route ---

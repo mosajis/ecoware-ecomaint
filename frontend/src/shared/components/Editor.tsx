@@ -18,9 +18,9 @@ import Editor, {
 } from "react-simple-wysiwyg";
 
 // === Custom Buttons ===
-const BtnAlignLeft = createButton("Align Left", "⬅", "justifyLeft");
+const BtnAlignLeft = createButton("Align Left", "➡", "justifyLeft");
 const BtnAlignCenter = createButton("Align Center", "≡", "justifyCenter");
-const BtnAlignRight = createButton("Align Right", "➡", "justifyRight");
+const BtnAlignRight = createButton("Align Right", "⬅", "justifyRight");
 const BtnUndo = createButton("Undo", "↶", "undo");
 const BtnRedo = createButton("Redo", "↷", "redo");
 

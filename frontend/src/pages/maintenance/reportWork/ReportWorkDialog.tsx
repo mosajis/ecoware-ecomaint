@@ -134,7 +134,7 @@ const ReportWorkDialog = ({
     fetchData();
   }, [open, maintLogId, workOrderId, componentUnitId]);
 
-  const handleSuccess = async () => {
+  const handleClose = async () => {
     if (workOrderId) {
       setIsLoadingSubmit(true);
       const record = await tblWorkOrder.update(
@@ -158,13 +158,12 @@ const ReportWorkDialog = ({
     }
     onSuccess({});
   };
-
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="lg">
       <DialogHeader
         title={`Report Work / ${workOrder?.title ?? reportWork.componentUnit?.compNo ?? ""}`}
-        onClose={onClose}
-        loading={isLoading}
+        onClose={handleClose}
+        loading={isLoadingSubmit || isLoading}
       />
       <DialogContent
         dividers
@@ -176,24 +175,6 @@ const ReportWorkDialog = ({
       >
         {isLoading ? <Spinner /> : <ReportWorkTabs />}
       </DialogContent>
-      <DialogActions sx={{ justifyContent: "center" }}>
-        <Button
-          onClick={handleSuccess}
-          type="submit"
-          color="secondary"
-          style={{ width: 200 }}
-          variant={
-            maintLog?.maintLogId && !isLoadingSubmit ? "contained" : "outlined"
-          }
-          disabled={!maintLog?.maintLogId || isLoadingSubmit}
-        >
-          {isLoadingSubmit ? "Saving ..." : "Ok"}
-        </Button>
-        <Button variant="outlined" onClick={onClose} sx={{ width: 200 }}>
-          Cancel
-        </Button>
-        <div>{JSON.stringify(reportWork)}</div>
-      </DialogActions>
     </Dialog>
   );
 };

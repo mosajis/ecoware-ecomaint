@@ -4,7 +4,7 @@ import ComponentUnitUpsert from "./ComponentUnitUpsert";
 import ReportWorkDialog from "../reportWork/ReportWorkDialog";
 import ComponentUnitActions from "./ComponentUnitActions";
 import WorkShopUpsert from "../workShop/WorkShopUpsert";
-import ReportFailureUpsert from "@/pages/report/reportFailure/ReportFailureUpsert";
+import ReportFailureUpsert from "@/pages/report/failureReport/FailureReportModal";
 import { useRouter } from "@tanstack/react-router";
 import { routeComponentUnitDetail } from "./ComponentUnitRoutes";
 import { useDataTree } from "@/shared/hooks/useDataTree";

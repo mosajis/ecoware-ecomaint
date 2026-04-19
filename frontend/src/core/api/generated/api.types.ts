@@ -412,6 +412,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/tblCompJobCounter/alert": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get All Counters Alerts */
+        get: operations["getTblCompJobCounterAlert"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tblCompJobMeasurePoint/": {
         parameters: {
             query?: never;
@@ -10148,6 +10165,16 @@ export interface operations {
                 };
             };
         };
+    };
+    getTblCompJobCounterAlert: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: never;
     };
     getTblCompJobMeasurePoint: {
         parameters: {
@@ -40819,6 +40846,7 @@ export interface operations {
                         jobDescription: {
                             title: (string | null) | null;
                             content: (string | null) | null;
+                            jobDescId: (number | null) | null;
                         };
                         frequency: {
                             value: (number | null) | null;
@@ -42949,6 +42977,7 @@ export interface operations {
     getTblMaintLogStocksUniqueSpareUnit: {
         parameters: {
             query?: {
+                compId?: number;
                 page?: number;
                 perPage?: number;
                 sort?: string;
@@ -54895,6 +54924,7 @@ export interface operations {
                                 tblJobDescription?: {
                                     jobDescCode: string;
                                     jobDescTitle: string;
+                                    jobDesc: string;
                                 };
                                 tblPeriod?: {
                                     name: string;

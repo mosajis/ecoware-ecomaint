@@ -7,7 +7,7 @@ export const schema = z.object({
   dateDone: z.string().or(z.date()),
   totalDuration: z.number(),
   waitingMin: z.number(),
-  unexpected: z.boolean(),
+  unexpected: z.number(),
   history: z.string(),
 
   maintType: selectSchema({

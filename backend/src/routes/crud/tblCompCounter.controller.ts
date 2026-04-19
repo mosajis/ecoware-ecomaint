@@ -162,16 +162,21 @@ const ControllerTblCompCounter = new BaseController({
               nextDate.setMonth(nextDate.getMonth() + 6);
             } else {
               // شرط سوم: محاسبه جبری
-              const nextDueCount = jc.nextDueCount || 0;
+              const nextDueCount = jc.nextDueCount;
               const currentVal = counter.currentValue || 0;
 
-              const remainingCapacity = nextDueCount - currentVal;
-              const addDays = remainingCapacity / finalAvg;
+              if (!nextDueCount) {
+                nextDate = now;
+              } else {
+                const remainingCapacity = nextDueCount - currentVal;
+                const addDays = remainingCapacity / finalAvg;
 
-              // اصلاح خطای TypeScript با استفاده از Nullish Coalescing
-              const baseDate = new Date(counter.currentDate ?? new Date());
-              baseDate.setDate(baseDate.getDate() + Math.round(addDays));
-              nextDate = baseDate;
+                // اصلاح خطای TypeScript با استفاده از Nullish Coalescing
+                const baseDate = new Date(counter.currentDate ?? new Date());
+                baseDate.setDate(baseDate.getDate() + Math.round(addDays));
+
+                nextDate = baseDate;
+              }
             }
 
             // بروزرسانی جدول Job

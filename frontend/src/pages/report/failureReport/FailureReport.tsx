@@ -1,16 +1,16 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import Splitter from "@/shared/components/Splitter/Splitter";
 import AttachmentMap from "@/shared/tabs/attachmentMap/AttachmentMap";
-import FailureReportUpsert from "./ReportFailureUpsert";
-import FailureReportActions from "./ReportFailureActions";
-import ReportFailureDialogClose from "./ReportFailureDialogClose";
-import ReportFailureDialogOpen from "./ReportFailureDialogOpen";
-import FailureReportDialogFilter from "./ReportFailureDialogFilter";
-import ReportFailureDialogPrint from "./ReportFailureDialogPrint";
+import FailureReportUpsert from "./FailureReportModal";
+import FailureReportActions from "./FailureReportActions";
+import ReportFailureDialogClose from "./FailureReportDialogClose";
+import ReportFailureDialogOpen from "./FailureReportDialogOpen";
+import FailureReportDialogFilter from "./FailureReportDialogFilter";
+import ReportFailureDialogPrint from "./FailureReportDialogPrint";
 import { useCallback, useMemo, useState } from "react";
-import { FailureReportFilter } from "./ReportFailureDialogFilter";
+import { FailureReportFilter } from "./FailureReportDialogFilter";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { columns } from "./ReportFailureColumns";
+import { columns } from "./FailureReportColumns";
 import {
   tblFailureReports,
   tblMaintLogAttachment,

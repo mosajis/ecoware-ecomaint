@@ -342,7 +342,11 @@ const ControllerTblWorkOrder = new BaseController({
           const compJob = await tx.tblCompJob.findUnique({
             where: { compJobId: workOrder.compJobId },
             include: {
-              tblCompJobCounters: true,
+              tblCompJobCounters: {
+                include: {
+                  tblCompCounter: true,
+                },
+              },
               tblJobDescription: true,
               tblPeriod: true,
             },
@@ -389,16 +393,40 @@ const ControllerTblWorkOrder = new BaseController({
             nextDueDateArray.push(calculatedDate);
           }
 
-          // compcounter => avarage
-          // comp
           /* 7. Counter-based calculation -------------------------------------------------------- */
-          // compJob.tblCompJobCounters?.forEach(counter => {
-          // if (counter.frequency) {
-          //   const counterDate = new Date(baseDateDone);
-          //   counterDate.setDate(counterDate.getDate() + counter.frequency);
-          //   dateDoneArray.push(counterDate);
-          // }
-          // });
+          compJob.tblCompJobCounters?.forEach((compJobCounter) => {
+            const frequency = compJobCounter.frequency || 0;
+            const calcAvg = compJobCounter.tblCompCounter?.averageCountRate;
+
+            if (frequency === 0) {
+              nextDueDateArray.push(now);
+              return;
+            }
+
+            if (calcAvg === -1 || calcAvg === null) {
+              // Error in calc avg (Average Count Rate)
+              nextDueDateArray.push(now);
+              return;
+            }
+
+            if (calcAvg === 0) {
+              // Sample: Engine is off
+              const cn = new Date(now);
+              cn.setMonth(cn.getMonth() + 6);
+              nextDueDateArray.push(cn);
+              return;
+            }
+
+            if (calcAvg && frequency) {
+              const x = frequency / calcAvg;
+
+              // x must be plus to maintLog.dateDone
+              // const nextDate = maintLog.dateDone.setD(nextDate.getMonth() + 6);
+              // nextDueDateArray.push(nextDate);
+
+              return;
+            }
+          });
 
           /* 8. Final DueDate -------------------------------------------------------------------- */
           if (nextDueDateArray.length === 0) {

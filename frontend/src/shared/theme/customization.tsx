@@ -222,6 +222,13 @@ export const dataDisplayCustomizations: Components<Theme> = {
       },
     },
   },
+  MuiRadio: {
+    styleOverrides: {
+      root: {
+        padding: "5px 10px",
+      },
+    },
+  },
   MuiListItem: {
     styleOverrides: {
       root: ({ theme }) => ({
