@@ -1,13 +1,13 @@
 import Elysia, { t } from "elysia";
 import { jwt } from "@elysiajs/jwt";
 import { AuthService } from "./auth.service";
-import { TblUsersPlain } from "orm/generated/prismabox/TblUsers";
-import { ServiceTblUsers } from "../crud/tblUsers.controller";
+import { ServiceTblUser } from "../crud/tblUser.controller";
 import { prisma } from "@/utils/prisma";
+import { TblUserPlain } from "orm/generated/prismabox/TblUser";
 
 const authService = new AuthService();
 
-export const UsersSafePlain = t.Omit(TblUsersPlain, ["uPassword"]);
+export const UsersSafePlain = t.Omit(TblUserPlain, ["password"]);
 
 export const ControllerAuth = new Elysia().group("/auth", (app) =>
   app
@@ -21,8 +21,12 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
     // 🔐 Login
     .post(
       "/login",
-      async ({ jwt, body, set }) => {
+      async ({ jwt, body, set, request }) => {
         const { username, password } = body;
+
+        const clientIp = "unknown";
+        const clientAgent = request.headers.get("user-agent") || "unknown";
+        const now = new Date();
 
         const user = await authService.validateUser({
           username: username,
@@ -30,6 +34,18 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
         });
 
         if (!user) {
+          await prisma.tblLoginAudit.create({
+            data: {
+              employeeId: null,
+              actionType: 3, // Error
+              isSuccess: false,
+              createdAt: now,
+              errorMessage: "username or password is incorrect",
+              ipAddress: clientIp,
+              deviceInfo: clientAgent,
+            },
+          });
+
           set.status = 401;
           return {
             status: "error",
@@ -37,11 +53,36 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
           };
         }
 
-        // Update last login
-        // await ServiceUsers.update(user.userId, { lastLoginDatetime: new Date() });
+        const loginAudit = await prisma.tblLoginAudit.create({
+          data: {
+            employeeId: user.employeeId,
+            actionType: 1, // 1: Login
+            isSuccess: true,
+            ipAddress: clientIp,
+            deviceInfo: clientAgent,
+            loginTime: now,
+            createdAt: now,
+            errorMessage: "",
+          },
+        });
 
-        const result = await authService.login(user, jwt.sign);
-        return result;
+        const loginAuditId = loginAudit.loginAuditId;
+
+        // Update last login
+        await prisma.tblUser.update({
+          where: { userId: user.userId },
+          data: {
+            lastLogin: now,
+          },
+        });
+
+        const { accessToken } = await authService.login(
+          user,
+          loginAuditId,
+          jwt.sign,
+        );
+
+        return { accessToken, loginAuditId };
       },
       {
         body: t.Object({
@@ -51,6 +92,7 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
         response: t.Union([
           t.Object({
             accessToken: t.String(),
+            loginAuditId: t.Number(),
           }),
           t.Object({
             message: t.String(),
@@ -94,7 +136,21 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
     // 🚪 Logout
     .post(
       "/logout",
-      async () => {
+      async ({ jwt, headers }) => {
+        const authHeader = headers["authorization"];
+        const token = authHeader?.split(" ")[1];
+
+        if (token) {
+          const payload = await jwt.verify(token);
+
+          if (payload && payload.loginAuditId) {
+            await prisma.tblLoginAudit.update({
+              where: { loginAuditId: Number(payload.loginAuditId) },
+              data: { logoutTime: new Date() },
+            });
+          }
+        }
+
         return { success: true };
       },
       {
@@ -136,12 +192,24 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
         }
 
         const username = String(payload.username);
-        const user = await prisma.tblUsers.findFirst({
-          where: { uUserName: username },
-          include: {
-            tblEmployeeTblUsersEmployeeIdTotblEmployee: {
-              include: {
-                tblDiscipline: true,
+        const user = await prisma.tblUser.findFirst({
+          where: { userName: username },
+          select: {
+            userId: true,
+            userName: true,
+            forcePasswordChange: true,
+            tblEmployee: {
+              select: {
+                employeeId: true,
+                lastName: true,
+                firstName: true,
+
+                tblDiscipline: {
+                  select: {
+                    name: true,
+                    discId: true,
+                  },
+                },
               },
             },
           },
@@ -156,11 +224,9 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
           };
         }
 
-        // token valid and user exists
-        const { uPassword, ...safeUser } = user;
         return {
           authorized: true,
-          user: safeUser, // Matches UsersSafePlain
+          user: user, // Matches UsersSafePlain
         };
       },
       {

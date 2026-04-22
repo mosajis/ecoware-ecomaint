@@ -15,8 +15,8 @@ export const login = async (data: {
   return await api.post<LoginResponse>("/auth/login", { data });
 };
 
-export const logout = (data: DynamicCreate<"postAuthLogout">) =>
-  api.post<DynamicResponse<"postAuthLogout">>("/authLogout", { data });
+export const logout = () =>
+  api.post<DynamicResponse<"postAuthLogout">>("/auth/logout");
 
 export const authorization = () =>
   api.get<DynamicResponse<"getAuthAuthorization">>("/auth/authorization");

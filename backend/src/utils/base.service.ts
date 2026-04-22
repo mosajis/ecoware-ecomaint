@@ -39,7 +39,7 @@ export class BaseService<T extends { id: any }> {
   // 🧱 دریافت همه با فیلتر، pagination، include و select
   async findAll({
     where = {},
-    orderBy = { createdAt: "desc" },
+    orderBy = {},
     include = {},
     select = {}, // 🆕
     page = 1,

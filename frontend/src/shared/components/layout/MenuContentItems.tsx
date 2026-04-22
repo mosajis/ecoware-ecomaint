@@ -30,19 +30,17 @@ import SpeedRoundedIcon from "@mui/icons-material/SpeedRounded";
 import AnalyticsRoundedIcon from "@mui/icons-material/AnalyticsRounded";
 import ReceiptLongRoundedIcon from "@mui/icons-material/ReceiptLongRounded";
 import EngineeringRoundedIcon from "@mui/icons-material/EngineeringRounded";
-
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 import StraightenRoundedIcon from "@mui/icons-material/StraightenRounded";
 import DoneAllRoundedIcon from "@mui/icons-material/DoneAllRounded";
-
 import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
 import ReportProblemRoundedIcon from "@mui/icons-material/ReportProblemRounded";
 import TodayRoundedIcon from "@mui/icons-material/TodayRounded";
 import DateRangeRoundedIcon from "@mui/icons-material/DateRangeRounded";
 import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
-
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
-
+import SecurityRoundedIcon from "@mui/icons-material/SecurityRounded";
+import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
 // ================= TYPES =================
 export type MenuItem = {
   text: string;
@@ -347,9 +345,20 @@ export const menuContentItems: MenuSection[] = [
 
   // ================= USERS =================
   {
-    title: "Users",
-    icon: <PeopleRoundedIcon sx={iconStyle} />,
-    path: "/users",
-    items: [],
+    title: "Access",
+    icon: <SecurityRoundedIcon sx={iconStyle} />,
+    path: "/access",
+    items: [
+      {
+        text: "Users",
+        icon: <PeopleRoundedIcon sx={iconStyle} />,
+        path: "/access/users",
+      },
+      {
+        text: "Users Group",
+        icon: <GroupRoundedIcon sx={iconStyle} />,
+        path: "/access/user-groups",
+      },
+    ],
   },
 ];

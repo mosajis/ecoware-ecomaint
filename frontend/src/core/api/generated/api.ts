@@ -143,6 +143,14 @@ export const tblCompJobCounter = {
     api.delete<DynamicResponse<'deleteTblCompJobCounter'>>('/tblCompJobCounter', { params: stringifyQuery(query) }),
 };
 
+export type TypeTblCompJobCounterAlert = DynamicResponse<'getTblCompJobCounterAlert'>['items'][0];
+export const tblCompJobCounterAlert = {
+  getAll: (query?: DynamicQuery<'getTblCompJobCounterAlert'>) =>
+    api.get<DynamicResponse<'getTblCompJobCounterAlert'>>('/tblCompJobCounterAlert', { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblCompJobCounterAlert'>) =>
+    api.get<DynamicResponse<'getTblCompJobCounterAlert'>>('/tblCompJobCounterAlert/count', { params: stringifyQuery(query) }),
+};
+
 export type TypeTblCompJobMeasurePoint = DynamicResponse<'getTblCompJobMeasurePoint'>['items'][0];
 export const tblCompJobMeasurePoint = {
   getAll: (query?: DynamicQuery<'getTblCompJobMeasurePoint'>) =>
@@ -597,24 +605,6 @@ export const tblFailureGroupFollow = {
     api.delete<DynamicResponse<'deleteTblFailureGroupFollow'>>('/tblFailureGroupFollow', { params: stringifyQuery(query) }),
 };
 
-export type TypeTblFailureReportWorkShop = DynamicResponse<'getTblFailureReportWorkShop'>['items'][0];
-export const tblFailureReportWorkShop = {
-  getAll: (query?: DynamicQuery<'getTblFailureReportWorkShop'>) =>
-    api.get<DynamicResponse<'getTblFailureReportWorkShop'>>('/tblFailureReportWorkShop', { params: stringifyQuery(query) }),
-  getById: (id: number, query?: DynamicQuery<'getTblFailureReportWorkShopByFailureReportWorkShopId'>) =>
-    api.get<DynamicResponse<'getTblFailureReportWorkShopByFailureReportWorkShopId'>>(`/tblFailureReportWorkShop/${id}`, { params: stringifyQuery(query) }),
-  count: (query?: DynamicQuery<'getTblFailureReportWorkShopCount'>) =>
-    api.get<DynamicResponse<'getTblFailureReportWorkShopCount'>>('/tblFailureReportWorkShop/count', { params: stringifyQuery(query) }),
-  create: (data: DynamicCreate<'postTblFailureReportWorkShop'>) =>
-    api.post<DynamicResponse<'postTblFailureReportWorkShop'>>('/tblFailureReportWorkShop', { data }),
-  update: (id: number, data: DynamicUpdate<'putTblFailureReportWorkShopByFailureReportWorkShopId'>, query?: DynamicQuery<'getTblFailureReportWorkShopByFailureReportWorkShopId'>) =>
-    api.put<DynamicResponse<'putTblFailureReportWorkShopByFailureReportWorkShopId'>>(`/tblFailureReportWorkShop/${id}`, { data, params: stringifyQuery(query) }),
-  deleteById: (id: number, query?: DynamicQuery<'deleteTblFailureReportWorkShopByFailureReportWorkShopId'>) =>
-    api.delete<DynamicResponse<'deleteTblFailureReportWorkShopByFailureReportWorkShopId'>>(`/tblFailureReportWorkShop/${id}`, { params: stringifyQuery(query) }),
-  deleteAll: (query?: DynamicQuery<'deleteTblFailureReportWorkShop'>) =>
-    api.delete<DynamicResponse<'deleteTblFailureReportWorkShop'>>('/tblFailureReportWorkShop', { params: stringifyQuery(query) }),
-};
-
 export type TypeTblFailureReports = DynamicResponse<'getTblFailureReports'>['items'][0];
 export const tblFailureReports = {
   getAll: (query?: DynamicQuery<'getTblFailureReports'>) =>
@@ -631,6 +621,24 @@ export const tblFailureReports = {
     api.delete<DynamicResponse<'deleteTblFailureReportsByFailureReportId'>>(`/tblFailureReports/${id}`, { params: stringifyQuery(query) }),
   deleteAll: (query?: DynamicQuery<'deleteTblFailureReports'>) =>
     api.delete<DynamicResponse<'deleteTblFailureReports'>>('/tblFailureReports', { params: stringifyQuery(query) }),
+};
+
+export type TypeTblFailureReportWorkShop = DynamicResponse<'getTblFailureReportWorkShop'>['items'][0];
+export const tblFailureReportWorkShop = {
+  getAll: (query?: DynamicQuery<'getTblFailureReportWorkShop'>) =>
+    api.get<DynamicResponse<'getTblFailureReportWorkShop'>>('/tblFailureReportWorkShop', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblFailureReportWorkShopByFailureReportWorkShopId'>) =>
+    api.get<DynamicResponse<'getTblFailureReportWorkShopByFailureReportWorkShopId'>>(`/tblFailureReportWorkShop/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblFailureReportWorkShopCount'>) =>
+    api.get<DynamicResponse<'getTblFailureReportWorkShopCount'>>('/tblFailureReportWorkShop/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblFailureReportWorkShop'>) =>
+    api.post<DynamicResponse<'postTblFailureReportWorkShop'>>('/tblFailureReportWorkShop', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblFailureReportWorkShopByFailureReportWorkShopId'>, query?: DynamicQuery<'getTblFailureReportWorkShopByFailureReportWorkShopId'>) =>
+    api.put<DynamicResponse<'putTblFailureReportWorkShopByFailureReportWorkShopId'>>(`/tblFailureReportWorkShop/${id}`, { data, params: stringifyQuery(query) }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblFailureReportWorkShopByFailureReportWorkShopId'>) =>
+    api.delete<DynamicResponse<'deleteTblFailureReportWorkShopByFailureReportWorkShopId'>>(`/tblFailureReportWorkShop/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblFailureReportWorkShop'>) =>
+    api.delete<DynamicResponse<'deleteTblFailureReportWorkShop'>>('/tblFailureReportWorkShop', { params: stringifyQuery(query) }),
 };
 
 export type TypeTblFailureSeverityLevel = DynamicResponse<'getTblFailureSeverityLevel'>['items'][0];
@@ -962,22 +970,28 @@ export const tblMaintLogFollow = {
     api.delete<DynamicResponse<'deleteTblMaintLogFollow'>>('/tblMaintLogFollow', { params: stringifyQuery(query) }),
 };
 
-export type TypeTblMaintLogStocks = DynamicResponse<'getTblMaintLogStocks'>['items'][0];
-export const tblMaintLogStocks = {
-  getAll: (query?: DynamicQuery<'getTblMaintLogStocks'>) =>
-    api.get<DynamicResponse<'getTblMaintLogStocks'>>('/tblMaintLogStocks', { params: stringifyQuery(query) }),
-  getById: (id: number, query?: DynamicQuery<'getTblMaintLogStocksByMaintLogStockId'>) =>
-    api.get<DynamicResponse<'getTblMaintLogStocksByMaintLogStockId'>>(`/tblMaintLogStocks/${id}`, { params: stringifyQuery(query) }),
-  count: (query?: DynamicQuery<'getTblMaintLogStocksCount'>) =>
-    api.get<DynamicResponse<'getTblMaintLogStocksCount'>>('/tblMaintLogStocks/count', { params: stringifyQuery(query) }),
-  create: (data: DynamicCreate<'postTblMaintLogStocks'>) =>
-    api.post<DynamicResponse<'postTblMaintLogStocks'>>('/tblMaintLogStocks', { data }),
-  update: (id: number, data: DynamicUpdate<'putTblMaintLogStocksByMaintLogStockId'>, query?: DynamicQuery<'getTblMaintLogStocksByMaintLogStockId'>) =>
-    api.put<DynamicResponse<'putTblMaintLogStocksByMaintLogStockId'>>(`/tblMaintLogStocks/${id}`, { data, params: stringifyQuery(query) }),
-  deleteById: (id: number, query?: DynamicQuery<'deleteTblMaintLogStocksByMaintLogStockId'>) =>
-    api.delete<DynamicResponse<'deleteTblMaintLogStocksByMaintLogStockId'>>(`/tblMaintLogStocks/${id}`, { params: stringifyQuery(query) }),
-  deleteAll: (query?: DynamicQuery<'deleteTblMaintLogStocks'>) =>
-    api.delete<DynamicResponse<'deleteTblMaintLogStocks'>>('/tblMaintLogStocks', { params: stringifyQuery(query) }),
+export type TypeTblMaintLogSpare = DynamicResponse<'getTblMaintLogSpare'>['items'][0];
+export const tblMaintLogSpare = {
+  getAll: (query?: DynamicQuery<'getTblMaintLogSpare'>) =>
+    api.get<DynamicResponse<'getTblMaintLogSpare'>>('/tblMaintLogSpare', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblMaintLogSpareByMaintLogSpareId'>) =>
+    api.get<DynamicResponse<'getTblMaintLogSpareByMaintLogSpareId'>>(`/tblMaintLogSpare/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblMaintLogSpareCount'>) =>
+    api.get<DynamicResponse<'getTblMaintLogSpareCount'>>('/tblMaintLogSpare/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblMaintLogSpare'>) =>
+    api.post<DynamicResponse<'postTblMaintLogSpare'>>('/tblMaintLogSpare', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblMaintLogSpareByMaintLogSpareId'>, query?: DynamicQuery<'getTblMaintLogSpareByMaintLogSpareId'>) =>
+    api.put<DynamicResponse<'putTblMaintLogSpareByMaintLogSpareId'>>(`/tblMaintLogSpare/${id}`, { data, params: stringifyQuery(query) }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblMaintLogSpareByMaintLogSpareId'>) =>
+    api.delete<DynamicResponse<'deleteTblMaintLogSpareByMaintLogSpareId'>>(`/tblMaintLogSpare/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblMaintLogSpare'>) =>
+    api.delete<DynamicResponse<'deleteTblMaintLogSpare'>>('/tblMaintLogSpare', { params: stringifyQuery(query) }),
+};
+
+export type TypeTblMaintLogSpareUniqueSpareUnit = DynamicResponse<'getTblMaintLogSpareUniqueSpareUnit'>['items'][0];
+export const tblMaintLogSpareUniqueSpareUnit = {
+  getAll: (query?: DynamicQuery<'getTblMaintLogSpareUniqueSpareUnit'>) =>
+    api.get<DynamicResponse<'getTblMaintLogSpareUniqueSpareUnit'>>('/tblMaintLogSpareUniqueSpareUnit', { params: stringifyQuery(query) }),
 };
 
 export type TypeTblMaintType = DynamicResponse<'getTblMaintType'>['items'][0];
@@ -1178,22 +1192,22 @@ export const tblUnit = {
     api.delete<DynamicResponse<'deleteTblUnit'>>('/tblUnit', { params: stringifyQuery(query) }),
 };
 
-export type TypeTblUsers = DynamicResponse<'getTblUsers'>['items'][0];
-export const tblUsers = {
-  getAll: (query?: DynamicQuery<'getTblUsers'>) =>
-    api.get<DynamicResponse<'getTblUsers'>>('/tblUsers', { params: stringifyQuery(query) }),
-  getById: (id: number, query?: DynamicQuery<'getTblUsersByUserId'>) =>
-    api.get<DynamicResponse<'getTblUsersByUserId'>>(`/tblUsers/${id}`, { params: stringifyQuery(query) }),
-  count: (query?: DynamicQuery<'getTblUsersCount'>) =>
-    api.get<DynamicResponse<'getTblUsersCount'>>('/tblUsers/count', { params: stringifyQuery(query) }),
-  create: (data: DynamicCreate<'postTblUsers'>) =>
-    api.post<DynamicResponse<'postTblUsers'>>('/tblUsers', { data }),
-  update: (id: number, data: DynamicUpdate<'putTblUsersByUserId'>, query?: DynamicQuery<'getTblUsersByUserId'>) =>
-    api.put<DynamicResponse<'putTblUsersByUserId'>>(`/tblUsers/${id}`, { data, params: stringifyQuery(query) }),
-  deleteById: (id: number, query?: DynamicQuery<'deleteTblUsersByUserId'>) =>
-    api.delete<DynamicResponse<'deleteTblUsersByUserId'>>(`/tblUsers/${id}`, { params: stringifyQuery(query) }),
-  deleteAll: (query?: DynamicQuery<'deleteTblUsers'>) =>
-    api.delete<DynamicResponse<'deleteTblUsers'>>('/tblUsers', { params: stringifyQuery(query) }),
+export type TypeTblUser = DynamicResponse<'getTblUser'>['items'][0];
+export const tblUser = {
+  getAll: (query?: DynamicQuery<'getTblUser'>) =>
+    api.get<DynamicResponse<'getTblUser'>>('/tblUser', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblUserByUserId'>) =>
+    api.get<DynamicResponse<'getTblUserByUserId'>>(`/tblUser/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblUserCount'>) =>
+    api.get<DynamicResponse<'getTblUserCount'>>('/tblUser/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblUser'>) =>
+    api.post<DynamicResponse<'postTblUser'>>('/tblUser', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblUserByUserId'>, query?: DynamicQuery<'getTblUserByUserId'>) =>
+    api.put<DynamicResponse<'putTblUserByUserId'>>(`/tblUser/${id}`, { data, params: stringifyQuery(query) }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblUserByUserId'>) =>
+    api.delete<DynamicResponse<'deleteTblUserByUserId'>>(`/tblUser/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblUser'>) =>
+    api.delete<DynamicResponse<'deleteTblUser'>>('/tblUser', { params: stringifyQuery(query) }),
 };
 
 export type TypeTblWorkOrder = DynamicResponse<'getTblWorkOrder'>['items'][0];

@@ -28,7 +28,7 @@ export { default as ControllerTblDepartment } from "./tblDepartment.controller";
 export { default as ControllerTblDiscipline } from "./tblDiscipline.controller";
 export { default as ControllerTblEmployee } from "./tblEmployee.controller";
 export { default as ControllerTblFailureGroupFollow } from "./tblFailureGroupFollow.controller";
-export { default as ControllerTblFailureReports } from "./tblFailureReports.controller";
+export { default as ControllerTblFailureReport } from "./tblFailureReport.controller";
 export { default as ControllerTblFailureSeverityLevel } from "./tblFailureSeverityLevel.controller";
 export { default as ControllerTblFailureStatus } from "./tblFailureStatus.controller";
 export { default as ControllerTblFollowStatus } from "./tblFollowStatus.controller";
@@ -55,7 +55,7 @@ export { default as ControllerTblRoundCompJob } from "./tblRoundCompJob.controll
 export { default as ControllerTblSpareType } from "./tblSpareType.controller";
 export { default as ControllerTblSpareUnit } from "./tblSpareUnit.controller";
 export { default as ControllerTblUnit } from "./tblUnit.controller";
-export { default as ControllerTblUsers } from "./tblUsers.controller";
+export { default as ControllerTblUser } from "./tblUser.controller";
 export { default as ControllerTblWorkOrder } from "./tblWorkOrder.controller";
 export { default as ControllerTblWorkOrderStatus } from "./tblWorkOrderStatus.controller";
 export { default as ControllerTblWorkOrderType } from "./tblWorkOrderType.controller";
@@ -63,7 +63,7 @@ export { default as ControllerTblWorkShopComponent } from "./tblWorkShopComponen
 export { default as ControllerTblJobDescription } from "./tblJobDescription.controller";
 export { default as ControllerTblJobVersion } from "./tblJobVersion.controller";
 export { default as ControllerTblLocation } from "./tblLocation.controller";
-export { default as ControllerTblMaintLogStocks } from "./tblMaintLogStocks.controller";
+export { default as ControllerTblMaintLogStocks } from "./tblMaintLogSpare.controller";
 export { default as ControllerTblFailureReportWorkShop } from "./tblFailureReportWorkShop.controller";
 export { default as ControllerTblWorkShop } from "./tblWorkShop.controller";
 export { default as ControllerTblWorkShopAttachment } from "./tblWorkShopAttachment.controller";

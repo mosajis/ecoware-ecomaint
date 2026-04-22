@@ -19,6 +19,7 @@ export default function HeaderBreadcrumbs() {
     <Box display="flex" gap={1} alignItems="center">
       {breadcrumbMatches.map((match, index) => {
         const isLast = index === breadcrumbMatches.length - 1;
+        const isFirst = index === 0;
 
         const label =
           typeof match.context!.breadcrumb === "function"
@@ -36,6 +37,7 @@ export default function HeaderBreadcrumbs() {
                   "&:hover": { textDecoration: "underline" },
                 }}
                 onClick={() =>
+                  !isFirst &&
                   router.navigate({ to: match.pathname, search: allSearch })
                 }
               >

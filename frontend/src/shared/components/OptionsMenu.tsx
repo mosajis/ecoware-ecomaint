@@ -9,12 +9,18 @@ import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
 import MenuButton from "./layout/MenuButton";
 import AccountBox from "@mui/icons-material/AccountBox";
 import { styled } from "@mui/material/styles";
+import { LOCAL_STORAGE } from "@/const";
+import { useNavigate } from "@tanstack/react-router";
+import { AuthLoginRoute } from "@/app/router/routes/auth.routes";
+import { logout } from "@/pages/auth/auth.api";
 
 const MenuItem = styled(MuiMenuItem)({
   minWidth: 130,
 });
 
 export default function OptionsMenu() {
+  const navigate = useNavigate();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -23,6 +29,18 @@ export default function OptionsMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLogOut = () => {
+    logout().then(() => {
+      window.localStorage.removeItem(LOCAL_STORAGE.ACCESS_KEY);
+      navigate({ to: AuthLoginRoute.path });
+    });
+  };
+
+  const handleChangePassword = () => {
+    // navigate({ to: AuthLoginRoute.path });
+  };
+
   return (
     <React.Fragment>
       <MenuButton onClick={handleClick} sx={{ borderColor: "transparent" }}>
@@ -37,20 +55,20 @@ export default function OptionsMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>
+        {/* <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <AccountBox fontSize="small" />
           </ListItemIcon>
           <ListItemText>Profile</ListItemText>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
+        </MenuItem> */}
+        <MenuItem onClick={handleChangePassword}>
           <ListItemIcon>
             <AccountBox fontSize="small" />
           </ListItemIcon>
-          <ListItemText>Chnage Password</ListItemText>
+          <ListItemText>Change Password</ListItemText>
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleLogOut}>
           <ListItemIcon>
             <LogoutRoundedIcon fontSize="small" />
           </ListItemIcon>

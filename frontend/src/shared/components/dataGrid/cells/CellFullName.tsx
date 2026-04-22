@@ -1,14 +1,13 @@
+import { TypeTblEmployee } from "@/core/api/generated/api";
 import { FC } from "react";
-import { TypeTblUsers } from "@/core/api/generated/api";
 
-type CellFullNameProps = {
-  value?: TypeTblUsers | null;
+type Props = {
+  value?: TypeTblEmployee | null;
 };
 
-const CellFullName: FC<CellFullNameProps> = ({ value }) => {
-  const employee = value?.tblEmployeeTblUsersEmployeeIdTotblEmployee;
-  const fullName = employee
-    ? [employee.firstName, employee.lastName].filter(Boolean).join(" ")
+const CellFullName: FC<Props> = ({ value }) => {
+  const fullName = value
+    ? [value.firstName, value.lastName].filter(Boolean).join(" ")
     : "";
 
   return fullName;

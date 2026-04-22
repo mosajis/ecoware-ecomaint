@@ -83,10 +83,10 @@ export default function SideMenu() {
 
         <Box sx={{ mr: "auto" }}>
           <Typography variant="body2" fontWeight={"bold"}>
-            {auth.user?.uUserName}
+            {auth.user.userName}
           </Typography>
           <Typography variant="caption" sx={{ color: "text.secondary" }}>
-            {auth.user?.uName || "Fill Name"}
+            {auth.user.tblEmployee.firstName} {auth.user.tblEmployee.lastName}
           </Typography>
         </Box>
 

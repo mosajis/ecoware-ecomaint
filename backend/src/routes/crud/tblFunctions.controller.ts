@@ -2,15 +2,15 @@ import { BaseController } from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
 
 import {
-  TblFunctions,
-  TblFunctionsInputCreate,
-  TblFunctionsInputUpdate,
-  TblFunctionsPlain,
-} from "orm/generated/prismabox/TblFunctions";
+  TblFunction,
+  TblFunctionInputCreate,
+  TblFunctionInputUpdate,
+  TblFunctionPlain,
+} from "orm/generated/prismabox/TblFunction";
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
-export const ServiceTblFunctions = new BaseService(prisma.tblFunctions);
+export const ServiceTblFunctions = new BaseService(prisma.tblFunction);
 
 const ControllerTblFunctions = new BaseController({
   prefix: "/tblFunctions",
@@ -19,9 +19,9 @@ const ControllerTblFunctions = new BaseController({
   },
   primaryKey: "functionId",
   service: ServiceTblFunctions,
-  createSchema: TblFunctionsInputCreate,
-  updateSchema: TblFunctionsInputUpdate,
-  responseSchema: buildResponseSchema(TblFunctionsPlain, TblFunctions),
+  createSchema: TblFunctionInputCreate,
+  updateSchema: TblFunctionInputUpdate,
+  responseSchema: buildResponseSchema(TblFunctionPlain, TblFunction),
 }).app;
 
 export default ControllerTblFunctions;

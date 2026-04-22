@@ -90,27 +90,27 @@ export const ControllerStatistics = new Elysia().group("/statistics", (app) =>
         failureLastMonth,
       ] = await Promise.all([
         // Total
-        prisma.tblFailureReports.count(),
+        prisma.tblFailureReport.count(),
 
         // Open (closedDateTime is null)
-        prisma.tblFailureReports.count({
+        prisma.tblFailureReport.count({
           where: { closedDateTime: null },
         }),
 
         // Closed (closedDateTime is not null)
-        prisma.tblFailureReports.count({
+        prisma.tblFailureReport.count({
           where: { closedDateTime: { not: null } },
         }),
 
         // Last Week (failureDateTime in last 7 days)
-        prisma.tblFailureReports.count({
+        prisma.tblFailureReport.count({
           where: {
             // failureDateTime: { gte: sevenDaysAgo },
           },
         }),
 
         // Last Month (failureDateTime in last 30 days)
-        prisma.tblFailureReports.count({
+        prisma.tblFailureReport.count({
           where: {
             // failureDateTime: { gte: thirtyDaysAgo },
           },

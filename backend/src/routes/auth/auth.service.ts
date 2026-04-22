@@ -1,6 +1,6 @@
 import { prisma } from "@/utils/prisma";
 import bcrypt from "bcrypt";
-import { type TblUsers } from "orm/generated/prisma/client";
+import { type TblUser } from "orm/generated/prisma/client";
 
 export class AuthService {
   constructor() {}
@@ -11,25 +11,34 @@ export class AuthService {
   }: {
     username: string;
     password: string;
-  }): Promise<Omit<TblUsers, "uPassword"> | null> {
-    const user = await prisma.tblUsers.findFirst({
-      where: { uUserName: username },
+  }): Promise<Omit<TblUser, "password"> | null> {
+    const user = await prisma.tblUser.findFirst({
+      where: { userName: username },
     });
 
     if (!user) return null;
 
-    const isPasswordValid = await bcrypt.compare(password, user.uPassword);
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      user?.password || "",
+    );
+
     if (!isPasswordValid) return null;
 
-    const { uPassword: _password, ...userWithoutPassword } = user;
+    const { password: _password, ...userWithoutPassword } = user;
     return userWithoutPassword;
   }
 
-  async login(user: Omit<TblUsers, "uPassword">, sign: (payload: any) => any) {
+  async login(
+    user: Omit<TblUser, "password">,
+    loginAuditId: number,
+    sign: (payload: any) => any,
+  ) {
     const payload = {
       sub: user.userId,
-      username: user.uUserName,
+      username: user.userName,
       userGroupId: user.userGroupId,
+      loginAuditId,
     };
 
     const accessToken = await sign(payload);
@@ -40,8 +49,8 @@ export class AuthService {
   async register(registerDto: { username: string; password: string }) {
     const { username, password } = registerDto;
 
-    const existingUser = await prisma.tblUsers.findFirst({
-      where: { uUserName: username },
+    const existingUser = await prisma.tblUser.findFirst({
+      where: { userName: username },
     });
 
     if (existingUser) {
@@ -50,16 +59,16 @@ export class AuthService {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await prisma.tblUsers.create({
+    const user = await prisma.tblUser.create({
       data: {
-        uUserName: username,
-        uPassword: hashedPassword,
+        userName: username,
+        password: hashedPassword,
         userGroupId: 3,
-        uLastLogin: new Date().toISOString(),
+        lastLogin: new Date().toString(),
       },
     });
 
-    const { uPassword: _password, ...userWithoutPassword } = user;
+    const { password: _password, ...userWithoutPassword } = user;
     return userWithoutPassword;
   }
 }
