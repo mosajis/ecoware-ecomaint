@@ -1,5 +1,5 @@
 import treeGeneral from "./general.routes";
-import treeAccess from "./access.routes";
+import treeAccess from "../../../pages/access/access.routes";
 import { createRoute } from "@tanstack/react-router";
 import { redirect } from "@tanstack/react-router";
 import { protectedRoute } from "./protected.routes";

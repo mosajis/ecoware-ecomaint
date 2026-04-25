@@ -3,18 +3,15 @@ import MuiAvatar from "@mui/material/Avatar";
 import MuiListItemAvatar from "@mui/material/ListItemAvatar";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListSubheader from "@mui/material/ListSubheader";
+import DevicesRoundedIcon from "@mui/icons-material/DevicesRounded";
+import { useAtom } from "jotai";
+import { styled } from "@mui/material/styles";
+import { atomRig } from "../atoms/general.atom";
+import { tblInstallation, TypeTblInstallation } from "@/core/api/generated/api";
 import Select, {
   type SelectChangeEvent,
   selectClasses,
 } from "@mui/material/Select";
-import Divider from "@mui/material/Divider";
-import { styled } from "@mui/material/styles";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import DevicesRoundedIcon from "@mui/icons-material/DevicesRounded";
-import SmartphoneRoundedIcon from "@mui/icons-material/SmartphoneRounded";
-import ConstructionRoundedIcon from "@mui/icons-material/ConstructionRounded";
 
 const Avatar = styled(MuiAvatar)(({ theme }) => ({
   width: 28,
@@ -30,15 +27,54 @@ const ListItemAvatar = styled(MuiListItemAvatar)({
 });
 
 export default function SelectContent() {
-  const [company, setCompany] = React.useState("");
+  const [selectedRig, setSelectedRig] = useAtom(atomRig);
+  const [installations, setInstallations] = React.useState<
+    TypeTblInstallation[]
+  >([]);
+
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await tblInstallation.getAll();
+        const data: TypeTblInstallation[] = Array.isArray(response)
+          ? response
+          : response.items;
+        setInstallations(data);
+      } catch (error) {
+        console.error("Failed to fetch installations", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  React.useEffect(() => {
+    if (!loading && installations.length > 0) {
+      const isValid =
+        selectedRig &&
+        installations.some((item) => item.instId === selectedRig.instId);
+      if (!isValid) {
+        setSelectedRig(installations[0]);
+      }
+    }
+  }, [loading, installations, selectedRig, setSelectedRig]);
 
   const handleChange = (event: SelectChangeEvent) => {
-    setCompany(event.target.value as string);
+    const value = event.target.value;
+    const selected = installations.find(
+      (item) => String(item.instId) === value,
+    );
+    if (selected) {
+      setSelectedRig(selected);
+    }
   };
 
   return (
     <Select
-      value={company}
+      value={selectedRig ? String(selectedRig.instId) : ""}
       onChange={handleChange}
       displayEmpty
       fullWidth
@@ -57,47 +93,16 @@ export default function SelectContent() {
         },
       }}
     >
-      <ListSubheader sx={{ pt: 0 }}>Production</ListSubheader>
-      <MenuItem value="">
-        <ListItemAvatar>
-          <Avatar alt="Sitemark web">
-            <DevicesRoundedIcon sx={{ fontSize: "1rem" }} />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Sitemark-web" secondary="Web app" />
-      </MenuItem>
-      <MenuItem value={10}>
-        <ListItemAvatar>
-          <Avatar alt="Sitemark App">
-            <SmartphoneRoundedIcon sx={{ fontSize: "1rem" }} />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Sitemark-app" secondary="Mobile application" />
-      </MenuItem>
-      <MenuItem value={20}>
-        <ListItemAvatar>
-          <Avatar alt="Sitemark Store">
-            <DevicesRoundedIcon sx={{ fontSize: "1rem" }} />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Sitemark-Store" secondary="Web app" />
-      </MenuItem>
-      <ListSubheader>Development</ListSubheader>
-      <MenuItem value={30}>
-        <ListItemAvatar>
-          <Avatar alt="Sitemark Store">
-            <ConstructionRoundedIcon sx={{ fontSize: "1rem" }} />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Sitemark-Admin" secondary="Web app" />
-      </MenuItem>
-      <Divider sx={{ mx: -1 }} />
-      <MenuItem value={40}>
-        <ListItemIcon>
-          <AddRoundedIcon />
-        </ListItemIcon>
-        <ListItemText primary="Add product" secondary="Web app" />
-      </MenuItem>
+      {installations.map((item) => (
+        <MenuItem key={item.instId} value={String(item.instId)}>
+          <ListItemAvatar>
+            <Avatar alt={item.name}>
+              <DevicesRoundedIcon sx={{ fontSize: "1rem" }} />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary={item.name} secondary={item.caption} />
+        </MenuItem>
+      ))}
     </Select>
   );
 }

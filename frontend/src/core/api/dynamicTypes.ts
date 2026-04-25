@@ -40,6 +40,7 @@ type OriginalQuery<K extends keyof operations> =
 type FilterAndIncludeFields = {
   filter?: object | any;
   include?: object | any;
+  select?: object | any;
 };
 
 // گام ۳: نوع کمکی برای اعمال بازنویسی روی تک‌تک اعضای Union

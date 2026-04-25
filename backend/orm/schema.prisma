@@ -814,6 +814,7 @@ model TblInstallation {
   instId                       Int                           @id(map: "PK_tblInstallation") @map("InstID")
   name                         String                        @map("Name") @db.NVarChar(50)
   orderNo                      Int?                          @map("OrderNo")
+  caption                      String?                       @map("Caption") @db.NVarChar(50)
   tblAttachments               TblAttachment[]
   tblAttachmentTypes           TblAttachmentType[]
   tblCompCounters              TblCompCounter[]
@@ -1358,23 +1359,23 @@ model TblUnit {
 
 model TblUser {
   userId               Int                   @id(map: "PK_tblAmosUser") @default(dbgenerated("NEXT VALUE FOR [Seq_Users]"), map: "DF_UserID") @map("UserID")
-  employeeId           Int?                  @map("EmployeeID")
-  userGroupId          Int?                  @map("UserGroupId")
-  userName             String?               @map("UserName") @db.NVarChar(100)
-  password             String?               @map("Password") @db.NVarChar(200)
-  accountDisabled      Boolean?              @map("AccountDisabled")
-  forcePasswordChange  Boolean?              @map("ForcePasswordChange")
+  employeeId           Int                   @map("EmployeeID")
+  userGroupId          Int                   @map("UserGroupId")
+  userName             String                @map("UserName") @db.NVarChar(100)
+  password             String                @map("Password") @db.NVarChar(200)
+  accountDisabled      Boolean               @map("AccountDisabled")
+  forcePasswordChange  Boolean               @map("ForcePasswordChange")
   lastLogin            DateTime?             @map("LastLogin") @db.DateTime
   lastUpdate           DateTime?             @db.DateTime
-  tblEmployee          TblEmployee?          @relation(fields: [employeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblUser_tblEmployee")
-  tblUserGroup         TblUserGroup?         @relation(fields: [userGroupId], references: [userGroupId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblUser_tblUserGroup")
+  tblEmployee          TblEmployee           @relation(fields: [employeeId], references: [employeeId], onUpdate: NoAction, map: "FK_tblUser_tblEmployee")
+  tblUserGroup         TblUserGroup          @relation(fields: [userGroupId], references: [userGroupId], onUpdate: NoAction, map: "FK_tblUser_tblUserGroup")
   tblUserInstallations TblUserInstallation[]
 
   @@map("tblUser")
 }
 
 model TblUserGroup {
-  userGroupId          Int                   @id(map: "PK_tblUserGroup") @map("UserGroupId")
+  userGroupId          Int                   @id(map: "PK_tblUserGroup") @default(autoincrement()) @map("UserGroupId")
   name                 String                @map("Name") @db.NVarChar(200)
   description          String?               @map("Description") @db.NVarChar(1500)
   lastUpdate           DateTime?             @db.DateTime
@@ -1389,7 +1390,11 @@ model TblUserGroupElement {
   userGroupElementId Int          @id(map: "PK_tblUserGroupElement") @map("UserGroupElementID")
   userGroupId        Int          @map("UserGroupId")
   elementId          Int          @map("ElementId")
-  isPermit           Boolean      @map("IsPermit")
+  canCreate          Boolean      @map("CanCreate")
+  canUpdate          Boolean      @map("CanUpdate")
+  canDelete          Boolean      @map("CanDelete")
+  canView            Boolean      @map("CanView")
+  canExport          Boolean      @map("CanExport")
   tblElement         TblElement   @relation(fields: [elementId], references: [elementId], onUpdate: NoAction, map: "FK_tblUserGroupElement_tblElement")
   tblUserGroup       TblUserGroup @relation(fields: [userGroupId], references: [userGroupId], onUpdate: NoAction, map: "FK_tblUserGroupElement_tblUserGroup")
 

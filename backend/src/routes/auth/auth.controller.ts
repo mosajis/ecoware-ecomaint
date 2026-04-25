@@ -1,7 +1,6 @@
 import Elysia, { t } from "elysia";
 import { jwt } from "@elysiajs/jwt";
 import { AuthService } from "./auth.service";
-import { ServiceTblUser } from "../crud/tblUser.controller";
 import { prisma } from "@/utils/prisma";
 import { TblUserPlain } from "orm/generated/prismabox/TblUser";
 
@@ -53,6 +52,26 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
           };
         }
 
+        if (user.accountDisabled) {
+          await prisma.tblLoginAudit.create({
+            data: {
+              employeeId: user.employeeId,
+              actionType: 3, // Error
+              isSuccess: false,
+              createdAt: now,
+              errorMessage: "Account is disabled",
+              ipAddress: clientIp,
+              deviceInfo: clientAgent,
+            },
+          });
+
+          set.status = 403;
+          return {
+            status: "error",
+            message: "Account is disabled",
+          };
+        }
+
         const loginAudit = await prisma.tblLoginAudit.create({
           data: {
             employeeId: user.employeeId,
@@ -101,34 +120,6 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
         detail: {
           tags: ["auth"],
           summary: "Login",
-        },
-      },
-    )
-
-    // 👤 Register
-    .post(
-      "/register",
-      async ({ body, set }) => {
-        try {
-          await authService.register(body);
-          return {};
-        } catch (e: any) {
-          set.status = 400;
-          return {
-            status: "error",
-            message: e.message || "Registration failed",
-          };
-        }
-      },
-      {
-        body: t.Object({
-          username: t.String(),
-          password: t.String(),
-        }),
-        response: t.Object({}),
-        detail: {
-          tags: ["auth"],
-          summary: "Register",
         },
       },
     )

@@ -72,6 +72,10 @@ const TABLE_PKS = {
   TblWorkShopDone: "WShopDoneID",
   TblWorkShopRequest: "WShopRequestID",
   TblUser: "UserID",
+  TblInstallation: "InstID",
+  tblUserGroup: "userGroupId",
+  tblUserGroupElement: "UserGroupElementID",
+  tblUserInstallation: "UserInstID",
   TblSpareUnit: "SpareUnitID",
   TblFailureSeverityLevel: "failureSeverityLevelId",
   TblFailureStatus: "failureStatusId",
@@ -105,7 +109,7 @@ const SPECIAL_RELATIONS = {
 };
 
 const PRISMABOX_DIR = path.resolve("./orm/generated/prismabox");
-const MAX_DEPTH = 5;
+const MAX_DEPTH = 2;
 
 let fixedCount = 0;
 const modelCache = {};

@@ -18,7 +18,6 @@ export default function PageEmployee() {
     () =>
       tblEmployee.getAll({
         include: {
-          tblAddress: true,
           tblDiscipline: true,
         },
       }),

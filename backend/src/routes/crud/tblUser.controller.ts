@@ -1,4 +1,4 @@
-import { BaseController } from "@/utils/base.controller";
+import { BaseController, querySchema } from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
 import { t } from "elysia";
 import {
@@ -9,6 +9,9 @@ import {
 } from "orm/generated/prismabox/TblUser";
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
+import { AuthService } from "../auth/auth.service";
+
+const authService = new AuthService();
 
 export const ServiceTblUser = new BaseService(prisma.tblUser);
 
@@ -56,40 +59,35 @@ const ControllerTblUser = new BaseController({
   updateSchema: TblUserInputUpdate,
   responseSchema: buildResponseSchema(TblUserPlain, TblUser),
   extend: (app) => {
-    app.get(
+    // 👤 Register
+    app.post(
       "/",
-      async ({ query }) => {
-        const users = await ServiceTblUser.findAll({
-          ...query,
-          select: {
-            userId: true,
-            userName: true,
-            lastLogin: true,
-            accountDisabled: true,
-            forcePasswordChange: true,
-            tblEmployee: {
-              select: {
-                firstName: true,
-                lastName: true,
-                title: true,
-                tblDiscipline: {
-                  select: {
-                    name: true,
-                  },
-                },
-              },
-            },
-            tblUserGroup: {
-              select: {
-                name: true,
-              },
-            },
-          },
-        });
-        return users;
+      async ({ body, set }) => {
+        try {
+          const result = await authService.register(body);
+          return result;
+        } catch (e: any) {
+          set.status = 400;
+          return {
+            status: "error",
+            message: e.message || "Registration failed",
+          };
+        }
       },
       {
-        response: ResponseSchema,
+        body: t.Object({
+          userName: t.String(),
+          password: t.String(),
+          employeeId: t.Number(),
+          userGroupId: t.Number(),
+          accountDisabled: t.Boolean(),
+          forcePasswordChange: t.Boolean(),
+        }),
+        response: buildResponseSchema(TypeUser, TblUser),
+        detail: {
+          tags: ["tblUser"],
+          summary: "Create",
+        },
       },
     );
   },

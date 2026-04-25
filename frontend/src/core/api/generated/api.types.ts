@@ -1723,6 +1723,61 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/tblElement/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all */
+        get: operations["getTblElement"];
+        put?: never;
+        /** Create */
+        post: operations["postTblElement"];
+        /** Delete all */
+        delete: operations["deleteTblElement"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblElement/{elementId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one */
+        get: operations["getTblElementByElementId"];
+        /** Update */
+        put: operations["putTblElementByElementId"];
+        post?: never;
+        /** Delete one */
+        delete: operations["deleteTblElementByElementId"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblElement/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Count */
+        get: operations["getTblElementCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tblEmployee/": {
         parameters: {
             query?: never;
@@ -2108,7 +2163,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/tblFunctions/": {
+    "/tblFunction/": {
         parameters: {
             query?: never;
             header?: never;
@@ -2116,18 +2171,18 @@ export interface paths {
             cookie?: never;
         };
         /** Get all */
-        get: operations["getTblFunctions"];
+        get: operations["getTblFunction"];
         put?: never;
         /** Create */
-        post: operations["postTblFunctions"];
+        post: operations["postTblFunction"];
         /** Delete all */
-        delete: operations["deleteTblFunctions"];
+        delete: operations["deleteTblFunction"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/tblFunctions/{functionId}": {
+    "/tblFunction/{functionId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -2135,18 +2190,18 @@ export interface paths {
             cookie?: never;
         };
         /** Get one */
-        get: operations["getTblFunctionsByFunctionId"];
+        get: operations["getTblFunctionByFunctionId"];
         /** Update */
-        put: operations["putTblFunctionsByFunctionId"];
+        put: operations["putTblFunctionByFunctionId"];
         post?: never;
         /** Delete one */
-        delete: operations["deleteTblFunctionsByFunctionId"];
+        delete: operations["deleteTblFunctionByFunctionId"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/tblFunctions/count": {
+    "/tblFunction/count": {
         parameters: {
             query?: never;
             header?: never;
@@ -2154,7 +2209,62 @@ export interface paths {
             cookie?: never;
         };
         /** Count */
-        get: operations["getTblFunctionsCount"];
+        get: operations["getTblFunctionCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblInstallation/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all */
+        get: operations["getTblInstallation"];
+        put?: never;
+        /** Create */
+        post: operations["postTblInstallation"];
+        /** Delete all */
+        delete: operations["deleteTblInstallation"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblInstallation/{instId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one */
+        get: operations["getTblInstallationByInstId"];
+        /** Update */
+        put: operations["putTblInstallationByInstId"];
+        post?: never;
+        /** Delete one */
+        delete: operations["deleteTblInstallationByInstId"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblInstallation/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Count */
+        get: operations["getTblInstallationCount"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3651,6 +3761,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /** Get all */
         get: operations["getTblUser"];
         put?: never;
         /** Create */
@@ -3690,6 +3801,171 @@ export interface paths {
         };
         /** Count */
         get: operations["getTblUserCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblUserGroup/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all */
+        get: operations["getTblUserGroup"];
+        put?: never;
+        /** Create */
+        post: operations["postTblUserGroup"];
+        /** Delete all */
+        delete: operations["deleteTblUserGroup"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblUserGroup/{userGroupId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one */
+        get: operations["getTblUserGroupByUserGroupId"];
+        /** Update */
+        put: operations["putTblUserGroupByUserGroupId"];
+        post?: never;
+        /** Delete one */
+        delete: operations["deleteTblUserGroupByUserGroupId"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblUserGroup/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Count */
+        get: operations["getTblUserGroupCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblUserGroupElement/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all */
+        get: operations["getTblUserGroupElement"];
+        put?: never;
+        /** Create */
+        post: operations["postTblUserGroupElement"];
+        /** Delete all */
+        delete: operations["deleteTblUserGroupElement"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblUserGroupElement/{userGroupElementId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one */
+        get: operations["getTblUserGroupElementByUserGroupElementId"];
+        /** Update */
+        put: operations["putTblUserGroupElementByUserGroupElementId"];
+        post?: never;
+        /** Delete one */
+        delete: operations["deleteTblUserGroupElementByUserGroupElementId"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblUserGroupElement/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Count */
+        get: operations["getTblUserGroupElementCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblUserInstallation/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all */
+        get: operations["getTblUserInstallation"];
+        put?: never;
+        /** Create */
+        post: operations["postTblUserInstallation"];
+        /** Delete all */
+        delete: operations["deleteTblUserInstallation"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblUserInstallation/{userInstId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one */
+        get: operations["getTblUserInstallationByUserInstId"];
+        /** Update */
+        put: operations["putTblUserInstallationByUserInstId"];
+        post?: never;
+        /** Delete one */
+        delete: operations["deleteTblUserInstallationByUserInstId"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblUserInstallation/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Count */
+        get: operations["getTblUserInstallationCount"];
         put?: never;
         post?: never;
         delete?: never;
@@ -4073,23 +4349,6 @@ export interface paths {
         put?: never;
         /** Login */
         post: operations["postAuthLogin"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/auth/register": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Register */
-        post: operations["postAuthRegister"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4878,6 +5137,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -5068,6 +5328,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -5153,7 +5414,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -5217,7 +5478,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -5281,7 +5542,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -5371,6 +5632,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -5539,6 +5801,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -5576,7 +5839,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -5595,7 +5858,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -5614,7 +5877,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -5661,6 +5924,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -5754,6 +6018,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -5794,7 +6059,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -5817,7 +6082,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -5840,7 +6105,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -5888,6 +6153,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -5949,6 +6215,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -6116,6 +6383,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -6209,7 +6477,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompCounterLogs?: {
@@ -6262,7 +6530,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompCounterLogs?: {
@@ -6315,7 +6583,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompCounterLogs?: {
@@ -6441,6 +6709,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -6635,6 +6904,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -6732,7 +7002,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -6799,7 +7069,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -6866,7 +7136,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -6999,6 +7269,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -7161,6 +7432,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -7307,6 +7579,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -7352,7 +7625,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -7379,7 +7652,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -7406,7 +7679,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -7469,6 +7742,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -7578,6 +7852,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -7625,7 +7900,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -7655,7 +7930,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -7685,7 +7960,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -7749,6 +8024,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -7826,6 +8102,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -7971,6 +8248,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -8158,7 +8436,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription?: {
@@ -8246,7 +8524,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription?: {
@@ -8334,7 +8612,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription?: {
@@ -8473,6 +8751,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -8739,6 +9018,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -8929,7 +9209,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -9038,7 +9318,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -9147,7 +9427,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -9304,6 +9584,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -9538,6 +9819,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -9814,6 +10096,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -9863,7 +10146,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -9894,7 +10177,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -9925,7 +10208,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -10024,6 +10307,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -10169,6 +10453,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -10221,7 +10506,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -10256,7 +10541,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -10291,7 +10576,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -10391,6 +10676,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -10504,6 +10790,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -10647,6 +10934,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -10689,7 +10977,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -10713,7 +11001,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -10737,7 +11025,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -10819,6 +11107,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -10947,6 +11236,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -10991,7 +11281,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -11018,7 +11308,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -11045,7 +11335,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -11128,6 +11418,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -11224,6 +11515,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -11335,6 +11627,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -11375,7 +11668,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobTrigger?: {
@@ -11394,7 +11687,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobTrigger?: {
@@ -11413,7 +11706,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobTrigger?: {
@@ -11478,6 +11771,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -11592,6 +11886,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -11633,7 +11928,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -11655,7 +11950,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -11677,7 +11972,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -11744,6 +12039,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -11826,6 +12122,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -11973,6 +12270,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -12049,7 +12347,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -12094,7 +12392,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -12139,7 +12437,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -12237,6 +12535,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -12394,6 +12693,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -12473,7 +12773,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -12529,7 +12829,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -12585,7 +12885,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -12688,6 +12988,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -12813,6 +13114,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -12943,6 +13245,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -12995,7 +13298,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -13023,7 +13326,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -13051,7 +13354,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -13112,6 +13415,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -13225,6 +13529,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -13279,7 +13584,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -13311,7 +13616,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -13343,7 +13648,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -13406,6 +13711,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -13487,6 +13793,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -13591,6 +13898,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -13627,7 +13935,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -13645,7 +13953,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -13663,7 +13971,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -13705,6 +14013,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -13793,6 +14102,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -13830,7 +14140,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -13850,7 +14160,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -13870,7 +14180,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -13913,6 +14223,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -13969,6 +14280,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -14048,6 +14360,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -14079,7 +14392,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -14092,7 +14405,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -14105,7 +14418,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -14133,6 +14446,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -14207,6 +14521,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -14238,7 +14553,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -14252,7 +14567,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -14266,7 +14581,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -14295,6 +14610,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -14337,6 +14653,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -14831,6 +15148,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -14865,7 +15183,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -14881,7 +15199,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -14897,7 +15215,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -14938,6 +15256,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -15025,6 +15344,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -15060,7 +15380,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -15078,7 +15398,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -15096,7 +15416,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -15138,6 +15458,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -15193,6 +15514,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -15338,6 +15660,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -15445,7 +15768,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompTypeAttachments?: {
@@ -15499,7 +15822,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompTypeAttachments?: {
@@ -15553,7 +15876,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompTypeAttachments?: {
@@ -15667,6 +15990,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -15862,6 +16186,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -15977,7 +16302,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -16052,7 +16377,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -16127,7 +16452,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -16254,6 +16579,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -16417,6 +16743,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -16588,6 +16915,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -16629,7 +16957,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -16652,7 +16980,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -16675,7 +17003,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -16740,6 +17068,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -16851,6 +17180,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -16892,7 +17222,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -16916,7 +17246,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -16940,7 +17270,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -17006,6 +17336,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -17085,6 +17416,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -17215,6 +17547,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -17267,7 +17600,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompTypeJobCounters?: {
@@ -17293,7 +17626,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompTypeJobCounters?: {
@@ -17319,7 +17652,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompTypeJobCounters?: {
@@ -17376,6 +17709,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -17487,6 +17821,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -17541,7 +17876,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -17573,7 +17908,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -17605,7 +17940,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -17666,6 +18001,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -17745,6 +18081,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -17913,6 +18250,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -18052,7 +18390,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription?: {
@@ -18126,7 +18464,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription?: {
@@ -18200,7 +18538,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription?: {
@@ -18317,6 +18655,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -18527,6 +18866,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -18669,7 +19009,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -18761,7 +19101,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -18853,7 +19193,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -18985,6 +19325,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -19163,6 +19504,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -19406,6 +19748,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -19452,7 +19795,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -19480,7 +19823,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -19508,7 +19851,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -19586,6 +19929,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -19710,6 +20054,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -19759,7 +20104,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -19791,7 +20136,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -19823,7 +20168,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -19902,6 +20247,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -19994,6 +20340,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -20141,6 +20488,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -20183,7 +20531,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -20207,7 +20555,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -20231,7 +20579,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -20300,6 +20648,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -20415,6 +20764,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -20459,7 +20809,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -20486,7 +20836,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -20513,7 +20863,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -20583,6 +20933,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -20666,6 +21017,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -20806,6 +21158,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -20851,7 +21204,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobTrigger?: {
@@ -20875,7 +21228,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobTrigger?: {
@@ -20899,7 +21252,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobTrigger?: {
@@ -20966,6 +21319,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -21082,6 +21436,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -21129,7 +21484,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -21157,7 +21512,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -21185,7 +21540,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -21254,6 +21609,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -21338,6 +21694,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -21491,6 +21848,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -21547,7 +21905,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -21579,7 +21937,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -21611,7 +21969,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -21683,6 +22041,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -21807,6 +22166,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -21868,7 +22228,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -21907,7 +22267,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -21946,7 +22306,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -22020,6 +22380,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -22112,6 +22473,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -22387,6 +22749,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -22579,7 +22942,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblLocation?: {
@@ -22672,7 +23035,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblLocation?: {
@@ -22765,7 +23128,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblLocation?: {
@@ -22986,6 +23349,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -23334,6 +23698,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -23542,7 +23907,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -23671,7 +24036,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -23800,7 +24165,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -24041,6 +24406,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -24357,6 +24723,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -24620,6 +24987,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -24661,7 +25029,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -24684,7 +25052,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -24707,7 +25075,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -24779,6 +25147,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -24897,6 +25266,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -24938,7 +25308,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -24962,7 +25332,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -24986,7 +25356,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -25059,6 +25429,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -25145,6 +25516,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -27676,6 +28048,504 @@ export interface operations {
             };
         };
     };
+    getTblElement: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                            tblElement?: null | ({
+                                elementId: number;
+                                parentId: null | number;
+                                name: string;
+                                caption: string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            otherTblElements?: {
+                                elementId: number;
+                                parentId: null | number;
+                                name: string;
+                                caption: string;
+                                orderNo: null | number;
+                            }[];
+                            tblUserGroupElements?: {
+                                userGroupElementId: number;
+                                userGroupId: number;
+                                elementId: number;
+                                canCreate: boolean;
+                                canUpdate: boolean;
+                                canDelete: boolean;
+                                canView: boolean;
+                                canExport: boolean;
+                            }[];
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
+    };
+    postTblElement: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name: string;
+                    caption: string;
+                    orderNo?: null | number;
+                    tblElement?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    otherTblElements?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
+                    tblUserGroupElements?: {
+                        connect: {
+                            userGroupElementId: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    name: string;
+                    caption: string;
+                    orderNo?: null | number;
+                    tblElement?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    otherTblElements?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
+                    tblUserGroupElements?: {
+                        connect: {
+                            userGroupElementId: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    name: string;
+                    caption: string;
+                    orderNo?: null | number;
+                    tblElement?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    otherTblElements?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
+                    tblUserGroupElements?: {
+                        connect: {
+                            userGroupElementId: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        elementId: number;
+                        parentId: null | number;
+                        name: string;
+                        caption: string;
+                        orderNo: null | number;
+                        tblElement?: null | ({
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        otherTblElements?: {
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                        }[];
+                        tblUserGroupElements?: {
+                            userGroupElementId: number;
+                            userGroupId: number;
+                            elementId: number;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblElement: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        deleted: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblElementByElementId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                elementId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        elementId: number;
+                        parentId: null | number;
+                        name: string;
+                        caption: string;
+                        orderNo: null | number;
+                        tblElement?: null | ({
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        otherTblElements?: {
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                        }[];
+                        tblUserGroupElements?: {
+                            userGroupElementId: number;
+                            userGroupId: number;
+                            elementId: number;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    putTblElementByElementId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                elementId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    caption?: string;
+                    orderNo?: null | number;
+                    tblElement?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblElements?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblUserGroupElements?: {
+                        connect?: {
+                            userGroupElementId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    name?: string;
+                    caption?: string;
+                    orderNo?: null | number;
+                    tblElement?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblElements?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblUserGroupElements?: {
+                        connect?: {
+                            userGroupElementId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    name?: string;
+                    caption?: string;
+                    orderNo?: null | number;
+                    tblElement?: {
+                        connect?: {
+                            id: number;
+                        };
+                        disconnect?: boolean;
+                    };
+                    otherTblElements?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblUserGroupElements?: {
+                        connect?: {
+                            userGroupElementId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        elementId: number;
+                        parentId: null | number;
+                        name: string;
+                        caption: string;
+                        orderNo: null | number;
+                        tblElement?: null | ({
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        otherTblElements?: {
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                        }[];
+                        tblUserGroupElements?: {
+                            userGroupElementId: number;
+                            userGroupId: number;
+                            elementId: number;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblElementByElementId: {
+        parameters: {
+            query?: {
+                force?: boolean;
+            };
+            header?: never;
+            path: {
+                elementId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        elementId: number;
+                        parentId: null | number;
+                        name: string;
+                        caption: string;
+                        orderNo: null | number;
+                        tblElement?: null | ({
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        otherTblElements?: {
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                        }[];
+                        tblUserGroupElements?: {
+                            userGroupElementId: number;
+                            userGroupId: number;
+                            elementId: number;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    getTblElementCount: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
     getTblEmployee: {
         parameters: {
             query?: {
@@ -28252,12 +29122,12 @@ export interface operations {
                             }[];
                             tblUsers?: {
                                 userId: number;
-                                employeeId: null | number;
-                                userGroupId: null | number;
-                                userName: null | string;
-                                password: null | string;
-                                accountDisabled: null | boolean;
-                                forcePasswordChange: null | boolean;
+                                employeeId: number;
+                                userGroupId: number;
+                                userName: string;
+                                password: string;
+                                accountDisabled: boolean;
+                                forcePasswordChange: boolean;
                                 lastLogin: null | string;
                                 lastUpdate: null | string;
                             }[];
@@ -29725,12 +30595,12 @@ export interface operations {
                         }[];
                         tblUsers?: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
                         }[];
@@ -30545,12 +31415,12 @@ export interface operations {
                         }[];
                         tblUsers?: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
                         }[];
@@ -32408,12 +33278,12 @@ export interface operations {
                         }[];
                         tblUsers?: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
                         }[];
@@ -33196,12 +34066,12 @@ export interface operations {
                         }[];
                         tblUsers?: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
                         }[];
@@ -33849,6 +34719,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -33947,7 +34818,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblFailureGroupFollow?: {
@@ -33995,7 +34866,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblFailureGroupFollow?: {
@@ -34043,7 +34914,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblFailureGroupFollow?: {
@@ -34116,6 +34987,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -34267,6 +35139,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -34366,7 +35239,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -34424,7 +35297,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -34482,7 +35355,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -34564,6 +35437,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -34683,6 +35557,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -34836,6 +35711,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -34884,7 +35760,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShop: {
@@ -34901,7 +35777,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShop: {
@@ -34918,7 +35794,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShop: {
@@ -34963,6 +35839,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -35067,6 +35944,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -35115,7 +35993,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -35133,7 +36011,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -35151,7 +36029,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -35197,6 +36075,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -35269,6 +36148,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -36587,7 +37467,7 @@ export interface operations {
             };
         };
     };
-    getTblFunctions: {
+    getTblFunction: {
         parameters: {
             query?: {
                 page?: number;
@@ -36627,6 +37507,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -36736,7 +37617,7 @@ export interface operations {
             };
         };
     };
-    postTblFunctions: {
+    postTblFunction: {
         parameters: {
             query?: never;
             header?: never;
@@ -36753,7 +37634,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblComponentUnit?: {
@@ -36795,7 +37676,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblComponentUnit?: {
@@ -36837,7 +37718,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblComponentUnit?: {
@@ -36895,6 +37776,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -36999,7 +37881,7 @@ export interface operations {
             };
         };
     };
-    deleteTblFunctions: {
+    deleteTblFunction: {
         parameters: {
             query?: {
                 page?: number;
@@ -37030,7 +37912,7 @@ export interface operations {
             };
         };
     };
-    getTblFunctionsByFunctionId: {
+    getTblFunctionByFunctionId: {
         parameters: {
             query?: {
                 include?: string;
@@ -37065,6 +37947,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -37169,7 +38052,7 @@ export interface operations {
             };
         };
     };
-    putTblFunctionsByFunctionId: {
+    putTblFunctionByFunctionId: {
         parameters: {
             query?: {
                 include?: string;
@@ -37191,7 +38074,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -37248,7 +38131,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -37305,7 +38188,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -37378,6 +38261,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -37482,7 +38366,7 @@ export interface operations {
             };
         };
     };
-    deleteTblFunctionsByFunctionId: {
+    deleteTblFunctionByFunctionId: {
         parameters: {
             query?: {
                 force?: boolean;
@@ -37516,6 +38400,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -37620,7 +38505,5289 @@ export interface operations {
             };
         };
     };
-    getTblFunctionsCount: {
+    getTblFunctionCount: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblInstallation: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            instId: number;
+                            name: string;
+                            orderNo: null | number;
+                            caption: null | string;
+                            tblAttachments?: {
+                                attachmentId: number;
+                                title: null | string;
+                                fileName: null | string;
+                                attachmentTypeId: null | number;
+                                path: null | string;
+                                size: null | number;
+                                isUserAttachment: boolean;
+                                createdEmployeeId: number;
+                                createdAt: string;
+                                instId: null | number;
+                            }[];
+                            tblAttachmentTypes?: {
+                                attachmentTypeId: number;
+                                name: null | string;
+                                orderNo: null | number;
+                                createdEmployeeId: number;
+                                createdAt: string;
+                                instId: null | number;
+                            }[];
+                            tblCompCounters?: {
+                                compCounterId: number;
+                                compId: null | number;
+                                counterTypeId: null | number;
+                                currentValue: null | number;
+                                currentDate: null | string;
+                                changedBy: null | number;
+                                dependsOnId: null | number;
+                                startDate: null | string;
+                                startValue: null | number;
+                                lastZeroedValue: null | number;
+                                zeroedDate: null | string;
+                                averageCountRate: null | number;
+                                useCalcAverage: null | number;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblCompCounterLogs?: {
+                                compCounterLogId: number;
+                                compCounterId: null | number;
+                                dependsOnId: null | number;
+                                currentDate: null | string;
+                                currentValue: null | number;
+                                startDate: null | string;
+                                startValue: null | number;
+                                zeroedDate: null | string;
+                                lastZeroedValue: null | number;
+                                changedBy: null | number;
+                                changedDate: null | string;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblCompJobs?: {
+                                compJobId: number;
+                                discId: null | number;
+                                compId: null | number;
+                                jobDescId: null | number;
+                                jobConditionId: null | number;
+                                maintClassId: null | number;
+                                maintCauseId: null | number;
+                                maintTypeId: null | number;
+                                rescheduleLimitId: null | number;
+                                frequency: null | number;
+                                frequencyPeriod: null | number;
+                                changeReason: null | string;
+                                planningMethod: null | number;
+                                statusNone: null | number;
+                                statusInUse: null | number;
+                                statusAvailable: null | number;
+                                statusRepair: null | number;
+                                lastDone: null | string;
+                                nextDueDate: null | string;
+                                cbmStatus: null | number;
+                                outputFormat: null | number;
+                                priority: null | number;
+                                window: null | number;
+                                active: null | number;
+                                mandatoryHistory: null | number;
+                                createdEmployeeId: null | number;
+                                notes: null | string;
+                                mandatoryResource: null | number;
+                                mandatoryStockUsage: null | number;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblCompJobCounters?: {
+                                compJobCounterId: number;
+                                compJobId: null | number;
+                                compCounterId: null | number;
+                                frequency: null | number;
+                                lastDoneCount: null | number;
+                                nextDueCount: null | number;
+                                window: null | number;
+                                showInAlert: null | boolean;
+                                updateByFunction: null | boolean;
+                                orderNumber: null | number;
+                                orderNo: null | number;
+                                createdEmployeeId: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblCompJobMeasurePoints?: {
+                                compJobMeasurePointId: number;
+                                compMeasurePointId: null | number;
+                                compJobId: null | number;
+                                triggerJob: null | number;
+                                useOperationalValues: null | number;
+                                minValue: null | number;
+                                maxValue: null | number;
+                                updateOnReport: null | number;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblCompJobTriggers?: {
+                                compJobTriggerId: number;
+                                jobTriggerId: null | number;
+                                compJobId: null | number;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblCompMeasurePoints?: {
+                                compMeasurePointId: number;
+                                compId: null | number;
+                                counterTypeId: null | number;
+                                changedBy: null | number;
+                                currentDate: null | string;
+                                unitId: null | number;
+                                currentValue: null | number;
+                                setValue: null | number;
+                                operationalMinValue: null | number;
+                                operationalMaxValue: null | number;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblCompMeasurePointLogs?: {
+                                compMeasurePointLogId: number;
+                                compMeasurePointId: null | number;
+                                changedBy: null | number;
+                                changedDate: null | string;
+                                currentDate: null | string;
+                                unitId: null | number;
+                                currentValue: null | number;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblCompOilInfos?: {
+                                compOilInfoId: number;
+                                compId: null | number;
+                                compCounterId: null | number;
+                                spareTypeId: null | number;
+                                compJobId: null | number;
+                                tankCapacity: null | number;
+                                laboratoryCode: null | string;
+                                samplingPosition: null | string;
+                                oilGrade: null | string;
+                                orderNo: null | number;
+                                employeeId: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblComponentUnits?: {
+                                compId: number;
+                                compTypeId: null | number;
+                                locationId: null | number;
+                                parentCompId: null | number;
+                                vendorId: null | number;
+                                compNo: null | string;
+                                serialNo: null | string;
+                                model: null | string;
+                                comment1: null | string;
+                                comment2: null | string;
+                                comment3: null | string;
+                                assetNo: null | string;
+                                statusId: null | number;
+                                notes: null | string;
+                                isCritical: null | number;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblComponentUnitAttachments?: {
+                                componentUnitAttachmentId: number;
+                                compId: number;
+                                attachmentId: number;
+                                orderNo: null | number;
+                                createdEmployeeId: number;
+                                createdAt: string;
+                                instId: null | number;
+                            }[];
+                            tblCompSpares?: {
+                                compSpareId: number;
+                                compTypeId: null | number;
+                                spareTypeId: null | number;
+                                quantity: null | number;
+                                drawingNo: null | string;
+                                position: null | string;
+                                oldPartNo: null | string;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblCompStatusLogs?: {
+                                compStatusLogId: number;
+                                compId: null | number;
+                                fromStatusId: null | number;
+                                toStatusId: null | number;
+                                changedBy: null | number;
+                                initiatingCompId: null | number;
+                                workOrderId: null | number;
+                                fromDeptId: null | number;
+                                changedTime: null | string;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblCompTypes?: {
+                                compTypeId: number;
+                                parentCompTypeId: null | number;
+                                compTypeNo: null | string;
+                                compName: null | string;
+                                compType: null | string;
+                                compTypeModel: null | string;
+                                makerId: null | number;
+                                notes: null | string;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblCompTypeAttachments?: {
+                                compTypeAttachmentId: number;
+                                compTypeId: number;
+                                attachmentId: number;
+                                orderNo: null | number;
+                                createdEmployeeId: number;
+                                createdAt: string;
+                                instId: null | number;
+                            }[];
+                            tblCompTypeCounters?: {
+                                compTypeCounterId: number;
+                                compTypeId: null | number;
+                                counterTypeId: null | number;
+                                averageCountRate: null | number;
+                                useCalcAverage: null | number;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblCompTypeJobs?: {
+                                compTypeJobId: number;
+                                compTypeId: null | number;
+                                discId: null | number;
+                                jobDescId: null | number;
+                                jobConditionId: null | number;
+                                frequency: null | number;
+                                frequencyPeriod: null | number;
+                                planningMethod: null | number;
+                                statusNone: null | number;
+                                statusInUse: null | number;
+                                statusAvailable: null | number;
+                                statusRepair: null | number;
+                                maintClassId: null | number;
+                                maintCauseId: null | number;
+                                maintTypeId: null | number;
+                                priority: null | number;
+                                window: null | number;
+                                mandatoryHistory: null | number;
+                                orderNo: null | number;
+                                createdEmployeeId: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblCompTypeJobCounters?: {
+                                compTypeJobCounterId: number;
+                                compTypeJobId: null | number;
+                                compTypeCounterId: null | number;
+                                frequency: null | number;
+                                window: null | number;
+                                showInAlert: null | boolean;
+                                updateByFunction: null | boolean;
+                                orderNo: null | number;
+                                createdEmployeeId: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblCompTypeJobMeasurePoints?: {
+                                compTypeJobMeasurePointId: number;
+                                compTypeMeasurePointId: null | number;
+                                compTypeJobId: null | number;
+                                triggerJob: null | number;
+                                useOperationalValues: null | number;
+                                minValue: null | number;
+                                maxValue: null | number;
+                                updateOnReport: null | number;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblCompTypeJobTriggers?: {
+                                compTypeJobTriggerId: number;
+                                jobTriggerId: null | number;
+                                compTypeJobId: null | number;
+                                orderNo: null | number;
+                                createdEmployeeId: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblCompTypeMeasurePoints?: {
+                                compTypeMeasurePointId: number;
+                                compTypeId: null | number;
+                                counterTypeId: null | number;
+                                unitId: null | number;
+                                setValue: null | number;
+                                operationalMinValue: null | number;
+                                operationalMaxValue: null | number;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblFailureReports?: {
+                                failureReportId: number;
+                                maintLogId: null | number;
+                                title: null | string;
+                                failureNumber: null | number;
+                                locationId: null | number;
+                                failureSeverityLevelId: null | number;
+                                failureStatusId: null | number;
+                                failureGroupFollowId: null | number;
+                                requestNo: null | string;
+                                nextFollowDate: null | string;
+                                closedEmployeeId: null | number;
+                                closedDateTime: null | string;
+                                followDesc: null | string;
+                                instId: null | number;
+                            }[];
+                            tblFailureReportWorkShops?: {
+                                failureReportWorkShopId: number;
+                                failureReportId: number;
+                                workShopId: number;
+                                instId: null | number;
+                            }[];
+                            tblFunctions?: {
+                                functionId: number;
+                                compId: null | number;
+                                funcNo: null | string;
+                                funcDesc: null | string;
+                                parentFunctionId: null | number;
+                                notes: null | string;
+                                statusId: null | number;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblJobDescriptions?: {
+                                jobDescId: number;
+                                jobClassId: null | number;
+                                jobDescCode: null | string;
+                                jobDescTitle: null | string;
+                                jobDesc: null | string;
+                                revision: null | string;
+                                changeReason: null | string;
+                                status: null | number;
+                                oldRevisionJobDescId: null | number;
+                                copiedFromJobDescId: null | number;
+                                createdDate: null | string;
+                                createdEmployeeId: null | number;
+                                approvedDate: null | string;
+                                approvedBy: null | number;
+                                applicationId: null | number;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblJobDescriptionAttachments?: {
+                                jobDescriptionAttachmentId: number;
+                                jobDescId: number;
+                                attachmentId: number;
+                                orderNo: null | number;
+                                createdEmployeeId: number;
+                                createdAt: string;
+                                instId: null | number;
+                            }[];
+                            tblJobVersions?: {
+                                jobVersionId: number;
+                                jobVersionNo: null | string;
+                                jobDescTitle: null | string;
+                                jobDesc: null | string;
+                                createdDate: null | string;
+                                status: null | number;
+                                jobDescId: null | number;
+                                createdEmployeeId: null | number;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblLogCounters?: {
+                                logCounterId: number;
+                                maintLogId: null | number;
+                                counterTypeId: null | number;
+                                frequency: null | number;
+                                reportedCount: null | number;
+                                overdueCount: null | number;
+                                orderNo: null | number;
+                                createdEmployeeId: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblLogDisciplines?: {
+                                logDiscId: number;
+                                maintLogId: null | number;
+                                employeeId: null | number;
+                                discId: null | number;
+                                timeSpent: null | number;
+                                orderNo: null | number;
+                                createdEmployeeId: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblMaintLogs?: {
+                                maintLogId: number;
+                                maintCauseId: null | number;
+                                maintTypeId: null | number;
+                                maintClassId: null | number;
+                                functionId: null | number;
+                                jobDescId: null | number;
+                                workOrderId: null | number;
+                                compId: null | number;
+                                totalDuration: null | number;
+                                downTime: null | number;
+                                dateDone: null | string;
+                                frequency: null | number;
+                                frequencyPeriod: null | number;
+                                overdueCount: null | number;
+                                unexpected: null | number;
+                                reportedBy: null | number;
+                                history: null | string;
+                                workOrderStatusId: null | number;
+                                followStatusId: null | number;
+                                discId: null | number;
+                                reportedDate: null | string;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                                updatedEmployeeId: null | number;
+                            }[];
+                            tblMaintLogAttachments?: {
+                                maintLogAttachmentId: number;
+                                maintLogId: number;
+                                attachmentId: number;
+                                orderNo: null | number;
+                                createdEmployeeId: number;
+                                createdAt: string;
+                                instId: null | number;
+                            }[];
+                            tblMaintLogFollows?: {
+                                followId: number;
+                                followEmployeeId: number;
+                                maintLogId: number;
+                                isRequest: null | number;
+                                isWaiting: null | number;
+                                isUnPlan: null | number;
+                                followDesc: null | string;
+                                followStatuseId: null | number;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblMaintLogSpares?: {
+                                maintLogSpareId: number;
+                                maintLogId: number;
+                                spareUnitId: number;
+                                spareCount: null | number;
+                                orderNo: null | number;
+                                createdEmployeeId: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblOilSamplingLogs?: {
+                                oilSamplingLogId: number;
+                                compOilInfoId: number;
+                                compCounterId: number;
+                                maintLogId: null | number;
+                                samplerId: null | number;
+                                senderToLabId: null | number;
+                                compCounterVal: number;
+                                oilCounterVal: number;
+                                changeOilDate: null | string;
+                                addOilVal: null | number;
+                                samplingdate: string;
+                                testDate: string;
+                                sendToLaboratoryDate: null | string;
+                                tankCapacity: null | number;
+                                samplingPosition: null | string;
+                                oilGrade: null | string;
+                                responseDate: null | string;
+                                resultCompCode: null | number;
+                                resultCompDesc: null | string;
+                                resultOilCode: null | number;
+                                resultOilDesc: null | string;
+                                resultCode: null | number;
+                                resultDesc: null | string;
+                                actionCode: null | number;
+                                actionDesc: null | string;
+                                ladingBillNnumber: null | string;
+                                customerName: null | string;
+                                locationName: null | string;
+                                sampleNumber: null | number;
+                                laboratoryCode: null | string;
+                                userComment: null | string;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblReScheduleLogs?: {
+                                rescheduleLogId: number;
+                                workOrderId: null | number;
+                                fromDueDate: null | string;
+                                toDueDate: null | string;
+                                rescheduledBy: null | number;
+                                rescheduledDate: null | string;
+                                reason: null | string;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblRotationLogs?: {
+                                rotationLogId: number;
+                                compId: null | number;
+                                functionId: null | number;
+                                employeeInsertedId: null | number;
+                                employeeRemovedId: null | number;
+                                fromDate: null | string;
+                                toDate: null | string;
+                                notes: null | string;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblRounds?: {
+                                roundId: number;
+                                maintCauseId: null | number;
+                                maintClassId: null | number;
+                                maintTypeId: null | number;
+                                rescheduleLimitId: null | number;
+                                roundCode: null | string;
+                                roundTitle: null | string;
+                                discId: null | number;
+                                frequency: null | number;
+                                frequencyPeriod: null | number;
+                                planningMethod: null | number;
+                                includeAllJobs: null | number;
+                                reportingMethod: null | number;
+                                lastDone: null | string;
+                                nextDueDate: null | string;
+                                description: null | string;
+                                priority: null | number;
+                                window: null | number;
+                                orderNo: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblRoundCompJobs?: {
+                                roundCompJobId: number;
+                                compJobId: number;
+                                roundId: number;
+                                jobSequence: null | number;
+                                active: null | number;
+                                functionDriven: null | number;
+                                functionId: null | number;
+                                deleteOnRotation: null | number;
+                                orderNo: null | number;
+                                createdEmployeeId: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblUserInstallations?: {
+                                userInstId: number;
+                                userId: number;
+                                instId: number;
+                            }[];
+                            tblWorkOrders?: {
+                                workOrderId: number;
+                                compJobId: null | number;
+                                maintClassId: null | number;
+                                maintTypeId: null | number;
+                                maintCauseId: null | number;
+                                createdBy: null | number;
+                                issuedBy: null | number;
+                                plannedBy: null | number;
+                                issuedDate: null | string;
+                                respDiscId: null | number;
+                                compId: null | number;
+                                roundId: null | number;
+                                parentWorkOrderId: null | number;
+                                woNo: null | string;
+                                title: null | string;
+                                priority: null | number;
+                                estTotalDuration: null | number;
+                                dueDate: null | string;
+                                window: null | number;
+                                created: null | string;
+                                started: null | string;
+                                completed: null | string;
+                                description: null | string;
+                                filed: null | number;
+                                unexpected: null | number;
+                                workOrderStatusId: null | number;
+                                workOrderTypeId: null | number;
+                                reportingMethod: null | number;
+                                pendingBy: null | number;
+                                pendTypeId: null | number;
+                                pendingdate: null | string;
+                                orderNo: null | number;
+                                userComment: null | string;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblWorkShops?: {
+                                workShopId: number;
+                                title: string;
+                                workShopNo: null | string;
+                                awardingDate: null | string;
+                                createdDate: null | string;
+                                personInChargeId: null | number;
+                                discId: null | number;
+                                repairDescription: null | string;
+                                personInChargeApproveId: null | number;
+                                followDesc: null | string;
+                                closedDate: null | string;
+                                closedById: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblWorkShopAttachments?: {
+                                workShopAttachmentId: number;
+                                workShopId: number;
+                                attachmentId: number;
+                                createdEmployeeId: number;
+                                createdAt: string;
+                                instId: null | number;
+                            }[];
+                            tblWorkShopComponents?: {
+                                workShopCompId: number;
+                                workShopId: number;
+                                compId: number;
+                                functionId: null | number;
+                                locationId: null | number;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                            }[];
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
+    };
+    postTblInstallation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name: string;
+                    orderNo?: null | number;
+                    caption?: null | string;
+                    tblAttachments?: {
+                        connect: {
+                            attachmentId: number;
+                        }[];
+                    };
+                    tblAttachmentTypes?: {
+                        connect: {
+                            attachmentTypeId: number;
+                        }[];
+                    };
+                    tblCompCounters?: {
+                        connect: {
+                            compCounterId: number;
+                        }[];
+                    };
+                    tblCompCounterLogs?: {
+                        connect: {
+                            compCounterLogId: number;
+                        }[];
+                    };
+                    tblCompJobs?: {
+                        connect: {
+                            compJobId: number;
+                        }[];
+                    };
+                    tblCompJobCounters?: {
+                        connect: {
+                            compJobCounterId: number;
+                        }[];
+                    };
+                    tblCompJobMeasurePoints?: {
+                        connect: {
+                            compJobMeasurePointId: number;
+                        }[];
+                    };
+                    tblCompJobTriggers?: {
+                        connect: {
+                            compJobTriggerId: number;
+                        }[];
+                    };
+                    tblCompMeasurePoints?: {
+                        connect: {
+                            compMeasurePointId: number;
+                        }[];
+                    };
+                    tblCompMeasurePointLogs?: {
+                        connect: {
+                            compMeasurePointLogId: number;
+                        }[];
+                    };
+                    tblCompOilInfos?: {
+                        connect: {
+                            compOilInfoId: number;
+                        }[];
+                    };
+                    tblComponentUnits?: {
+                        connect: {
+                            compId: number;
+                        }[];
+                    };
+                    tblComponentUnitAttachments?: {
+                        connect: {
+                            componentUnitAttachmentId: number;
+                        }[];
+                    };
+                    tblCompSpares?: {
+                        connect: {
+                            compSpareId: number;
+                        }[];
+                    };
+                    tblCompStatusLogs?: {
+                        connect: {
+                            compStatusLogId: number;
+                        }[];
+                    };
+                    tblCompTypes?: {
+                        connect: {
+                            compTypeId: number;
+                        }[];
+                    };
+                    tblCompTypeAttachments?: {
+                        connect: {
+                            compTypeAttachmentId: number;
+                        }[];
+                    };
+                    tblCompTypeCounters?: {
+                        connect: {
+                            compTypeCounterId: number;
+                        }[];
+                    };
+                    tblCompTypeJobs?: {
+                        connect: {
+                            compTypeJobId: number;
+                        }[];
+                    };
+                    tblCompTypeJobCounters?: {
+                        connect: {
+                            compTypeJobCounterId: number;
+                        }[];
+                    };
+                    tblCompTypeJobMeasurePoints?: {
+                        connect: {
+                            compTypeJobMeasurePointId: number;
+                        }[];
+                    };
+                    tblCompTypeJobTriggers?: {
+                        connect: {
+                            compTypeJobTriggerId: number;
+                        }[];
+                    };
+                    tblCompTypeMeasurePoints?: {
+                        connect: {
+                            compTypeMeasurePointId: number;
+                        }[];
+                    };
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
+                    tblFailureReportWorkShops?: {
+                        connect: {
+                            failureReportWorkShopId: number;
+                        }[];
+                    };
+                    tblFunctions?: {
+                        connect: {
+                            functionId: number;
+                        }[];
+                    };
+                    tblJobDescriptions?: {
+                        connect: {
+                            jobDescId: number;
+                        }[];
+                    };
+                    tblJobDescriptionAttachments?: {
+                        connect: {
+                            jobDescriptionAttachmentId: number;
+                        }[];
+                    };
+                    tblJobVersions?: {
+                        connect: {
+                            jobVersionId: number;
+                        }[];
+                    };
+                    tblLogCounters?: {
+                        connect: {
+                            logCounterId: number;
+                        }[];
+                    };
+                    tblLogDisciplines?: {
+                        connect: {
+                            logDiscId: number;
+                        }[];
+                    };
+                    tblMaintLogs?: {
+                        connect: {
+                            maintLogId: number;
+                        }[];
+                    };
+                    tblMaintLogAttachments?: {
+                        connect: {
+                            maintLogAttachmentId: number;
+                        }[];
+                    };
+                    tblMaintLogFollows?: {
+                        connect: {
+                            followId: number;
+                        }[];
+                    };
+                    tblMaintLogSpares?: {
+                        connect: {
+                            maintLogSpareId: number;
+                        }[];
+                    };
+                    tblOilSamplingLogs?: {
+                        connect: {
+                            oilSamplingLogId: number;
+                        }[];
+                    };
+                    tblReScheduleLogs?: {
+                        connect: {
+                            rescheduleLogId: number;
+                        }[];
+                    };
+                    tblRotationLogs?: {
+                        connect: {
+                            rotationLogId: number;
+                        }[];
+                    };
+                    tblRounds?: {
+                        connect: {
+                            roundId: number;
+                        }[];
+                    };
+                    tblRoundCompJobs?: {
+                        connect: {
+                            roundCompJobId: number;
+                        }[];
+                    };
+                    tblUserInstallations?: {
+                        connect: {
+                            userInstId: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
+                    tblWorkShops?: {
+                        connect: {
+                            workShopId: number;
+                        }[];
+                    };
+                    tblWorkShopAttachments?: {
+                        connect: {
+                            workShopAttachmentId: number;
+                        }[];
+                    };
+                    tblWorkShopComponents?: {
+                        connect: {
+                            workShopCompId: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    name: string;
+                    orderNo?: null | number;
+                    caption?: null | string;
+                    tblAttachments?: {
+                        connect: {
+                            attachmentId: number;
+                        }[];
+                    };
+                    tblAttachmentTypes?: {
+                        connect: {
+                            attachmentTypeId: number;
+                        }[];
+                    };
+                    tblCompCounters?: {
+                        connect: {
+                            compCounterId: number;
+                        }[];
+                    };
+                    tblCompCounterLogs?: {
+                        connect: {
+                            compCounterLogId: number;
+                        }[];
+                    };
+                    tblCompJobs?: {
+                        connect: {
+                            compJobId: number;
+                        }[];
+                    };
+                    tblCompJobCounters?: {
+                        connect: {
+                            compJobCounterId: number;
+                        }[];
+                    };
+                    tblCompJobMeasurePoints?: {
+                        connect: {
+                            compJobMeasurePointId: number;
+                        }[];
+                    };
+                    tblCompJobTriggers?: {
+                        connect: {
+                            compJobTriggerId: number;
+                        }[];
+                    };
+                    tblCompMeasurePoints?: {
+                        connect: {
+                            compMeasurePointId: number;
+                        }[];
+                    };
+                    tblCompMeasurePointLogs?: {
+                        connect: {
+                            compMeasurePointLogId: number;
+                        }[];
+                    };
+                    tblCompOilInfos?: {
+                        connect: {
+                            compOilInfoId: number;
+                        }[];
+                    };
+                    tblComponentUnits?: {
+                        connect: {
+                            compId: number;
+                        }[];
+                    };
+                    tblComponentUnitAttachments?: {
+                        connect: {
+                            componentUnitAttachmentId: number;
+                        }[];
+                    };
+                    tblCompSpares?: {
+                        connect: {
+                            compSpareId: number;
+                        }[];
+                    };
+                    tblCompStatusLogs?: {
+                        connect: {
+                            compStatusLogId: number;
+                        }[];
+                    };
+                    tblCompTypes?: {
+                        connect: {
+                            compTypeId: number;
+                        }[];
+                    };
+                    tblCompTypeAttachments?: {
+                        connect: {
+                            compTypeAttachmentId: number;
+                        }[];
+                    };
+                    tblCompTypeCounters?: {
+                        connect: {
+                            compTypeCounterId: number;
+                        }[];
+                    };
+                    tblCompTypeJobs?: {
+                        connect: {
+                            compTypeJobId: number;
+                        }[];
+                    };
+                    tblCompTypeJobCounters?: {
+                        connect: {
+                            compTypeJobCounterId: number;
+                        }[];
+                    };
+                    tblCompTypeJobMeasurePoints?: {
+                        connect: {
+                            compTypeJobMeasurePointId: number;
+                        }[];
+                    };
+                    tblCompTypeJobTriggers?: {
+                        connect: {
+                            compTypeJobTriggerId: number;
+                        }[];
+                    };
+                    tblCompTypeMeasurePoints?: {
+                        connect: {
+                            compTypeMeasurePointId: number;
+                        }[];
+                    };
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
+                    tblFailureReportWorkShops?: {
+                        connect: {
+                            failureReportWorkShopId: number;
+                        }[];
+                    };
+                    tblFunctions?: {
+                        connect: {
+                            functionId: number;
+                        }[];
+                    };
+                    tblJobDescriptions?: {
+                        connect: {
+                            jobDescId: number;
+                        }[];
+                    };
+                    tblJobDescriptionAttachments?: {
+                        connect: {
+                            jobDescriptionAttachmentId: number;
+                        }[];
+                    };
+                    tblJobVersions?: {
+                        connect: {
+                            jobVersionId: number;
+                        }[];
+                    };
+                    tblLogCounters?: {
+                        connect: {
+                            logCounterId: number;
+                        }[];
+                    };
+                    tblLogDisciplines?: {
+                        connect: {
+                            logDiscId: number;
+                        }[];
+                    };
+                    tblMaintLogs?: {
+                        connect: {
+                            maintLogId: number;
+                        }[];
+                    };
+                    tblMaintLogAttachments?: {
+                        connect: {
+                            maintLogAttachmentId: number;
+                        }[];
+                    };
+                    tblMaintLogFollows?: {
+                        connect: {
+                            followId: number;
+                        }[];
+                    };
+                    tblMaintLogSpares?: {
+                        connect: {
+                            maintLogSpareId: number;
+                        }[];
+                    };
+                    tblOilSamplingLogs?: {
+                        connect: {
+                            oilSamplingLogId: number;
+                        }[];
+                    };
+                    tblReScheduleLogs?: {
+                        connect: {
+                            rescheduleLogId: number;
+                        }[];
+                    };
+                    tblRotationLogs?: {
+                        connect: {
+                            rotationLogId: number;
+                        }[];
+                    };
+                    tblRounds?: {
+                        connect: {
+                            roundId: number;
+                        }[];
+                    };
+                    tblRoundCompJobs?: {
+                        connect: {
+                            roundCompJobId: number;
+                        }[];
+                    };
+                    tblUserInstallations?: {
+                        connect: {
+                            userInstId: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
+                    tblWorkShops?: {
+                        connect: {
+                            workShopId: number;
+                        }[];
+                    };
+                    tblWorkShopAttachments?: {
+                        connect: {
+                            workShopAttachmentId: number;
+                        }[];
+                    };
+                    tblWorkShopComponents?: {
+                        connect: {
+                            workShopCompId: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    name: string;
+                    orderNo?: null | number;
+                    caption?: null | string;
+                    tblAttachments?: {
+                        connect: {
+                            attachmentId: number;
+                        }[];
+                    };
+                    tblAttachmentTypes?: {
+                        connect: {
+                            attachmentTypeId: number;
+                        }[];
+                    };
+                    tblCompCounters?: {
+                        connect: {
+                            compCounterId: number;
+                        }[];
+                    };
+                    tblCompCounterLogs?: {
+                        connect: {
+                            compCounterLogId: number;
+                        }[];
+                    };
+                    tblCompJobs?: {
+                        connect: {
+                            compJobId: number;
+                        }[];
+                    };
+                    tblCompJobCounters?: {
+                        connect: {
+                            compJobCounterId: number;
+                        }[];
+                    };
+                    tblCompJobMeasurePoints?: {
+                        connect: {
+                            compJobMeasurePointId: number;
+                        }[];
+                    };
+                    tblCompJobTriggers?: {
+                        connect: {
+                            compJobTriggerId: number;
+                        }[];
+                    };
+                    tblCompMeasurePoints?: {
+                        connect: {
+                            compMeasurePointId: number;
+                        }[];
+                    };
+                    tblCompMeasurePointLogs?: {
+                        connect: {
+                            compMeasurePointLogId: number;
+                        }[];
+                    };
+                    tblCompOilInfos?: {
+                        connect: {
+                            compOilInfoId: number;
+                        }[];
+                    };
+                    tblComponentUnits?: {
+                        connect: {
+                            compId: number;
+                        }[];
+                    };
+                    tblComponentUnitAttachments?: {
+                        connect: {
+                            componentUnitAttachmentId: number;
+                        }[];
+                    };
+                    tblCompSpares?: {
+                        connect: {
+                            compSpareId: number;
+                        }[];
+                    };
+                    tblCompStatusLogs?: {
+                        connect: {
+                            compStatusLogId: number;
+                        }[];
+                    };
+                    tblCompTypes?: {
+                        connect: {
+                            compTypeId: number;
+                        }[];
+                    };
+                    tblCompTypeAttachments?: {
+                        connect: {
+                            compTypeAttachmentId: number;
+                        }[];
+                    };
+                    tblCompTypeCounters?: {
+                        connect: {
+                            compTypeCounterId: number;
+                        }[];
+                    };
+                    tblCompTypeJobs?: {
+                        connect: {
+                            compTypeJobId: number;
+                        }[];
+                    };
+                    tblCompTypeJobCounters?: {
+                        connect: {
+                            compTypeJobCounterId: number;
+                        }[];
+                    };
+                    tblCompTypeJobMeasurePoints?: {
+                        connect: {
+                            compTypeJobMeasurePointId: number;
+                        }[];
+                    };
+                    tblCompTypeJobTriggers?: {
+                        connect: {
+                            compTypeJobTriggerId: number;
+                        }[];
+                    };
+                    tblCompTypeMeasurePoints?: {
+                        connect: {
+                            compTypeMeasurePointId: number;
+                        }[];
+                    };
+                    tblFailureReports?: {
+                        connect: {
+                            failureReportId: number;
+                        }[];
+                    };
+                    tblFailureReportWorkShops?: {
+                        connect: {
+                            failureReportWorkShopId: number;
+                        }[];
+                    };
+                    tblFunctions?: {
+                        connect: {
+                            functionId: number;
+                        }[];
+                    };
+                    tblJobDescriptions?: {
+                        connect: {
+                            jobDescId: number;
+                        }[];
+                    };
+                    tblJobDescriptionAttachments?: {
+                        connect: {
+                            jobDescriptionAttachmentId: number;
+                        }[];
+                    };
+                    tblJobVersions?: {
+                        connect: {
+                            jobVersionId: number;
+                        }[];
+                    };
+                    tblLogCounters?: {
+                        connect: {
+                            logCounterId: number;
+                        }[];
+                    };
+                    tblLogDisciplines?: {
+                        connect: {
+                            logDiscId: number;
+                        }[];
+                    };
+                    tblMaintLogs?: {
+                        connect: {
+                            maintLogId: number;
+                        }[];
+                    };
+                    tblMaintLogAttachments?: {
+                        connect: {
+                            maintLogAttachmentId: number;
+                        }[];
+                    };
+                    tblMaintLogFollows?: {
+                        connect: {
+                            followId: number;
+                        }[];
+                    };
+                    tblMaintLogSpares?: {
+                        connect: {
+                            maintLogSpareId: number;
+                        }[];
+                    };
+                    tblOilSamplingLogs?: {
+                        connect: {
+                            oilSamplingLogId: number;
+                        }[];
+                    };
+                    tblReScheduleLogs?: {
+                        connect: {
+                            rescheduleLogId: number;
+                        }[];
+                    };
+                    tblRotationLogs?: {
+                        connect: {
+                            rotationLogId: number;
+                        }[];
+                    };
+                    tblRounds?: {
+                        connect: {
+                            roundId: number;
+                        }[];
+                    };
+                    tblRoundCompJobs?: {
+                        connect: {
+                            roundCompJobId: number;
+                        }[];
+                    };
+                    tblUserInstallations?: {
+                        connect: {
+                            userInstId: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect: {
+                            workOrderId: number;
+                        }[];
+                    };
+                    tblWorkShops?: {
+                        connect: {
+                            workShopId: number;
+                        }[];
+                    };
+                    tblWorkShopAttachments?: {
+                        connect: {
+                            workShopAttachmentId: number;
+                        }[];
+                    };
+                    tblWorkShopComponents?: {
+                        connect: {
+                            workShopCompId: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        instId: number;
+                        name: string;
+                        orderNo: null | number;
+                        caption: null | string;
+                        tblAttachments?: {
+                            attachmentId: number;
+                            title: null | string;
+                            fileName: null | string;
+                            attachmentTypeId: null | number;
+                            path: null | string;
+                            size: null | number;
+                            isUserAttachment: boolean;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblAttachmentTypes?: {
+                            attachmentTypeId: number;
+                            name: null | string;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblCompCounters?: {
+                            compCounterId: number;
+                            compId: null | number;
+                            counterTypeId: null | number;
+                            currentValue: null | number;
+                            currentDate: null | string;
+                            changedBy: null | number;
+                            dependsOnId: null | number;
+                            startDate: null | string;
+                            startValue: null | number;
+                            lastZeroedValue: null | number;
+                            zeroedDate: null | string;
+                            averageCountRate: null | number;
+                            useCalcAverage: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompCounterLogs?: {
+                            compCounterLogId: number;
+                            compCounterId: null | number;
+                            dependsOnId: null | number;
+                            currentDate: null | string;
+                            currentValue: null | number;
+                            startDate: null | string;
+                            startValue: null | number;
+                            zeroedDate: null | string;
+                            lastZeroedValue: null | number;
+                            changedBy: null | number;
+                            changedDate: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompJobs?: {
+                            compJobId: number;
+                            discId: null | number;
+                            compId: null | number;
+                            jobDescId: null | number;
+                            jobConditionId: null | number;
+                            maintClassId: null | number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            rescheduleLimitId: null | number;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            changeReason: null | string;
+                            planningMethod: null | number;
+                            statusNone: null | number;
+                            statusInUse: null | number;
+                            statusAvailable: null | number;
+                            statusRepair: null | number;
+                            lastDone: null | string;
+                            nextDueDate: null | string;
+                            cbmStatus: null | number;
+                            outputFormat: null | number;
+                            priority: null | number;
+                            window: null | number;
+                            active: null | number;
+                            mandatoryHistory: null | number;
+                            createdEmployeeId: null | number;
+                            notes: null | string;
+                            mandatoryResource: null | number;
+                            mandatoryStockUsage: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompJobCounters?: {
+                            compJobCounterId: number;
+                            compJobId: null | number;
+                            compCounterId: null | number;
+                            frequency: null | number;
+                            lastDoneCount: null | number;
+                            nextDueCount: null | number;
+                            window: null | number;
+                            showInAlert: null | boolean;
+                            updateByFunction: null | boolean;
+                            orderNumber: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompJobMeasurePoints?: {
+                            compJobMeasurePointId: number;
+                            compMeasurePointId: null | number;
+                            compJobId: null | number;
+                            triggerJob: null | number;
+                            useOperationalValues: null | number;
+                            minValue: null | number;
+                            maxValue: null | number;
+                            updateOnReport: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompJobTriggers?: {
+                            compJobTriggerId: number;
+                            jobTriggerId: null | number;
+                            compJobId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompMeasurePoints?: {
+                            compMeasurePointId: number;
+                            compId: null | number;
+                            counterTypeId: null | number;
+                            changedBy: null | number;
+                            currentDate: null | string;
+                            unitId: null | number;
+                            currentValue: null | number;
+                            setValue: null | number;
+                            operationalMinValue: null | number;
+                            operationalMaxValue: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompMeasurePointLogs?: {
+                            compMeasurePointLogId: number;
+                            compMeasurePointId: null | number;
+                            changedBy: null | number;
+                            changedDate: null | string;
+                            currentDate: null | string;
+                            unitId: null | number;
+                            currentValue: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompOilInfos?: {
+                            compOilInfoId: number;
+                            compId: null | number;
+                            compCounterId: null | number;
+                            spareTypeId: null | number;
+                            compJobId: null | number;
+                            tankCapacity: null | number;
+                            laboratoryCode: null | string;
+                            samplingPosition: null | string;
+                            oilGrade: null | string;
+                            orderNo: null | number;
+                            employeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblComponentUnits?: {
+                            compId: number;
+                            compTypeId: null | number;
+                            locationId: null | number;
+                            parentCompId: null | number;
+                            vendorId: null | number;
+                            compNo: null | string;
+                            serialNo: null | string;
+                            model: null | string;
+                            comment1: null | string;
+                            comment2: null | string;
+                            comment3: null | string;
+                            assetNo: null | string;
+                            statusId: null | number;
+                            notes: null | string;
+                            isCritical: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblComponentUnitAttachments?: {
+                            componentUnitAttachmentId: number;
+                            compId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblCompSpares?: {
+                            compSpareId: number;
+                            compTypeId: null | number;
+                            spareTypeId: null | number;
+                            quantity: null | number;
+                            drawingNo: null | string;
+                            position: null | string;
+                            oldPartNo: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompStatusLogs?: {
+                            compStatusLogId: number;
+                            compId: null | number;
+                            fromStatusId: null | number;
+                            toStatusId: null | number;
+                            changedBy: null | number;
+                            initiatingCompId: null | number;
+                            workOrderId: null | number;
+                            fromDeptId: null | number;
+                            changedTime: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypes?: {
+                            compTypeId: number;
+                            parentCompTypeId: null | number;
+                            compTypeNo: null | string;
+                            compName: null | string;
+                            compType: null | string;
+                            compTypeModel: null | string;
+                            makerId: null | number;
+                            notes: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeAttachments?: {
+                            compTypeAttachmentId: number;
+                            compTypeId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeCounters?: {
+                            compTypeCounterId: number;
+                            compTypeId: null | number;
+                            counterTypeId: null | number;
+                            averageCountRate: null | number;
+                            useCalcAverage: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeJobs?: {
+                            compTypeJobId: number;
+                            compTypeId: null | number;
+                            discId: null | number;
+                            jobDescId: null | number;
+                            jobConditionId: null | number;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            planningMethod: null | number;
+                            statusNone: null | number;
+                            statusInUse: null | number;
+                            statusAvailable: null | number;
+                            statusRepair: null | number;
+                            maintClassId: null | number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            priority: null | number;
+                            window: null | number;
+                            mandatoryHistory: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeJobCounters?: {
+                            compTypeJobCounterId: number;
+                            compTypeJobId: null | number;
+                            compTypeCounterId: null | number;
+                            frequency: null | number;
+                            window: null | number;
+                            showInAlert: null | boolean;
+                            updateByFunction: null | boolean;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeJobMeasurePoints?: {
+                            compTypeJobMeasurePointId: number;
+                            compTypeMeasurePointId: null | number;
+                            compTypeJobId: null | number;
+                            triggerJob: null | number;
+                            useOperationalValues: null | number;
+                            minValue: null | number;
+                            maxValue: null | number;
+                            updateOnReport: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeJobTriggers?: {
+                            compTypeJobTriggerId: number;
+                            jobTriggerId: null | number;
+                            compTypeJobId: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeMeasurePoints?: {
+                            compTypeMeasurePointId: number;
+                            compTypeId: null | number;
+                            counterTypeId: null | number;
+                            unitId: null | number;
+                            setValue: null | number;
+                            operationalMinValue: null | number;
+                            operationalMaxValue: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            maintLogId: null | number;
+                            title: null | string;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
+                            closedEmployeeId: null | number;
+                            closedDateTime: null | string;
+                            followDesc: null | string;
+                            instId: null | number;
+                        }[];
+                        tblFailureReportWorkShops?: {
+                            failureReportWorkShopId: number;
+                            failureReportId: number;
+                            workShopId: number;
+                            instId: null | number;
+                        }[];
+                        tblFunctions?: {
+                            functionId: number;
+                            compId: null | number;
+                            funcNo: null | string;
+                            funcDesc: null | string;
+                            parentFunctionId: null | number;
+                            notes: null | string;
+                            statusId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblJobDescriptions?: {
+                            jobDescId: number;
+                            jobClassId: null | number;
+                            jobDescCode: null | string;
+                            jobDescTitle: null | string;
+                            jobDesc: null | string;
+                            revision: null | string;
+                            changeReason: null | string;
+                            status: null | number;
+                            oldRevisionJobDescId: null | number;
+                            copiedFromJobDescId: null | number;
+                            createdDate: null | string;
+                            createdEmployeeId: null | number;
+                            approvedDate: null | string;
+                            approvedBy: null | number;
+                            applicationId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblJobDescriptionAttachments?: {
+                            jobDescriptionAttachmentId: number;
+                            jobDescId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblJobVersions?: {
+                            jobVersionId: number;
+                            jobVersionNo: null | string;
+                            jobDescTitle: null | string;
+                            jobDesc: null | string;
+                            createdDate: null | string;
+                            status: null | number;
+                            jobDescId: null | number;
+                            createdEmployeeId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblLogCounters?: {
+                            logCounterId: number;
+                            maintLogId: null | number;
+                            counterTypeId: null | number;
+                            frequency: null | number;
+                            reportedCount: null | number;
+                            overdueCount: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblLogDisciplines?: {
+                            logDiscId: number;
+                            maintLogId: null | number;
+                            employeeId: null | number;
+                            discId: null | number;
+                            timeSpent: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblMaintLogs?: {
+                            maintLogId: number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            maintClassId: null | number;
+                            functionId: null | number;
+                            jobDescId: null | number;
+                            workOrderId: null | number;
+                            compId: null | number;
+                            totalDuration: null | number;
+                            downTime: null | number;
+                            dateDone: null | string;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            overdueCount: null | number;
+                            unexpected: null | number;
+                            reportedBy: null | number;
+                            history: null | string;
+                            workOrderStatusId: null | number;
+                            followStatusId: null | number;
+                            discId: null | number;
+                            reportedDate: null | string;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                            updatedEmployeeId: null | number;
+                        }[];
+                        tblMaintLogAttachments?: {
+                            maintLogAttachmentId: number;
+                            maintLogId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            followEmployeeId: number;
+                            maintLogId: number;
+                            isRequest: null | number;
+                            isWaiting: null | number;
+                            isUnPlan: null | number;
+                            followDesc: null | string;
+                            followStatuseId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblMaintLogSpares?: {
+                            maintLogSpareId: number;
+                            maintLogId: number;
+                            spareUnitId: number;
+                            spareCount: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblOilSamplingLogs?: {
+                            oilSamplingLogId: number;
+                            compOilInfoId: number;
+                            compCounterId: number;
+                            maintLogId: null | number;
+                            samplerId: null | number;
+                            senderToLabId: null | number;
+                            compCounterVal: number;
+                            oilCounterVal: number;
+                            changeOilDate: null | string;
+                            addOilVal: null | number;
+                            samplingdate: string;
+                            testDate: string;
+                            sendToLaboratoryDate: null | string;
+                            tankCapacity: null | number;
+                            samplingPosition: null | string;
+                            oilGrade: null | string;
+                            responseDate: null | string;
+                            resultCompCode: null | number;
+                            resultCompDesc: null | string;
+                            resultOilCode: null | number;
+                            resultOilDesc: null | string;
+                            resultCode: null | number;
+                            resultDesc: null | string;
+                            actionCode: null | number;
+                            actionDesc: null | string;
+                            ladingBillNnumber: null | string;
+                            customerName: null | string;
+                            locationName: null | string;
+                            sampleNumber: null | number;
+                            laboratoryCode: null | string;
+                            userComment: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblReScheduleLogs?: {
+                            rescheduleLogId: number;
+                            workOrderId: null | number;
+                            fromDueDate: null | string;
+                            toDueDate: null | string;
+                            rescheduledBy: null | number;
+                            rescheduledDate: null | string;
+                            reason: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblRotationLogs?: {
+                            rotationLogId: number;
+                            compId: null | number;
+                            functionId: null | number;
+                            employeeInsertedId: null | number;
+                            employeeRemovedId: null | number;
+                            fromDate: null | string;
+                            toDate: null | string;
+                            notes: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblRounds?: {
+                            roundId: number;
+                            maintCauseId: null | number;
+                            maintClassId: null | number;
+                            maintTypeId: null | number;
+                            rescheduleLimitId: null | number;
+                            roundCode: null | string;
+                            roundTitle: null | string;
+                            discId: null | number;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            planningMethod: null | number;
+                            includeAllJobs: null | number;
+                            reportingMethod: null | number;
+                            lastDone: null | string;
+                            nextDueDate: null | string;
+                            description: null | string;
+                            priority: null | number;
+                            window: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblRoundCompJobs?: {
+                            roundCompJobId: number;
+                            compJobId: number;
+                            roundId: number;
+                            jobSequence: null | number;
+                            active: null | number;
+                            functionDriven: null | number;
+                            functionId: null | number;
+                            deleteOnRotation: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblUserInstallations?: {
+                            userInstId: number;
+                            userId: number;
+                            instId: number;
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            compJobId: null | number;
+                            maintClassId: null | number;
+                            maintTypeId: null | number;
+                            maintCauseId: null | number;
+                            createdBy: null | number;
+                            issuedBy: null | number;
+                            plannedBy: null | number;
+                            issuedDate: null | string;
+                            respDiscId: null | number;
+                            compId: null | number;
+                            roundId: null | number;
+                            parentWorkOrderId: null | number;
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | number;
+                            estTotalDuration: null | number;
+                            dueDate: null | string;
+                            window: null | number;
+                            created: null | string;
+                            started: null | string;
+                            completed: null | string;
+                            description: null | string;
+                            filed: null | number;
+                            unexpected: null | number;
+                            workOrderStatusId: null | number;
+                            workOrderTypeId: null | number;
+                            reportingMethod: null | number;
+                            pendingBy: null | number;
+                            pendTypeId: null | number;
+                            pendingdate: null | string;
+                            orderNo: null | number;
+                            userComment: null | string;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblWorkShops?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblWorkShopAttachments?: {
+                            workShopAttachmentId: number;
+                            workShopId: number;
+                            attachmentId: number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblInstallation: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        deleted: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblInstallationByInstId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                instId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        instId: number;
+                        name: string;
+                        orderNo: null | number;
+                        caption: null | string;
+                        tblAttachments?: {
+                            attachmentId: number;
+                            title: null | string;
+                            fileName: null | string;
+                            attachmentTypeId: null | number;
+                            path: null | string;
+                            size: null | number;
+                            isUserAttachment: boolean;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblAttachmentTypes?: {
+                            attachmentTypeId: number;
+                            name: null | string;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblCompCounters?: {
+                            compCounterId: number;
+                            compId: null | number;
+                            counterTypeId: null | number;
+                            currentValue: null | number;
+                            currentDate: null | string;
+                            changedBy: null | number;
+                            dependsOnId: null | number;
+                            startDate: null | string;
+                            startValue: null | number;
+                            lastZeroedValue: null | number;
+                            zeroedDate: null | string;
+                            averageCountRate: null | number;
+                            useCalcAverage: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompCounterLogs?: {
+                            compCounterLogId: number;
+                            compCounterId: null | number;
+                            dependsOnId: null | number;
+                            currentDate: null | string;
+                            currentValue: null | number;
+                            startDate: null | string;
+                            startValue: null | number;
+                            zeroedDate: null | string;
+                            lastZeroedValue: null | number;
+                            changedBy: null | number;
+                            changedDate: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompJobs?: {
+                            compJobId: number;
+                            discId: null | number;
+                            compId: null | number;
+                            jobDescId: null | number;
+                            jobConditionId: null | number;
+                            maintClassId: null | number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            rescheduleLimitId: null | number;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            changeReason: null | string;
+                            planningMethod: null | number;
+                            statusNone: null | number;
+                            statusInUse: null | number;
+                            statusAvailable: null | number;
+                            statusRepair: null | number;
+                            lastDone: null | string;
+                            nextDueDate: null | string;
+                            cbmStatus: null | number;
+                            outputFormat: null | number;
+                            priority: null | number;
+                            window: null | number;
+                            active: null | number;
+                            mandatoryHistory: null | number;
+                            createdEmployeeId: null | number;
+                            notes: null | string;
+                            mandatoryResource: null | number;
+                            mandatoryStockUsage: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompJobCounters?: {
+                            compJobCounterId: number;
+                            compJobId: null | number;
+                            compCounterId: null | number;
+                            frequency: null | number;
+                            lastDoneCount: null | number;
+                            nextDueCount: null | number;
+                            window: null | number;
+                            showInAlert: null | boolean;
+                            updateByFunction: null | boolean;
+                            orderNumber: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompJobMeasurePoints?: {
+                            compJobMeasurePointId: number;
+                            compMeasurePointId: null | number;
+                            compJobId: null | number;
+                            triggerJob: null | number;
+                            useOperationalValues: null | number;
+                            minValue: null | number;
+                            maxValue: null | number;
+                            updateOnReport: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompJobTriggers?: {
+                            compJobTriggerId: number;
+                            jobTriggerId: null | number;
+                            compJobId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompMeasurePoints?: {
+                            compMeasurePointId: number;
+                            compId: null | number;
+                            counterTypeId: null | number;
+                            changedBy: null | number;
+                            currentDate: null | string;
+                            unitId: null | number;
+                            currentValue: null | number;
+                            setValue: null | number;
+                            operationalMinValue: null | number;
+                            operationalMaxValue: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompMeasurePointLogs?: {
+                            compMeasurePointLogId: number;
+                            compMeasurePointId: null | number;
+                            changedBy: null | number;
+                            changedDate: null | string;
+                            currentDate: null | string;
+                            unitId: null | number;
+                            currentValue: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompOilInfos?: {
+                            compOilInfoId: number;
+                            compId: null | number;
+                            compCounterId: null | number;
+                            spareTypeId: null | number;
+                            compJobId: null | number;
+                            tankCapacity: null | number;
+                            laboratoryCode: null | string;
+                            samplingPosition: null | string;
+                            oilGrade: null | string;
+                            orderNo: null | number;
+                            employeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblComponentUnits?: {
+                            compId: number;
+                            compTypeId: null | number;
+                            locationId: null | number;
+                            parentCompId: null | number;
+                            vendorId: null | number;
+                            compNo: null | string;
+                            serialNo: null | string;
+                            model: null | string;
+                            comment1: null | string;
+                            comment2: null | string;
+                            comment3: null | string;
+                            assetNo: null | string;
+                            statusId: null | number;
+                            notes: null | string;
+                            isCritical: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblComponentUnitAttachments?: {
+                            componentUnitAttachmentId: number;
+                            compId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblCompSpares?: {
+                            compSpareId: number;
+                            compTypeId: null | number;
+                            spareTypeId: null | number;
+                            quantity: null | number;
+                            drawingNo: null | string;
+                            position: null | string;
+                            oldPartNo: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompStatusLogs?: {
+                            compStatusLogId: number;
+                            compId: null | number;
+                            fromStatusId: null | number;
+                            toStatusId: null | number;
+                            changedBy: null | number;
+                            initiatingCompId: null | number;
+                            workOrderId: null | number;
+                            fromDeptId: null | number;
+                            changedTime: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypes?: {
+                            compTypeId: number;
+                            parentCompTypeId: null | number;
+                            compTypeNo: null | string;
+                            compName: null | string;
+                            compType: null | string;
+                            compTypeModel: null | string;
+                            makerId: null | number;
+                            notes: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeAttachments?: {
+                            compTypeAttachmentId: number;
+                            compTypeId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeCounters?: {
+                            compTypeCounterId: number;
+                            compTypeId: null | number;
+                            counterTypeId: null | number;
+                            averageCountRate: null | number;
+                            useCalcAverage: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeJobs?: {
+                            compTypeJobId: number;
+                            compTypeId: null | number;
+                            discId: null | number;
+                            jobDescId: null | number;
+                            jobConditionId: null | number;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            planningMethod: null | number;
+                            statusNone: null | number;
+                            statusInUse: null | number;
+                            statusAvailable: null | number;
+                            statusRepair: null | number;
+                            maintClassId: null | number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            priority: null | number;
+                            window: null | number;
+                            mandatoryHistory: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeJobCounters?: {
+                            compTypeJobCounterId: number;
+                            compTypeJobId: null | number;
+                            compTypeCounterId: null | number;
+                            frequency: null | number;
+                            window: null | number;
+                            showInAlert: null | boolean;
+                            updateByFunction: null | boolean;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeJobMeasurePoints?: {
+                            compTypeJobMeasurePointId: number;
+                            compTypeMeasurePointId: null | number;
+                            compTypeJobId: null | number;
+                            triggerJob: null | number;
+                            useOperationalValues: null | number;
+                            minValue: null | number;
+                            maxValue: null | number;
+                            updateOnReport: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeJobTriggers?: {
+                            compTypeJobTriggerId: number;
+                            jobTriggerId: null | number;
+                            compTypeJobId: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeMeasurePoints?: {
+                            compTypeMeasurePointId: number;
+                            compTypeId: null | number;
+                            counterTypeId: null | number;
+                            unitId: null | number;
+                            setValue: null | number;
+                            operationalMinValue: null | number;
+                            operationalMaxValue: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            maintLogId: null | number;
+                            title: null | string;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
+                            closedEmployeeId: null | number;
+                            closedDateTime: null | string;
+                            followDesc: null | string;
+                            instId: null | number;
+                        }[];
+                        tblFailureReportWorkShops?: {
+                            failureReportWorkShopId: number;
+                            failureReportId: number;
+                            workShopId: number;
+                            instId: null | number;
+                        }[];
+                        tblFunctions?: {
+                            functionId: number;
+                            compId: null | number;
+                            funcNo: null | string;
+                            funcDesc: null | string;
+                            parentFunctionId: null | number;
+                            notes: null | string;
+                            statusId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblJobDescriptions?: {
+                            jobDescId: number;
+                            jobClassId: null | number;
+                            jobDescCode: null | string;
+                            jobDescTitle: null | string;
+                            jobDesc: null | string;
+                            revision: null | string;
+                            changeReason: null | string;
+                            status: null | number;
+                            oldRevisionJobDescId: null | number;
+                            copiedFromJobDescId: null | number;
+                            createdDate: null | string;
+                            createdEmployeeId: null | number;
+                            approvedDate: null | string;
+                            approvedBy: null | number;
+                            applicationId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblJobDescriptionAttachments?: {
+                            jobDescriptionAttachmentId: number;
+                            jobDescId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblJobVersions?: {
+                            jobVersionId: number;
+                            jobVersionNo: null | string;
+                            jobDescTitle: null | string;
+                            jobDesc: null | string;
+                            createdDate: null | string;
+                            status: null | number;
+                            jobDescId: null | number;
+                            createdEmployeeId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblLogCounters?: {
+                            logCounterId: number;
+                            maintLogId: null | number;
+                            counterTypeId: null | number;
+                            frequency: null | number;
+                            reportedCount: null | number;
+                            overdueCount: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblLogDisciplines?: {
+                            logDiscId: number;
+                            maintLogId: null | number;
+                            employeeId: null | number;
+                            discId: null | number;
+                            timeSpent: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblMaintLogs?: {
+                            maintLogId: number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            maintClassId: null | number;
+                            functionId: null | number;
+                            jobDescId: null | number;
+                            workOrderId: null | number;
+                            compId: null | number;
+                            totalDuration: null | number;
+                            downTime: null | number;
+                            dateDone: null | string;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            overdueCount: null | number;
+                            unexpected: null | number;
+                            reportedBy: null | number;
+                            history: null | string;
+                            workOrderStatusId: null | number;
+                            followStatusId: null | number;
+                            discId: null | number;
+                            reportedDate: null | string;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                            updatedEmployeeId: null | number;
+                        }[];
+                        tblMaintLogAttachments?: {
+                            maintLogAttachmentId: number;
+                            maintLogId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            followEmployeeId: number;
+                            maintLogId: number;
+                            isRequest: null | number;
+                            isWaiting: null | number;
+                            isUnPlan: null | number;
+                            followDesc: null | string;
+                            followStatuseId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblMaintLogSpares?: {
+                            maintLogSpareId: number;
+                            maintLogId: number;
+                            spareUnitId: number;
+                            spareCount: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblOilSamplingLogs?: {
+                            oilSamplingLogId: number;
+                            compOilInfoId: number;
+                            compCounterId: number;
+                            maintLogId: null | number;
+                            samplerId: null | number;
+                            senderToLabId: null | number;
+                            compCounterVal: number;
+                            oilCounterVal: number;
+                            changeOilDate: null | string;
+                            addOilVal: null | number;
+                            samplingdate: string;
+                            testDate: string;
+                            sendToLaboratoryDate: null | string;
+                            tankCapacity: null | number;
+                            samplingPosition: null | string;
+                            oilGrade: null | string;
+                            responseDate: null | string;
+                            resultCompCode: null | number;
+                            resultCompDesc: null | string;
+                            resultOilCode: null | number;
+                            resultOilDesc: null | string;
+                            resultCode: null | number;
+                            resultDesc: null | string;
+                            actionCode: null | number;
+                            actionDesc: null | string;
+                            ladingBillNnumber: null | string;
+                            customerName: null | string;
+                            locationName: null | string;
+                            sampleNumber: null | number;
+                            laboratoryCode: null | string;
+                            userComment: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblReScheduleLogs?: {
+                            rescheduleLogId: number;
+                            workOrderId: null | number;
+                            fromDueDate: null | string;
+                            toDueDate: null | string;
+                            rescheduledBy: null | number;
+                            rescheduledDate: null | string;
+                            reason: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblRotationLogs?: {
+                            rotationLogId: number;
+                            compId: null | number;
+                            functionId: null | number;
+                            employeeInsertedId: null | number;
+                            employeeRemovedId: null | number;
+                            fromDate: null | string;
+                            toDate: null | string;
+                            notes: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblRounds?: {
+                            roundId: number;
+                            maintCauseId: null | number;
+                            maintClassId: null | number;
+                            maintTypeId: null | number;
+                            rescheduleLimitId: null | number;
+                            roundCode: null | string;
+                            roundTitle: null | string;
+                            discId: null | number;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            planningMethod: null | number;
+                            includeAllJobs: null | number;
+                            reportingMethod: null | number;
+                            lastDone: null | string;
+                            nextDueDate: null | string;
+                            description: null | string;
+                            priority: null | number;
+                            window: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblRoundCompJobs?: {
+                            roundCompJobId: number;
+                            compJobId: number;
+                            roundId: number;
+                            jobSequence: null | number;
+                            active: null | number;
+                            functionDriven: null | number;
+                            functionId: null | number;
+                            deleteOnRotation: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblUserInstallations?: {
+                            userInstId: number;
+                            userId: number;
+                            instId: number;
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            compJobId: null | number;
+                            maintClassId: null | number;
+                            maintTypeId: null | number;
+                            maintCauseId: null | number;
+                            createdBy: null | number;
+                            issuedBy: null | number;
+                            plannedBy: null | number;
+                            issuedDate: null | string;
+                            respDiscId: null | number;
+                            compId: null | number;
+                            roundId: null | number;
+                            parentWorkOrderId: null | number;
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | number;
+                            estTotalDuration: null | number;
+                            dueDate: null | string;
+                            window: null | number;
+                            created: null | string;
+                            started: null | string;
+                            completed: null | string;
+                            description: null | string;
+                            filed: null | number;
+                            unexpected: null | number;
+                            workOrderStatusId: null | number;
+                            workOrderTypeId: null | number;
+                            reportingMethod: null | number;
+                            pendingBy: null | number;
+                            pendTypeId: null | number;
+                            pendingdate: null | string;
+                            orderNo: null | number;
+                            userComment: null | string;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblWorkShops?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblWorkShopAttachments?: {
+                            workShopAttachmentId: number;
+                            workShopId: number;
+                            attachmentId: number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    putTblInstallationByInstId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                instId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    orderNo?: null | number;
+                    caption?: null | string;
+                    tblAttachments?: {
+                        connect?: {
+                            attachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblAttachmentTypes?: {
+                        connect?: {
+                            attachmentTypeId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompCounters?: {
+                        connect?: {
+                            compCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompCounterLogs?: {
+                        connect?: {
+                            compCounterLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompJobs?: {
+                        connect?: {
+                            compJobId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompJobCounters?: {
+                        connect?: {
+                            compJobCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompJobMeasurePoints?: {
+                        connect?: {
+                            compJobMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompJobTriggers?: {
+                        connect?: {
+                            compJobTriggerId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompMeasurePoints?: {
+                        connect?: {
+                            compMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompMeasurePointLogs?: {
+                        connect?: {
+                            compMeasurePointLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompOilInfos?: {
+                        connect?: {
+                            compOilInfoId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblComponentUnits?: {
+                        connect?: {
+                            compId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblComponentUnitAttachments?: {
+                        connect?: {
+                            componentUnitAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompSpares?: {
+                        connect?: {
+                            compSpareId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompStatusLogs?: {
+                        connect?: {
+                            compStatusLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypes?: {
+                        connect?: {
+                            compTypeId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeAttachments?: {
+                        connect?: {
+                            compTypeAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeCounters?: {
+                        connect?: {
+                            compTypeCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeJobs?: {
+                        connect?: {
+                            compTypeJobId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeJobCounters?: {
+                        connect?: {
+                            compTypeJobCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeJobMeasurePoints?: {
+                        connect?: {
+                            compTypeJobMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeJobTriggers?: {
+                        connect?: {
+                            compTypeJobTriggerId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeMeasurePoints?: {
+                        connect?: {
+                            compTypeMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblFailureReportWorkShops?: {
+                        connect?: {
+                            failureReportWorkShopId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblFunctions?: {
+                        connect?: {
+                            functionId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblJobDescriptions?: {
+                        connect?: {
+                            jobDescId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblJobDescriptionAttachments?: {
+                        connect?: {
+                            jobDescriptionAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblJobVersions?: {
+                        connect?: {
+                            jobVersionId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblLogCounters?: {
+                        connect?: {
+                            logCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblLogDisciplines?: {
+                        connect?: {
+                            logDiscId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogs?: {
+                        connect?: {
+                            maintLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogAttachments?: {
+                        connect?: {
+                            maintLogAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogFollows?: {
+                        connect?: {
+                            followId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogSpares?: {
+                        connect?: {
+                            maintLogSpareId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblOilSamplingLogs?: {
+                        connect?: {
+                            oilSamplingLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblReScheduleLogs?: {
+                        connect?: {
+                            rescheduleLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblRotationLogs?: {
+                        connect?: {
+                            rotationLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblRounds?: {
+                        connect?: {
+                            roundId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblRoundCompJobs?: {
+                        connect?: {
+                            roundCompJobId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblUserInstallations?: {
+                        connect?: {
+                            userInstId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShops?: {
+                        connect?: {
+                            workShopId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopAttachments?: {
+                        connect?: {
+                            workShopAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopComponents?: {
+                        connect?: {
+                            workShopCompId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    name?: string;
+                    orderNo?: null | number;
+                    caption?: null | string;
+                    tblAttachments?: {
+                        connect?: {
+                            attachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblAttachmentTypes?: {
+                        connect?: {
+                            attachmentTypeId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompCounters?: {
+                        connect?: {
+                            compCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompCounterLogs?: {
+                        connect?: {
+                            compCounterLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompJobs?: {
+                        connect?: {
+                            compJobId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompJobCounters?: {
+                        connect?: {
+                            compJobCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompJobMeasurePoints?: {
+                        connect?: {
+                            compJobMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompJobTriggers?: {
+                        connect?: {
+                            compJobTriggerId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompMeasurePoints?: {
+                        connect?: {
+                            compMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompMeasurePointLogs?: {
+                        connect?: {
+                            compMeasurePointLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompOilInfos?: {
+                        connect?: {
+                            compOilInfoId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblComponentUnits?: {
+                        connect?: {
+                            compId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblComponentUnitAttachments?: {
+                        connect?: {
+                            componentUnitAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompSpares?: {
+                        connect?: {
+                            compSpareId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompStatusLogs?: {
+                        connect?: {
+                            compStatusLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypes?: {
+                        connect?: {
+                            compTypeId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeAttachments?: {
+                        connect?: {
+                            compTypeAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeCounters?: {
+                        connect?: {
+                            compTypeCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeJobs?: {
+                        connect?: {
+                            compTypeJobId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeJobCounters?: {
+                        connect?: {
+                            compTypeJobCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeJobMeasurePoints?: {
+                        connect?: {
+                            compTypeJobMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeJobTriggers?: {
+                        connect?: {
+                            compTypeJobTriggerId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeMeasurePoints?: {
+                        connect?: {
+                            compTypeMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblFailureReportWorkShops?: {
+                        connect?: {
+                            failureReportWorkShopId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblFunctions?: {
+                        connect?: {
+                            functionId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblJobDescriptions?: {
+                        connect?: {
+                            jobDescId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblJobDescriptionAttachments?: {
+                        connect?: {
+                            jobDescriptionAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblJobVersions?: {
+                        connect?: {
+                            jobVersionId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblLogCounters?: {
+                        connect?: {
+                            logCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblLogDisciplines?: {
+                        connect?: {
+                            logDiscId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogs?: {
+                        connect?: {
+                            maintLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogAttachments?: {
+                        connect?: {
+                            maintLogAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogFollows?: {
+                        connect?: {
+                            followId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogSpares?: {
+                        connect?: {
+                            maintLogSpareId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblOilSamplingLogs?: {
+                        connect?: {
+                            oilSamplingLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblReScheduleLogs?: {
+                        connect?: {
+                            rescheduleLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblRotationLogs?: {
+                        connect?: {
+                            rotationLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblRounds?: {
+                        connect?: {
+                            roundId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblRoundCompJobs?: {
+                        connect?: {
+                            roundCompJobId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblUserInstallations?: {
+                        connect?: {
+                            userInstId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShops?: {
+                        connect?: {
+                            workShopId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopAttachments?: {
+                        connect?: {
+                            workShopAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopComponents?: {
+                        connect?: {
+                            workShopCompId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    name?: string;
+                    orderNo?: null | number;
+                    caption?: null | string;
+                    tblAttachments?: {
+                        connect?: {
+                            attachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblAttachmentTypes?: {
+                        connect?: {
+                            attachmentTypeId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompCounters?: {
+                        connect?: {
+                            compCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompCounterLogs?: {
+                        connect?: {
+                            compCounterLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompJobs?: {
+                        connect?: {
+                            compJobId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompJobCounters?: {
+                        connect?: {
+                            compJobCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompJobMeasurePoints?: {
+                        connect?: {
+                            compJobMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompJobTriggers?: {
+                        connect?: {
+                            compJobTriggerId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompMeasurePoints?: {
+                        connect?: {
+                            compMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompMeasurePointLogs?: {
+                        connect?: {
+                            compMeasurePointLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompOilInfos?: {
+                        connect?: {
+                            compOilInfoId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblComponentUnits?: {
+                        connect?: {
+                            compId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblComponentUnitAttachments?: {
+                        connect?: {
+                            componentUnitAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompSpares?: {
+                        connect?: {
+                            compSpareId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompStatusLogs?: {
+                        connect?: {
+                            compStatusLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypes?: {
+                        connect?: {
+                            compTypeId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeAttachments?: {
+                        connect?: {
+                            compTypeAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeCounters?: {
+                        connect?: {
+                            compTypeCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeJobs?: {
+                        connect?: {
+                            compTypeJobId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeJobCounters?: {
+                        connect?: {
+                            compTypeJobCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeJobMeasurePoints?: {
+                        connect?: {
+                            compTypeJobMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeJobTriggers?: {
+                        connect?: {
+                            compTypeJobTriggerId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompTypeMeasurePoints?: {
+                        connect?: {
+                            compTypeMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblFailureReports?: {
+                        connect?: {
+                            failureReportId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblFailureReportWorkShops?: {
+                        connect?: {
+                            failureReportWorkShopId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblFunctions?: {
+                        connect?: {
+                            functionId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblJobDescriptions?: {
+                        connect?: {
+                            jobDescId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblJobDescriptionAttachments?: {
+                        connect?: {
+                            jobDescriptionAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblJobVersions?: {
+                        connect?: {
+                            jobVersionId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblLogCounters?: {
+                        connect?: {
+                            logCounterId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblLogDisciplines?: {
+                        connect?: {
+                            logDiscId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogs?: {
+                        connect?: {
+                            maintLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogAttachments?: {
+                        connect?: {
+                            maintLogAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogFollows?: {
+                        connect?: {
+                            followId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblMaintLogSpares?: {
+                        connect?: {
+                            maintLogSpareId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblOilSamplingLogs?: {
+                        connect?: {
+                            oilSamplingLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblReScheduleLogs?: {
+                        connect?: {
+                            rescheduleLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblRotationLogs?: {
+                        connect?: {
+                            rotationLogId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblRounds?: {
+                        connect?: {
+                            roundId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblRoundCompJobs?: {
+                        connect?: {
+                            roundCompJobId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblUserInstallations?: {
+                        connect?: {
+                            userInstId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkOrders?: {
+                        connect?: {
+                            workOrderId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShops?: {
+                        connect?: {
+                            workShopId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopAttachments?: {
+                        connect?: {
+                            workShopAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWorkShopComponents?: {
+                        connect?: {
+                            workShopCompId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        instId: number;
+                        name: string;
+                        orderNo: null | number;
+                        caption: null | string;
+                        tblAttachments?: {
+                            attachmentId: number;
+                            title: null | string;
+                            fileName: null | string;
+                            attachmentTypeId: null | number;
+                            path: null | string;
+                            size: null | number;
+                            isUserAttachment: boolean;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblAttachmentTypes?: {
+                            attachmentTypeId: number;
+                            name: null | string;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblCompCounters?: {
+                            compCounterId: number;
+                            compId: null | number;
+                            counterTypeId: null | number;
+                            currentValue: null | number;
+                            currentDate: null | string;
+                            changedBy: null | number;
+                            dependsOnId: null | number;
+                            startDate: null | string;
+                            startValue: null | number;
+                            lastZeroedValue: null | number;
+                            zeroedDate: null | string;
+                            averageCountRate: null | number;
+                            useCalcAverage: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompCounterLogs?: {
+                            compCounterLogId: number;
+                            compCounterId: null | number;
+                            dependsOnId: null | number;
+                            currentDate: null | string;
+                            currentValue: null | number;
+                            startDate: null | string;
+                            startValue: null | number;
+                            zeroedDate: null | string;
+                            lastZeroedValue: null | number;
+                            changedBy: null | number;
+                            changedDate: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompJobs?: {
+                            compJobId: number;
+                            discId: null | number;
+                            compId: null | number;
+                            jobDescId: null | number;
+                            jobConditionId: null | number;
+                            maintClassId: null | number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            rescheduleLimitId: null | number;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            changeReason: null | string;
+                            planningMethod: null | number;
+                            statusNone: null | number;
+                            statusInUse: null | number;
+                            statusAvailable: null | number;
+                            statusRepair: null | number;
+                            lastDone: null | string;
+                            nextDueDate: null | string;
+                            cbmStatus: null | number;
+                            outputFormat: null | number;
+                            priority: null | number;
+                            window: null | number;
+                            active: null | number;
+                            mandatoryHistory: null | number;
+                            createdEmployeeId: null | number;
+                            notes: null | string;
+                            mandatoryResource: null | number;
+                            mandatoryStockUsage: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompJobCounters?: {
+                            compJobCounterId: number;
+                            compJobId: null | number;
+                            compCounterId: null | number;
+                            frequency: null | number;
+                            lastDoneCount: null | number;
+                            nextDueCount: null | number;
+                            window: null | number;
+                            showInAlert: null | boolean;
+                            updateByFunction: null | boolean;
+                            orderNumber: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompJobMeasurePoints?: {
+                            compJobMeasurePointId: number;
+                            compMeasurePointId: null | number;
+                            compJobId: null | number;
+                            triggerJob: null | number;
+                            useOperationalValues: null | number;
+                            minValue: null | number;
+                            maxValue: null | number;
+                            updateOnReport: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompJobTriggers?: {
+                            compJobTriggerId: number;
+                            jobTriggerId: null | number;
+                            compJobId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompMeasurePoints?: {
+                            compMeasurePointId: number;
+                            compId: null | number;
+                            counterTypeId: null | number;
+                            changedBy: null | number;
+                            currentDate: null | string;
+                            unitId: null | number;
+                            currentValue: null | number;
+                            setValue: null | number;
+                            operationalMinValue: null | number;
+                            operationalMaxValue: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompMeasurePointLogs?: {
+                            compMeasurePointLogId: number;
+                            compMeasurePointId: null | number;
+                            changedBy: null | number;
+                            changedDate: null | string;
+                            currentDate: null | string;
+                            unitId: null | number;
+                            currentValue: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompOilInfos?: {
+                            compOilInfoId: number;
+                            compId: null | number;
+                            compCounterId: null | number;
+                            spareTypeId: null | number;
+                            compJobId: null | number;
+                            tankCapacity: null | number;
+                            laboratoryCode: null | string;
+                            samplingPosition: null | string;
+                            oilGrade: null | string;
+                            orderNo: null | number;
+                            employeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblComponentUnits?: {
+                            compId: number;
+                            compTypeId: null | number;
+                            locationId: null | number;
+                            parentCompId: null | number;
+                            vendorId: null | number;
+                            compNo: null | string;
+                            serialNo: null | string;
+                            model: null | string;
+                            comment1: null | string;
+                            comment2: null | string;
+                            comment3: null | string;
+                            assetNo: null | string;
+                            statusId: null | number;
+                            notes: null | string;
+                            isCritical: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblComponentUnitAttachments?: {
+                            componentUnitAttachmentId: number;
+                            compId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblCompSpares?: {
+                            compSpareId: number;
+                            compTypeId: null | number;
+                            spareTypeId: null | number;
+                            quantity: null | number;
+                            drawingNo: null | string;
+                            position: null | string;
+                            oldPartNo: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompStatusLogs?: {
+                            compStatusLogId: number;
+                            compId: null | number;
+                            fromStatusId: null | number;
+                            toStatusId: null | number;
+                            changedBy: null | number;
+                            initiatingCompId: null | number;
+                            workOrderId: null | number;
+                            fromDeptId: null | number;
+                            changedTime: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypes?: {
+                            compTypeId: number;
+                            parentCompTypeId: null | number;
+                            compTypeNo: null | string;
+                            compName: null | string;
+                            compType: null | string;
+                            compTypeModel: null | string;
+                            makerId: null | number;
+                            notes: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeAttachments?: {
+                            compTypeAttachmentId: number;
+                            compTypeId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeCounters?: {
+                            compTypeCounterId: number;
+                            compTypeId: null | number;
+                            counterTypeId: null | number;
+                            averageCountRate: null | number;
+                            useCalcAverage: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeJobs?: {
+                            compTypeJobId: number;
+                            compTypeId: null | number;
+                            discId: null | number;
+                            jobDescId: null | number;
+                            jobConditionId: null | number;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            planningMethod: null | number;
+                            statusNone: null | number;
+                            statusInUse: null | number;
+                            statusAvailable: null | number;
+                            statusRepair: null | number;
+                            maintClassId: null | number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            priority: null | number;
+                            window: null | number;
+                            mandatoryHistory: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeJobCounters?: {
+                            compTypeJobCounterId: number;
+                            compTypeJobId: null | number;
+                            compTypeCounterId: null | number;
+                            frequency: null | number;
+                            window: null | number;
+                            showInAlert: null | boolean;
+                            updateByFunction: null | boolean;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeJobMeasurePoints?: {
+                            compTypeJobMeasurePointId: number;
+                            compTypeMeasurePointId: null | number;
+                            compTypeJobId: null | number;
+                            triggerJob: null | number;
+                            useOperationalValues: null | number;
+                            minValue: null | number;
+                            maxValue: null | number;
+                            updateOnReport: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeJobTriggers?: {
+                            compTypeJobTriggerId: number;
+                            jobTriggerId: null | number;
+                            compTypeJobId: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeMeasurePoints?: {
+                            compTypeMeasurePointId: number;
+                            compTypeId: null | number;
+                            counterTypeId: null | number;
+                            unitId: null | number;
+                            setValue: null | number;
+                            operationalMinValue: null | number;
+                            operationalMaxValue: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            maintLogId: null | number;
+                            title: null | string;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
+                            closedEmployeeId: null | number;
+                            closedDateTime: null | string;
+                            followDesc: null | string;
+                            instId: null | number;
+                        }[];
+                        tblFailureReportWorkShops?: {
+                            failureReportWorkShopId: number;
+                            failureReportId: number;
+                            workShopId: number;
+                            instId: null | number;
+                        }[];
+                        tblFunctions?: {
+                            functionId: number;
+                            compId: null | number;
+                            funcNo: null | string;
+                            funcDesc: null | string;
+                            parentFunctionId: null | number;
+                            notes: null | string;
+                            statusId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblJobDescriptions?: {
+                            jobDescId: number;
+                            jobClassId: null | number;
+                            jobDescCode: null | string;
+                            jobDescTitle: null | string;
+                            jobDesc: null | string;
+                            revision: null | string;
+                            changeReason: null | string;
+                            status: null | number;
+                            oldRevisionJobDescId: null | number;
+                            copiedFromJobDescId: null | number;
+                            createdDate: null | string;
+                            createdEmployeeId: null | number;
+                            approvedDate: null | string;
+                            approvedBy: null | number;
+                            applicationId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblJobDescriptionAttachments?: {
+                            jobDescriptionAttachmentId: number;
+                            jobDescId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblJobVersions?: {
+                            jobVersionId: number;
+                            jobVersionNo: null | string;
+                            jobDescTitle: null | string;
+                            jobDesc: null | string;
+                            createdDate: null | string;
+                            status: null | number;
+                            jobDescId: null | number;
+                            createdEmployeeId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblLogCounters?: {
+                            logCounterId: number;
+                            maintLogId: null | number;
+                            counterTypeId: null | number;
+                            frequency: null | number;
+                            reportedCount: null | number;
+                            overdueCount: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblLogDisciplines?: {
+                            logDiscId: number;
+                            maintLogId: null | number;
+                            employeeId: null | number;
+                            discId: null | number;
+                            timeSpent: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblMaintLogs?: {
+                            maintLogId: number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            maintClassId: null | number;
+                            functionId: null | number;
+                            jobDescId: null | number;
+                            workOrderId: null | number;
+                            compId: null | number;
+                            totalDuration: null | number;
+                            downTime: null | number;
+                            dateDone: null | string;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            overdueCount: null | number;
+                            unexpected: null | number;
+                            reportedBy: null | number;
+                            history: null | string;
+                            workOrderStatusId: null | number;
+                            followStatusId: null | number;
+                            discId: null | number;
+                            reportedDate: null | string;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                            updatedEmployeeId: null | number;
+                        }[];
+                        tblMaintLogAttachments?: {
+                            maintLogAttachmentId: number;
+                            maintLogId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            followEmployeeId: number;
+                            maintLogId: number;
+                            isRequest: null | number;
+                            isWaiting: null | number;
+                            isUnPlan: null | number;
+                            followDesc: null | string;
+                            followStatuseId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblMaintLogSpares?: {
+                            maintLogSpareId: number;
+                            maintLogId: number;
+                            spareUnitId: number;
+                            spareCount: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblOilSamplingLogs?: {
+                            oilSamplingLogId: number;
+                            compOilInfoId: number;
+                            compCounterId: number;
+                            maintLogId: null | number;
+                            samplerId: null | number;
+                            senderToLabId: null | number;
+                            compCounterVal: number;
+                            oilCounterVal: number;
+                            changeOilDate: null | string;
+                            addOilVal: null | number;
+                            samplingdate: string;
+                            testDate: string;
+                            sendToLaboratoryDate: null | string;
+                            tankCapacity: null | number;
+                            samplingPosition: null | string;
+                            oilGrade: null | string;
+                            responseDate: null | string;
+                            resultCompCode: null | number;
+                            resultCompDesc: null | string;
+                            resultOilCode: null | number;
+                            resultOilDesc: null | string;
+                            resultCode: null | number;
+                            resultDesc: null | string;
+                            actionCode: null | number;
+                            actionDesc: null | string;
+                            ladingBillNnumber: null | string;
+                            customerName: null | string;
+                            locationName: null | string;
+                            sampleNumber: null | number;
+                            laboratoryCode: null | string;
+                            userComment: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblReScheduleLogs?: {
+                            rescheduleLogId: number;
+                            workOrderId: null | number;
+                            fromDueDate: null | string;
+                            toDueDate: null | string;
+                            rescheduledBy: null | number;
+                            rescheduledDate: null | string;
+                            reason: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblRotationLogs?: {
+                            rotationLogId: number;
+                            compId: null | number;
+                            functionId: null | number;
+                            employeeInsertedId: null | number;
+                            employeeRemovedId: null | number;
+                            fromDate: null | string;
+                            toDate: null | string;
+                            notes: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblRounds?: {
+                            roundId: number;
+                            maintCauseId: null | number;
+                            maintClassId: null | number;
+                            maintTypeId: null | number;
+                            rescheduleLimitId: null | number;
+                            roundCode: null | string;
+                            roundTitle: null | string;
+                            discId: null | number;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            planningMethod: null | number;
+                            includeAllJobs: null | number;
+                            reportingMethod: null | number;
+                            lastDone: null | string;
+                            nextDueDate: null | string;
+                            description: null | string;
+                            priority: null | number;
+                            window: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblRoundCompJobs?: {
+                            roundCompJobId: number;
+                            compJobId: number;
+                            roundId: number;
+                            jobSequence: null | number;
+                            active: null | number;
+                            functionDriven: null | number;
+                            functionId: null | number;
+                            deleteOnRotation: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblUserInstallations?: {
+                            userInstId: number;
+                            userId: number;
+                            instId: number;
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            compJobId: null | number;
+                            maintClassId: null | number;
+                            maintTypeId: null | number;
+                            maintCauseId: null | number;
+                            createdBy: null | number;
+                            issuedBy: null | number;
+                            plannedBy: null | number;
+                            issuedDate: null | string;
+                            respDiscId: null | number;
+                            compId: null | number;
+                            roundId: null | number;
+                            parentWorkOrderId: null | number;
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | number;
+                            estTotalDuration: null | number;
+                            dueDate: null | string;
+                            window: null | number;
+                            created: null | string;
+                            started: null | string;
+                            completed: null | string;
+                            description: null | string;
+                            filed: null | number;
+                            unexpected: null | number;
+                            workOrderStatusId: null | number;
+                            workOrderTypeId: null | number;
+                            reportingMethod: null | number;
+                            pendingBy: null | number;
+                            pendTypeId: null | number;
+                            pendingdate: null | string;
+                            orderNo: null | number;
+                            userComment: null | string;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblWorkShops?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblWorkShopAttachments?: {
+                            workShopAttachmentId: number;
+                            workShopId: number;
+                            attachmentId: number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblInstallationByInstId: {
+        parameters: {
+            query?: {
+                force?: boolean;
+            };
+            header?: never;
+            path: {
+                instId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        instId: number;
+                        name: string;
+                        orderNo: null | number;
+                        caption: null | string;
+                        tblAttachments?: {
+                            attachmentId: number;
+                            title: null | string;
+                            fileName: null | string;
+                            attachmentTypeId: null | number;
+                            path: null | string;
+                            size: null | number;
+                            isUserAttachment: boolean;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblAttachmentTypes?: {
+                            attachmentTypeId: number;
+                            name: null | string;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblCompCounters?: {
+                            compCounterId: number;
+                            compId: null | number;
+                            counterTypeId: null | number;
+                            currentValue: null | number;
+                            currentDate: null | string;
+                            changedBy: null | number;
+                            dependsOnId: null | number;
+                            startDate: null | string;
+                            startValue: null | number;
+                            lastZeroedValue: null | number;
+                            zeroedDate: null | string;
+                            averageCountRate: null | number;
+                            useCalcAverage: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompCounterLogs?: {
+                            compCounterLogId: number;
+                            compCounterId: null | number;
+                            dependsOnId: null | number;
+                            currentDate: null | string;
+                            currentValue: null | number;
+                            startDate: null | string;
+                            startValue: null | number;
+                            zeroedDate: null | string;
+                            lastZeroedValue: null | number;
+                            changedBy: null | number;
+                            changedDate: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompJobs?: {
+                            compJobId: number;
+                            discId: null | number;
+                            compId: null | number;
+                            jobDescId: null | number;
+                            jobConditionId: null | number;
+                            maintClassId: null | number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            rescheduleLimitId: null | number;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            changeReason: null | string;
+                            planningMethod: null | number;
+                            statusNone: null | number;
+                            statusInUse: null | number;
+                            statusAvailable: null | number;
+                            statusRepair: null | number;
+                            lastDone: null | string;
+                            nextDueDate: null | string;
+                            cbmStatus: null | number;
+                            outputFormat: null | number;
+                            priority: null | number;
+                            window: null | number;
+                            active: null | number;
+                            mandatoryHistory: null | number;
+                            createdEmployeeId: null | number;
+                            notes: null | string;
+                            mandatoryResource: null | number;
+                            mandatoryStockUsage: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompJobCounters?: {
+                            compJobCounterId: number;
+                            compJobId: null | number;
+                            compCounterId: null | number;
+                            frequency: null | number;
+                            lastDoneCount: null | number;
+                            nextDueCount: null | number;
+                            window: null | number;
+                            showInAlert: null | boolean;
+                            updateByFunction: null | boolean;
+                            orderNumber: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompJobMeasurePoints?: {
+                            compJobMeasurePointId: number;
+                            compMeasurePointId: null | number;
+                            compJobId: null | number;
+                            triggerJob: null | number;
+                            useOperationalValues: null | number;
+                            minValue: null | number;
+                            maxValue: null | number;
+                            updateOnReport: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompJobTriggers?: {
+                            compJobTriggerId: number;
+                            jobTriggerId: null | number;
+                            compJobId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompMeasurePoints?: {
+                            compMeasurePointId: number;
+                            compId: null | number;
+                            counterTypeId: null | number;
+                            changedBy: null | number;
+                            currentDate: null | string;
+                            unitId: null | number;
+                            currentValue: null | number;
+                            setValue: null | number;
+                            operationalMinValue: null | number;
+                            operationalMaxValue: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompMeasurePointLogs?: {
+                            compMeasurePointLogId: number;
+                            compMeasurePointId: null | number;
+                            changedBy: null | number;
+                            changedDate: null | string;
+                            currentDate: null | string;
+                            unitId: null | number;
+                            currentValue: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompOilInfos?: {
+                            compOilInfoId: number;
+                            compId: null | number;
+                            compCounterId: null | number;
+                            spareTypeId: null | number;
+                            compJobId: null | number;
+                            tankCapacity: null | number;
+                            laboratoryCode: null | string;
+                            samplingPosition: null | string;
+                            oilGrade: null | string;
+                            orderNo: null | number;
+                            employeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblComponentUnits?: {
+                            compId: number;
+                            compTypeId: null | number;
+                            locationId: null | number;
+                            parentCompId: null | number;
+                            vendorId: null | number;
+                            compNo: null | string;
+                            serialNo: null | string;
+                            model: null | string;
+                            comment1: null | string;
+                            comment2: null | string;
+                            comment3: null | string;
+                            assetNo: null | string;
+                            statusId: null | number;
+                            notes: null | string;
+                            isCritical: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblComponentUnitAttachments?: {
+                            componentUnitAttachmentId: number;
+                            compId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblCompSpares?: {
+                            compSpareId: number;
+                            compTypeId: null | number;
+                            spareTypeId: null | number;
+                            quantity: null | number;
+                            drawingNo: null | string;
+                            position: null | string;
+                            oldPartNo: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompStatusLogs?: {
+                            compStatusLogId: number;
+                            compId: null | number;
+                            fromStatusId: null | number;
+                            toStatusId: null | number;
+                            changedBy: null | number;
+                            initiatingCompId: null | number;
+                            workOrderId: null | number;
+                            fromDeptId: null | number;
+                            changedTime: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypes?: {
+                            compTypeId: number;
+                            parentCompTypeId: null | number;
+                            compTypeNo: null | string;
+                            compName: null | string;
+                            compType: null | string;
+                            compTypeModel: null | string;
+                            makerId: null | number;
+                            notes: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeAttachments?: {
+                            compTypeAttachmentId: number;
+                            compTypeId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeCounters?: {
+                            compTypeCounterId: number;
+                            compTypeId: null | number;
+                            counterTypeId: null | number;
+                            averageCountRate: null | number;
+                            useCalcAverage: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeJobs?: {
+                            compTypeJobId: number;
+                            compTypeId: null | number;
+                            discId: null | number;
+                            jobDescId: null | number;
+                            jobConditionId: null | number;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            planningMethod: null | number;
+                            statusNone: null | number;
+                            statusInUse: null | number;
+                            statusAvailable: null | number;
+                            statusRepair: null | number;
+                            maintClassId: null | number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            priority: null | number;
+                            window: null | number;
+                            mandatoryHistory: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeJobCounters?: {
+                            compTypeJobCounterId: number;
+                            compTypeJobId: null | number;
+                            compTypeCounterId: null | number;
+                            frequency: null | number;
+                            window: null | number;
+                            showInAlert: null | boolean;
+                            updateByFunction: null | boolean;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeJobMeasurePoints?: {
+                            compTypeJobMeasurePointId: number;
+                            compTypeMeasurePointId: null | number;
+                            compTypeJobId: null | number;
+                            triggerJob: null | number;
+                            useOperationalValues: null | number;
+                            minValue: null | number;
+                            maxValue: null | number;
+                            updateOnReport: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeJobTriggers?: {
+                            compTypeJobTriggerId: number;
+                            jobTriggerId: null | number;
+                            compTypeJobId: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblCompTypeMeasurePoints?: {
+                            compTypeMeasurePointId: number;
+                            compTypeId: null | number;
+                            counterTypeId: null | number;
+                            unitId: null | number;
+                            setValue: null | number;
+                            operationalMinValue: null | number;
+                            operationalMaxValue: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblFailureReports?: {
+                            failureReportId: number;
+                            maintLogId: null | number;
+                            title: null | string;
+                            failureNumber: null | number;
+                            locationId: null | number;
+                            failureSeverityLevelId: null | number;
+                            failureStatusId: null | number;
+                            failureGroupFollowId: null | number;
+                            requestNo: null | string;
+                            nextFollowDate: null | string;
+                            closedEmployeeId: null | number;
+                            closedDateTime: null | string;
+                            followDesc: null | string;
+                            instId: null | number;
+                        }[];
+                        tblFailureReportWorkShops?: {
+                            failureReportWorkShopId: number;
+                            failureReportId: number;
+                            workShopId: number;
+                            instId: null | number;
+                        }[];
+                        tblFunctions?: {
+                            functionId: number;
+                            compId: null | number;
+                            funcNo: null | string;
+                            funcDesc: null | string;
+                            parentFunctionId: null | number;
+                            notes: null | string;
+                            statusId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblJobDescriptions?: {
+                            jobDescId: number;
+                            jobClassId: null | number;
+                            jobDescCode: null | string;
+                            jobDescTitle: null | string;
+                            jobDesc: null | string;
+                            revision: null | string;
+                            changeReason: null | string;
+                            status: null | number;
+                            oldRevisionJobDescId: null | number;
+                            copiedFromJobDescId: null | number;
+                            createdDate: null | string;
+                            createdEmployeeId: null | number;
+                            approvedDate: null | string;
+                            approvedBy: null | number;
+                            applicationId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblJobDescriptionAttachments?: {
+                            jobDescriptionAttachmentId: number;
+                            jobDescId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblJobVersions?: {
+                            jobVersionId: number;
+                            jobVersionNo: null | string;
+                            jobDescTitle: null | string;
+                            jobDesc: null | string;
+                            createdDate: null | string;
+                            status: null | number;
+                            jobDescId: null | number;
+                            createdEmployeeId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblLogCounters?: {
+                            logCounterId: number;
+                            maintLogId: null | number;
+                            counterTypeId: null | number;
+                            frequency: null | number;
+                            reportedCount: null | number;
+                            overdueCount: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblLogDisciplines?: {
+                            logDiscId: number;
+                            maintLogId: null | number;
+                            employeeId: null | number;
+                            discId: null | number;
+                            timeSpent: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblMaintLogs?: {
+                            maintLogId: number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            maintClassId: null | number;
+                            functionId: null | number;
+                            jobDescId: null | number;
+                            workOrderId: null | number;
+                            compId: null | number;
+                            totalDuration: null | number;
+                            downTime: null | number;
+                            dateDone: null | string;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            overdueCount: null | number;
+                            unexpected: null | number;
+                            reportedBy: null | number;
+                            history: null | string;
+                            workOrderStatusId: null | number;
+                            followStatusId: null | number;
+                            discId: null | number;
+                            reportedDate: null | string;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                            updatedEmployeeId: null | number;
+                        }[];
+                        tblMaintLogAttachments?: {
+                            maintLogAttachmentId: number;
+                            maintLogId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblMaintLogFollows?: {
+                            followId: number;
+                            followEmployeeId: number;
+                            maintLogId: number;
+                            isRequest: null | number;
+                            isWaiting: null | number;
+                            isUnPlan: null | number;
+                            followDesc: null | string;
+                            followStatuseId: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblMaintLogSpares?: {
+                            maintLogSpareId: number;
+                            maintLogId: number;
+                            spareUnitId: number;
+                            spareCount: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblOilSamplingLogs?: {
+                            oilSamplingLogId: number;
+                            compOilInfoId: number;
+                            compCounterId: number;
+                            maintLogId: null | number;
+                            samplerId: null | number;
+                            senderToLabId: null | number;
+                            compCounterVal: number;
+                            oilCounterVal: number;
+                            changeOilDate: null | string;
+                            addOilVal: null | number;
+                            samplingdate: string;
+                            testDate: string;
+                            sendToLaboratoryDate: null | string;
+                            tankCapacity: null | number;
+                            samplingPosition: null | string;
+                            oilGrade: null | string;
+                            responseDate: null | string;
+                            resultCompCode: null | number;
+                            resultCompDesc: null | string;
+                            resultOilCode: null | number;
+                            resultOilDesc: null | string;
+                            resultCode: null | number;
+                            resultDesc: null | string;
+                            actionCode: null | number;
+                            actionDesc: null | string;
+                            ladingBillNnumber: null | string;
+                            customerName: null | string;
+                            locationName: null | string;
+                            sampleNumber: null | number;
+                            laboratoryCode: null | string;
+                            userComment: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblReScheduleLogs?: {
+                            rescheduleLogId: number;
+                            workOrderId: null | number;
+                            fromDueDate: null | string;
+                            toDueDate: null | string;
+                            rescheduledBy: null | number;
+                            rescheduledDate: null | string;
+                            reason: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblRotationLogs?: {
+                            rotationLogId: number;
+                            compId: null | number;
+                            functionId: null | number;
+                            employeeInsertedId: null | number;
+                            employeeRemovedId: null | number;
+                            fromDate: null | string;
+                            toDate: null | string;
+                            notes: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblRounds?: {
+                            roundId: number;
+                            maintCauseId: null | number;
+                            maintClassId: null | number;
+                            maintTypeId: null | number;
+                            rescheduleLimitId: null | number;
+                            roundCode: null | string;
+                            roundTitle: null | string;
+                            discId: null | number;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            planningMethod: null | number;
+                            includeAllJobs: null | number;
+                            reportingMethod: null | number;
+                            lastDone: null | string;
+                            nextDueDate: null | string;
+                            description: null | string;
+                            priority: null | number;
+                            window: null | number;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblRoundCompJobs?: {
+                            roundCompJobId: number;
+                            compJobId: number;
+                            roundId: number;
+                            jobSequence: null | number;
+                            active: null | number;
+                            functionDriven: null | number;
+                            functionId: null | number;
+                            deleteOnRotation: null | number;
+                            orderNo: null | number;
+                            createdEmployeeId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblUserInstallations?: {
+                            userInstId: number;
+                            userId: number;
+                            instId: number;
+                        }[];
+                        tblWorkOrders?: {
+                            workOrderId: number;
+                            compJobId: null | number;
+                            maintClassId: null | number;
+                            maintTypeId: null | number;
+                            maintCauseId: null | number;
+                            createdBy: null | number;
+                            issuedBy: null | number;
+                            plannedBy: null | number;
+                            issuedDate: null | string;
+                            respDiscId: null | number;
+                            compId: null | number;
+                            roundId: null | number;
+                            parentWorkOrderId: null | number;
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | number;
+                            estTotalDuration: null | number;
+                            dueDate: null | string;
+                            window: null | number;
+                            created: null | string;
+                            started: null | string;
+                            completed: null | string;
+                            description: null | string;
+                            filed: null | number;
+                            unexpected: null | number;
+                            workOrderStatusId: null | number;
+                            workOrderTypeId: null | number;
+                            reportingMethod: null | number;
+                            pendingBy: null | number;
+                            pendTypeId: null | number;
+                            pendingdate: null | string;
+                            orderNo: null | number;
+                            userComment: null | string;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblWorkShops?: {
+                            workShopId: number;
+                            title: string;
+                            workShopNo: null | string;
+                            awardingDate: null | string;
+                            createdDate: null | string;
+                            personInChargeId: null | number;
+                            discId: null | number;
+                            repairDescription: null | string;
+                            personInChargeApproveId: null | number;
+                            followDesc: null | string;
+                            closedDate: null | string;
+                            closedById: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                        tblWorkShopAttachments?: {
+                            workShopAttachmentId: number;
+                            workShopId: number;
+                            attachmentId: number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
+                        tblWorkShopComponents?: {
+                            workShopCompId: number;
+                            workShopId: number;
+                            compId: number;
+                            functionId: null | number;
+                            locationId: null | number;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    getTblInstallationCount: {
         parameters: {
             query?: {
                 page?: number;
@@ -38201,6 +44368,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -38305,7 +44473,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobClass?: {
@@ -38358,7 +44526,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobClass?: {
@@ -38411,7 +44579,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobClass?: {
@@ -38542,6 +44710,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -38752,6 +44921,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -38864,7 +45034,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -38933,7 +45103,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -39002,7 +45172,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -39141,6 +45311,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -39319,6 +45490,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -39468,6 +45640,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -39526,7 +45699,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription: {
@@ -39549,7 +45722,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription: {
@@ -39572,7 +45745,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription: {
@@ -39627,6 +45800,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -39745,6 +45919,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -39803,7 +45978,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -39827,7 +46002,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -39851,7 +46026,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -39907,6 +46082,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -39993,6 +46169,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -40559,6 +46736,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -40596,7 +46774,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -40615,7 +46793,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -40634,7 +46812,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -40674,6 +46852,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -40760,6 +46939,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -40798,7 +46978,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -40819,7 +46999,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -40840,7 +47020,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -40881,6 +47061,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -40935,6 +47116,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -41808,6 +47990,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -41876,7 +48059,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog?: {
@@ -41903,7 +48086,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog?: {
@@ -41930,7 +48113,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog?: {
@@ -41985,6 +48168,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -42109,6 +48293,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -42179,7 +48364,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -42210,7 +48395,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -42241,7 +48426,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -42298,6 +48483,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -42390,6 +48576,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -42529,6 +48716,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -42600,7 +48788,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog?: {
@@ -42630,7 +48818,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog?: {
@@ -42660,7 +48848,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog?: {
@@ -42725,6 +48913,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -42859,6 +49048,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -42933,7 +49123,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -42968,7 +49158,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -43003,7 +49193,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -43070,6 +49260,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -43172,6 +49363,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -45986,6 +52178,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -46190,7 +52383,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -46315,7 +52508,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -46440,7 +52633,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -46644,6 +52837,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -46923,6 +53117,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -47253,6 +53448,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -47438,6 +53634,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -47474,7 +53671,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -47492,7 +53689,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -47510,7 +53707,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -47560,6 +53757,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -47656,6 +53854,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -47692,7 +53891,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -47711,7 +53910,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -47730,7 +53929,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -47781,6 +53980,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -47845,6 +54045,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -47948,6 +54149,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -48017,7 +54219,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog: {
@@ -48045,7 +54247,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog: {
@@ -48073,7 +54275,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog: {
@@ -48130,6 +54332,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -48256,6 +54459,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -48326,7 +54530,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -48356,7 +54560,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -48386,7 +54590,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -48444,6 +54648,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -48538,6 +54743,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -48654,6 +54860,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -48722,7 +54929,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog: {
@@ -48747,7 +54954,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog: {
@@ -48772,7 +54979,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog: {
@@ -48819,6 +55026,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -48937,6 +55145,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -49006,7 +55215,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -49033,7 +55242,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -49060,7 +55269,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -49108,6 +55317,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -49194,6 +55404,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -50420,6 +56631,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -50482,7 +56694,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -50526,7 +56738,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -50570,7 +56782,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -50644,6 +56856,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -50764,6 +56977,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -50828,7 +57042,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -50875,7 +57089,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -50922,7 +57136,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -50997,6 +57211,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -51085,6 +57300,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -52444,6 +58660,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -52520,7 +58737,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkOrder?: {
@@ -52544,7 +58761,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkOrder?: {
@@ -52568,7 +58785,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkOrder?: {
@@ -52612,6 +58829,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -52736,6 +58954,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -52813,7 +59032,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -52840,7 +59059,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -52867,7 +59086,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -52913,6 +59132,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -53005,6 +59225,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -53182,6 +59403,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -53232,7 +59454,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -53264,7 +59486,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -53296,7 +59518,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -53383,6 +59605,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -53516,6 +59739,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -53570,7 +59794,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -53607,7 +59831,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -53644,7 +59868,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -53732,6 +59956,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -53833,6 +60058,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -53923,6 +60149,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -53999,7 +60226,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkOrders?: {
@@ -54025,7 +60252,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkOrders?: {
@@ -54051,7 +60278,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkOrders?: {
@@ -54095,6 +60322,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -54217,6 +60445,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -54293,7 +60522,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -54323,7 +60552,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -54353,7 +60582,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -54401,6 +60630,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -54491,6 +60721,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -54620,6 +60851,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -54656,7 +60888,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -54674,7 +60906,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -54692,7 +60924,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -54733,6 +60965,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -54820,6 +61053,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -54857,7 +61091,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -54877,7 +61111,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -54897,7 +61131,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -54939,6 +61173,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -54994,6 +61229,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -56818,7 +63054,16 @@ export interface operations {
     };
     getTblUser: {
         parameters: {
-            query?: never;
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
             header?: never;
             path?: never;
             cookie?: never;
@@ -56834,21 +63079,39 @@ export interface operations {
                     "application/json": {
                         items: {
                             userId: number;
+                            employeeId: number;
+                            userGroupId: number;
                             userName: string;
-                            lastLogin: (string | null) | null;
+                            password: string;
                             accountDisabled: boolean;
                             forcePasswordChange: boolean;
+                            lastLogin: null | string;
+                            lastUpdate: null | string;
                             tblEmployee?: {
-                                firstName: string;
-                                lastName: string;
-                                title: (string | null) | null;
-                                tblDiscipline?: {
-                                    name: string;
-                                };
+                                employeeId: number;
+                                code: null | string;
+                                lastName: null | string;
+                                firstName: null | string;
+                                discId: null | number;
+                                title: null | string;
+                                lastUpdate: null | string;
+                            } & {
+                                [key: string]: unknown;
                             };
                             tblUserGroup?: {
+                                userGroupId: number;
                                 name: string;
+                                description: null | string;
+                                lastUpdate: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
                             };
+                            tblUserInstallations?: {
+                                userInstId: number;
+                                userId: number;
+                                instId: number;
+                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -56869,73 +63132,28 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    userName?: null | string;
-                    password?: null | string;
-                    accountDisabled?: null | boolean;
-                    forcePasswordChange?: null | boolean;
-                    lastLogin?: null | string;
-                    lastUpdate?: null | string;
-                    tblEmployee?: {
-                        connect: {
-                            employeeId: number;
-                        };
-                    };
-                    tblUserGroup?: {
-                        connect: {
-                            id: number;
-                        };
-                    };
-                    tblUserInstallations?: {
-                        connect: {
-                            id: number;
-                        }[];
-                    };
+                    userName: string;
+                    password: string;
+                    employeeId: number;
+                    userGroupId: number;
+                    accountDisabled: boolean;
+                    forcePasswordChange: boolean;
                 };
                 "application/x-www-form-urlencoded": {
-                    userName?: null | string;
-                    password?: null | string;
-                    accountDisabled?: null | boolean;
-                    forcePasswordChange?: null | boolean;
-                    lastLogin?: null | string;
-                    lastUpdate?: null | string;
-                    tblEmployee?: {
-                        connect: {
-                            employeeId: number;
-                        };
-                    };
-                    tblUserGroup?: {
-                        connect: {
-                            id: number;
-                        };
-                    };
-                    tblUserInstallations?: {
-                        connect: {
-                            id: number;
-                        }[];
-                    };
+                    userName: string;
+                    password: string;
+                    employeeId: number;
+                    userGroupId: number;
+                    accountDisabled: boolean;
+                    forcePasswordChange: boolean;
                 };
                 "multipart/form-data": {
-                    userName?: null | string;
-                    password?: null | string;
-                    accountDisabled?: null | boolean;
-                    forcePasswordChange?: null | boolean;
-                    lastLogin?: null | string;
-                    lastUpdate?: null | string;
-                    tblEmployee?: {
-                        connect: {
-                            employeeId: number;
-                        };
-                    };
-                    tblUserGroup?: {
-                        connect: {
-                            id: number;
-                        };
-                    };
-                    tblUserInstallations?: {
-                        connect: {
-                            id: number;
-                        }[];
-                    };
+                    userName: string;
+                    password: string;
+                    employeeId: number;
+                    userGroupId: number;
+                    accountDisabled: boolean;
+                    forcePasswordChange: boolean;
                 };
             };
         };
@@ -56948,34 +63166,25 @@ export interface operations {
                 content: {
                     "application/json": {
                         userId: number;
-                        employeeId: null | number;
-                        userGroupId: null | number;
-                        userName: null | string;
-                        password: null | string;
-                        accountDisabled: null | boolean;
-                        forcePasswordChange: null | boolean;
-                        lastLogin: null | string;
-                        lastUpdate: null | string;
-                        tblEmployee?: null | ({
-                            employeeId: number;
-                            code: null | string;
-                            lastName: null | string;
-                            firstName: null | string;
-                            discId: null | number;
-                            title: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblUserGroup?: null | ({
-                            userGroupId: number;
+                        userName: string;
+                        lastLogin: (string | null) | null;
+                        accountDisabled: boolean;
+                        forcePasswordChange: boolean;
+                        tblEmployee?: {
+                            firstName: string;
+                            lastName: string;
+                            title: (string | null) | null;
+                            tblDiscipline?: {
+                                name: string;
+                            };
+                        };
+                        tblUserGroup?: {
                             name: string;
-                            description: null | string;
-                            lastUpdate: null | string;
-                            orderNo: null | number;
-                        } & {
-                            [key: string]: unknown;
-                        });
+                        };
+                        employeeId?: number;
+                        userGroupId?: number;
+                        password?: string;
+                        lastUpdate?: null | string;
                         tblUserInstallations?: {
                             userInstId: number;
                             userId: number;
@@ -57039,15 +63248,15 @@ export interface operations {
                 content: {
                     "application/json": {
                         userId: number;
-                        employeeId: null | number;
-                        userGroupId: null | number;
-                        userName: null | string;
-                        password: null | string;
-                        accountDisabled: null | boolean;
-                        forcePasswordChange: null | boolean;
+                        employeeId: number;
+                        userGroupId: number;
+                        userName: string;
+                        password: string;
+                        accountDisabled: boolean;
+                        forcePasswordChange: boolean;
                         lastLogin: null | string;
                         lastUpdate: null | string;
-                        tblEmployee?: null | ({
+                        tblEmployee?: {
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -57057,8 +63266,8 @@ export interface operations {
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
-                        });
-                        tblUserGroup?: null | ({
+                        };
+                        tblUserGroup?: {
                             userGroupId: number;
                             name: string;
                             description: null | string;
@@ -57066,7 +63275,7 @@ export interface operations {
                             orderNo: null | number;
                         } & {
                             [key: string]: unknown;
-                        });
+                        };
                         tblUserInstallations?: {
                             userInstId: number;
                             userId: number;
@@ -57092,27 +63301,25 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    userName?: null | string;
-                    password?: null | string;
-                    accountDisabled?: null | boolean;
-                    forcePasswordChange?: null | boolean;
+                    userName?: string;
+                    password?: string;
+                    accountDisabled?: boolean;
+                    forcePasswordChange?: boolean;
                     lastLogin?: null | string;
                     lastUpdate?: null | string;
                     tblEmployee?: {
-                        connect?: {
+                        connect: {
                             employeeId: number;
                         };
-                        disconnect?: boolean;
                     };
                     tblUserGroup?: {
-                        connect?: {
-                            id: number;
+                        connect: {
+                            userGroupId: number;
                         };
-                        disconnect?: boolean;
                     };
                     tblUserInstallations?: {
                         connect?: {
-                            id: number;
+                            userInstId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -57120,27 +63327,25 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    userName?: null | string;
-                    password?: null | string;
-                    accountDisabled?: null | boolean;
-                    forcePasswordChange?: null | boolean;
+                    userName?: string;
+                    password?: string;
+                    accountDisabled?: boolean;
+                    forcePasswordChange?: boolean;
                     lastLogin?: null | string;
                     lastUpdate?: null | string;
                     tblEmployee?: {
-                        connect?: {
+                        connect: {
                             employeeId: number;
                         };
-                        disconnect?: boolean;
                     };
                     tblUserGroup?: {
-                        connect?: {
-                            id: number;
+                        connect: {
+                            userGroupId: number;
                         };
-                        disconnect?: boolean;
                     };
                     tblUserInstallations?: {
                         connect?: {
-                            id: number;
+                            userInstId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -57148,27 +63353,25 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    userName?: null | string;
-                    password?: null | string;
-                    accountDisabled?: null | boolean;
-                    forcePasswordChange?: null | boolean;
+                    userName?: string;
+                    password?: string;
+                    accountDisabled?: boolean;
+                    forcePasswordChange?: boolean;
                     lastLogin?: null | string;
                     lastUpdate?: null | string;
                     tblEmployee?: {
-                        connect?: {
+                        connect: {
                             employeeId: number;
                         };
-                        disconnect?: boolean;
                     };
                     tblUserGroup?: {
-                        connect?: {
-                            id: number;
+                        connect: {
+                            userGroupId: number;
                         };
-                        disconnect?: boolean;
                     };
                     tblUserInstallations?: {
                         connect?: {
-                            id: number;
+                            userInstId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -57186,15 +63389,15 @@ export interface operations {
                 content: {
                     "application/json": {
                         userId: number;
-                        employeeId: null | number;
-                        userGroupId: null | number;
-                        userName: null | string;
-                        password: null | string;
-                        accountDisabled: null | boolean;
-                        forcePasswordChange: null | boolean;
+                        employeeId: number;
+                        userGroupId: number;
+                        userName: string;
+                        password: string;
+                        accountDisabled: boolean;
+                        forcePasswordChange: boolean;
                         lastLogin: null | string;
                         lastUpdate: null | string;
-                        tblEmployee?: null | ({
+                        tblEmployee?: {
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -57204,8 +63407,8 @@ export interface operations {
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
-                        });
-                        tblUserGroup?: null | ({
+                        };
+                        tblUserGroup?: {
                             userGroupId: number;
                             name: string;
                             description: null | string;
@@ -57213,7 +63416,7 @@ export interface operations {
                             orderNo: null | number;
                         } & {
                             [key: string]: unknown;
-                        });
+                        };
                         tblUserInstallations?: {
                             userInstId: number;
                             userId: number;
@@ -57245,15 +63448,15 @@ export interface operations {
                 content: {
                     "application/json": {
                         userId: number;
-                        employeeId: null | number;
-                        userGroupId: null | number;
-                        userName: null | string;
-                        password: null | string;
-                        accountDisabled: null | boolean;
-                        forcePasswordChange: null | boolean;
+                        employeeId: number;
+                        userGroupId: number;
+                        userName: string;
+                        password: string;
+                        accountDisabled: boolean;
+                        forcePasswordChange: boolean;
                         lastLogin: null | string;
                         lastUpdate: null | string;
-                        tblEmployee?: null | ({
+                        tblEmployee?: {
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -57263,8 +63466,8 @@ export interface operations {
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
-                        });
-                        tblUserGroup?: null | ({
+                        };
+                        tblUserGroup?: {
                             userGroupId: number;
                             name: string;
                             description: null | string;
@@ -57272,7 +63475,7 @@ export interface operations {
                             orderNo: null | number;
                         } & {
                             [key: string]: unknown;
-                        });
+                        };
                         tblUserInstallations?: {
                             userInstId: number;
                             userId: number;
@@ -57284,6 +63487,1280 @@ export interface operations {
         };
     };
     getTblUserCount: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblUserGroup: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            userGroupId: number;
+                            name: string;
+                            description: null | string;
+                            lastUpdate: null | string;
+                            orderNo: null | number;
+                            tblUsers?: {
+                                userId: number;
+                                employeeId: number;
+                                userGroupId: number;
+                                userName: string;
+                                password: string;
+                                accountDisabled: boolean;
+                                forcePasswordChange: boolean;
+                                lastLogin: null | string;
+                                lastUpdate: null | string;
+                            }[];
+                            tblUserGroupElements?: {
+                                userGroupElementId: number;
+                                userGroupId: number;
+                                elementId: number;
+                                canCreate: boolean;
+                                canUpdate: boolean;
+                                canDelete: boolean;
+                                canView: boolean;
+                                canExport: boolean;
+                            }[];
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
+    };
+    postTblUserGroup: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name: string;
+                    description?: null | string;
+                    lastUpdate?: null | string;
+                    orderNo?: null | number;
+                    tblUsers?: {
+                        connect: {
+                            userId: number;
+                        }[];
+                    };
+                    tblUserGroupElements?: {
+                        connect: {
+                            userGroupElementId: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    name: string;
+                    description?: null | string;
+                    lastUpdate?: null | string;
+                    orderNo?: null | number;
+                    tblUsers?: {
+                        connect: {
+                            userId: number;
+                        }[];
+                    };
+                    tblUserGroupElements?: {
+                        connect: {
+                            userGroupElementId: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    name: string;
+                    description?: null | string;
+                    lastUpdate?: null | string;
+                    orderNo?: null | number;
+                    tblUsers?: {
+                        connect: {
+                            userId: number;
+                        }[];
+                    };
+                    tblUserGroupElements?: {
+                        connect: {
+                            userGroupElementId: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        userGroupId: number;
+                        name: string;
+                        description: null | string;
+                        lastUpdate: null | string;
+                        orderNo: null | number;
+                        tblUsers?: {
+                            userId: number;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
+                            lastLogin: null | string;
+                            lastUpdate: null | string;
+                        }[];
+                        tblUserGroupElements?: {
+                            userGroupElementId: number;
+                            userGroupId: number;
+                            elementId: number;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblUserGroup: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        deleted: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblUserGroupByUserGroupId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                userGroupId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        userGroupId: number;
+                        name: string;
+                        description: null | string;
+                        lastUpdate: null | string;
+                        orderNo: null | number;
+                        tblUsers?: {
+                            userId: number;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
+                            lastLogin: null | string;
+                            lastUpdate: null | string;
+                        }[];
+                        tblUserGroupElements?: {
+                            userGroupElementId: number;
+                            userGroupId: number;
+                            elementId: number;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    putTblUserGroupByUserGroupId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                userGroupId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    description?: null | string;
+                    lastUpdate?: null | string;
+                    orderNo?: null | number;
+                    tblUsers?: {
+                        connect?: {
+                            userId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblUserGroupElements?: {
+                        connect?: {
+                            userGroupElementId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    name?: string;
+                    description?: null | string;
+                    lastUpdate?: null | string;
+                    orderNo?: null | number;
+                    tblUsers?: {
+                        connect?: {
+                            userId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblUserGroupElements?: {
+                        connect?: {
+                            userGroupElementId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+                "multipart/form-data": {
+                    name?: string;
+                    description?: null | string;
+                    lastUpdate?: null | string;
+                    orderNo?: null | number;
+                    tblUsers?: {
+                        connect?: {
+                            userId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblUserGroupElements?: {
+                        connect?: {
+                            userGroupElementId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        userGroupId: number;
+                        name: string;
+                        description: null | string;
+                        lastUpdate: null | string;
+                        orderNo: null | number;
+                        tblUsers?: {
+                            userId: number;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
+                            lastLogin: null | string;
+                            lastUpdate: null | string;
+                        }[];
+                        tblUserGroupElements?: {
+                            userGroupElementId: number;
+                            userGroupId: number;
+                            elementId: number;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    deleteTblUserGroupByUserGroupId: {
+        parameters: {
+            query?: {
+                force?: boolean;
+            };
+            header?: never;
+            path: {
+                userGroupId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        userGroupId: number;
+                        name: string;
+                        description: null | string;
+                        lastUpdate: null | string;
+                        orderNo: null | number;
+                        tblUsers?: {
+                            userId: number;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
+                            lastLogin: null | string;
+                            lastUpdate: null | string;
+                        }[];
+                        tblUserGroupElements?: {
+                            userGroupElementId: number;
+                            userGroupId: number;
+                            elementId: number;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    getTblUserGroupCount: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblUserGroupElement: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            userGroupElementId: number;
+                            userGroupId: number;
+                            elementId: number;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
+                            tblElement?: {
+                                elementId: number;
+                                parentId: null | number;
+                                name: string;
+                                caption: string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            };
+                            tblUserGroup?: {
+                                userGroupId: number;
+                                name: string;
+                                description: null | string;
+                                lastUpdate: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            };
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
+    };
+    postTblUserGroupElement: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    canCreate: boolean;
+                    canUpdate: boolean;
+                    canDelete: boolean;
+                    canView: boolean;
+                    canExport: boolean;
+                    tblElement: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblUserGroup: {
+                        connect: {
+                            userGroupId: number;
+                        };
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    canCreate: boolean;
+                    canUpdate: boolean;
+                    canDelete: boolean;
+                    canView: boolean;
+                    canExport: boolean;
+                    tblElement: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblUserGroup: {
+                        connect: {
+                            userGroupId: number;
+                        };
+                    };
+                };
+                "multipart/form-data": {
+                    canCreate: boolean;
+                    canUpdate: boolean;
+                    canDelete: boolean;
+                    canView: boolean;
+                    canExport: boolean;
+                    tblElement: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblUserGroup: {
+                        connect: {
+                            userGroupId: number;
+                        };
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        userGroupElementId: number;
+                        userGroupId: number;
+                        elementId: number;
+                        canCreate: boolean;
+                        canUpdate: boolean;
+                        canDelete: boolean;
+                        canView: boolean;
+                        canExport: boolean;
+                        tblElement?: {
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblUserGroup?: {
+                            userGroupId: number;
+                            name: string;
+                            description: null | string;
+                            lastUpdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteTblUserGroupElement: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        deleted: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblUserGroupElementByUserGroupElementId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                userGroupElementId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        userGroupElementId: number;
+                        userGroupId: number;
+                        elementId: number;
+                        canCreate: boolean;
+                        canUpdate: boolean;
+                        canDelete: boolean;
+                        canView: boolean;
+                        canExport: boolean;
+                        tblElement?: {
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblUserGroup?: {
+                            userGroupId: number;
+                            name: string;
+                            description: null | string;
+                            lastUpdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    putTblUserGroupElementByUserGroupElementId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                userGroupElementId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    canCreate?: boolean;
+                    canUpdate?: boolean;
+                    canDelete?: boolean;
+                    canView?: boolean;
+                    canExport?: boolean;
+                    tblElement?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblUserGroup?: {
+                        connect: {
+                            userGroupId: number;
+                        };
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    canCreate?: boolean;
+                    canUpdate?: boolean;
+                    canDelete?: boolean;
+                    canView?: boolean;
+                    canExport?: boolean;
+                    tblElement?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblUserGroup?: {
+                        connect: {
+                            userGroupId: number;
+                        };
+                    };
+                };
+                "multipart/form-data": {
+                    canCreate?: boolean;
+                    canUpdate?: boolean;
+                    canDelete?: boolean;
+                    canView?: boolean;
+                    canExport?: boolean;
+                    tblElement?: {
+                        connect: {
+                            id: number;
+                        };
+                    };
+                    tblUserGroup?: {
+                        connect: {
+                            userGroupId: number;
+                        };
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        userGroupElementId: number;
+                        userGroupId: number;
+                        elementId: number;
+                        canCreate: boolean;
+                        canUpdate: boolean;
+                        canDelete: boolean;
+                        canView: boolean;
+                        canExport: boolean;
+                        tblElement?: {
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblUserGroup?: {
+                            userGroupId: number;
+                            name: string;
+                            description: null | string;
+                            lastUpdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteTblUserGroupElementByUserGroupElementId: {
+        parameters: {
+            query?: {
+                force?: boolean;
+            };
+            header?: never;
+            path: {
+                userGroupElementId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        userGroupElementId: number;
+                        userGroupId: number;
+                        elementId: number;
+                        canCreate: boolean;
+                        canUpdate: boolean;
+                        canDelete: boolean;
+                        canView: boolean;
+                        canExport: boolean;
+                        tblElement?: {
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblUserGroup?: {
+                            userGroupId: number;
+                            name: string;
+                            description: null | string;
+                            lastUpdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    getTblUserGroupElementCount: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblUserInstallation: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            userInstId: number;
+                            userId: number;
+                            instId: number;
+                            tblInstallation?: {
+                                instId: number;
+                                name: string;
+                                orderNo: null | number;
+                                caption: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            };
+                            tblUser?: {
+                                userId: number;
+                                employeeId: number;
+                                userGroupId: number;
+                                userName: string;
+                                password: string;
+                                accountDisabled: boolean;
+                                forcePasswordChange: boolean;
+                                lastLogin: null | string;
+                                lastUpdate: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            };
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
+    };
+    postTblUserInstallation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    tblInstallation: {
+                        connect: {
+                            instId: number;
+                        };
+                    };
+                    tblUser: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    tblInstallation: {
+                        connect: {
+                            instId: number;
+                        };
+                    };
+                    tblUser: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                };
+                "multipart/form-data": {
+                    tblInstallation: {
+                        connect: {
+                            instId: number;
+                        };
+                    };
+                    tblUser: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        userInstId: number;
+                        userId: number;
+                        instId: number;
+                        tblInstallation?: {
+                            instId: number;
+                            name: string;
+                            orderNo: null | number;
+                            caption: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblUser?: {
+                            userId: number;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
+                            lastLogin: null | string;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteTblUserInstallation: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        deleted: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblUserInstallationByUserInstId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                userInstId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        userInstId: number;
+                        userId: number;
+                        instId: number;
+                        tblInstallation?: {
+                            instId: number;
+                            name: string;
+                            orderNo: null | number;
+                            caption: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblUser?: {
+                            userId: number;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
+                            lastLogin: null | string;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    putTblUserInstallationByUserInstId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                userInstId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    tblInstallation?: {
+                        connect: {
+                            instId: number;
+                        };
+                    };
+                    tblUser?: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    tblInstallation?: {
+                        connect: {
+                            instId: number;
+                        };
+                    };
+                    tblUser?: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                };
+                "multipart/form-data": {
+                    tblInstallation?: {
+                        connect: {
+                            instId: number;
+                        };
+                    };
+                    tblUser?: {
+                        connect: {
+                            userId: number;
+                        };
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        userInstId: number;
+                        userId: number;
+                        instId: number;
+                        tblInstallation?: {
+                            instId: number;
+                            name: string;
+                            orderNo: null | number;
+                            caption: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblUser?: {
+                            userId: number;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
+                            lastLogin: null | string;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteTblUserInstallationByUserInstId: {
+        parameters: {
+            query?: {
+                force?: boolean;
+            };
+            header?: never;
+            path: {
+                userInstId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        userInstId: number;
+                        userId: number;
+                        instId: number;
+                        tblInstallation?: {
+                            instId: number;
+                            name: string;
+                            orderNo: null | number;
+                            caption: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblUser?: {
+                            userId: number;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
+                            lastLogin: null | string;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    getTblUserInstallationCount: {
         parameters: {
             query?: {
                 page?: number;
@@ -57470,7 +64947,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintCause?: {
@@ -57584,7 +65061,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintCause?: {
@@ -57698,7 +65175,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintCause?: {
@@ -57942,6 +65419,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -58335,6 +65813,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -58583,7 +66062,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -58721,7 +66200,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -58859,7 +66338,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -59114,6 +66593,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -59475,6 +66955,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -60512,6 +67993,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -60587,7 +68069,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShopAttachments?: {
@@ -60637,7 +68119,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShopAttachments?: {
@@ -60687,7 +68169,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShopAttachments?: {
@@ -60779,6 +68261,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -60924,6 +68407,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -61006,7 +68490,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -61070,7 +68554,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -61134,7 +68618,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -61233,6 +68717,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -61346,6 +68831,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -61449,6 +68935,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -61511,7 +68998,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShop: {
@@ -61533,7 +69020,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShop: {
@@ -61555,7 +69042,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShop: {
@@ -61600,6 +69087,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -61713,6 +69201,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -61775,7 +69264,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -61798,7 +69287,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -61821,7 +69310,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -61867,6 +69356,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -61948,6 +69438,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -62092,6 +69583,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -62156,7 +69648,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblLocation?: {
@@ -62184,7 +69676,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblLocation?: {
@@ -62212,7 +69704,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblLocation?: {
@@ -62283,6 +69775,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -62418,6 +69911,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -62483,7 +69977,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -62514,7 +70008,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -62545,7 +70039,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -62618,6 +70112,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -62721,6 +70216,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -62812,41 +70308,6 @@ export interface operations {
             };
         };
         responses: never;
-    };
-    postAuthRegister: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    username: string;
-                    password: string;
-                };
-                "application/x-www-form-urlencoded": {
-                    username: string;
-                    password: string;
-                };
-                "multipart/form-data": {
-                    username: string;
-                    password: string;
-                };
-            };
-        };
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": Record<string, never>;
-                };
-            };
-        };
     };
     postAuthLogout: {
         parameters: {

@@ -11,14 +11,14 @@ import { useState } from "react";
 import {
   tblComponentUnit,
   tblDiscipline,
-  tblUsers,
   tblFailureSeverityLevel,
   tblFailureStatus,
+  tblUser,
   TypeTblComponentUnit,
   TypeTblDiscipline,
-  TypeTblUsers,
   TypeTblFailureSeverityLevel,
   TypeTblFailureStatus,
+  TypeTblUser,
 } from "@/core/api/generated/api";
 
 export interface FailureReportFilter {
@@ -32,7 +32,7 @@ type FiltersState = {
   dateFrom: string;
   dateTo: string;
   discipline: TypeTblDiscipline | null;
-  reportedBy: TypeTblUsers | null;
+  reportedBy: TypeTblUser | null;
   severity: TypeTblFailureSeverityLevel | null;
   status: TypeTblFailureStatus | null;
   downTime: string;
@@ -251,7 +251,7 @@ export default function FailureReportFilterDialog({
           <FieldAsyncSelectGrid
             label="Reported By"
             selectionMode="single"
-            request={tblUsers.getAll}
+            request={tblUser.getAll}
             value={filters.reportedBy}
             columns={[
               { field: "uName", headerName: "Name", flex: 1 },
@@ -262,7 +262,7 @@ export default function FailureReportFilterDialog({
             onChange={(v) =>
               setFilters((p) => ({
                 ...p,
-                reportedBy: v as TypeTblUsers | null,
+                reportedBy: v as TypeTblUser | null,
               }))
             }
           />

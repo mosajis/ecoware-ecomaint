@@ -8,12 +8,6 @@ export const columns: GridColDef<TypeTblEmployee>[] = [
   { field: "lastName", headerName: "Last Name", flex: 1 },
   { field: "firstName", headerName: "First Name", flex: 1 },
   {
-    field: "address",
-    headerName: "Address",
-    flex: 1,
-    valueGetter: (v, row) => row.tblAddress?.name,
-  },
-  {
     field: "discipline",
     headerName: "Discipline",
     flex: 1,

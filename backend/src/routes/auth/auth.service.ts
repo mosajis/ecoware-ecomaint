@@ -1,5 +1,6 @@
 import { prisma } from "@/utils/prisma";
 import bcrypt from "bcrypt";
+import type { connect } from "node:http2";
 import { type TblUser } from "orm/generated/prisma/client";
 
 export class AuthService {
@@ -46,25 +47,39 @@ export class AuthService {
     return { accessToken };
   }
 
-  async register(registerDto: { username: string; password: string }) {
-    const { username, password } = registerDto;
+  async register(registerDto: any) {
+    const {
+      userName,
+      password,
+      userGroupId,
+      employeeId,
+      accountDisabled,
+      forcePasswordChange,
+    } = registerDto;
 
     const existingUser = await prisma.tblUser.findFirst({
-      where: { userName: username },
+      where: { userName: userName },
     });
 
     if (existingUser) {
-      throw new Error("Mobile number already in use");
+      throw new Error("Username already in use");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    console.log("aaaaa", hashedPassword);
     const user = await prisma.tblUser.create({
       data: {
-        userName: username,
+        tblEmployee: {
+          connect: { employeeId: employeeId },
+        },
+        tblUserGroup: {
+          connect: { userGroupId: userGroupId },
+        },
+        accountDisabled,
+        forcePasswordChange,
+        userName: userName,
         password: hashedPassword,
-        userGroupId: 3,
-        lastLogin: new Date().toString(),
       },
     });
 

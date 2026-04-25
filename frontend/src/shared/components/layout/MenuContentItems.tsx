@@ -1,4 +1,3 @@
-import React from "react";
 import type { ReactNode } from "react";
 // ================= ICONS =================
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
@@ -38,7 +37,7 @@ import ReportProblemRoundedIcon from "@mui/icons-material/ReportProblemRounded";
 import TodayRoundedIcon from "@mui/icons-material/TodayRounded";
 import DateRangeRoundedIcon from "@mui/icons-material/DateRangeRounded";
 import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
-import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
+import PeopleRoundedIcon from "@mui/icons-material/AccountBoxRounded";
 import SecurityRoundedIcon from "@mui/icons-material/SecurityRounded";
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
 // ================= TYPES =================

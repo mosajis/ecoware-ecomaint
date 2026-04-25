@@ -53,7 +53,7 @@ export class BaseService<T extends { id: any }> {
     }
 
     // Safe pagination
-    const safePerPage = Math.min(Number(perPage) || 20, this.maxLimit);
+    const safePerPage = Math.min(this.maxLimit);
     const safeSkip =
       skip ?? (page && perPage ? (page - 1) * safePerPage : undefined);
 
