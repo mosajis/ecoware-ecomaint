@@ -37,6 +37,7 @@ export default function PageAttachment() {
         showToolbar
         disableRowNumber
         disableEdit
+        elementId={1200}
         label="Attachments"
         rows={rows}
         columns={columns}

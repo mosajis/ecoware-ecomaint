@@ -107,6 +107,7 @@ export default function PageCounterUpdate() {
           disableDelete
           disableEdit
           label="Counters"
+          elementId={1370}
           loading={loading}
           rows={rows}
           columns={columns}

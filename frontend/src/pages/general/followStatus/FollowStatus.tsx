@@ -37,6 +37,7 @@ export default function PageFollowStatus() {
     <>
       <CustomizedDataGrid
         showToolbar
+        elementId={700}
         label="Follow Status"
         rows={rows}
         columns={columns}

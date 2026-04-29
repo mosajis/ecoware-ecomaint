@@ -35,6 +35,7 @@ export default function RoundPage() {
         showToolbar
         loading={loading}
         label="Rounds"
+        elementId={1350}
         rows={rows}
         onRefreshClick={handleRefresh}
         columns={columns}

@@ -38,6 +38,7 @@ export default function PageAddress() {
       <CustomizedDataGrid
         showToolbar
         disableRowNumber
+        elementId={100}
         label="Address"
         rows={rows}
         columns={columns}

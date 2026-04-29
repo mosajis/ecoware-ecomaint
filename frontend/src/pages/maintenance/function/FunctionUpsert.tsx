@@ -8,7 +8,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { buildRelation, requiredStringField } from "@/core/helper";
 import { memo, useCallback, useEffect, useState } from "react";
-import { tblFunctions, TypeTblFunctions } from "@/core/api/generated/api";
+import { tblFunction, TypeTblFunction } from "@/core/api/generated/api";
 
 const schema = z.object({
   funcNo: requiredStringField(),
@@ -31,7 +31,7 @@ type Props = {
   mode: "create" | "update";
   recordId?: number | null;
   onClose: () => void;
-  onSuccess: (data: TypeTblFunctions) => void;
+  onSuccess: (data: TypeTblFunction) => void;
 };
 
 function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
@@ -62,7 +62,7 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
     setLoadingInitial(true);
 
     try {
-      const res = await tblFunctions.getById(recordId, {
+      const res = await tblFunction.getById(recordId, {
         include: { tblFunctions: true, tblComponentUnit: true },
       });
 
@@ -70,10 +70,10 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         funcNo: res?.funcNo ?? "",
         funcDesc: res?.funcDesc ?? "",
         orderNo: res?.orderNo,
-        parent: res?.tblFunctions
+        parent: res?.tblFunction
           ? {
-              functionId: res.tblFunctions.functionId,
-              funcNo: res.tblFunctions.funcNo,
+              functionId: res.tblFunction.functionId,
+              funcNo: res.tblFunction.funcNo,
             }
           : null,
       });
@@ -112,12 +112,12 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           ),
         };
 
-        let result: TypeTblFunctions;
+        let result: TypeTblFunction;
 
         if (mode === "create") {
-          result = await tblFunctions.create(payload);
+          result = await tblFunction.create(payload);
         } else {
-          result = await tblFunctions.update(recordId!, payload);
+          result = await tblFunction.update(recordId!, payload);
         }
 
         onSuccess(result);
@@ -200,7 +200,7 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               label="Parent Function"
               getOptionLabel={(row) => row.funcNo}
               selectionMode="single"
-              request={tblFunctions.getAll}
+              request={tblFunction.getAll}
               value={field.value}
               onChange={field.onChange}
               columns={[

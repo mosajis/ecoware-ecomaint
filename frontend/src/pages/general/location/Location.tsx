@@ -60,6 +60,7 @@ export default function PageLocation() {
       <Splitter initialPrimarySize="35%">
         <GenericTree<TypeTblLocation>
           label="Tree View"
+          elementId={200}
           loading={loading}
           data={tree}
           onDelete={handleDelete}
@@ -73,6 +74,7 @@ export default function PageLocation() {
 
         <GenericDataGrid
           label="List View"
+          elementId={200}
           showToolbar
           disableRowNumber
           loading={loading}

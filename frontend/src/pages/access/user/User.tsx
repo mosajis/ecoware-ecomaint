@@ -58,6 +58,7 @@ const Users = () => {
     <>
       <CustomizedDataGrid
         label="Users"
+        elementId={1710}
         showToolbar
         rows={rows}
         columns={columns}

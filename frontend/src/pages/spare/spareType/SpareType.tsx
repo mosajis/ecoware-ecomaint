@@ -142,6 +142,7 @@ export default function PageStockType() {
       <CustomizedDataGrid
         showToolbar
         label="List View"
+        elementId={1510}
         loading={loading}
         rows={rows}
         columns={columns}

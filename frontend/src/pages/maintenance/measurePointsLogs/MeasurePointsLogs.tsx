@@ -42,6 +42,7 @@ export default function PageMeasurePointsLogs() {
       disableEdit
       onDeleteClick={handleDelete}
       label="Measure Points Logs"
+      elementId={1410}
       rows={rows}
       columns={columns}
       loading={loading}

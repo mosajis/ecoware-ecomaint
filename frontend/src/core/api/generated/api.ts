@@ -2,6 +2,8 @@
 import { api } from '@/service/axios';
 import type { DynamicResponse, DynamicQuery, DynamicCreate, DynamicUpdate } from '../dynamicTypes';
 
+// 🔥 Utility برای stringify خودکار query parameters
+// این تابع filter, include, select و سایر objectها را به JSON string تبدیل می‌کند
 function stringifyQuery<Q extends Record<string, any>>(query?: Q) {
   if (!query) return query;
   const result: Record<string, any> = {};

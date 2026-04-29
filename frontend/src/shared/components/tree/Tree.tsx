@@ -10,6 +10,7 @@ import {
 } from "@headless-tree/core";
 
 import "./tree.css";
+import { usePermission } from "@/shared/hooks/usePermison";
 
 interface GenericTreeProps<T> {
   label?: string;
@@ -23,6 +24,7 @@ interface GenericTreeProps<T> {
   onEdit?: (itemId: number) => void;
   onDelete?: (itemId: number) => void;
   loading?: boolean;
+  elementId?: number
 }
 
 export function GenericTree<T>({
@@ -37,7 +39,12 @@ export function GenericTree<T>({
   onRefresh,
   onDoubleClick,
   loading = false,
+  elementId,
 }: GenericTreeProps<T>) {
+  const { canCreate, canUpdate, canDelete, canView, canExport } =
+      usePermission(elementId!);
+
+
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [focusedItem, setFocusedItem] = useState<string | null>(null);
@@ -225,9 +232,11 @@ export function GenericTree<T>({
       <TreeHeader
         label={label || "Tree View"}
         onSearch={handleSearch}
-        onDelete={handleDelete}
-        onEdit={handleEdit}
-        onAdd={onAdd}
+        
+        onDelete={canDelete ? handleDelete: undefined}
+        onEdit={canUpdate ? handleEdit: undefined}
+        onAdd={canCreate ? onAdd: undefined}
+        
         onRefresh={onRefresh}
         onExpandAll={handleExpandAll}
         onCollapseAll={handleCollapseAll}

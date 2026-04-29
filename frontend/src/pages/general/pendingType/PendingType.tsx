@@ -37,6 +37,7 @@ export default function PagePendingType() {
       <CustomizedDataGrid
         showToolbar
         label="Pending Type"
+        elementId={800}
         rows={rows}
         columns={columns}
         loading={loading}

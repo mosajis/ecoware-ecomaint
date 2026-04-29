@@ -382,6 +382,7 @@ export default function WorkOrderPage() {
           onDoubleClick={handleDoubleClick}
           showToolbar
           label="WorkOrders"
+          elementId={1340}
           rows={rows}
           columns={columns}
           loading={loading}

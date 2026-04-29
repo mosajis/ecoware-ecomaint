@@ -125,6 +125,7 @@ export default function PageWorkShop() {
           showToolbar
           disableRowNumber
           label="WorkShop"
+          elementId={1360}
           loading={loading}
           rows={rows}
           columns={columns}

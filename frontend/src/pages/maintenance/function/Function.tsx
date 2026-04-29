@@ -9,9 +9,9 @@ import { mapToTree } from "@/shared/components/tree/TreeUtil";
 import { GenericTree } from "@/shared/components/tree/Tree";
 import { useDialogs } from "@/shared/hooks/useDialogs";
 import { useCallback, useState, useMemo } from "react";
-import { tblFunctions, TypeTblFunctions } from "@/core/api/generated/api";
 import { routeDetail } from "./FunctionRoutes";
 import { columns, getItemName, getRowId } from "./FunctionColumn";
+import { tblFunction, TypeTblFunction } from "@/core/api/generated/api";
 
 export default function PageFunction() {
   const router = useRouter();
@@ -25,21 +25,21 @@ export default function PageFunction() {
   });
 
   const getAll = useCallback(() => {
-    return tblFunctions.getAll({
+    return tblFunction.getAll({
       include: { tblComponentUnit: true },
     });
   }, []);
 
   const treeMapper = useCallback(
-    (items: TypeTblFunctions[]) =>
+    (items: TypeTblFunction[]) =>
       mapToTree(items, "functionId", "parentFunctionId"),
     [],
   );
 
   const { rows, tree, loading, refetch, handleDelete } =
-    useDataTree<TypeTblFunctions>({
+    useDataTree<TypeTblFunction>({
       getAll,
-      deleteById: tblFunctions.deleteById,
+      deleteById: tblFunction.deleteById,
       getId: (item) => item.functionId,
       mapper: treeMapper,
     });
@@ -79,7 +79,8 @@ export default function PageFunction() {
   return (
     <>
       <Splitter initialPrimarySize="35%">
-        <GenericTree<TypeTblFunctions>
+        <GenericTree<TypeTblFunction>
+          elementId={1430}
           loading={loading}
           data={tree}
           onDoubleClick={handleRowDoubleClick}
@@ -93,6 +94,7 @@ export default function PageFunction() {
         <CustomizedDataGrid
           showToolbar
           label="List View"
+          elementId={1430}
           rows={rows}
           columns={columns}
           loading={loading}

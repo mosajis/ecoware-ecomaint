@@ -101,6 +101,7 @@ export default function PageMaintClass() {
           disableColumns
           disableExport
           disableRefresh
+          elementId={600}
           label="Maint Class"
           rows={classRows}
           columns={columns}
@@ -120,6 +121,7 @@ export default function PageMaintClass() {
             disableExport
             disableRefresh
             label="Maint Type"
+            elementId={620}
             rows={typeRows}
             columns={columns}
             loading={loadingType}
@@ -137,6 +139,7 @@ export default function PageMaintClass() {
             disableExport
             disableRefresh
             label="Maint Cause"
+            elementId={610}
             rows={causeRows}
             columns={columns}
             loading={loadingCause}

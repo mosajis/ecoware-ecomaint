@@ -63,6 +63,7 @@ export default function PageJobDescription() {
           disableRefresh
           disableColumns
           label="Job Description"
+          elementId={1000}
           loading={loading}
           rows={rows}
           columns={columns}

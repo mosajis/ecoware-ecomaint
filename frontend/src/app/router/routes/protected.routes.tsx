@@ -1,7 +1,8 @@
-import { createRoute } from "@tanstack/react-router";
-import { Outlet, redirect } from "@tanstack/react-router";
 import AppLayout from "@/shared/components/layout/AppLayout";
 import AppAuthorization from "@/shared/components/AppAthorization";
+import AppLogic from "@/app/logic";
+import { createRoute } from "@tanstack/react-router";
+import { Outlet, redirect } from "@tanstack/react-router";
 import { LOCAL_STORAGE } from "@/const";
 import { NotFound } from "@/pages/NotFound";
 import { rootRoute } from "./_components/rootRoute";
@@ -13,6 +14,7 @@ export const protectedRoute = createRoute({
   path: "",
   component: () => (
     <AppAuthorization>
+      <AppLogic />
       <AppLayout />
     </AppAuthorization>
   ),

@@ -2,21 +2,21 @@ import TabsComponent from "./FunctionTabs";
 import Spinner from "@/shared/components/Spinner";
 import { useEffect, useState } from "react";
 import { routeDetail } from "./FunctionRoutes";
-import { tblFunctions, TypeTblFunctions } from "@/core/api/generated/api";
+import { tblFunction, TypeTblFunction } from "@/core/api/generated/api";
 
 const FunctionDetail = () => {
   const { id } = routeDetail.useParams();
   const { breadcrumb } = routeDetail.useSearch();
 
   const [loading, setLoading] = useState(true);
-  const [recordFunction, setFunction] = useState<TypeTblFunctions | null>(null);
+  const [recordFunction, setFunction] = useState<TypeTblFunction | null>(null);
 
   useEffect(() => {
     if (!id) return;
 
     setLoading(true);
 
-    tblFunctions
+    tblFunction
       .getById(id, {
         include: {
           tblComponentUnit: true,

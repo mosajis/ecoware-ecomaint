@@ -54,6 +54,7 @@ export default function PageCounterType() {
           disableExport
           rowSelection
           label="Counter Type"
+          elementId={500}
           rows={rows}
           columns={columns}
           loading={loading}

@@ -101,6 +101,7 @@ const UserGroups = () => {
         <CustomizedDataGrid
           showToolbar
           label="User Groups"
+          elementId={1720}
           rows={rows}
           columns={columns}
           loading={loading}

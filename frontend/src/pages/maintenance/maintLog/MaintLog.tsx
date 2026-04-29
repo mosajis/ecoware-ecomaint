@@ -102,6 +102,7 @@ export default function PageMaintLog() {
           checkboxSelection
           disableRowSelectionOnClick
           label="Maintenance Log"
+          elementId={1420}
           rowSelection
           rows={rows}
           columns={columns}

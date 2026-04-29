@@ -37,8 +37,9 @@ export default function PageDiscipline() {
   return (
     <>
       <CustomizedDataGrid
-        loading={loading}
         showToolbar
+        elementId={400}
+        loading={loading}
         label="Discipline"
         rows={rows}
         columns={columns}

@@ -85,6 +85,7 @@ export default function PageJobTrigger() {
           disableRowNumber
           disableRefresh
           disableFilters
+          elementId={1100}
           label="Job Triggers"
           rows={rows}
           columns={columns}

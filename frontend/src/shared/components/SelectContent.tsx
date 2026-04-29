@@ -12,6 +12,8 @@ import Select, {
   type SelectChangeEvent,
   selectClasses,
 } from "@mui/material/Select";
+import { useNavigate } from "@tanstack/react-router";
+import { dashboardRoute } from "@/app/router/routes/dashboard.routes";
 
 const Avatar = styled(MuiAvatar)(({ theme }) => ({
   width: 28,
@@ -27,6 +29,7 @@ const ListItemAvatar = styled(MuiListItemAvatar)({
 });
 
 export default function SelectContent() {
+  const navigate = useNavigate()
   const [selectedRig, setSelectedRig] = useAtom(atomRig);
   const [installations, setInstallations] = React.useState<
     TypeTblInstallation[]
@@ -69,6 +72,7 @@ export default function SelectContent() {
     );
     if (selected) {
       setSelectedRig(selected);
+      navigate({to: '/' })
     }
   };
 

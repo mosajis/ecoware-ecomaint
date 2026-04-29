@@ -126,10 +126,11 @@ export default function PageComponentJob() {
           disableDelete
           disableRowNumber
           showToolbar
+          label="Component Job"
+          elementId={1330}
           rows={rows}
           loading={loading}
           columns={columns}
-          label="Component Job"
           onRefreshClick={handleRefresh}
           getRowId={(row) => row.compJobId}
           onRowClick={handleRowClick}

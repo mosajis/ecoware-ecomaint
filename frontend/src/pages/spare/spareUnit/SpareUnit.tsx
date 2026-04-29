@@ -68,6 +68,7 @@ export default function PageSpareUnit() {
       <CustomizedDataGrid
         showToolbar
         label="List View"
+        elementId={1520}
         loading={loading}
         rows={rows}
         columns={columns}

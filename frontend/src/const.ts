@@ -1,4 +1,7 @@
 export const LOCAL_STORAGE = {
+  IS_PERSIST: "is-persist",
+  ELEMENTS: "elements",
+  USERGROUP_ELEMENTS: "usergroup-element",
   ACCESS_KEY: "access-token",
   PERSIST_CHECK_KEY: "is-persist",
   LANG: "language",

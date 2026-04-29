@@ -50,6 +50,7 @@ export default function PageEmployee() {
         showToolbar
         disableRowNumber
         label="Employee"
+        elementId={300}
         loading={loading}
         rows={rows}
         columns={columns}

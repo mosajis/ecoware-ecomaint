@@ -37,6 +37,7 @@ export default function PageJobClass() {
     <>
       <CustomizedDataGrid
         showToolbar
+        elementId={900}
         label="Job Class"
         rows={rows}
         columns={columns}

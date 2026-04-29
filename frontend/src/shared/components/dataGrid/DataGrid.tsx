@@ -1,4 +1,5 @@
 import DataGridToolbar from "./DataGridToolbar";
+import { usePermission } from "@/shared/hooks/usePermison";
 import { DataGrid as MuiDataGrid, GridRowId } from "@mui/x-data-grid";
 import {
   type DataGridProps,
@@ -39,8 +40,8 @@ interface CustomizedDataGridProps extends DataGridProps {
   disableEdit?: boolean;
   disableDelete?: boolean;
   disableRowNumber?: boolean;
-
   toolbarChildren?: React.ReactNode;
+  elementId?: number
 }
 
 export default function GenericDataGrid({
@@ -66,8 +67,12 @@ export default function GenericDataGrid({
   disableDelete,
   disableRowNumber,
   toolbarChildren,
+  elementId,
   ...rest
 }: CustomizedDataGridProps) {
+  const { canCreate, canUpdate, canDelete, canView, canExport } =
+    usePermission(elementId!);
+
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>({
       type: "include",
@@ -126,13 +131,15 @@ export default function GenericDataGrid({
         hasSelection={rowSelectionModel.ids.size > 0}
         disableSearch={disableSearch}
         disableDensity={disableDensity}
-        disableExport={disableExport}
         disableColumns={disableColumns}
         disableFilters={disableFilters}
-        disableAdd={disableAdd}
+        
+        disableExport={!canExport || disableExport}
+        disableAdd={!canCreate || disableAdd}
+        disableEdit={!canUpdate || disableEdit}
+        disableDelete={!canDelete || disableDelete}
+        
         disableRefresh={disableRefresh}
-        disableEdit={disableEdit}
-        disableDelete={disableDelete}
       >
         {toolbarChildren}
       </DataGridToolbar>

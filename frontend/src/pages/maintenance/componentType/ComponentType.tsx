@@ -80,6 +80,7 @@ export default function PageComponentType() {
       <Splitter initialPrimarySize="30%">
         <GenericTree<TypeTblCompType>
           label="Tree View"
+          elementId={1320}
           loading={loading}
           data={tree}
           onDoubleClick={handleRowDoubleClick}
@@ -94,6 +95,7 @@ export default function PageComponentType() {
           showToolbar
           disableRowNumber
           label="List View"
+          elementId={1320}
           rows={rows}
           columns={columns}
           loading={loading}

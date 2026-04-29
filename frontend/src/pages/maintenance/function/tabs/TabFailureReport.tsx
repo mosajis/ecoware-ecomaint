@@ -6,11 +6,11 @@ import {
   tblFailureReports,
   tblMaintCause,
   TypeTblFailureReports,
-  TypeTblFunctions,
+  TypeTblFunction,
 } from "@/core/api/generated/api";
 
 interface Props {
-  recordFunction?: TypeTblFunctions;
+  recordFunction?: TypeTblFunction;
   label?: string;
 }
 

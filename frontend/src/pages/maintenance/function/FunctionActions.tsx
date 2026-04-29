@@ -1,10 +1,10 @@
 import DataGridActionBar from "@/shared/components/dataGrid/DataGridActionBar";
 import Add from "@mui/icons-material/Add";
 import Remove from "@mui/icons-material/Remove";
-import { TypeTblFunctions } from "@/core/api/generated/api";
+import { TypeTblFunction } from "@/core/api/generated/api";
 
 type Props = {
-  selectedRow: TypeTblFunctions | null;
+  selectedRow: TypeTblFunction | null;
   onInstall: () => void;
   onRemove: () => void;
 };

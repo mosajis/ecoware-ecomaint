@@ -174,6 +174,7 @@ function PageMeasurePoints() {
           disableEdit
           disableDelete
           label="Measure Points"
+          elementId={1400}
           rows={rows}
           columns={columns}
           loading={loading}

@@ -12,7 +12,7 @@ import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
 import {
   tblComponentUnit,
-  tblFunctions,
+  tblFunction,
   tblRotationLog,
 } from "@/core/api/generated/api";
 
@@ -97,7 +97,7 @@ function DialogInstallRemoveComponent({
         });
 
         // 2. update function
-        await tblFunctions.update(functionId, {
+        await tblFunction.update(functionId, {
           ...buildRelation("tblComponentUnit", "compId", v.component.compId),
         });
 
@@ -122,7 +122,7 @@ function DialogInstallRemoveComponent({
         });
 
         // function → null
-        await tblFunctions.update(functionId, {
+        await tblFunction.update(functionId, {
           tblComponentUnit: {
             disconnect: true,
           },
