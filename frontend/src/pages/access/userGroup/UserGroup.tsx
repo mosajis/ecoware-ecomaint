@@ -15,8 +15,12 @@ import {
   TypeTblUser,
   TypeTblUserGroup,
 } from "@/core/api/generated/api";
+import { useRouter } from "@tanstack/react-router";
+import { routeUserGroupDetail } from "./UserGroupRoutes";
 
 const UserGroups = () => {
+  const router = useRouter();
+
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
   const [label, setLabel] = useState<string | null>(null);
   const [mode, setMode] = useState<"create" | "update">("create");
@@ -84,6 +88,20 @@ const UserGroups = () => {
     [selectedRowId],
   );
 
+  const handleRowDoubleClick = useCallback(
+    (rowId: number) => {
+      const row = rows.find((i) => i.userGroupId === rowId);
+
+      if (!row) return;
+      router.navigate({
+        to: routeUserGroupDetail.to,
+        params: { id: rowId },
+        search: { breadcrumb: row?.name },
+      });
+    },
+    [router, rows],
+  );
+
   const {
     rows: userRows,
     loading: userLoading,
@@ -109,7 +127,7 @@ const UserGroups = () => {
           onRefreshClick={handleRefresh}
           onDeleteClick={handleDelete}
           onEditClick={handleEdit}
-          onDoubleClick={handleEdit}
+          onDoubleClick={handleRowDoubleClick}
           getRowId={getRowId}
           onRowClick={handleRowClick}
         />

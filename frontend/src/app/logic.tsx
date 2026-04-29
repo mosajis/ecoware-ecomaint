@@ -1,48 +1,70 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useAtom, useAtomValue } from "jotai";
-import { atomUserGroupElements } from "./logic.atom";
-import { tblUserGroupElement } from "@/core/api/generated/api";
+
+import { tblInstallation, tblUserGroupElement } from "@/core/api/generated/api";
+
 import { LOCAL_STORAGE } from "@/const";
 import { atomUser } from "@/pages/auth/auth.atom";
+import { atomUserGroupElements } from "./logic.atom";
+import { atomInstallations } from "@/shared/atoms/general.atom";
 
 const AppLogic = () => {
   const user = useAtomValue(atomUser);
   const userGroupId = user?.userGroupId as number;
 
-  const [userGroupElements, setUserGroupElements] = useAtom(
-    atomUserGroupElements,
-  );
+  const [, setUserGroupElements] = useAtom(atomUserGroupElements);
+  const [, setInstallations] = useAtom(atomInstallations);
 
+  // const isPersist = localStorage.getItem(LOCAL_STORAGE.IS_PERSIST) === "1";
   const isPersist = false;
-  // const isPersist = localStorage.getItem(LOCAL_STORAGE.IS_PERSIST)
-  useEffect(() => {
-    const initData = async () => {
-      const res = await tblUserGroupElement.getAll({
-        filter: {
-          userGroupId,
-        },
-      });
-      const result: any = {};
-      res.items.forEach((i) => {
-        const item = {
-          canCreate: i.canCreate,
-          canExport: i.canExport,
-          canDelete: i.canDelete,
-          canUpdate: i.canUpdate,
-          canView: i.canView,
-        };
-        result[i.elementId] = item;
-      });
-      setUserGroupElements(result);
-      localStorage.setItem(LOCAL_STORAGE.IS_PERSIST, "1");
-    };
 
+  // === Load permissions
+  const loadPermissions = useCallback(async () => {
+    if (!userGroupId) return;
+
+    const res = await tblUserGroupElement.getAll({
+      filter: { userGroupId },
+    });
+
+    const result: Record<number, any> = {};
+
+    res.items.forEach((i) => {
+      result[i.elementId] = {
+        canCreate: i.canCreate,
+        canExport: i.canExport,
+        canDelete: i.canDelete,
+        canUpdate: i.canUpdate,
+        canView: i.canView,
+      };
+    });
+
+    setUserGroupElements(result);
+  }, [userGroupId, setUserGroupElements]);
+
+  // === Load installations
+  const loadInstallations = useCallback(async () => {
+    const res = await tblInstallation.getAll();
+    setInstallations(res.items ?? []);
+  }, [setInstallations]);
+
+  // === Init
+  const initData = useCallback(async () => {
+    try {
+      await Promise.all([loadPermissions(), loadInstallations()]);
+
+      localStorage.setItem(LOCAL_STORAGE.IS_PERSIST, "1");
+    } catch (err) {
+      console.error("App init failed", err);
+    }
+  }, [loadPermissions, loadInstallations]);
+
+  useEffect(() => {
     if (!isPersist) {
       initData();
     }
-  }, [isPersist, setUserGroupElements]);
+  }, [isPersist, initData]);
 
-  return "";
+  return null;
 };
 
 export default AppLogic;

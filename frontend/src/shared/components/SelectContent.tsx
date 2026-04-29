@@ -6,14 +6,13 @@ import ListItemText from "@mui/material/ListItemText";
 import DevicesRoundedIcon from "@mui/icons-material/DevicesRounded";
 import { useAtom } from "jotai";
 import { styled } from "@mui/material/styles";
-import { atomRig } from "../atoms/general.atom";
+import { atomInstallations, atomRig } from "../atoms/general.atom";
 import { tblInstallation, TypeTblInstallation } from "@/core/api/generated/api";
 import Select, {
   type SelectChangeEvent,
   selectClasses,
 } from "@mui/material/Select";
 import { useNavigate } from "@tanstack/react-router";
-import { dashboardRoute } from "@/app/router/routes/dashboard.routes";
 
 const Avatar = styled(MuiAvatar)(({ theme }) => ({
   width: 28,
@@ -29,33 +28,12 @@ const ListItemAvatar = styled(MuiListItemAvatar)({
 });
 
 export default function SelectContent() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [selectedRig, setSelectedRig] = useAtom(atomRig);
-  const [installations, setInstallations] = React.useState<
-    TypeTblInstallation[]
-  >([]);
-
-  const [loading, setLoading] = React.useState(true);
+  const [installations, setInstallations] = useAtom(atomInstallations);
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await tblInstallation.getAll();
-        const data: TypeTblInstallation[] = Array.isArray(response)
-          ? response
-          : response.items;
-        setInstallations(data);
-      } catch (error) {
-        console.error("Failed to fetch installations", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  React.useEffect(() => {
-    if (!loading && installations.length > 0) {
+    if (installations.length > 0) {
       const isValid =
         selectedRig &&
         installations.some((item) => item.instId === selectedRig.instId);
@@ -63,7 +41,7 @@ export default function SelectContent() {
         setSelectedRig(installations[0]);
       }
     }
-  }, [loading, installations, selectedRig, setSelectedRig]);
+  }, [installations, selectedRig, setSelectedRig]);
 
   const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value;
@@ -72,7 +50,7 @@ export default function SelectContent() {
     );
     if (selected) {
       setSelectedRig(selected);
-      navigate({to: '/' })
+      navigate({ to: "/" });
     }
   };
 

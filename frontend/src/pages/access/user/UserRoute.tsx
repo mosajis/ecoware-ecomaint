@@ -5,7 +5,7 @@ import { lazy } from "react";
 
 export default createRoute({
   getParentRoute: () => AccessRoute,
-  path: "users",
+  path: "user",
   component: () => <LazyRoute Component={lazy(() => import("./User"))} />,
   beforeLoad: () => ({ breadcrumb: "Users" }),
 });

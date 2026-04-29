@@ -1,5 +1,5 @@
 import RouteUser from "@/pages/access/user/UserRoute";
-import RouteUserGroup from "@/pages/access/userGroup/UserGroupRoute";
+import RouteUserGroup from "@/pages/access/userGroup/UserGroupRoutes";
 import { createRoute, Outlet } from "@tanstack/react-router";
 import { protectedRoute } from "../../app/router/routes/protected.routes";
 

@@ -351,12 +351,12 @@ export const menuContentItems: MenuSection[] = [
       {
         text: "Users",
         icon: <PeopleRoundedIcon sx={iconStyle} />,
-        path: "/access/users",
+        path: "/access/user",
       },
       {
         text: "Users Group",
         icon: <GroupRoundedIcon sx={iconStyle} />,
-        path: "/access/user-groups",
+        path: "/access/user-group",
       },
     ],
   },
