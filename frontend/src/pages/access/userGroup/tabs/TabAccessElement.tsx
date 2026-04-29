@@ -407,7 +407,7 @@ export default function TabAccessElement(props: Props) {
           </TableRow>
         </TableHead>
 
-        <TableBody sx={{ height: "20vh" }}>
+        <TableBody>
           {tree.map((n) => (
             <Row
               key={n.elementId}
