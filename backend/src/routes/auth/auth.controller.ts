@@ -188,6 +188,7 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
           select: {
             userId: true,
             userName: true,
+            userGroupId: true,
             forcePasswordChange: true,
             tblEmployee: {
               select: {

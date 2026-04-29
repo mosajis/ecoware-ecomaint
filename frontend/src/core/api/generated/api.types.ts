@@ -5137,6 +5137,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -5327,6 +5328,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -5412,7 +5414,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -5476,7 +5478,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -5540,7 +5542,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -5630,6 +5632,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -5798,6 +5801,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -5835,7 +5839,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -5854,7 +5858,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -5873,7 +5877,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -5920,6 +5924,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -6013,6 +6018,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -6053,7 +6059,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -6076,7 +6082,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -6099,7 +6105,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -6147,6 +6153,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -6208,6 +6215,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -6375,6 +6383,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -6468,7 +6477,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompCounterLogs?: {
@@ -6521,7 +6530,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompCounterLogs?: {
@@ -6574,7 +6583,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompCounterLogs?: {
@@ -6700,6 +6709,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -6894,6 +6904,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -6991,7 +7002,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -7058,7 +7069,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -7125,7 +7136,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -7258,6 +7269,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -7420,6 +7432,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -7566,6 +7579,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -7611,7 +7625,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -7638,7 +7652,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -7665,7 +7679,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -7728,6 +7742,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -7837,6 +7852,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -7884,7 +7900,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -7914,7 +7930,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -7944,7 +7960,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -8008,6 +8024,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -8085,6 +8102,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -8230,6 +8248,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -8417,7 +8436,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription?: {
@@ -8505,7 +8524,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription?: {
@@ -8593,7 +8612,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription?: {
@@ -8732,6 +8751,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -8998,6 +9018,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -9188,7 +9209,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -9297,7 +9318,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -9406,7 +9427,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -9563,6 +9584,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -9797,6 +9819,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -10073,6 +10096,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -10122,7 +10146,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -10153,7 +10177,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -10184,7 +10208,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -10283,6 +10307,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -10428,6 +10453,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -10480,7 +10506,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -10515,7 +10541,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -10550,7 +10576,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -10650,6 +10676,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -10763,6 +10790,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -10906,6 +10934,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -10948,7 +10977,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -10972,7 +11001,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -10996,7 +11025,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -11078,6 +11107,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -11206,6 +11236,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -11250,7 +11281,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -11277,7 +11308,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -11304,7 +11335,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -11387,6 +11418,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -11483,6 +11515,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -11594,6 +11627,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -11634,7 +11668,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobTrigger?: {
@@ -11653,7 +11687,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobTrigger?: {
@@ -11672,7 +11706,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobTrigger?: {
@@ -11737,6 +11771,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -11851,6 +11886,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -11892,7 +11928,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -11914,7 +11950,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -11936,7 +11972,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -12003,6 +12039,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -12085,6 +12122,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -12232,6 +12270,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -12308,7 +12347,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -12353,7 +12392,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -12398,7 +12437,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -12496,6 +12535,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -12653,6 +12693,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -12732,7 +12773,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -12788,7 +12829,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -12844,7 +12885,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -12947,6 +12988,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -13072,6 +13114,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -13202,6 +13245,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -13254,7 +13298,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -13282,7 +13326,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -13310,7 +13354,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -13371,6 +13415,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -13484,6 +13529,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -13538,7 +13584,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -13570,7 +13616,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -13602,7 +13648,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -13665,6 +13711,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -13746,6 +13793,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -13850,6 +13898,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -13886,7 +13935,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -13904,7 +13953,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -13922,7 +13971,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -13964,6 +14013,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -14052,6 +14102,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -14089,7 +14140,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -14109,7 +14160,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -14129,7 +14180,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -14172,6 +14223,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -14228,6 +14280,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -14307,6 +14360,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -14338,7 +14392,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -14351,7 +14405,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -14364,7 +14418,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -14392,6 +14446,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -14466,6 +14521,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -14497,7 +14553,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -14511,7 +14567,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -14525,7 +14581,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -14554,6 +14610,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -14596,6 +14653,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -15090,6 +15148,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -15124,7 +15183,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -15140,7 +15199,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -15156,7 +15215,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -15197,6 +15256,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -15284,6 +15344,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -15319,7 +15380,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -15337,7 +15398,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -15355,7 +15416,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -15397,6 +15458,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -15452,6 +15514,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -15597,6 +15660,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -15704,7 +15768,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompTypeAttachments?: {
@@ -15758,7 +15822,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompTypeAttachments?: {
@@ -15812,7 +15876,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompTypeAttachments?: {
@@ -15926,6 +15990,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -16121,6 +16186,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -16236,7 +16302,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -16311,7 +16377,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -16386,7 +16452,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -16513,6 +16579,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -16676,6 +16743,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -16847,6 +16915,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -16888,7 +16957,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -16911,7 +16980,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -16934,7 +17003,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -16999,6 +17068,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -17110,6 +17180,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -17151,7 +17222,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -17175,7 +17246,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -17199,7 +17270,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -17265,6 +17336,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -17344,6 +17416,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -17474,6 +17547,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -17526,7 +17600,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompTypeJobCounters?: {
@@ -17552,7 +17626,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompTypeJobCounters?: {
@@ -17578,7 +17652,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblCompTypeJobCounters?: {
@@ -17635,6 +17709,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -17746,6 +17821,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -17800,7 +17876,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -17832,7 +17908,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -17864,7 +17940,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -17925,6 +18001,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -18004,6 +18081,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -18172,6 +18250,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -18311,7 +18390,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription?: {
@@ -18385,7 +18464,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription?: {
@@ -18459,7 +18538,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription?: {
@@ -18576,6 +18655,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -18786,6 +18866,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -18928,7 +19009,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -19020,7 +19101,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -19112,7 +19193,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -19244,6 +19325,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -19422,6 +19504,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -19665,6 +19748,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -19711,7 +19795,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -19739,7 +19823,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -19767,7 +19851,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -19845,6 +19929,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -19969,6 +20054,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -20018,7 +20104,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -20050,7 +20136,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -20082,7 +20168,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -20161,6 +20247,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -20253,6 +20340,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -20400,6 +20488,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -20442,7 +20531,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -20466,7 +20555,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -20490,7 +20579,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -20559,6 +20648,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -20674,6 +20764,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -20718,7 +20809,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -20745,7 +20836,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -20772,7 +20863,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -20842,6 +20933,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -20925,6 +21017,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -21065,6 +21158,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -21110,7 +21204,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobTrigger?: {
@@ -21134,7 +21228,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobTrigger?: {
@@ -21158,7 +21252,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobTrigger?: {
@@ -21225,6 +21319,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -21341,6 +21436,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -21388,7 +21484,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -21416,7 +21512,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -21444,7 +21540,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -21513,6 +21609,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -21597,6 +21694,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -21750,6 +21848,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -21806,7 +21905,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -21838,7 +21937,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -21870,7 +21969,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUnit?: {
@@ -21942,6 +22041,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -22066,6 +22166,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -22127,7 +22228,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -22166,7 +22267,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -22205,7 +22306,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -22279,6 +22380,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -22371,6 +22473,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -22646,6 +22749,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -22838,7 +22942,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblLocation?: {
@@ -22931,7 +23035,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblLocation?: {
@@ -23024,7 +23128,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblLocation?: {
@@ -23245,6 +23349,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -23593,6 +23698,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -23801,7 +23907,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -23930,7 +24036,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -24059,7 +24165,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -24300,6 +24406,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -24616,6 +24723,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -24879,6 +24987,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -24920,7 +25029,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -24943,7 +25052,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -24966,7 +25075,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -25038,6 +25147,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -25156,6 +25266,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -25197,7 +25308,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -25221,7 +25332,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -25245,7 +25356,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -25318,6 +25429,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -25404,6 +25516,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -27986,7 +28099,11 @@ export interface operations {
                                 userGroupElementId: number;
                                 userGroupId: number;
                                 elementId: number;
-                                isPermit: boolean;
+                                canCreate: boolean;
+                                canUpdate: boolean;
+                                canDelete: boolean;
+                                canView: boolean;
+                                canExport: boolean;
                             }[];
                         }[];
                         total: number;
@@ -28013,7 +28130,7 @@ export interface operations {
                     orderNo?: null | number;
                     tblElement?: {
                         connect: {
-                            id: number;
+                            elementId: number;
                         };
                     };
                     otherTblElements?: {
@@ -28023,7 +28140,7 @@ export interface operations {
                     };
                     tblUserGroupElements?: {
                         connect: {
-                            id: number;
+                            userGroupElementId: number;
                         }[];
                     };
                 };
@@ -28033,7 +28150,7 @@ export interface operations {
                     orderNo?: null | number;
                     tblElement?: {
                         connect: {
-                            id: number;
+                            elementId: number;
                         };
                     };
                     otherTblElements?: {
@@ -28043,7 +28160,7 @@ export interface operations {
                     };
                     tblUserGroupElements?: {
                         connect: {
-                            id: number;
+                            userGroupElementId: number;
                         }[];
                     };
                 };
@@ -28053,7 +28170,7 @@ export interface operations {
                     orderNo?: null | number;
                     tblElement?: {
                         connect: {
-                            id: number;
+                            elementId: number;
                         };
                     };
                     otherTblElements?: {
@@ -28063,7 +28180,7 @@ export interface operations {
                     };
                     tblUserGroupElements?: {
                         connect: {
-                            id: number;
+                            userGroupElementId: number;
                         }[];
                     };
                 };
@@ -28102,7 +28219,11 @@ export interface operations {
                             userGroupElementId: number;
                             userGroupId: number;
                             elementId: number;
-                            isPermit: boolean;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
                         }[];
                     };
                 };
@@ -28186,7 +28307,11 @@ export interface operations {
                             userGroupElementId: number;
                             userGroupId: number;
                             elementId: number;
-                            isPermit: boolean;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
                         }[];
                     };
                 };
@@ -28213,7 +28338,7 @@ export interface operations {
                     orderNo?: null | number;
                     tblElement?: {
                         connect?: {
-                            id: number;
+                            elementId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -28227,7 +28352,7 @@ export interface operations {
                     };
                     tblUserGroupElements?: {
                         connect?: {
-                            id: number;
+                            userGroupElementId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -28240,7 +28365,7 @@ export interface operations {
                     orderNo?: null | number;
                     tblElement?: {
                         connect?: {
-                            id: number;
+                            elementId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -28254,7 +28379,7 @@ export interface operations {
                     };
                     tblUserGroupElements?: {
                         connect?: {
-                            id: number;
+                            userGroupElementId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -28267,7 +28392,7 @@ export interface operations {
                     orderNo?: null | number;
                     tblElement?: {
                         connect?: {
-                            id: number;
+                            elementId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -28281,7 +28406,7 @@ export interface operations {
                     };
                     tblUserGroupElements?: {
                         connect?: {
-                            id: number;
+                            userGroupElementId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -28323,7 +28448,11 @@ export interface operations {
                             userGroupElementId: number;
                             userGroupId: number;
                             elementId: number;
-                            isPermit: boolean;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
                         }[];
                     };
                 };
@@ -28375,7 +28504,11 @@ export interface operations {
                             userGroupElementId: number;
                             userGroupId: number;
                             elementId: number;
-                            isPermit: boolean;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
                         }[];
                     };
                 };
@@ -28989,12 +29122,12 @@ export interface operations {
                             }[];
                             tblUsers?: {
                                 userId: number;
-                                employeeId: null | number;
-                                userGroupId: null | number;
-                                userName: null | string;
-                                password: null | string;
-                                accountDisabled: null | boolean;
-                                forcePasswordChange: null | boolean;
+                                employeeId: number;
+                                userGroupId: number;
+                                userName: string;
+                                password: string;
+                                accountDisabled: boolean;
+                                forcePasswordChange: boolean;
                                 lastLogin: null | string;
                                 lastUpdate: null | string;
                             }[];
@@ -30462,12 +30595,12 @@ export interface operations {
                         }[];
                         tblUsers?: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
                         }[];
@@ -31282,12 +31415,12 @@ export interface operations {
                         }[];
                         tblUsers?: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
                         }[];
@@ -33145,12 +33278,12 @@ export interface operations {
                         }[];
                         tblUsers?: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
                         }[];
@@ -33933,12 +34066,12 @@ export interface operations {
                         }[];
                         tblUsers?: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
                         }[];
@@ -34586,6 +34719,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -34684,7 +34818,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblFailureGroupFollow?: {
@@ -34732,7 +34866,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblFailureGroupFollow?: {
@@ -34780,7 +34914,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblFailureGroupFollow?: {
@@ -34853,6 +34987,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -35004,6 +35139,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -35103,7 +35239,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -35161,7 +35297,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -35219,7 +35355,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -35301,6 +35437,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -35420,6 +35557,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -35573,6 +35711,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -35616,12 +35755,12 @@ export interface operations {
                 "application/json": {
                     tblFailureReport: {
                         connect: {
-                            id: number;
+                            failureReportId: number;
                         };
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShop: {
@@ -35633,12 +35772,12 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     tblFailureReport: {
                         connect: {
-                            id: number;
+                            failureReportId: number;
                         };
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShop: {
@@ -35650,12 +35789,12 @@ export interface operations {
                 "multipart/form-data": {
                     tblFailureReport: {
                         connect: {
-                            id: number;
+                            failureReportId: number;
                         };
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShop: {
@@ -35700,6 +35839,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -35804,6 +35944,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -35847,12 +35988,12 @@ export interface operations {
                 "application/json": {
                     tblFailureReport?: {
                         connect: {
-                            id: number;
+                            failureReportId: number;
                         };
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -35865,12 +36006,12 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     tblFailureReport?: {
                         connect: {
-                            id: number;
+                            failureReportId: number;
                         };
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -35883,12 +36024,12 @@ export interface operations {
                 "multipart/form-data": {
                     tblFailureReport?: {
                         connect: {
-                            id: number;
+                            failureReportId: number;
                         };
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -35934,6 +36075,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -36006,6 +36148,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -37364,6 +37507,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -37490,7 +37634,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblComponentUnit?: {
@@ -37500,7 +37644,7 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect: {
-                            id: number;
+                            functionId: number;
                         };
                     };
                     otherTblFunctions?: {
@@ -37532,7 +37676,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblComponentUnit?: {
@@ -37542,7 +37686,7 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect: {
-                            id: number;
+                            functionId: number;
                         };
                     };
                     otherTblFunctions?: {
@@ -37574,7 +37718,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblComponentUnit?: {
@@ -37584,7 +37728,7 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect: {
-                            id: number;
+                            functionId: number;
                         };
                     };
                     otherTblFunctions?: {
@@ -37632,6 +37776,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -37802,6 +37947,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -37928,7 +38074,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -37940,7 +38086,7 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect?: {
-                            id: number;
+                            functionId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -37985,7 +38131,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -37997,7 +38143,7 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect?: {
-                            id: number;
+                            functionId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -38042,7 +38188,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -38054,7 +38200,7 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect?: {
-                            id: number;
+                            functionId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -38115,6 +38261,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -38253,6 +38400,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -38417,6 +38565,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                             tblAttachments?: {
                                 attachmentId: number;
                                 title: null | string;
@@ -39094,6 +39243,7 @@ export interface operations {
                 "application/json": {
                     name: string;
                     orderNo?: null | number;
+                    caption?: null | string;
                     tblAttachments?: {
                         connect: {
                             attachmentId: number;
@@ -39296,7 +39446,7 @@ export interface operations {
                     };
                     tblUserInstallations?: {
                         connect: {
-                            id: number;
+                            userInstId: number;
                         }[];
                     };
                     tblWorkOrders?: {
@@ -39323,6 +39473,7 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     name: string;
                     orderNo?: null | number;
+                    caption?: null | string;
                     tblAttachments?: {
                         connect: {
                             attachmentId: number;
@@ -39525,7 +39676,7 @@ export interface operations {
                     };
                     tblUserInstallations?: {
                         connect: {
-                            id: number;
+                            userInstId: number;
                         }[];
                     };
                     tblWorkOrders?: {
@@ -39552,6 +39703,7 @@ export interface operations {
                 "multipart/form-data": {
                     name: string;
                     orderNo?: null | number;
+                    caption?: null | string;
                     tblAttachments?: {
                         connect: {
                             attachmentId: number;
@@ -39754,7 +39906,7 @@ export interface operations {
                     };
                     tblUserInstallations?: {
                         connect: {
-                            id: number;
+                            userInstId: number;
                         }[];
                     };
                     tblWorkOrders?: {
@@ -39791,6 +39943,7 @@ export interface operations {
                         instId: number;
                         name: string;
                         orderNo: null | number;
+                        caption: null | string;
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
@@ -40506,6 +40659,7 @@ export interface operations {
                         instId: number;
                         name: string;
                         orderNo: null | number;
+                        caption: null | string;
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
@@ -41183,6 +41337,7 @@ export interface operations {
                 "application/json": {
                     name?: string;
                     orderNo?: null | number;
+                    caption?: null | string;
                     tblAttachments?: {
                         connect?: {
                             attachmentId: number;
@@ -41505,7 +41660,7 @@ export interface operations {
                     };
                     tblUserInstallations?: {
                         connect?: {
-                            id: number;
+                            userInstId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -41547,6 +41702,7 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     name?: string;
                     orderNo?: null | number;
+                    caption?: null | string;
                     tblAttachments?: {
                         connect?: {
                             attachmentId: number;
@@ -41869,7 +42025,7 @@ export interface operations {
                     };
                     tblUserInstallations?: {
                         connect?: {
-                            id: number;
+                            userInstId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -41911,6 +42067,7 @@ export interface operations {
                 "multipart/form-data": {
                     name?: string;
                     orderNo?: null | number;
+                    caption?: null | string;
                     tblAttachments?: {
                         connect?: {
                             attachmentId: number;
@@ -42233,7 +42390,7 @@ export interface operations {
                     };
                     tblUserInstallations?: {
                         connect?: {
-                            id: number;
+                            userInstId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -42285,6 +42442,7 @@ export interface operations {
                         instId: number;
                         name: string;
                         orderNo: null | number;
+                        caption: null | string;
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
@@ -42968,6 +43126,7 @@ export interface operations {
                         instId: number;
                         name: string;
                         orderNo: null | number;
+                        caption: null | string;
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
@@ -44209,6 +44368,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -44313,7 +44473,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobClass?: {
@@ -44366,7 +44526,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobClass?: {
@@ -44419,7 +44579,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobClass?: {
@@ -44550,6 +44710,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -44760,6 +44921,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -44872,7 +45034,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -44941,7 +45103,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -45010,7 +45172,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -45149,6 +45311,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -45327,6 +45490,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -45476,6 +45640,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -45534,7 +45699,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription: {
@@ -45557,7 +45722,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription: {
@@ -45580,7 +45745,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblJobDescription: {
@@ -45635,6 +45800,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -45753,6 +45919,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -45811,7 +45978,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -45835,7 +46002,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -45859,7 +46026,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -45915,6 +46082,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -46001,6 +46169,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -46567,6 +46736,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -46604,7 +46774,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -46623,7 +46793,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -46642,7 +46812,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -46682,6 +46852,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -46768,6 +46939,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -46806,7 +46978,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -46827,7 +46999,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -46848,7 +47020,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -46889,6 +47061,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -46943,6 +47116,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -47816,6 +47990,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -47884,7 +48059,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog?: {
@@ -47911,7 +48086,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog?: {
@@ -47938,7 +48113,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog?: {
@@ -47993,6 +48168,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -48117,6 +48293,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -48187,7 +48364,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -48218,7 +48395,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -48249,7 +48426,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -48306,6 +48483,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -48398,6 +48576,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -48537,6 +48716,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -48608,7 +48788,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog?: {
@@ -48638,7 +48818,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog?: {
@@ -48668,7 +48848,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog?: {
@@ -48733,6 +48913,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -48867,6 +49048,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -48941,7 +49123,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -48976,7 +49158,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -49011,7 +49193,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -49078,6 +49260,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -49180,6 +49363,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -51994,6 +52178,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -52192,13 +52377,13 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect?: {
-                            id: number;
+                            functionId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -52317,13 +52502,13 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect?: {
-                            id: number;
+                            functionId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -52442,13 +52627,13 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect?: {
-                            id: number;
+                            functionId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -52652,6 +52837,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -52931,6 +53117,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -53261,6 +53448,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -53446,6 +53634,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -53482,7 +53671,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -53500,7 +53689,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -53518,7 +53707,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -53568,6 +53757,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -53664,6 +53854,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -53700,7 +53891,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -53719,7 +53910,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -53738,7 +53929,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -53789,6 +53980,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -53853,6 +54045,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -53956,6 +54149,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -54025,7 +54219,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog: {
@@ -54053,7 +54247,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog: {
@@ -54081,7 +54275,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog: {
@@ -54138,6 +54332,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -54264,6 +54459,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -54334,7 +54530,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -54364,7 +54560,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -54394,7 +54590,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -54452,6 +54648,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -54546,6 +54743,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -54662,6 +54860,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -54730,7 +54929,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog: {
@@ -54755,7 +54954,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog: {
@@ -54780,7 +54979,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintLog: {
@@ -54827,6 +55026,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -54945,6 +55145,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -55014,7 +55215,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -55041,7 +55242,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -55068,7 +55269,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -55116,6 +55317,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -55202,6 +55404,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -56428,6 +56631,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -56490,7 +56694,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -56534,7 +56738,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -56578,7 +56782,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -56652,6 +56856,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -56772,6 +56977,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -56836,7 +57042,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -56883,7 +57089,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -56930,7 +57136,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -57005,6 +57211,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -57093,6 +57300,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -58452,6 +58660,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -58528,7 +58737,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkOrder?: {
@@ -58552,7 +58761,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkOrder?: {
@@ -58576,7 +58785,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkOrder?: {
@@ -58620,6 +58829,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -58744,6 +58954,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -58821,7 +59032,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -58848,7 +59059,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -58875,7 +59086,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -58921,6 +59132,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -59013,6 +59225,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -59190,6 +59403,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -59235,12 +59449,12 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect: {
-                            id: number;
+                            functionId: number;
                         };
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -59267,12 +59481,12 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect: {
-                            id: number;
+                            functionId: number;
                         };
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -59299,12 +59513,12 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect: {
-                            id: number;
+                            functionId: number;
                         };
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -59391,6 +59605,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -59524,6 +59739,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -59572,13 +59788,13 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect?: {
-                            id: number;
+                            functionId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -59609,13 +59825,13 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect?: {
-                            id: number;
+                            functionId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -59646,13 +59862,13 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect?: {
-                            id: number;
+                            functionId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -59740,6 +59956,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -59841,6 +60058,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -59931,6 +60149,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -60007,7 +60226,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkOrders?: {
@@ -60033,7 +60252,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkOrders?: {
@@ -60059,7 +60278,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkOrders?: {
@@ -60103,6 +60322,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -60225,6 +60445,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -60301,7 +60522,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -60331,7 +60552,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -60361,7 +60582,7 @@ export interface operations {
                     lastUpdate?: null | string;
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -60409,6 +60630,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -60499,6 +60721,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -60628,6 +60851,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -60664,7 +60888,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -60682,7 +60906,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -60700,7 +60924,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                 };
@@ -60741,6 +60965,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -60828,6 +61053,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -60865,7 +61091,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -60885,7 +61111,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -60905,7 +61131,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -60947,6 +61173,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -61002,6 +61229,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -62851,15 +63079,15 @@ export interface operations {
                     "application/json": {
                         items: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
-                            tblEmployee?: null | ({
+                            tblEmployee?: {
                                 employeeId: number;
                                 code: null | string;
                                 lastName: null | string;
@@ -62869,8 +63097,8 @@ export interface operations {
                                 lastUpdate: null | string;
                             } & {
                                 [key: string]: unknown;
-                            });
-                            tblUserGroup?: null | ({
+                            };
+                            tblUserGroup?: {
                                 userGroupId: number;
                                 name: string;
                                 description: null | string;
@@ -62878,7 +63106,7 @@ export interface operations {
                                 orderNo: null | number;
                             } & {
                                 [key: string]: unknown;
-                            });
+                            };
                             tblUserInstallations?: {
                                 userInstId: number;
                                 userId: number;
@@ -62953,9 +63181,9 @@ export interface operations {
                         tblUserGroup?: {
                             name: string;
                         };
-                        employeeId?: null | number;
-                        userGroupId?: null | number;
-                        password?: null | string;
+                        employeeId?: number;
+                        userGroupId?: number;
+                        password?: string;
                         lastUpdate?: null | string;
                         tblUserInstallations?: {
                             userInstId: number;
@@ -63020,15 +63248,15 @@ export interface operations {
                 content: {
                     "application/json": {
                         userId: number;
-                        employeeId: null | number;
-                        userGroupId: null | number;
-                        userName: null | string;
-                        password: null | string;
-                        accountDisabled: null | boolean;
-                        forcePasswordChange: null | boolean;
+                        employeeId: number;
+                        userGroupId: number;
+                        userName: string;
+                        password: string;
+                        accountDisabled: boolean;
+                        forcePasswordChange: boolean;
                         lastLogin: null | string;
                         lastUpdate: null | string;
-                        tblEmployee?: null | ({
+                        tblEmployee?: {
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -63038,8 +63266,8 @@ export interface operations {
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
-                        });
-                        tblUserGroup?: null | ({
+                        };
+                        tblUserGroup?: {
                             userGroupId: number;
                             name: string;
                             description: null | string;
@@ -63047,7 +63275,7 @@ export interface operations {
                             orderNo: null | number;
                         } & {
                             [key: string]: unknown;
-                        });
+                        };
                         tblUserInstallations?: {
                             userInstId: number;
                             userId: number;
@@ -63073,27 +63301,25 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    userName?: null | string;
-                    password?: null | string;
-                    accountDisabled?: null | boolean;
-                    forcePasswordChange?: null | boolean;
+                    userName?: string;
+                    password?: string;
+                    accountDisabled?: boolean;
+                    forcePasswordChange?: boolean;
                     lastLogin?: null | string;
                     lastUpdate?: null | string;
                     tblEmployee?: {
-                        connect?: {
+                        connect: {
                             employeeId: number;
                         };
-                        disconnect?: boolean;
                     };
                     tblUserGroup?: {
-                        connect?: {
-                            id: number;
+                        connect: {
+                            userGroupId: number;
                         };
-                        disconnect?: boolean;
                     };
                     tblUserInstallations?: {
                         connect?: {
-                            id: number;
+                            userInstId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -63101,27 +63327,25 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    userName?: null | string;
-                    password?: null | string;
-                    accountDisabled?: null | boolean;
-                    forcePasswordChange?: null | boolean;
+                    userName?: string;
+                    password?: string;
+                    accountDisabled?: boolean;
+                    forcePasswordChange?: boolean;
                     lastLogin?: null | string;
                     lastUpdate?: null | string;
                     tblEmployee?: {
-                        connect?: {
+                        connect: {
                             employeeId: number;
                         };
-                        disconnect?: boolean;
                     };
                     tblUserGroup?: {
-                        connect?: {
-                            id: number;
+                        connect: {
+                            userGroupId: number;
                         };
-                        disconnect?: boolean;
                     };
                     tblUserInstallations?: {
                         connect?: {
-                            id: number;
+                            userInstId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -63129,27 +63353,25 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    userName?: null | string;
-                    password?: null | string;
-                    accountDisabled?: null | boolean;
-                    forcePasswordChange?: null | boolean;
+                    userName?: string;
+                    password?: string;
+                    accountDisabled?: boolean;
+                    forcePasswordChange?: boolean;
                     lastLogin?: null | string;
                     lastUpdate?: null | string;
                     tblEmployee?: {
-                        connect?: {
+                        connect: {
                             employeeId: number;
                         };
-                        disconnect?: boolean;
                     };
                     tblUserGroup?: {
-                        connect?: {
-                            id: number;
+                        connect: {
+                            userGroupId: number;
                         };
-                        disconnect?: boolean;
                     };
                     tblUserInstallations?: {
                         connect?: {
-                            id: number;
+                            userInstId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -63167,15 +63389,15 @@ export interface operations {
                 content: {
                     "application/json": {
                         userId: number;
-                        employeeId: null | number;
-                        userGroupId: null | number;
-                        userName: null | string;
-                        password: null | string;
-                        accountDisabled: null | boolean;
-                        forcePasswordChange: null | boolean;
+                        employeeId: number;
+                        userGroupId: number;
+                        userName: string;
+                        password: string;
+                        accountDisabled: boolean;
+                        forcePasswordChange: boolean;
                         lastLogin: null | string;
                         lastUpdate: null | string;
-                        tblEmployee?: null | ({
+                        tblEmployee?: {
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -63185,8 +63407,8 @@ export interface operations {
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
-                        });
-                        tblUserGroup?: null | ({
+                        };
+                        tblUserGroup?: {
                             userGroupId: number;
                             name: string;
                             description: null | string;
@@ -63194,7 +63416,7 @@ export interface operations {
                             orderNo: null | number;
                         } & {
                             [key: string]: unknown;
-                        });
+                        };
                         tblUserInstallations?: {
                             userInstId: number;
                             userId: number;
@@ -63226,15 +63448,15 @@ export interface operations {
                 content: {
                     "application/json": {
                         userId: number;
-                        employeeId: null | number;
-                        userGroupId: null | number;
-                        userName: null | string;
-                        password: null | string;
-                        accountDisabled: null | boolean;
-                        forcePasswordChange: null | boolean;
+                        employeeId: number;
+                        userGroupId: number;
+                        userName: string;
+                        password: string;
+                        accountDisabled: boolean;
+                        forcePasswordChange: boolean;
                         lastLogin: null | string;
                         lastUpdate: null | string;
-                        tblEmployee?: null | ({
+                        tblEmployee?: {
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -63244,8 +63466,8 @@ export interface operations {
                             lastUpdate: null | string;
                         } & {
                             [key: string]: unknown;
-                        });
-                        tblUserGroup?: null | ({
+                        };
+                        tblUserGroup?: {
                             userGroupId: number;
                             name: string;
                             description: null | string;
@@ -63253,7 +63475,7 @@ export interface operations {
                             orderNo: null | number;
                         } & {
                             [key: string]: unknown;
-                        });
+                        };
                         tblUserInstallations?: {
                             userInstId: number;
                             userId: number;
@@ -63328,12 +63550,12 @@ export interface operations {
                             orderNo: null | number;
                             tblUsers?: {
                                 userId: number;
-                                employeeId: null | number;
-                                userGroupId: null | number;
-                                userName: null | string;
-                                password: null | string;
-                                accountDisabled: null | boolean;
-                                forcePasswordChange: null | boolean;
+                                employeeId: number;
+                                userGroupId: number;
+                                userName: string;
+                                password: string;
+                                accountDisabled: boolean;
+                                forcePasswordChange: boolean;
                                 lastLogin: null | string;
                                 lastUpdate: null | string;
                             }[];
@@ -63341,7 +63563,11 @@ export interface operations {
                                 userGroupElementId: number;
                                 userGroupId: number;
                                 elementId: number;
-                                isPermit: boolean;
+                                canCreate: boolean;
+                                canUpdate: boolean;
+                                canDelete: boolean;
+                                canView: boolean;
+                                canExport: boolean;
                             }[];
                         }[];
                         total: number;
@@ -63374,7 +63600,7 @@ export interface operations {
                     };
                     tblUserGroupElements?: {
                         connect: {
-                            id: number;
+                            userGroupElementId: number;
                         }[];
                     };
                 };
@@ -63390,7 +63616,7 @@ export interface operations {
                     };
                     tblUserGroupElements?: {
                         connect: {
-                            id: number;
+                            userGroupElementId: number;
                         }[];
                     };
                 };
@@ -63406,7 +63632,7 @@ export interface operations {
                     };
                     tblUserGroupElements?: {
                         connect: {
-                            id: number;
+                            userGroupElementId: number;
                         }[];
                     };
                 };
@@ -63427,12 +63653,12 @@ export interface operations {
                         orderNo: null | number;
                         tblUsers?: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
                         }[];
@@ -63440,7 +63666,11 @@ export interface operations {
                             userGroupElementId: number;
                             userGroupId: number;
                             elementId: number;
-                            isPermit: boolean;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
                         }[];
                     };
                 };
@@ -63506,12 +63736,12 @@ export interface operations {
                         orderNo: null | number;
                         tblUsers?: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
                         }[];
@@ -63519,7 +63749,11 @@ export interface operations {
                             userGroupElementId: number;
                             userGroupId: number;
                             elementId: number;
-                            isPermit: boolean;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
                         }[];
                     };
                 };
@@ -63555,7 +63789,7 @@ export interface operations {
                     };
                     tblUserGroupElements?: {
                         connect?: {
-                            id: number;
+                            userGroupElementId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -63577,7 +63811,7 @@ export interface operations {
                     };
                     tblUserGroupElements?: {
                         connect?: {
-                            id: number;
+                            userGroupElementId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -63599,7 +63833,7 @@ export interface operations {
                     };
                     tblUserGroupElements?: {
                         connect?: {
-                            id: number;
+                            userGroupElementId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -63623,12 +63857,12 @@ export interface operations {
                         orderNo: null | number;
                         tblUsers?: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
                         }[];
@@ -63636,7 +63870,11 @@ export interface operations {
                             userGroupElementId: number;
                             userGroupId: number;
                             elementId: number;
-                            isPermit: boolean;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
                         }[];
                     };
                 };
@@ -63670,12 +63908,12 @@ export interface operations {
                         orderNo: null | number;
                         tblUsers?: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
                         }[];
@@ -63683,7 +63921,11 @@ export interface operations {
                             userGroupElementId: number;
                             userGroupId: number;
                             elementId: number;
-                            isPermit: boolean;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
                         }[];
                     };
                 };
@@ -63746,7 +63988,34 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        items: unknown[];
+                        items: {
+                            userGroupElementId: number;
+                            userGroupId: number;
+                            elementId: number;
+                            canCreate: boolean;
+                            canUpdate: boolean;
+                            canDelete: boolean;
+                            canView: boolean;
+                            canExport: boolean;
+                            tblElement?: {
+                                elementId: number;
+                                parentId: null | number;
+                                name: string;
+                                caption: string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            };
+                            tblUserGroup?: {
+                                userGroupId: number;
+                                name: string;
+                                description: null | string;
+                                lastUpdate: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            };
+                        }[];
                         total: number;
                         page: number;
                         perPage: number;
@@ -63766,47 +64035,96 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    isPermit: boolean;
+                    canCreate: boolean;
+                    canUpdate: boolean;
+                    canDelete: boolean;
+                    canView: boolean;
+                    canExport: boolean;
                     tblElement: {
                         connect: {
-                            id: number;
+                            elementId: number;
                         };
                     };
                     tblUserGroup: {
                         connect: {
-                            id: number;
+                            userGroupId: number;
                         };
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    isPermit: boolean;
+                    canCreate: boolean;
+                    canUpdate: boolean;
+                    canDelete: boolean;
+                    canView: boolean;
+                    canExport: boolean;
                     tblElement: {
                         connect: {
-                            id: number;
+                            elementId: number;
                         };
                     };
                     tblUserGroup: {
                         connect: {
-                            id: number;
+                            userGroupId: number;
                         };
                     };
                 };
                 "multipart/form-data": {
-                    isPermit: boolean;
+                    canCreate: boolean;
+                    canUpdate: boolean;
+                    canDelete: boolean;
+                    canView: boolean;
+                    canExport: boolean;
                     tblElement: {
                         connect: {
-                            id: number;
+                            elementId: number;
                         };
                     };
                     tblUserGroup: {
                         connect: {
-                            id: number;
+                            userGroupId: number;
                         };
                     };
                 };
             };
         };
-        responses: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        userGroupElementId: number;
+                        userGroupId: number;
+                        elementId: number;
+                        canCreate: boolean;
+                        canUpdate: boolean;
+                        canDelete: boolean;
+                        canView: boolean;
+                        canExport: boolean;
+                        tblElement?: {
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblUserGroup?: {
+                            userGroupId: number;
+                            name: string;
+                            description: null | string;
+                            lastUpdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
     };
     deleteTblUserGroupElement: {
         parameters: {
@@ -63852,7 +64170,44 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
-        responses: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        userGroupElementId: number;
+                        userGroupId: number;
+                        elementId: number;
+                        canCreate: boolean;
+                        canUpdate: boolean;
+                        canDelete: boolean;
+                        canView: boolean;
+                        canExport: boolean;
+                        tblElement?: {
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblUserGroup?: {
+                            userGroupId: number;
+                            name: string;
+                            description: null | string;
+                            lastUpdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
     };
     putTblUserGroupElementByUserGroupElementId: {
         parameters: {
@@ -63869,47 +64224,96 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    isPermit?: boolean;
+                    canCreate?: boolean;
+                    canUpdate?: boolean;
+                    canDelete?: boolean;
+                    canView?: boolean;
+                    canExport?: boolean;
                     tblElement?: {
                         connect: {
-                            id: number;
+                            elementId: number;
                         };
                     };
                     tblUserGroup?: {
                         connect: {
-                            id: number;
+                            userGroupId: number;
                         };
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    isPermit?: boolean;
+                    canCreate?: boolean;
+                    canUpdate?: boolean;
+                    canDelete?: boolean;
+                    canView?: boolean;
+                    canExport?: boolean;
                     tblElement?: {
                         connect: {
-                            id: number;
+                            elementId: number;
                         };
                     };
                     tblUserGroup?: {
                         connect: {
-                            id: number;
+                            userGroupId: number;
                         };
                     };
                 };
                 "multipart/form-data": {
-                    isPermit?: boolean;
+                    canCreate?: boolean;
+                    canUpdate?: boolean;
+                    canDelete?: boolean;
+                    canView?: boolean;
+                    canExport?: boolean;
                     tblElement?: {
                         connect: {
-                            id: number;
+                            elementId: number;
                         };
                     };
                     tblUserGroup?: {
                         connect: {
-                            id: number;
+                            userGroupId: number;
                         };
                     };
                 };
             };
         };
-        responses: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        userGroupElementId: number;
+                        userGroupId: number;
+                        elementId: number;
+                        canCreate: boolean;
+                        canUpdate: boolean;
+                        canDelete: boolean;
+                        canView: boolean;
+                        canExport: boolean;
+                        tblElement?: {
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblUserGroup?: {
+                            userGroupId: number;
+                            name: string;
+                            description: null | string;
+                            lastUpdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
     };
     deleteTblUserGroupElementByUserGroupElementId: {
         parameters: {
@@ -63923,7 +64327,44 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
-        responses: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        userGroupElementId: number;
+                        userGroupId: number;
+                        elementId: number;
+                        canCreate: boolean;
+                        canUpdate: boolean;
+                        canDelete: boolean;
+                        canView: boolean;
+                        canExport: boolean;
+                        tblElement?: {
+                            elementId: number;
+                            parentId: null | number;
+                            name: string;
+                            caption: string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblUserGroup?: {
+                            userGroupId: number;
+                            name: string;
+                            description: null | string;
+                            lastUpdate: null | string;
+                            orderNo: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
     };
     getTblUserGroupElementCount: {
         parameters: {
@@ -63989,17 +64430,18 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             };
                             tblUser?: {
                                 userId: number;
-                                employeeId: null | number;
-                                userGroupId: null | number;
-                                userName: null | string;
-                                password: null | string;
-                                accountDisabled: null | boolean;
-                                forcePasswordChange: null | boolean;
+                                employeeId: number;
+                                userGroupId: number;
+                                userName: string;
+                                password: string;
+                                accountDisabled: boolean;
+                                forcePasswordChange: boolean;
                                 lastLogin: null | string;
                                 lastUpdate: null | string;
                             } & {
@@ -64027,7 +64469,7 @@ export interface operations {
                 "application/json": {
                     tblInstallation: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUser: {
@@ -64039,7 +64481,7 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     tblInstallation: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUser: {
@@ -64051,7 +64493,7 @@ export interface operations {
                 "multipart/form-data": {
                     tblInstallation: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUser: {
@@ -64077,17 +64519,18 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         };
                         tblUser?: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
                         } & {
@@ -64157,17 +64600,18 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         };
                         tblUser?: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
                         } & {
@@ -64195,7 +64639,7 @@ export interface operations {
                 "application/json": {
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUser?: {
@@ -64207,7 +64651,7 @@ export interface operations {
                 "application/x-www-form-urlencoded": {
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUser?: {
@@ -64219,7 +64663,7 @@ export interface operations {
                 "multipart/form-data": {
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblUser?: {
@@ -64245,17 +64689,18 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         };
                         tblUser?: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
                         } & {
@@ -64293,17 +64738,18 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         };
                         tblUser?: {
                             userId: number;
-                            employeeId: null | number;
-                            userGroupId: null | number;
-                            userName: null | string;
-                            password: null | string;
-                            accountDisabled: null | boolean;
-                            forcePasswordChange: null | boolean;
+                            employeeId: number;
+                            userGroupId: number;
+                            userName: string;
+                            password: string;
+                            accountDisabled: boolean;
+                            forcePasswordChange: boolean;
                             lastLogin: null | string;
                             lastUpdate: null | string;
                         } & {
@@ -64501,7 +64947,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintCause?: {
@@ -64615,7 +65061,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintCause?: {
@@ -64729,7 +65175,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblMaintCause?: {
@@ -64973,6 +65419,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -65366,6 +65813,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -65614,7 +66062,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -65752,7 +66200,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -65890,7 +66338,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -66145,6 +66593,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -66506,6 +66955,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -67543,6 +67993,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -67618,7 +68069,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShopAttachments?: {
@@ -67668,7 +68119,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShopAttachments?: {
@@ -67718,7 +68169,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShopAttachments?: {
@@ -67810,6 +68261,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -67955,6 +68407,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -68037,7 +68490,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -68101,7 +68554,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -68165,7 +68618,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -68264,6 +68717,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -68377,6 +68831,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -68480,6 +68935,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -68542,7 +68998,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShop: {
@@ -68564,7 +69020,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShop: {
@@ -68586,7 +69042,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblWorkShop: {
@@ -68631,6 +69087,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -68744,6 +69201,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -68806,7 +69264,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -68829,7 +69287,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -68852,7 +69310,7 @@ export interface operations {
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -68898,6 +69356,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -68979,6 +69438,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -69123,6 +69583,7 @@ export interface operations {
                                 instId: number;
                                 name: string;
                                 orderNo: null | number;
+                                caption: null | string;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -69182,12 +69643,12 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect: {
-                            id: number;
+                            functionId: number;
                         };
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblLocation?: {
@@ -69210,12 +69671,12 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect: {
-                            id: number;
+                            functionId: number;
                         };
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblLocation?: {
@@ -69238,12 +69699,12 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect: {
-                            id: number;
+                            functionId: number;
                         };
                     };
                     tblInstallation?: {
                         connect: {
-                            id: number;
+                            instId: number;
                         };
                     };
                     tblLocation?: {
@@ -69314,6 +69775,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -69449,6 +69911,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -69508,13 +69971,13 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect?: {
-                            id: number;
+                            functionId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -69539,13 +70002,13 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect?: {
-                            id: number;
+                            functionId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -69570,13 +70033,13 @@ export interface operations {
                     };
                     tblFunction?: {
                         connect?: {
-                            id: number;
+                            functionId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblInstallation?: {
                         connect?: {
-                            id: number;
+                            instId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -69649,6 +70112,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });
@@ -69752,6 +70216,7 @@ export interface operations {
                             instId: number;
                             name: string;
                             orderNo: null | number;
+                            caption: null | string;
                         } & {
                             [key: string]: unknown;
                         });

@@ -38,6 +38,7 @@ const TABLE_PKS = {
   TblDepartment: "DeptID",
   TblDiscipline: "DiscID",
   TblEmployee: "EmployeeID",
+  TblElement: "ElementID",
   TblFailureReport: "FailureReportId",
   TblFollowStatus: "FollowStatusID",
   TblFunction: "FunctionID",

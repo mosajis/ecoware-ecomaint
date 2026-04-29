@@ -1387,7 +1387,7 @@ model TblUserGroup {
 }
 
 model TblUserGroupElement {
-  userGroupElementId Int          @id(map: "PK_tblUserGroupElement") @map("UserGroupElementID")
+  userGroupElementId Int          @id(map: "PK_tblUserGroupElement") @default(autoincrement()) @map("UserGroupElementID")
   userGroupId        Int          @map("UserGroupId")
   elementId          Int          @map("ElementId")
   canCreate          Boolean      @map("CanCreate")

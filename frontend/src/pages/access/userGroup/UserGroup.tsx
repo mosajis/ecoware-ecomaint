@@ -130,7 +130,10 @@ const UserGroups = () => {
         open={dialogs.upsert}
         mode={mode}
         recordId={selectedRowId}
-        onClose={() => closeDialog("upsert")}
+        onClose={() => {
+          closeDialog("upsert");
+          handleRefresh();
+        }}
         onSuccess={handleRefresh}
       />
     </>

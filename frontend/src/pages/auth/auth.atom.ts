@@ -1,10 +1,10 @@
 import { atom } from "jotai";
-import type { TypeTblDiscipline, TypeTblUsers } from "@/core/api/generated/api";
+import type { TypeTblDiscipline, TypeTblUser } from "@/core/api/generated/api";
 
 // Your auth atom
 type TypeAuth = {
   authorized: boolean;
-  user: null | TypeTblUsers;
+  user: null | TypeTblUser;
 };
 export const atomAuth = atom<TypeAuth>({
   authorized: false,

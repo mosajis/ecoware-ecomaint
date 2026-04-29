@@ -41,7 +41,7 @@ interface CustomizedDataGridProps extends DataGridProps {
   disableDelete?: boolean;
   disableRowNumber?: boolean;
   toolbarChildren?: React.ReactNode;
-  elementId?: number
+  elementId?: number;
 }
 
 export default function GenericDataGrid({
@@ -70,8 +70,11 @@ export default function GenericDataGrid({
   elementId,
   ...rest
 }: CustomizedDataGridProps) {
-  const { canCreate, canUpdate, canDelete, canView, canExport } =
-    usePermission(elementId!);
+  const { canCreate, canUpdate, canDelete, canView, canExport } = usePermission(
+    elementId!,
+  );
+
+  if (!canView) return;
 
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>({
@@ -133,12 +136,10 @@ export default function GenericDataGrid({
         disableDensity={disableDensity}
         disableColumns={disableColumns}
         disableFilters={disableFilters}
-        
         disableExport={!canExport || disableExport}
         disableAdd={!canCreate || disableAdd}
         disableEdit={!canUpdate || disableEdit}
         disableDelete={!canDelete || disableDelete}
-        
         disableRefresh={disableRefresh}
       >
         {toolbarChildren}

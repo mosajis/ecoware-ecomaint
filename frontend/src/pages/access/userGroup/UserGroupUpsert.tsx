@@ -1,17 +1,8 @@
-import { useEffect, useState } from "react";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-
-import {
-  tblUserGroup,
-  tblElement,
-  TypeTblElement,
-} from "@/core/api/generated/api";
 import UserGroupTabs from "./UserGroupTabs";
+import { useAtom } from "jotai";
+import { useEffect } from "react";
+import { atomUserGroupId } from "./UserGroupAtom";
 
 interface UserGroupUpsertProps {
   open: boolean;
@@ -28,7 +19,11 @@ const UserGroupUpsert = ({
   onClose,
   onSuccess,
 }: UserGroupUpsertProps) => {
-  const [activeTab, setActiveTab] = useState(0);
+  const [, setUserGroupId] = useAtom(atomUserGroupId);
+
+  useEffect(() => {
+    setUserGroupId(recordId);
+  }, [recordId, setUserGroupId]);
 
   return (
     <FormDialog
@@ -36,7 +31,7 @@ const UserGroupUpsert = ({
       open={open}
       onClose={onClose}
       maxWidth="md"
-      title={mode === "create" ? "Create" : "Edit"}
+      title={mode === "create" ? "Create UserGroup" : "Edit UserGroup"}
     >
       <UserGroupTabs />
     </FormDialog>
