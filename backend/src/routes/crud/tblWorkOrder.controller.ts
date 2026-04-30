@@ -103,6 +103,8 @@ const ControllerTblWorkOrder = new BaseController({
   createSchema: TblWorkOrderInputCreate,
   updateSchema: TblWorkOrderInputUpdate,
   responseSchema: buildResponseSchema(TblWorkOrderPlain, TblWorkOrder),
+  scope: true,
+
   extend: (app) => {
     app.get(
       "/",

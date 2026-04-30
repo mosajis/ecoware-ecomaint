@@ -17,3 +17,9 @@ body,
 .MsoNormal span {
   color: inherit !important;
 }
+
+th,
+td,
+tr {
+  border-collapse: collapse;
+}

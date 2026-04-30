@@ -89,6 +89,7 @@ const ControllerTblMaintLog = new BaseController({
   createSchema: TblMaintLogInputCreate,
   updateSchema: TblMaintLogInputUpdate,
   responseSchema: buildResponseSchema(TblMaintLogPlain, TblMaintLog),
+  scope: true,
 
   extend: (app) => {
     app.get(

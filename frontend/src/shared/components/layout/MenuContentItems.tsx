@@ -40,6 +40,7 @@ import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
 import PeopleRoundedIcon from "@mui/icons-material/AccountBoxRounded";
 import SecurityRoundedIcon from "@mui/icons-material/SecurityRounded";
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
+import { getPremission, usePermission } from "@/shared/hooks/usePermison";
 // ================= TYPES =================
 export type MenuItem = {
   text: string;
@@ -47,6 +48,7 @@ export type MenuItem = {
   id?: string;
   icon?: ReactNode;
   children?: MenuItem[];
+  permit?: boolean;
 };
 
 export type MenuSection = {
@@ -54,7 +56,8 @@ export type MenuSection = {
   icon: ReactNode;
   path?: string;
   items: MenuItem[];
-  noActiveHighlight?: boolean; // ← اضافه کن
+  noActiveHighlight?: boolean;
+  permit?: boolean;
 };
 
 // ================= ICON STYLE =================
@@ -83,6 +86,7 @@ export const menuContentItems: MenuSection[] = [
         path: "/maintenance/component-unit",
         id: "quick:component",
         icon: <PrecisionManufacturingRoundedIcon sx={iconStyle} />,
+        permit: getPremission(1310).canView,
       },
       {
         text: "Work Order",
@@ -121,77 +125,90 @@ export const menuContentItems: MenuSection[] = [
   {
     title: "General",
     icon: <ApartmentIcon sx={iconStyle} />,
+    permit: getPremission(100).canView,
     items: [
       {
         text: "Address",
         path: "/general/address",
         id: "general:address",
         icon: <LocationOnRoundedIcon sx={iconStyle} />,
+        permit: getPremission(100).canView,
       },
       {
         text: "Location",
         path: "/general/location",
         id: "general:location",
+        permit: getPremission(200).canView,
         icon: <BusinessRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Employee",
         path: "/general/employee",
         id: "general:employee",
+        permit: getPremission(300).canView,
         icon: <BadgeRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Discipline",
         path: "/general/discipline",
         id: "general:discipline",
+        permit: getPremission(400).canView,
         icon: <HubRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Counter Type",
         path: "/general/counter-type",
         id: "general:counterType",
+        permit: getPremission(500).canView,
         icon: <NumbersRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Maint Class",
+        text: "Maint Classes",
         path: "/general/maint-class",
         id: "general:maintClass",
+        permit: getPremission(600).canView,
         icon: <CategoryRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Follow Status",
         path: "/general/follow-status",
         id: "general:followStatus",
+        permit: getPremission(700).canView,
         icon: <AutorenewRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Pending Type",
         path: "/general/pending-type",
         id: "general:pendingType",
+        permit: getPremission(800).canView,
         icon: <HourglassBottomRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Job Class",
         path: "/general/job-class",
         id: "general:jobClass",
+        permit: getPremission(900).canView,
         icon: <WorkOutlineRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Job Description",
         path: "/general/job-description",
         id: "general:jobDescription",
+        permit: getPremission(1000).canView,
         icon: <DescriptionRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Job Trigger",
         path: "/general/job-trigger",
         id: "general:jobTrigger",
+        permit: getPremission(1100).canView,
         icon: <FlashOnRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Attachment",
         path: "/general/attachment",
         id: "general:attachment",
+        permit: getPremission(1200).canView,
         icon: <AttachFileRoundedIcon sx={iconStyle} />,
       },
     ],
@@ -201,83 +218,97 @@ export const menuContentItems: MenuSection[] = [
   {
     title: "Maintenance",
     icon: <BuildRoundedIcon sx={iconStyle} />,
+    permit: getPremission(1300).canView,
     items: [
       {
         text: "Function",
         path: "/maintenance/function",
         id: "maint:function",
+        permit: getPremission(1430).canView,
         icon: <SettingsSuggestRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Component",
         path: "/maintenance/component-unit",
         id: "maint:component",
+        permit: getPremission(1310).canView,
         icon: <PrecisionManufacturingRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Component Type",
         path: "/maintenance/component-type",
         id: "maint:componentType",
+        permit: getPremission(1320).canView,
         icon: <WidgetsRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Component Job",
         path: "/maintenance/component-job",
         id: "maint:componentJob",
+        permit: getPremission(1330).canView,
         icon: <BuildCircleRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Work Order",
         path: "/maintenance/work-order",
         id: "maint:workOrder",
+        permit: getPremission(1340).canView,
         icon: <AssignmentTurnedInRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Round",
         path: "/maintenance/round",
         id: "maint:round",
+        permit: getPremission(1350).canView,
         icon: <SyncRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Workshop",
         path: "/maintenance/workshop",
         id: "maint:workshop",
+        permit: getPremission(1360).canView,
         icon: <EngineeringRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Update Counter",
         path: "/maintenance/counters",
         id: "maint:counters",
+        permit: getPremission(1370).canView,
         icon: <UpdateRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Counters Alert",
         path: "/maintenance/counters-alert",
         id: "maint:counterAlert",
+        permit: getPremission(1380).canView,
         icon: <WarningAmberRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Counters Logs",
         path: "/maintenance/counters-logs",
         id: "maint:counterLogs",
+        permit: getPremission(1390).canView,
         icon: <HistoryRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Measure Points",
         path: "/maintenance/measure-points",
         id: "maint:measurePoints",
+        permit: getPremission(1400).canView,
         icon: <SpeedRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Measure Points Logs",
         path: "/maintenance/measure-points-logs",
         id: "maint:measurePointsLogs",
+        permit: getPremission(1410).canView,
         icon: <AnalyticsRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Maint Log",
         path: "/maintenance/maint-log",
         id: "maint:maintLog",
+        permit: getPremission(1420).canView,
         icon: <ReceiptLongRoundedIcon sx={iconStyle} />,
       },
     ],
@@ -287,23 +318,28 @@ export const menuContentItems: MenuSection[] = [
   {
     title: "Spare",
     icon: <InventoryRoundedIcon sx={iconStyle} />,
+    permit: getPremission(1500).canView,
+
     items: [
       {
         text: "Spare Type",
         path: "/spare/type",
         id: "spare:type",
+        permit: getPremission(1510).canView,
         icon: <CategoryRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Spare Unit",
         path: "/spare/unit",
         id: "spare:unit",
+        permit: getPremission(1520).canView,
         icon: <StraightenRoundedIcon sx={iconStyle} />,
       },
       {
         text: "Spare Used",
         path: "/spare/used",
         id: "spare:used",
+        permit: getPremission(1530).canView,
         icon: <DoneAllRoundedIcon sx={iconStyle} />,
       },
     ],
@@ -320,24 +356,6 @@ export const menuContentItems: MenuSection[] = [
         path: "/report/failure",
         id: "report:failure",
         icon: <ReportProblemRoundedIcon sx={iconStyle} />,
-      },
-      {
-        text: "Daily Report",
-        path: "/report/daily",
-        id: "report:daily",
-        icon: <TodayRoundedIcon sx={iconStyle} />,
-      },
-      {
-        text: "Monthly Report",
-        path: "/report/monthly",
-        id: "report:monthly",
-        icon: <DateRangeRoundedIcon sx={iconStyle} />,
-      },
-      {
-        text: "KPI Report",
-        path: "/report/kpi",
-        id: "report:kpi",
-        icon: <TrendingUpRoundedIcon sx={iconStyle} />,
       },
     ],
   },

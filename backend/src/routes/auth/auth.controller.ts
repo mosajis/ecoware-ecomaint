@@ -32,6 +32,31 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
           password,
         });
 
+        const userInstallation = await prisma.tblUserInstallation.findMany({
+          where: {
+            userId: user?.userId,
+          },
+        });
+
+        if (userInstallation.length < 1) {
+          await prisma.tblLoginAudit.create({
+            data: {
+              employeeId: user?.employeeId || null,
+              actionType: 3, // Error
+              isSuccess: false,
+              createdAt: now,
+              errorMessage: "User has no installation assigned",
+              ipAddress: clientIp,
+              deviceInfo: clientAgent,
+            },
+          });
+
+          set.status = 401;
+          return {
+            status: "error",
+            message: "User has no installation assigned",
+          };
+        }
         if (!user) {
           await prisma.tblLoginAudit.create({
             data: {

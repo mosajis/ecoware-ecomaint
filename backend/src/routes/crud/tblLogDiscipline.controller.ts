@@ -22,6 +22,7 @@ const ControllerTblLogDiscipline = new BaseController({
   createSchema: TblLogDisciplineInputCreate,
   updateSchema: TblLogDisciplineInputUpdate,
   responseSchema: buildResponseSchema(TblLogDisciplinePlain, TblLogDiscipline),
+  scope: true,
 }).app;
 
 export default ControllerTblLogDiscipline;

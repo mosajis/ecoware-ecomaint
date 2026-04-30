@@ -21,6 +21,7 @@ const ControllerTblJobVersion = new BaseController({
   createSchema: TblJobVersionInputCreate,
   updateSchema: TblJobVersionInputUpdate,
   responseSchema: buildResponseSchema(TblJobVersionPlain, TblJobVersion),
+  scope: true,
 }).app;
 
 export default ControllerTblJobVersion;

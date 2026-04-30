@@ -1,7 +1,9 @@
-// base.controller.ts
 import { Elysia, t } from "elysia";
 import { BaseService } from "./base.service";
 
+/* ---------------------------------- */
+/* Query Schema */
+/* ---------------------------------- */
 export const querySchema = t.Object({
   page: t.Optional(t.Number()),
   perPage: t.Optional(t.Number()),
@@ -13,6 +15,9 @@ export const querySchema = t.Object({
   force: t.Optional(t.Boolean()),
 });
 
+/* ---------------------------------- */
+/* Sort Parser */
+/* ---------------------------------- */
 export function parseSortString(sort?: string): Record<string, "asc" | "desc"> {
   if (!sort) return {};
   return sort.split(",").reduce(
@@ -27,6 +32,62 @@ export function parseSortString(sort?: string): Record<string, "asc" | "desc"> {
   );
 }
 
+/* ---------------------------------- */
+/* Scope Enforcer (internal) */
+/* ---------------------------------- */
+async function applyScope({
+  filter,
+  headers,
+  ctx,
+  enabled,
+}: {
+  filter: Record<string, any>;
+  headers: Record<string, any>;
+  ctx: any;
+  enabled?: boolean;
+}) {
+  if (!enabled) return filter;
+
+  const rawInstId = headers["x-inst-id"];
+
+  // 👇 از ctx.user می‌گیریم (باید از auth middleware بیاد)
+  const userId = ctx.user?.id;
+  if (!userId) {
+    throw new Error("Unauthorized");
+  }
+
+  // 👇 گرفتن instهای مجاز
+  const rows = await ctx.prisma.tblUserInstallation.findMany({
+    where: { userId },
+    select: { instId: true },
+  });
+
+  const allowedIds = rows.map((r: any) => r.instId);
+
+  // اگر header ارسال شده
+  if (rawInstId !== undefined) {
+    const instId = Number(rawInstId);
+
+    if (!allowedIds.includes(instId)) {
+      throw new Error("Forbidden: invalid instId");
+    }
+
+    return {
+      ...filter,
+      instId,
+    };
+  }
+
+  // اگر header نبود → همه instهای مجاز
+  return {
+    ...filter,
+    instId: { in: allowedIds },
+  };
+}
+
+/* ---------------------------------- */
+/* Controller Options */
+/* ---------------------------------- */
 export interface BaseControllerOptions<Model> {
   prefix: string;
   swagger: { tags: string[] };
@@ -45,8 +106,13 @@ export interface BaseControllerOptions<Model> {
     | "deleteAll"
     | "count"
   )[];
+
+  scope?: boolean; // ⭐ فقط true/false
 }
 
+/* ---------------------------------- */
+/* Base Controller */
+/* ---------------------------------- */
 export class BaseController<Model extends Record<string, any>> {
   readonly app: Elysia;
 
@@ -60,55 +126,44 @@ export class BaseController<Model extends Record<string, any>> {
     extend,
     excludeRoutes = [],
     primaryKey = "id",
+    scope = false,
   }: BaseControllerOptions<Model>) {
     const { tags } = swagger;
     const app = new Elysia({ prefix });
 
     const isEnabled = (route: string) => !excludeRoutes.includes(route as any);
 
-    // 🧩 GET / (Get All)
+    /* ---------------------------------- */
+    /* GET ALL */
+    /* ---------------------------------- */
     if (isEnabled("getAll")) {
       app.get(
         "/",
-        async ({ query }) => {
+        async ({ query, headers, ...ctx }) => {
           const {
             page = 1,
             perPage = 20,
             sort,
             filter,
             include,
-            select, // 🆕
+            select,
             paginate = false,
           } = query;
 
           let parsedFilter: Record<string, any> = {};
           let parsedInclude: Record<string, any> = {};
-          let parsedSelect: Record<string, any> = {}; // 🆕
+          let parsedSelect: Record<string, any> = {};
 
-          if (filter) {
-            try {
-              parsedFilter = JSON.parse(filter);
-            } catch {
-              throw new Error("Invalid filter JSON");
-            }
-          }
+          if (filter) parsedFilter = JSON.parse(filter);
+          if (include) parsedInclude = JSON.parse(include);
+          if (select) parsedSelect = JSON.parse(select);
 
-          if (include) {
-            try {
-              parsedInclude = JSON.parse(include);
-            } catch {
-              throw new Error("Invalid include JSON");
-            }
-          }
-
-          // 🆕 پارس select
-          if (select) {
-            try {
-              parsedSelect = JSON.parse(select);
-            } catch {
-              throw new Error("Invalid select JSON");
-            }
-          }
+          parsedFilter = await applyScope({
+            filter: parsedFilter,
+            headers,
+            ctx,
+            enabled: scope,
+          });
 
           const sortObj = parseSortString(sort);
           const usePagination = !!paginate;
@@ -117,7 +172,7 @@ export class BaseController<Model extends Record<string, any>> {
             where: parsedFilter,
             orderBy: sortObj,
             include: parsedInclude,
-            select: parsedSelect, // 🆕
+            select: parsedSelect,
             page: usePagination ? Number(page) : 1,
             perPage: usePagination ? Number(perPage) : Number.MAX_SAFE_INTEGER,
           });
@@ -137,61 +192,73 @@ export class BaseController<Model extends Record<string, any>> {
       );
     }
 
-    // 🧩 GET /:primaryKey (Get One)
+    /* ---------------------------------- */
+    /* GET ONE */
+    /* ---------------------------------- */
     if (isEnabled("getOne")) {
       app.get(
         `/:${primaryKey}`,
-        async ({ params, query }) => {
+        async ({ params, query, headers, ...ctx }) => {
           let parsedInclude: Record<string, any> = {};
-          let parsedSelect: Record<string, any> = {}; // 🆕
+          let parsedSelect: Record<string, any> = {};
 
-          if (query.include) {
-            try {
-              parsedInclude = JSON.parse(query.include);
-            } catch {
-              throw new Error("Invalid include JSON");
-            }
-          }
-
-          // 🆕 پارس select
-          if (query.select) {
-            try {
-              parsedSelect = JSON.parse(query.select);
-            } catch {
-              throw new Error("Invalid select JSON");
-            }
-          }
+          if (query.include) parsedInclude = JSON.parse(query.include);
+          if (query.select) parsedSelect = JSON.parse(query.select);
 
           const keyValue = params[primaryKey];
-          return await service.findOne(
-            {
-              [primaryKey]: isNaN(Number(keyValue))
-                ? keyValue
-                : Number(keyValue),
-            },
-            parsedInclude,
-            parsedSelect, // 🆕
-          );
+
+          let where: any = {
+            [primaryKey]: isNaN(Number(keyValue)) ? keyValue : Number(keyValue),
+          };
+
+          where = await applyScope({
+            filter: where,
+            headers,
+            ctx,
+            enabled: scope,
+          });
+
+          return await service.findOne(where, parsedInclude, parsedSelect);
         },
         {
           tags,
           detail: { summary: "Get one" },
-          params: t.Object({ [primaryKey]: t.Union([t.String(), t.Number()]) }),
+          params: t.Object({
+            [primaryKey]: t.Union([t.String(), t.Number()]),
+          }),
           query: t.Object({
             include: t.Optional(t.String()),
-            select: t.Optional(t.String()), // 🆕
+            select: t.Optional(t.String()),
           }),
           response: responseSchema,
         },
       );
     }
 
-    // 🧩 POST / (Create)
+    /* ---------------------------------- */
+    /* CREATE */
+    /* ---------------------------------- */
     if (isEnabled("create")) {
       app.post(
         "/",
-        async ({ body }) => {
-          return await service.create(body);
+        async ({ body, headers, ...ctx }) => {
+          let data = body;
+
+          if (scope) {
+            const scoped = await applyScope({
+              filter: {},
+              headers,
+              ctx,
+              enabled: true,
+            });
+
+            data = {
+              ...(body as any),
+              ...scoped,
+            };
+          }
+
+          return await service.create(data);
         },
         {
           tags,
@@ -202,100 +269,114 @@ export class BaseController<Model extends Record<string, any>> {
       );
     }
 
-    // 🧩 PUT /:primaryKey (Update)
+    /* ---------------------------------- */
+    /* UPDATE */
+    /* ---------------------------------- */
     if (isEnabled("update")) {
       app.put(
         `/:${primaryKey}`,
-        async ({ params, body, query }) => {
+        async ({ params, body, query, headers, ...ctx }) => {
           let parsedInclude: Record<string, any> = {};
-          let parsedSelect: Record<string, any> = {}; // 🆕
+          let parsedSelect: Record<string, any> = {};
 
-          if (query.include) {
-            try {
-              parsedInclude = JSON.parse(query.include);
-            } catch {
-              throw new Error("Invalid include JSON");
-            }
-          }
-
-          // 🆕 پارس select
-          if (query.select) {
-            try {
-              parsedSelect = JSON.parse(query.select);
-            } catch {
-              throw new Error("Invalid select JSON");
-            }
-          }
+          if (query.include) parsedInclude = JSON.parse(query.include);
+          if (query.select) parsedSelect = JSON.parse(query.select);
 
           const keyValue = params[primaryKey];
-          return await service.update(
-            {
-              [primaryKey]: isNaN(Number(keyValue))
-                ? keyValue
-                : Number(keyValue),
-            },
-            body,
-            parsedInclude,
-            parsedSelect, // 🆕
-          );
+
+          let where: any = {
+            [primaryKey]: isNaN(Number(keyValue)) ? keyValue : Number(keyValue),
+          };
+
+          where = await applyScope({
+            filter: where,
+            headers,
+            ctx,
+            enabled: scope,
+          });
+
+          return await service.update(where, body, parsedInclude, parsedSelect);
         },
         {
           tags,
           detail: { summary: "Update" },
           validate: false,
-          params: t.Object({ [primaryKey]: t.Union([t.String(), t.Number()]) }),
+          params: t.Object({
+            [primaryKey]: t.Union([t.String(), t.Number()]),
+          }),
           body: updateSchema,
           query: t.Object({
             include: t.Optional(t.String()),
-            select: t.Optional(t.String()), // 🆕
+            select: t.Optional(t.String()),
           }),
           response: responseSchema,
         },
       );
     }
 
-    // 🧩 DELETE /:primaryKey (Soft or Force Delete)
+    /* ---------------------------------- */
+    /* DELETE */
+    /* ---------------------------------- */
     if (isEnabled("delete")) {
       app.delete(
         `/:${primaryKey}`,
-        async ({ params, query }) => {
+        async ({ params, query, headers, ...ctx }) => {
           const keyValue = params[primaryKey];
-          return await service.delete(
-            {
-              [primaryKey]: isNaN(Number(keyValue))
-                ? keyValue
-                : Number(keyValue),
-            },
-            { force: query.force },
-          );
+
+          let where: any = {
+            [primaryKey]: isNaN(Number(keyValue)) ? keyValue : Number(keyValue),
+          };
+
+          where = await applyScope({
+            filter: where,
+            headers,
+            ctx,
+            enabled: scope,
+          });
+
+          return await service.delete(where, {
+            force: query.force,
+          });
         },
         {
           tags,
           detail: { summary: "Delete one" },
-          params: t.Object({ [primaryKey]: t.Union([t.String(), t.Number()]) }),
-          query: t.Object({ force: t.Optional(t.Boolean()) }),
+          params: t.Object({
+            [primaryKey]: t.Union([t.String(), t.Number()]),
+          }),
+          query: t.Object({
+            force: t.Optional(t.Boolean()),
+          }),
           response: responseSchema,
         },
       );
     }
 
-    // 🧩 DELETE / (Delete All)
+    /* ---------------------------------- */
+    /* DELETE ALL */
+    /* ---------------------------------- */
     if (isEnabled("deleteAll")) {
       app.delete(
         "/",
-        async ({ query }) => {
+        async ({ query, headers, ...ctx }) => {
           let parsedFilter: Record<string, any> = {};
-          if (query.filter) {
-            try {
-              parsedFilter = JSON.parse(query.filter);
-            } catch {
-              throw new Error("Invalid filter JSON");
-            }
-          }
+
+          if (query.filter) parsedFilter = JSON.parse(query.filter);
+
+          parsedFilter = await applyScope({
+            filter: parsedFilter,
+            headers,
+            ctx,
+            enabled: scope,
+          });
+
           const result = await service.deleteAll(parsedFilter, {
             force: query.force,
           });
-          return { deleted: result.count ?? result.deleted ?? 0 };
+
+          return {
+            deleted: result.count ?? result.deleted ?? 0,
+          };
         },
         {
           tags,
@@ -308,32 +389,39 @@ export class BaseController<Model extends Record<string, any>> {
       );
     }
 
-    // 🧩 GET /count
+    /* ---------------------------------- */
+    /* COUNT */
+    /* ---------------------------------- */
     if (isEnabled("count")) {
       app.get(
         "/count",
-        async ({ query }) => {
+        async ({ query, headers, ...ctx }) => {
           let parsedFilter: Record<string, any> = {};
-          if (query.filter) {
-            try {
-              parsedFilter = JSON.parse(query.filter);
-            } catch {
-              throw new Error("Invalid filter JSON");
-            }
-          }
+
+          if (query.filter) parsedFilter = JSON.parse(query.filter);
+
+          parsedFilter = await applyScope({
+            filter: parsedFilter,
+            headers,
+            ctx,
+            enabled: scope,
+          });
+
           const result = await service.count(parsedFilter);
+
           return { count: result };
         },
         {
           tags,
           detail: { summary: "Count" },
           query: querySchema,
-          response: t.Object({ count: t.Integer() }),
+          response: t.Object({
+            count: t.Integer(),
+          }),
         },
       );
     }
 
-    // 🧩 Extend custom routes
     if (extend) extend(app as any);
 
     this.app = app as any;

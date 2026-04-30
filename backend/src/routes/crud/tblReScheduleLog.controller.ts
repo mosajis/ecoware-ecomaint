@@ -22,6 +22,7 @@ const ControllerTblReScheduleLog = new BaseController({
   createSchema: TblReScheduleLogInputCreate,
   updateSchema: TblReScheduleLogInputUpdate,
   responseSchema: buildResponseSchema(TblReScheduleLogPlain, TblReScheduleLog),
+  scope: true,
 }).app;
 
 export default ControllerTblReScheduleLog;

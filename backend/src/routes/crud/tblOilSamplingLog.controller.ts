@@ -23,6 +23,7 @@ const ControllerTblOilSamplingLog = new BaseController({
   service: ServiceTblOilSamplingLog,
   createSchema: TblOilSamplingLogInputCreate,
   updateSchema: TblOilSamplingLogInputUpdate,
+  scope: true,
   responseSchema: buildResponseSchema(
     TblOilSamplingLogPlain,
     TblOilSamplingLog,

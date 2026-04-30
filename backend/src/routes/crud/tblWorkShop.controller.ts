@@ -16,6 +16,8 @@ const ControllerTblWorkShop = new BaseController({
   swagger: {
     tags: ["tblWorkShop"],
   },
+  scope: true,
+
   primaryKey: "workShopId",
   service: ServiceTblWorkShop,
   createSchema: TblWorkShopInputCreate,

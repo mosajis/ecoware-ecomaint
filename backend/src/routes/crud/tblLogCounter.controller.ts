@@ -22,6 +22,7 @@ const ControllerTblLogCounter = new BaseController({
   createSchema: TblLogCounterInputCreate,
   updateSchema: TblLogCounterInputUpdate,
   responseSchema: buildResponseSchema(TblLogCounterPlain, TblLogCounter),
+  scope: true,
 }).app;
 
 export default ControllerTblLogCounter;

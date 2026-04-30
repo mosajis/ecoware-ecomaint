@@ -23,6 +23,8 @@ const ControllerTblMaintLogAttachment = new BaseController({
   service: ServiceTblMaintLogAttachment,
   createSchema: TblMaintLogAttachmentInputCreate,
   updateSchema: TblMaintLogAttachmentInputUpdate,
+  scope: true,
+
   responseSchema: buildResponseSchema(
     TblMaintLogAttachmentPlain,
     TblMaintLogAttachment,

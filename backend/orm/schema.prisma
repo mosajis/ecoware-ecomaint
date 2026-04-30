@@ -647,6 +647,7 @@ model TblElement {
   name                 String                @map("Name") @db.NVarChar(100)
   caption              String                @map("Caption") @db.NVarChar(100)
   orderNo              Int?                  @map("OrderNo")
+  hasCrud              Boolean?              @map("HasCrud")
   tblElement           TblElement?           @relation("tblElementTotblElement", fields: [parentId], references: [elementId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblElement_tblElement")
   otherTblElements     TblElement[]          @relation("tblElementTotblElement")
   tblUserGroupElements TblUserGroupElement[]
@@ -855,7 +856,6 @@ model TblInstallation {
   tblRotationLogs              TblRotationLog[]
   tblRounds                    TblRound[]
   tblRoundCompJobs             TblRoundCompJob[]
-  tblUserInstallations         TblUserInstallation[]
   tblWorkOrders                TblWorkOrder[]
   tblWorkShops                 TblWorkShop[]
   tblWorkShopAttachments       TblWorkShopAttachment[]
@@ -1358,18 +1358,17 @@ model TblUnit {
 }
 
 model TblUser {
-  userId               Int                   @id(map: "PK_tblAmosUser") @default(dbgenerated("NEXT VALUE FOR [Seq_Users]"), map: "DF_UserID") @map("UserID")
-  employeeId           Int                   @map("EmployeeID")
-  userGroupId          Int                   @map("UserGroupId")
-  userName             String                @map("UserName") @db.NVarChar(100)
-  password             String                @map("Password") @db.NVarChar(200)
-  accountDisabled      Boolean               @map("AccountDisabled")
-  forcePasswordChange  Boolean               @map("ForcePasswordChange")
-  lastLogin            DateTime?             @map("LastLogin") @db.DateTime
-  lastUpdate           DateTime?             @db.DateTime
-  tblEmployee          TblEmployee           @relation(fields: [employeeId], references: [employeeId], onUpdate: NoAction, map: "FK_tblUser_tblEmployee")
-  tblUserGroup         TblUserGroup          @relation(fields: [userGroupId], references: [userGroupId], onUpdate: NoAction, map: "FK_tblUser_tblUserGroup")
-  tblUserInstallations TblUserInstallation[]
+  userId              Int          @id(map: "PK_tblAmosUser") @default(dbgenerated("NEXT VALUE FOR [Seq_Users]"), map: "DF_UserID") @map("UserID")
+  employeeId          Int          @map("EmployeeID")
+  userGroupId         Int          @map("UserGroupId")
+  userName            String       @map("UserName") @db.NVarChar(100)
+  password            String       @map("Password") @db.NVarChar(200)
+  accountDisabled     Boolean      @map("AccountDisabled")
+  forcePasswordChange Boolean      @map("ForcePasswordChange")
+  lastLogin           DateTime?    @map("LastLogin") @db.DateTime
+  lastUpdate          DateTime?    @db.DateTime
+  tblEmployee         TblEmployee  @relation(fields: [employeeId], references: [employeeId], onUpdate: NoAction, map: "FK_tblUser_tblEmployee")
+  tblUserGroup        TblUserGroup @relation(fields: [userGroupId], references: [userGroupId], onUpdate: NoAction, map: "FK_tblUser_tblUserGroup")
 
   @@map("tblUser")
 }
@@ -1402,11 +1401,9 @@ model TblUserGroupElement {
 }
 
 model TblUserInstallation {
-  userInstId      Int             @id(map: "PK_tblUserInstallation") @default(autoincrement()) @map("UserInstID")
-  userId          Int             @map("UserId")
-  instId          Int             @map("InstId")
-  tblInstallation TblInstallation @relation(fields: [instId], references: [instId], onUpdate: NoAction, map: "FK_tblUserInstallation_tblInstallation")
-  tblUser         TblUser         @relation(fields: [userId], references: [userId], onUpdate: NoAction, map: "FK_tblUserInstallation_tblUser")
+  userInstId Int @id(map: "PK_tblUserInstallation") @default(autoincrement()) @map("UserInstID")
+  userId     Int @map("UserId")
+  instId     Int @map("InstId")
 
   @@map("tblUserInstallation")
 }

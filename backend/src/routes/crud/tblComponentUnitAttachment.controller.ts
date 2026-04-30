@@ -19,6 +19,7 @@ const ControllerTblComponentUnitAttachment = new BaseController({
   swagger: {
     tags: ["tblComponentUnitAttachment"],
   },
+  scope: true,
   primaryKey: "componentUnitAttachmentId",
   service: ServiceTblComponentUnitAttachment,
   createSchema: TblComponentUnitAttachmentInputCreate,

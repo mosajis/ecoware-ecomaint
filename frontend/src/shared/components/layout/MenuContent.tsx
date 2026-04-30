@@ -74,6 +74,7 @@ export default function MenuContent() {
       ? false
       : isExactMatch(item.path) || isNestedMatch(item.path);
 
+    if (!item.permit) return;
     return (
       <Fragment key={item.id || item.text}>
         <ListItem disablePadding>

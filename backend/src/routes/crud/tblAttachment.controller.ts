@@ -162,6 +162,7 @@ const baseController = new BaseController({
   service: ServiceTblAttachment,
   createSchema: TblAttachmentInputCreate,
   updateSchema: TblAttachmentInputUpdate,
+  scope: true,
   responseSchema: buildResponseSchema(TblAttachmentPlain, TblAttachment),
   excludeRoutes: ["create"],
   extend: (app: Elysia) => {

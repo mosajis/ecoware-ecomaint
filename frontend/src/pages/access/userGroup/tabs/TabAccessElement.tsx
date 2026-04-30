@@ -16,7 +16,7 @@ import {
   TypeTblElement,
   TypeTblUserGroup,
 } from "@/core/api/generated/api";
-import { alpha, useTheme } from "@mui/material";
+import { useTheme } from "@mui/material";
 import { toast } from "sonner";
 
 /* ─── Types ───────────────── */
@@ -79,7 +79,20 @@ function getCheckState(values: boolean[]): CheckState {
   return "indeterminate";
 }
 
-/* ─── Row ───────────────── */
+function getPermissionLabel(permission: Permission): string {
+  return permission.replace("can", "");
+}
+
+/* ─── Row Component ───────────────── */
+
+interface RowProps {
+  node: any;
+  depth: number;
+  stateMap: StateMap;
+  onChange: (id: number, permission: Permission, value: boolean) => void;
+  onRowToggle: (node: any, value: boolean, isParent: boolean) => void;
+  borderColor: string;
+}
 
 const Row = React.memo(function Row({
   node,
@@ -87,10 +100,9 @@ const Row = React.memo(function Row({
   stateMap,
   onChange,
   onRowToggle,
-}: any) {
-  const theme = useTheme();
+  borderColor,
+}: RowProps) {
   const [open, setOpen] = useState(true);
-
   const isParent = node.children.length > 0;
   const state = stateMap[node.elementId];
   const perms = state?.perms ?? EMPTY;
@@ -101,17 +113,18 @@ const Row = React.memo(function Row({
 
   const rowState = getCheckState(rowValues);
 
+  const cellBorder = `1px solid ${borderColor}`;
+
   return (
     <>
-      <TableRow
-        sx={{
-          bgcolor: isParent ? "background.paper" : "",
-          "&:hover": {
-            bgcolor: alpha(theme.palette.primary.main, 0.03),
-          },
-        }}
-      >
-        <TableCell sx={{ pl: 1 + depth * 3 + (isParent ? 0 : 2 * depth) }}>
+      <TableRow>
+        <TableCell
+          sx={{
+            pl: 1 + depth * 3 + (isParent ? 0 : 2 * depth),
+            borderRight: cellBorder,
+            borderBottom: cellBorder,
+          }}
+        >
           <Box display="flex" alignItems="center">
             {node.children.length > 0 && (
               <IconButton
@@ -128,48 +141,70 @@ const Row = React.memo(function Row({
           </Box>
         </TableCell>
 
-        {/* ALL */}
-        <TableCell align="left">
-          <Checkbox
-            size="small"
-            checked={rowState === "all"}
-            indeterminate={rowState === "indeterminate"}
-            onChange={(_, val) => onRowToggle(node, val, isParent)}
-          />
+        {/* ALL Column */}
+        <TableCell
+          align="center"
+          sx={{ borderRight: cellBorder, borderBottom: cellBorder }}
+        >
+          {node.hasCrud && (
+            <Checkbox
+              sx={{ margin: 0 }}
+              size="small"
+              checked={rowState === "all"}
+              indeterminate={rowState === "indeterminate"}
+              onChange={(_, val) => onRowToggle(node, val, isParent)}
+            />
+          )}
         </TableCell>
 
-        {PERMISSIONS.map((p) => {
-          const disabled = isParent && p !== "canView";
-
-          return (
-            <TableCell key={p} align="left">
+        {/* Permission Columns */}
+        {PERMISSIONS.map((p) => (
+          <TableCell
+            key={p}
+            align="center"
+            sx={{
+              borderRight: cellBorder,
+              borderBottom: cellBorder,
+            }}
+          >
+            {node.hasCrud ? (
               <Checkbox
                 size="small"
+                sx={{ margin: 0 }}
                 checked={perms[p]}
-                disabled={disabled}
                 onChange={(_, val) => onChange(node.elementId, p, val)}
               />
-            </TableCell>
-          );
-        })}
+            ) : (
+              p === "canView" && (
+                <Checkbox
+                  sx={{ margin: 0 }}
+                  size="small"
+                  checked={perms[p]}
+                  onChange={(_, val) => onChange(node.elementId, p, val)}
+                />
+              )
+            )}
+          </TableCell>
+        ))}
       </TableRow>
 
       {open &&
-        node.children.map((c: any) => (
+        node.children.map((child: any) => (
           <Row
-            key={c.elementId}
-            node={c}
+            key={child.elementId}
+            node={child}
             depth={depth + 1}
             stateMap={stateMap}
             onChange={onChange}
             onRowToggle={onRowToggle}
+            borderColor={borderColor}
           />
         ))}
     </>
   );
 });
 
-/* ─── Main ───────────────── */
+/* ─── Main Component ───────────────── */
 
 type Props = {
   userGroup: TypeTblUserGroup;
@@ -177,79 +212,115 @@ type Props = {
 
 export default function TabAccessElement(props: Props) {
   const userGroupId = props?.userGroup?.userGroupId;
-
   const theme = useTheme();
 
   const [elements, setElements] = useState<TypeTblElement[]>([]);
   const [stateMap, setStateMap] = useState<StateMap>({});
   const [loading, setLoading] = useState(false);
 
-  /* fetch */
+  /* ─── Data Fetching ───────────────── */
 
   useEffect(() => {
     if (!userGroupId) return;
 
     (async () => {
-      const [el, ug] = await Promise.all([
-        tblElement.getAll(),
-        tblUserGroupElement.getAll({ filter: { userGroupId } }),
-      ]);
+      try {
+        const [elementsData, userGroupElementsData] = await Promise.all([
+          tblElement.getAll(),
+          tblUserGroupElement.getAll({ filter: { userGroupId } }),
+        ]);
 
-      setElements(el.items);
+        setElements(elementsData.items);
 
-      const map: StateMap = {};
+        const map: StateMap = {};
 
-      el.items.forEach((e) => {
-        map[e.elementId] = {
-          perms: { ...EMPTY },
-          original: { ...EMPTY },
-        };
-      });
+        // Initialize all elements with empty permissions
+        elementsData.items.forEach((element) => {
+          map[element.elementId] = {
+            perms: { ...EMPTY },
+            original: { ...EMPTY },
+          };
+        });
 
-      ug.items.forEach((u) => {
-        const p: PermMap = {
-          canView: u.canView,
-          canCreate: u.canCreate,
-          canUpdate: u.canUpdate,
-          canDelete: u.canDelete,
-          canExport: u.canExport,
-        };
+        // Update with existing permissions
+        userGroupElementsData.items.forEach((userGroupElement) => {
+          const permissions: PermMap = {
+            canView: userGroupElement.canView,
+            canCreate: userGroupElement.canCreate,
+            canUpdate: userGroupElement.canUpdate,
+            canDelete: userGroupElement.canDelete,
+            canExport: userGroupElement.canExport,
+          };
 
-        map[u.elementId] = {
-          recordId: u.userGroupElementId,
-          perms: p,
-          original: p,
-        };
-      });
+          map[userGroupElement.elementId] = {
+            recordId: userGroupElement.userGroupElementId,
+            perms: permissions,
+            original: permissions,
+          };
+        });
 
-      setStateMap(map);
+        setStateMap(map);
+      } catch (error) {
+        toast.error("Error loading data");
+        console.error("Error fetching data:", error);
+      }
     })();
   }, [userGroupId]);
 
+  /* ─── Computed Values ───────────────── */
+
   const tree = useMemo(() => buildTree(elements), [elements]);
 
-  /* handlers */
+  const colState = useMemo(() => {
+    const result: Record<string, CheckState> = {};
 
-  const handleChange = useCallback((id: any, key: any, val: any) => {
-    setStateMap((p) => ({
-      ...p,
-      [id]: {
-        ...p[id],
-        perms: { ...p[id].perms, [key]: val },
-      },
-    }));
-  }, []);
+    PERMISSIONS.forEach((permission) => {
+      const values = Object.values(stateMap).map((s) => s.perms[permission]);
+      result[permission] = getCheckState(values);
+    });
+
+    return result;
+  }, [stateMap]);
+
+  const allPermState = useMemo(() => {
+    const allValues = Object.values(stateMap).flatMap((s) =>
+      PERMISSIONS.map((p) => s.perms[p]),
+    );
+    return getCheckState(allValues);
+  }, [stateMap]);
+
+  const dirtyCount = useMemo(() => {
+    return Object.values(stateMap).filter((s) =>
+      PERMISSIONS.some((p) => s.perms[p] !== s.original[p]),
+    ).length;
+  }, [stateMap]);
+
+  /* ─── Event Handlers ───────────────── */
+
+  const handleChange = useCallback(
+    (id: number, permission: Permission, value: boolean) => {
+      setStateMap((prev) => ({
+        ...prev,
+        [id]: {
+          ...prev[id],
+          perms: { ...prev[id].perms, [permission]: value },
+        },
+      }));
+    },
+    [],
+  );
 
   const handleRowToggle = useCallback(
-    (node: any, val: any, isParent: boolean) => {
-      setStateMap((p) => {
-        const next = { ...p };
-
-        const keys = isParent ? ["canView"] : PERMISSIONS;
+    (node: any, value: boolean, isParent: boolean) => {
+      setStateMap((prev) => {
+        const next = { ...prev };
+        const permissionsToUpdate = isParent ? ["canView"] : PERMISSIONS;
 
         next[node.elementId] = {
           ...next[node.elementId],
-          perms: Object.fromEntries(keys.map((k) => [k, val])) as PermMap,
+          perms: Object.fromEntries(
+            permissionsToUpdate.map((p) => [p, value]),
+          ) as PermMap,
         };
 
         return next;
@@ -258,83 +329,112 @@ export default function TabAccessElement(props: Props) {
     [],
   );
 
-  /* column state */
+  const handleColumnToggle = useCallback(
+    (permission: Permission, value: boolean) => {
+      setStateMap((prev) => {
+        const next = { ...prev };
+        Object.keys(next).forEach((id) => {
+          next[+id] = {
+            ...next[+id],
+            perms: {
+              ...next[+id].perms,
+              [permission]: value,
+            },
+          };
+        });
+        return next;
+      });
+    },
+    [],
+  );
 
-  const colState = useMemo(() => {
-    const res: any = {};
-
-    PERMISSIONS.forEach((p) => {
-      const vals = Object.values(stateMap).map((s) => s.perms[p]);
-      res[p] = getCheckState(vals);
+  const handleToggleAll = useCallback((value: boolean) => {
+    setStateMap((prev) => {
+      const next = { ...prev };
+      Object.keys(next).forEach((id) => {
+        next[+id] = {
+          ...next[+id],
+          perms: {
+            ...next[+id].perms,
+            ...Object.fromEntries(PERMISSIONS.map((p) => [p, value])),
+          },
+        };
+      });
+      return next;
     });
+  }, []);
 
-    return res;
-  }, [stateMap]);
-
-  /* dirty */
-
-  const dirtyCount = useMemo(() => {
-    return Object.values(stateMap).filter((s) =>
-      PERMISSIONS.some((p) => s.perms[p] !== s.original[p]),
-    ).length;
-  }, [stateMap]);
-
-  /* save */
+  /* ─── Save Handler ───────────────── */
 
   const handleSave = async () => {
     setLoading(true);
-    await Promise.all(
-      Object.entries(stateMap).map(async ([id, s]) => {
-        const any = Object.values(s.perms).some(Boolean);
+    try {
+      await Promise.all(
+        Object.entries(stateMap).map(async ([elementId, state]) => {
+          const hasAnyPermission = Object.values(state.perms).some(Boolean);
 
-        if (s.recordId) {
-          if (any) {
-            await tblUserGroupElement.update(s.recordId, s.perms);
-          } else {
-            await tblUserGroupElement.deleteById(s.recordId);
+          if (state.recordId) {
+            if (hasAnyPermission) {
+              await tblUserGroupElement.update(state.recordId, state.perms);
+            } else {
+              await tblUserGroupElement.deleteById(state.recordId);
+            }
+          } else if (hasAnyPermission) {
+            await tblUserGroupElement.create({
+              ...state.perms,
+              tblElement: { connect: { elementId: +elementId } },
+              tblUserGroup: { connect: { userGroupId } },
+            });
           }
-        } else if (any) {
-          await tblUserGroupElement.create({
-            ...s.perms,
-            tblElement: { connect: { elementId: +id } },
-            tblUserGroup: { connect: { userGroupId } },
-          });
-        }
-      }),
-    )
-      .then(() => {
-        toast.success("Successfully Saved");
-      })
-      .catch(() => {
-        toast.error("Faild Save");
-      })
-      .finally(() => {
-        setLoading(false);
+        }),
+      );
+
+      toast.success("Changes saved successfully");
+
+      // Update original state after successful save
+      setStateMap((prev) => {
+        const next = { ...prev };
+        Object.keys(next).forEach((id) => {
+          next[+id] = {
+            ...next[+id],
+            original: { ...next[+id].perms },
+          };
+        });
+        return next;
       });
+    } catch (error) {
+      toast.error("خطا در ذخیره تغییرات");
+      console.error("Error saving changes:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  /* render */
+  /* ─── Theme Colors ───────────────── */
+
+  const borderColor = theme.palette.divider;
+
+  const headerBgColor = theme.palette.background.paper;
+
+  /* ─── Render ───────────────── */
+
   return (
-    <Box border={`1px solid ${theme.palette.divider}`}>
-      {/* toolbar */}
+    <Box height="100%" display="flex" flexDirection="column">
+      {/* Header Section */}
       <Box
         display="flex"
-        alignItems={"center"}
+        alignItems="center"
         justifyContent="space-between"
         p={1}
         sx={{
-          borderBottom: `1px solid ${theme.palette.divider}`,
-          borderTop: `1px solid ${theme.palette.divider}`,
-          position: "sticky",
-          top: 0,
-          bgcolor: "background.paper",
-          zIndex: 10,
+          borderBottom: `1px solid ${borderColor}`,
+          bgcolor: headerBgColor,
+          flexShrink: 0,
         }}
       >
         <Typography fontWeight={600}>
-          Access Control ({dirtyCount} changes)
+          Unsaved changes ({dirtyCount} changes)
         </Typography>
-
         <Button
           startIcon={<Save />}
           variant={!dirtyCount ? "outlined" : "contained"}
@@ -347,77 +447,116 @@ export default function TabAccessElement(props: Props) {
         </Button>
       </Box>
 
-      <Table size="small" stickyHeader>
-        <TableHead>
-          <TableRow>
-            <TableCell
-              sx={{
-                bgcolor: "background.paper",
-                borderBottom: `1px solid ${theme.palette.divider}`,
-              }}
-            >
-              Element
-            </TableCell>
-
-            {/* ALL */}
-            <TableCell
-              sx={{
-                bgcolor: "background.paper",
-                borderBottom: `1px solid ${theme.palette.divider}`,
-              }}
-              align="left"
-            >
-              All
-            </TableCell>
-
-            {PERMISSIONS.map((p) => (
+      {/* Table Container */}
+      <Box overflow="auto" flex={1}>
+        <Table size="small" stickyHeader sx={{ borderCollapse: "collapse" }}>
+          <TableHead>
+            <TableRow sx={{ bgcolor: headerBgColor }}>
+              {/* Name Column */}
               <TableCell
                 sx={{
-                  bgcolor: "background.paper",
-                  borderBottom: `1px solid ${theme.palette.divider}`,
+                  borderRight: `1px solid ${borderColor}`,
+                  borderBottom: `1px solid ${borderColor}`,
+                  bgcolor: headerBgColor,
+                  fontWeight: 600,
+                  minWidth: 200,
                 }}
-                key={p}
-                align="left"
               >
-                <Checkbox
-                  size="small"
-                  checked={colState[p] === "all"}
-                  indeterminate={colState[p] === "indeterminate"}
-                  onChange={(_, val) => {
-                    setStateMap((prev) => {
-                      const next = { ...prev };
-                      Object.keys(next).forEach((id) => {
-                        next[+id] = {
-                          ...next[+id],
-                          perms: {
-                            ...next[+id].perms,
-                            [p]: val,
-                          },
-                        };
-                      });
-                      return next;
-                    });
-                  }}
-                />
-                {p.replace("can", "")}
+                Name
               </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
 
-        <TableBody>
-          {tree.map((n) => (
-            <Row
-              key={n.elementId}
-              node={n}
-              depth={0}
-              stateMap={stateMap}
-              onChange={handleChange}
-              onRowToggle={handleRowToggle}
-            />
-          ))}
-        </TableBody>
-      </Table>
+              {/* All Column */}
+              <TableCell
+                align="center"
+                sx={{
+                  borderRight: `1px solid ${borderColor}`,
+                  borderBottom: `1px solid ${borderColor}`,
+                  bgcolor: headerBgColor,
+                  fontWeight: 600,
+                  minWidth: 60,
+                }}
+              >
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  gap={0.5}
+                >
+                  <Checkbox
+                    sx={{ margin: 0 }}
+                    size="small"
+                    checked={allPermState === "all"}
+                    indeterminate={allPermState === "indeterminate"}
+                    onChange={(_, val) => handleToggleAll(val)}
+                  />
+                  <Typography variant="caption">All</Typography>
+                </Box>
+              </TableCell>
+
+              {/* Permission Columns */}
+              {PERMISSIONS.map((permission) => (
+                <TableCell
+                  key={permission}
+                  align="center"
+                  sx={{
+                    borderRight: `1px solid ${borderColor}`,
+                    borderBottom: `1px solid ${borderColor}`,
+                    bgcolor: headerBgColor,
+                    fontWeight: 600,
+                    minWidth: 80,
+                  }}
+                >
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                    gap={0.5}
+                  >
+                    <Checkbox
+                      sx={{ margin: 0 }}
+                      size="small"
+                      checked={colState[permission] === "all"}
+                      indeterminate={colState[permission] === "indeterminate"}
+                      onChange={(_, val) => handleColumnToggle(permission, val)}
+                    />
+                    <Typography variant="caption">
+                      {getPermissionLabel(permission)}
+                    </Typography>
+                  </Box>
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+
+          <TableBody>
+            {tree.length > 0 ? (
+              tree.map((node) => (
+                <Row
+                  key={node.elementId}
+                  node={node}
+                  depth={0}
+                  stateMap={stateMap}
+                  onChange={handleChange}
+                  onRowToggle={handleRowToggle}
+                  borderColor={borderColor}
+                />
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={PERMISSIONS.length + 2}
+                  align="center"
+                  sx={{ py: 3 }}
+                >
+                  <Typography color="textSecondary">
+                    No data available
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </Box>
     </Box>
   );
 }

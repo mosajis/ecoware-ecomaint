@@ -61,6 +61,7 @@ const ControllerTblMaintLogSpare = new BaseController({
     tags: ["tblMaintLogSpare"],
   },
   primaryKey: "maintLogSpareId",
+  scope: true,
   service: ServiceTblMaintLogSpare,
   createSchema: TblMaintLogSpareInputCreate,
   updateSchema: TblMaintLogSpareInputUpdate,

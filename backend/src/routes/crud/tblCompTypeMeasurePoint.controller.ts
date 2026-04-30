@@ -31,6 +31,7 @@ const ControllerTblCompTypeMeasurePoint = new BaseController({
     TblCompTypeMeasurePointPlain,
     TblCompTypeMeasurePoint,
   ),
+  scope: true,
 
   extend: (app) => {
     app.post(

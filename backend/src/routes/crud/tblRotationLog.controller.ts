@@ -22,6 +22,7 @@ const ControllerTblRotationLog = new BaseController({
   createSchema: TblRotationLogInputCreate,
   updateSchema: TblRotationLogInputUpdate,
   responseSchema: buildResponseSchema(TblRotationLogPlain, TblRotationLog),
+  scope: true,
 }).app;
 
 export default ControllerTblRotationLog;

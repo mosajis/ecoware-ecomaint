@@ -18,6 +18,7 @@ const ControllerTblRoundCompJob = new BaseController({
     tags: ["tblRoundCompJob"],
   },
   primaryKey: "roundCompJobId",
+  scope: true,
   service: ServiceTblRoundCompJob,
   createSchema: TblRoundCompJobInputCreate,
   updateSchema: TblRoundCompJobInputUpdate,

@@ -31,6 +31,7 @@ const ControllerTblCompTypeJobCounter = new BaseController({
     TblCompTypeJobCounterPlain,
     TblCompTypeJobCounter,
   ),
+  scope: true,
 
   extend: (app) => {
     app.post(

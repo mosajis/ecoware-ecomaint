@@ -9,7 +9,9 @@ import {
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
-export const ServiceTblFailureReportWorkShop = new BaseService(prisma.tblFailureReportWorkShop);
+export const ServiceTblFailureReportWorkShop = new BaseService(
+  prisma.tblFailureReportWorkShop,
+);
 
 const ControllerTblFailureReportWorkShop = new BaseController({
   prefix: "/tblFailureReportWorkShop",
@@ -20,7 +22,11 @@ const ControllerTblFailureReportWorkShop = new BaseController({
   service: ServiceTblFailureReportWorkShop,
   createSchema: TblFailureReportWorkShopInputCreate,
   updateSchema: TblFailureReportWorkShopInputUpdate,
-  responseSchema: buildResponseSchema(TblFailureReportWorkShopPlain, TblFailureReportWorkShop),
+  responseSchema: buildResponseSchema(
+    TblFailureReportWorkShopPlain,
+    TblFailureReportWorkShop,
+  ),
+  scope: true,
 }).app;
 
 export default ControllerTblFailureReportWorkShop;

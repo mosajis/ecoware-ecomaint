@@ -27,6 +27,7 @@ const ControllerTblJobDescriptionAttachment = new BaseController({
     TblJobDescriptionAttachmentPlain,
     TblJobDescriptionAttachment,
   ),
+  scope: true,
 }).app;
 
 export default ControllerTblJobDescriptionAttachment;

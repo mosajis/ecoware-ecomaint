@@ -17,6 +17,7 @@ const ControllerTblCompSpare = new BaseController({
   swagger: {
     tags: ["tblCompSpare"],
   },
+  scope: true,
   primaryKey: "compSpareId",
   service: ServiceTblCompSpare,
   createSchema: TblCompSpareInputCreate,

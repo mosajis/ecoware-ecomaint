@@ -19,6 +19,8 @@ const ControllerTblCompMeasurePointLog = new BaseController({
   swagger: {
     tags: ["tblCompMeasurePointLog"],
   },
+  scope: true,
+
   primaryKey: "compMeasurePointLogId",
   service: ServiceTblCompMeasurePointLog,
   createSchema: TblCompMeasurePointLogInputCreate,

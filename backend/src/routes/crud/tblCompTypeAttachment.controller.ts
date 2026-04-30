@@ -23,6 +23,8 @@ const ControllerTblCompTypeAttachment = new BaseController({
   swagger: {
     tags: ["tblCompTypeAttachment"],
   },
+  scope: true,
+
   primaryKey: "compTypeAttachmentId",
   service: ServiceTblCompTypeAttachment,
   createSchema: TblCompTypeAttachmentInputCreate,

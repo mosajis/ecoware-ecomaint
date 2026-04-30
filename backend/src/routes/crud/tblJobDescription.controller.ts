@@ -27,6 +27,7 @@ const ControllerTblJobDescription = new BaseController({
     TblJobDescriptionPlain,
     TblJobDescription,
   ),
+  scope: true,
 }).app;
 
 export default ControllerTblJobDescription;

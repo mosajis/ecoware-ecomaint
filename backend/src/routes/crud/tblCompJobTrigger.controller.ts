@@ -19,6 +19,7 @@ const ControllerTblCompJobTrigger = new BaseController({
   swagger: {
     tags: ["tblCompJobTrigger"],
   },
+  scope: true,
   primaryKey: "compJobTriggerId",
   service: ServiceTblCompJobTrigger,
   createSchema: TblCompJobTriggerInputCreate,

@@ -21,6 +21,7 @@ const ControllerTblRound = new BaseController({
   service: ServiceTblRound,
   createSchema: TblRoundInputCreate,
   updateSchema: TblRoundInputUpdate,
+  scope: true,
   responseSchema: buildResponseSchema(TblRoundPlain, TblRound),
 }).app;
 

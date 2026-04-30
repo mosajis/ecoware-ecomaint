@@ -18,6 +18,7 @@ const ControllerTblCompCounter = new BaseController({
   swagger: {
     tags: ["tblCompCounter"],
   },
+  scope: true,
   primaryKey: "compCounterId",
   service: ServiceTblCompCounter,
   createSchema: TblCompCounterInputCreate,
@@ -43,7 +44,7 @@ const ControllerTblCompCounter = new BaseController({
               changedBy: null,
               currentDate: null,
               currentValue: null,
-              lastupdate: null,
+              lastUpdate: null,
               lastZeroedValue: null,
             },
           });
@@ -184,7 +185,7 @@ const ControllerTblCompCounter = new BaseController({
               where: { compJobId: job.compJobId },
               data: {
                 nextDueDate: nextDate,
-                lastupdate: now,
+                lastUpdate: now,
               },
             });
 
@@ -196,7 +197,7 @@ const ControllerTblCompCounter = new BaseController({
               },
               data: {
                 dueDate: nextDate,
-                lastupdate: now,
+                lastUpdate: now,
               },
             });
           }

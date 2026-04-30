@@ -20,38 +20,6 @@ import {
   TypeTblUserGroup,
 } from "@/core/api/generated/api";
 
-// === Validation Schema with Zod ===
-const schema = z.object({
-  userName: z.string().min(1, "Username is required"),
-  password: z.string().optional(),
-  accountDisabled: z.boolean(),
-  forcePasswordChange: z.boolean(),
-
-  tblEmployee: z
-    .object({
-      employeeId: z.number(),
-    })
-    .nullable()
-    .optional(),
-
-  tblUserGroup: z
-    .object({
-      userGroupId: z.number(),
-    })
-    .nullable()
-    .optional(),
-
-  tblUserInstallations: z
-    .array(
-      z.object({
-        instId: z.number(),
-      }),
-    )
-    .optional(),
-});
-
-export type UserFormValues = z.infer<typeof schema>;
-
 type Props = {
   open: boolean;
   mode: "create" | "update";
@@ -60,9 +28,52 @@ type Props = {
   onSuccess?: (data: TypeTblUser) => void;
 };
 
+// Helper function to create schema based on mode
+const createValidationSchema = (mode: "create" | "update") =>
+  z.object({
+    userName: z.string().min(1, "Username is required"),
+    password: z.string().refine(
+      (val) => {
+        if (mode === "create") return val.length > 0;
+        return true; // Update mode: password is optional
+      },
+      {
+        message: "Password is required",
+      },
+    ),
+    accountDisabled: z.boolean(),
+    forcePasswordChange: z.boolean(),
+
+    tblEmployee: z
+      .object({
+        employeeId: z.number(),
+      })
+      .nullable()
+      .optional(),
+
+    tblUserGroup: z
+      .object({
+        userGroupId: z.number(),
+      })
+      .nullable()
+      .optional(),
+
+    tblUserInstallations: z
+      .array(
+        z.object({
+          instId: z.number(),
+        }),
+      )
+      .min(1, "Select at least one well"),
+  });
+
+export type UserFormValues = z.infer<ReturnType<typeof createValidationSchema>>;
+
 function UserUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
+  const validationSchema = useMemo(() => createValidationSchema(mode), [mode]);
 
   const defaultValues: UserFormValues = useMemo(
     () => ({
@@ -82,50 +93,58 @@ function UserUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
     handleSubmit,
     reset,
     formState: { errors },
-    setValue,
   } = useForm<UserFormValues>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(validationSchema),
     defaultValues,
+    mode: "onChange",
   });
 
   // === Fetch initial data for update mode
   const fetchData = useCallback(async () => {
     if (mode === "update" && recordId) {
       setLoadingInitial(true);
-
-      // Fetch user details
-      const userRes = await tblUser.getById(recordId, {
-        include: {
-          tblEmployee: true,
-          tblUserGroup: true,
-        },
-      });
-
-      const userInstallRes = await tblUserInstallation.getAll({
-        include: {
-          tblInstallation: true,
-        },
-      });
-      if (userRes && userInstallRes) {
-        // Extract installation IDs for the form
-        const userInstallations =
-          userInstallRes.items.map((ui) => ({
-            instId: ui.instId,
-            name: ui?.tblInstallation?.name,
-          })) || [];
-
-        reset({
-          userName: userRes.userName ?? "",
-          password: "",
-          accountDisabled: userRes.accountDisabled ?? false,
-          forcePasswordChange: userRes.forcePasswordChange ?? false,
-          tblEmployee: userRes.tblEmployee,
-          tblUserGroup: userRes.tblUserGroup,
-          tblUserInstallations: userInstallations,
+      try {
+        // Fetch user details
+        const userRes = await tblUser.getById(recordId, {
+          include: {
+            tblEmployee: true,
+            tblUserGroup: true,
+          },
         });
-      }
 
-      setLoadingInitial(false);
+        const userInstallRes = await tblUserInstallation.getAll({
+          filter: {
+            userId: userRes.userId,
+          },
+          include: {
+            tblInstallation: true,
+          },
+        });
+
+        if (userRes && userInstallRes) {
+          // Extract installation IDs for the form
+          const userInstallations =
+            userInstallRes.items.map((ui) => ({
+              instId: ui.instId,
+              name: ui?.tblInstallation?.name,
+            })) || [];
+
+          reset({
+            userName: userRes.userName ?? "",
+            password: "",
+            accountDisabled: userRes.accountDisabled ?? false,
+            forcePasswordChange: userRes.forcePasswordChange ?? false,
+            tblEmployee: userRes.tblEmployee,
+            tblUserGroup: userRes.tblUserGroup,
+            tblUserInstallations: userInstallations,
+          });
+        }
+      } catch (err) {
+        console.error("Error fetching user data:", err);
+        toast.error("Failed to load user data");
+      } finally {
+        setLoadingInitial(false);
+      }
     } else {
       reset(defaultValues);
     }
@@ -143,16 +162,18 @@ function UserUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
       try {
         const userData: any = {
           userName: values.userName ?? "",
-          password: values.password ? values.password : "",
           accountDisabled: values.accountDisabled ?? false,
           forcePasswordChange: false,
-          employeeId: values.tblEmployee?.employeeId,
-          userGroupId: values.tblUserGroup?.userGroupId,
+          employeeId: values.tblEmployee?.employeeId || null,
+          userGroupId: values.tblUserGroup?.userGroupId || null,
         };
 
-        // In update mode, omit password if it's empty
-        if (mode === "update" && !userData.password) {
-          delete userData.password;
+        // Handle password properly
+        if (mode === "create") {
+          userData.password = values.password;
+        } else if (values.password) {
+          // Update mode: only include password if user provided one
+          userData.password = values.password;
         }
 
         let createdOrUpdatedUser: any;
@@ -160,75 +181,86 @@ function UserUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         // Handle user creation/update
         if (mode === "create") {
           createdOrUpdatedUser = await tblUser.create(userData);
-          toast.info("User created successfully.");
+          toast.success("User created successfully.");
         } else if (mode === "update" && recordId) {
           createdOrUpdatedUser = await tblUser.update(recordId, userData);
-          toast.info("User updated successfully.");
+          toast.success("User updated successfully.");
         }
 
         // After user is created/updated, handle installations
         if (createdOrUpdatedUser) {
-          const userId = createdOrUpdatedUser.userId; // Assuming userId is returned
-
-          // 1. Get current installations for the user (if in update mode)
-          let currentInstallations: number[] = [];
-          if (mode === "update") {
-            const currentUserInstallations = await tblUser.getById(userId, {
-              include: { tblUserInstallations: true },
-            });
-            currentInstallations =
-              currentUserInstallations?.tblUserInstallations?.map(
-                (ui) => ui.instId,
-              ) || [];
-          }
-
-          // 2. Get the desired installations from the form
+          const userId = createdOrUpdatedUser.userId as number;
           const desiredInstallationIds =
             values.tblUserInstallations?.map((inst) => inst.instId) || [];
 
-          // 3. Determine which installations to add and remove
-          const installationsToAdd = desiredInstallationIds.filter(
-            (id) => !currentInstallations.includes(id),
-          );
-          const installationsToRemove = currentInstallations.filter(
-            (id) => !desiredInstallationIds.includes(id),
-          );
+          // For create mode: just add all desired installations
+          if (mode === "create") {
+            for (const instId of desiredInstallationIds) {
+              await tblUserInstallation.create({
+                tblInstallation: {
+                  connect: {
+                    instId,
+                  },
+                },
+                tblUser: {
+                  connect: {
+                    userId,
+                  },
+                },
+              });
+            }
+          } else if (mode === "update") {
+            // For update mode: delete old ones and create new ones
+            // Get current installations
+            const currentUserInstallations = await tblUser.getById(userId, {
+              include: {
+                tblUserInstallations: true,
+              },
+            });
 
-          // 4. Perform API calls to update installations
-          for (const instId of installationsToAdd) {
-            await tblUserInstallation.create({
-              tblInstallation: {
-                connect: {
+            const currentInstallationIds =
+              currentUserInstallations?.tblUserInstallations?.map(
+                (ui) => ui.instId,
+              ) || [];
+
+            // Determine which to add and remove
+            const installationsToAdd = desiredInstallationIds.filter(
+              (id) => !currentInstallationIds.includes(id),
+            );
+            const installationsToRemove = currentInstallationIds.filter(
+              (id) => !desiredInstallationIds.includes(id),
+            );
+
+            // Add new installations
+            for (const instId of installationsToAdd) {
+              await tblUserInstallation.create({
+                tblInstallation: {
+                  connect: {
+                    instId,
+                  },
+                },
+                tblUser: {
+                  connect: {
+                    userId,
+                  },
+                },
+              });
+            }
+
+            // Remove old installations
+            for (const instId of installationsToRemove) {
+              await tblUserInstallation.deleteAll({
+                filter: {
+                  userId,
                   instId,
                 },
-              },
-              tblUser: {
-                connect: {
-                  userId,
-                },
-              },
-            }); // Assuming a create method exists
+              });
+            }
           }
-          for (const instId of installationsToRemove) {
-            // Find the specific userInstallationId to delete if necessary, or assume API handles userId+instId lookup
-            // For simplicity, assuming tblUserInstallation.deleteMany({ where: { userId, instId } }) or similar
-            // If only deleteById is available, you might need to fetch those IDs first.
-            // For now, let's assume a delete method that takes userId and instId, or a specific ID.
-            // If no direct delete for user+instId, we might need to fetch IDs first.
-            // For this example, let's assume a simpler API or that we can delete by user ID and installation ID combination.
-            // If the API only supports deleteById, this part would need adjustment.
-            console.warn(
-              "Handling deletion of user installations might require fetching specific IDs or a different API method.",
-            );
-            // Example placeholder: await tblUserInstallation.delete(someId);
-            // A common pattern is to delete all and re-create, or to use a bulk delete if available.
-            // For now, let's skip the actual delete call and add a console log.
-            console.log(
-              `Would remove installation ${instId} for user ${userId}`,
-            );
+
+          if (desiredInstallationIds.length > 0) {
+            toast.success("User wells access updated.");
           }
-          if (installationsToAdd.length > 0)
-            toast.info("User's well access updated.");
 
           onSuccess?.(createdOrUpdatedUser);
           onClose();
@@ -242,7 +274,7 @@ function UserUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         setSubmitting(false);
       }
     },
-    [mode, recordId, onSuccess, onClose, setValue],
+    [mode, recordId, onSuccess, onClose],
   );
 
   // === Component for selecting multiple installations ===
@@ -253,7 +285,7 @@ function UserUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         control={control}
         render={({ field }) => (
           <FieldAsyncSelectGrid
-            label="Wells Access"
+            label="Wells Access *"
             columns={[
               { field: "name", headerName: "Name", flex: 1 },
               { field: "caption", headerName: "Caption", flex: 1 },
@@ -271,7 +303,7 @@ function UserUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         )}
       />
     );
-  }, [control, isDisabled, errors, tblInstallation]); // Add tblInstallation dependency
+  }, [control, isDisabled, errors]);
 
   return (
     <FormDialog
@@ -345,14 +377,14 @@ function UserUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
                 tblEmployee.getAll({
                   filter: {
                     tblUsers: {
-                      none: {}, // Filter out employees already assigned to a user
+                      none: {},
                     },
                   },
                 })
               }
               getOptionLabel={(row: any) => `${row.firstName} ${row.lastName}`}
               getRowId={(row: any) => row.employeeId}
-              value={field.value} // Ensure value is in the format { employeeId: number }
+              value={field.value}
               onChange={(selectedOption) =>
                 field.onChange(
                   selectedOption
@@ -383,14 +415,13 @@ function UserUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           )}
         />
 
+        {/* Account Disabled */}
         <Box
           display={"flex"}
           gap={1.5}
           flexDirection={"column"}
           gridColumn="span 2"
         >
-          {" "}
-          {/* Span across both columns */}
           <Controller
             name="accountDisabled"
             control={control}
@@ -409,12 +440,8 @@ function UserUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           />
         </Box>
 
-        {/* New section for Well Access */}
-        <Box gridColumn="span 2">
-          {" "}
-          {/* Span across both columns */}
-          {renderInstallationSelector()}
-        </Box>
+        {/* Wells Access */}
+        <Box gridColumn="span 2">{renderInstallationSelector()}</Box>
       </Box>
     </FormDialog>
   );

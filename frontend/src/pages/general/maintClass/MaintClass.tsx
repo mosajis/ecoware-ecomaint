@@ -101,7 +101,7 @@ export default function PageMaintClass() {
           disableColumns
           disableExport
           disableRefresh
-          elementId={600}
+          elementId={630}
           label="Maint Class"
           rows={classRows}
           columns={columns}

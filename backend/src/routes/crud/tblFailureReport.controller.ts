@@ -24,6 +24,7 @@ const ControllerTblFailureReports = new BaseController({
   createSchema: TblFailureReportInputCreate,
   updateSchema: TblFailureReportInputUpdate,
   responseSchema: buildResponseSchema(TblFailureReportPlain, TblFailureReport),
+  scope: true,
 }).app;
 
 export default ControllerTblFailureReports;

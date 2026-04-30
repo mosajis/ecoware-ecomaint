@@ -22,6 +22,7 @@ const ControllerTblFunctions = new BaseController({
   createSchema: TblFunctionInputCreate,
   updateSchema: TblFunctionInputUpdate,
   responseSchema: buildResponseSchema(TblFunctionPlain, TblFunction),
+  scope: true,
 }).app;
 
 export default ControllerTblFunctions;

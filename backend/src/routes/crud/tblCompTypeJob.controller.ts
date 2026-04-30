@@ -26,6 +26,7 @@ const ControllerTblCompTypeJob = new BaseController({
   createSchema: TblCompTypeJobInputCreate,
   updateSchema: TblCompTypeJobInputUpdate,
   responseSchema: buildResponseSchema(TblCompTypeJobPlain, TblCompTypeJob),
+  scope: true,
 
   extend: (app) => {
     app.post(

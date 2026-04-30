@@ -18,6 +18,7 @@ const ControllerTblComponentUnit = new BaseController({
   swagger: {
     tags: ["tblComponentUnit"],
   },
+  scope: true,
   primaryKey: "compId",
   service: ServiceTblComponentUnit,
   createSchema: TblComponentUnitInputCreate,
