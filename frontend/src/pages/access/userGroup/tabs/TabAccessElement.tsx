@@ -143,14 +143,12 @@ const Row = React.memo(function Row({
 
           return (
             <TableCell key={p} align="left">
-              {!disabled && (
-                <Checkbox
-                  size="small"
-                  checked={perms[p]}
-                  disabled={disabled}
-                  onChange={(_, val) => onChange(node.elementId, p, val)}
-                />
-              )}
+              <Checkbox
+                size="small"
+                checked={perms[p]}
+                disabled={disabled}
+                onChange={(_, val) => onChange(node.elementId, p, val)}
+              />
             </TableCell>
           );
         })}

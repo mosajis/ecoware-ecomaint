@@ -1,7 +1,12 @@
 import { useEffect, useCallback } from "react";
 import { useAtom, useAtomValue } from "jotai";
 
-import { tblInstallation, tblUserGroupElement } from "@/core/api/generated/api";
+import {
+  tblInstallation,
+  tblUserGroupElement,
+  tblUserInstallation,
+  TypeTblInstallation,
+} from "@/core/api/generated/api";
 
 import { LOCAL_STORAGE } from "@/const";
 import { atomUser } from "@/pages/auth/auth.atom";
@@ -11,6 +16,7 @@ import { atomInstallations } from "@/shared/atoms/general.atom";
 const AppLogic = () => {
   const user = useAtomValue(atomUser);
   const userGroupId = user?.userGroupId as number;
+  const userId = user?.userId as number;
 
   const [, setUserGroupElements] = useAtom(atomUserGroupElements);
   const [, setInstallations] = useAtom(atomInstallations);
@@ -43,19 +49,31 @@ const AppLogic = () => {
 
   // === Load installations
   const loadInstallations = useCallback(async () => {
-    const res = await tblInstallation.getAll();
-    setInstallations(res.items ?? []);
+    const res = await tblUserInstallation.getAll({
+      filter: {
+        userId,
+      },
+      include: {
+        tblInstallation: true,
+      },
+    });
+
+    const installations: TypeTblInstallation[] = [];
+
+    res.items.forEach((i) => {
+      if (i.tblInstallation) {
+        installations.push(i.tblInstallation);
+      }
+    });
+
+    setInstallations(installations);
   }, [setInstallations]);
 
   // === Init
   const initData = useCallback(async () => {
-    try {
-      await Promise.all([loadPermissions(), loadInstallations()]);
+    await Promise.all([loadPermissions(), loadInstallations()]);
 
-      localStorage.setItem(LOCAL_STORAGE.IS_PERSIST, "1");
-    } catch (err) {
-      console.error("App init failed", err);
-    }
+    localStorage.setItem(LOCAL_STORAGE.IS_PERSIST, "1");
   }, [loadPermissions, loadInstallations]);
 
   useEffect(() => {
