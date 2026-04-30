@@ -31,6 +31,7 @@ const ControllerTblCompTypeJobTrigger = new BaseController({
     TblCompTypeJobTriggerPlain,
     TblCompTypeJobTrigger,
   ),
+  scope: true,
 
   extend: (app) => {
     app.post(

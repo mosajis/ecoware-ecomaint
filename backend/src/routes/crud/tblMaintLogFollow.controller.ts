@@ -23,6 +23,8 @@ const ControllerTblMaintLogFollow = new BaseController({
   service: ServiceTblMaintLogFollow,
   createSchema: TblMaintLogFollowInputCreate,
   updateSchema: TblMaintLogFollowInputUpdate,
+  scope: true,
+
   responseSchema: buildResponseSchema(
     TblMaintLogFollowPlain,
     TblMaintLogFollow,
