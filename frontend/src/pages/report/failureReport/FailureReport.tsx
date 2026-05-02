@@ -3,10 +3,10 @@ import Splitter from "@/shared/components/Splitter/Splitter";
 import AttachmentMap from "@/shared/tabs/attachmentMap/AttachmentMap";
 import FailureReportUpsert from "./FailureReportModal";
 import FailureReportActions from "./FailureReportActions";
-import ReportFailureDialogClose from "./FailureReportDialogClose";
-import ReportFailureDialogOpen from "./FailureReportDialogOpen";
+import failureReportDialogClose from "./FailureReportDialogClose";
+import failureReportDialogOpen from "./FailureReportDialogOpen";
 import FailureReportDialogFilter from "./FailureReportDialogFilter";
-import ReportFailureDialogPrint from "./FailureReportDialogPrint";
+import failureReportDialogPrint from "./FailureReportDialogPrint";
 import { useCallback, useMemo, useState } from "react";
 import { FailureReportFilter } from "./FailureReportDialogFilter";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
@@ -19,7 +19,7 @@ import {
 
 const getRowId = (row: TypeTblFailureReports) => row.failureReportId;
 
-export default function PageReportFailure() {
+export default function PagefailureReport() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
   const [mode, setMode] = useState<"create" | "update">("create");
@@ -159,14 +159,14 @@ export default function PageReportFailure() {
         onSuccess={handleSucessUpsert}
       />
 
-      <ReportFailureDialogClose
+      <failureReportDialogClose
         open={dialogs.close}
         failureReportId={selectedRowId}
         onClose={() => closeDialog("close")}
         onSuccess={(patch) => optimisticUpdate(selectedRowId!, patch)}
       />
 
-      <ReportFailureDialogOpen
+      <failureReportDialogOpen
         open={dialogs.open}
         failureReportId={selectedRowId}
         onClose={() => closeDialog("open")}
@@ -179,7 +179,7 @@ export default function PageReportFailure() {
         onSubmit={handleFilterSubmit}
       />
 
-      <ReportFailureDialogPrint
+      <failureReportDialogPrint
         failureReportId={selectedRowId!}
         onClose={() => closeDialog("print")}
         open={dialogs.print}

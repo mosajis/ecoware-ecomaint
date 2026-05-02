@@ -15,14 +15,14 @@ import {
   tblMaintCause,
   tblDiscipline,
   tblComponentUnit,
-  tblUsers,
+  tblUser,
   tblWorkOrder,
   TypeTblMaintClass,
   TypeTblMaintType,
   TypeTblMaintCause,
   TypeTblDiscipline,
   TypeTblComponentUnit,
-  TypeTblUsers,
+  TypeTblUser,
   TypeTblWorkOrder,
   TypeTblJobClass,
 } from "@/core/api/generated/api";
@@ -38,7 +38,7 @@ type FiltersState = {
   jobClass: TypeTblJobClass | null;
   discipline: TypeTblDiscipline | null;
   component: TypeTblComponentUnit | null;
-  reporter: TypeTblUsers | null;
+  reporter: TypeTblUser | null;
   workOrder: TypeTblWorkOrder | null;
 
   jobCode: string;
@@ -348,7 +348,7 @@ export default function MaintLogFilterDialog({
               }
               selectionMode="single"
               request={() =>
-                tblUsers.getAll({
+                tblUser.getAll({
                   include: {
                     tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
                   },

@@ -1,9 +1,9 @@
-import { TypeTblMaintLogStocks } from "@/core/api/generated/api";
+import { TypeTblMaintLogSpare } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 
-export const getRowId = (row: TypeTblMaintLogStocks) => row.maintLogStockId;
+export const getRowId = (row: TypeTblMaintLogSpare) => row.maintLogStockId;
 
-export const columns: GridColDef<TypeTblMaintLogStocks>[] = [
+export const columns: GridColDef<TypeTblMaintLogSpare>[] = [
   {
     field: "partName",
     headerName: "Part Name",

@@ -6,14 +6,14 @@ import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
 import { useAtomValue } from "jotai";
 import {
-  tblMaintLogStocks,
-  TypeTblMaintLogStocks,
+  tblMaintLogSpare,
+  TypeTblMaintLogSpare,
 } from "@/core/api/generated/api";
 import { atomInitData } from "../../FailureReportAtom";
 
-const getRowId = (row: TypeTblMaintLogStocks) => row.maintLogStockId;
+const getRowId = (row: TypeTblMaintLogSpare) => row.maintLogSpareId;
 
-const columns: GridColDef<TypeTblMaintLogStocks>[] = [
+const columns: GridColDef<TypeTblMaintLogSpare>[] = [
   {
     field: "partName",
     headerName: "Part Name",
@@ -44,6 +44,7 @@ const columns: GridColDef<TypeTblMaintLogStocks>[] = [
     field: "unit",
     headerName: "Unit",
     flex: 1,
+    // @ts-ignore
     valueGetter: (_, row) => row?.tblSpareUnit?.tblSpareType?.tblUnit?.name,
   },
 ];
@@ -63,7 +64,7 @@ const TabStockUsed = () => {
   };
 
   const getAll = useCallback(() => {
-    return tblMaintLogStocks.getAll({
+    return tblMaintLogSpare.getAll({
       include: {
         tblSpareUnit: {
           include: {
@@ -83,8 +84,8 @@ const TabStockUsed = () => {
 
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
-    tblMaintLogStocks.deleteById,
-    "maintLogStockId",
+    tblMaintLogSpare.deleteById,
+    "maintLogSpareId",
     !!maintLogId,
   );
 

@@ -9,9 +9,9 @@ import { useForm, Controller } from "react-hook-form";
 import { memo, useEffect, useState, useCallback } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  tblMaintLogStocks,
+  tblMaintLogSpare,
   tblSpareUnit,
-  TypeTblMaintLogStocks,
+  TypeTblMaintLogSpare,
 } from "@/core/api/generated/api";
 
 const schema = z.object({
@@ -37,7 +37,7 @@ type Props = {
   recordId?: number | null;
   maintLogId?: number;
   onClose: () => void;
-  onSuccess: (data: TypeTblMaintLogStocks) => void;
+  onSuccess: (data: TypeTblMaintLogSpare) => void;
 };
 
 function StepStockUsedUpsert({
@@ -72,7 +72,7 @@ function StepStockUsedUpsert({
     setLoadingInitial(true);
 
     try {
-      const res = await tblMaintLogStocks.getById(recordId, {
+      const res = await tblMaintLogSpare.getById(recordId, {
         include: {
           tblSpareUnit: {
             include: { tblSpareType: true },
@@ -83,7 +83,7 @@ function StepStockUsedUpsert({
       if (res?.tblSpareUnit) {
         reset({
           spareUnit: res.tblSpareUnit,
-          stockCount: res.stockCount ?? 1,
+          stockCount: res.spareCount ?? 1,
         });
       }
     } finally {
@@ -121,12 +121,12 @@ function StepStockUsedUpsert({
           },
         };
 
-        let result: TypeTblMaintLogStocks;
+        let result: TypeTblMaintLogSpare;
 
         if (mode === "create") {
-          result = await tblMaintLogStocks.create(payload);
+          result = await tblMaintLogSpare.create(payload);
         } else {
-          result = await tblMaintLogStocks.update(recordId!, payload);
+          result = await tblMaintLogSpare.update(recordId!, payload);
         }
 
         onSuccess(result);
@@ -163,7 +163,7 @@ function StepStockUsedUpsert({
                   include: { tblSpareType: true },
                   filter: {
                     NOT: {
-                      tblMaintLogStocks: {
+                      tblMaintLogSpare: {
                         some: { maintLogId },
                       },
                     },

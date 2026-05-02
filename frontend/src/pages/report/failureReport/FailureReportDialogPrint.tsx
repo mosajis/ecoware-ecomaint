@@ -18,7 +18,7 @@ type Props = {
   failureReportId: number;
 };
 
-export default function ReportFailureDialogPrint({
+export default function failureReportDialogPrint({
   open,
   onClose,
   failureReportId,

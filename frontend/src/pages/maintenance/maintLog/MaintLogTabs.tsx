@@ -31,7 +31,7 @@ const TabAttachment = lazy(() => import("./tabs/TabAttachment"));
 // Tabs
 const tabs: ReusableTabItem[] = [
   { label: "History", icon: <AccountTree />, component: TabHistory },
-  { label: "Stocks Used", icon: <Inventory />, component: TabStockUsed },
+  { label: "Spare Used", icon: <Inventory />, component: TabStockUsed },
   { label: "Follow", icon: <TrackChanges />, component: TabFollow },
   {
     label: "Failure Report",

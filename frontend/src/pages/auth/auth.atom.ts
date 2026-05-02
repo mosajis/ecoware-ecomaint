@@ -14,11 +14,11 @@ export const atomAuth = atom<TypeAuth>({
 // Derived atom to get the user
 export const atomUser = atom((get) => {
   const auth = get(atomAuth);
-  return auth.user;
+  return auth?.user;
 });
 
 export const atomUserDiscipline = atom((get) => {
   const auth = get(atomAuth);
-  return auth.user?.tblEmployeeTblUsersEmployeeIdTotblEmployee
+  return auth.user?.tblEmployee
     ?.tblDiscipline as TypeTblDiscipline;
 });

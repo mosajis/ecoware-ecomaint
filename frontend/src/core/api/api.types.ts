@@ -1,8 +1,8 @@
 import { DynamicResponse } from "./dynamicTypes";
 
 export type TypeStatistics = DynamicResponse<"getStatistics">;
-export type TypeMaintLogStocksBySpareUnitId =
-  DynamicResponse<"getTblMaintLogStocksUniqueSpareUnit">;
+export type TypeMaintLogSpareBySpareUnitId =
+  DynamicResponse<"getTblMaintLogSpareUniqueSpareUnit">;
 
 export type MaintLogContex = DynamicResponse<"getTblMaintLogContext">;
 

@@ -2,11 +2,11 @@ import Splitter from "@/shared/components/Splitter/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback, useState } from "react";
-import { tblMaintLogStocksBySpareUnitId } from "@/core/api/api";
+import { tblMaintLogSpareBySpareUnitId } from "@/core/api/api";
 import {
   tblMaintLog,
-  tblMaintLogStocks,
-  TypeTblMaintLogStocks,
+  tblMaintLogSpare,
+  TypeTblMaintLogSpare,
 } from "@/core/api/generated/api";
 import {
   columns,
@@ -18,9 +18,9 @@ import {
 export default function PageStockUsed() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
-  // MaintLog Stocks
+  // MaintLog Spare
   const getAll = useCallback(() => {
-    return tblMaintLogStocksBySpareUnitId();
+    return tblMaintLogSpareBySpareUnitId();
   }, []);
 
   const { rows, loading, handleRefresh } = useDataGrid<any>(
@@ -31,7 +31,7 @@ export default function PageStockUsed() {
 
   // MaintLog
   const getAllMaintLog = useCallback(() => {
-    return tblMaintLogStocks.getAll({
+    return tblMaintLogSpare.getAll({
       include: {
         tblMaintLog: {
           include: {
@@ -64,8 +64,8 @@ export default function PageStockUsed() {
   );
 
   const handleRowClick = useCallback(
-    ({ row }: { row: TypeTblMaintLogStocks }) => {
-      setSelectedRowId(row.stockItemId);
+    ({ row }: { row: TypeTblMaintLogSpare }) => {
+      setSelectedRowId(row.spareUnitId);
     },
     [],
   );

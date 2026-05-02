@@ -17,7 +17,7 @@ import { toast } from "sonner";
 import {
   tblWorkShop,
   tblDiscipline,
-  tblUsers,
+  tblUser,
   TypeTblDiscipline,
 } from "@/core/api/generated/api";
 
@@ -58,9 +58,9 @@ function TabGeneral({ mode, workShopId }: Props) {
       awardingDate: workShop.awardingDate?.toString(),
       discipline: workShop.tblDiscipline ?? null,
       personInCharge:
-        workShop.tblUsersTblWorkShopPersonInChargeIdTotblUsers ?? null,
+        workShop?.tblUsersTblWorkShopPersonInChargeIdTotblUsers ?? null,
       personInChargeApprove:
-        workShop.tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers ?? null,
+        workShop?.tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers ?? null,
       repairDescription: workShop.repairDescription ?? "",
       followDesc: workShop.followDesc ?? "",
     });
@@ -253,7 +253,7 @@ function TabGeneral({ mode, workShopId }: Props) {
                 },
               ]}
               request={() =>
-                tblUsers.getAll({
+                tblUser.getAll({
                   include: {
                     tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
                   },
@@ -295,7 +295,7 @@ function TabGeneral({ mode, workShopId }: Props) {
                 },
               ]}
               request={() =>
-                tblUsers.getAll({
+                tblUser.getAll({
                   include: {
                     tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
                   },

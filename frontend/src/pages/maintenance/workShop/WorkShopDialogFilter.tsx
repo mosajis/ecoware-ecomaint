@@ -10,9 +10,9 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { useState } from "react";
 import {
   tblDiscipline,
-  tblUsers,
+  tblUser,
   TypeTblDiscipline,
-  TypeTblUsers,
+  TypeTblUser,
 } from "@/core/api/generated/api";
 
 export interface WorkShopFilter {
@@ -23,8 +23,8 @@ type FiltersState = {
   statusMode: "open" | "closed" | "all";
   workShopNo: string;
   discipline: TypeTblDiscipline | null;
-  personInCharge: TypeTblUsers | null;
-  personInChargeApprove: TypeTblUsers | null;
+  personInCharge: TypeTblUser | null;
+  personInChargeApprove: TypeTblUser | null;
   awardingDateFrom: string;
   awardingDateTo: string;
   createdDateFrom: string;
@@ -214,30 +214,30 @@ export default function WorkShopDialogFilter({
 
         {/* Person In Charge + Approve */}
         <Box display="grid" gridTemplateColumns="1fr 1fr" gap={1.5}>
-          <FieldAsyncSelectGrid<TypeTblUsers>
+          <FieldAsyncSelectGrid<TypeTblUser>
             label="Person In Charge"
-            request={tblUsers.getAll}
+            request={tblUser.getAll}
             value={filters.personInCharge}
             columns={[
               { field: "uName", headerName: "Name", flex: 1 },
               { field: "uUserName", headerName: "Username", flex: 1 },
             ]}
             getRowId={(r) => r.userId}
-            getOptionLabel={(r) => r.uName ?? ""}
-            onChange={(v) => set("personInCharge", v as TypeTblUsers | null)}
+            getOptionLabel={(r) => r.userName ?? ""}
+            onChange={(v) => set("personInCharge", v as TypeTblUser | null)}
           />
-          <FieldAsyncSelectGrid<TypeTblUsers>
+          <FieldAsyncSelectGrid<TypeTblUser>
             label="ToolPusher"
-            request={tblUsers.getAll}
+            request={tblUser.getAll}
             value={filters.personInChargeApprove}
             columns={[
               { field: "uName", headerName: "Name", flex: 1 },
               { field: "uUserName", headerName: "Username", flex: 1 },
             ]}
             getRowId={(r) => r.userId}
-            getOptionLabel={(r) => r.uName ?? ""}
+            getOptionLabel={(r) => r.userName ?? ""}
             onChange={(v) =>
-              set("personInChargeApprove", v as TypeTblUsers | null)
+              set("personInChargeApprove", v as TypeTblUser | null)
             }
           />
         </Box>

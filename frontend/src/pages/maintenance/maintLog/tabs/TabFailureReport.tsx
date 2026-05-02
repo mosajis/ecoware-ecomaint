@@ -5,7 +5,7 @@ import { tblFailureReports, TypeTblMaintLog } from "@/core/api/generated/api";
 import {
   columns,
   getRowId,
-} from "@/pages/report/reportFailure/ReportFailureColumns";
+} from "@/pages/report/failureReport/FailureReportColumns";
 
 interface Props {
   selected: TypeTblMaintLog;

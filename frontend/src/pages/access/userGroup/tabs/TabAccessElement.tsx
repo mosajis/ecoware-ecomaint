@@ -412,9 +412,7 @@ export default function TabAccessElement(props: Props) {
 
   /* ─── Theme Colors ───────────────── */
 
-  const borderColor = theme.palette.divider;
-
-  const headerBgColor = theme.palette.background.paper;
+  const borderColor = (theme.vars || theme).palette.divider;
 
   /* ─── Render ───────────────── */
 
@@ -428,7 +426,6 @@ export default function TabAccessElement(props: Props) {
         p={1}
         sx={{
           borderBottom: `1px solid ${borderColor}`,
-          bgcolor: headerBgColor,
           flexShrink: 0,
         }}
       >
@@ -451,13 +448,13 @@ export default function TabAccessElement(props: Props) {
       <Box overflow="auto" flex={1}>
         <Table size="small" stickyHeader sx={{ borderCollapse: "collapse" }}>
           <TableHead>
-            <TableRow sx={{ bgcolor: headerBgColor }}>
+            <TableRow>
               {/* Name Column */}
               <TableCell
                 sx={{
                   borderRight: `1px solid ${borderColor}`,
                   borderBottom: `1px solid ${borderColor}`,
-                  bgcolor: headerBgColor,
+                  
                   fontWeight: 600,
                   minWidth: 200,
                 }}
@@ -471,7 +468,7 @@ export default function TabAccessElement(props: Props) {
                 sx={{
                   borderRight: `1px solid ${borderColor}`,
                   borderBottom: `1px solid ${borderColor}`,
-                  bgcolor: headerBgColor,
+                  
                   fontWeight: 600,
                   minWidth: 60,
                 }}
@@ -501,7 +498,6 @@ export default function TabAccessElement(props: Props) {
                   sx={{
                     borderRight: `1px solid ${borderColor}`,
                     borderBottom: `1px solid ${borderColor}`,
-                    bgcolor: headerBgColor,
                     fontWeight: 600,
                     minWidth: 80,
                   }}

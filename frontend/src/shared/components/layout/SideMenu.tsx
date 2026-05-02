@@ -77,16 +77,16 @@ export default function SideMenu() {
           justifyContent: open ? "initial" : "center",
         }}
       >
-        <Avatar alt={auth.user?.uUserName} sx={{ width: 36, height: 36 }}>
-          {auth.user?.uUserName?.[0]}
+        <Avatar alt={auth.user?.userName} sx={{ width: 36, height: 36 }}>
+          {auth.user?.userName?.[0]}
         </Avatar>
 
         <Box sx={{ mr: "auto" }}>
           <Typography variant="body2" fontWeight={"bold"}>
-            {auth.user.userName}
+            {auth?.user?.userName}
           </Typography>
           <Typography variant="caption" sx={{ color: "text.secondary" }}>
-            {auth.user.tblEmployee.firstName} {auth.user.tblEmployee.lastName}
+            {auth?.user?.tblEmployee?.firstName} {auth?.user?.tblEmployee?.lastName}
           </Typography>
         </Box>
 

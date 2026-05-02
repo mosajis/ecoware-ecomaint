@@ -2,7 +2,6 @@ import { useEffect, useCallback } from "react";
 import { useAtom, useAtomValue } from "jotai";
 
 import {
-  tblInstallation,
   tblUserGroupElement,
   tblUserInstallation,
   TypeTblInstallation,
@@ -21,8 +20,8 @@ const AppLogic = () => {
   const [, setUserGroupElements] = useAtom(atomUserGroupElements);
   const [, setInstallations] = useAtom(atomInstallations);
 
-  // const isPersist = localStorage.getItem(LOCAL_STORAGE.IS_PERSIST) === "1";
-  const isPersist = false;
+  const isPersist = localStorage.getItem(LOCAL_STORAGE.IS_PERSIST) === "1";
+  // const isPersist = false;
 
   // === Load permissions
   const loadPermissions = useCallback(async () => {

@@ -2,7 +2,7 @@ import { api } from "@/service/axios";
 import {
   MaintLogContex,
   MaintLogContextParams,
-  TypeMaintLogStocksBySpareUnitId,
+  TypeMaintLogSpareBySpareUnitId,
   TypeStatistics,
 } from "./api.types";
 
@@ -24,11 +24,11 @@ export const generateNextWorkORder = async (
     data: { maintLogId, userId },
   });
 
-export const tblMaintLogStocksBySpareUnitId = (
+export const tblMaintLogSpareBySpareUnitId = (
   compId?: number,
-): Promise<TypeMaintLogStocksBySpareUnitId> => {
+): Promise<TypeMaintLogSpareBySpareUnitId> => {
   const query = compId ? `?compId=${compId}` : "";
-  return api.get(`/tblMaintLogStocks/uniqueSpareUnit${query}`);
+  return api.get(`/tblMaintLogSpare/uniqueSpareUnit${query}`);
 };
 
 export const getMaintLogContext = async (

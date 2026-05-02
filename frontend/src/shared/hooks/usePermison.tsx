@@ -7,7 +7,6 @@ export function getPremission(elementId: number) {
 
   const perms = userPermissions[elementId];
 
-  console.log(userPermissions);
   return {
     canCreate: perms?.canCreate ?? false,
     canUpdate: perms?.canUpdate ?? false,

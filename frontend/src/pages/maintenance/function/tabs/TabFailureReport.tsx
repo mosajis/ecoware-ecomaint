@@ -1,7 +1,7 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback } from "react";
-import { columns } from "@/pages/report/reportFailure/ReportFailureColumns";
+import { columns } from "@/pages/report/failureReport/FailureReportColumns";
 import {
   tblFailureReports,
   tblMaintCause,

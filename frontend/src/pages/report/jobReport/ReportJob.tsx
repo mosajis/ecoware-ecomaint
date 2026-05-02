@@ -1,5 +1,5 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-// import FailureReportUpsert from "./ReportFailureUpsert";
+// import FailureReportUpsert from "./failureReportUpsert";
 import Splitter from "@/shared/components/Splitter/Splitter";
 import AttachmentMap from "@/shared/tabs/attachmentMap/AttachmentMap";
 import CellSeverity from "../_components/CellSeverity";
@@ -7,7 +7,6 @@ import { GridColDef } from "@mui/x-data-grid";
 import { useCallback, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
-  tblFailureReportAttachment,
   tblFailureReports,
   TypeTblFailureReports,
 } from "@/core/api/generated/api";
@@ -22,12 +21,12 @@ const columns: GridColDef<TypeTblFailureReports>[] = [
     width: 100,
     valueGetter: (_, row) => row.failureNumber,
   },
-  {
-    field: "componentName",
-    headerName: "Component Name",
-    flex: 1,
-    valueGetter: (_, row) => row?.tblComponentUnit?.compNo,
-  },
+  // {
+  //   field: "componentName",
+  //   headerName: "Component Name",
+  //   flex: 1,
+  //   valueGetter: (_, row) => row?.tblComponentUnit?.compNo,
+  // },
   {
     field: "failureDateTime",
     headerName: "Failure Date",
@@ -44,7 +43,7 @@ const columns: GridColDef<TypeTblFailureReports>[] = [
     field: "totalWait",
     headerName: "Total Wait",
     width: 100,
-    valueGetter: (_, row) => row.totalWait,
+    // valueGetter: (_, row) => row.totalWait,
   },
   {
     field: "severity",
@@ -64,7 +63,7 @@ const columns: GridColDef<TypeTblFailureReports>[] = [
     field: "discipline",
     headerName: "Discipline",
     width: 120,
-    valueGetter: (_, row) => row?.tblDiscipline?.name,
+    // valueGetter: (_, row) => row?.tblDiscipline?.name,
   },
   {
     field: "reportedBy",
@@ -98,7 +97,7 @@ const columns: GridColDef<TypeTblFailureReports>[] = [
   },
 ];
 
-export default function PageReportFailure() {
+export default function PagefailureReport() {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
@@ -174,6 +173,7 @@ export default function PageReportFailure() {
           getRowId={getRowId}
           onRowClick={handleRowClick}
         />
+        <div>uncomplete</div>
         {/* <AttachmentMap
           label={label || "Failure Attachments"}
           mapService={tblFailureReportAttachment}

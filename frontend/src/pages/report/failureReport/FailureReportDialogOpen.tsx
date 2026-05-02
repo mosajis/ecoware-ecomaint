@@ -11,7 +11,7 @@ type Props = {
   onSuccess: (patch: any) => void;
 };
 
-export default function ReportFailureOpenDialog({
+export default function failureReportOpenDialog({
   open,
   failureReportId,
   onClose,

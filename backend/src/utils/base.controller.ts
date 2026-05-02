@@ -1,5 +1,6 @@
 import { Elysia, t } from "elysia";
 import { BaseService } from "./base.service";
+import { prisma } from "./prisma";
 
 /* ---------------------------------- */
 /* Query Schema */
@@ -49,15 +50,15 @@ async function applyScope({
   if (!enabled) return filter;
 
   const rawInstId = headers["x-inst-id"];
+  
+  const userId = 16;
 
-  // 👇 از ctx.user می‌گیریم (باید از auth middleware بیاد)
-  const userId = ctx.user?.id;
   if (!userId) {
     throw new Error("Unauthorized");
   }
 
   // 👇 گرفتن instهای مجاز
-  const rows = await ctx.prisma.tblUserInstallation.findMany({
+  const rows = await prisma.tblUserInstallation.findMany({
     where: { userId },
     select: { instId: true },
   });

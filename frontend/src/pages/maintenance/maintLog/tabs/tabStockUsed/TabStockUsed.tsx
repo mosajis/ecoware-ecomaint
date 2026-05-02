@@ -1,6 +1,6 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { memo, useCallback, useMemo } from "react";
-import { tblMaintLogStocks, TypeTblMaintLog } from "@/core/api/generated/api";
+import { tblMaintLogSpare, TypeTblMaintLog } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { columns, getRowId } from "./TabStockUsedColumns";
 
@@ -18,7 +18,7 @@ const TabStockUsed = (props: Props) => {
   );
 
   const getAll = useCallback(() => {
-    return tblMaintLogStocks.getAll({
+    return tblMaintLogSpare.getAll({
       include: {
         tblSpareUnit: {
           include: {
@@ -35,8 +35,8 @@ const TabStockUsed = (props: Props) => {
   // === useDataGrid ===
   const { rows, loading } = useDataGrid(
     getAll,
-    tblMaintLogStocks.deleteById,
-    "maintLogStockId",
+    tblMaintLogSpare.deleteById,
+    "maintLogSpareId",
     !!maintLogId,
   );
 

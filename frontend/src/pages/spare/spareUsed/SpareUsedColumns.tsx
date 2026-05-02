@@ -1,14 +1,14 @@
 import {
   TypeTblMaintLog,
-  TypeTblMaintLogStocks,
+  TypeTblMaintLogSpare,
 } from "@/core/api/generated/api";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import { GridColDef } from "@mui/x-data-grid";
 
-export const getRowId = (row: TypeTblMaintLogStocks) => row.maintLogStockId;
+export const getRowId = (row: TypeTblMaintLogSpare) => row.maintLogStockId;
 export const maintLogGetRowId = (row: TypeTblMaintLog) => row.maintLogId;
 
-export const columns: GridColDef<TypeTblMaintLogStocks>[] = [
+export const columns: GridColDef<TypeTblMaintLogSpare>[] = [
   {
     field: "partName",
     headerName: "Part Name",
@@ -63,7 +63,7 @@ export const columns: GridColDef<TypeTblMaintLogStocks>[] = [
   },
 ];
 
-export const maintLogColumns: GridColDef<TypeTblMaintLogStocks>[] = [
+export const maintLogColumns: GridColDef<TypeTblMaintLogSpare>[] = [
   {
     field: "component",
     headerName: "Component",

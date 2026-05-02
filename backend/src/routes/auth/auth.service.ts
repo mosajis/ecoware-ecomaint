@@ -67,7 +67,6 @@ export class AuthService {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    console.log("aaaaa", hashedPassword);
     const user = await prisma.tblUser.create({
       data: {
         tblEmployee: {

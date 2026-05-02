@@ -175,8 +175,6 @@ model TblCompJob {
   mandatoryHistory        Int?                     @map("MandatoryHistory")
   createdEmployeeId       Int?                     @map("CreatedEmployeeId")
   notes                   String?                  @map("Notes") @db.NVarChar(4000)
-  mandatoryResource       Int?                     @map("MandatoryResource")
-  mandatoryStockUsage     Int?                     @map("MandatoryStockUsage")
   orderNo                 Int?                     @map("OrderNo")
   lastUpdate              DateTime?                @db.DateTime
   instId                  Int?                     @map("InstId")

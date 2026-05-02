@@ -8,7 +8,7 @@ export const PageReportDaily = lazy(
   () => import("@/pages/report/dailyReport/ReportDaily"),
 );
 
-export const PageReportFailure = lazy(
+export const PagefailureReport = lazy(
   () => import("@/pages/report/failureReport/FailureReport"),
 );
 
@@ -50,10 +50,10 @@ export const ReportMounthlyRoute = createRoute({
   beforeLoad: () => ({ breadcrumb: "Monthly" }),
 });
 
-export const ReportFailureRoute = createRoute({
+export const failureReportRoute = createRoute({
   getParentRoute: () => ReportRoute,
   path: "failure",
-  component: () => <LazyRoute Component={PageReportFailure} />,
+  component: () => <LazyRoute Component={PagefailureReport} />,
   beforeLoad: () => ({ breadcrumb: "Failure" }),
 });
 // --- Add all children to parent ---
@@ -61,5 +61,5 @@ export const reportRouteTree = ReportRoute.addChildren([
   ReportMounthlyRoute,
   ReportJobRoute,
   ReportDailyRoute,
-  ReportFailureRoute,
+  failureReportRoute,
 ]);

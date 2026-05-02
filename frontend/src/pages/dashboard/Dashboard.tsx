@@ -12,11 +12,17 @@ import { buildWorkOrderCardsData } from "./cards/cardsWorkOrder";
 import { buildFailureCardsData } from "./cards/cardsFailure";
 import { buildUnplannedCardsData } from "./cards/cardsUnplanned";
 import { TypeStatistics } from "@/core/api/api.types";
+import { useAtomValue } from "jotai";
+import { atomRig } from "@/shared/atoms/general.atom";
 
 const Dashboard = () => {
   const [counts, setCounts] = useState<TypeStatistics | null>(null);
   const [loading, setLoading] = useState(true);
+  
+  const rig = useAtomValue(atomRig)
+  const rigId = rig?.instId
 
+  
   useEffect(() => {
     const initFetch = async () => {
       setLoading(true);
@@ -26,7 +32,7 @@ const Dashboard = () => {
     };
 
     initFetch();
-  }, []);
+  }, [rigId]);
 
   if (loading || !counts) {
     return <Spinner />;

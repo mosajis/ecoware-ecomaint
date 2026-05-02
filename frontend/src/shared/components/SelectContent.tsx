@@ -7,12 +7,12 @@ import DevicesRoundedIcon from "@mui/icons-material/DevicesRounded";
 import { useAtom } from "jotai";
 import { styled } from "@mui/material/styles";
 import { atomInstallations, atomRig } from "../atoms/general.atom";
-import { tblInstallation, TypeTblInstallation } from "@/core/api/generated/api";
 import Select, {
   type SelectChangeEvent,
   selectClasses,
 } from "@mui/material/Select";
 import { useNavigate } from "@tanstack/react-router";
+
 
 const Avatar = styled(MuiAvatar)(({ theme }) => ({
   width: 28,
@@ -34,9 +34,12 @@ export default function SelectContent() {
 
   React.useEffect(() => {
     if (installations.length > 0) {
-      const isValid =
-        selectedRig &&
-        installations.some((item) => item.instId === selectedRig.instId);
+
+      const isValid = selectedRig &&
+      installations.some((item) => item.instId === selectedRig.instId);
+      
+      if(!selectedRig) return
+      
       if (!isValid) {
         setSelectedRig(installations[0]);
       }

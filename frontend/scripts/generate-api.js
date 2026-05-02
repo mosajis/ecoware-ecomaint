@@ -23,7 +23,7 @@ const ignoreResources = [
   "index",
   "statistics",
   "tblAttachmentByAttachmentIdDownload",
-  "tblMaintLogStocksUniqueSpareUnit",
+  "tblMaintLogSpareUniqueSpareUnit",
   "tblMaintLogContext",
 ];
 

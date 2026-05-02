@@ -16,7 +16,7 @@ type Props = {
   onSuccess: (record: any) => void;
 };
 
-export default function ReportFailureCloseDialog({
+export default function failureReportCloseDialog({
   open,
   failureReportId,
   onClose,

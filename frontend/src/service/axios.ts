@@ -5,6 +5,7 @@ import { configAxios } from "@/config";
 import { LOCAL_STORAGE } from "@/const";
 import { jotaiStore } from "@/shared/atoms/jotai.store";
 import { AtomApiError } from "@/shared/atoms/error.atom";
+import { atomRig } from "@/shared/atoms/general.atom";
 
 export default class Api {
   axios;
@@ -45,9 +46,17 @@ export default class Api {
     // Authorization interceptor
     this.axios.interceptors.request.use((config) => {
       const token = localStorage.getItem(LOCAL_STORAGE.ACCESS_KEY);
+      const rig = jotaiStore.get(atomRig)
+      const instId = rig?.instId
+
       if (token) {
         config.headers["Authorization"] = `Bearer ${token}`;
       }
+
+      if(instId) {
+        config.headers["x-inst-id"] = instId;
+      }
+
       return config;
     });
 
