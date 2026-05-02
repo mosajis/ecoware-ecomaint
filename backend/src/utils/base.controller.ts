@@ -1,6 +1,7 @@
 import { Elysia, t } from "elysia";
 import { BaseService } from "./base.service";
 import { prisma } from "./prisma";
+import { TblInstallation } from "orm/generated/prismabox/TblInstallation";
 
 /* ---------------------------------- */
 /* Query Schema */
@@ -253,12 +254,17 @@ export class BaseController<Model extends Record<string, any>> {
               enabled: true,
             });
 
+            
             data = {
-              ...(body as any),
-              ...scoped,
+              tblInstallation: {
+                connect: {
+                  instId: scoped.instId
+                }
+              },
+              
+              ...body as any,
             };
           }
-
           return await service.create(data);
         },
         {

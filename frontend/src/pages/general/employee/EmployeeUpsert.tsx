@@ -24,13 +24,6 @@ export const schema = z.object({
   lastName: requiredStringField(),
   firstName: requiredStringField(),
 
-  address: z
-    .object({
-      addressId: z.number(),
-      name: z.string(),
-    })
-    .nullable(),
-
   discipline: z
     .object({
       discId: z.number(),
@@ -40,8 +33,6 @@ export const schema = z.object({
     .refine((val) => val !== null, {
       message: "Discipline is required",
     }),
-
-  orderNo: z.number().nullable(),
 });
 
 export type EmployeeFormValues = z.input<typeof schema>;
@@ -63,8 +54,6 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
       code: "",
       lastName: "",
       firstName: "",
-      address: null,
-      orderNo: null,
       discipline: null,
     }),
     [],
@@ -83,7 +72,6 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         const res = await tblEmployee.getById(recordId, {
           include: {
             tblDiscipline: true,
-            tblAddress: true,
           },
         });
 
@@ -92,14 +80,6 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
             code: res.code ?? "",
             lastName: res.lastName ?? "",
             firstName: res.firstName ?? "",
-
-            address: res.tblAddress
-              ? {
-                  addressId: res.tblAddress.addressId,
-                  name: res.tblAddress.name ?? "",
-                }
-              : null,
-
             discipline: res.tblDiscipline
               ? {
                   discId: res.tblDiscipline.discId,
@@ -107,7 +87,6 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
                 }
               : null,
 
-            orderNo: res.orderNo ?? null,
           });
         }
       } finally {
@@ -134,14 +113,7 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           code: values.code ?? null,
           lastName: values.lastName ?? "",
           firstName: values.firstName ?? "",
-          orderNo: values.orderNo,
-
-          // Relation
-          ...buildRelation(
-            "tblAddress",
-            "addressId",
-            values.address?.addressId,
-          ),
+          
           ...buildRelation(
             "tblDiscipline",
             "discId",
@@ -232,24 +204,6 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           />
         </Box>
 
-        {/* Address (70%) */}
-        <Controller
-          name="address"
-          control={control}
-          render={({ field, fieldState }) => (
-            <FieldAsyncSelectGrid<TypeTblAddress>
-              disabled={isDisabled}
-              label="Address"
-              value={field.value}
-              request={tblAddress.getAll}
-              columns={[{ field: "name", headerName: "Address", flex: 1 }]}
-              getRowId={(row) => row.addressId}
-              onChange={field.onChange}
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
-            />
-          )}
-        />
         {/* Discipline (30%) */}
         <Controller
           name="discipline"
@@ -264,20 +218,6 @@ function EmployeeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               getOptionLabel={(row) => row.name || ""}
               value={field.value}
               onChange={field.onChange}
-            />
-          )}
-        />
-
-        <Controller
-          name="orderNo"
-          control={control}
-          render={({ field }) => (
-            <NumberField
-              {...field}
-              sx={{ width: "50%" }}
-              label="Order No"
-              size="small"
-              disabled={isDisabled}
             />
           )}
         />

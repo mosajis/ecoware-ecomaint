@@ -654,57 +654,55 @@ model TblElement {
 }
 
 model TblEmployee {
-  employeeId                                                        Int                           @id(map: "PK_tblEmployee") @default(dbgenerated("NEXT VALUE FOR [Seq_Employee]"), map: "DF_EmployeeID") @map("EmployeeID")
-  code                                                              String?                       @map("Code") @db.NVarChar(100)
-  lastName                                                          String?                       @map("LastName") @db.NVarChar(100)
-  firstName                                                         String?                       @map("FirstName") @db.NVarChar(100)
-  discId                                                            Int?                          @map("DiscID")
-  title                                                             String?                       @map("Title") @db.NVarChar(100)
-  lastUpdate                                                        DateTime?                     @db.DateTime
-  tblAttachments                                                    TblAttachment[]
-  tblAttachmentTypes                                                TblAttachmentType[]
-  tblCompCounters                                                   TblCompCounter[]
-  tblCompCounterLogs                                                TblCompCounterLog[]
-  tblCompJobs                                                       TblCompJob[]
-  tblCompJobCounters                                                TblCompJobCounter[]
-  tblCompMeasurePoints                                              TblCompMeasurePoint[]
-  tblCompMeasurePointLogs                                           TblCompMeasurePointLog[]
-  tblCompOilInfos                                                   TblCompOilInfo[]
-  tblComponentUnitAttachments                                       TblComponentUnitAttachment[]
-  tblCompStatusLogs                                                 TblCompStatusLog[]
-  tblCompTypeAttachments                                            TblCompTypeAttachment[]
-  tblCompTypeJobs                                                   TblCompTypeJob[]
-  tblCompTypeJobCounters                                            TblCompTypeJobCounter[]
-  tblCompTypeJobTriggers                                            TblCompTypeJobTrigger[]
-  tblDiscipline                                                     TblDiscipline?                @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblEmployee_tblDiscipline")
-  tblFailureReports                                                 TblFailureReport[]
-  tblJobDescriptionTblJobDescriptionCreatedEmployeeIdTotblEmployees TblJobDescription[]           @relation("tblJobDescription_CreatedEmployeeIdTotblEmployee")
-  tblJobDescriptionTblJobDescriptionApprovedByTotblEmployees        TblJobDescription[]           @relation("tblJobDescription_ApprovedByTotblEmployee")
-  tblJobDescriptionAttachments                                      TblJobDescriptionAttachment[]
-  tblJobVersions                                                    TblJobVersion[]
-  tblLogCounters                                                    TblLogCounter[]
-  tblLogDisciplineTblLogDisciplineEmployeeIdTotblEmployees          TblLogDiscipline[]            @relation("tblLogDiscipline_EmployeeIDTotblEmployee")
-  tblLogDisciplineTblLogDisciplineCreatedEmployeeIdTotblEmployees   TblLogDiscipline[]            @relation("tblLogDiscipline_CreatedEmployeeIdTotblEmployee")
-  tblLoginAudits                                                    TblLoginAudit[]
-  tblMaintLogTblMaintLogReportedByTotblEmployees                    TblMaintLog[]                 @relation("tblMaintLog_ReportedByTotblEmployee")
-  tblMaintLogAttachments                                            TblMaintLogAttachment[]
-  tblMaintLogFollows                                                TblMaintLogFollow[]
-  tblMaintLogSpares                                                 TblMaintLogSpare[]
-  tblOilSamplingLogTblOilSamplingLogSamplerIdTotblEmployees         TblOilSamplingLog[]           @relation("TblOilSamplingLog_SamplerIDTotblEmployee")
-  tblOilSamplingLogTblOilSamplingLogSenderToLabIdTotblEmployees     TblOilSamplingLog[]           @relation("TblOilSamplingLog_SenderToLabIdTotblEmployee")
-  tblReScheduleLogs                                                 TblReScheduleLog[]
-  tblRotationLogTblRotationLogEmployeeInsertedIdTotblEmployees      TblRotationLog[]              @relation("tblRotationLog_EmployeeInsertedIdTotblEmployee")
-  tblRotationLogTblRotationLogEmployeeRemovedIdTotblEmployees       TblRotationLog[]              @relation("tblRotationLog_EmployeeRemovedIdTotblEmployee")
-  tblRoundCompJobs                                                  TblRoundCompJob[]
-  tblUsers                                                          TblUser[]
-  tblWorkOrderTblWorkOrderCreatedByTotblEmployees                   TblWorkOrder[]                @relation("tblWorkOrder_CreatedByTotblEmployee")
-  tblWorkOrderTblWorkOrderIssuedByTotblEmployees                    TblWorkOrder[]                @relation("tblWorkOrder_IssuedByTotblEmployee")
-  tblWorkOrderTblWorkOrderPendingByTotblEmployees                   TblWorkOrder[]                @relation("tblWorkOrder_PendingByTotblEmployee")
-  tblWorkOrderTblWorkOrderPlannedByTotblEmployees                   TblWorkOrder[]                @relation("tblWorkOrder_PlannedByTotblEmployee")
-  tblWorkShopTblWorkShopPersonInChargeIdTotblEmployees              TblWorkShop[]                 @relation("tblWorkShop_PersonInChargeIDTotblEmployee")
-  tblWorkShopTblWorkShopPersonInChargeApproveIdTotblEmployees       TblWorkShop[]                 @relation("tblWorkShop_PersonInChargeApproveIDTotblEmployee")
-  tblWorkShopTblWorkShopClosedByIdTotblEmployees                    TblWorkShop[]                 @relation("tblWorkShop_ClosedByIDTotblEmployee")
-  tblWorkShopAttachments                                            TblWorkShopAttachment[]
+  employeeId                                                      Int                           @id(map: "PK_tblEmployee") @default(dbgenerated("NEXT VALUE FOR [Seq_Employee]"), map: "DF_EmployeeID") @map("EmployeeID")
+  code                                                            String?                       @map("Code") @db.NVarChar(100)
+  lastName                                                        String?                       @map("LastName") @db.NVarChar(100)
+  firstName                                                       String?                       @map("FirstName") @db.NVarChar(100)
+  discId                                                          Int?                          @map("DiscID")
+  title                                                           String?                       @map("Title") @db.NVarChar(100)
+  lastUpdate                                                      DateTime?                     @db.DateTime
+  tblAttachments                                                  TblAttachment[]
+  tblAttachmentTypes                                              TblAttachmentType[]
+  tblCompCounters                                                 TblCompCounter[]
+  tblCompCounterLogs                                              TblCompCounterLog[]
+  tblCompJobs                                                     TblCompJob[]
+  tblCompJobCounters                                              TblCompJobCounter[]
+  tblCompMeasurePoints                                            TblCompMeasurePoint[]
+  tblCompMeasurePointLogs                                         TblCompMeasurePointLog[]
+  tblCompOilInfos                                                 TblCompOilInfo[]
+  tblComponentUnitAttachments                                     TblComponentUnitAttachment[]
+  tblCompStatusLogs                                               TblCompStatusLog[]
+  tblCompTypeAttachments                                          TblCompTypeAttachment[]
+  tblCompTypeJobs                                                 TblCompTypeJob[]
+  tblCompTypeJobCounters                                          TblCompTypeJobCounter[]
+  tblCompTypeJobTriggers                                          TblCompTypeJobTrigger[]
+  tblDiscipline                                                   TblDiscipline?                @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblEmployee_tblDiscipline")
+  tblFailureReports                                               TblFailureReport[]
+  tblJobDescriptionAttachments                                    TblJobDescriptionAttachment[]
+  tblJobVersions                                                  TblJobVersion[]
+  tblLogCounters                                                  TblLogCounter[]
+  tblLogDisciplineTblLogDisciplineEmployeeIdTotblEmployees        TblLogDiscipline[]            @relation("tblLogDiscipline_EmployeeIDTotblEmployee")
+  tblLogDisciplineTblLogDisciplineCreatedEmployeeIdTotblEmployees TblLogDiscipline[]            @relation("tblLogDiscipline_CreatedEmployeeIdTotblEmployee")
+  tblLoginAudits                                                  TblLoginAudit[]
+  tblMaintLogTblMaintLogReportedByTotblEmployees                  TblMaintLog[]                 @relation("tblMaintLog_ReportedByTotblEmployee")
+  tblMaintLogAttachments                                          TblMaintLogAttachment[]
+  tblMaintLogFollows                                              TblMaintLogFollow[]
+  tblMaintLogSpares                                               TblMaintLogSpare[]
+  tblOilSamplingLogTblOilSamplingLogSamplerIdTotblEmployees       TblOilSamplingLog[]           @relation("TblOilSamplingLog_SamplerIDTotblEmployee")
+  tblOilSamplingLogTblOilSamplingLogSenderToLabIdTotblEmployees   TblOilSamplingLog[]           @relation("TblOilSamplingLog_SenderToLabIdTotblEmployee")
+  tblReScheduleLogs                                               TblReScheduleLog[]
+  tblRotationLogTblRotationLogEmployeeInsertedIdTotblEmployees    TblRotationLog[]              @relation("tblRotationLog_EmployeeInsertedIdTotblEmployee")
+  tblRotationLogTblRotationLogEmployeeRemovedIdTotblEmployees     TblRotationLog[]              @relation("tblRotationLog_EmployeeRemovedIdTotblEmployee")
+  tblRoundCompJobs                                                TblRoundCompJob[]
+  tblUsers                                                        TblUser[]
+  tblWorkOrderTblWorkOrderCreatedByTotblEmployees                 TblWorkOrder[]                @relation("tblWorkOrder_CreatedByTotblEmployee")
+  tblWorkOrderTblWorkOrderIssuedByTotblEmployees                  TblWorkOrder[]                @relation("tblWorkOrder_IssuedByTotblEmployee")
+  tblWorkOrderTblWorkOrderPendingByTotblEmployees                 TblWorkOrder[]                @relation("tblWorkOrder_PendingByTotblEmployee")
+  tblWorkOrderTblWorkOrderPlannedByTotblEmployees                 TblWorkOrder[]                @relation("tblWorkOrder_PlannedByTotblEmployee")
+  tblWorkShopTblWorkShopPersonInChargeIdTotblEmployees            TblWorkShop[]                 @relation("tblWorkShop_PersonInChargeIDTotblEmployee")
+  tblWorkShopTblWorkShopPersonInChargeApproveIdTotblEmployees     TblWorkShop[]                 @relation("tblWorkShop_PersonInChargeApproveIDTotblEmployee")
+  tblWorkShopTblWorkShopClosedByIdTotblEmployees                  TblWorkShop[]                 @relation("tblWorkShop_ClosedByIDTotblEmployee")
+  tblWorkShopAttachments                                          TblWorkShopAttachment[]
 
   @@map("tblEmployee")
 }
@@ -773,7 +771,7 @@ model TblFailureStatus {
 }
 
 model TblFollowStatus {
-  followStatusId     Int                 @id(map: "PK_tblFollowStatus") @map("FollowStatusID")
+  followStatusId     Int                 @id(map: "PK_tblFollowStatus") @default(autoincrement()) @map("FollowStatusID")
   fsName             String?             @map("FSName") @db.NVarChar(200)
   fsDesc             String?             @map("FSDesc")
   fsGroup            Int?                @map("FSGroup")
@@ -878,32 +876,23 @@ model TblJobClass {
 }
 
 model TblJobDescription {
-  jobDescId                                                  Int                           @id(map: "PK_tblJobDescription") @default(dbgenerated("NEXT VALUE FOR [Seq_JobDescription]"), map: "DF_JobDescID") @map("JobDescID")
-  jobClassId                                                 Int?                          @map("JobClassID")
-  jobDescCode                                                String?                       @map("JobDescCode") @db.NVarChar(100)
-  jobDescTitle                                               String?                       @map("JobDescTitle") @db.NVarChar(200)
-  jobDesc                                                    String?                       @map("JobDesc") @db.NVarChar(Max)
-  revision                                                   String?                       @map("Revision") @db.NVarChar(100)
-  changeReason                                               String?                       @map("ChangeReason") @db.NVarChar(4000)
-  status                                                     Int?                          @map("Status")
-  oldRevisionJobDescId                                       Int?                          @map("OldRevisionJobDescID")
-  copiedFromJobDescId                                        Int?                          @map("CopiedFromJobDescID")
-  createdDate                                                DateTime?                     @map("CreatedDate") @db.DateTime
-  createdEmployeeId                                          Int?                          @map("CreatedEmployeeId")
-  approvedDate                                               DateTime?                     @map("ApprovedDate") @db.DateTime
-  approvedBy                                                 Int?                          @map("ApprovedBy")
-  applicationId                                              Int?                          @map("ApplicationID")
-  orderNo                                                    Int?                          @map("OrderNo")
-  lastUpdate                                                 DateTime?                     @db.DateTime
-  instId                                                     Int?                          @map("InstId")
-  tblCompJobs                                                TblCompJob[]
-  tblCompTypeJobs                                            TblCompTypeJob[]
-  tblEmployeeTblJobDescriptionCreatedEmployeeIdTotblEmployee TblEmployee?                  @relation("tblJobDescription_CreatedEmployeeIdTotblEmployee", fields: [createdEmployeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblJobDescription_tblEmployee")
-  tblEmployeeTblJobDescriptionApprovedByTotblEmployee        TblEmployee?                  @relation("tblJobDescription_ApprovedByTotblEmployee", fields: [approvedBy], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblJobDescription_tblEmployee1")
-  tblInstallation                                            TblInstallation?              @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblJobDescription_tblInstallation")
-  tblJobClass                                                TblJobClass?                  @relation(fields: [jobClassId], references: [jobClassId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblJobDescription_tblJobClass1")
-  tblJobDescriptionAttachments                               TblJobDescriptionAttachment[]
-  tblMaintLogs                                               TblMaintLog[]
+  jobDescId                    Int                           @id(map: "PK_tblJobDescription") @default(dbgenerated("NEXT VALUE FOR [Seq_JobDescription]"), map: "DF_JobDescID") @map("JobDescID")
+  jobClassId                   Int?                          @map("JobClassID")
+  jobDescCode                  String?                       @map("JobDescCode") @db.NVarChar(100)
+  jobDescTitle                 String?                       @map("JobDescTitle") @db.NVarChar(200)
+  jobDesc                      String?                       @map("JobDesc") @db.NVarChar(Max)
+  changeReason                 String?                       @map("ChangeReason") @db.NVarChar(4000)
+  createdDate                  DateTime?                     @map("CreatedDate") @db.DateTime
+  createdEmployeeId            Int?                          @map("CreatedEmployeeId")
+  orderNo                      Int?                          @map("OrderNo")
+  lastUpdate                   DateTime?                     @db.DateTime
+  instId                       Int?                          @map("InstId")
+  tblCompJobs                  TblCompJob[]
+  tblCompTypeJobs              TblCompTypeJob[]
+  tblInstallation              TblInstallation?              @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblJobDescription_tblInstallation")
+  tblJobClass                  TblJobClass?                  @relation(fields: [jobClassId], references: [jobClassId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblJobDescription_tblJobClass1")
+  tblJobDescriptionAttachments TblJobDescriptionAttachment[]
+  tblMaintLogs                 TblMaintLog[]
 
   @@map("tblJobDescription")
 }

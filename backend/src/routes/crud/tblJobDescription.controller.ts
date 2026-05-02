@@ -19,6 +19,7 @@ const ControllerTblJobDescription = new BaseController({
   swagger: {
     tags: ["tblJobDescription"],
   },
+  scope: true,
   primaryKey: "jobDescId",
   service: ServiceTblJobDescription,
   createSchema: TblJobDescriptionInputCreate,
@@ -27,7 +28,6 @@ const ControllerTblJobDescription = new BaseController({
     TblJobDescriptionPlain,
     TblJobDescription,
   ),
-  scope: true,
 }).app;
 
 export default ControllerTblJobDescription;

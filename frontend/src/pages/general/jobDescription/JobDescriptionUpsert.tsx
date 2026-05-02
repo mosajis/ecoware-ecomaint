@@ -12,6 +12,8 @@ import {
   tblJobClass,
   TypeTblJobDescription,
 } from "@/core/api/generated/api";
+import { useAtomValue } from "jotai";
+import { atomRig } from "@/shared/atoms/general.atom";
 
 // === Validation Schema ===
 const schema = z.object({
@@ -44,6 +46,9 @@ function JobDescriptionUpsert({
   onClose,
   onSuccess,
 }: Props) {
+  const rig = useAtomValue(atomRig)
+  const rigId = rig?.instId as number 
+  
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 

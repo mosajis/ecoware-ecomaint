@@ -4454,6 +4454,22 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/assets/*": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["getAssets*"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -8179,8 +8195,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -8242,16 +8256,9 @@ export interface operations {
                                 jobDescCode: null | string;
                                 jobDescTitle: null | string;
                                 jobDesc: null | string;
-                                revision: null | string;
                                 changeReason: null | string;
-                                status: null | number;
-                                oldRevisionJobDescId: null | number;
-                                copiedFromJobDescId: null | number;
                                 createdDate: null | string;
                                 createdEmployeeId: null | number;
-                                approvedDate: null | string;
-                                approvedBy: null | number;
-                                applicationId: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -8399,8 +8406,6 @@ export interface operations {
                     active?: null | number;
                     mandatoryHistory?: null | number;
                     notes?: null | string;
-                    mandatoryResource?: null | number;
-                    mandatoryStockUsage?: null | number;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblComponentUnit?: {
@@ -8487,8 +8492,6 @@ export interface operations {
                     active?: null | number;
                     mandatoryHistory?: null | number;
                     notes?: null | string;
-                    mandatoryResource?: null | number;
-                    mandatoryStockUsage?: null | number;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblComponentUnit?: {
@@ -8575,8 +8578,6 @@ export interface operations {
                     active?: null | number;
                     mandatoryHistory?: null | number;
                     notes?: null | string;
-                    mandatoryResource?: null | number;
-                    mandatoryStockUsage?: null | number;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblComponentUnit?: {
@@ -8682,8 +8683,6 @@ export interface operations {
                         mandatoryHistory: null | number;
                         createdEmployeeId: null | number;
                         notes: null | string;
-                        mandatoryResource: null | number;
-                        mandatoryStockUsage: null | number;
                         orderNo: null | number;
                         lastUpdate: null | string;
                         instId: null | number;
@@ -8745,16 +8744,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -8949,8 +8941,6 @@ export interface operations {
                         mandatoryHistory: null | number;
                         createdEmployeeId: null | number;
                         notes: null | string;
-                        mandatoryResource: null | number;
-                        mandatoryStockUsage: null | number;
                         orderNo: null | number;
                         lastUpdate: null | string;
                         instId: null | number;
@@ -9012,16 +9002,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -9169,8 +9152,6 @@ export interface operations {
                     active?: null | number;
                     mandatoryHistory?: null | number;
                     notes?: null | string;
-                    mandatoryResource?: null | number;
-                    mandatoryStockUsage?: null | number;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblComponentUnit?: {
@@ -9278,8 +9259,6 @@ export interface operations {
                     active?: null | number;
                     mandatoryHistory?: null | number;
                     notes?: null | string;
-                    mandatoryResource?: null | number;
-                    mandatoryStockUsage?: null | number;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblComponentUnit?: {
@@ -9387,8 +9366,6 @@ export interface operations {
                     active?: null | number;
                     mandatoryHistory?: null | number;
                     notes?: null | string;
-                    mandatoryResource?: null | number;
-                    mandatoryStockUsage?: null | number;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblComponentUnit?: {
@@ -9515,8 +9492,6 @@ export interface operations {
                         mandatoryHistory: null | number;
                         createdEmployeeId: null | number;
                         notes: null | string;
-                        mandatoryResource: null | number;
-                        mandatoryStockUsage: null | number;
                         orderNo: null | number;
                         lastUpdate: null | string;
                         instId: null | number;
@@ -9578,16 +9553,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -9750,8 +9718,6 @@ export interface operations {
                         mandatoryHistory: null | number;
                         createdEmployeeId: null | number;
                         notes: null | string;
-                        mandatoryResource: null | number;
-                        mandatoryStockUsage: null | number;
                         orderNo: null | number;
                         lastUpdate: null | string;
                         instId: null | number;
@@ -9813,16 +9779,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -10057,8 +10016,6 @@ export interface operations {
                                 mandatoryHistory: null | number;
                                 createdEmployeeId: null | number;
                                 notes: null | string;
-                                mandatoryResource: null | number;
-                                mandatoryStockUsage: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -10268,8 +10225,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -10414,8 +10369,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -10637,8 +10590,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -10751,8 +10702,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -10889,8 +10838,6 @@ export interface operations {
                                 mandatoryHistory: null | number;
                                 createdEmployeeId: null | number;
                                 notes: null | string;
-                                mandatoryResource: null | number;
-                                mandatoryStockUsage: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -11062,8 +11009,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -11191,8 +11136,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -11373,8 +11316,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -11470,8 +11411,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -11599,8 +11538,6 @@ export interface operations {
                                 mandatoryHistory: null | number;
                                 createdEmployeeId: null | number;
                                 notes: null | string;
-                                mandatoryResource: null | number;
-                                mandatoryStockUsage: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -11743,8 +11680,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -11858,8 +11793,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -12011,8 +11944,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -12094,8 +12025,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -18244,16 +18173,9 @@ export interface operations {
                                 jobDescCode: null | string;
                                 jobDescTitle: null | string;
                                 jobDesc: null | string;
-                                revision: null | string;
                                 changeReason: null | string;
-                                status: null | number;
-                                oldRevisionJobDescId: null | number;
-                                copiedFromJobDescId: null | number;
                                 createdDate: null | string;
                                 createdEmployeeId: null | number;
-                                approvedDate: null | string;
-                                approvedBy: null | number;
-                                applicationId: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -18649,16 +18571,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -18860,16 +18775,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -19319,16 +19227,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -19498,16 +19399,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -22625,8 +22519,6 @@ export interface operations {
                                 mandatoryHistory: null | number;
                                 createdEmployeeId: null | number;
                                 notes: null | string;
-                                mandatoryResource: null | number;
-                                mandatoryStockUsage: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -23225,8 +23117,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -23574,8 +23464,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -24282,8 +24170,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -24599,8 +24485,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -26756,8 +26640,6 @@ export interface operations {
                                 mandatoryHistory: null | number;
                                 createdEmployeeId: null | number;
                                 notes: null | string;
-                                mandatoryResource: null | number;
-                                mandatoryStockUsage: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -27075,8 +26957,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -27296,8 +27176,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -27678,8 +27556,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -27867,8 +27743,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -28666,8 +28540,6 @@ export interface operations {
                                 mandatoryHistory: null | number;
                                 createdEmployeeId: null | number;
                                 notes: null | string;
-                                mandatoryResource: null | number;
-                                mandatoryStockUsage: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -28833,46 +28705,6 @@ export interface operations {
                                 closedEmployeeId: null | number;
                                 closedDateTime: null | string;
                                 followDesc: null | string;
-                                instId: null | number;
-                            }[];
-                            tblJobDescriptionTblJobDescriptionCreatedEmployeeIdTotblEmployees?: {
-                                jobDescId: number;
-                                jobClassId: null | number;
-                                jobDescCode: null | string;
-                                jobDescTitle: null | string;
-                                jobDesc: null | string;
-                                revision: null | string;
-                                changeReason: null | string;
-                                status: null | number;
-                                oldRevisionJobDescId: null | number;
-                                copiedFromJobDescId: null | number;
-                                createdDate: null | string;
-                                createdEmployeeId: null | number;
-                                approvedDate: null | string;
-                                approvedBy: null | number;
-                                applicationId: null | number;
-                                orderNo: null | number;
-                                lastUpdate: null | string;
-                                instId: null | number;
-                            }[];
-                            tblJobDescriptionTblJobDescriptionApprovedByTotblEmployees?: {
-                                jobDescId: number;
-                                jobClassId: null | number;
-                                jobDescCode: null | string;
-                                jobDescTitle: null | string;
-                                jobDesc: null | string;
-                                revision: null | string;
-                                changeReason: null | string;
-                                status: null | number;
-                                oldRevisionJobDescId: null | number;
-                                copiedFromJobDescId: null | number;
-                                createdDate: null | string;
-                                createdEmployeeId: null | number;
-                                approvedDate: null | string;
-                                approvedBy: null | number;
-                                applicationId: null | number;
-                                orderNo: null | number;
-                                lastUpdate: null | string;
                                 instId: null | number;
                             }[];
                             tblJobDescriptionAttachments?: {
@@ -29450,16 +29282,6 @@ export interface operations {
                             failureReportId: number;
                         }[];
                     };
-                    tblJobDescriptionTblJobDescriptionCreatedEmployeeIdTotblEmployees?: {
-                        connect: {
-                            id: number;
-                        }[];
-                    };
-                    tblJobDescriptionTblJobDescriptionApprovedByTotblEmployees?: {
-                        connect: {
-                            id: number;
-                        }[];
-                    };
                     tblJobDescriptionAttachments?: {
                         connect: {
                             jobDescriptionAttachmentId: number;
@@ -29677,16 +29499,6 @@ export interface operations {
                             failureReportId: number;
                         }[];
                     };
-                    tblJobDescriptionTblJobDescriptionCreatedEmployeeIdTotblEmployees?: {
-                        connect: {
-                            id: number;
-                        }[];
-                    };
-                    tblJobDescriptionTblJobDescriptionApprovedByTotblEmployees?: {
-                        connect: {
-                            id: number;
-                        }[];
-                    };
                     tblJobDescriptionAttachments?: {
                         connect: {
                             jobDescriptionAttachmentId: number;
@@ -29902,16 +29714,6 @@ export interface operations {
                     tblFailureReports?: {
                         connect: {
                             failureReportId: number;
-                        }[];
-                    };
-                    tblJobDescriptionTblJobDescriptionCreatedEmployeeIdTotblEmployees?: {
-                        connect: {
-                            id: number;
-                        }[];
-                    };
-                    tblJobDescriptionTblJobDescriptionApprovedByTotblEmployees?: {
-                        connect: {
-                            id: number;
                         }[];
                     };
                     tblJobDescriptionAttachments?: {
@@ -30139,8 +29941,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -30306,46 +30106,6 @@ export interface operations {
                             closedEmployeeId: null | number;
                             closedDateTime: null | string;
                             followDesc: null | string;
-                            instId: null | number;
-                        }[];
-                        tblJobDescriptionTblJobDescriptionCreatedEmployeeIdTotblEmployees?: {
-                            jobDescId: number;
-                            jobClassId: null | number;
-                            jobDescCode: null | string;
-                            jobDescTitle: null | string;
-                            jobDesc: null | string;
-                            revision: null | string;
-                            changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
-                            createdDate: null | string;
-                            createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
-                            orderNo: null | number;
-                            lastUpdate: null | string;
-                            instId: null | number;
-                        }[];
-                        tblJobDescriptionTblJobDescriptionApprovedByTotblEmployees?: {
-                            jobDescId: number;
-                            jobClassId: null | number;
-                            jobDescCode: null | string;
-                            jobDescTitle: null | string;
-                            jobDesc: null | string;
-                            revision: null | string;
-                            changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
-                            createdDate: null | string;
-                            createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
-                            orderNo: null | number;
-                            lastUpdate: null | string;
                             instId: null | number;
                         }[];
                         tblJobDescriptionAttachments?: {
@@ -30959,8 +30719,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -31126,46 +30884,6 @@ export interface operations {
                             closedEmployeeId: null | number;
                             closedDateTime: null | string;
                             followDesc: null | string;
-                            instId: null | number;
-                        }[];
-                        tblJobDescriptionTblJobDescriptionCreatedEmployeeIdTotblEmployees?: {
-                            jobDescId: number;
-                            jobClassId: null | number;
-                            jobDescCode: null | string;
-                            jobDescTitle: null | string;
-                            jobDesc: null | string;
-                            revision: null | string;
-                            changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
-                            createdDate: null | string;
-                            createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
-                            orderNo: null | number;
-                            lastUpdate: null | string;
-                            instId: null | number;
-                        }[];
-                        tblJobDescriptionTblJobDescriptionApprovedByTotblEmployees?: {
-                            jobDescId: number;
-                            jobClassId: null | number;
-                            jobDescCode: null | string;
-                            jobDescTitle: null | string;
-                            jobDesc: null | string;
-                            revision: null | string;
-                            changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
-                            createdDate: null | string;
-                            createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
-                            orderNo: null | number;
-                            lastUpdate: null | string;
                             instId: null | number;
                         }[];
                         tblJobDescriptionAttachments?: {
@@ -31792,22 +31510,6 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblJobDescriptionTblJobDescriptionCreatedEmployeeIdTotblEmployees?: {
-                        connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblJobDescriptionTblJobDescriptionApprovedByTotblEmployees?: {
-                        connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblJobDescriptionAttachments?: {
                         connect?: {
                             jobDescriptionAttachmentId: number;
@@ -32144,22 +31846,6 @@ export interface operations {
                     tblFailureReports?: {
                         connect?: {
                             failureReportId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblJobDescriptionTblJobDescriptionCreatedEmployeeIdTotblEmployees?: {
-                        connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblJobDescriptionTblJobDescriptionApprovedByTotblEmployees?: {
-                        connect?: {
-                            id: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -32506,22 +32192,6 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblJobDescriptionTblJobDescriptionCreatedEmployeeIdTotblEmployees?: {
-                        connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblJobDescriptionTblJobDescriptionApprovedByTotblEmployees?: {
-                        connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblJobDescriptionAttachments?: {
                         connect?: {
                             jobDescriptionAttachmentId: number;
@@ -32822,8 +32492,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -32989,46 +32657,6 @@ export interface operations {
                             closedEmployeeId: null | number;
                             closedDateTime: null | string;
                             followDesc: null | string;
-                            instId: null | number;
-                        }[];
-                        tblJobDescriptionTblJobDescriptionCreatedEmployeeIdTotblEmployees?: {
-                            jobDescId: number;
-                            jobClassId: null | number;
-                            jobDescCode: null | string;
-                            jobDescTitle: null | string;
-                            jobDesc: null | string;
-                            revision: null | string;
-                            changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
-                            createdDate: null | string;
-                            createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
-                            orderNo: null | number;
-                            lastUpdate: null | string;
-                            instId: null | number;
-                        }[];
-                        tblJobDescriptionTblJobDescriptionApprovedByTotblEmployees?: {
-                            jobDescId: number;
-                            jobClassId: null | number;
-                            jobDescCode: null | string;
-                            jobDescTitle: null | string;
-                            jobDesc: null | string;
-                            revision: null | string;
-                            changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
-                            createdDate: null | string;
-                            createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
-                            orderNo: null | number;
-                            lastUpdate: null | string;
                             instId: null | number;
                         }[];
                         tblJobDescriptionAttachments?: {
@@ -33610,8 +33238,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -33777,46 +33403,6 @@ export interface operations {
                             closedEmployeeId: null | number;
                             closedDateTime: null | string;
                             followDesc: null | string;
-                            instId: null | number;
-                        }[];
-                        tblJobDescriptionTblJobDescriptionCreatedEmployeeIdTotblEmployees?: {
-                            jobDescId: number;
-                            jobClassId: null | number;
-                            jobDescCode: null | string;
-                            jobDescTitle: null | string;
-                            jobDesc: null | string;
-                            revision: null | string;
-                            changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
-                            createdDate: null | string;
-                            createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
-                            orderNo: null | number;
-                            lastUpdate: null | string;
-                            instId: null | number;
-                        }[];
-                        tblJobDescriptionTblJobDescriptionApprovedByTotblEmployees?: {
-                            jobDescId: number;
-                            jobClassId: null | number;
-                            jobDescCode: null | string;
-                            jobDescTitle: null | string;
-                            jobDesc: null | string;
-                            revision: null | string;
-                            changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
-                            createdDate: null | string;
-                            createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
-                            orderNo: null | number;
-                            lastUpdate: null | string;
                             instId: null | number;
                         }[];
                         tblJobDescriptionAttachments?: {
@@ -38653,8 +38239,6 @@ export interface operations {
                                 mandatoryHistory: null | number;
                                 createdEmployeeId: null | number;
                                 notes: null | string;
-                                mandatoryResource: null | number;
-                                mandatoryStockUsage: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -38936,16 +38520,9 @@ export interface operations {
                                 jobDescCode: null | string;
                                 jobDescTitle: null | string;
                                 jobDesc: null | string;
-                                revision: null | string;
                                 changeReason: null | string;
-                                status: null | number;
-                                oldRevisionJobDescId: null | number;
-                                copiedFromJobDescId: null | number;
                                 createdDate: null | string;
                                 createdEmployeeId: null | number;
-                                approvedDate: null | string;
-                                approvedBy: null | number;
-                                applicationId: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -39150,11 +38727,6 @@ export interface operations {
                                 createdEmployeeId: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
-                            }[];
-                            tblUserInstallations?: {
-                                userInstId: number;
-                                userId: number;
-                                instId: number;
                             }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
@@ -39449,11 +39021,6 @@ export interface operations {
                             roundCompJobId: number;
                         }[];
                     };
-                    tblUserInstallations?: {
-                        connect: {
-                            userInstId: number;
-                        }[];
-                    };
                     tblWorkOrders?: {
                         connect: {
                             workOrderId: number;
@@ -39677,11 +39244,6 @@ export interface operations {
                     tblRoundCompJobs?: {
                         connect: {
                             roundCompJobId: number;
-                        }[];
-                    };
-                    tblUserInstallations?: {
-                        connect: {
-                            userInstId: number;
                         }[];
                     };
                     tblWorkOrders?: {
@@ -39909,11 +39471,6 @@ export interface operations {
                             roundCompJobId: number;
                         }[];
                     };
-                    tblUserInstallations?: {
-                        connect: {
-                            userInstId: number;
-                        }[];
-                    };
                     tblWorkOrders?: {
                         connect: {
                             workOrderId: number;
@@ -40031,8 +39588,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -40314,16 +39869,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -40528,11 +40076,6 @@ export interface operations {
                             createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
-                        }[];
-                        tblUserInstallations?: {
-                            userInstId: number;
-                            userId: number;
-                            instId: number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -40747,8 +40290,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -41030,16 +40571,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -41244,11 +40778,6 @@ export interface operations {
                             createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
-                        }[];
-                        tblUserInstallations?: {
-                            userInstId: number;
-                            userId: number;
-                            instId: number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -41663,14 +41192,6 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblUserInstallations?: {
-                        connect?: {
-                            userInstId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblWorkOrders?: {
                         connect?: {
                             workOrderId: number;
@@ -42023,14 +41544,6 @@ export interface operations {
                     tblRoundCompJobs?: {
                         connect?: {
                             roundCompJobId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblUserInstallations?: {
-                        connect?: {
-                            userInstId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -42393,14 +41906,6 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblUserInstallations?: {
-                        connect?: {
-                            userInstId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblWorkOrders?: {
                         connect?: {
                             workOrderId: number;
@@ -42530,8 +42035,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -42813,16 +42316,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -43027,11 +42523,6 @@ export interface operations {
                             createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
-                        }[];
-                        tblUserInstallations?: {
-                            userInstId: number;
-                            userId: number;
-                            instId: number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -43214,8 +42705,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -43497,16 +42986,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -43712,11 +43194,6 @@ export interface operations {
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
-                        tblUserInstallations?: {
-                            userInstId: number;
-                            userId: number;
-                            instId: number;
-                        }[];
                         tblWorkOrders?: {
                             workOrderId: number;
                             compJobId: null | number;
@@ -43864,16 +43341,9 @@ export interface operations {
                                 jobDescCode: null | string;
                                 jobDescTitle: null | string;
                                 jobDesc: null | string;
-                                revision: null | string;
                                 changeReason: null | string;
-                                status: null | number;
-                                oldRevisionJobDescId: null | number;
-                                copiedFromJobDescId: null | number;
                                 createdDate: null | string;
                                 createdEmployeeId: null | number;
-                                approvedDate: null | string;
-                                approvedBy: null | number;
-                                applicationId: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -43955,16 +43425,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -44041,16 +43504,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -44141,16 +43597,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -44195,16 +43644,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -44276,16 +43718,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -44317,8 +43752,6 @@ export interface operations {
                                 mandatoryHistory: null | number;
                                 createdEmployeeId: null | number;
                                 notes: null | string;
-                                mandatoryResource: null | number;
-                                mandatoryStockUsage: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -44347,28 +43780,6 @@ export interface operations {
                                 lastUpdate: null | string;
                                 instId: null | number;
                             }[];
-                            tblEmployeeTblJobDescriptionCreatedEmployeeIdTotblEmployee?: null | ({
-                                employeeId: number;
-                                code: null | string;
-                                lastName: null | string;
-                                firstName: null | string;
-                                discId: null | number;
-                                title: null | string;
-                                lastUpdate: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblEmployeeTblJobDescriptionApprovedByTotblEmployee?: null | ({
-                                employeeId: number;
-                                code: null | string;
-                                lastName: null | string;
-                                firstName: null | string;
-                                discId: null | number;
-                                title: null | string;
-                                lastUpdate: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            });
                             tblInstallation?: null | ({
                                 instId: number;
                                 name: string;
@@ -44448,12 +43859,8 @@ export interface operations {
                     jobDescCode?: null | string;
                     jobDescTitle?: null | string;
                     jobDesc?: null | string;
-                    revision?: null | string;
                     changeReason?: null | string;
-                    status?: null | number;
                     createdDate?: null | string;
-                    approvedDate?: null | string;
-                    approvedBy?: null | number;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblCompJobs?: {
@@ -44465,16 +43872,6 @@ export interface operations {
                         connect: {
                             compTypeJobId: number;
                         }[];
-                    };
-                    tblEmployeeTblJobDescriptionCreatedEmployeeIdTotblEmployee?: {
-                        connect: {
-                            id: number;
-                        };
-                    };
-                    tblEmployeeTblJobDescriptionApprovedByTotblEmployee?: {
-                        connect: {
-                            id: number;
-                        };
                     };
                     tblInstallation?: {
                         connect: {
@@ -44501,12 +43898,8 @@ export interface operations {
                     jobDescCode?: null | string;
                     jobDescTitle?: null | string;
                     jobDesc?: null | string;
-                    revision?: null | string;
                     changeReason?: null | string;
-                    status?: null | number;
                     createdDate?: null | string;
-                    approvedDate?: null | string;
-                    approvedBy?: null | number;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblCompJobs?: {
@@ -44518,16 +43911,6 @@ export interface operations {
                         connect: {
                             compTypeJobId: number;
                         }[];
-                    };
-                    tblEmployeeTblJobDescriptionCreatedEmployeeIdTotblEmployee?: {
-                        connect: {
-                            id: number;
-                        };
-                    };
-                    tblEmployeeTblJobDescriptionApprovedByTotblEmployee?: {
-                        connect: {
-                            id: number;
-                        };
                     };
                     tblInstallation?: {
                         connect: {
@@ -44554,12 +43937,8 @@ export interface operations {
                     jobDescCode?: null | string;
                     jobDescTitle?: null | string;
                     jobDesc?: null | string;
-                    revision?: null | string;
                     changeReason?: null | string;
-                    status?: null | number;
                     createdDate?: null | string;
-                    approvedDate?: null | string;
-                    approvedBy?: null | number;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblCompJobs?: {
@@ -44571,16 +43950,6 @@ export interface operations {
                         connect: {
                             compTypeJobId: number;
                         }[];
-                    };
-                    tblEmployeeTblJobDescriptionCreatedEmployeeIdTotblEmployee?: {
-                        connect: {
-                            id: number;
-                        };
-                    };
-                    tblEmployeeTblJobDescriptionApprovedByTotblEmployee?: {
-                        connect: {
-                            id: number;
-                        };
                     };
                     tblInstallation?: {
                         connect: {
@@ -44618,16 +43987,9 @@ export interface operations {
                         jobDescCode: null | string;
                         jobDescTitle: null | string;
                         jobDesc: null | string;
-                        revision: null | string;
                         changeReason: null | string;
-                        status: null | number;
-                        oldRevisionJobDescId: null | number;
-                        copiedFromJobDescId: null | number;
                         createdDate: null | string;
                         createdEmployeeId: null | number;
-                        approvedDate: null | string;
-                        approvedBy: null | number;
-                        applicationId: null | number;
                         orderNo: null | number;
                         lastUpdate: null | string;
                         instId: null | number;
@@ -44659,8 +44021,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -44689,28 +44049,6 @@ export interface operations {
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
-                        tblEmployeeTblJobDescriptionCreatedEmployeeIdTotblEmployee?: null | ({
-                            employeeId: number;
-                            code: null | string;
-                            lastName: null | string;
-                            firstName: null | string;
-                            discId: null | number;
-                            title: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblEmployeeTblJobDescriptionApprovedByTotblEmployee?: null | ({
-                            employeeId: number;
-                            code: null | string;
-                            lastName: null | string;
-                            firstName: null | string;
-                            discId: null | number;
-                            title: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
                         tblInstallation?: null | ({
                             instId: number;
                             name: string;
@@ -44829,16 +44167,9 @@ export interface operations {
                         jobDescCode: null | string;
                         jobDescTitle: null | string;
                         jobDesc: null | string;
-                        revision: null | string;
                         changeReason: null | string;
-                        status: null | number;
-                        oldRevisionJobDescId: null | number;
-                        copiedFromJobDescId: null | number;
                         createdDate: null | string;
                         createdEmployeeId: null | number;
-                        approvedDate: null | string;
-                        approvedBy: null | number;
-                        applicationId: null | number;
                         orderNo: null | number;
                         lastUpdate: null | string;
                         instId: null | number;
@@ -44870,8 +44201,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -44900,28 +44229,6 @@ export interface operations {
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
-                        tblEmployeeTblJobDescriptionCreatedEmployeeIdTotblEmployee?: null | ({
-                            employeeId: number;
-                            code: null | string;
-                            lastName: null | string;
-                            firstName: null | string;
-                            discId: null | number;
-                            title: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblEmployeeTblJobDescriptionApprovedByTotblEmployee?: null | ({
-                            employeeId: number;
-                            code: null | string;
-                            lastName: null | string;
-                            firstName: null | string;
-                            discId: null | number;
-                            title: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
                         tblInstallation?: null | ({
                             instId: number;
                             name: string;
@@ -45001,12 +44308,8 @@ export interface operations {
                     jobDescCode?: null | string;
                     jobDescTitle?: null | string;
                     jobDesc?: null | string;
-                    revision?: null | string;
                     changeReason?: null | string;
-                    status?: null | number;
                     createdDate?: null | string;
-                    approvedDate?: null | string;
-                    approvedBy?: null | number;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblCompJobs?: {
@@ -45024,18 +44327,6 @@ export interface operations {
                         disconnect?: {
                             id: number;
                         }[];
-                    };
-                    tblEmployeeTblJobDescriptionCreatedEmployeeIdTotblEmployee?: {
-                        connect?: {
-                            id: number;
-                        };
-                        disconnect?: boolean;
-                    };
-                    tblEmployeeTblJobDescriptionApprovedByTotblEmployee?: {
-                        connect?: {
-                            id: number;
-                        };
-                        disconnect?: boolean;
                     };
                     tblInstallation?: {
                         connect?: {
@@ -45070,12 +44361,8 @@ export interface operations {
                     jobDescCode?: null | string;
                     jobDescTitle?: null | string;
                     jobDesc?: null | string;
-                    revision?: null | string;
                     changeReason?: null | string;
-                    status?: null | number;
                     createdDate?: null | string;
-                    approvedDate?: null | string;
-                    approvedBy?: null | number;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblCompJobs?: {
@@ -45093,18 +44380,6 @@ export interface operations {
                         disconnect?: {
                             id: number;
                         }[];
-                    };
-                    tblEmployeeTblJobDescriptionCreatedEmployeeIdTotblEmployee?: {
-                        connect?: {
-                            id: number;
-                        };
-                        disconnect?: boolean;
-                    };
-                    tblEmployeeTblJobDescriptionApprovedByTotblEmployee?: {
-                        connect?: {
-                            id: number;
-                        };
-                        disconnect?: boolean;
                     };
                     tblInstallation?: {
                         connect?: {
@@ -45139,12 +44414,8 @@ export interface operations {
                     jobDescCode?: null | string;
                     jobDescTitle?: null | string;
                     jobDesc?: null | string;
-                    revision?: null | string;
                     changeReason?: null | string;
-                    status?: null | number;
                     createdDate?: null | string;
-                    approvedDate?: null | string;
-                    approvedBy?: null | number;
                     orderNo?: null | number;
                     lastUpdate?: null | string;
                     tblCompJobs?: {
@@ -45162,18 +44433,6 @@ export interface operations {
                         disconnect?: {
                             id: number;
                         }[];
-                    };
-                    tblEmployeeTblJobDescriptionCreatedEmployeeIdTotblEmployee?: {
-                        connect?: {
-                            id: number;
-                        };
-                        disconnect?: boolean;
-                    };
-                    tblEmployeeTblJobDescriptionApprovedByTotblEmployee?: {
-                        connect?: {
-                            id: number;
-                        };
-                        disconnect?: boolean;
                     };
                     tblInstallation?: {
                         connect?: {
@@ -45219,16 +44478,9 @@ export interface operations {
                         jobDescCode: null | string;
                         jobDescTitle: null | string;
                         jobDesc: null | string;
-                        revision: null | string;
                         changeReason: null | string;
-                        status: null | number;
-                        oldRevisionJobDescId: null | number;
-                        copiedFromJobDescId: null | number;
                         createdDate: null | string;
                         createdEmployeeId: null | number;
-                        approvedDate: null | string;
-                        approvedBy: null | number;
-                        applicationId: null | number;
                         orderNo: null | number;
                         lastUpdate: null | string;
                         instId: null | number;
@@ -45260,8 +44512,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -45290,28 +44540,6 @@ export interface operations {
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
-                        tblEmployeeTblJobDescriptionCreatedEmployeeIdTotblEmployee?: null | ({
-                            employeeId: number;
-                            code: null | string;
-                            lastName: null | string;
-                            firstName: null | string;
-                            discId: null | number;
-                            title: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblEmployeeTblJobDescriptionApprovedByTotblEmployee?: null | ({
-                            employeeId: number;
-                            code: null | string;
-                            lastName: null | string;
-                            firstName: null | string;
-                            discId: null | number;
-                            title: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
                         tblInstallation?: null | ({
                             instId: number;
                             name: string;
@@ -45398,16 +44626,9 @@ export interface operations {
                         jobDescCode: null | string;
                         jobDescTitle: null | string;
                         jobDesc: null | string;
-                        revision: null | string;
                         changeReason: null | string;
-                        status: null | number;
-                        oldRevisionJobDescId: null | number;
-                        copiedFromJobDescId: null | number;
                         createdDate: null | string;
                         createdEmployeeId: null | number;
-                        approvedDate: null | string;
-                        approvedBy: null | number;
-                        applicationId: null | number;
                         orderNo: null | number;
                         lastUpdate: null | string;
                         instId: null | number;
@@ -45439,8 +44660,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -45469,28 +44688,6 @@ export interface operations {
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
-                        tblEmployeeTblJobDescriptionCreatedEmployeeIdTotblEmployee?: null | ({
-                            employeeId: number;
-                            code: null | string;
-                            lastName: null | string;
-                            firstName: null | string;
-                            discId: null | number;
-                            title: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblEmployeeTblJobDescriptionApprovedByTotblEmployee?: null | ({
-                            employeeId: number;
-                            code: null | string;
-                            lastName: null | string;
-                            firstName: null | string;
-                            discId: null | number;
-                            title: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
                         tblInstallation?: null | ({
                             instId: number;
                             name: string;
@@ -45655,16 +44852,9 @@ export interface operations {
                                 jobDescCode: null | string;
                                 jobDescTitle: null | string;
                                 jobDesc: null | string;
-                                revision: null | string;
                                 changeReason: null | string;
-                                status: null | number;
-                                oldRevisionJobDescId: null | number;
-                                copiedFromJobDescId: null | number;
                                 createdDate: null | string;
                                 createdEmployeeId: null | number;
-                                approvedDate: null | string;
-                                approvedBy: null | number;
-                                applicationId: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -45815,16 +45005,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -45934,16 +45117,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -46097,16 +45273,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -46184,16 +45353,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -49894,8 +49056,6 @@ export interface operations {
                                 mandatoryHistory: null | number;
                                 createdEmployeeId: null | number;
                                 notes: null | string;
-                                mandatoryResource: null | number;
-                                mandatoryStockUsage: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -50123,8 +49283,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -50305,8 +49463,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -50570,8 +49726,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -50720,8 +49874,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -50907,8 +50059,6 @@ export interface operations {
                                 mandatoryHistory: null | number;
                                 createdEmployeeId: null | number;
                                 notes: null | string;
-                                mandatoryResource: null | number;
-                                mandatoryStockUsage: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -51136,8 +50286,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -51318,8 +50466,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -51583,8 +50729,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -51733,8 +50877,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -52193,16 +51335,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -52852,16 +51987,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -53132,16 +52260,9 @@ export interface operations {
                             jobDescCode: null | string;
                             jobDescTitle: null | string;
                             jobDesc: null | string;
-                            revision: null | string;
                             changeReason: null | string;
-                            status: null | number;
-                            oldRevisionJobDescId: null | number;
-                            copiedFromJobDescId: null | number;
                             createdDate: null | string;
                             createdEmployeeId: null | number;
-                            approvedDate: null | string;
-                            approvedBy: null | number;
-                            applicationId: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -53463,16 +52584,9 @@ export interface operations {
                                 jobDescCode: null | string;
                                 jobDescTitle: null | string;
                                 jobDesc: null | string;
-                                revision: null | string;
                                 changeReason: null | string;
-                                status: null | number;
-                                oldRevisionJobDescId: null | number;
-                                copiedFromJobDescId: null | number;
                                 createdDate: null | string;
                                 createdEmployeeId: null | number;
-                                approvedDate: null | string;
-                                approvedBy: null | number;
-                                applicationId: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -55595,8 +54709,6 @@ export interface operations {
                                 mandatoryHistory: null | number;
                                 createdEmployeeId: null | number;
                                 notes: null | string;
-                                mandatoryResource: null | number;
-                                mandatoryStockUsage: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -55824,8 +54936,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -56006,8 +55116,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -56271,8 +55379,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -56421,8 +55527,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -57903,8 +57007,6 @@ export interface operations {
                                 mandatoryHistory: null | number;
                                 createdEmployeeId: null | number;
                                 notes: null | string;
-                                mandatoryResource: null | number;
-                                mandatoryStockUsage: null | number;
                                 orderNo: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
@@ -58072,8 +57174,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -58215,8 +57315,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -58411,8 +57509,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -58522,8 +57618,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -63112,11 +62206,6 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             };
-                            tblUserInstallations?: {
-                                userInstId: number;
-                                userId: number;
-                                instId: number;
-                            }[];
                         }[];
                         total: number;
                         page: number;
@@ -63190,11 +62279,6 @@ export interface operations {
                         userGroupId?: number;
                         password?: string;
                         lastUpdate?: null | string;
-                        tblUserInstallations?: {
-                            userInstId: number;
-                            userId: number;
-                            instId: number;
-                        }[];
                     };
                 };
             };
@@ -63281,11 +62365,6 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         };
-                        tblUserInstallations?: {
-                            userInstId: number;
-                            userId: number;
-                            instId: number;
-                        }[];
                     };
                 };
             };
@@ -63322,14 +62401,6 @@ export interface operations {
                             userGroupId: number;
                         };
                     };
-                    tblUserInstallations?: {
-                        connect?: {
-                            userInstId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                 };
                 "application/x-www-form-urlencoded": {
                     userName?: string;
@@ -63348,14 +62419,6 @@ export interface operations {
                             userGroupId: number;
                         };
                     };
-                    tblUserInstallations?: {
-                        connect?: {
-                            userInstId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                 };
                 "multipart/form-data": {
                     userName?: string;
@@ -63373,14 +62436,6 @@ export interface operations {
                         connect: {
                             userGroupId: number;
                         };
-                    };
-                    tblUserInstallations?: {
-                        connect?: {
-                            userInstId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
                     };
                 };
             };
@@ -63422,11 +62477,6 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         };
-                        tblUserInstallations?: {
-                            userInstId: number;
-                            userId: number;
-                            instId: number;
-                        }[];
                     };
                 };
             };
@@ -63481,11 +62531,6 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         };
-                        tblUserInstallations?: {
-                            userInstId: number;
-                            userId: number;
-                            instId: number;
-                        }[];
                     };
                 };
             };
@@ -64436,27 +63481,6 @@ export interface operations {
                             userInstId: number;
                             userId: number;
                             instId: number;
-                            tblInstallation?: {
-                                instId: number;
-                                name: string;
-                                orderNo: null | number;
-                                caption: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            };
-                            tblUser?: {
-                                userId: number;
-                                employeeId: number;
-                                userGroupId: number;
-                                userName: string;
-                                password: string;
-                                accountDisabled: boolean;
-                                forcePasswordChange: boolean;
-                                lastLogin: null | string;
-                                lastUpdate: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            };
                         }[];
                         total: number;
                         page: number;
@@ -64476,42 +63500,9 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": {
-                    tblInstallation: {
-                        connect: {
-                            instId: number;
-                        };
-                    };
-                    tblUser: {
-                        connect: {
-                            userId: number;
-                        };
-                    };
-                };
-                "application/x-www-form-urlencoded": {
-                    tblInstallation: {
-                        connect: {
-                            instId: number;
-                        };
-                    };
-                    tblUser: {
-                        connect: {
-                            userId: number;
-                        };
-                    };
-                };
-                "multipart/form-data": {
-                    tblInstallation: {
-                        connect: {
-                            instId: number;
-                        };
-                    };
-                    tblUser: {
-                        connect: {
-                            userId: number;
-                        };
-                    };
-                };
+                "application/json": Record<string, never>;
+                "application/x-www-form-urlencoded": Record<string, never>;
+                "multipart/form-data": Record<string, never>;
             };
         };
         responses: {
@@ -64525,27 +63516,6 @@ export interface operations {
                         userInstId: number;
                         userId: number;
                         instId: number;
-                        tblInstallation?: {
-                            instId: number;
-                            name: string;
-                            orderNo: null | number;
-                            caption: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                        tblUser?: {
-                            userId: number;
-                            employeeId: number;
-                            userGroupId: number;
-                            userName: string;
-                            password: string;
-                            accountDisabled: boolean;
-                            forcePasswordChange: boolean;
-                            lastLogin: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
                     };
                 };
             };
@@ -64606,27 +63576,6 @@ export interface operations {
                         userInstId: number;
                         userId: number;
                         instId: number;
-                        tblInstallation?: {
-                            instId: number;
-                            name: string;
-                            orderNo: null | number;
-                            caption: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                        tblUser?: {
-                            userId: number;
-                            employeeId: number;
-                            userGroupId: number;
-                            userName: string;
-                            password: string;
-                            accountDisabled: boolean;
-                            forcePasswordChange: boolean;
-                            lastLogin: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
                     };
                 };
             };
@@ -64646,42 +63595,9 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": {
-                    tblInstallation?: {
-                        connect: {
-                            instId: number;
-                        };
-                    };
-                    tblUser?: {
-                        connect: {
-                            userId: number;
-                        };
-                    };
-                };
-                "application/x-www-form-urlencoded": {
-                    tblInstallation?: {
-                        connect: {
-                            instId: number;
-                        };
-                    };
-                    tblUser?: {
-                        connect: {
-                            userId: number;
-                        };
-                    };
-                };
-                "multipart/form-data": {
-                    tblInstallation?: {
-                        connect: {
-                            instId: number;
-                        };
-                    };
-                    tblUser?: {
-                        connect: {
-                            userId: number;
-                        };
-                    };
-                };
+                "application/json": Record<string, never>;
+                "application/x-www-form-urlencoded": Record<string, never>;
+                "multipart/form-data": Record<string, never>;
             };
         };
         responses: {
@@ -64695,27 +63611,6 @@ export interface operations {
                         userInstId: number;
                         userId: number;
                         instId: number;
-                        tblInstallation?: {
-                            instId: number;
-                            name: string;
-                            orderNo: null | number;
-                            caption: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                        tblUser?: {
-                            userId: number;
-                            employeeId: number;
-                            userGroupId: number;
-                            userName: string;
-                            password: string;
-                            accountDisabled: boolean;
-                            forcePasswordChange: boolean;
-                            lastLogin: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
                     };
                 };
             };
@@ -64744,27 +63639,6 @@ export interface operations {
                         userInstId: number;
                         userId: number;
                         instId: number;
-                        tblInstallation?: {
-                            instId: number;
-                            name: string;
-                            orderNo: null | number;
-                            caption: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                        tblUser?: {
-                            userId: number;
-                            employeeId: number;
-                            userGroupId: number;
-                            userName: string;
-                            password: string;
-                            accountDisabled: boolean;
-                            forcePasswordChange: boolean;
-                            lastLogin: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        };
                     };
                 };
             };
@@ -65340,8 +64214,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -65734,8 +64606,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -66514,8 +65384,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -66876,8 +65744,6 @@ export interface operations {
                             mandatoryHistory: null | number;
                             createdEmployeeId: null | number;
                             notes: null | string;
-                            mandatoryResource: null | number;
-                            mandatoryStockUsage: null | number;
                             orderNo: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
@@ -70423,6 +69289,16 @@ export interface operations {
         responses: never;
     };
     "get*": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: never;
+    };
+    "getAssets*": {
         parameters: {
             query?: never;
             header?: never;
