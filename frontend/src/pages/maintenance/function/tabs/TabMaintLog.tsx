@@ -4,12 +4,12 @@ import { useCallback } from "react";
 import { columns } from "../../maintLog/MaintLogColumns";
 import {
   tblMaintLog,
-  TypeTblFunctions,
+  TypeTblFunction,
   TypeTblMaintLog,
 } from "@/core/api/generated/api";
 
 interface Props {
-  recordFunction?: TypeTblFunctions;
+  recordFunction?: TypeTblFunction;
   label?: string;
 }
 const getRowId = (row: TypeTblMaintLog) => row.maintLogId;

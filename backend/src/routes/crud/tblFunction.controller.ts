@@ -12,6 +12,7 @@ import { prisma } from "@/utils/prisma";
 export const ServiceTblFunction = new BaseService(prisma.tblFunction);
 
 const ControllerTblFunction = new BaseController({
+  scope: true,
   prefix: "/tblFunction",
   swagger: {
     tags: ["tblFunction"],

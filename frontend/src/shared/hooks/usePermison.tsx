@@ -22,10 +22,10 @@ export function usePermission(elementId: number) {
   const perms = userPermissions[elementId];
 
   return {
-    canCreate: perms?.canCreate ?? true,
-    canUpdate: perms?.canUpdate ?? true,
-    canDelete: perms?.canDelete ?? true,
-    canView: perms?.canView ?? true,
-    canExport: perms?.canExport ?? true,
+    canCreate: perms?.canCreate || true,
+    canUpdate: perms?.canUpdate || true,
+    canDelete: perms?.canDelete || true,
+    canView: perms?.canView || true,
+    canExport: perms?.canExport || true,
   };
 }

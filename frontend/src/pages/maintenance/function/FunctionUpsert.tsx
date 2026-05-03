@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { buildRelation, requiredStringField } from "@/core/helper";
 import { memo, useCallback, useEffect, useState } from "react";
 import { tblFunction, TypeTblFunction } from "@/core/api/generated/api";
+import { PERMIT_ID } from "./FunctionPermit";
 
 const schema = z.object({
   funcNo: requiredStringField(),
@@ -63,7 +64,7 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
 
     try {
       const res = await tblFunction.getById(recordId, {
-        include: { tblFunctions: true, tblComponentUnit: true },
+        include: { tblFunction: true, tblComponentUnit: true },
       });
 
       reset({
@@ -106,7 +107,7 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           funcDesc: d.funcDesc,
           orderNo: d.orderNo,
           ...buildRelation(
-            "tblFunctions",
+            "tblFunction",
             "functionId",
             d.parent?.functionId ?? null,
           ),
@@ -196,6 +197,7 @@ function FunctionUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           control={control}
           render={({ field, fieldState }) => (
             <FieldAsyncSelectGrid
+              elementId={PERMIT_ID}
               dialogMaxWidth="sm"
               label="Parent Function"
               getOptionLabel={(row) => row.funcNo}

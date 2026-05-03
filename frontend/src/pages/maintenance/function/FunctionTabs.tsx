@@ -8,7 +8,7 @@ import TabsContainer, {
   ReusableTabItem,
 } from "@/shared/components/TabsContainer";
 import { lazy } from "react";
-import { TypeTblFunctions } from "@/core/api/generated/api";
+import { TypeTblFunction } from "@/core/api/generated/api";
 
 // Lazy-loaded components
 const TabJob = lazy(() => import("./tabs/tabJob/TabJob"));
@@ -21,7 +21,7 @@ const TabRotationLog = lazy(
 );
 
 type Props = {
-  recordFunction?: TypeTblFunctions;
+  recordFunction?: TypeTblFunction;
   label?: string;
 };
 

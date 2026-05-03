@@ -3,8 +3,10 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { Fragment } from "react";
+import { getPremission } from "@/shared/hooks/usePermison";
 export interface DataGridActionItem {
   label: string;
+  elementId: number,
   onClick?: () => void;
   icon?: React.ReactNode;
   variant?: "text" | "outlined" | "contained";
@@ -33,7 +35,8 @@ const DataGridActionBar = ({
     <Box display="flex" alignItems="center">
       {actions.map((action, index) => (
         <Fragment key={action.label}>
-          <Button
+          {
+            getPremission(action.elementId).canView && <Button
             size={size}
             variant={action.variant ?? "text"}
             color={action.color ?? "primary"}
@@ -44,6 +47,7 @@ const DataGridActionBar = ({
           >
             {action.label}
           </Button>
+          }
 
           {index < actions.length - 1 && (
             <Divider orientation="vertical" variant="middle" flexItem />

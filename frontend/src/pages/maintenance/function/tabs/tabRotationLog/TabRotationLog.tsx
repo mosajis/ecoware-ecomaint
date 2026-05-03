@@ -5,7 +5,7 @@ import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
 import {
   tblRotationLog,
-  TypeTblFunctions,
+  TypeTblFunction,
   TypeTblRotationLog,
 } from "@/core/api/generated/api";
 
@@ -34,21 +34,21 @@ const columns: GridColDef<TypeTblRotationLog>[] = [
     field: "userInsertedId",
     headerName: "Inserted By",
     flex: 1,
-    valueGetter: (_, row) =>
-      row.tblUsersTblRotationLogUserInsertedIdTotblUsers?.uName,
+    valueGetter: (_, row) => ""
+      // row.tblUsersTblRotationLogUserInsertedIdTotblUsers?.uName,
   },
   {
     field: "userRemovedId",
     headerName: "Removed By",
     flex: 1,
-    valueGetter: (_, row) =>
-      row.tblUsersTblRotationLogUserRemovedIdTotblUsers?.uName,
+    valueGetter: (_, row) => ""
+      // row.tblUsersTblRotationLogUserRemovedIdTotblUsers?.uName,
   },
   { field: "notes", headerName: "Notes", flex: 1 },
 ];
 
 interface Props {
-  recordFunction?: TypeTblFunctions;
+  recordFunction?: TypeTblFunction;
   label?: string;
 }
 
@@ -60,8 +60,6 @@ const TabRotationLog = ({ recordFunction, label }: Props) => {
       tblRotationLog.getAll({
         include: {
           tblComponentUnit: true,
-          tblUsersTblRotationLogUserInsertedIdTotblUsers: true,
-          tblUsersTblRotationLogUserRemovedIdTotblUsers: true,
         },
         filter: {
           functionId: functionId,

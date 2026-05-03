@@ -1024,12 +1024,6 @@ export const tblMaintLogSpare = {
     api.delete<DynamicResponse<'deleteTblMaintLogSpare'>>('/tblMaintLogSpare', { params: stringifyQuery(query) }),
 };
 
-export type TypeTblMaintLogSpareUniqueSpareUnit = DynamicResponse<'getTblMaintLogSpareUniqueSpareUnit'>['items'][0];
-export const tblMaintLogSpareUniqueSpareUnit = {
-  getAll: (query?: DynamicQuery<'getTblMaintLogSpareUniqueSpareUnit'>) =>
-    api.get<DynamicResponse<'getTblMaintLogSpareUniqueSpareUnit'>>('/tblMaintLogSpareUniqueSpareUnit', { params: stringifyQuery(query) }),
-};
-
 export type TypeTblMaintType = DynamicResponse<'getTblMaintType'>['items'][0];
 export const tblMaintType = {
   getAll: (query?: DynamicQuery<'getTblMaintType'>) =>

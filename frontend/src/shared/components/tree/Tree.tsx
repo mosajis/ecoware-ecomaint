@@ -44,6 +44,7 @@ export function GenericTree<T>({
   const { canCreate, canUpdate, canDelete, canView, canExport } =
       usePermission(elementId!);
 
+      if(!canView) return
 
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);

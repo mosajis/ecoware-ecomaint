@@ -56,6 +56,41 @@ const EMPTY: PermMap = {
 };
 
 /* ─── Helpers ───────────────── */
+const normalizePerms = (perms: Partial<PermMap>): PermMap => ({
+  canView: !!perms.canView,
+  canCreate: !!perms.canCreate,
+  canUpdate: !!perms.canUpdate,
+  canDelete: !!perms.canDelete,
+  canExport: !!perms.canExport,
+});
+
+const getSubTreeIds = (node: any): number[] => {
+  let ids = [node.elementId];
+
+  node.children?.forEach((child: any) => {
+    ids = ids.concat(getSubTreeIds(child));
+  });
+
+  return ids;
+};
+
+const getSubTreePermValues = (
+  node: any,
+  stateMap: StateMap
+): boolean[] => {
+  let values: boolean[] = [];
+
+  const current = stateMap[node.elementId];
+  if (current) {
+    values.push(...PERMISSIONS.map((p) => current.perms[p]));
+  }
+
+  node.children?.forEach((child: any) => {
+    values = values.concat(getSubTreePermValues(child, stateMap));
+  });
+
+  return values;
+};
 
 function buildTree(flat: TypeTblElement[]) {
   const map = new Map<number, any>();
@@ -108,8 +143,8 @@ const Row = React.memo(function Row({
   const perms = state?.perms ?? EMPTY;
 
   const rowValues = isParent
-    ? [perms.canView]
-    : PERMISSIONS.map((p) => perms[p]);
+  ? getSubTreePermValues(node, stateMap)
+  : PERMISSIONS.map((p) => perms[p]);
 
   const rowState = getCheckState(rowValues);
 
@@ -146,14 +181,17 @@ const Row = React.memo(function Row({
           align="center"
           sx={{ borderRight: cellBorder, borderBottom: cellBorder }}
         >
-          {node.hasCrud && (
+          {(isParent || node.hasCrud ) && (
             <Checkbox
-              sx={{ margin: 0 }}
-              size="small"
-              checked={rowState === "all"}
-              indeterminate={rowState === "indeterminate"}
-              onChange={(_, val) => onRowToggle(node, val, isParent)}
-            />
+  sx={{ margin: 0 }}
+  size="small"
+  checked={rowState === "all"}
+  indeterminate={rowState === "indeterminate"}
+  onChange={() => {
+    const nextValue = rowState !== "all";
+    onRowToggle(node, nextValue, isParent);
+  }}
+/>
           )}
         </TableCell>
 
@@ -245,12 +283,12 @@ export default function TabAccessElement(props: Props) {
         // Update with existing permissions
         userGroupElementsData.items.forEach((userGroupElement) => {
           const permissions: PermMap = {
-            canView: userGroupElement.canView,
-            canCreate: userGroupElement.canCreate,
-            canUpdate: userGroupElement.canUpdate,
-            canDelete: userGroupElement.canDelete,
-            canExport: userGroupElement.canExport,
-          };
+  canView: !!userGroupElement.canView,
+  canCreate: !!userGroupElement.canCreate,
+  canUpdate: !!userGroupElement.canUpdate,
+  canDelete: !!userGroupElement.canDelete,
+  canExport: !!userGroupElement.canExport,
+};
 
           map[userGroupElement.elementId] = {
             recordId: userGroupElement.userGroupElementId,
@@ -311,23 +349,33 @@ export default function TabAccessElement(props: Props) {
   );
 
   const handleRowToggle = useCallback(
-    (node: any, value: boolean, isParent: boolean) => {
-      setStateMap((prev) => {
-        const next = { ...prev };
-        const permissionsToUpdate = isParent ? ["canView"] : PERMISSIONS;
+  (node: any, value: boolean, isParent: boolean) => {
+    setStateMap((prev) => {
+      const next = { ...prev };
+      const ids = getSubTreeIds(node);
 
-        next[node.elementId] = {
-          ...next[node.elementId],
-          perms: Object.fromEntries(
-            permissionsToUpdate.map((p) => [p, value]),
-          ) as PermMap,
+      ids.forEach((id) => {
+        const current = next[id];
+
+        const updatedPerms: PermMap = {
+          canView: value,
+          canCreate: value,
+          canUpdate: value,
+          canDelete: value,
+          canExport: value,
         };
 
-        return next;
+        next[id] = {
+          ...current,
+          perms: updatedPerms,
+        };
       });
-    },
-    [],
-  );
+
+      return next;
+    });
+  },
+  []
+);
 
   const handleColumnToggle = useCallback(
     (permission: Permission, value: boolean) => {
@@ -348,68 +396,94 @@ export default function TabAccessElement(props: Props) {
     [],
   );
 
-  const handleToggleAll = useCallback((value: boolean) => {
-    setStateMap((prev) => {
-      const next = { ...prev };
-      Object.keys(next).forEach((id) => {
-        next[+id] = {
-          ...next[+id],
-          perms: {
-            ...next[+id].perms,
-            ...Object.fromEntries(PERMISSIONS.map((p) => [p, value])),
-          },
-        };
-      });
-      return next;
+const handleToggleAll = useCallback((value: boolean) => {
+  setStateMap((prev) => {
+    const next = { ...prev };
+
+    Object.keys(next).forEach((id) => {
+      next[+id] = {
+        ...next[+id],
+        perms: {
+          canView: value,
+          canCreate: value,
+          canUpdate: value,
+          canDelete: value,
+          canExport: value,
+        },
+      };
     });
-  }, []);
+
+    return next;
+  });
+}, []);
+
 
   /* ─── Save Handler ───────────────── */
 
-  const handleSave = async () => {
-    setLoading(true);
-    try {
-      await Promise.all(
-        Object.entries(stateMap).map(async ([elementId, state]) => {
-          const hasAnyPermission = Object.values(state.perms).some(Boolean);
+const handleSave = async () => {
+  setLoading(true);
 
-          if (state.recordId) {
-            if (hasAnyPermission) {
-              await tblUserGroupElement.update(state.recordId, state.perms);
-            } else {
-              await tblUserGroupElement.deleteById(state.recordId);
-            }
-          } else if (hasAnyPermission) {
-            await tblUserGroupElement.create({
-              ...state.perms,
-              tblElement: { connect: { elementId: +elementId } },
+  try {
+    const changedEntries = Object.entries(stateMap).filter(([, state]) =>
+      PERMISSIONS.some((p) => state.perms[p] !== state.original[p])
+    );
+
+    // جمع‌آوری آپدیت‌های ID برای بعد از save
+    const idUpdates: Record<number, { recordId?: number; deleted?: boolean }> = {};
+
+    await Promise.all(
+      changedEntries.map(async ([elementId, state]) => {
+        const payload = normalizePerms(state.perms);
+        const allFalse = Object.values(payload).every((v) => !v);
+        const id = +elementId;
+
+        if (state.recordId) {
+          if (allFalse) {
+            await tblUserGroupElement.deleteById(state.recordId);
+            idUpdates[id] = { deleted: true }; // ✅ علامت‌گذاری برای پاک کردن recordId
+          } else {
+            await tblUserGroupElement.update(state.recordId, payload);
+          }
+        } else {
+          if (!allFalse) {
+            const created = await tblUserGroupElement.create({
+              ...payload,
+              tblElement: { connect: { elementId: id } },
               tblUserGroup: { connect: { userGroupId } },
             });
+            idUpdates[id] = { recordId: created.userGroupElementId }; // ✅ ذخیره ID جدید
           }
-        }),
-      );
+        }
+      })
+    );
 
-      toast.success("Changes saved successfully");
+    toast.success("Changes saved successfully");
 
-      // Update original state after successful save
-      setStateMap((prev) => {
-        const next = { ...prev };
-        Object.keys(next).forEach((id) => {
-          next[+id] = {
-            ...next[+id],
-            original: { ...next[+id].perms },
-          };
-        });
-        return next;
+    setStateMap((prev) => {
+      const next = { ...prev };
+
+      changedEntries.forEach(([elementId]) => {
+        const id = +elementId;
+        const update = idUpdates[id];
+
+        next[id] = {
+          ...next[id],
+          recordId: update?.deleted
+            ? undefined                    // ✅ پاک کردن recordId بعد از delete
+            : (update?.recordId ?? next[id].recordId), // ✅ ذخیره recordId بعد از create
+          original: { ...next[id].perms },
+        };
       });
-    } catch (error) {
-      toast.error("خطا در ذخیره تغییرات");
-      console.error("Error saving changes:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
+      return next;
+    });
+  } catch (error) {
+    toast.error("خطا در ذخیره تغییرات");
+    console.error(error);
+  } finally {
+    setLoading(false);
+  }
+};
   /* ─── Theme Colors ───────────────── */
 
   const borderColor = (theme.vars || theme).palette.divider;
@@ -479,13 +553,17 @@ export default function TabAccessElement(props: Props) {
                   alignItems="center"
                   gap={0.5}
                 >
-                  <Checkbox
-                    sx={{ margin: 0 }}
-                    size="small"
-                    checked={allPermState === "all"}
-                    indeterminate={allPermState === "indeterminate"}
-                    onChange={(_, val) => handleToggleAll(val)}
-                  />
+<Checkbox
+  sx={{ margin: 0 }}
+  size="small"
+  checked={allPermState === "all"}
+  indeterminate={allPermState === "indeterminate"}
+  onChange={() => {
+    const nextValue = allPermState !== "all";
+    handleToggleAll(nextValue);
+  }}
+/>
+
                   <Typography variant="caption">All</Typography>
                 </Box>
               </TableCell>

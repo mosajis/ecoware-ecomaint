@@ -14,8 +14,9 @@ export const protectedRoute = createRoute({
   path: "",
   component: () => (
     <AppAuthorization>
-      <AppLogic />
-      <AppLayout />
+      <AppLogic >
+        <AppLayout />
+      </AppLogic>
     </AppAuthorization>
   ),
   notFoundComponent: NotFound,

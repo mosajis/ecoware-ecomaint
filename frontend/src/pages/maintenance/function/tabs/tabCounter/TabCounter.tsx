@@ -1,11 +1,11 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useCallback } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { tblCompCounter, TypeTblFunctions } from "@/core/api/generated/api";
+import { tblCompCounter, TypeTblFunction } from "@/core/api/generated/api";
 import { columns, getRowId } from "./TabCounterColumn";
 
 interface Props {
-  recordFunction?: TypeTblFunctions;
+  recordFunction?: TypeTblFunction;
   label?: string;
 }
 

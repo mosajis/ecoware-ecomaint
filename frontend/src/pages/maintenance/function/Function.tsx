@@ -12,6 +12,7 @@ import { useCallback, useState, useMemo } from "react";
 import { routeDetail } from "./FunctionRoutes";
 import { columns, getItemName, getRowId } from "./FunctionColumn";
 import { tblFunction, TypeTblFunction } from "@/core/api/generated/api";
+import { PERMIT_ID } from "./FunctionPermit";
 
 export default function PageFunction() {
   const router = useRouter();
@@ -80,7 +81,7 @@ export default function PageFunction() {
     <>
       <Splitter initialPrimarySize="35%">
         <GenericTree<TypeTblFunction>
-          elementId={1430}
+          elementId={PERMIT_ID}
           loading={loading}
           data={tree}
           onDoubleClick={handleRowDoubleClick}
@@ -94,7 +95,7 @@ export default function PageFunction() {
         <CustomizedDataGrid
           showToolbar
           label="List View"
-          elementId={1430}
+          elementId={PERMIT_ID}
           rows={rows}
           columns={columns}
           loading={loading}
@@ -123,27 +124,23 @@ export default function PageFunction() {
         onSuccess={refetch}
       />
 
-      {selectedRow && (
-        <>
-          <DialogInstallRemoveComponent
-            open={dialogs.install}
-            mode="install"
-            functionId={selectedRow.functionId}
-            compId={selectedRow.compId}
-            onClose={() => closeDialog("install")}
-            onSuccess={refetch}
-          />
+<DialogInstallRemoveComponent
+  open={dialogs.install}
+  mode="install"
+  functionId={selectedRow?.functionId!}
+  compId={selectedRow?.compId}
+  onClose={() => closeDialog("install")}
+  onSuccess={refetch}
+/>
 
-          <DialogInstallRemoveComponent
-            open={dialogs.remove}
-            mode="remove"
-            functionId={selectedRow.functionId}
-            compId={selectedRow.compId}
-            onClose={() => closeDialog("remove")}
-            onSuccess={refetch}
-          />
-        </>
-      )}
+<DialogInstallRemoveComponent
+  open={dialogs.remove}
+  mode="remove"
+  functionId={selectedRow?.functionId!}
+  compId={selectedRow?.compId}
+  onClose={() => closeDialog("remove")}
+  onSuccess={refetch}
+/>
     </>
   );
 }

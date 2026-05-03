@@ -1,0 +1,4 @@
+export const PERMIT_ID = 1430
+
+export const PERMIT_ID_FUNCTION_INSTALL = 1431
+export const PERMIT_ID_FUNCTION_REMOVE = 1432

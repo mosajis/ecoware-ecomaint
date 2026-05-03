@@ -13,7 +13,7 @@ import {
 export interface SelectModalProps<TItem extends Record<string, any>> {
   open: boolean;
   title?: string;
-
+  elementId: number,
   onClose: () => void;
   request: () => Promise<any>;
   extractRows?: (data: any) => TItem[];
@@ -28,6 +28,7 @@ export interface SelectModalProps<TItem extends Record<string, any>> {
 }
 
 export function AsyncSelectGridDialog<TItem extends Record<string, any>>({
+  elementId,
   open,
   title = "Select",
   selectionMode = "single",
@@ -121,6 +122,7 @@ export function AsyncSelectGridDialog<TItem extends Record<string, any>>({
     <Dialog open={open} onClose={onClose} fullWidth maxWidth={maxWidth}>
       <DialogContent sx={{ height, p: 1 }}>
         <CustomizedDataGrid
+          elementId={elementId}
           showToolbar
           disableAdd
           disableDelete

@@ -15,6 +15,7 @@ import {
   tblFunction,
   tblRotationLog,
 } from "@/core/api/generated/api";
+import { PERMIT_ID } from "../../componentUnit/ComponentUnitPermit";
 
 // =======================
 // SCHEMA
@@ -85,7 +86,7 @@ function DialogInstallRemoveComponent({
 
         // 1. rotation log
         await tblRotationLog.create({
-          ...buildRelation("tblFunctions", "functionId", functionId),
+          ...buildRelation("tblFunction", "functionId", functionId),
           ...buildRelation("tblComponentUnit", "compId", v.component.compId),
           ...buildRelation(
             "tblUsersTblRotationLogUserInsertedIdTotblUsers",
@@ -110,7 +111,7 @@ function DialogInstallRemoveComponent({
 
         await tblRotationLog.create({
           ...buildRelation("tblComponentUnit", "compId", compId),
-          ...buildRelation("tblFunctions", "functionId", functionId),
+          ...buildRelation("tblFunction", "functionId", functionId),
           ...buildRelation(
             "tblUsersTblRotationLogUserRemovedIdTotblUsers",
             "userId",
@@ -161,6 +162,7 @@ function DialogInstallRemoveComponent({
               control={control}
               render={({ field, fieldState }) => (
                 <FieldAsyncSelectGrid
+                  elementId={PERMIT_ID}
                   columns={[{ field: "compNo", headerName: "Name", flex: 1 }]}
                   label="Component"
                   selectionMode="single"
