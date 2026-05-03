@@ -1,71 +1,21 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import TabComponentUpsert from "./TabComponentUnitUpsert";
 import { useState, useCallback } from "react";
-import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import {
-  tblCompType,
-  tblWorkShopComponent,
-  TypeTblWorkShopComponent,
-} from "@/core/api/generated/api";
-
-const getRowId = (row: TypeTblWorkShopComponent) => row.workShopCompId;
-
-const columns: GridColDef<TypeTblWorkShopComponent>[] = [
-  {
-    field: "compNo",
-    headerName: "Component No",
-    width: 280,
-    //@ts-ignore
-    valueGetter: (_, row) => row?.tblComponentUnit?.compNo ?? "",
-  },
-  {
-    field: "compType",
-    headerName: "Component Type",
-    flex: 1,
-    //@ts-ignore
-    valueGetter: (_, row) => row?.tblComponentUnit?.tblCompType?.compName ?? "",
-  },
-  {
-    field: "model",
-    headerName: "Model / Type",
-    flex: 1,
-    valueGetter: (_, row) => row?.tblComponentUnit?.model ?? "",
-  },
-  {
-    field: "locationId",
-    headerName: "Location",
-    flex: 1,
-    //@ts-ignore
-    valueGetter: (_, row) => row?.tblLocation?.name ?? "",
-  },
-  {
-    field: "serialNo",
-    headerName: "Serial No",
-    flex: 1,
-    valueGetter: (_, row) => row?.tblComponentUnit?.serialNo ?? "",
-  },
-];
+import { columns, getRowId } from "./TabComponentUnitColumns";
+import { tblWorkShopComponent } from "@/core/api/generated/api";
 
 type Props = {
   workShopId?: number | null;
+  label?: string;
 };
 
-export default function TabComponents({ workShopId }: Props) {
+export default function TabComponents({ workShopId, label }: Props) {
   const [openForm, setOpenForm] = useState(false);
-  const [mode, setMode] = useState<"create" | "update">("create");
-  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
   const handleCreate = () => {
     if (!workShopId) return;
-    setSelectedRowId(null);
-    setMode("create");
-    setOpenForm(true);
-  };
 
-  const handleEdit = (row: TypeTblWorkShopComponent) => {
-    setSelectedRowId(row.workShopCompId);
-    setMode("update");
     setOpenForm(true);
   };
 
@@ -98,9 +48,9 @@ export default function TabComponents({ workShopId }: Props) {
   return (
     <>
       <CustomizedDataGrid
-        showToolbar
+        showToolbar={!!workShopId}
         disableEdit={true}
-        label="Component Units"
+        label={label}
         loading={loading}
         rows={rows}
         columns={columns}
@@ -108,7 +58,6 @@ export default function TabComponents({ workShopId }: Props) {
         onDeleteClick={handleDelete}
         onRefreshClick={handleRefresh}
         onAddClick={handleCreate}
-        onRowDoubleClick={({ row }) => handleEdit(row)}
       />
 
       {workShopId && (

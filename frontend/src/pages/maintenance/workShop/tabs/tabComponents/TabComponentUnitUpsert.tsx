@@ -11,6 +11,7 @@ import {
   TypeTblComponentUnit,
   TypeTblWorkShopComponent,
 } from "@/core/api/generated/api";
+import { PERMIT_ID } from "@/pages/maintenance/componentUnit/ComponentUnitPermit";
 
 const schema = z.object({
   component: z
@@ -117,6 +118,7 @@ function TabComponentUpsert({ open, workShopId, onClose, onSuccess }: Props) {
           control={control}
           render={({ field, fieldState }) => (
             <FieldAsyncSelectGrid<TypeTblComponentUnit>
+              elementId={PERMIT_ID}
               label="Component *"
               selectionMode="single"
               value={field.value}

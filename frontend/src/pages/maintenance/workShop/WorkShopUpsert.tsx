@@ -7,7 +7,6 @@ import WorkShopTabs from "./WorkShopTabs";
 import { memo, useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { tblWorkShop } from "@/core/api/generated/api";
-import { atomInitData, Type } from "./WorkShopAtom";
 import Spinner from "@/shared/components/Spinner";
 
 type Props = {
@@ -15,19 +14,19 @@ type Props = {
   mode: "create" | "update";
   workShopId?: number | null;
   onClose: () => void;
-  onSuccess: (initData: Type) => void;
+  onSuccess: () => void;
 };
 
 function WorkShopUpsert({ open, workShopId, onClose, onSuccess }: Props) {
-  const [initData, setInitData] = useAtom(atomInitData);
+  // const [initData, setInitData] = useAtom(atomInitData);
   const [loading, setLoading] = useState(false);
 
-  const _workShopId = workShopId ?? initData.workShop?.workShopId;
+  const _workShopId = workShopId;
   const mode = _workShopId ? "update" : "create";
 
   useEffect(() => {
     if (!open) {
-      setInitData({ workShop: null });
+      // setInitData({ workShop: null });
     }
   }, [open]);
 
@@ -57,7 +56,7 @@ function WorkShopUpsert({ open, workShopId, onClose, onSuccess }: Props) {
             },
           },
         });
-        setInitData({ workShop });
+        // setInitData({ workShop });
       } catch {
       } finally {
         setLoading(false);
@@ -65,7 +64,7 @@ function WorkShopUpsert({ open, workShopId, onClose, onSuccess }: Props) {
     };
 
     fetchData();
-  }, [open, mode, _workShopId, setInitData]);
+  }, [open, mode, _workShopId]);
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth>

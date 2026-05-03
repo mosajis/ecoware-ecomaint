@@ -15,6 +15,7 @@ import {
   tblWorkShopAttachment,
   TypeTblWorkShop,
 } from "@/core/api/generated/api";
+import WorkShopTabs from "./WorkShopTabs";
 
 export default function PageWorkShop() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
@@ -38,7 +39,7 @@ export default function PageWorkShop() {
           tblDiscipline: true,
           tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee: true,
           tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee: true,
-          tblEmployeeTblWorkShopClosedByIdTotblEmployee: true
+          tblEmployeeTblWorkShopClosedByIdTotblEmployee: true,
         },
       }),
     [filter],
@@ -48,7 +49,7 @@ export default function PageWorkShop() {
     getAll,
     tblWorkShop.deleteById,
     "workShopId",
-    !dialogs.filter
+    !dialogs.filter,
   );
 
   const selectedRow = rows.find((r) => r.workShopId === selectedRowId) || null;
@@ -79,7 +80,7 @@ export default function PageWorkShop() {
         return;
       }
       setSelectedRowId(row.workShopId);
-      setSelectedLabel(row.workShopNo ?? null);
+      setSelectedLabel(row.title ?? null);
     },
     [selectedRowId],
   );
@@ -127,23 +128,16 @@ export default function PageWorkShop() {
           onRowClick={handleRowClick}
           toolbarChildren={toolbar}
         />
-        <AttachmentMap
-          label={selectedLabel || "WorkShop Attachments"}
-          mapService={tblWorkShopAttachment}
-          filterId={selectedRowId}
-          filterKey="workShopId"
-          relName="tblWorkShop"
-          tableId="workShopAttachmentId"
-        />
+        <WorkShopTabs workShopId={selectedRowId} label={selectedLabel} />
       </Splitter>
 
-      <WorkShopUpsert
+      {/* <WorkShopUpsert
         open={dialogs.upsert}
         mode={mode}
         workShopId={selectedRowId}
         onClose={() => closeDialog("upsert")}
         onSuccess={handleSuccessUpsert}
-      />
+      /> */}
 
       <WorkShopDialogComplete
         open={dialogs.close}
