@@ -1,6 +1,7 @@
 import DOMPurify from "dompurify";
 import { TypeTblFailureReports } from "@/core/api/generated/api";
-import { formatDateTime, val } from "@/core/helper";
+import { extractFullName, formatDateTime, val } from "@/core/helper";
+import CellFullName from "@/shared/components/dataGrid/cells/CellFullName";
 
 type Props = {
   failureReport: TypeTblFailureReports;
@@ -16,13 +17,10 @@ const extractData = (report: any) => ({
   serialNo: report?.tblMaintLog?.tblComponentUnit?.serialNo ?? "-",
   reportedDate: report.tblMaintLog?.reportedDate,
   downTime: report.tblMaintLog?.downTime ?? "-",
-  //@ts-ignore
-  reportedBy:
-    report.tblMaintLog?.tblUsersTblMaintLogReportedByTotblUsers
-      ?.tblEmployeeTblUsersEmployeeIdTotblEmployee?.lastName +
-    " " +
-    report.tblMaintLog?.tblUsersTblMaintLogReportedByTotblUsers
-      ?.tblEmployeeTblUsersEmployeeIdTotblEmployee?.firstName,
+
+  reportedBy: extractFullName(
+    report.tblEmployeeTblMaintLogReportedByTotblEmployee,
+  ),
   failureNumber: report.failureNumber ?? "-",
   description: report.tblMaintLog?.history ?? "",
   followDesc: report.followDesc ?? "",

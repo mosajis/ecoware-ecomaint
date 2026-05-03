@@ -70,9 +70,16 @@ export default function GenericDataGrid({
   elementId,
   ...rest
 }: CustomizedDataGridProps) {
-  const { canCreate, canUpdate, canDelete, canView, canExport } = usePermission(
+  let { canCreate, canUpdate, canDelete, canView, canExport } = usePermission(
     elementId!,
   );
+
+  if (!elementId) {
+    canCreate = true;
+    canUpdate = true;
+    canView = true;
+    canExport = true;
+  }
 
   if (!canView) return;
 

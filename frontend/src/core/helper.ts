@@ -1,6 +1,10 @@
 import { format as formatGregorian } from "date-fns";
 import { format as formatJalali } from "date-fns-jalali";
-import { TypeTblUser, TypeTblWorkOrder } from "./api/generated/api";
+import {
+  TypeTblEmployee,
+  TypeTblUser,
+  TypeTblWorkOrder,
+} from "./api/generated/api";
 import { DATE_FORMATS, DateTimeType } from "@/const";
 import * as z from "zod";
 
@@ -102,8 +106,7 @@ export const formatFileSize = (bytes: number) => {
   return i === 0 ? `${bytes} ${sizes[i]}` : `${value.toFixed(2)} ${sizes[i]}`;
 };
 
-export const extractFullName = (value: TypeTblUser) => {
-  const employee = value?.tblEmployee;
+export const extractFullName = (employee: TypeTblEmployee) => {
   const fullName = employee
     ? [employee.firstName, employee.lastName].filter(Boolean).join(" ")
     : "";

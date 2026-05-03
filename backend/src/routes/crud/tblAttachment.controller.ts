@@ -18,10 +18,11 @@ export interface CreateAttachmentInput {
   title?: string;
   attachmentTypeId?: number;
   isUserAttachment: boolean;
-  createdUserId: number;
+  createdEmployeeId: number;
   buffer: Buffer;
   originalFileName: string;
   mimeType: string;
+  instId: number;
 }
 
 export interface UpdateAttachmentInput {
@@ -50,7 +51,9 @@ export class AttachmentService extends BaseService<any> {
       size: fileInfo.size,
       isUserAttachment: data.isUserAttachment,
       attachmentTypeId: data.attachmentTypeId,
-      createdUserId: data.createdUserId,
+      createdEmployeeId: data.createdEmployeeId,
+      instId: data.instId,
+      createdAt: new Date(),
     } as any);
   }
 
@@ -169,7 +172,7 @@ const baseController = new BaseController({
     // POST / - Upload file
     app.post(
       "/",
-      async ({ body, set }) => {
+      async ({ body, set, headers }) => {
         try {
           const file = body.file;
 
@@ -179,6 +182,7 @@ const baseController = new BaseController({
           }
 
           const buffer = Buffer.from(await file.arrayBuffer());
+
           const fileName = file.name || "unknown";
           const mimeType = file.type || "application/octet-stream";
 
@@ -196,16 +200,32 @@ const baseController = new BaseController({
             };
           }
 
-          // // فیلدهای دیگر
-          const createdUserId = Number(body.createdUserId || 1);
+          const createdEmployeeId = Number(body.createdEmployeeId) || 0; // Default to 0 if not provided
+          const instId = Number(headers["x-inst-id"] || 0);
+
+          if (!createdEmployeeId) {
+            set.status = 400;
+            return {
+              error: "createdEmployeeId is required and must be a valid number",
+            };
+          }
+
+          if (!instId) {
+            set.status = 400;
+            return {
+              error: "Instance ID is required in x-inst-id header",
+            };
+          }
+
           const attachment = await ServiceTblAttachment.createWithFile({
             title: body.title,
             attachmentTypeId: Number(body.attachmentTypeId),
             isUserAttachment: body.isUserAttachment === "true",
-            createdUserId,
+            createdEmployeeId,
             buffer,
             originalFileName: fileName,
             mimeType,
+            instId,
           });
 
           set.status = 201;
@@ -224,7 +244,7 @@ const baseController = new BaseController({
           title: t.Optional(t.String()),
           attachmentTypeId: t.Optional(t.String()),
           isUserAttachment: t.Optional(t.String()),
-          createdUserId: t.Optional(t.String()),
+          createdEmployeeId: t.Optional(t.String()),
           file: t.File(),
         }),
         type: "multipart/form-data",

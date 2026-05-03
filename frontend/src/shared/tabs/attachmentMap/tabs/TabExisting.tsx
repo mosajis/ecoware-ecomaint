@@ -2,7 +2,7 @@ import TabContainer from "@/shared/components/TabContainer";
 import DataGrid from "@/shared/components/dataGrid/DataGrid";
 import LinearProgress from "@mui/material/LinearProgress";
 import { memo, useCallback, useEffect, useState } from "react";
-import { attachmentColumns } from "../AttachmentColumn";
+import { attachmentColumns } from "../AttachmentMapColumn";
 import { GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { tblAttachment, TypeTblAttachment } from "@/core/api/generated/api";

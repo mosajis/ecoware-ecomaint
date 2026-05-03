@@ -1,6 +1,7 @@
 import Axios from "axios";
 import { TypeTblAttachment } from "@/core/api/generated/api";
 import { configAxios } from "@/config";
+import { api } from "@/service/axios";
 
 const axios = Axios.create({
   baseURL: configAxios.httpURL,
@@ -11,7 +12,7 @@ export type CreateAttachmentPayload = {
   title: string;
   attachmentTypeId: number;
   isUserAttachment: boolean;
-  createdUserId: number;
+  createdEmployeeId: number;
 };
 
 /**
@@ -25,14 +26,14 @@ export async function createAttachment(
   form.append("title", payload.title);
   form.append("attachmentTypeId", String(payload.attachmentTypeId));
   form.append("isUserAttachment", String(payload.isUserAttachment));
-  form.append("createdUserId", String(payload.createdUserId));
+  form.append("createdEmployeeId", String(payload.createdEmployeeId));
 
   try {
-    const res = await axios.post<TypeTblAttachment>(
-      "http://185.105.239.12:5273/tblAttachment",
-      form,
-    );
-    return res.data;
+    const res = await api.post<TypeTblAttachment>("tblAttachment", {
+      data: form,
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return res;
   } catch (err: any) {
     if (err.response) {
       throw new Error(
@@ -44,8 +45,5 @@ export async function createAttachment(
 }
 
 export function downloadAttachment(id: number) {
-  window.open(
-    `http://185.105.239.12:5273/tblAttachment/${id}/download`,
-    "_blank",
-  );
+  window.open(configAxios.httpURL + `/tblAttachment/${id}/download`, "_blank");
 }

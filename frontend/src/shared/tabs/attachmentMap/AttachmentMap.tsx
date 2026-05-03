@@ -3,13 +3,14 @@ import DataGrid from "@/shared/components/dataGrid/DataGrid";
 import { memo, useCallback, useMemo, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { BaseAttachmentGridProps, MapRelationConfig } from "./AttachmentType";
-import { attachmentTableColumns } from "./AttachmentColumn";
+import { attachmentTableColumns } from "./AttachmentMapColumn";
+import { tblEmployee } from "@/core/api/generated/api";
 
 export type AttachmentMapProps<T = any> = BaseAttachmentGridProps<T> & {
   onAfterAdd?: (id: number) => void;
   onAskDelete?: (id: number, deleteFn: () => Promise<void>) => void;
   refreshTrigger?: number;
-  elementId?: number
+  elementId?: number;
 };
 
 function AttachmentMap<T = any>({
@@ -36,6 +37,7 @@ function AttachmentMap<T = any>({
       include: {
         tblAttachment: {
           include: {
+            tblEmployee: true,
             tblAttachmentType: true,
           },
         },

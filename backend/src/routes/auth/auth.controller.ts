@@ -3,6 +3,7 @@ import { jwt } from "@elysiajs/jwt";
 import { AuthService } from "./auth.service";
 import { prisma } from "@/utils/prisma";
 import { TblUserPlain } from "orm/generated/prismabox/TblUser";
+import { jwtPlugin } from "./auth.jwt";
 
 const authService = new AuthService();
 
@@ -10,13 +11,7 @@ export const UsersSafePlain = t.Omit(TblUserPlain, ["password"]);
 
 export const ControllerAuth = new Elysia().group("/auth", (app) =>
   app
-    .use(
-      jwt({
-        name: "jwt",
-        secret: process.env["JWT_SECRET"] || "",
-        exp: "1d",
-      }),
-    )
+    .use(jwtPlugin)
     // 🔐 Login
     .post(
       "/login",

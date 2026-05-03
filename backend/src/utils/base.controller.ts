@@ -2,6 +2,7 @@ import { Elysia, t } from "elysia";
 import { BaseService } from "./base.service";
 import { prisma } from "./prisma";
 import { TblInstallation } from "orm/generated/prismabox/TblInstallation";
+import { authPlugin } from "@/routes/auth/auth.guard";
 
 /* ---------------------------------- */
 /* Query Schema */
@@ -40,19 +41,19 @@ export function parseSortString(sort?: string): Record<string, "asc" | "desc"> {
 async function applyScope({
   filter,
   headers,
-  ctx,
+  userId,
   enabled,
+  ctx,
 }: {
   filter: Record<string, any>;
   headers: Record<string, any>;
-  ctx: any;
+  userId: number;
   enabled?: boolean;
+  ctx: any;
 }) {
   if (!enabled) return filter;
 
   const rawInstId = headers["x-inst-id"];
-  
-  const userId = 16;
 
   if (!userId) {
     throw new Error("Unauthorized");
@@ -131,7 +132,7 @@ export class BaseController<Model extends Record<string, any>> {
     scope = false,
   }: BaseControllerOptions<Model>) {
     const { tags } = swagger;
-    const app = new Elysia({ prefix });
+    const app = new Elysia({ prefix }).use(authPlugin);
 
     const isEnabled = (route: string) => !excludeRoutes.includes(route as any);
 
@@ -141,7 +142,7 @@ export class BaseController<Model extends Record<string, any>> {
     if (isEnabled("getAll")) {
       app.get(
         "/",
-        async ({ query, headers, ...ctx }) => {
+        async ({ userId, query, headers, ...ctx }) => {
           const {
             page = 1,
             perPage = 20,
@@ -165,11 +166,12 @@ export class BaseController<Model extends Record<string, any>> {
             headers,
             ctx,
             enabled: scope,
+            userId,
           });
 
           const sortObj = parseSortString(sort);
           const usePagination = !!paginate;
-          
+
           return await service.findAll({
             where: parsedFilter,
             orderBy: sortObj,
@@ -200,7 +202,7 @@ export class BaseController<Model extends Record<string, any>> {
     if (isEnabled("getOne")) {
       app.get(
         `/:${primaryKey}`,
-        async ({ params, query, headers, ...ctx }) => {
+        async ({ userId, params, query, headers, ...ctx }) => {
           let parsedInclude: Record<string, any> = {};
           let parsedSelect: Record<string, any> = {};
 
@@ -216,6 +218,7 @@ export class BaseController<Model extends Record<string, any>> {
           where = await applyScope({
             filter: where,
             headers,
+            userId,
             ctx,
             enabled: scope,
           });
@@ -243,26 +246,26 @@ export class BaseController<Model extends Record<string, any>> {
     if (isEnabled("create")) {
       app.post(
         "/",
-        async ({ body, headers, ...ctx }) => {
+        async ({ userId, body, headers, ...ctx }) => {
           let data = body;
 
           if (scope) {
             const scoped = await applyScope({
               filter: {},
               headers,
+              userId,
               ctx,
               enabled: true,
             });
 
-            
             data = {
               tblInstallation: {
                 connect: {
-                  instId: scoped.instId
-                }
+                  instId: scoped.instId,
+                },
               },
-              
-              ...body as any,
+
+              ...(body as any),
             };
           }
           return await service.create(data);
@@ -282,7 +285,7 @@ export class BaseController<Model extends Record<string, any>> {
     if (isEnabled("update")) {
       app.put(
         `/:${primaryKey}`,
-        async ({ params, body, query, headers, ...ctx }) => {
+        async ({ userId, params, body, query, headers, ...ctx }) => {
           let parsedInclude: Record<string, any> = {};
           let parsedSelect: Record<string, any> = {};
 
@@ -298,6 +301,7 @@ export class BaseController<Model extends Record<string, any>> {
           where = await applyScope({
             filter: where,
             headers,
+            userId,
             ctx,
             enabled: scope,
           });
@@ -327,7 +331,7 @@ export class BaseController<Model extends Record<string, any>> {
     if (isEnabled("delete")) {
       app.delete(
         `/:${primaryKey}`,
-        async ({ params, query, headers, ...ctx }) => {
+        async ({ userId, params, query, headers, ...ctx }) => {
           const keyValue = params[primaryKey];
 
           let where: any = {
@@ -337,6 +341,7 @@ export class BaseController<Model extends Record<string, any>> {
           where = await applyScope({
             filter: where,
             headers,
+            userId,
             ctx,
             enabled: scope,
           });
@@ -365,7 +370,7 @@ export class BaseController<Model extends Record<string, any>> {
     if (isEnabled("deleteAll")) {
       app.delete(
         "/",
-        async ({ query, headers, ...ctx }) => {
+        async ({ userId, query, headers, ...ctx }) => {
           let parsedFilter: Record<string, any> = {};
 
           if (query.filter) parsedFilter = JSON.parse(query.filter);
@@ -373,6 +378,7 @@ export class BaseController<Model extends Record<string, any>> {
           parsedFilter = await applyScope({
             filter: parsedFilter,
             headers,
+            userId,
             ctx,
             enabled: scope,
           });
@@ -402,7 +408,7 @@ export class BaseController<Model extends Record<string, any>> {
     if (isEnabled("count")) {
       app.get(
         "/count",
-        async ({ query, headers, ...ctx }) => {
+        async ({ userId, query, headers, ...ctx }) => {
           let parsedFilter: Record<string, any> = {};
 
           if (query.filter) parsedFilter = JSON.parse(query.filter);
@@ -410,6 +416,7 @@ export class BaseController<Model extends Record<string, any>> {
           parsedFilter = await applyScope({
             filter: parsedFilter,
             headers,
+            userId,
             ctx,
             enabled: scope,
           });

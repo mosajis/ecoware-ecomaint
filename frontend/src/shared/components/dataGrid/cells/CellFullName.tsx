@@ -1,16 +1,15 @@
 import { TypeTblEmployee } from "@/core/api/generated/api";
+import { extractFullName } from "@/core/helper";
 import { FC } from "react";
 
 type Props = {
-  value?: TypeTblEmployee | null;
+  value: TypeTblEmployee;
 };
 
 const CellFullName: FC<Props> = ({ value }) => {
-  const fullName = value
-    ? [value.firstName, value.lastName].filter(Boolean).join(" ")
-    : "";
+  if (!value) return "";
 
-  return fullName;
+  return extractFullName(value);
 };
 
 export default CellFullName;

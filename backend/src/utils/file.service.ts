@@ -44,6 +44,7 @@ export class FileService {
 
     // Check extension
     const ext = path.extname(originalName).toLowerCase();
+    console.log(ext);
     if (!FILE_CONFIG.ALLOWED_EXTENSIONS.includes(ext)) {
       return {
         code: "INVALID_EXTENSION",

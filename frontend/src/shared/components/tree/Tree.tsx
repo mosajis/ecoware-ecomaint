@@ -24,7 +24,7 @@ interface GenericTreeProps<T> {
   onEdit?: (itemId: number) => void;
   onDelete?: (itemId: number) => void;
   loading?: boolean;
-  elementId?: number
+  elementId?: number;
 }
 
 export function GenericTree<T>({
@@ -41,10 +41,18 @@ export function GenericTree<T>({
   loading = false,
   elementId,
 }: GenericTreeProps<T>) {
-  const { canCreate, canUpdate, canDelete, canView, canExport } =
-      usePermission(elementId!);
+  let { canCreate, canUpdate, canDelete, canView, canExport } = usePermission(
+    elementId!,
+  );
 
-      if(!canView) return
+  if (!elementId) {
+    canCreate = true;
+    canUpdate = true;
+    canView = true;
+    canExport = true;
+  }
+
+  if (!canView) return;
 
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
@@ -233,11 +241,9 @@ export function GenericTree<T>({
       <TreeHeader
         label={label || "Tree View"}
         onSearch={handleSearch}
-        
-        onDelete={canDelete ? handleDelete: undefined}
-        onEdit={canUpdate ? handleEdit: undefined}
-        onAdd={canCreate ? onAdd: undefined}
-        
+        onDelete={canDelete ? handleDelete : undefined}
+        onEdit={canUpdate ? handleEdit : undefined}
+        onAdd={canCreate ? onAdd : undefined}
         onRefresh={onRefresh}
         onExpandAll={handleExpandAll}
         onCollapseAll={handleCollapseAll}

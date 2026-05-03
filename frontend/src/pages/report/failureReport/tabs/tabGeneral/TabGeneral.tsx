@@ -131,9 +131,9 @@ function TabGeneral({ mode, failureReportId, compId }: Props) {
           ...buildRelation("tblDiscipline", "discId", userDiscipline?.discId),
           ...buildRelation("tblComponentUnit", "compId", v.component?.compId),
           ...buildRelation(
-            "tblUsersTblMaintLogReportedByTotblUsers",
-            "userId",
-            user?.userId,
+            "tblEmployeeTblMaintLogReportedByTotblEmployee",
+            "employeeId",
+            user?.tblEmployee?.employeeId,
           ),
           ...buildRelation(
             "tblMaintClass",
@@ -324,7 +324,7 @@ function TabGeneral({ mode, failureReportId, compId }: Props) {
         />
         <TextField
           label="Reported By"
-          value={user?.uName ?? ""}
+          value={user?.userName ?? ""}
           fullWidth
           size="small"
           slotProps={{ input: { readOnly: true } }}

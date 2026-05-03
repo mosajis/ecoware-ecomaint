@@ -131,7 +131,11 @@ export function useAttachmentForm<T>({
           "attachmentId",
           selectedAttachmentId,
         ),
-        ...buildRelation("tblUsers", "userId", user?.userId),
+        ...buildRelation(
+          "tblEmployee",
+          "employeeId",
+          user?.tblEmployee?.employeeId,
+        ),
       };
 
       const result = await mapService.create(mapPayload);
@@ -154,13 +158,13 @@ export function useAttachmentForm<T>({
 
   const handleNewSubmit = useCallback(
     async (values: NewAttachmentFormValues) => {
-      setSubmitting(true);
+      setSubmitting(false);
       const newAttachment = await createAttachment({
         title: values.title,
         attachmentTypeId: values.attachmentType?.attachmentTypeId || 0,
         isUserAttachment: values.isUserAttachment,
         file: values.file,
-        createdUserId: user?.userId as number,
+        createdEmployeeId: user?.tblEmployee?.employeeId as number,
       });
 
       if (!newAttachment) {
@@ -179,7 +183,11 @@ export function useAttachmentForm<T>({
           "attachmentId",
           newAttachment.attachmentId,
         ),
-        ...buildRelation("tblUsers", "userId", user?.userId),
+        ...buildRelation(
+          "tblEmployee",
+          "employeeId",
+          user?.tblEmployee?.employeeId,
+        ),
       };
 
       const result = await mapService.create(mapPayload);

@@ -8,7 +8,7 @@ import { AsyncSelectGridDialog } from "./_components/AsyncSelectGridDialog";
 
 // ---------------- Base Props ----------------
 type BaseFieldAsyncSelectGridProps<TItem extends Record<string, any>> = {
-  elementId: number,
+  elementId?: number;
   label?: string;
   placeholder?: string;
   disabled?: boolean;
@@ -153,7 +153,7 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
       />
 
       <AsyncSelectGridDialog<TItem>
-        elementId={elementId}
+        elementId={elementId!}
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
         title={label}

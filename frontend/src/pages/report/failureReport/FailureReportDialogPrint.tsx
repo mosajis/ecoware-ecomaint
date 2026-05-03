@@ -40,11 +40,7 @@ export default function failureReportDialogPrint({
             include: {
               tblMaintLog: {
                 include: {
-                  tblUsersTblMaintLogReportedByTotblUsers: {
-                    include: {
-                      tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
-                    },
-                  },
+                  tblEmployee: true,
                   tblComponentUnit: true,
                   tblMaintCause: true,
                   tblDiscipline: true,
@@ -53,7 +49,6 @@ export default function failureReportDialogPrint({
               tblFailureSeverityLevel: true,
               tblFailureStatus: true,
               tblFailureGroupFollow: true,
-              tblUsers: true,
               tblLocation: true,
             },
           });
