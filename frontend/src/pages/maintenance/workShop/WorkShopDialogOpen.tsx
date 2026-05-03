@@ -22,16 +22,15 @@ export default function WorkShopDialogOpen({
 
     const patch = {
       closedDate: null,
-      tblUsers: buildRelation("tblUsers", "userId", undefined),
+      ...buildRelation("tblEmployeeTblWorkShopClosedByIdTotblEmployee", "employeeId", undefined),
     };
-
-    // ✅ optimistic
-    onSuccess(patch);
 
     try {
       await tblWorkShop.update(workShopId, {
         ...patch,
       });
+
+      onSuccess(patch);
 
       toast.success("WorkShop Open Successfully");
 

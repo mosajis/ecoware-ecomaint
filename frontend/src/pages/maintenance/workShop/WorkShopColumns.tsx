@@ -39,7 +39,7 @@ export const columns: GridColDef<TypeTblWorkShop>[] = [
     field: "personInCharge",
     headerName: "Person In Charge",
     flex: 1,
-    valueGetter: (_, row) => row?.tblUsersTblWorkShopPersonInChargeIdTotblUsers,
+    valueGetter: (_, row) => row?.tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee,
     renderCell: ({ value }) => <CellFullName value={value} />,
   },
   {
@@ -47,7 +47,7 @@ export const columns: GridColDef<TypeTblWorkShop>[] = [
     headerName: "ToolPusher",
     flex: 1,
     valueGetter: (_, row) =>
-      row?.tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers,
+      row?.tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee,
 
     renderCell: ({ value }) => <CellFullName value={value} />,
   },
@@ -61,7 +61,7 @@ export const columns: GridColDef<TypeTblWorkShop>[] = [
     field: "closedBy",
     headerName: "Closed By",
     flex: 1,
-    valueGetter: (_, row) => row?.tblUsersTblWorkShopClosedByIdTotblUsers,
+    valueGetter: (_, row) => row?.tblEmployeeTblWorkShopClosedByIdTotblEmployee,
     renderCell: ({ value }) => <CellFullName value={value} />,
   },
 ];

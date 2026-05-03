@@ -31,21 +31,6 @@ export default function PageWorkShop({ componentUnit }: Props) {
           tblWorkShop: {
             include: {
               tblDiscipline: true,
-              tblUsersTblWorkShopPersonInChargeIdTotblUsers: {
-                include: {
-                  tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
-                },
-              },
-              tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers: {
-                include: {
-                  tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
-                },
-              },
-              tblUsersTblWorkShopClosedByIdTotblUsers: {
-                include: {
-                  tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
-                },
-              },
             },
           },
         },

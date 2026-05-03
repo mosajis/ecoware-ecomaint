@@ -1,10 +1,10 @@
-import { TypeTblRotationLog } from "@/core/api/generated/api";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
+import { TypeTblRotationLog } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 
-const getRowId = (row: TypeTblRotationLog) => row.rotationLogId;
+export const getRowId = (row: TypeTblRotationLog) => row.rotationLogId;
 
-const columns: GridColDef<TypeTblRotationLog>[] = [
+export const columns: GridColDef<TypeTblRotationLog>[] = [
   {
     field: "compNo",
     headerName: "Component Name",
@@ -27,15 +27,16 @@ const columns: GridColDef<TypeTblRotationLog>[] = [
     field: "userInsertedId",
     headerName: "Inserted By",
     flex: 1,
-    valueGetter: (_, row) =>
-      row.tblUsersTblRotationLogUserInsertedIdTotblUsers?.uName,
+    valueGetter: (_, row) => ""
+      // row.tblUsersTblRotationLogUserInsertedIdTotblUsers?.uName,
   },
   {
     field: "userRemovedId",
     headerName: "Removed By",
     flex: 1,
-    valueGetter: (_, row) =>
-      row.tblUsersTblRotationLogUserRemovedIdTotblUsers?.uName,
+    valueGetter: (_, row) => ""
+      // row.tblUsersTblRotationLogUserRemovedIdTotblUsers?.uName,
   },
   { field: "notes", headerName: "Notes", flex: 1 },
 ];
+

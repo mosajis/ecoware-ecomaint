@@ -169,7 +169,7 @@ export class BaseController<Model extends Record<string, any>> {
 
           const sortObj = parseSortString(sort);
           const usePagination = !!paginate;
-
+          
           return await service.findAll({
             where: parsedFilter,
             orderBy: sortObj,

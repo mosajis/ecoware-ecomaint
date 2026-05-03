@@ -86,16 +86,11 @@ export function useAttachmentForm<T>({
 
   const loadAttachments = useCallback(async () => {
     setLoadingAttachments(true);
-    try {
-      const res = await tblAttachment.getAll({
-        include: { tblAttachmentType: true },
-      });
-      setAttachments(res.items ?? []);
-    } catch (err) {
-      console.error("Failed to load attachments", err);
-    } finally {
-      setLoadingAttachments(false);
-    }
+    const res = await tblAttachment.getAll({
+      include: { tblAttachmentType: true },
+    });
+    setAttachments(res.items ?? []);
+    setLoadingAttachments(false);
   }, []);
 
   const resetForms = useCallback(() => {
@@ -124,34 +119,28 @@ export function useAttachmentForm<T>({
       }
 
       setSubmitting(true);
+      const mapPayload = {
+        orderNo: 0,
+        ...buildRelation(
+          relationConfig.relName,
+          relationConfig.filterKey,
+          relationConfig.filterId,
+        ),
+        ...buildRelation(
+          relationConfig.attachmentField,
+          "attachmentId",
+          selectedAttachmentId,
+        ),
+        ...buildRelation("tblUsers", "userId", user?.userId),
+      };
 
-      try {
-        const mapPayload = {
-          orderNo: 0,
-          ...buildRelation(
-            relationConfig.relName,
-            relationConfig.filterKey,
-            relationConfig.filterId,
-          ),
-          ...buildRelation(
-            relationConfig.attachmentField,
-            "attachmentId",
-            selectedAttachmentId,
-          ),
-          ...buildRelation("tblUsers", "userId", user?.userId),
-        };
+      const result = await mapService.create(mapPayload);
 
-        const result = await mapService.create(mapPayload);
-
-        if (result) {
-          onSuccess(result);
-          onClose();
-        }
-      } catch (err) {
-        console.error("Failed to submit existing attachment", err);
-      } finally {
-        setSubmitting(false);
+      if (result) {
+        onSuccess(result);
+        onClose();
       }
+      setSubmitting(false);
     },
     [
       selectedAttachmentId,
@@ -166,45 +155,40 @@ export function useAttachmentForm<T>({
   const handleNewSubmit = useCallback(
     async (values: NewAttachmentFormValues) => {
       setSubmitting(true);
-      try {
-        const newAttachment = await createAttachment({
-          title: values.title,
-          attachmentTypeId: values.attachmentType?.attachmentTypeId || 0,
-          isUserAttachment: values.isUserAttachment,
-          file: values.file,
-          createdUserId: user?.userId as number,
-        });
+      const newAttachment = await createAttachment({
+        title: values.title,
+        attachmentTypeId: values.attachmentType?.attachmentTypeId || 0,
+        isUserAttachment: values.isUserAttachment,
+        file: values.file,
+        createdUserId: user?.userId as number,
+      });
 
-        if (!newAttachment) {
-          throw new Error("Failed to create attachment");
-        }
-
-        const mapPayload = {
-          orderNo: 0,
-          ...buildRelation(
-            relationConfig.relName,
-            relationConfig.filterKey,
-            relationConfig.filterId,
-          ),
-          ...buildRelation(
-            relationConfig.attachmentField,
-            "attachmentId",
-            newAttachment.attachmentId,
-          ),
-          ...buildRelation("tblUsers", "userId", user?.userId),
-        };
-
-        const result = await mapService.create(mapPayload);
-
-        if (result) {
-          onSuccess(result);
-          onClose();
-        }
-      } catch (err) {
-        console.error("Failed to submit new attachment", err);
-      } finally {
-        setSubmitting(false);
+      if (!newAttachment) {
+        throw new Error("Failed to create attachment");
       }
+
+      const mapPayload = {
+        orderNo: 0,
+        ...buildRelation(
+          relationConfig.relName,
+          relationConfig.filterKey,
+          relationConfig.filterId,
+        ),
+        ...buildRelation(
+          relationConfig.attachmentField,
+          "attachmentId",
+          newAttachment.attachmentId,
+        ),
+        ...buildRelation("tblUsers", "userId", user?.userId),
+      };
+
+      const result = await mapService.create(mapPayload);
+
+      if (result) {
+        onSuccess(result);
+        onClose();
+      }
+      setSubmitting(false);
     },
     [relationConfig, mapService, user?.userId, onSuccess, onClose],
   );

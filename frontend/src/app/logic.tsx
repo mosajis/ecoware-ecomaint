@@ -28,8 +28,8 @@ const AppLogic = ({ children }: Props) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // const isPersist = localStorage.getItem(LOCAL_STORAGE.IS_PERSIST) === "1";
-  const isPersist = false
+  const isPersist = localStorage.getItem(LOCAL_STORAGE.IS_PERSIST) === "1";
+  // const isPersist = false
 
   // === Permissions
   const loadPermissions = useCallback(async () => {

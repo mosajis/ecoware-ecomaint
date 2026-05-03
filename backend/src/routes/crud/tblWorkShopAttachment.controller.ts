@@ -19,7 +19,6 @@ const ControllerTblWorkShopAttachment = new BaseController({
     tags: ["tblWorkShopAttachment"],
   },
   scope: true,
-
   primaryKey: "workShopAttachmentId",
   service: ServiceTblWorkShopAttachment,
   createSchema: TblWorkShopAttachmentInputCreate,

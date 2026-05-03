@@ -25,6 +25,7 @@ export default function WorkShopDialogComplete({
   const [loading, setLoading] = useState(false);
 
   const user = useAtomValue(atomUser);
+  const employeeId = user?.tblEmployee?.employeeId
 
   useEffect(() => {
     if (!open) {
@@ -41,9 +42,9 @@ export default function WorkShopDialogComplete({
       await tblWorkShop.update(workShopId, {
         closedDate: closedDate?.toString(),
         ...buildRelation(
-          "tblUsersTblWorkShopClosedByIdTotblUsers",
-          "userId",
-          user?.userId,
+          "tblEmployeeTblWorkShopClosedByIdTotblEmployee",
+          "employeeId",
+          employeeId,
         ),
       });
 

@@ -28,24 +28,28 @@ export default function WorkShopActions({
       label: "Filter",
       icon: <FilterListIcon />,
       onClick: onFilter,
+      elementId: 1361
     },
     {
       label: "Close",
       icon: <TaskAltIcon />,
       onClick: onClose,
       disabled: !isSelected || isClosed,
+      elementId: 1361
     },
     {
       label: "Open",
       icon: <LockOpenIcon />,
       onClick: onOpen,
       disabled: !isSelected || !isClosed,
+      elementId: 1362
     },
     {
       label: "Print",
       icon: <PrintIcon />,
       onClick: onPrint,
       disabled: !isSelected,
+      elementId: 1362
     },
   ];
 

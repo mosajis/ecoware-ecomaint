@@ -83,15 +83,13 @@ model TblAttachment {
 }
 
 model TblAttachmentType {
-  attachmentTypeId  Int              @id(map: "PK_tblAttachmentType1") @default(dbgenerated("NEXT VALUE FOR [Seq_AttachmentType]"), map: "DF_AttachmentTypeID") @map("AttachmentTypeID")
-  name              String?          @map("Name") @db.NVarChar(100)
-  orderNo           Int?             @map("OrderNo")
-  createdEmployeeId Int              @map("CreatedEmployeeId")
-  createdAt         DateTime         @default(now(), map: "DF_tblAttachmentType_created_at") @map("created_at") @db.DateTime
-  instId            Int?             @map("InstId")
+  attachmentTypeId  Int             @id(map: "PK_tblAttachmentType1") @default(dbgenerated("NEXT VALUE FOR [Seq_AttachmentType]"), map: "DF_AttachmentTypeID") @map("AttachmentTypeID")
+  name              String?         @map("Name") @db.NVarChar(100)
+  orderNo           Int?            @map("OrderNo")
+  createdEmployeeId Int             @map("CreatedEmployeeId")
+  createdAt         DateTime        @default(now(), map: "DF_tblAttachmentType_created_at") @map("created_at") @db.DateTime
   tblAttachments    TblAttachment[]
-  tblEmployee       TblEmployee      @relation(fields: [createdEmployeeId], references: [employeeId], onUpdate: NoAction, map: "FK_tblAttachmentType_tblEmployee")
-  tblInstallation   TblInstallation? @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblAttachmentType_tblInstallation")
+  tblEmployee       TblEmployee     @relation(fields: [createdEmployeeId], references: [employeeId], onUpdate: NoAction, map: "FK_tblAttachmentType_tblEmployee")
 
   @@map("tblAttachmentType")
 }
@@ -813,7 +811,6 @@ model TblInstallation {
   orderNo                      Int?                          @map("OrderNo")
   caption                      String?                       @map("Caption") @db.NVarChar(50)
   tblAttachments               TblAttachment[]
-  tblAttachmentTypes           TblAttachmentType[]
   tblCompCounters              TblCompCounter[]
   tblCompCounterLogs           TblCompCounterLog[]
   tblCompJobs                  TblCompJob[]

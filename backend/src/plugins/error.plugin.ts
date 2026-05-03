@@ -17,6 +17,8 @@ export const pluginErrorHandler = (app: Elysia) =>
       details: error.meta,
     };
 
+    console.log(error)
+
     // Prisma unique constraint
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === "P2002") {

@@ -9,9 +9,11 @@ export type AttachmentMapProps<T = any> = BaseAttachmentGridProps<T> & {
   onAfterAdd?: (id: number) => void;
   onAskDelete?: (id: number, deleteFn: () => Promise<void>) => void;
   refreshTrigger?: number;
+  elementId?: number
 };
 
 function AttachmentMap<T = any>({
+  elementId,
   disableAdd,
   disableDelete,
   filterId,
@@ -112,6 +114,7 @@ function AttachmentMap<T = any>({
   return (
     <>
       <DataGrid
+        elementId={elementId}
         disableAdd={disableAdd}
         disableDelete={disableDelete}
         disableRowNumber

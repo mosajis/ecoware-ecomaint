@@ -4,6 +4,9 @@ import AttachmentMap from "@/shared/tabs/attachmentMap/AttachmentMap";
 import WorkShopUpsert from "./WorkShopUpsert";
 import WorkShopActions from "./WorkShopActions";
 import WorkShopDialogComplete from "./WorkShopDialogClose";
+import WorkShopDialogOpen from "./WorkShopDialogOpen";
+import WorkShopDialogFilter, { WorkShopFilter } from "./WorkShopDialogFilter";
+import WorkShopDialogPrint from "./WorkShopDialogPrint";
 import { useCallback, useMemo, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { columns, getRowId } from "./WorkShopColumns";
@@ -12,9 +15,6 @@ import {
   tblWorkShopAttachment,
   TypeTblWorkShop,
 } from "@/core/api/generated/api";
-import WorkShopDialogOpen from "./WorkShopDialogOpen";
-import WorkShopDialogFilter, { WorkShopFilter } from "./WorkShopDialogFilter";
-import WorkShopDialogPrint from "./WorkShopDialogPrint";
 
 export default function PageWorkShop() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
@@ -25,7 +25,7 @@ export default function PageWorkShop() {
   const [dialogs, setDialogs] = useState({
     upsert: false,
     open: false,
-    filter: false,
+    filter: true,
     close: false,
     print: false,
   });
@@ -36,21 +36,9 @@ export default function PageWorkShop() {
         filter: filter ?? undefined,
         include: {
           tblDiscipline: true,
-          tblUsersTblWorkShopPersonInChargeIdTotblUsers: {
-            include: {
-              tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
-            },
-          },
-          tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers: {
-            include: {
-              tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
-            },
-          },
-          tblUsersTblWorkShopClosedByIdTotblUsers: {
-            include: {
-              tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
-            },
-          },
+          tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee: true,
+          tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee: true,
+          tblEmployeeTblWorkShopClosedByIdTotblEmployee: true
         },
       }),
     [filter],
@@ -60,6 +48,7 @@ export default function PageWorkShop() {
     getAll,
     tblWorkShop.deleteById,
     "workShopId",
+    !dialogs.filter
   );
 
   const selectedRow = rows.find((r) => r.workShopId === selectedRowId) || null;

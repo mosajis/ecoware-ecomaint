@@ -41,21 +41,8 @@ export default function WorkShopDialogPrint({
           tblWorkShop.getById(workShopId, {
             include: {
               tblDiscipline: true,
-              tblUsersTblWorkShopPersonInChargeIdTotblUsers: {
-                include: {
-                  tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
-                },
-              },
-              tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers: {
-                include: {
-                  tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
-                },
-              },
-              tblUsersTblWorkShopClosedByIdTotblUsers: {
-                include: {
-                  tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
-                },
-              },
+              tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee: true,
+              tblEmployeeTblWorkShopClosedByIdTotblEmployee: true
             },
           }),
           tblWorkShopComponent.getAll({

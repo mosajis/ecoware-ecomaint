@@ -87,26 +87,17 @@ const TABLE_PKS = {
 };
 
 const SPECIAL_RELATIONS = {
-  // tblUsersTblWorkShopPersonInChargeIdTotblUsers: "userId",
-  // tblUsersTblWorkShopClosedByIdTotblUsers: "userId",
-  // tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers: "userId",
-  // tblUsersTblMaintLogUpdatedUserIdTotblUsers: "userId",
-  // tblUsersTblEmployeeCreatedUserIdTotblUsers: "userId",
-  // tblUsersTblMaintLogReportedByTotblUsers: "userId",
-  // tblUsersTblRotationLogUserRemovedIdTotblUsers: "userId",
-  // tblUsersTblRotationLogUserInsertedIdTotblUsers: "userId",
-  // tblEmployeeTblEmployeeCreatedUserIdTotblUsers: "userId",
-  // tblMaintLogTblMaintLogUpdatedUserIdTotblUsers: "userId",
-  // tblMaintLogTblMaintLogReportedByTotblUsers: "userId",
-  // tblRotationLogTblRotationLogUserInsertedIdTotblUsers: "userId",
-  // tblRotationLogTblRotationLogUserRemovedIdTotblUsers: "userId",
-  // tblWorkOrderTblWorkOrderIssuedByTotblUsers: "userId",
-  // tblWorkOrderTblWorkOrderPlannedByTotblUsers: "userId",
-  // tblWorkOrderTblWorkOrderCreatedByTotblUsers: "userId",
-  // tblWorkOrderTblWorkOrderPendingByTotblUsers: "userId",
-  // tblWorkShopTblWorkShopPersonInChargeIdTotblUsers: "userId",
-  // tblWorkShopTblWorkShopClosedByIdTotblUsers: "userId",
-  // tblWorkShopTblWorkShopPersonInChargeApproveIdTotblUsers: "userId",
+  tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee: "employeeId",
+  tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee: "employeeId",
+  tblEmployeeTblMaintLogReportedByTotblEmployee: "employeeId",
+  tblEmployeeTblWorkOrderCreatedByTotblEmployee: "employeeId",
+  tblEmployeeTblWorkOrderIssuedByTotblEmployee: "employeeId",
+  tblEmployeeTblWorkOrderPendingByTotblEmployee: "employeeId",
+  tblEmployeeTblWorkOrderPendingByTotblEmployee: "employeeId",
+  tblEmployeeTblWorkOrderPlannedByTotblEmployee: "employeeId",
+  tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee: "employeeId",
+  tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee: "employeeId",
+  tblEmployeeTblWorkShopClosedByIdTotblEmployee: "employeeId",
 };
 
 const PRISMABOX_DIR = path.resolve("./orm/generated/prismabox");
