@@ -108,13 +108,19 @@ const ControllerTblWorkOrder = new BaseController({
   extend: (app) => {
     app.get(
       "/",
-      async ({ query }) => {
+      async ({ query, headers }) => {
+        const instId = Number(headers["x-inst-id"] || 0);
+
+        if (!instId) {
+          throw new Error("Instance ID is required");
+        }
         const {
           page = 1,
           perPage = 20,
           sort,
           filter,
           paginate = false,
+          select,
         } = query;
 
         const parsedFilter = filter ? JSON.parse(filter) : {};
@@ -122,64 +128,66 @@ const ControllerTblWorkOrder = new BaseController({
         const usePagination = !!paginate;
 
         return await ServiceTblWorkOrder.findAll({
-          where: parsedFilter,
+          where: { ...parsedFilter, instId },
           orderBy: sortObj,
           page: usePagination ? Number(page) : undefined,
           perPage: usePagination ? Number(perPage) : 250_000,
-          select: {
-            workOrderId: true,
-            compId: true,
-            pendingdate: true,
-            title: true,
-            priority: true,
-            description: true,
-            userComment: true,
-            window: true,
-            dueDate: true,
-            created: true,
-            started: true,
-            completed: true,
-
-            tblComponentUnit: {
-              select: {
+          select: select
+            ? JSON.parse(select)
+            : {
+                workOrderId: true,
                 compId: true,
-                compNo: true,
-                tblLocation: {
-                  select: { name: true },
-                },
-              },
-            },
+                pendingdate: true,
+                title: true,
+                priority: true,
+                description: true,
+                userComment: true,
+                window: true,
+                dueDate: true,
+                created: true,
+                started: true,
+                completed: true,
 
-            tblCompJob: {
-              select: {
-                frequency: true,
-                compJobId: true,
-                nextDueDate: true,
-                tblJobDescription: {
+                tblComponentUnit: {
                   select: {
-                    jobDescCode: true,
-                    jobDescTitle: true,
-                    jobDesc: true,
+                    compId: true,
+                    compNo: true,
+                    tblLocation: {
+                      select: { name: true },
+                    },
                   },
                 },
-                tblPeriod: {
+
+                tblCompJob: {
+                  select: {
+                    frequency: true,
+                    compJobId: true,
+                    nextDueDate: true,
+                    tblJobDescription: {
+                      select: {
+                        jobDescCode: true,
+                        jobDescTitle: true,
+                        jobDesc: true,
+                      },
+                    },
+                    tblPeriod: {
+                      select: { name: true },
+                    },
+                  },
+                },
+
+                tblPendingType: {
+                  select: { pendTypeName: true },
+                },
+
+                tblDiscipline: {
+                  select: { name: true },
+                },
+
+                tblWorkOrderStatus: {
                   select: { name: true },
                 },
               },
-            },
-
-            tblPendingType: {
-              select: { pendTypeName: true },
-            },
-
-            tblDiscipline: {
-              select: { name: true },
-            },
-
-            tblWorkOrderStatus: {
-              select: { name: true },
-            },
-          },
         });
       },
       {
@@ -192,8 +200,14 @@ const ControllerTblWorkOrder = new BaseController({
 
     app.post(
       "/generate",
-      async ({ body, set }) => {
+      async ({ body, set, headers }) => {
         const { userId } = body;
+
+        const instId = Number(headers["x-inst-id"] || 0);
+
+        if (!instId) {
+          throw new Error("Instance ID is required");
+        }
 
         if (!userId) {
           set.status = 400;
@@ -208,7 +222,7 @@ const ControllerTblWorkOrder = new BaseController({
 
         return await prisma.$transaction(async (tx) => {
           const compJobs = await tx.tblCompJob.findMany({
-            where: { nextDueDate: null },
+            where: { nextDueDate: null, instId },
             select: {
               compJobId: true,
               discId: true,
@@ -241,6 +255,7 @@ const ControllerTblWorkOrder = new BaseController({
             lastupdate: now,
             workOrderStatusId: 2,
             workOrderTypeId: 2,
+            instId,
           }));
 
           const resultWorkOrder = await tx.tblWorkOrder.createMany({
@@ -249,11 +264,12 @@ const ControllerTblWorkOrder = new BaseController({
 
           const resultCompJob = await tx.tblCompJob.updateMany({
             where: {
+              instId,
               compJobId: { in: compJobs.map((i) => i.compJobId) },
             },
             data: {
               nextDueDate: now,
-              lastupdate: now,
+              lastUpdate: now,
             },
           });
 
@@ -282,8 +298,14 @@ const ControllerTblWorkOrder = new BaseController({
 
     app.post(
       "/generate/next",
-      async ({ body, set }) => {
+      async ({ body, set, headers }) => {
         const { maintLogId, userId } = body;
+
+        const instId = Number(headers["x-inst-id"] || 0);
+
+        if (!instId) {
+          throw new Error("Instance ID is required");
+        }
 
         if (!maintLogId || !userId) {
           set.status = 400;
@@ -296,7 +318,7 @@ const ControllerTblWorkOrder = new BaseController({
         return prisma.$transaction(async (tx) => {
           /* 1. MaintLog --------------------------------------------------------------------- */
           const maintLog = await tx.tblMaintLog.findUnique({
-            where: { maintLogId },
+            where: { maintLogId, instId },
             select: {
               maintLogId: true,
               workOrderId: true,
@@ -314,7 +336,7 @@ const ControllerTblWorkOrder = new BaseController({
 
           /* 2. WorkOrder --------------------------------------------------------------------- */
           const workOrder = await tx.tblWorkOrder.findUnique({
-            where: { workOrderId: maintLog.workOrderId },
+            where: { workOrderId: maintLog.workOrderId, instId },
             select: {
               workOrderId: true,
               compJobId: true,
@@ -342,7 +364,7 @@ const ControllerTblWorkOrder = new BaseController({
 
           /* 3. CompJob ------------------------------------------------------------------------- */
           const compJob = await tx.tblCompJob.findUnique({
-            where: { compJobId: workOrder.compJobId },
+            where: { compJobId: workOrder.compJobId, instId },
             include: {
               tblCompJobCounters: {
                 include: {
@@ -453,19 +475,20 @@ const ControllerTblWorkOrder = new BaseController({
               window: compJob.window,
               dueDate: finalNextDueDate,
               created: now,
-              lastupdate: now,
+              lastUpdate: now,
               workOrderStatusId: 2,
               workOrderTypeId: 1,
+              instId,
             },
           });
 
           /* 10. Update CompJob ------------------------------------------------------------------- */
           await tx.tblCompJob.update({
-            where: { compJobId: compJob.compJobId },
+            where: { compJobId: compJob.compJobId, instId },
             data: {
               nextDueDate: finalNextDueDate,
               lastDone: maintLog.dateDone,
-              lastupdate: now,
+              lastUpdate: now,
             },
           });
 

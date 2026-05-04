@@ -15,17 +15,18 @@ import {
   tblMaintCause,
   tblDiscipline,
   tblComponentUnit,
-  tblUser,
   tblWorkOrder,
   TypeTblMaintClass,
   TypeTblMaintType,
   TypeTblMaintCause,
   TypeTblDiscipline,
   TypeTblComponentUnit,
-  TypeTblUser,
   TypeTblWorkOrder,
   TypeTblJobClass,
+  TypeTblEmployee,
+  tblEmployee,
 } from "@/core/api/generated/api";
+import { extractFullName } from "@/core/helper";
 
 export interface MaintLogFilter {
   AND?: any[];
@@ -38,7 +39,7 @@ type FiltersState = {
   jobClass: TypeTblJobClass | null;
   discipline: TypeTblDiscipline | null;
   component: TypeTblComponentUnit | null;
-  reporter: TypeTblUser | null;
+  reporter: TypeTblEmployee | null;
   workOrder: TypeTblWorkOrder | null;
 
   jobCode: string;
@@ -46,7 +47,7 @@ type FiltersState = {
   doneTo: string;
   reportFrom: string;
   reportTo: string;
-  unexpected: number;
+  // unexpected: number;
   control: boolean;
 };
 
@@ -78,7 +79,7 @@ export default function MaintLogFilterDialog({
       doneTo: "",
       reportFrom: "",
       reportTo: "",
-      unexpected: 0,
+      // unexpected: 0,
       control: false,
     };
 
@@ -106,7 +107,7 @@ export default function MaintLogFilterDialog({
       }
 
       if ("reporterId" in c) {
-        base.reporter = { userId: c.reporterId } as any;
+        base.reporter = { employeeId: c.reporterId } as any;
       }
 
       if ("workOrderId" in c) {
@@ -150,9 +151,9 @@ export default function MaintLogFilterDialog({
 
       // ----------- Booleans -----------
 
-      if (c.unexpected === false) {
-        base.unexpected = 1;
-      }
+      // if (c.unexpected === false) {
+      //   base.unexpected = 1;
+      // }
     }
 
     return base;
@@ -199,7 +200,7 @@ export default function MaintLogFilterDialog({
     }
 
     if (filters.reporter) {
-      conditions.push({ reportedBy: filters.reporter.userId });
+      conditions.push({ reportedBy: filters.reporter.employeeId });
     }
 
     if (filters.workOrder) {
@@ -238,9 +239,9 @@ export default function MaintLogFilterDialog({
       });
     }
 
-    if (filters.unexpected) {
-      conditions.push({ unexpected: 1 });
-    }
+    // if (filters.unexpected) {
+    //   conditions.push({ unexpected: 1 });
+    // }
 
     const prismaFilter: MaintLogFilter = {
       AND: conditions.length > 0 ? conditions : undefined,
@@ -328,38 +329,24 @@ export default function MaintLogFilterDialog({
                   field: "firstName",
                   headerName: "First Name",
                   flex: 1,
-                  valueGetter: (_: any, row: any) =>
-                    row.tblEmployeeTblUsersEmployeeIdTotblEmployee?.firstName,
                 },
                 {
                   field: "lastName",
                   headerName: "Last Name",
                   flex: 1,
-                  valueGetter: (_: any, row: any) =>
-                    row.tblEmployeeTblUsersEmployeeIdTotblEmployee?.lastName,
                 },
               ]}
               label="Reporter"
               value={filters.reporter}
-              getOptionLabel={(row) =>
-                row.tblEmployeeTblUsersEmployeeIdTotblEmployee
-                  ? `${row.tblEmployeeTblUsersEmployeeIdTotblEmployee.firstName} ${row.tblEmployeeTblUsersEmployeeIdTotblEmployee.lastName}`
-                  : "Unknown User"
-              }
+              getOptionLabel={(row: TypeTblEmployee) => extractFullName(row)}
               selectionMode="single"
-              request={() =>
-                tblUser.getAll({
-                  include: {
-                    tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
-                  },
-                })
-              }
-              getRowId={(r) => r.userId}
+              request={tblEmployee.getAll}
+              getRowId={(r) => r.employeeId}
               onChange={(v) =>
                 setFilters((p) => ({ ...p, reporter: v as any }))
               }
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={
                 <Checkbox
                   checked={Boolean(filters.unexpected)}
@@ -372,7 +359,7 @@ export default function MaintLogFilterDialog({
                 />
               }
               label="unExpected"
-            />
+            /> */}
           </Box>
         </Box>
         <Box display={"flex"} flexDirection={"column"} gap={1.5}>
@@ -388,7 +375,11 @@ export default function MaintLogFilterDialog({
             getOptionLabel={(row) => row.title}
             value={filters.workOrder}
             selectionMode="single"
-            request={tblWorkOrder.getAll}
+            request={() =>
+              tblWorkOrder.getAll({
+                select: { workOrderId: true, title: true },
+              })
+            }
             getRowId={(r) => r.workOrderId}
             onChange={(v) => setFilters((p) => ({ ...p, workOrder: v as any }))}
           />

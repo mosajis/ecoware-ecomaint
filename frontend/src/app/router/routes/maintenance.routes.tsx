@@ -1,11 +1,12 @@
 import RouteMeasurePointLog from "@/pages/maintenance/measurePointLog/MeasurePointLogRoute";
 import RouteCounterLog from "@/pages/maintenance/counterLog/CounterLogRoute";
+import RouteCounterUpdate from "@/pages/maintenance/counter/CounterRoute";
 import RouteMeasurePoint from "@/pages/maintenance/measurePoint/MeasurePointRoute";
-import routeComponentUnit from "@/pages/maintenance/componentUnit/ComponentUnitRoutes";
-import routeFunction from "@/pages/maintenance/function/FunctionRoutes";
-import routeMaintLog from "@/pages/maintenance/maintLog/MaintLogRoute";
-import routeWorkShop from "@/pages/maintenance/workShop/WorkShopRoutes";
-import routeCountersAlert from "@/pages/maintenance/counterAlert/CounterAlertRoutes";
+import RouteComponentUnit from "@/pages/maintenance/componentUnit/ComponentUnitRoutes";
+import RouteFunction from "@/pages/maintenance/function/FunctionRoutes";
+import RouteMaintLog from "@/pages/maintenance/maintLog/MaintLogRoute";
+import RouteWorkShop from "@/pages/maintenance/workShop/WorkShopRoutes";
+import RouteCounterAlert from "@/pages/maintenance/counterAlert/CounterAlertRoutes";
 import { lazy } from "react";
 import { createRoute, Outlet } from "@tanstack/react-router";
 import { protectedRoute } from "./protected.routes";
@@ -21,10 +22,6 @@ const PageWorkOrder = lazy(
   () => import("@/pages/maintenance/workOrder/WorkOrder"),
 );
 const PageRound = lazy(() => import("@/pages/maintenance/round/Round"));
-
-const PageCounterUpdate = lazy(
-  () => import("@/pages/maintenance/counter/Counter"),
-);
 
 // --- Maintenance root ---
 export const routeMaintenance = createRoute({
@@ -51,14 +48,6 @@ export const routeRound = createRoute({
   beforeLoad: () => ({ breadcrumb: "Round" }),
 });
 
-// --- Counter Update ---
-export const routeCounterUpdate = createRoute({
-  getParentRoute: () => routeMaintenance,
-  path: "counters",
-  component: () => <LazyRoute Component={PageCounterUpdate} />,
-  beforeLoad: () => ({ breadcrumb: "Counters" }),
-});
-
 export const routeComponentJob = createRoute({
   getParentRoute: () => routeMaintenance,
   path: "component-job",
@@ -67,17 +56,18 @@ export const routeComponentJob = createRoute({
 });
 // --- Maintenance root ---
 export const maintenanceRoutesTree = routeMaintenance.addChildren([
-  routeFunction,
-  routeComponentUnit,
+  RouteFunction,
+  RouteComponentUnit,
+  RouteMeasurePointLog,
+  RouteMeasurePoint,
+  RouteCounterLog,
+  RouteCounterUpdate,
+  RouteCounterAlert,
+  RouteMaintLog,
+  RouteWorkShop,
+
   routeComponentType,
   routeComponentJob,
   routeWorkOrder,
   routeRound,
-  RouteMeasurePointLog,
-  RouteMeasurePoint,
-  RouteCounterLog,
-  routeCounterUpdate,
-  routeMaintLog,
-  routeCountersAlert,
-  routeWorkShop,
 ]);

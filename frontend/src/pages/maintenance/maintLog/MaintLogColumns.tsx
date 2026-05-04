@@ -2,6 +2,8 @@ import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import { TypeTblMaintLog } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 
+export const getRowId = (row: TypeTblMaintLog) => row.maintLogId;
+
 export const columns: GridColDef<TypeTblMaintLog>[] = [
   {
     field: "component",

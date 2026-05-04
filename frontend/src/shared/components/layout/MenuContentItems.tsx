@@ -97,7 +97,7 @@ export const menuContentItems: MenuSection[] = [
       },
       {
         text: "Update Counter",
-        path: "/maintenance/counters",
+        path: "/maintenance/counter",
         id: "quick:updateCounter",
         icon: <UpdateRoundedIcon sx={iconStyle} />,
         permit: getPermit(1370).canView,
@@ -275,7 +275,7 @@ export const menuContentItems: MenuSection[] = [
         icon: <EngineeringRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "** Update Counter",
+        text: "Update Counter",
         path: "/maintenance/counters",
         id: "maint:counters",
         permit: getPermit(1370).canView,

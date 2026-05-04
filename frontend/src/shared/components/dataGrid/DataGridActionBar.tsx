@@ -25,14 +25,16 @@ export interface DataGridActionItem {
 interface DataGridActionBarProps {
   actions: DataGridActionItem[];
   size?: "small" | "medium" | "large";
+  children?: React.ReactNode;
 }
 
 const DataGridActionBar = ({
   actions,
   size = "small",
+  children,
 }: DataGridActionBarProps) => {
   return (
-    <Box display="flex" alignItems="center">
+    <Box display="flex" alignItems="center" gap={0.25}>
       {actions.map((action, index) => (
         <Fragment key={action.label}>
           {getPermit(action.elementId).canView && (
@@ -48,12 +50,17 @@ const DataGridActionBar = ({
               {action.label}
             </Button>
           )}
-
           {index < actions.length - 1 && (
             <Divider orientation="vertical" variant="middle" flexItem />
           )}
         </Fragment>
       ))}
+      {children && (
+        <Box display={"flex"} gap={0.25}>
+          <Divider orientation="vertical" variant="middle" flexItem />
+          {children}
+        </Box>
+      )}
     </Box>
   );
 };

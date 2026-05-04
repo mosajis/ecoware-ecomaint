@@ -1,9 +1,9 @@
 import Splitter from "@/shared/components/Splitter/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import CountersUpdate from "./CounterUpdate";
 import Checkbox from "@mui/material/Checkbox";
+import Actions from "./CounterActions";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback, useMemo, useState } from "react";
@@ -116,16 +116,10 @@ export default function PageCounterUpdate() {
           rowSelectionModel={rowSelectionModel}
           onRowSelectionModelChange={setRowSelectionModel}
           toolbarChildren={
-            <>
-              <Button
-                sx={{ m: 1 }}
-                onClick={() => setOpenForm(true)}
-                disabled={!selectedRowId}
-                variant={!selectedRow ? "text" : "contained"}
-                size="small"
-              >
-                Update Counter
-              </Button>
+            <Actions
+              selectedRowId={selectedRow}
+              onClickUpdate={() => setOpenForm(true)}
+            >
               <FormControlLabel
                 control={
                   <Checkbox
@@ -136,7 +130,7 @@ export default function PageCounterUpdate() {
                 }
                 label="Show All"
               />
-            </>
+            </Actions>
           }
         />
 
@@ -145,7 +139,7 @@ export default function PageCounterUpdate() {
           disableAdd
           disableEdit
           onDeleteClick={handleDelete}
-          label={label || "Counters Logs"}
+          label={label || "Counter Log"}
           loading={logLoading}
           rows={logRows}
           columns={logColumns}

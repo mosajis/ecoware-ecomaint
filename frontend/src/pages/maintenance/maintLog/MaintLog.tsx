@@ -3,13 +3,13 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import TabsComponent from "./MaintLogTabs";
 import Splitter from "@/shared/components/Splitter/Splitter";
 import MaintLogFollowDialog from "./MaintLogDialogFollow";
-import MaintLogActions from "./MaintLogActions";
 import MaintLogDialogPrint from "./MaintLogDialogPrint";
+import Actions from "./MaintLogActions";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback, useMemo, useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { useDialogs } from "@/shared/hooks/useDialogs";
-import { columns } from "./MaintLogColumns";
+import { columns, getRowId } from "./MaintLogColumns";
 import {
   tblMaintLog,
   TypeTblFollowStatus,
@@ -19,11 +19,9 @@ import MaintLogFilterDialog, {
   type MaintLogFilter,
 } from "./MaintLogDialogFilter";
 
-const getRowId = (row: TypeTblMaintLog) => row.maintLogId;
-
 export default function PageMaintLog() {
   const { dialogs, openDialog, closeDialog } = useDialogs({
-    filter: false,
+    filter: true,
     follow: false,
     print: false,
     reportWork: false,
@@ -101,15 +99,16 @@ export default function PageMaintLog() {
           showToolbar
           checkboxSelection
           disableRowSelectionOnClick
-          label="Maintenance Log"
+          disableRowNumber
+          disableEdit
+          disableDelete
+          label="Maint Log"
           elementId={1420}
           rowSelection
           rows={rows}
           columns={columns}
           loading={loading}
           onDoubleClick={handleEdit}
-          disableEdit
-          disableDelete
           onDeleteClick={handleDelete}
           onRowClick={handleRowClick}
           onRefreshClick={handleRefresh}
@@ -117,7 +116,7 @@ export default function PageMaintLog() {
           rowSelectionModel={selectionModel}
           onRowSelectionModelChange={handleSelectionChange}
           toolbarChildren={
-            <MaintLogActions
+            <Actions
               onFilter={() => openDialog("filter")}
               onFollow={() => openDialog("follow")}
               onPrint={() => openDialog("print")}

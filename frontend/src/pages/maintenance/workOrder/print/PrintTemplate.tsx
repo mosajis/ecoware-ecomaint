@@ -8,6 +8,7 @@ import { PrintFooter } from "@/shared/components/print/_components/PrintFooter";
 import { extractFullName } from "@/core/helper";
 import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
+import { atomRig } from "@/shared/atoms/general.atom";
 
 interface PrintProps {
   workOrders: TypeTblWorkOrderWithRels[];
@@ -18,17 +19,19 @@ interface PrintProps {
 const PrintTemplate = forwardRef<HTMLDivElement, PrintProps>(
   ({ workOrders, outputFormat, sortOrder }, ref) => {
     const user = useAtomValue(atomUser);
+    const rig = useAtomValue(atomRig);
+
     return (
       <PrintLayout
         ref={ref}
         header={
           <PrintHeader
-            location="o3"
+            location={rig?.name || "N/A"}
             title="Work Order Reports"
             totalLength={workOrders.length}
           />
         }
-        footer={<PrintFooter printedBy={extractFullName(user!)} />}
+        footer={<PrintFooter printedBy={extractFullName(user?.tblEmployee)} />}
         content={
           <PrintContent
             workOrders={workOrders}
