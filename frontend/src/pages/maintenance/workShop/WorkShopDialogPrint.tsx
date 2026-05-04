@@ -42,7 +42,8 @@ export default function WorkShopDialogPrint({
             include: {
               tblDiscipline: true,
               tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee: true,
-              tblEmployeeTblWorkShopClosedByIdTotblEmployee: true
+              tblEmployeeTblWorkShopClosedByIdTotblEmployee: true,
+              tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee: true,
             },
           }),
           tblWorkShopComponent.getAll({

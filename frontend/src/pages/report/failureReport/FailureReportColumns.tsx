@@ -72,7 +72,7 @@ export const columns: GridColDef<TypeTblFailureReports>[] = [
     field: "closedBy",
     headerName: "Closed By",
     flex: 1,
-    valueGetter: (_, row) => row?.tblUsers,
+    valueGetter: (_, row) => row?.tblEmployee,
     renderCell: ({ value }) => <CellFullName value={value} />,
   },
 

@@ -4,16 +4,15 @@ import { routeMaintenance } from "@/app/router/routes/maintenance.routes";
 import { createRoute, Outlet } from "@tanstack/react-router";
 import { lazy } from "react";
 
-// --- Component Unit ---
-const routeFunction = createRoute({
+const Route = createRoute({
   getParentRoute: () => routeMaintenance,
   path: "/function",
   component: () => <Outlet />,
   beforeLoad: () => ({ breadcrumb: "Functions" }),
 });
 
-const routeList = createRoute({
-  getParentRoute: () => routeFunction,
+const RouteList = createRoute({
+  getParentRoute: () => Route,
   path: "/",
   component: () => (
     <LazyRoute
@@ -23,8 +22,8 @@ const routeList = createRoute({
   beforeLoad: () => ({ breadcrumb: "List" }),
 });
 
-export const routeDetail = createDetailRoute({
-  parent: routeFunction,
+export const RouteDetail = createDetailRoute({
+  parent: Route,
   path: "$id",
   Component: () => (
     <LazyRoute
@@ -35,6 +34,6 @@ export const routeDetail = createDetailRoute({
   ),
 });
 
-routeFunction.addChildren([routeList, routeDetail]);
+Route.addChildren([RouteList, RouteDetail]);
 
-export default routeFunction;
+export default Route;

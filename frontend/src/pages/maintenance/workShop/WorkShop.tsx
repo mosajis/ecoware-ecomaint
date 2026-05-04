@@ -1,26 +1,24 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import Splitter from "@/shared/components/Splitter/Splitter";
-import AttachmentMap from "@/shared/tabs/attachmentMap/AttachmentMap";
 import WorkShopUpsert from "./WorkShopUpsert";
 import WorkShopActions from "./WorkShopActions";
 import WorkShopDialogComplete from "./WorkShopDialogClose";
 import WorkShopDialogOpen from "./WorkShopDialogOpen";
 import WorkShopDialogFilter, { WorkShopFilter } from "./WorkShopDialogFilter";
+import WorkShopTabs from "./WorkShopTabs";
 import WorkShopDialogPrint from "./WorkShopDialogPrint";
 import { useCallback, useMemo, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { columns, getRowId } from "./WorkShopColumns";
-import {
-  tblWorkShop,
-  tblWorkShopAttachment,
-  TypeTblWorkShop,
-} from "@/core/api/generated/api";
-import WorkShopTabs from "./WorkShopTabs";
+import { tblWorkShop, TypeTblWorkShop } from "@/core/api/generated/api";
+import { RouteDetail } from "./WorkShopRoutes";
+import { useRouter } from "@tanstack/react-router";
 
 export default function PageWorkShop() {
+  const router = useRouter();
+
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
-  const [mode, setMode] = useState<"create" | "update">("create");
   const [filter, setFilter] = useState<WorkShopFilter | null>(null);
 
   const [dialogs, setDialogs] = useState({
@@ -62,13 +60,13 @@ export default function PageWorkShop() {
 
   const handleCreate = useCallback(() => {
     setSelectedRowId(null);
-    setMode("create");
+
     openDialog("upsert");
   }, []);
 
   const handleEdit = useCallback((rowId: number) => {
     setSelectedRowId(rowId);
-    setMode("update");
+
     openDialog("upsert");
   }, []);
 
@@ -108,6 +106,19 @@ export default function PageWorkShop() {
     handleRefresh();
   };
 
+  const handleRowDoubleClick = useCallback(
+    (rowId: number) => {
+      const row = rows.find((i) => i.workShopId === rowId);
+      if (!row) return;
+      router.navigate({
+        to: RouteDetail.to,
+        params: { id: rowId },
+        search: { breadcrumb: row?.title },
+      });
+    },
+    [router, rows],
+  );
+
   return (
     <>
       <Splitter horizontal initialPrimarySize="65%">
@@ -123,7 +134,7 @@ export default function PageWorkShop() {
           onRefreshClick={handleRefresh}
           onAddClick={handleCreate}
           onEditClick={handleEdit}
-          onDoubleClick={handleEdit}
+          onDoubleClick={handleRowDoubleClick}
           onDeleteClick={handleDelete}
           onRowClick={handleRowClick}
           toolbarChildren={toolbar}
@@ -131,13 +142,12 @@ export default function PageWorkShop() {
         <WorkShopTabs workShopId={selectedRowId} label={selectedLabel} />
       </Splitter>
 
-      {/* <WorkShopUpsert
+      <WorkShopUpsert
         open={dialogs.upsert}
-        mode={mode}
         workShopId={selectedRowId}
         onClose={() => closeDialog("upsert")}
         onSuccess={handleSuccessUpsert}
-      /> */}
+      />
 
       <WorkShopDialogComplete
         open={dialogs.close}

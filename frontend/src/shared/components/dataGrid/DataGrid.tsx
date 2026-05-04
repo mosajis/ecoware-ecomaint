@@ -1,5 +1,5 @@
 import DataGridToolbar from "./DataGridToolbar";
-import { usePermission } from "@/shared/hooks/usePermison";
+import { getPermit } from "@/shared/hooks/usePermison";
 import { DataGrid as MuiDataGrid, GridRowId } from "@mui/x-data-grid";
 import {
   type DataGridProps,
@@ -70,7 +70,7 @@ export default function GenericDataGrid({
   elementId,
   ...rest
 }: CustomizedDataGridProps) {
-  let { canCreate, canUpdate, canDelete, canView, canExport } = usePermission(
+  let { canCreate, canUpdate, canDelete, canView, canExport } = getPermit(
     elementId!,
   );
 

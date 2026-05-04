@@ -9,7 +9,7 @@ import { mapToTree } from "@/shared/components/tree/TreeUtil";
 import { GenericTree } from "@/shared/components/tree/Tree";
 import { useDialogs } from "@/shared/hooks/useDialogs";
 import { useCallback, useState, useMemo } from "react";
-import { routeDetail } from "./FunctionRoutes";
+import { RouteDetail } from "./FunctionRoutes";
 import { columns, getItemName, getRowId } from "./FunctionColumn";
 import { tblFunction, TypeTblFunction } from "@/core/api/generated/api";
 import { PERMIT_ID } from "./FunctionPermit";
@@ -69,7 +69,7 @@ export default function PageFunction() {
       const row = rows.find((i) => i.functionId === rowId);
       if (!row) return;
       router.navigate({
-        to: routeDetail.to,
+        to: RouteDetail.to,
         params: { id: rowId },
         search: { breadcrumb: row?.funcNo },
       });
@@ -124,23 +124,23 @@ export default function PageFunction() {
         onSuccess={refetch}
       />
 
-<DialogInstallRemoveComponent
-  open={dialogs.install}
-  mode="install"
-  functionId={selectedRow?.functionId!}
-  compId={selectedRow?.compId}
-  onClose={() => closeDialog("install")}
-  onSuccess={refetch}
-/>
+      <DialogInstallRemoveComponent
+        open={dialogs.install}
+        mode="install"
+        functionId={selectedRow?.functionId!}
+        compId={selectedRow?.compId}
+        onClose={() => closeDialog("install")}
+        onSuccess={refetch}
+      />
 
-<DialogInstallRemoveComponent
-  open={dialogs.remove}
-  mode="remove"
-  functionId={selectedRow?.functionId!}
-  compId={selectedRow?.compId}
-  onClose={() => closeDialog("remove")}
-  onSuccess={refetch}
-/>
+      <DialogInstallRemoveComponent
+        open={dialogs.remove}
+        mode="remove"
+        functionId={selectedRow?.functionId!}
+        compId={selectedRow?.compId}
+        onClose={() => closeDialog("remove")}
+        onSuccess={refetch}
+      />
     </>
   );
 }

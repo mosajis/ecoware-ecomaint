@@ -106,10 +106,8 @@ export const formatFileSize = (bytes: number) => {
   return i === 0 ? `${bytes} ${sizes[i]}` : `${value.toFixed(2)} ${sizes[i]}`;
 };
 
-export const extractFullName = (employee: TypeTblEmployee) => {
-  const fullName = employee
-    ? [employee.firstName, employee.lastName].filter(Boolean).join(" ")
-    : "";
+export const extractFullName = (employee?: TypeTblEmployee | null) => {
+  const fullName = employee?.firstName + " " + employee?.lastName;
 
   return fullName;
 };

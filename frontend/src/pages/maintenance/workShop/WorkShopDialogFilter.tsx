@@ -10,10 +10,11 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { useState } from "react";
 import {
   tblDiscipline,
-  tblUser,
+  tblEmployee,
   TypeTblDiscipline,
-  TypeTblUser,
+  TypeTblEmployee,
 } from "@/core/api/generated/api";
+import { extractFullName } from "@/core/helper";
 
 export interface WorkShopFilter {
   AND?: any[];
@@ -23,8 +24,8 @@ type FiltersState = {
   statusMode: "open" | "closed" | "all";
   workShopNo: string;
   discipline: TypeTblDiscipline | null;
-  personInCharge: TypeTblUser | null;
-  personInChargeApprove: TypeTblUser | null;
+  personInCharge: TypeTblEmployee | null;
+  personInChargeApprove: TypeTblEmployee | null;
   awardingDateFrom: string;
   awardingDateTo: string;
   createdDateFrom: string;
@@ -85,13 +86,13 @@ export default function WorkShopDialogFilter({
 
     // Person In Charge
     if (filters.personInCharge) {
-      conditions.push({ personInChargeId: filters.personInCharge.userId });
+      conditions.push({ personInChargeId: filters.personInCharge.employeeId });
     }
 
     // Person In Charge Approve
     if (filters.personInChargeApprove) {
       conditions.push({
-        personInChargeApproveId: filters.personInChargeApprove.userId,
+        personInChargeApproveId: filters.personInChargeApprove.employeeId,
       });
     }
 
@@ -140,7 +141,16 @@ export default function WorkShopDialogFilter({
   };
 
   const handleClear = () => {
-    setFilters(getDefaultFilters());
+    const cleared = getDefaultFilters();
+
+    setFilters(cleared);
+
+    const prismaFilter: WorkShopFilter = {
+      AND: undefined,
+    };
+
+    onSubmit(prismaFilter);
+    onClose();
   };
 
   const set = <K extends keyof FiltersState>(key: K, value: FiltersState[K]) =>
@@ -165,6 +175,7 @@ export default function WorkShopDialogFilter({
         justifyContent="space-between"
         alignItems="center"
         fontWeight="bold"
+        marginBottom={1}
       >
         WorkShop State
         <RadioGroup
@@ -214,30 +225,30 @@ export default function WorkShopDialogFilter({
 
         {/* Person In Charge + Approve */}
         <Box display="grid" gridTemplateColumns="1fr 1fr" gap={1.5}>
-          <FieldAsyncSelectGrid<TypeTblUser>
+          <FieldAsyncSelectGrid<TypeTblEmployee>
             label="Person In Charge"
-            request={tblUser.getAll}
+            request={tblEmployee.getAll}
             value={filters.personInCharge}
             columns={[
-              { field: "uName", headerName: "Name", flex: 1 },
-              { field: "uUserName", headerName: "Username", flex: 1 },
+              { field: "firstName", headerName: "FirstName", flex: 1 },
+              { field: "lastName", headerName: "LastName", flex: 1 },
             ]}
-            getRowId={(r) => r.userId}
-            getOptionLabel={(r) => r.userName ?? ""}
-            onChange={(v) => set("personInCharge", v as TypeTblUser | null)}
+            getRowId={(r) => r.employeeId}
+            getOptionLabel={(r) => extractFullName(r) ?? ""}
+            onChange={(v) => set("personInCharge", v as TypeTblEmployee | null)}
           />
-          <FieldAsyncSelectGrid<TypeTblUser>
+          <FieldAsyncSelectGrid<TypeTblEmployee>
             label="ToolPusher"
-            request={tblUser.getAll}
+            request={tblEmployee.getAll}
             value={filters.personInChargeApprove}
             columns={[
-              { field: "uName", headerName: "Name", flex: 1 },
-              { field: "uUserName", headerName: "Username", flex: 1 },
+              { field: "firstName", headerName: "FirstName", flex: 1 },
+              { field: "lastName", headerName: "LastName", flex: 1 },
             ]}
-            getRowId={(r) => r.userId}
-            getOptionLabel={(r) => r.userName ?? ""}
+            getRowId={(r) => r.employeeId}
+            getOptionLabel={(r) => extractFullName(r) ?? ""}
             onChange={(v) =>
-              set("personInChargeApprove", v as TypeTblUser | null)
+              set("personInChargeApprove", v as TypeTblEmployee | null)
             }
           />
         </Box>

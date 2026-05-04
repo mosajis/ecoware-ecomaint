@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { columns, getRowId } from "./JobTriggerColumns";
 import { useDialogs } from "@/shared/hooks/useDialogs";
 import { effectTblCompTypeJobTrigger } from "@/core/api/apiEffects";
-import { usePermission } from "@/shared/hooks/usePermison";
+import { getPermit } from "@/shared/hooks/usePermison";
 
 export default function PageJobTrigger() {
   const [_loading, setLoading] = useState(false);
@@ -68,19 +68,21 @@ export default function PageJobTrigger() {
         });
     }
   };
-  const permit = usePermission(1110)
+  const permit = getPermit(1110);
 
   return (
-    <Box height={'100%'} display={'flex'} flexDirection={'column'} gap={1.5}>
-      {permit.canView && <Button
-        onClick={onFireTrigger}
-        variant="outlined"
-        sx={{width: 'max-content'}}
-        loading={_loading}
-        disabled={loading || _loading || !selectedRowId}
-      >
-        Fire Trigger
-      </Button>}
+    <Box height={"100%"} display={"flex"} flexDirection={"column"} gap={1.5}>
+      {permit.canView && (
+        <Button
+          onClick={onFireTrigger}
+          variant="outlined"
+          sx={{ width: "max-content" }}
+          loading={_loading}
+          disabled={loading || _loading || !selectedRowId}
+        >
+          Fire Trigger
+        </Button>
+      )}
       <Splitter initialPrimarySize="40%" resetOnDoubleClick>
         <CustomizedDataGrid
           showToolbar

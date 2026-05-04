@@ -42,7 +42,6 @@ export default function ComponentUnitActions({
     },
     {
       disabled: !isSelected,
-
       label: "WorkShop",
       icon: <EngineeringRounded />,
       onClick: onWorkShop,

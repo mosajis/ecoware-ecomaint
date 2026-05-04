@@ -1,28 +1,24 @@
-import TabsComponent from "./FunctionTabs";
+import TabsComponent from "./WorkShopTabs";
 import Spinner from "@/shared/components/Spinner";
 import { useEffect, useState } from "react";
-import { RouteDetail } from "./FunctionRoutes";
-import { tblFunction, TypeTblFunction } from "@/core/api/generated/api";
+import { RouteDetail } from "./WorkShopRoutes";
+import { tblWorkShop, TypeTblWorkShop } from "@/core/api/generated/api";
 
 const FunctionDetail = () => {
   const { id } = RouteDetail.useParams();
   const { breadcrumb } = RouteDetail.useSearch();
 
   const [loading, setLoading] = useState(true);
-  const [recordFunction, setFunction] = useState<TypeTblFunction | null>(null);
+  const [data, setData] = useState<TypeTblWorkShop | null>(null);
 
   useEffect(() => {
     if (!id) return;
 
     setLoading(true);
 
-    tblFunction
-      .getById(id, {
-        include: {
-          tblComponentUnit: true,
-        },
-      })
-      .then(setFunction)
+    tblWorkShop
+      .getById(id)
+      .then(setData)
       .finally(() => {
         setLoading(false);
       });
@@ -30,7 +26,7 @@ const FunctionDetail = () => {
 
   if (loading) return <Spinner />;
 
-  return <TabsComponent label={breadcrumb} recordFunction={recordFunction!} />;
+  return <TabsComponent label={breadcrumb} workShopId={data?.workShopId} />;
 };
 
 export default FunctionDetail;

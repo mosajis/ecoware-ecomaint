@@ -7,7 +7,7 @@ export const getRowId = (row: TypeTblWorkShop) => row.workShopId;
 
 export const columns: GridColDef<TypeTblWorkShop>[] = [
   {
-    field: "workShopId",
+    field: "workShopNo",
     headerName: "No",
     width: 60,
   },
@@ -32,14 +32,14 @@ export const columns: GridColDef<TypeTblWorkShop>[] = [
     field: "discipline",
     headerName: "Discipline",
     flex: 1,
-    // @ts-ignore
     valueGetter: (_, row) => row?.tblDiscipline?.name,
   },
   {
     field: "personInCharge",
     headerName: "Person In Charge",
     flex: 1,
-    valueGetter: (_, row) => row?.tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee,
+    valueGetter: (_, row) =>
+      row?.tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee,
     renderCell: ({ value }) => <CellFullName value={value} />,
   },
   {

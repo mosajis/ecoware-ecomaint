@@ -1,6 +1,6 @@
 import DOMPurify from "dompurify";
 import { TypeTblWorkShop } from "@/core/api/generated/api";
-import { formatDateTime, val } from "@/core/helper";
+import { extractFullName, formatDateTime, val } from "@/core/helper";
 
 type Props = {
   workShop: TypeTblWorkShop;
@@ -14,31 +14,17 @@ export const PrintTable = ({ workShop }: Props) => {
     (workShop.followDesc as string) ?? "",
   );
 
-  const toolPusherFirstName =
-    workShop.tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers
-      ?.tblEmployeeTblUsersEmployeeIdTotblEmployee?.firstName;
-  const toolPusherLastName =
-    workShop.tblUsersTblWorkShopPersonInChargeApproveIdTotblUsers
-      ?.tblEmployeeTblUsersEmployeeIdTotblEmployee?.lastName;
-  const toolPusherFullName = toolPusherFirstName + " " + toolPusherLastName;
+  const toolPusher = extractFullName(
+    workShop.tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee,
+  );
 
-  const personInCharrgeFirstName =
-    workShop.tblUsersTblWorkShopPersonInChargeIdTotblUsers
-      ?.tblEmployeeTblUsersEmployeeIdTotblEmployee?.firstName;
-  const personInCharrgeLastName =
-    workShop.tblUsersTblWorkShopPersonInChargeIdTotblUsers
-      ?.tblEmployeeTblUsersEmployeeIdTotblEmployee?.lastName;
-  const personInCharrgeFullName =
-    personInCharrgeFirstName + " " + personInCharrgeLastName;
+  const personInCharrge = extractFullName(
+    workShop.tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee,
+  );
 
-  const closeByFirstName =
-    workShop.tblUsersTblWorkShopClosedByIdTotblUsers
-      ?.tblEmployeeTblUsersEmployeeIdTotblEmployee?.firstName;
-  const closeByLastName =
-    workShop.tblUsersTblWorkShopClosedByIdTotblUsers
-      ?.tblEmployeeTblUsersEmployeeIdTotblEmployee?.lastName;
-
-  const closeByFullName = closeByFirstName + " " + closeByLastName;
+  const closeBy = extractFullName(
+    workShop.tblEmployeeTblWorkShopClosedByIdTotblEmployee,
+  );
 
   // @ts-ignore
   const components = workShop.tblWorkShopComponents ?? [];
@@ -85,12 +71,12 @@ export const PrintTable = ({ workShop }: Props) => {
             <td className="print__cell print__label">Person In Charge</td>
             <td className="print__cell">
               {/* @ts-ignore */}
-              {val(personInCharrgeFullName)}
+              {val(personInCharrge)}
             </td>
             <td className="print__cell print__label">Toolpusher</td>
             <td className="print__cell">
               {/* @ts-ignore */}
-              {val(toolPusherFullName)}
+              {val(toolPusher)}
             </td>
           </tr>
 
@@ -104,7 +90,7 @@ export const PrintTable = ({ workShop }: Props) => {
             <td className="print__cell print__label">Closed By</td>
             <td className="print__cell">
               {/* @ts-ignore */}
-              {val(closeByFullName)}
+              {val(closeBy)}
             </td>
           </tr>
         </tbody>
