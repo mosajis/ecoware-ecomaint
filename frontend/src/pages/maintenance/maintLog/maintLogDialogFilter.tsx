@@ -26,7 +26,7 @@ import {
   TypeTblEmployee,
   tblEmployee,
 } from "@/core/api/generated/api";
-import { extractFullName } from "@/core/helper";
+import { daysAgo, extractFullName } from "@/core/helper";
 
 export interface MaintLogFilter {
   AND?: any[];
@@ -77,8 +77,8 @@ export default function MaintLogFilterDialog({
       jobCode: "",
       doneFrom: "",
       doneTo: "",
-      reportFrom: "",
-      reportTo: "",
+      reportFrom: daysAgo(7).toISOString(),
+      reportTo: new Date().toISOString(),
       // unexpected: 0,
       control: false,
     };
@@ -251,8 +251,23 @@ export default function MaintLogFilterDialog({
   };
 
   const handleClearFilter = () => {
-    setFilters(deserializeFilter(null));
-    onSubmit(null);
+    const clearedFilters = deserializeFilter(null);
+    setFilters(clearedFilters);
+
+    // ✅ Default filter رو ساخت و فرستاد (نه null)
+    const defaultFilter: MaintLogFilter = {
+      AND: [
+        {
+          reportedDate: {
+            gte: new Date(daysAgo(7)),
+            lte: new Date(),
+          },
+        },
+      ],
+    };
+
+    onSubmit(defaultFilter);
+    onClose();
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -266,7 +281,7 @@ export default function MaintLogFilterDialog({
       title="Maint Log Filter"
       maxWidth="sm"
       submitText="Ok"
-      cancelText="Clear"
+      cancelText="Default"
       onClose={onClose}
       onSubmit={handleSubmit}
       onCancelClick={handleClearFilter}
@@ -363,7 +378,7 @@ export default function MaintLogFilterDialog({
           </Box>
         </Box>
         <Box display={"flex"} flexDirection={"column"} gap={1.5}>
-          <FieldAsyncSelectGrid
+          {/* <FieldAsyncSelectGrid
             columns={[
               {
                 field: "title",
@@ -377,12 +392,13 @@ export default function MaintLogFilterDialog({
             selectionMode="single"
             request={() =>
               tblWorkOrder.getAll({
+                
                 select: { workOrderId: true, title: true },
               })
             }
             getRowId={(r) => r.workOrderId}
             onChange={(v) => setFilters((p) => ({ ...p, workOrder: v as any }))}
-          />
+          /> */}
           <FieldAsyncSelectGrid<TypeTblComponentUnit>
             columns={[{ field: "compNo", headerName: "Component", flex: 1 }]}
             label="Component"

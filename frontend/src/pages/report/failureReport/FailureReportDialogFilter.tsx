@@ -160,7 +160,7 @@ export default function FailureReportFilterDialog({
       open={open}
       title="Filter"
       submitText="Ok"
-      cancelText="Clear"
+      cancelText="Default"
       onClose={onClose}
       onSubmit={(e) => {
         e.preventDefault();

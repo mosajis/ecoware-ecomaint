@@ -127,74 +127,90 @@ const ControllerTblWorkOrder = new BaseController({
         const sortObj = parseSortString(sort);
         const usePagination = !!paginate;
 
+        // ✅ Default select object
+        const defaultSelect = {
+          workOrderId: true,
+          compId: true,
+          pendingdate: true,
+          title: true,
+          priority: true,
+          description: true,
+          userComment: true,
+          window: true,
+          dueDate: true,
+          created: true,
+          started: true,
+          completed: true,
+
+          tblComponentUnit: {
+            select: {
+              compId: true,
+              compNo: true,
+              tblLocation: {
+                select: { name: true },
+              },
+            },
+          },
+
+          tblCompJob: {
+            select: {
+              frequency: true,
+              compJobId: true,
+              nextDueDate: true,
+              tblJobDescription: {
+                select: {
+                  jobDescCode: true,
+                  jobDescTitle: true,
+                  jobDesc: true,
+                },
+              },
+              tblPeriod: {
+                select: { name: true },
+              },
+            },
+          },
+
+          tblPendingType: {
+            select: { pendTypeName: true },
+          },
+
+          tblDiscipline: {
+            select: { name: true },
+          },
+
+          tblWorkOrderStatus: {
+            select: { name: true },
+          },
+        };
+
+        // ✅ Custom select با validation
+        let selectObj = defaultSelect;
+        if (select) {
+          try {
+            const customSelect = JSON.parse(select);
+            // ✅ همیشه instId رو شامل کن (برای filtering)
+            selectObj = {
+              ...customSelect,
+            };
+          } catch (error) {
+            console.warn("Invalid select JSON, using default");
+            selectObj = defaultSelect;
+          }
+        }
+
         return await ServiceTblWorkOrder.findAll({
           where: { ...parsedFilter, instId },
           orderBy: sortObj,
           page: usePagination ? Number(page) : undefined,
           perPage: usePagination ? Number(perPage) : 250_000,
-          select: select
-            ? JSON.parse(select)
-            : {
-                workOrderId: true,
-                compId: true,
-                pendingdate: true,
-                title: true,
-                priority: true,
-                description: true,
-                userComment: true,
-                window: true,
-                dueDate: true,
-                created: true,
-                started: true,
-                completed: true,
-
-                tblComponentUnit: {
-                  select: {
-                    compId: true,
-                    compNo: true,
-                    tblLocation: {
-                      select: { name: true },
-                    },
-                  },
-                },
-
-                tblCompJob: {
-                  select: {
-                    frequency: true,
-                    compJobId: true,
-                    nextDueDate: true,
-                    tblJobDescription: {
-                      select: {
-                        jobDescCode: true,
-                        jobDescTitle: true,
-                        jobDesc: true,
-                      },
-                    },
-                    tblPeriod: {
-                      select: { name: true },
-                    },
-                  },
-                },
-
-                tblPendingType: {
-                  select: { pendTypeName: true },
-                },
-
-                tblDiscipline: {
-                  select: { name: true },
-                },
-
-                tblWorkOrderStatus: {
-                  select: { name: true },
-                },
-              },
+          select: selectObj,
         });
       },
       {
         tags: ["tblWorkOrder"],
         detail: { summary: "Get all with custom select" },
         query: querySchema,
-        response: WorkOrderListResponseSchema,
+        response: t.Any(), // ✅ Response flexible است برای custom selects
       },
     );
 

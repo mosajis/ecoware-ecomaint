@@ -348,7 +348,7 @@ export default function WorkOrderFilterDialog({
       onClose={handleOnClose}
       onSubmit={handleSubmit}
       submitText="Ok"
-      cancelText="Clear"
+      cancelText="Default"
       onCancelClick={handleClearFilter} // 🔹 دکمه Clear فیلترها رو پاک می‌کنه
     >
       <Box display="flex" gap={1.5} flexDirection="column">

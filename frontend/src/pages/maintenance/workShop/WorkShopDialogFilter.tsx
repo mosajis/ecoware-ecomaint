@@ -161,7 +161,7 @@ export default function WorkShopDialogFilter({
       open={open}
       title="Filter WorkShop"
       submitText="Ok"
-      cancelText="Clear"
+      cancelText="Default"
       onClose={onClose}
       onSubmit={(e) => {
         e.preventDefault();

@@ -43,7 +43,7 @@ export default function PageMaintLog() {
   }, [filter]);
 
   const { rows, loading, handleRefresh, optimisticUpdate, handleDelete } =
-    useDataGrid(getAll, tblMaintLog.deleteById, "maintLogId");
+    useDataGrid(getAll, tblMaintLog.deleteById, "maintLogId", !dialogs.filter);
 
   const selectedRows = useMemo<TypeTblMaintLog[]>(() => {
     const hasId = (id: number) =>

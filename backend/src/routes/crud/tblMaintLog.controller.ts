@@ -94,7 +94,7 @@ const ControllerTblMaintLog = new BaseController({
   extend: (app) => {
     app.get(
       "/",
-      async ({ query }) => {
+      async ({ query, headers }) => {
         const {
           page = 1,
           perPage = 20,
@@ -103,12 +103,18 @@ const ControllerTblMaintLog = new BaseController({
           paginate = false,
         } = query;
 
+        const instId = Number(headers["x-inst-id"] || 0);
+
+        if (!instId) {
+          throw new Error("Instance ID is required");
+        }
+
         const parsedFilter = filter ? JSON.parse(filter) : {};
         const sortObj = parseSortString(sort);
         const usePagination = false;
 
         return ServiceTblMaintLog.findAll({
-          where: parsedFilter,
+          where: { ...parsedFilter, instId },
           orderBy: sortObj,
           page: usePagination ? Number(page) : undefined,
           perPage: usePagination ? Number(perPage) : 250_000,
