@@ -1,18 +1,16 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { columns, getRowId } from "./CountersLogsColumns";
-import { useCallback } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import {
-  tblCompCounterLog,
-  TypeTblCompCounterLog,
-} from "@/core/api/generated/api";
+import { useCallback } from "react";
+import { tblCompMeasurePointLog } from "@/core/api/generated/api";
+import { columns, getRowId } from "./MeasurePointLogColumn";
 
-export default function PageCounterLog() {
+function PageMeasurePointsLogs() {
   const getAll = useCallback(
     () =>
-      tblCompCounterLog.getAll({
+      tblCompMeasurePointLog.getAll({
         include: {
-          tblCompCounter: {
+          tblUnit: true,
+          tblCompMeasurePoint: {
             include: {
               tblCounterType: true,
               tblComponentUnit: {
@@ -26,25 +24,27 @@ export default function PageCounterLog() {
       }),
     [],
   );
+  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
+    getAll,
+    tblCompMeasurePointLog.deleteById,
+    "compMeasurePointId",
+  );
 
-  const { rows, loading, handleRefresh, handleDelete } =
-    useDataGrid<TypeTblCompCounterLog>(
-      getAll,
-      tblCompCounterLog.deleteById,
-      "compCounterLogId",
-    );
   return (
     <CustomizedDataGrid
       showToolbar
       disableAdd
       disableEdit
-      label="Counter Logs"
+      onDeleteClick={handleDelete}
+      label="Measure Point Log"
+      elementId={1410}
       rows={rows}
       columns={columns}
       loading={loading}
-      onDeleteClick={handleDelete}
       onRefreshClick={handleRefresh}
       getRowId={getRowId}
     />
   );
 }
+
+export default PageMeasurePointsLogs;

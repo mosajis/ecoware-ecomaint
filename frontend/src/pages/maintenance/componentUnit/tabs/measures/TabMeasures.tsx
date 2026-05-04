@@ -2,7 +2,7 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import Upsert from "./TabMeasuresUpsert";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import Button from "@mui/material/Button";
-import MeasurePointsTrend from "@/pages/maintenance/measurePoints/MeasurePointsTrend";
+import MeasurePointsTrend from "@/pages/maintenance/measurePoint/MeasurePointTrend";
 import { useCallback, useMemo, useState } from "react";
 import { GridColDef, GridRowSelectionModel } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";

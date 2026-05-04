@@ -123,7 +123,7 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           attachmentTypeId: values?.attachmentType?.attachmentTypeId || 0,
           isUserAttachment: values.isUserAttachment,
           file: values.file,
-          createdUserId: user?.userId as number,
+          createdEmployeeId: user?.tblEmployee?.employeeId as number,
         };
 
         let result: TypeTblAttachment | undefined;
@@ -202,7 +202,7 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
                 onChange={field.onChange}
                 label="Attachment Type *"
                 request={tblAttachmentType.getAll}
-                getOptionLabel={(row) => row.name}
+                getOptionLabel={(row) => row.name || ""}
                 error={!!fieldState.error?.message}
                 helperText={fieldState.error?.message}
               />

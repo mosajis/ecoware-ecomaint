@@ -2,8 +2,8 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import Splitter from "@/shared/components/Splitter/Splitter";
 import Button from "@mui/material/Button";
-import MeasurePointsUpdate from "./MeasurePointsUpdate";
-import MeasurePointsTrend from "./MeasurePointsTrend";
+import MeasurePointsUpdate from "./MeasurePointUpdate";
+import MeasurePointsTrend from "./MeasurePointTrend";
 
 import { GridColDef, GridRowSelectionModel } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
@@ -11,7 +11,7 @@ import { useCallback, useMemo, useState } from "react";
 import {
   columns as logColumns,
   getRowId as logGetRowId,
-} from "../measurePointsLogs/MeasurePointsLogsColumns";
+} from "../measurePointLog/MeasurePointLogColumn";
 import {
   tblCompMeasurePoint,
   tblCompMeasurePointLog,

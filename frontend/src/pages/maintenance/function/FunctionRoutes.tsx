@@ -14,11 +14,7 @@ const Route = createRoute({
 const RouteList = createRoute({
   getParentRoute: () => Route,
   path: "/",
-  component: () => (
-    <LazyRoute
-      Component={lazy(() => import("@/pages/maintenance/function/Function"))}
-    />
-  ),
+  component: () => <LazyRoute Component={lazy(() => import("./Function"))} />,
   beforeLoad: () => ({ breadcrumb: "List" }),
 });
 
@@ -26,11 +22,7 @@ export const RouteDetail = createDetailRoute({
   parent: Route,
   path: "$id",
   Component: () => (
-    <LazyRoute
-      Component={lazy(
-        () => import("@/pages/maintenance/function/FunctionDetail"),
-      )}
-    />
+    <LazyRoute Component={lazy(() => import("./FunctionDetail"))} />
   ),
 });
 

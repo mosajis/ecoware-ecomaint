@@ -1,13 +1,13 @@
 import { LazyRoute } from "@/app/router/routes/_components/lazyRoute";
-import { generalRoute } from "@/app/router/routes/general.routes";
+import { generalRoute } from "@/pages/general/GeneralRoutes";
 import { createRoute } from "@tanstack/react-router";
 import { lazy } from "react";
 
-const Page = lazy(() => import("./Attachment"));
-
-export default createRoute({
+const Route = createRoute({
   getParentRoute: () => generalRoute,
   path: "attachment",
-  component: () => <LazyRoute Component={Page} />,
+  component: () => <LazyRoute Component={lazy(() => import("./Attachment"))} />,
   beforeLoad: () => ({ breadcrumb: "Attachment" }),
 });
+
+export default Route;

@@ -11,7 +11,7 @@ import RouteJobDescription from "@/pages/general/jobDescription/JobDescriptionRo
 import RouteJobTrigger from "@/pages/general/jobTrigger/JobTriggerRoute";
 import RouteAttachment from "@/pages/general/attachment/AttachmentRoute";
 import { createRoute, Outlet } from "@tanstack/react-router";
-import { protectedRoute } from "./protected.routes";
+import { protectedRoute } from "../../app/router/routes/protected.routes";
 
 // --- General parent route ---
 export const generalRoute = createRoute({

@@ -2,7 +2,7 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import AttachmentUpsert from "./AttachmentUpsert";
 import { useCallback, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { tblAttachment } from "@/core/api/generated/api";
+import { tblAttachment, tblEmployee } from "@/core/api/generated/api";
 import { useDialogs } from "@/shared/hooks/useDialogs";
 import { columns, getRowId } from "./AttachmentColumns";
 
@@ -14,7 +14,10 @@ export default function PageAttachment() {
   });
 
   const getAll = useCallback(
-    () => tblAttachment.getAll({ include: { tblAttachmentType: true } }),
+    () =>
+      tblAttachment.getAll({
+        include: { tblAttachmentType: true, tblEmployee: true },
+      }),
     [],
   );
   // === useDataGrid ===

@@ -1,8 +1,9 @@
 import routeComponentUnit from "@/pages/maintenance/componentUnit/ComponentUnitRoutes";
+import RouteMeasurePointLog from "@/pages/maintenance/measurePointLog/MeasurePointLogRoute";
 import routeFunction from "@/pages/maintenance/function/FunctionRoutes";
 import routeMaintLog from "@/pages/maintenance/maintLog/MaintLogRoute";
 import routeWorkShop from "@/pages/maintenance/workShop/WorkShopRoutes";
-import routeCountersAlert from "@/pages/maintenance/countersAlert/CountersAlertRoutes";
+import routeCountersAlert from "@/pages/maintenance/counterAlert/CounterAlertRoutes";
 import { lazy } from "react";
 import { createRoute, Outlet } from "@tanstack/react-router";
 import { protectedRoute } from "./protected.routes";
@@ -19,17 +20,14 @@ const PageWorkOrder = lazy(
 );
 const PageRound = lazy(() => import("@/pages/maintenance/round/Round"));
 const PageMeasurePoints = lazy(
-  () => import("@/pages/maintenance/measurePoints/MeasurePoints"),
-);
-const PageMeasurePointsLogs = lazy(
-  () => import("@/pages/maintenance/measurePointsLogs/MeasurePointsLogs"),
+  () => import("@/pages/maintenance/measurePoint/MeasurePoint"),
 );
 const PageCountersLog = lazy(
-  () => import("@/pages/maintenance/countersLogs/CountersLogs"),
+  () => import("@/pages/maintenance/counterLog/CounterLog"),
 );
 
 const PageCounterUpdate = lazy(
-  () => import("@/pages/maintenance/counters/Counters"),
+  () => import("@/pages/maintenance/counter/Counter"),
 );
 
 // --- Maintenance root ---
@@ -64,12 +62,6 @@ export const routeMeasurePoints = createRoute({
   component: () => <LazyRoute Component={PageMeasurePoints} />,
   beforeLoad: () => ({ breadcrumb: "Measure Points" }),
 });
-export const routeMeasurePointsLogs = createRoute({
-  getParentRoute: () => routeMaintenance,
-  path: "measure-points-logs",
-  component: () => <LazyRoute Component={PageMeasurePointsLogs} />,
-  beforeLoad: () => ({ breadcrumb: "Measure Points Logs" }),
-});
 
 // --- Counters & Maint Logs ---
 export const routeCountersLog = createRoute({
@@ -101,8 +93,7 @@ export const maintenanceRoutesTree = routeMaintenance.addChildren([
   routeComponentJob,
   routeWorkOrder,
   routeRound,
-  routeMeasurePoints,
-  routeMeasurePointsLogs,
+  RouteMeasurePointLog,
   routeCountersLog,
   routeCounterUpdate,
   routeMaintLog,

@@ -1,8 +1,9 @@
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import CellDownload from "@/shared/components/dataGrid/cells/CellDownload";
 import CellFileSize from "@/shared/components/dataGrid/cells/CellFileSize";
-import { TypeTblAttachment } from "@/core/api/generated/api";
+import { tblEmployee, TypeTblAttachment } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
+import CellFullName from "@/shared/components/dataGrid/cells/CellFullName";
 
 export const getRowId = (row: TypeTblAttachment) => row.attachmentId;
 
@@ -29,15 +30,22 @@ export const columns: GridColDef<TypeTblAttachment>[] = [
     renderCell: ({ value }) => <CellFileSize value={value} />,
   },
   {
-    field: "isUserAttachment",
-    headerName: "User Attachment",
-    type: "boolean",
-    width: 135,
+    field: "employee",
+    headerName: "Employee",
+
+    valueGetter: (_, row) => row.tblEmployee,
+    renderCell: ({ value }) => <CellFullName value={value} />,
   },
   {
     field: "createdAt",
     headerName: "Created At",
     width: 150,
     renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+  {
+    field: "isUserAttachment",
+    headerName: "User Attachment",
+    type: "boolean",
+    width: 135,
   },
 ];

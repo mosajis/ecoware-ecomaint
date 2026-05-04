@@ -2,16 +2,16 @@ import Splitter from "@/shared/components/Splitter/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import CountersUpdate from "./CountersUpdate";
+import CountersUpdate from "./CounterUpdate";
 import Checkbox from "@mui/material/Checkbox";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback, useMemo, useState } from "react";
-import { columns, getRowId } from "./CountersColumns";
+import { columns, getRowId } from "./CounterColumns";
 import {
   columns as logColumns,
   getRowId as logGetRowId,
-} from "../countersLogs/CountersLogsColumns";
+} from "../counterLog/CounterLogColumns";
 import {
   tblCompCounter,
   tblCompCounterLog,

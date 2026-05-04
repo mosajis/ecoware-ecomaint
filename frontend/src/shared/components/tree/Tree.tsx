@@ -10,7 +10,7 @@ import {
 } from "@headless-tree/core";
 
 import "./tree.css";
-import { usePermission } from "@/shared/hooks/usePermison";
+import { getPermit } from "@/shared/hooks/usePermison";
 
 interface GenericTreeProps<T> {
   label?: string;
@@ -41,7 +41,7 @@ export function GenericTree<T>({
   loading = false,
   elementId,
 }: GenericTreeProps<T>) {
-  let { canCreate, canUpdate, canDelete, canView, canExport } = usePermission(
+  let { canCreate, canUpdate, canDelete, canView, canExport } = getPermit(
     elementId!,
   );
 
