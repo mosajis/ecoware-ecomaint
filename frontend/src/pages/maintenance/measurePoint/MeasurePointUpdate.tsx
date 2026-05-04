@@ -32,6 +32,7 @@ type Props = {
 function MeasurePointsUpdate({ open, recordId, onClose, onSuccess }: Props) {
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [unitId, setUnitId] = useState<number | null>(null);
 
   const defaultValues: CompMeasurePointCurrentFormValues = useMemo(
     () => ({
@@ -51,25 +52,29 @@ function MeasurePointsUpdate({ open, recordId, onClose, onSuccess }: Props) {
     defaultValues,
   });
 
-  /* ================= Fetch data (edit) ================= */
   const fetchData = useCallback(async () => {
     if (!recordId) {
       reset(defaultValues);
+      setUnitId(null);
       return;
     }
 
     setLoadingInitial(true);
     try {
-      const res = await tblCompMeasurePoint.getById(recordId);
+      const res = await tblCompMeasurePoint.getById(recordId, {
+        include: { tblUnit: true },
+      });
       if (res) {
         reset({
           currentValue: res.currentValue ?? 0,
           currentDate: res.currentDate ?? new Date(),
         });
+        setUnitId(res.tblUnit?.unitId ?? null); // ⚡ ذخیرهٔ واحد
       }
     } catch (err) {
       console.error("Failed to fetch CompMeasurePoint", err);
       reset(defaultValues);
+      setUnitId(null);
     } finally {
       setLoadingInitial(false);
     }
@@ -81,7 +86,6 @@ function MeasurePointsUpdate({ open, recordId, onClose, onSuccess }: Props) {
 
   const isDisabled = loadingInitial || submitting;
 
-  /* ================= Submit ================= */
   const onSubmit = useCallback(
     async (values: CompMeasurePointCurrentFormValues) => {
       if (!recordId) return;
@@ -89,8 +93,16 @@ function MeasurePointsUpdate({ open, recordId, onClose, onSuccess }: Props) {
       setSubmitting(true);
       try {
         const result = await tblCompMeasurePoint.update(recordId, {
+          tblUnit: {
+            connect: {
+              unitId: unitId || 0,
+            },
+          },
           currentValue: values.currentValue,
-          currentDate: values.currentDate.toString(),
+          currentDate:
+            values.currentDate instanceof Date
+              ? values.currentDate.toISOString()
+              : values.currentDate,
         });
 
         onSuccess(result);
@@ -101,7 +113,7 @@ function MeasurePointsUpdate({ open, recordId, onClose, onSuccess }: Props) {
         setSubmitting(false);
       }
     },
-    [recordId, onSuccess, onClose],
+    [recordId, unitId, onSuccess, onClose],
   );
 
   return (

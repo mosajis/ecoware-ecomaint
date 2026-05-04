@@ -10,7 +10,7 @@ import {
 import { LOCAL_STORAGE } from "@/const";
 import { atomUser } from "@/pages/auth/auth.atom";
 import { atomUserGroupElements } from "./logic.atom";
-import { atomInstallations } from "@/shared/atoms/general.atom";
+import { atomInstallations, atomRig } from "@/shared/atoms/general.atom";
 import Spinner from "@/shared/components/Spinner";
 
 type Props = {
@@ -24,6 +24,7 @@ const AppLogic = ({ children }: Props) => {
 
   const [, setUserGroupElements] = useAtom(atomUserGroupElements);
   const [, setInstallations] = useAtom(atomInstallations);
+  const [, setRig] = useAtom(atomRig);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -79,6 +80,8 @@ const AppLogic = ({ children }: Props) => {
       if (permissions) setUserGroupElements(permissions);
       if (installations) setInstallations(installations);
 
+      setRig(installations?.[0] || null);
+
       localStorage.setItem(LOCAL_STORAGE.IS_PERSIST, "1");
     } catch (err) {
       console.error(err);
@@ -86,7 +89,12 @@ const AppLogic = ({ children }: Props) => {
     } finally {
       setLoading(false);
     }
-  }, [loadPermissions, loadInstallations, setUserGroupElements, setInstallations]);
+  }, [
+    loadPermissions,
+    loadInstallations,
+    setUserGroupElements,
+    setInstallations,
+  ]);
 
   useEffect(() => {
     if (!isPersist) {

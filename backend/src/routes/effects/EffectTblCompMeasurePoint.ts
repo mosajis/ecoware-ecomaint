@@ -3,6 +3,7 @@ import type { Prisma, TblCompMeasurePoint } from "orm/generated/prisma/client";
 export async function effectCompMeasurePoint(
   tx: Prisma.TransactionClient,
   measurePoint: TblCompMeasurePoint,
+  instId = 0,
 ) {
   const hasCurrent =
     measurePoint.currentDate && measurePoint.currentValue !== null;
@@ -11,6 +12,7 @@ export async function effectCompMeasurePoint(
 
   const log = await tx.tblCompMeasurePointLog.create({
     data: {
+      instId,
       compMeasurePointId: measurePoint.compMeasurePointId,
       currentDate: measurePoint.currentDate,
       currentValue: measurePoint.currentValue,
@@ -18,7 +20,7 @@ export async function effectCompMeasurePoint(
       changedDate: new Date(),
       orderNo: measurePoint.orderNo,
       unitId: measurePoint.unitId ?? null,
-      lastupdate: new Date(),
+      lastUpdate: new Date(),
     },
   });
 

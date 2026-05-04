@@ -8,7 +8,7 @@ export const ControllerStatistics = new Elysia()
   .group("/statistics", (app) =>
     app.get(
       "/",
-      async ({ userId, headers }) => {
+      async ({ headers }) => {
         const instId = Number(headers["x-inst-id"] || 0);
 
         if (!instId) {

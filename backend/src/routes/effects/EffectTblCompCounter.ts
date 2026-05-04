@@ -1,9 +1,9 @@
-import type { prisma } from "@/utils/prisma";
 import type { Prisma, TblCompCounter } from "orm/generated/prisma/client";
 
 export async function effectCompCounter(
   tx: Prisma.TransactionClient,
   counter: TblCompCounter,
+  instId: number,
 ) {
   const hasCurrent = counter.currentDate && counter.currentValue !== null;
   const hasStart = counter.startDate && counter.startValue !== null;
@@ -20,7 +20,8 @@ export async function effectCompCounter(
       startValue: counter.startValue,
       orderNo: counter.orderNo,
       changedDate: new Date(),
-      lastupdate: new Date(),
+      lastUpdate: new Date(),
+      instId,
     },
   });
 
@@ -34,7 +35,8 @@ export async function effectCompCounter(
         startValue: counter.startValue,
         orderNo: counter.orderNo,
         changedDate: new Date(),
-        lastupdate: new Date(),
+        lastUpdate: new Date(),
+        instId,
       },
     });
   }

@@ -27,7 +27,13 @@ const ControllerTblCompCounter = new BaseController({
   extend: (app) => {
     app.post(
       "/",
-      async ({ body, set }) => {
+      async ({ body, set, headers }) => {
+        const instId = Number(headers["x-inst-id"] || 0);
+
+        if (!instId) {
+          throw new Error("Instance ID is required");
+        }
+
         const data = body;
         const result = await prisma.$transaction(async (tx) => {
           const counter = await tx.tblCompCounter.create({
@@ -46,9 +52,10 @@ const ControllerTblCompCounter = new BaseController({
               currentValue: null,
               lastUpdate: null,
               lastZeroedValue: null,
+              instId,
             },
           });
-          await effectCompCounter(tx, counter);
+          await effectCompCounter(tx, counter, instId);
           return counter;
         });
 
@@ -69,14 +76,20 @@ const ControllerTblCompCounter = new BaseController({
 
     app.put(
       "/:compCounterId",
-      async ({ params, body, set }) => {
+      async ({ params, body, set, headers }) => {
+        const instId = Number(headers["x-inst-id"] || 0);
+
+        if (!instId) {
+          throw new Error("Instance ID is required");
+        }
+
         const compCounterId = Number(params.compCounterId);
         const data = body;
 
         const result = await prisma.$transaction(async (tx) => {
           // ۱. اعتبارسنجی تاریخ (طبق منطق قبلی خودت)
           const lastLog = await tx.tblCompCounterLog.findFirst({
-            where: { compCounterId },
+            where: { compCounterId, instId },
             orderBy: { compCounterLogId: "desc" },
           });
 
@@ -89,7 +102,7 @@ const ControllerTblCompCounter = new BaseController({
 
           // ۲. بروزرسانی کانتر
           let counter = await tx.tblCompCounter.update({
-            where: { compCounterId },
+            where: { compCounterId, instId },
             data: {
               dependsOnId: data.tblCompCounter?.connect?.compCounterId,
               orderNo: data.orderNo,
@@ -105,14 +118,14 @@ const ControllerTblCompCounter = new BaseController({
           });
 
           // ۳. ثبت لاگ
-          await effectCompCounter(tx, counter);
+          await effectCompCounter(tx, counter, instId);
 
           // ۴. محاسبه نرخ متوسط (الگوریتم اصلی بدون تغییر)
           let finalAvg = counter.averageCountRate ?? -1;
 
           if (!data.useCalcAverage) {
             const lastTwoLogs = await tx.tblCompCounterLog.findMany({
-              where: { compCounterId },
+              where: { compCounterId, instId },
               orderBy: { compCounterLogId: "desc" },
               take: 2,
             });
@@ -135,14 +148,14 @@ const ControllerTblCompCounter = new BaseController({
             }
 
             counter = await tx.tblCompCounter.update({
-              where: { compCounterId },
+              where: { compCounterId, instId },
               data: { averageCountRate: finalAvg },
             });
           }
 
           // ۵. توسعه: پیدا کردن Jobها از طریق جدول واسط TblCompJobCounters
           const jobCounters = await tx.tblCompJobCounter.findMany({
-            where: { compCounterId: compCounterId },
+            where: { compCounterId: compCounterId, instId },
             include: {
               tblCompJob: true, // لینک به جدول اصلی Job
             },
@@ -182,7 +195,7 @@ const ControllerTblCompCounter = new BaseController({
 
             // بروزرسانی جدول Job
             await tx.tblCompJob.update({
-              where: { compJobId: job.compJobId },
+              where: { compJobId: job.compJobId, instId },
               data: {
                 nextDueDate: nextDate,
                 lastUpdate: now,
@@ -192,6 +205,7 @@ const ControllerTblCompCounter = new BaseController({
             // بروزرسانی WorkOrderها
             await tx.tblWorkOrder.updateMany({
               where: {
+                instId,
                 compJobId: job.compJobId,
                 workOrderStatusId: { notIn: [5, 6, 7, 8] },
               },

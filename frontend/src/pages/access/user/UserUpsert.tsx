@@ -285,7 +285,7 @@ function UserUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
         control={control}
         render={({ field }) => (
           <FieldAsyncSelectGrid
-            label="Wells Access *"
+            label="Rig Access *"
             columns={[
               { field: "name", headerName: "Name", flex: 1 },
               { field: "caption", headerName: "Caption", flex: 1 },

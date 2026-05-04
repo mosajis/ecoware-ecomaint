@@ -38,7 +38,8 @@ export default function PageCounterLog() {
       showToolbar
       disableAdd
       disableEdit
-      label="Counter Logs"
+      elementId={1390}
+      label="Counter Log"
       rows={rows}
       columns={columns}
       loading={loading}

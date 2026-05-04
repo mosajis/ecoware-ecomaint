@@ -3,15 +3,14 @@ import { routeMaintenance } from "@/app/router/routes/maintenance.routes";
 import { createRoute } from "@tanstack/react-router";
 import { lazy } from "react";
 
-const countersAlert = createRoute({
+// --- Measure Points ---
+export const Route = createRoute({
   getParentRoute: () => routeMaintenance,
-  path: "counter-alert",
+  path: "measure-point",
   component: () => (
-    <LazyRoute Component={lazy(() => import("./CounterAlert"))} />
+    <LazyRoute Component={lazy(() => import("./MeasurePoint"))} />
   ),
-  beforeLoad: () => ({ breadcrumb: "Counter Alert" }),
+  beforeLoad: () => ({ breadcrumb: "Measure Point" }),
 });
 
-const routes = countersAlert;
-
-export default routes;
+export default Route;

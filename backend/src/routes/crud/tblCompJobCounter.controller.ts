@@ -31,9 +31,15 @@ const ControllerTblCompJobCounter = new BaseController({
   extend: (app) => {
     app.get(
       "/alert",
-      async ({ params, body, set }) => {
+      async ({ headers }) => {
+        const instId = Number(headers["x-inst-id"] || 0);
+
+        if (!instId) {
+          throw new Error("Instance ID is required");
+        }
+
         const compJobCounters = await prisma.tblCompJobCounter.findMany({
-          where: { showInAlert: true },
+          where: { showInAlert: true, instId },
           select: {
             nextDueCount: true,
             lastDoneCount: true,

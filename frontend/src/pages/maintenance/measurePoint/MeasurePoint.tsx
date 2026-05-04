@@ -1,11 +1,11 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import Splitter from "@/shared/components/Splitter/Splitter";
-import Button from "@mui/material/Button";
 import MeasurePointsUpdate from "./MeasurePointUpdate";
 import MeasurePointsTrend from "./MeasurePointTrend";
+import Actions from "./MeasurePointActions";
 
-import { GridColDef, GridRowSelectionModel } from "@mui/x-data-grid";
+import { columns, getRowId } from "./MeasurePointColumn";
+import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback, useMemo, useState } from "react";
 import {
@@ -15,66 +15,7 @@ import {
 import {
   tblCompMeasurePoint,
   tblCompMeasurePointLog,
-  TypeTblCompMeasurePoint,
 } from "@/core/api/generated/api";
-import { BarChartSharp } from "@mui/icons-material";
-
-const getRowId = (row: TypeTblCompMeasurePoint) => row.compMeasurePointId;
-
-const columns: GridColDef<TypeTblCompMeasurePoint>[] = [
-  {
-    field: "compNo",
-    headerName: "Component",
-    flex: 1,
-    valueGetter: (_, row) => row?.tblComponentUnit?.compNo,
-  },
-  {
-    field: "compType",
-    headerName: "Component Type",
-    flex: 1,
-    // @ts-ignore
-    valueGetter: (_, row) => row?.tblComponentUnit?.tblCompType?.compName,
-  },
-
-  {
-    field: "measureName",
-    headerName: "Measurepoint",
-    flex: 1,
-
-    valueGetter: (_, row) => row.tblCounterType?.name,
-  },
-
-  {
-    field: "currentDate",
-    headerName: "Current Date",
-    width: 130,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-  {
-    field: "currentValue",
-    headerName: "Current Value",
-    flex: 1,
-  },
-  {
-    field: "setValue",
-    headerName: "Set Value",
-  },
-  {
-    field: "operationalMinValue",
-    headerName: "Min Value",
-  },
-
-  {
-    field: "operationalMaxValue",
-    headerName: "Max Value",
-  },
-
-  {
-    field: "unitDescription",
-    headerName: "Unit Descr",
-    valueGetter: (_, row) => row.tblUnit?.description,
-  },
-];
 
 function PageMeasurePoints() {
   const [openForm, setOpenForm] = useState(false);
@@ -178,37 +119,24 @@ function PageMeasurePoints() {
           rows={rows}
           columns={columns}
           loading={loading}
+          rowSelectionModel={rowSelectionModel}
           onRefreshClick={handleRefresh}
           getRowId={getRowId}
-          rowSelectionModel={rowSelectionModel}
           onRowSelectionModelChange={setRowSelectionModel}
           toolbarChildren={
-            <>
-              <Button
-                sx={{ ml: 3 }}
-                onClick={() => setOpenForm(true)}
-                disabled={!selectedRowId}
-                variant={!selectedRow ? "text" : "contained"}
-                size="small"
-              >
-                Update Measure
-              </Button>
-              <Button
-                onClick={() => setOpenTrend(true)}
-                disabled={!selectedRowId}
-                size="small"
-                startIcon={<BarChartSharp />}
-              >
-                Trend
-              </Button>
-            </>
+            <Actions
+              selectedRow={selectedRow}
+              onClickTrend={() => setOpenTrend(true)}
+              onClickUpdate={() => setOpenForm(true)}
+            />
           }
         />
         <CustomizedDataGrid
           showToolbar
           disableAdd
           disableEdit
-          label={label || "Measure Points Logs"}
+          elementId={1400}
+          label={label || "Measure Point Log"}
           rows={logRows}
           columns={logColumns}
           loading={logLoading}

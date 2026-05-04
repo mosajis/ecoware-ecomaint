@@ -35,7 +35,13 @@ const ControllerTblCompMeasurePoint = new BaseController({
     // Update
     app.put(
       "/:compMeasurePointId",
-      async ({ params, body }) => {
+      async ({ params, body, headers }) => {
+        const instId = Number(headers["x-inst-id"] || 0);
+
+        if (!instId) {
+          throw new Error("Instance ID is required");
+        }
+
         const compMeasurePointId = Number(params.compMeasurePointId);
         const data = body;
 
@@ -53,7 +59,7 @@ const ControllerTblCompMeasurePoint = new BaseController({
             },
           });
 
-          await effectCompMeasurePoint(tx, measurePoint);
+          await effectCompMeasurePoint(tx, measurePoint, instId);
           return measurePoint;
         });
 

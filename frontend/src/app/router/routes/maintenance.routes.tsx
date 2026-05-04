@@ -1,5 +1,7 @@
-import routeComponentUnit from "@/pages/maintenance/componentUnit/ComponentUnitRoutes";
 import RouteMeasurePointLog from "@/pages/maintenance/measurePointLog/MeasurePointLogRoute";
+import RouteCounterLog from "@/pages/maintenance/counterLog/CounterLogRoute";
+import RouteMeasurePoint from "@/pages/maintenance/measurePoint/MeasurePointRoute";
+import routeComponentUnit from "@/pages/maintenance/componentUnit/ComponentUnitRoutes";
 import routeFunction from "@/pages/maintenance/function/FunctionRoutes";
 import routeMaintLog from "@/pages/maintenance/maintLog/MaintLogRoute";
 import routeWorkShop from "@/pages/maintenance/workShop/WorkShopRoutes";
@@ -19,12 +21,6 @@ const PageWorkOrder = lazy(
   () => import("@/pages/maintenance/workOrder/WorkOrder"),
 );
 const PageRound = lazy(() => import("@/pages/maintenance/round/Round"));
-const PageMeasurePoints = lazy(
-  () => import("@/pages/maintenance/measurePoint/MeasurePoint"),
-);
-const PageCountersLog = lazy(
-  () => import("@/pages/maintenance/counterLog/CounterLog"),
-);
 
 const PageCounterUpdate = lazy(
   () => import("@/pages/maintenance/counter/Counter"),
@@ -55,22 +51,6 @@ export const routeRound = createRoute({
   beforeLoad: () => ({ breadcrumb: "Round" }),
 });
 
-// --- Measure Points ---
-export const routeMeasurePoints = createRoute({
-  getParentRoute: () => routeMaintenance,
-  path: "measure-points",
-  component: () => <LazyRoute Component={PageMeasurePoints} />,
-  beforeLoad: () => ({ breadcrumb: "Measure Points" }),
-});
-
-// --- Counters & Maint Logs ---
-export const routeCountersLog = createRoute({
-  getParentRoute: () => routeMaintenance,
-  path: "counters-logs",
-  component: () => <LazyRoute Component={PageCountersLog} />,
-  beforeLoad: () => ({ breadcrumb: "Counters Logs" }),
-});
-
 // --- Counter Update ---
 export const routeCounterUpdate = createRoute({
   getParentRoute: () => routeMaintenance,
@@ -94,7 +74,8 @@ export const maintenanceRoutesTree = routeMaintenance.addChildren([
   routeWorkOrder,
   routeRound,
   RouteMeasurePointLog,
-  routeCountersLog,
+  RouteMeasurePoint,
+  RouteCounterLog,
   routeCounterUpdate,
   routeMaintLog,
   routeCountersAlert,
