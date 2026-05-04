@@ -221,7 +221,7 @@ export const menuContentItems: MenuSection[] = [
 
   // ================= MAINTENANCE =================
   {
-    title: "Maintenance",
+    title: "** Maintenance",
     icon: <BuildRoundedIcon sx={iconStyle} />,
     permit: getPermit(1300).canView,
     items: [
@@ -233,70 +233,70 @@ export const menuContentItems: MenuSection[] = [
         icon: <SettingsSuggestRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Component",
+        text: "** Component",
         path: "/maintenance/component-unit",
         id: "maint:component",
         permit: getPermit(1310).canView,
         icon: <PrecisionManufacturingRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Component Type",
+        text: "** Component Type",
         path: "/maintenance/component-type",
         id: "maint:componentType",
         permit: getPermit(1320).canView,
         icon: <WidgetsRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Component Job",
+        text: "** Component Job",
         path: "/maintenance/component-job",
         id: "maint:componentJob",
         permit: getPermit(1330).canView,
         icon: <BuildCircleRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Work Order",
+        text: "** Work Order",
         path: "/maintenance/work-order",
         id: "maint:workOrder",
         permit: getPermit(1340).canView,
         icon: <AssignmentTurnedInRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Round",
+        text: "** Round",
         path: "/maintenance/round",
         id: "maint:round",
         permit: getPermit(1350).canView,
         icon: <SyncRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Workshop",
+        text: "** Workshop",
         path: "/maintenance/workshop",
         id: "maint:workshop",
         permit: getPermit(1360).canView,
         icon: <EngineeringRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Update Counter",
+        text: "** Update Counter",
         path: "/maintenance/counters",
         id: "maint:counters",
         permit: getPermit(1370).canView,
         icon: <UpdateRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Counters Alert",
+        text: "** Counters Alert",
         path: "/maintenance/counters-alert",
         id: "maint:counterAlert",
         permit: getPermit(1380).canView,
         icon: <WarningAmberRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Counters Logs",
+        text: "** Counters Logs",
         path: "/maintenance/counters-logs",
         id: "maint:counterLogs",
         permit: getPermit(1390).canView,
         icon: <HistoryRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Measure Point",
+        text: "** Measure Point",
         path: "/maintenance/measure-point",
         id: "maint:measurePoint",
         permit: getPermit(1400).canView,
@@ -310,7 +310,7 @@ export const menuContentItems: MenuSection[] = [
         icon: <AnalyticsRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Maint Log",
+        text: "** Maint Log",
         path: "/maintenance/maint-log",
         id: "maint:maintLog",
         permit: getPermit(1420).canView,
@@ -321,27 +321,27 @@ export const menuContentItems: MenuSection[] = [
 
   // ================= SPARE =================
   {
-    title: "Spare",
+    title: "** Spare",
     icon: <InventoryRoundedIcon sx={iconStyle} />,
     permit: getPermit(1500).canView,
 
     items: [
       {
-        text: "Spare Type",
+        text: "** Spare Type",
         path: "/spare/type",
         id: "spare:type",
         permit: getPermit(1510).canView,
         icon: <CategoryRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Spare Unit",
+        text: "** Spare Unit",
         path: "/spare/unit",
         id: "spare:unit",
         permit: getPermit(1520).canView,
         icon: <StraightenRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "Spare Used",
+        text: "** Spare Used",
         path: "/spare/used",
         id: "spare:used",
         permit: getPermit(1530).canView,
@@ -352,13 +352,13 @@ export const menuContentItems: MenuSection[] = [
 
   // ================= REPORT =================
   {
-    title: "Report",
+    title: "** Report",
     icon: <AssessmentRoundedIcon sx={iconStyle} />,
     path: "/report",
     permit: getPermit(1600).canView,
     items: [
       {
-        text: "Failure Report",
+        text: "** Failure Report",
         path: "/report/failure",
         id: "report:failure",
         permit: getPermit(1610).canView,

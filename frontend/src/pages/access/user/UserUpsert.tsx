@@ -365,9 +365,8 @@ function UserUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           render={({ field }) => (
             <FieldAsyncSelectGrid
               columns={[
-                { field: "code", headerName: "Code", width: 60 },
-                { field: "lastName", headerName: "Last Name", flex: 1 },
                 { field: "firstName", headerName: "First Name", flex: 1 },
+                { field: "lastName", headerName: "Last Name", flex: 1 },
               ]}
               label="Employee"
               disabled={isDisabled}
