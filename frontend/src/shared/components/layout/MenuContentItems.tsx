@@ -321,27 +321,27 @@ export const menuContentItems: MenuSection[] = [
 
   // ================= SPARE =================
   {
-    title: "** Spare",
+    title: "Spare",
     icon: <InventoryRoundedIcon sx={iconStyle} />,
     permit: getPermit(1500).canView,
 
     items: [
       {
-        text: "** Spare Type",
+        text: "Spare Type",
         path: "/spare/type",
         id: "spare:type",
         permit: getPermit(1510).canView,
         icon: <CategoryRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "** Spare Unit",
+        text: "Spare Unit",
         path: "/spare/unit",
         id: "spare:unit",
         permit: getPermit(1520).canView,
         icon: <StraightenRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "** Spare Used",
+        text: "Spare Used",
         path: "/spare/used",
         id: "spare:used",
         permit: getPermit(1530).canView,

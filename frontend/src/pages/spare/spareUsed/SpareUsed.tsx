@@ -15,30 +15,34 @@ import {
   maintLogGetRowId,
 } from "./SpareUsedColumns";
 
-export default function PageStockUsed() {
-  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+export default function PageSpareUsed() {
+  const [selectedSpareUnitId, setSelectedSpareUnitId] = useState<number | null>(
+    null,
+  );
 
-  // MaintLog Spare
-  const getAll = useCallback(() => {
+  // === LEFT GRID (Spare Used)
+  const getAllSpareUsed = useCallback(() => {
     return tblMaintLogSpareBySpareUnitId();
   }, []);
 
-  const { rows, loading, handleRefresh } = useDataGrid<any>(
-    getAll,
+  const {
+    rows: spareRows,
+    loading: spareLoading,
+    handleRefresh: refreshSpare,
+  } = useDataGrid<any>(
+    getAllSpareUsed,
     tblMaintLog.deleteById,
     "maintLogStockId",
   );
 
-  // MaintLog
+  // === RIGHT GRID (MaintLog - dependent)
   const getAllMaintLog = useCallback(() => {
     return tblMaintLogSpare.getAll({
       include: {
         tblMaintLog: {
           include: {
             tblComponentUnit: {
-              include: {
-                tblCompStatus: true,
-              },
+              include: { tblCompStatus: true },
             },
             tblWorkOrder: true,
             tblMaintClass: true,
@@ -47,54 +51,59 @@ export default function PageStockUsed() {
         },
       },
       filter: {
-        stockItemId: selectedRowId,
+        spareUnitId: selectedSpareUnitId,
       },
     });
-  }, [selectedRowId]);
+  }, [selectedSpareUnitId]);
 
   const {
     rows: maintLogRows,
     loading: maintLogLoading,
-    handleRefresh: maintLogHandleRefresh,
+    handleRefresh: refreshMaintLog,
   } = useDataGrid(
     getAllMaintLog,
     tblMaintLog.deleteById,
     "maintLogId",
-    !!selectedRowId,
+    !!selectedSpareUnitId,
   );
 
+  // === Handlers
   const handleRowClick = useCallback(
     ({ row }: { row: TypeTblMaintLogSpare }) => {
-      setSelectedRowId(row.spareUnitId);
+      setSelectedSpareUnitId(row.spareUnitId);
     },
     [],
   );
+
   return (
     <Splitter horizontal>
+      {/* === LEFT: Spare Used */}
       <CustomizedDataGrid
         showToolbar
         disableEdit
         disableDelete
         disableAdd
         label="Spare Used"
-        loading={loading}
-        rows={rows}
+        loading={spareLoading}
+        rows={spareRows}
         columns={columns}
-        onRefreshClick={handleRefresh}
+        onRefreshClick={refreshSpare}
         getRowId={getRowId}
         onRowClick={handleRowClick}
       />
+
+      {/* === RIGHT: Maint Log */}
       <CustomizedDataGrid
         showToolbar
         disableEdit
         disableDelete
         disableAdd
         disableRefresh
-        label="MaintLog"
+        label="Maint Log"
         loading={maintLogLoading}
         rows={maintLogRows}
         columns={maintLogColumns}
-        onRefreshClick={maintLogHandleRefresh}
+        onRefreshClick={refreshMaintLog}
         getRowId={maintLogGetRowId}
       />
     </Splitter>

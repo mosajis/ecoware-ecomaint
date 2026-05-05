@@ -1,9 +1,8 @@
 import * as z from "zod";
-import FormDialog from "@/shared/components/formDialog/FormDialog";
 import Box from "@mui/material/Box";
-import { memo, useEffect, useState, useCallback } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import { memo } from "react";
+import { Controller } from "react-hook-form";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
 import {
@@ -11,125 +10,108 @@ import {
   tblSpareUnit,
   TypeTblSpareUnit,
 } from "@/core/api/generated/api";
+import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
 
-// === Validation Schema ===
+// === Schema ===
 const schema = z.object({
   spareTypeId: z
     .object({
       spareTypeId: z.number(),
       name: z.string().nullable().optional(),
     })
-    .nullable(),
+    .nullable()
+    .optional(),
 });
 
-export type SpareUnitFormValues = z.infer<typeof schema>;
+type SpareUnitFormValues = z.infer<typeof schema>;
 
-type Props = {
-  open: boolean;
-  mode: "create" | "update";
-  recordId?: number | null;
-  onClose: () => void;
-  onSuccess: (data: TypeTblSpareUnit) => void;
+const defaultValues: SpareUnitFormValues = {
+  spareTypeId: null,
 };
 
-function SpareUnitFormDialog({
+function SpareUnitUpsert({
+  entityName,
   open,
   mode,
   recordId,
   onClose,
   onSuccess,
-}: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-
-  const defaultValues: SpareUnitFormValues = {
-    spareTypeId: null,
-  };
-
-  const { control, handleSubmit, reset } = useForm<SpareUnitFormValues>({
-    resolver: zodResolver(schema),
+}: UpsertProps<TypeTblSpareUnit>) {
+  const {
+    form,
+    loadingInitial,
+    submitting,
+    isDisabled,
+    readonly,
+    title,
+    handleFormSubmit,
+  } = useUpsertForm<SpareUnitFormValues, TypeTblSpareUnit>({
+    entityName,
+    open,
+    mode,
+    recordId,
+    schema,
     defaultValues,
-  });
 
-  // === Load record in edit mode ===
-  const fetchData = useCallback(async () => {
-    if (mode !== "update" || !recordId) {
-      reset(defaultValues);
-      return;
-    }
-
-    setLoadingInitial(true);
-
-    try {
-      const res = await tblSpareUnit.getById(recordId, {
+    onFetch: async (id) => {
+      const res = await tblSpareUnit.getById(id, {
         include: { tblSpareType: true },
       });
 
-      reset({
-        spareTypeId: res?.tblSpareType ?? null,
-      });
-    } finally {
-      setLoadingInitial(false);
-    }
-  }, [mode, recordId, reset]);
-
-  useEffect(() => {
-    if (open) fetchData();
-  }, [open, fetchData]);
-
-  const isDisabled = loadingInitial || submitting;
-
-  // === Submit Handler ===
-  const handleFormSubmit = useCallback(
-    async (values: SpareUnitFormValues) => {
-      const parsed = schema.safeParse(values);
-      if (!parsed.success) return;
-
-      try {
-        setSubmitting(true);
-
-        let result: TypeTblSpareUnit;
-
-        const spareTypeId = parsed.data.spareTypeId?.spareTypeId ?? null;
-
-        const spareTypeRelation = buildRelation(
-          "tblSpareType",
-          "spareTypeId",
-          spareTypeId,
-        );
-
-        if (mode === "create") {
-          // POST Request
-          result = await tblSpareUnit.create({
-            ...spareTypeRelation,
-          });
-        } else {
-          // PUT Request
-          result = await tblSpareUnit.update(recordId!, {
-            ...spareTypeRelation,
-          });
-        }
-
-        onSuccess(result);
-        onClose();
-      } finally {
-        setSubmitting(false);
-      }
+      return {
+        spareTypeId: res?.tblSpareType
+          ? {
+              spareTypeId: res.tblSpareType.spareTypeId,
+              name: res.tblSpareType.name ?? "",
+            }
+          : null,
+      };
     },
-    [mode, recordId, onSuccess, onClose],
-  );
+
+    onCreate: async (values) => {
+      const spareTypeRelation = buildRelation(
+        "tblSpareType",
+        "spareTypeId",
+        values.spareTypeId?.spareTypeId,
+      );
+
+      return tblSpareUnit.create({
+        ...spareTypeRelation,
+      });
+    },
+
+    onUpdate: async (id, values) => {
+      const spareTypeRelation = buildRelation(
+        "tblSpareType",
+        "spareTypeId",
+        values.spareTypeId?.spareTypeId,
+      );
+
+      return tblSpareUnit.update(id, {
+        ...spareTypeRelation,
+      });
+    },
+
+    onSuccess,
+    onClose,
+  });
+
+  const {
+    control,
+    formState: { errors },
+  } = form;
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === "create" ? "Create Spare Item" : "Edit Spare Item"}
+      title={title}
       submitting={submitting}
       loadingInitial={loadingInitial}
-      onSubmit={handleSubmit(handleFormSubmit)}
+      onSubmit={handleFormSubmit}
+      readonly={readonly}
     >
       <Box display="grid" gridTemplateColumns="repeat(1, 1fr)" gap={1.5}>
-        {/* Spare Type Select */}
         <Controller
           name="spareTypeId"
           control={control}
@@ -154,4 +136,4 @@ function SpareUnitFormDialog({
   );
 }
 
-export default memo(SpareUnitFormDialog);
+export default memo(SpareUnitUpsert);

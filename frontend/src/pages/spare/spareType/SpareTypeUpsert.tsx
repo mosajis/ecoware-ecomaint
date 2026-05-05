@@ -1,11 +1,10 @@
 import * as z from "zod";
-import FormDialog from "@/shared/components/formDialog/FormDialog";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import NumberField from "@/shared/components/fields/FieldNumber";
-import { memo, useEffect, useState, useCallback } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import FieldNumber from "@/shared/components/fields/FieldNumber";
+import { memo } from "react";
+import { Controller } from "react-hook-form";
 import {
   tblSpareType,
   tblUnit,
@@ -13,22 +12,17 @@ import {
 } from "@/core/api/generated/api";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
+import { requiredStringField } from "@/core/helper";
+import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
 
+// === Schema ===
 const schema = z.object({
-  name: z.string().min(1, "Name is required"),
+  name: requiredStringField(),
 
   partTypeNo: z.string().nullable().optional(),
   makerRefNo: z.string().nullable().optional(),
   extraNo: z.string().nullable().optional(),
   note: z.string().nullable().optional(),
-
-  // parentSpareType: z
-  //   .object({
-  //     spareTypeId: z.number(),
-  //     name: z.string().nullable().optional(),
-  //   })
-  //   .nullable()
-  //   .optional(),
 
   unit: z
     .object({
@@ -41,147 +35,133 @@ const schema = z.object({
   orderNo: z.number().nullable().optional(),
 });
 
-export type SpareTypeFormValues = z.infer<typeof schema>;
+type SpareTypeFormValues = z.infer<typeof schema>;
 
-type Props = {
-  open: boolean;
-  mode: "create" | "update";
-  recordId?: number | null;
-  onClose: () => void;
-  onSuccess: () => void;
+const defaultValues: SpareTypeFormValues = {
+  name: "",
+  partTypeNo: "",
+  makerRefNo: "",
+  extraNo: "",
+  note: "",
+  unit: null,
+  orderNo: null,
 };
 
-function SpareTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-
-  const defaultValues: SpareTypeFormValues = {
-    name: "",
-    partTypeNo: "",
-    makerRefNo: "",
-    note: "",
-    extraNo: "",
-    // parentSpareType: null,
-    unit: null,
-    orderNo: null,
-  };
-
-  const { control, handleSubmit, reset } = useForm<SpareTypeFormValues>({
-    resolver: zodResolver(schema),
+function SpareTypeUpsert({
+  entityName,
+  open,
+  mode,
+  recordId,
+  onClose,
+  onSuccess,
+}: UpsertProps<TypeTblSpareType>) {
+  const {
+    form,
+    loadingInitial,
+    submitting,
+    isDisabled,
+    readonly,
+    title,
+    handleFormSubmit,
+  } = useUpsertForm<SpareTypeFormValues, TypeTblSpareType>({
+    entityName,
+    open,
+    mode,
+    recordId,
+    schema,
     defaultValues,
+
+    onFetch: async (id) => {
+      const res = await tblSpareType.getById(id, {
+        include: { tblUnit: true },
+      });
+
+      return {
+        name: res.name ?? "",
+        partTypeNo: res.partTypeNo ?? "",
+        makerRefNo: res.makerRefNo ?? "",
+        extraNo: res.extraNo ?? "",
+        note: res.note ?? "",
+        unit: res.tblUnit
+          ? {
+              unitId: res.tblUnit.unitId,
+              name: res.tblUnit.name ?? "",
+            }
+          : null,
+        orderNo: res.orderNo ?? null,
+      };
+    },
+
+    onCreate: async (values) => {
+      const unitRelation = buildRelation(
+        "tblUnit",
+        "unitId",
+        values.unit?.unitId,
+      );
+
+      return tblSpareType.create({
+        name: values.name,
+        partTypeNo: values.partTypeNo,
+        makerRefNo: values.makerRefNo,
+        extraNo: values.extraNo,
+        note: values.note,
+        orderNo: values.orderNo,
+        ...unitRelation,
+      });
+    },
+
+    onUpdate: async (id, values) => {
+      const unitRelation = buildRelation(
+        "tblUnit",
+        "unitId",
+        values.unit?.unitId,
+      );
+
+      return tblSpareType.update(id, {
+        name: values.name,
+        partTypeNo: values.partTypeNo,
+        makerRefNo: values.makerRefNo,
+        extraNo: values.extraNo,
+        note: values.note,
+        orderNo: values.orderNo,
+        ...unitRelation,
+      });
+    },
+
+    onSuccess,
+    onClose,
   });
 
-  const fetchData = useCallback(async () => {
-    if (mode !== "update" || !recordId) {
-      reset(defaultValues);
-      return;
-    }
-
-    setLoadingInitial(true);
-    try {
-      const res = await tblSpareType.getById(recordId, {
-        include: {
-          tblSpareType: true,
-          tblUnit: true,
-        },
-      });
-
-      reset({
-        name: res?.name ?? "",
-        extraNo: res?.extraNo ?? "",
-        partTypeNo: res?.partTypeNo ?? "",
-        makerRefNo: res?.makerRefNo ?? "",
-        note: res?.note ?? "",
-        // parentSpareType: res?.tblSpareType ?? null,
-        unit: res?.tblUnit ?? null,
-        orderNo: res?.orderNo ?? null,
-      });
-    } finally {
-      setLoadingInitial(false);
-    }
-  }, [mode, recordId, reset]);
-
-  useEffect(() => {
-    if (open) fetchData();
-  }, [open, fetchData]);
-
-  const isDisabled = loadingInitial || submitting;
-
-  // === Submit Handler ===
-  const handleFormSubmit = useCallback(
-    async (values: SpareTypeFormValues) => {
-      const parsed = schema.safeParse(values);
-      if (!parsed.success) return;
-
-      try {
-        setSubmitting(true);
-
-        // const parentRelation = buildRelation(
-        //   "tblSpareType",
-        //   "spareTypeId",
-        //   parsed.data.parentSpareType?.spareTypeId ?? null,
-        // );
-
-        const unitRelation = buildRelation(
-          "tblUnit",
-          "unitId",
-          parsed.data.unit?.unitId ?? null,
-        );
-
-        const payload = {
-          name: parsed.data.name,
-          partTypeNo: parsed.data.partTypeNo,
-          makerRefNo: parsed.data.makerRefNo,
-          note: parsed.data.note,
-          extraNo: parsed?.data.extraNo ?? "",
-          orderNo: parsed.data.orderNo,
-          // ...parentRelation,
-          ...unitRelation,
-        };
-
-        if (mode === "create") {
-          await tblSpareType.create(payload);
-        } else {
-          await tblSpareType.update(recordId!, payload);
-        }
-
-        onSuccess();
-        onClose();
-      } finally {
-        setSubmitting(false);
-      }
-    },
-    [mode, recordId, onClose, onSuccess],
-  );
+  const {
+    control,
+    formState: { errors },
+  } = form;
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === "create" ? "Create Spare Type" : "Edit Spare Type"}
+      title={title}
       submitting={submitting}
       loadingInitial={loadingInitial}
-      onSubmit={handleSubmit(handleFormSubmit)}
+      onSubmit={handleFormSubmit}
+      readonly={readonly}
     >
       <Box display="grid" gridTemplateColumns="repeat(1, 1fr)" gap={1.5}>
-        {/* No */}
         <Controller
           name="partTypeNo"
           control={control}
-          render={({ field, fieldState }) => (
+          render={({ field }) => (
             <TextField
-              sx={{ width: "75%" }}
               {...field}
-              label="MESC Code *"
+              label="MESC Code"
               size="small"
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
               disabled={isDisabled}
+              sx={{ width: "75%" }}
             />
           )}
         />
 
-        {/* Name */}
         <Controller
           name="name"
           control={control}
@@ -196,6 +176,7 @@ function SpareTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
             />
           )}
         />
+
         <Controller
           name="unit"
           control={control}
@@ -206,7 +187,10 @@ function SpareTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               selectionMode="single"
               value={field.value}
               request={tblUnit.getAll}
-              columns={[{ field: "name", headerName: "Name", flex: 1 }]}
+              columns={[
+                { field: "name", headerName: "Name", flex: 1 },
+                { field: "description", headerName: "Description", flex: 1 },
+              ]}
               getRowId={(row) => row.unitId}
               onChange={field.onChange}
               error={!!fieldState.error}
@@ -216,85 +200,55 @@ function SpareTypeUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           )}
         />
 
-        {/* Name */}
         <Controller
           name="makerRefNo"
           control={control}
-          render={({ field, fieldState }) => (
+          render={({ field }) => (
             <TextField
               {...field}
-              label="MakerRef No *"
+              label="Maker Ref No"
               size="small"
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
               disabled={isDisabled}
             />
           )}
         />
 
-        {/* Name */}
         <Controller
           name="extraNo"
           control={control}
-          render={({ field, fieldState }) => (
+          render={({ field }) => (
             <TextField
               {...field}
-              label="Extra No *"
+              label="Extra No"
               size="small"
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
               disabled={isDisabled}
             />
           )}
         />
 
-        {/* Name */}
         <Controller
           name="note"
           control={control}
-          render={({ field, fieldState }) => (
+          render={({ field }) => (
             <TextField
               {...field}
               label="Note"
               size="small"
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
               disabled={isDisabled}
             />
           )}
         />
 
-        {/* <Controller
-          name="parentSpareType"
-          control={control}
-          render={({ field, fieldState }) => (
-            <FieldAsyncSelectGrid
-              dialogMaxWidth="sm"
-              label="Parent Spare Type"
-              selectionMode="single"
-              value={field.value}
-              request={tblSpareType.getAll}
-              columns={[{ field: "name", headerName: "Name", flex: 1 }]}
-              getRowId={(row) => row.spareTypeId}
-              onChange={field.onChange}
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
-              disabled={isDisabled}
-            />
-          )}
-        /> */}
-
-        {/* Order */}
         <Controller
           name="orderNo"
           control={control}
           render={({ field }) => (
-            <NumberField
+            <FieldNumber
               {...field}
-              label="Order"
-              sx={{ width: "50%" }}
+              label="Order No"
               size="small"
               disabled={isDisabled}
+              sx={{ width: "50%" }}
             />
           )}
         />

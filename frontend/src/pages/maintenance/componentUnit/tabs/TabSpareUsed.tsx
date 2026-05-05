@@ -53,7 +53,7 @@ export default function TabSpareUsed({ componentUnit }: Props) {
         },
       },
       filter: {
-        stockItemId: selectedRowId,
+        spareUnitId: selectedRowId,
         tblMaintLog: {
           compId: componentUnit?.compId,
         },

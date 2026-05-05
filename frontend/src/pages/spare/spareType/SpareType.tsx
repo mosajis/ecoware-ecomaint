@@ -1,67 +1,14 @@
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import SpareTypeFormDialog from "./SpareTypeUpsert";
-import Splitter from "@/shared/components/Splitter/Splitter";
-import { GenericTree } from "@/shared/components/tree/Tree";
-import { useState, useCallback } from "react";
-import { GridColDef } from "@mui/x-data-grid";
+import DataGrid from "@/shared/components/dataGrid/DataGrid";
+import SpareTypeUpsert from "./SpareTypeUpsert";
+import { useCallback } from "react";
 import { useDataTree } from "@/shared/hooks/useDataTree";
 import { mapToTree } from "@/shared/components/tree/TreeUtil";
 import { tblSpareType, TypeTblSpareType } from "@/core/api/generated/api";
+import { columns, getRowId } from "./SpareTypeColumn";
+import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 
-const getRowId = (row: TypeTblSpareType) => row.spareTypeId;
-const getItemName = (row: TypeTblSpareType) => row.name || "-";
-
-const columns: GridColDef<TypeTblSpareType>[] = [
-  {
-    field: "partName",
-    headerName: "Part Name",
-    flex: 1,
-    // @ts-ignore
-    valueGetter: (_, row) => row?.name,
-  },
-  {
-    field: "partTypeNo",
-    headerName: "MESC Code",
-    flex: 1,
-    // @ts-ignore
-    valueGetter: (_, row) => row?.partTypeNo,
-  },
-  {
-    field: "makerRefNo",
-    headerName: "Maker Ref",
-    flex: 1,
-    // @ts-ignore
-    valueGetter: (_, row) => row?.makerRefNo,
-  },
-  {
-    field: "extraNo",
-    headerName: "Extra No",
-    flex: 1,
-    // @ts-ignore
-    valueGetter: (_, row) => row?.extraNo,
-  },
-  {
-    field: "note",
-    headerName: "Note",
-    flex: 1,
-    // @ts-ignore
-    valueGetter: (_, row) => row?.note,
-  },
-  {
-    field: "unit",
-    headerName: "Unit",
-    flex: 1,
-    // @ts-ignore
-    valueGetter: (_, row) => row.tblUnit?.name,
-  },
-];
-
-export default function PageStockType() {
-  const [openForm, setOpenForm] = useState(false);
-  const [mode, setMode] = useState<"create" | "update">("create");
-  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
-
-  // === useDataTree ===
+export default function PageSpareType() {
+  // === TREE MAPPER ===
   const treeMapper = useCallback(
     (items: TypeTblSpareType[]) =>
       mapToTree(items, "spareTypeId", "parentSpareTypeId"),
@@ -78,6 +25,7 @@ export default function PageStockType() {
     [],
   );
 
+  // === DATA ===
   const { tree, rows, loading, refetch, handleDelete } =
     useDataTree<TypeTblSpareType>({
       getAll,
@@ -86,81 +34,28 @@ export default function PageStockType() {
       mapper: treeMapper,
     });
 
-  // === Handlers ===
-  const handleCreate = () => {
-    setSelectedRowId(null);
-    setMode("create");
-    handleUpsertOpen();
-  };
+  const { openCreate, openEdit, openView, dialogProps } = useUpsertDialog({
+    onSuccess: refetch,
+  });
 
-  const handleEdit = (rowId: number) => {
-    setSelectedRowId(rowId);
-    setMode("update");
-    handleUpsertOpen();
-  };
-
-  const handleUpsertClose = useCallback(() => {
-    setOpenForm(false);
-  }, []);
-
-  const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true);
-  }, []);
+  const label = "Spare Type";
 
   return (
-    <>
-      {/* <Splitter> */}
-      {/* === TREE VIEW === */}
-      {/* <GenericTree<TypeTblSpareType>
-          label="Tree View"
-          loading={loading}
-          data={tree}
-          onDelete={handleDelete}
-          onEdit={handleEdit}
-          onDoubleClick={handleEdit}
-          onAdd={handleCreate}
-          onRefresh={refetch}
-          getItemName={getItemName}
-          getItemId={getRowId}
-        /> */}
-
-      {/* === GRID VIEW === */}
-      {/* <CustomizedDataGrid
-          showToolbar
-          label="List View"
-          loading={loading}
-          rows={rows}
-          columns={columns}
-          onEditClick={handleEdit}
-          onDeleteClick={handleDelete}
-          onDoubleClick={handleEdit}
-          onRefreshClick={refetch}
-          onAddClick={handleCreate}
-          getRowId={getRowId}
-        /> */}
-      {/* </Splitter> */}
-      <CustomizedDataGrid
-        showToolbar
-        label="List View"
-        elementId={1510}
-        loading={loading}
-        rows={rows}
-        columns={columns}
-        onEditClick={handleEdit}
-        onDeleteClick={handleDelete}
-        onDoubleClick={handleEdit}
-        onRefreshClick={refetch}
-        onAddClick={handleCreate}
-        getRowId={getRowId}
-      />
-      {/* === FORM === */}
-      <SpareTypeFormDialog
-        open={openForm}
-        mode={mode}
-        recordId={selectedRowId}
-        onClose={handleUpsertClose}
-        onSuccess={refetch}
-      />
-    </>
+    <DataGrid
+      showToolbar
+      label={label}
+      elementId={1510}
+      loading={loading}
+      rows={rows}
+      columns={columns}
+      getRowId={getRowId}
+      onAddClick={openCreate}
+      onEditClick={openEdit}
+      onDoubleClick={openView}
+      onDeleteClick={handleDelete}
+      onRefreshClick={refetch}
+    >
+      <SpareTypeUpsert entityName={label} {...dialogProps} />
+    </DataGrid>
   );
 }

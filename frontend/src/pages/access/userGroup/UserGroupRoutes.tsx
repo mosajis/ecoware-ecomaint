@@ -1,4 +1,4 @@
-import AccessRoute from "@/pages/access/access.routes";
+import AccessRoute from "@/pages/access/AccessRoutes";
 import { LazyRoute } from "@/app/router/routes/_components/lazyRoute";
 import { createRoute, Outlet } from "@tanstack/react-router";
 import { lazy } from "react";

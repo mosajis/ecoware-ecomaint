@@ -18,8 +18,8 @@ const responseSchema = buildResponseSchema(
 );
 
 const MaintLogStockWithTotalsSchema = t.Object({
-  maintLogStockId: t.Number(),
-  spareItemId: t.Number(),
+  maintLogSpareId: t.Number(),
+  spareUnitId: t.Number(),
   spareCount: t.Union([t.Number(), t.Null()]),
 
   tblSpareUnit: t.Optional(
@@ -69,8 +69,12 @@ const ControllerTblMaintLogSpare = new BaseController({
   extend: (app) => {
     app.get(
       "/uniqueSpareUnit",
-      async ({ query }) => {
-        const compId = Number(query.compId) ?? null;
+      async ({ query, headers }) => {
+        const instId = Number(headers["x-inst-id"] || 0);
+
+        if (!instId) {
+          throw new Error("Instance ID is required");
+        }
 
         const page = query.page ?? 1;
         const perPage = query.perPage ?? 20;
@@ -80,6 +84,9 @@ const ControllerTblMaintLogSpare = new BaseController({
 
         // 1) گرفتن stockItemId یکتا با groupBy
         const distinctIds = await prisma.tblMaintLogSpare.groupBy({
+          where: {
+            instId,
+          },
           by: ["spareUnitId"],
           orderBy: { spareUnitId: "asc" },
           skip: paginate ? skip : undefined,
@@ -91,15 +98,27 @@ const ControllerTblMaintLogSpare = new BaseController({
         // 2) گرفتن رکوردهای maintLogSpare مربوط به stockItemId های یکتا
         const records = await prisma.tblMaintLogSpare.findMany({
           where: {
+            instId,
             spareUnitId: { in: stockItemIds },
-            tblMaintLog: { compId: compId },
           },
-          include: {
+          select: {
+            maintLogSpareId: true,
+            spareCount: true,
+            spareUnitId: true,
+
             tblSpareUnit: {
-              include: {
+              select: {
+                spareUnitId: true,
                 tblSpareType: {
-                  include: {
-                    tblUnit: true,
+                  select: {
+                    spareTypeId: true,
+                    name: true,
+                    tblUnit: {
+                      select: {
+                        unitId: true,
+                        name: true,
+                      },
+                    },
                   },
                 },
               },
@@ -147,6 +166,9 @@ const ControllerTblMaintLogSpare = new BaseController({
 
         // 6) total گروه‌ها (تعداد stockItemId یکتا)
         const total = await prisma.tblMaintLogSpare.groupBy({
+          where: {
+            instId,
+          },
           by: ["spareUnitId"],
         });
 
@@ -166,7 +188,6 @@ const ControllerTblMaintLogSpare = new BaseController({
           summary: "Get unique spare units by stockItemId",
         },
         query: t.Object({
-          compId: t.Optional(t.Number()),
           page: t.Optional(t.Number()),
           perPage: t.Optional(t.Number()),
           sort: t.Optional(t.String()),

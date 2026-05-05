@@ -1,13 +1,14 @@
-import treeGeneral from "../../../pages/general/GeneralRoutes";
-import treeAccess from "../../../pages/access/access.routes";
+import treeGeneral from "@/pages/general/GeneralRoutes";
+import treeAccess from "@/pages/access/AccessRoutes";
+import treeDashboard from "@/pages/dashboard/DashboardRoute";
+import treeSpare from "@/pages/spare/SpareRoutes";
 import { createRoute } from "@tanstack/react-router";
 import { redirect } from "@tanstack/react-router";
 import { protectedRoute } from "./protected.routes";
-import { routes as stockRouteTree } from "./spare.routes";
+
 import { AuthLoginRoute } from "./auth.routes";
 import { rootRoute } from "./_components/rootRoute";
 import { maintenanceRoutesTree } from "./maintenance.routes";
-import { dashboardRoutesTree } from "./dashboard.routes";
 import { reportRouteTree } from "./report.routes";
 
 // --- Index redirect "/" → "/dashboard" ---
@@ -24,11 +25,12 @@ export const routesTree = rootRoute.addChildren([
   indexRoute,
   AuthLoginRoute,
   protectedRoute.addChildren([
+    treeDashboard,
     treeGeneral,
     treeAccess,
+    treeSpare,
+
     reportRouteTree,
-    stockRouteTree,
-    dashboardRoutesTree,
     maintenanceRoutesTree,
   ]),
 ]);

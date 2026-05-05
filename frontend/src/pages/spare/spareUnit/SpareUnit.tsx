@@ -1,92 +1,53 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import SpareItemUpsert from "./SpareUnitUpsert";
-import { useState, useCallback } from "react";
+import SpareUnitUpsert from "./SpareUnitUpsert";
+import { useCallback } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { tblSpareUnit, TypeTblSpareUnit } from "@/core/api/generated/api";
-
-const getRowId = (row: TypeTblSpareUnit) => row.spareUnitId;
-
-const columns: GridColDef<TypeTblSpareUnit>[] = [
-  {
-    field: "number",
-    headerName: "Number",
-    valueGetter: (_, row) => row.tblSpareType?.no,
-  },
-  {
-    field: "tblSpareType",
-    headerName: "Spare Type",
-    flex: 1,
-    valueGetter: (_, row) => row.tblSpareType?.name,
-  },
-];
+import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
+import { columns, getRowId } from "./SpareUnitColumn";
 
 export default function PageSpareUnit() {
-  const [openForm, setOpenForm] = useState(false);
-  const [mode, setMode] = useState<"create" | "update">("create");
-  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+  const getAll = useCallback(
+    () =>
+      tblSpareUnit.getAll({
+        include: {
+          tblSpareType: true,
+        },
+      }),
+    [],
+  );
 
-  const getAll = useCallback(() => {
-    return tblSpareUnit.getAll({
-      include: {
-        tblSpareType: true,
-      },
-    });
-  }, []);
-
-  // === useDataTree ===
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
     tblSpareUnit.deleteById,
     "spareUnitId",
   );
 
-  // === Handlers ===
-  const handleCreate = () => {
-    setSelectedRowId(null);
-    setMode("create");
-    handleUpsertOpen();
-  };
+  const { openCreate, openEdit, openView, dialogProps } = useUpsertDialog({
+    onSuccess: handleRefresh,
+  });
 
-  const handleEdit = (rowId: number) => {
-    setSelectedRowId(rowId);
-    setMode("update");
-    handleUpsertOpen();
-  };
+  const label = "Spare Unit";
 
-  // === Columns ===
-
-  const handleUpsertClose = useCallback(() => {
-    setOpenForm(false);
-  }, []);
-
-  const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true);
-  }, []);
   return (
     <>
       <CustomizedDataGrid
         showToolbar
-        label="List View"
+        label={label}
         elementId={1520}
         loading={loading}
         rows={rows}
         columns={columns}
-        onEditClick={handleEdit}
-        onDoubleClick={handleEdit}
+        onAddClick={openCreate}
+        onEditClick={openEdit}
+        onDoubleClick={openView}
         onDeleteClick={handleDelete}
         onRefreshClick={handleRefresh}
-        onAddClick={handleCreate}
         getRowId={getRowId}
       />
 
-      <SpareItemUpsert
-        open={openForm}
-        mode={mode}
-        recordId={selectedRowId}
-        onClose={handleUpsertClose}
-        onSuccess={handleRefresh}
-      />
+      <SpareUnitUpsert entityName={label} {...dialogProps} />
     </>
   );
 }

@@ -3,10 +3,10 @@ import Splitter from "@/shared/components/Splitter/Splitter";
 import AttachmentMap from "@/shared/tabs/attachmentMap/AttachmentMap";
 import FailureReportUpsert from "./FailureReportModal";
 import FailureReportActions from "./FailureReportActions";
-import failureReportDialogClose from "./FailureReportDialogClose";
-import failureReportDialogOpen from "./FailureReportDialogOpen";
+import FailureReportDialogClose from "./FailureReportDialogClose";
+import FailureReportDialogOpen from "./FailureReportDialogOpen";
 import FailureReportDialogFilter from "./FailureReportDialogFilter";
-import failureReportDialogPrint from "./FailureReportDialogPrint";
+import FailureReportDialogPrint from "./FailureReportDialogPrint";
 import { useCallback, useMemo, useState } from "react";
 import { FailureReportFilter } from "./FailureReportDialogFilter";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
@@ -39,9 +39,7 @@ export default function PagefailureReport() {
         include: {
           tblMaintLog: {
             include: {
-              tblUsersTblMaintLogReportedByTotblUsers: {
-                include: { tblEmployeeTblUsersEmployeeIdTotblEmployee: true },
-              },
+              tblEmployee: true,
               tblComponentUnit: true,
               tblMaintCause: true,
               tblDiscipline: true,
@@ -50,9 +48,6 @@ export default function PagefailureReport() {
           tblFailureSeverityLevel: true,
           tblFailureStatus: true,
           tblFailureGroupFollow: true,
-          tblUsers: {
-            include: { tblEmployeeTblUsersEmployeeIdTotblEmployee: true },
-          },
         },
       }),
     [filter],
@@ -159,14 +154,14 @@ export default function PagefailureReport() {
         onSuccess={handleSucessUpsert}
       />
 
-      <failureReportDialogClose
+      <FailureReportDialogClose
         open={dialogs.close}
         failureReportId={selectedRowId}
         onClose={() => closeDialog("close")}
         onSuccess={(patch) => optimisticUpdate(selectedRowId!, patch)}
       />
 
-      <failureReportDialogOpen
+      <FailureReportDialogOpen
         open={dialogs.open}
         failureReportId={selectedRowId}
         onClose={() => closeDialog("open")}
@@ -179,7 +174,7 @@ export default function PagefailureReport() {
         onSubmit={handleFilterSubmit}
       />
 
-      <failureReportDialogPrint
+      <FailureReportDialogPrint
         failureReportId={selectedRowId!}
         onClose={() => closeDialog("print")}
         open={dialogs.print}
