@@ -48,13 +48,10 @@ export function useDataGrid<T, K extends keyof T = keyof T>(
   /**
    * refresh دیتا (awaitable)
    */
-  const handleRefresh = useCallback(
-    async (params?: any) => {
-      if (!isEnabled) return;
-      return fetchRef.current(params);
-    },
-    [isEnabled],
-  );
+  const handleRefresh = useCallback(async () => {
+    if (!isEnabled) return;
+    return fetchRef.current();
+  }, [isEnabled]);
 
   /**
    * delete + refresh

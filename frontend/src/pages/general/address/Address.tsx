@@ -1,63 +1,41 @@
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import AddressUpsert from "./AddressUpsert";
+import DataGrid from "@/shared/components/dataGrid/DataGrid";
+import Upsert from "./AddressUpsert";
 
-import { useCallback, useState } from "react";
 import { tblAddress } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { columns, getRowId } from "./AddressColumns";
-import { useDialogs } from "@/shared/hooks/useDialogs";
+import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 
 export default function PageAddress() {
-  const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
-  const [mode, setMode] = useState<"create" | "update">("create");
-
-  const { dialogs, openDialog, closeDialog } = useDialogs({
-    upsert: false,
-  });
-
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     tblAddress.getAll,
     tblAddress.deleteById,
     "addressId",
   );
 
-  const handleCreate = useCallback(() => {
-    setSelectedRowId(null);
-    setMode("create");
-    openDialog("upsert");
-  }, []);
+  const { openCreate, openEdit, openView, dialogProps } = useUpsertDialog({
+    onSuccess: handleRefresh,
+  });
 
-  const handleEdit = useCallback((rowId: number) => {
-    setSelectedRowId(rowId);
-    setMode("update");
-    openDialog("upsert");
-  }, []);
+  const label = "Address";
 
   return (
-    <>
-      <CustomizedDataGrid
-        showToolbar
-        disableRowNumber
-        elementId={100}
-        label="Address"
-        rows={rows}
-        columns={columns}
-        loading={loading}
-        onAddClick={handleCreate}
-        onRefreshClick={handleRefresh}
-        onDeleteClick={handleDelete}
-        onEditClick={handleEdit}
-        onDoubleClick={handleEdit}
-        getRowId={getRowId}
-      />
-
-      <AddressUpsert
-        open={dialogs.upsert}
-        mode={mode}
-        recordId={selectedRowId}
-        onClose={() => closeDialog("upsert")}
-        onSuccess={handleRefresh}
-      />
-    </>
+    <DataGrid
+      showToolbar
+      disableRowNumber
+      elementId={100}
+      label={label}
+      rows={rows}
+      columns={columns}
+      loading={loading}
+      onRefreshClick={handleRefresh}
+      onDeleteClick={handleDelete}
+      onAddClick={openCreate}
+      onEditClick={openEdit}
+      onDoubleClick={openView}
+      getRowId={getRowId}
+    >
+      <Upsert entityName={label} {...dialogProps} />
+    </DataGrid>
   );
 }

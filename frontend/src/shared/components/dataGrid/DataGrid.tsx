@@ -42,6 +42,7 @@ interface CustomizedDataGridProps extends DataGridProps {
   disableRowNumber?: boolean;
   toolbarChildren?: React.ReactNode;
   elementId?: number;
+  children?: React.ReactNode;
 }
 
 export default function GenericDataGrid({
@@ -68,6 +69,7 @@ export default function GenericDataGrid({
   disableRowNumber,
   toolbarChildren,
   elementId,
+  children,
   ...rest
 }: CustomizedDataGridProps) {
   let { canCreate, canUpdate, canDelete, canView, canExport } = getPermit(
@@ -179,16 +181,19 @@ export default function GenericDataGrid({
   );
 
   return (
-    <MuiDataGrid
-      rows={indexedRows}
-      columns={columnsWithRowNumber}
-      initialState={mergedInitialState}
-      slots={slots}
-      rowSelectionModel={rowSelectionModel}
-      onRowSelectionModelChange={handleRowSelectionChange}
-      getRowId={getRowId}
-      onRowDoubleClick={(params, event) => onDoubleClick?.(Number(params.id))}
-      {...rest}
-    />
+    <>
+      <MuiDataGrid
+        rows={indexedRows}
+        columns={columnsWithRowNumber}
+        initialState={mergedInitialState}
+        slots={slots}
+        rowSelectionModel={rowSelectionModel}
+        onRowSelectionModelChange={handleRowSelectionChange}
+        getRowId={getRowId}
+        onRowDoubleClick={(params, event) => onDoubleClick?.(Number(params.id))}
+        {...rest}
+      />
+      {children && children}
+    </>
   );
 }

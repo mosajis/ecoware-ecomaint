@@ -133,11 +133,11 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
               <DeleteIcon />
             </ToolbarButton>
           )}
-          {!disableRefresh && onRefreshClick && (
-            <ToolbarButton title="Refresh" onClick={onRefreshClick}>
-              <RefreshIcon />
-            </ToolbarButton>
-          )}
+          {/* {!disableRefresh && onRefreshClick && ( */}
+          <ToolbarButton title="Refresh" onClick={onRefreshClick}>
+            <RefreshIcon />
+          </ToolbarButton>
+          {/* )} */}
           {!disableAdd && onAddClick && (
             <ToolbarButton title="Add" onClick={onAddClick}>
               <AddIcon />

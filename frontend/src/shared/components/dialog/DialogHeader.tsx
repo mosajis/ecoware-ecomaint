@@ -24,10 +24,10 @@ export default function DialogHeader({
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        p: "0.6rem 1rem",
-        ...(props.sx || {}), // merge custom sx if passed
+        p: "0.7rem 0.8rem",
+        ...(props.sx || {}),
       }}
-      {...props} // spread باقی props به DialogTitle
+      {...props}
     >
       {title}
       <IconButton size="small" onClick={onClose} disabled={disabled}>

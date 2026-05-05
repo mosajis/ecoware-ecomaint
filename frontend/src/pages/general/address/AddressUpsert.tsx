@@ -3,14 +3,13 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import FieldNumber from "@/shared/components/fields/FieldNumber";
-import { memo, useEffect, useMemo, useState, useCallback } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { memo } from "react";
+import { Controller } from "react-hook-form";
 import { tblAddress, TypeTblAddress } from "@/core/api/generated/api";
 import { requiredStringField } from "@/core/helper";
-import { toast } from "sonner";
+import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
 
-// === Validation Schema with Zod ===
+// === Schema ===
 const schema = z.object({
   code: requiredStringField(),
   name: requiredStringField(),
@@ -22,111 +21,77 @@ const schema = z.object({
   orderNo: z.number().nullable(),
 });
 
-export type AddressFormValues = z.infer<typeof schema>;
+type AddressFormValues = z.infer<typeof schema>;
 
-type Props = {
-  open: boolean;
-  mode: "create" | "update";
-  recordId?: number | null;
-  onClose: () => void;
-  onSuccess?: (data: TypeTblAddress) => void;
+const defaultValues: AddressFormValues = {
+  code: "",
+  name: "",
+  address1: "",
+  address2: "",
+  phone: "",
+  eMail: "",
+  contact: "",
+  orderNo: null,
 };
 
-function AddressUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+function AddressUpsert({
+  entityName,
+  open,
+  mode,
+  recordId,
+  onClose,
+  onSuccess,
+}: UpsertProps<TypeTblAddress>) {
+  const {
+    form,
+    loadingInitial,
+    submitting,
+    isDisabled,
+    readonly,
+    title,
+    handleFormSubmit,
+  } = useUpsertForm<AddressFormValues, TypeTblAddress>({
+    entityName,
+    open,
+    mode,
+    recordId,
+    schema,
+    defaultValues,
 
-  const defaultValues: AddressFormValues = useMemo(
-    () => ({
-      code: "",
-      name: "",
-      address1: "",
-      address2: "",
-      phone: "",
-      eMail: "",
-      contact: "",
-      orderNo: null,
-    }),
-    [],
-  );
+    onFetch: async (id) => {
+      const res = await tblAddress.getById(id);
+      return {
+        code: res.code ?? "",
+        name: res.name ?? "",
+        address1: res.address1 ?? "",
+        address2: res.address2 ?? "",
+        phone: res.phone ?? "",
+        eMail: res.eMail ?? "",
+        contact: res.contact ?? "",
+        orderNo: res.orderNo ?? null,
+      };
+    },
+
+    onCreate: tblAddress.create,
+    onUpdate: tblAddress.update,
+    onSuccess,
+    onClose,
+  });
 
   const {
     control,
-    handleSubmit,
-    reset,
     formState: { errors },
-  } = useForm<AddressFormValues>({
-    resolver: zodResolver(schema),
-    defaultValues,
-  });
-
-  // === Fetch initial data
-  const fetchData = useCallback(async () => {
-    if (mode === "update" && recordId) {
-      setLoadingInitial(true);
-      try {
-        const res = await tblAddress.getById(recordId);
-        if (res) {
-          reset({
-            code: res.code ?? "",
-            name: res.name ?? "",
-            address1: res.address1 ?? "",
-            address2: res.address2 ?? "",
-            phone: res.phone ?? "",
-            eMail: res.eMail ?? "",
-            contact: res.contact ?? "",
-            orderNo: res.orderNo,
-          });
-        }
-      } catch (err) {
-        console.error("Failed to load address", err);
-      } finally {
-        setLoadingInitial(false);
-      }
-    } else {
-      reset(defaultValues);
-    }
-  }, [mode, recordId, reset, defaultValues]);
-
-  useEffect(() => {
-    if (open) fetchData();
-  }, [open, fetchData]);
-
-  const isDisabled = loadingInitial || submitting;
-
-  // === Form submit handler
-  const handleFormSubmit = useCallback(
-    async (values: AddressFormValues) => {
-      setSubmitting(true);
-      try {
-        let result: TypeTblAddress | undefined;
-        if (mode === "create") {
-          result = await tblAddress.create(values);
-        } else if (mode === "update" && recordId) {
-          result = await tblAddress.update(recordId, values);
-        }
-
-        if (result) {
-          onSuccess?.(result);
-          onClose();
-        }
-      } catch (err) {
-        toast.error("Failed to submit address form");
-      } finally {
-        setSubmitting(false);
-      }
-    },
-    [mode, recordId, onSuccess, onClose],
-  );
+  } = form;
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === "create" ? "Create Address" : "Edit Address"}
+      title={title}
       submitting={submitting}
       loadingInitial={loadingInitial}
-      onSubmit={handleSubmit(handleFormSubmit)}
+      onSubmit={handleFormSubmit}
+      readonly={readonly}
     >
       <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1.5}>
         <Controller
@@ -240,6 +205,7 @@ function AddressUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
             />
           )}
         />
+
         <Controller
           name="orderNo"
           control={control}

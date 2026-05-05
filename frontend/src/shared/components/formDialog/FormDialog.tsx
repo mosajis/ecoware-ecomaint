@@ -21,7 +21,7 @@ export type FormDialogWrapperProps = {
   open: boolean;
   onClose: () => void;
   onCancelClick?: () => void;
-  title: string;
+  title?: string;
   submitting?: boolean;
   loadingInitial?: boolean;
   onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -65,7 +65,8 @@ export default function FormDialog({
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      if (readonly) return;
+
+      if (readonly || isDisabled) return;
 
       setError(null);
 
@@ -80,13 +81,13 @@ export default function FormDialog({
   return (
     <Dialog
       open={open}
-      onClose={isDisabled ? undefined : onClose}
+      onClose={isDisabled && !readonly ? undefined : onClose}
       fullWidth
       maxWidth={maxWidth}
     >
       {!hideHeader && (
         <DialogHeader
-          title={title}
+          title={title || ""}
           onClose={onClose}
           loading={loadingInitial}
           disabled={isDisabled}
@@ -104,7 +105,17 @@ export default function FormDialog({
         )}
 
         <form onSubmit={handleSubmit}>
-          <Suspense fallback={<Spinner />}>{children}</Suspense>
+          <fieldset
+            disabled={readonly || isDisabled}
+            style={{
+              border: "none",
+              margin: 0,
+              padding: 0,
+              minInlineSize: "unset",
+            }}
+          >
+            <Suspense fallback={<Spinner />}>{children}</Suspense>
+          </fieldset>
 
           {!hideFooter && (
             <DialogActions sx={{ p: 0, m: 0, mt: 2 }}>
