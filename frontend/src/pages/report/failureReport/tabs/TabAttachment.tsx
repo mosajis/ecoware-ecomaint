@@ -1,11 +1,15 @@
 import AttachmentMap from "@/shared/tabs/attachmentMap/AttachmentMap";
-import { useAtomValue } from "jotai";
-import { tblMaintLogAttachment } from "@/core/api/generated/api";
-import { atomInitData } from "../FailureReportAtom";
+import {
+  tblMaintLogAttachment,
+  TypeTblFailureReport,
+} from "@/core/api/generated/api";
 
-const TabAttachments = () => {
-  const { maintLog } = useAtomValue(atomInitData);
-  const maintLogId = maintLog?.maintLogId;
+type Props = {
+  failreReport?: TypeTblFailureReport;
+};
+
+const TabAttachments = ({ failreReport }: Props) => {
+  const maintLogId = failreReport?.maintLogId;
 
   return (
     <AttachmentMap

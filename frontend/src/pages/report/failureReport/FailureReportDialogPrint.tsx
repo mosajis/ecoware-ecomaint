@@ -7,8 +7,8 @@ import PrintTemplate from "./print/PrintTemplate";
 import { useState, useRef, useEffect } from "react";
 import { useReactToPrint } from "react-to-print";
 import {
-  tblFailureReports,
-  TypeTblFailureReports,
+  tblFailureReport,
+  TypeTblFailureReport,
 } from "@/core/api/generated/api";
 import { toast } from "sonner";
 
@@ -25,7 +25,7 @@ export default function failureReportDialogPrint({
 }: Props) {
   const [loading, setLoading] = useState(false);
   const [failureReport, setFailureReport] =
-    useState<TypeTblFailureReports | null>(null);
+    useState<TypeTblFailureReport | null>(null);
 
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -36,7 +36,7 @@ export default function failureReportDialogPrint({
       const fetchData = async () => {
         setLoading(true);
         try {
-          const res = await tblFailureReports.getById(failureReportId, {
+          const res = await tblFailureReport.getById(failureReportId, {
             include: {
               tblMaintLog: {
                 include: {

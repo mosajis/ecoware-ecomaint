@@ -1,7 +1,7 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useCallback } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { tblFailureReports, TypeTblMaintLog } from "@/core/api/generated/api";
+import { tblFailureReport, TypeTblMaintLog } from "@/core/api/generated/api";
 import {
   columns,
   getRowId,
@@ -14,7 +14,7 @@ interface Props {
 
 const TabFailureReport = ({ selected, label }: Props) => {
   const getAll = useCallback(() => {
-    return tblFailureReports.getAll({
+    return tblFailureReport.getAll({
       filter: {
         maintLogId: selected.maintLogId,
       },
@@ -41,7 +41,7 @@ const TabFailureReport = ({ selected, label }: Props) => {
 
   const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
-    tblFailureReports.getById,
+    tblFailureReport.getById,
     "failureReportId",
     !!selected?.maintLogId,
   );

@@ -1,6 +1,6 @@
 import ConfirmDialog from "@/shared/components/ConfirmDialog";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import { tblFailureReports, tblWorkShop } from "@/core/api/generated/api";
+import { tblFailureReport, tblWorkShop } from "@/core/api/generated/api";
 import { buildRelation } from "@/core/helper";
 import { toast } from "sonner";
 
@@ -22,7 +22,11 @@ export default function WorkShopDialogOpen({
 
     const patch = {
       closedDate: null,
-      ...buildRelation("tblEmployeeTblWorkShopClosedByIdTotblEmployee", "employeeId", undefined),
+      ...buildRelation(
+        "tblEmployeeTblWorkShopClosedByIdTotblEmployee",
+        "employeeId",
+        undefined,
+      ),
     };
 
     try {

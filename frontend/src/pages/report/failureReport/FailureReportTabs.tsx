@@ -1,67 +1,48 @@
 import Build from "@mui/icons-material/Build";
 import Inventory from "@mui/icons-material/Inventory";
 import AttachFile from "@mui/icons-material/AttachFile";
-import Report from "@mui/icons-material/Report";
-import { useAtomValue } from "jotai";
-import { atomInitData } from "./FailureReportAtom";
 import { lazy } from "react";
 import TabsContainer, {
   ReusableTabItem,
 } from "@/shared/components/TabsContainer";
+import { TypeTblFailureReport } from "@/core/api/generated/api";
 
-const General = lazy(() => import("./tabs/tabGeneral/TabGeneral"));
-const StockUsed = lazy(() => import("./tabs/tabStockUsed/TabStockUsed"));
+const SpareUsed = lazy(() => import("./tabs/tabSpareUsed/TabSpareUsed"));
 const Attachments = lazy(() => import("./tabs/TabAttachment"));
 const ResourceUsed = lazy(
   () => import("./tabs/tabResourceUsed/TabResourceUsed"),
 );
 
 type Props = {
-  mode: "create" | "update";
-  failureReportId?: number | null;
-  compId?: number;
+  failreReport?: TypeTblFailureReport;
 };
 
-const FailureReportTabs = ({ mode, failureReportId, compId }: Props) => {
-  const { maintLog } = useAtomValue(atomInitData);
-
+const Tabs = ({ failreReport }: Props) => {
   const tabs: ReusableTabItem[] = [
-    {
-      label: "General",
-      icon: <Report />,
-      component: General,
-    },
     {
       label: "Resource Used",
       icon: <Build />,
       component: ResourceUsed,
-      disabled: !maintLog?.maintLogId,
     },
     {
       label: "Spare Used",
       icon: <Inventory />,
-      component: StockUsed,
-      disabled: !maintLog?.maintLogId,
+      component: SpareUsed,
     },
     {
       label: "Attachments",
       icon: <AttachFile />,
       component: Attachments,
-      disabled: !maintLog?.maintLogId,
     },
   ];
 
   return (
     <TabsContainer
       tabs={tabs}
-      persistInUrl={false}
-      tabProps={{
-        mode,
-        failureReportId,
-        compId,
-      }}
+      persistInUrl={true}
+      tabProps={{ failreReport }}
     />
   );
 };
 
-export default FailureReportTabs;
+export default Tabs;

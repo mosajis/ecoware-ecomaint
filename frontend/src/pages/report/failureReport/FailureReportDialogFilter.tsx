@@ -11,15 +11,17 @@ import { useState } from "react";
 import {
   tblComponentUnit,
   tblDiscipline,
+  tblEmployee,
   tblFailureSeverityLevel,
   tblFailureStatus,
-  tblUser,
   TypeTblComponentUnit,
   TypeTblDiscipline,
+  TypeTblEmployee,
   TypeTblFailureSeverityLevel,
   TypeTblFailureStatus,
-  TypeTblUser,
 } from "@/core/api/generated/api";
+import { extractFullName } from "@/core/helper";
+import { Divider } from "@mui/material";
 
 export interface FailureReportFilter {
   AND?: any[];
@@ -32,7 +34,7 @@ type FiltersState = {
   dateFrom: string;
   dateTo: string;
   discipline: TypeTblDiscipline | null;
-  reportedBy: TypeTblUser | null;
+  reportedBy: TypeTblEmployee | null;
   severity: TypeTblFailureSeverityLevel | null;
   status: TypeTblFailureStatus | null;
   downTime: string;
@@ -138,7 +140,7 @@ export default function FailureReportFilterDialog({
     if (filters.reportedBy) {
       conditions.push({
         tblMaintLog: {
-          reportedBy: filters.reportedBy.userId,
+          reportedBy: filters.reportedBy.employeeId,
         },
       });
     }
@@ -179,6 +181,7 @@ export default function FailureReportFilterDialog({
           sx={{
             justifyContent: "center",
             gap: 1.5,
+            mb: 1,
           }}
           row
           value={filters.statusMode}
@@ -232,44 +235,30 @@ export default function FailureReportFilterDialog({
           onChange={(e) => setFilters((p) => ({ ...p, title: e.target.value }))}
         />
 
+        <Divider />
+
         {/* Discipline + Reported By */}
         <Box display="grid" gridTemplateColumns="1fr 1fr" gap={1.5}>
-          <FieldAsyncSelect<TypeTblDiscipline>
-            label="Discipline"
-            selectionMode="single"
-            request={tblDiscipline.getAll}
-            value={filters.discipline}
-            getOptionLabel={(row) => row.name || ""}
-            onChange={(v) =>
-              setFilters((p) => ({
-                ...p,
-                discipline: v as TypeTblDiscipline | null,
-              }))
-            }
-          />
-
-          <FieldAsyncSelectGrid
+          <FieldAsyncSelectGrid<TypeTblEmployee>
             label="Reported By"
             selectionMode="single"
-            request={tblUser.getAll}
+            request={tblEmployee.getAll}
             value={filters.reportedBy}
             columns={[
-              { field: "uName", headerName: "Name", flex: 1 },
-              { field: "uUserName", headerName: "Username", flex: 1 },
+              { field: "firstName", headerName: "First Name", flex: 1 },
+              { field: "lastName", headerName: "Last Name", flex: 1 },
             ]}
-            getRowId={(row) => row.userId}
-            getOptionLabel={(row) => row.uUserName}
+            getRowId={(row) => row.employeeId}
+            getOptionLabel={extractFullName}
             onChange={(v) =>
               setFilters((p) => ({
                 ...p,
-                reportedBy: v as TypeTblUser | null,
+                reportedBy: v as TypeTblEmployee | null,
               }))
             }
           />
-        </Box>
 
-        {/* Severity + Status */}
-        <Box display="grid" gridTemplateColumns="1fr 1fr" gap={1.5}>
+          {/* Severity + Status */}
           <FieldAsyncSelect<TypeTblFailureSeverityLevel>
             label="Severity"
             selectionMode="single"
@@ -280,6 +269,19 @@ export default function FailureReportFilterDialog({
               setFilters((p) => ({
                 ...p,
                 severity: v as TypeTblFailureSeverityLevel | null,
+              }))
+            }
+          />
+          <FieldAsyncSelect<TypeTblDiscipline>
+            label="Discipline"
+            selectionMode="single"
+            request={tblDiscipline.getAll}
+            value={filters.discipline}
+            getOptionLabel={(row) => row.name || ""}
+            onChange={(v) =>
+              setFilters((p) => ({
+                ...p,
+                discipline: v as TypeTblDiscipline | null,
               }))
             }
           />
@@ -297,38 +299,28 @@ export default function FailureReportFilterDialog({
               }))
             }
           />
-        </Box>
+          <Box display="flex" gap={1.5} flexDirection={"column"}>
+            <Divider />
 
-        {/* Total Wait */}
-        {/* <TextField
-          label="Total Wait"
-          type="number"
-          size="small"
-          value={filters.downTime}
-          onChange={(e) =>
-            setFilters((p) => ({ ...p, downTime: e.target.value }))
-          }
-        /> */}
-
-        {/* Date Range */}
-        <Box display="flex" gap={1.5}>
-          <FieldDateTime
-            type="DATE"
-            label="From"
-            field={{
-              value: filters.dateFrom,
-              onChange: (v: string) =>
-                setFilters((p) => ({ ...p, dateFrom: v })),
-            }}
-          />
-          <FieldDateTime
-            type="DATE"
-            label="To"
-            field={{
-              value: filters.dateTo,
-              onChange: (v: string) => setFilters((p) => ({ ...p, dateTo: v })),
-            }}
-          />
+            <FieldDateTime
+              type="DATE"
+              label="From"
+              field={{
+                value: filters.dateFrom,
+                onChange: (v: string) =>
+                  setFilters((p) => ({ ...p, dateFrom: v })),
+              }}
+            />
+            <FieldDateTime
+              type="DATE"
+              label="To"
+              field={{
+                value: filters.dateTo,
+                onChange: (v: string) =>
+                  setFilters((p) => ({ ...p, dateTo: v })),
+              }}
+            />
+          </Box>
         </Box>
       </Box>
     </FormDialog>

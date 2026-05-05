@@ -1,5 +1,6 @@
-import { BaseController } from "@/utils/base.controller";
+import { BaseController, querySchema } from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
+import { t } from "elysia";
 
 import {
   TblCompJobCounter,
@@ -7,12 +8,37 @@ import {
   TblCompJobCounterInputUpdate,
   TblCompJobCounterPlain,
 } from "orm/generated/prismabox/TblCompJobCounter";
+
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 
 export const ServiceTblCompJobCounter = new BaseService(
   prisma.tblCompJobCounter,
 );
+
+const AlertItemSchema = t.Object({
+  start: t.Object({
+    lastDoneCount: t.Nullable(t.Number()),
+    lastDone: t.Optional(t.Nullable(t.Date())),
+  }),
+
+  value: t.Object({
+    currentValue: t.Optional(t.Nullable(t.Number())),
+    currentDate: t.Optional(t.Nullable(t.Date())),
+  }),
+
+  end: t.Object({
+    nextDueCount: t.Nullable(t.Number()),
+    nextDueDate: t.Optional(t.Nullable(t.Date())),
+  }),
+
+  info: t.Object({
+    componentName: t.Optional(t.Nullable(t.String())),
+    jobDescTitle: t.String(),
+    frequency: t.Optional(t.Nullable(t.Number())),
+    status: t.Nullable(t.Boolean()),
+  }),
+});
 
 const ControllerTblCompJobCounter = new BaseController({
   prefix: "/tblCompJobCounter",
@@ -28,7 +54,11 @@ const ControllerTblCompJobCounter = new BaseController({
     TblCompJobCounterPlain,
     TblCompJobCounter,
   ),
+
   extend: (app) => {
+    /**
+     * 🚨 ALERT ENDPOINT
+     */
     app.get(
       "/alert",
       async ({ headers }) => {
@@ -69,7 +99,7 @@ const ControllerTblCompJobCounter = new BaseController({
           },
         });
 
-        const result = compJobCounters.map((x) => {
+        const items = compJobCounters.map((x) => {
           const lastDoneTime = x.tblCompJob?.lastDone?.getTime() ?? 0;
           const currentTime = x.tblCompCounter?.currentDate?.getTime() ?? 0;
           const nextDueTime = x.tblCompJob?.nextDueDate?.getTime() ?? 0;
@@ -84,6 +114,7 @@ const ControllerTblCompJobCounter = new BaseController({
             hasRequiredData &&
             currentTime >= lastDoneTime &&
             currentTime <= nextDueTime;
+
           const countCondition =
             hasRequiredData &&
             currentCount >= lastDoneCount &&
@@ -114,10 +145,24 @@ const ControllerTblCompJobCounter = new BaseController({
           };
         });
 
-        return result;
+        return {
+          items,
+          total: items.length,
+          page: 1,
+          perPage: items.length,
+          totalPages: 1,
+        };
       },
       {
         tags: ["tblCompJobCounter"],
+        query: querySchema,
+        response: t.Object({
+          items: t.Array(AlertItemSchema),
+          total: t.Integer(),
+          page: t.Integer(),
+          perPage: t.Integer(),
+          totalPages: t.Integer(),
+        }),
         detail: {
           summary: "Get All Counters Alerts",
         },

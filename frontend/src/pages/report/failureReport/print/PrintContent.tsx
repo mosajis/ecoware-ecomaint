@@ -1,8 +1,8 @@
-import { TypeTblFailureReports } from "@/core/api/generated/api";
+import { TypeTblFailureReport } from "@/core/api/generated/api";
 import { PrintTable } from "./PrintTable";
 
 interface Props {
-  failureReport: TypeTblFailureReports;
+  failureReport: TypeTblFailureReport;
 }
 
 const PrintContent = ({ failureReport }: Props) => {

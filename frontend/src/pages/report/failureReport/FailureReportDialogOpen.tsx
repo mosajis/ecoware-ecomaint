@@ -1,6 +1,6 @@
 import ConfirmDialog from "@/shared/components/ConfirmDialog";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import { tblFailureReports } from "@/core/api/generated/api";
+import { tblFailureReport } from "@/core/api/generated/api";
 import { buildRelation } from "@/core/helper";
 import { toast } from "sonner";
 
@@ -21,22 +21,10 @@ export default function failureReportOpenDialog({
     if (!failureReportId) return;
 
     try {
-      const res = await tblFailureReports.update(
-        failureReportId,
-        {
-          closedDateTime: null,
-          ...buildRelation("tblUsers", "userId", undefined),
-        },
-        {
-          include: {
-            tblUsers: {
-              include: {
-                tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
-              },
-            },
-          },
-        },
-      );
+      const res = await tblFailureReport.update(failureReportId, {
+        closedDateTime: null,
+        ...buildRelation("tblEmployee", "employeeId", undefined),
+      });
       onSuccess(res);
       toast.success("Failure Report Open Successfully");
       onClose();

@@ -652,55 +652,54 @@ model TblElement {
 }
 
 model TblEmployee {
-  employeeId                                                      Int                           @id(map: "PK_tblEmployee") @default(dbgenerated("NEXT VALUE FOR [Seq_Employee]"), map: "DF_EmployeeID") @map("EmployeeID")
-  code                                                            String?                       @map("Code") @db.NVarChar(100)
-  lastName                                                        String?                       @map("LastName") @db.NVarChar(100)
-  firstName                                                       String?                       @map("FirstName") @db.NVarChar(100)
-  discId                                                          Int?                          @map("DiscID")
-  title                                                           String?                       @map("Title") @db.NVarChar(100)
-  lastUpdate                                                      DateTime?                     @db.DateTime
-  tblAttachments                                                  TblAttachment[]
-  tblAttachmentTypes                                              TblAttachmentType[]
-  tblCompCounters                                                 TblCompCounter[]
-  tblCompCounterLogs                                              TblCompCounterLog[]
-  tblCompJobs                                                     TblCompJob[]
-  tblCompJobCounters                                              TblCompJobCounter[]
-  tblCompMeasurePoints                                            TblCompMeasurePoint[]
-  tblCompMeasurePointLogs                                         TblCompMeasurePointLog[]
-  tblCompOilInfos                                                 TblCompOilInfo[]
-  tblComponentUnitAttachments                                     TblComponentUnitAttachment[]
-  tblCompStatusLogs                                               TblCompStatusLog[]
-  tblCompTypeAttachments                                          TblCompTypeAttachment[]
-  tblCompTypeJobs                                                 TblCompTypeJob[]
-  tblCompTypeJobCounters                                          TblCompTypeJobCounter[]
-  tblCompTypeJobTriggers                                          TblCompTypeJobTrigger[]
-  tblDiscipline                                                   TblDiscipline?                @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblEmployee_tblDiscipline")
-  tblFailureReports                                               TblFailureReport[]
-  tblJobDescriptionAttachments                                    TblJobDescriptionAttachment[]
-  tblJobVersions                                                  TblJobVersion[]
-  tblLogCounters                                                  TblLogCounter[]
-  tblLogDisciplineTblLogDisciplineEmployeeIdTotblEmployees        TblLogDiscipline[]            @relation("tblLogDiscipline_EmployeeIDTotblEmployee")
-  tblLogDisciplineTblLogDisciplineCreatedEmployeeIdTotblEmployees TblLogDiscipline[]            @relation("tblLogDiscipline_CreatedEmployeeIdTotblEmployee")
-  tblLoginAudits                                                  TblLoginAudit[]
-  tblMaintLogs                                                    TblMaintLog[]
-  tblMaintLogAttachments                                          TblMaintLogAttachment[]
-  tblMaintLogFollows                                              TblMaintLogFollow[]
-  tblMaintLogSpares                                               TblMaintLogSpare[]
-  tblOilSamplingLogTblOilSamplingLogSamplerIdTotblEmployees       TblOilSamplingLog[]           @relation("TblOilSamplingLog_SamplerIDTotblEmployee")
-  tblOilSamplingLogTblOilSamplingLogSenderToLabIdTotblEmployees   TblOilSamplingLog[]           @relation("TblOilSamplingLog_SenderToLabIdTotblEmployee")
-  tblReScheduleLogs                                               TblReScheduleLog[]
-  tblRotationLogTblRotationLogEmployeeInsertedIdTotblEmployees    TblRotationLog[]              @relation("tblRotationLog_EmployeeInsertedIdTotblEmployee")
-  tblRotationLogTblRotationLogEmployeeRemovedIdTotblEmployees     TblRotationLog[]              @relation("tblRotationLog_EmployeeRemovedIdTotblEmployee")
-  tblRoundCompJobs                                                TblRoundCompJob[]
-  tblUsers                                                        TblUser[]
-  tblWorkOrderTblWorkOrderCreatedByTotblEmployees                 TblWorkOrder[]                @relation("tblWorkOrder_CreatedByTotblEmployee")
-  tblWorkOrderTblWorkOrderIssuedByTotblEmployees                  TblWorkOrder[]                @relation("tblWorkOrder_IssuedByTotblEmployee")
-  tblWorkOrderTblWorkOrderPendingByTotblEmployees                 TblWorkOrder[]                @relation("tblWorkOrder_PendingByTotblEmployee")
-  tblWorkOrderTblWorkOrderPlannedByTotblEmployees                 TblWorkOrder[]                @relation("tblWorkOrder_PlannedByTotblEmployee")
-  tblWorkShopTblWorkShopPersonInChargeIdTotblEmployees            TblWorkShop[]                 @relation("tblWorkShop_PersonInChargeIDTotblEmployee")
-  tblWorkShopTblWorkShopPersonInChargeApproveIdTotblEmployees     TblWorkShop[]                 @relation("tblWorkShop_PersonInChargeApproveIDTotblEmployee")
-  tblWorkShopTblWorkShopClosedByIdTotblEmployees                  TblWorkShop[]                 @relation("tblWorkShop_ClosedByIDTotblEmployee")
-  tblWorkShopAttachments                                          TblWorkShopAttachment[]
+  employeeId                                                    Int                           @id(map: "PK_tblEmployee") @default(dbgenerated("NEXT VALUE FOR [Seq_Employee]"), map: "DF_EmployeeID") @map("EmployeeID")
+  code                                                          String?                       @map("Code") @db.NVarChar(100)
+  lastName                                                      String?                       @map("LastName") @db.NVarChar(100)
+  firstName                                                     String?                       @map("FirstName") @db.NVarChar(100)
+  discId                                                        Int?                          @map("DiscID")
+  title                                                         String?                       @map("Title") @db.NVarChar(100)
+  lastUpdate                                                    DateTime?                     @db.DateTime
+  tblAttachments                                                TblAttachment[]
+  tblAttachmentTypes                                            TblAttachmentType[]
+  tblCompCounters                                               TblCompCounter[]
+  tblCompCounterLogs                                            TblCompCounterLog[]
+  tblCompJobs                                                   TblCompJob[]
+  tblCompJobCounters                                            TblCompJobCounter[]
+  tblCompMeasurePoints                                          TblCompMeasurePoint[]
+  tblCompMeasurePointLogs                                       TblCompMeasurePointLog[]
+  tblCompOilInfos                                               TblCompOilInfo[]
+  tblComponentUnitAttachments                                   TblComponentUnitAttachment[]
+  tblCompStatusLogs                                             TblCompStatusLog[]
+  tblCompTypeAttachments                                        TblCompTypeAttachment[]
+  tblCompTypeJobs                                               TblCompTypeJob[]
+  tblCompTypeJobCounters                                        TblCompTypeJobCounter[]
+  tblCompTypeJobTriggers                                        TblCompTypeJobTrigger[]
+  tblDiscipline                                                 TblDiscipline?                @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblEmployee_tblDiscipline")
+  tblFailureReports                                             TblFailureReport[]
+  tblJobDescriptionAttachments                                  TblJobDescriptionAttachment[]
+  tblJobVersions                                                TblJobVersion[]
+  tblLogCounters                                                TblLogCounter[]
+  tblLogDisciplines                                             TblLogDiscipline[]
+  tblLoginAudits                                                TblLoginAudit[]
+  tblMaintLogs                                                  TblMaintLog[]
+  tblMaintLogAttachments                                        TblMaintLogAttachment[]
+  tblMaintLogFollows                                            TblMaintLogFollow[]
+  tblMaintLogSpares                                             TblMaintLogSpare[]
+  tblOilSamplingLogTblOilSamplingLogSamplerIdTotblEmployees     TblOilSamplingLog[]           @relation("TblOilSamplingLog_SamplerIDTotblEmployee")
+  tblOilSamplingLogTblOilSamplingLogSenderToLabIdTotblEmployees TblOilSamplingLog[]           @relation("TblOilSamplingLog_SenderToLabIdTotblEmployee")
+  tblReScheduleLogs                                             TblReScheduleLog[]
+  tblRotationLogTblRotationLogEmployeeInsertedIdTotblEmployees  TblRotationLog[]              @relation("tblRotationLog_EmployeeInsertedIdTotblEmployee")
+  tblRotationLogTblRotationLogEmployeeRemovedIdTotblEmployees   TblRotationLog[]              @relation("tblRotationLog_EmployeeRemovedIdTotblEmployee")
+  tblRoundCompJobs                                              TblRoundCompJob[]
+  tblUsers                                                      TblUser[]
+  tblWorkOrderTblWorkOrderCreatedByTotblEmployees               TblWorkOrder[]                @relation("tblWorkOrder_CreatedByTotblEmployee")
+  tblWorkOrderTblWorkOrderIssuedByTotblEmployees                TblWorkOrder[]                @relation("tblWorkOrder_IssuedByTotblEmployee")
+  tblWorkOrderTblWorkOrderPendingByTotblEmployees               TblWorkOrder[]                @relation("tblWorkOrder_PendingByTotblEmployee")
+  tblWorkOrderTblWorkOrderPlannedByTotblEmployees               TblWorkOrder[]                @relation("tblWorkOrder_PlannedByTotblEmployee")
+  tblWorkShopTblWorkShopPersonInChargeIdTotblEmployees          TblWorkShop[]                 @relation("tblWorkShop_PersonInChargeIDTotblEmployee")
+  tblWorkShopTblWorkShopPersonInChargeApproveIdTotblEmployees   TblWorkShop[]                 @relation("tblWorkShop_PersonInChargeApproveIDTotblEmployee")
+  tblWorkShopTblWorkShopClosedByIdTotblEmployees                TblWorkShop[]                 @relation("tblWorkShop_ClosedByIDTotblEmployee")
+  tblWorkShopAttachments                                        TblWorkShopAttachment[]
 
   @@map("tblEmployee")
 }
@@ -717,7 +716,7 @@ model TblFailureReport {
   failureReportId           Int                        @id(map: "PK_tblFailureReports") @default(dbgenerated("NEXT VALUE FOR [Seq_FailureReports]"), map: "DF_FailureReportId") @map("FailureReportId")
   maintLogId                Int?                       @map("MaintLogID")
   title                     String?                    @map("Title") @db.NVarChar(500)
-  failureNumber             Int?                       @map("FailureNumber")
+  failureNumber             String?                    @map("FailureNumber") @db.NVarChar(20)
   locationId                Int?                       @map("LocationID")
   failureSeverityLevelId    Int?                       @map("FailureSeverityLevelID")
   failureStatusId           Int?                       @map("FailureStatusID")
@@ -976,20 +975,18 @@ model TblLogCounter {
 }
 
 model TblLogDiscipline {
-  logDiscId                                                 Int              @id(map: "PK_tblLogDiscipline1") @default(dbgenerated("NEXT VALUE FOR [Seq_LogDiscipline]"), map: "DF_LogDiscID") @map("LogDiscID")
-  maintLogId                                                Int?             @map("MaintLogID")
-  employeeId                                                Int?             @map("EmployeeID")
-  discId                                                    Int?             @map("DiscID")
-  timeSpent                                                 Int?             @map("TimeSpent")
-  orderNo                                                   Int?             @map("OrderNo")
-  createdEmployeeId                                         Int?             @map("CreatedEmployeeId")
-  lastUpdate                                                DateTime?        @db.DateTime
-  instId                                                    Int?             @map("InstId")
-  tblDiscipline                                             TblDiscipline?   @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLogDiscipline_tblDiscipline")
-  tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee        TblEmployee?     @relation("tblLogDiscipline_EmployeeIDTotblEmployee", fields: [employeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLogDiscipline_tblEmployee")
-  tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee TblEmployee?     @relation("tblLogDiscipline_CreatedEmployeeIdTotblEmployee", fields: [createdEmployeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLogDiscipline_tblEmployee2")
-  tblInstallation                                           TblInstallation? @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLogDiscipline_tblInstallation")
-  tblMaintLog                                               TblMaintLog?     @relation(fields: [maintLogId], references: [maintLogId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLogDiscipline_tblMaintLog")
+  logDiscId       Int              @id(map: "PK_tblLogDiscipline") @default(dbgenerated("NEXT VALUE FOR [Seq_LogDiscipline]"), map: "DF_LogDiscID") @map("LogDiscID")
+  maintLogId      Int?             @map("MaintLogID")
+  employeeId      Int?             @map("EmployeeID")
+  discId          Int?             @map("DiscID")
+  timeSpent       Int?             @map("TimeSpent")
+  orderNo         Int?             @map("OrderNo")
+  lastUpdate      DateTime?        @db.DateTime
+  instId          Int?             @map("InstId")
+  tblDiscipline   TblDiscipline?   @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLogDiscipline_tblDiscipline")
+  tblEmployee     TblEmployee?     @relation(fields: [employeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLogDiscipline_tblEmployee")
+  tblInstallation TblInstallation? @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLogDiscipline_tblInstallation")
+  tblMaintLog     TblMaintLog?     @relation(fields: [maintLogId], references: [maintLogId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLogDiscipline_tblMaintLog")
 
   @@map("tblLogDiscipline")
 }
@@ -1004,7 +1001,7 @@ model TblLoginAudit {
   ipAddress    String?      @map("IpAddress") @db.VarChar(45)
   deviceInfo   String       @map("DeviceInfo") @db.Text
   errorMessage String?      @map("ErrorMessage") @db.Text
-  createdAt    DateTime     @db.DateTime
+  createdAt    DateTime     @map("created_at") @db.DateTime
   tblEmployee  TblEmployee? @relation(fields: [employeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLoginAudit_tblEmployee")
 
   @@map("tblLoginAudit")
@@ -1037,47 +1034,48 @@ model TblMaintClass {
 }
 
 model TblMaintLog {
-  maintLogId         Int                 @id(clustered: false, map: "PK_tblMaintLog") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintLog]"), map: "DF_MaintLogID") @map("MaintLogID")
-  maintCauseId       Int?                @map("MaintCauseID")
-  maintTypeId        Int?                @map("MaintTypeID")
-  maintClassId       Int?                @map("MaintClassID")
-  functionId         Int?                @map("FunctionID")
-  jobDescId          Int?                @map("JobDescID")
-  workOrderId        Int?                @map("WorkOrderID")
-  compId             Int?                @map("CompID")
-  totalDuration      Int?                @map("TotalDuration")
-  downTime           Int?                @map("DownTime")
-  dateDone           DateTime?           @map("DateDone") @db.DateTime
-  frequency          Int?                @map("Frequency")
-  frequencyPeriod    Int?                @map("FrequencyPeriod")
-  overdueCount       Int?                @map("OverdueCount")
-  unexpected         Int?                @map("Unexpected")
-  reportedBy         Int?                @map("ReportedBy")
-  history            String?             @map("History") @db.NVarChar(Max)
-  workOrderStatusId  Int?                @map("WorkOrderStatusId")
-  followStatusId     Int?                @map("FollowStatusId")
-  discId             Int?                @map("DiscID")
-  reportedDate       DateTime?           @map("ReportedDate") @db.DateTime
-  lastUpdate         DateTime?           @db.DateTime
-  instId             Int?                @map("InstId")
-  updatedEmployeeId  Int?                @map("UpdatedEmployeeId")
-  tblFailureReports  TblFailureReport[]
-  tblLogCounters     TblLogCounter[]
-  tblLogDisciplines  TblLogDiscipline[]
-  tblComponentUnit   TblComponentUnit?   @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblComponentUnit")
-  tblDiscipline      TblDiscipline?      @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblDiscipline")
-  tblEmployee        TblEmployee?        @relation(fields: [reportedBy], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblEmployee")
-  tblFollowStatus    TblFollowStatus?    @relation(fields: [followStatusId], references: [followStatusId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblFollowStatus")
-  tblFunction        TblFunction?        @relation(fields: [functionId], references: [functionId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblFunctions")
-  tblInstallation    TblInstallation?    @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblInstallation")
-  tblJobDescription  TblJobDescription?  @relation(fields: [jobDescId], references: [jobDescId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblJobDescription")
-  tblMaintCause      TblMaintCause?      @relation(fields: [maintCauseId], references: [maintCauseId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblMaintCause")
-  tblMaintClass      TblMaintClass?      @relation(fields: [maintClassId], references: [maintClassId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblMaintClass")
-  tblMaintType       TblMaintType?       @relation(fields: [maintTypeId], references: [maintTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblMaintType")
-  tblPeriod          TblPeriod?          @relation(fields: [frequencyPeriod], references: [periodId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblPeriod")
-  tblWorkOrder       TblWorkOrder?       @relation(fields: [workOrderId], references: [workOrderId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblWorkOrder")
-  tblMaintLogFollows TblMaintLogFollow[]
-  tblMaintLogSpares  TblMaintLogSpare[]
+  maintLogId             Int                     @id(clustered: false, map: "PK_tblMaintLog") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintLog]"), map: "DF_MaintLogID") @map("MaintLogID")
+  maintCauseId           Int?                    @map("MaintCauseID")
+  maintTypeId            Int?                    @map("MaintTypeID")
+  maintClassId           Int?                    @map("MaintClassID")
+  functionId             Int?                    @map("FunctionID")
+  jobDescId              Int?                    @map("JobDescID")
+  workOrderId            Int?                    @map("WorkOrderID")
+  compId                 Int?                    @map("CompID")
+  totalDuration          Int?                    @map("TotalDuration")
+  downTime               Int?                    @map("DownTime")
+  dateDone               DateTime?               @map("DateDone") @db.DateTime
+  frequency              Int?                    @map("Frequency")
+  frequencyPeriod        Int?                    @map("FrequencyPeriod")
+  overdueCount           Int?                    @map("OverdueCount")
+  unexpected             Int?                    @map("Unexpected")
+  reportedBy             Int?                    @map("ReportedBy")
+  history                String?                 @map("History") @db.NVarChar(Max)
+  workOrderStatusId      Int?                    @map("WorkOrderStatusId")
+  followStatusId         Int?                    @map("FollowStatusId")
+  discId                 Int?                    @map("DiscID")
+  reportedDate           DateTime?               @map("ReportedDate") @db.DateTime
+  lastUpdate             DateTime?               @db.DateTime
+  instId                 Int?                    @map("InstId")
+  updatedEmployeeId      Int?                    @map("UpdatedEmployeeId")
+  tblFailureReports      TblFailureReport[]
+  tblLogCounters         TblLogCounter[]
+  tblLogDisciplines      TblLogDiscipline[]
+  tblComponentUnit       TblComponentUnit?       @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblComponentUnit")
+  tblDiscipline          TblDiscipline?          @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblDiscipline")
+  tblEmployee            TblEmployee?            @relation(fields: [reportedBy], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblEmployee")
+  tblFollowStatus        TblFollowStatus?        @relation(fields: [followStatusId], references: [followStatusId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblFollowStatus")
+  tblFunction            TblFunction?            @relation(fields: [functionId], references: [functionId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblFunctions")
+  tblInstallation        TblInstallation?        @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblInstallation")
+  tblJobDescription      TblJobDescription?      @relation(fields: [jobDescId], references: [jobDescId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblJobDescription")
+  tblMaintCause          TblMaintCause?          @relation(fields: [maintCauseId], references: [maintCauseId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblMaintCause")
+  tblMaintClass          TblMaintClass?          @relation(fields: [maintClassId], references: [maintClassId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblMaintClass")
+  tblMaintType           TblMaintType?           @relation(fields: [maintTypeId], references: [maintTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblMaintType")
+  tblPeriod              TblPeriod?              @relation(fields: [frequencyPeriod], references: [periodId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblPeriod")
+  tblWorkOrder           TblWorkOrder?           @relation(fields: [workOrderId], references: [workOrderId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLog_tblWorkOrder")
+  tblMaintLogAttachments TblMaintLogAttachment[]
+  tblMaintLogFollows     TblMaintLogFollow[]
+  tblMaintLogSpares      TblMaintLogSpare[]
 
   @@map("tblMaintLog")
 }
@@ -1093,6 +1091,7 @@ model TblMaintLogAttachment {
   tblAttachment        TblAttachment    @relation(fields: [attachmentId], references: [attachmentId], onDelete: Cascade, onUpdate: NoAction, map: "FK_tblMaintLogAttachment_tblAttachment")
   tblEmployee          TblEmployee      @relation(fields: [createdEmployeeId], references: [employeeId], onUpdate: NoAction, map: "FK_tblMaintLogAttachment_tblEmployee")
   tblInstallation      TblInstallation? @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLogAttachment_tblInstallation")
+  tblMaintLog          TblMaintLog      @relation(fields: [maintLogId], references: [maintLogId], onUpdate: NoAction, map: "FK_tblMaintLogAttachment_tblMaintLog")
 
   @@map("tblMaintLogAttachment")
 }

@@ -12,7 +12,7 @@ type Props = {
   selectedCount: number;
 };
 
-export default function Actions({
+export default function MaintLogActions({
   onFilter,
   onFollow,
   onPrint,

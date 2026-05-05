@@ -1,19 +1,23 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import StepResourceUsedUpsert from "./TabResourceUsedUpsert";
 import { useState, useCallback } from "react";
-import { useAtomValue } from "jotai";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { atomInitData } from "../../FailureReportAtom";
 import { columns, getRowId } from "./TabResourceUsedColumns";
-import { tblLogDiscipline } from "@/core/api/generated/api";
+import {
+  tblLogDiscipline,
+  TypeTblFailureReport,
+} from "@/core/api/generated/api";
 
-const StepResourceUsed = () => {
-  const { maintLog } = useAtomValue(atomInitData);
+type Props = {
+  failreReport?: TypeTblFailureReport;
+};
+
+const StepResourceUsed = ({ failreReport }: Props) => {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
-  const maintLogId = maintLog?.maintLogId;
+  const maintLogId = failreReport?.maintLogId;
 
   const handleCreate = () => {
     if (!maintLogId) return;
@@ -46,9 +50,9 @@ const StepResourceUsed = () => {
   return (
     <>
       <CustomizedDataGrid
-        showToolbar
         disableEdit
-        label="Resource Used"
+        showToolbar={!!maintLogId}
+        label={failreReport?.title || "Resource Used"}
         loading={loading}
         rows={rows}
         columns={columns}
@@ -60,9 +64,10 @@ const StepResourceUsed = () => {
 
       {maintLogId && (
         <StepResourceUsedUpsert
+          maintLogId={maintLogId}
           open={openForm}
           mode={mode}
-          recordId={selectedRowId}
+          recordId={maintLogId}
           onClose={() => setOpenForm(false)}
           onSuccess={handleFormSuccess}
         />

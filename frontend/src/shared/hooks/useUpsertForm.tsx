@@ -19,7 +19,7 @@ type UseUpsertFormOptions<TValues extends FieldValues, TResult> = {
   schema: ZodType<TValues>;
   defaultValues: DefaultValues<TValues>;
   entityName: string;
-  onFetch: (recordId: number) => Promise<Partial<TValues>>;
+  onFetch: (recordId: number) => Promise<any>;
   onClose: () => void;
   onCreate?: (values: TValues) => Promise<TResult>;
   onUpdate?: (id: number, values: TValues) => Promise<TResult>;

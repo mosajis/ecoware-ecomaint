@@ -3,9 +3,9 @@ import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback } from "react";
 import { columns } from "@/pages/report/failureReport/FailureReportColumns";
 import {
-  tblFailureReports,
+  tblFailureReport,
   tblMaintCause,
-  TypeTblFailureReports,
+  TypeTblFailureReport,
   TypeTblFunction,
 } from "@/core/api/generated/api";
 
@@ -14,14 +14,14 @@ interface Props {
   label?: string;
 }
 
-const getRowId = (row: TypeTblFailureReports) => row.failureReportId;
+const getRowId = (row: TypeTblFailureReport) => row.failureReportId;
 
 export default function TabFailureReport({ label, recordFunction }: Props) {
   const compId = recordFunction?.tblComponentUnit?.compId;
 
   const getAll = useCallback(
     () =>
-      tblFailureReports.getAll({
+      tblFailureReport.getAll({
         filter: {
           tblMaintLog: {
             // compId,
@@ -49,7 +49,7 @@ export default function TabFailureReport({ label, recordFunction }: Props) {
 
   const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
-    tblFailureReports.deleteById,
+    tblFailureReport.deleteById,
     "failureReportId",
     !!compId,
   );

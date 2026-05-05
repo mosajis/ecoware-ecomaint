@@ -1,5 +1,5 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import FailureReportUpsert from "@/pages/report/failureReport/FailureReportModal";
+import FailureReportUpsert from "@/pages/report/failureReport/FailureReportUpsert";
 import Splitter from "@/shared/components/Splitter/Splitter";
 import AttachmentMap from "@/shared/tabs/attachmentMap/AttachmentMap";
 import { useCallback, useState } from "react";
@@ -9,10 +9,10 @@ import {
   getRowId,
 } from "@/pages/report/failureReport/FailureReportColumns";
 import {
-  tblFailureReports,
+  tblFailureReport,
   tblMaintLogAttachment,
   TypeTblComponentUnit,
-  TypeTblFailureReports,
+  TypeTblFailureReport,
 } from "@/core/api/generated/api";
 
 interface TabFailureReportProps {
@@ -23,7 +23,7 @@ interface TabFailureReportProps {
 const TabFailureReport = ({ componentUnit, label }: TabFailureReportProps) => {
   const compId = componentUnit?.compId;
 
-  const [selectedRow, setSelectedRow] = useState<TypeTblFailureReports | null>(
+  const [selectedRow, setSelectedRow] = useState<TypeTblFailureReport | null>(
     null,
   );
   const [dialogs, setDialogs] = useState({
@@ -31,7 +31,7 @@ const TabFailureReport = ({ componentUnit, label }: TabFailureReportProps) => {
   });
 
   const handleRowClick = useCallback(
-    ({ row }: { row: TypeTblFailureReports }) => {
+    ({ row }: { row: TypeTblFailureReport }) => {
       if (row.failureReportId === selectedRow?.failureReportId) {
         setSelectedRow(null);
         return;
@@ -48,7 +48,7 @@ const TabFailureReport = ({ componentUnit, label }: TabFailureReportProps) => {
     setDialogs((p) => ({ ...p, [key]: false }));
 
   const getAll = useCallback(() => {
-    return tblFailureReports.getAll({
+    return tblFailureReport.getAll({
       include: {
         tblMaintLog: {
           include: {
@@ -77,7 +77,7 @@ const TabFailureReport = ({ componentUnit, label }: TabFailureReportProps) => {
 
   const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
-    tblFailureReports.getById,
+    tblFailureReport.getById,
     "failureReportId",
     !!compId,
   );
@@ -118,9 +118,10 @@ const TabFailureReport = ({ componentUnit, label }: TabFailureReportProps) => {
         />
       </Splitter>
       <FailureReportUpsert
+        entityName="Failure Report"
         open={dialogs.upsert}
         mode={"update"}
-        failureReportId={selectedRow?.failureReportId}
+        recordId={selectedRow?.failureReportId!}
         onClose={() => closeDialog("upsert")}
         onSuccess={handleSucessUpsert}
       />

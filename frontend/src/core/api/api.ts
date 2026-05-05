@@ -5,6 +5,7 @@ import {
   TypeMaintLogSpareBySpareUnitId,
   TypeStatistics,
 } from "./api.types";
+import { TypeTblCompJobCounterAlert } from "./generated/api";
 
 export const generateWorkOrder = (userId: number) =>
   api.post(`/tblWorkOrder/generate`, {
@@ -47,5 +48,5 @@ export const getMaintLogContext = async (
 export const getStatistics = (): Promise<TypeStatistics> =>
   api.get(`/statistics/`);
 
-export const getCountersAlert = (): Promise<TypeStatistics> =>
+export const getCountersAlert = (): Promise<TypeTblCompJobCounterAlert> =>
   api.get(`/tblCompJobCounter/alert`);

@@ -1,12 +1,14 @@
 import DataGridActionBar from "@/shared/components/dataGrid/DataGridActionBar";
-import FilterListIcon from "@mui/icons-material/FilterList";
+import FilterList from "@mui/icons-material/FilterList";
+import Badge from "@mui/material/Badge";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import PrintIcon from "@mui/icons-material/Print";
-import { TypeTblFailureReports } from "@/core/api/generated/api";
+import { TypeTblFailureReport } from "@/core/api/generated/api";
 
 type Props = {
-  selectedRow: TypeTblFailureReports | null;
+  selectedRow: TypeTblFailureReport | null;
+  hasFilter: boolean;
   onFilter: () => void;
   onPrint: () => void;
   onClose: () => void;
@@ -14,6 +16,7 @@ type Props = {
 };
 
 export default function FailureReportActions({
+  hasFilter,
   selectedRow,
   onFilter,
   onPrint,
@@ -26,7 +29,11 @@ export default function FailureReportActions({
   const actions = [
     {
       label: "Filter",
-      icon: <FilterListIcon />,
+      icon: (
+        <Badge color="warning" variant="dot" invisible={!hasFilter}>
+          <FilterList fontSize="small" />
+        </Badge>
+      ),
       onClick: onFilter,
     },
     {

@@ -119,9 +119,14 @@ for (const [resource, ops] of Object.entries(resourcesMap)) {
 
   // update - supports: include, select
   const putOp = ops.put?.find((x) => /By[A-Z].*Id$/.test(x)) || ops.put?.[0];
+  const queryType = getByIdOp;
+
+  const queryParam = queryType
+    ? `query?: DynamicQuery<'${queryType}'>`
+    : `query?: never`;
   if (putOp)
-    output += `  update: (id: number, data: DynamicUpdate<'${putOp}'>, query?: DynamicQuery<'${getByIdOp}'>) =>
-    api.put<DynamicResponse<'${putOp}'>>(\`/${resource}/\${id}\`, { data, params: stringifyQuery(query) }),\n`;
+    output += `  update: (id: number, data: DynamicUpdate<'${putOp}'>, ${queryParam}) =>
+    api.put<DynamicResponse<'${putOp}'>>(\`/${resource}/\${id}\`, { data, params: stringifyQuery(${queryParam ? "query" : "{}"}) }),\n`;
 
   const delOps = ops.delete || [];
   const delById = delOps.find((x) => /By[A-Z].*Id$/.test(x));

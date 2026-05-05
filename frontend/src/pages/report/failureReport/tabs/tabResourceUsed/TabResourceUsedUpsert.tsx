@@ -9,7 +9,6 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { buildRelation } from "@/core/helper";
 import { useAtomValue } from "jotai";
-import { atomInitData } from "../../FailureReportAtom";
 import {
   tblEmployee,
   tblLogDiscipline,
@@ -34,6 +33,7 @@ type Props = {
   open: boolean;
   mode: "create" | "update";
   recordId?: number | null;
+  maintLogId?: number;
   onClose: () => void;
   onSuccess: (data: TypeTblLogDiscipline) => void;
 };
@@ -42,14 +42,14 @@ function TabResourceUsedUpsert({
   open,
   mode,
   recordId,
+  maintLogId,
   onClose,
   onSuccess,
 }: Props) {
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const { maintLog } = useAtomValue(atomInitData);
 
-  const maintLogId = maintLog?.maintLogId;
+  if (!maintLogId) return;
 
   const defaultValues: StepResourceUsedFormValues = {
     employee: null,

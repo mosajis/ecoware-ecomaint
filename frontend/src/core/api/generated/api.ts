@@ -623,22 +623,32 @@ export const tblFailureGroupFollow = {
     api.delete<DynamicResponse<'deleteTblFailureGroupFollow'>>('/tblFailureGroupFollow', { params: stringifyQuery(query) }),
 };
 
-export type TypeTblFailureReports = DynamicResponse<'getTblFailureReports'>['items'][0];
-export const tblFailureReports = {
-  getAll: (query?: DynamicQuery<'getTblFailureReports'>) =>
-    api.get<DynamicResponse<'getTblFailureReports'>>('/tblFailureReports', { params: stringifyQuery(query) }),
-  getById: (id: number, query?: DynamicQuery<'getTblFailureReportsByFailureReportId'>) =>
-    api.get<DynamicResponse<'getTblFailureReportsByFailureReportId'>>(`/tblFailureReports/${id}`, { params: stringifyQuery(query) }),
-  count: (query?: DynamicQuery<'getTblFailureReportsCount'>) =>
-    api.get<DynamicResponse<'getTblFailureReportsCount'>>('/tblFailureReports/count', { params: stringifyQuery(query) }),
-  create: (data: DynamicCreate<'postTblFailureReports'>) =>
-    api.post<DynamicResponse<'postTblFailureReports'>>('/tblFailureReports', { data }),
-  update: (id: number, data: DynamicUpdate<'putTblFailureReportsByFailureReportId'>, query?: DynamicQuery<'getTblFailureReportsByFailureReportId'>) =>
-    api.put<DynamicResponse<'putTblFailureReportsByFailureReportId'>>(`/tblFailureReports/${id}`, { data, params: stringifyQuery(query) }),
-  deleteById: (id: number, query?: DynamicQuery<'deleteTblFailureReportsByFailureReportId'>) =>
-    api.delete<DynamicResponse<'deleteTblFailureReportsByFailureReportId'>>(`/tblFailureReports/${id}`, { params: stringifyQuery(query) }),
-  deleteAll: (query?: DynamicQuery<'deleteTblFailureReports'>) =>
-    api.delete<DynamicResponse<'deleteTblFailureReports'>>('/tblFailureReports', { params: stringifyQuery(query) }),
+export type TypeTblFailureReport = DynamicResponse<'getTblFailureReport'>['items'][0];
+export const tblFailureReport = {
+  getAll: (query?: DynamicQuery<'getTblFailureReport'>) =>
+    api.get<DynamicResponse<'getTblFailureReport'>>('/tblFailureReport', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblFailureReportByFailureReportId'>) =>
+    api.get<DynamicResponse<'getTblFailureReportByFailureReportId'>>(`/tblFailureReport/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblFailureReportCount'>) =>
+    api.get<DynamicResponse<'getTblFailureReportCount'>>('/tblFailureReport/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblFailureReport'>) =>
+    api.post<DynamicResponse<'postTblFailureReport'>>('/tblFailureReport', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblFailureReportByFailureReportId'>, query?: DynamicQuery<'getTblFailureReportByFailureReportId'>) =>
+    api.put<DynamicResponse<'putTblFailureReportByFailureReportId'>>(`/tblFailureReport/${id}`, { data, params: stringifyQuery(query) }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblFailureReportByFailureReportId'>) =>
+    api.delete<DynamicResponse<'deleteTblFailureReportByFailureReportId'>>(`/tblFailureReport/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblFailureReport'>) =>
+    api.delete<DynamicResponse<'deleteTblFailureReport'>>('/tblFailureReport', { params: stringifyQuery(query) }),
+};
+
+export const tblFailureReportFull = {
+  create: (data: DynamicCreate<'postTblFailureReportFull'>) =>
+    api.post<DynamicResponse<'postTblFailureReportFull'>>('/tblFailureReportFull', { data }),
+};
+
+export const tblFailureReportByFailureReportIdFull = {
+  update: (id: number, data: DynamicUpdate<'putTblFailureReportByFailureReportIdFull'>, query?: never) =>
+    api.put<DynamicResponse<'putTblFailureReportByFailureReportIdFull'>>(`/tblFailureReportByFailureReportIdFull/${id}`, { data, params: stringifyQuery(query) }),
 };
 
 export type TypeTblFailureReportWorkShop = DynamicResponse<'getTblFailureReportWorkShop'>['items'][0];

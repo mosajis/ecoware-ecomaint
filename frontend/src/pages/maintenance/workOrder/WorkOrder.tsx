@@ -7,6 +7,7 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import TabsComponent from "./WorkOrderTabs";
 import WorkOrderDialogReschedule from "./WorkOrderDialogReschedule";
 import ReportWorkDialog from "../reportWork/ReportWorkDialog";
+import WorkOrderDetailDialog from "./WorkOrderDialogDetail";
 import { useCallback, useMemo, useState } from "react";
 import { columns } from "./WorkOrderColumns";
 import { tblWorkOrder, TypeTblWorkOrder } from "@/core/api/generated/api";
@@ -19,7 +20,6 @@ import { GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
 import { TypeTblWorkOrderWithRels } from "./types";
 import { atomUser } from "@/pages/auth/auth.atom";
 import { useDialogs } from "@/shared/hooks/useDialogs";
-import WorkOrderDetailDialog from "./WorkOrderDialogDetail";
 
 const getRowId = (row: TypeTblWorkOrder) => row.workOrderId;
 

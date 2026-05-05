@@ -1888,7 +1888,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/tblFailureReports/": {
+    "/tblFailureReport/": {
         parameters: {
             query?: never;
             header?: never;
@@ -1896,18 +1896,18 @@ export interface paths {
             cookie?: never;
         };
         /** Get all */
-        get: operations["getTblFailureReports"];
+        get: operations["getTblFailureReport"];
         put?: never;
         /** Create */
-        post: operations["postTblFailureReports"];
+        post: operations["postTblFailureReport"];
         /** Delete all */
-        delete: operations["deleteTblFailureReports"];
+        delete: operations["deleteTblFailureReport"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/tblFailureReports/{failureReportId}": {
+    "/tblFailureReport/{failureReportId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -1915,18 +1915,18 @@ export interface paths {
             cookie?: never;
         };
         /** Get one */
-        get: operations["getTblFailureReportsByFailureReportId"];
+        get: operations["getTblFailureReportByFailureReportId"];
         /** Update */
-        put: operations["putTblFailureReportsByFailureReportId"];
+        put: operations["putTblFailureReportByFailureReportId"];
         post?: never;
         /** Delete one */
-        delete: operations["deleteTblFailureReportsByFailureReportId"];
+        delete: operations["deleteTblFailureReportByFailureReportId"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/tblFailureReports/count": {
+    "/tblFailureReport/count": {
         parameters: {
             query?: never;
             header?: never;
@@ -1934,8 +1934,42 @@ export interface paths {
             cookie?: never;
         };
         /** Count */
-        get: operations["getTblFailureReportsCount"];
+        get: operations["getTblFailureReportCount"];
         put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblFailureReport/full": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create Full */
+        post: operations["postTblFailureReportFull"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblFailureReport/{failureReportId}/full": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Update Full */
+        put: operations["putTblFailureReportByFailureReportIdFull"];
         post?: never;
         delete?: never;
         options?: never;
@@ -10684,13 +10718,57 @@ export interface operations {
     };
     getTblCompJobCounterAlert: {
         parameters: {
-            query?: never;
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
             header?: never;
             path?: never;
             cookie?: never;
         };
         requestBody?: never;
-        responses: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            start: {
+                                lastDoneCount: (number | null) | null;
+                                lastDone?: (string | null) | null;
+                            };
+                            value: {
+                                currentValue?: (number | null) | null;
+                                currentDate?: (string | null) | null;
+                            };
+                            end: {
+                                nextDueCount: (number | null) | null;
+                                nextDueDate?: (string | null) | null;
+                            };
+                            info: {
+                                componentName?: (string | null) | null;
+                                jobDescTitle: string;
+                                frequency?: (number | null) | null;
+                                status: (boolean | null) | null;
+                            };
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
     };
     getTblCompJobMeasurePoint: {
         parameters: {
@@ -26603,7 +26681,6 @@ export interface operations {
                                 discId: null | number;
                                 timeSpent: null | number;
                                 orderNo: null | number;
-                                createdEmployeeId: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
                             }[];
@@ -26920,7 +26997,6 @@ export interface operations {
                             discId: null | number;
                             timeSpent: null | number;
                             orderNo: null | number;
-                            createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
@@ -27139,7 +27215,6 @@ export interface operations {
                             discId: null | number;
                             timeSpent: null | number;
                             orderNo: null | number;
-                            createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
@@ -27519,7 +27594,6 @@ export interface operations {
                             discId: null | number;
                             timeSpent: null | number;
                             orderNo: null | number;
-                            createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
@@ -27706,7 +27780,6 @@ export interface operations {
                             discId: null | number;
                             timeSpent: null | number;
                             orderNo: null | number;
-                            createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
@@ -28613,7 +28686,7 @@ export interface operations {
                                 failureReportId: number;
                                 maintLogId: null | number;
                                 title: null | string;
-                                failureNumber: null | number;
+                                failureNumber: null | string;
                                 locationId: null | number;
                                 failureSeverityLevelId: null | number;
                                 failureStatusId: null | number;
@@ -28659,25 +28732,13 @@ export interface operations {
                                 lastUpdate: null | string;
                                 instId: null | number;
                             }[];
-                            tblLogDisciplineTblLogDisciplineEmployeeIdTotblEmployees?: {
+                            tblLogDisciplines?: {
                                 logDiscId: number;
                                 maintLogId: null | number;
                                 employeeId: null | number;
                                 discId: null | number;
                                 timeSpent: null | number;
                                 orderNo: null | number;
-                                createdEmployeeId: null | number;
-                                lastUpdate: null | string;
-                                instId: null | number;
-                            }[];
-                            tblLogDisciplineTblLogDisciplineCreatedEmployeeIdTotblEmployees?: {
-                                logDiscId: number;
-                                maintLogId: null | number;
-                                employeeId: null | number;
-                                discId: null | number;
-                                timeSpent: null | number;
-                                orderNo: null | number;
-                                createdEmployeeId: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
                             }[];
@@ -29215,14 +29276,9 @@ export interface operations {
                             logCounterId: number;
                         }[];
                     };
-                    tblLogDisciplineTblLogDisciplineEmployeeIdTotblEmployees?: {
+                    tblLogDisciplines?: {
                         connect: {
-                            id: number;
-                        }[];
-                    };
-                    tblLogDisciplineTblLogDisciplineCreatedEmployeeIdTotblEmployees?: {
-                        connect: {
-                            id: number;
+                            logDiscId: number;
                         }[];
                     };
                     tblLoginAudits?: {
@@ -29432,14 +29488,9 @@ export interface operations {
                             logCounterId: number;
                         }[];
                     };
-                    tblLogDisciplineTblLogDisciplineEmployeeIdTotblEmployees?: {
+                    tblLogDisciplines?: {
                         connect: {
-                            id: number;
-                        }[];
-                    };
-                    tblLogDisciplineTblLogDisciplineCreatedEmployeeIdTotblEmployees?: {
-                        connect: {
-                            id: number;
+                            logDiscId: number;
                         }[];
                     };
                     tblLoginAudits?: {
@@ -29649,14 +29700,9 @@ export interface operations {
                             logCounterId: number;
                         }[];
                     };
-                    tblLogDisciplineTblLogDisciplineEmployeeIdTotblEmployees?: {
+                    tblLogDisciplines?: {
                         connect: {
-                            id: number;
-                        }[];
-                    };
-                    tblLogDisciplineTblLogDisciplineCreatedEmployeeIdTotblEmployees?: {
-                        connect: {
-                            id: number;
+                            logDiscId: number;
                         }[];
                     };
                     tblLoginAudits?: {
@@ -30013,7 +30059,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -30059,25 +30105,13 @@ export interface operations {
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
-                        tblLogDisciplineTblLogDisciplineEmployeeIdTotblEmployees?: {
+                        tblLogDisciplines?: {
                             logDiscId: number;
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
                             timeSpent: null | number;
                             orderNo: null | number;
-                            createdEmployeeId: null | number;
-                            lastUpdate: null | string;
-                            instId: null | number;
-                        }[];
-                        tblLogDisciplineTblLogDisciplineCreatedEmployeeIdTotblEmployees?: {
-                            logDiscId: number;
-                            maintLogId: null | number;
-                            employeeId: null | number;
-                            discId: null | number;
-                            timeSpent: null | number;
-                            orderNo: null | number;
-                            createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
@@ -30790,7 +30824,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -30836,25 +30870,13 @@ export interface operations {
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
-                        tblLogDisciplineTblLogDisciplineEmployeeIdTotblEmployees?: {
+                        tblLogDisciplines?: {
                             logDiscId: number;
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
                             timeSpent: null | number;
                             orderNo: null | number;
-                            createdEmployeeId: null | number;
-                            lastUpdate: null | string;
-                            instId: null | number;
-                        }[];
-                        tblLogDisciplineTblLogDisciplineCreatedEmployeeIdTotblEmployees?: {
-                            logDiscId: number;
-                            maintLogId: null | number;
-                            employeeId: null | number;
-                            discId: null | number;
-                            timeSpent: null | number;
-                            orderNo: null | number;
-                            createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
@@ -31450,17 +31472,9 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblLogDisciplineTblLogDisciplineEmployeeIdTotblEmployees?: {
+                    tblLogDisciplines?: {
                         connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblLogDisciplineTblLogDisciplineCreatedEmployeeIdTotblEmployees?: {
-                        connect?: {
-                            id: number;
+                            logDiscId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -31791,17 +31805,9 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblLogDisciplineTblLogDisciplineEmployeeIdTotblEmployees?: {
+                    tblLogDisciplines?: {
                         connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblLogDisciplineTblLogDisciplineCreatedEmployeeIdTotblEmployees?: {
-                        connect?: {
-                            id: number;
+                            logDiscId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -32132,17 +32138,9 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblLogDisciplineTblLogDisciplineEmployeeIdTotblEmployees?: {
+                    tblLogDisciplines?: {
                         connect?: {
-                            id: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblLogDisciplineTblLogDisciplineCreatedEmployeeIdTotblEmployees?: {
-                        connect?: {
-                            id: number;
+                            logDiscId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -32562,7 +32560,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -32608,25 +32606,13 @@ export interface operations {
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
-                        tblLogDisciplineTblLogDisciplineEmployeeIdTotblEmployees?: {
+                        tblLogDisciplines?: {
                             logDiscId: number;
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
                             timeSpent: null | number;
                             orderNo: null | number;
-                            createdEmployeeId: null | number;
-                            lastUpdate: null | string;
-                            instId: null | number;
-                        }[];
-                        tblLogDisciplineTblLogDisciplineCreatedEmployeeIdTotblEmployees?: {
-                            logDiscId: number;
-                            maintLogId: null | number;
-                            employeeId: null | number;
-                            discId: null | number;
-                            timeSpent: null | number;
-                            orderNo: null | number;
-                            createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
@@ -33307,7 +33293,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -33353,25 +33339,13 @@ export interface operations {
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
-                        tblLogDisciplineTblLogDisciplineEmployeeIdTotblEmployees?: {
+                        tblLogDisciplines?: {
                             logDiscId: number;
                             maintLogId: null | number;
                             employeeId: null | number;
                             discId: null | number;
                             timeSpent: null | number;
                             orderNo: null | number;
-                            createdEmployeeId: null | number;
-                            lastUpdate: null | string;
-                            instId: null | number;
-                        }[];
-                        tblLogDisciplineTblLogDisciplineCreatedEmployeeIdTotblEmployees?: {
-                            logDiscId: number;
-                            maintLogId: null | number;
-                            employeeId: null | number;
-                            discId: null | number;
-                            timeSpent: null | number;
-                            orderNo: null | number;
-                            createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
@@ -33852,7 +33826,7 @@ export interface operations {
                                 failureReportId: number;
                                 maintLogId: null | number;
                                 title: null | string;
-                                failureNumber: null | number;
+                                failureNumber: null | string;
                                 locationId: null | number;
                                 failureSeverityLevelId: null | number;
                                 failureStatusId: null | number;
@@ -33923,7 +33897,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -33998,7 +33972,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -34078,7 +34052,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -34121,7 +34095,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -34169,7 +34143,7 @@ export interface operations {
             };
         };
     };
-    getTblFailureReports: {
+    getTblFailureReport: {
         parameters: {
             query?: {
                 page?: number;
@@ -34198,7 +34172,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -34300,7 +34274,7 @@ export interface operations {
             };
         };
     };
-    postTblFailureReports: {
+    postTblFailureReport: {
         parameters: {
             query?: never;
             header?: never;
@@ -34311,7 +34285,7 @@ export interface operations {
             content: {
                 "application/json": {
                     title?: null | string;
-                    failureNumber?: null | number;
+                    failureNumber?: null | string;
                     requestNo?: null | string;
                     nextFollowDate?: null | string;
                     closedDateTime?: null | string;
@@ -34359,7 +34333,7 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     title?: null | string;
-                    failureNumber?: null | number;
+                    failureNumber?: null | string;
                     requestNo?: null | string;
                     nextFollowDate?: null | string;
                     closedDateTime?: null | string;
@@ -34407,7 +34381,7 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     title?: null | string;
-                    failureNumber?: null | number;
+                    failureNumber?: null | string;
                     requestNo?: null | string;
                     nextFollowDate?: null | string;
                     closedDateTime?: null | string;
@@ -34466,7 +34440,7 @@ export interface operations {
                         failureReportId: number;
                         maintLogId: null | number;
                         title: null | string;
-                        failureNumber: null | number;
+                        failureNumber: null | string;
                         locationId: null | number;
                         failureSeverityLevelId: null | number;
                         failureStatusId: null | number;
@@ -34563,7 +34537,7 @@ export interface operations {
             };
         };
     };
-    deleteTblFailureReports: {
+    deleteTblFailureReport: {
         parameters: {
             query?: {
                 page?: number;
@@ -34594,7 +34568,7 @@ export interface operations {
             };
         };
     };
-    getTblFailureReportsByFailureReportId: {
+    getTblFailureReportByFailureReportId: {
         parameters: {
             query?: {
                 include?: string;
@@ -34618,7 +34592,7 @@ export interface operations {
                         failureReportId: number;
                         maintLogId: null | number;
                         title: null | string;
-                        failureNumber: null | number;
+                        failureNumber: null | string;
                         locationId: null | number;
                         failureSeverityLevelId: null | number;
                         failureStatusId: null | number;
@@ -34715,7 +34689,7 @@ export interface operations {
             };
         };
     };
-    putTblFailureReportsByFailureReportId: {
+    putTblFailureReportByFailureReportId: {
         parameters: {
             query?: {
                 include?: string;
@@ -34731,7 +34705,7 @@ export interface operations {
             content: {
                 "application/json": {
                     title?: null | string;
-                    failureNumber?: null | number;
+                    failureNumber?: null | string;
                     requestNo?: null | string;
                     nextFollowDate?: null | string;
                     closedDateTime?: null | string;
@@ -34789,7 +34763,7 @@ export interface operations {
                 };
                 "application/x-www-form-urlencoded": {
                     title?: null | string;
-                    failureNumber?: null | number;
+                    failureNumber?: null | string;
                     requestNo?: null | string;
                     nextFollowDate?: null | string;
                     closedDateTime?: null | string;
@@ -34847,7 +34821,7 @@ export interface operations {
                 };
                 "multipart/form-data": {
                     title?: null | string;
-                    failureNumber?: null | number;
+                    failureNumber?: null | string;
                     requestNo?: null | string;
                     nextFollowDate?: null | string;
                     closedDateTime?: null | string;
@@ -34916,7 +34890,7 @@ export interface operations {
                         failureReportId: number;
                         maintLogId: null | number;
                         title: null | string;
-                        failureNumber: null | number;
+                        failureNumber: null | string;
                         locationId: null | number;
                         failureSeverityLevelId: null | number;
                         failureStatusId: null | number;
@@ -35013,7 +34987,7 @@ export interface operations {
             };
         };
     };
-    deleteTblFailureReportsByFailureReportId: {
+    deleteTblFailureReportByFailureReportId: {
         parameters: {
             query?: {
                 force?: boolean;
@@ -35036,7 +35010,7 @@ export interface operations {
                         failureReportId: number;
                         maintLogId: null | number;
                         title: null | string;
-                        failureNumber: null | number;
+                        failureNumber: null | string;
                         locationId: null | number;
                         failureSeverityLevelId: null | number;
                         failureStatusId: null | number;
@@ -35133,7 +35107,7 @@ export interface operations {
             };
         };
     };
-    getTblFailureReportsCount: {
+    getTblFailureReportCount: {
         parameters: {
             query?: {
                 page?: number;
@@ -35159,6 +35133,1167 @@ export interface operations {
                 content: {
                     "application/json": {
                         count: number;
+                    };
+                };
+            };
+        };
+    };
+    postTblFailureReportFull: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    maintLog: {
+                        totalDuration?: null | number;
+                        downTime?: null | number;
+                        dateDone?: null | string;
+                        frequency?: null | number;
+                        frequencyPeriod?: null | number;
+                        overdueCount?: null | number;
+                        unexpected?: null | number;
+                        reportedBy?: null | number;
+                        history?: null | string;
+                        reportedDate?: null | string;
+                        lastUpdate?: null | string;
+                        tblFailureReports?: {
+                            connect: {
+                                failureReportId: number;
+                            }[];
+                        };
+                        tblLogCounters?: {
+                            connect: {
+                                logCounterId: number;
+                            }[];
+                        };
+                        tblLogDisciplines?: {
+                            connect: {
+                                logDiscId: number;
+                            }[];
+                        };
+                        tblComponentUnit?: {
+                            connect: {
+                                compId: number;
+                            };
+                        };
+                        tblDiscipline?: {
+                            connect: {
+                                discId: number;
+                            };
+                        };
+                        tblEmployee?: {
+                            connect: {
+                                employeeId: number;
+                            };
+                        };
+                        tblFollowStatus?: {
+                            connect: {
+                                followStatusId: number;
+                            };
+                        };
+                        tblFunction?: {
+                            connect: {
+                                functionId: number;
+                            };
+                        };
+                        tblInstallation?: {
+                            connect: {
+                                instId: number;
+                            };
+                        };
+                        tblJobDescription?: {
+                            connect: {
+                                jobDescId: number;
+                            };
+                        };
+                        tblMaintCause?: {
+                            connect: {
+                                maintCauseId: number;
+                            };
+                        };
+                        tblMaintClass?: {
+                            connect: {
+                                maintClassId: number;
+                            };
+                        };
+                        tblMaintType?: {
+                            connect: {
+                                maintTypeId: number;
+                            };
+                        };
+                        tblPeriod?: {
+                            connect: {
+                                periodId: number;
+                            };
+                        };
+                        tblWorkOrder?: {
+                            connect: {
+                                workOrderId: number;
+                            };
+                        };
+                        tblMaintLogAttachments?: {
+                            connect: {
+                                maintLogAttachmentId: number;
+                            }[];
+                        };
+                        tblMaintLogFollows?: {
+                            connect: {
+                                followId: number;
+                            }[];
+                        };
+                        tblMaintLogSpares?: {
+                            connect: {
+                                maintLogSpareId: number;
+                            }[];
+                        };
+                    };
+                    failureReport: {
+                        title?: null | string;
+                        failureNumber?: null | string;
+                        requestNo?: null | string;
+                        nextFollowDate?: null | string;
+                        closedDateTime?: null | string;
+                        followDesc?: null | string;
+                        tblEmployee?: {
+                            connect: {
+                                employeeId: number;
+                            };
+                        };
+                        tblInstallation?: {
+                            connect: {
+                                instId: number;
+                            };
+                        };
+                        tblFailureGroupFollow?: {
+                            connect: {
+                                failureGroupFollowId: number;
+                            };
+                        };
+                        tblFailureStatus?: {
+                            connect: {
+                                failureStatusId: number;
+                            };
+                        };
+                        tblFailureSeverityLevel?: {
+                            connect: {
+                                failureSeverityLevelId: number;
+                            };
+                        };
+                        tblLocation?: {
+                            connect: {
+                                locationId: number;
+                            };
+                        };
+                        tblMaintLog?: {
+                            connect: {
+                                maintLogId: number;
+                            };
+                        };
+                        tblFailureReportWorkShops?: {
+                            connect: {
+                                failureReportWorkShopId: number;
+                            }[];
+                        };
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    maintLog: {
+                        totalDuration?: null | number;
+                        downTime?: null | number;
+                        dateDone?: null | string;
+                        frequency?: null | number;
+                        frequencyPeriod?: null | number;
+                        overdueCount?: null | number;
+                        unexpected?: null | number;
+                        reportedBy?: null | number;
+                        history?: null | string;
+                        reportedDate?: null | string;
+                        lastUpdate?: null | string;
+                        tblFailureReports?: {
+                            connect: {
+                                failureReportId: number;
+                            }[];
+                        };
+                        tblLogCounters?: {
+                            connect: {
+                                logCounterId: number;
+                            }[];
+                        };
+                        tblLogDisciplines?: {
+                            connect: {
+                                logDiscId: number;
+                            }[];
+                        };
+                        tblComponentUnit?: {
+                            connect: {
+                                compId: number;
+                            };
+                        };
+                        tblDiscipline?: {
+                            connect: {
+                                discId: number;
+                            };
+                        };
+                        tblEmployee?: {
+                            connect: {
+                                employeeId: number;
+                            };
+                        };
+                        tblFollowStatus?: {
+                            connect: {
+                                followStatusId: number;
+                            };
+                        };
+                        tblFunction?: {
+                            connect: {
+                                functionId: number;
+                            };
+                        };
+                        tblInstallation?: {
+                            connect: {
+                                instId: number;
+                            };
+                        };
+                        tblJobDescription?: {
+                            connect: {
+                                jobDescId: number;
+                            };
+                        };
+                        tblMaintCause?: {
+                            connect: {
+                                maintCauseId: number;
+                            };
+                        };
+                        tblMaintClass?: {
+                            connect: {
+                                maintClassId: number;
+                            };
+                        };
+                        tblMaintType?: {
+                            connect: {
+                                maintTypeId: number;
+                            };
+                        };
+                        tblPeriod?: {
+                            connect: {
+                                periodId: number;
+                            };
+                        };
+                        tblWorkOrder?: {
+                            connect: {
+                                workOrderId: number;
+                            };
+                        };
+                        tblMaintLogAttachments?: {
+                            connect: {
+                                maintLogAttachmentId: number;
+                            }[];
+                        };
+                        tblMaintLogFollows?: {
+                            connect: {
+                                followId: number;
+                            }[];
+                        };
+                        tblMaintLogSpares?: {
+                            connect: {
+                                maintLogSpareId: number;
+                            }[];
+                        };
+                    };
+                    failureReport: {
+                        title?: null | string;
+                        failureNumber?: null | string;
+                        requestNo?: null | string;
+                        nextFollowDate?: null | string;
+                        closedDateTime?: null | string;
+                        followDesc?: null | string;
+                        tblEmployee?: {
+                            connect: {
+                                employeeId: number;
+                            };
+                        };
+                        tblInstallation?: {
+                            connect: {
+                                instId: number;
+                            };
+                        };
+                        tblFailureGroupFollow?: {
+                            connect: {
+                                failureGroupFollowId: number;
+                            };
+                        };
+                        tblFailureStatus?: {
+                            connect: {
+                                failureStatusId: number;
+                            };
+                        };
+                        tblFailureSeverityLevel?: {
+                            connect: {
+                                failureSeverityLevelId: number;
+                            };
+                        };
+                        tblLocation?: {
+                            connect: {
+                                locationId: number;
+                            };
+                        };
+                        tblMaintLog?: {
+                            connect: {
+                                maintLogId: number;
+                            };
+                        };
+                        tblFailureReportWorkShops?: {
+                            connect: {
+                                failureReportWorkShopId: number;
+                            }[];
+                        };
+                    };
+                };
+                "multipart/form-data": {
+                    maintLog: {
+                        totalDuration?: null | number;
+                        downTime?: null | number;
+                        dateDone?: null | string;
+                        frequency?: null | number;
+                        frequencyPeriod?: null | number;
+                        overdueCount?: null | number;
+                        unexpected?: null | number;
+                        reportedBy?: null | number;
+                        history?: null | string;
+                        reportedDate?: null | string;
+                        lastUpdate?: null | string;
+                        tblFailureReports?: {
+                            connect: {
+                                failureReportId: number;
+                            }[];
+                        };
+                        tblLogCounters?: {
+                            connect: {
+                                logCounterId: number;
+                            }[];
+                        };
+                        tblLogDisciplines?: {
+                            connect: {
+                                logDiscId: number;
+                            }[];
+                        };
+                        tblComponentUnit?: {
+                            connect: {
+                                compId: number;
+                            };
+                        };
+                        tblDiscipline?: {
+                            connect: {
+                                discId: number;
+                            };
+                        };
+                        tblEmployee?: {
+                            connect: {
+                                employeeId: number;
+                            };
+                        };
+                        tblFollowStatus?: {
+                            connect: {
+                                followStatusId: number;
+                            };
+                        };
+                        tblFunction?: {
+                            connect: {
+                                functionId: number;
+                            };
+                        };
+                        tblInstallation?: {
+                            connect: {
+                                instId: number;
+                            };
+                        };
+                        tblJobDescription?: {
+                            connect: {
+                                jobDescId: number;
+                            };
+                        };
+                        tblMaintCause?: {
+                            connect: {
+                                maintCauseId: number;
+                            };
+                        };
+                        tblMaintClass?: {
+                            connect: {
+                                maintClassId: number;
+                            };
+                        };
+                        tblMaintType?: {
+                            connect: {
+                                maintTypeId: number;
+                            };
+                        };
+                        tblPeriod?: {
+                            connect: {
+                                periodId: number;
+                            };
+                        };
+                        tblWorkOrder?: {
+                            connect: {
+                                workOrderId: number;
+                            };
+                        };
+                        tblMaintLogAttachments?: {
+                            connect: {
+                                maintLogAttachmentId: number;
+                            }[];
+                        };
+                        tblMaintLogFollows?: {
+                            connect: {
+                                followId: number;
+                            }[];
+                        };
+                        tblMaintLogSpares?: {
+                            connect: {
+                                maintLogSpareId: number;
+                            }[];
+                        };
+                    };
+                    failureReport: {
+                        title?: null | string;
+                        failureNumber?: null | string;
+                        requestNo?: null | string;
+                        nextFollowDate?: null | string;
+                        closedDateTime?: null | string;
+                        followDesc?: null | string;
+                        tblEmployee?: {
+                            connect: {
+                                employeeId: number;
+                            };
+                        };
+                        tblInstallation?: {
+                            connect: {
+                                instId: number;
+                            };
+                        };
+                        tblFailureGroupFollow?: {
+                            connect: {
+                                failureGroupFollowId: number;
+                            };
+                        };
+                        tblFailureStatus?: {
+                            connect: {
+                                failureStatusId: number;
+                            };
+                        };
+                        tblFailureSeverityLevel?: {
+                            connect: {
+                                failureSeverityLevelId: number;
+                            };
+                        };
+                        tblLocation?: {
+                            connect: {
+                                locationId: number;
+                            };
+                        };
+                        tblMaintLog?: {
+                            connect: {
+                                maintLogId: number;
+                            };
+                        };
+                        tblFailureReportWorkShops?: {
+                            connect: {
+                                failureReportWorkShopId: number;
+                            }[];
+                        };
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureReportId: number;
+                        maintLogId: null | number;
+                        title: null | string;
+                        failureNumber: null | string;
+                        locationId: null | number;
+                        failureSeverityLevelId: null | number;
+                        failureStatusId: null | number;
+                        failureGroupFollowId: null | number;
+                        requestNo: null | string;
+                        nextFollowDate: null | string;
+                        closedEmployeeId: null | number;
+                        closedDateTime: null | string;
+                        followDesc: null | string;
+                        instId: null | number;
+                        tblEmployee?: null | ({
+                            employeeId: number;
+                            code: null | string;
+                            lastName: null | string;
+                            firstName: null | string;
+                            discId: null | number;
+                            title: null | string;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblInstallation?: null | ({
+                            instId: number;
+                            name: string;
+                            orderNo: null | number;
+                            caption: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblFailureGroupFollow?: null | ({
+                            failureGroupFollowId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblFailureStatus?: null | ({
+                            failureStatusId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblFailureSeverityLevel?: null | ({
+                            failureSeverityLevelId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblLocation?: null | ({
+                            locationId: number;
+                            parentLocationId: null | number;
+                            name: null | string;
+                            locationCode: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblMaintLog?: null | ({
+                            maintLogId: number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            maintClassId: null | number;
+                            functionId: null | number;
+                            jobDescId: null | number;
+                            workOrderId: null | number;
+                            compId: null | number;
+                            totalDuration: null | number;
+                            downTime: null | number;
+                            dateDone: null | string;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            overdueCount: null | number;
+                            unexpected: null | number;
+                            reportedBy: null | number;
+                            history: null | string;
+                            workOrderStatusId: null | number;
+                            followStatusId: null | number;
+                            discId: null | number;
+                            reportedDate: null | string;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                            updatedEmployeeId: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblFailureReportWorkShops?: {
+                            failureReportWorkShopId: number;
+                            failureReportId: number;
+                            workShopId: number;
+                            instId: null | number;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    putTblFailureReportByFailureReportIdFull: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                failureReportId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    maintLog: {
+                        totalDuration?: null | number;
+                        downTime?: null | number;
+                        dateDone?: null | string;
+                        frequency?: null | number;
+                        frequencyPeriod?: null | number;
+                        overdueCount?: null | number;
+                        unexpected?: null | number;
+                        reportedBy?: null | number;
+                        history?: null | string;
+                        reportedDate?: null | string;
+                        lastUpdate?: null | string;
+                        tblFailureReports?: {
+                            connect: {
+                                failureReportId: number;
+                            }[];
+                        };
+                        tblLogCounters?: {
+                            connect: {
+                                logCounterId: number;
+                            }[];
+                        };
+                        tblLogDisciplines?: {
+                            connect: {
+                                logDiscId: number;
+                            }[];
+                        };
+                        tblComponentUnit?: {
+                            connect: {
+                                compId: number;
+                            };
+                        };
+                        tblDiscipline?: {
+                            connect: {
+                                discId: number;
+                            };
+                        };
+                        tblEmployee?: {
+                            connect: {
+                                employeeId: number;
+                            };
+                        };
+                        tblFollowStatus?: {
+                            connect: {
+                                followStatusId: number;
+                            };
+                        };
+                        tblFunction?: {
+                            connect: {
+                                functionId: number;
+                            };
+                        };
+                        tblInstallation?: {
+                            connect: {
+                                instId: number;
+                            };
+                        };
+                        tblJobDescription?: {
+                            connect: {
+                                jobDescId: number;
+                            };
+                        };
+                        tblMaintCause?: {
+                            connect: {
+                                maintCauseId: number;
+                            };
+                        };
+                        tblMaintClass?: {
+                            connect: {
+                                maintClassId: number;
+                            };
+                        };
+                        tblMaintType?: {
+                            connect: {
+                                maintTypeId: number;
+                            };
+                        };
+                        tblPeriod?: {
+                            connect: {
+                                periodId: number;
+                            };
+                        };
+                        tblWorkOrder?: {
+                            connect: {
+                                workOrderId: number;
+                            };
+                        };
+                        tblMaintLogAttachments?: {
+                            connect: {
+                                maintLogAttachmentId: number;
+                            }[];
+                        };
+                        tblMaintLogFollows?: {
+                            connect: {
+                                followId: number;
+                            }[];
+                        };
+                        tblMaintLogSpares?: {
+                            connect: {
+                                maintLogSpareId: number;
+                            }[];
+                        };
+                    };
+                    failureReport: {
+                        title?: null | string;
+                        failureNumber?: null | string;
+                        requestNo?: null | string;
+                        nextFollowDate?: null | string;
+                        closedDateTime?: null | string;
+                        followDesc?: null | string;
+                        tblEmployee?: {
+                            connect: {
+                                employeeId: number;
+                            };
+                        };
+                        tblInstallation?: {
+                            connect: {
+                                instId: number;
+                            };
+                        };
+                        tblFailureGroupFollow?: {
+                            connect: {
+                                failureGroupFollowId: number;
+                            };
+                        };
+                        tblFailureStatus?: {
+                            connect: {
+                                failureStatusId: number;
+                            };
+                        };
+                        tblFailureSeverityLevel?: {
+                            connect: {
+                                failureSeverityLevelId: number;
+                            };
+                        };
+                        tblLocation?: {
+                            connect: {
+                                locationId: number;
+                            };
+                        };
+                        tblMaintLog?: {
+                            connect: {
+                                maintLogId: number;
+                            };
+                        };
+                        tblFailureReportWorkShops?: {
+                            connect: {
+                                failureReportWorkShopId: number;
+                            }[];
+                        };
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    maintLog: {
+                        totalDuration?: null | number;
+                        downTime?: null | number;
+                        dateDone?: null | string;
+                        frequency?: null | number;
+                        frequencyPeriod?: null | number;
+                        overdueCount?: null | number;
+                        unexpected?: null | number;
+                        reportedBy?: null | number;
+                        history?: null | string;
+                        reportedDate?: null | string;
+                        lastUpdate?: null | string;
+                        tblFailureReports?: {
+                            connect: {
+                                failureReportId: number;
+                            }[];
+                        };
+                        tblLogCounters?: {
+                            connect: {
+                                logCounterId: number;
+                            }[];
+                        };
+                        tblLogDisciplines?: {
+                            connect: {
+                                logDiscId: number;
+                            }[];
+                        };
+                        tblComponentUnit?: {
+                            connect: {
+                                compId: number;
+                            };
+                        };
+                        tblDiscipline?: {
+                            connect: {
+                                discId: number;
+                            };
+                        };
+                        tblEmployee?: {
+                            connect: {
+                                employeeId: number;
+                            };
+                        };
+                        tblFollowStatus?: {
+                            connect: {
+                                followStatusId: number;
+                            };
+                        };
+                        tblFunction?: {
+                            connect: {
+                                functionId: number;
+                            };
+                        };
+                        tblInstallation?: {
+                            connect: {
+                                instId: number;
+                            };
+                        };
+                        tblJobDescription?: {
+                            connect: {
+                                jobDescId: number;
+                            };
+                        };
+                        tblMaintCause?: {
+                            connect: {
+                                maintCauseId: number;
+                            };
+                        };
+                        tblMaintClass?: {
+                            connect: {
+                                maintClassId: number;
+                            };
+                        };
+                        tblMaintType?: {
+                            connect: {
+                                maintTypeId: number;
+                            };
+                        };
+                        tblPeriod?: {
+                            connect: {
+                                periodId: number;
+                            };
+                        };
+                        tblWorkOrder?: {
+                            connect: {
+                                workOrderId: number;
+                            };
+                        };
+                        tblMaintLogAttachments?: {
+                            connect: {
+                                maintLogAttachmentId: number;
+                            }[];
+                        };
+                        tblMaintLogFollows?: {
+                            connect: {
+                                followId: number;
+                            }[];
+                        };
+                        tblMaintLogSpares?: {
+                            connect: {
+                                maintLogSpareId: number;
+                            }[];
+                        };
+                    };
+                    failureReport: {
+                        title?: null | string;
+                        failureNumber?: null | string;
+                        requestNo?: null | string;
+                        nextFollowDate?: null | string;
+                        closedDateTime?: null | string;
+                        followDesc?: null | string;
+                        tblEmployee?: {
+                            connect: {
+                                employeeId: number;
+                            };
+                        };
+                        tblInstallation?: {
+                            connect: {
+                                instId: number;
+                            };
+                        };
+                        tblFailureGroupFollow?: {
+                            connect: {
+                                failureGroupFollowId: number;
+                            };
+                        };
+                        tblFailureStatus?: {
+                            connect: {
+                                failureStatusId: number;
+                            };
+                        };
+                        tblFailureSeverityLevel?: {
+                            connect: {
+                                failureSeverityLevelId: number;
+                            };
+                        };
+                        tblLocation?: {
+                            connect: {
+                                locationId: number;
+                            };
+                        };
+                        tblMaintLog?: {
+                            connect: {
+                                maintLogId: number;
+                            };
+                        };
+                        tblFailureReportWorkShops?: {
+                            connect: {
+                                failureReportWorkShopId: number;
+                            }[];
+                        };
+                    };
+                };
+                "multipart/form-data": {
+                    maintLog: {
+                        totalDuration?: null | number;
+                        downTime?: null | number;
+                        dateDone?: null | string;
+                        frequency?: null | number;
+                        frequencyPeriod?: null | number;
+                        overdueCount?: null | number;
+                        unexpected?: null | number;
+                        reportedBy?: null | number;
+                        history?: null | string;
+                        reportedDate?: null | string;
+                        lastUpdate?: null | string;
+                        tblFailureReports?: {
+                            connect: {
+                                failureReportId: number;
+                            }[];
+                        };
+                        tblLogCounters?: {
+                            connect: {
+                                logCounterId: number;
+                            }[];
+                        };
+                        tblLogDisciplines?: {
+                            connect: {
+                                logDiscId: number;
+                            }[];
+                        };
+                        tblComponentUnit?: {
+                            connect: {
+                                compId: number;
+                            };
+                        };
+                        tblDiscipline?: {
+                            connect: {
+                                discId: number;
+                            };
+                        };
+                        tblEmployee?: {
+                            connect: {
+                                employeeId: number;
+                            };
+                        };
+                        tblFollowStatus?: {
+                            connect: {
+                                followStatusId: number;
+                            };
+                        };
+                        tblFunction?: {
+                            connect: {
+                                functionId: number;
+                            };
+                        };
+                        tblInstallation?: {
+                            connect: {
+                                instId: number;
+                            };
+                        };
+                        tblJobDescription?: {
+                            connect: {
+                                jobDescId: number;
+                            };
+                        };
+                        tblMaintCause?: {
+                            connect: {
+                                maintCauseId: number;
+                            };
+                        };
+                        tblMaintClass?: {
+                            connect: {
+                                maintClassId: number;
+                            };
+                        };
+                        tblMaintType?: {
+                            connect: {
+                                maintTypeId: number;
+                            };
+                        };
+                        tblPeriod?: {
+                            connect: {
+                                periodId: number;
+                            };
+                        };
+                        tblWorkOrder?: {
+                            connect: {
+                                workOrderId: number;
+                            };
+                        };
+                        tblMaintLogAttachments?: {
+                            connect: {
+                                maintLogAttachmentId: number;
+                            }[];
+                        };
+                        tblMaintLogFollows?: {
+                            connect: {
+                                followId: number;
+                            }[];
+                        };
+                        tblMaintLogSpares?: {
+                            connect: {
+                                maintLogSpareId: number;
+                            }[];
+                        };
+                    };
+                    failureReport: {
+                        title?: null | string;
+                        failureNumber?: null | string;
+                        requestNo?: null | string;
+                        nextFollowDate?: null | string;
+                        closedDateTime?: null | string;
+                        followDesc?: null | string;
+                        tblEmployee?: {
+                            connect: {
+                                employeeId: number;
+                            };
+                        };
+                        tblInstallation?: {
+                            connect: {
+                                instId: number;
+                            };
+                        };
+                        tblFailureGroupFollow?: {
+                            connect: {
+                                failureGroupFollowId: number;
+                            };
+                        };
+                        tblFailureStatus?: {
+                            connect: {
+                                failureStatusId: number;
+                            };
+                        };
+                        tblFailureSeverityLevel?: {
+                            connect: {
+                                failureSeverityLevelId: number;
+                            };
+                        };
+                        tblLocation?: {
+                            connect: {
+                                locationId: number;
+                            };
+                        };
+                        tblMaintLog?: {
+                            connect: {
+                                maintLogId: number;
+                            };
+                        };
+                        tblFailureReportWorkShops?: {
+                            connect: {
+                                failureReportWorkShopId: number;
+                            }[];
+                        };
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        failureReportId: number;
+                        maintLogId: null | number;
+                        title: null | string;
+                        failureNumber: null | string;
+                        locationId: null | number;
+                        failureSeverityLevelId: null | number;
+                        failureStatusId: null | number;
+                        failureGroupFollowId: null | number;
+                        requestNo: null | string;
+                        nextFollowDate: null | string;
+                        closedEmployeeId: null | number;
+                        closedDateTime: null | string;
+                        followDesc: null | string;
+                        instId: null | number;
+                        tblEmployee?: null | ({
+                            employeeId: number;
+                            code: null | string;
+                            lastName: null | string;
+                            firstName: null | string;
+                            discId: null | number;
+                            title: null | string;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblInstallation?: null | ({
+                            instId: number;
+                            name: string;
+                            orderNo: null | number;
+                            caption: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblFailureGroupFollow?: null | ({
+                            failureGroupFollowId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblFailureStatus?: null | ({
+                            failureStatusId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblFailureSeverityLevel?: null | ({
+                            failureSeverityLevelId: number;
+                            name: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblLocation?: null | ({
+                            locationId: number;
+                            parentLocationId: null | number;
+                            name: null | string;
+                            locationCode: null | string;
+                            orderNo: null | number;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblMaintLog?: null | ({
+                            maintLogId: number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            maintClassId: null | number;
+                            functionId: null | number;
+                            jobDescId: null | number;
+                            workOrderId: null | number;
+                            compId: null | number;
+                            totalDuration: null | number;
+                            downTime: null | number;
+                            dateDone: null | string;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            overdueCount: null | number;
+                            unexpected: null | number;
+                            reportedBy: null | number;
+                            history: null | string;
+                            workOrderStatusId: null | number;
+                            followStatusId: null | number;
+                            discId: null | number;
+                            reportedDate: null | string;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                            updatedEmployeeId: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        });
+                        tblFailureReportWorkShops?: {
+                            failureReportWorkShopId: number;
+                            failureReportId: number;
+                            workShopId: number;
+                            instId: null | number;
+                        }[];
                     };
                 };
             };
@@ -35198,7 +36333,7 @@ export interface operations {
                                 failureReportId: number;
                                 maintLogId: null | number;
                                 title: null | string;
-                                failureNumber: null | number;
+                                failureNumber: null | string;
                                 locationId: null | number;
                                 failureSeverityLevelId: null | number;
                                 failureStatusId: null | number;
@@ -35326,7 +36461,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -35431,7 +36566,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -35562,7 +36697,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -35635,7 +36770,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -35743,7 +36878,7 @@ export interface operations {
                                 failureReportId: number;
                                 maintLogId: null | number;
                                 title: null | string;
-                                failureNumber: null | number;
+                                failureNumber: null | string;
                                 locationId: null | number;
                                 failureSeverityLevelId: null | number;
                                 failureStatusId: null | number;
@@ -35814,7 +36949,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -35889,7 +37024,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -35969,7 +37104,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -36012,7 +37147,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -36092,7 +37227,7 @@ export interface operations {
                                 failureReportId: number;
                                 maintLogId: null | number;
                                 title: null | string;
-                                failureNumber: null | number;
+                                failureNumber: null | string;
                                 locationId: null | number;
                                 failureSeverityLevelId: null | number;
                                 failureStatusId: null | number;
@@ -36163,7 +37298,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -36238,7 +37373,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -36318,7 +37453,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -36361,7 +37496,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -38390,7 +39525,7 @@ export interface operations {
                                 failureReportId: number;
                                 maintLogId: null | number;
                                 title: null | string;
-                                failureNumber: null | number;
+                                failureNumber: null | string;
                                 locationId: null | number;
                                 failureSeverityLevelId: null | number;
                                 failureStatusId: null | number;
@@ -38474,7 +39609,6 @@ export interface operations {
                                 discId: null | number;
                                 timeSpent: null | number;
                                 orderNo: null | number;
-                                createdEmployeeId: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
                             }[];
@@ -39736,7 +40870,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -39820,7 +40954,6 @@ export interface operations {
                             discId: null | number;
                             timeSpent: null | number;
                             orderNo: null | number;
-                            createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
@@ -40435,7 +41568,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -40519,7 +41652,6 @@ export interface operations {
                             discId: null | number;
                             timeSpent: null | number;
                             orderNo: null | number;
-                            createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
@@ -42177,7 +43309,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -42261,7 +43393,6 @@ export interface operations {
                             discId: null | number;
                             timeSpent: null | number;
                             orderNo: null | number;
-                            createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
@@ -42844,7 +43975,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -42928,7 +44059,6 @@ export interface operations {
                             discId: null | number;
                             timeSpent: null | number;
                             orderNo: null | number;
-                            createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
@@ -46278,7 +47408,7 @@ export interface operations {
                                 failureReportId: number;
                                 maintLogId: null | number;
                                 title: null | string;
-                                failureNumber: null | number;
+                                failureNumber: null | string;
                                 locationId: null | number;
                                 failureSeverityLevelId: null | number;
                                 failureStatusId: null | number;
@@ -46469,7 +47599,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -46595,7 +47725,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -46825,7 +47955,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -46919,7 +48049,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -47742,7 +48872,6 @@ export interface operations {
                             discId: null | number;
                             timeSpent: null | number;
                             orderNo: null | number;
-                            createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
                             tblDiscipline?: null | ({
@@ -47756,18 +48885,7 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             });
-                            tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: null | ({
-                                employeeId: number;
-                                code: null | string;
-                                lastName: null | string;
-                                firstName: null | string;
-                                discId: null | number;
-                                title: null | string;
-                                lastUpdate: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            });
-                            tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: null | ({
+                            tblEmployee?: null | ({
                                 employeeId: number;
                                 code: null | string;
                                 lastName: null | string;
@@ -47842,12 +48960,7 @@ export interface operations {
                             discId: number;
                         };
                     };
-                    tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: {
-                        connect: {
-                            employeeId: number;
-                        };
-                    };
-                    tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: {
+                    tblEmployee?: {
                         connect: {
                             employeeId: number;
                         };
@@ -47872,12 +48985,7 @@ export interface operations {
                             discId: number;
                         };
                     };
-                    tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: {
-                        connect: {
-                            employeeId: number;
-                        };
-                    };
-                    tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: {
+                    tblEmployee?: {
                         connect: {
                             employeeId: number;
                         };
@@ -47902,12 +49010,7 @@ export interface operations {
                             discId: number;
                         };
                     };
-                    tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: {
-                        connect: {
-                            employeeId: number;
-                        };
-                    };
-                    tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: {
+                    tblEmployee?: {
                         connect: {
                             employeeId: number;
                         };
@@ -47939,7 +49042,6 @@ export interface operations {
                         discId: null | number;
                         timeSpent: null | number;
                         orderNo: null | number;
-                        createdEmployeeId: null | number;
                         lastUpdate: null | string;
                         instId: null | number;
                         tblDiscipline?: null | ({
@@ -47953,18 +49055,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: null | ({
-                            employeeId: number;
-                            code: null | string;
-                            lastName: null | string;
-                            firstName: null | string;
-                            discId: null | number;
-                            title: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: null | ({
+                        tblEmployee?: null | ({
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -48074,7 +49165,6 @@ export interface operations {
                         discId: null | number;
                         timeSpent: null | number;
                         orderNo: null | number;
-                        createdEmployeeId: null | number;
                         lastUpdate: null | string;
                         instId: null | number;
                         tblDiscipline?: null | ({
@@ -48088,18 +49178,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: null | ({
-                            employeeId: number;
-                            code: null | string;
-                            lastName: null | string;
-                            firstName: null | string;
-                            discId: null | number;
-                            title: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: null | ({
+                        tblEmployee?: null | ({
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -48175,13 +49254,7 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: {
-                        connect?: {
-                            employeeId: number;
-                        };
-                        disconnect?: boolean;
-                    };
-                    tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: {
+                    tblEmployee?: {
                         connect?: {
                             employeeId: number;
                         };
@@ -48210,13 +49283,7 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: {
-                        connect?: {
-                            employeeId: number;
-                        };
-                        disconnect?: boolean;
-                    };
-                    tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: {
+                    tblEmployee?: {
                         connect?: {
                             employeeId: number;
                         };
@@ -48245,13 +49312,7 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: {
-                        connect?: {
-                            employeeId: number;
-                        };
-                        disconnect?: boolean;
-                    };
-                    tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: {
+                    tblEmployee?: {
                         connect?: {
                             employeeId: number;
                         };
@@ -48286,7 +49347,6 @@ export interface operations {
                         discId: null | number;
                         timeSpent: null | number;
                         orderNo: null | number;
-                        createdEmployeeId: null | number;
                         lastUpdate: null | string;
                         instId: null | number;
                         tblDiscipline?: null | ({
@@ -48300,18 +49360,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: null | ({
-                            employeeId: number;
-                            code: null | string;
-                            lastName: null | string;
-                            firstName: null | string;
-                            discId: null | number;
-                            title: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: null | ({
+                        tblEmployee?: null | ({
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -48389,7 +49438,6 @@ export interface operations {
                         discId: null | number;
                         timeSpent: null | number;
                         orderNo: null | number;
-                        createdEmployeeId: null | number;
                         lastUpdate: null | string;
                         instId: null | number;
                         tblDiscipline?: null | ({
@@ -48403,18 +49451,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: null | ({
-                            employeeId: number;
-                            code: null | string;
-                            lastName: null | string;
-                            firstName: null | string;
-                            discId: null | number;
-                            title: null | string;
-                            lastUpdate: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
-                        tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: null | ({
+                        tblEmployee?: null | ({
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -51115,7 +52152,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -51146,7 +52183,6 @@ export interface operations {
                             discId: null | number;
                             timeSpent: null | number;
                             orderNo: null | number;
-                            createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
@@ -51312,6 +52348,15 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblMaintLogAttachments?: {
+                            maintLogAttachmentId: number;
+                            maintLogId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
                         tblMaintLogFollows?: {
                             followId: number;
                             followEmployeeId: number;
@@ -51462,6 +52507,14 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblMaintLogAttachments?: {
+                        connect?: {
+                            maintLogAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblMaintLogFollows?: {
                         connect?: {
                             followId: number;
@@ -51586,6 +52639,14 @@ export interface operations {
                             workOrderId: number;
                         };
                         disconnect?: boolean;
+                    };
+                    tblMaintLogAttachments?: {
+                        connect?: {
+                            maintLogAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
                     };
                     tblMaintLogFollows?: {
                         connect?: {
@@ -51712,6 +52773,14 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblMaintLogAttachments?: {
+                        connect?: {
+                            maintLogAttachmentId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblMaintLogFollows?: {
                         connect?: {
                             followId: number;
@@ -51767,7 +52836,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -51798,7 +52867,6 @@ export interface operations {
                             discId: null | number;
                             timeSpent: null | number;
                             orderNo: null | number;
-                            createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
@@ -51964,6 +53032,15 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblMaintLogAttachments?: {
+                            maintLogAttachmentId: number;
+                            maintLogId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
                         tblMaintLogFollows?: {
                             followId: number;
                             followEmployeeId: number;
@@ -52040,7 +53117,7 @@ export interface operations {
                             failureReportId: number;
                             maintLogId: null | number;
                             title: null | string;
-                            failureNumber: null | number;
+                            failureNumber: null | string;
                             locationId: null | number;
                             failureSeverityLevelId: null | number;
                             failureStatusId: null | number;
@@ -52071,7 +53148,6 @@ export interface operations {
                             discId: null | number;
                             timeSpent: null | number;
                             orderNo: null | number;
-                            createdEmployeeId: null | number;
                             lastUpdate: null | string;
                             instId: null | number;
                         }[];
@@ -52237,6 +53313,15 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblMaintLogAttachments?: {
+                            maintLogAttachmentId: number;
+                            maintLogId: number;
+                            attachmentId: number;
+                            orderNo: null | number;
+                            createdEmployeeId: number;
+                            createdAt: string;
+                            instId: null | number;
+                        }[];
                         tblMaintLogFollows?: {
                             followId: number;
                             followEmployeeId: number;
@@ -52364,7 +53449,7 @@ export interface operations {
                                 failureReportId: number;
                                 maintLogId: null | number;
                                 title: null | string;
-                                failureNumber: null | number;
+                                failureNumber: null | string;
                                 locationId: null | number;
                                 failureSeverityLevelId: null | number;
                                 failureStatusId: null | number;
@@ -52395,7 +53480,6 @@ export interface operations {
                                 discId: null | number;
                                 timeSpent: null | number;
                                 orderNo: null | number;
-                                createdEmployeeId: null | number;
                                 lastUpdate: null | string;
                                 instId: null | number;
                             }[];
@@ -52561,6 +53645,15 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             });
+                            tblMaintLogAttachments?: {
+                                maintLogAttachmentId: number;
+                                maintLogId: number;
+                                attachmentId: number;
+                                orderNo: null | number;
+                                createdEmployeeId: number;
+                                createdAt: string;
+                                instId: null | number;
+                            }[];
                             tblMaintLogFollows?: {
                                 followId: number;
                                 followEmployeeId: number;
@@ -52656,6 +53749,34 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             });
+                            tblMaintLog?: {
+                                maintLogId: number;
+                                maintCauseId: null | number;
+                                maintTypeId: null | number;
+                                maintClassId: null | number;
+                                functionId: null | number;
+                                jobDescId: null | number;
+                                workOrderId: null | number;
+                                compId: null | number;
+                                totalDuration: null | number;
+                                downTime: null | number;
+                                dateDone: null | string;
+                                frequency: null | number;
+                                frequencyPeriod: null | number;
+                                overdueCount: null | number;
+                                unexpected: null | number;
+                                reportedBy: null | number;
+                                history: null | string;
+                                workOrderStatusId: null | number;
+                                followStatusId: null | number;
+                                discId: null | number;
+                                reportedDate: null | string;
+                                lastUpdate: null | string;
+                                instId: null | number;
+                                updatedEmployeeId: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            };
                         }[];
                         total: number;
                         page: number;
@@ -52692,6 +53813,11 @@ export interface operations {
                             instId: number;
                         };
                     };
+                    tblMaintLog: {
+                        connect: {
+                            maintLogId: number;
+                        };
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     orderNo?: null | number;
@@ -52710,6 +53836,11 @@ export interface operations {
                             instId: number;
                         };
                     };
+                    tblMaintLog: {
+                        connect: {
+                            maintLogId: number;
+                        };
+                    };
                 };
                 "multipart/form-data": {
                     orderNo?: null | number;
@@ -52726,6 +53857,11 @@ export interface operations {
                     tblInstallation?: {
                         connect: {
                             instId: number;
+                        };
+                    };
+                    tblMaintLog: {
+                        connect: {
+                            maintLogId: number;
                         };
                     };
                 };
@@ -52779,6 +53915,34 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblMaintLog?: {
+                            maintLogId: number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            maintClassId: null | number;
+                            functionId: null | number;
+                            jobDescId: null | number;
+                            workOrderId: null | number;
+                            compId: null | number;
+                            totalDuration: null | number;
+                            downTime: null | number;
+                            dateDone: null | string;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            overdueCount: null | number;
+                            unexpected: null | number;
+                            reportedBy: null | number;
+                            history: null | string;
+                            workOrderStatusId: null | number;
+                            followStatusId: null | number;
+                            discId: null | number;
+                            reportedDate: null | string;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                            updatedEmployeeId: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
                     };
                 };
             };
@@ -52876,6 +54040,34 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblMaintLog?: {
+                            maintLogId: number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            maintClassId: null | number;
+                            functionId: null | number;
+                            jobDescId: null | number;
+                            workOrderId: null | number;
+                            compId: null | number;
+                            totalDuration: null | number;
+                            downTime: null | number;
+                            dateDone: null | string;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            overdueCount: null | number;
+                            unexpected: null | number;
+                            reportedBy: null | number;
+                            history: null | string;
+                            workOrderStatusId: null | number;
+                            followStatusId: null | number;
+                            discId: null | number;
+                            reportedDate: null | string;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                            updatedEmployeeId: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
                     };
                 };
             };
@@ -52913,6 +54105,11 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblMaintLog?: {
+                        connect: {
+                            maintLogId: number;
+                        };
+                    };
                 };
                 "application/x-www-form-urlencoded": {
                     orderNo?: null | number;
@@ -52932,6 +54129,11 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
+                    tblMaintLog?: {
+                        connect: {
+                            maintLogId: number;
+                        };
+                    };
                 };
                 "multipart/form-data": {
                     orderNo?: null | number;
@@ -52950,6 +54152,11 @@ export interface operations {
                             instId: number;
                         };
                         disconnect?: boolean;
+                    };
+                    tblMaintLog?: {
+                        connect: {
+                            maintLogId: number;
+                        };
                     };
                 };
             };
@@ -53002,6 +54209,34 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblMaintLog?: {
+                            maintLogId: number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            maintClassId: null | number;
+                            functionId: null | number;
+                            jobDescId: null | number;
+                            workOrderId: null | number;
+                            compId: null | number;
+                            totalDuration: null | number;
+                            downTime: null | number;
+                            dateDone: null | string;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            overdueCount: null | number;
+                            unexpected: null | number;
+                            reportedBy: null | number;
+                            history: null | string;
+                            workOrderStatusId: null | number;
+                            followStatusId: null | number;
+                            discId: null | number;
+                            reportedDate: null | string;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                            updatedEmployeeId: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
                     };
                 };
             };
@@ -53067,6 +54302,34 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
+                        tblMaintLog?: {
+                            maintLogId: number;
+                            maintCauseId: null | number;
+                            maintTypeId: null | number;
+                            maintClassId: null | number;
+                            functionId: null | number;
+                            jobDescId: null | number;
+                            workOrderId: null | number;
+                            compId: null | number;
+                            totalDuration: null | number;
+                            downTime: null | number;
+                            dateDone: null | string;
+                            frequency: null | number;
+                            frequencyPeriod: null | number;
+                            overdueCount: null | number;
+                            unexpected: null | number;
+                            reportedBy: null | number;
+                            history: null | string;
+                            workOrderStatusId: null | number;
+                            followStatusId: null | number;
+                            discId: null | number;
+                            reportedDate: null | string;
+                            lastUpdate: null | string;
+                            instId: null | number;
+                            updatedEmployeeId: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        };
                     };
                 };
             };
@@ -54500,7 +55763,6 @@ export interface operations {
     getTblMaintLogSpareUniqueSpareUnit: {
         parameters: {
             query?: {
-                compId?: number;
                 page?: number;
                 perPage?: number;
                 sort?: string;
@@ -54524,8 +55786,8 @@ export interface operations {
                 content: {
                     "application/json": {
                         items: {
-                            maintLogStockId: number;
-                            spareItemId: number;
+                            maintLogSpareId: number;
+                            spareUnitId: number;
                             spareCount: number | null;
                             tblSpareUnit?: null | {
                                 spareUnitId: number;
