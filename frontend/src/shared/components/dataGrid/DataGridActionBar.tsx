@@ -6,6 +6,7 @@ import { Fragment } from "react";
 import { getPermit } from "@/shared/hooks/usePermison";
 export interface DataGridActionItem {
   label: string;
+  loading?: boolean;
   elementId?: number;
   onClick?: () => void;
   icon?: React.ReactNode;
@@ -46,6 +47,7 @@ const DataGridActionBar = ({
               disabled={action.disabled}
               sx={action.sx}
               onClick={action.onClick}
+              loading={!!action.loading}
             >
               {action.label}
             </Button>

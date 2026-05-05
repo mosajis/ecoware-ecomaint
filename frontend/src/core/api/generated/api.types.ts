@@ -5118,7 +5118,6 @@ export interface operations {
                                 orderNo: null | number;
                                 createdEmployeeId: number;
                                 createdAt: string;
-                                instId: null | number;
                             } & {
                                 [key: string]: unknown;
                             });
@@ -5208,7 +5207,7 @@ export interface operations {
                     title?: string;
                     attachmentTypeId?: string;
                     isUserAttachment?: string;
-                    createdUserId?: string;
+                    createdEmployeeId?: string;
                     /**
                      * Format: binary
                      * @default File
@@ -5219,7 +5218,7 @@ export interface operations {
                     title?: string;
                     attachmentTypeId?: string;
                     isUserAttachment?: string;
-                    createdUserId?: string;
+                    createdEmployeeId?: string;
                     /**
                      * Format: binary
                      * @default File
@@ -5230,7 +5229,7 @@ export interface operations {
                     title?: string;
                     attachmentTypeId?: string;
                     isUserAttachment?: string;
-                    createdUserId?: string;
+                    createdEmployeeId?: string;
                     /**
                      * Format: binary
                      * @default File
@@ -5309,7 +5308,6 @@ export interface operations {
                             orderNo: null | number;
                             createdEmployeeId: number;
                             createdAt: string;
-                            instId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -5613,7 +5611,6 @@ export interface operations {
                             orderNo: null | number;
                             createdEmployeeId: number;
                             createdAt: string;
-                            instId: null | number;
                         } & {
                             [key: string]: unknown;
                         });
@@ -5773,7 +5770,6 @@ export interface operations {
                             orderNo: null | number;
                             createdEmployeeId: number;
                             createdAt: string;
-                            instId: null | number;
                             tblAttachments?: {
                                 attachmentId: number;
                                 title: null | string;
@@ -5797,14 +5793,6 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             };
-                            tblInstallation?: null | ({
-                                instId: number;
-                                name: string;
-                                orderNo: null | number;
-                                caption: null | string;
-                            } & {
-                                [key: string]: unknown;
-                            });
                         }[];
                         total: number;
                         page: number;
@@ -5837,11 +5825,6 @@ export interface operations {
                             employeeId: number;
                         };
                     };
-                    tblInstallation?: {
-                        connect: {
-                            instId: number;
-                        };
-                    };
                 };
                 "application/x-www-form-urlencoded": {
                     name?: null | string;
@@ -5856,11 +5839,6 @@ export interface operations {
                             employeeId: number;
                         };
                     };
-                    tblInstallation?: {
-                        connect: {
-                            instId: number;
-                        };
-                    };
                 };
                 "multipart/form-data": {
                     name?: null | string;
@@ -5873,11 +5851,6 @@ export interface operations {
                     tblEmployee: {
                         connect: {
                             employeeId: number;
-                        };
-                    };
-                    tblInstallation?: {
-                        connect: {
-                            instId: number;
                         };
                     };
                 };
@@ -5896,7 +5869,6 @@ export interface operations {
                         orderNo: null | number;
                         createdEmployeeId: number;
                         createdAt: string;
-                        instId: null | number;
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
@@ -5920,14 +5892,6 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         };
-                        tblInstallation?: null | ({
-                            instId: number;
-                            name: string;
-                            orderNo: null | number;
-                            caption: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
                     };
                 };
             };
@@ -5990,7 +5954,6 @@ export interface operations {
                         orderNo: null | number;
                         createdEmployeeId: number;
                         createdAt: string;
-                        instId: null | number;
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
@@ -6014,14 +5977,6 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         };
-                        tblInstallation?: null | ({
-                            instId: number;
-                            name: string;
-                            orderNo: null | number;
-                            caption: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
                     };
                 };
             };
@@ -6057,12 +6012,6 @@ export interface operations {
                             employeeId: number;
                         };
                     };
-                    tblInstallation?: {
-                        connect?: {
-                            instId: number;
-                        };
-                        disconnect?: boolean;
-                    };
                 };
                 "application/x-www-form-urlencoded": {
                     name?: null | string;
@@ -6079,12 +6028,6 @@ export interface operations {
                         connect: {
                             employeeId: number;
                         };
-                    };
-                    tblInstallation?: {
-                        connect?: {
-                            instId: number;
-                        };
-                        disconnect?: boolean;
                     };
                 };
                 "multipart/form-data": {
@@ -6103,12 +6046,6 @@ export interface operations {
                             employeeId: number;
                         };
                     };
-                    tblInstallation?: {
-                        connect?: {
-                            instId: number;
-                        };
-                        disconnect?: boolean;
-                    };
                 };
             };
         };
@@ -6125,7 +6062,6 @@ export interface operations {
                         orderNo: null | number;
                         createdEmployeeId: number;
                         createdAt: string;
-                        instId: null | number;
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
@@ -6149,14 +6085,6 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         };
-                        tblInstallation?: null | ({
-                            instId: number;
-                            name: string;
-                            orderNo: null | number;
-                            caption: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
                     };
                 };
             };
@@ -6187,7 +6115,6 @@ export interface operations {
                         orderNo: null | number;
                         createdEmployeeId: number;
                         createdAt: string;
-                        instId: null | number;
                         tblAttachments?: {
                             attachmentId: number;
                             title: null | string;
@@ -6211,14 +6138,6 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         };
-                        tblInstallation?: null | ({
-                            instId: number;
-                            name: string;
-                            orderNo: null | number;
-                            caption: null | string;
-                        } & {
-                            [key: string]: unknown;
-                        });
                     };
                 };
             };
@@ -28476,7 +28395,6 @@ export interface operations {
                                 orderNo: null | number;
                                 createdEmployeeId: number;
                                 createdAt: string;
-                                instId: null | number;
                             }[];
                             tblCompCounters?: {
                                 compCounterId: number;
@@ -28775,7 +28693,7 @@ export interface operations {
                                 errorMessage: null | string;
                                 createdAt: string;
                             }[];
-                            tblMaintLogTblMaintLogReportedByTotblEmployees?: {
+                            tblMaintLogs?: {
                                 maintLogId: number;
                                 maintCauseId: null | number;
                                 maintTypeId: null | number;
@@ -29312,9 +29230,9 @@ export interface operations {
                             loginAuditId: number;
                         }[];
                     };
-                    tblMaintLogTblMaintLogReportedByTotblEmployees?: {
+                    tblMaintLogs?: {
                         connect: {
-                            id: number;
+                            maintLogId: number;
                         }[];
                     };
                     tblMaintLogAttachments?: {
@@ -29529,9 +29447,9 @@ export interface operations {
                             loginAuditId: number;
                         }[];
                     };
-                    tblMaintLogTblMaintLogReportedByTotblEmployees?: {
+                    tblMaintLogs?: {
                         connect: {
-                            id: number;
+                            maintLogId: number;
                         }[];
                     };
                     tblMaintLogAttachments?: {
@@ -29746,9 +29664,9 @@ export interface operations {
                             loginAuditId: number;
                         }[];
                     };
-                    tblMaintLogTblMaintLogReportedByTotblEmployees?: {
+                    tblMaintLogs?: {
                         connect: {
-                            id: number;
+                            maintLogId: number;
                         }[];
                     };
                     tblMaintLogAttachments?: {
@@ -29877,7 +29795,6 @@ export interface operations {
                             orderNo: null | number;
                             createdEmployeeId: number;
                             createdAt: string;
-                            instId: null | number;
                         }[];
                         tblCompCounters?: {
                             compCounterId: number;
@@ -30176,7 +30093,7 @@ export interface operations {
                             errorMessage: null | string;
                             createdAt: string;
                         }[];
-                        tblMaintLogTblMaintLogReportedByTotblEmployees?: {
+                        tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | number;
                             maintTypeId: null | number;
@@ -30655,7 +30572,6 @@ export interface operations {
                             orderNo: null | number;
                             createdEmployeeId: number;
                             createdAt: string;
-                            instId: null | number;
                         }[];
                         tblCompCounters?: {
                             compCounterId: number;
@@ -30954,7 +30870,7 @@ export interface operations {
                             errorMessage: null | string;
                             createdAt: string;
                         }[];
-                        tblMaintLogTblMaintLogReportedByTotblEmployees?: {
+                        tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | number;
                             maintTypeId: null | number;
@@ -31558,9 +31474,9 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblMaintLogTblMaintLogReportedByTotblEmployees?: {
+                    tblMaintLogs?: {
                         connect?: {
-                            id: number;
+                            maintLogId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -31899,9 +31815,9 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblMaintLogTblMaintLogReportedByTotblEmployees?: {
+                    tblMaintLogs?: {
                         connect?: {
-                            id: number;
+                            maintLogId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -32240,9 +32156,9 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblMaintLogTblMaintLogReportedByTotblEmployees?: {
+                    tblMaintLogs?: {
                         connect?: {
-                            id: number;
+                            maintLogId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -32428,7 +32344,6 @@ export interface operations {
                             orderNo: null | number;
                             createdEmployeeId: number;
                             createdAt: string;
-                            instId: null | number;
                         }[];
                         tblCompCounters?: {
                             compCounterId: number;
@@ -32727,7 +32642,7 @@ export interface operations {
                             errorMessage: null | string;
                             createdAt: string;
                         }[];
-                        tblMaintLogTblMaintLogReportedByTotblEmployees?: {
+                        tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | number;
                             maintTypeId: null | number;
@@ -33174,7 +33089,6 @@ export interface operations {
                             orderNo: null | number;
                             createdEmployeeId: number;
                             createdAt: string;
-                            instId: null | number;
                         }[];
                         tblCompCounters?: {
                             compCounterId: number;
@@ -33473,7 +33387,7 @@ export interface operations {
                             errorMessage: null | string;
                             createdAt: string;
                         }[];
-                        tblMaintLogTblMaintLogReportedByTotblEmployees?: {
+                        tblMaintLogs?: {
                             maintLogId: number;
                             maintCauseId: null | number;
                             maintTypeId: null | number;
@@ -38169,14 +38083,6 @@ export interface operations {
                                 createdAt: string;
                                 instId: null | number;
                             }[];
-                            tblAttachmentTypes?: {
-                                attachmentTypeId: number;
-                                name: null | string;
-                                orderNo: null | number;
-                                createdEmployeeId: number;
-                                createdAt: string;
-                                instId: null | number;
-                            }[];
                             tblCompCounters?: {
                                 compCounterId: number;
                                 compId: null | number;
@@ -38831,11 +38737,6 @@ export interface operations {
                             attachmentId: number;
                         }[];
                     };
-                    tblAttachmentTypes?: {
-                        connect: {
-                            attachmentTypeId: number;
-                        }[];
-                    };
                     tblCompCounters?: {
                         connect: {
                             compCounterId: number;
@@ -39061,11 +38962,6 @@ export interface operations {
                             attachmentId: number;
                         }[];
                     };
-                    tblAttachmentTypes?: {
-                        connect: {
-                            attachmentTypeId: number;
-                        }[];
-                    };
                     tblCompCounters?: {
                         connect: {
                             compCounterId: number;
@@ -39289,11 +39185,6 @@ export interface operations {
                     tblAttachments?: {
                         connect: {
                             attachmentId: number;
-                        }[];
-                    };
-                    tblAttachmentTypes?: {
-                        connect: {
-                            attachmentTypeId: number;
                         }[];
                     };
                     tblCompCounters?: {
@@ -39534,14 +39425,6 @@ export interface operations {
                             path: null | string;
                             size: null | number;
                             isUserAttachment: boolean;
-                            createdEmployeeId: number;
-                            createdAt: string;
-                            instId: null | number;
-                        }[];
-                        tblAttachmentTypes?: {
-                            attachmentTypeId: number;
-                            name: null | string;
-                            orderNo: null | number;
                             createdEmployeeId: number;
                             createdAt: string;
                             instId: null | number;
@@ -40245,14 +40128,6 @@ export interface operations {
                             createdAt: string;
                             instId: null | number;
                         }[];
-                        tblAttachmentTypes?: {
-                            attachmentTypeId: number;
-                            name: null | string;
-                            orderNo: null | number;
-                            createdEmployeeId: number;
-                            createdAt: string;
-                            instId: null | number;
-                        }[];
                         tblCompCounters?: {
                             compCounterId: number;
                             compId: null | number;
@@ -40910,14 +40785,6 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblAttachmentTypes?: {
-                        connect?: {
-                            attachmentTypeId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblCompCounters?: {
                         connect?: {
                             compCounterId: number;
@@ -41275,14 +41142,6 @@ export interface operations {
                             id: number;
                         }[];
                     };
-                    tblAttachmentTypes?: {
-                        connect?: {
-                            attachmentTypeId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
                     tblCompCounters?: {
                         connect?: {
                             compCounterId: number;
@@ -41635,14 +41494,6 @@ export interface operations {
                     tblAttachments?: {
                         connect?: {
                             attachmentId: number;
-                        }[];
-                        disconnect?: {
-                            id: number;
-                        }[];
-                    };
-                    tblAttachmentTypes?: {
-                        connect?: {
-                            attachmentTypeId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -42015,14 +41866,6 @@ export interface operations {
                             path: null | string;
                             size: null | number;
                             isUserAttachment: boolean;
-                            createdEmployeeId: number;
-                            createdAt: string;
-                            instId: null | number;
-                        }[];
-                        tblAttachmentTypes?: {
-                            attachmentTypeId: number;
-                            name: null | string;
-                            orderNo: null | number;
                             createdEmployeeId: number;
                             createdAt: string;
                             instId: null | number;
@@ -42690,14 +42533,6 @@ export interface operations {
                             path: null | string;
                             size: null | number;
                             isUserAttachment: boolean;
-                            createdEmployeeId: number;
-                            createdAt: string;
-                            instId: null | number;
-                        }[];
-                        tblAttachmentTypes?: {
-                            attachmentTypeId: number;
-                            name: null | string;
-                            orderNo: null | number;
                             createdEmployeeId: number;
                             createdAt: string;
                             instId: null | number;
@@ -48009,12 +47844,12 @@ export interface operations {
                     };
                     tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblInstallation?: {
@@ -48039,12 +47874,12 @@ export interface operations {
                     };
                     tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblInstallation?: {
@@ -48069,12 +47904,12 @@ export interface operations {
                     };
                     tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblInstallation?: {
@@ -48342,13 +48177,13 @@ export interface operations {
                     };
                     tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -48377,13 +48212,13 @@ export interface operations {
                     };
                     tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -48412,13 +48247,13 @@ export interface operations {
                     };
                     tblEmployeeTblLogDisciplineEmployeeIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblLogDisciplineCreatedEmployeeIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -51348,7 +51183,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblEmployeeTblMaintLogReportedByTotblEmployee?: null | ({
+                        tblEmployee?: null | ({
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -51567,9 +51402,9 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblEmployeeTblMaintLogReportedByTotblEmployee?: {
+                    tblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -51692,9 +51527,9 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblEmployeeTblMaintLogReportedByTotblEmployee?: {
+                    tblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -51817,9 +51652,9 @@ export interface operations {
                         };
                         disconnect?: boolean;
                     };
-                    tblEmployeeTblMaintLogReportedByTotblEmployee?: {
+                    tblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -52000,7 +51835,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblEmployeeTblMaintLogReportedByTotblEmployee?: null | ({
+                        tblEmployee?: null | ({
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -52273,7 +52108,7 @@ export interface operations {
                         } & {
                             [key: string]: unknown;
                         });
-                        tblEmployeeTblMaintLogReportedByTotblEmployee?: null | ({
+                        tblEmployee?: null | ({
                             employeeId: number;
                             code: null | string;
                             lastName: null | string;
@@ -52597,7 +52432,7 @@ export interface operations {
                             } & {
                                 [key: string]: unknown;
                             });
-                            tblEmployeeTblMaintLogReportedByTotblEmployee?: null | ({
+                            tblEmployee?: null | ({
                                 employeeId: number;
                                 code: null | string;
                                 lastName: null | string;
@@ -63976,65 +63811,7 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            workOrderId: number;
-                            compId: number;
-                            title: string;
-                            priority: (number | null) | null;
-                            description: (string | null) | null;
-                            window: (number | null) | null;
-                            userComment: (string | null) | null;
-                            dueDate: (string | null) | null;
-                            pendingdate: (string | null) | null;
-                            created: (string | null) | null;
-                            started: (string | null) | null;
-                            completed: (string | null) | null;
-                            tblComponentUnit?: {
-                                compId: number;
-                                compNo: string;
-                                tblLocation?: {
-                                    name?: string;
-                                };
-                            };
-                            tblCompJob: ({
-                                compJobId: number;
-                                frequency: (number | null) | null;
-                                nextDueDate?: string;
-                                tblJobDescription?: {
-                                    jobDescCode: string;
-                                    jobDescTitle: string;
-                                    jobDesc: string;
-                                };
-                                tblPeriod?: {
-                                    name: string;
-                                };
-                            } | null) | null;
-                            tblPendingType?: {
-                                pendTypeName?: string;
-                            };
-                            tblDiscipline?: {
-                                name: string;
-                            };
-                            tblWorkOrderStatus?: {
-                                name: string;
-                            };
-                        }[];
-                        total: number;
-                        page: number;
-                        perPage: number;
-                        totalPages: number;
-                    };
-                };
-            };
-        };
+        responses: never;
     };
     postTblWorkOrder: {
         parameters: {
@@ -64095,22 +63872,22 @@ export interface operations {
                     };
                     tblEmployeeTblWorkOrderCreatedByTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblWorkOrderIssuedByTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblWorkOrderPendingByTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblWorkOrderPlannedByTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblInstallation?: {
@@ -64209,22 +63986,22 @@ export interface operations {
                     };
                     tblEmployeeTblWorkOrderCreatedByTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblWorkOrderIssuedByTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblWorkOrderPendingByTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblWorkOrderPlannedByTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblInstallation?: {
@@ -64323,22 +64100,22 @@ export interface operations {
                     };
                     tblEmployeeTblWorkOrderCreatedByTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblWorkOrderIssuedByTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblWorkOrderPendingByTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblWorkOrderPlannedByTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblInstallation?: {
@@ -65202,25 +64979,25 @@ export interface operations {
                     };
                     tblEmployeeTblWorkOrderCreatedByTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblWorkOrderIssuedByTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblWorkOrderPendingByTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblWorkOrderPlannedByTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -65340,25 +65117,25 @@ export interface operations {
                     };
                     tblEmployeeTblWorkOrderCreatedByTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblWorkOrderIssuedByTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblWorkOrderPendingByTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblWorkOrderPlannedByTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -65478,25 +65255,25 @@ export interface operations {
                     };
                     tblEmployeeTblWorkOrderCreatedByTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblWorkOrderIssuedByTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblWorkOrderPendingByTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblWorkOrderPlannedByTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -67214,17 +66991,17 @@ export interface operations {
                     };
                     tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblWorkShopClosedByIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblInstallation?: {
@@ -67264,17 +67041,17 @@ export interface operations {
                     };
                     tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblWorkShopClosedByIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblInstallation?: {
@@ -67314,17 +67091,17 @@ export interface operations {
                     };
                     tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblWorkShopClosedByIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblInstallation?: {
@@ -67632,19 +67409,19 @@ export interface operations {
                     };
                     tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblWorkShopClosedByIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -67696,19 +67473,19 @@ export interface operations {
                     };
                     tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblWorkShopClosedByIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -67760,19 +67537,19 @@ export interface operations {
                     };
                     tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblWorkShopClosedByIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -69509,48 +69286,7 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        workOrder: {
-                            total: number;
-                            plan: number;
-                            issue: number;
-                            open: number;
-                            completed: number;
-                            overdue: number;
-                            pending: number;
-                            current: number;
-                            postponed: number;
-                        };
-                        failure: {
-                            total: number;
-                            open: number;
-                            closed: number;
-                            lastWeek: number;
-                            lastMonth: number;
-                        };
-                        unplanned: {
-                            lastWeek: number;
-                            lastMonth: number;
-                        };
-                        disciplines: {
-                            [key: string]: {
-                                open: number;
-                                pending: number;
-                                overdue: number;
-                                current: number;
-                            };
-                        };
-                    };
-                };
-            };
-        };
+        responses: never;
     };
     getHealth: {
         parameters: {

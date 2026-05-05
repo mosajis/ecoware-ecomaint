@@ -1,24 +1,28 @@
 import * as z from "zod";
+
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
-import { memo, useEffect, useState, useCallback } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { buildRelation } from "@/core/helper";
+
+import { memo } from "react";
+import { Controller } from "react-hook-form";
+
 import {
   tblJobDescription,
   tblJobClass,
   TypeTblJobDescription,
 } from "@/core/api/generated/api";
+
+import { buildRelation } from "@/core/helper";
+import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
 import { useAtomValue } from "jotai";
 import { atomRig } from "@/shared/atoms/general.atom";
 
-// === Validation Schema ===
+// === Schema ===
 const schema = z.object({
-  jobDescCode: z.string().optional().nullable(),
-  jobDescTitle: z.string().min(1, "Job Description is required"),
+  jobDescCode: z.string().nullable().optional(),
+  jobDescTitle: z.string().min(1),
   jobClassId: z
     .object({
       jobClassId: z.number(),
@@ -26,58 +30,51 @@ const schema = z.object({
     })
     .nullable()
     .optional(),
-  changeReason: z.string().optional().nullable(),
+  changeReason: z.string().nullable().optional(),
 });
 
 export type JobDescriptionFormValues = z.infer<typeof schema>;
 
-type Props = {
-  open: boolean;
-  mode: "create" | "update";
-  recordId?: number | null;
-  onClose: () => void;
-  onSuccess: (data: TypeTblJobDescription) => void;
+const defaultValues: JobDescriptionFormValues = {
+  jobDescCode: "",
+  jobDescTitle: "",
+  jobClassId: null,
+  changeReason: "",
 };
 
 function JobDescriptionUpsert({
+  entityName,
   open,
   mode,
   recordId,
   onClose,
   onSuccess,
-}: Props) {
-  const rig = useAtomValue(atomRig)
-  const rigId = rig?.instId as number 
-  
-  const [loadingInitial, setLoadingInitial] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+}: UpsertProps<TypeTblJobDescription>) {
+  const rig = useAtomValue(atomRig);
+  const rigId = rig?.instId as number;
 
-  const defaultValues: JobDescriptionFormValues = {
-    jobDescCode: "",
-    jobDescTitle: "",
-    jobClassId: null,
-    changeReason: "",
-  };
-
-  const { control, handleSubmit, reset } = useForm<JobDescriptionFormValues>({
-    resolver: zodResolver(schema),
+  const {
+    form,
+    loadingInitial,
+    submitting,
+    isDisabled,
+    readonly,
+    title,
+    handleFormSubmit,
+  } = useUpsertForm<JobDescriptionFormValues, TypeTblJobDescription>({
+    entityName,
+    open,
+    mode,
+    recordId,
+    schema,
     defaultValues,
-  });
 
-  // === Load record in edit mode ===
-  const fetchData = useCallback(async () => {
-    if (mode !== "update" || !recordId) {
-      reset(defaultValues);
-      return;
-    }
-
-    setLoadingInitial(true);
-    try {
-      const res = await tblJobDescription.getById(recordId, {
+    onFetch: async (id) => {
+      const res = await tblJobDescription.getById(id, {
         include: { tblJobClass: true },
       });
 
-      reset({
+      return {
         jobDescCode: res?.jobDescCode ?? "",
         jobDescTitle: res?.jobDescTitle ?? "",
         jobClassId: res?.tblJobClass
@@ -87,73 +84,32 @@ function JobDescriptionUpsert({
             }
           : null,
         changeReason: res?.changeReason ?? "",
-      });
-    } finally {
-      setLoadingInitial(false);
-    }
-  }, [mode, recordId, reset]);
-
-  useEffect(() => {
-    if (open) fetchData();
-  }, [open, fetchData]);
-
-  const isDisabled = loadingInitial || submitting;
-
-  // === Submit Handler ===
-  const handleFormSubmit = useCallback(
-    async (values: JobDescriptionFormValues) => {
-      const parsed = schema.safeParse(values);
-      if (!parsed.success) return;
-
-      try {
-        setSubmitting(true);
-
-        const jobClassRelation = buildRelation(
-          "tblJobClass",
-          "jobClassId",
-          parsed.data.jobClassId?.jobClassId,
-        );
-
-        let result: TypeTblJobDescription;
-
-        if (mode === "create") {
-          result = await tblJobDescription.create({
-            jobDescCode: parsed.data.jobDescCode ?? "",
-            jobDescTitle: parsed.data.jobDescTitle,
-            changeReason: parsed.data.changeReason ?? "",
-            ...jobClassRelation,
-          });
-        } else {
-          result = await tblJobDescription.update(recordId!, {
-            jobDescCode: parsed.data.jobDescCode ?? "",
-            jobDescTitle: parsed.data.jobDescTitle,
-            changeReason: parsed.data.changeReason ?? "",
-            ...jobClassRelation,
-          });
-        }
-
-        onSuccess(result);
-        onClose();
-      } finally {
-        setSubmitting(false);
-      }
+      };
     },
-    [mode, recordId, onSuccess, onClose],
-  );
+
+    onCreate: tblJobDescription.create,
+    onUpdate: tblJobDescription.update,
+
+    onSuccess,
+    onClose,
+  });
+
+  const {
+    control,
+    formState: { errors },
+  } = form;
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
-      title={
-        mode === "create" ? "Create Job Description" : "Edit Job Description"
-      }
+      title={title}
       submitting={submitting}
       loadingInitial={loadingInitial}
-      onSubmit={handleSubmit(handleFormSubmit)}
+      onSubmit={handleFormSubmit}
+      readonly={readonly}
     >
       <Box display="grid" gridTemplateColumns="repeat(1, 1fr)" gap={1.5}>
-        {/* Code */}
         <Controller
           name="jobDescCode"
           control={control}
@@ -167,7 +123,6 @@ function JobDescriptionUpsert({
           )}
         />
 
-        {/* Job Description */}
         <Controller
           name="jobDescTitle"
           control={control}
@@ -183,7 +138,6 @@ function JobDescriptionUpsert({
           )}
         />
 
-        {/* Job Class */}
         <Controller
           name="jobClassId"
           control={control}
@@ -204,7 +158,6 @@ function JobDescriptionUpsert({
           )}
         />
 
-        {/* Change Reason */}
         <Controller
           name="changeReason"
           control={control}

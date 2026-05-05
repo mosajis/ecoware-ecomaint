@@ -1,24 +1,24 @@
 import Splitter from "@/shared/components/Splitter/Splitter";
 import JobDescriptionUpsert from "./JobDescriptionUpsert";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+
 import { useCallback, useState } from "react";
+
 import { Tabs } from "./JobDescriptionTabs";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
+
 import { columns, getRowId } from "./JobDescriptionColumns";
-import { useDialogs } from "@/shared/hooks/useDialogs";
+
 import {
   tblJobDescription,
   TypeTblJobDescription,
 } from "@/core/api/generated/api";
 
+import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
+
 export default function PageJobDescription() {
-  const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   const [label, setLabel] = useState<string | null>(null);
-
-  const { dialogs, openDialog, closeDialog } = useDialogs({
-    upsert: false,
-  });
 
   // === DataGrid ===
   const getAll = useCallback(() => {
@@ -33,23 +33,17 @@ export default function PageJobDescription() {
     "jobDescId",
   );
 
-  // === Handlers ===
-  const handleCreate = useCallback(() => {
-    setSelectedRowId(null);
-    setMode("create");
-    openDialog("upsert");
-  }, []);
+  // === Upsert Dialog (NEW PATTERN) ===
+  const { openCreate, openEdit, dialogProps } =
+    useUpsertDialog<TypeTblJobDescription>({
+      onSuccess: handleRefresh,
+    });
 
-  const handleEdit = useCallback((rowId: number) => {
-    setSelectedRowId(rowId);
-    setMode("update");
-    openDialog("upsert");
-  }, []);
-
+  // === Row click (only UI state) ===
   const handleRowClick = useCallback(
     ({ row }: { row: TypeTblJobDescription }) => {
-      setSelectedRowId(row.jobDescId);
       setLabel(row.jobDescTitle);
+      setSelectedRowId(row.jobDescId);
     },
     [],
   );
@@ -67,25 +61,19 @@ export default function PageJobDescription() {
           loading={loading}
           rows={rows}
           columns={columns}
-          onAddClick={handleCreate}
-          onRefreshClick={handleRefresh}
-          onDoubleClick={handleEdit}
-          onEditClick={handleEdit}
+          getRowId={getRowId}
+          onAddClick={openCreate}
+          onEditClick={openEdit}
+          onDoubleClick={openEdit}
           onDeleteClick={handleDelete}
           onRowClick={handleRowClick}
-          getRowId={getRowId}
+          onRefreshClick={handleRefresh}
         />
 
         <Tabs label={label} jobDescriptionId={selectedRowId} />
       </Splitter>
 
-      <JobDescriptionUpsert
-        open={dialogs.upsert}
-        mode={mode}
-        recordId={selectedRowId}
-        onClose={() => closeDialog("upsert")}
-        onSuccess={handleRefresh}
-      />
+      <JobDescriptionUpsert entityName="Job Description" {...dialogProps} />
     </>
   );
 }

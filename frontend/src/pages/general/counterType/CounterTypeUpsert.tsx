@@ -1,16 +1,19 @@
 import * as z from "zod";
+
 import FormDialog from "@/shared/components/formDialog/FormDialog";
+import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
-import TextField from "@mui/material/TextField";
-import { memo, useEffect, useState, useCallback, useMemo } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { tblCounterType, TypeTblCounterType } from "@/core/api/generated/api";
-import { requiredStringField } from "@/core/helper";
 import NumberField from "@/shared/components/fields/FieldNumber";
 
-// === Zod schema ===
+import { memo } from "react";
+import { Controller } from "react-hook-form";
+
+import { tblCounterType, TypeTblCounterType } from "@/core/api/generated/api";
+import { requiredStringField } from "@/core/helper";
+import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
+
+// === Schema ===
 const schema = z.object({
   code: requiredStringField(),
   name: requiredStringField(),
@@ -20,108 +23,71 @@ const schema = z.object({
 
 export type CounterTypeFormValues = z.infer<typeof schema>;
 
-type Props = {
-  open: boolean;
-  mode: "create" | "update";
-  recordId?: number | null;
-  onClose: () => void;
-  onSuccess: (data: TypeTblCounterType) => void;
+const defaultValues: CounterTypeFormValues = {
+  code: "",
+  name: "",
+  type: 0,
+  orderNo: null,
 };
 
 function CounterTypeUpsert({
+  entityName,
   open,
   mode,
   recordId,
   onClose,
   onSuccess,
-}: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+}: UpsertProps<TypeTblCounterType>) {
+  const {
+    form,
+    loadingInitial,
+    submitting,
+    isDisabled,
+    readonly,
+    title,
+    handleFormSubmit,
+  } = useUpsertForm<CounterTypeFormValues, TypeTblCounterType>({
+    entityName,
+    open,
+    mode,
+    recordId,
+    schema,
+    defaultValues,
 
-  const defaultValues: CounterTypeFormValues = useMemo(
-    () => ({
-      code: "",
-      name: "",
-      type: 0,
-      orderNo: null,
-    }),
-    [],
-  );
+    onFetch: async (id) => {
+      const res = await tblCounterType.getById(id);
+
+      return {
+        code: res?.code ?? "",
+        name: res?.name ?? "",
+        type: res?.type ?? 0,
+        orderNo: res?.orderNo ?? null,
+      };
+    },
+
+    onCreate: tblCounterType.create,
+    onUpdate: tblCounterType.update,
+
+    onSuccess,
+    onClose,
+  });
 
   const {
     control,
-    handleSubmit,
-    reset,
     formState: { errors },
-  } = useForm<CounterTypeFormValues>({
-    resolver: zodResolver(schema),
-    defaultValues,
-  });
-
-  // === Fetch data for update ===
-  const fetchData = useCallback(async () => {
-    if (mode === "update" && recordId) {
-      setLoadingInitial(true);
-      try {
-        const res = await tblCounterType.getById(recordId);
-        if (res) {
-          reset({
-            code: res.code ?? "",
-            name: res.name ?? "",
-            type: res.type ?? 0,
-            orderNo: res.type ?? 0,
-          });
-        }
-      } catch (err) {
-        console.error("Failed to fetch CounterType", err);
-        reset(defaultValues);
-      } finally {
-        setLoadingInitial(false);
-      }
-    } else {
-      reset(defaultValues);
-    }
-  }, [mode, recordId, reset, defaultValues]);
-
-  useEffect(() => {
-    if (open) fetchData();
-  }, [open, fetchData]);
-
-  const isDisabled = loadingInitial || submitting;
-
-  const handleFormSubmit = useCallback(
-    async (values: CounterTypeFormValues) => {
-      setSubmitting(true);
-      try {
-        let result: TypeTblCounterType;
-        if (mode === "create") {
-          result = await tblCounterType.create(values);
-        } else if (mode === "update" && recordId) {
-          result = await tblCounterType.update(recordId, values);
-        } else {
-          return;
-        }
-        onSuccess(result);
-        onClose();
-      } catch (err) {
-        console.error("Submit failed", err);
-      } finally {
-        setSubmitting(false);
-      }
-    },
-    [mode, recordId, onSuccess, onClose],
-  );
+  } = form;
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === "create" ? "Create Counter Type" : "Edit Counter Type"}
+      title={title}
       submitting={submitting}
       loadingInitial={loadingInitial}
-      onSubmit={handleSubmit(handleFormSubmit)}
+      onSubmit={handleFormSubmit}
+      readonly={readonly}
     >
-      <Box display="flex" flexDirection={"column"} gap={1.5}>
+      <Box display="flex" flexDirection="column" gap={1.5}>
         <Controller
           name="code"
           control={control}
@@ -130,13 +96,14 @@ function CounterTypeUpsert({
               {...field}
               label="Code *"
               size="small"
+              sx={{ width: "70%" }}
               error={!!errors.code}
               helperText={errors.code?.message}
               disabled={isDisabled}
-              sx={{ width: "70%" }}
             />
           )}
         />
+
         <Controller
           name="name"
           control={control}
@@ -151,6 +118,7 @@ function CounterTypeUpsert({
             />
           )}
         />
+
         <Controller
           name="orderNo"
           control={control}
@@ -165,6 +133,7 @@ function CounterTypeUpsert({
             />
           )}
         />
+
         <Controller
           name="type"
           control={control}
@@ -174,14 +143,16 @@ function CounterTypeUpsert({
               select
               label="Type *"
               size="small"
-              disabled={isDisabled}
-              sx={{ width: "50%" }}
               value={field.value ?? ""}
               onChange={(e) =>
                 field.onChange(
                   e.target.value === "" ? null : Number(e.target.value),
                 )
               }
+              error={!!errors.type}
+              helperText={errors.type?.message}
+              disabled={isDisabled}
+              sx={{ width: "50%" }}
             >
               <MenuItem value={3}>Measure</MenuItem>
               <MenuItem value={0}>Counter</MenuItem>

@@ -1,19 +1,12 @@
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import DataGrid from "@/shared/components/dataGrid/DataGrid";
 import EmployeeUpsert from "./EmployeeUpsert";
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { tblEmployee } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { useDialogs } from "@/shared/hooks/useDialogs";
+import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 import { columns, getRowId } from "./EmployeeColumns";
 
 export default function PageEmployee() {
-  const [mode, setMode] = useState<"create" | "update">("create");
-  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
-
-  const { dialogs, openDialog, closeDialog } = useDialogs({
-    upsert: false,
-  });
-
   const getAll = useCallback(
     () =>
       tblEmployee.getAll({
@@ -24,51 +17,35 @@ export default function PageEmployee() {
     [],
   );
 
-  // === useDataGrid hook
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
     tblEmployee.deleteById,
     "employeeId",
   );
 
-  // === Handlers
-  const handleCreate = useCallback(() => {
-    setSelectedRowId(null);
-    setMode("create");
-    openDialog("upsert");
-  }, []);
+  const { openCreate, openEdit, dialogProps, openView } = useUpsertDialog({
+    onSuccess: handleRefresh,
+  });
 
-  const handleEdit = useCallback((rowId: number) => {
-    setSelectedRowId(rowId);
-    setMode("update");
-    openDialog("upsert");
-  }, []);
+  const label = "Employee";
 
   return (
-    <>
-      <CustomizedDataGrid
-        showToolbar
-        disableRowNumber
-        label="Employee"
-        elementId={300}
-        loading={loading}
-        rows={rows}
-        columns={columns}
-        onAddClick={handleCreate}
-        onRefreshClick={handleRefresh}
-        onDeleteClick={handleDelete}
-        onEditClick={handleEdit}
-        onDoubleClick={handleEdit}
-        getRowId={getRowId}
-      />
-
-      <EmployeeUpsert
-        open={dialogs.upsert}
-        mode={mode}
-        recordId={selectedRowId}
-        onClose={() => closeDialog("upsert")}
-        onSuccess={handleRefresh}
-      />
-    </>
+    <DataGrid
+      showToolbar
+      disableRowNumber
+      label={label}
+      elementId={300}
+      loading={loading}
+      rows={rows}
+      columns={columns}
+      onAddClick={openCreate}
+      onRefreshClick={handleRefresh}
+      onDeleteClick={handleDelete}
+      onEditClick={openEdit}
+      onDoubleClick={openView}
+      getRowId={getRowId}
+    >
+      <EmployeeUpsert entityName={label} {...dialogProps} />
+    </DataGrid>
   );
 }

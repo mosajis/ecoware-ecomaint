@@ -46,14 +46,14 @@ export default class Api {
     // Authorization interceptor
     this.axios.interceptors.request.use((config) => {
       const token = localStorage.getItem(LOCAL_STORAGE.ACCESS_KEY);
-      const rig = jotaiStore.get(atomRig)
-      const instId = rig?.instId
+      const rig = jotaiStore.get(atomRig);
+      const instId = rig?.instId;
 
       if (token) {
         config.headers["Authorization"] = `Bearer ${token}`;
       }
 
-      if(instId) {
+      if (instId) {
         config.headers["x-inst-id"] = instId;
       }
 

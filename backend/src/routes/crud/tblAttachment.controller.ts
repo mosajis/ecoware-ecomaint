@@ -1,4 +1,4 @@
-import { Elysia, t } from "elysia";
+import { Elysia, file, t } from "elysia";
 import { BaseController } from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
 import { FileService } from "@/utils/file.service";
@@ -10,6 +10,8 @@ import {
 } from "orm/generated/prismabox/TblAttachment";
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
+import path from "node:path";
+import { FILE_CONFIG } from "@/utils/file.config";
 
 // ========================================
 // Interfaces
@@ -54,7 +56,7 @@ export class AttachmentService extends BaseService<any> {
       createdEmployeeId: data.createdEmployeeId,
       instId: data.instId,
       createdAt: new Date(),
-    } as any);
+    });
   }
 
   /**
@@ -106,6 +108,7 @@ export class AttachmentService extends BaseService<any> {
     buffer: Buffer;
     originalName: string;
     mimeType: string;
+    path: string;
   }> {
     const attachment = await this.findOne({ attachmentId });
 
@@ -114,8 +117,10 @@ export class AttachmentService extends BaseService<any> {
     }
 
     const buffer = await FileService.readFile(attachment.path);
+    const fullPath = path.join(FILE_CONFIG.UPLOAD_DIR, attachment.path);
 
     return {
+      path: fullPath,
       buffer,
       originalName: attachment.fileName,
       mimeType: this.getMimeType(attachment.fileName),
@@ -249,9 +254,7 @@ const baseController = new BaseController({
         }),
         type: "multipart/form-data",
         response: t.Union([
-          t.Object({
-            /* Attachment Schema */
-          }),
+          buildResponseSchema(TblAttachmentPlain, TblAttachment),
           t.Object({
             error: t.String(),
             code: t.Optional(t.String()),
@@ -270,15 +273,7 @@ const baseController = new BaseController({
           const fileData =
             await ServiceTblAttachment.getFileForDownload(attachmentId);
 
-          const headers = FileService.getDownloadHeaders(
-            fileData.originalName,
-            fileData.mimeType,
-          );
-
-          set.headers = headers;
-          set.status = 200;
-
-          return fileData.buffer;
+          return file(fileData.path);
         } catch (error) {
           set.status = 404;
           return new TextEncoder().encode(

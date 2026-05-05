@@ -1,15 +1,18 @@
 import * as z from "zod";
+
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import FieldNumber from "@/shared/components/fields/FieldNumber";
-import { memo, useEffect, useMemo, useState, useCallback } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { requiredStringField } from "@/core/helper";
-import { tblJobTrigger, TypeTblJobTrigger } from "@/core/api/generated/api";
 
-// === Validation Schema with Zod ===
+import { memo } from "react";
+import { Controller } from "react-hook-form";
+
+import { tblJobTrigger, TypeTblJobTrigger } from "@/core/api/generated/api";
+import { requiredStringField } from "@/core/helper";
+import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
+
+// === Schema ===
 const schema = z.object({
   descr: requiredStringField(),
   orderNo: z.number().nullable(),
@@ -17,91 +20,67 @@ const schema = z.object({
 
 export type FormValues = z.infer<typeof schema>;
 
-type Props = {
-  open: boolean;
-  mode: "create" | "update";
-  recordId?: number | null;
-  onClose: () => void;
-  onSuccess?: (data: TypeTblJobTrigger) => void;
+const defaultValues: FormValues = {
+  descr: "",
+  orderNo: null,
 };
 
-function JobTriggerUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+function JobTriggerUpsert({
+  entityName,
+  open,
+  mode,
+  recordId,
+  onClose,
+  onSuccess,
+}: UpsertProps<TypeTblJobTrigger>) {
+  const {
+    form,
+    loadingInitial,
+    submitting,
+    isDisabled,
+    readonly,
+    title,
+    handleFormSubmit,
+  } = useUpsertForm<FormValues, TypeTblJobTrigger>({
+    entityName,
+    open,
+    mode,
+    recordId,
+    schema,
+    defaultValues,
 
-  const defaultValues: FormValues = useMemo(
-    () => ({
-      descr: "",
-      orderNo: null,
-    }),
-    [],
-  );
+    onFetch: async (id) => {
+      const res = await tblJobTrigger.getById(id);
+
+      return {
+        descr: res?.descr ?? "",
+        orderNo: res?.orderNo ?? null,
+      };
+    },
+
+    onCreate: tblJobTrigger.create,
+    onUpdate: tblJobTrigger.update,
+
+    onSuccess,
+    onClose,
+  });
 
   const {
     control,
-    handleSubmit,
-    reset,
     formState: { errors },
-  } = useForm<FormValues>({
-    resolver: zodResolver(schema),
-    defaultValues,
-  });
-
-  // === Fetch initial data
-  const fetchData = useCallback(async () => {
-    if (mode === "update" && recordId) {
-      setLoadingInitial(true);
-      const res = await tblJobTrigger.getById(recordId);
-      if (res) {
-        reset({
-          descr: res.descr ?? "",
-          orderNo: res.orderNo,
-        });
-      }
-      setLoadingInitial(false);
-    } else {
-      reset(defaultValues);
-    }
-  }, [mode, recordId, reset, defaultValues]);
-
-  useEffect(() => {
-    if (open) fetchData();
-  }, [open, fetchData]);
-
-  const isDisabled = loadingInitial || submitting;
-
-  // === Form submit handler
-  const handleFormSubmit = useCallback(
-    async (values: FormValues) => {
-      setSubmitting(true);
-
-      let result: TypeTblJobTrigger | undefined;
-      if (mode === "create") {
-        result = await tblJobTrigger.create(values);
-      } else if (mode === "update" && recordId) {
-        result = await tblJobTrigger.update(recordId, values);
-      }
-
-      if (result) {
-        onSuccess?.(result);
-        onClose();
-      }
-
-      setSubmitting(false);
-    },
-    [mode, recordId, onSuccess, onClose],
-  );
+  } = form;
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === "create" ? "Create Job Trigger" : "Edit Job Trigger"}
+      title={title}
       submitting={submitting}
       loadingInitial={loadingInitial}
-      onSubmit={handleSubmit(handleFormSubmit)}
+      onSubmit={handleFormSubmit}
+      readonly={readonly}
     >
-      <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1.5}>
+      <Box display="flex" flexDirection="column" gap={1.5}>
         <Controller
           name="descr"
           control={control}
@@ -113,7 +92,6 @@ function JobTriggerUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               error={!!errors.descr}
               helperText={errors.descr?.message}
               disabled={isDisabled}
-              sx={{ gridColumn: "span 4" }}
             />
           )}
         />
@@ -129,7 +107,6 @@ function JobTriggerUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               error={!!errors.orderNo}
               helperText={errors.orderNo?.message}
               disabled={isDisabled}
-              sx={{ gridColumn: "span 2 " }}
             />
           )}
         />

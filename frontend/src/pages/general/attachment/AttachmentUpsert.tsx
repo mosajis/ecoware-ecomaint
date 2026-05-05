@@ -1,4 +1,5 @@
 import * as z from "zod";
+
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
@@ -6,60 +7,98 @@ import FileField from "@/shared/components/fields/FieldFile";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import FieldAsyncSelect from "@/shared/components/fields/FieldAsyncSelect";
-import { memo, useEffect, useMemo, useCallback, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { createAttachment } from "./AttachmentService";
-import { newAttachmentSchema } from "@/shared/tabs/attachmentMap/AttachmentMapSchema";
+
+import { memo, useEffect } from "react";
+import { Controller } from "react-hook-form";
 import { useAtomValue } from "jotai";
+
 import { atomUser } from "@/pages/auth/auth.atom";
 import {
   tblAttachment,
-  TypeTblAttachment,
   tblAttachmentType,
+  TypeTblAttachment,
   TypeTblAttachmentType,
 } from "@/core/api/generated/api";
 
+import { newAttachmentSchema } from "@/shared/tabs/attachmentMap/AttachmentMapSchema";
+import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
+import { createAttachment } from "./AttachmentService";
+
+// === Types ===
 export type AttachmentFormValues = z.input<typeof newAttachmentSchema>;
 
-type Props = {
-  open: boolean;
-  mode: "create" | "update";
-  recordId?: number | null;
-  onClose: () => void;
-  onSuccess: (data: TypeTblAttachment) => void;
+const defaultValues: AttachmentFormValues = {
+  title: "",
+  attachmentType: null,
+  isUserAttachment: true,
+  file: new File([], ""),
 };
 
-function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
-  const [submitting, setSubmitting] = useState(false);
-
+function AttachmentUpsert({
+  entityName,
+  open,
+  mode,
+  recordId,
+  onClose,
+  onSuccess,
+}: UpsertProps<TypeTblAttachment>) {
   const user = useAtomValue(atomUser);
 
-  const defaultValues: AttachmentFormValues = useMemo(
-    () => ({
-      title: "",
-      attachmentType: null,
-      isUserAttachment: true,
-      file: new File([], ""),
-    }),
-    [],
-  );
+  const {
+    form,
+    loadingInitial,
+    submitting,
+    isDisabled,
+    readonly,
+    title,
+    handleFormSubmit,
+  } = useUpsertForm<AttachmentFormValues, TypeTblAttachment>({
+    entityName,
+    open,
+    mode,
+    recordId,
+    schema: newAttachmentSchema,
+    defaultValues,
+
+    onFetch: async (id) => {
+      const res = await tblAttachment.getById(id, {
+        include: { tblAttachmentType: true },
+      });
+
+      return {
+        title: res?.title ?? "",
+        attachmentType: res?.tblAttachmentType
+          ? {
+              attachmentTypeId: res.tblAttachmentType.attachmentTypeId,
+              name: res.tblAttachmentType.name ?? "",
+            }
+          : null,
+        isUserAttachment: res?.isUserAttachment ?? true,
+        file: new File([], ""),
+      };
+    },
+
+    onCreate: async (values) =>
+      createAttachment({
+        ...values,
+        attachmentTypeId: values.attachmentType?.attachmentTypeId as number,
+        createdEmployeeId: user?.tblEmployee?.employeeId as number,
+      }),
+
+    onSuccess,
+    onClose,
+  });
 
   const {
     control,
-    handleSubmit,
-    reset,
+    formState: { errors },
     setValue,
     watch,
-    formState: { errors },
-  } = useForm<AttachmentFormValues>({
-    resolver: zodResolver(newAttachmentSchema),
-    defaultValues,
-    mode: "onChange",
-  });
+  } = form;
 
   const selectedFile = watch("file");
 
+  // === Auto title from file ===
   useEffect(() => {
     const fileName = selectedFile?.name?.trim();
 
@@ -77,88 +116,20 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
     if (!currentTitle?.trim()) {
       setValue("title", nameWithoutExtension);
     }
-  }, [selectedFile, setValue, watch]);
-
-  const fetchData = useCallback(async () => {
-    if (mode === "update" && recordId) {
-      try {
-        const res = await tblAttachment.getById(recordId, {
-          include: { tblAttachmentType: true },
-        });
-
-        if (res) {
-          reset({
-            title: res.title ?? "",
-            attachmentType: res.tblAttachmentType
-              ? {
-                  attachmentTypeId: res.tblAttachmentType.attachmentTypeId,
-                  name: res.tblAttachmentType.name ?? "",
-                }
-              : null,
-            isUserAttachment: res.isUserAttachment ?? true,
-            file: new File([], ""),
-          });
-        }
-      } catch (err) {
-        console.error("Failed to load attachment data", err);
-      }
-    } else {
-      reset(defaultValues);
-    }
-  }, [mode, recordId, reset, defaultValues]);
-
-  useEffect(() => {
-    if (open) fetchData();
-  }, [open, fetchData]);
-
-  const isDisabled = submitting;
-
-  // === ارسال فرم ===
-  const handleFormSubmit = useCallback(
-    async (values: AttachmentFormValues) => {
-      setSubmitting(true);
-      try {
-        const payload = {
-          title: values.title,
-          attachmentTypeId: values?.attachmentType?.attachmentTypeId || 0,
-          isUserAttachment: values.isUserAttachment,
-          file: values.file,
-          createdEmployeeId: user?.tblEmployee?.employeeId as number,
-        };
-
-        let result: TypeTblAttachment | undefined;
-
-        if (mode === "create") {
-          result = await createAttachment(payload);
-        } else if (mode === "update" && recordId) {
-          result = await tblAttachment.update(recordId, payload);
-        }
-
-        if (result) {
-          onSuccess(result);
-          onClose();
-        }
-      } catch (err) {
-        console.error("Failed to submit attachment form", err);
-      } finally {
-        setSubmitting(false);
-      }
-    },
-    [mode, recordId, onSuccess, onClose],
-  );
+  }, [selectedFile]);
 
   return (
     <FormDialog
       open={open}
-      maxWidth="sm"
       onClose={onClose}
-      title={mode === "create" ? "Create Attachment" : "Edit Attachment"}
+      title={title}
       submitting={submitting}
-      loadingInitial={false}
-      onSubmit={handleSubmit(handleFormSubmit)}
+      loadingInitial={loadingInitial}
+      onSubmit={handleFormSubmit}
+      readonly={readonly}
     >
       <Box display="flex" flexDirection="column" gap={1.5}>
-        {/* آپلود فایل */}
+        {/* File */}
         <Controller
           name="file"
           control={control}
@@ -175,7 +146,7 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
           )}
         />
 
-        {/* عنوان */}
+        {/* Title */}
         <Controller
           name="title"
           control={control}
@@ -184,14 +155,15 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
               {...field}
               label="Title *"
               size="small"
-              fullWidth
               error={!!errors.title}
               helperText={errors.title?.message}
               disabled={isDisabled}
             />
           )}
         />
-        <Box display={"grid"} gridTemplateColumns={"2fr 1fr "} gap={1.5}>
+
+        <Box display="grid" gridTemplateColumns="2fr 1fr" gap={1.5}>
+          {/* Type */}
           <Controller
             name="attachmentType"
             control={control}
@@ -203,12 +175,13 @@ function AttachmentUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
                 label="Attachment Type *"
                 request={tblAttachmentType.getAll}
                 getOptionLabel={(row) => row.name || ""}
-                error={!!fieldState.error?.message}
+                error={!!fieldState.error}
                 helperText={fieldState.error?.message}
               />
             )}
           />
 
+          {/* Checkbox */}
           <Controller
             name="isUserAttachment"
             control={control}

@@ -1,62 +1,39 @@
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import DisciplineFormDialog from "./DisciplineUpsert";
-import { useState, useCallback } from "react";
+import DataGrid from "@/shared/components/dataGrid/DataGrid";
+import DisciplineUpsert from "./DisciplineUpsert";
+import { useCallback } from "react";
 import { tblDiscipline } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { useDialogs } from "@/shared/hooks/useDialogs";
+import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 import { columns, getRowId } from "./DisciplineColumns";
 
 export default function PageDiscipline() {
-  const [mode, setMode] = useState<"create" | "update">("create");
-  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
-
-  const { dialogs, openDialog, closeDialog } = useDialogs({
-    upsert: false,
-  });
-
-  // === Hook ===
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     tblDiscipline.getAll,
     tblDiscipline.deleteById,
     "discId",
   );
 
-  // === Handlers ===
-  const handleCreate = useCallback(() => {
-    setSelectedRowId(null);
-    setMode("create");
-    openDialog("upsert");
-  }, []);
-
-  const handleEdit = useCallback((rowId: number) => {
-    setSelectedRowId(rowId);
-    setMode("update");
-    openDialog("upsert");
-  }, []);
+  const { openCreate, openEdit, openView, dialogProps } = useUpsertDialog({
+    onSuccess: handleRefresh,
+  });
+  const label = "Discipline";
 
   return (
-    <>
-      <CustomizedDataGrid
-        showToolbar
-        elementId={400}
-        loading={loading}
-        label="Discipline"
-        rows={rows}
-        columns={columns}
-        onDeleteClick={handleDelete}
-        onEditClick={handleEdit}
-        onDoubleClick={handleEdit}
-        onAddClick={handleCreate}
-        getRowId={getRowId}
-      />
-
-      <DisciplineFormDialog
-        open={dialogs.upsert}
-        mode={mode}
-        recordId={selectedRowId}
-        onClose={() => closeDialog("upsert")}
-        onSuccess={handleRefresh}
-      />
-    </>
+    <DataGrid
+      showToolbar
+      elementId={400}
+      loading={loading}
+      label={label}
+      rows={rows}
+      columns={columns}
+      onAddClick={openCreate}
+      onEditClick={openEdit}
+      onDeleteClick={handleDelete}
+      onRefreshClick={handleRefresh}
+      onDoubleClick={openView}
+      getRowId={getRowId}
+    >
+      <DisciplineUpsert entityName={label} {...dialogProps} />
+    </DataGrid>
   );
 }

@@ -1,30 +1,25 @@
-import MaintClassUpsert from "./MaintClassUpsert.js";
-import MaintTypeUpsert from "./MaintTypeUpsert.js";
-import MaintCauseUpsert from "./MaintCauseUpsert.js";
-import Splitter from "@/shared/components/Splitter/Splitter.js";
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { useDialogs } from "@/shared/hooks/useDialogs.js";
-import { useState, useCallback } from "react";
-import { useDataGrid } from "@/shared/hooks/useDataGrid.js";
+import Splitter from "@/shared/components/Splitter/Splitter";
+import DataGrid from "@/shared/components/dataGrid/DataGrid";
+import MaintClassUpsert from "./MaintClassUpsert";
+import MaintTypeUpsert from "./MaintTypeUpsert";
+import MaintCauseUpsert from "./MaintCauseUpsert";
+
 import {
   tblMaintType,
   tblMaintClass,
   tblMaintCause,
 } from "@/core/api/generated/api";
+import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 import {
   columns,
   getRowIdCause,
   getRowIdClass,
   getRowIdType,
-} from "./MaintColumns.js";
+} from "./MaintColumns";
 
 export default function PageMaintClass() {
-  const { dialogs, openDialog, closeDialog } = useDialogs({
-    upsertType: false,
-    upsertCause: false,
-    upsertClass: false,
-  });
-  // ---------------- Maint Type ----------------
+  // === Maint Type ===
   const {
     rows: typeRows,
     loading: loadingType,
@@ -32,19 +27,11 @@ export default function PageMaintClass() {
     handleRefresh: refreshType,
   } = useDataGrid(tblMaintType.getAll, tblMaintType.deleteById, "maintTypeId");
 
-  const [modeType, setModeType] = useState<"create" | "update">("create");
-  const [selectedTypeId, setSelectedTypeId] = useState<number | null>(null);
+  const typeDialog = useUpsertDialog({
+    onSuccess: refreshType,
+  });
 
-  const openUpsertMaintType = useCallback(
-    (mode: "create" | "update" = "create", id?: number) => {
-      setModeType(mode);
-      setSelectedTypeId(id ?? null);
-      openDialog("upsertType");
-    },
-    [],
-  );
-
-  // ---------------- Maint Class ----------------
+  // === Maint Class ===
   const {
     rows: classRows,
     loading: loadingClass,
@@ -56,20 +43,11 @@ export default function PageMaintClass() {
     "maintClassId",
   );
 
-  const [modeClass, setModeClass] = useState<"create" | "update">("create");
-  const [selectedClassId, setSelectedClassId] = useState<number | null>(null);
+  const classDialog = useUpsertDialog({
+    onSuccess: refreshClass,
+  });
 
-  const openUpsertMaintClass = useCallback(
-    (mode: "create" | "update" = "create", id?: number) => {
-      setModeClass(mode);
-      setSelectedClassId(id ?? null);
-      openDialog("upsertClass");
-    },
-    [],
-  );
-
-  // ---------------- Maint Cause ----------------
-
+  // === Maint Cause ===
   const {
     rows: causeRows,
     loading: loadingCause,
@@ -81,101 +59,82 @@ export default function PageMaintClass() {
     "maintCauseId",
   );
 
-  const [modeCause, setModeCause] = useState<"create" | "update">("create");
-  const [selectedCauseId, setSelectedCauseId] = useState<number | null>(null);
-
-  const openUpsertMaintCause = useCallback(
-    (mode: "create" | "update" = "create", id?: number) => {
-      setModeCause(mode);
-      setSelectedCauseId(id ?? null);
-      openDialog("upsertCause");
-    },
-    [],
-  );
+  const causeDialog = useUpsertDialog({
+    onSuccess: refreshCause,
+  });
 
   return (
-    <>
-      <Splitter initialPrimarySize="34%">
-        <CustomizedDataGrid
+    <Splitter initialPrimarySize="34%">
+      {/* CLASS */}
+      <DataGrid
+        showToolbar
+        disableColumns
+        disableExport
+        elementId={630}
+        label="Maint Class"
+        rows={classRows}
+        columns={columns}
+        loading={loadingClass}
+        onAddClick={classDialog.openCreate}
+        onEditClick={classDialog.openEdit}
+        onDeleteClick={handleDeleteClass}
+        onRefreshClick={refreshClass}
+        onDoubleClick={classDialog.openView}
+        getRowId={getRowIdClass}
+      >
+        <MaintClassUpsert
+          entityName="Maint Class"
+          {...classDialog.dialogProps}
+        />
+      </DataGrid>
+
+      <Splitter initialPrimarySize="50%">
+        {/* TYPE */}
+        <DataGrid
           showToolbar
           disableColumns
           disableExport
-          disableRefresh
-          elementId={630}
-          label="Maint Class"
-          rows={classRows}
+          label="Maint Type"
+          elementId={620}
+          rows={typeRows}
           columns={columns}
-          loading={loadingClass}
-          onEditClick={(rowId) => openUpsertMaintClass("update", rowId)}
-          onDoubleClick={(rowId) => openUpsertMaintClass("update", rowId)}
-          onAddClick={() => openUpsertMaintClass()}
-          onDeleteClick={handleDeleteClass}
-          onRefreshClick={refreshClass}
-          getRowId={getRowIdClass}
-        />
-
-        <Splitter initialPrimarySize="50%">
-          <CustomizedDataGrid
-            showToolbar
-            disableColumns
-            disableExport
-            disableRefresh
-            label="Maint Type"
-            elementId={620}
-            rows={typeRows}
-            columns={columns}
-            loading={loadingType}
-            onEditClick={(rowId) => openUpsertMaintType("update", rowId)}
-            onDoubleClick={(rowId) => openUpsertMaintType("update", rowId)}
-            onAddClick={() => openUpsertMaintType()}
-            onDeleteClick={handleDeleteType}
-            onRefreshClick={refreshType}
-            getRowId={getRowIdType}
+          loading={loadingType}
+          onAddClick={typeDialog.openCreate}
+          onEditClick={typeDialog.openEdit}
+          onDeleteClick={handleDeleteType}
+          onRefreshClick={refreshType}
+          onDoubleClick={typeDialog.openView}
+          getRowId={getRowIdType}
+        >
+          <MaintTypeUpsert
+            entityName="Maint Type"
+            {...typeDialog.dialogProps}
           />
+        </DataGrid>
 
-          <CustomizedDataGrid
-            showToolbar
-            disableColumns
-            disableExport
-            disableRefresh
-            label="Maint Cause"
-            elementId={610}
-            rows={causeRows}
-            columns={columns}
-            loading={loadingCause}
-            onEditClick={(rowId) => openUpsertMaintCause("update", rowId)}
-            onDoubleClick={(rowId) => openUpsertMaintCause("update", rowId)}
-            onAddClick={() => openUpsertMaintCause()}
-            onDeleteClick={handleDeleteCause}
-            onRefreshClick={refreshCause}
-            getRowId={getRowIdCause}
+        {/* CAUSE */}
+        <DataGrid
+          showToolbar
+          disableColumns
+          disableExport
+          label="Maint Cause"
+          elementId={610}
+          rows={causeRows}
+          columns={columns}
+          loading={loadingCause}
+          onAddClick={causeDialog.openCreate}
+          onEditClick={causeDialog.openEdit}
+          onDeleteClick={handleDeleteCause}
+          onRefreshClick={refreshCause}
+          onDoubleClick={causeDialog.openView}
+          getRowId={getRowIdCause}
+        >
+          <MaintCauseUpsert
+            entityName="Maint Cause"
+            {...causeDialog.dialogProps}
           />
-        </Splitter>
+        </DataGrid>
       </Splitter>
-
-      <MaintTypeUpsert
-        open={dialogs.upsertType}
-        mode={modeType}
-        recordId={selectedTypeId}
-        onClose={() => closeDialog("upsertType")}
-        onSuccess={refreshType}
-      />
-
-      <MaintClassUpsert
-        open={dialogs.upsertClass}
-        mode={modeClass}
-        recordId={selectedClassId}
-        onClose={() => closeDialog("upsertClass")}
-        onSuccess={refreshClass}
-      />
-
-      <MaintCauseUpsert
-        open={dialogs.upsertCause}
-        mode={modeCause}
-        recordId={selectedCauseId}
-        onClose={() => closeDialog("upsertCause")}
-        onSuccess={refreshCause}
-      />
-    </>
+    </Splitter>
   );
 }

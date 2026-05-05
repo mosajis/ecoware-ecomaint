@@ -1,14 +1,19 @@
 import * as z from "zod";
+
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import NumberField from "@/shared/components/fields/FieldNumber";
-import { memo, useEffect, useMemo, useState, useCallback } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+
+import { memo } from "react";
+import { Controller } from "react-hook-form";
+
 import { tblMaintCause, TypeTblMaintCause } from "@/core/api/generated/api";
 import { requiredStringField } from "@/core/helper";
+import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
 
+// === Schema ===
 const schema = z.object({
   description: requiredStringField(),
   orderNo: z.number().nullable(),
@@ -16,93 +21,74 @@ const schema = z.object({
 
 export type MaintCauseFormValues = z.infer<typeof schema>;
 
-type Props = {
-  open: boolean;
-  mode: "create" | "update";
-  recordId?: number | null;
-  onClose: () => void;
-  onSuccess: (data: TypeTblMaintCause) => void;
+const defaultValues: MaintCauseFormValues = {
+  description: "",
+  orderNo: null,
 };
 
-function MaintCauseUpsert({ open, mode, recordId, onClose, onSuccess }: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+function MaintCauseUpsert({
+  entityName,
+  open,
+  mode,
+  recordId,
+  onClose,
+  onSuccess,
+}: UpsertProps<TypeTblMaintCause>) {
+  const {
+    form,
+    loadingInitial,
+    submitting,
+    isDisabled,
+    readonly,
+    title,
+    handleFormSubmit,
+  } = useUpsertForm<MaintCauseFormValues, TypeTblMaintCause>({
+    entityName,
+    open,
+    mode,
+    recordId,
+    schema,
+    defaultValues,
 
-  const defaultValues: MaintCauseFormValues = useMemo(
-    () => ({ description: "", orderNo: null }),
-    [],
-  );
+    onFetch: async (id) => {
+      const res = await tblMaintCause.getById(id);
+
+      return {
+        description: res?.descr ?? "",
+        orderNo: res?.orderNo ?? null,
+      };
+    },
+
+    onCreate: (data) =>
+      tblMaintCause.create({
+        descr: data.description,
+        orderNo: data.orderNo,
+      }),
+
+    onUpdate: (id, data) =>
+      tblMaintCause.update(id, {
+        descr: data.description,
+        orderNo: data.orderNo,
+      }),
+
+    onSuccess,
+    onClose,
+  });
 
   const {
     control,
-    handleSubmit,
-    reset,
     formState: { errors },
-  } = useForm<MaintCauseFormValues>({
-    resolver: zodResolver(schema),
-    defaultValues,
-  });
-
-  const fetchData = useCallback(async () => {
-    if (mode === "update" && recordId) {
-      setLoadingInitial(true);
-      try {
-        const res = await tblMaintCause.getById(recordId);
-        reset({ description: res?.descr ?? "", orderNo: res.orderNo });
-      } catch (err) {
-        console.error("Failed to fetch MaintCause", err);
-        reset(defaultValues);
-      } finally {
-        setLoadingInitial(false);
-      }
-    } else {
-      reset(defaultValues);
-    }
-  }, [mode, recordId, reset, defaultValues]);
-
-  useEffect(() => {
-    if (open) fetchData();
-  }, [open, fetchData]);
-
-  const isDisabled = loadingInitial || submitting;
-
-  const handleFormSubmit = useCallback(
-    async (values: MaintCauseFormValues) => {
-      setSubmitting(true);
-      try {
-        let result: TypeTblMaintCause;
-        if (mode === "create") {
-          result = await tblMaintCause.create({
-            descr: values.description,
-            orderNo: values.orderNo,
-          });
-        } else if (mode === "update" && recordId) {
-          result = await tblMaintCause.update(recordId, {
-            descr: values.description,
-            orderNo: values.orderNo,
-          });
-        } else {
-          return;
-        }
-        onSuccess(result);
-        onClose();
-      } catch (err) {
-        console.error("Submit failed", err);
-      } finally {
-        setSubmitting(false);
-      }
-    },
-    [mode, recordId, onSuccess, onClose],
-  );
+  } = form;
 
   return (
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === "create" ? "Create Maint Cause" : "Edit Maint Cause"}
+      title={title}
       submitting={submitting}
       loadingInitial={loadingInitial}
-      onSubmit={handleSubmit(handleFormSubmit)}
+      onSubmit={handleFormSubmit}
+      readonly={readonly}
     >
       <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1.5}>
         <Controller

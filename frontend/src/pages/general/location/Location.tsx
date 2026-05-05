@@ -1,23 +1,20 @@
 import Splitter from "@/shared/components/Splitter/Splitter";
 import LocationUpsert from "./LocationUpsert";
-import GenericDataGrid from "@/shared/components/dataGrid/DataGrid";
+import DataGrid from "@/shared/components/dataGrid/DataGrid";
 import { tblLocation, TypeTblLocation } from "@/core/api/generated/api";
 import { useDataTree } from "@/shared/hooks/useDataTree";
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { GenericTree } from "@/shared/components/tree/Tree";
 import { mapToTree } from "@/shared/components/tree/TreeUtil";
-import { useDialogs } from "@/shared/hooks/useDialogs";
+import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 import { columns, getRowId } from "./LocationColumns";
 
 const getItemName = (row: TypeTblLocation) => row.name || "-";
 
 export default function PageLocation() {
-  const { dialogs, openDialog, closeDialog } = useDialogs({
-    upsert: false,
+  const { openView, openCreate, openEdit, dialogProps } = useUpsertDialog({
+    onSuccess: () => refetch(),
   });
-
-  const [mode, setMode] = useState<"create" | "update">("create");
-  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
   const treeMapper = useCallback(
     (items: TypeTblLocation[]) =>
@@ -43,59 +40,41 @@ export default function PageLocation() {
       mapper: treeMapper,
     });
 
-  const handleCreate = useCallback(() => {
-    setSelectedRowId(null);
-    setMode("create");
-    openDialog("upsert");
-  }, []);
-
-  const handleEdit = useCallback((rowId: number) => {
-    setSelectedRowId(rowId);
-    setMode("update");
-    openDialog("upsert");
-  }, []);
+  const label = "Location";
 
   return (
-    <>
-      <Splitter initialPrimarySize="35%">
-        <GenericTree<TypeTblLocation>
-          label="Tree View"
-          elementId={200}
-          loading={loading}
-          data={tree}
-          onDelete={handleDelete}
-          onEdit={handleEdit}
-          onDoubleClick={handleEdit}
-          onAdd={handleCreate}
-          onRefresh={refetch}
-          getItemName={getItemName}
-          getItemId={getRowId}
-        />
-
-        <GenericDataGrid
-          label="List View"
-          elementId={200}
-          showToolbar
-          disableRowNumber
-          loading={loading}
-          rows={rows}
-          columns={columns}
-          onDoubleClick={handleEdit}
-          onEditClick={handleEdit}
-          onDeleteClick={handleDelete}
-          onRefreshClick={refetch}
-          onAddClick={handleCreate}
-          getRowId={getRowId}
-        />
-      </Splitter>
-
-      <LocationUpsert
-        open={dialogs.upsert}
-        mode={mode}
-        recordId={selectedRowId}
-        onClose={() => closeDialog("upsert")}
-        onSuccess={refetch}
+    <Splitter initialPrimarySize="35%">
+      <GenericTree<TypeTblLocation>
+        label="Tree View"
+        elementId={200}
+        loading={loading}
+        data={tree}
+        onDelete={handleDelete}
+        onEdit={openEdit}
+        onDoubleClick={openView}
+        onAdd={openCreate}
+        onRefresh={refetch}
+        getItemName={getItemName}
+        getItemId={getRowId}
       />
-    </>
+
+      <DataGrid
+        label="List View"
+        elementId={200}
+        showToolbar
+        disableRowNumber
+        loading={loading}
+        rows={rows}
+        columns={columns}
+        onDoubleClick={openView}
+        onEditClick={openEdit}
+        onDeleteClick={handleDelete}
+        onRefreshClick={refetch}
+        onAddClick={openCreate}
+        getRowId={getRowId}
+      >
+        <LocationUpsert entityName={label} {...dialogProps} />
+      </DataGrid>
+    </Splitter>
   );
 }

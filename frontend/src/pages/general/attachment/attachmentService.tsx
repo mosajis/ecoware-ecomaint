@@ -44,6 +44,32 @@ export async function createAttachment(
   }
 }
 
-export function downloadAttachment(id: number) {
-  window.open(configAxios.httpURL + `/tblAttachment/${id}/download`, "_blank");
+export async function downloadAttachment(id: number) {
+  const res = await api.get(`/tblAttachment/${id}/download`, {
+    responseType: "blob",
+  });
+
+  const blob = new Blob([res.data]);
+  const url = window.URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+
+  const disposition =
+    res.headers?.["content-disposition"] ||
+    res.headers?.["Content-Disposition"];
+
+  let fileName = `attachment-${id}`;
+
+  if (disposition) {
+    const match = disposition.match(/filename="?(.*?)"?$/);
+    if (match?.[1]) fileName = match[1];
+  }
+
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  window.URL.revokeObjectURL(url);
 }

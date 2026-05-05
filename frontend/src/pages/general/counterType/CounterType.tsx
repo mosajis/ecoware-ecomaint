@@ -1,15 +1,14 @@
 import Splitter from "@/shared/components/Splitter/Splitter";
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import DataGrid from "@/shared/components/dataGrid/DataGrid";
 import CounterTypeTabs from "./CounterTypeTabs";
 import CounterTypeUpsert from "./CounterTypeUpsert";
-import { useState, useCallback } from "react";
 import { tblCounterType, TypeTblCounterType } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 import { columns, getRowId } from "./CounterTypeColumns";
+import { useCallback, useState } from "react";
 
 export default function PageCounterType() {
-  const [openForm, setOpenForm] = useState(false);
-  const [mode, setMode] = useState<"create" | "update">("create");
   const [label, setLabel] = useState<string | null>(null);
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
@@ -19,63 +18,38 @@ export default function PageCounterType() {
     "counterTypeId",
   );
 
-  // === Handlers ===
-  const handleCreate = useCallback(() => {
-    setSelectedRowId(null);
-    setMode("create");
-    handleUpsertOpen();
-  }, []);
-
-  const handleEdit = useCallback((rowId: number) => {
-    setSelectedRowId(rowId);
-    setMode("update");
-    handleUpsertOpen();
-  }, []);
-
-  const handleUpsertClose = useCallback(() => {
-    setOpenForm(false);
-  }, [setOpenForm]);
-
-  const handleUpsertOpen = useCallback(() => {
-    setOpenForm(true);
-  }, [setOpenForm]);
-
+  const { openCreate, openEdit, openView, dialogProps } = useUpsertDialog({
+    onSuccess: handleRefresh,
+  });
   const handleRowClick = useCallback(({ row }: { row: TypeTblCounterType }) => {
     setSelectedRowId(row.counterTypeId);
     setLabel(row.name);
   }, []);
 
   return (
-    <>
-      <Splitter initialPrimarySize="35%">
-        <CustomizedDataGrid
-          showToolbar
-          disableColumns
-          disableExport
-          rowSelection
-          label="Counter Type"
-          elementId={500}
-          rows={rows}
-          columns={columns}
-          loading={loading}
-          onEditClick={handleEdit}
-          onDoubleClick={handleEdit}
-          onDeleteClick={handleDelete}
-          onAddClick={handleCreate}
-          onRefreshClick={handleRefresh}
-          getRowId={getRowId}
-          onRowClick={handleRowClick}
-        />
+    <Splitter initialPrimarySize="35%">
+      <DataGrid
+        showToolbar
+        disableColumns
+        disableExport
+        rowSelection
+        label={"Counter Type"}
+        elementId={500}
+        rows={rows}
+        columns={columns}
+        loading={loading}
+        onRowClick={handleRowClick}
+        onAddClick={openCreate}
+        onEditClick={openEdit}
+        onDeleteClick={handleDelete}
+        onRefreshClick={handleRefresh}
+        onDoubleClick={openView}
+        getRowId={getRowId}
+      >
+        <CounterTypeUpsert entityName={"Counter Type"} {...dialogProps} />
+      </DataGrid>
 
-        <CounterTypeTabs counterTypeId={selectedRowId} label={label} />
-      </Splitter>
-      <CounterTypeUpsert
-        open={openForm}
-        mode={mode}
-        recordId={selectedRowId}
-        onClose={handleUpsertClose}
-        onSuccess={handleRefresh}
-      />
-    </>
+      <CounterTypeTabs label={label} counterTypeId={selectedRowId} />
+    </Splitter>
   );
 }

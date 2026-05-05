@@ -1,63 +1,50 @@
-import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import AttachmentUpsert from "./AttachmentUpsert";
-import { useCallback, useState } from "react";
+import DataGrid from "@/shared/components/dataGrid/DataGrid";
+import Upsert from "./AttachmentUpsert";
+
+import { tblAttachment } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { tblAttachment, tblEmployee } from "@/core/api/generated/api";
-import { useDialogs } from "@/shared/hooks/useDialogs";
 import { columns, getRowId } from "./AttachmentColumns";
+import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
+import { useCallback } from "react";
 
 export default function PageAttachment() {
-  const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
-  const [mode, setMode] = useState<"create" | "update">("create");
-  const { dialogs, openDialog, closeDialog } = useDialogs({
-    upsert: false,
-  });
+  const getAll = useCallback(() => {
+    return tblAttachment.getAll({
+      include: {
+        tblAttachmentType: true,
+        tblEmployee: true,
+      },
+    });
+  }, []);
 
-  const getAll = useCallback(
-    () =>
-      tblAttachment.getAll({
-        include: { tblAttachmentType: true, tblEmployee: true },
-      }),
-    [],
-  );
-  // === useDataGrid ===
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
     tblAttachment.deleteById,
     "attachmentId",
   );
 
-  // === Handlers ===
-  const handleCreate = useCallback(() => {
-    setSelectedRowId(null);
-    setMode("create");
-    openDialog("upsert");
-  }, []);
+  const { openCreate, openEdit, openView, dialogProps } = useUpsertDialog({
+    onSuccess: handleRefresh,
+  });
+
+  const label = "Attachment";
 
   return (
-    <>
-      <CustomizedDataGrid
-        showToolbar
-        disableRowNumber
-        disableEdit
-        elementId={1200}
-        label="Attachments"
-        rows={rows}
-        columns={columns}
-        loading={loading}
-        onDeleteClick={handleDelete}
-        onAddClick={handleCreate}
-        onRefreshClick={handleRefresh}
-        getRowId={getRowId}
-      />
-
-      <AttachmentUpsert
-        open={dialogs.upsert}
-        mode={mode}
-        recordId={selectedRowId}
-        onClose={() => closeDialog("upsert")}
-        onSuccess={handleRefresh}
-      />
-    </>
+    <DataGrid
+      showToolbar
+      disableRowNumber
+      disableEdit
+      elementId={1200}
+      label={label}
+      rows={rows}
+      columns={columns}
+      loading={loading}
+      onRefreshClick={handleRefresh}
+      onDeleteClick={handleDelete}
+      onAddClick={openCreate}
+      getRowId={getRowId}
+    >
+      <Upsert entityName={label} {...dialogProps} />
+    </DataGrid>
   );
 }
