@@ -22,6 +22,8 @@ const ignoreResources = [
   "health",
   "index",
   "statistics",
+  "tblFailureReportFull",
+  "tblFailureReportByFailureReportIdFull",
   "tblAttachmentByAttachmentIdDownload",
   "tblMaintLogSpareUniqueSpareUnit",
   "tblMaintLogContext",

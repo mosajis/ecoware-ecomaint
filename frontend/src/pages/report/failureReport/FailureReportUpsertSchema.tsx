@@ -1,8 +1,9 @@
+import { requiredStringField } from "@/core/helper";
 import * as z from "zod";
 
 export const schema = z.object({
   // Basic Info
-  title: z.string(),
+  title: requiredStringField(),
   requestNo: z.string(),
   failureDateTime: z.date().or(z.string()),
 
@@ -23,6 +24,14 @@ export const schema = z.object({
     })
     .nullable()
     .refine((val) => val !== null),
+
+  location: z
+    .object({
+      locationId: z.number(),
+      name: z.string().nullable().optional(),
+    })
+    .nullable()
+    .optional(),
 
   // Status & Severity
   failureSeverity: z
@@ -77,6 +86,7 @@ export const schema = z.object({
     .refine((val) => val !== null),
 
   // Descriptions
+  failureNumber: z.string().nullable().optional(),
   failureDesc: z.string(),
   downTime: z.number(),
   followDesc: z.string().nullable().optional(),

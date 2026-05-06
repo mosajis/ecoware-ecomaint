@@ -176,7 +176,7 @@ function TabSpareUsedUpsert({
                   include: { tblSpareType: true },
                   filter: {
                     NOT: {
-                      tblMaintLogSpare: {
+                      tblMaintLogSpares: {
                         some: { maintLogId },
                       },
                     },

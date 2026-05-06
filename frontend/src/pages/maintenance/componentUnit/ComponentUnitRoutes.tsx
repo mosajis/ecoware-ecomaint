@@ -16,11 +16,7 @@ export const routeComponentUnitList = createRoute({
   getParentRoute: () => routeComponentUnit,
   path: "/",
   component: () => (
-    <LazyRoute
-      Component={lazy(
-        () => import("@/pages/maintenance/componentUnit/ComponentUnit"),
-      )}
-    />
+    <LazyRoute Component={lazy(() => import("./ComponentUnit"))} />
   ),
   beforeLoad: () => ({ breadcrumb: "List" }),
 });
@@ -29,11 +25,7 @@ export const routeComponentUnitDetail = createDetailRoute({
   parent: routeComponentUnit,
   path: "$id",
   Component: () => (
-    <LazyRoute
-      Component={lazy(
-        () => import("@/pages/maintenance/componentUnit/ComponentUnitDetail"),
-      )}
-    />
+    <LazyRoute Component={lazy(() => import("./ComponentUnitDetail"))} />
   ),
 });
 

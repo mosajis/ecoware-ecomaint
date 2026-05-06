@@ -53,13 +53,12 @@ export default function PagefailureReport() {
     [filter],
   );
 
-  const { rows, loading, handleRefresh, handleDelete, optimisticUpdate } =
-    useDataGrid(
-      getAll,
-      tblFailureReport.deleteById,
-      "failureReportId",
-      !dialogs.filter,
-    );
+  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
+    getAll,
+    tblFailureReport.deleteById,
+    "failureReportId",
+    !dialogs.filter,
+  );
 
   const { openCreate, openEdit, openView, dialogProps } =
     useUpsertDialog<TypeTblFailureReport>({

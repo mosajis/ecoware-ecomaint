@@ -1,5 +1,5 @@
-// TabSpareUsed.tsx
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import TabSpareUsedUpsert from "./TabSpareUsedUpsert";
 import { useCallback, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 
@@ -9,7 +9,6 @@ import {
 } from "@/core/api/generated/api";
 
 import { columns, getRowId } from "./TabSpareUsedColumns";
-import TabSpareUsedUpsert from "./TabSpareUsedUpsert";
 
 type Props = {
   failreReport?: TypeTblFailureReport;
@@ -67,6 +66,7 @@ const TabSpareUsed = ({ failreReport }: Props) => {
         columns={columns}
         getRowId={getRowId}
         onAddClick={handleCreate}
+        onRefreshClick={handleRefresh}
         onDeleteClick={handleDelete}
       />
 

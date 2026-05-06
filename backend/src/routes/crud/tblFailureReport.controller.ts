@@ -13,6 +13,10 @@ import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 import { generateDocumentNumber, removeNulls } from "@/helper";
 import { TblMaintLogInputCreate } from "orm/generated/prismabox/TblMaintLog";
+import { TblInstallation } from "orm/generated/prismabox/TblInstallation";
+import { TblFailureGroupFollow } from "orm/generated/prismabox/TblFailureGroupFollow";
+import { TblLocation } from "orm/generated/prismabox/TblLocation";
+import { authPlugin } from "../auth/auth.guard";
 
 export const ServiceTblFailureReports = new BaseService(
   prisma.tblFailureReport,
@@ -39,9 +43,9 @@ const ControllerTblFailureReports = new BaseController({
     /**
      * 🚀 CREATE FULL
      */
-    app.post(
+    app.use(authPlugin).post(
       "/full",
-      async ({ body, headers }) => {
+      async ({ body, headers, userId }) => {
         const instId = Number(headers["x-inst-id"] || 0);
 
         if (!instId) {
@@ -49,6 +53,12 @@ const ControllerTblFailureReports = new BaseController({
         }
 
         return await prisma.$transaction(async (tx) => {
+          const user = await tx.tblUser.findFirst({
+            where: {
+              userId: Number(userId),
+            },
+          });
+
           // 🔥 global generator
           const failureNumber = await generateDocumentNumber({
             tx,
@@ -59,16 +69,32 @@ const ControllerTblFailureReports = new BaseController({
           const maintLogData = removeNulls({
             ...body.maintLog,
 
-            tblEmployee: body.maintLog.tblEmployee,
             tblDiscipline: body.maintLog.tblDiscipline,
             tblMaintClass: body.maintLog.tblMaintClass,
             tblMaintCause: body.maintLog.tblMaintCause,
             tblMaintType: body.maintLog.tblMaintType,
+            tblComponentUnit: body.maintLog.tblComponentUnit,
 
-            instId,
+            tblEmployee: {
+              connect: {
+                employeeId: user?.employeeId,
+              },
+            },
+            tblInstallation: {
+              connect: {
+                instId,
+              },
+            },
           });
 
           const maintLog = await tx.tblMaintLog.create({
+            include: {
+              tblComponentUnit: {
+                include: {
+                  tblLocation: true,
+                },
+              },
+            },
             data: maintLogData,
           });
 
@@ -76,12 +102,30 @@ const ControllerTblFailureReports = new BaseController({
             ...body.failureReport,
 
             failureNumber,
-            maintLogId: maintLog.maintLogId,
-            tblFailureSeverityLevel: body.failureReport.tblFailureSeverityLevel,
-            tblFailureStatus: body.failureReport.tblFailureStatus,
-            tblFailureGroupFollow: body.failureReport?.tblFailureGroupFollow,
+            tblMaintLog: {
+              connect: {
+                maintLogId: maintLog.maintLogId,
+              },
+            },
+            tblFailureSeverityLevel:
+              body.failureReport.tblFailureSeverityLevel || undefined,
+            tblFailureStatus: body.failureReport.tblFailureStatus || undefined,
+            tblFailureGroupFollow:
+              body.failureReport?.tblFailureGroupFollow || undefined,
 
-            instId,
+            tblLocation: maintLog.tblComponentUnit?.tblLocation
+              ? {
+                  connect: {
+                    locationId:
+                      maintLog.tblComponentUnit?.tblLocation?.locationId,
+                  },
+                }
+              : undefined,
+            tblInstallation: {
+              connect: {
+                instId,
+              },
+            },
           });
           const failureReport = await tx.tblFailureReport.create({
             data: failureReportData,
@@ -110,12 +154,18 @@ const ControllerTblFailureReports = new BaseController({
     /**
      * 🔁 UPDATE FULL
      */
-    app.put(
+    app.use(authPlugin).put(
       "/:failureReportId/full",
-      async ({ params, body }) => {
+      async ({ params, body, userId }) => {
         const id = Number(params.failureReportId);
 
         return await prisma.$transaction(async (tx) => {
+          const user = await tx.tblUser.findFirst({
+            where: {
+              userId: Number(userId),
+            },
+          });
+
           const existing = await tx.tblFailureReport.findUnique({
             where: { failureReportId: id },
           });
@@ -128,11 +178,13 @@ const ControllerTblFailureReports = new BaseController({
             const maintLogData = removeNulls({
               ...body.maintLog,
 
-              tblEmployee: body.maintLog.tblEmployee?.connect?.employeeId,
-              tblDiscipline: body.maintLog.tblDiscipline?.connect?.discId,
-              tblMaintClass: body.maintLog.tblMaintClass?.connect.maintClassId,
-              tblMaintCause: body.maintLog.tblMaintCause?.connect?.maintCauseId,
-              tblMaintType: body.maintLog.tblMaintType?.connect?.maintTypeId,
+              tblEmployee: body.maintLog.tblEmployee,
+              tblDiscipline: body.maintLog.tblDiscipline,
+              tblMaintClass: body.maintLog.tblMaintClass,
+              tblMaintCause: body.maintLog.tblMaintCause,
+              tblMaintType: body.maintLog.tblMaintType,
+
+              updatedEmployeeId: user?.employeeId,
             });
 
             await tx.tblMaintLog.update({
@@ -144,14 +196,9 @@ const ControllerTblFailureReports = new BaseController({
           const failureReportData = removeNulls({
             ...body.failureReport,
 
-            tblFailureSeverityLevel:
-              body.failureReport.tblFailureSeverityLevel?.connect
-                ?.failureSeverityLevelId,
-            tblFailureStatus:
-              body.failureReport.tblFailureStatus?.connect.failureStatusId,
-            tblFailureGroupFollow:
-              body.failureReport?.tblFailureGroupFollow?.connect
-                ?.failureGroupFollowId,
+            tblFailureSeverityLevel: body.failureReport.tblFailureSeverityLevel,
+            tblFailureStatus: body.failureReport.tblFailureStatus,
+            tblFailureGroupFollow: body.failureReport?.tblFailureGroupFollow,
           });
 
           return await tx.tblFailureReport.update({

@@ -157,7 +157,6 @@ export default function PageComponentUnit() {
 
       <WorkShopUpsert
         open={dialogs.workShop}
-        mode={"create"}
         onClose={() => closeDialog("workShop")}
         onSuccess={() => closeDialog("workShop")}
       />

@@ -302,6 +302,7 @@ function ComponentUnitUpsert({
             render={({ field }) => (
               <TextField
                 {...field}
+                value={field.value || ""}
                 label="Serial No"
                 size="small"
                 fullWidth
@@ -317,6 +318,7 @@ function ComponentUnitUpsert({
             render={({ field }) => (
               <TextField
                 {...field}
+                value={field.value || ""}
                 label="Asset No"
                 size="small"
                 fullWidth
@@ -350,6 +352,7 @@ function ComponentUnitUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              value={field.value || ""}
               label="Comment 1"
               size="small"
               fullWidth
@@ -365,6 +368,7 @@ function ComponentUnitUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              value={field.value || ""}
               label="Comment 2"
               size="small"
               fullWidth
@@ -380,6 +384,7 @@ function ComponentUnitUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              value={field.value || ""}
               label="Comment 3"
               size="small"
               fullWidth

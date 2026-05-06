@@ -6,12 +6,6 @@ export const getRowId = (row: TypeTblMaintLog) => row.maintLogId;
 
 export const columns: GridColDef<TypeTblMaintLog>[] = [
   {
-    field: "id",
-    headerName: "id",
-    flex: 1,
-    valueGetter: (_, row) => row?.maintLogId,
-  },
-  {
     field: "component",
     headerName: "Component",
     flex: 1,

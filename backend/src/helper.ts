@@ -41,16 +41,7 @@ export const generateDocumentNumber = async ({
 
   const repo = (tx as any)[model];
 
-  const where = useYear
-    ? {
-        createdAt: {
-          gte: new Date(`${year}-01-01`),
-          lt: new Date(`${year + 1}-01-01`),
-        },
-      }
-    : undefined;
-
-  const count = await repo.count({ where });
+  const count = await repo.count();
 
   const padded = String(count + 1).padStart(padSize, "0");
 

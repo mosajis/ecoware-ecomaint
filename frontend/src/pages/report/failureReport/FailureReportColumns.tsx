@@ -1,8 +1,10 @@
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import CellSeverity from "../_components/CellSeverity";
+import CellFullName from "@/shared/components/dataGrid/cells/CellFullName";
 import { TypeTblFailureReport } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
-import CellFullName from "@/shared/components/dataGrid/cells/CellFullName";
+import { RouteDetail } from "./FailureReportRoutes";
+import CellLink from "@/shared/components/dataGrid/cells/CellLink";
 
 export const getRowId = (row: TypeTblFailureReport) => row.failureReportId;
 
@@ -15,10 +17,18 @@ export const columns: GridColDef<TypeTblFailureReport>[] = [
     headerAlign: "center",
   },
   {
-    field: "id",
-    headerName: "No",
-    width: 50,
-    valueGetter: (_, row) => row?.tblMaintLog?.maintLogId,
+    field: "title",
+    headerName: "Title",
+    flex: 3,
+    valueGetter: (_, row) => row.title,
+    renderCell: ({ value, row }) => (
+      <CellLink
+        breadcrumb={row.title}
+        value={row.title}
+        to={RouteDetail.to}
+        params={{ id: row.failureReportId }}
+      />
+    ),
   },
   {
     field: "componentName",
@@ -34,12 +44,7 @@ export const columns: GridColDef<TypeTblFailureReport>[] = [
     valueGetter: (_, row) => row?.tblMaintLog?.dateDone,
     renderCell: ({ value }) => <CellDateTime value={value} />,
   },
-  {
-    field: "title",
-    headerName: "Title",
-    flex: 2,
-    valueGetter: (_, row) => row.title,
-  },
+
   {
     field: "downTime",
     headerName: "Down Time",

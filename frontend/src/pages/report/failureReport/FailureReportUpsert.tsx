@@ -5,7 +5,7 @@ import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGri
 import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 import FieldAsyncSelect from "@/shared/components/fields/FieldAsyncSelect";
 import { Controller } from "react-hook-form";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 
 import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
 
@@ -21,8 +21,6 @@ import {
   TypeTblFailureReport,
   TypeTblComponentUnit,
   TypeTblEmployee,
-  tblFailureReportFull,
-  tblFailureReportByFailureReportIdFull,
   TypeTblFailureGroupFollow,
 } from "@/core/api/generated/api";
 
@@ -30,13 +28,14 @@ import {
   SchemaValue,
   schema,
   DEFAULT_VALUES,
-} from "./tabs/tabGeneral/TabGeneralSchema";
+} from "./FailureReportUpsertSchema";
 
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import { useAtomValue } from "jotai";
 import { atomUser, atomUserDiscipline } from "@/pages/auth/auth.atom";
 import { Divider } from "@mui/material";
 import { extractFullName } from "@/core/helper";
+import { createFailureReport, updateFailureReport } from "@/core/api/api";
 
 function FailureReportUpsert({
   entityName,
@@ -92,6 +91,11 @@ function FailureReportUpsert({
         followDesc: v.followDesc,
         nextFollowDate: v.nextFollowDate,
 
+        tblLocation: v.location?.locationId
+          ? {
+              connect: { locationId: v.location.locationId },
+            }
+          : undefined,
         tblFailureSeverityLevel: v.failureSeverity?.failureSeverityLevelId
           ? {
               connect: {
@@ -138,12 +142,13 @@ function FailureReportUpsert({
         include: {
           tblMaintLog: {
             include: {
-              tblComponentUnit: { include: { tblLocation: true } },
+              tblComponentUnit: true,
               tblMaintType: true,
               tblMaintCause: true,
               tblMaintClass: true,
             },
           },
+          tblLocation: true,
           tblFailureSeverityLevel: true,
           tblFailureStatus: true,
           tblFailureGroupFollow: true,
@@ -163,6 +168,7 @@ function FailureReportUpsert({
         downTime: maintLog?.downTime ?? 0,
         component: maintLog?.tblComponentUnit ?? null,
 
+        failureNumber: failureReport.failureNumber,
         failureSeverity: failureReport.tblFailureSeverityLevel ?? null,
         failureStatus: failureReport.tblFailureStatus ?? null,
         failureGroupFollow: failureReport.tblFailureGroupFollow ?? null,
@@ -171,6 +177,7 @@ function FailureReportUpsert({
         followDesc: failureReport.followDesc ?? "",
         nextFollowDate: failureReport.nextFollowDate ?? null,
 
+        location: failureReport.tblLocation ?? null,
         maintClass: maintLog?.tblMaintClass ?? null,
         maintCause: maintLog?.tblMaintCause ?? null,
         maintType: maintLog?.tblMaintType ?? null,
@@ -180,7 +187,7 @@ function FailureReportUpsert({
     onCreate: async (values) => {
       const { maintLog, failureReport } = buildBodies(values);
 
-      return tblFailureReportFull.create({
+      return createFailureReport({
         maintLog: {
           ...maintLog,
           dateDone: values.failureDateTime.toString(),
@@ -193,7 +200,7 @@ function FailureReportUpsert({
     onUpdate: async (id, values) => {
       const { maintLog, failureReport } = buildBodies(values);
 
-      return tblFailureReportByFailureReportIdFull.update(id, {
+      return updateFailureReport(id, {
         maintLog: {
           ...maintLog,
           dateDone: values.failureDateTime.toString(),
@@ -210,7 +217,26 @@ function FailureReportUpsert({
     formState: { errors },
   } = form;
 
-  const component = watch("component") ?? null;
+  const component = watch("component");
+
+  const locationFromReport = watch("location");
+
+  useEffect(() => {
+    if (!locationFromReport && component?.tblLocation) {
+      form.setValue("location", component.tblLocation);
+    }
+  }, [component?.compId]);
+
+  const editedTitle = watch("title");
+  useEffect(() => {
+    if (component?.compNo) {
+      const newTitle = `${component.compNo} - Failure Report`;
+
+      if (!editedTitle || editedTitle.includes("- Failure Report")) {
+        form.setValue("title", newTitle);
+      }
+    }
+  }, [component?.compNo]);
 
   return (
     <FormDialog
@@ -258,13 +284,19 @@ function FailureReportUpsert({
                 )}
               />
 
-              <TextField
-                label="Failure No"
-                // value={failureNumber ?? ""}
-                fullWidth
-                size="small"
-                disabled={isDisabled}
-                slotProps={{ input: { readOnly: true } }}
+              <Controller
+                name="failureNumber"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    value={field.value ?? ""}
+                    label="Failure No"
+                    fullWidth
+                    size="small"
+                    disabled={isDisabled}
+                    slotProps={{ input: { readOnly: true } }}
+                  />
+                )}
               />
 
               <Controller
@@ -302,33 +334,21 @@ function FailureReportUpsert({
             <Divider flexItem />
           </Box>
           <Box display={"flex"} gap={1.5}>
-            <Controller
-              name="reprtedBy"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  label="Reported By"
-                  disabled={isDisabled}
-                  value={extractFullName(user?.tblEmployee)}
-                  fullWidth
-                  size="small"
-                  slotProps={{ input: { readOnly: true } }}
-                />
-              )}
+            <TextField
+              label="Reported By"
+              disabled={isDisabled}
+              value={extractFullName(user?.tblEmployee)}
+              fullWidth
+              size="small"
+              slotProps={{ input: { readOnly: true } }}
             />
-            <Controller
-              name="reprtedBy"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  fullWidth
-                  label="Discipline"
-                  disabled={isDisabled}
-                  value={userDiscipline?.name ?? ""}
-                  size="small"
-                  slotProps={{ input: { readOnly: true } }}
-                />
-              )}
+            <TextField
+              fullWidth
+              label="Discipline"
+              disabled={isDisabled}
+              value={userDiscipline?.name ?? ""}
+              size="small"
+              slotProps={{ input: { readOnly: true } }}
             />
           </Box>
 
@@ -369,7 +389,7 @@ function FailureReportUpsert({
             <Box display={"grid"} gridTemplateColumns={"2fr 1fr"} gap={1.5}>
               <TextField
                 label="Location"
-                value={component?.tblLocation?.name || ""}
+                value={locationFromReport?.name || ""}
                 fullWidth
                 disabled={isDisabled}
                 slotProps={{ input: { readOnly: true } }}
@@ -492,7 +512,7 @@ function FailureReportUpsert({
 
           <Box display={"flex"} gap={1.5}>
             <Controller
-              name="failureDateTime"
+              name="nextFollowDate"
               control={control}
               render={({ field }) => (
                 <FieldDateTime
@@ -500,12 +520,12 @@ function FailureReportUpsert({
                   field={field}
                   disabled={isDisabled}
                   type="DATE"
-                  error={!!errors.failureDateTime}
+                  error={!!errors.nextFollowDate}
                 />
               )}
             />
             <Controller
-              name="failureSeverity"
+              name="failureGroupFollow"
               control={control}
               render={({ field }) => (
                 <FieldAsyncSelect<TypeTblFailureGroupFollow>
@@ -516,7 +536,7 @@ function FailureReportUpsert({
                   onChange={field.onChange}
                   value={field.value}
                   disabled={isDisabled}
-                  error={!!errors.failureSeverity}
+                  error={!!errors.failureGroupFollow}
                 />
               )}
             />

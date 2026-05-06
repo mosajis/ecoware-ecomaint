@@ -6,6 +6,7 @@ import {
   TypeStatistics,
 } from "./api.types";
 import { TypeTblCompJobCounterAlert } from "./generated/api";
+import { DynamicCreate, DynamicResponse, DynamicUpdate } from "./dynamicTypes";
 
 export const generateWorkOrder = (userId: number) =>
   api.post(`/tblWorkOrder/generate`, {
@@ -50,3 +51,22 @@ export const getStatistics = (): Promise<TypeStatistics> =>
 
 export const getCountersAlert = (): Promise<TypeTblCompJobCounterAlert> =>
   api.get(`/tblCompJobCounter/alert`);
+
+export const createFailureReport = (
+  data: DynamicCreate<"postTblFailureReportFull">,
+) =>
+  api.post<DynamicResponse<"postTblFailureReportFull">>(
+    "/tblFailureReport/full",
+    {
+      data,
+    },
+  );
+
+export const updateFailureReport = (
+  id: number,
+  data: DynamicUpdate<"putTblFailureReportByFailureReportIdFull">,
+) =>
+  api.put<DynamicResponse<"putTblFailureReportByFailureReportIdFull">>(
+    `/tblFailureReport/${id}/full`,
+    { data },
+  );
