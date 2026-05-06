@@ -69,7 +69,7 @@ export default function ConfirmDialog({
     >
       <DialogHeader title={title} onClose={loading ? undefined : onCancel} />
 
-      <DialogContent dividers sx={{ py: 5 }}>
+      <DialogContent dividers sx={{ py: 2 }}>
         <Box
           sx={{
             display: "flex",

@@ -22,6 +22,7 @@ import {
   TypeTblComponentUnit,
   TypeTblEmployee,
   TypeTblFailureGroupFollow,
+  tblLocation,
 } from "@/core/api/generated/api";
 
 import {
@@ -44,7 +45,8 @@ function FailureReportUpsert({
   recordId,
   onClose,
   onSuccess,
-}: UpsertProps<any>) {
+  compId, // ✅ NEW
+}: UpsertProps<any> & { compId?: number }) {
   const user = useAtomValue(atomUser);
   const userDiscipline = useAtomValue(atomUserDiscipline);
   const userEmployee = user?.tblEmployee as TypeTblEmployee;
@@ -228,6 +230,7 @@ function FailureReportUpsert({
   }, [component?.compId]);
 
   const editedTitle = watch("title");
+
   useEffect(() => {
     if (component?.compNo) {
       const newTitle = `${component.compNo} - Failure Report`;
@@ -238,6 +241,28 @@ function FailureReportUpsert({
     }
   }, [component?.compNo]);
 
+  useEffect(() => {
+    if (!open || !compId || mode !== "create") return;
+
+    if (mode === "create" && compId) {
+      tblComponentUnit
+        .getById(compId, {
+          include: {
+            tblLocation: true,
+          },
+        })
+        .then((res) => {
+          if (res) {
+            form.setValue("component", res);
+
+            // sync location فقط اگر قبلاً set نشده
+            if (!form.getValues("location") && res.tblLocation) {
+              form.setValue("location", res.tblLocation);
+            }
+          }
+        });
+    }
+  }, [compId, mode, open]);
   return (
     <FormDialog
       open={open}
@@ -361,6 +386,7 @@ function FailureReportUpsert({
               control={control}
               render={({ field }) => (
                 <FieldAsyncSelectGrid<TypeTblComponentUnit>
+                  key={compId}
                   label="Component *"
                   columns={[
                     { field: "compNo", headerName: "Comp No", flex: 1 },

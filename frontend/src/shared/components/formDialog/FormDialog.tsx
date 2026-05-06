@@ -114,7 +114,7 @@ export default function FormDialog({
               minInlineSize: "unset",
             }}
           >
-            <Suspense fallback={<Spinner />}>{children}</Suspense>
+            <Suspense fallback={<Spinner />}>{open && children}</Suspense>
           </fieldset>
 
           {!hideFooter && (

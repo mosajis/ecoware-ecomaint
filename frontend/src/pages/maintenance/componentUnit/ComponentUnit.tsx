@@ -17,18 +17,30 @@ import {
   tblComponentUnit,
   TypeTblComponentUnit,
 } from "@/core/api/generated/api";
+import ConfirmDialog from "@/shared/components/ConfirmDialog";
+import { RouteDetail as FailureReportRouteDetail } from "@/pages/report/failureReport/FailureReportRoutes";
+import { RouteDetail as WorkShopRouteDetail } from "../workShop/WorkShopRoutes";
+import { Check, CheckCircle } from "@mui/icons-material";
+// import { RouteDetail as ReportWorkRouteDetail } from "../reportWork/";
+
+type PendingRedirectType = "failureReport" | "workShop" | "reportWork" | null;
 
 export default function PageComponentUnit() {
   const router = useRouter();
 
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
   const [mode, setMode] = useState<"create" | "update">("create");
+  const [pendingRedirect, setPendingRedirect] = useState<{
+    type: PendingRedirectType;
+    id: number | null;
+  }>({ type: null, id: null });
 
   const { dialogs, openDialog, closeDialog } = useDialogs({
     upsert: false,
     reportWork: false,
     workShop: false,
     failureReport: false,
+    pendingRedirect: false,
   });
 
   const getAll = useCallback(() => {
@@ -87,6 +99,29 @@ export default function PageComponentUnit() {
 
   const handleRoutineClick = () => {};
 
+  const handleRedirectConfirm = useCallback(async () => {
+    // if (!pendingRedirect.id || !pendingRedirect.type) return;
+    // const routes = {
+    //   failureReport: FailureReportRouteDetail,
+    //   workShop: WorkShopRouteDetail,
+    //   // reportWork: ReportWorkRouteDetail,
+    // };
+    // const route = routes[pendingRedirect.type];
+    // if (route) {
+    //   await router.navigate({
+    //     to: route.to,
+    //     params: { id: pendingRedirect.id },
+    //   });
+    // }
+    // setPendingRedirect({ type: null, id: null });
+    // closeDialog("pendingRedirect");
+  }, [pendingRedirect, router]);
+
+  const handleRedirectCancel = useCallback(() => {
+    setPendingRedirect({ type: null, id: null });
+    closeDialog("pendingRedirect");
+  }, []);
+
   const selectedRow = rows.find((r) => r.compId === selectedRowId) || null;
 
   return (
@@ -120,15 +155,15 @@ export default function PageComponentUnit() {
           onAddClick={handleCreate}
           onRowClick={handleRowClick}
           onRefreshClick={refetch}
-          toolbarChildren={
-            <ComponentUnitActions
-              selectedRow={selectedRow}
-              onWorkShop={() => openDialog("workShop")}
-              onFailureReport={() => openDialog("failureReport")}
-              onNoneRoutine={() => openDialog("reportWork")}
-              onRoutine={handleRoutineClick}
-            />
-          }
+          // toolbarChildren={
+          //   <ComponentUnitActions
+          //     selectedRow={selectedRow}
+          //     onWorkShop={() => openDialog("workShop")}
+          //     onFailureReport={() => openDialog("failureReport")}
+          //     onNoneRoutine={() => openDialog("reportWork")}
+          //     onRoutine={handleRoutineClick}
+          //   />
+          // }
         />
       </Splitter>
 
@@ -140,26 +175,57 @@ export default function PageComponentUnit() {
         onSuccess={refetch}
       />
 
-      <ReportWorkDialog
+      {/* <ReportWorkDialog
         open={dialogs.reportWork}
         onClose={() => closeDialog("reportWork")}
-        onSuccess={() => closeDialog("reportWork")}
+        onSuccess={(reportWorkId) => {
+          closeDialog("reportWork");
+          setPendingRedirect({ type: "reportWork", id: reportWorkId });
+          openDialog("pendingRedirect");
+        }}
         componentUnitId={selectedRowId ?? undefined}
-      />
+      /> */}
 
-      <FailureReportUpsert
-        open={dialogs.failureReport}
-        mode={"create"}
-        compId={selectedRowId!}
-        onClose={() => closeDialog("failureReport")}
-        onSuccess={() => closeDialog("failureReport")}
-      />
+      {selectedRowId && (
+        <FailureReportUpsert
+          entityName="Failure Report"
+          open={dialogs.failureReport}
+          mode={"create"}
+          compId={selectedRowId!}
+          onClose={() => {
+            closeDialog("failureReport");
+            setPendingRedirect({ type: "failureReport", id: 2 });
+            openDialog("pendingRedirect");
+          }}
+          onSuccess={(failureReportId) => {
+            closeDialog("failureReport");
+            setPendingRedirect({ type: "failureReport", id: failureReportId });
+            openDialog("pendingRedirect");
+          }}
+        />
+      )}
 
       <WorkShopUpsert
         open={dialogs.workShop}
         onClose={() => closeDialog("workShop")}
-        onSuccess={() => closeDialog("workShop")}
+        onSuccess={(workShopId) => {
+          closeDialog("workShop");
+          // setPendingRedirect({ type: "workShop", id: workShopId });
+          // openDialog("pendingRedirect");
+        }}
       />
+
+      {/* <ConfirmDialog
+        open={!dialogs.pendingRedirect}
+        title="Success"
+        message="Record created successfully. Do you want to open the details page?"
+        confirmText="Yes"
+        cancelText="No"
+        confirmColor="success"
+        icon={null}
+        onCancel={handleRedirectCancel}
+        onConfirm={handleRedirectConfirm}
+      /> */}
     </>
   );
 }
