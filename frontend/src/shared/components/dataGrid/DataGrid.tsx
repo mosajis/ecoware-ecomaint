@@ -9,7 +9,7 @@ import {
   type GridCallbackDetails,
 } from "@mui/x-data-grid";
 
-import { useMemo, useCallback, useState } from "react";
+import { useMemo, useCallback, useState, useRef } from "react";
 
 const rowNumberColumn: GridColDef = {
   field: "rowNumber",
@@ -83,7 +83,10 @@ export default function GenericDataGrid({
     canExport = true;
   }
 
-  if (!canView) return;
+  if (!canView) return null;
+
+  // ✅ FIX: stable ref instead of variable
+  const clickTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>({
@@ -109,11 +112,8 @@ export default function GenericDataGrid({
   }, [initialState]);
 
   const handleRowSelectionChange = useCallback(
-    (
-      rowSelectionModel: GridRowSelectionModel,
-      details: GridCallbackDetails,
-    ) => {
-      setRowSelectionModel(rowSelectionModel);
+    (model: GridRowSelectionModel, _details: GridCallbackDetails) => {
+      setRowSelectionModel(model);
     },
     [],
   );
@@ -129,6 +129,30 @@ export default function GenericDataGrid({
     if (!rowId) return;
     onDeleteClick?.(Number(rowId));
   }, [rowSelectionModel, onDeleteClick]);
+
+  const handleRowClick = useCallback((params: any) => {
+    if (clickTimeoutRef.current) {
+      clearTimeout(clickTimeoutRef.current);
+    }
+
+    clickTimeoutRef.current = setTimeout(() => {
+      setRowSelectionModel({
+        type: "include",
+        ids: new Set([params.id]),
+      });
+    }, 150);
+  }, []);
+
+  const handleRowDoubleClick = useCallback(
+    (params: any) => {
+      if (clickTimeoutRef.current) {
+        clearTimeout(clickTimeoutRef.current);
+      }
+
+      onDoubleClick?.(Number(params.id));
+    },
+    [onDoubleClick],
+  );
 
   const ToolbarWrapper = useMemo(
     () => (props: any) => (
@@ -190,10 +214,12 @@ export default function GenericDataGrid({
         rowSelectionModel={rowSelectionModel}
         onRowSelectionModelChange={handleRowSelectionChange}
         getRowId={getRowId}
-        onRowDoubleClick={(params, event) => onDoubleClick?.(Number(params.id))}
+        onRowClick={handleRowClick}
+        onRowDoubleClick={handleRowDoubleClick}
         {...rest}
       />
-      {children && children}
+
+      {children}
     </>
   );
 }

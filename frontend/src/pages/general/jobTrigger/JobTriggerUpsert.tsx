@@ -32,7 +32,7 @@ function JobTriggerUpsert({
   recordId,
   onClose,
   onSuccess,
-}: UpsertProps<TypeTblJobTrigger>) {
+}: UpsertProps) {
   const {
     form,
     loadingInitial,

@@ -1,11 +1,22 @@
 import { GridColDef } from "@mui/x-data-grid";
 import { TypeTblUserGroup } from "@/core/api/generated/api";
+import CellLink from "@/shared/components/dataGrid/cells/CellLink";
+import { RouteDetail } from "./UserGroupRoutes";
 
-export const columns: GridColDef[] = [
+export const columns: GridColDef<TypeTblUserGroup>[] = [
   {
     field: "name",
     headerName: "Name",
     flex: 1,
+    valueGetter: (_, row) => row.name,
+    renderCell: ({ value, row }) => (
+      <CellLink
+        breadcrumb={row.name}
+        value={row.name}
+        to={RouteDetail.to}
+        params={{ id: row.userGroupId }}
+      />
+    ),
   },
   {
     field: "description",

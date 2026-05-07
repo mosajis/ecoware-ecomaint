@@ -13,7 +13,7 @@ import {
 export interface SelectModalProps<TItem extends Record<string, any>> {
   open: boolean;
   title?: string;
-  elementId: number,
+  elementId: number;
   onClose: () => void;
   request: () => Promise<any>;
   extractRows?: (data: any) => TItem[];
@@ -45,7 +45,10 @@ export function AsyncSelectGridDialog<TItem extends Record<string, any>>({
   const [rows, setRows] = useState<TItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [rowSelectionModel, setRowSelectionModel] =
-    useState<GridRowSelectionModel>({ type: "include", ids: new Set() });
+    useState<GridRowSelectionModel>({
+      type: "include",
+      ids: new Set(),
+    });
 
   // ---------------- Fetch Data ----------------
   const fetchData = useCallback(async () => {
@@ -87,18 +90,38 @@ export function AsyncSelectGridDialog<TItem extends Record<string, any>>({
     setRowSelectionModel(newSelection);
   }, [selected, selectionMode, getRowId]);
 
+  const rowMap = new Map<GridRowId, TItem>(rows.map((r) => [getRowId(r), r]));
+
+  const resolveSelection = (model: GridRowSelectionModel, rows: TItem[]) => {
+    const ids = new Set(model.ids);
+
+    const rowMap = new Map(rows.map((r) => [getRowId(r), r]));
+
+    if (model.type === "include") {
+      return Array.from(ids)
+        .map((id) => rowMap.get(id))
+        .filter(Boolean);
+    }
+
+    // exclude mode (Select All)
+    return rows.filter((r) => !ids.has(getRowId(r)));
+  };
+
   // ---------------- Handle OK ----------------
   const handleOk = () => {
     if (selectionMode === "single") {
-      const selectedId = Array.from(rowSelectionModel.ids)[0];
-      const selectedItem = rows.find((r) => getRowId(r) === selectedId) ?? null;
-      onSelect(selectedItem);
-    } else {
-      const selectedItems = rows.filter((r) =>
-        rowSelectionModel.ids.has(getRowId(r)),
-      );
-      onSelect(selectedItems);
+      const selectedIds = Array.from(rowSelectionModel.ids);
+      const id = selectedIds[0];
+      const item = rowMap.get(id) ?? null;
+
+      onSelect(item);
+      onClose();
+      return;
     }
+
+    const items = resolveSelection(rowSelectionModel, rows) as TItem[];
+
+    onSelect(items);
     onClose();
   };
 
@@ -135,9 +158,7 @@ export function AsyncSelectGridDialog<TItem extends Record<string, any>>({
           label={title}
           columns={columns}
           checkboxSelection={selectionMode === "multiple"}
-          onRowSelectionModelChange={(newRowSelectionModel) => {
-            setRowSelectionModel(newRowSelectionModel);
-          }}
+          onRowSelectionModelChange={setRowSelectionModel}
           rowSelectionModel={rowSelectionModel}
           onRowDoubleClick={handleRowDoubleClick}
           onRefreshClick={fetchData}

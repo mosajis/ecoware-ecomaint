@@ -41,7 +41,7 @@ function AddressUpsert({
   recordId,
   onClose,
   onSuccess,
-}: UpsertProps<TypeTblAddress>) {
+}: UpsertProps) {
   const {
     form,
     loadingInitial,

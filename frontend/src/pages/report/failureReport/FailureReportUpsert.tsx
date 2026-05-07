@@ -46,7 +46,7 @@ function FailureReportUpsert({
   onClose,
   onSuccess,
   compId, // ✅ NEW
-}: UpsertProps<any> & { compId?: number }) {
+}: UpsertProps & { compId?: number }) {
   const user = useAtomValue(atomUser);
   const userDiscipline = useAtomValue(atomUserDiscipline);
   const userEmployee = user?.tblEmployee as TypeTblEmployee;

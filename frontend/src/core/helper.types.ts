@@ -1,8 +1,8 @@
-type UpsertProps<T> = {
+type UpsertProps = {
   entityName: string;
   open: boolean;
   mode: "create" | "update" | "view";
   recordId?: number | null;
   onClose: () => void;
-  onSuccess?: (data?: T) => void;
+  onSuccess?: (data?: any) => void;
 };

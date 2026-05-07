@@ -37,7 +37,7 @@ function CounterTypeUpsert({
   recordId,
   onClose,
   onSuccess,
-}: UpsertProps<TypeTblCounterType>) {
+}: UpsertProps) {
   const {
     form,
     loadingInitial,

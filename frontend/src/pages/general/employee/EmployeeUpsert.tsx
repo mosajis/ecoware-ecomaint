@@ -50,7 +50,7 @@ function EmployeeUpsert({
   recordId,
   onClose,
   onSuccess,
-}: UpsertProps<TypeTblEmployee>) {
+}: UpsertProps) {
   const {
     form,
     loadingInitial,

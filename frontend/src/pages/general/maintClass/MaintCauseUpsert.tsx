@@ -33,7 +33,7 @@ function MaintCauseUpsert({
   recordId,
   onClose,
   onSuccess,
-}: UpsertProps<TypeTblMaintCause>) {
+}: UpsertProps) {
   const {
     form,
     loadingInitial,

@@ -40,7 +40,7 @@ function LocationUpsert({
   recordId,
   onClose,
   onSuccess,
-}: UpsertProps<TypeTblLocation>) {
+}: UpsertProps) {
   const {
     form,
     loadingInitial,

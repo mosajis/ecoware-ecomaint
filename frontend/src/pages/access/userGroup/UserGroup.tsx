@@ -1,45 +1,34 @@
 import Splitter from "@/shared/components/Splitter/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import UserGroupUpsert from "./UserGroupUpsert";
+
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { columns, getRowId } from "./UserGroupColumns";
+import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 import { useCallback, useState } from "react";
-import { useDialogs } from "@/shared/hooks/useDialogs";
-import {
-  getRowId as userGetRowId,
-  columns as userColumns,
-} from "@/pages/access/user/UserColumns";
+
 import {
   tblUser,
   tblUserGroup,
   TypeTblUser,
   TypeTblUserGroup,
 } from "@/core/api/generated/api";
-import { useRouter } from "@tanstack/react-router";
-import { routeUserGroupDetail } from "./UserGroupRoutes";
+
+import { columns, getRowId } from "./UserGroupColumns";
+import {
+  columns as userColumns,
+  getRowId as userGetRowId,
+} from "@/pages/access/user/UserColumns";
 
 const UserGroups = () => {
-  const router = useRouter();
-
-  const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
+  const [selectedGroupId, setSelectedGroupId] = useState<number | null>(null);
   const [label, setLabel] = useState<string | null>(null);
-  const [mode, setMode] = useState<"create" | "update">("create");
 
-  const { dialogs, openDialog, closeDialog } = useDialogs({
-    upsert: false,
-  });
-
-  const getAll = useCallback(
+  const getAllGroups = useCallback(
     () =>
       tblUserGroup.getAll({
         include: {
           tblUserGroupElements: {
-            include: {
-              tblElement: true,
-            },
-          },
-          _count: {
-            select: { tblUsers: true },
+            include: { tblElement: true },
           },
         },
       }),
@@ -48,25 +37,17 @@ const UserGroups = () => {
 
   const { rows, loading, handleDelete, handleRefresh } =
     useDataGrid<TypeTblUserGroup>(
-      getAll,
+      getAllGroups,
       tblUserGroup.deleteById,
       "userGroupId",
     );
 
-  const handleCreate = useCallback(() => {
-    setSelectedRowId(null);
-    setMode("create");
-    openDialog("upsert");
-  }, []);
-
-  const handleEdit = useCallback((rowId: number) => {
-    setSelectedRowId(rowId);
-    setMode("update");
-    openDialog("upsert");
-  }, []);
+  const { openCreate, openEdit, openView, dialogProps } = useUpsertDialog({
+    onSuccess: handleRefresh,
+  });
 
   const handleRowClick = useCallback(({ row }: { row: TypeTblUserGroup }) => {
-    setSelectedRowId(row.userGroupId);
+    setSelectedGroupId(row.userGroupId);
     setLabel(row.name);
   }, []);
 
@@ -74,7 +55,7 @@ const UserGroups = () => {
     () =>
       tblUser.getAll({
         filter: {
-          userGroupId: selectedRowId,
+          userGroupId: selectedGroupId,
         },
         include: {
           tblEmployee: {
@@ -85,32 +66,18 @@ const UserGroups = () => {
           tblUserGroup: true,
         },
       }),
-    [selectedRowId],
-  );
-
-  const handleRowDoubleClick = useCallback(
-    (rowId: number) => {
-      const row = rows.find((i) => i.userGroupId === rowId);
-
-      if (!row) return;
-      router.navigate({
-        to: routeUserGroupDetail.to,
-        params: { id: rowId },
-        search: { breadcrumb: row?.name },
-      });
-    },
-    [router, rows],
+    [selectedGroupId],
   );
 
   const {
     rows: userRows,
     loading: userLoading,
-    handleRefresh: handleRefreshUser,
+    handleRefresh: handleRefreshUsers,
   } = useDataGrid<TypeTblUser>(
     getAllUsers,
-    tblUserGroup.deleteById,
+    tblUser.deleteById,
     "userId",
-    !!selectedRowId,
+    !!selectedGroupId,
   );
 
   return (
@@ -123,14 +90,15 @@ const UserGroups = () => {
           rows={rows}
           columns={columns}
           loading={loading}
-          onAddClick={handleCreate}
-          onRefreshClick={handleRefresh}
+          onAddClick={openCreate}
+          onEditClick={openEdit}
+          onDoubleClick={openView}
           onDeleteClick={handleDelete}
-          onEditClick={handleEdit}
-          onDoubleClick={handleRowDoubleClick}
+          onRefreshClick={handleRefresh}
           getRowId={getRowId}
           onRowClick={handleRowClick}
         />
+
         <CustomizedDataGrid
           disableAdd
           disableEdit
@@ -140,20 +108,11 @@ const UserGroups = () => {
           columns={userColumns}
           loading={userLoading}
           getRowId={userGetRowId}
-          onRefreshClick={handleRefreshUser}
+          onRefreshClick={handleRefreshUsers}
         />
       </Splitter>
 
-      <UserGroupUpsert
-        open={dialogs.upsert}
-        mode={mode}
-        recordId={selectedRowId}
-        onClose={() => {
-          closeDialog("upsert");
-          handleRefresh();
-        }}
-        onSuccess={handleRefresh}
-      />
+      <UserGroupUpsert entityName="User Group" {...dialogProps} />
     </>
   );
 };

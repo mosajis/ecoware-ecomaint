@@ -41,7 +41,7 @@ function AttachmentUpsert({
   recordId,
   onClose,
   onSuccess,
-}: UpsertProps<TypeTblAttachment>) {
+}: UpsertProps) {
   const user = useAtomValue(atomUser);
 
   const {

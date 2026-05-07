@@ -32,7 +32,7 @@ export default function OptionsMenu() {
 
   const handleLogOut = () => {
     logout().then(() => {
-      window.localStorage.removeItem(LOCAL_STORAGE.ACCESS_KEY);
+      window.localStorage.clear();
       navigate({ to: AuthLoginRoute.path });
     });
   };

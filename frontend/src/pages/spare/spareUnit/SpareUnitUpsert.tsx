@@ -36,7 +36,7 @@ function SpareUnitUpsert({
   recordId,
   onClose,
   onSuccess,
-}: UpsertProps<TypeTblSpareUnit>) {
+}: UpsertProps) {
   const {
     form,
     loadingInitial,

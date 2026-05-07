@@ -3,27 +3,23 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import FunctionUpsert from "./FunctionUpsert";
 import DialogInstallRemoveComponent from "./_components/DialogInstallRemoveComponent";
 import FunctionActions from "./FunctionActions";
+
 import { useRouter } from "@tanstack/react-router";
 import { useDataTree } from "@/shared/hooks/useDataTree";
 import { mapToTree } from "@/shared/components/tree/TreeUtil";
 import { GenericTree } from "@/shared/components/tree/Tree";
-import { useDialogs } from "@/shared/hooks/useDialogs";
-import { useCallback, useState, useMemo } from "react";
+import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
+import { useCallback, useMemo, useState } from "react";
 import { RouteDetail } from "./FunctionRoutes";
 import { columns, getItemName, getRowId } from "./FunctionColumn";
 import { tblFunction, TypeTblFunction } from "@/core/api/generated/api";
 import { PERMIT_ID } from "./FunctionPermit";
+import { useDialogs } from "@/shared/hooks/useDialogs";
 
 export default function PageFunction() {
   const router = useRouter();
 
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
-
-  const { dialogs, openDialog, closeDialog } = useDialogs({
-    upsert: false,
-    install: false,
-    remove: false,
-  });
 
   const getAll = useCallback(() => {
     return tblFunction.getAll({
@@ -36,7 +32,6 @@ export default function PageFunction() {
       mapToTree(items, "functionId", "parentFunctionId"),
     [],
   );
-
   const { rows, tree, loading, refetch, handleDelete } =
     useDataTree<TypeTblFunction>({
       getAll,
@@ -48,50 +43,51 @@ export default function PageFunction() {
   const selectedRow = useMemo(() => {
     if (!selectedRowId) return null;
     return rows.find((r) => r.functionId === selectedRowId) || null;
-  }, [selectedRowId, rows]);
+  }, [selectedRowId]);
 
-  const handleRowClick = (params: any) => {
+  const { dialogs, openDialog, closeDialog } = useDialogs({
+    install: false,
+    remove: false,
+  });
+
+  const { openCreate, openEdit, openView, dialogProps } = useUpsertDialog({
+    onSuccess: refetch,
+  });
+
+  const handleRowClick = useCallback((params: any) => {
     setSelectedRowId(params.row.functionId);
-  };
-
-  const handleCreate = useCallback(() => {
-    setSelectedRowId(null);
-    openDialog("upsert");
   }, []);
 
-  const handleEdit = useCallback((rowId: number) => {
-    setSelectedRowId(rowId);
-    openDialog("upsert");
-  }, []);
-
-  const handleRowDoubleClick = useCallback(
+  const handleNavigateDetail = useCallback(
     (rowId: number) => {
       const row = rows.find((i) => i.functionId === rowId);
       if (!row) return;
+
       router.navigate({
         to: RouteDetail.to,
         params: { id: rowId },
-        search: { breadcrumb: row?.funcNo },
+        search: { breadcrumb: row.funcNo },
       });
     },
     [router, rows],
   );
-
   return (
     <>
       <Splitter initialPrimarySize="35%">
+        {/* TREE VIEW */}
         <GenericTree<TypeTblFunction>
           elementId={PERMIT_ID}
           loading={loading}
           data={tree}
-          onDoubleClick={handleRowDoubleClick}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-          onAdd={handleCreate}
           getItemId={getRowId}
           getItemName={getItemName}
+          onEdit={openEdit}
+          onDelete={handleDelete}
+          onAdd={openCreate}
+          onDoubleClick={handleNavigateDetail}
         />
 
+        {/* GRID VIEW */}
         <CustomizedDataGrid
           showToolbar
           label="List View"
@@ -100,12 +96,12 @@ export default function PageFunction() {
           columns={columns}
           loading={loading}
           getRowId={getRowId}
-          onEditClick={handleEdit}
-          onDeleteClick={handleDelete}
-          onDoubleClick={handleRowDoubleClick}
-          onAddClick={handleCreate}
-          onRefreshClick={refetch}
           onRowClick={handleRowClick}
+          onEditClick={openEdit}
+          onDeleteClick={handleDelete}
+          onAddClick={openCreate}
+          onRefreshClick={refetch}
+          onDoubleClick={openView}
           toolbarChildren={
             <FunctionActions
               selectedRow={selectedRow}
@@ -116,14 +112,10 @@ export default function PageFunction() {
         />
       </Splitter>
 
-      <FunctionUpsert
-        open={dialogs.upsert}
-        mode={selectedRowId ? "update" : "create"}
-        recordId={selectedRowId}
-        onClose={() => closeDialog("upsert")}
-        onSuccess={refetch}
-      />
+      {/* UPSERT */}
+      <FunctionUpsert entityName="Function" {...dialogProps} />
 
+      {/* INSTALL */}
       <DialogInstallRemoveComponent
         open={dialogs.install}
         mode="install"
@@ -133,6 +125,7 @@ export default function PageFunction() {
         onSuccess={refetch}
       />
 
+      {/* REMOVE */}
       <DialogInstallRemoveComponent
         open={dialogs.remove}
         mode="remove"

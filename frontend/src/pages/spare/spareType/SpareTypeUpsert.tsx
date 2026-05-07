@@ -54,7 +54,7 @@ function SpareTypeUpsert({
   recordId,
   onClose,
   onSuccess,
-}: UpsertProps<TypeTblSpareType>) {
+}: UpsertProps) {
   const {
     form,
     loadingInitial,

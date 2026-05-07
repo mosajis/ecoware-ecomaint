@@ -352,13 +352,13 @@ export const menuContentItems: MenuSection[] = [
 
   // ================= REPORT =================
   {
-    title: "** Report",
+    title: "Report",
     icon: <AssessmentRoundedIcon sx={iconStyle} />,
     path: "/report",
     permit: getPermit(1600).canView,
     items: [
       {
-        text: "** Failure Report",
+        text: "Failure Report",
         path: "/report/failure",
         id: "report:failure",
         permit: getPermit(1610).canView,

@@ -2,7 +2,6 @@ import { useEffect, useState, useCallback, useRef, useMemo } from "react";
 import { ZodType } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import IconEye from "@mui/icons-material/RemoveRedEye";
 import {
   useForm,
   UseFormReturn,
@@ -12,7 +11,7 @@ import {
 
 type Mode = "create" | "update" | "view";
 
-type UseUpsertFormOptions<TValues extends FieldValues, TResult> = {
+type UseUpsertFormOptions<TValues, TResult> = {
   open: boolean;
   mode: Mode;
   recordId?: number | null;

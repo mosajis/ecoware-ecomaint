@@ -5,7 +5,7 @@ import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
 import { tblAttachment, TypeTblAttachment } from "@/core/api/generated/api";
 import { buildRelation } from "@/core/helper";
-import { createAttachment } from "@/pages/general/attachment/attachmentService";
+import { createAttachment } from "@/pages/general/attachment/AttachmentService";
 import {
   existingAttachmentSchema,
   newAttachmentSchema,

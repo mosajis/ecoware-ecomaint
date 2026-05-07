@@ -34,7 +34,7 @@ function PendingTypeUpsert({
   recordId,
   onClose,
   onSuccess,
-}: UpsertProps<TypeTblPendingType>) {
+}: UpsertProps) {
   const {
     form,
     loadingInitial,

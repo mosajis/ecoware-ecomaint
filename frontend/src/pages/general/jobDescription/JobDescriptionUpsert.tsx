@@ -49,7 +49,7 @@ function JobDescriptionUpsert({
   recordId,
   onClose,
   onSuccess,
-}: UpsertProps<TypeTblJobDescription>) {
+}: UpsertProps) {
   const rig = useAtomValue(atomRig);
   const rigId = rig?.instId as number;
 

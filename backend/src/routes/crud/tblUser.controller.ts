@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import { BaseController, querySchema } from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
 import { t } from "elysia";
@@ -87,6 +88,54 @@ const ControllerTblUser = new BaseController({
         detail: {
           tags: ["tblUser"],
           summary: "Create",
+        },
+      },
+    );
+    app.put(
+      "/:userId",
+      async ({ params, body, set }) => {
+        try {
+          const userId = Number(params.userId);
+          const plainPassword = body.password;
+
+          const data: any = {
+            userName: body.userName,
+            accountDisabled: body.accountDisabled,
+            forcePasswordChange: body.forcePasswordChange,
+            lastLogin: body.lastLogin,
+            lastUpdate: new Date().toISOString(),
+          };
+
+          // فقط اگر password ارسال شده بود
+          if (plainPassword) {
+            data.password = await bcrypt.hash(plainPassword, 10);
+          }
+
+          if (body.tblEmployee) {
+            data.tblEmployee = body.tblEmployee;
+          }
+
+          if (body.tblUserGroup) {
+            data.tblUserGroup = body.tblUserGroup;
+          }
+
+          const result = await ServiceTblUser.update({ userId }, data);
+
+          return result;
+        } catch (e: any) {
+          set.status = 400;
+          return {
+            status: "error",
+            message: e.message || "Update failed",
+          };
+        }
+      },
+      {
+        body: TblUserInputUpdate,
+        response: buildResponseSchema(TypeUser, TblUser),
+        detail: {
+          tags: ["tblUser"],
+          summary: "Update user",
         },
       },
     );

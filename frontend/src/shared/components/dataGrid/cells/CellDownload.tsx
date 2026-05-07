@@ -1,7 +1,7 @@
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
-import { downloadAttachment } from "@/pages/general/attachment/attachmentService";
+import { downloadAttachment } from "@/pages/general/attachment/AttachmentService";
 import { FC } from "react";
 
 type CellDownloadProps = {

@@ -1,12 +1,12 @@
 import Spinner from "@/shared/components/Spinner";
 import Tabs from "./UserGroupTabs";
 import { useEffect, useState } from "react";
-import { routeUserGroupDetail } from "./UserGroupRoutes";
 import { tblUserGroup, TypeTblUserGroup } from "@/core/api/generated/api";
+import { RouteDetail } from "./UserGroupRoutes";
 
 const UserGroupDetail = () => {
-  const { id } = routeUserGroupDetail.useParams();
-  const { breadcrumb } = routeUserGroupDetail.useSearch();
+  const { id } = RouteDetail.useParams();
+  const { breadcrumb } = RouteDetail.useSearch();
 
   const [loading, setLoading] = useState(true);
   const [userGroup, setUserGroup] = useState<TypeTblUserGroup | null>(null);

@@ -32,7 +32,7 @@ function JobClassUpsert({
   recordId,
   onClose,
   onSuccess,
-}: UpsertProps<TypeTblJobClass>) {
+}: UpsertProps) {
   const {
     form,
     loadingInitial,

@@ -1389,6 +1389,7 @@ model TblUserInstallation {
   userInstId      Int             @id(map: "PK_tblUserInstallation") @default(autoincrement()) @map("UserInstID")
   userId          Int             @map("UserId")
   instId          Int             @map("InstId")
+  
   tblInstallation TblInstallation @relation(fields: [instId], references: [instId], onUpdate: NoAction, map: "FK_tblUserInstallation_tblInstallation")
   tblUser         TblUser         @relation(fields: [userId], references: [userId], onUpdate: NoAction, map: "FK_tblUserInstallation_tblUser")
 

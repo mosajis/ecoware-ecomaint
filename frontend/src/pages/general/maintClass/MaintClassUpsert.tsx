@@ -33,7 +33,7 @@ function MaintClassUpsert({
   recordId,
   onClose,
   onSuccess,
-}: UpsertProps<TypeTblMaintClass>) {
+}: UpsertProps) {
   const {
     form,
     loadingInitial,

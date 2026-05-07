@@ -33,7 +33,7 @@ function FollowStatusUpsert({
   recordId,
   onClose,
   onSuccess,
-}: UpsertProps<TypeTblFollowStatus>) {
+}: UpsertProps) {
   const {
     form,
     loadingInitial,

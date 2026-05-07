@@ -31,7 +31,7 @@ function DisciplineUpsert({
   recordId,
   onClose,
   onSuccess,
-}: UpsertProps<TypeTblDiscipline>) {
+}: UpsertProps) {
   const {
     form,
     loadingInitial,
