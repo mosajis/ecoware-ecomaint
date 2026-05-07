@@ -13,65 +13,7 @@ import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
 import { generateWorkOrder } from "@/core/api/api";
 import { toast } from "sonner";
-
-const columns: GridColDef<TypeTblCompJob>[] = [
-  {
-    field: "compNo",
-    headerName: "Component",
-    flex: 2,
-    valueGetter: (value, row) => row.tblComponentUnit?.compNo,
-  },
-
-  {
-    field: "compTypeName",
-    headerName: "CompType",
-    flex: 1,
-    // @ts-ignore
-    valueGetter: (value, row) => row.tblComponentUnit?.tblCompType.compName,
-  },
-
-  {
-    field: "jobCode",
-    headerName: "Job Code",
-    width: 100,
-    valueGetter: (value, row) => row.tblJobDescription?.jobDescCode,
-  },
-
-  {
-    field: "jobTitle",
-    headerName: "Job Title",
-    flex: 1,
-    valueGetter: (value, row) => row.tblJobDescription?.jobDescTitle,
-  },
-
-  {
-    field: "discipline",
-    headerName: "Discipline",
-    width: 100,
-    valueGetter: (value, row) => row.tblDiscipline?.name,
-  },
-
-  {
-    field: "frequency",
-    headerName: "Frequency",
-    renderCell: ({ row, value }) => (
-      <CellFrequency frequency={value} frequencyPeriod={row.tblPeriod} />
-    ),
-  },
-
-  {
-    field: "lastDone",
-    headerName: "Last Done",
-    width: 150,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-  {
-    field: "nextDueDate",
-    headerName: "Next Due Date",
-    width: 150,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-];
+import { columns, getRowId } from "./ComponentJobColumns";
 
 export default function PageComponentJob() {
   const user = useAtomValue(atomUser);
@@ -115,34 +57,38 @@ export default function PageComponentJob() {
   };
 
   return (
-    <Box height={"calc(100% - 50px)"}>
-      <Button onClick={onGenerateWorkOrder} variant="contained" sx={{ mb: 1 }}>
-        Generate Work Order
-      </Button>
-      <Splitter initialPrimarySize="70%" horizontal>
-        <CustomizedDataGrid
-          disableAdd
-          disableEdit
-          disableDelete
-          disableRowNumber
-          showToolbar
-          label="Component Job"
-          elementId={1330}
-          rows={rows}
-          loading={loading}
-          columns={columns}
-          onRefreshClick={handleRefresh}
-          getRowId={(row) => row.compJobId}
-          onRowClick={handleRowClick}
-        />
+    <Splitter initialPrimarySize="70%" horizontal>
+      <CustomizedDataGrid
+        disableAdd
+        disableEdit
+        disableDelete
+        disableRowNumber
+        showToolbar
+        label="Component Job"
+        elementId={1330}
+        rows={rows}
+        loading={loading}
+        columns={columns}
+        onRefreshClick={handleRefresh}
+        getRowId={getRowId}
+        onRowClick={handleRowClick}
+        toolbarChildren={
+          <Button
+            onClick={onGenerateWorkOrder}
+            // variant="contained"
+            size="small"
+          >
+            Generate Work Order
+          </Button>
+        }
+      />
 
-        <Editor
-          readOnly
-          label={selected?.tblJobDescription?.jobDescTitle || "Job Description"}
-          key={selected?.compJobId}
-          initValue={selected?.tblJobDescription?.jobDesc}
-        />
-      </Splitter>
-    </Box>
+      <Editor
+        readOnly
+        label={selected?.tblJobDescription?.jobDescTitle || "Job Description"}
+        key={selected?.compJobId}
+        initValue={selected?.tblJobDescription?.jobDesc}
+      />
+    </Splitter>
   );
 }

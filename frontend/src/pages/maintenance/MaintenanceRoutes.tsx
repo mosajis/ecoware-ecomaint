@@ -7,17 +7,15 @@ import RouteFunction from "@/pages/maintenance/function/FunctionRoutes";
 import RouteMaintLog from "@/pages/maintenance/maintLog/MaintLogRoute";
 import RouteWorkShop from "@/pages/maintenance/workShop/WorkShopRoutes";
 import RouteCounterAlert from "@/pages/maintenance/counterAlert/CounterAlertRoutes";
+import RouteComponentType from "@/pages/maintenance/componentType/ComponentTypeRoutes";
+import RouteComponentJob from "@/pages/maintenance/componentJob/ComponentJobRoute";
+
 import { lazy } from "react";
 import { createRoute, Outlet } from "@tanstack/react-router";
-import { protectedRoute } from "./protected.routes";
-import { LazyRoute } from "./_components/lazyRoute";
-import { routeComponentType } from "@/pages/maintenance/componentType/ComponentTypeRoutes";
+import { protectedRoute } from "../../app/router/routes/protected.routes";
+import { LazyRoute } from "../../app/router/routes/_components/lazyRoute";
 import { NotFound } from "@/pages/NotFound";
 
-//  Lazy pages ---
-const PageComponentJob = lazy(
-  () => import("@/pages/maintenance/componentJob/ComponentJob"),
-);
 const PageWorkOrder = lazy(
   () => import("@/pages/maintenance/workOrder/WorkOrder"),
 );
@@ -48,12 +46,6 @@ export const routeRound = createRoute({
   beforeLoad: () => ({ breadcrumb: "Round" }),
 });
 
-export const routeComponentJob = createRoute({
-  getParentRoute: () => routeMaintenance,
-  path: "component-job",
-  component: () => <LazyRoute Component={PageComponentJob} />,
-  beforeLoad: () => ({ breadcrumb: "Component Job" }),
-});
 // --- Maintenance root ---
 export const maintenanceRoutesTree = routeMaintenance.addChildren([
   RouteFunction,
@@ -65,9 +57,8 @@ export const maintenanceRoutesTree = routeMaintenance.addChildren([
   RouteCounterAlert,
   RouteMaintLog,
   RouteWorkShop,
-
-  routeComponentType,
-  routeComponentJob,
+  RouteComponentType,
+  RouteComponentJob,
   routeWorkOrder,
   routeRound,
 ]);

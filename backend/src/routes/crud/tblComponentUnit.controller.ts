@@ -10,6 +10,7 @@ import {
   TblComponentUnitInputUpdate,
   TblComponentUnitPlain,
 } from "orm/generated/prismabox/TblComponentUnit";
+import { authPlugin } from "../auth/auth.guard";
 
 export const ServiceTblComponentUnit = new BaseService(prisma.tblComponentUnit);
 
@@ -25,11 +26,22 @@ const ControllerTblComponentUnit = new BaseController({
   updateSchema: TblComponentUnitInputUpdate,
   responseSchema: buildResponseSchema(TblComponentUnitPlain, TblComponentUnit),
   extend: (app) => {
-    app.post(
+    app.use(authPlugin).post(
       "/:componentUnitId/effect",
-      async ({ params, body, set }) => {
+      async ({ params, body, set, userId, headers }) => {
+        const instId = Number(headers["x-inst-id"] || 0);
+
+        if (!instId) {
+          throw new Error("Instance ID is required");
+        }
+
         const componentUnitId = Number(params.componentUnitId);
-        const userId = body.userId;
+
+        const user = await prisma.tblUser.findFirst({
+          where: { userId },
+          include: { tblEmployee: true },
+        });
+        const employeeId = user?.tblEmployee.employeeId as number;
 
         if (!Number.isInteger(componentUnitId)) {
           set.status = 400;
@@ -42,7 +54,8 @@ const ControllerTblComponentUnit = new BaseController({
         try {
           await effectComponentUnitChange({
             componentUnitId,
-            userId,
+            employeeId,
+            instId,
           });
 
           return { status: "OK" };

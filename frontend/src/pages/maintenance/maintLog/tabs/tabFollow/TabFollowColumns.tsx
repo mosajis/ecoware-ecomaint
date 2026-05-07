@@ -8,7 +8,7 @@ export const columns: GridColDef<TypeTblMaintLogFollow>[] = [
     field: "followBy",
     headerName: "Follow By",
     flex: 1,
-    valueGetter: (_, row) => row?.tblUsers,
+    valueGetter: (_, row) => row?.tblEmployee,
     renderCell: ({ value }) => <CellFullName value={value} />,
   },
   {
@@ -29,6 +29,4 @@ export const columns: GridColDef<TypeTblMaintLogFollow>[] = [
     flex: 1,
     type: "boolean",
   },
-  { field: "waitingTime", headerName: "Waiting (Minutes)", flex: 1 },
-  { field: "followDate", headerName: "Follow Date", flex: 1 },
 ];

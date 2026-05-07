@@ -45,7 +45,7 @@ const TabLogCounter = (props: Props) => {
       valueGetter: (_, row) => row?.tblCounterType?.name,
     },
     {
-      field: "lastupdate",
+      field: "lastUpdate",
       headerName: "Last Update",
       flex: 1,
       renderCell: ({ value }) => <CellDateTime value={value} />,

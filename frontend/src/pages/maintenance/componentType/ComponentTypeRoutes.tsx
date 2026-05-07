@@ -1,17 +1,10 @@
 import { createDetailRoute } from "@/app/router/routes/_components/DetailRoute";
 import { LazyRoute } from "@/app/router/routes/_components/lazyRoute";
-import { routeMaintenance } from "@/app/router/routes/maintenance.routes";
+import { routeMaintenance } from "@/pages/maintenance/MaintenanceRoutes";
 import { createRoute, Outlet } from "@tanstack/react-router";
 import { lazy } from "react";
 
-export const PageComponentType = lazy(
-  () => import("@/pages/maintenance/componentType/ComponentType"),
-);
-export const PageComponentTypeDetail = lazy(
-  () => import("@/pages/maintenance/componentType/ComponentTypeDetail"),
-);
-
-export const routeComponentType = createRoute({
+export const Route = createRoute({
   getParentRoute: () => routeMaintenance,
   path: "component-type",
   component: Outlet,
@@ -20,22 +13,25 @@ export const routeComponentType = createRoute({
   }),
 });
 
-export const routeComponentTypeList = createRoute({
-  getParentRoute: () => routeComponentType,
+export const RouteList = createRoute({
+  getParentRoute: () => Route,
   path: "/",
-  component: () => <LazyRoute Component={PageComponentType} />,
+  component: () => (
+    <LazyRoute Component={lazy(() => import("./ComponentType"))} />
+  ),
   beforeLoad: () => ({
     breadcrumb: "List",
   }),
 });
 
-export const routeComponentTypeDetail = createDetailRoute({
-  parent: routeComponentType,
+export const RouteDetail = createDetailRoute({
+  parent: Route,
   path: "/$id",
-  Component: () => <LazyRoute Component={PageComponentTypeDetail} />,
+  Component: () => (
+    <LazyRoute Component={lazy(() => import("./ComponentTypeDetail"))} />
+  ),
 });
 
-routeComponentType.addChildren([
-  routeComponentTypeList,
-  routeComponentTypeDetail,
-]);
+Route.addChildren([RouteList, RouteDetail]);
+
+export default Route;

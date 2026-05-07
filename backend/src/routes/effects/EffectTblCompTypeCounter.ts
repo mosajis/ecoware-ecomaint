@@ -100,7 +100,7 @@ export async function effectCompTypeCounter({
           },
           data: {
             ...baseData,
-            lastupdate: new Date(),
+            lastUpdate: new Date(),
           },
         });
 

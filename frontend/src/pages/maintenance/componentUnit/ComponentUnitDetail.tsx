@@ -1,15 +1,16 @@
 import Spinner from "@/shared/components/Spinner";
 import ComponentUnitTabs from "./ComponentUnitTabs";
 import { useEffect, useState } from "react";
-import { routeComponentUnitDetail } from "./ComponentUnitRoutes";
+
 import {
   tblComponentUnit,
   TypeTblComponentUnit,
 } from "@/core/api/generated/api";
+import { RouteDetail } from "./ComponentUnitRoutes";
 
 const ComponentTypeDetail = () => {
-  const { id } = routeComponentUnitDetail.useParams();
-  const { breadcrumb } = routeComponentUnitDetail.useSearch();
+  const { id } = RouteDetail.useParams();
+  const { breadcrumb } = RouteDetail.useSearch();
 
   const [loading, setLoading] = useState(true);
   const [componentUnit, setComponentUnit] =

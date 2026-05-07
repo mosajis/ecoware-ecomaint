@@ -86,7 +86,7 @@ const ControllerTblJobTrigger = new BaseController({
             window: i!.window,
             dueDate: now,
             created: now,
-            lastupdate: now,
+            lastUpdate: now,
             workOrderStatusId: 2,
             workOrderTypeId: 3,
           }));
@@ -103,7 +103,7 @@ const ControllerTblJobTrigger = new BaseController({
             },
             data: {
               nextDueDate: now,
-              lastupdate: now,
+              lastUpdate: now,
             },
           });
 

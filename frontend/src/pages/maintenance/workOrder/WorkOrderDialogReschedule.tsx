@@ -80,7 +80,7 @@ export default function WorkOrderDialogReschedule({
       if (workOrder.compJobId && data.newDueDate) {
         await tblCompJob.update(workOrder.compJobId, {
           nextDueDate: data.newDueDate,
-          lastupdate: new Date().toISOString(),
+          lastUpdate: new Date().toISOString(),
         });
       }
 
@@ -95,12 +95,12 @@ export default function WorkOrderDialogReschedule({
           },
           issuedDate: null,
           ...buildRelation(
-            "tblUsersTblWorkOrderIssuedByTotblUsers",
-            "issuedBy",
+            "tblEmployeeTblWorkOrderIssuedByTotblEmployee",
+            "employeeId",
             null,
           ),
           dueDate: data.newDueDate,
-          lastupdate: new Date().toISOString(),
+          lastUpdate: new Date().toISOString(),
         },
         {
           include: {
@@ -134,7 +134,7 @@ export default function WorkOrderDialogReschedule({
         toDueDate: data.newDueDate,
         rescheduledDate: new Date().toISOString(),
         reason: data.reason,
-        lastupdate: new Date().toISOString(),
+        lastUpdate: new Date().toISOString(),
         rescheduledBy: userId,
       });
 

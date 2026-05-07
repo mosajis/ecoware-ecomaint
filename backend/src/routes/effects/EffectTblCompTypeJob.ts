@@ -130,7 +130,7 @@ export async function effectCompTypeJob({
           },
           data: {
             ...baseData,
-            lastupdate: new Date(),
+            lastUpdate: new Date(),
           },
         });
 

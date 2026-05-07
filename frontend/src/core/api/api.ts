@@ -49,8 +49,7 @@ export const getMaintLogContext = async (
 export const getStatistics = (): Promise<TypeStatistics> =>
   api.get(`/statistics/`);
 
-export const getCountersAlert = (): Promise<TypeTblCompJobCounterAlert> =>
-  api.get(`/tblCompJobCounter/alert`);
+export const getCountersAlert = () => api.get(`/tblCompJobCounter/alert`);
 
 export const createFailureReport = (
   data: DynamicCreate<"postTblFailureReportFull">,

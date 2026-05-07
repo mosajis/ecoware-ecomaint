@@ -1,19 +1,19 @@
 import { createDetailRoute } from "@/app/router/routes/_components/DetailRoute";
 import { LazyRoute } from "@/app/router/routes/_components/lazyRoute";
-import { routeMaintenance } from "@/app/router/routes/maintenance.routes";
+import { routeMaintenance } from "@/pages/maintenance/MaintenanceRoutes";
 import { createRoute, Outlet } from "@tanstack/react-router";
 import { lazy } from "react";
 
 // --- Component Unit ---
-export const routeComponentUnit = createRoute({
+export const Route = createRoute({
   getParentRoute: () => routeMaintenance,
   path: "component-unit",
   component: () => <Outlet />,
   beforeLoad: () => ({ breadcrumb: "Component Unit" }),
 });
 
-export const routeComponentUnitList = createRoute({
-  getParentRoute: () => routeComponentUnit,
+export const RouteList = createRoute({
+  getParentRoute: () => Route,
   path: "/",
   component: () => (
     <LazyRoute Component={lazy(() => import("./ComponentUnit"))} />
@@ -21,17 +21,14 @@ export const routeComponentUnitList = createRoute({
   beforeLoad: () => ({ breadcrumb: "List" }),
 });
 
-export const routeComponentUnitDetail = createDetailRoute({
-  parent: routeComponentUnit,
+export const RouteDetail = createDetailRoute({
+  parent: Route,
   path: "$id",
   Component: () => (
     <LazyRoute Component={lazy(() => import("./ComponentUnitDetail"))} />
   ),
 });
 
-const routes = routeComponentUnit.addChildren([
-  routeComponentUnitList,
-  routeComponentUnitDetail,
-]);
+const routes = Route.addChildren([RouteList, RouteDetail]);
 
 export default routes;

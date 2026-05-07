@@ -268,7 +268,7 @@ const ControllerTblWorkOrder = new BaseController({
             window: i.window,
             dueDate: now,
             created: now,
-            lastupdate: now,
+            lastUpdate: now,
             workOrderStatusId: 2,
             workOrderTypeId: 2,
             instId,

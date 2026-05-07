@@ -20,7 +20,7 @@ const TabMeasure = lazy(() => import("./tabs/measures/TabMeasures"));
 // ===== Tabs Config =====
 const tabs: ReusableTabItem[] = [
   {
-    label: "Jobs",
+    label: "Job",
     icon: <AccountTreeIcon />,
     component: TabJob,
   },

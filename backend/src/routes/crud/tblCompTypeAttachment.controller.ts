@@ -13,6 +13,7 @@ import {
   effectCompTypeAttachment,
   OperationEnum,
 } from "../effects/EffectTblCompTypeAttachment";
+import { authPlugin } from "../auth/auth.guard";
 
 export const ServiceTblCompTypeAttachment = new BaseService(
   prisma.tblCompTypeAttachment,
@@ -35,10 +36,16 @@ const ControllerTblCompTypeAttachment = new BaseController({
   ),
 
   extend: (app) => {
-    app.post(
+    app.use(authPlugin).post(
       "/:compTypeAttachmentId/effect",
-      async ({ params, body, set }) => {
+      async ({ params, body, set, headers }) => {
         try {
+          const instId = Number(headers["x-inst-id"] || 0);
+
+          if (!instId) {
+            throw new Error("Instance ID is required");
+          }
+
           const compTypeAttachmentId = Number(params.compTypeAttachmentId);
 
           if (isNaN(compTypeAttachmentId)) {
@@ -49,6 +56,7 @@ const ControllerTblCompTypeAttachment = new BaseController({
           const result = await effectCompTypeAttachment({
             compTypeAttachmentId,
             operation: body.operation,
+            instId,
           });
 
           return result;

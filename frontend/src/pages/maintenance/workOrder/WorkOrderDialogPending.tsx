@@ -68,7 +68,7 @@ export default function WorkOrderPendingDialog({
             },
           },
           pendingdate: new Date().toString(),
-          lastupdate: new Date().toString(),
+          lastUpdate: new Date().toString(),
           userComment: data.note || undefined,
         },
         {

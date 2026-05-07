@@ -17,7 +17,7 @@ const CountersAlert = () => {
   useEffect(() => {
     getCountersAlert()
       .then((data) => {
-        setAlerts(data);
+        setAlerts(data.items);
       })
       .finally(() => {
         setLoading(false);

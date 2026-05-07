@@ -20,11 +20,7 @@ const TabFollow = (props: props) => {
       },
       include: {
         tblFollowStatus: true,
-        tblUsers: {
-          include: {
-            tblEmployeeTblUsersEmployeeIdTotblEmployee: true,
-          },
-        },
+        tblEmployee: true,
       },
     });
   }, [selected?.maintLogId]);

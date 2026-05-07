@@ -108,7 +108,7 @@ const TabsContainer = ({
             {...tab.containerProps}
             style={{ display: isActive ? undefined : "none" }}
           >
-            {isMounted && TabComponent && (
+            {isMounted && TabComponent && isActive && (
               <Suspense fallback={<Spinner />}>
                 <TabComponent {...tabProps} />
               </Suspense>

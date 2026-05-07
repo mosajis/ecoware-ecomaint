@@ -4,7 +4,6 @@ import { useCallback } from "react";
 import { columns } from "@/pages/report/failureReport/FailureReportColumns";
 import {
   tblFailureReport,
-  tblMaintCause,
   TypeTblFailureReport,
   TypeTblFunction,
 } from "@/core/api/generated/api";
@@ -33,15 +32,11 @@ export default function TabFailureReport({ label, recordFunction }: Props) {
               tblMaintCause: true,
               tblComponentUnit: true,
               tblDiscipline: true,
-              tblUsersTblMaintLogReportedByTotblUsers: {
-                include: { tblEmployeeTblUsersEmployeeIdTotblEmployee: true },
-              },
             },
           },
           tblFailureSeverityLevel: true,
           tblFailureStatus: true,
           tblFailureGroupFollow: true,
-          tblUsers: true,
         },
       }),
     [compId],

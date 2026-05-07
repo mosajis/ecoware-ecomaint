@@ -57,7 +57,7 @@ function DialogInstallRemoveComponent({
   const [loading, setloading] = useState(false);
   const schema = mode === "install" ? installSchema : removeSchema;
   const user = useAtomValue(atomUser);
-  const userId = user?.userId as number;
+  const employeeId = user?.tblEmployee?.employeeId as number;
 
   const { control, handleSubmit } = useForm<any>({
     resolver: zodResolver(schema),
@@ -89,9 +89,9 @@ function DialogInstallRemoveComponent({
           ...buildRelation("tblFunction", "functionId", functionId),
           ...buildRelation("tblComponentUnit", "compId", v.component.compId),
           ...buildRelation(
-            "tblUsersTblRotationLogUserInsertedIdTotblUsers",
-            "userId",
-            userId,
+            "tblEmployeeTblRotationLogEmployeeInsertedIdTotblEmployee",
+            "employeeId",
+            employeeId,
           ),
           fromDate: new Date(v.fromDate) as any,
           notes: v.notes ?? "",
@@ -113,9 +113,9 @@ function DialogInstallRemoveComponent({
           ...buildRelation("tblComponentUnit", "compId", compId),
           ...buildRelation("tblFunction", "functionId", functionId),
           ...buildRelation(
-            "tblUsersTblRotationLogUserRemovedIdTotblUsers",
-            "userId",
-            userId,
+            "tblEmployeeTblRotationLogEmployeeRemovedIdTotblEmployee",
+            "employeeId",
+            employeeId,
           ),
 
           toDate: new Date(v.toDate) as any,

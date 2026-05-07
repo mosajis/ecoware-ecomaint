@@ -1,20 +1,31 @@
 import * as z from "zod";
-import FormDialog from "@/shared/components/formDialog/FormDialog";
+import { memo } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+
+import FormDialog from "@/shared/components/formDialog/FormDialog";
 import NumberField from "@/shared/components/fields/FieldNumber";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
-import { memo, useEffect, useState, useCallback } from "react";
-import { buildRelation, requiredStringField } from "@/core/helper";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { tblCompType, tblAddress } from "@/core/api/generated/api";
 
+import { buildRelation, requiredStringField } from "@/core/helper";
+import {
+  tblCompType,
+  tblAddress,
+  TypeTblCompType,
+} from "@/core/api/generated/api";
+
+import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
+import { Controller } from "react-hook-form";
+
+// =======================
+// schema
+// =======================
 const schema = z.object({
   compTypeNo: requiredStringField(),
   compName: requiredStringField(),
   compType: z.string().nullable().optional(),
   orderNo: z.number().nullable(),
+
   tblCompType: z
     .object({
       compTypeId: z.number(),
@@ -22,6 +33,7 @@ const schema = z.object({
     })
     .nullable()
     .optional(),
+
   maker: z
     .object({
       addressId: z.number(),
@@ -31,181 +43,198 @@ const schema = z.object({
     .optional(),
 });
 
-type CompTypeFormValues = z.infer<typeof schema>;
+export type CompTypeFormValues = z.infer<typeof schema>;
 
-type Props = {
-  open: boolean;
-  mode: "create" | "update";
-  recordId?: number | null;
-  onClose: () => void;
-  onSuccess: () => void;
+// =======================
+// default values
+// =======================
+const defaultValues: CompTypeFormValues = {
+  compTypeNo: "",
+  compName: "",
+  compType: "",
+  orderNo: null,
+  maker: null,
+  tblCompType: null,
 };
 
+// =======================
+// component
+// =======================
 function ComponentTypeUpsert({
+  entityName = "Component Type",
   open,
   mode,
   recordId,
   onClose,
   onSuccess,
-}: Props) {
-  const [loadingInitial, setLoadingInitial] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-
-  const defaultValues: CompTypeFormValues = {
-    compTypeNo: "",
-    compName: "",
-    compType: "",
-    maker: null,
-    tblCompType: null,
-    orderNo: null,
-  };
-
-  const { control, handleSubmit, reset } = useForm<CompTypeFormValues>({
-    resolver: zodResolver(schema),
+}: UpsertProps) {
+  const {
+    form,
+    loadingInitial,
+    submitting,
+    isDisabled,
+    readonly,
+    title,
+    handleFormSubmit,
+  } = useUpsertForm<CompTypeFormValues, TypeTblCompType>({
+    entityName,
+    open,
+    mode,
+    recordId,
+    schema,
     defaultValues,
-  });
 
-  const loadData = useCallback(async () => {
-    if (mode !== "update" || !recordId) {
-      reset(defaultValues);
-      return;
-    }
-
-    setLoadingInitial(true);
-
-    try {
-      const res = await tblCompType.getById(recordId, {
+    // =======================
+    // fetch
+    // =======================
+    onFetch: async (id) => {
+      const res = await tblCompType.getById(id, {
         include: {
           tblAddress: true,
           tblCompType: true,
         },
       });
 
-      reset({
+      return {
         compTypeNo: res?.compTypeNo ?? "",
         compName: res?.compName ?? "",
         compType: res?.compType ?? "",
         orderNo: res?.orderNo ?? null,
-        maker: res?.tblAddress ?? null,
+
+        maker: res?.tblAddress
+          ? {
+              addressId: res.tblAddress.addressId,
+              name: res.tblAddress.name ?? null,
+            }
+          : null,
+
         tblCompType: res?.tblCompType
           ? {
               compTypeId: res.tblCompType.compTypeId,
               compName: res.tblCompType.compName ?? null,
             }
           : null,
-      });
-    } finally {
-      setLoadingInitial(false);
-    }
-  }, [mode, recordId, reset]);
+      };
+    },
 
-  const onSubmitForm = useCallback(
-    async (values: CompTypeFormValues) => {
-      const parsed = schema.safeParse(values);
-      if (!parsed.success) return;
+    // =======================
+    // create
+    // =======================
+    onCreate: async (values) => {
+      const payload = {
+        compTypeNo: values.compTypeNo,
+        compName: values.compName,
+        compType: values.compType,
+        orderNo: values.orderNo,
 
-      setSubmitting(true);
+        ...buildRelation("tblAddress", "addressId", values.maker?.addressId),
 
-      try {
-        const makerRel = buildRelation(
-          "tblAddress",
-          "addressId",
-          parsed.data.maker?.addressId ?? null,
-        );
-        const parentRel = buildRelation(
+        ...buildRelation(
           "tblCompType",
           "compTypeId",
-          parsed.data.tblCompType?.compTypeId ?? null,
-        );
-        const payload = {
-          compTypeNo: parsed.data.compTypeNo,
-          compName: parsed.data.compName,
-          compType: parsed.data.compType,
-          orderNo: parsed.data.orderNo,
-          ...makerRel,
-          ...parentRel,
-        };
+          values.tblCompType?.compTypeId,
+        ),
+      };
 
-        if (mode === "create") {
-          await tblCompType.create(payload);
-        } else {
-          await tblCompType.update(recordId!, payload);
-        }
-
-        onSuccess();
-        onClose();
-      } finally {
-        setSubmitting(false);
-      }
+      return tblCompType.create(payload);
     },
-    [mode, recordId, onSuccess, onClose],
-  );
 
-  useEffect(() => {
-    if (open) loadData();
-  }, [open, loadData]);
+    // =======================
+    // update
+    // =======================
+    onUpdate: async (id, values) => {
+      const payload = {
+        compTypeNo: values.compTypeNo,
+        compName: values.compName,
+        compType: values.compType,
+        orderNo: values.orderNo,
 
-  const isDisabled = loadingInitial || submitting;
+        ...buildRelation(
+          "tblAddress",
+          "addressId",
+          values.maker?.addressId ?? null,
+        ),
+
+        ...buildRelation(
+          "tblCompType",
+          "compTypeId",
+          values.tblCompType?.compTypeId ?? null,
+        ),
+      };
+
+      return tblCompType.update(id, payload);
+    },
+
+    onSuccess,
+    onClose,
+  });
+
+  const {
+    control,
+    formState: { errors },
+  } = form;
 
   return (
     <FormDialog
       open={open}
-      title={
-        mode === "create" ? "Create Component Type" : "Edit Component Type"
-      }
-      onClose={onClose}
-      submitting={submitting}
+      title={title}
       loadingInitial={loadingInitial}
-      onSubmit={handleSubmit(onSubmitForm)}
+      submitting={submitting}
+      onClose={onClose}
+      onSubmit={handleFormSubmit}
+      readonly={readonly}
     >
       <Box display="grid" gridTemplateColumns="1fr" gap={1.5}>
+        {/* Code */}
         <Controller
           name="compTypeNo"
           control={control}
-          render={({ field, fieldState }) => (
+          render={({ field }) => (
             <TextField
               {...field}
               label="Code *"
               size="small"
               sx={{ width: "40%" }}
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
+              error={!!errors.compTypeNo}
+              helperText={errors.compTypeNo?.message}
               disabled={isDisabled}
             />
           )}
         />
 
+        {/* Name */}
         <Controller
           name="compName"
           control={control}
-          render={({ field, fieldState }) => (
+          render={({ field }) => (
             <TextField
               {...field}
               label="Name *"
               size="small"
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
+              error={!!errors.compName}
+              helperText={errors.compName?.message}
               disabled={isDisabled}
             />
           )}
         />
 
+        {/* Type */}
         <Controller
           name="compType"
           control={control}
-          render={({ field, fieldState }) => (
+          render={({ field }) => (
             <TextField
               {...field}
               label="Type / Model"
               size="small"
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
+              error={!!errors.compType}
+              helperText={errors.compType?.message}
               disabled={isDisabled}
             />
           )}
         />
 
-        {/* Maker Address */}
+        {/* Maker */}
         <Controller
           name="maker"
           control={control}
@@ -225,15 +254,16 @@ function ComponentTypeUpsert({
             />
           )}
         />
+
+        {/* Parent */}
         <Controller
           name="tblCompType"
           control={control}
           render={({ field, fieldState }) => (
             <FieldAsyncSelectGrid
               dialogMaxWidth="sm"
-              label="Parent "
+              label="Parent"
               selectionMode="single"
-              getOptionLabel={(row) => row.compName}
               value={field.value}
               request={tblCompType.getAll}
               columns={[{ field: "compName", headerName: "Name", flex: 1 }]}
@@ -246,17 +276,18 @@ function ComponentTypeUpsert({
           )}
         />
 
+        {/* Order */}
         <Controller
           name="orderNo"
           control={control}
-          render={({ field, fieldState }) => (
+          render={({ field }) => (
             <NumberField
               {...field}
-              label="Order No "
+              label="Order No"
               size="small"
               sx={{ width: "40%" }}
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
+              error={!!errors.orderNo}
+              helperText={errors.orderNo?.message}
               disabled={isDisabled}
             />
           )}

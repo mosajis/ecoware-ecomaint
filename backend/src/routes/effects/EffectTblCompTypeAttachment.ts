@@ -12,21 +12,23 @@ type OperationType = typeof OperationEnum.static;
 export async function effectCompTypeAttachment({
   compTypeAttachmentId,
   operation,
+  instId,
 }: {
   compTypeAttachmentId: number;
   operation: OperationType;
+  instId: number;
 }) {
   return prisma.$transaction(async (tx) => {
     // ================= Fetch CompTypeAttachment =================
     const cta = await tx.tblCompTypeAttachment.findUnique({
-      where: { compTypeAttachmentId },
+      where: { compTypeAttachmentId, instId },
     });
 
     if (!cta) {
       throw new Error("CompTypeAttachment not found.");
     }
 
-    const { compTypeId, attachmentId, orderNo, createdUserId } = cta;
+    const { compTypeId, attachmentId, orderNo, createdEmployeeId } = cta;
 
     if (!compTypeId || !attachmentId) {
       throw new Error("Invalid CompTypeAttachment data.");
@@ -35,7 +37,7 @@ export async function effectCompTypeAttachment({
     // ================= Fetch Component Units =================
     const compIds = await tx.tblComponentUnit
       .findMany({
-        where: { compTypeId },
+        where: { compTypeId, instId },
         select: { compId: true },
       })
       .then((rows) => rows.map((r) => r.compId));
@@ -48,7 +50,7 @@ export async function effectCompTypeAttachment({
     const baseData = {
       attachmentId,
       orderNo,
-      createdUserId,
+      createdEmployeeId,
     };
 
     // ================= Operation Switch =================
@@ -57,6 +59,7 @@ export async function effectCompTypeAttachment({
       case 0: {
         const existing = await tx.tblComponentUnitAttachment.findMany({
           where: {
+            instId,
             attachmentId,
             compId: { in: compIds },
           },
@@ -68,6 +71,7 @@ export async function effectCompTypeAttachment({
         const data = compIds
           .filter((compId) => !existingSet.has(compId))
           .map((compId) => ({
+            instId,
             compId,
             ...baseData,
           }));
@@ -88,6 +92,7 @@ export async function effectCompTypeAttachment({
       case 1: {
         const result = await tx.tblComponentUnitAttachment.updateMany({
           where: {
+            instId,
             attachmentId,
             compId: { in: compIds },
           },
@@ -106,6 +111,7 @@ export async function effectCompTypeAttachment({
       case 2: {
         const result = await tx.tblComponentUnitAttachment.deleteMany({
           where: {
+            instId,
             attachmentId,
             compId: { in: compIds },
           },

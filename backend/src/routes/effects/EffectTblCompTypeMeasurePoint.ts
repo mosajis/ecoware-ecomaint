@@ -102,7 +102,7 @@ export async function effectCompTypeMeasurePoint({
           },
           data: {
             ...baseData,
-            lastupdate: new Date(),
+            lastUpdate: new Date(),
           },
         });
 

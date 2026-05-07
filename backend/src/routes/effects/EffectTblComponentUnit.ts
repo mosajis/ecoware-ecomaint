@@ -9,10 +9,12 @@ export const OperationEnum = t.Enum({
 
 export async function effectComponentUnitChange({
   componentUnitId,
-  userId,
+  employeeId,
+  instId,
 }: {
   componentUnitId: number;
-  userId: number;
+  employeeId: number;
+  instId: number;
 }) {
   const now = new Date();
 
@@ -21,7 +23,7 @@ export async function effectComponentUnitChange({
     // ComponentUnit
     // =========================================================================
     const componentUnit = await tx.tblComponentUnit.findUnique({
-      where: { compId: componentUnitId },
+      where: { compId: componentUnitId, instId },
       select: {
         compId: true,
         compTypeId: true,
@@ -43,10 +45,10 @@ export async function effectComponentUnitChange({
       compTypeCounters,
       compTypeAttachments,
     ] = await Promise.all([
-      tx.tblCompTypeJob.findMany({ where: { compTypeId } }),
-      tx.tblCompTypeMeasurePoint.findMany({ where: { compTypeId } }),
-      tx.tblCompTypeCounter.findMany({ where: { compTypeId } }),
-      tx.tblCompTypeAttachment.findMany({ where: { compTypeId } }),
+      tx.tblCompTypeJob.findMany({ where: { compTypeId, instId } }),
+      tx.tblCompTypeMeasurePoint.findMany({ where: { compTypeId, instId } }),
+      tx.tblCompTypeCounter.findMany({ where: { compTypeId, instId } }),
+      tx.tblCompTypeAttachment.findMany({ where: { compTypeId, instId } }),
     ]);
 
     // =========================================================================
@@ -54,8 +56,9 @@ export async function effectComponentUnitChange({
     // =========================================================================
     await tx.tblCompJob.createMany({
       data: compTypeJobs.map((j) => ({
+        instId,
         compId,
-        lastupdate: now,
+        lastUpdate: now,
         orderNo: j.orderNo,
         discId: j.discId,
         jobDescId: j.jobDescId,
@@ -67,18 +70,13 @@ export async function effectComponentUnitChange({
         statusInUse: j.statusInUse,
         statusAvailable: j.statusAvailable,
         statusRepair: j.statusRepair,
-        outputFormat: j.outputFormat,
         maintClassId: j.maintClassId,
         maintCauseId: j.maintCauseId,
         maintTypeId: j.maintTypeId,
-        rescheduleLimitId: j.rescheduleLimitId,
         priority: j.priority,
         window: j.window,
-        active: j.active,
         mandatoryHistory: j.mandatoryHistory,
-        mandatoryResource: j.mandatoryResource,
-        mandatoryStockUsage: j.mandatoryStockUsage,
-        createdUserId: userId,
+        createdEmployeeId: employeeId,
         changeReason: "",
         notes: "",
       })),
@@ -94,13 +92,14 @@ export async function effectComponentUnitChange({
         ? []
         : await tx.tblCompTypeJobTrigger.findMany({
             where: {
+              instId,
               compTypeJobId: { in: compTypeJobIds },
             },
           });
 
     if (compTypeJobTriggers.length > 0) {
       const compJobs = await tx.tblCompJob.findMany({
-        where: { compId },
+        where: { compId, instId },
       });
 
       const jobMap = new Map(compJobs.map((j) => [j.jobDescId, j]));
@@ -116,6 +115,7 @@ export async function effectComponentUnitChange({
           if (!job) return null;
 
           return {
+            instId,
             compJobId: job.compJobId,
             jobTriggerId: ctjt.jobTriggerId,
           };
@@ -134,6 +134,7 @@ export async function effectComponentUnitChange({
     // =========================================================================
     await tx.tblCompMeasurePoint.createMany({
       data: compTypeMeasurePoints.map((m) => ({
+        instId,
         compId,
         counterTypeId: m.counterTypeId,
         unitId: m.unitId,
@@ -142,7 +143,7 @@ export async function effectComponentUnitChange({
         operationalMaxValue: m.operationalMaxValue,
 
         orderNo: m.orderNo,
-        lastupdate: now,
+        lastUpdate: now,
         currentValue: 0,
       })),
     });
@@ -152,13 +153,14 @@ export async function effectComponentUnitChange({
     // =========================================================================
     await tx.tblCompCounter.createMany({
       data: compTypeCounters.map((c) => ({
+        instId,
         compId,
         counterTypeId: c.counterTypeId,
 
         orderNo: c.orderNo,
         averageCountRate: c.averageCountRate,
         useCalcAverage: c.useCalcAverage,
-        lastupdate: now,
+        lastUpdate: now,
         currentValue: 0,
       })),
     });
@@ -168,10 +170,11 @@ export async function effectComponentUnitChange({
     // =========================================================================
     await tx.tblComponentUnitAttachment.createMany({
       data: compTypeAttachments.map((a) => ({
+        instId,
         compId,
         attachmentId: a.attachmentId,
         orderNo: a.orderNo,
-        createdUserId: userId,
+        createdEmployeeId: employeeId,
         createdAt: now,
       })),
     });
@@ -185,6 +188,7 @@ export async function effectComponentUnitChange({
         ? []
         : await tx.tblCompTypeJobCounter.findMany({
             where: {
+              instId,
               compTypeJobId: { in: compTypeJobIds },
             },
           });
@@ -210,6 +214,7 @@ export async function effectComponentUnitChange({
         if (!job || !counter) return null;
 
         return {
+          instId,
           compJobId: job.compJobId,
           compCounterId: counter.compCounterId,
           frequency: jc.frequency,
@@ -217,8 +222,8 @@ export async function effectComponentUnitChange({
           orderNo: jc.orderNo,
           updateByFunction: jc.updateByFunction,
           showInAlert: jc.showInAlert,
-          lastupdate: now,
-          createdUserId: userId,
+          lastUpdate: now,
+          createdEmployeeId: employeeId,
           orderNumber: 0,
         };
       })

@@ -128,7 +128,7 @@ export default function WorkOrderFilterDialog({
 
   const userDisipline =
     // @ts-ignore
-    user?.tblEmployeeTblUsersEmployeeIdTotblEmployee?.tblDiscipline?.name;
+    user?.tblEmployee?.tblDiscipline?.name;
 
   const defaultDiscipline =
     userDisipline && RESPONSIBILITIES.includes(userDisipline)

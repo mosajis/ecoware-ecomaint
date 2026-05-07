@@ -7,6 +7,8 @@ import {
   TypeTblComponentUnit,
   TypeTblCompType,
 } from "@/core/api/generated/api";
+import CellLink from "@/shared/components/dataGrid/cells/CellLink";
+import { RouteDetail } from "../../componentUnit/ComponentUnitRoutes";
 
 const getRowId = (row: TypeTblComponentUnit) => row.compId;
 
@@ -28,6 +30,14 @@ const columns: GridColDef<TypeTblComponentUnit>[] = [
     field: "compNo",
     headerName: "Comp No",
     flex: 1,
+    renderCell: ({ value, row }) => (
+      <CellLink
+        breadcrumb={row.compTypeId}
+        value={row.compNo}
+        to={RouteDetail.to}
+        params={{ id: row.compId }}
+      />
+    ),
   },
   {
     field: "model",

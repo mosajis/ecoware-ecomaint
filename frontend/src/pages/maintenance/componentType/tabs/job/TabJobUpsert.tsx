@@ -60,7 +60,10 @@ const schema = z.object({
       descr: z.string().nullable().optional(),
     })
     .nullable()
-    .optional(),
+    .optional()
+    .refine((val) => val !== null, {
+      message: "required",
+    }),
 
   maintCause: z
     .object({
@@ -68,7 +71,10 @@ const schema = z.object({
       descr: z.string().nullable().optional(),
     })
     .nullable()
-    .optional(),
+    .optional()
+    .refine((val) => val !== null, {
+      message: "required",
+    }),
 
   maintType: z
     .object({
@@ -76,7 +82,10 @@ const schema = z.object({
       descr: z.string().nullable().optional(),
     })
     .nullable()
-    .optional(),
+    .optional()
+    .refine((val) => val !== null, {
+      message: "required",
+    }),
 
   frequency: z.number().nullable().optional(),
   frequencyPeriod: z
@@ -183,7 +192,7 @@ function ComponentTypeJobUpsert({
         maintCause: res?.tblMaintCause ?? null,
         maintType: res?.tblMaintType ?? null,
         frequency: res?.frequency ?? null,
-        frequencyPeriod: res?.tblPeriod ?? null,
+        frequencyPeriod: res.tblPeriod as any,
         priority: res?.priority ?? null,
         window: res?.window ?? null,
         statusNone: !!res?.statusNone,
@@ -227,7 +236,7 @@ function ComponentTypeJobUpsert({
           ...buildRelation(
             "tblPeriod",
             "periodId",
-            v.frequencyPeriod?.periodId,
+            v.frequencyPeriod?.periodId ?? null,
           ),
           ...buildRelation(
             "tblJobDescription",
@@ -387,7 +396,7 @@ function ComponentTypeJobUpsert({
             render={({ field, fieldState }) => (
               <FieldAsyncSelectGrid
                 dialogMaxWidth="sm"
-                label="Maint Class"
+                label="Maint Class *"
                 value={field.value}
                 selectionMode="single"
                 request={tblMaintClass.getAll}
@@ -408,7 +417,7 @@ function ComponentTypeJobUpsert({
             render={({ field, fieldState }) => (
               <FieldAsyncSelectGrid
                 dialogMaxWidth="sm"
-                label="Maint Cause"
+                label="Maint Cause *"
                 value={field.value}
                 selectionMode="single"
                 error={!!fieldState.error?.message}
@@ -429,7 +438,7 @@ function ComponentTypeJobUpsert({
             render={({ field, fieldState }) => (
               <FieldAsyncSelectGrid
                 dialogMaxWidth="sm"
-                label="Maint Type"
+                label="Maint Type *"
                 value={field.value}
                 selectionMode="single"
                 error={!!fieldState.error?.message}

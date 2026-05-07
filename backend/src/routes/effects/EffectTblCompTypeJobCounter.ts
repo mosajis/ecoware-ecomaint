@@ -150,7 +150,7 @@ export async function effectCompTypeJobCounter({
           },
           data: {
             ...baseData,
-            lastupdate: new Date(),
+            lastUpdate: new Date(),
           },
         });
 

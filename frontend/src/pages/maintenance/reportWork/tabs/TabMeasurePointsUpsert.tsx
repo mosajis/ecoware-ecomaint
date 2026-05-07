@@ -11,6 +11,8 @@ import {
   tblCompMeasurePointLog,
   TypeTblCompJobMeasurePoint,
 } from "@/core/api/generated/api";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
 
 const schema = z.object({
   currentValue: z.number(),
@@ -36,6 +38,9 @@ function StepMeasurePointUpsert({
   onSuccess,
 }: Props) {
   const [submitting, setSubmitting] = useState(false);
+
+  const user = useAtomValue(atomUser);
+  const employeeId = user?.tblEmployee?.employeeId;
 
   const defaultValues: MeasureValueFormValues = {
     currentValue: 0,
@@ -78,15 +83,15 @@ function StepMeasurePointUpsert({
 
         // Create log entry
         await tblCompMeasurePointLog.create({
-          tblUsers: {
+          tblEmployee: {
             connect: {
-              userId,
+              employeeId,
             },
           },
           changedDate: new Date().toISOString(),
           currentDate: currentDate,
           currentValue: values.currentValue,
-          lastupdate: new Date().toISOString(),
+          lastUpdate: new Date().toISOString(),
           tblCompMeasurePoint: {
             connect: {
               compMeasurePointId: compMeasurePointId,

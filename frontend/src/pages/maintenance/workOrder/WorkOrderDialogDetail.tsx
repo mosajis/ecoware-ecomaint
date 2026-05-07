@@ -209,9 +209,6 @@ export default function WorkOrderDetailDialog({
           otherTblWorkOrders: {
             include: { tblWorkOrderStatus: true },
           },
-          tblUsersTblWorkOrderCreatedByTotblUsers: true,
-          tblUsersTblWorkOrderIssuedByTotblUsers: true,
-          tblUsersTblWorkOrderPlannedByTotblUsers: true,
         },
       });
       setData(res as any);
@@ -324,7 +321,7 @@ export default function WorkOrderDetailDialog({
               <DetailRow label="Created" value={fmt(wo.created)} />
               <DetailRow label="Started" value={fmt(wo.started)} />
               <DetailRow label="Completed" value={fmt(wo.completed)} />
-              <DetailRow label="Last Update" value={fmt(wo.lastupdate)} />
+              <DetailRow label="Last Update" value={fmt(wo.lastUpdate)} />
               <DetailRow
                 label="Est. Total Duration"
                 value={wo.estTotalDuration ? `${wo.estTotalDuration} min` : "—"}

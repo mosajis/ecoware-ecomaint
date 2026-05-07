@@ -40,7 +40,7 @@ interface Props {
 function MaintLogFollowDialog({ open, maintLogId, onClose, onSuccess }: Props) {
   const [submitting, setSubmitting] = useState(false);
   const user = useAtomValue(atomUser);
-  const userId = user?.userId as number;
+  const employeeId = user?.tblEmployee?.employeeId;
 
   const defaultValues: MaintLogFollowFormValues = {
     followStatus: null,
@@ -82,7 +82,7 @@ function MaintLogFollowDialog({ open, maintLogId, onClose, onSuccess }: Props) {
 
         // 2. Create follow-up log entry
         await tblMaintLogFollow.create({
-          ...buildRelation("tblUsers", "userId", userId),
+          ...buildRelation("tblEmployee", "employeeId", employeeId),
           ...buildRelation("tblMaintLog", "maintLogId", maintLogId),
           ...buildRelation("tblFollowStatus", "followStatusId", followStatusId),
           followDesc: values.description,
@@ -107,10 +107,10 @@ function MaintLogFollowDialog({ open, maintLogId, onClose, onSuccess }: Props) {
     <FormDialog
       open={open}
       onClose={onClose}
-      title="Add New Follow-up"
+      title="Follow-up"
       submitting={submitting}
       onSubmit={handleSubmit(onSubmit)}
-      disabled={!isValid || isDisabled}
+      // disabled={!isValid || isDisabled}
     >
       <Box display="flex" flexDirection="column" gap={3} mt={1}>
         {/* Follow Status */}

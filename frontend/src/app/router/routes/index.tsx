@@ -9,7 +9,7 @@ import { protectedRoute } from "./protected.routes";
 
 import { AuthLoginRoute } from "./auth.routes";
 import { rootRoute } from "./_components/rootRoute";
-import { maintenanceRoutesTree } from "./maintenance.routes";
+import { maintenanceRoutesTree } from "../../../pages/maintenance/MaintenanceRoutes";
 
 // --- Index redirect "/" → "/dashboard" ---
 export const indexRoute = createRoute({

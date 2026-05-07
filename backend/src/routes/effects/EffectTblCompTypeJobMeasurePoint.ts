@@ -150,7 +150,7 @@ export async function effectCompTypeJobMeasurePoint({
           },
           data: {
             ...baseData,
-            lastupdate: new Date(),
+            lastUpdate: new Date(),
           },
         });
 

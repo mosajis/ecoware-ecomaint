@@ -6,7 +6,6 @@ import ComponentUnitActions from "./ComponentUnitActions";
 import WorkShopUpsert from "../workShop/WorkShopUpsert";
 import FailureReportUpsert from "@/pages/report/failureReport/FailureReportUpsert";
 import { useRouter } from "@tanstack/react-router";
-import { routeComponentUnitDetail } from "./ComponentUnitRoutes";
 import { useDataTree } from "@/shared/hooks/useDataTree";
 import { mapToTree } from "@/shared/components/tree/TreeUtil";
 import { GenericTree } from "@/shared/components/tree/Tree";
@@ -21,6 +20,7 @@ import ConfirmDialog from "@/shared/components/ConfirmDialog";
 import { RouteDetail as FailureReportRouteDetail } from "@/pages/report/failureReport/FailureReportRoutes";
 import { RouteDetail as WorkShopRouteDetail } from "../workShop/WorkShopRoutes";
 import { Check, CheckCircle } from "@mui/icons-material";
+import { RouteDetail } from "./ComponentUnitRoutes";
 // import { RouteDetail as ReportWorkRouteDetail } from "../reportWork/";
 
 type PendingRedirectType = "failureReport" | "workShop" | "reportWork" | null;
@@ -85,7 +85,7 @@ export default function PageComponentUnit() {
 
       if (!row) return;
       router.navigate({
-        to: routeComponentUnitDetail.to,
+        to: RouteDetail.to,
         params: { id: rowId },
         search: { breadcrumb: row?.compNo },
       });

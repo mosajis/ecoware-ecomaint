@@ -21,9 +21,6 @@ const TabFailureReport = ({ selected, label }: Props) => {
       include: {
         tblMaintLog: {
           include: {
-            tblUsersTblMaintLogReportedByTotblUsers: {
-              include: { tblEmployeeTblUsersEmployeeIdTotblEmployee: true },
-            },
             tblComponentUnit: true,
             tblMaintCause: true,
             tblDiscipline: true,
@@ -32,9 +29,6 @@ const TabFailureReport = ({ selected, label }: Props) => {
         tblFailureSeverityLevel: true,
         tblFailureStatus: true,
         tblFailureGroupFollow: true,
-        tblUsers: {
-          include: { tblEmployeeTblUsersEmployeeIdTotblEmployee: true },
-        },
       },
     });
   }, [selected?.maintLogId]);

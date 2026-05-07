@@ -1,12 +1,12 @@
 import Spinner from "@/shared/components/Spinner";
 import ComponentTypeTabs from "./ComponentTypeTabs";
 import { useEffect, useState } from "react";
-import { routeComponentTypeDetail } from "./ComponentTypeRoutes";
+import { RouteDetail } from "./ComponentTypeRoutes";
 import { tblCompType } from "@/core/api/generated/api";
 
 const ComponentTypeDetail = () => {
-  const { id } = routeComponentTypeDetail.useParams();
-  const { breadcrumb } = routeComponentTypeDetail.useSearch();
+  const { id } = RouteDetail.useParams();
+  const { breadcrumb } = RouteDetail.useSearch();
 
   const [loading, setLoading] = useState(true);
   const [compType, setCompType] = useState<any>(null);

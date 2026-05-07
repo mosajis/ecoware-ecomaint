@@ -1,6 +1,6 @@
 import { createDetailRoute } from "@/app/router/routes/_components/DetailRoute";
 import { LazyRoute } from "@/app/router/routes/_components/lazyRoute";
-import { routeMaintenance } from "@/app/router/routes/maintenance.routes";
+import { routeMaintenance } from "@/pages/maintenance/MaintenanceRoutes";
 import { createRoute, Outlet } from "@tanstack/react-router";
 import { lazy } from "react";
 

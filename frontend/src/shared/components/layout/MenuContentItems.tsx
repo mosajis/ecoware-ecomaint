@@ -240,14 +240,14 @@ export const menuContentItems: MenuSection[] = [
         icon: <PrecisionManufacturingRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "** Component Type",
+        text: "Component Type",
         path: "/maintenance/component-type",
         id: "maint:componentType",
         permit: getPermit(1320).canView,
         icon: <WidgetsRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "** Component Job",
+        text: "Component Job",
         path: "/maintenance/component-job",
         id: "maint:componentJob",
         permit: getPermit(1330).canView,
@@ -276,7 +276,7 @@ export const menuContentItems: MenuSection[] = [
       },
       {
         text: "Update Counter",
-        path: "/maintenance/counters",
+        path: "/maintenance/counter",
         id: "maint:counters",
         permit: getPermit(1370).canView,
         icon: <UpdateRoundedIcon sx={iconStyle} />,
