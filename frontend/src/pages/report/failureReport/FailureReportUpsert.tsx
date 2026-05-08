@@ -211,6 +211,8 @@ function FailureReportUpsert({
         failureReport,
       });
     },
+
+    onSuccess,
   });
 
   const {

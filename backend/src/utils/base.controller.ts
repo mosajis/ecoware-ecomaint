@@ -235,7 +235,7 @@ export class BaseController<Model extends Record<string, any>> {
             include: t.Optional(t.String()),
             select: t.Optional(t.String()),
           }),
-          response: responseSchema,
+          // response: responseSchema,
         },
       );
     }

@@ -2,6 +2,8 @@ import CellFullName from "@/shared/components/dataGrid/cells/CellFullName";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import { TypeTblWorkShop } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
+import CellLink from "@/shared/components/dataGrid/cells/CellLink";
+import { RouteDetail } from "./WorkShopRoutes";
 
 export const getRowId = (row: TypeTblWorkShop) => row.workShopId;
 
@@ -15,6 +17,14 @@ export const columns: GridColDef<TypeTblWorkShop>[] = [
     field: "title",
     headerName: "Title",
     flex: 1,
+    renderCell: ({ value, row }) => (
+      <CellLink
+        breadcrumb={row.title}
+        value={row.title}
+        to={RouteDetail.to}
+        params={{ id: row.workShopId }}
+      />
+    ),
   },
   {
     field: "awardingDate",

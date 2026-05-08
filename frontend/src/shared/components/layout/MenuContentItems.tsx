@@ -261,14 +261,14 @@ export const menuContentItems: MenuSection[] = [
         icon: <AssignmentTurnedInRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "** Round",
+        text: "Round",
         path: "/maintenance/round",
         id: "maint:round",
         permit: getPermit(1350).canView,
         icon: <SyncRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "** Workshop",
+        text: "Workshop",
         path: "/maintenance/workshop",
         id: "maint:workshop",
         permit: getPermit(1360).canView,
@@ -310,7 +310,7 @@ export const menuContentItems: MenuSection[] = [
         icon: <AnalyticsRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "** Maint Log",
+        text: "Maint Log",
         path: "/maintenance/maint-log",
         id: "maint:maintLog",
         permit: getPermit(1420).canView,

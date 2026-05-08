@@ -1,47 +1,63 @@
 import Splitter from "@/shared/components/Splitter/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import ComponentUnitUpsert from "./ComponentUnitUpsert";
-import ReportWorkDialog from "../reportWork/ReportWorkDialog";
 import ComponentUnitActions from "./ComponentUnitActions";
 import WorkShopUpsert from "../workShop/WorkShopUpsert";
 import FailureReportUpsert from "@/pages/report/failureReport/FailureReportUpsert";
+import ConfirmDialog from "@/shared/components/ConfirmDialog";
+
 import { useRouter } from "@tanstack/react-router";
 import { useDataTree } from "@/shared/hooks/useDataTree";
+import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
+import { useDialogs } from "@/shared/hooks/useDialogs";
 import { mapToTree } from "@/shared/components/tree/TreeUtil";
 import { GenericTree } from "@/shared/components/tree/Tree";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { columns, getItemName, getRowId } from "./ComponentUnitColumns";
-import { useDialogs } from "@/shared/hooks/useDialogs";
+import { RouteDetail } from "./ComponentUnitRoutes";
+import { RouteDetail as FailureReportRouteDetail } from "@/pages/report/failureReport/FailureReportRoutes";
+import { RouteDetail as WorkShopRouteDetail } from "../workShop/WorkShopRoutes";
+
 import {
   tblComponentUnit,
   TypeTblComponentUnit,
 } from "@/core/api/generated/api";
-import ConfirmDialog from "@/shared/components/ConfirmDialog";
-import { RouteDetail as FailureReportRouteDetail } from "@/pages/report/failureReport/FailureReportRoutes";
-import { RouteDetail as WorkShopRouteDetail } from "../workShop/WorkShopRoutes";
-import { Check, CheckCircle } from "@mui/icons-material";
-import { RouteDetail } from "./ComponentUnitRoutes";
-// import { RouteDetail as ReportWorkRouteDetail } from "../reportWork/";
+
+const PERMIT_ID = 1310;
 
 type PendingRedirectType = "failureReport" | "workShop" | "reportWork" | null;
+
+type PendingRedirect = {
+  type: PendingRedirectType;
+  id: number | null;
+  breadcrumb: string | null;
+};
+
+const DEFAULT_PENDING_REDIRECT: PendingRedirect = {
+  type: null,
+  id: null,
+  breadcrumb: null,
+};
 
 export default function PageComponentUnit() {
   const router = useRouter();
 
-  const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
-  const [mode, setMode] = useState<"create" | "update">("create");
-  const [pendingRedirect, setPendingRedirect] = useState<{
-    type: PendingRedirectType;
-    id: number | null;
-  }>({ type: null, id: null });
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+
+  const [pendingRedirect, setPendingRedirect] = useState<PendingRedirect>(
+    DEFAULT_PENDING_REDIRECT,
+  );
 
   const { dialogs, openDialog, closeDialog } = useDialogs({
-    upsert: false,
     reportWork: false,
     workShop: false,
     failureReport: false,
     pendingRedirect: false,
   });
+
+  // =======================
+  // DATA
+  // =======================
 
   const getAll = useCallback(() => {
     return tblComponentUnit.getAll({
@@ -67,165 +83,211 @@ export default function PageComponentUnit() {
       mapper: treeMapper,
     });
 
-  const handleCreate = useCallback(() => {
-    setSelectedRowId(null);
-    setMode("create");
-    openDialog("upsert");
-  }, []);
+  // =======================
+  // UPSERT DIALOG
+  // =======================
 
-  const handleEdit = useCallback((rowId: number) => {
-    setSelectedRowId(rowId);
-    setMode("update");
-    openDialog("upsert");
-  }, []);
+  const { openCreate, openEdit, openView, dialogProps } = useUpsertDialog({
+    onSuccess: refetch,
+  });
 
-  const handleRowDoubleClick = useCallback(
+  // =======================
+  // SELECTED ROW
+  // =======================
+
+  const selectedRow = useMemo(() => {
+    if (!selectedRowId) return null;
+
+    return rows.find((r) => r.compId === selectedRowId) || null;
+  }, [rows, selectedRowId]);
+
+  // =======================
+  // NAVIGATION
+  // =======================
+
+  const handleOpenDetail = useCallback(
     (rowId: number) => {
       const row = rows.find((i) => i.compId === rowId);
 
       if (!row) return;
+
       router.navigate({
         to: RouteDetail.to,
         params: { id: rowId },
-        search: { breadcrumb: row?.compNo },
+        search: {
+          breadcrumb: row.compNo,
+        },
       });
     },
     [router, rows],
   );
 
-  const handleRowClick = ({ row }: { row: TypeTblComponentUnit }) => {
-    setSelectedRowId(row.compId);
-  };
+  const openInNewTab = useCallback(
+    (route: { to: string }, id: number, breadcrumb?: string | null) => {
+      const href = router.buildLocation({
+        to: route.to,
+        params: { id },
+        search: {
+          breadcrumb: breadcrumb ?? "",
+        },
+      }).href;
 
-  const handleRoutineClick = () => {};
+      window.open(href, "_blank");
+    },
+    [router],
+  );
 
-  const handleRedirectConfirm = useCallback(async () => {
-    // if (!pendingRedirect.id || !pendingRedirect.type) return;
-    // const routes = {
-    //   failureReport: FailureReportRouteDetail,
-    //   workShop: WorkShopRouteDetail,
-    //   // reportWork: ReportWorkRouteDetail,
-    // };
-    // const route = routes[pendingRedirect.type];
-    // if (route) {
-    //   await router.navigate({
-    //     to: route.to,
-    //     params: { id: pendingRedirect.id },
-    //   });
-    // }
-    // setPendingRedirect({ type: null, id: null });
-    // closeDialog("pendingRedirect");
-  }, [pendingRedirect, router]);
+  // =======================
+  // GRID EVENTS
+  // =======================
 
-  const handleRedirectCancel = useCallback(() => {
-    setPendingRedirect({ type: null, id: null });
-    closeDialog("pendingRedirect");
+  const handleRowClick = useCallback(
+    ({ row }: { row: TypeTblComponentUnit }) => {
+      setSelectedRowId(row.compId);
+    },
+    [],
+  );
+
+  // =======================
+  // ROUTINE ACTION
+  // =======================
+
+  const handleRoutineClick = useCallback(() => {
+    //
   }, []);
 
-  const selectedRow = rows.find((r) => r.compId === selectedRowId) || null;
+  // =======================
+  // REDIRECT CONFIRM
+  // =======================
+
+  const handleRedirectConfirm = useCallback(() => {
+    if (!pendingRedirect.id || !pendingRedirect.type) return;
+
+    const routes = {
+      failureReport: FailureReportRouteDetail,
+      workShop: WorkShopRouteDetail,
+      reportWork: { to: "" },
+    };
+
+    const route = routes[pendingRedirect.type];
+
+    if (route?.to) {
+      openInNewTab(route, pendingRedirect.id, pendingRedirect.breadcrumb);
+    }
+
+    setPendingRedirect(DEFAULT_PENDING_REDIRECT);
+
+    closeDialog("pendingRedirect");
+  }, [pendingRedirect, closeDialog, openInNewTab]);
+
+  const handleRedirectCancel = useCallback(() => {
+    setPendingRedirect(DEFAULT_PENDING_REDIRECT);
+
+    closeDialog("pendingRedirect");
+  }, [closeDialog]);
 
   return (
     <>
       <Splitter initialPrimarySize="30%">
         <GenericTree<TypeTblComponentUnit>
           label="Tree View"
-          elementId={1310}
+          elementId={PERMIT_ID}
           loading={loading}
           data={tree}
-          onDoubleClick={handleRowDoubleClick}
-          onEdit={handleEdit}
+          onDoubleClick={handleOpenDetail}
+          onEdit={openEdit}
           onDelete={handleDelete}
-          onAdd={handleCreate}
+          onAdd={openCreate}
           onRefresh={refetch}
           getItemId={getRowId}
           getItemName={getItemName}
         />
+
         <CustomizedDataGrid
           showToolbar
           disableRowNumber
           label="List View"
-          elementId={1310}
+          elementId={PERMIT_ID}
           rows={rows}
           columns={columns}
           loading={loading}
           getRowId={getRowId}
-          onEditClick={handleEdit}
+          onEditClick={openEdit}
           onDeleteClick={handleDelete}
-          onDoubleClick={handleRowDoubleClick}
-          onAddClick={handleCreate}
-          onRowClick={handleRowClick}
+          onAddClick={openCreate}
+          onDoubleClick={openView}
           onRefreshClick={refetch}
-          // toolbarChildren={
-          //   <ComponentUnitActions
-          //     selectedRow={selectedRow}
-          //     onWorkShop={() => openDialog("workShop")}
-          //     onFailureReport={() => openDialog("failureReport")}
-          //     onNoneRoutine={() => openDialog("reportWork")}
-          //     onRoutine={handleRoutineClick}
-          //   />
-          // }
+          onRowClick={handleRowClick}
+          toolbarChildren={
+            <ComponentUnitActions
+              selectedRow={selectedRow}
+              onWorkShop={() => openDialog("workShop")}
+              onFailureReport={() => openDialog("failureReport")}
+              onNoneRoutine={() => openDialog("reportWork")}
+              onRoutine={handleRoutineClick}
+            />
+          }
         />
       </Splitter>
 
-      <ComponentUnitUpsert
-        open={dialogs.upsert}
-        mode={mode}
-        recordId={selectedRowId}
-        onClose={() => closeDialog("upsert")}
-        onSuccess={refetch}
-      />
+      {/* UPSERT */}
 
-      {/* <ReportWorkDialog
-        open={dialogs.reportWork}
-        onClose={() => closeDialog("reportWork")}
-        onSuccess={(reportWorkId) => {
-          closeDialog("reportWork");
-          setPendingRedirect({ type: "reportWork", id: reportWorkId });
-          openDialog("pendingRedirect");
-        }}
-        componentUnitId={selectedRowId ?? undefined}
-      /> */}
+      <ComponentUnitUpsert entityName="Component" {...dialogProps} />
+
+      {/* FAILURE REPORT */}
 
       {selectedRowId && (
         <FailureReportUpsert
           entityName="Failure Report"
           open={dialogs.failureReport}
-          mode={"create"}
-          compId={selectedRowId!}
-          onClose={() => {
+          mode="create"
+          compId={selectedRowId}
+          onClose={() => closeDialog("failureReport")}
+          onSuccess={(failureReport) => {
             closeDialog("failureReport");
-            setPendingRedirect({ type: "failureReport", id: 2 });
-            openDialog("pendingRedirect");
-          }}
-          onSuccess={(failureReportId) => {
-            closeDialog("failureReport");
-            setPendingRedirect({ type: "failureReport", id: failureReportId });
+
+            setPendingRedirect({
+              type: "failureReport",
+              id: failureReport.failureReportId,
+              breadcrumb: failureReport.title,
+            });
+
             openDialog("pendingRedirect");
           }}
         />
       )}
 
+      {/* WORKSHOP */}
+
       <WorkShopUpsert
         open={dialogs.workShop}
         onClose={() => closeDialog("workShop")}
-        onSuccess={(workShopId) => {
+        onSuccess={(workShop) => {
           closeDialog("workShop");
-          // setPendingRedirect({ type: "workShop", id: workShopId });
-          // openDialog("pendingRedirect");
+
+          setPendingRedirect({
+            type: "workShop",
+            id: workShop.workShopId,
+            breadcrumb: workShop.title,
+          });
+
+          openDialog("pendingRedirect");
         }}
       />
 
-      {/* <ConfirmDialog
-        open={!dialogs.pendingRedirect}
+      {/* CONFIRM REDIRECT */}
+
+      <ConfirmDialog
+        open={dialogs.pendingRedirect}
         title="Success"
         message="Record created successfully. Do you want to open the details page?"
         confirmText="Yes"
         cancelText="No"
-        confirmColor="success"
+        confirmColor="primary"
         icon={null}
         onCancel={handleRedirectCancel}
         onConfirm={handleRedirectConfirm}
-      /> */}
+      />
     </>
   );
 }

@@ -1,33 +1,13 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback } from "react";
-import {
-  tblCompTypeCounter,
-  TypeTblCompTypeCounter,
-} from "@/core/api/generated/api";
+import { tblCompTypeCounter } from "@/core/api/generated/api";
+import { columns, getRowId } from "./TabCompTypeColumn";
 
 interface TabCompTypeCounterProps {
   counterTypeId: number | null | undefined;
   label?: string;
 }
-
-const getRowId = (row: TypeTblCompTypeCounter) => row.compTypeCounterId;
-
-const columns: GridColDef<TypeTblCompTypeCounter>[] = [
-  {
-    field: "code",
-    headerName: "Code",
-    width: 120,
-    valueGetter: (_, row) => row.tblCompType?.compTypeNo,
-  },
-  {
-    field: "name",
-    headerName: "Name",
-    flex: 1,
-    valueGetter: (_, row) => row?.tblCompType?.compName,
-  },
-];
 
 export default function TabCompTypeCounter(props: TabCompTypeCounterProps) {
   const { counterTypeId, label } = props;

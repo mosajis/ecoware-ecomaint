@@ -2,6 +2,7 @@ import CellLink from "@/shared/components/dataGrid/cells/CellLink";
 import { TypeTblFunction } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 import { RouteDetail } from "./FunctionRoutes";
+import { RouteDetail as RouteComponentUnitDetail } from "../componentUnit/ComponentUnitRoutes";
 
 export const getRowId = (row: TypeTblFunction) => row.functionId;
 export const getItemName = (row: TypeTblFunction) => row.funcNo || "-";
@@ -13,8 +14,8 @@ export const columns: GridColDef<TypeTblFunction>[] = [
     flex: 1,
     renderCell: ({ value, row }) => (
       <CellLink
-        breadcrumb={row.funcNo}
-        value={row.funcNo}
+        breadcrumb={value}
+        value={value}
         to={RouteDetail.to}
         params={{ id: row.functionId }}
       />
@@ -26,6 +27,14 @@ export const columns: GridColDef<TypeTblFunction>[] = [
     headerName: "Component",
     flex: 1,
     valueGetter: (_, row) => row.tblComponentUnit?.compNo,
+    renderCell: ({ value, row }) => (
+      <CellLink
+        breadcrumb={value}
+        value={value}
+        to={RouteComponentUnitDetail.to}
+        params={{ id: row.compId }}
+      />
+    ),
   },
   { field: "orderNo", headerName: "Order No", width: 85 },
 ];

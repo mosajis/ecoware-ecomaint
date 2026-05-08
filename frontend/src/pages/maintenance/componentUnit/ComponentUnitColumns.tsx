@@ -1,11 +1,25 @@
+import CellLink from "@/shared/components/dataGrid/cells/CellLink";
 import { TypeTblComponentUnit } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
+import { RouteDetail } from "./ComponentUnitRoutes";
 
 export const getRowId = (row: TypeTblComponentUnit) => row.compId;
 export const getItemName = (row: TypeTblComponentUnit) => row.compNo || "-";
 
 export const columns: GridColDef<TypeTblComponentUnit>[] = [
-  { field: "compNo", headerName: "Component No", width: 280 },
+  {
+    field: "compNo",
+    headerName: "Component No",
+    width: 280,
+    renderCell: ({ value, row }) => (
+      <CellLink
+        breadcrumb={value}
+        value={value}
+        to={RouteDetail.to}
+        params={{ id: row.compId }}
+      />
+    ),
+  },
   {
     field: "compType",
     headerName: "Component Type",

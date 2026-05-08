@@ -1,9 +1,11 @@
 import CellWorkOrderStatus from "./customCell/CellWorkOrderStatus";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import CellOverdue from "./customCell/CellWorkOrderOverDue";
+import CellLink from "@/shared/components/dataGrid/cells/CellLink";
 import { GridColDef } from "@mui/x-data-grid";
 import { TypeTblWorkOrderWithRels } from "./types";
 import { calculateOverdue } from "@/core/helper";
+import { RouteDetail } from "../componentUnit/ComponentUnitRoutes";
 
 export const columns: GridColDef<TypeTblWorkOrderWithRels>[] = [
   {
@@ -23,6 +25,14 @@ export const columns: GridColDef<TypeTblWorkOrderWithRels>[] = [
     headerName: "Component",
     flex: 1,
     valueGetter: (_, row) => row.tblComponentUnit?.compNo,
+    renderCell: ({ value, row }) => (
+      <CellLink
+        breadcrumb={value}
+        value={value}
+        to={RouteDetail.to}
+        params={{ id: row.tblComponentUnit?.compId }}
+      />
+    ),
   },
   {
     field: "location",

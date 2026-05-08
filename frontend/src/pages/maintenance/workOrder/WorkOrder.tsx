@@ -25,7 +25,7 @@ const getRowId = (row: TypeTblWorkOrder) => row.workOrderId;
 
 export default function WorkOrderPage() {
   const user = useAtomValue(atomUser);
-  const userId = user?.userId as number;
+  const employeeId = user?.tblEmployee?.employeeId as number;
 
   const { dialogs, openDialog, closeDialog } = useDialogs({
     workOrderDetail: false,

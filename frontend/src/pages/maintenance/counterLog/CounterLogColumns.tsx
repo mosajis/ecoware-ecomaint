@@ -1,6 +1,10 @@
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
+import CellLink from "@/shared/components/dataGrid/cells/CellLink";
 import { TypeTblCompCounterLog } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
+
+import { RouteDetail as RouteComponentUnitDetail } from "../componentUnit/ComponentUnitRoutes";
+import { RouteDetail as RouteComponentTypeDetail } from "../componentType/ComponentTypeRoutes";
 
 export const getRowId = (row: TypeTblCompCounterLog) => row.compCounterLogId;
 
@@ -11,6 +15,15 @@ export const columns: GridColDef<TypeTblCompCounterLog>[] = [
     flex: 1,
     // @ts-ignore
     valueGetter: (_, row) => row?.tblCompCounter?.tblComponentUnit?.compNo,
+    renderCell: ({ value, row }) => (
+      <CellLink
+        breadcrumb={value}
+        value={value}
+        to={RouteComponentUnitDetail.to}
+        // @ts-ignore
+        params={{ id: row?.tblCompCounter?.tblComponentUnit?.compId }}
+      />
+    ),
   },
   {
     field: "componentType",
@@ -19,6 +32,16 @@ export const columns: GridColDef<TypeTblCompCounterLog>[] = [
     valueGetter: (_, row) =>
       // @ts-ignore
       row?.tblCompCounter?.tblComponentUnit?.tblCompType?.compName,
+
+    renderCell: ({ value, row }) => (
+      <CellLink
+        breadcrumb={value}
+        value={value}
+        to={RouteComponentTypeDetail.to}
+        // @ts-ignore
+        params={{ id: row?.tblCompCounter?.tblCompType?.compTypeId }}
+      />
+    ),
   },
   {
     field: "counterName",

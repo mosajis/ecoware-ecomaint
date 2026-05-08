@@ -1,6 +1,9 @@
-import { TypeTblCompMeasurePoint } from "@/core/api/generated/api";
+import CellLink from "@/shared/components/dataGrid/cells/CellLink";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
+import { TypeTblCompMeasurePoint } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
+import { RouteDetail as RouteComponentUnitDetail } from "../componentUnit/ComponentUnitRoutes";
+import { RouteDetail as RouteComponentTypeDetail } from "../componentType/ComponentTypeRoutes";
 
 export const getRowId = (row: TypeTblCompMeasurePoint) =>
   row.compMeasurePointId;
@@ -11,6 +14,14 @@ export const columns: GridColDef<TypeTblCompMeasurePoint>[] = [
     headerName: "Component",
     flex: 1,
     valueGetter: (_, row) => row?.tblComponentUnit?.compNo,
+    renderCell: ({ value, row }) => (
+      <CellLink
+        breadcrumb={value}
+        value={value}
+        to={RouteComponentUnitDetail.to}
+        params={{ id: row?.tblComponentUnit?.compId }}
+      />
+    ),
   },
   {
     field: "compType",
@@ -18,6 +29,15 @@ export const columns: GridColDef<TypeTblCompMeasurePoint>[] = [
     flex: 1,
     // @ts-ignore
     valueGetter: (_, row) => row?.tblComponentUnit?.tblCompType?.compName,
+    renderCell: ({ value, row }) => (
+      <CellLink
+        breadcrumb={value}
+        value={value}
+        to={RouteComponentTypeDetail.to}
+        // @ts-ignore
+        params={{ id: row?.tblComponentUnit?.tblCompType?.compTypeId }}
+      />
+    ),
   },
 
   {

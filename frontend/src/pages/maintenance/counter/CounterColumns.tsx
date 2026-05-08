@@ -1,6 +1,9 @@
-import { TypeTblCompCounter } from "@/core/api/generated/api";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
+import { RouteDetail as RouteComponentUnitDetail } from "../componentUnit/ComponentUnitRoutes";
+import { RouteDetail as RouteComponentTypeDetail } from "../componentType/ComponentTypeRoutes";
+import { TypeTblCompCounter } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
+import CellLink from "@/shared/components/dataGrid/cells/CellLink";
 
 export const getRowId = (row: TypeTblCompCounter) => row.compCounterId;
 
@@ -10,13 +13,16 @@ export const columns: GridColDef<TypeTblCompCounter>[] = [
     headerName: "component",
     flex: 1,
     valueGetter: (_, row) => row.tblComponentUnit?.compNo,
+    renderCell: ({ value, row }) => (
+      <CellLink
+        breadcrumb={value}
+        value={value}
+        to={RouteComponentUnitDetail.to}
+        params={{ id: row.tblComponentUnit?.compId }}
+      />
+    ),
   },
-  {
-    field: "counterType",
-    headerName: "Counter Type",
-    flex: 1,
-    valueGetter: (_, row) => row.tblCounterType?.name || "",
-  },
+
   {
     field: "currentDate",
     headerName: "Current Date",

@@ -2,13 +2,12 @@ import * as z from "zod";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { tblCompCounter, TypeTblCompCounter } from "@/core/api/generated/api";
 
 import Box from "@mui/material/Box";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import NumberField from "@/shared/components/fields/FieldNumber";
 import FieldDateTime from "@/shared/components/fields/FieldDateTime";
-
-import { tblCompCounter, TypeTblCompCounter } from "@/core/api/generated/api";
 
 /* ================= Schema ================= */
 const schema = z.object({

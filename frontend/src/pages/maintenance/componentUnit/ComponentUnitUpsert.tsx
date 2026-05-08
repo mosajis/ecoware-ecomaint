@@ -5,14 +5,17 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import NumberField from "@/shared/components/fields/FieldNumber";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
-import { memo, useEffect, useState, useCallback } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { buildRelation } from "@/core/helper";
-import { DEFAULT_VALUES, schema, SchemaValue } from "./ComponentUnitSchema";
+
+import { memo } from "react";
+import { Controller } from "react-hook-form";
 import { useAtomValue } from "jotai";
+
+import { buildRelation } from "@/core/helper";
 import { atomUser } from "@/pages/auth/auth.atom";
 import { effectTblComponentUnit } from "@/core/api/apiEffects";
+
+import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
+
 import {
   tblAddress,
   tblComponentUnit,
@@ -21,17 +24,15 @@ import {
   tblLocation,
   TypeTblAddress,
   TypeTblCompStatus,
+  TypeTblComponentUnit,
 } from "@/core/api/generated/api";
 
-type Props = {
-  open: boolean;
-  mode: "create" | "update";
-  recordId?: number | null;
-  onClose: () => void;
-  onSuccess: () => void;
-};
+import { DEFAULT_VALUES, schema, SchemaValue } from "./ComponentUnitSchema";
+
+type Props = UpsertProps;
 
 function ComponentUnitUpsert({
+  entityName,
   open,
   mode,
   recordId,
@@ -39,23 +40,25 @@ function ComponentUnitUpsert({
   onSuccess,
 }: Props) {
   const user = useAtomValue(atomUser);
-  const [loading, setLoading] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
 
-  const { control, handleSubmit, reset } = useForm<SchemaValue>({
-    resolver: zodResolver(schema),
+  const {
+    form,
+    loadingInitial,
+    submitting,
+    isDisabled,
+    readonly,
+    title,
+    handleFormSubmit,
+  } = useUpsertForm<SchemaValue, TypeTblComponentUnit>({
+    entityName,
+    open,
+    mode,
+    recordId,
+    schema,
     defaultValues: DEFAULT_VALUES,
-  });
 
-  const fetchData = useCallback(async () => {
-    if (mode !== "update" || !recordId) {
-      reset(DEFAULT_VALUES);
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const res = await tblComponentUnit.getById(recordId, {
+    onFetch: async (id) => {
+      const res = await tblComponentUnit.getById(id, {
         include: {
           tblCompType: true,
           tblLocation: true,
@@ -65,25 +68,28 @@ function ComponentUnitUpsert({
         },
       });
 
-      reset({
+      return {
         compType: res.tblCompType
           ? {
               compTypeId: res.tblCompType.compTypeId,
               compName: res.tblCompType.compName,
             }
           : null,
+
         location: res.tblLocation
           ? {
               locationId: res.tblLocation.locationId,
               name: res.tblLocation.name,
             }
           : null,
+
         parentComp: res.tblComponentUnit
           ? {
-              compId: res.tblComponentUnit?.compId,
-              compNo: res.tblComponentUnit?.compNo ?? null,
+              compId: res.tblComponentUnit.compId,
+              compNo: res.tblComponentUnit.compNo ?? null,
             }
           : null,
+
         status: res.tblCompStatus
           ? {
               compStatusId: res.tblCompStatus.compStatusId,
@@ -97,6 +103,7 @@ function ComponentUnitUpsert({
               name: res.tblAddress.name,
             }
           : null,
+
         compNo: res.compNo ?? "",
         serialNo: res.serialNo ?? null,
         assetNo: res.assetNo ?? null,
@@ -106,85 +113,124 @@ function ComponentUnitUpsert({
         comment3: res.comment3 ?? null,
         isCritical: !!res.isCritical,
         orderNo: res.orderNo ?? null,
-      });
-    } finally {
-      setLoading(false);
-    }
-  }, [mode, recordId, reset]);
-
-  useEffect(() => {
-    if (open) fetchData();
-  }, [open, fetchData]);
-
-  const handleFormSubmit = useCallback(
-    async (values: SchemaValue) => {
-      const parsed = schema.safeParse(values);
-      if (!parsed.success) return;
-
-      const v = parsed.data;
-
-      try {
-        setSubmitting(true);
-
-        const body = {
-          compNo: v.compNo,
-          serialNo: v.serialNo ?? null,
-          assetNo: v.assetNo ?? null,
-          comment1: v.comment1 ?? null,
-          comment2: v.comment2 ?? null,
-          comment3: v.comment3 ?? null,
-          model: v.model ?? null,
-          isCritical: v.isCritical ? 1 : 0,
-          orderNo: v.orderNo ?? null,
-          ...buildRelation("tblCompType", "compTypeId", v.compType?.compTypeId),
-          ...buildRelation(
-            "tblLocation",
-            "locationId",
-            v.location?.locationId ?? null,
-          ),
-          ...buildRelation("tblCompStatus", "compStatusId", 1),
-          ...buildRelation(
-            "tblAddress",
-            "addressId",
-            v.vendor?.addressId ?? null,
-          ),
-          ...buildRelation(
-            "tblComponentUnit",
-            "compId",
-            v.parentComp?.compId ?? null,
-          ),
-        };
-
-        if (mode === "create") {
-          const result = await tblComponentUnit.create(body);
-          await effectTblComponentUnit(result.compId, user?.userId as number);
-        } else {
-          await tblComponentUnit.update(recordId!, body);
-        }
-
-        onSuccess();
-        onClose();
-      } finally {
-        setSubmitting(false);
-      }
+      };
     },
-    [mode, recordId, onSuccess, onClose],
-  );
-  const isDisabled = loading || submitting;
+
+    onCreate: async (values) => {
+      const body = {
+        compNo: values.compNo,
+        serialNo: values.serialNo ?? null,
+        assetNo: values.assetNo ?? null,
+        comment1: values.comment1 ?? null,
+        comment2: values.comment2 ?? null,
+        comment3: values.comment3 ?? null,
+        model: values.model ?? null,
+        isCritical: values.isCritical ? 1 : 0,
+        orderNo: values.orderNo ?? null,
+
+        ...buildRelation(
+          "tblCompType",
+          "compTypeId",
+          values.compType?.compTypeId,
+        ),
+
+        ...buildRelation(
+          "tblLocation",
+          "locationId",
+          values.location?.locationId ?? null,
+        ),
+
+        ...buildRelation(
+          "tblCompStatus",
+          "compStatusId",
+          values.status?.compStatusId ?? 1,
+        ),
+
+        ...buildRelation(
+          "tblAddress",
+          "addressId",
+          values.vendor?.addressId ?? null,
+        ),
+
+        ...buildRelation(
+          "tblComponentUnit",
+          "compId",
+          values.parentComp?.compId ?? null,
+        ),
+      };
+
+      const result = await tblComponentUnit.create(body);
+
+      await effectTblComponentUnit(result.compId, user?.userId as number);
+
+      return result;
+    },
+
+    onUpdate: async (id, values) => {
+      const body = {
+        compNo: values.compNo,
+        serialNo: values.serialNo ?? null,
+        assetNo: values.assetNo ?? null,
+        comment1: values.comment1 ?? null,
+        comment2: values.comment2 ?? null,
+        comment3: values.comment3 ?? null,
+        model: values.model ?? null,
+        isCritical: values.isCritical ? 1 : 0,
+        orderNo: values.orderNo ?? null,
+
+        ...buildRelation(
+          "tblCompType",
+          "compTypeId",
+          values.compType?.compTypeId,
+        ),
+
+        ...buildRelation(
+          "tblLocation",
+          "locationId",
+          values.location?.locationId ?? null,
+        ),
+
+        ...buildRelation(
+          "tblCompStatus",
+          "compStatusId",
+          values.status?.compStatusId ?? 1,
+        ),
+
+        ...buildRelation(
+          "tblAddress",
+          "addressId",
+          values.vendor?.addressId ?? null,
+        ),
+
+        ...buildRelation(
+          "tblComponentUnit",
+          "compId",
+          values.parentComp?.compId ?? null,
+        ),
+      };
+
+      return tblComponentUnit.update(id, body);
+    },
+
+    onSuccess,
+    onClose,
+  });
+
+  const { control } = form;
 
   return (
     <FormDialog
       maxWidth="sm"
       open={open}
       onClose={onClose}
-      title={mode === "create" ? "New Component Unit" : "Edit Component Unit"}
+      title={title}
       submitting={submitting}
-      loadingInitial={loading}
-      onSubmit={handleSubmit(handleFormSubmit)}
+      loadingInitial={loadingInitial}
+      onSubmit={handleFormSubmit}
+      readonly={readonly}
     >
       <Box display="flex" flexDirection="column" gap={1.5}>
-        <Box display={"flex"} gap={1.5}>
-          {/* Component No */}
+        <Box display="flex" gap={1.5}>
           <Controller
             name="compNo"
             control={control}
@@ -200,7 +246,7 @@ function ComponentUnitUpsert({
               />
             )}
           />
-          {/* Is Critical */}
+
           <Controller
             name="isCritical"
             control={control}
@@ -220,7 +266,6 @@ function ComponentUnitUpsert({
           />
         </Box>
 
-        {/* Component Type */}
         <Controller
           name="compType"
           control={control}
@@ -232,7 +277,13 @@ function ComponentUnitUpsert({
               value={field.value}
               selectionMode="single"
               request={tblCompType.getAll}
-              columns={[{ field: "compName", headerName: "Name", flex: 1 }]}
+              columns={[
+                {
+                  field: "compName",
+                  headerName: "Name",
+                  flex: 1,
+                },
+              ]}
               getRowId={(row) => row.compTypeId}
               onChange={field.onChange}
               error={!!fieldState.error}
@@ -241,8 +292,7 @@ function ComponentUnitUpsert({
           )}
         />
 
-        <Box display={"grid"} gridTemplateColumns={"3fr 1fr"} gap={1.5}>
-          {/* Location */}
+        <Box display="grid" gridTemplateColumns="3fr 1fr" gap={1.5}>
           <Controller
             name="location"
             control={control}
@@ -254,13 +304,19 @@ function ComponentUnitUpsert({
                 value={field.value}
                 selectionMode="single"
                 request={tblLocation.getAll}
-                columns={[{ field: "name", headerName: "Name", flex: 1 }]}
+                columns={[
+                  {
+                    field: "name",
+                    headerName: "Name",
+                    flex: 1,
+                  },
+                ]}
                 getRowId={(row) => row.locationId}
                 onChange={field.onChange}
               />
             )}
           />
-          {/* Component Type */}
+
           <Controller
             name="status"
             control={control}
@@ -272,7 +328,11 @@ function ComponentUnitUpsert({
                 selectionMode="single"
                 request={tblCompStatus.getAll}
                 columns={[
-                  { field: "compStatusName", headerName: "Status", flex: 1 },
+                  {
+                    field: "compStatusName",
+                    headerName: "Status",
+                    flex: 1,
+                  },
                 ]}
                 onChange={field.onChange}
                 getOptionLabel={(row) => row.compStatusName}
@@ -281,6 +341,7 @@ function ComponentUnitUpsert({
             )}
           />
         </Box>
+
         <Controller
           name="model"
           control={control}
@@ -294,8 +355,8 @@ function ComponentUnitUpsert({
             />
           )}
         />
-        {/* Serial No */}
-        <Box display={"flex"} gap={1.5}>
+
+        <Box display="flex" gap={1.5}>
           <Controller
             name="serialNo"
             control={control}
@@ -311,7 +372,6 @@ function ComponentUnitUpsert({
             )}
           />
 
-          {/* Asset No */}
           <Controller
             name="assetNo"
             control={control}
@@ -328,7 +388,6 @@ function ComponentUnitUpsert({
           />
         </Box>
 
-        {/* Component Type */}
         <Controller
           name="vendor"
           control={control}
@@ -339,13 +398,20 @@ function ComponentUnitUpsert({
               disabled={isDisabled}
               selectionMode="single"
               request={tblAddress.getAll}
-              columns={[{ field: "name", headerName: "Name", flex: 1 }]}
+              columns={[
+                {
+                  field: "name",
+                  headerName: "Name",
+                  flex: 1,
+                },
+              ]}
               onChange={field.onChange}
               getOptionLabel={(row) => row.name}
               getRowId={(row) => row.addressId}
             />
           )}
         />
+
         <Controller
           name="comment1"
           control={control}
@@ -361,7 +427,6 @@ function ComponentUnitUpsert({
           )}
         />
 
-        {/* Comment2 */}
         <Controller
           name="comment2"
           control={control}
@@ -377,7 +442,6 @@ function ComponentUnitUpsert({
           )}
         />
 
-        {/* Comment3 */}
         <Controller
           name="comment3"
           control={control}
@@ -393,7 +457,6 @@ function ComponentUnitUpsert({
           )}
         />
 
-        {/* Parent Component */}
         <Controller
           name="parentComp"
           control={control}
@@ -405,7 +468,13 @@ function ComponentUnitUpsert({
               value={field.value}
               selectionMode="single"
               request={tblComponentUnit.getAll}
-              columns={[{ field: "compNo", headerName: "Comp No", flex: 1 }]}
+              columns={[
+                {
+                  field: "compNo",
+                  headerName: "Comp No",
+                  flex: 1,
+                },
+              ]}
               getRowId={(row) => row.compId}
               onChange={field.onChange}
               error={!!fieldState.error}
@@ -413,7 +482,7 @@ function ComponentUnitUpsert({
             />
           )}
         />
-        {/* Order No */}
+
         <Controller
           name="orderNo"
           control={control}

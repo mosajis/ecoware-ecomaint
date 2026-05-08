@@ -1,7 +1,9 @@
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
+import CellLink from "@/shared/components/dataGrid/cells/CellLink";
 import { TypeTblRotationLog } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 import { extractFullName } from "@/core/helper";
+import { RouteDetail as RouteComponentUnitDetail } from "../../../componentUnit/ComponentUnitRoutes";
 
 export const getRowId = (row: TypeTblRotationLog) => row.rotationLogId;
 
@@ -11,6 +13,14 @@ export const columns: GridColDef<TypeTblRotationLog>[] = [
     headerName: "Component Name",
     flex: 1,
     valueGetter: (_, row) => row.tblComponentUnit?.compNo,
+    renderCell: ({ value, row }) => (
+      <CellLink
+        breadcrumb={value}
+        value={value}
+        to={RouteComponentUnitDetail.to}
+        params={{ id: row.compId }}
+      />
+    ),
   },
   {
     field: "fromDate",

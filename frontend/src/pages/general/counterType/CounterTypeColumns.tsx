@@ -5,7 +5,6 @@ export const getRowId = (row: TypeTblCounterType) => row.counterTypeId;
 
 export const columns: GridColDef<TypeTblCounterType>[] = [
   { field: "name", headerName: "Name", flex: 1 },
-
   {
     field: "type",
     headerName: "Type",

@@ -23,6 +23,8 @@ const TabRotationLog = ({ recordFunction, label }: Props) => {
       tblRotationLog.getAll({
         include: {
           tblComponentUnit: true,
+          tblEmployeeTblRotationLogEmployeeInsertedIdTotblEmployee: true,
+          tblEmployeeTblRotationLogEmployeeRemovedIdTotblEmployee: true,
         },
         filter: {
           functionId: functionId,

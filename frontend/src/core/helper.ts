@@ -107,6 +107,7 @@ export const formatFileSize = (bytes: number) => {
 };
 
 export const extractFullName = (employee?: TypeTblEmployee | null) => {
+  if (!employee) return "-";
   const fullName = employee?.firstName + " " + employee?.lastName;
 
   return fullName;
