@@ -13,14 +13,6 @@ export const columns: GridColDef<TypeTblCompCounter>[] = [
     headerName: "component",
     flex: 1,
     valueGetter: (_, row) => row.tblComponentUnit?.compNo,
-    renderCell: ({ value, row }) => (
-      <CellLink
-        breadcrumb={value}
-        value={value}
-        to={RouteComponentUnitDetail.to}
-        params={{ id: row.tblComponentUnit?.compId }}
-      />
-    ),
   },
 
   {

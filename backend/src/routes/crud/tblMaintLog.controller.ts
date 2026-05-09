@@ -22,6 +22,8 @@ import type {
   TblMaintType,
   TblMaintLog as TypeTblMaintLog,
 } from "orm/generated/prisma/client";
+import { connect } from "node:http2";
+import { TblCompJobCounter } from "orm/generated/prismabox/TblCompJobCounter";
 
 const MaintLogItemSchema = t.Object({
   maintLogId: t.Number(),
@@ -495,7 +497,7 @@ const ControllerTblMaintLog = new BaseController({
           },
         });
 
-        const employeeId = user?.tblEmployee?.employeeId;
+        const employeeId = user?.tblEmployee?.employeeId as number;
 
         const tblFunction = await prisma.tblFunction.findFirst({
           where: {
@@ -533,6 +535,7 @@ const ControllerTblMaintLog = new BaseController({
             overdueCount: tblWorkOrder?.dueDate
               ? diffDay(dateDone, tblWorkOrder?.dueDate)
               : null,
+
             workOrderStatusId: 5,
 
             history: restData.history,
@@ -612,17 +615,50 @@ const ControllerTblMaintLog = new BaseController({
                 connect: { maintCauseId: Number(maintCauseId) },
               },
             }),
-
-            // ...(reportedCount !== undefined && {
-            //   tblLogCounter: {
-            //     create: {
-            //       reportedCount: Number(reportedCount),
-            //       compId: Number(compId),
-            //     },
-            //   },
-            // }),
           },
         });
+
+        if (reportedCount !== undefined && employeeId) {
+          const compJobCounters = await prisma.tblWorkOrder.findFirst({
+            include: {
+              tblCompJob: {
+                include: {
+                  tblCompJobCounters: true,
+                },
+              },
+            },
+            where: {
+              workOrderId,
+            },
+          });
+
+          const compJobCounter =
+            compJobCounters?.tblCompJob?.tblCompJobCounters[0];
+          const dueCount = compJobCounter?.nextDueCount || 0;
+          const frequency = compJobCounter?.frequency || 0;
+
+          await prisma.tblCompJobCounter.update({
+            where: {
+              compJobCounterId: compJobCounter?.compJobCounterId,
+            },
+            data: {
+              lastDoneCount: Number(reportedCount),
+              nextDueCount: Number(reportedCount) + frequency,
+              lastUpdate: now,
+            },
+          });
+          await prisma.tblLogCounter.create({
+            data: {
+              frequency,
+              counterTypeId: 10001,
+              reportedCount: Number(reportedCount),
+              overdueCount: reportedCount - dueCount,
+
+              maintLogId: newLog.maintLogId,
+              createdEmployeeId: employeeId,
+            },
+          });
+        }
 
         if (workOrderId) {
           await prisma.tblWorkOrder.update({

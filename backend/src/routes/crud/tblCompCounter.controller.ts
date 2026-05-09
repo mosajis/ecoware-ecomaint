@@ -104,6 +104,11 @@ const ControllerTblCompCounter = new BaseController({
           let counter = await tx.tblCompCounter.update({
             where: { compCounterId, instId },
             data: {
+              // tblEmployee:  {
+              //   connect: {
+              //     employeeId: data.tblEmployee?.connect?.employeeId ?? 0,
+              //   },
+              // },
               dependsOnId: data.tblCompCounter?.connect?.compCounterId,
               orderNo: data.orderNo,
               startDate: data.startDate,

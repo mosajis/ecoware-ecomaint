@@ -8,6 +8,8 @@ import Box from "@mui/material/Box";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import NumberField from "@/shared/components/fields/FieldNumber";
 import FieldDateTime from "@/shared/components/fields/FieldDateTime";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
 
 /* ================= Schema ================= */
 const schema = z.object({
@@ -28,6 +30,9 @@ type Props = {
 function CountersUpdate({ open, recordId, onClose, onSuccess }: Props) {
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
+  const user = useAtomValue(atomUser);
+  const employeeId = user?.tblEmployee?.employeeId as number;
 
   const defaultValues: CompCounterCurrentFormValues = useMemo(
     () => ({
@@ -87,6 +92,11 @@ function CountersUpdate({ open, recordId, onClose, onSuccess }: Props) {
         const result = await tblCompCounter.update(recordId, {
           currentValue: values.currentValue,
           currentDate: values.currentDate.toString(),
+          tblEmployee: {
+            connect: {
+              employeeId,
+            },
+          },
         });
 
         onSuccess(result);

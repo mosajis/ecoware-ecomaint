@@ -114,7 +114,7 @@ function MaintLogUpsert({
       const payload = {
         compId: initialCompId || context?.componentUnit?.compId || 0,
         workOrderId,
-        dateDone: values.dateDone?.toString(),
+        dateDone: values.dateDone,
         downTime: values.waitingMin ?? 0,
         totalDuration: values.totalDuration ?? 0,
         unexpected: values.unexpected,
