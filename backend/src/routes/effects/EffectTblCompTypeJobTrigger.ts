@@ -12,14 +12,16 @@ type OperationType = typeof OperationEnum.static;
 export async function effectCompTypeJobTrigger({
   compTypeJobTriggerId,
   operation,
+  instId,
 }: {
   compTypeJobTriggerId: number;
   operation: OperationType;
+  instId: number;
 }) {
   return prisma.$transaction(async (tx) => {
     // ================= Fetch CompTypeJobTrigger =================
     const ctjt = await tx.tblCompTypeJobTrigger.findUnique({
-      where: { compTypeJobTriggerId },
+      where: { compTypeJobTriggerId, instId },
     });
 
     if (!ctjt?.compTypeJobId || !ctjt.jobTriggerId) {
@@ -30,7 +32,7 @@ export async function effectCompTypeJobTrigger({
 
     // ================= Fetch CompTypeJob =================
     const compTypeJob = await tx.tblCompTypeJob.findUnique({
-      where: { compTypeJobId },
+      where: { compTypeJobId, instId },
     });
 
     if (!compTypeJob?.compTypeId || !compTypeJob.jobDescId) {
@@ -42,7 +44,7 @@ export async function effectCompTypeJobTrigger({
     // ================= Fetch Component Units =================
     const compIds = await tx.tblComponentUnit
       .findMany({
-        where: { compTypeId },
+        where: { compTypeId, instId },
         select: { compId: true },
       })
       .then((rows) => rows.map((r) => r.compId));
@@ -56,6 +58,7 @@ export async function effectCompTypeJobTrigger({
       where: {
         compId: { in: compIds },
         jobDescId,
+        instId,
       },
       select: {
         compJobId: true,
@@ -74,6 +77,7 @@ export async function effectCompTypeJobTrigger({
       case 0: {
         const existing = await tx.tblCompJobTrigger.findMany({
           where: {
+            instId,
             compJobId: { in: compJobIds },
             jobTriggerId,
           },
@@ -85,6 +89,7 @@ export async function effectCompTypeJobTrigger({
         const data = compJobIds
           .filter((compJobId) => !existingSet.has(compJobId))
           .map((compJobId) => ({
+            instId,
             compJobId,
             jobTriggerId,
           }));
@@ -114,6 +119,7 @@ export async function effectCompTypeJobTrigger({
       case 2: {
         const result = await tx.tblCompJobTrigger.deleteMany({
           where: {
+            instId,
             compJobId: { in: compJobIds },
             jobTriggerId,
           },

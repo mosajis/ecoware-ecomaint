@@ -13,6 +13,7 @@ import {
   TblMaintLogInputUpdate,
   TblMaintLogPlain,
 } from "orm/generated/prismabox/TblMaintLog";
+import { authPlugin } from "../auth/auth.guard";
 
 const MaintLogItemSchema = t.Object({
   maintLogId: t.Number(),
@@ -396,73 +397,176 @@ const ControllerTblMaintLog = new BaseController({
         }),
       },
     );
-
-    app.post(
+    app.use(authPlugin).post(
       "/",
-      async ({ body }) => {
+      async ({ body, userId, headers }) => {
+        const instId = Number(headers["x-inst-id"] || 0);
+
+        if (!instId) {
+          throw new Error("Instance ID is required");
+        }
+
+        const now = new Date().toISOString();
+
         const {
           reportedCount, // برای جدول tblLogCounter
           discId,
           periodId,
-          jobDescId,
           maintClassId,
           maintTypeId,
           maintCauseId,
           fsId,
-          workOrderId,
           compId,
+          workOrderId,
           ...restData
         } = body;
 
+        const user = await prisma.tblUser.findFirst({
+          where: {
+            userId,
+          },
+          include: {
+            tblEmployee: true,
+          },
+        });
+
+        const employeeId = user?.tblEmployee?.employeeId;
+
+        const tblFunction = await prisma.tblFunction.findFirst({
+          where: {
+            compId,
+          },
+        });
+
+        const functionId = tblFunction?.functionId;
+
+        const tblWorkOrder = await prisma.tblWorkOrder.findFirst({
+          where: {
+            workOrderId,
+          },
+          select: {
+            dueDate: true,
+            respDiscId: true,
+            tblCompJob: {
+              select: {
+                compJobId: true,
+                jobDescId: true,
+                frequency: true,
+                frequencyPeriod: true,
+              },
+            },
+          },
+        });
+
+        const jobDescId = tblWorkOrder?.tblCompJob?.jobDescId;
+        const frequency = tblWorkOrder?.tblCompJob?.frequency;
+        const frequencyPeriod = tblWorkOrder?.tblCompJob?.frequencyPeriod;
+        const respDiscId = tblWorkOrder?.respDiscId;
+
         // ایجاد رکورد اصلی در tblMaintLog
-        // const newLog = await prisma.tblMaintLog.create({
-        //   data: {
-        //     ...restData,
-        //     // مدیریت روابط به صورت ایمن
-        //     ...(compId && {
-        //       tblComponentUnit: { connect: { compId: Number(compId) } },
-        //     }),
-        //     ...(workOrderId && {
-        //       tblWorkOrder: { connect: { workOrderId: Number(workOrderId) } },
-        //     }),
-        //     ...(jobDescId && {
-        //       tblJobDescription: { connect: { jobDescId: Number(jobDescId) } },
-        //     }),
-        //     ...(discId && {
-        //       tblDiscipline: { connect: { discId: Number(discId) } },
-        //     }),
-        //     ...(periodId && {
-        //       tblPeriod: { connect: { periodId: Number(periodId) } },
-        //     }),
-        //     ...(maintClassId && {
-        //       tblMaintClass: {
-        //         connect: { maintClassId: Number(maintClassId) },
-        //       },
-        //     }),
-        //     ...(maintTypeId && {
-        //       tblMaintType: { connect: { maintTypeId: Number(maintTypeId) } },
-        //     }),
-        //     ...(maintCauseId && {
-        //       tblMaintCause: {
-        //         connect: { maintCauseId: Number(maintCauseId) },
-        //       },
-        //     }),
-        //     ...(fsId && {
-        //       tblFollowStatus: { connect: { fsId: Number(fsId) } },
-        //     }),
+        const newLog = await prisma.tblMaintLog.create({
+          data: {
+            // overdueCount: restData.dateDone - tblWorkOrder?.dueDate // اختلاف این دو زمان به روز
+            workOrderStatusId: 5,
 
-        //     // ...(reportedCount !== undefined && {
-        //     //   tblLogCounter: {
-        //     //     create: {
-        //     //       reportedCount: Number(reportedCount),
-        //     //       compId: Number(compId),
-        //     //     },
-        //     //   },
-        //     // }),
-        //   },
-        // });
+            history: restData.history,
 
-        // return newLog;
+            reportedDate: now,
+            unexpected: restData.unexpected,
+            frequency,
+            totalDuration: restData.totalDuration,
+            downTime: restData.downTime || 0,
+            dateDone: now,
+            // مدیریت روابط به صورت ایمن
+            ...(functionId && {
+              tblFunction: {
+                connect: {
+                  functionId,
+                },
+              },
+            }),
+            ...(respDiscId && {
+              tblDiscipline: {
+                connect: {
+                  discId: respDiscId,
+                },
+              },
+            }),
+            ...(employeeId && {
+              updatedEmployeeId: employeeId,
+              tblEmployee: {
+                connect: {
+                  employeeId,
+                },
+              },
+            }),
+            ...(frequencyPeriod && {
+              tblPeriod: {
+                connect: {
+                  periodId: frequencyPeriod,
+                },
+              },
+            }),
+            ...(instId && {
+              tblInstallation: {
+                connect: {
+                  instId,
+                },
+              },
+            }),
+            ...(compId && {
+              tblComponentUnit: { connect: { compId: Number(compId) } },
+            }),
+            ...(workOrderId && {
+              tblWorkOrder: { connect: { workOrderId: Number(workOrderId) } },
+            }),
+            ...(jobDescId && {
+              tblJobDescription: { connect: { jobDescId: Number(jobDescId) } },
+            }),
+            ...(discId && {
+              tblDiscipline: { connect: { discId: Number(discId) } },
+            }),
+            ...(periodId && {
+              tblPeriod: { connect: { periodId: Number(periodId) } },
+            }),
+            ...(maintClassId && {
+              tblMaintClass: {
+                connect: { maintClassId: Number(maintClassId) },
+              },
+            }),
+            ...(maintTypeId && {
+              tblMaintType: { connect: { maintTypeId: Number(maintTypeId) } },
+            }),
+            ...(maintCauseId && {
+              tblMaintCause: {
+                connect: { maintCauseId: Number(maintCauseId) },
+              },
+            }),
+            ...(fsId && {
+              tblFollowStatus: { connect: { fsId: Number(fsId) } },
+            }),
+
+            ...(reportedCount !== undefined && {
+              tblLogCounter: {
+                create: {
+                  reportedCount: Number(reportedCount),
+                  compId: Number(compId),
+                },
+              },
+            }),
+          },
+        });
+
+        // به روزرسانی ورک اوردر
+        await prisma.tblWorkOrder.update({
+          where: { workOrderId },
+          data: {
+            workOrderStatusId: 5,
+            completed: now,
+            lastUpdate: now,
+          },
+        });
+        return newLog;
       },
       {
         tags: ["tblMaintLog"],
@@ -470,7 +574,7 @@ const ControllerTblMaintLog = new BaseController({
           dateDone: t.String(),
           downTime: t.Optional(t.Number()),
           totalDuration: t.Optional(t.Number()),
-          unexpected: t.Optional(t.Boolean()),
+          unexpected: t.Optional(t.Number()),
           history: t.Optional(t.String()),
           compId: t.Optional(t.Number()),
           workOrderId: t.Optional(t.Number()),

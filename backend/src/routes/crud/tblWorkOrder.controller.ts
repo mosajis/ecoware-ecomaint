@@ -13,7 +13,8 @@ import {
   TblWorkOrderInputUpdate,
   TblWorkOrderPlain,
 } from "orm/generated/prismabox/TblWorkOrder";
-import { periodToDays } from "@/helper";
+import { generateDocumentNumber, periodToDays } from "@/helper";
+import type { TblWorkOrder } from "orm/generated/prisma/browser";
 
 export const ServiceTblWorkOrder = new BaseService(prisma.tblWorkOrder);
 export const WorkOrderItemSchema = t.Object({
@@ -225,26 +226,50 @@ const ControllerTblWorkOrder = new BaseController({
           throw new Error("Instance ID is required");
         }
 
-        if (!userId) {
-          set.status = 400;
-          return {
-            message: "User not found",
-            createdWorkOrders: 0,
-            updatedCompJobs: 0,
-          };
-        }
+        const user = await prisma.tblUser.findFirst({
+          where: { userId },
+          include: {
+            tblEmployee: true,
+          },
+        });
+
+        const employeeId = user?.tblEmployee?.employeeId;
 
         const now = new Date();
 
         return await prisma.$transaction(async (tx) => {
+          // const _workorders = await tx.tblWorkOrder.findMany({
+          //   select: {
+          //     compJobId: true,
+          //   },
+          //   where: {
+          //     workOrderStatusId: {
+          //       in: [2, 3, 4, 7, 8], // Plan, Issue, Pend, Cancel, Postponed
+          //     },
+          //   },
+          // });
+
+          // const compJobIds = _workorders.map((i) => i.compJobId);
+
           const compJobs = await tx.tblCompJob.findMany({
-            where: { nextDueDate: null, instId },
+            where: {
+              nextDueDate: null,
+              instId,
+              // tblWorkOrders: {
+              //   none: {
+              //     compJobId: compJobIds,
+              //   },
+              // },
+            },
             select: {
               compJobId: true,
               discId: true,
               compId: true,
               priority: true,
               window: true,
+              maintCauseId: true,
+              maintClassId: true,
+              maintTypeId: true,
               tblJobDescription: {
                 select: { jobDescTitle: true },
               },
@@ -259,8 +284,14 @@ const ControllerTblWorkOrder = new BaseController({
             };
           }
 
-          const workOrders = compJobs.map((i) => ({
-            createdBy: userId,
+          let workOrders = compJobs.map((i, index) => ({
+            woNo: String(index),
+            plannedBy: employeeId,
+            compJobId: i.compJobId,
+            createdBy: employeeId,
+            maintCauseId: i.maintCauseId,
+            maintClassId: i.maintClassId,
+            maintTypeId: i.maintTypeId,
             respDiscId: i.discId,
             compId: i.compId,
             title: i.tblJobDescription?.jobDescTitle ?? null,
@@ -273,6 +304,17 @@ const ControllerTblWorkOrder = new BaseController({
             workOrderTypeId: 2,
             instId,
           }));
+
+          // const workOrdersWithWoNo = await Promise.all(
+          //   workOrders.map(async (i) => {
+          //     const woNo = await generateDocumentNumber({
+          //       tx,
+          //       model: "tblFailureReport",
+          //       prefix: "FR",
+          //     });
+          //     return { ...i, woNo };
+          //   }),
+          // );
 
           const resultWorkOrder = await tx.tblWorkOrder.createMany({
             data: workOrders,

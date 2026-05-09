@@ -12,14 +12,16 @@ type OperationType = typeof OperationEnum.static;
 export async function effectCompTypeJobCounter({
   compTypeJobCounterId,
   operation,
+  instId,
 }: {
   compTypeJobCounterId: number;
   operation: OperationType;
+  instId: number;
 }) {
   return prisma.$transaction(async (tx) => {
     // ================= Fetch CompTypeJobCounter =================
     const ctjc = await tx.tblCompTypeJobCounter.findUnique({
-      where: { compTypeJobCounterId },
+      where: { compTypeJobCounterId, instId },
       include: {
         tblCompTypeJob: true,
         tblCompTypeCounter: true,
@@ -38,7 +40,7 @@ export async function effectCompTypeJobCounter({
       showInAlert,
       updateByFunction,
       orderNo,
-      createdUserId,
+      createdEmployeeId,
     } = ctjc;
 
     const { compTypeId, jobDescId } = ctjc.tblCompTypeJob;
@@ -51,7 +53,7 @@ export async function effectCompTypeJobCounter({
     // ================= Fetch Component Units =================
     const compIds = await tx.tblComponentUnit
       .findMany({
-        where: { compTypeId },
+        where: { compTypeId, instId },
         select: { compId: true },
       })
       .then((rows) => rows.map((r) => r.compId));
@@ -63,6 +65,7 @@ export async function effectCompTypeJobCounter({
     // ================= Get CompJobIds =================
     const compJobs = await tx.tblCompJob.findMany({
       where: {
+        instId,
         jobDescId,
         compId: { in: compIds },
       },
@@ -76,6 +79,7 @@ export async function effectCompTypeJobCounter({
     // ================= Get CompCounterIds =================
     const compCounters = await tx.tblCompCounter.findMany({
       where: {
+        instId,
         compId: { in: compIds },
         counterTypeId,
       },
@@ -88,12 +92,13 @@ export async function effectCompTypeJobCounter({
 
     // ================= Shared payload =================
     const baseData = {
+      instId,
       frequency,
       window,
       showInAlert,
       updateByFunction,
       orderNo,
-      createdUserId,
+      createdEmployeeId,
     };
 
     // ================= Operation Switch =================
@@ -102,6 +107,7 @@ export async function effectCompTypeJobCounter({
       case 0: {
         const existing = await tx.tblCompJobCounter.findMany({
           where: {
+            instId,
             compJobId: { in: compJobs.map((cj) => cj.compJobId) },
           },
           select: { compJobId: true, compCounterId: true },
@@ -145,6 +151,7 @@ export async function effectCompTypeJobCounter({
 
         const result = await tx.tblCompJobCounter.updateMany({
           where: {
+            instId,
             compJobId: { in: compJobs.map((cj) => cj.compJobId) },
             compCounterId: { in: compCounterIds },
           },
@@ -166,6 +173,7 @@ export async function effectCompTypeJobCounter({
 
         const result = await tx.tblCompJobCounter.deleteMany({
           where: {
+            instId,
             compJobId: { in: compJobs.map((cj) => cj.compJobId) },
             compCounterId: { in: compCounterIds },
           },

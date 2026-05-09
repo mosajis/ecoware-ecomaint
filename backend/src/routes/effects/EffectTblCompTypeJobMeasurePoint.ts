@@ -12,14 +12,17 @@ type OperationType = typeof OperationEnum.static;
 export async function effectCompTypeJobMeasurePoint({
   compTypeJobMeasurePointId,
   operation,
+  instId,
 }: {
   compTypeJobMeasurePointId: number;
   operation: OperationType;
+  instId: number;
 }) {
+  const _instId = instId;
   return prisma.$transaction(async (tx) => {
     // ================= Fetch CompTypeJobMeasurePoint =================
     const ctjmp = await tx.tblCompTypeJobMeasurePoint.findUnique({
-      where: { compTypeJobMeasurePointId },
+      where: { compTypeJobMeasurePointId, instId: _instId },
       include: {
         tblCompTypeJob: true,
         tblCompTypeMeasurePoint: true,
@@ -31,6 +34,7 @@ export async function effectCompTypeJobMeasurePoint({
     }
 
     const {
+      instId,
       compTypeJobId,
       compTypeMeasurePointId,
       triggerJob,
@@ -51,7 +55,7 @@ export async function effectCompTypeJobMeasurePoint({
     // ================= Fetch Component Units =================
     const compIds = await tx.tblComponentUnit
       .findMany({
-        where: { compTypeId },
+        where: { compTypeId, instId },
         select: { compId: true },
       })
       .then((rows) => rows.map((r) => r.compId));
@@ -64,6 +68,7 @@ export async function effectCompTypeJobMeasurePoint({
     const compJobs = await tx.tblCompJob.findMany({
       where: {
         jobDescId,
+        instId,
         compId: { in: compIds },
       },
       select: { compJobId: true, compId: true },
@@ -76,8 +81,9 @@ export async function effectCompTypeJobMeasurePoint({
     // ================= Get CompMeasurePointIds =================
     const compMeasurePoints = await tx.tblCompMeasurePoint.findMany({
       where: {
-        compId: { in: compIds },
+        instId,
         counterTypeId,
+        compId: { in: compIds },
       },
       select: { compMeasurePointId: true, compId: true },
     });
@@ -88,6 +94,7 @@ export async function effectCompTypeJobMeasurePoint({
 
     // ================= Shared payload =================
     const baseData = {
+      instId,
       triggerJob,
       useOperationalValues,
       minValue,
@@ -102,6 +109,7 @@ export async function effectCompTypeJobMeasurePoint({
       case 0: {
         const existing = await tx.tblCompJobMeasurePoint.findMany({
           where: {
+            instId,
             compJobId: { in: compJobs.map((cj) => cj.compJobId) },
           },
           select: { compJobId: true, compMeasurePointId: true },
@@ -145,6 +153,7 @@ export async function effectCompTypeJobMeasurePoint({
 
         const result = await tx.tblCompJobMeasurePoint.updateMany({
           where: {
+            instId,
             compJobId: { in: compJobs.map((cj) => cj.compJobId) },
             compMeasurePointId: { in: compMeasurePointIds },
           },
@@ -166,6 +175,7 @@ export async function effectCompTypeJobMeasurePoint({
 
         const result = await tx.tblCompJobMeasurePoint.deleteMany({
           where: {
+            instId,
             compJobId: { in: compJobs.map((cj) => cj.compJobId) },
             compMeasurePointId: { in: compMeasurePointIds },
           },

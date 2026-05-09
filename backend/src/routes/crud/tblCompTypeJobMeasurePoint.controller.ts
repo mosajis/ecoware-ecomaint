@@ -36,7 +36,7 @@ const ControllerTblCompTypeJobMeasurePoint = new BaseController({
   extend: (app) => {
     app.post(
       "/:compTypeJobMeasurePointId/effect",
-      async ({ params, body, set }) => {
+      async ({ params, body, set, headers }) => {
         try {
           const compTypeJobMeasurePointId = Number(
             params.compTypeJobMeasurePointId,
@@ -50,9 +50,16 @@ const ControllerTblCompTypeJobMeasurePoint = new BaseController({
             };
           }
 
+          const instId = Number(headers["x-inst-id"] || 0);
+
+          if (!instId) {
+            throw new Error("Instance ID is required");
+          }
+
           const result = await effectCompTypeJobMeasurePoint({
             compTypeJobMeasurePointId,
             operation: body.operation,
+            instId,
           });
 
           return result;

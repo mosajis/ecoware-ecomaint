@@ -36,7 +36,7 @@ const ControllerTblCompTypeJobCounter = new BaseController({
   extend: (app) => {
     app.post(
       "/:compTypeJobCounterId/effect",
-      async ({ params, body, set }) => {
+      async ({ params, body, set, headers }) => {
         try {
           const compTypeJobCounterId = Number(params.compTypeJobCounterId);
 
@@ -48,9 +48,16 @@ const ControllerTblCompTypeJobCounter = new BaseController({
             };
           }
 
+          const instId = Number(headers["x-inst-id"] || 0);
+
+          if (!instId) {
+            throw new Error("Instance ID is required");
+          }
+
           const result = await effectCompTypeJobCounter({
             compTypeJobCounterId,
             operation: body.operation,
+            instId,
           });
 
           return result;

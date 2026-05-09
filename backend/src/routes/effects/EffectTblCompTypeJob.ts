@@ -12,14 +12,16 @@ type OperationType = typeof OperationEnum.static;
 export async function effectCompTypeJob({
   compTypeJobId,
   operation,
+  instId,
 }: {
   compTypeJobId: number;
   operation: OperationType;
+  instId: number;
 }) {
   return prisma.$transaction(async (tx) => {
     // ================= Fetch CompTypeJob =================
     const ctj = await tx.tblCompTypeJob.findUnique({
-      where: { compTypeJobId },
+      where: { compTypeJobId, instId },
     });
 
     if (!ctj) {
@@ -35,9 +37,6 @@ export async function effectCompTypeJob({
       jobConditionId,
       planningMethod,
       window,
-      outputFormat,
-      active,
-      mandatoryResource,
       priority,
       maintClassId,
       maintCauseId,
@@ -57,7 +56,7 @@ export async function effectCompTypeJob({
     // ================= Fetch Component Units =================
     const compIds = await tx.tblComponentUnit
       .findMany({
-        where: { compTypeId },
+        where: { compTypeId, instId },
         select: { compId: true },
       })
       .then((rows) => rows.map((r) => r.compId));
@@ -68,15 +67,13 @@ export async function effectCompTypeJob({
 
     // ================= Shared payload =================
     const baseData = {
+      instId,
       discId,
       frequency,
       frequencyPeriod,
       jobConditionId,
       planningMethod,
       window,
-      outputFormat,
-      active,
-      mandatoryResource,
       priority,
       maintClassId,
       maintCauseId,
@@ -93,6 +90,7 @@ export async function effectCompTypeJob({
       case 0: {
         const existing = await tx.tblCompJob.findMany({
           where: {
+            instId,
             jobDescId,
             compId: { in: compIds },
           },
@@ -125,6 +123,7 @@ export async function effectCompTypeJob({
       case 1: {
         const result = await tx.tblCompJob.updateMany({
           where: {
+            instId,
             jobDescId,
             compId: { in: compIds },
           },
@@ -144,6 +143,7 @@ export async function effectCompTypeJob({
         const result = await tx.tblCompJob.deleteMany({
           where: {
             jobDescId,
+            instId,
             compId: { in: compIds },
           },
         });

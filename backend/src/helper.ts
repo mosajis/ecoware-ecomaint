@@ -32,8 +32,8 @@ export const generateDocumentNumber = async ({
   tx,
   model,
   prefix,
-  useYear = true,
-  padSize = 6,
+  useYear = false,
+  padSize = 3,
   useRandomSuffix = true,
 }: GenerateNumberOptions) => {
   const now = new Date();
