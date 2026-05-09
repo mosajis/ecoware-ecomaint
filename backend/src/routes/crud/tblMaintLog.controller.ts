@@ -93,7 +93,7 @@ const ControllerTblMaintLog = new BaseController({
   scope: true,
 
   extend: (app) => {
-    app.get(
+    app.use(authPlugin).get(
       "/",
       async ({ query, headers }) => {
         const {
@@ -165,7 +165,7 @@ const ControllerTblMaintLog = new BaseController({
       },
     );
 
-    app.get(
+    app.use(authPlugin).get(
       "/context",
       async ({ query }) => {
         const { compId, workOrderId, maintLogId } = query;
@@ -198,6 +198,7 @@ const ControllerTblMaintLog = new BaseController({
               tblMaintType: true,
               tblMaintCause: true,
               tblMaintClass: true,
+              tblComponentUnit: true,
               tblWorkOrder: {
                 include: {
                   tblCompJob: {
@@ -397,6 +398,7 @@ const ControllerTblMaintLog = new BaseController({
         }),
       },
     );
+
     app.use(authPlugin).post(
       "/",
       async ({ body, userId, headers }) => {
@@ -409,7 +411,7 @@ const ControllerTblMaintLog = new BaseController({
         const now = new Date().toISOString();
 
         const {
-          reportedCount, // برای جدول tblLogCounter
+          reportedCount,
           discId,
           periodId,
           maintClassId,
@@ -543,7 +545,7 @@ const ControllerTblMaintLog = new BaseController({
               },
             }),
             ...(fsId && {
-              tblFollowStatus: { connect: { fsId: Number(fsId) } },
+              tblFollowStatus: { connect: { followStatusId: Number(fsId) } },
             }),
 
             ...(reportedCount !== undefined && {
@@ -587,6 +589,7 @@ const ControllerTblMaintLog = new BaseController({
           fsId: t.Optional(t.Number()),
           reportedCount: t.Optional(t.Number()),
         }),
+        response: buildResponseSchema(TblMaintLogPlain, TblMaintLog),
         detail: { summary: "Create" },
       },
     );

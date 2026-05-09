@@ -7,14 +7,13 @@ import {
 import { BaseService } from "@/utils/base.service";
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
+import { periodToDays } from "@/helper";
 import {
   TblWorkOrder,
   TblWorkOrderInputCreate,
   TblWorkOrderInputUpdate,
   TblWorkOrderPlain,
 } from "orm/generated/prismabox/TblWorkOrder";
-import { generateDocumentNumber, periodToDays } from "@/helper";
-import type { TblWorkOrder } from "orm/generated/prisma/browser";
 
 export const ServiceTblWorkOrder = new BaseService(prisma.tblWorkOrder);
 export const WorkOrderItemSchema = t.Object({
@@ -115,6 +114,7 @@ const ControllerTblWorkOrder = new BaseController({
         if (!instId) {
           throw new Error("Instance ID is required");
         }
+
         const {
           page = 1,
           perPage = 20,
@@ -128,7 +128,7 @@ const ControllerTblWorkOrder = new BaseController({
         const sortObj = parseSortString(sort);
         const usePagination = !!paginate;
 
-        // ✅ Default select object
+        // âœ… Default select object
         const defaultSelect = {
           workOrderId: true,
           compId: true,
@@ -184,12 +184,11 @@ const ControllerTblWorkOrder = new BaseController({
           },
         };
 
-        // ✅ Custom select با validation
+        // âœ… Custom select Ø¨Ø§ validation
         let selectObj = defaultSelect;
         if (select) {
           try {
             const customSelect = JSON.parse(select);
-            // ✅ همیشه instId رو شامل کن (برای filtering)
             selectObj = {
               ...customSelect,
             };
@@ -211,7 +210,7 @@ const ControllerTblWorkOrder = new BaseController({
         tags: ["tblWorkOrder"],
         detail: { summary: "Get all with custom select" },
         query: querySchema,
-        response: t.Any(), // ✅ Response flexible است برای custom selects
+        response: t.Any(),
       },
     );
 

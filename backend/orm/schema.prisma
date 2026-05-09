@@ -52,7 +52,7 @@ model TblAddress {
   eMail             String?            @map("EMail") @db.NVarChar(100)
   notes             String?            @map("Notes") @db.NVarChar(4000)
   orderNo           Int?               @map("OrderNo")
-  lastUpdate        DateTime?          @db.DateTime
+  lastUpdate        DateTime?          @default(now(), map: "DF_tblAddress_lastUpdate") @db.DateTime
   tblComponentUnits TblComponentUnit[]
   tblCompTypes      TblCompType[]
 
@@ -109,7 +109,7 @@ model TblCompCounter {
   averageCountRate     Int?                @map("AverageCountRate")
   useCalcAverage       Int?                @map("UseCalcAverage")
   orderNo              Int?                @map("OrderNo")
-  lastUpdate           DateTime?           @db.DateTime
+  lastUpdate           DateTime?           @default(now(), map: "DF_tblCompCounter_lastUpdate") @db.DateTime
   instId               Int?                @map("InstId")
   tblCompCounter       TblCompCounter?     @relation("tblCompCounterTotblCompCounter", fields: [dependsOnId], references: [compCounterId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompCounter_tblCompCounter")
   otherTblCompCounters TblCompCounter[]    @relation("tblCompCounterTotblCompCounter")
@@ -136,7 +136,7 @@ model TblCompCounterLog {
   changedBy        Int?             @map("ChangedBy")
   changedDate      DateTime?        @map("ChangedDate") @db.DateTime
   orderNo          Int?             @map("OrderNo")
-  lastUpdate       DateTime?        @db.DateTime
+  lastUpdate       DateTime?        @default(now(), map: "DF_tblCompCounterLog_lastUpdate") @db.DateTime
   instId           Int?             @map("InstId")
   tblCompCounter   TblCompCounter?  @relation(fields: [compCounterId], references: [compCounterId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompCounterLog_tblCompCounter")
   tblEmployee      TblEmployee?     @relation(fields: [changedBy], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompCounterLog_tblEmployee")
@@ -174,7 +174,7 @@ model TblCompJob {
   createdEmployeeId       Int?                     @map("CreatedEmployeeId")
   notes                   String?                  @map("Notes") @db.NVarChar(4000)
   orderNo                 Int?                     @map("OrderNo")
-  lastUpdate              DateTime?                @db.DateTime
+  lastUpdate              DateTime?                @default(now(), map: "DF_tblCompJob_lastUpdate") @db.DateTime
   instId                  Int?                     @map("InstId")
   tblComponentUnit        TblComponentUnit?        @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJob_tblComponentUnit")
   tblDiscipline           TblDiscipline?           @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJob_tblDiscipline")
@@ -206,7 +206,7 @@ model TblCompJobCounter {
   orderNumber       Int?             @map("OrderNumber")
   orderNo           Int?             @map("OrderNo")
   createdEmployeeId Int?             @map("CreatedEmployeeId")
-  lastUpdate        DateTime?        @db.DateTime
+  lastUpdate        DateTime?        @default(now(), map: "DF_tblCompJobCounter_lastUpdate") @db.DateTime
   instId            Int?             @map("InstId")
   tblCompCounter    TblCompCounter?  @relation(fields: [compCounterId], references: [compCounterId], onDelete: Cascade, onUpdate: NoAction, map: "FK_tblCompJobCounter_tblCompCounter")
   tblCompJob        TblCompJob?      @relation(fields: [compJobId], references: [compJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJobCounter_tblCompJob")
@@ -226,7 +226,7 @@ model TblCompJobMeasurePoint {
   maxValue              Int?                 @map("MaxValue")
   updateOnReport        Int?                 @map("UpdateOnReport")
   orderNo               Int?                 @map("OrderNo")
-  lastUpdate            DateTime?            @db.DateTime
+  lastUpdate            DateTime?            @default(now(), map: "DF_tblCompJobMeasurePoint_lastUpdate") @db.DateTime
   instId                Int?                 @map("InstId")
   tblCompJob            TblCompJob?          @relation(fields: [compJobId], references: [compJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJobMeasurePoint_tblCompJob")
   tblCompMeasurePoint   TblCompMeasurePoint? @relation(fields: [compMeasurePointId], references: [compMeasurePointId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJobMeasurePoint_tblCompMeasurePoint")
@@ -240,7 +240,7 @@ model TblCompJobTrigger {
   jobTriggerId     Int?             @map("JobTriggerID")
   compJobId        Int?             @map("CompJobID")
   orderNo          Int?             @map("OrderNo")
-  lastUpdate       DateTime?        @db.DateTime
+  lastUpdate       DateTime?        @default(now(), map: "DF_tblCompJobTrigger_lastUpdate") @db.DateTime
   instId           Int?             @map("InstId")
   tblCompJob       TblCompJob?      @relation(fields: [compJobId], references: [compJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJobTrigger_tblCompJob")
   tblInstallation  TblInstallation? @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompJobTrigger_tblInstallation")
@@ -261,7 +261,7 @@ model TblCompMeasurePoint {
   operationalMinValue     Int?                     @map("OperationalMinValue")
   operationalMaxValue     Int?                     @map("OperationalMaxValue")
   orderNo                 Int?                     @map("OrderNo")
-  lastUpdate              DateTime?                @db.DateTime
+  lastUpdate              DateTime?                @default(now(), map: "DF_tblCompMeasurePoint_lastUpdate") @db.DateTime
   instId                  Int?                     @map("InstId")
   tblCompJobMeasurePoints TblCompJobMeasurePoint[]
   tblComponentUnit        TblComponentUnit?        @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompMeasurePoint_tblComponentUnit")
@@ -283,7 +283,7 @@ model TblCompMeasurePointLog {
   unitId                Int?                 @map("UnitID")
   currentValue          Int?                 @map("CurrentValue")
   orderNo               Int?                 @map("OrderNo")
-  lastUpdate            DateTime?            @db.DateTime
+  lastUpdate            DateTime?            @default(now(), map: "DF_tblCompMeasurePointLog_lastUpdate") @db.DateTime
   instId                Int?                 @map("InstId")
   tblCompMeasurePoint   TblCompMeasurePoint? @relation(fields: [compMeasurePointId], references: [compMeasurePointId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompMeasurePointLog_tblCompMeasurePoint")
   tblEmployee           TblEmployee?         @relation(fields: [changedBy], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompMeasurePointLog_tblEmployee")
@@ -305,7 +305,7 @@ model TblCompOilInfo {
   oilGrade         String?          @map("OilGrade") @db.NVarChar(100)
   orderNo          Int?             @map("OrderNo")
   employeeId       Int?             @map("EmployeeId")
-  lastUpdate       DateTime?        @db.DateTime
+  lastUpdate       DateTime?        @default(now(), map: "DF_TblCompOilInfo_lastUpdate") @db.DateTime
   instId           Int?             @map("InstId")
   tblEmployee      TblEmployee?     @relation(fields: [employeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblCompOilInfo_tblEmployee")
   tblInstallation  TblInstallation? @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblCompOilInfo_tblInstallation")
@@ -328,7 +328,7 @@ model TblComponentUnit {
   notes                       String?                      @map("Notes") @db.NVarChar(4000)
   isCritical                  Int?                         @map("IsCritical") @db.TinyInt
   orderNo                     Int?                         @map("OrderNo")
-  lastUpdate                  DateTime?                    @db.DateTime
+  lastUpdate                  DateTime?                    @default(now(), map: "DF_tblComponentUnit_lastUpdate") @db.DateTime
   instId                      Int?                         @map("InstId")
   tblCompCounters             TblCompCounter[]
   tblCompJobs                 TblCompJob[]
@@ -375,7 +375,7 @@ model TblCompSpare {
   position        String?          @map("Position") @db.NVarChar(200)
   oldPartNo       String?          @map("OldPartNo") @db.NVarChar(100)
   orderNo         Int?             @map("OrderNo")
-  lastUpdate      DateTime?        @db.DateTime
+  lastUpdate      DateTime?        @default(now(), map: "DF_tblCompSpare_lastUpdate") @db.DateTime
   instId          Int?             @map("InstId")
   tblInstallation TblInstallation? @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompSpare_tblInstallation")
 
@@ -387,7 +387,7 @@ model TblCompStatus {
   compStatusName    String?            @map("CompStatusName") @db.NVarChar(500)
   compStatusGroup   Int?               @map("CompStatusGroup")
   orderNo           Int?               @map("OrderNo")
-  lastUpdate        DateTime?          @db.DateTime
+  lastUpdate        DateTime?          @default(now(), map: "DF_tblCompStatus_lastUpdate") @db.DateTime
   tblComponentUnits TblComponentUnit[]
 
   @@map("tblCompStatus")
@@ -404,7 +404,7 @@ model TblCompStatusLog {
   fromDeptId       Int?             @map("FromDeptID")
   changedTime      DateTime?        @map("ChangedTime") @db.DateTime
   orderNo          Int?             @map("OrderNo")
-  lastUpdate       DateTime?        @db.DateTime
+  lastUpdate       DateTime?        @default(now(), map: "DF_tblCompStatusLog_lastUpdate") @db.DateTime
   instId           Int?             @map("InstId")
   tblEmployee      TblEmployee?     @relation(fields: [changedBy], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompStatusLog_tblEmployee")
   tblInstallation  TblInstallation? @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompStatusLog_tblInstallation")
@@ -422,7 +422,7 @@ model TblCompType {
   makerId                  Int?                      @map("MakerID")
   notes                    String?                   @map("Notes") @db.NVarChar(4000)
   orderNo                  Int?                      @map("OrderNo")
-  lastUpdate               DateTime?                 @db.DateTime
+  lastUpdate               DateTime?                 @default(now(), map: "DF_tblCompType_lastUpdate") @db.DateTime
   instId                   Int?                      @map("InstId")
   tblComponentUnits        TblComponentUnit[]
   tblAddress               TblAddress?               @relation(fields: [makerId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompType_tblAddress")
@@ -460,7 +460,7 @@ model TblCompTypeCounter {
   averageCountRate       Int?                    @map("AverageCountRate")
   useCalcAverage         Int?                    @map("UseCalcAverage")
   orderNo                Int?                    @map("OrderNo")
-  lastUpdate             DateTime?               @db.DateTime
+  lastUpdate             DateTime?               @default(now(), map: "DF_tblCompTypeCounter_lastUpdate") @db.DateTime
   instId                 Int?                    @map("InstId")
   tblCompType            TblCompType?            @relation(fields: [compTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeCounter_tblCompType")
   tblCounterType         TblCounterType?         @relation(fields: [counterTypeId], references: [counterTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeCounter_tblCounterType")
@@ -491,7 +491,7 @@ model TblCompTypeJob {
   mandatoryHistory            Int?                         @map("MandatoryHistory")
   orderNo                     Int?                         @map("OrderNo")
   createdEmployeeId           Int?                         @map("CreatedEmployeeId")
-  lastUpdate                  DateTime?                    @db.DateTime
+  lastUpdate                  DateTime?                    @default(now(), map: "DF_tblCompTypeJob_lastUpdate") @db.DateTime
   instId                      Int?                         @map("InstId")
   tblCompType                 TblCompType?                 @relation(fields: [compTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJob_tblCompType")
   tblDiscipline               TblDiscipline?               @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJob_tblDiscipline")
@@ -519,7 +519,7 @@ model TblCompTypeJobCounter {
   updateByFunction     Boolean?            @map("UpdateByFunction")
   orderNo              Int?                @map("OrderNo")
   createdEmployeeId    Int?                @map("CreatedEmployeeId")
-  lastUpdate           DateTime?           @db.DateTime
+  lastUpdate           DateTime?           @default(now(), map: "DF_tblCompTypeJobCounter_lastUpdate") @db.DateTime
   instId               Int?                @map("InstId")
   tblCompTypeCounter   TblCompTypeCounter? @relation(fields: [compTypeCounterId], references: [compTypeCounterId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJobCounter_tblCompTypeCounter")
   tblCompTypeJob       TblCompTypeJob?     @relation(fields: [compTypeJobId], references: [compTypeJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJobCounter_tblCompTypeJob")
@@ -539,7 +539,7 @@ model TblCompTypeJobMeasurePoint {
   maxValue                  Int?                     @map("MaxValue")
   updateOnReport            Int?                     @map("UpdateOnReport")
   orderNo                   Int?                     @map("OrderNo")
-  lastUpdate                DateTime?                @db.DateTime
+  lastUpdate                DateTime?                @default(now(), map: "DF_tblCompTypeJobMeasurePoint_lastUpdate") @db.DateTime
   instId                    Int?                     @map("InstId")
   tblCompTypeJob            TblCompTypeJob?          @relation(fields: [compTypeJobId], references: [compTypeJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJobMeasurePoint_tblCompTypeJob")
   tblCompTypeMeasurePoint   TblCompTypeMeasurePoint? @relation(fields: [compTypeMeasurePointId], references: [compTypeMeasurePointId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJobMeasurePoint_tblCompTypeMeasurePoint")
@@ -554,7 +554,7 @@ model TblCompTypeJobTrigger {
   compTypeJobId        Int?             @map("CompTypeJobID")
   orderNo              Int?             @map("OrderNo")
   createdEmployeeId    Int?             @map("CreatedEmployeeId")
-  lastUpdate           DateTime?        @db.DateTime
+  lastUpdate           DateTime?        @default(now(), map: "DF_tblCompTypeJobTrigger_lastUpdate") @db.DateTime
   instId               Int?             @map("InstId")
   tblCompTypeJob       TblCompTypeJob?  @relation(fields: [compTypeJobId], references: [compTypeJobId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJobTrigger_tblCompTypeJob")
   tblEmployee          TblEmployee?     @relation(fields: [createdEmployeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeJobTrigger_tblEmployee")
@@ -573,7 +573,7 @@ model TblCompTypeMeasurePoint {
   operationalMinValue         Int?                         @map("OperationalMinValue")
   operationalMaxValue         Int?                         @map("OperationalMaxValue")
   orderNo                     Int?                         @map("OrderNo")
-  lastUpdate                  DateTime?                    @db.DateTime
+  lastUpdate                  DateTime?                    @default(now(), map: "DF_tblCompTypeMeasurePoint_lastUpdate") @db.DateTime
   instId                      Int?                         @map("InstId")
   tblCompTypeJobMeasurePoints TblCompTypeJobMeasurePoint[]
   tblCompType                 TblCompType?                 @relation(fields: [compTypeId], references: [compTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblCompTypeMeasurePoint_tblCompType")
@@ -591,7 +591,7 @@ model TblCounterType {
   maxDailyValue            Int?                      @map("MaxDailyValue")
   type                     Int?                      @map("Type")
   orderNo                  Int?                      @map("OrderNo")
-  lastUpdate               DateTime?                 @db.DateTime
+  lastUpdate               DateTime?                 @default(now(), map: "DF_tblCounterType_lastUpdate") @db.DateTime
   tblCompCounters          TblCompCounter[]
   tblCompMeasurePoints     TblCompMeasurePoint[]
   tblCompTypeCounters      TblCompTypeCounter[]
@@ -613,7 +613,7 @@ model TblDepartment {
   statusReason String?   @map("StatusReason") @db.NVarChar(200)
   statusDate   DateTime? @map("StatusDate") @db.DateTime
   orderNo      Int?      @map("OrderNo")
-  lastUpdate   DateTime? @db.DateTime
+  lastUpdate   DateTime? @default(now(), map: "DF_tblDepartment_lastUpdate") @db.DateTime
 
   @@map("tblDepartment")
 }
@@ -625,7 +625,7 @@ model TblDiscipline {
   externalDisc      Int?               @map("ExternalDisc")
   parentDiscId      Int?               @map("ParentDiscID")
   orderNo           Int?               @map("OrderNo")
-  lastUpdate        DateTime?          @db.DateTime
+  lastUpdate        DateTime?          @default(now(), map: "DF_tblDiscipline_lastUpdate") @db.DateTime
   tblCompJobs       TblCompJob[]
   tblCompTypeJobs   TblCompTypeJob[]
   tblEmployees      TblEmployee[]
@@ -658,7 +658,7 @@ model TblEmployee {
   firstName                                                     String?                       @map("FirstName") @db.NVarChar(100)
   discId                                                        Int?                          @map("DiscID")
   title                                                         String?                       @map("Title") @db.NVarChar(100)
-  lastUpdate                                                    DateTime?                     @db.DateTime
+  lastUpdate                                                    DateTime?                     @default(now(), map: "DF_tblEmployee_lastUpdate") @db.DateTime
   tblAttachments                                                TblAttachment[]
   tblAttachmentTypes                                            TblAttachmentType[]
   tblCompCounters                                               TblCompCounter[]
@@ -775,7 +775,7 @@ model TblFollowStatus {
   sortId             Int?                @map("SortId")
   followStatuseId1   Int?                @map("FollowStatuseID1")
   orderNo            Int?                @map("OrderNo")
-  lastUpdate         DateTime?           @db.DateTime
+  lastUpdate         DateTime?           @default(now(), map: "DF_tblFollowStatus_lastUpdate") @db.DateTime
   tblMaintLogs       TblMaintLog[]
   tblMaintLogFollows TblMaintLogFollow[]
 
@@ -791,7 +791,7 @@ model TblFunction {
   notes                 String?                @map("Notes") @db.NVarChar(2000)
   statusId              Int?                   @map("StatusID")
   orderNo               Int?                   @map("OrderNo")
-  lastUpdate            DateTime?              @db.DateTime
+  lastUpdate            DateTime?              @default(now(), map: "DF_tblFunction_lastUpdate") @db.DateTime
   instId                Int?                   @map("InstId")
   tblInstallation       TblInstallation?       @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblFunction_tblInstallation")
   tblComponentUnit      TblComponentUnit?      @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblFunctions_tblComponentUnit")
@@ -866,7 +866,7 @@ model TblJobClass {
   code                     String?             @map("Code") @db.NVarChar(100)
   name                     String?             @map("Name") @db.NVarChar(100)
   orderNo                  Int?                @map("OrderNo")
-  lastUpdate               DateTime?           @db.DateTime
+  lastUpdate               DateTime?           @default(now(), map: "DF_tblJobClass_lastUpdate") @db.DateTime
   tblJobDescriptions       TblJobDescription[]
 
   @@map("tblJobClass")
@@ -882,7 +882,7 @@ model TblJobDescription {
   createdDate                  DateTime?                     @map("CreatedDate") @db.DateTime
   createdEmployeeId            Int?                          @map("CreatedEmployeeId")
   orderNo                      Int?                          @map("OrderNo")
-  lastUpdate                   DateTime?                     @db.DateTime
+  lastUpdate                   DateTime?                     @default(now(), map: "DF_tblJobDescription_lastUpdate") @db.DateTime
   instId                       Int?                          @map("InstId")
   tblCompJobs                  TblCompJob[]
   tblCompTypeJobs              TblCompTypeJob[]
@@ -914,7 +914,7 @@ model TblJobTrigger {
   jobTriggerId           Int                     @id(map: "PK_tblJobTrigger") @default(dbgenerated("NEXT VALUE FOR [Seq_JobTrigger]"), map: "DF_JobTriggerID") @map("JobTriggerID")
   descr                  String?                 @map("Descr") @db.NVarChar(500)
   orderNo                Int?                    @map("OrderNo")
-  lastUpdate             DateTime?               @db.DateTime
+  lastUpdate             DateTime?               @default(now(), map: "DF_tblJobTrigger_lastUpdate") @db.DateTime
   tblCompJobTriggers     TblCompJobTrigger[]
   tblCompTypeJobTriggers TblCompTypeJobTrigger[]
 
@@ -931,7 +931,7 @@ model TblJobVersion {
   jobDescId         Int?             @map("JobDescID")
   createdEmployeeId Int?             @map("CreatedEmployeeId")
   orderNo           Int?             @map("OrderNo")
-  lastUpdate        DateTime?        @db.DateTime
+  lastUpdate        DateTime?        @default(now(), map: "DF_tblJobVersion_lastUpdate") @db.DateTime
   instId            Int?             @map("InstId")
   tblEmployee       TblEmployee?     @relation(fields: [createdEmployeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblJobVersion_tblEmployee")
   tblInstallation   TblInstallation? @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblJobVersion_tblInstallation")
@@ -945,7 +945,7 @@ model TblLocation {
   name                  String?                @map("Name") @db.NVarChar(100)
   locationCode          String?                @map("LocationCode") @db.NVarChar(100)
   orderNo               Int?                   @map("OrderNo")
-  lastUpdate            DateTime?              @db.DateTime
+  lastUpdate            DateTime?              @default(now(), map: "DF_tblLocation_lastUpdate") @db.DateTime
   tblComponentUnits     TblComponentUnit[]
   tblFailureReports     TblFailureReport[]
   tblLocation           TblLocation?           @relation("tblLocationTotblLocation", fields: [parentLocationId], references: [locationId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLocation_tblLocation")
@@ -964,7 +964,7 @@ model TblLogCounter {
   overdueCount      Int?             @map("OverdueCount")
   orderNo           Int?             @map("OrderNo")
   createdEmployeeId Int?             @map("CreatedEmployeeId")
-  lastUpdate        DateTime?        @db.DateTime
+  lastUpdate        DateTime?        @default(now(), map: "DF_tblLogCounter_lastUpdate") @db.DateTime
   instId            Int?             @map("InstId")
   tblCounterType    TblCounterType?  @relation(fields: [counterTypeId], references: [counterTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLogCounter_tblCounterType")
   tblEmployee       TblEmployee?     @relation(fields: [createdEmployeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLogCounter_tblEmployee")
@@ -981,7 +981,7 @@ model TblLogDiscipline {
   discId          Int?             @map("DiscID")
   timeSpent       Int?             @map("TimeSpent")
   orderNo         Int?             @map("OrderNo")
-  lastUpdate      DateTime?        @db.DateTime
+  lastUpdate      DateTime?        @default(now(), map: "DF_tblLogDiscipline_lastUpdate") @db.DateTime
   instId          Int?             @map("InstId")
   tblDiscipline   TblDiscipline?   @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLogDiscipline_tblDiscipline")
   tblEmployee     TblEmployee?     @relation(fields: [employeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLogDiscipline_tblEmployee")
@@ -1001,7 +1001,7 @@ model TblLoginAudit {
   ipAddress    String?      @map("IpAddress") @db.VarChar(45)
   deviceInfo   String       @map("DeviceInfo") @db.Text
   errorMessage String?      @map("ErrorMessage") @db.Text
-  createdAt    DateTime     @map("created_at") @db.DateTime
+  createdAt    DateTime     @default(now(), map: "DF_tblLoginAudit_CreatedAt") @map("created_at") @db.DateTime
   tblEmployee  TblEmployee? @relation(fields: [employeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblLoginAudit_tblEmployee")
 
   @@map("tblLoginAudit")
@@ -1011,7 +1011,7 @@ model TblMaintCause {
   maintCauseId    Int              @id(map: "PK_tblMaintCause") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintCause]"), map: "DF_MaintCauseID") @map("MaintCauseID")
   descr           String?          @map("Descr") @db.NVarChar(100)
   orderNo         Int?             @map("OrderNo")
-  lastUpdate      DateTime?        @db.DateTime
+  lastUpdate      DateTime?        @default(now(), map: "DF_tblMaintCause_lastUpdate") @db.DateTime
   tblCompJobs     TblCompJob[]
   tblCompTypeJobs TblCompTypeJob[]
   tblMaintLogs    TblMaintLog[]
@@ -1024,7 +1024,7 @@ model TblMaintClass {
   maintClassId    Int              @id(map: "PK_tblMaintClass") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintClass]"), map: "DF_MaintClassID") @map("MaintClassID")
   descr           String?          @map("Descr") @db.NVarChar(100)
   orderNo         Int?             @map("OrderNo")
-  lastUpdate      DateTime?        @db.DateTime
+  lastUpdate      DateTime?        @default(now(), map: "DF_tblMaintClass_lastUpdate") @db.DateTime
   tblCompJobs     TblCompJob[]
   tblCompTypeJobs TblCompTypeJob[]
   tblMaintLogs    TblMaintLog[]
@@ -1055,7 +1055,7 @@ model TblMaintLog {
   followStatusId         Int?                    @map("FollowStatusId")
   discId                 Int?                    @map("DiscID")
   reportedDate           DateTime?               @map("ReportedDate") @db.DateTime
-  lastUpdate             DateTime?               @db.DateTime
+  lastUpdate             DateTime?               @default(now(), map: "DF_tblMaintLog_lastUpdate") @db.DateTime
   instId                 Int?                    @map("InstId")
   updatedEmployeeId      Int?                    @map("UpdatedEmployeeId")
   tblFailureReports      TblFailureReport[]
@@ -1106,7 +1106,7 @@ model TblMaintLogFollow {
   followDesc       String?          @map("FollowDesc") @db.NVarChar(2000)
   followStatuseId  Int?             @map("FollowStatuseID")
   orderNo          Int?             @map("OrderNo")
-  lastUpdate       DateTime?        @db.DateTime
+  lastUpdate       DateTime?        @default(now(), map: "DF_tblMaintLogFollow_lastUpdate") @db.DateTime
   instId           Int?             @map("InstId")
   tblEmployee      TblEmployee      @relation(fields: [followEmployeeId], references: [employeeId], onUpdate: NoAction, map: "FK_tblMaintLogFollow_tblEmployee")
   tblFollowStatus  TblFollowStatus? @relation(fields: [followStatuseId], references: [followStatusId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLogFollow_tblFollowStatus")
@@ -1123,7 +1123,7 @@ model TblMaintLogSpare {
   spareCount        Float?           @map("SpareCount")
   orderNo           Int?             @map("OrderNo")
   createdEmployeeId Int?             @map("CreatedEmployeeId")
-  lastUpdate        DateTime?        @db.DateTime
+  lastUpdate        DateTime?        @default(now(), map: "DF_tblMaintLogSpare_lastUpdate") @db.DateTime
   instId            Int?             @map("InstId")
   tblEmployee       TblEmployee?     @relation(fields: [createdEmployeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLogSpare_tblEmployee")
   tblInstallation   TblInstallation? @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblMaintLogSpare_tblInstallation")
@@ -1137,7 +1137,7 @@ model TblMaintType {
   maintTypeId     Int              @id(map: "PK_tblMaintType") @default(dbgenerated("NEXT VALUE FOR [Seq_MaintType]"), map: "DF_MaintTypeID") @map("MaintTypeID")
   descr           String?          @map("Descr") @db.NVarChar(100)
   orderNo         Int?             @map("OrderNo")
-  lastUpdate      DateTime?        @db.DateTime
+  lastUpdate      DateTime?        @default(now(), map: "DF_tblMaintType_lastUpdate") @db.DateTime
   tblCompJobs     TblCompJob[]
   tblCompTypeJobs TblCompTypeJob[]
   tblMaintLogs    TblMaintLog[]
@@ -1179,7 +1179,7 @@ model TblOilSamplingLog {
   laboratoryCode                                         String?          @map("LaboratoryCode") @db.NVarChar(100)
   userComment                                            String?          @map("UserComment") @db.NVarChar(500)
   orderNo                                                Int?             @map("OrderNo")
-  lastUpdate                                             DateTime?        @db.DateTime
+  lastUpdate                                             DateTime?        @default(now(), map: "DF_TblOilSamplingLog_lastUpdate") @db.DateTime
   instId                                                 Int?             @map("InstId")
   tblEmployeeTblOilSamplingLogSamplerIdTotblEmployee     TblEmployee?     @relation("TblOilSamplingLog_SamplerIDTotblEmployee", fields: [samplerId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblOilSamplingLog_tblEmployee")
   tblEmployeeTblOilSamplingLogSenderToLabIdTotblEmployee TblEmployee?     @relation("TblOilSamplingLog_SenderToLabIdTotblEmployee", fields: [senderToLabId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblOilSamplingLog_tblEmployee1")
@@ -1194,7 +1194,7 @@ model TblPendingType {
   sortId        Int?           @map("SortID")
   description   String?        @map("Description") @db.NVarChar(2000)
   orderNo       Int?           @map("OrderNo")
-  lastUpdate    DateTime?      @db.DateTime
+  lastUpdate    DateTime?      @default(now(), map: "DF_tblPendingType_lastUpdate") @db.DateTime
   tblWorkOrders TblWorkOrder[]
 
   @@map("tblPendingType")
@@ -1219,7 +1219,7 @@ model TblReScheduleLog {
   rescheduledDate DateTime?        @map("RescheduledDate") @db.DateTime
   reason          String?          @map("Reason") @db.NVarChar(500)
   orderNo         Int?             @map("OrderNo")
-  lastUpdate      DateTime?        @db.DateTime
+  lastUpdate      DateTime?        @default(now(), map: "DF_tblReScheduleLog_lastUpdate") @db.DateTime
   instId          Int?             @map("InstId")
   tblEmployee     TblEmployee?     @relation(fields: [rescheduledBy], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblReScheduleLog_tblEmployee")
   tblInstallation TblInstallation? @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblReScheduleLog_tblInstallation")
@@ -1238,7 +1238,7 @@ model TblRotationLog {
   toDate                                                   DateTime?         @map("ToDate") @db.DateTime
   notes                                                    String?           @map("Notes") @db.NVarChar(2000)
   orderNo                                                  Int?              @map("OrderNo")
-  lastUpdate                                               DateTime?         @db.DateTime
+  lastUpdate                                               DateTime?         @default(now(), map: "DF_tblRotationLog_lastUpdate") @db.DateTime
   instId                                                   Int?              @map("InstId")
   tblComponentUnit                                         TblComponentUnit? @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRotationLog_tblComponentUnit")
   tblEmployeeTblRotationLogEmployeeInsertedIdTotblEmployee TblEmployee?      @relation("tblRotationLog_EmployeeInsertedIdTotblEmployee", fields: [employeeInsertedId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRotationLog_tblEmployee")
@@ -1269,7 +1269,7 @@ model TblRound {
   priority          Int?             @map("Priority")
   window            Int?             @map("Window")
   orderNo           Int?             @map("OrderNo")
-  lastUpdate        DateTime?        @db.DateTime
+  lastUpdate        DateTime?        @default(now(), map: "DF_tblRound_lastUpdate") @db.DateTime
   instId            Int?             @map("InstId")
   tblInstallation   TblInstallation? @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRound_tblInstallation")
   tblWorkOrders     TblWorkOrder[]
@@ -1288,7 +1288,7 @@ model TblRoundCompJob {
   deleteOnRotation  Int?             @map("DeleteOnRotation")
   orderNo           Int?             @map("OrderNo")
   createdEmployeeId Int?             @map("CreatedEmployeeId")
-  lastUpdate        DateTime?        @db.DateTime
+  lastUpdate        DateTime?        @default(now(), map: "DF_tblRoundCompJob_lastUpdate") @db.DateTime
   instId            Int?             @map("InstId")
   tblEmployee       TblEmployee?     @relation(fields: [createdEmployeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRoundCompJob_tblEmployee")
   tblInstallation   TblInstallation? @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblRoundCompJob_tblInstallation")
@@ -1306,7 +1306,7 @@ model TblSpareType {
   extraNo            String?        @map("ExtraNo") @db.NVarChar(200)
   note               String?        @map("Note") @db.NVarChar(4000)
   orderNo            Int?           @map("OrderNo")
-  lastUpdate         DateTime?      @db.DateTime
+  lastUpdate         DateTime?      @default(now(), map: "DF_tblSpareType_lastUpdate") @db.DateTime
   tblUnit            TblUnit?       @relation(fields: [unitId], references: [unitId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblSpareType_tblUnit")
   tblSpareType       TblSpareType?  @relation("tblSpareTypeTotblSpareType", fields: [parentSpareTypeId], references: [spareTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblStockType_tblStockType")
   otherTblSpareTypes TblSpareType[] @relation("tblSpareTypeTotblSpareType")
@@ -1318,7 +1318,7 @@ model TblSpareType {
 model TblSpareUnit {
   spareUnitId       Int                @id(map: "PK_tblSpareUnit") @default(dbgenerated("NEXT VALUE FOR [Seq_SpareUnit]"), map: "DF_SpareUnitID") @map("SpareUnitID")
   spareTypeId       Int?               @map("SpareTypeID")
-  lastUpdate        DateTime?          @db.DateTime
+  lastUpdate        DateTime?          @default(now(), map: "DF_tblSpareUnit_lastUpdate") @db.DateTime
   tblMaintLogSpares TblMaintLogSpare[]
   tblSpareType      TblSpareType?      @relation(fields: [spareTypeId], references: [spareTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblStockItem_tblStockType")
 
@@ -1332,7 +1332,7 @@ model TblUnit {
   allowDecimals            Int?                      @map("AllowDecimals")
   description              String?                   @map("Description") @db.NVarChar(100)
   orderNo                  Int?                      @map("OrderNo")
-  lastUpdate               DateTime?                 @db.DateTime
+  lastUpdate               DateTime?                 @default(now(), map: "DF_tblUnit_lastUpdate") @db.DateTime
   tblCompMeasurePoints     TblCompMeasurePoint[]
   tblCompMeasurePointLogs  TblCompMeasurePointLog[]
   tblCompTypeMeasurePoints TblCompTypeMeasurePoint[]
@@ -1350,7 +1350,7 @@ model TblUser {
   accountDisabled      Boolean               @map("AccountDisabled")
   forcePasswordChange  Boolean               @map("ForcePasswordChange")
   lastLogin            DateTime?             @map("LastLogin") @db.DateTime
-  lastUpdate           DateTime?             @db.DateTime
+  lastUpdate           DateTime?             @default(now(), map: "DF_tblUser_lastUpdate") @db.DateTime
   tblEmployee          TblEmployee           @relation(fields: [employeeId], references: [employeeId], onUpdate: NoAction, map: "FK_tblUser_tblEmployee")
   tblUserGroup         TblUserGroup          @relation(fields: [userGroupId], references: [userGroupId], onUpdate: NoAction, map: "FK_tblUser_tblUserGroup")
   tblUserInstallations TblUserInstallation[]
@@ -1362,7 +1362,7 @@ model TblUserGroup {
   userGroupId          Int                   @id(map: "PK_tblUserGroup") @default(autoincrement()) @map("UserGroupId")
   name                 String                @map("Name") @db.NVarChar(200)
   description          String?               @map("Description") @db.NVarChar(1500)
-  lastUpdate           DateTime?             @db.DateTime
+  lastUpdate           DateTime?             @default(now(), map: "DF_tblUserGroup_lastUpdate") @db.DateTime
   orderNo              Int?                  @map("OrderNo")
   tblUsers             TblUser[]
   tblUserGroupElements TblUserGroupElement[]
@@ -1389,7 +1389,6 @@ model TblUserInstallation {
   userInstId      Int             @id(map: "PK_tblUserInstallation") @default(autoincrement()) @map("UserInstID")
   userId          Int             @map("UserId")
   instId          Int             @map("InstId")
-  
   tblInstallation TblInstallation @relation(fields: [instId], references: [instId], onUpdate: NoAction, map: "FK_tblUserInstallation_tblInstallation")
   tblUser         TblUser         @relation(fields: [userId], references: [userId], onUpdate: NoAction, map: "FK_tblUserInstallation_tblUser")
 
@@ -1430,7 +1429,7 @@ model TblWorkOrder {
   pendingdate                                   DateTime?           @map("Pendingdate") @db.Date
   orderNo                                       Int?                @map("OrderNo")
   userComment                                   String?             @map("UserComment") @db.NVarChar(4000)
-  lastUpdate                                    DateTime?           @db.DateTime
+  lastUpdate                                    DateTime?           @default(now(), map: "DF_tblWorkOrder_lastUpdate") @db.DateTime
   instId                                        Int?                @map("InstId")
   tblMaintLogs                                  TblMaintLog[]
   tblReScheduleLogs                             TblReScheduleLog[]
@@ -1482,7 +1481,7 @@ model TblWorkShop {
   followDesc                                                 String?                    @map("FollowDesc") @db.NVarChar(2000)
   closedDate                                                 DateTime?                  @map("ClosedDate") @db.DateTime
   closedById                                                 Int?                       @map("ClosedByID")
-  lastUpdate                                                 DateTime?                  @db.DateTime
+  lastUpdate                                                 DateTime?                  @default(now(), map: "DF_tblWorkShop_lastUpdate") @db.DateTime
   instId                                                     Int?                       @map("InstId")
   tblFailureReportWorkShops                                  TblFailureReportWorkShop[]
   tblDiscipline                                              TblDiscipline?             @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkShop_tblDiscipline")
@@ -1517,7 +1516,7 @@ model TblWorkShopComponent {
   compId           Int              @map("CompID")
   functionId       Int?             @map("FunctionID")
   locationId       Int?             @map("LocationID")
-  lastUpdate       DateTime?        @db.DateTime
+  lastUpdate       DateTime?        @default(now(), map: "DF_tblWorkShopComponent_lastUpdate") @db.DateTime
   instId           Int?             @map("InstId")
   tblComponentUnit TblComponentUnit @relation(fields: [compId], references: [compId], onUpdate: NoAction, map: "FK_tblWorkShopComponent_tblComponentUnit")
   tblFunction      TblFunction?     @relation(fields: [functionId], references: [functionId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblWorkShopComponent_tblFunctions")

@@ -37,8 +37,14 @@ const ControllerTblCompTypeCounter = new BaseController({
   extend: (app) => {
     app.post(
       "/:compTypeCounterId/effect",
-      async ({ params, body, set }) => {
+      async ({ params, body, set, headers }) => {
         try {
+          const instId = Number(headers["x-inst-id"] || 0);
+
+          if (!instId) {
+            throw new Error("Instance ID is required");
+          }
+
           const compTypeCounterId = Number(params.compTypeCounterId);
 
           if (isNaN(compTypeCounterId)) {
@@ -49,6 +55,7 @@ const ControllerTblCompTypeCounter = new BaseController({
           const result = await effectCompTypeCounter({
             compTypeCounterId,
             operation: body.operation,
+            instId,
           });
 
           return result;

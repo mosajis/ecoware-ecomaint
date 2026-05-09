@@ -12,14 +12,16 @@ type OperationType = typeof OperationEnum.static;
 export async function effectCompTypeCounter({
   compTypeCounterId,
   operation,
+  instId,
 }: {
   compTypeCounterId: number;
   operation: OperationType;
+  instId: number;
 }) {
   return prisma.$transaction(async (tx) => {
     // ================= Fetch CompTypeCounter =================
     const ctc = await tx.tblCompTypeCounter.findUnique({
-      where: { compTypeCounterId },
+      where: { compTypeCounterId, instId },
     });
 
     if (!ctc) {
@@ -41,7 +43,7 @@ export async function effectCompTypeCounter({
     // ================= Fetch Component Units =================
     const compIds = await tx.tblComponentUnit
       .findMany({
-        where: { compTypeId },
+        where: { compTypeId, instId },
         select: { compId: true },
       })
       .then((rows) => rows.map((r) => r.compId));
@@ -56,6 +58,7 @@ export async function effectCompTypeCounter({
       averageCountRate,
       useCalcAverage,
       orderNo,
+      instId,
     };
 
     // ================= Operation Switch =================
@@ -65,6 +68,7 @@ export async function effectCompTypeCounter({
         const existing = await tx.tblCompCounter.findMany({
           where: {
             counterTypeId,
+            instId,
             compId: { in: compIds },
           },
           select: { compId: true },
@@ -95,6 +99,7 @@ export async function effectCompTypeCounter({
       case 1: {
         const result = await tx.tblCompCounter.updateMany({
           where: {
+            instId,
             counterTypeId,
             compId: { in: compIds },
           },
@@ -114,6 +119,7 @@ export async function effectCompTypeCounter({
       case 2: {
         const result = await tx.tblCompCounter.deleteMany({
           where: {
+            instId,
             counterTypeId,
             compId: { in: compIds },
           },

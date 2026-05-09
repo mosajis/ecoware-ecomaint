@@ -173,6 +173,7 @@ export default function LoginPage() {
                 variant="contained"
                 color="secondary"
                 disabled={loading}
+                loading={loading}
                 sx={{ mt: 0 }}
               >
                 {loading ? "Signing In..." : "SIGN IN"}

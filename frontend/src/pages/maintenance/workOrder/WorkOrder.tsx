@@ -6,7 +6,6 @@ import Splitter from "@/shared/components/Splitter/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import TabsComponent from "./WorkOrderTabs";
 import WorkOrderDialogReschedule from "./WorkOrderDialogReschedule";
-import ReportWorkDialog from "../reportWork/ReportWorkDialog";
 import WorkOrderDetailDialog from "./WorkOrderDialogDetail";
 import { useCallback, useMemo, useState } from "react";
 import { columns } from "./WorkOrderColumns";
@@ -435,12 +434,12 @@ export default function WorkOrderPage() {
       />
 
       {/* Complete Dialog */}
-      <ReportWorkDialog
+      {/* <ReportWorkDialog
         onSuccess={successComplete}
         onClose={closeDialogComplete}
         open={dialogComplete}
         workOrderId={selectedWorkOrders[0]?.workOrderId}
-      />
+      /> */}
 
       {/* Pending Dialog */}
       <WorkOrderPendingDialog

@@ -22,6 +22,8 @@ import {
   tblMaintLog,
   tblMaintType,
 } from "@/core/api/generated/api";
+import { buildRelation } from "@/core/helper";
+import { Divider, TextField } from "@mui/material";
 
 type MaintLogUpsertProps = {
   open: boolean;
@@ -102,8 +104,8 @@ function MaintLogUpsert({
         maintCause: maintLog?.tblMaintCause ?? null,
         maintClass: maintLog?.tblMaintClass ?? null,
         history: maintLog?.history ?? "",
-        reportedCount: null,
         unexpected: maintLog?.unexpected,
+        reportedCount: context?.isCounter ? context.reportedCount : undefined,
       };
     },
 
@@ -121,6 +123,7 @@ function MaintLogUpsert({
         totalDuration: values.totalDuration ?? 0,
         unexpected: values.unexpected,
         history: values.history ?? "",
+
         maintClassId: values.maintClass?.maintClassId,
         maintTypeId: values.maintType?.maintTypeId,
         maintCauseId: values.maintCause?.maintCauseId,
@@ -137,10 +140,22 @@ function MaintLogUpsert({
         totalDuration: values.totalDuration ?? 0,
         unexpected: values.unexpected,
         history: values.history ?? "",
-        maintClassId: values.maintClass?.maintClassId,
-        maintTypeId: values.maintType?.maintTypeId,
-        maintCauseId: values.maintCause?.maintCauseId,
         reportedCount: context?.isCounter ? values.reportedCount : undefined,
+        ...buildRelation(
+          "tblMaintClass",
+          "maintClassId",
+          values.maintClass?.maintClassId,
+        ),
+        ...buildRelation(
+          "tblMaintType",
+          "maintTypeId",
+          values.maintType?.maintTypeId,
+        ),
+        ...buildRelation(
+          "tblMaintCause",
+          "maintCauseId",
+          values.maintCause?.maintCauseId,
+        ),
       };
 
       return await tblMaintLog.update(id, payload as any);
@@ -177,13 +192,6 @@ function MaintLogUpsert({
     loadContext();
   }, [open, mode, initialCompId, workOrderId]);
 
-  // Update reportedCount when context changes
-  useEffect(() => {
-    if (context && mode === "create") {
-      setValue("reportedCount", context.reportedCount ?? null);
-    }
-  }, [context, setValue, mode]);
-
   const disabledCounterFields = !context?.isCounter;
 
   return (
@@ -199,6 +207,28 @@ function MaintLogUpsert({
     >
       <Box display="grid" gap={1.5} gridTemplateColumns="1fr 1fr">
         <Box display="grid" gap={1.5} gridTemplateColumns="1fr 1fr">
+          <Box
+            gridColumn={"span 2"}
+            display={"flex"}
+            flexDirection={"column"}
+            gap={1.5}
+          >
+            <TextField
+              label="Component"
+              fullWidth
+              value={context?.maintLog?.tblComponentUnit?.compNo || " "}
+              size="small"
+              slotProps={{ input: { readOnly: true } }}
+            />
+            <TextField
+              label="Job Title"
+              value={context?.maintLog?.tblJobDescription?.jobDescTitle || " "}
+              fullWidth
+              size="small"
+              slotProps={{ input: { readOnly: true } }}
+            />
+            <Divider />
+          </Box>
           {/* Column 1: Date & Duration */}
           <Box display="grid" gap={1.5}>
             <Controller

@@ -101,7 +101,7 @@ export default function PageMaintLog() {
           disableRowNumber
           label="Maint Log"
           elementId={1420}
-          // rowSelection
+          externalRowSelection={true}
           rows={rows}
           columns={columns}
           loading={loading}
@@ -127,6 +127,7 @@ export default function PageMaintLog() {
       </Splitter>
 
       <MaintLogUpsert {...dialogProps} />
+
       <MaintLogFilterDialog
         open={dialogs.filter}
         onClose={() => closeDialog("filter")}

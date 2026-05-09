@@ -25,14 +25,6 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
     headerName: "Component",
     flex: 1,
     valueGetter: (_, row) => row?.tblComponentUnit?.compNo,
-    renderCell: ({ value, row }) => (
-      <CellLink
-        breadcrumb={value}
-        value={value}
-        to={RouteDetail.to}
-        params={{ id: row.tblComponentUnit?.compId }}
-      />
-    ),
   },
   {
     field: "jobCode",

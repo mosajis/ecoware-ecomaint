@@ -37,6 +37,7 @@ import { atomUser, atomUserDiscipline } from "@/pages/auth/auth.atom";
 import { Divider } from "@mui/material";
 import { extractFullName } from "@/core/helper";
 import { createFailureReport, updateFailureReport } from "@/core/api/api";
+import FieldNumber from "@/shared/components/fields/FieldNumber";
 
 function FailureReportUpsert({
   entityName,
@@ -330,15 +331,14 @@ function FailureReportUpsert({
                 name="downTime"
                 control={control}
                 render={({ field }) => (
-                  <TextField
+                  <FieldNumber
                     {...field}
                     label="Down Time (Min)"
-                    type="number"
                     fullWidth
                     disabled={isDisabled}
                     size="small"
                     value={field.value ?? 0}
-                    onChange={(e) => field.onChange(Number(e.target.value))}
+                    onChange={field.onChange}
                   />
                 )}
               />
