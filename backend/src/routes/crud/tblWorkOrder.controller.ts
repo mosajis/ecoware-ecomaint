@@ -14,6 +14,7 @@ import {
   TblWorkOrderInputUpdate,
   TblWorkOrderPlain,
 } from "orm/generated/prismabox/TblWorkOrder";
+import { authPlugin } from "../auth/auth.guard";
 
 export const ServiceTblWorkOrder = new BaseService(prisma.tblWorkOrder);
 export const WorkOrderItemSchema = t.Object({
@@ -128,7 +129,6 @@ const ControllerTblWorkOrder = new BaseController({
         const sortObj = parseSortString(sort);
         const usePagination = !!paginate;
 
-        // âœ… Default select object
         const defaultSelect = {
           workOrderId: true,
           compId: true,
@@ -184,7 +184,6 @@ const ControllerTblWorkOrder = new BaseController({
           },
         };
 
-        // âœ… Custom select Ø¨Ø§ validation
         let selectObj = defaultSelect;
         if (select) {
           try {
@@ -214,11 +213,9 @@ const ControllerTblWorkOrder = new BaseController({
       },
     );
 
-    app.post(
+    app.use(authPlugin).post(
       "/generate",
-      async ({ body, set, headers }) => {
-        const { userId } = body;
-
+      async ({ body, set, headers, userId }) => {
         const instId = Number(headers["x-inst-id"] || 0);
 
         if (!instId) {
@@ -300,20 +297,9 @@ const ControllerTblWorkOrder = new BaseController({
             created: now,
             lastUpdate: now,
             workOrderStatusId: 2,
-            workOrderTypeId: 2,
+            workOrderTypeId: 1,
             instId,
           }));
-
-          // const workOrdersWithWoNo = await Promise.all(
-          //   workOrders.map(async (i) => {
-          //     const woNo = await generateDocumentNumber({
-          //       tx,
-          //       model: "tblFailureReport",
-          //       prefix: "FR",
-          //     });
-          //     return { ...i, woNo };
-          //   }),
-          // );
 
           const resultWorkOrder = await tx.tblWorkOrder.createMany({
             data: workOrders,
@@ -338,9 +324,6 @@ const ControllerTblWorkOrder = new BaseController({
         });
       },
       {
-        body: t.Object({
-          userId: t.Number(),
-        }),
         response: t.Object({
           message: t.String(),
           createdWorkOrders: t.Number(),
@@ -353,10 +336,10 @@ const ControllerTblWorkOrder = new BaseController({
       },
     );
 
-    app.post(
+    app.use(authPlugin).post(
       "/generate/next",
-      async ({ body, set, headers }) => {
-        const { maintLogId, userId } = body;
+      async ({ body, set, headers, userId }) => {
+        const { maintLogId } = body;
 
         const instId = Number(headers["x-inst-id"] || 0);
 
@@ -364,13 +347,14 @@ const ControllerTblWorkOrder = new BaseController({
           throw new Error("Instance ID is required");
         }
 
-        if (!maintLogId || !userId) {
-          set.status = 400;
-          return {
-            message: "maintLogId and userId are required",
-            success: false,
-          };
-        }
+        const user = await prisma.tblUser.findFirst({
+          where: { userId },
+          include: {
+            tblEmployee: true,
+          },
+        });
+
+        const employeeId = user?.tblEmployee?.employeeId;
 
         return prisma.$transaction(async (tx) => {
           /* 1. MaintLog --------------------------------------------------------------------- */
@@ -522,7 +506,7 @@ const ControllerTblWorkOrder = new BaseController({
           const newWorkOrder = await tx.tblWorkOrder.create({
             data: {
               compJobId: compJob.compJobId,
-              createdBy: userId,
+              createdBy: employeeId,
               respDiscId: compJob.discId,
               compId: compJob.compId,
               title:
@@ -562,7 +546,6 @@ const ControllerTblWorkOrder = new BaseController({
       {
         body: t.Object({
           maintLogId: t.Number(),
-          userId: t.Number(),
         }),
         response: t.Object({
           message: t.String(),

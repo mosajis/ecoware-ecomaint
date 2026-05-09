@@ -3,6 +3,7 @@ import Filter from "@mui/icons-material/FilterList";
 import AutoModeIcon from "@mui/icons-material/AutoMode";
 import PrintIcon from "@mui/icons-material/Print";
 import { WORK_ORDER_ACTIONS } from "./WorkOrderActionsConfig";
+import { STATUS } from "./types";
 
 type Props = {
   selectedStatuses: string[];
@@ -75,19 +76,22 @@ export default function WorkOrderActions({
         selectedCount === 0 ||
         !WORK_ORDER_ACTIONS.cancel.isEnabled(selectedStatuses),
     },
+    // {
+    //   ...WORK_ORDER_ACTIONS.request,
+    //   onClick: onRequest,
+    // },
     {
-      ...WORK_ORDER_ACTIONS.request,
-      onClick: onRequest,
-    },
-    {
-      label: "Rescadule",
+      label: "ReSchedule",
       icon: <AutoModeIcon />,
-      isEnabled: true,
-      // disabled: selectedStatuses.length > 0,
+      disabled:
+        selectedCount != 1 ||
+        selectedStatuses.every(
+          (s) => s === STATUS.CONTROL || s === STATUS.COMPLETE,
+        ),
       onClick: onReschedule,
     },
     {
-      // disabled: selectedStatuses.length > 0,
+      disabled: selectedCount < 1,
       label: "Print",
       icon: <PrintIcon />,
       onClick: onPrint,

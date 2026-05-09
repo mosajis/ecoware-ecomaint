@@ -21,7 +21,7 @@ type Props = {
   open: boolean;
   onClose: () => void;
   onSubmit?: () => void;
-  readOnly?: boolean;
+  hideFooter?: boolean;
   workOrders: TypeTblWorkOrderWithRels[];
 };
 
@@ -30,7 +30,7 @@ export default function WorkOrderDialogPrint({
   open,
   title,
   onClose,
-  readOnly,
+  hideFooter,
   workOrders,
 }: Props) {
   const [outputFormat, setOutputFormat] = useState<OutputFormat>("list");
@@ -45,7 +45,7 @@ export default function WorkOrderDialogPrint({
       onClose={onClose}
       title={title}
       onSubmit={onSubmit}
-      readonly={readOnly}
+      hideFooter={hideFooter}
     >
       <Stack spacing={1.5}>
         {/* Settings */}
@@ -83,11 +83,11 @@ export default function WorkOrderDialogPrint({
                 control={<Radio size="small" />}
                 label="Component"
               />
-              <FormControlLabel
+              {/* <FormControlLabel
                 value="workOrderNumber"
                 control={<Radio size="small" />}
                 label="Work Order Number"
-              />
+              /> */}
               <FormControlLabel
                 value="dueDate"
                 control={<Radio size="small" />}

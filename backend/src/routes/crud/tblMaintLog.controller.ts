@@ -2,6 +2,8 @@ import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 import { t } from "elysia";
 import { BaseService } from "@/utils/base.service";
+import { authPlugin } from "../auth/auth.guard";
+import { diffDay } from "@/helper";
 import {
   BaseController,
   parseSortString,
@@ -13,7 +15,13 @@ import {
   TblMaintLogInputUpdate,
   TblMaintLogPlain,
 } from "orm/generated/prismabox/TblMaintLog";
-import { authPlugin } from "../auth/auth.guard";
+import type {
+  TblComponentUnit,
+  TblMaintCause,
+  TblMaintClass,
+  TblMaintType,
+  TblMaintLog as TypeTblMaintLog,
+} from "orm/generated/prisma/client";
 
 const MaintLogItemSchema = t.Object({
   maintLogId: t.Number(),
@@ -188,7 +196,13 @@ const ControllerTblMaintLog = new BaseController({
           value: null as number | null,
           period: null as { periodId: number; name: string | null } | null,
         };
-        let maintLog = null as any;
+
+        let maintLog: any = null;
+        let componentUnit: TblComponentUnit | null = null;
+
+        let maintCause: TblMaintCause | null = null;
+        let maintClass: TblMaintClass | null = null;
+        let maintType: TblMaintType | null = null;
 
         // ── حالت ۱: Edit Mode - گرفتن اطلاعات موجود ──
         if (maintLogId) {
@@ -247,6 +261,11 @@ const ControllerTblMaintLog = new BaseController({
             if (logCounter) {
               reportedCount = logCounter.reportedCount ?? 0;
             }
+
+            componentUnit = maintLog.tblComponentUnit;
+            maintClass = maintLog.tblMaintClass;
+            maintType = maintLog.tblMaintType;
+            maintCause = maintLog.tblMaintCause;
           }
         }
 
@@ -257,19 +276,29 @@ const ControllerTblMaintLog = new BaseController({
           const workOrder = await prisma.tblWorkOrder.findUnique({
             where: { workOrderId: Number(workOrderId) },
             include: {
+              tblMaintCause: true,
+              tblMaintClass: true,
+              tblMaintType: true,
               tblCompJob: {
                 include: {
+                  tblJobDescription: true,
+                  tblPeriod: true,
+                  tblComponentUnit: true,
+
                   tblCompJobCounters: {
                     include: {
                       tblCompCounter: true,
                     },
                   },
-                  tblJobDescription: true,
-                  tblPeriod: true,
                 },
               },
             },
           });
+
+          componentUnit = workOrder?.tblCompJob?.tblComponentUnit || null;
+          maintCause = workOrder?.tblMaintCause || null;
+          maintClass = workOrder?.tblMaintClass || null;
+          maintType = workOrder?.tblMaintType || null;
 
           if (workOrder?.tblCompJob) {
             const compJob = workOrder.tblCompJob;
@@ -316,6 +345,12 @@ const ControllerTblMaintLog = new BaseController({
 
         // ── حالت ۳: بدون Work Order → فقط بر اساس compId (Unplanned) ──
         if (compId && !workOrderId && !maintLogId) {
+          const component = await prisma.tblComponentUnit.findUnique({
+            where: { compId: Number(compId) },
+          });
+
+          componentUnit = component;
+
           const compCounter = await prisma.tblCompCounter.findFirst({
             where: {
               compId: Number(compId),
@@ -356,6 +391,10 @@ const ControllerTblMaintLog = new BaseController({
           counterData,
           reportedCount,
           jobDescription,
+          componentUnit,
+          maintCause,
+          maintClass,
+          maintType,
           frequency,
           maintLog,
         };
@@ -373,6 +412,30 @@ const ControllerTblMaintLog = new BaseController({
         response: t.Object({
           isPlanned: t.Boolean(),
           isCounter: t.Boolean(),
+          componentUnit: t.Nullable(
+            t.Object({
+              compNo: t.Nullable(t.String()),
+              compId: t.Nullable(t.Number()),
+            }),
+          ),
+          maintCause: t.Nullable(
+            t.Object({
+              maintCauseId: t.Number(),
+              descr: t.Nullable(t.String()),
+            }),
+          ),
+          maintClass: t.Nullable(
+            t.Object({
+              maintClassId: t.Number(),
+              descr: t.Nullable(t.String()),
+            }),
+          ),
+          maintType: t.Nullable(
+            t.Object({
+              maintTypeId: t.Number(),
+              descr: t.Nullable(t.String()),
+            }),
+          ),
           counterData: t.Object({
             lastDate: t.Nullable(t.String()),
             lastValue: t.Nullable(t.Number()),
@@ -417,9 +480,9 @@ const ControllerTblMaintLog = new BaseController({
           maintClassId,
           maintTypeId,
           maintCauseId,
-          fsId,
-          compId,
           workOrderId,
+          compId,
+          dateDone,
           ...restData
         } = body;
 
@@ -465,10 +528,11 @@ const ControllerTblMaintLog = new BaseController({
         const frequencyPeriod = tblWorkOrder?.tblCompJob?.frequencyPeriod;
         const respDiscId = tblWorkOrder?.respDiscId;
 
-        // ایجاد رکورد اصلی در tblMaintLog
         const newLog = await prisma.tblMaintLog.create({
           data: {
-            // overdueCount: restData.dateDone - tblWorkOrder?.dueDate // اختلاف این دو زمان به روز
+            overdueCount: tblWorkOrder?.dueDate
+              ? diffDay(dateDone, tblWorkOrder?.dueDate)
+              : null,
             workOrderStatusId: 5,
 
             history: restData.history,
@@ -478,8 +542,8 @@ const ControllerTblMaintLog = new BaseController({
             frequency,
             totalDuration: restData.totalDuration,
             downTime: restData.downTime || 0,
-            dateDone: now,
-            // مدیریت روابط به صورت ایمن
+            dateDone: dateDone || now,
+
             ...(functionId && {
               tblFunction: {
                 connect: {
@@ -517,7 +581,11 @@ const ControllerTblMaintLog = new BaseController({
               },
             }),
             ...(compId && {
-              tblComponentUnit: { connect: { compId: Number(compId) } },
+              tblComponentUnit: {
+                connect: {
+                  compId: Number(compId),
+                },
+              },
             }),
             ...(workOrderId && {
               tblWorkOrder: { connect: { workOrderId: Number(workOrderId) } },
@@ -544,30 +612,31 @@ const ControllerTblMaintLog = new BaseController({
                 connect: { maintCauseId: Number(maintCauseId) },
               },
             }),
-            ...(fsId && {
-              tblFollowStatus: { connect: { followStatusId: Number(fsId) } },
-            }),
 
-            ...(reportedCount !== undefined && {
-              tblLogCounter: {
-                create: {
-                  reportedCount: Number(reportedCount),
-                  compId: Number(compId),
-                },
-              },
-            }),
+            // ...(reportedCount !== undefined && {
+            //   tblLogCounter: {
+            //     create: {
+            //       reportedCount: Number(reportedCount),
+            //       compId: Number(compId),
+            //     },
+            //   },
+            // }),
           },
         });
 
-        // به روزرسانی ورک اوردر
-        await prisma.tblWorkOrder.update({
-          where: { workOrderId },
-          data: {
-            workOrderStatusId: 5,
-            completed: now,
-            lastUpdate: now,
-          },
-        });
+        if (workOrderId) {
+          await prisma.tblWorkOrder.update({
+            where: { workOrderId },
+            include: {
+              tblWorkOrderStatus: true,
+            },
+            data: {
+              workOrderStatusId: 5,
+              completed: now,
+              lastUpdate: now,
+            },
+          });
+        }
         return newLog;
       },
       {
@@ -586,7 +655,6 @@ const ControllerTblMaintLog = new BaseController({
           maintClassId: t.Optional(t.Number()),
           maintTypeId: t.Optional(t.Number()),
           maintCauseId: t.Optional(t.Number()),
-          fsId: t.Optional(t.Number()),
           reportedCount: t.Optional(t.Number()),
         }),
         response: buildResponseSchema(TblMaintLogPlain, TblMaintLog),

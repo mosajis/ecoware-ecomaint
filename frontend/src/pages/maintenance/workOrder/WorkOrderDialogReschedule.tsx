@@ -7,6 +7,7 @@ import {
   tblWorkOrder,
   tblCompJob,
   tblReScheduleLog,
+  tblCompJobCounter,
 } from "@/core/api/generated/api";
 import { TypeTblWorkOrderWithRels } from "./types";
 import { toast } from "sonner";
@@ -21,8 +22,10 @@ import { buildRelation } from "@/core/helper";
 export const schema = z.object({
   currentDueDate: z.string().nullable(),
   newDueDate: z.string().nullable(),
-  currentDueCount: z.number().nullable(),
-  newDueCount: z.number().nullable(),
+
+  newDueCount: z.number().nullable().optional(),
+  currentDueCount: z.number().nullable().optional(),
+
   reason: z.string().nullable(),
 });
 
@@ -46,6 +49,7 @@ export default function WorkOrderDialogReschedule({
     handleSubmit,
     reset,
     setValue,
+    watch,
     formState: { isSubmitting },
   } = useForm<formValues>({
     resolver: zodResolver(schema),
@@ -59,17 +63,36 @@ export default function WorkOrderDialogReschedule({
   });
 
   const user = useAtomValue(atomUser);
-  const userId = user?.userId as number;
+  const employeeId = user?.tblEmployee?.employeeId as number;
 
   // Set current values when workOrder changes
   useEffect(() => {
-    if (workOrder) {
-      setValue("currentDueDate", workOrder.dueDate ? workOrder.dueDate : null);
-      // setValue(
-      //   "currentDueCount",
-      //   workOrder.tblCompJob?.tbl
-      // );
-    }
+    const init = async () => {
+      if (workOrder) {
+        setValue(
+          "currentDueDate",
+          workOrder.dueDate ? workOrder.dueDate : null,
+        );
+
+        const compJobId = workOrder?.tblCompJob?.compJobId;
+        const compJobCounters = await tblCompJobCounter.getAll({
+          filter: {
+            compJobId,
+          },
+        });
+
+        const compJobCounter =
+          compJobCounters.items.length > 0 ? compJobCounters.items[0] : null;
+
+        if (compJobCounter) {
+          const nextDueCount = compJobCounter.nextDueCount;
+
+          setValue("currentDueCount", nextDueCount ? nextDueCount : null);
+        }
+      }
+    };
+
+    init();
   }, [workOrder, setValue]);
 
   const onSubmit = async (data: formValues) => {
@@ -135,7 +158,11 @@ export default function WorkOrderDialogReschedule({
         rescheduledDate: new Date().toISOString(),
         reason: data.reason,
         lastUpdate: new Date().toISOString(),
-        rescheduledBy: userId,
+        tblEmployee: {
+          connect: {
+            employeeId,
+          },
+        },
       });
 
       onSuccess(updatedWorkOrder);
@@ -150,6 +177,8 @@ export default function WorkOrderDialogReschedule({
     reset();
     onClose();
   };
+
+  const isDisabled = Boolean(watch("currentDueDate"));
 
   return (
     <FormDialog
@@ -189,6 +218,7 @@ export default function WorkOrderDialogReschedule({
           control={control}
           render={({ field }) => (
             <FieldNumber
+              disabled={isDisabled}
               label="Current Due Count"
               value={field.value}
               onChange={field.onChange}
@@ -202,6 +232,7 @@ export default function WorkOrderDialogReschedule({
           control={control}
           render={({ field, fieldState }) => (
             <FieldNumber
+              disabled={isDisabled}
               label="New Due Count"
               value={field.value}
               onChange={field.onChange}

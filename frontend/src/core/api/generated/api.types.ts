@@ -53664,6 +53664,22 @@ export interface operations {
                     "application/json": {
                         isPlanned: boolean;
                         isCounter: boolean;
+                        componentUnit: ({
+                            compNo: (string | null) | null;
+                            compId: (number | null) | null;
+                        } | null) | null;
+                        maintCause: ({
+                            maintCauseId: number;
+                            descr: (string | null) | null;
+                        } | null) | null;
+                        maintClass: ({
+                            maintClassId: number;
+                            descr: (string | null) | null;
+                        } | null) | null;
+                        maintType: ({
+                            maintTypeId: number;
+                            descr: (string | null) | null;
+                        } | null) | null;
                         counterData: {
                             lastDate: (string | null) | null;
                             lastValue: (number | null) | null;

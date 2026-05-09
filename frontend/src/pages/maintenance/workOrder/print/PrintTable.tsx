@@ -1,16 +1,22 @@
-import { calculateOverdue, formatDateTime, val } from "@/core/helper";
+import {
+  calculateOverdue,
+  extractFullName,
+  formatDateTime,
+  val,
+} from "@/core/helper";
 import { TypeTblWorkOrderWithRels } from "../types";
 import { OutputFormat } from "./PrintTypes";
+import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 
 const extractData = (wo: TypeTblWorkOrderWithRels) => ({
   title: wo.title,
   // @ts-ignore
-  plannedBy: wo.usersTblWorkOrderPlannedByToUsers?.uName,
+  plannedBy: extractFullName(wo.tblEmployeeTblWorkOrderIssuedByTotblEmployee),
   workorderId: wo.workOrderId,
   component: wo.tblComponentUnit?.compNo,
   dueDate: wo.dueDate,
   location: wo.tblComponentUnit?.tblLocation?.name,
-  lastDone: wo.completed,
+  lastDone: "-",
   discipline: wo.tblDiscipline?.name,
   frequency: wo.tblCompJob?.frequency,
   window: wo.window,
@@ -67,7 +73,7 @@ const PrintTable = ({ workorder, outputFormat }: Props) => {
 
             <td className="print__cell print__label">Due Date</td>
             <td className="print__cell">
-              {data.dueDate ? formatDateTime(data.dueDate) : "-"}
+              <CellDateTime value={data.dueDate} type="DATE" />
             </td>
 
             <td className="print__cell print__label">Discipline</td>
@@ -80,7 +86,7 @@ const PrintTable = ({ workorder, outputFormat }: Props) => {
 
             <td className="print__cell print__label">Last Done</td>
             <td className="print__cell">
-              {data.lastDone ? formatDateTime(data.lastDone) : "-"}
+              {data.lastDone ? data.lastDone : "-"}
             </td>
 
             <td className="print__cell print__label">Frequency</td>

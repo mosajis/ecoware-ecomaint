@@ -9,6 +9,8 @@ import { toast } from "sonner";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
 
 export const schema = z.object({
   pendingType: z.object({
@@ -37,6 +39,9 @@ export default function WorkOrderPendingDialog({
   onSuccess,
   workOrder,
 }: Props) {
+  const user = useAtomValue(atomUser);
+  const employeeId = user?.tblEmployee?.employeeId as number;
+
   const {
     control,
     handleSubmit,
@@ -57,6 +62,11 @@ export default function WorkOrderPendingDialog({
       const result = await tblWorkOrder.update(
         workOrder.workOrderId,
         {
+          tblEmployeeTblWorkOrderPendingByTotblEmployee: {
+            connect: {
+              employeeId,
+            },
+          },
           tblPendingType: {
             connect: {
               pendTypeId: data.pendingType.pendTypeId,

@@ -10,9 +10,8 @@ import { RouteDetail } from "../componentUnit/ComponentUnitRoutes";
 export const columns: GridColDef<TypeTblWorkOrderWithRels>[] = [
   {
     field: "workOrderId",
-    headerName: "WO.NO",
+    headerName: "No",
     width: 90,
-    valueFormatter: (value) => "WO-" + value,
   },
   {
     field: "jobCode",

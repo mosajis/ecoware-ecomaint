@@ -57,3 +57,17 @@ export const removeNulls = (obj: any) => {
     Object.entries(obj).filter(([_, v]) => v !== null && v !== undefined),
   );
 };
+
+export function diffDay(date1: string | Date, date2: string | Date): number {
+  const d1 = new Date(date1);
+  const d2 = new Date(date2);
+
+  // حذف ساعت برای جلوگیری از خطای timezone
+  d1.setHours(0, 0, 0, 0);
+  d2.setHours(0, 0, 0, 0);
+
+  const diffTime: number = d1.getTime() - d2.getTime();
+  const diffDays: number = diffTime / (1000 * 60 * 60 * 24);
+
+  return diffDays;
+}

@@ -6,7 +6,7 @@ export const atomSideMenuOpen = atomWithStorage("isSideMenuOpen", true);
 
 export const atomLanguage = atomWithStorage<"en" | "fa">(
   LOCAL_STORAGE.LANG,
-  "en",
+  "fa",
 );
 
 export const atomRig = atomWithStorage(

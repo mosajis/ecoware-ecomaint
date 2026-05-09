@@ -1,3 +1,4 @@
+import { DynamicCreate, DynamicResponse, DynamicUpdate } from "./dynamicTypes";
 import { api } from "@/service/axios";
 import {
   MaintLogContex,
@@ -5,25 +6,15 @@ import {
   TypeMaintLogSpareBySpareUnitId,
   TypeStatistics,
 } from "./api.types";
-import { TypeTblCompJobCounterAlert } from "./generated/api";
-import { DynamicCreate, DynamicResponse, DynamicUpdate } from "./dynamicTypes";
 
-export const generateWorkOrder = (userId: number) =>
-  api.post(`/tblWorkOrder/generate`, {
-    data: { userId },
-  });
+export const generateWorkOrder = () => api.post(`/tblWorkOrder/generate`);
 
-export const generateJobTrigger = (userId: number, jobTriggerId: number) =>
-  api.post(`/tblJobTrigger/${jobTriggerId}/generate`, {
-    data: { userId },
-  });
+export const generateJobTrigger = (jobTriggerId: number) =>
+  api.post(`/tblJobTrigger/${jobTriggerId}/generate`);
 
-export const generateNextWorkORder = async (
-  maintLogId: number,
-  userId: number,
-) =>
+export const generateNextWorkOrder = async (maintLogId: number) =>
   api.post("/tblWorkOrder/generate/next", {
-    data: { maintLogId, userId },
+    data: { maintLogId },
   });
 
 export const tblMaintLogSpareBySpareUnitId = (

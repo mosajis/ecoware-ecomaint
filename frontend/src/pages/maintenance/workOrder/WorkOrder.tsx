@@ -1,3 +1,4 @@
+import MaintLogUpsert from "../maintLog/MaintLogUpsert";
 import ConfirmDialog from "@/shared/components/ConfirmDialog";
 import WorkOrderPrintDialog from "./WorkOrderDialogPrint";
 import WorkOrderPendingDialog from "./WorkOrderDialogPending";
@@ -19,6 +20,8 @@ import { GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
 import { TypeTblWorkOrderWithRels } from "./types";
 import { atomUser } from "@/pages/auth/auth.atom";
 import { useDialogs } from "@/shared/hooks/useDialogs";
+import { toast } from "sonner";
+import { over } from "lodash-es";
 
 const getRowId = (row: TypeTblWorkOrder) => row.workOrderId;
 
@@ -28,18 +31,16 @@ export default function WorkOrderPage() {
 
   const { dialogs, openDialog, closeDialog } = useDialogs({
     workOrderDetail: false,
+    dialogIssue: false,
+    dialogFilter: true,
+    dialogComplete: false,
+    dialogPending: false,
+    dialogPostponed: false,
+    dialogCancel: false,
+    dialogRequest: false,
+    dialogReschedule: false,
+    dialogPrint: false,
   });
-
-  // Dialog States
-  const [dialogIssue, setDialogIssue] = useState(false);
-  const [dialogFilter, setDialogFilter] = useState(true);
-  const [dialogComplete, setDialogComplete] = useState(false);
-  const [dialogPending, setDialogPending] = useState(false);
-  const [dialogPostponed, setDialogPostponed] = useState(false);
-  const [dialogCancel, setDialogCancel] = useState(false);
-  const [dialogRequest, setDialogRequest] = useState(false);
-  const [dialogReschedule, setDialogReschedule] = useState(false);
-  const [dialogPrint, setDialogPrint] = useState(false);
 
   const [filter, setFilter] = useState<WorkOrderFilter | null>(null);
 
@@ -83,69 +84,6 @@ export default function WorkOrderPage() {
       .filter((w) => w !== undefined);
   }, [selectedWorkOrders]);
 
-  // Dialog Handlers
-  const openDialogIssue = useCallback(() => setDialogIssue(true), []);
-  const closeDialogIssue = useCallback(() => setDialogIssue(false), []);
-
-  const openDialogPrint = useCallback(() => setDialogPrint(true), []);
-  const closeDialogPrint = useCallback(() => setDialogPrint(false), []);
-
-  const openDialogFilter = useCallback(() => setDialogFilter(true), []);
-  const closeDialogFilter = useCallback(() => setDialogFilter(false), []);
-
-  const openDialogComplete = useCallback(() => setDialogComplete(true), []);
-  const closeDialogComplete = useCallback(() => setDialogComplete(false), []);
-
-  const openDialogPending = useCallback(() => setDialogPending(true), []);
-  const closeDialogPending = useCallback(() => setDialogPending(false), []);
-
-  const openDialogPostponed = useCallback(() => setDialogPostponed(true), []);
-  const closeDialogPostponed = useCallback(() => setDialogPostponed(false), []);
-
-  const openDialogCancel = useCallback(() => setDialogCancel(true), []);
-  const closeDialogCancel = useCallback(() => setDialogCancel(false), []);
-
-  const openDialogRequest = useCallback(() => setDialogRequest(true), []);
-  const closeDialogRequest = useCallback(() => setDialogRequest(false), []);
-
-  const openDialogReschedule = useCallback(() => setDialogReschedule(true), []);
-  const closeDialogReschedule = useCallback(
-    () => setDialogReschedule(false),
-    [],
-  );
-
-  // Action Handlers
-  const onFilterClick = useCallback(
-    () => openDialogFilter(),
-    [openDialogFilter],
-  );
-  const onIssueClick = useCallback(() => openDialogIssue(), [openDialogIssue]);
-  const onCompleteClick = useCallback(
-    () => openDialogComplete(),
-    [openDialogComplete],
-  );
-  const onPendingClick = useCallback(
-    () => openDialogPending(),
-    [openDialogPending],
-  );
-  const onPostponedClick = useCallback(
-    () => openDialogPostponed(),
-    [openDialogPostponed],
-  );
-  const onCancelClick = useCallback(
-    () => openDialogCancel(),
-    [openDialogCancel],
-  );
-  const onRequestClick = useCallback(
-    () => openDialogRequest(),
-    [openDialogRequest],
-  );
-  const onRescheduleClick = useCallback(
-    () => openDialogReschedule(),
-    [openDialogReschedule],
-  );
-  const onPrintClick = useCallback(() => openDialogPrint(), [openDialogPrint]);
-
   const handleRowSelectionChange = useCallback(
     (model: GridRowSelectionModel) => {
       setRowSelectionModel(model);
@@ -156,20 +94,27 @@ export default function WorkOrderPage() {
   // Submit Handlers
   const handleSubmitFilter = (filter: WorkOrderFilter | null) => {
     setFilter(filter);
-    closeDialogFilter();
+    closeDialog("dialogFilter");
   };
 
   const handleConfirmCancel = async () => {
     try {
       const updates = selectedWorkOrders.map((wo) =>
-        tblWorkOrder.update(wo.workOrderId, {
-          tblWorkOrder: {
-            connect: {
-              workOrderId: 7,
+        tblWorkOrder.update(
+          wo.workOrderId,
+          {
+            tblWorkOrderStatus: {
+              connect: {
+                workOrderStatusId: 7,
+              },
             },
-          }, // Cancel
-          completed: new Date().toString(),
-        }),
+          },
+          {
+            include: {
+              tblWorkOrderStatus: true,
+            },
+          },
+        ),
       );
 
       const results = await Promise.all(updates);
@@ -179,10 +124,9 @@ export default function WorkOrderPage() {
         successCancel(record);
       });
 
-      closeDialogCancel();
+      closeDialog("dialogCancel");
     } catch (error) {
-      console.error("Error canceling work orders:", error);
-      // Handle error (show toast notification, etc.)
+      toast.error("Failed to cancel work orders");
     }
   };
 
@@ -213,7 +157,7 @@ export default function WorkOrderPage() {
         successPostponed(record);
       });
 
-      closeDialogPostponed();
+      closeDialog("dialogPostponed");
     } catch (error) {
       console.error("Error postponing work orders:", error);
     }
@@ -227,6 +171,11 @@ export default function WorkOrderPage() {
           {
             tblWorkOrderStatus: { connect: { workOrderStatusId: 3 } }, // Issue
             issuedDate: new Date().toString(),
+            tblEmployeeTblWorkOrderIssuedByTotblEmployee: {
+              connect: {
+                employeeId,
+              },
+            },
           },
           {
             include: {
@@ -245,7 +194,7 @@ export default function WorkOrderPage() {
 
       // setRowSelectionModel({ type: "include", ids: new Set<GridRowId>() });
 
-      closeDialogIssue();
+      closeDialog("dialogIssue");
     } catch (error) {
       console.error("Error issuing work orders:", error);
     }
@@ -271,7 +220,7 @@ export default function WorkOrderPage() {
         successRequest(record);
       });
 
-      closeDialogRequest();
+      closeDialog("dialogRequest");
     } catch (error) {
       console.error("Error requesting work orders:", error);
     }
@@ -296,7 +245,7 @@ export default function WorkOrderPage() {
         successReschedule(record);
       });
 
-      closeDialogReschedule();
+      closeDialog("dialogReschedule");
     } catch (error) {
       console.error("Error rescheduling work orders:", error);
     }
@@ -323,6 +272,8 @@ export default function WorkOrderPage() {
 
   const successReschedule = (record: TypeTblWorkOrder) => {
     optimisticUpdate(record.workOrderId, {
+      tblWorkOrderStatus: record.tblWorkOrderStatus,
+      workOrderStatusId: 2,
       dueDate: record.dueDate,
       window: record.window,
     });
@@ -340,7 +291,6 @@ export default function WorkOrderPage() {
     optimisticUpdate(record.workOrderId, {
       tblWorkOrderStatus: record.tblWorkOrderStatus,
       workOrderStatusId: 7,
-      completed: record.completed,
     });
   };
 
@@ -352,12 +302,16 @@ export default function WorkOrderPage() {
   };
 
   const successComplete = (record: TypeTblWorkOrder) => {
-    closeDialogComplete();
     optimisticUpdate(record.workOrderId, {
-      tblWorkOrderStatus: record.tblWorkOrderStatus,
-      workOrderStatusId: 5,
+      tblWorkOrderStatus: {
+        name: "Complete",
+        workOrderStatusId: 5,
+      },
       completed: record.completed,
+      overdue: record.overdue,
     });
+
+    closeDialog("dialogComplete");
   };
 
   const handleClick = ({ row }: any) => {
@@ -392,15 +346,15 @@ export default function WorkOrderPage() {
           toolbarChildren={
             <WorkOrderActions
               selectedStatuses={selectedStatuses}
-              onFilter={onFilterClick}
-              onIssue={onIssueClick}
-              onComplete={onCompleteClick}
-              onPending={onPendingClick}
-              onPostponed={onPostponedClick}
-              onCancel={onCancelClick}
-              onRequest={onRequestClick}
-              onReschedule={onRescheduleClick}
-              onPrint={onPrintClick}
+              onFilter={() => openDialog("dialogFilter")}
+              onIssue={() => openDialog("dialogIssue")}
+              onComplete={() => openDialog("dialogComplete")}
+              onPending={() => openDialog("dialogPending")}
+              onPostponed={() => openDialog("dialogPostponed")}
+              onCancel={() => openDialog("dialogCancel")}
+              onRequest={() => openDialog("dialogRequest")}
+              onReschedule={() => openDialog("dialogReschedule")}
+              onPrint={() => openDialog("dialogPrint")}
             />
           }
         />
@@ -410,8 +364,8 @@ export default function WorkOrderPage() {
 
       {/* Filter Dialog */}
       <WorkOrderFilterDialog
-        open={dialogFilter}
-        onClose={closeDialogFilter}
+        open={dialogs.dialogFilter}
+        onClose={() => closeDialog("dialogFilter")}
         onSubmit={handleSubmitFilter}
       />
 
@@ -419,77 +373,82 @@ export default function WorkOrderPage() {
       <WorkOrderPrintDialog
         title="Print WorkOrder"
         workOrders={selectedWorkOrders}
-        open={dialogPrint}
-        onClose={closeDialogPrint}
-        readOnly={true}
+        open={dialogs.dialogPrint}
+        onClose={() => closeDialog("dialogPrint")}
+        hideFooter={true}
       />
 
       {/* Issue Dialog */}
       <WorkOrderPrintDialog
+        hideFooter={false}
         title="Issue WorkOrder(s)"
         workOrders={selectedWorkOrders}
-        open={dialogIssue}
-        onClose={closeDialogIssue}
+        open={dialogs.dialogIssue}
+        onClose={() => closeDialog("dialogIssue")}
         onSubmit={handleSubmitIssue}
       />
 
       {/* Complete Dialog */}
-      {/* <ReportWorkDialog
+      <MaintLogUpsert
+        title="Complete WorkOrder"
+        mode="create"
         onSuccess={successComplete}
-        onClose={closeDialogComplete}
-        open={dialogComplete}
+        open={dialogs.dialogComplete}
+        onClose={() => closeDialog("dialogComplete")}
         workOrderId={selectedWorkOrders[0]?.workOrderId}
-      /> */}
+      />
 
       {/* Pending Dialog */}
       <WorkOrderPendingDialog
         onSuccess={successPending}
-        open={dialogPending}
-        onClose={closeDialogPending}
+        open={dialogs.dialogPending}
+        onClose={() => closeDialog("dialogPending")}
         workOrder={selectedWorkOrders[0] ?? null}
       />
 
       {/* Postponed Dialog */}
       <ConfirmDialog
-        open={dialogPostponed}
+        open={dialogs.dialogPostponed}
         title="Postponed Work Order(s)"
         message={`Are you sure you want to Postponed ${selectedWorkOrders.length} work order(s)?`}
         confirmText="Postponed"
         cancelText="Cancel"
         onConfirm={handleConfirmPostponed}
-        onCancel={closeDialogPostponed}
+        onCancel={() => closeDialog("dialogPostponed")}
       />
 
       {/* Cancel Confirm Dialog */}
       <ConfirmDialog
-        open={dialogCancel}
+        open={dialogs.dialogCancel}
         title="Cancel Work Orders"
         message={`Are you sure you want to cancel ${selectedWorkOrders.length} work order(s)?`}
         confirmText="Cancel WorkOrder"
         cancelText="Close"
         confirmColor="error"
         onConfirm={handleConfirmCancel}
-        onCancel={closeDialogCancel}
+        onCancel={() => closeDialog("dialogCancel")}
       />
 
       {/* Request Dialog */}
       <ConfirmDialog
-        open={dialogRequest}
+        open={dialogs.dialogRequest}
         title="Request Work Orders"
         message={`Are you sure you want to request ${selectedWorkOrders.length} work order(s)?`}
         confirmText="Request"
         cancelText="Close"
         onConfirm={handleSubmitRequest}
-        onCancel={closeDialogRequest}
+        onCancel={() => closeDialog("dialogRequest")}
       />
 
       {/* Reschedule Dialog */}
-      <WorkOrderDialogReschedule
-        workOrder={selectedWorkOrders[0]}
-        open={dialogReschedule}
-        onClose={closeDialogReschedule}
-        onSuccess={successReschedule}
-      />
+      {dialogs.dialogReschedule && (
+        <WorkOrderDialogReschedule
+          workOrder={selectedWorkOrders[0]}
+          open={dialogs.dialogReschedule}
+          onClose={() => closeDialog("dialogReschedule")}
+          onSuccess={successReschedule}
+        />
+      )}
 
       <WorkOrderDetailDialog
         open={dialogs.workOrderDetail}

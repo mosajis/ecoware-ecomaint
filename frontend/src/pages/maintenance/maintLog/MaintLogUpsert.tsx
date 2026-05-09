@@ -11,7 +11,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import Editor from "@/shared/components/Editor";
 import { Controller } from "react-hook-form";
 import { memo, useEffect, useState } from "react";
-import { getMaintLogContext } from "@/core/api/api";
+import { generateNextWorkOrder, getMaintLogContext } from "@/core/api/api";
 import { MaintLogContex } from "@/core/api/api.types";
 import { toast } from "sonner";
 import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
@@ -27,6 +27,7 @@ import { Divider, TextField } from "@mui/material";
 
 type MaintLogUpsertProps = {
   open: boolean;
+  title: string;
   mode: "create" | "update" | "view";
   recordId?: number | null;
   workOrderId?: number;
@@ -49,6 +50,7 @@ const defaultValues: TypeValues = {
 
 function MaintLogUpsert({
   open,
+  title,
   mode,
   recordId,
   workOrderId,
@@ -64,7 +66,6 @@ function MaintLogUpsert({
     submitting,
     isDisabled,
     readonly,
-    title,
     handleFormSubmit,
   } = useUpsertForm<TypeValues, any>({
     entityName: "Maintenance Log",
@@ -100,9 +101,9 @@ function MaintLogUpsert({
         dateDone: maintLog?.dateDone ? new Date(maintLog.dateDone) : new Date(),
         totalDuration: maintLog?.totalDuration ?? 0,
         waitingMin: maintLog?.downTime ?? 0,
-        maintType: maintLog?.tblMaintType ?? null,
-        maintCause: maintLog?.tblMaintCause ?? null,
-        maintClass: maintLog?.tblMaintClass ?? null,
+        maintType: context?.maintType ?? null,
+        maintCause: context?.maintCause ?? null,
+        maintClass: context?.maintClass ?? null,
         history: maintLog?.history ?? "",
         unexpected: maintLog?.unexpected,
         reportedCount: context?.isCounter ? context.reportedCount : undefined,
@@ -110,13 +111,8 @@ function MaintLogUpsert({
     },
 
     onCreate: async (values) => {
-      const compId = initialCompId || workOrderId; // Use initialCompId if provided
-      if (!compId) {
-        throw new Error("CompId or WorkOrderId is required");
-      }
-
       const payload = {
-        compId,
+        compId: initialCompId || context?.componentUnit?.compId || 0,
         workOrderId,
         dateDone: values.dateDone?.toString(),
         downTime: values.waitingMin ?? 0,
@@ -127,10 +123,31 @@ function MaintLogUpsert({
         maintClassId: values.maintClass?.maintClassId,
         maintTypeId: values.maintType?.maintTypeId,
         maintCauseId: values.maintCause?.maintCauseId,
+
         reportedCount: context?.isCounter ? values.reportedCount : undefined,
       };
 
-      return await tblMaintLog.create(payload);
+      await tblMaintLog
+        .create(payload)
+        .then((res) => {
+          toast.success("Maintenance Log created successfully");
+
+          if (workOrderId) {
+            generateNextWorkOrder(res.maintLogId)
+              .then((woRes) => {
+                toast.success("Next Work Order generated successfully");
+              })
+              .catch(() => {
+                toast.error("Failed to generate Next Work Order");
+              });
+          }
+
+          onSuccess?.(res);
+        })
+        .catch(() => {
+          toast.error("Failed to create Maintenance Log");
+        });
+      return;
     },
 
     onUpdate: async (id, values) => {
@@ -169,6 +186,7 @@ function MaintLogUpsert({
     control,
     formState: { errors },
     setValue,
+    reset,
   } = form;
 
   // Load context when dialog opens for create mode
@@ -184,6 +202,14 @@ function MaintLogUpsert({
           workOrderId,
         });
         setContext(contextData);
+
+        reset({
+          ...defaultValues,
+          maintType: contextData.maintType || null,
+          maintCause: contextData.maintCause || null,
+          maintClass: contextData.maintClass || null,
+          reportedCount: contextData.isCounter ? contextData.reportedCount : 0,
+        });
       } catch (error) {
         toast.error("Failed to load context");
       }
@@ -216,13 +242,13 @@ function MaintLogUpsert({
             <TextField
               label="Component"
               fullWidth
-              value={context?.maintLog?.tblComponentUnit?.compNo || " "}
+              value={context?.componentUnit?.compNo || " "}
               size="small"
               slotProps={{ input: { readOnly: true } }}
             />
             <TextField
               label="Job Title"
-              value={context?.maintLog?.tblJobDescription?.jobDescTitle || " "}
+              value={context?.jobDescription?.title || " "}
               fullWidth
               size="small"
               slotProps={{ input: { readOnly: true } }}
@@ -236,11 +262,11 @@ function MaintLogUpsert({
               control={control}
               render={({ field, fieldState }) => (
                 <FieldDateTime
+                  field={field}
                   type="DATETIME"
                   label="Date Done"
                   error={!!fieldState.error}
                   helperText={fieldState.error?.message}
-                  field={field}
                 />
               )}
             />
@@ -384,12 +410,12 @@ function MaintLogUpsert({
                   <FormControlLabel
                     value={1}
                     control={<Radio size="small" />}
-                    label="Unplanned (Major)"
+                    label="UnPlanned (KPI)"
                   />
                   <FormControlLabel
                     value={2}
                     control={<Radio size="small" />}
-                    label="Non-routine (Minor)"
+                    label="UnPlanned (Ignore)"
                   />
                 </RadioGroup>
               </FormControl>
