@@ -75,7 +75,7 @@ export default function PageComponentJob() {
         toolbarChildren={
           <Button
             onClick={onGenerateWorkOrder}
-            // variant="contained"
+            variant="contained"
             size="small"
           >
             Generate Work Order

@@ -23,7 +23,7 @@ import { atomRig } from "@/shared/atoms/general.atom";
 const schema = z.object({
   jobDescCode: z.string().nullable().optional(),
   jobDescTitle: z.string().min(1),
-  jobClassId: z
+  tblJobClass: z
     .object({
       jobClassId: z.number(),
       name: z.string().nullable().optional(),
@@ -38,7 +38,7 @@ export type JobDescriptionFormValues = z.infer<typeof schema>;
 const defaultValues: JobDescriptionFormValues = {
   jobDescCode: "",
   jobDescTitle: "",
-  jobClassId: null,
+  tblJobClass: null,
   changeReason: "",
 };
 
@@ -77,7 +77,7 @@ function JobDescriptionUpsert({
       return {
         jobDescCode: res?.jobDescCode ?? "",
         jobDescTitle: res?.jobDescTitle ?? "",
-        jobClassId: res?.tblJobClass
+        tblJobClass: res?.tblJobClass
           ? {
               jobClassId: res.tblJobClass.jobClassId,
               name: res.tblJobClass.name,
@@ -87,8 +87,35 @@ function JobDescriptionUpsert({
       };
     },
 
-    onCreate: tblJobDescription.create,
-    onUpdate: tblJobDescription.update,
+    onCreate: (values) => {
+      return tblJobDescription.create({
+        changeReason: values.changeReason,
+        createdDate: new Date().toISOString(),
+        jobDescCode: values?.jobDescCode ?? "",
+        jobDescTitle: values?.jobDescTitle ?? "",
+        tblJobClass: values.tblJobClass?.jobClassId
+          ? {
+              connect: {
+                jobClassId: values.tblJobClass?.jobClassId,
+              },
+            }
+          : undefined,
+      });
+    },
+    onUpdate: (id, values) => {
+      return tblJobDescription.update(id, {
+        changeReason: values.changeReason ?? undefined,
+        jobDescCode: values?.jobDescCode ?? undefined,
+        jobDescTitle: values?.jobDescTitle ?? undefined,
+        tblJobClass: values.tblJobClass?.jobClassId
+          ? {
+              connect: {
+                jobClassId: values.tblJobClass?.jobClassId,
+              },
+            }
+          : undefined,
+      });
+    },
 
     onSuccess,
     onClose,
@@ -139,7 +166,7 @@ function JobDescriptionUpsert({
         />
 
         <Controller
-          name="jobClassId"
+          name="tblJobClass"
           control={control}
           render={({ field, fieldState }) => (
             <FieldAsyncSelectGrid
