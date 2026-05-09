@@ -15,7 +15,6 @@ import {
   TypeTblEmployee,
   TypeTblLogDiscipline,
 } from "@/core/api/generated/api";
-import { reportWorkAtom } from "../../ReportWorkAtom";
 
 /* =========================
    Schema
@@ -31,7 +30,7 @@ const schema = z.object({
   timeSpent: z.number().min(0, "Time spent must be greater than 0"),
 });
 
-export type StepResourceUsedFormValues = z.infer<typeof schema>;
+export type FormValues = z.infer<typeof schema>;
 
 /* =========================
    Props
@@ -40,34 +39,32 @@ type Props = {
   open: boolean;
   mode: "create" | "update";
   recordId?: number | null;
+  maintLogId: number;
   onClose: () => void;
   onSuccess: (data: TypeTblLogDiscipline) => void;
 };
 
-function StepResourceUsedFormDialog({
+function TabResourceUsedUpsert({
   open,
   mode,
   recordId,
+  maintLogId,
   onClose,
   onSuccess,
 }: Props) {
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const { maintLog } = useAtomValue(reportWorkAtom);
 
-  const maintLogId = maintLog?.maintLogId;
-
-  const defaultValues: StepResourceUsedFormValues = {
+  const defaultValues: FormValues = {
     employee: null,
     disipline: null,
     timeSpent: 0,
   };
 
-  const { control, handleSubmit, reset, setValue } =
-    useForm<StepResourceUsedFormValues>({
-      resolver: zodResolver(schema),
-      defaultValues,
-    });
+  const { control, handleSubmit, reset, setValue } = useForm({
+    resolver: zodResolver(schema),
+    defaultValues,
+  });
 
   const isDisabled = loadingInitial || submitting;
 
@@ -108,7 +105,7 @@ function StepResourceUsedFormDialog({
      Submit
   ========================= */
   const handleFormSubmit = useCallback(
-    async (values: StepResourceUsedFormValues) => {
+    async (values: FormValues) => {
       const parsed = schema.safeParse(values);
       if (!parsed.success || !maintLogId) return;
 
@@ -164,11 +161,7 @@ function StepResourceUsedFormDialog({
     <FormDialog
       open={open}
       onClose={onClose}
-      title={
-        mode === "create"
-          ? "Create Step Resource Used"
-          : "Edit Step Resource Used"
-      }
+      title={mode === "create" ? "Create Resource Used" : "Edit Resource Used"}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
@@ -252,4 +245,4 @@ function StepResourceUsedFormDialog({
   );
 }
 
-export default memo(StepResourceUsedFormDialog);
+export default memo(TabResourceUsedUpsert);

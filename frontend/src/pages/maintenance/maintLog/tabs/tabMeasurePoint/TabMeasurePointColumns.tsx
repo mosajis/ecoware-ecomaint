@@ -1,41 +1,36 @@
+import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
+import { GridColDef } from "@mui/x-data-grid";
 import {
   TypeTblCompJobMeasurePoint,
   TypeTblCompMeasurePoint,
 } from "@/core/api/generated/api";
-import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
-import { GridColDef } from "@mui/x-data-grid";
 
-export const getRowId = (row: TypeTblCompMeasurePoint) =>
-  row.compMeasurePointId;
+export const getRowId = (row: TypeTblCompJobMeasurePoint) =>
+  row.compJobMeasurePointId;
 
-export const columns: GridColDef<TypeTblCompMeasurePoint>[] = [
+export const columns: GridColDef<TypeTblCompJobMeasurePoint>[] = [
   {
-    field: "measureName",
-    headerName: "Measure",
+    field: "counterTypeName",
+    headerName: "Measure Name",
     flex: 1,
-    valueGetter: (_, row) => row?.tblCounterType?.name || "",
+    valueGetter: (_, row) =>
+      // @ts-ignore
+      row?.tblCompMeasurePoint?.tblCounterType?.name || "—",
   },
   {
-    field: "currentDate",
-    headerName: "Current Date",
-    width: 135,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
+    field: "currentValue",
+    headerName: "Current Value",
+    flex: 1,
+    align: "left",
+    valueGetter: (_, row) =>
+      // @ts-ignore
+      row?.tblCompMeasurePoint?.currentValue ?? "—",
   },
-  { field: "currentValue", headerName: "Current Value", width: 120 },
   {
     field: "unitName",
     headerName: "Unit",
     flex: 1,
-    valueGetter: (_, row) => row.tblUnit?.name || "",
+    // @ts-ignore
+    valueGetter: (_, row) => row?.tblCompMeasurePoint?.tblUnit?.name || "—",
   },
-  {
-    field: "unitDescription",
-    headerName: "Unit Description",
-    flex: 1,
-    valueGetter: (_, row) => row.tblUnit?.description || "",
-  },
-  { field: "setValue", headerName: "Set Value", width: 110 },
-  { field: "operationalMinValue", headerName: "Min", width: 100 },
-  { field: "operationalMaxValue", headerName: "Max", width: 100 },
-  { field: "orderNo", headerName: "Order", width: 80 },
 ];

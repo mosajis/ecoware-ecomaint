@@ -1,7 +1,7 @@
 import { TypeTblMaintLogSpare } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 
-export const getRowId = (row: TypeTblMaintLogSpare) => row.maintLogStockId;
+export const getRowId = (row: TypeTblMaintLogSpare) => row.maintLogSpareId;
 
 export const columns: GridColDef<TypeTblMaintLogSpare>[] = [
   {
@@ -24,5 +24,10 @@ export const columns: GridColDef<TypeTblMaintLogSpare>[] = [
     flex: 1,
     // @ts-ignore
     valueGetter: (_, row) => row?.tblSpareUnit.tblSpareType.makerRefNo,
+  },
+  {
+    field: "spareCount",
+    headerName: "Count",
+    flex: 1,
   },
 ];

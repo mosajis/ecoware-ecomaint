@@ -29,7 +29,7 @@ const schema = z.object({
       .nullable()
       .optional(),
   }),
-  stockCount: z.number().min(1, "Stock count must be greater than 0"),
+  spareCount: z.number().min(1, "Stock count must be greater than 0"),
 });
 
 export type StockUsedFormValues = z.infer<typeof schema>;
@@ -43,7 +43,7 @@ type Props = {
   onSuccess: (data: TypeTblMaintLogSpare) => void;
 };
 
-function StockUsedFormDialog({
+function TabSpareUsedUpsert({
   open,
   mode,
   recordId,
@@ -56,7 +56,7 @@ function StockUsedFormDialog({
 
   const defaultValues: StockUsedFormValues = {
     spareUnit: undefined as any,
-    stockCount: 1,
+    spareCount: 1,
   };
 
   const { control, handleSubmit, reset, watch } = useForm<StockUsedFormValues>({
@@ -90,7 +90,7 @@ function StockUsedFormDialog({
       if (res?.tblSpareUnit) {
         reset({
           spareUnit: res.tblSpareUnit,
-          stockCount: res.spareCount ?? 1,
+          spareCount: res.spareCount ?? 1,
         });
       }
     } finally {
@@ -119,7 +119,7 @@ function StockUsedFormDialog({
         setSubmitting(true);
 
         const payload = {
-          stockCount: values.stockCount,
+          spareCount: values.spareCount,
 
           // ✅ Relation 1
           tblSpareUnit: {
@@ -174,7 +174,7 @@ function StockUsedFormDialog({
           render={({ field, fieldState }) => (
             <FieldAsyncSelectGrid
               dialogMaxWidth="sm"
-              label="Stock Item *"
+              label="Spare Unit *"
               selectionMode="single"
               getOptionLabel={(row) => row?.tblSpareType?.name}
               value={field.value}
@@ -229,12 +229,12 @@ function StockUsedFormDialog({
 
         {/* Stock Count */}
         <Controller
-          name="stockCount"
+          name="spareCount"
           control={control}
           render={({ field, fieldState }) => (
             <NumberField
               {...field}
-              label="Stock Count *"
+              label="Spare Count *"
               size="small"
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
@@ -249,4 +249,4 @@ function StockUsedFormDialog({
   );
 }
 
-export default memo(StockUsedFormDialog);
+export default memo(TabSpareUsedUpsert);

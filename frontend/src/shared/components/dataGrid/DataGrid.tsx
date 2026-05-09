@@ -1,108 +1,174 @@
-import DataGridToolbar from "./DataGridToolbar";
-import { getPermit } from "@/shared/hooks/usePermison";
-import { DataGrid as MuiDataGrid, GridRowId } from "@mui/x-data-grid";
+import { useMemo, useCallback, useState } from "react";
+
 import {
+  DataGrid as MuiDataGrid,
   type DataGridProps,
   type GridColDef,
+  type GridRowId,
+  type GridRowParams,
+  type GridValidRowModel,
   type GridSlotsComponent,
   type GridRowSelectionModel,
-  type GridCallbackDetails,
 } from "@mui/x-data-grid";
 
-import { useMemo, useCallback, useState, useRef } from "react";
+import DataGridToolbar from "./DataGridToolbar";
+import { getPermit } from "@/shared/hooks/usePermison";
 
 const rowNumberColumn: GridColDef = {
   field: "rowNumber",
   headerName: "#",
-  width: 35,
+  width: 50,
   sortable: false,
   filterable: false,
   disableColumnMenu: true,
   align: "center",
   headerAlign: "center",
+  renderCell: (params) => params.api.getAllRowIds().indexOf(params.id) + 1,
 };
 
-interface CustomizedDataGridProps extends DataGridProps {
+interface CustomizedDataGridProps<
+  R extends GridValidRowModel,
+> extends DataGridProps<R> {
   label?: string;
+
   onAddClick?: () => void;
   onRefreshClick?: () => void;
+
   onEditClick?: (rowId: number) => void;
-  onDoubleClick?: (rowId: number) => void;
   onDeleteClick?: (rowId: number) => void;
-  getRowId: (row: any) => GridRowId;
+  onDoubleClick?: (rowId: number) => void;
+
   disableSearch?: boolean;
   disableDensity?: boolean;
   disableExport?: boolean;
   disableColumns?: boolean;
   disableFilters?: boolean;
+
   disableAdd?: boolean;
   disableRefresh?: boolean;
   disableEdit?: boolean;
   disableDelete?: boolean;
+
   disableRowNumber?: boolean;
+
   toolbarChildren?: React.ReactNode;
+
   elementId?: number;
+
   children?: React.ReactNode;
 }
 
-export default function GenericDataGrid({
-  rows,
+export default function GenericDataGrid<R extends GridValidRowModel>({
+  rows = [],
   columns = [],
   initialState,
+
   label,
   loading,
+
   onAddClick,
   onRefreshClick,
   onEditClick,
   onDeleteClick,
   onDoubleClick,
-  getRowId,
+
   disableSearch,
   disableDensity = true,
   disableExport,
   disableColumns,
   disableFilters,
+
   disableAdd,
   disableRefresh,
   disableEdit,
   disableDelete,
-  disableRowNumber,
-  toolbarChildren,
-  elementId,
-  children,
-  ...rest
-}: CustomizedDataGridProps) {
-  let { canCreate, canUpdate, canDelete, canView, canExport } = getPermit(
-    elementId!,
-  );
 
-  if (!elementId) {
-    canCreate = true;
-    canUpdate = true;
-    canView = true;
-    canExport = true;
+  disableRowNumber,
+
+  toolbarChildren,
+
+  elementId,
+
+  children,
+
+  rowSelectionModel,
+  checkboxSelection,
+
+  ...rest
+}: CustomizedDataGridProps<R>) {
+  const permit = elementId
+    ? getPermit(elementId)
+    : {
+        canCreate: true,
+        canUpdate: true,
+        canDelete: true,
+        canView: true,
+        canExport: true,
+      };
+
+  const { canCreate, canUpdate, canDelete, canView, canExport } = permit;
+
+  if (!canView) {
+    return null;
   }
 
-  if (!canView) return null;
+  // =========================================
+  // Internal Selection (Single Select Mode)
+  // =========================================
 
-  // ✅ FIX: stable ref instead of variable
-  const clickTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [selectedRowId, setSelectedRowId] = useState<GridRowId | null>(null);
 
-  const [rowSelectionModel, setRowSelectionModel] =
-    useState<GridRowSelectionModel>({
-      type: "include",
-      ids: new Set<GridRowId>([]),
-    });
+  // =========================================
+  // Selection Helpers
+  // =========================================
 
-  const indexedRows = useMemo(() => {
-    if (!rows) return [];
-    if (disableRowNumber) return rows;
-    return rows.map((row, index) => ({ ...row, rowNumber: index + 1 }));
-  }, [rows, disableRowNumber]);
+  const hasCheckboxSelection = checkboxSelection === true;
 
-  const columnsWithRowNumber = useMemo(() => {
-    return disableRowNumber ? columns : [rowNumberColumn, ...columns];
-  }, [columns, disableRowNumber]);
+  const getSelectedIds = useCallback((): GridRowId[] => {
+    if (hasCheckboxSelection && rowSelectionModel) {
+      if (Array.isArray(rowSelectionModel)) {
+        return rowSelectionModel;
+      }
+
+      return Array.from(
+        (rowSelectionModel as Exclude<GridRowSelectionModel, GridRowId[]>).ids,
+      );
+    }
+
+    return selectedRowId !== null ? [selectedRowId] : [];
+  }, [hasCheckboxSelection, rowSelectionModel, selectedRowId]);
+
+  const selectedIds = getSelectedIds();
+
+  const hasSelection = selectedIds.length > 0;
+
+  const selectedRow = selectedIds[0];
+
+  // =========================================
+  // Columns
+  // =========================================
+
+  const finalColumns = useMemo<GridColDef[]>(() => {
+    const baseColumns = disableRowNumber
+      ? [...columns]
+      : [rowNumberColumn, ...columns];
+
+    if (disableFilters) {
+      return baseColumns.map((column) => ({
+        ...column,
+        filterable: false,
+      }));
+    }
+
+    return baseColumns.map((column) => ({
+      ...column,
+      filterable: column.field !== "rowNumber" && column.filterable !== false,
+    }));
+  }, [columns, disableRowNumber, disableFilters]);
+
+  // =========================================
+  // Initial State
+  // =========================================
 
   const mergedInitialState = useMemo(() => {
     return {
@@ -111,111 +177,165 @@ export default function GenericDataGrid({
     };
   }, [initialState]);
 
-  const handleRowSelectionChange = useCallback(
-    (model: GridRowSelectionModel, _details: GridCallbackDetails) => {
-      setRowSelectionModel(model);
-    },
-    [],
-  );
+  // =========================================
+  // Actions
+  // =========================================
 
   const handleEdit = useCallback(() => {
-    const rowId = Array.from(rowSelectionModel.ids)[0];
-    if (!rowId) return;
-    onEditClick?.(Number(rowId));
-  }, [rowSelectionModel, onEditClick]);
-
-  const handleDelete = useCallback(() => {
-    const rowId = Array.from(rowSelectionModel.ids)[0];
-    if (!rowId) return;
-    onDeleteClick?.(Number(rowId));
-  }, [rowSelectionModel, onDeleteClick]);
-
-  const handleRowClick = useCallback((params: any) => {
-    if (clickTimeoutRef.current) {
-      clearTimeout(clickTimeoutRef.current);
+    if (!selectedRow) {
+      return;
     }
 
-    clickTimeoutRef.current = setTimeout(() => {
-      setRowSelectionModel({
-        type: "include",
-        ids: new Set([params.id]),
-      });
-    }, 150);
-  }, []);
+    onEditClick?.(Number(selectedRow));
+  }, [selectedRow, onEditClick]);
 
-  const handleRowDoubleClick = useCallback(
-    (params: any) => {
-      if (clickTimeoutRef.current) {
-        clearTimeout(clickTimeoutRef.current);
+  const handleDelete = useCallback(() => {
+    if (!selectedRow) {
+      return;
+    }
+
+    onDeleteClick?.(Number(selectedRow));
+  }, [selectedRow, onDeleteClick]);
+
+  // =========================================
+  // Events
+  // =========================================
+
+  const handleRowClick = useCallback(
+    (params: GridRowParams<R>) => {
+      if (hasCheckboxSelection) {
+        return;
       }
 
+      setSelectedRowId(params.id);
+    },
+    [hasCheckboxSelection],
+  );
+
+  const handleRowDoubleClick = useCallback(
+    (params: GridRowParams<R>) => {
       onDoubleClick?.(Number(params.id));
     },
     [onDoubleClick],
   );
 
-  const ToolbarWrapper = useMemo(
-    () => (props: any) => (
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent) => {
+      if (!hasSelection) {
+        return;
+      }
+
+      if (event.key === "Enter" && !disableEdit && canUpdate) {
+        event.preventDefault();
+        handleEdit();
+      }
+
+      if (event.key === "Delete" && !disableDelete && canDelete) {
+        event.preventDefault();
+        handleDelete();
+      }
+    },
+    [
+      hasSelection,
+
+      disableEdit,
+      disableDelete,
+
+      canUpdate,
+      canDelete,
+
+      handleEdit,
+      handleDelete,
+    ],
+  );
+
+  // =========================================
+  // Toolbar
+  // =========================================
+
+  const ToolbarSlot = useCallback(
+    () => (
       <DataGridToolbar
-        {...props}
-        label={label!}
+        label={label ?? ""}
         loading={loading}
+        hasSelection={hasSelection}
         onAddClick={onAddClick}
         onRefreshClick={onRefreshClick}
         onEditClick={handleEdit}
         onDeleteClick={handleDelete}
-        hasSelection={rowSelectionModel.ids.size > 0}
         disableSearch={disableSearch}
         disableDensity={disableDensity}
+        disableExport={!canExport || disableExport}
         disableColumns={disableColumns}
         disableFilters={disableFilters}
-        disableExport={!canExport || disableExport}
         disableAdd={!canCreate || disableAdd}
+        disableRefresh={disableRefresh}
         disableEdit={!canUpdate || disableEdit}
         disableDelete={!canDelete || disableDelete}
-        disableRefresh={disableRefresh}
       >
         {toolbarChildren}
       </DataGridToolbar>
     ),
     [
-      toolbarChildren,
       label,
       loading,
+
+      hasSelection,
+
       onAddClick,
       onRefreshClick,
+
       handleEdit,
       handleDelete,
-      rowSelectionModel,
+
       disableSearch,
       disableDensity,
       disableExport,
       disableColumns,
       disableFilters,
+
       disableAdd,
       disableRefresh,
       disableEdit,
       disableDelete,
+
+      toolbarChildren,
+
+      canCreate,
+      canUpdate,
+      canDelete,
+      canExport,
     ],
   );
 
   const slots: Partial<GridSlotsComponent> = useMemo(
-    () => ({ toolbar: ToolbarWrapper }),
-    [ToolbarWrapper],
+    () => ({
+      toolbar: ToolbarSlot,
+    }),
+    [ToolbarSlot],
   );
 
   return (
     <>
       <MuiDataGrid
-        rows={indexedRows}
-        columns={columnsWithRowNumber}
-        initialState={mergedInitialState}
+        rows={rows}
+        columns={finalColumns}
+        loading={loading}
         slots={slots}
-        rowSelectionModel={rowSelectionModel}
-        onRowSelectionModelChange={handleRowSelectionChange}
-        getRowId={getRowId}
+        initialState={mergedInitialState}
         onRowClick={handleRowClick}
         onRowDoubleClick={handleRowDoubleClick}
+        getRowClassName={(params) =>
+          params.id === selectedRowId ? "Mui-selected" : ""
+        }
+        pageSizeOptions={[10, 25, 50, 100]}
+        checkboxSelection={checkboxSelection}
+        rowSelectionModel={rowSelectionModel}
+        slotProps={{
+          root: {
+            onKeyDown: handleKeyDown,
+          },
+        }}
         {...rest}
       />
 

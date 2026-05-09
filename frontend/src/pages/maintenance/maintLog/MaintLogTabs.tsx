@@ -15,7 +15,7 @@ import TabsContainer, {
 
 // Lazy imports
 const TabHistory = lazy(() => import("./tabs/TabHistory"));
-const TabStockUsed = lazy(() => import("./tabs/tabStockUsed/TabStockUsed"));
+const TabStockUsed = lazy(() => import("./tabs/tabSpareUsed/TabSpareUsed"));
 const TabFollow = lazy(() => import("./tabs/tabFollow/TabFollow"));
 const TabFailureReport = lazy(() => import("./tabs/TabFailureReport"));
 const TabResourceUsed = lazy(
@@ -25,7 +25,7 @@ const TabLogCounter = lazy(() => import("./tabs/TabLogCounter"));
 const TabMeasurePoint = lazy(
   () => import("./tabs/tabMeasurePoint/TabMeasurePoint"),
 );
-const TabWorkOrders = lazy(() => import("./tabs/TabWorkOrders"));
+const TabWorkOrders = lazy(() => import("./tabs/TabWorkOrder"));
 const TabAttachment = lazy(() => import("./tabs/TabAttachment"));
 
 // Tabs

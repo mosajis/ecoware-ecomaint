@@ -24,16 +24,14 @@ type Props = {
   open: boolean;
   row: TypeTblCompJobMeasurePoint | null;
   maintLogDate?: string;
-  userId: number;
   onClose: () => void;
   onSuccess: (newValue: number, currentDate: string) => void;
 };
 
-function StepMeasurePointUpsert({
+function TabMeasurePointUpsert({
   open,
   row,
   maintLogDate,
-  userId,
   onClose,
   onSuccess,
 }: Props) {
@@ -115,7 +113,7 @@ function StepMeasurePointUpsert({
         setSubmitting(false);
       }
     },
-    [row, maintLogDate, userId, onSuccess, onClose],
+    [row, maintLogDate, onSuccess, onClose],
   );
 
   return (
@@ -149,4 +147,4 @@ function StepMeasurePointUpsert({
   );
 }
 
-export default memo(StepMeasurePointUpsert);
+export default memo(TabMeasurePointUpsert);

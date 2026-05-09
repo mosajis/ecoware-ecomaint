@@ -1,25 +1,31 @@
+import { createDetailRoute } from "@/app/router/routes/_components/DetailRoute";
 import { LazyRoute } from "@/app/router/routes/_components/lazyRoute";
 import { routeMaintenance } from "@/pages/maintenance/MaintenanceRoutes";
-import { createRoute } from "@tanstack/react-router";
+import { createRoute, Outlet } from "@tanstack/react-router";
 import { lazy } from "react";
-import z from "zod";
 
-const searchSchema = z.object({
-  filter: z.string().optional(),
-});
-
-const maintLog = createRoute({
+export const Route = createRoute({
   getParentRoute: () => routeMaintenance,
   path: "maint-log",
-  validateSearch: searchSchema,
-  component: () => (
-    <LazyRoute
-      Component={lazy(() => import("@/pages/maintenance/maintLog/MaintLog"))}
-    />
-  ),
-  beforeLoad: () => ({ breadcrumb: "Maint Logs" }),
+  component: () => <Outlet />,
+  beforeLoad: () => ({ breadcrumb: "MaintLog" }),
 });
 
-const routes = maintLog;
+export const RouteList = createRoute({
+  getParentRoute: () => Route,
+  path: "/",
+  component: () => <LazyRoute Component={lazy(() => import("./MaintLog"))} />,
+  beforeLoad: () => ({ breadcrumb: "List" }),
+});
+
+export const RouteDetail = createDetailRoute({
+  parent: Route,
+  path: "$id",
+  Component: () => (
+    <LazyRoute Component={lazy(() => import("./MaintLogDetail"))} />
+  ),
+});
+
+const routes = Route.addChildren([RouteList, RouteDetail]);
 
 export default routes;

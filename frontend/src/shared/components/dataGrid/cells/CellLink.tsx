@@ -1,12 +1,12 @@
-import { FC, ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
+import Box from "@mui/material/Box";
+import { ReactNode } from "react";
+import { useRouter } from "@tanstack/react-router";
 
 type Props<TParams extends Record<string, any> = any> = {
   value?: ReactNode;
   to: string; // path route
   params?: TParams; // params مثل id
-  breadcrumb?: any;
-  className?: string;
+  breadcrumb?: string;
 };
 
 const CellLink = <TParams extends Record<string, any>>({
@@ -14,20 +14,29 @@ const CellLink = <TParams extends Record<string, any>>({
   to,
   params,
   breadcrumb,
-  className,
 }: Props<TParams>) => {
   if (!value) return null;
+  const router = useRouter();
+
+  const handleClick = () => {
+    const href = router.buildLocation({
+      to,
+      params,
+      search: {
+        breadcrumb: breadcrumb ?? "",
+      },
+    }).href;
+
+    window.open(href, "_blank");
+  };
 
   return (
-    <Link
-      to={to}
-      params={params}
-      search={{ breadcrumb }}
-      className={className}
-      style={{ color: "unset" }}
+    <span
+      onClick={handleClick}
+      style={{ textDecoration: "underline", cursor: "pointer" }}
     >
       {value}
-    </Link>
+    </span>
   );
 };
 

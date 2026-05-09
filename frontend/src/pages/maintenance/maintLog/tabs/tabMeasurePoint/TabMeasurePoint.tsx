@@ -1,56 +1,111 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { useCallback } from "react";
-import { columns, getRowId } from "./TabMeasurePointColumns";
+import TabMeasurePointUpsert from "./TabMeasurePointUpsert";
+import { useCallback, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { atomUser } from "@/pages/auth/auth.atom";
+import { columns, getRowId } from "./TabMeasurePointColumns";
+import { useAtomValue } from "jotai";
 import {
+  tblCompJobMeasurePoint,
   tblCompMeasurePoint,
-  tblCompTypeMeasurePoint,
+  TypeTblCompJobMeasurePoint,
   TypeTblMaintLog,
 } from "@/core/api/generated/api";
 
 type Props = {
   selected: TypeTblMaintLog;
-  label?: string;
 };
-// maintLogMeasurepoint
-const TabMeasurePoints = ({ selected }: Props) => {
-  const compId = selected?.tblComponentUnit?.compId;
-  // === getAll callback ===
-  const getAll = useCallback(() => {
-    return tblCompMeasurePoint.getAll({
-      filter: {
-        compId,
-      },
-      include: {
-        tblUnit: true,
-        tblCounterType: true,
-      },
-    });
-  }, [compId]);
 
-  // === useDataGrid ===
-  const { rows, loading, handleRefresh } = useDataGrid(
+const TabMeasures = ({ selected }: Props) => {
+  const [selectedRow, setSelectedRow] =
+    useState<TypeTblCompJobMeasurePoint | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const user = useAtomValue(atomUser);
+  const userId = user?.userId as number;
+  // const compJobId = workOrder?.tblCompJob?.compJobId;
+
+  const getAll = useCallback(
+    () =>
+      tblCompJobMeasurePoint.getAll({
+        filter: {
+          // compJobId,
+        },
+        include: {
+          tblCompMeasurePoint: {
+            include: {
+              tblCounterType: true,
+              tblUnit: true,
+            },
+          },
+        },
+      }),
+    [],
+  );
+
+  const { rows, loading, handleRefresh, optimisticUpdate } = useDataGrid(
     getAll,
-    tblCompTypeMeasurePoint.deleteById,
-    "compMeasurePointId",
-    !!compId,
+    tblCompMeasurePoint.deleteById,
+    "compJobMeasurePointId",
+    // !!compJobId,
+  );
+
+  const handleEdit = useCallback(
+    (rowId: number) => {
+      const row = rows.find((r) => r.compJobMeasurePointId === rowId);
+      if (row) {
+        setSelectedRow(row);
+        setDialogOpen(true);
+      }
+    },
+    [rows],
+  );
+
+  const handleCloseDialog = useCallback(() => {
+    setDialogOpen(false);
+    setSelectedRow(null);
+  }, []);
+
+  const handleSuccess = useCallback(
+    (newValue: number, currentDate: string) => {
+      if (!selectedRow) return;
+
+      optimisticUpdate(selectedRow.compJobMeasurePointId, {
+        tblCompMeasurePoint: selectedRow.tblCompMeasurePoint
+          ? {
+              ...selectedRow.tblCompMeasurePoint,
+              currentValue: newValue,
+              currentDate: currentDate,
+            }
+          : selectedRow.tblCompMeasurePoint,
+      } as any);
+    },
+    [selectedRow, optimisticUpdate],
   );
 
   return (
-    <CustomizedDataGrid
-      label="Measures"
-      showToolbar
-      disableAdd
-      disableEdit
-      disableRowSelectionOnClick
-      disableDelete
-      rows={rows}
-      columns={columns}
-      loading={loading}
-      onRefreshClick={handleRefresh}
-      getRowId={getRowId}
-    />
+    <>
+      <CustomizedDataGrid
+        showToolbar
+        disableAdd
+        label="Component Measures"
+        rows={rows}
+        columns={columns}
+        loading={loading}
+        onRefreshClick={handleRefresh}
+        onEditClick={handleEdit}
+        onDoubleClick={handleEdit}
+        getRowId={getRowId}
+      />
+
+      <TabMeasurePointUpsert
+        open={dialogOpen}
+        row={selectedRow!}
+        onClose={handleCloseDialog}
+        onSuccess={handleSuccess}
+      />
+    </>
   );
 };
 
-export default TabMeasurePoints;
+export default TabMeasures;

@@ -1,12 +1,25 @@
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
+import CellLink from "@/shared/components/dataGrid/cells/CellLink";
 import { TypeTblMaintLog } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
-import CellLink from "@/shared/components/dataGrid/cells/CellLink";
-import { RouteDetail } from "../componentUnit/ComponentUnitRoutes";
+import { RouteDetail } from "./MaintLogRoute";
 
 export const getRowId = (row: TypeTblMaintLog) => row.maintLogId;
 
 export const columns: GridColDef<TypeTblMaintLog>[] = [
+  {
+    field: "maintLogId",
+    headerName: "No",
+    width: 50,
+    renderCell: ({ value, row }) => (
+      <CellLink
+        breadcrumb={row.tblComponentUnit?.compNo!}
+        value={value}
+        to={RouteDetail.to}
+        params={{ id: row.maintLogId }}
+      />
+    ),
+  },
   {
     field: "component",
     headerName: "Component",

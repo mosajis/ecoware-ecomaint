@@ -1,10 +1,10 @@
-import ReportWorkDialog from "../reportWork/ReportWorkDialog";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import TabsComponent from "./MaintLogTabs";
 import Splitter from "@/shared/components/Splitter/Splitter";
 import MaintLogFollowDialog from "./MaintLogDialogFollow";
 import MaintLogDialogPrint from "./MaintLogDialogPrint";
 import Actions from "./MaintLogActions";
+import MaintLogUpsert from "./MaintLogUpsert";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback, useMemo, useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
@@ -18,13 +18,13 @@ import {
 import MaintLogFilterDialog, {
   type MaintLogFilter,
 } from "./MaintLogDialogFilter";
+import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 
 export default function PageMaintLog() {
   const { dialogs, openDialog, closeDialog } = useDialogs({
     filter: true,
     follow: false,
     print: false,
-    reportWork: false,
   });
 
   const [selectedRow, setSelectedRow] = useState<TypeTblMaintLog | null>(null);
@@ -44,6 +44,10 @@ export default function PageMaintLog() {
 
   const { rows, loading, handleRefresh, optimisticUpdate, handleDelete } =
     useDataGrid(getAll, tblMaintLog.deleteById, "maintLogId", !dialogs.filter);
+
+  const { openCreate, openEdit, openView, dialogProps } = useUpsertDialog({
+    onSuccess: handleRefresh,
+  });
 
   const selectedRows = useMemo<TypeTblMaintLog[]>(() => {
     const hasId = (id: number) =>
@@ -88,27 +92,21 @@ export default function PageMaintLog() {
     [selectedRow?.maintLogId, optimisticUpdate, handleRefresh],
   );
 
-  const handleEdit = () => {
-    if (!selectedRow) return;
-    openDialog("reportWork");
-  };
   return (
     <>
       <Splitter horizontal>
         <CustomizedDataGrid
           showToolbar
           checkboxSelection
-          disableRowSelectionOnClick
           disableRowNumber
-          disableEdit
-          disableDelete
           label="Maint Log"
           elementId={1420}
-          rowSelection
+          // rowSelection
           rows={rows}
           columns={columns}
           loading={loading}
-          onDoubleClick={handleEdit}
+          onEditClick={openEdit}
+          onDoubleClick={openView}
           onDeleteClick={handleDelete}
           onRowClick={handleRowClick}
           onRefreshClick={handleRefresh}
@@ -128,15 +126,7 @@ export default function PageMaintLog() {
         <TabsComponent selectedMaintLog={selectedRow} persistInUrl={true} />
       </Splitter>
 
-      <ReportWorkDialog
-        open={dialogs.reportWork}
-        onClose={() => closeDialog("reportWork")}
-        onSuccess={() => {
-          closeDialog("reportWork");
-          handleRefresh();
-        }}
-        maintLogId={selectedRow?.maintLogId}
-      />
+      <MaintLogUpsert {...dialogProps} />
       <MaintLogFilterDialog
         open={dialogs.filter}
         onClose={() => closeDialog("filter")}

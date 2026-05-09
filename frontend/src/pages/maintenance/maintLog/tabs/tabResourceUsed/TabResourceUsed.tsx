@@ -1,49 +1,88 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import { useState, useCallback } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { useCallback } from "react";
 import { columns, getRowId } from "./TabResourceUsedColumns";
-import { tblLogDiscipline, TypeTblMaintLog } from "@/core/api/generated/api";
+import {
+  tblLogDiscipline,
+  TypeTblLogDiscipline,
+  TypeTblMaintLog,
+} from "@/core/api/generated/api";
+import TabResourceUsedUpsert from "./TabResourceUsedUpsert";
 
 type Props = {
   selected: TypeTblMaintLog;
-  label?: string;
 };
 
-const TabResourceUsed = (props: Props) => {
-  const { selected, label } = props;
+const TabResourceUsed = ({ selected }: Props) => {
+  const [openForm, setOpenForm] = useState(false);
+  const [mode, setMode] = useState<"create" | "update">("create");
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+
+  const maintLogId = selected.maintLogId;
+
+  // === Handlers ===
+  const handleCreate = () => {
+    if (!maintLogId) {
+      return; // Should not happen due to disabled state
+    }
+    setSelectedRowId(null);
+    setMode("create");
+    setOpenForm(true);
+  };
+
+  const handleEdit = (row: TypeTblLogDiscipline) => {
+    setSelectedRowId(row.logDiscId);
+    setMode("update");
+    setOpenForm(true);
+  };
 
   const getAll = useCallback(() => {
     return tblLogDiscipline.getAll({
       filter: {
-        maintLogId: selected?.maintLogId,
+        maintLogId: maintLogId,
       },
-      include: {
-        tblDiscipline: true,
-        tblEmployee: true,
-      },
+      include: { tblDiscipline: true, tblEmployee: true },
     });
-  }, [selected?.maintLogId]);
+  }, [maintLogId]);
 
-  const { rows, loading } = useDataGrid(
+  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
     getAll,
     tblLogDiscipline.deleteById,
     "logDiscId",
-    !!selected?.maintLogId,
+    !!maintLogId,
   );
 
+  const handleFormSuccess = () => {
+    setOpenForm(false);
+    handleRefresh();
+  };
   return (
-    <CustomizedDataGrid
-      label={label || "Resource Used"}
-      showToolbar
-      disableAdd
-      disableEdit
-      disableDelete
-      disableRowSelectionOnClick
-      loading={loading}
-      rows={rows}
-      columns={columns}
-      getRowId={getRowId}
-    />
+    <>
+      <CustomizedDataGrid
+        showToolbar
+        disableEdit
+        label="Resource Used"
+        loading={loading}
+        rows={rows}
+        columns={columns}
+        onDeleteClick={handleDelete}
+        onRefreshClick={handleRefresh}
+        onAddClick={handleCreate}
+        getRowId={getRowId}
+      />
+
+      {/* === FORM === */}
+      {maintLogId && (
+        <TabResourceUsedUpsert
+          maintLogId={maintLogId}
+          open={openForm}
+          mode={mode}
+          recordId={selectedRowId}
+          onClose={() => setOpenForm(false)}
+          onSuccess={handleFormSuccess}
+        />
+      )}
+    </>
   );
 };
 

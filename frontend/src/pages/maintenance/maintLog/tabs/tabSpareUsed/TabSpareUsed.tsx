@@ -1,49 +1,20 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import StepStockUsedUpsert from "./TabStockUsedUpsert";
+import TabSpareUsedUpsert from "./TabSpareUsedUpsert";
 import { useCallback, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { GridColDef } from "@mui/x-data-grid";
-import { useAtomValue } from "jotai";
-import {
-  tblMaintLogSpare,
-  TypeTblMaintLogSpare,
-} from "@/core/api/generated/api";
-import { reportWorkAtom } from "../../ReportWorkAtom";
+import { tblMaintLogSpare, TypeTblMaintLog } from "@/core/api/generated/api";
+import { columns, getRowId } from "./TabSpareUsedColumns";
 
-const getRowId = (row: TypeTblMaintLogSpare) => row.maintLogSpareId;
+type Props = {
+  selected: TypeTblMaintLog;
+};
 
-const columns: GridColDef<TypeTblMaintLogSpare>[] = [
-  {
-    field: "partName",
-    headerName: "Part Name",
-    flex: 1,
-    // @ts-ignore
-    valueGetter: (_, row) => row?.tblSpareUnit?.tblSpareType.name,
-  },
-  {
-    field: "partTypeNo",
-    headerName: "MESC Code",
-    flex: 1,
-    // @ts-ignore
-    valueGetter: (_, row) => row?.tblSpareUnit.tblSpareType.partTypeNo,
-  },
-  {
-    field: "makerRefNo",
-    headerName: "Maker Ref",
-    flex: 1,
-    // @ts-ignore
-    valueGetter: (_, row) => row?.tblSpareUnit.tblSpareType.makerRefNo,
-  },
-];
-
-const StepStockUsed = () => {
+const TabSpareUsed = ({ selected }: Props) => {
   const [openForm, setOpenForm] = useState(false);
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
-  const { maintLog } = useAtomValue(reportWorkAtom);
-
-  const maintLogId = maintLog?.maintLogId;
+  const maintLogId = selected?.maintLogId;
 
   const handleCreate = () => {
     setSelectedRowId(null);
@@ -95,7 +66,7 @@ const StepStockUsed = () => {
         columns={columns}
       />
 
-      <StepStockUsedUpsert
+      <TabSpareUsedUpsert
         open={openForm}
         mode={mode}
         recordId={selectedRowId}
@@ -107,4 +78,4 @@ const StepStockUsed = () => {
   );
 };
 
-export default StepStockUsed;
+export default TabSpareUsed;
