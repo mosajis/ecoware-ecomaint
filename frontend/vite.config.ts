@@ -15,7 +15,7 @@ export default defineConfig({
     emptyOutDir: true,
     cssCodeSplit: true,
     minify: "esbuild",
-    outDir: "../build/public",
+    outDir: "../backend/public",
     chunkSizeWarningLimit: 1000,
   },
   resolve: {

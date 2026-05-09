@@ -5,6 +5,7 @@ import MaintLogFollowDialog from "./MaintLogDialogFollow";
 import MaintLogDialogPrint from "./MaintLogDialogPrint";
 import Actions from "./MaintLogActions";
 import MaintLogUpsert from "./MaintLogUpsert";
+import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback, useMemo, useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
@@ -18,7 +19,6 @@ import {
 import MaintLogFilterDialog, {
   type MaintLogFilter,
 } from "./MaintLogDialogFilter";
-import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 
 export default function PageMaintLog() {
   const { dialogs, openDialog, closeDialog } = useDialogs({
