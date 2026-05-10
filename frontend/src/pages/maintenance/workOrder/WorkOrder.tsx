@@ -8,6 +8,7 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import TabsComponent from "./WorkOrderTabs";
 import WorkOrderDialogReschedule from "./WorkOrderDialogReschedule";
 import WorkOrderDetailDialog from "./WorkOrderDialogDetail";
+import { RouteDetail as RouteMaintLogDetail } from "../maintLog/MaintLogRoute";
 import { useCallback, useMemo, useState } from "react";
 import { columns } from "./WorkOrderColumns";
 import { tblWorkOrder, TypeTblWorkOrder } from "@/core/api/generated/api";
@@ -22,12 +23,29 @@ import { atomUser } from "@/pages/auth/auth.atom";
 import { useDialogs } from "@/shared/hooks/useDialogs";
 import { toast } from "sonner";
 import { over } from "lodash-es";
+import { useRouter } from "@tanstack/react-router";
 
 const getRowId = (row: TypeTblWorkOrder) => row.workOrderId;
+
+export type PendingRedirectType = "maintLog" | null;
+
+export type PendingRedirect = {
+  type: PendingRedirectType;
+  id: number | null;
+  breadcrumb: string | null;
+};
+
+export const DEFAULT_PENDING_REDIRECT: PendingRedirect = {
+  type: null,
+  id: null,
+  breadcrumb: null,
+};
 
 export default function WorkOrderPage() {
   const user = useAtomValue(atomUser);
   const employeeId = user?.tblEmployee?.employeeId as number;
+
+  const router = useRouter();
 
   const { dialogs, openDialog, closeDialog } = useDialogs({
     workOrderDetail: false,
@@ -40,6 +58,8 @@ export default function WorkOrderPage() {
     dialogRequest: false,
     dialogReschedule: false,
     dialogPrint: false,
+
+    pendingRedirect: false,
   });
 
   const [filter, setFilter] = useState<WorkOrderFilter | null>(null);
@@ -90,6 +110,43 @@ export default function WorkOrderPage() {
     },
     [],
   );
+
+  const [pendingRedirect, setPendingRedirect] = useState<PendingRedirect>(
+    DEFAULT_PENDING_REDIRECT,
+  );
+
+  const openInNewTab = useCallback(
+    (route: { to: string }, id: number, breadcrumb?: string | null) => {
+      const href = router.buildLocation({
+        to: route.to,
+        params: { id },
+        search: {
+          breadcrumb: breadcrumb ?? "",
+        },
+      }).href;
+
+      window.open(href, "_blank");
+    },
+    [router],
+  );
+
+  const handleRedirectConfirm = useCallback(() => {
+    if (!pendingRedirect.id || !pendingRedirect.type) return;
+
+    const routes = {
+      maintLog: RouteMaintLogDetail,
+    };
+
+    const route = routes[pendingRedirect.type];
+
+    if (route?.to) {
+      openInNewTab(route, pendingRedirect.id, pendingRedirect.breadcrumb);
+    }
+
+    setPendingRedirect(DEFAULT_PENDING_REDIRECT);
+
+    closeDialog("pendingRedirect");
+  }, [pendingRedirect, closeDialog, openInNewTab]);
 
   // Submit Handlers
   const handleSubmitFilter = (filter: WorkOrderFilter | null) => {
@@ -312,6 +369,15 @@ export default function WorkOrderPage() {
     });
 
     closeDialog("dialogComplete");
+    if (record.maintLogId) {
+      setPendingRedirect({
+        type: "maintLog",
+        id: record.maintLogId,
+        breadcrumb: selectedWorkOrders[0]?.tblComponentUnit?.compNo,
+      });
+
+      openDialog("pendingRedirect");
+    }
   };
 
   const handleClick = ({ row }: any) => {
@@ -322,6 +388,11 @@ export default function WorkOrderPage() {
     openDialog("workOrderDetail");
     setSelectedRowId(rowId);
   };
+  const handleRedirectCancel = useCallback(() => {
+    setPendingRedirect(DEFAULT_PENDING_REDIRECT);
+
+    closeDialog("pendingRedirect");
+  }, [closeDialog]);
   return (
     <>
       <Splitter horizontal initialPrimarySize="65%">
@@ -454,6 +525,18 @@ export default function WorkOrderPage() {
         open={dialogs.workOrderDetail}
         onClose={() => closeDialog("workOrderDetail")}
         workOrderId={selectedRowId}
+      />
+
+      <ConfirmDialog
+        open={dialogs.pendingRedirect}
+        title="Success"
+        message="Record created successfully. Do you want to open the details page?"
+        confirmText="Yes"
+        cancelText="No"
+        confirmColor="primary"
+        icon={null}
+        onCancel={handleRedirectCancel}
+        onConfirm={handleRedirectConfirm}
       />
     </>
   );

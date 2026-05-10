@@ -18,7 +18,7 @@ const TabResourceUsed = ({ selected }: Props) => {
   const [mode, setMode] = useState<"create" | "update">("create");
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
-  const maintLogId = selected.maintLogId;
+  const maintLogId = selected?.maintLogId;
 
   // === Handlers ===
   const handleCreate = () => {

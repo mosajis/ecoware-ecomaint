@@ -17,23 +17,30 @@ import { columns, getItemName, getRowId } from "./ComponentUnitColumns";
 import { RouteDetail } from "./ComponentUnitRoutes";
 import { RouteDetail as FailureReportRouteDetail } from "@/pages/report/failureReport/FailureReportRoutes";
 import { RouteDetail as WorkShopRouteDetail } from "../workShop/WorkShopRoutes";
+import { RouteDetail as MaintLogRouteDetail } from "../maintLog/MaintLogRoute";
 
 import {
   tblComponentUnit,
   TypeTblComponentUnit,
+  TypeTblMaintLog,
 } from "@/core/api/generated/api";
+import MaintLogUpsert from "../maintLog/MaintLogUpsert";
 
 const PERMIT_ID = 1310;
 
-type PendingRedirectType = "failureReport" | "workShop" | "reportWork" | null;
+export type PendingRedirectType =
+  | "failureReport"
+  | "workShop"
+  | "maintLog"
+  | null;
 
-type PendingRedirect = {
+export type PendingRedirect = {
   type: PendingRedirectType;
   id: number | null;
   breadcrumb: string | null;
 };
 
-const DEFAULT_PENDING_REDIRECT: PendingRedirect = {
+export const DEFAULT_PENDING_REDIRECT: PendingRedirect = {
   type: null,
   id: null,
   breadcrumb: null,
@@ -52,6 +59,7 @@ export default function PageComponentUnit() {
     reportWork: false,
     workShop: false,
     failureReport: false,
+    dialogComplete: false,
     pendingRedirect: false,
   });
 
@@ -166,7 +174,7 @@ export default function PageComponentUnit() {
     const routes = {
       failureReport: FailureReportRouteDetail,
       workShop: WorkShopRouteDetail,
-      reportWork: { to: "" },
+      maintLog: MaintLogRouteDetail,
     };
 
     const route = routes[pendingRedirect.type];
@@ -185,6 +193,19 @@ export default function PageComponentUnit() {
 
     closeDialog("pendingRedirect");
   }, [closeDialog]);
+
+  const successUnplanned = (record: TypeTblMaintLog) => {
+    closeDialog("dialogComplete");
+    if (record.maintLogId) {
+      setPendingRedirect({
+        type: "maintLog",
+        id: record.maintLogId,
+        breadcrumb: selectedRow?.compNo || String(record.maintLogId),
+      });
+
+      openDialog("pendingRedirect");
+    }
+  };
 
   return (
     <>
@@ -223,7 +244,7 @@ export default function PageComponentUnit() {
               selectedRow={selectedRow}
               onWorkShop={() => openDialog("workShop")}
               onFailureReport={() => openDialog("failureReport")}
-              onNoneRoutine={() => openDialog("reportWork")}
+              onNoneRoutine={() => openDialog("dialogComplete")}
               onRoutine={handleRoutineClick}
             />
           }
@@ -235,6 +256,14 @@ export default function PageComponentUnit() {
       <ComponentUnitUpsert entityName="Component" {...dialogProps} />
 
       {/* FAILURE REPORT */}
+      <MaintLogUpsert
+        title={`UnPlanned / ${selectedRow?.compNo}`}
+        mode="create"
+        compId={selectedRow?.compId}
+        onSuccess={successUnplanned}
+        open={dialogs.dialogComplete}
+        onClose={() => closeDialog("dialogComplete")}
+      />
 
       {selectedRowId && (
         <FailureReportUpsert

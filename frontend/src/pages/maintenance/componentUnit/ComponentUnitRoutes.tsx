@@ -4,7 +4,6 @@ import { routeMaintenance } from "@/pages/maintenance/MaintenanceRoutes";
 import { createRoute, Outlet } from "@tanstack/react-router";
 import { lazy } from "react";
 
-// --- Component Unit ---
 export const Route = createRoute({
   getParentRoute: () => routeMaintenance,
   path: "component-unit",

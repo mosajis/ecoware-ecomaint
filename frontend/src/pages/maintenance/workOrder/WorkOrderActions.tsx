@@ -44,6 +44,7 @@ export default function WorkOrderActions({
     {
       ...WORK_ORDER_ACTIONS.issue,
       onClick: onIssue,
+      elementId: 1341,
       disabled:
         selectedCount === 0 ||
         !WORK_ORDER_ACTIONS.issue.isEnabled(selectedStatuses),
@@ -51,6 +52,7 @@ export default function WorkOrderActions({
     {
       ...WORK_ORDER_ACTIONS.complete,
       onClick: onComplete,
+      elementId: 1342,
       disabled:
         selectedCount != 1 ||
         !WORK_ORDER_ACTIONS.complete.isEnabled(selectedStatuses),
@@ -58,6 +60,8 @@ export default function WorkOrderActions({
     {
       ...WORK_ORDER_ACTIONS.pending,
       onClick: onPending,
+      elementId: 1343,
+
       disabled:
         selectedCount != 1 ||
         !WORK_ORDER_ACTIONS.pending.isEnabled(selectedStatuses),
@@ -65,6 +69,7 @@ export default function WorkOrderActions({
     {
       ...WORK_ORDER_ACTIONS.postponed,
       onClick: onPostponed,
+      elementId: 1344,
       disabled:
         selectedCount === 0 ||
         !WORK_ORDER_ACTIONS.postponed.isEnabled(selectedStatuses),
@@ -72,6 +77,7 @@ export default function WorkOrderActions({
     {
       ...WORK_ORDER_ACTIONS.cancel,
       onClick: onCancel,
+      elementId: 1345,
       disabled:
         selectedCount === 0 ||
         !WORK_ORDER_ACTIONS.cancel.isEnabled(selectedStatuses),
@@ -81,6 +87,8 @@ export default function WorkOrderActions({
     //   onClick: onRequest,
     // },
     {
+      elementId: 1347,
+
       label: "ReSchedule",
       icon: <AutoModeIcon />,
       disabled:
@@ -91,6 +99,7 @@ export default function WorkOrderActions({
       onClick: onReschedule,
     },
     {
+      elementId: 1348,
       disabled: selectedCount < 1,
       label: "Print",
       icon: <PrintIcon />,

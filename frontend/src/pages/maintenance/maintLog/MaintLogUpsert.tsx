@@ -111,7 +111,8 @@ function MaintLogUpsert({
     },
 
     onCreate: async (values) => {
-      const payload = {
+      const payload: any = {
+        mode: initialCompId ? "unPlanned" : "Planned",
         compId: initialCompId || context?.componentUnit?.compId || 0,
         workOrderId,
         dateDone: values.dateDone,
@@ -130,7 +131,7 @@ function MaintLogUpsert({
       await tblMaintLog
         .create(payload)
         .then((res) => {
-          toast.success("Maintenance Log created successfully");
+          toast.success("created successfully");
 
           if (workOrderId) {
             generateNextWorkOrder(res.maintLogId)
@@ -205,6 +206,7 @@ function MaintLogUpsert({
 
         reset({
           ...defaultValues,
+          unexpected: initialCompId ? 1 : 0,
           maintType: contextData.maintType || null,
           maintCause: contextData.maintCause || null,
           maintClass: contextData.maintClass || null,

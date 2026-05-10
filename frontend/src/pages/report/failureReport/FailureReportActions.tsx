@@ -29,6 +29,7 @@ export default function FailureReportActions({
   const actions = [
     {
       label: "Filter",
+
       icon: (
         <Badge color="warning" variant="dot" invisible={!hasFilter}>
           <FilterList fontSize="small" />
@@ -40,12 +41,14 @@ export default function FailureReportActions({
       label: "Close",
       icon: <TaskAltIcon />,
       onClick: onClose,
+      elementId: 1612,
       disabled: !isSelected || isClosed,
     },
     {
       label: "Open",
       icon: <LockOpenIcon />,
       onClick: onOpen,
+      elementId: 1611,
       disabled: !isSelected || !isClosed,
     },
     {

@@ -221,7 +221,7 @@ export const menuContentItems: MenuSection[] = [
 
   // ================= MAINTENANCE =================
   {
-    title: "** Maintenance",
+    title: "Maintenance",
     icon: <BuildRoundedIcon sx={iconStyle} />,
     permit: getPermit(1300).canView,
     items: [
@@ -233,7 +233,7 @@ export const menuContentItems: MenuSection[] = [
         icon: <SettingsSuggestRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "** Component",
+        text: "Component",
         path: "/maintenance/component-unit",
         id: "maint:component",
         permit: getPermit(1310).canView,
@@ -254,7 +254,7 @@ export const menuContentItems: MenuSection[] = [
         icon: <BuildCircleRoundedIcon sx={iconStyle} />,
       },
       {
-        text: "** Work Order",
+        text: "Work Order",
         path: "/maintenance/work-order",
         id: "maint:workOrder",
         permit: getPermit(1340).canView,

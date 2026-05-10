@@ -63,6 +63,7 @@ export default function LoginPage() {
       const res = await login(data);
 
       if (res?.accessToken) {
+        localStorage.clear();
         localStorage.setItem(LOCAL_STORAGE.ACCESS_KEY, res.accessToken);
         toast.success("Logged in successfully!");
         navigate({ to: "/" });

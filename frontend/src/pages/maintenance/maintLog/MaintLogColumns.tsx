@@ -68,4 +68,9 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
     headerName: "DownTime",
     flex: 1,
   },
+  {
+    field: "unexpected",
+    headerName: "UnPlanned",
+    flex: 1,
+  },
 ];

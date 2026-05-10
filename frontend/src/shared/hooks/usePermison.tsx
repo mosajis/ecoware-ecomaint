@@ -17,10 +17,10 @@ export function getPermit(elementId?: number) {
   const perms = userPermissions[elementId];
 
   return {
-    canCreate: perms?.canCreate || true,
-    canUpdate: perms?.canUpdate || true,
-    canDelete: perms?.canDelete || true,
-    canView: perms?.canView || true,
-    canExport: perms?.canExport || true,
+    canCreate: Boolean(perms?.canCreate),
+    canUpdate: Boolean(perms?.canUpdate),
+    canDelete: Boolean(perms?.canDelete),
+    canView: Boolean(perms?.canView),
+    canExport: Boolean(perms?.canExport),
   };
 }

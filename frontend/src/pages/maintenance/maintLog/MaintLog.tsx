@@ -39,6 +39,7 @@ export default function PageMaintLog() {
   const getAll = useCallback(() => {
     return tblMaintLog.getAll({
       filter: filter ?? undefined,
+      sort: "dateDone:desc",
     });
   }, [filter]);
 
@@ -99,6 +100,7 @@ export default function PageMaintLog() {
           showToolbar
           checkboxSelection
           disableRowNumber
+          disableRowSelectionOnClick
           label="Maint Log"
           elementId={1420}
           externalRowSelection={true}
@@ -126,7 +128,10 @@ export default function PageMaintLog() {
         <TabsComponent selectedMaintLog={selectedRow} persistInUrl={true} />
       </Splitter>
 
-      <MaintLogUpsert {...dialogProps} />
+      <MaintLogUpsert
+        title={selectedRow?.tblComponentUnit?.compNo || "MaintLog View"}
+        {...dialogProps}
+      />
 
       <MaintLogFilterDialog
         open={dialogs.filter}

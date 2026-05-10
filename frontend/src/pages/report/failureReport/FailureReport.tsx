@@ -101,6 +101,7 @@ export default function PagefailureReport() {
         <DataGrid
           showToolbar
           disableRowNumber
+          elementId={1610}
           label="Failure Report"
           loading={loading}
           rows={rows}

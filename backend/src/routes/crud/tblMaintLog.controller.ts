@@ -496,9 +496,6 @@ const ControllerTblMaintLog = new BaseController({
             tblEmployee: true,
           },
         });
-
-        const employeeId = user?.tblEmployee?.employeeId as number;
-
         const tblFunction = await prisma.tblFunction.findFirst({
           where: {
             compId,
@@ -506,6 +503,75 @@ const ControllerTblMaintLog = new BaseController({
         });
 
         const functionId = tblFunction?.functionId;
+        const employeeId = user?.tblEmployee?.employeeId as number;
+
+        if (body.mode === "unPlanned") {
+          const discId = user?.tblEmployee?.discId;
+          const newLog = await prisma.tblMaintLog.create({
+            data: {
+              overdueCount: 0,
+              workOrderStatusId: 5,
+              history: restData.history,
+              reportedDate: now,
+              unexpected: restData.unexpected,
+              totalDuration: restData.totalDuration,
+              downTime: restData.downTime || 0,
+              dateDone: dateDone || now,
+
+              ...(functionId && {
+                tblFunction: {
+                  connect: {
+                    functionId,
+                  },
+                },
+              }),
+              ...(discId && {
+                tblDiscipline: {
+                  connect: {
+                    discId: discId,
+                  },
+                },
+              }),
+              ...(employeeId && {
+                updatedEmployeeId: employeeId,
+                tblEmployee: {
+                  connect: {
+                    employeeId,
+                  },
+                },
+              }),
+              ...(instId && {
+                tblInstallation: {
+                  connect: {
+                    instId,
+                  },
+                },
+              }),
+              ...(compId && {
+                tblComponentUnit: {
+                  connect: {
+                    compId: Number(compId),
+                  },
+                },
+              }),
+              ...(maintClassId && {
+                tblMaintClass: {
+                  connect: { maintClassId: Number(maintClassId) },
+                },
+              }),
+              ...(maintTypeId && {
+                tblMaintType: { connect: { maintTypeId: Number(maintTypeId) } },
+              }),
+              ...(maintCauseId && {
+                tblMaintCause: {
+                  connect: { maintCauseId: Number(maintCauseId) },
+                },
+              }),
+            },
+          });
+
+          return newLog;
+        }
 
         const tblWorkOrder = await prisma.tblWorkOrder.findFirst({
           where: {
@@ -618,7 +684,7 @@ const ControllerTblMaintLog = new BaseController({
           },
         });
 
-        if (reportedCount !== undefined && employeeId) {
+        if (reportedCount && employeeId) {
           const compJobCounters = await prisma.tblWorkOrder.findFirst({
             include: {
               tblCompJob: {
@@ -656,6 +722,7 @@ const ControllerTblMaintLog = new BaseController({
 
               maintLogId: newLog.maintLogId,
               createdEmployeeId: employeeId,
+              instId,
             },
           });
         }
@@ -678,6 +745,7 @@ const ControllerTblMaintLog = new BaseController({
       {
         tags: ["tblMaintLog"],
         body: t.Object({
+          mode: t.String(),
           dateDone: t.String(),
           downTime: t.Optional(t.Number()),
           totalDuration: t.Optional(t.Number()),

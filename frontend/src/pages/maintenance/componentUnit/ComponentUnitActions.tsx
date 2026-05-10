@@ -29,7 +29,7 @@ export default function ComponentUnitActions({
     //   disabled: !isSelected,
     // },
     {
-      label: "None-Routine",
+      label: "UnPlanned",
       icon: <TaskAltIcon />,
       onClick: onNoneRoutine,
       disabled: !isSelected,
