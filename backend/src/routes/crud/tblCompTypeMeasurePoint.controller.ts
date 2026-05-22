@@ -36,7 +36,7 @@ const ControllerTblCompTypeMeasurePoint = new BaseController({
   extend: (app) => {
     app.post(
       "/:compTypeMeasurePointId/effect",
-      async ({ params, body, set }) => {
+      async ({ params, body, set, headers }) => {
         try {
           const compTypeMeasurePointId = Number(params.compTypeMeasurePointId);
 
@@ -48,9 +48,16 @@ const ControllerTblCompTypeMeasurePoint = new BaseController({
             };
           }
 
+          const instId = Number(headers["x-inst-id"] || 0);
+
+          if (!instId) {
+            throw new Error("Instance ID is required");
+          }
+
           const result = await effectCompTypeMeasurePoint({
             compTypeMeasurePointId,
             operation: body.operation,
+            instId,
           });
 
           return result;

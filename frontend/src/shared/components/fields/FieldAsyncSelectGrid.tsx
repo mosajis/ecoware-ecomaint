@@ -16,6 +16,7 @@ type BaseFieldAsyncSelectGridProps<TItem extends Record<string, any>> = {
   columns: any[];
   error?: boolean;
   helperText?: string;
+  disableRowNumber?: boolean;
   request: () => Promise<any>;
   extractRows?: (data: any) => TItem[];
   getRowId: (row: TItem) => GridRowId;
@@ -44,6 +45,7 @@ export type FieldAsyncSelectGridProps<TItem extends Record<string, any>> =
 
 function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
   elementId,
+  disableRowNumber,
   label,
   placeholder,
   value,
@@ -153,6 +155,7 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
       />
 
       <AsyncSelectGridDialog<TItem>
+        disableRowNumber={disableRowNumber}
         elementId={elementId!}
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}

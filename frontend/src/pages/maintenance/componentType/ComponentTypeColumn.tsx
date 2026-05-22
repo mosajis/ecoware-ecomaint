@@ -18,7 +18,7 @@ export const columns: GridColDef<TypeTblCompType>[] = [
     flex: 1,
     renderCell: ({ value, row }) => (
       <CellLink
-        breadcrumb={row.compTypeId}
+        breadcrumb={row.compName || ""}
         value={row.compName}
         to={RouteDetail.to}
         params={{ id: row.compTypeId }}

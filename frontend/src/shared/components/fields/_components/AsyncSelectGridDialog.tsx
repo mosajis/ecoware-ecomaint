@@ -19,7 +19,7 @@ export interface SelectModalProps<TItem extends Record<string, any>> {
   extractRows?: (data: any) => TItem[];
   onSelect: (selected: TItem | TItem[] | null) => void;
   getRowId: GridRowIdGetter<TItem>;
-
+  disableRowNumber?: boolean;
   columns: any[];
   selectionMode?: "single" | "multiple";
   selected?: TItem | TItem[] | null;
@@ -33,6 +33,7 @@ export function AsyncSelectGridDialog<TItem extends Record<string, any>>({
   title = "Select",
   selectionMode = "single",
   columns,
+  disableRowNumber = false,
   onClose,
   request,
   extractRows,
@@ -153,6 +154,7 @@ export function AsyncSelectGridDialog<TItem extends Record<string, any>>({
           disableColumnFilter
           disableExport
           disableColumns
+          disableRowNumber={disableRowNumber}
           rows={rows}
           loading={loading}
           label={title}

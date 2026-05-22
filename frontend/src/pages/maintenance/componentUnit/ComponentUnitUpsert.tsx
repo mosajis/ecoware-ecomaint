@@ -348,6 +348,7 @@ function ComponentUnitUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              value={field.value || ""}
               label="Model / Type"
               size="small"
               fullWidth

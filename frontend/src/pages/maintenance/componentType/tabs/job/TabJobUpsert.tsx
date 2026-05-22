@@ -307,6 +307,7 @@ function ComponentTypeJobUpsert({
           render={({ field, fieldState }) => (
             <Box width="60%">
               <FieldAsyncSelectGrid
+                disableRowNumber
                 dialogMaxWidth="sm"
                 label="Job Description *"
                 getOptionLabel={(row) => row.jobDescTitle}
@@ -314,6 +315,7 @@ function ComponentTypeJobUpsert({
                 selectionMode="single"
                 request={tblJobDescription.getAll}
                 columns={[
+                  { field: "jobDescCode", headerName: "Code", width: 100 },
                   { field: "jobDescTitle", headerName: "Title", flex: 1 },
                 ]}
                 error={!!fieldState.error?.message}

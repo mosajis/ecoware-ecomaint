@@ -191,6 +191,9 @@ export async function effectComponentUnitChange({
               instId,
               compTypeJobId: { in: compTypeJobIds },
             },
+            include: {
+              tblCompTypeCounter: true,
+            },
           });
 
     const [compJobs, compCounters] = await Promise.all([
@@ -209,7 +212,9 @@ export async function effectComponentUnitChange({
         if (!compTypeJob) return null;
 
         const job = jobMap.get(compTypeJob.jobDescId);
-        const counter = counterMap.get(jc.compTypeCounterId);
+        const counter = counterMap.get(
+          jc.tblCompTypeCounter?.counterTypeId || 0,
+        );
 
         if (!job || !counter) return null;
 
@@ -224,7 +229,6 @@ export async function effectComponentUnitChange({
           showInAlert: jc.showInAlert,
           lastUpdate: now,
           createdEmployeeId: employeeId,
-          orderNumber: 0,
         };
       })
       .filter(Boolean);
@@ -232,6 +236,65 @@ export async function effectComponentUnitChange({
     if (jobCounterData.length > 0) {
       await tx.tblCompJobCounter.createMany({
         data: jobCounterData as any[],
+      });
+    }
+
+    // =========================================================================
+    // JobMeasurePoint (کاملاً ID-based)
+    // =========================================================================
+    const compTypeJobMeasurePoints =
+      compTypeJobIds.length === 0
+        ? []
+        : await tx.tblCompTypeJobMeasurePoint.findMany({
+            where: {
+              instId,
+              compTypeJobId: { in: compTypeJobIds },
+            },
+            include: {
+              tblCompTypeMeasurePoint: true,
+            },
+          });
+
+    const compMeasurePoints = await tx.tblCompMeasurePoint.findMany({
+      where: { compId },
+    });
+
+    const measureMap = new Map(
+      compMeasurePoints.map((c) => [c.counterTypeId, c]),
+    );
+
+    const jobMeasureData = compTypeJobMeasurePoints
+      .map((jm) => {
+        const compTypeJob = compTypeJobs.find(
+          (j) => j.compTypeJobId === jm.compTypeJobId,
+        );
+        if (!compTypeJob) return null;
+
+        const job = jobMap.get(compTypeJob.jobDescId);
+        const measure = measureMap.get(
+          jm.tblCompTypeMeasurePoint?.counterTypeId || 0,
+        );
+
+        if (!job || !measure) return null;
+
+        return {
+          instId,
+          compJobId: job.compJobId,
+          compMeasurePointId: measure.compMeasurePointId,
+          lastUpdate: now,
+
+          useOperationalValues: jm.useOperationalValues,
+          minValue: jm.minValue,
+          maxValue: jm.maxValue,
+          updateOnReport: jm.updateOnReport,
+          orderNo: 0,
+        };
+      })
+      .filter(Boolean);
+
+    if (jobMeasureData.length > 0) {
+      await tx.tblCompJobMeasurePoint.createMany({
+        data: jobMeasureData as any,
       });
     }
   });
