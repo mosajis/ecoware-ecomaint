@@ -68,7 +68,7 @@ export default function failureReportCloseDialog({
       const record = await tblFailureReport.update(failureReportId, {
         closedDateTime: closedDateTime?.toString(),
         followDesc,
-        ...buildRelation("tblEmployee", "employeeId", employeeId),
+        ...buildRelation("tblEmployee", "employeeId", { employeeId }),
       });
 
       onSuccess(record);

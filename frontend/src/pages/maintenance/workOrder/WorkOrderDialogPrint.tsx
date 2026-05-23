@@ -11,7 +11,7 @@ import PrintTemplate from "./print/PrintTemplate";
 import { useState, useRef } from "react";
 import { BorderedBox } from "@/shared/components/BorderedBox";
 import { useReactToPrint } from "react-to-print";
-import { TypeTblWorkOrderWithRels } from "./types";
+import { TypeTblWorkOrder } from "@/core/api/generated/api";
 
 type OutputFormat = "list" | "details";
 type SortOrder = "component" | "workOrderNumber" | "dueDate";
@@ -22,7 +22,7 @@ type Props = {
   onClose: () => void;
   onSubmit?: () => void;
   hideFooter?: boolean;
-  workOrders: TypeTblWorkOrderWithRels[];
+  workOrders: TypeTblWorkOrder[];
 };
 
 export default function WorkOrderDialogPrint({

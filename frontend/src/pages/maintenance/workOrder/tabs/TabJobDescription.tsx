@@ -1,8 +1,8 @@
+import { TypeTblWorkOrder } from "@/core/api/generated/api";
 import Editor from "@/shared/components/Editor";
-import { TypeTblWorkOrderWithRels } from "../types";
 
 interface Props {
-  workOrder?: TypeTblWorkOrderWithRels | null;
+  workOrder?: TypeTblWorkOrder | null;
   label?: string;
 }
 

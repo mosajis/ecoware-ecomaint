@@ -7,7 +7,6 @@ import {
   TypeTblMaintLog,
   TypeTblWorkOrder,
 } from "@/core/api/generated/api";
-import { TypeTblWorkOrderWithRels } from "../../workOrder/types";
 import { calculateOverdue, formatDateTime } from "@/core/helper";
 import StatusChip from "../../workOrder/customCell/CellWorkOrderStatus";
 import OverdueText from "../../workOrder/customCell/CellWorkOrderOverDue";
@@ -54,7 +53,7 @@ const TabWorkOrder = ({ selected, label }: Props) => {
     !!selected?.maintLogId,
   );
 
-  const columns = useMemo<GridColDef<TypeTblWorkOrderWithRels>[]>(
+  const columns = useMemo<GridColDef<TypeTblWorkOrder>[]>(
     () => [
       {
         field: "jobCode",

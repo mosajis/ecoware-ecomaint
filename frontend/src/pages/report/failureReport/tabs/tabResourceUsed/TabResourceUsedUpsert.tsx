@@ -106,20 +106,18 @@ function TabResourceUsedUpsert({
         const employeeRelation = buildRelation(
           "tblEmployee",
           "employeeId",
-          parsed.data.employee?.employeeId,
+          parsed.data.employee,
         );
 
         const disciplineRelation = buildRelation(
           "tblDiscipline",
           "discId",
-          parsed.data.disipline?.discId,
+          parsed.data.disipline,
         );
 
-        const maintLogRelation = buildRelation(
-          "tblMaintLog",
-          "maintLogId",
+        const maintLogRelation = buildRelation("tblMaintLog", "maintLogId", {
           maintLogId,
-        );
+        });
 
         let result: TypeTblLogDiscipline;
 

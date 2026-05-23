@@ -1,15 +1,15 @@
+import { TypeTblWorkOrder } from "@/core/api/generated/api";
 import PrintTable from "./PrintTable";
-import { TypeTblWorkOrderWithRels } from "../types";
 import { OutputFormat, SortOrder } from "./PrintTypes";
 
 const toStr = (v: unknown) => (typeof v === "string" ? v : "");
 const sortWorkOrders = (
-  workOrders: TypeTblWorkOrderWithRels[],
+  workOrders: TypeTblWorkOrder[],
   sortOrder: SortOrder,
-): TypeTblWorkOrderWithRels[] => {
+): TypeTblWorkOrder[] => {
   const comparators: Record<
     SortOrder,
-    (a: TypeTblWorkOrderWithRels, b: TypeTblWorkOrderWithRels) => number
+    (a: TypeTblWorkOrder, b: TypeTblWorkOrder) => number
   > = {
     component: (a, b) =>
       (a.tblComponentUnit?.compNo ?? "").localeCompare(
@@ -27,7 +27,7 @@ const sortWorkOrders = (
 };
 
 interface Props {
-  workOrders: TypeTblWorkOrderWithRels[];
+  workOrders: TypeTblWorkOrder[];
   outputFormat: OutputFormat;
   sortOrder: SortOrder;
 }

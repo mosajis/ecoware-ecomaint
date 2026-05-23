@@ -2,8 +2,11 @@ import Box from "@mui/material/Box";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import Editor from "@/shared/components/Editor";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import { tblPendingType, tblWorkOrder } from "@/core/api/generated/api";
-import { TypeTblWorkOrderWithRels } from "./types";
+import {
+  tblPendingType,
+  tblWorkOrder,
+  TypeTblWorkOrder,
+} from "@/core/api/generated/api";
 import { GridRowId } from "@mui/x-data-grid";
 import { toast } from "sonner";
 import { useForm, Controller } from "react-hook-form";
@@ -25,8 +28,8 @@ export type formValues = z.infer<typeof schema>;
 type Props = {
   open: boolean;
   onClose: () => void;
-  onSuccess: (record: TypeTblWorkOrderWithRels) => void;
-  workOrder: TypeTblWorkOrderWithRels | null;
+  onSuccess: (record: TypeTblWorkOrder) => void;
+  workOrder: TypeTblWorkOrder | null;
 };
 
 const pendingTypeColumns = [

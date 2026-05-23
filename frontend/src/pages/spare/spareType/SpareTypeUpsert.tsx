@@ -93,11 +93,7 @@ function SpareTypeUpsert({
     },
 
     onCreate: async (values) => {
-      const unitRelation = buildRelation(
-        "tblUnit",
-        "unitId",
-        values.unit?.unitId,
-      );
+      const unitRelation = buildRelation("tblUnit", "unitId", values.unit);
 
       return tblSpareType.create({
         name: values.name,
@@ -111,11 +107,7 @@ function SpareTypeUpsert({
     },
 
     onUpdate: async (id, values) => {
-      const unitRelation = buildRelation(
-        "tblUnit",
-        "unitId",
-        values.unit?.unitId,
-      );
+      const unitRelation = buildRelation("tblUnit", "unitId", values.unit);
 
       return tblSpareType.update(id, {
         name: values.name,

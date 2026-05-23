@@ -65337,67 +65337,7 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
-        responses: {
-            /** @description Response for status 200 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            workOrderId: number;
-                            compId?: number;
-                            pendingdate?: string;
-                            title?: string;
-                            priority?: number;
-                            description?: string;
-                            userComment?: string;
-                            window?: number;
-                            dueDate?: string;
-                            created?: string;
-                            started?: string;
-                            completed?: string;
-                            woNo: unknown;
-                            tblComponentUnit?: {
-                                compId: number;
-                                compNo?: string;
-                                tblLocation?: {
-                                    name: string;
-                                };
-                            };
-                            tblCompJob?: {
-                                jobDescId?: number;
-                                frequency?: number;
-                                compJobId: number;
-                                nextDueDate?: string;
-                                tblJobDescription?: {
-                                    jobDescCode: string;
-                                    jobDescTitle: string;
-                                    jobDesc?: string;
-                                };
-                                tblPeriod?: {
-                                    name: string;
-                                };
-                            };
-                            tblPendingType?: {
-                                pendTypeName: string;
-                            };
-                            tblDiscipline?: {
-                                name: string;
-                            };
-                            tblWorkOrderStatus?: {
-                                name: string;
-                            };
-                        }[];
-                        total: number;
-                        page: number;
-                        perPage: number;
-                        totalPages: number;
-                    };
-                };
-            };
-        };
+        responses: never;
     };
     postTblWorkOrder: {
         parameters: {

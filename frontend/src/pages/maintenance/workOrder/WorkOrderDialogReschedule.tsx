@@ -8,8 +8,8 @@ import {
   tblCompJob,
   tblReScheduleLog,
   tblCompJobCounter,
+  TypeTblWorkOrder,
 } from "@/core/api/generated/api";
-import { TypeTblWorkOrderWithRels } from "./types";
 import { toast } from "sonner";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,8 +34,8 @@ export type formValues = z.infer<typeof schema>;
 type Props = {
   open: boolean;
   onClose: () => void;
-  onSuccess: (record: TypeTblWorkOrderWithRels) => void;
-  workOrder: TypeTblWorkOrderWithRels | null;
+  onSuccess: (record: TypeTblWorkOrder) => void;
+  workOrder: TypeTblWorkOrder | null;
 };
 
 export default function WorkOrderDialogReschedule({
@@ -98,10 +98,12 @@ export default function WorkOrderDialogReschedule({
   const onSubmit = async (data: formValues) => {
     if (!workOrder) return;
 
+    const compJobId = workOrder?.tblCompJob?.compJobId;
+
     try {
       // 1. Update CompJob nextDueDate
-      if (workOrder.compJobId && data.newDueDate) {
-        await tblCompJob.update(workOrder.compJobId, {
+      if (compJobId && data.newDueDate) {
+        await tblCompJob.update(compJobId, {
           nextDueDate: data.newDueDate,
           lastUpdate: new Date().toISOString(),
         });
@@ -165,7 +167,7 @@ export default function WorkOrderDialogReschedule({
         },
       });
 
-      onSuccess(updatedWorkOrder);
+      onSuccess(updatedWorkOrder as any);
       handleClose();
     } catch (error) {
       console.error("Failed to reschedule work order:", error);

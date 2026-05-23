@@ -1,13 +1,11 @@
 import CellWorkOrderStatus from "./customCell/CellWorkOrderStatus";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import CellOverdue from "./customCell/CellWorkOrderOverDue";
-import CellLink from "@/shared/components/dataGrid/cells/CellLink";
 import { GridColDef } from "@mui/x-data-grid";
-import { TypeTblWorkOrderWithRels } from "./types";
 import { calculateOverdue } from "@/core/helper";
-import { RouteDetail } from "../componentUnit/ComponentUnitRoutes";
+import { TypeTblWorkOrder } from "@/core/api/generated/api";
 
-export const columns: GridColDef<TypeTblWorkOrderWithRels>[] = [
+export const columns: GridColDef<TypeTblWorkOrder>[] = [
   {
     field: "workOrderId",
     headerName: "No",

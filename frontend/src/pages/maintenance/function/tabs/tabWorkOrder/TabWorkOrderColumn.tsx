@@ -2,12 +2,11 @@ import OverdueText from "../../../workOrder/customCell/CellWorkOrderOverDue";
 import StatusChip from "@/pages/maintenance/workOrder/customCell/CellWorkOrderStatus";
 import { TypeTblWorkOrder } from "@/core/api/generated/api";
 import { calculateOverdue, formatDateTime } from "@/core/helper";
-import { TypeTblWorkOrderWithRels } from "@/pages/maintenance/workOrder/types";
 import { GridColDef } from "@mui/x-data-grid";
 
 export const getRowId = (row: TypeTblWorkOrder) => row.workOrderId;
 
-export const columns: GridColDef<TypeTblWorkOrderWithRels>[] = [
+export const columns: GridColDef<TypeTblWorkOrder>[] = [
   {
     field: "jobCode",
     headerName: "JobCode",

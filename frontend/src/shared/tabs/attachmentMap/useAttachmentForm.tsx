@@ -6,7 +6,7 @@ import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
 import { tblAttachment, TypeTblAttachment } from "@/core/api/generated/api";
 import { buildRelation } from "@/core/helper";
-import { createAttachment } from "@/pages/general/attachment/attachmentService";
+import { createAttachment } from "@/pages/general/attachment/AttachmentService";
 import {
   existingAttachmentSchema,
   newAttachmentSchema,
@@ -153,23 +153,15 @@ export function useAttachmentForm<T>({
       const mapPayload = {
         orderNo: 0,
 
-        ...buildRelation(
-          relationConfig.relName,
-          relationConfig.filterKey,
-          filterId,
-        ),
+        ...buildRelation(relationConfig.relName, relationConfig.filterKey, {
+          [relationConfig.filterKey]: filterId,
+        }),
 
-        ...buildRelation(
-          relationConfig.attachmentField,
-          "attachmentId",
-          selectedAttachmentId,
-        ),
+        ...buildRelation(relationConfig.attachmentField, "attachmentId", {
+          attachmentId: selectedAttachmentId,
+        }),
 
-        ...buildRelation(
-          "tblEmployee",
-          "employeeId",
-          user?.tblEmployee?.employeeId,
-        ),
+        ...buildRelation("tblEmployee", "employeeId", user?.tblEmployee),
       };
 
       const result = await mapService.create(mapPayload);
@@ -214,23 +206,17 @@ export function useAttachmentForm<T>({
         const mapPayload = {
           orderNo: 0,
 
-          ...buildRelation(
-            relationConfig.relName,
-            relationConfig.filterKey,
-            filterId,
-          ),
+          ...buildRelation(relationConfig.relName, relationConfig.filterKey, {
+            [relationConfig.filterKey]: filterId,
+          }),
 
           ...buildRelation(
             relationConfig.attachmentField,
             "attachmentId",
-            newAttachment.attachmentId,
+            newAttachment,
           ),
 
-          ...buildRelation(
-            "tblEmployee",
-            "employeeId",
-            user?.tblEmployee?.employeeId,
-          ),
+          ...buildRelation("tblEmployee", "employeeId", user?.tblEmployee),
         };
 
         const result = await mapService.create(mapPayload);

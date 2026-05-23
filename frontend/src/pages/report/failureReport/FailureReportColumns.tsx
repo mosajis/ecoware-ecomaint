@@ -23,7 +23,7 @@ export const columns: GridColDef<TypeTblFailureReport>[] = [
     valueGetter: (_, row) => row.title,
     renderCell: ({ value, row }) => (
       <CellLink
-        breadcrumb={row.title}
+        breadcrumb={row.title!}
         value={row.title}
         to={RouteDetail.to}
         params={{ id: row.failureReportId }}

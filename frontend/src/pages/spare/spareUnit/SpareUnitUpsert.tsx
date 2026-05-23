@@ -72,7 +72,7 @@ function SpareUnitUpsert({
       const spareTypeRelation = buildRelation(
         "tblSpareType",
         "spareTypeId",
-        values.spareTypeId?.spareTypeId,
+        values.spareTypeId,
       );
 
       return tblSpareUnit.create({
@@ -84,7 +84,7 @@ function SpareUnitUpsert({
       const spareTypeRelation = buildRelation(
         "tblSpareType",
         "spareTypeId",
-        values.spareTypeId?.spareTypeId,
+        values.spareTypeId,
       );
 
       return tblSpareUnit.update(id, {

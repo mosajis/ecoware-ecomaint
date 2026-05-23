@@ -18,7 +18,6 @@ import WorkOrderFilterDialog, {
 import { useAtomValue } from "jotai";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
-import { TypeTblWorkOrderWithRels } from "./types";
 import { atomUser } from "@/pages/auth/auth.atom";
 import { useDialogs } from "@/shared/hooks/useDialogs";
 import { toast } from "sonner";
@@ -64,8 +63,7 @@ export default function WorkOrderPage() {
 
   const [filter, setFilter] = useState<WorkOrderFilter | null>(null);
 
-  const [selectedRow, setSelectedRow] =
-    useState<TypeTblWorkOrderWithRels | null>(null);
+  const [selectedRow, setSelectedRow] = useState<TypeTblWorkOrder | null>(null);
 
   const [selectedRowId, setSelectedRowId] = useState<null | number>(null);
   const [rowSelectionModel, setRowSelectionModel] =
@@ -83,14 +81,14 @@ export default function WorkOrderPage() {
   );
 
   const { rows, loading, handleRefresh, optimisticUpdate } =
-    useDataGrid<TypeTblWorkOrderWithRels>(
+    useDataGrid<TypeTblWorkOrder>(
       getAll as any,
       tblWorkOrder.deleteById,
       "workOrderId",
       filter !== null,
     );
 
-  const selectedWorkOrders = useMemo<TypeTblWorkOrderWithRels[]>(() => {
+  const selectedWorkOrders = useMemo<TypeTblWorkOrder[]>(() => {
     if (rowSelectionModel.type === "include") {
       return rows.filter((r) => rowSelectionModel.ids.has(r.workOrderId));
     } else {
@@ -312,17 +310,15 @@ export default function WorkOrderPage() {
   const successPending = (record: TypeTblWorkOrder) => {
     optimisticUpdate(record.workOrderId, {
       tblPendingType: record.tblPendingType,
-      pendingdate: record.pendingdate,
+      pendingdate: record.pendingdate ?? undefined,
       tblWorkOrderStatus: record.tblWorkOrderStatus,
       userComment: record.userComment,
-      workOrderStatusId: record.workOrderStatusId,
     });
   };
 
   const successRequest = (record: TypeTblWorkOrder) => {
     optimisticUpdate(record.workOrderId, {
       tblWorkOrderStatus: record.tblWorkOrderStatus,
-      workOrderStatusId: 1,
       created: record.created,
     });
   };
@@ -330,7 +326,6 @@ export default function WorkOrderPage() {
   const successReschedule = (record: TypeTblWorkOrder) => {
     optimisticUpdate(record.workOrderId, {
       tblWorkOrderStatus: record.tblWorkOrderStatus,
-      workOrderStatusId: 2,
       dueDate: record.dueDate,
       window: record.window,
     });
@@ -339,7 +334,6 @@ export default function WorkOrderPage() {
   const successIssue = (record: TypeTblWorkOrder) => {
     optimisticUpdate(record.workOrderId, {
       tblWorkOrderStatus: record.tblWorkOrderStatus,
-      workOrderStatusId: 3,
       issuedDate: record.issuedDate,
     });
   };
@@ -347,14 +341,12 @@ export default function WorkOrderPage() {
   const successCancel = (record: TypeTblWorkOrder) => {
     optimisticUpdate(record.workOrderId, {
       tblWorkOrderStatus: record.tblWorkOrderStatus,
-      workOrderStatusId: 7,
     });
   };
 
   const successPostponed = (record: TypeTblWorkOrder) => {
     optimisticUpdate(record.workOrderId, {
       tblWorkOrderStatus: record.tblWorkOrderStatus,
-      workOrderStatusId: 8,
     });
   };
 
@@ -362,18 +354,16 @@ export default function WorkOrderPage() {
     optimisticUpdate(record.workOrderId, {
       tblWorkOrderStatus: {
         name: "Complete",
-        workOrderStatusId: 5,
       },
       completed: record.completed,
-      overdue: record.overdue,
     });
 
     closeDialog("dialogComplete");
-    if (record.maintLogId) {
+    if (record?.maintLogId) {
       setPendingRedirect({
         type: "maintLog",
         id: record.maintLogId,
-        breadcrumb: selectedWorkOrders[0]?.tblComponentUnit?.compNo,
+        breadcrumb: selectedWorkOrders[0]?.tblComponentUnit?.compNo || "",
       });
 
       openDialog("pendingRedirect");

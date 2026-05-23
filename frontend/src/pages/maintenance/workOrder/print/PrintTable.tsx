@@ -4,11 +4,11 @@ import {
   formatDateTime,
   val,
 } from "@/core/helper";
-import { TypeTblWorkOrderWithRels } from "../types";
 import { OutputFormat } from "./PrintTypes";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
+import { TypeTblWorkOrder } from "@/core/api/generated/api";
 
-const extractData = (wo: TypeTblWorkOrderWithRels) => ({
+const extractData = (wo: TypeTblWorkOrder) => ({
   title: wo.title,
   // @ts-ignore
   plannedBy: extractFullName(wo.tblEmployeeTblWorkOrderIssuedByTotblEmployee),
@@ -33,7 +33,7 @@ const extractData = (wo: TypeTblWorkOrderWithRels) => ({
 });
 
 type Props = {
-  workorder: TypeTblWorkOrderWithRels;
+  workorder: TypeTblWorkOrder;
   outputFormat: OutputFormat;
 };
 
@@ -91,7 +91,7 @@ const PrintTable = ({ workorder, outputFormat }: Props) => {
 
             <td className="print__cell print__label">Frequency</td>
             <td className="print__cell">
-              {val(data.frequency)} {val(data.frequencyPeriod)}
+              {val(data.frequency as any)} {val(data.frequencyPeriod)}
             </td>
           </tr>
 

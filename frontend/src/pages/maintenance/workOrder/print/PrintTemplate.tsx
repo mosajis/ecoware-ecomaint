@@ -1,7 +1,6 @@
 import PrintLayout from "@/shared/components/print/PrintLayout";
 import PrintContent from "./PrintContent";
 import { forwardRef } from "react";
-import { TypeTblWorkOrderWithRels } from "../types";
 import { OutputFormat, SortOrder } from "./PrintTypes";
 import { PrintHeader } from "@/shared/components/print/_components/PrintHeader";
 import { PrintFooter } from "@/shared/components/print/_components/PrintFooter";
@@ -9,9 +8,10 @@ import { extractFullName } from "@/core/helper";
 import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
 import { atomRig } from "@/shared/atoms/general.atom";
+import { TypeTblWorkOrder } from "@/core/api/generated/api";
 
 interface PrintProps {
-  workOrders: TypeTblWorkOrderWithRels[];
+  workOrders: TypeTblWorkOrder[];
   outputFormat: OutputFormat;
   sortOrder: SortOrder;
 }
