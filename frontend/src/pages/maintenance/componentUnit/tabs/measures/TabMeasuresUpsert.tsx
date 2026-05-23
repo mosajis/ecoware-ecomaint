@@ -127,10 +127,10 @@ function CompMeasurePointUpsert({
           ...buildRelation(
             "tblCounterType",
             "counterTypeId",
-            values.counterType.counterTypeId,
+            values.counterType,
           ),
-          ...buildRelation("tblUnit", "unitId", values.unit.unitId),
-          ...buildRelation("tblComponentUnit", "compId", compId),
+          ...buildRelation("tblUnit", "unitId", values.unit),
+          ...buildRelation("tblComponentUnit", "compId", { compId }),
         };
         const result =
           mode === "create"

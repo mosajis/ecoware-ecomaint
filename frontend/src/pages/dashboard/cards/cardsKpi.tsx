@@ -4,27 +4,27 @@ import { KPI_COLORS } from "../_consts/colors";
 export const buildKpiCardsData = (counts: TypeStatistics) => [
   {
     label: "MTBF",
-    value: counts.open,
+    value: 1,
     color: KPI_COLORS.blue,
   },
   {
     label: "MTTR",
-    value: counts.pending,
+    value: 2,
     color: KPI_COLORS.blue,
   },
   {
     label: "PMC",
-    value: counts.overdue,
+    value: 3,
     color: KPI_COLORS.blue,
   },
   {
     label: "PMP",
-    value: counts.current,
+    value: 4,
     color: KPI_COLORS.blue,
   },
   {
     label: "Backlog Ratio",
-    value: counts.completed,
+    value: 5,
     color: KPI_COLORS.blue,
   },
 ];

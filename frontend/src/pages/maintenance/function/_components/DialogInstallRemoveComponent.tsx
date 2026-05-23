@@ -86,12 +86,12 @@ function DialogInstallRemoveComponent({
 
         // 1. rotation log
         await tblRotationLog.create({
-          ...buildRelation("tblFunction", "functionId", functionId),
-          ...buildRelation("tblComponentUnit", "compId", v.component.compId),
+          ...buildRelation("tblFunction", "functionId", { functionId }),
+          ...buildRelation("tblComponentUnit", "compId", v.component),
           ...buildRelation(
             "tblEmployeeTblRotationLogEmployeeInsertedIdTotblEmployee",
             "employeeId",
-            employeeId,
+            { employeeId },
           ),
           fromDate: new Date(v.fromDate) as any,
           notes: v.notes ?? "",
@@ -99,23 +99,25 @@ function DialogInstallRemoveComponent({
 
         // 2. update function
         await tblFunction.update(functionId, {
-          ...buildRelation("tblComponentUnit", "compId", v.component.compId),
+          ...buildRelation("tblComponentUnit", "compId", v.component),
         });
 
         // 3. update component status → InUse = 2
         await tblComponentUnit.update(v.component.compId, {
-          ...buildRelation("tblCompStatus", "compStatusId", 2),
+          ...buildRelation("tblCompStatus", "compStatusId", {
+            compStatusId: 2,
+          }),
         });
       } else {
         const v = values as RemoveValues;
 
         await tblRotationLog.create({
-          ...buildRelation("tblComponentUnit", "compId", compId),
-          ...buildRelation("tblFunction", "functionId", functionId),
+          ...buildRelation("tblComponentUnit", "compId", { compId }),
+          ...buildRelation("tblFunction", "functionId", { functionId }),
           ...buildRelation(
             "tblEmployeeTblRotationLogEmployeeRemovedIdTotblEmployee",
             "employeeId",
-            employeeId,
+            { employeeId },
           ),
 
           toDate: new Date(v.toDate) as any,
@@ -132,7 +134,9 @@ function DialogInstallRemoveComponent({
         // component → None = 1
         if (compId) {
           await tblComponentUnit.update(compId, {
-            ...buildRelation("tblCompStatus", "compStatusId", 1),
+            ...buildRelation("tblCompStatus", "compStatusId", {
+              compStatusId: 1,
+            }),
           });
         }
       }

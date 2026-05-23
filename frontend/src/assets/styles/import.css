@@ -23,3 +23,7 @@ td,
 tr {
   border-collapse: collapse;
 }
+
+.rsw-btn:hover {
+  background: rgb(234 234 234 / 37%);
+}

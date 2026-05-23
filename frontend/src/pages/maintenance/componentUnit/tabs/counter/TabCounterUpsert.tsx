@@ -135,7 +135,7 @@ function CompCounterUpsert({
         const counterTypeRelation = buildRelation(
           "tblCounterType",
           "counterTypeId",
-          parsed.data.counterType!.counterTypeId,
+          parsed.data.counterType,
         );
 
         // If dependOn is not provided, we can skip building the relation
@@ -144,11 +144,9 @@ function CompCounterUpsert({
         //   "compCounterId",
         //   parsed.data?.dependOn?.compCounterId,
         // );
-        const compRelation = buildRelation(
-          "tblComponentUnit",
-          "compId",
+        const compRelation = buildRelation("tblComponentUnit", "compId", {
           compId,
-        );
+        });
 
         const payload = {
           startDate: parsed.data.startDate.toString(),

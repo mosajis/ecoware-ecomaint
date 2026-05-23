@@ -10,11 +10,7 @@ const TabOverDueHistory = (props: props) => {
   const { label, selected } = props;
 
   return (
-    <Editor
-      label={label || "OverDue Reason"}
-      initValue={selected?.overdueReason}
-      readOnly
-    />
+    <Editor label={label || "History"} initValue={selected?.history} readOnly />
   );
 };
 

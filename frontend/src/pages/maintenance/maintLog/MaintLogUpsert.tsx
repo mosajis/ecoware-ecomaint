@@ -159,21 +159,9 @@ function MaintLogUpsert({
         unexpected: values.unexpected,
         history: values.history ?? "",
         reportedCount: context?.isCounter ? values.reportedCount : undefined,
-        ...buildRelation(
-          "tblMaintClass",
-          "maintClassId",
-          values.maintClass?.maintClassId,
-        ),
-        ...buildRelation(
-          "tblMaintType",
-          "maintTypeId",
-          values.maintType?.maintTypeId,
-        ),
-        ...buildRelation(
-          "tblMaintCause",
-          "maintCauseId",
-          values.maintCause?.maintCauseId,
-        ),
+        ...buildRelation("tblMaintClass", "maintClassId", values.maintClass),
+        ...buildRelation("tblMaintType", "maintTypeId", values.maintType),
+        ...buildRelation("tblMaintCause", "maintCauseId", values.maintCause),
       };
 
       return await tblMaintLog.update(id, payload as any);

@@ -121,7 +121,6 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Download file */
         get: operations["getTblAttachmentByAttachmentIdDownload"];
         put?: never;
         post?: never;
@@ -5766,7 +5765,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                attachmentId: number;
+                attachmentId: string;
             };
             cookie?: never;
         };
@@ -52012,6 +52011,7 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
+                    mode: string;
                     dateDone: string;
                     downTime?: number;
                     totalDuration?: number;
@@ -52025,10 +52025,10 @@ export interface operations {
                     maintClassId?: number;
                     maintTypeId?: number;
                     maintCauseId?: number;
-                    fsId?: number;
                     reportedCount?: number;
                 };
                 "application/x-www-form-urlencoded": {
+                    mode: string;
                     dateDone: string;
                     downTime?: number;
                     totalDuration?: number;
@@ -52042,10 +52042,10 @@ export interface operations {
                     maintClassId?: number;
                     maintTypeId?: number;
                     maintCauseId?: number;
-                    fsId?: number;
                     reportedCount?: number;
                 };
                 "multipart/form-data": {
+                    mode: string;
                     dateDone: string;
                     downTime?: number;
                     totalDuration?: number;
@@ -52059,7 +52059,6 @@ export interface operations {
                     maintClassId?: number;
                     maintTypeId?: number;
                     maintCauseId?: number;
-                    fsId?: number;
                     reportedCount?: number;
                 };
             };
@@ -59976,12 +59975,12 @@ export interface operations {
                     };
                     tblEmployeeTblRotationLogEmployeeInsertedIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblRotationLogEmployeeRemovedIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblFunction?: {
@@ -60008,12 +60007,12 @@ export interface operations {
                     };
                     tblEmployeeTblRotationLogEmployeeInsertedIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblRotationLogEmployeeRemovedIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblFunction?: {
@@ -60040,12 +60039,12 @@ export interface operations {
                     };
                     tblEmployeeTblRotationLogEmployeeInsertedIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblEmployeeTblRotationLogEmployeeRemovedIdTotblEmployee?: {
                         connect: {
-                            id: number;
+                            employeeId: number;
                         };
                     };
                     tblFunction?: {
@@ -60313,13 +60312,13 @@ export interface operations {
                     };
                     tblEmployeeTblRotationLogEmployeeInsertedIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblRotationLogEmployeeRemovedIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -60350,13 +60349,13 @@ export interface operations {
                     };
                     tblEmployeeTblRotationLogEmployeeInsertedIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblRotationLogEmployeeRemovedIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -60387,13 +60386,13 @@ export interface operations {
                     };
                     tblEmployeeTblRotationLogEmployeeInsertedIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
                     tblEmployeeTblRotationLogEmployeeRemovedIdTotblEmployee?: {
                         connect?: {
-                            id: number;
+                            employeeId: number;
                         };
                         disconnect?: boolean;
                     };
@@ -65338,7 +65337,67 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
-        responses: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            workOrderId: number;
+                            compId?: number;
+                            pendingdate?: string;
+                            title?: string;
+                            priority?: number;
+                            description?: string;
+                            userComment?: string;
+                            window?: number;
+                            dueDate?: string;
+                            created?: string;
+                            started?: string;
+                            completed?: string;
+                            woNo: unknown;
+                            tblComponentUnit?: {
+                                compId: number;
+                                compNo?: string;
+                                tblLocation?: {
+                                    name: string;
+                                };
+                            };
+                            tblCompJob?: {
+                                jobDescId?: number;
+                                frequency?: number;
+                                compJobId: number;
+                                nextDueDate?: string;
+                                tblJobDescription?: {
+                                    jobDescCode: string;
+                                    jobDescTitle: string;
+                                    jobDesc?: string;
+                                };
+                                tblPeriod?: {
+                                    name: string;
+                                };
+                            };
+                            tblPendingType?: {
+                                pendTypeName: string;
+                            };
+                            tblDiscipline?: {
+                                name: string;
+                            };
+                            tblWorkOrderStatus?: {
+                                name: string;
+                            };
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
     };
     postTblWorkOrder: {
         parameters: {
@@ -67609,19 +67668,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
-            content: {
-                "application/json": {
-                    userId: number;
-                };
-                "application/x-www-form-urlencoded": {
-                    userId: number;
-                };
-                "multipart/form-data": {
-                    userId: number;
-                };
-            };
-        };
+        requestBody?: never;
         responses: {
             /** @description Response for status 200 */
             200: {
@@ -67649,15 +67696,12 @@ export interface operations {
             content: {
                 "application/json": {
                     maintLogId: number;
-                    userId: number;
                 };
                 "application/x-www-form-urlencoded": {
                     maintLogId: number;
-                    userId: number;
                 };
                 "multipart/form-data": {
                     maintLogId: number;
-                    userId: number;
                 };
             };
         };
@@ -70813,7 +70857,48 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
-        responses: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        workOrder: {
+                            plan: number;
+                            issue: number;
+                            total: number;
+                            open: number;
+                            completed: number;
+                            overdue: number;
+                            pending: number;
+                            current: number;
+                            postponed: number;
+                        };
+                        failure: {
+                            total: number;
+                            open: number;
+                            closed: number;
+                            lastWeek: number;
+                            lastMonth: number;
+                        };
+                        unplanned: {
+                            lastWeek: number;
+                            lastMonth: number;
+                        };
+                        disciplines: {
+                            [key: string]: {
+                                open: number;
+                                pending: number;
+                                overdue: number;
+                                current: number;
+                            };
+                        };
+                    };
+                };
+            };
+        };
     };
     getHealth: {
         parameters: {

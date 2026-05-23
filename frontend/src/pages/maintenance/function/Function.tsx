@@ -43,7 +43,7 @@ export default function PageFunction() {
   const selectedRow = useMemo(() => {
     if (!selectedRowId) return null;
     return rows.find((r) => r.functionId === selectedRowId) || null;
-  }, [selectedRowId]);
+  }, [selectedRowId, rows]);
 
   const { dialogs, openDialog, closeDialog } = useDialogs({
     install: false,

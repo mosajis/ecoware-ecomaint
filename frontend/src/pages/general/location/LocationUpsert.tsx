@@ -71,24 +71,20 @@ function LocationUpsert({
     },
 
     onCreate: async (data) => {
-      const parentId = data.parentLocationId?.locationId ?? null;
-
       return tblLocation.create({
         name: data.name,
         locationCode: data.locationCode,
         orderNo: data.orderNo,
-        ...buildRelation("tblLocation", "locationId", parentId),
+        ...buildRelation("tblLocation", "locationId", data.parentLocationId),
       });
     },
 
     onUpdate: async (id, data) => {
-      const parentId = data.parentLocationId?.locationId ?? null;
-
       return tblLocation.update(id, {
         name: data.name,
         locationCode: data.locationCode,
         orderNo: data.orderNo,
-        ...buildRelation("tblLocation", "locationId", parentId),
+        ...buildRelation("tblLocation", "locationId", data.parentLocationId),
       });
     },
 

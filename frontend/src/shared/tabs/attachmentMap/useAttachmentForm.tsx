@@ -2,10 +2,11 @@ import { useState, useEffect, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAtomValue } from "jotai";
+
 import { atomUser } from "@/pages/auth/auth.atom";
 import { tblAttachment, TypeTblAttachment } from "@/core/api/generated/api";
 import { buildRelation } from "@/core/helper";
-import { createAttachment } from "@/pages/general/attachment/AttachmentService";
+import { createAttachment } from "@/pages/general/attachment/attachmentService";
 import {
   existingAttachmentSchema,
   newAttachmentSchema,
@@ -39,11 +40,15 @@ export function useAttachmentForm<T>({
   const [selectedAttachmentId, setSelectedAttachmentId] = useState<
     number | null
   >(null);
+
   const [attachments, setAttachments] = useState<TypeTblAttachment[]>([]);
   const [loadingAttachments, setLoadingAttachments] = useState(false);
 
   const user = useAtomValue(atomUser);
 
+  // ======================
+  // Forms
+  // ======================
   const existingForm = useForm<ExistingAttachmentFormValues>({
     resolver: zodResolver(existingAttachmentSchema),
     defaultValues: { selectedAttachmentId: null },
@@ -66,71 +71,100 @@ export function useAttachmentForm<T>({
 
   const selectedFile = newForm.watch("file");
 
-  // Auto-fill title from filename
+  // ======================
+  // Auto title
+  // ======================
   useEffect(() => {
     const fileName = selectedFile?.name?.trim();
+
     if (!fileName) {
       newForm.setValue("title", "");
       return;
     }
 
-    const lastDotIndex = fileName.lastIndexOf(".");
-    const nameWithoutExtension =
-      lastDotIndex === -1 ? fileName : fileName.substring(0, lastDotIndex);
+    const lastDot = fileName.lastIndexOf(".");
+    const nameWithoutExt =
+      lastDot === -1 ? fileName : fileName.substring(0, lastDot);
 
-    const currentTitle = newForm.watch("title");
-    if (!currentTitle?.trim()) {
-      newForm.setValue("title", nameWithoutExtension);
+    const current = newForm.getValues("title");
+
+    if (!current?.trim()) {
+      newForm.setValue("title", nameWithoutExt);
     }
   }, [selectedFile, newForm]);
 
+  // ======================
+  // Load attachments
+  // ======================
   const loadAttachments = useCallback(async () => {
     setLoadingAttachments(true);
-    const res = await tblAttachment.getAll({
-      include: { tblAttachmentType: true },
-    });
-    setAttachments(res.items ?? []);
-    setLoadingAttachments(false);
+    try {
+      const res = await tblAttachment.getAll({
+        include: { tblAttachmentType: true },
+      });
+
+      setAttachments(res.items ?? []);
+    } finally {
+      setLoadingAttachments(false);
+    }
   }, []);
 
+  // ======================
+  // Reset
+  // ======================
   const resetForms = useCallback(() => {
     existingForm.reset({ selectedAttachmentId: null });
+
     newForm.reset({
       title: "",
       attachmentType: null,
       isUserAttachment: true,
       file: new File([], ""),
     });
+
     setSelectedAttachmentId(null);
   }, [existingForm, newForm]);
 
   useEffect(() => {
-    if (open) {
-      resetForms();
-      loadAttachments();
-    }
+    if (!open) return;
+
+    resetForms();
+    loadAttachments();
   }, [open, resetForms, loadAttachments]);
 
-  const handleExistingSubmit = useCallback(
-    async (values: ExistingAttachmentFormValues) => {
-      if (!selectedAttachmentId) {
-        toast.error("Please select an attachment");
-        return;
-      }
+  // ======================
+  // Normalize relationId (IMPORTANT)
+  // ======================
+  const filterId =
+    relationConfig.filterId == null ? undefined : relationConfig.filterId;
 
-      setSubmitting(true);
+  // ======================
+  // Existing submit
+  // ======================
+  const handleExistingSubmit = useCallback(async () => {
+    if (!selectedAttachmentId) {
+      toast.error("Please select an attachment");
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
       const mapPayload = {
         orderNo: 0,
+
         ...buildRelation(
           relationConfig.relName,
           relationConfig.filterKey,
-          relationConfig.filterId,
+          filterId,
         ),
+
         ...buildRelation(
           relationConfig.attachmentField,
           "attachmentId",
           selectedAttachmentId,
         ),
+
         ...buildRelation(
           "tblEmployee",
           "employeeId",
@@ -144,81 +178,95 @@ export function useAttachmentForm<T>({
         onSuccess(result);
         onClose();
       }
+    } finally {
       setSubmitting(false);
+    }
+  }, [
+    selectedAttachmentId,
+    relationConfig,
+    filterId,
+    mapService,
+    user?.tblEmployee?.employeeId,
+    onSuccess,
+    onClose,
+  ]);
+
+  // ======================
+  // New submit
+  // ======================
+  const handleNewSubmit = useCallback(
+    async (values: NewAttachmentFormValues) => {
+      setSubmitting(true);
+
+      try {
+        const newAttachment = await createAttachment({
+          title: values.title,
+          attachmentTypeId: values.attachmentType?.attachmentTypeId || 0,
+          isUserAttachment: values.isUserAttachment,
+          file: values.file,
+          createdEmployeeId: user?.tblEmployee?.employeeId as number,
+        });
+
+        if (!newAttachment) {
+          throw new Error("Failed to create attachment");
+        }
+
+        const mapPayload = {
+          orderNo: 0,
+
+          ...buildRelation(
+            relationConfig.relName,
+            relationConfig.filterKey,
+            filterId,
+          ),
+
+          ...buildRelation(
+            relationConfig.attachmentField,
+            "attachmentId",
+            newAttachment.attachmentId,
+          ),
+
+          ...buildRelation(
+            "tblEmployee",
+            "employeeId",
+            user?.tblEmployee?.employeeId,
+          ),
+        };
+
+        const result = await mapService.create(mapPayload);
+
+        if (result) {
+          onSuccess(result);
+          onClose();
+        }
+      } finally {
+        setSubmitting(false);
+      }
     },
     [
-      selectedAttachmentId,
       relationConfig,
+      filterId,
       mapService,
-      user?.userId,
+      user?.tblEmployee?.employeeId,
       onSuccess,
       onClose,
     ],
-  );
-
-  const handleNewSubmit = useCallback(
-    async (values: NewAttachmentFormValues) => {
-      setSubmitting(false);
-      const newAttachment = await createAttachment({
-        title: values.title,
-        attachmentTypeId: values.attachmentType?.attachmentTypeId || 0,
-        isUserAttachment: values.isUserAttachment,
-        file: values.file,
-        createdEmployeeId: user?.tblEmployee?.employeeId as number,
-      });
-
-      if (!newAttachment) {
-        throw new Error("Failed to create attachment");
-      }
-
-      console.log(
-        buildRelation(
-          relationConfig.relName,
-          relationConfig.filterKey,
-          relationConfig.filterId,
-        ),
-      );
-      const mapPayload = {
-        orderNo: 0,
-
-        ...buildRelation(
-          relationConfig.relName,
-          relationConfig.filterKey,
-          relationConfig.filterId,
-        ),
-        ...buildRelation(
-          relationConfig.attachmentField,
-          "attachmentId",
-          newAttachment.attachmentId,
-        ),
-        ...buildRelation(
-          "tblEmployee",
-          "employeeId",
-          user?.tblEmployee?.employeeId,
-        ),
-      };
-
-      const result = await mapService.create(mapPayload);
-
-      if (result) {
-        onSuccess(result);
-        onClose();
-      }
-      setSubmitting(false);
-    },
-    [relationConfig, mapService, user?.userId, onSuccess, onClose],
   );
 
   return {
     activeTab,
     setActiveTab,
     submitting,
+
     selectedAttachmentId,
     setSelectedAttachmentId,
+
     attachments,
     loadingAttachments,
+
     existingForm,
     newForm,
+
     handleExistingSubmit,
     handleNewSubmit,
   };

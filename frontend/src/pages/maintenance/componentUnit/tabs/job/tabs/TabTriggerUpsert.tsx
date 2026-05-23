@@ -96,9 +96,9 @@ function JobCounterUpsert({
           ...buildRelation(
             "tblJobTrigger",
             "jobTriggerId",
-            parsed.data.jobTrigger?.jobTriggerId,
+            parsed.data.jobTrigger,
           ),
-          ...buildRelation("tblCompJob", "compJobId", compJobId),
+          ...buildRelation("tblCompJob", "compJobId", { compJobId }),
         };
 
         if (mode === "create") {

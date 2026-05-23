@@ -119,9 +119,9 @@ function JobCounterUpsert({
           ...buildRelation(
             "tblCompCounter",
             "compCounterId",
-            parsed.data.compCounter?.compCounterId,
+            parsed.data.compCounter,
           ),
-          ...buildRelation("tblCompJob", "compJobId", compJobId),
+          ...buildRelation("tblCompJob", "compJobId", { compJobId }),
         };
 
         if (mode === "create") {

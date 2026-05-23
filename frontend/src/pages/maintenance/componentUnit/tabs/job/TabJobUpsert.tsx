@@ -229,33 +229,13 @@ function ComponentJobUpsert({
         active: values.active ? 1 : 0,
         mandatoryHistory: values.mandatoryHistory ? 1 : 0,
 
-        ...buildRelation("tblComponentUnit", "compId", compId),
-        ...buildRelation(
-          "tblJobDescription",
-          "jobDescId",
-          values.jobDesc?.jobDescId,
-        ),
-        ...buildRelation("tblDiscipline", "discId", values.disc?.discId),
-        ...buildRelation(
-          "tblMaintClass",
-          "maintClassId",
-          values.maintClass?.maintClassId,
-        ),
-        ...buildRelation(
-          "tblMaintCause",
-          "maintCauseId",
-          values.maintCause?.maintCauseId,
-        ),
-        ...buildRelation(
-          "tblMaintType",
-          "maintTypeId",
-          values.maintType?.maintTypeId,
-        ),
-        ...buildRelation(
-          "tblPeriod",
-          "periodId",
-          values.frequencyPeriod?.periodId,
-        ),
+        ...buildRelation("tblComponentUnit", "compId", { compId }),
+        ...buildRelation("tblJobDescription", "jobDescId", values.jobDesc),
+        ...buildRelation("tblDiscipline", "discId", values.disc),
+        ...buildRelation("tblMaintClass", "maintClassId", values.maintClass),
+        ...buildRelation("tblMaintCause", "maintCauseId", values.maintCause),
+        ...buildRelation("tblMaintType", "maintTypeId", values.maintType),
+        ...buildRelation("tblPeriod", "periodId", values.frequencyPeriod),
       };
 
       setSubmitting(true);

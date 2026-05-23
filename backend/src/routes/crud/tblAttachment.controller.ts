@@ -104,12 +104,7 @@ export class AttachmentService extends BaseService<any> {
   /**
    * Get file for download
    */
-  async getFileForDownload(attachmentId: number): Promise<{
-    buffer: Buffer;
-    originalName: string;
-    mimeType: string;
-    path: string;
-  }> {
+  async getFileForDownload(attachmentId: number) {
     const attachment = await this.findOne({ attachmentId });
 
     if (!attachment || !attachment.path) {
@@ -117,10 +112,8 @@ export class AttachmentService extends BaseService<any> {
     }
 
     const buffer = await FileService.readFile(attachment.path);
-    const fullPath = path.join(FILE_CONFIG.UPLOAD_DIR, attachment.path);
 
     return {
-      path: fullPath,
       buffer,
       originalName: attachment.fileName,
       mimeType: this.getMimeType(attachment.fileName),
@@ -264,29 +257,28 @@ const baseController = new BaseController({
     );
 
     // GET /:attachmentId/download - Download file
-    app.get(
-      "/:attachmentId/download",
-      async ({ params, set }) => {
-        try {
-          const attachmentId = Number(params.attachmentId);
+    app.get("/:attachmentId/download", async ({ params, set }) => {
+      try {
+        const attachmentId = Number(params.attachmentId);
 
-          const fileData =
-            await ServiceTblAttachment.getFileForDownload(attachmentId);
+        const fileData =
+          await ServiceTblAttachment.getFileForDownload(attachmentId);
+        console.log(fileData.originalName);
 
-          return file(fileData.path);
-        } catch (error) {
-          set.status = 404;
-          return new TextEncoder().encode(
-            error instanceof Error ? error.message : "File not found",
-          );
-        }
-      },
-      {
-        tags: ["tblAttachment"],
-        detail: { summary: "Download file" },
-        params: t.Object({ attachmentId: t.Number() }),
-      },
-    );
+        set.headers["content-type"] = fileData.mimeType;
+
+        set.headers["content-disposition"] =
+          `attachment; filename="${fileData.originalName}"`;
+
+        return fileData.buffer;
+      } catch (error) {
+        set.status = 404;
+
+        return {
+          message: error instanceof Error ? error.message : "File not found",
+        };
+      }
+    });
 
     // DELETE /:attachmentId - Delete with file cleanup
     app.delete(

@@ -47,7 +47,7 @@ export default function PageComponentJob() {
   }, []);
 
   const onGenerateWorkOrder = async () => {
-    generateWorkOrder(userId)
+    generateWorkOrder()
       .then((res) => {
         toast.success(`Generated SuccessFuly (${res.createdWorkOrders})`);
       })

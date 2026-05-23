@@ -128,9 +128,11 @@ function TabMasuresUpsert({
           ...buildRelation(
             "tblCompTypeMeasurePoint",
             "compTypeMeasurePointId",
-            values.compTypeMeasurePoint!.compTypeMeasurePointId,
+            values.compTypeMeasurePoint,
           ),
-          ...buildRelation("tblCompTypeJob", "compTypeJobId", compTypeJobId),
+          ...buildRelation("tblCompTypeJob", "compTypeJobId", {
+            compTypeJobId,
+          }),
         };
 
         const result =

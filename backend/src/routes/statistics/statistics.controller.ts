@@ -3,6 +3,43 @@ import { daysAgo } from "@/helper";
 import { prisma } from "@/utils/prisma";
 import { authPlugin } from "../auth/auth.guard";
 
+const StatisticsSchema = t.Object({
+  workOrder: t.Object({
+    plan: t.Number(),
+    issue: t.Number(),
+    total: t.Number(),
+    open: t.Number(),
+    completed: t.Number(),
+    overdue: t.Number(),
+    pending: t.Number(),
+    current: t.Number(),
+    postponed: t.Number(),
+  }),
+
+  failure: t.Object({
+    total: t.Number(),
+    open: t.Number(),
+    closed: t.Number(),
+    lastWeek: t.Number(),
+    lastMonth: t.Number(),
+  }),
+
+  unplanned: t.Object({
+    lastWeek: t.Number(),
+    lastMonth: t.Number(),
+  }),
+
+  disciplines: t.Record(
+    t.String(),
+    t.Object({
+      open: t.Number(),
+      pending: t.Number(),
+      overdue: t.Number(),
+      current: t.Number(),
+    }),
+  ),
+});
+
 export const ControllerStatistics = new Elysia()
   .use(authPlugin)
   .group("/statistics", (app) =>
@@ -267,7 +304,7 @@ export const ControllerStatistics = new Elysia()
         };
       },
       {
-        response: t.Any(),
+        response: StatisticsSchema,
         detail: {
           tags: ["Statistics"],
           summary: "Dashboard statistics",

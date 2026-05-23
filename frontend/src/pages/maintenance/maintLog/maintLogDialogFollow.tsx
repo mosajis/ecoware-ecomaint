@@ -77,14 +77,18 @@ function MaintLogFollowDialog({ open, maintLogId, onClose, onSuccess }: Props) {
 
         // 1. Update follow status on the main maintenance log record
         await tblMaintLog.update(maintLogId, {
-          ...buildRelation("tblFollowStatus", "followStatusId", followStatusId),
+          ...buildRelation("tblFollowStatus", "followStatusId", {
+            followStatusId,
+          }),
         });
 
         // 2. Create follow-up log entry
         await tblMaintLogFollow.create({
-          ...buildRelation("tblEmployee", "employeeId", employeeId),
-          ...buildRelation("tblMaintLog", "maintLogId", maintLogId),
-          ...buildRelation("tblFollowStatus", "followStatusId", followStatusId),
+          ...buildRelation("tblEmployee", "employeeId", { employeeId }),
+          ...buildRelation("tblMaintLog", "maintLogId", { maintLogId }),
+          ...buildRelation("tblFollowStatus", "followStatusId", {
+            followStatusId,
+          }),
           followDesc: values.description,
         } as any);
 

@@ -117,6 +117,8 @@ function ComponentUnitUpsert({
     },
 
     onCreate: async (values) => {
+      const compStatusId = values.status?.compStatusId ?? 1;
+
       const body = {
         compNo: values.compNo,
         serialNo: values.serialNo ?? null,
@@ -128,35 +130,11 @@ function ComponentUnitUpsert({
         isCritical: values.isCritical ? 1 : 0,
         orderNo: values.orderNo ?? null,
 
-        ...buildRelation(
-          "tblCompType",
-          "compTypeId",
-          values.compType?.compTypeId,
-        ),
-
-        ...buildRelation(
-          "tblLocation",
-          "locationId",
-          values.location?.locationId ?? null,
-        ),
-
-        ...buildRelation(
-          "tblCompStatus",
-          "compStatusId",
-          values.status?.compStatusId ?? 1,
-        ),
-
-        ...buildRelation(
-          "tblAddress",
-          "addressId",
-          values.vendor?.addressId ?? null,
-        ),
-
-        ...buildRelation(
-          "tblComponentUnit",
-          "compId",
-          values.parentComp?.compId ?? null,
-        ),
+        ...buildRelation("tblCompType", "compTypeId", values.compType),
+        ...buildRelation("tblLocation", "locationId", values.location),
+        ...buildRelation("tblCompStatus", "compStatusId", { compStatusId }),
+        ...buildRelation("tblAddress", "addressId", values.vendor),
+        ...buildRelation("tblComponentUnit", "compId", values.parentComp),
       };
 
       const result = await tblComponentUnit.create(body);
@@ -167,6 +145,7 @@ function ComponentUnitUpsert({
     },
 
     onUpdate: async (id, values) => {
+      const compStatusId = values.status?.compStatusId ?? 1;
       const body = {
         compNo: values.compNo,
         serialNo: values.serialNo ?? null,
@@ -178,35 +157,11 @@ function ComponentUnitUpsert({
         isCritical: values.isCritical ? 1 : 0,
         orderNo: values.orderNo ?? null,
 
-        ...buildRelation(
-          "tblCompType",
-          "compTypeId",
-          values.compType?.compTypeId,
-        ),
-
-        ...buildRelation(
-          "tblLocation",
-          "locationId",
-          values.location?.locationId ?? null,
-        ),
-
-        ...buildRelation(
-          "tblCompStatus",
-          "compStatusId",
-          values.status?.compStatusId ?? 1,
-        ),
-
-        ...buildRelation(
-          "tblAddress",
-          "addressId",
-          values.vendor?.addressId ?? null,
-        ),
-
-        ...buildRelation(
-          "tblComponentUnit",
-          "compId",
-          values.parentComp?.compId ?? null,
-        ),
+        ...buildRelation("tblCompType", "compTypeId", values.compType),
+        ...buildRelation("tblLocation", "locationId", values.location),
+        ...buildRelation("tblCompStatus", "compStatusId", { compStatusId }),
+        ...buildRelation("tblAddress", "addressId", values.vendor),
+        ...buildRelation("tblComponentUnit", "compId", values.parentComp),
       };
 
       return tblComponentUnit.update(id, body);

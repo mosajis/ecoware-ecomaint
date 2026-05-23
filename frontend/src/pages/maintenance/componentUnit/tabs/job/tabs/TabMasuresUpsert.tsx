@@ -127,9 +127,9 @@ function TabMasuresUpsert({
           ...buildRelation(
             "tblCompMeasurePoint",
             "compMeasurePointId",
-            values.compMeasurePoint!.compMeasurePointId,
+            values.compMeasurePoint,
           ),
-          ...buildRelation("tblCompJob", "compJobId", compJobId),
+          ...buildRelation("tblCompJob", "compJobId", { compJobId }),
         };
 
         mode === "create"

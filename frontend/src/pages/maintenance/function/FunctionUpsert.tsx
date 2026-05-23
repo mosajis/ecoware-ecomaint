@@ -97,11 +97,7 @@ function FunctionUpsert({
     onCreate: async (values) => {
       const payload = {
         ...values,
-        ...buildRelation(
-          "tblFunction",
-          "functionId",
-          values.parent?.functionId ?? null,
-        ),
+        ...buildRelation("tblFunction", "functionId", values.parent),
       };
 
       return tblFunction.create(payload);
@@ -113,11 +109,7 @@ function FunctionUpsert({
     onUpdate: async (id, values) => {
       const payload = {
         ...values,
-        ...buildRelation(
-          "tblFunction",
-          "functionId",
-          values.parent?.functionId,
-        ),
+        ...buildRelation("tblFunction", "functionId", values.parent),
       };
 
       return tblFunction.update(id, payload);

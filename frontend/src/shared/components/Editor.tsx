@@ -83,8 +83,10 @@ const EditorToolbar = memo(
     autoSaveStatus: "idle" | "saving" | "saved";
   }) => {
     const theme = useTheme();
-    const { mode, setMode } = useColorScheme();
+
     const rightBtnColors = getButtonColors(theme, disabled || loading);
+
+    const isLight = localStorage.getItem("mui-mode") === "light";
 
     const saveBtnStyle: React.CSSProperties = {
       padding: "6px 12px",
@@ -119,25 +121,19 @@ const EditorToolbar = memo(
         <Typography fontWeight={"bold"}>{label}</Typography>
         {/* Formatting buttons */}
         <div style={{ display: "flex", gap: "4px", alignItems: "center" }}>
-          <BtnBold style={{ color: mode === "light" ? "#333" : "white" }} />
-          <BtnItalic style={{ color: mode === "light" ? "#333" : "white" }} />
+          <BtnBold style={{ color: isLight ? "#333" : "white" }} />
+          <BtnItalic style={{ color: isLight ? "#333" : "white" }} />
 
           <div style={dividerStyle(theme)} />
 
-          <BtnAlignLeft
-            style={{ color: mode === "light" ? "#333" : "white" }}
-          />
-          <BtnAlignCenter
-            style={{ color: mode === "light" ? "#333" : "white" }}
-          />
-          <BtnAlignRight
-            style={{ color: mode === "light" ? "#333" : "white" }}
-          />
+          <BtnAlignLeft style={{ color: isLight ? "#333" : "white" }} />
+          <BtnAlignCenter style={{ color: isLight ? "#333" : "white" }} />
+          <BtnAlignRight style={{ color: isLight ? "#333" : "white" }} />
 
           <div style={dividerStyle(theme)} />
 
-          <BtnUndo style={{ color: mode === "light" ? "#333" : "white" }} />
-          <BtnRedo style={{ color: mode === "light" ? "#333" : "white" }} />
+          <BtnUndo style={{ color: isLight ? "#333" : "white" }} />
+          <BtnRedo style={{ color: isLight ? "#333" : "white" }} />
           {/* Right side: autosave + manual save */}
           {(!readOnly && !onChange) ||
             (autoSaveEnabled && (

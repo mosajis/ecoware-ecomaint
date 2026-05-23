@@ -2,6 +2,7 @@ import PrintTable from "./PrintTable";
 import { TypeTblWorkOrderWithRels } from "../types";
 import { OutputFormat, SortOrder } from "./PrintTypes";
 
+const toStr = (v: unknown) => (typeof v === "string" ? v : "");
 const sortWorkOrders = (
   workOrders: TypeTblWorkOrderWithRels[],
   sortOrder: SortOrder,
@@ -14,7 +15,7 @@ const sortWorkOrders = (
       (a.tblComponentUnit?.compNo ?? "").localeCompare(
         b.tblComponentUnit?.compNo ?? "",
       ),
-    workOrderNumber: (a, b) => (a.woNo ?? "").localeCompare(b.woNo ?? ""),
+    workOrderNumber: (a, b) => toStr(a.woNo).localeCompare(toStr(b.woNo)),
     dueDate: (a, b) => {
       const dateA = a.dueDate ? new Date(a.dueDate).getTime() : 0;
       const dateB = b.dueDate ? new Date(b.dueDate).getTime() : 0;

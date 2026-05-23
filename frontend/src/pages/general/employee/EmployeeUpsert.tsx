@@ -90,7 +90,7 @@ function EmployeeUpsert({
         code: data.code,
         lastName: data.lastName,
         firstName: data.firstName,
-        ...buildRelation("tblDiscipline", "discId", data.discipline?.discId),
+        ...buildRelation("tblDiscipline", "discId", data.discipline),
       });
     },
 
@@ -99,7 +99,7 @@ function EmployeeUpsert({
         code: data.code,
         lastName: data.lastName,
         firstName: data.firstName,
-        ...buildRelation("tblDiscipline", "discId", data.discipline?.discId),
+        ...buildRelation("tblDiscipline", "discId", data.discipline),
       });
     },
 

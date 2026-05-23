@@ -53,8 +53,8 @@ const defaultValues: CompTypeFormValues = {
   compName: "",
   compType: "",
   orderNo: null,
-  maker: null,
-  tblCompType: null,
+  maker: undefined,
+  tblCompType: undefined,
 };
 
 // =======================
@@ -100,20 +100,8 @@ function ComponentTypeUpsert({
         compName: res?.compName ?? "",
         compType: res?.compType ?? "",
         orderNo: res?.orderNo ?? null,
-
-        maker: res?.tblAddress
-          ? {
-              addressId: res.tblAddress.addressId,
-              name: res.tblAddress.name ?? null,
-            }
-          : null,
-
-        tblCompType: res?.tblCompType
-          ? {
-              compTypeId: res.tblCompType.compTypeId,
-              compName: res.tblCompType.compName ?? null,
-            }
-          : null,
+        maker: res.tblAddress,
+        tblCompType: res.tblCompType,
       };
     },
 
@@ -121,19 +109,15 @@ function ComponentTypeUpsert({
     // create
     // =======================
     onCreate: async (values) => {
+      console.log(values);
       const payload = {
         compTypeNo: values.compTypeNo,
         compName: values.compName,
         compType: values.compType,
         orderNo: values.orderNo,
 
-        ...buildRelation("tblAddress", "addressId", values.maker?.addressId),
-
-        ...buildRelation(
-          "tblCompType",
-          "compTypeId",
-          values.tblCompType?.compTypeId,
-        ),
+        ...buildRelation("tblAddress", "addressId", values.maker),
+        ...buildRelation("tblCompType", "compTypeId", values.tblCompType),
       };
 
       return tblCompType.create(payload);
@@ -149,17 +133,8 @@ function ComponentTypeUpsert({
         compType: values.compType,
         orderNo: values.orderNo,
 
-        ...buildRelation(
-          "tblAddress",
-          "addressId",
-          values.maker?.addressId ?? null,
-        ),
-
-        ...buildRelation(
-          "tblCompType",
-          "compTypeId",
-          values.tblCompType?.compTypeId ?? null,
-        ),
+        ...buildRelation("tblAddress", "addressId", values.maker),
+        ...buildRelation("tblCompType", "compTypeId", values.tblCompType),
       };
 
       return tblCompType.update(id, payload);
@@ -259,21 +234,25 @@ function ComponentTypeUpsert({
         <Controller
           name="tblCompType"
           control={control}
-          render={({ field, fieldState }) => (
-            <FieldAsyncSelectGrid
-              dialogMaxWidth="sm"
-              label="Parent"
-              selectionMode="single"
-              value={field.value}
-              request={tblCompType.getAll}
-              columns={[{ field: "compName", headerName: "Name", flex: 1 }]}
-              getRowId={(row) => row.compTypeId}
-              onChange={field.onChange}
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
-              disabled={isDisabled}
-            />
-          )}
+          render={({ field, fieldState }) => {
+            console.log(field.value);
+            return (
+              <FieldAsyncSelectGrid
+                dialogMaxWidth="sm"
+                label="Parent"
+                selectionMode="single"
+                getOptionLabel={(row) => row.compName}
+                request={tblCompType.getAll}
+                columns={[{ field: "compName", headerName: "Name", flex: 1 }]}
+                getRowId={(row) => row.compTypeId}
+                onChange={field.onChange}
+                value={field.value}
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
+                disabled={isDisabled}
+              />
+            );
+          }}
         />
 
         {/* Order */}

@@ -23,7 +23,7 @@ export default function failureReportOpenDialog({
     try {
       const res = await tblFailureReport.update(failureReportId, {
         closedDateTime: null,
-        ...buildRelation("tblEmployee", "employeeId", undefined),
+        ...buildRelation("tblEmployee", "employeeId", null),
       });
       onSuccess(res);
       toast.success("Failure Report Open Successfully");

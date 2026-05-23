@@ -49,12 +49,6 @@ const columns: GridColDef<TypeTblMaintLog>[] = [
     valueGetter: (_, row) => row?.tblFollowStatus?.fsName,
   },
   {
-    field: "followCount",
-    headerName: "Follow Count",
-    flex: 1,
-    valueGetter: (_, row) => row?.overdueCount,
-  },
-  {
     field: "empHrs",
     headerName: "Emp / Hrs",
     flex: 1,
@@ -79,13 +73,6 @@ const columns: GridColDef<TypeTblMaintLog>[] = [
     valueGetter: (_, row) =>
       // @ts-ignore
       row?.tblComponentUnit?.tblCompStatus?.compStatusName,
-  },
-  {
-    field: "isCritical",
-    headerName: "Is Critical",
-    flex: 1,
-    valueGetter: (_, row) => row.tblComponentUnit?.isCritical,
-    type: "boolean",
   },
   {
     field: "unexpected",

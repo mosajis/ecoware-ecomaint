@@ -102,9 +102,11 @@ function JobTriggerUpsert({
           ...buildRelation(
             "tblJobTrigger",
             "jobTriggerId",
-            parsed.data.jobTrigger?.jobTriggerId,
+            parsed.data.jobTrigger,
           ),
-          ...buildRelation("tblCompTypeJob", "compTypeJobId", compTypeJobId),
+          ...buildRelation("tblCompTypeJob", "compTypeJobId", {
+            compTypeJobId,
+          }),
         };
 
         let result: TypeTblCompTypeJobTrigger;

@@ -125,10 +125,10 @@ function MeasurePointUpsert({
           ...buildRelation(
             "tblCounterType",
             "counterTypeId",
-            parsed.data.counterType.counterTypeId,
+            parsed.data.counterType,
           ),
-          ...buildRelation("tblUnit", "unitId", parsed.data.unit.unitId),
-          ...buildRelation("tblCompType", "compTypeId", compTypeId),
+          ...buildRelation("tblUnit", "unitId", parsed.data.unit),
+          ...buildRelation("tblCompType", "compTypeId", { compTypeId }),
         };
 
         let result: TypeTblCompTypeMeasurePoint;

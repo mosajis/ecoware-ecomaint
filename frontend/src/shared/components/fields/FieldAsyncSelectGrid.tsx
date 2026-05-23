@@ -82,22 +82,21 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
       : Array.isArray(value) && value.length > 0;
 
   const handleSelect = (selected: TItem | TItem[] | null) => {
+    const normalized = selected === undefined ? null : selected;
+
     if (selectionMode === "multiple") {
-      (onChange as (v: TItem[] | null) => void)(selected as TItem[] | null);
+      onChange(normalized as any);
     } else {
-      (onChange as (v: TItem | null) => void)(selected as TItem | null);
+      onChange(normalized as any);
     }
+
     setDialogOpen(false);
   };
 
   const handleClear = (e: React.MouseEvent) => {
     if (!isInteractive) return;
     e.stopPropagation();
-    if (selectionMode === "multiple") {
-      (onChange as (v: TItem[] | null) => void)(null);
-    } else {
-      (onChange as (v: TItem | null) => void)(null);
-    }
+    onChange(null);
   };
 
   return (

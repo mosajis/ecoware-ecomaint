@@ -123,9 +123,11 @@ function JobCounterUpsert({
           ...buildRelation(
             "tblCompTypeCounter",
             "compTypeCounterId",
-            parsed.data?.compTypeCounter?.compTypeCounterId,
+            parsed.data?.compTypeCounter,
           ),
-          ...buildRelation("tblCompTypeJob", "compTypeJobId", compTypeJobId),
+          ...buildRelation("tblCompTypeJob", "compTypeJobId", {
+            compTypeJobId,
+          }),
         };
 
         let result: TypeTblCompTypeJobCounter;

@@ -94,6 +94,72 @@ export const WorkOrderListResponseSchema = t.Object({
   totalPages: t.Number(),
 });
 
+const TblWorkOrderSchema = t.Object({
+  workOrderId: t.Number(),
+  compId: t.Optional(t.Number()),
+  pendingdate: t.Optional(t.String()), // Date -> string (ISO)
+  title: t.Optional(t.String()),
+  priority: t.Optional(t.Number()),
+  description: t.Optional(t.String()),
+  userComment: t.Optional(t.String()),
+  window: t.Optional(t.Number()),
+  dueDate: t.Optional(t.String()),
+  created: t.Optional(t.String()),
+  started: t.Optional(t.String()),
+  completed: t.Optional(t.String()),
+  woNo: t.Any(),
+  tblComponentUnit: t.Optional(
+    t.Object({
+      compId: t.Number(),
+      compNo: t.Optional(t.String()),
+      tblLocation: t.Optional(
+        t.Object({
+          name: t.String(),
+        }),
+      ),
+    }),
+  ),
+
+  tblCompJob: t.Optional(
+    t.Object({
+      jobDescId: t.Optional(t.Number()),
+      frequency: t.Optional(t.Number()),
+      compJobId: t.Number(),
+      nextDueDate: t.Optional(t.String()),
+      tblJobDescription: t.Optional(
+        t.Object({
+          jobDescCode: t.String(),
+          jobDescTitle: t.String(),
+          jobDesc: t.Optional(t.String()),
+        }),
+      ),
+      tblPeriod: t.Optional(
+        t.Object({
+          name: t.String(),
+        }),
+      ),
+    }),
+  ),
+
+  tblPendingType: t.Optional(
+    t.Object({
+      pendTypeName: t.String(),
+    }),
+  ),
+
+  tblDiscipline: t.Optional(
+    t.Object({
+      name: t.String(),
+    }),
+  ),
+
+  tblWorkOrderStatus: t.Optional(
+    t.Object({
+      name: t.String(),
+    }),
+  ),
+});
+
 const ControllerTblWorkOrder = new BaseController({
   prefix: "/tblWorkOrder",
   swagger: {
@@ -142,6 +208,7 @@ const ControllerTblWorkOrder = new BaseController({
           created: true,
           started: true,
           completed: true,
+          woNo: true,
 
           tblComponentUnit: {
             select: {
@@ -155,6 +222,7 @@ const ControllerTblWorkOrder = new BaseController({
 
           tblCompJob: {
             select: {
+              jobDescId: true,
               frequency: true,
               compJobId: true,
               nextDueDate: true,
@@ -209,7 +277,13 @@ const ControllerTblWorkOrder = new BaseController({
         tags: ["tblWorkOrder"],
         detail: { summary: "Get all with custom select" },
         query: querySchema,
-        response: t.Any(),
+        response: t.Object({
+          items: t.Array(TblWorkOrderSchema),
+          total: t.Integer(),
+          page: t.Integer(),
+          perPage: t.Integer(),
+          totalPages: t.Integer(),
+        }),
       },
     );
 

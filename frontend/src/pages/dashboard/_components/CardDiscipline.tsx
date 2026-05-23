@@ -12,7 +12,8 @@ type Props = {
   counts: TypeStatistics;
 };
 
-const DisciplineCard = ({ title, counts }: Props) => {
+const DisciplineCard = (props: Props) => {
+  const { counts, title } = props;
   const disciplineStats = counts.disciplines[title] || {
     open: 0,
     pending: 0,

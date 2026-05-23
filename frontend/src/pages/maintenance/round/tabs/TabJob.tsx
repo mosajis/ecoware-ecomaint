@@ -17,13 +17,12 @@ const TabJob = ({ roundId, label }: TabJobProps) => {
   // const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
   // --- useDataGrid ---
-  const { rows, loading, handleRefresh, handleDelete, handleFormSuccess } =
-    useDataGrid(
-      tblJobDescription.getAll,
-      tblJobDescription.deleteById,
-      "jobDescId",
-      //   !!roundId
-    );
+  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
+    tblJobDescription.getAll,
+    tblJobDescription.deleteById,
+    "jobDescId",
+    //   !!roundId
+  );
 
   // --- Handlers ---
   const handleAdd = useCallback(() => {

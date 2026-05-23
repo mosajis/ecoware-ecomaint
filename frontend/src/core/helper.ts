@@ -8,12 +8,16 @@ import {
 import { DATE_FORMATS, DateTimeType } from "@/const";
 import * as z from "zod";
 
-export function buildRelation(
+export function buildRelation<T extends Record<string, any>>(
   relationName: string,
   idField: string,
-  value: number | null | undefined,
+  value: T | null | undefined,
 ) {
   if (value === undefined) {
+    return;
+  }
+
+  if (value === null) {
     return {
       [relationName]: {
         disconnect: true,
@@ -21,16 +25,21 @@ export function buildRelation(
     };
   }
 
-  if (value === null) {
+  const id = value?.[idField];
+
+  if (id == null) {
     return;
   }
 
   return {
     [relationName]: {
-      connect: { [idField]: value },
+      connect: {
+        [idField]: id,
+      },
     },
   };
 }
+
 export function formatDateTime(
   dateTime: string | Date | number,
   type: DateTimeType = "DATETIME",

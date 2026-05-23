@@ -3,6 +3,8 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { tblFailureReport, tblWorkShop } from "@/core/api/generated/api";
 import { buildRelation } from "@/core/helper";
 import { toast } from "sonner";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
 
 type Props = {
   open: boolean;
@@ -25,7 +27,7 @@ export default function WorkShopDialogOpen({
       ...buildRelation(
         "tblEmployeeTblWorkShopClosedByIdTotblEmployee",
         "employeeId",
-        undefined,
+        null,
       ),
     };
 

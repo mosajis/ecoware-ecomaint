@@ -232,35 +232,15 @@ function ComponentTypeJobUpsert({
           statusAvailable: v.statusAvailable ? 1 : 0,
           statusInUse: v.statusInUse ? 1 : 0,
           statusRepair: v.statusRepair ? 1 : 0,
-          ...buildRelation("tblCompType", "compTypeId", compType?.compTypeId),
-          ...buildRelation(
-            "tblPeriod",
-            "periodId",
-            v.frequencyPeriod?.periodId ?? null,
-          ),
-          ...buildRelation(
-            "tblJobDescription",
-            "jobDescId",
-            v.jobDesc?.jobDescId,
-          ),
-          ...buildRelation("tblDiscipline", "discId", v.disc?.discId),
-          ...buildRelation(
-            "tblMaintClass",
-            "maintClassId",
-            v.maintClass?.maintClassId,
-          ),
-          ...buildRelation(
-            "tblMaintCause",
-            "maintCauseId",
-            v.maintCause?.maintCauseId,
-          ),
-          ...buildRelation(
-            "tblMaintType",
-            "maintTypeId",
-            v.maintType?.maintTypeId,
-          ),
           active: v.active ? 1 : 0,
           mandatoryHistory: v.mandatoryHistory ? 1 : 0,
+          ...buildRelation("tblCompType", "compTypeId", compType),
+          ...buildRelation("tblPeriod", "periodId", v.frequencyPeriod),
+          ...buildRelation("tblJobDescription", "jobDescId", v.jobDesc),
+          ...buildRelation("tblDiscipline", "discId", v.disc),
+          ...buildRelation("tblMaintClass", "maintClassId", v.maintClass),
+          ...buildRelation("tblMaintCause", "maintCauseId", v.maintCause),
+          ...buildRelation("tblMaintType", "maintTypeId", v.maintType),
         };
 
         let result: TypeTblCompTypeJob;

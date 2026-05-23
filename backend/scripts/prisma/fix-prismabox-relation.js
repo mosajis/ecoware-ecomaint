@@ -87,6 +87,8 @@ const TABLE_PKS = {
 };
 
 const SPECIAL_RELATIONS = {
+  tblEmployeeTblRotationLogEmployeeInsertedIdTotblEmployee: "employeeId",
+  tblEmployeeTblRotationLogEmployeeRemovedIdTotblEmployee: "employeeId",
   tblEmployeeTblMaintLogReportedByTotblEmployee: "employeeId",
   tblEmployeeTblWorkOrderCreatedByTotblEmployee: "employeeId",
   tblEmployeeTblWorkOrderIssuedByTotblEmployee: "employeeId",

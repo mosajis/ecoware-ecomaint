@@ -104,14 +104,12 @@ function CounterUpsert({
         const counterTypeRelation = buildRelation(
           "tblCounterType",
           "counterTypeId",
-          parsed.data?.counterType?.counterTypeId,
+          parsed.data?.counterType,
         );
 
-        const compTypeRelation = buildRelation(
-          "tblCompType",
-          "compTypeId",
+        const compTypeRelation = buildRelation("tblCompType", "compTypeId", {
           compTypeId,
-        );
+        });
 
         const payload = {
           orderNo: parsed.data.orderNo,

@@ -159,7 +159,7 @@ function WorkShopUpsert({ open, workShopId, onClose, onSuccess }: Props) {
           ...buildRelation(
             "tblDiscipline",
             "discId",
-            values.discipline?.discId ?? userDiscipline.discId ?? null,
+            values.discipline?.discId ?? userDiscipline.discId,
           ),
           ...buildRelation(
             "tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee",

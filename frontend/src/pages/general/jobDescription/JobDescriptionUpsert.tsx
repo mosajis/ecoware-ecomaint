@@ -14,7 +14,6 @@ import {
   TypeTblJobDescription,
 } from "@/core/api/generated/api";
 
-import { buildRelation } from "@/core/helper";
 import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
 import { useAtomValue } from "jotai";
 import { atomRig } from "@/shared/atoms/general.atom";

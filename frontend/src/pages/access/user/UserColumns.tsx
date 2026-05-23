@@ -37,6 +37,7 @@ export const columns: GridColDef<TypeTblUser>[] = [
   {
     field: "Discipline",
     headerName: "Discipline",
+    // @ts-ignore
     valueGetter: (_, row) => row?.tblEmployee?.tblDiscipline?.name,
     flex: 1,
   },
