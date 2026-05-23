@@ -19,8 +19,9 @@ import { authPlugin } from "../auth/auth.guard";
 export const ServiceTblWorkOrder = new BaseService(prisma.tblWorkOrder);
 export const WorkOrderItemSchema = t.Object({
   workOrderId: t.Number(),
-  compId: t.Number(),
-
+  compId: t.Union([t.Number(), t.Null()]),
+  maintLogId: t.Union([t.Number(), t.Null()]),
+  // compId: t.Optional(t.Number()),
   title: t.String(),
   priority: t.Nullable(t.Number()),
   description: t.Nullable(t.String()),
@@ -28,7 +29,8 @@ export const WorkOrderItemSchema = t.Object({
   userComment: t.Nullable(t.String()),
 
   dueDate: t.Nullable(t.Date()),
-  pendingdate: t.Nullable(t.Date()),
+  pendingdate: t.Union([t.Date(), t.Null()]),
+  issuedDate: t.Union([t.Date(), t.Null()]),
   created: t.Nullable(t.Date()),
   started: t.Nullable(t.Date()),
   completed: t.Nullable(t.Date()),
@@ -36,7 +38,7 @@ export const WorkOrderItemSchema = t.Object({
   tblComponentUnit: t.Optional(
     t.Object({
       compId: t.Number(),
-      compNo: t.String(),
+      compNo: t.Union([t.String(), t.Null()]),
       tblLocation: t.Optional(
         t.Object({
           name: t.Optional(t.String()),
@@ -94,27 +96,34 @@ export const WorkOrderListResponseSchema = t.Object({
   totalPages: t.Number(),
 });
 
-const TblWorkOrderSchema = t.Object({
+export const TblWorkOrderSchema = t.Object({
   workOrderId: t.Number(),
-  compId: t.Optional(t.Number()),
-  pendingdate: t.Optional(t.String()), // Date -> string (ISO)
+  maintLogId: t.Union([t.Number(), t.Null()]),
+  // compId: t.Nullable(t.Optional(t.Number())),
+  compId: t.Union([t.Number(), t.Null()]),
+  pendingdate: t.Union([t.Date(), t.Null()]),
+  issuedDate: t.Union([t.Date(), t.Null()]),
   title: t.Optional(t.String()),
   priority: t.Optional(t.Number()),
   description: t.Optional(t.String()),
   userComment: t.Optional(t.String()),
   window: t.Optional(t.Number()),
-  dueDate: t.Optional(t.String()),
-  created: t.Optional(t.String()),
-  started: t.Optional(t.String()),
-  completed: t.Optional(t.String()),
-  woNo: t.Any(),
+  dueDate: t.Optional(t.Date()),
+  created: t.Optional(t.Date()),
+  started: t.Optional(t.Date()),
+  completed: t.Optional(t.Date()),
+  woNo: t.Union([t.String(), t.Null()]),
+
   tblComponentUnit: t.Optional(
     t.Object({
       compId: t.Number(),
       compNo: t.Optional(t.String()),
+      serialNo: t.Optional(t.String()),
+      isCritical: t.Optional(t.Number()),
+
       tblLocation: t.Optional(
         t.Object({
-          name: t.String(),
+          name: t.Optional(t.String()),
         }),
       ),
     }),
@@ -122,20 +131,22 @@ const TblWorkOrderSchema = t.Object({
 
   tblCompJob: t.Optional(
     t.Object({
-      jobDescId: t.Optional(t.Number()),
-      frequency: t.Optional(t.Number()),
+      jobDescId: t.Number(),
+      frequency: t.Any(),
       compJobId: t.Number(),
-      nextDueDate: t.Optional(t.String()),
+      nextDueDate: t.Optional(t.Date()),
+
       tblJobDescription: t.Optional(
         t.Object({
-          jobDescCode: t.String(),
-          jobDescTitle: t.String(),
+          jobDescCode: t.Optional(t.String()),
+          jobDescTitle: t.Optional(t.String()),
           jobDesc: t.Optional(t.String()),
         }),
       ),
+
       tblPeriod: t.Optional(
         t.Object({
-          name: t.String(),
+          name: t.Optional(t.String()),
         }),
       ),
     }),
@@ -143,19 +154,20 @@ const TblWorkOrderSchema = t.Object({
 
   tblPendingType: t.Optional(
     t.Object({
-      pendTypeName: t.String(),
+      pendTypeName: t.Optional(t.String()),
+      description: t.Optional(t.String()),
     }),
   ),
 
   tblDiscipline: t.Optional(
     t.Object({
-      name: t.String(),
+      name: t.Optional(t.String()),
     }),
   ),
 
   tblWorkOrderStatus: t.Optional(
     t.Object({
-      name: t.String(),
+      name: t.Optional(t.String()),
     }),
   ),
 });
@@ -196,9 +208,11 @@ const ControllerTblWorkOrder = new BaseController({
         const usePagination = !!paginate;
 
         const defaultSelect = {
+          maintLogId: true,
           workOrderId: true,
           compId: true,
           pendingdate: true,
+          issuedDate: true,
           title: true,
           priority: true,
           description: true,
@@ -214,6 +228,9 @@ const ControllerTblWorkOrder = new BaseController({
             select: {
               compId: true,
               compNo: true,
+              serialNo: true,
+              isCritical: true,
+              description: true,
               tblLocation: {
                 select: { name: true },
               },
@@ -240,7 +257,7 @@ const ControllerTblWorkOrder = new BaseController({
           },
 
           tblPendingType: {
-            select: { pendTypeName: true },
+            select: { pendTypeName: true, description: true },
           },
 
           tblDiscipline: {
@@ -277,13 +294,7 @@ const ControllerTblWorkOrder = new BaseController({
         tags: ["tblWorkOrder"],
         detail: { summary: "Get all with custom select" },
         query: querySchema,
-        response: t.Object({
-          items: t.Array(TblWorkOrderSchema),
-          total: t.Integer(),
-          page: t.Integer(),
-          perPage: t.Integer(),
-          totalPages: t.Integer(),
-        }),
+        response: t.Any(),
       },
     );
 
