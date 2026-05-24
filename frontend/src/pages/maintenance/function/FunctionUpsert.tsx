@@ -95,7 +95,6 @@ function FunctionUpsert({
         ...buildRelation("tblFunction", "functionId", values.parent),
       };
 
-      console.log(values);
       return tblFunction.create(payload);
     },
 

@@ -17,7 +17,9 @@ export const pluginErrorHandler = (app: Elysia) =>
       details: error.meta,
     };
 
-    console.log(error)
+    console.log("--------------------------------");
+    console.error(error);
+    console.log("--------------------------------");
 
     // Prisma unique constraint
     if (error instanceof Prisma.PrismaClientKnownRequestError) {

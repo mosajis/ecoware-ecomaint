@@ -145,7 +145,6 @@ function ComponentUnitUpsert({
     control,
     formState: { errors },
   } = form;
-  console.log(errors);
   return (
     <FormDialog
       maxWidth="sm"

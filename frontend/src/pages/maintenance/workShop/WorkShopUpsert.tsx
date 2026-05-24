@@ -276,7 +276,6 @@ function WorkShopUpsert({
             include: INCLUDE,
           });
         } else {
-          console.log("here");
           result = await tblWorkShop.update(workShopId!, body, {
             include: INCLUDE,
           });

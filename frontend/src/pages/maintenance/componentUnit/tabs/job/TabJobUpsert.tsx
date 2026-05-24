@@ -222,7 +222,6 @@ function ComponentJobUpsert({
 
   const handleFormSubmit = useCallback(
     async (values: JobFormValues) => {
-      console.log(values);
       const body = {
         lastDone: values.lastDone,
         nextDueDate: values.nextDueDate,

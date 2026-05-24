@@ -263,7 +263,6 @@ const baseController = new BaseController({
 
         const fileData =
           await ServiceTblAttachment.getFileForDownload(attachmentId);
-        console.log(fileData.originalName);
 
         set.headers["content-type"] = fileData.mimeType;
 

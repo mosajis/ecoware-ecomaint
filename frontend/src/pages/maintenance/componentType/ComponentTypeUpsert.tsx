@@ -109,7 +109,6 @@ function ComponentTypeUpsert({
     // create
     // =======================
     onCreate: async (values) => {
-      console.log(values);
       const payload = {
         compTypeNo: values.compTypeNo,
         compName: values.compName,
@@ -235,7 +234,6 @@ function ComponentTypeUpsert({
           name="tblCompType"
           control={control}
           render={({ field, fieldState }) => {
-            console.log(field.value);
             return (
               <FieldAsyncSelectGrid
                 dialogMaxWidth="sm"

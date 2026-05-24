@@ -60,7 +60,6 @@ function TabSpareUsedUpsert({
   onClose,
   onSuccess,
 }: Props & { entityName?: string }) {
-  console.log(maintLogId);
   const {
     form,
     loadingInitial,
