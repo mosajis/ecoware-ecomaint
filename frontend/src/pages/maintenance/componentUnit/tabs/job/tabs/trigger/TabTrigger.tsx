@@ -1,50 +1,15 @@
-import JobCounterUpsert from "./TabCounterUpsert";
+import Upsert from "./TabTriggerUpsert";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useCallback, useState } from "react";
-import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import {
-  tblCompJobCounter,
-  tblCompTypeJobCounter,
-  TypeTblCompJob,
-  TypeTblCompJobCounter,
-  TypeTblCompTypeJobCounter,
-} from "@/core/api/generated/api";
+import { tblCompJobTrigger, TypeTblCompJob } from "@/core/api/generated/api";
+import { columns, getRowId } from "./TabTriggerColumns";
 
 type Props = {
   compJob?: TypeTblCompJob | null;
 };
 
-const getRowId = (row: TypeTblCompJobCounter) => row.compJobCounterId;
-
-// === Columns ===
-const columns: GridColDef<TypeTblCompTypeJobCounter>[] = [
-  {
-    field: "counterType",
-    headerName: "Counter Type",
-    flex: 1,
-    valueGetter: (_, row) =>
-      // @ts-ignore
-      row.tblCompCounter?.tblCounterType?.name,
-  },
-  { field: "frequency", headerName: "Frequency", width: 120 },
-  { field: "window", headerName: "Window", width: 120 },
-  {
-    field: "showInAlert",
-    headerName: "Alert",
-    width: 90,
-    type: "boolean",
-  },
-  {
-    field: "updateByFunction",
-    headerName: "By Func",
-    width: 110,
-    type: "boolean",
-  },
-  { field: "orderNo", headerName: "Order No", width: 80 },
-];
-
-const TabCounter = ({ compJob }: Props) => {
+const TabJobTrigger = ({ compJob }: Props) => {
   const compJobId = compJob?.compJobId;
   const compId = compJob?.compId;
 
@@ -56,13 +21,9 @@ const TabCounter = ({ compJob }: Props) => {
 
   // === getAll ===
   const getAll = useCallback(() => {
-    return tblCompJobCounter.getAll({
+    return tblCompJobTrigger.getAll({
       include: {
-        tblCompCounter: {
-          include: {
-            tblCounterType: true,
-          },
-        },
+        tblJobTrigger: true,
       },
       filter: {
         compJobId,
@@ -73,7 +34,7 @@ const TabCounter = ({ compJob }: Props) => {
   // === useDataGrid ===
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
-    tblCompTypeJobCounter.deleteById,
+    tblCompJobTrigger.deleteById,
     "compJobId",
     !!compJobId,
   );
@@ -102,6 +63,7 @@ const TabCounter = ({ compJob }: Props) => {
   return (
     <>
       <CustomizedDataGrid
+        disableEdit
         label={label}
         rows={rows}
         columns={columns}
@@ -117,7 +79,7 @@ const TabCounter = ({ compJob }: Props) => {
 
       {/* === UPSERT === */}
       {compJobId && compId && (
-        <JobCounterUpsert
+        <Upsert
           open={openForm}
           mode={mode}
           recordId={selectedId}
@@ -131,4 +93,4 @@ const TabCounter = ({ compJob }: Props) => {
   );
 };
 
-export default TabCounter;
+export default TabJobTrigger;

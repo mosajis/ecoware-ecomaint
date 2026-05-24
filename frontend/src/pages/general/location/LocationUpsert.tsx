@@ -29,7 +29,7 @@ type LocationFormValues = z.infer<typeof schema>;
 const defaultValues: LocationFormValues = {
   name: "",
   locationCode: "",
-  parentLocationId: null,
+  parentLocationId: undefined,
   orderNo: null,
 };
 
@@ -65,7 +65,7 @@ function LocationUpsert({
       return {
         name: res?.name ?? "",
         locationCode: res?.locationCode ?? "",
-        parentLocationId: res?.tblLocation ?? null,
+        parentLocationId: res?.tblLocation,
         orderNo: res?.orderNo ?? null,
       };
     },

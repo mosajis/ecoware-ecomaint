@@ -3,47 +3,19 @@ import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import ConfirmDialog from "@/shared/components/ConfirmDialog";
 import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import { useCallback, useState } from "react";
-import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { toast } from "sonner";
+import { effectTblCompTypeJobCounter } from "@/core/api/apiEffects";
 import {
   tblCompTypeJobCounter,
   TypeTblCompTypeJob,
   TypeTblCompTypeJobCounter,
 } from "@/core/api/generated/api";
-import { effectTblCompTypeJobCounter } from "@/core/api/apiEffects";
+import { columns, getRowId } from "./TabCounterColumns";
 
 type Props = {
   compTypeJob?: TypeTblCompTypeJob;
 };
-
-const getRowId = (row: TypeTblCompTypeJobCounter) => row.compTypeJobCounterId;
-
-const columns: GridColDef<TypeTblCompTypeJobCounter>[] = [
-  {
-    field: "counterType",
-    headerName: "Counter Type",
-    flex: 1,
-    valueGetter: (_, row) =>
-      // @ts-ignore
-      row.tblCompTypeCounter?.tblCounterType?.name,
-  },
-  { field: "frequency", headerName: "Frequency", width: 120 },
-  { field: "window", headerName: "Window", width: 120 },
-  {
-    field: "showInAlert",
-    headerName: "Alert",
-    width: 90,
-    type: "boolean",
-  },
-  {
-    field: "updateByFunction",
-    headerName: "By Func",
-    width: 110,
-    type: "boolean",
-  },
-  { field: "orderNo", headerName: "Order", width: 80 },
-];
 
 const TabCounter = ({ compTypeJob }: Props) => {
   const compTypeJobId = compTypeJob?.compTypeJobId;

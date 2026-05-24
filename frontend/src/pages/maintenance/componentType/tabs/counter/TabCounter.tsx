@@ -1,10 +1,8 @@
 import CounterUpsert from "./TabCounterUpsert";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import ConfirmDialog from "@/shared/components/ConfirmDialog";
 import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import { useCallback, useState } from "react";
-import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
   tblCompTypeCounter,
@@ -13,63 +11,12 @@ import {
 } from "@/core/api/generated/api";
 import { toast } from "sonner";
 import { effectTblCompTypeCounter } from "@/core/api/apiEffects";
+import { columns, getRowId } from "./TabCounterColumns";
 
 type Props = {
   compType?: TypeTblCompType;
   label?: string;
 };
-
-const getRowId = (row: TypeTblCompTypeCounter) => row.compTypeCounterId;
-
-// === Columns ===
-const columns: GridColDef<TypeTblCompTypeCounter>[] = [
-  {
-    field: "counterType",
-    headerName: "Counter Type",
-    flex: 1,
-    valueGetter: (_, row) => row.tblCounterType?.name || "",
-  },
-  {
-    field: "currentDate",
-    headerName: "Current Date",
-    flex: 1,
-
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-  {
-    field: "currentValue",
-    headerName: "Current Value",
-    flex: 1,
-  },
-  {
-    field: "startDate",
-    headerName: "Start Date",
-    flex: 1,
-
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-  {
-    field: "startValue",
-    headerName: "Start Value",
-    flex: 1,
-  },
-  {
-    field: "useCalcAverage",
-    headerName: "Use Calc Avg",
-    flex: 1,
-    type: "boolean",
-  },
-  {
-    field: "averageCountRate",
-    headerName: "Avg Rate",
-    flex: 1,
-  },
-  {
-    field: "orderNo",
-    headerName: "Order No",
-    width: 85,
-  },
-];
 
 const TabCounter = ({ compType, label }: Props) => {
   const compTypeId = compType?.compTypeId;

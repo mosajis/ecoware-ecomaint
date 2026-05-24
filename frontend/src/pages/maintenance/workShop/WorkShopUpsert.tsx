@@ -15,40 +15,48 @@ import {
   requiredStringField,
 } from "@/core/helper";
 import { useAtomValue } from "jotai";
-import { atomUserDiscipline } from "@/pages/auth/auth.atom";
+import { atomUser, atomUserDiscipline } from "@/pages/auth/auth.atom";
 import { toast } from "sonner";
+import { Divider } from "@mui/material";
 import {
   tblWorkShop,
-  tblDiscipline,
-  tblUser,
-  TypeTblDiscipline,
   TypeTblWorkShop,
   tblEmployee,
   TypeTblEmployee,
+  tblComponentUnit,
+  TypeTblComponentUnit,
 } from "@/core/api/generated/api";
 
 // ─── Schema ───────────────────────────────────────────────────────────────────
 
 const schema = z.object({
+  componentUnit: z
+    .object({
+      compId: z.number(),
+      compNo: z.string().nullable(),
+    })
+    .nullable()
+    .refine((val) => val !== null, {
+      message: "Component Unit is required",
+    }),
   title: requiredStringField(),
   workShopNo: z.string().nullable(),
   awardingDate: z.string().nullable(),
-  discipline: z.any().nullable(),
   personInCharge: z.any().nullable(),
   personInChargeApprove: z.any().nullable(),
   repairDescription: z.string().nullable(),
   followDesc: z.string().nullable(),
 });
 
-type SchemaValue = z.infer<typeof schema>;
+type SchemaValue = z.input<typeof schema>;
 
 const DEFAULT_VALUES: SchemaValue = {
+  componentUnit: null,
   title: "",
   workShopNo: "",
-  awardingDate: null,
-  discipline: null,
-  personInCharge: null,
-  personInChargeApprove: null,
+  awardingDate: new Date().toString(),
+  personInCharge: undefined,
+  personInChargeApprove: undefined,
   repairDescription: "",
   followDesc: "",
 };
@@ -81,112 +89,194 @@ const EMPLOYEE_COLUMNS = [
 type Props = {
   open: boolean;
   workShopId?: number | null;
+  initialCompId?: number | null; // ⭐ compId اختیاری
   onClose: () => void;
   onSuccess: (data: TypeTblWorkShop) => void;
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-function WorkShopUpsert({ open, workShopId, onClose, onSuccess }: Props) {
+function WorkShopUpsert({
+  open,
+  workShopId,
+  initialCompId,
+  onClose,
+  onSuccess,
+}: Props) {
+  const user = useAtomValue(atomUser);
   const userDiscipline = useAtomValue(atomUserDiscipline);
 
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const mode: "create" | "update" = workShopId ? "update" : "create";
+  const mode = workShopId ? "update" : "create";
 
   const {
     control,
     handleSubmit,
     reset,
-    formState: { errors, isDirty },
+    setValue,
+    watch,
+    formState: { errors },
   } = useForm<SchemaValue>({
     resolver: zodResolver(schema),
-    defaultValues: { ...DEFAULT_VALUES, discipline: userDiscipline },
+    defaultValues: DEFAULT_VALUES,
   });
 
-  // ── Fetch ─────────────────────────────────────────────────────────────────
+  const personInCharge = watch("personInCharge");
+  const componentUnit = watch("componentUnit");
 
-  const fetchData = useCallback(async () => {
-    if (mode === "update" && workShopId) {
-      setLoadingInitial(true);
+  // ─────────────────────────────
+  // Derived state (NO FORM FIELD)
+  // ─────────────────────────────
+  const discipline = personInCharge?.tblDiscipline ?? userDiscipline;
+
+  // ─────────────────────────────
+  // auto set default user
+  // ─────────────────────────────
+  useEffect(() => {
+    if (!open || mode !== "create") return;
+
+    if (user?.tblEmployee) {
+      setValue("personInCharge", user.tblEmployee);
+    }
+  }, [open, mode, user, setValue]);
+
+  // ─────────────────────────────
+  // auto set initial component
+  // ─────────────────────────────
+  useEffect(() => {
+    if (!open || mode !== "create" || !initialCompId) return;
+
+    // 📌 Fetch component data
+    const setComponent = async () => {
       try {
-        const workShop = await tblWorkShop.getById(workShopId, {
-          include: INCLUDE,
-        });
-        if (workShop) {
-          reset({
-            title: workShop.title,
-            workShopNo: workShop.workShopNo ?? "",
-            awardingDate: workShop.awardingDate?.toString(),
-            discipline: workShop.tblDiscipline ?? null,
-            personInCharge:
-              workShop.tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee ??
-              null,
-            personInChargeApprove:
-              workShop.tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee ??
-              null,
-            repairDescription: workShop.repairDescription ?? "",
-            followDesc: workShop.followDesc ?? "",
+        const component = await tblComponentUnit.getById(initialCompId);
+        if (component) {
+          setValue("componentUnit", {
+            compId: component.compId,
+            compNo: component.compNo,
           });
         }
-      } catch {
-        toast.error("Failed to load WorkShop");
-      } finally {
-        setLoadingInitial(false);
+      } catch (error) {
+        console.error("Failed to load component:", error);
       }
-    } else {
-      reset({ ...DEFAULT_VALUES, discipline: userDiscipline });
+    };
+
+    setComponent();
+  }, [open, mode, initialCompId, setValue]);
+
+  // ─────────────────────────────
+  // fetch data
+  // ─────────────────────────────
+  const fetchData = useCallback(async () => {
+    if (!workShopId) return;
+
+    setLoadingInitial(true);
+
+    try {
+      const data: any = await tblWorkShop.getById(workShopId, {
+        include: {
+          ...INCLUDE,
+          tblWorkShopComponents: {
+            include: {
+              tblComponentUnit: true,
+            },
+          },
+        },
+      });
+
+      if (!data) return;
+
+      // 📌 گرفتن اولین component اگر وجود داشت
+      const firstCompId = data.tblWorkShopComponents?.[0]?.compId;
+
+      let componentUnit = null;
+
+      if (firstCompId) {
+        try {
+          const component = await tblComponentUnit.getById(firstCompId);
+
+          if (component) {
+            componentUnit = {
+              compId: component.compId,
+              compNo: component.compNo,
+            };
+          }
+        } catch (e) {
+          console.error("Failed to fetch component unit:", e);
+        }
+      }
+      reset({
+        componentUnit,
+        title: data.title,
+        workShopNo: data.workShopNo ?? "",
+        awardingDate: data.awardingDate?.toString(),
+        repairDescription: data.repairDescription ?? "",
+        followDesc: data.followDesc ?? "",
+        personInCharge:
+          data.tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee ?? null,
+        personInChargeApprove:
+          data.tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee ??
+          null,
+      });
+    } catch {
+      toast.error("Failed to load WorkShop");
+    } finally {
+      setLoadingInitial(false);
     }
-  }, [mode, workShopId, reset, userDiscipline]);
+  }, [workShopId, reset]);
 
   useEffect(() => {
     if (open) fetchData();
   }, [open, fetchData]);
 
-  // ── Submit ────────────────────────────────────────────────────────────────
-
-  const handleFormSubmit = useCallback(
+  // ─────────────────────────────
+  // submit
+  // ─────────────────────────────
+  const onSubmit = useCallback(
     async (values: SchemaValue) => {
       setSubmitting(true);
+
       try {
         const body = {
           title: values.title,
-          workShopNo: values.workShopNo,
+          // ⭐ workShopNo حذف شد - backend خودش تولید می‌کند
           awardingDate: values.awardingDate?.toString(),
           repairDescription: values.repairDescription,
           followDesc: values.followDesc,
-          ...buildRelation(
-            "tblDiscipline",
-            "discId",
-            values.discipline?.discId ?? userDiscipline.discId,
-          ),
-          ...buildRelation(
-            "tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee",
-            "employeeId",
-            values.personInChargeApprove?.employeeId,
-          ),
+
+          ...buildRelation("tblDiscipline", "discId", discipline),
+
           ...buildRelation(
             "tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee",
             "employeeId",
-            values.personInCharge?.employeeId,
+            values.personInCharge,
           ),
+
+          ...buildRelation(
+            "tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee",
+            "employeeId",
+            values.personInChargeApprove,
+          ),
+
+          // ⭐ اضافه کردن compId برای ایجاد WorkShopComponent
+          ...(values.componentUnit && {
+            compId: values.componentUnit.compId,
+          }),
         };
 
         let result: TypeTblWorkShop;
 
         if (mode === "create") {
-          const countResult = await tblWorkShop.count();
-          const nextNumber = ((countResult?.count ?? 0) + 1).toString();
-          const created = await tblWorkShop.create({
-            ...body,
-            workShopNo: nextNumber,
-            createdDate: new Date().toString(),
-          });
+          // ⭐ backend خودش workShopNo و createdDate رو تولید می‌کند
+          const created = await tblWorkShop.create(body);
+
           result = await tblWorkShop.getById(created.workShopId, {
             include: INCLUDE,
           });
         } else {
+          console.log("here");
           result = await tblWorkShop.update(workShopId!, body, {
             include: INCLUDE,
           });
@@ -201,13 +291,14 @@ function WorkShopUpsert({ open, workShopId, onClose, onSuccess }: Props) {
         setSubmitting(false);
       }
     },
-    [mode, workShopId, userDiscipline, onSuccess, onClose],
+    [mode, workShopId, discipline, onSuccess, onClose],
   );
-
-  // ── Render ────────────────────────────────────────────────────────────────
 
   const isDisabled = loadingInitial || submitting;
 
+  // ─────────────────────────────
+  // UI
+  // ─────────────────────────────
   return (
     <FormDialog
       open={open}
@@ -216,25 +307,37 @@ function WorkShopUpsert({ open, workShopId, onClose, onSuccess }: Props) {
       submitting={submitting}
       loadingInitial={loadingInitial}
       maxWidth="lg"
-      onSubmit={handleSubmit(handleFormSubmit)}
+      onSubmit={handleSubmit(onSubmit)}
     >
-      <Box display="flex" flexDirection="column" gap={1.5} p={1}>
-        {/* Row 1 – Title / No / Date */}
-        <Box display="flex" gap={1.5}>
+      <Box display="grid" gridTemplateColumns="1fr 1fr" gap={1.5}>
+        <Box display={"flex"} flexDirection={"column"} gap={1.5}>
+          {/* ⭐ COMPONENT UNIT - بالای همه */}
           <Controller
-            name="title"
+            name="componentUnit"
             control={control}
             render={({ field }) => (
-              <TextField
-                {...field}
-                label="Title *"
-                fullWidth
-                size="small"
-                error={!!errors.title}
+              <FieldAsyncSelectGrid<TypeTblComponentUnit>
+                label="Component Unit *"
+                placeholder="Select a component..."
+                value={field.value}
+                onChange={field.onChange}
                 disabled={isDisabled}
+                error={!!errors.componentUnit}
+                helperText={errors.componentUnit?.message}
+                request={tblComponentUnit.getAll}
+                columns={[
+                  {
+                    field: "compNo",
+                    headerName: "CompNo",
+                    flex: 1,
+                  },
+                ]}
+                getOptionLabel={(row) => row.compNo}
+                getRowId={(row) => row?.compId}
               />
             )}
           />
+          <Divider />
 
           <Controller
             name="workShopNo"
@@ -243,9 +346,26 @@ function WorkShopUpsert({ open, workShopId, onClose, onSuccess }: Props) {
               <TextField
                 {...field}
                 label="WorkShop No"
-                fullWidth
                 size="small"
-                InputProps={{ readOnly: true }}
+                fullWidth
+                sx={{ width: "50%" }}
+                slotProps={{ input: { readOnly: true } }}
+              />
+            )}
+          />
+
+          <Divider />
+
+          <Controller
+            name="title"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label="Title *"
+                size="small"
+                fullWidth
+                error={!!errors.title}
                 disabled={isDisabled}
               />
             )}
@@ -256,60 +376,24 @@ function WorkShopUpsert({ open, workShopId, onClose, onSuccess }: Props) {
             control={control}
             render={({ field }) => (
               <FieldDateTime
-                label="Awarding Date"
+                label="Awarding Date *"
                 field={field}
-                disabled={isDisabled}
                 type="DATE"
-                error={!!errors.awardingDate}
-              />
-            )}
-          />
-        </Box>
-
-        {/* Row 2 – Selects */}
-        <Box display="flex" gap={1.5}>
-          <Controller
-            name="discipline"
-            control={control}
-            render={({ field }) => (
-              <FieldAsyncSelect<TypeTblDiscipline>
-                label="Discipline"
-                getOptionKey={(row) => row.discId}
-                getOptionLabel={(row) => row.name || ""}
-                request={tblDiscipline.getAll}
-                value={field.value}
-                onChange={field.onChange}
-                disabled={isDisabled || mode === "create"}
-              />
-            )}
-          />
-
-          <Controller
-            name="personInCharge"
-            control={control}
-            render={({ field }) => (
-              <FieldAsyncSelectGrid<TypeTblEmployee>
-                label="Person In Charge"
-                columns={EMPLOYEE_COLUMNS}
-                request={tblEmployee.getAll}
-                getRowId={(row) => row.employeeId}
-                getOptionLabel={extractFullName}
-                value={field.value}
-                onChange={field.onChange}
                 disabled={isDisabled}
               />
             )}
           />
+          <Divider />
 
           <Controller
             name="personInChargeApprove"
             control={control}
             render={({ field }) => (
               <FieldAsyncSelectGrid<TypeTblEmployee>
-                label="ToolPusher"
+                label="ToolPusher *"
                 columns={EMPLOYEE_COLUMNS}
                 request={tblEmployee.getAll}
-                getRowId={(row) => row.employeeId}
+                getRowId={(r) => r.employeeId}
                 getOptionLabel={extractFullName}
                 value={field.value}
                 onChange={field.onChange}
@@ -317,43 +401,57 @@ function WorkShopUpsert({ open, workShopId, onClose, onSuccess }: Props) {
               />
             )}
           />
+          <Box display={"flex"} gap={1.5}>
+            <Controller
+              name="personInCharge"
+              control={control}
+              render={({ field }) => (
+                <FieldAsyncSelectGrid<TypeTblEmployee>
+                  label="Person In Charge *"
+                  columns={EMPLOYEE_COLUMNS}
+                  request={() =>
+                    tblEmployee.getAll({
+                      include: { tblDiscipline: true },
+                    })
+                  }
+                  getRowId={(r) => r.employeeId}
+                  getOptionLabel={extractFullName}
+                  value={field.value}
+                  onChange={field.onChange}
+                  disabled={isDisabled}
+                />
+              )}
+            />
+            {/* Discipline DISPLAY ONLY */}
+            <TextField
+              label="Discipline"
+              value={discipline?.name ?? ""}
+              size="small"
+              fullWidth
+              InputProps={{ readOnly: true }}
+            />
+          </Box>
         </Box>
+        <Editor
+          initValue={watch("repairDescription")}
+          label="Repair Description"
+          onChange={(v) => setValue("repairDescription", v)}
+          disabled={isDisabled}
+          containerStyle={{ height: 320 }}
+        />
 
-        {/* Row 3 – Editors */}
-        <Box display="flex" flexDirection="column" gap={1.5} height="470px">
-          <Controller
-            name="repairDescription"
-            control={control}
-            render={({ field }) => (
-              <Editor
-                {...field}
-                initValue={field.value}
-                label="Repair Description"
-                onChange={field.onChange}
-                disabled={isDisabled}
-                autoSave={false}
-              />
-            )}
-          />
-
-          <Controller
-            name="followDesc"
-            control={control}
-            render={({ field }) => (
-              <Editor
-                {...field}
-                initValue={field.value}
-                label="Follow Description"
-                onChange={field.onChange}
-                disabled={isDisabled}
-                autoSave={false}
-              />
-            )}
+        {/* FULL WIDTH */}
+        <Box gridColumn="1 / -1">
+          <Editor
+            initValue={watch("followDesc")}
+            label="Follow Description"
+            onChange={(v) => setValue("followDesc", v)}
+            disabled={isDisabled}
+            containerStyle={{ height: 230 }}
           />
         </Box>
       </Box>
     </FormDialog>
   );
 }
-
 export default memo(WorkShopUpsert);

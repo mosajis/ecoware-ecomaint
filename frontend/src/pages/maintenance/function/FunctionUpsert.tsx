@@ -37,7 +37,7 @@ const defaultValues: FunctionFormValues = {
   funcNo: "",
   funcDesc: "",
   orderNo: null,
-  parent: null,
+  parent: undefined,
 };
 
 // =======================
@@ -82,12 +82,7 @@ function FunctionUpsert({
         funcNo: res?.funcNo ?? "",
         funcDesc: res?.funcDesc ?? "",
         orderNo: res?.orderNo ?? null,
-        parent: res?.tblFunction
-          ? {
-              functionId: res.tblFunction.functionId,
-              funcNo: res.tblFunction.funcNo,
-            }
-          : null,
+        parent: res?.tblFunction,
       };
     },
 
@@ -100,6 +95,7 @@ function FunctionUpsert({
         ...buildRelation("tblFunction", "functionId", values.parent),
       };
 
+      console.log(values);
       return tblFunction.create(payload);
     },
 

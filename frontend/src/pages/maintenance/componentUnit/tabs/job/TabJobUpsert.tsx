@@ -37,6 +37,7 @@ const schema = z.object({
       jobDescTitle: z.string().nullable().optional(),
     })
     .nullable()
+    .optional()
     .refine((val) => val !== null, {
       message: "Job Description is required",
     }),
@@ -46,6 +47,7 @@ const schema = z.object({
       discId: z.number(),
       name: z.string().nullable().optional(),
     })
+    .optional()
     .nullable()
     .refine((val) => val !== null, {
       message: "Discipline is required",
@@ -57,7 +59,10 @@ const schema = z.object({
       descr: z.string().nullable().optional(),
     })
     .nullable()
-    .optional(),
+    .optional()
+    .refine((val) => val !== null, {
+      message: "required",
+    }),
 
   maintCause: z
     .object({
@@ -65,7 +70,10 @@ const schema = z.object({
       descr: z.string().nullable().optional(),
     })
     .nullable()
-    .optional(),
+    .optional()
+    .refine((val) => val !== null, {
+      message: "required",
+    }),
 
   maintType: z
     .object({
@@ -73,7 +81,10 @@ const schema = z.object({
       descr: z.string().nullable().optional(),
     })
     .nullable()
-    .optional(),
+    .optional()
+    .refine((val) => val !== null, {
+      message: "required",
+    }),
 
   frequency: z.number().nullable().optional(),
 
@@ -117,13 +128,13 @@ type Props = {
 const DEFAULT_VALUES: JobFormValues = {
   lastDone: null,
   nextDueDate: null,
-  jobDesc: null,
-  disc: null,
-  maintClass: null,
-  maintCause: null,
-  maintType: null,
+  jobDesc: undefined,
+  disc: undefined,
+  maintClass: undefined,
+  maintCause: undefined,
+  maintType: undefined,
   frequency: null,
-  frequencyPeriod: null,
+  frequencyPeriod: undefined,
   priority: null,
   window: null,
   statusNone: true,
@@ -177,17 +188,17 @@ function ComponentJobUpsert({
       });
 
       reset({
-        lastDone: row.lastDone ?? null,
-        nextDueDate: row.nextDueDate ?? null,
-        jobDesc: row.tblJobDescription ?? null,
-        disc: row.tblDiscipline ?? null,
-        maintClass: row.tblMaintClass ?? null,
-        maintCause: row.tblMaintCause ?? null,
-        maintType: row.tblMaintType ?? null,
-        frequency: row.frequency ?? null,
-        frequencyPeriod: row.tblPeriod ?? null,
-        priority: row.priority ?? null,
-        window: row.window ?? null,
+        lastDone: row.lastDone,
+        nextDueDate: row.nextDueDate,
+        jobDesc: row.tblJobDescription,
+        disc: row.tblDiscipline,
+        maintClass: row.tblMaintClass,
+        maintCause: row.tblMaintCause,
+        maintType: row.tblMaintType,
+        frequency: row.frequency,
+        frequencyPeriod: row.tblPeriod,
+        priority: row.priority,
+        window: row.window,
         statusNone: !!row.statusNone,
         statusAvailable: !!row.statusAvailable,
         statusInUse: !!row.statusInUse,
@@ -211,13 +222,14 @@ function ComponentJobUpsert({
 
   const handleFormSubmit = useCallback(
     async (values: JobFormValues) => {
+      console.log(values);
       const body = {
         lastDone: values.lastDone,
         nextDueDate: values.nextDueDate,
 
-        frequency: values.frequency ?? null,
-        priority: values.priority ?? null,
-        window: values.window ?? null,
+        frequency: values.frequency,
+        priority: values.priority,
+        window: values.window,
 
         planningMethod: values.planningMethod === "Fixed" ? 1 : 0,
 
@@ -369,7 +381,7 @@ function ComponentJobUpsert({
               <FieldAsyncSelectGrid
                 disabled={isDisabled}
                 dialogMaxWidth="sm"
-                label="Maint Class"
+                label="Maint Class *"
                 value={field.value}
                 selectionMode="single"
                 request={tblMaintClass.getAll}
@@ -390,7 +402,7 @@ function ComponentJobUpsert({
               <FieldAsyncSelectGrid
                 disabled={isDisabled}
                 dialogMaxWidth="sm"
-                label="Maint Cause"
+                label="Maint Cause *"
                 value={field.value}
                 selectionMode="single"
                 request={tblMaintCause.getAll}
@@ -411,7 +423,7 @@ function ComponentJobUpsert({
               <FieldAsyncSelectGrid
                 disabled={isDisabled}
                 dialogMaxWidth="sm"
-                label="Maint Type"
+                label="Maint Type *"
                 value={field.value}
                 selectionMode="single"
                 request={tblMaintType.getAll}

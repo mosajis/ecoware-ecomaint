@@ -41,63 +41,35 @@ export function GenericTree<T>({
   loading = false,
   elementId,
 }: GenericTreeProps<T>) {
-  let { canCreate, canUpdate, canDelete, canView, canExport } = getPermit(
-    elementId!,
-  );
+  // ✅ اصلاح: permission logic درست
+  const defaultPermissions = {
+    canCreate: true,
+    canUpdate: true,
+    canDelete: true,
+    canView: true,
+    canExport: true,
+  };
 
-  if (!elementId) {
-    canCreate = true;
-    canUpdate = true;
-    canView = true;
-    canExport = true;
-  }
+  const permissions = elementId ? getPermit(elementId) : defaultPermissions;
 
-  if (!canView) return;
+  const { canCreate, canUpdate, canDelete, canView, canExport } = permissions;
 
+  if (!canView) return null;
+
+  // ✅ States
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [focusedItem, setFocusedItem] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const initializedRef = useRef(false);
-  const prevItemsSizeRef = useRef(0);
+  // ✅ Refs
   const clickTimerRef = useRef<number | null>(null);
+  const dataHashRef = useRef<string>("");
   const CLICK_DELAY = 200;
 
   const { itemsMap, childrenMap, rootIds } = data;
 
-  // ✅ فقط اولین بار که rootIds می‌آد expand کن
-  useEffect(() => {
-    if (rootIds.length > 0 && !initializedRef.current) {
-      setExpandedItems(rootIds.map(String));
-      initializedRef.current = true;
-      prevItemsSizeRef.current = itemsMap.size;
-    }
-  }, [rootIds]);
-
-  // ✅ بعد از CRUD داده آپدیت میشه — expanded کاربر حفظ میشه
-  // فقط root های جدید اضافه میشن و invalid ids پاک میشن
-  useEffect(() => {
-    if (!initializedRef.current) return;
-    if (itemsMap.size === prevItemsSizeRef.current) return;
-
-    prevItemsSizeRef.current = itemsMap.size;
-
-    const validIds = new Set(Array.from(itemsMap.keys()).map(String));
-
-    setExpandedItems((prev) => {
-      const cleaned = prev.filter((id) => validIds.has(id));
-      const newRoots = rootIds
-        .map(String)
-        .filter((id) => !cleaned.includes(id));
-      return newRoots.length > 0 ? [...cleaned, ...newRoots] : cleaned;
-    });
-
-    setSelectedItems((prev) => prev.filter((id) => validIds.has(id)));
-    setFocusedItem((prev) => (prev && validIds.has(prev) ? prev : null));
-  }, [itemsMap, rootIds]);
-
-  // ✅ Parent map for ancestor lookup
+  // ✅ Parent map برای ancestor lookup
   const parentMap = useMemo(() => {
     const map = new Map<number, number>();
     childrenMap.forEach((children, parentId) => {
@@ -105,6 +77,69 @@ export function GenericTree<T>({
     });
     return map;
   }, [childrenMap]);
+
+  // ✅ تشخیص تغییر در data (مقایسه هش)
+  const dataHash = useMemo(() => {
+    return `${itemsMap.size}-${rootIds.length}-${childrenMap.size}`;
+  }, [itemsMap, rootIds, childrenMap]);
+
+  // ✅ اولین initialize - expand کردن root items
+  useEffect(() => {
+    if (rootIds.length === 0) {
+      setExpandedItems([]);
+      setSelectedItems([]);
+      setFocusedItem(null);
+      dataHashRef.current = dataHash;
+      return;
+    }
+
+    // اگر این اولین بار است
+    if (dataHashRef.current === "") {
+      setExpandedItems(rootIds.map(String));
+      dataHashRef.current = dataHash;
+      return;
+    }
+
+    // اگر data تغییر کرده است (add/update/delete)
+    if (dataHashRef.current !== dataHash) {
+      setExpandedItems((prev) => {
+        const validIds = new Set(Array.from(itemsMap.keys()).map(String));
+
+        // حفظ expanded items که هنوز موجود اند
+        const cleaned = prev.filter((id) => validIds.has(id));
+
+        // اضافه کردن root های جدید
+        const newRoots = rootIds
+          .map(String)
+          .filter((id) => !cleaned.includes(id));
+
+        return [...cleaned, ...newRoots];
+      });
+
+      // تمیزکاری selected items
+      setSelectedItems((prev) => {
+        const validIds = new Set(Array.from(itemsMap.keys()).map(String));
+        return prev.filter((id) => validIds.has(id));
+      });
+
+      // تمیزکاری focused item
+      setFocusedItem((prev) => {
+        const validIds = new Set(Array.from(itemsMap.keys()).map(String));
+        return prev && validIds.has(prev) ? prev : null;
+      });
+
+      dataHashRef.current = dataHash;
+    }
+  }, [dataHash, rootIds, itemsMap]);
+
+  // ✅ حل memory leak - cleanup timeout در unmount
+  useEffect(() => {
+    return () => {
+      if (clickTimerRef.current) {
+        clearTimeout(clickTimerRef.current);
+      }
+    };
+  }, []);
 
   const getAncestorIds = useCallback(
     (id: number): string[] => {
@@ -121,6 +156,7 @@ export function GenericTree<T>({
     [parentMap],
   );
 
+  // ✅ Tree config - بهتر شده
   const treeConfig = useMemo(
     () => ({
       rootItemId: "root" as const,
@@ -128,18 +164,23 @@ export function GenericTree<T>({
       setSelectedItems,
       setExpandedItems,
       setFocusedItem,
-      getItemName: (item: any) => getItemName(item.getItemData()),
+      getItemName: (item: any) => {
+        const data = item.getItemData();
+        return data ? getItemName(data) : "";
+      },
       isItemFolder: (item: any) => {
         const d = item.getItemData();
         if (!d) return false;
         const id = Number(getItemId(d));
         if (Number.isNaN(id)) return false;
-        return (childrenMap.get(id)?.length ?? 0) > 0;
+        const children = childrenMap.get(id) || [];
+        return children.length > 0;
       },
       dataLoader: {
         getItem: (itemId: string) => {
           if (itemId === "root") return {} as T;
-          return itemsMap.get(Number(itemId)) || ({ id: itemId } as T);
+          const item = itemsMap.get(Number(itemId));
+          return item || ({ id: itemId } as T);
         },
         getChildren: (itemId: string) => {
           if (itemId === "root") return rootIds.map(String);
@@ -163,34 +204,49 @@ export function GenericTree<T>({
 
   const tree = useTree<T>(treeConfig);
 
-  const getTreeItems = useCallback(() => tree.getItems(), [tree]);
+  // ✅ Handlers - بهتر شده
 
   const handleExpandAll = useCallback(() => {
-    getTreeItems().forEach((item) => {
-      if (item.isFolder()) item.expand();
+    const items = tree.getItems();
+    items.forEach((item) => {
+      if (item.isFolder()) {
+        item.expand();
+      }
     });
-  }, [getTreeItems]);
+  }, [tree]);
 
   const handleCollapseAll = useCallback(() => {
-    getTreeItems().forEach((item) => item.collapse());
-  }, [getTreeItems]);
+    const items = tree.getItems();
+    items.forEach((item) => {
+      item.collapse();
+    });
+  }, [tree]);
 
   const handleEdit = useCallback(() => {
     const firstSelected = selectedItems[0];
-    if (firstSelected) onEdit?.(Number(firstSelected));
+    if (firstSelected && onEdit) {
+      onEdit(Number(firstSelected));
+    }
   }, [selectedItems, onEdit]);
 
   const handleDelete = useCallback(() => {
     const firstSelected = selectedItems[0];
-    if (firstSelected) onDelete?.(Number(firstSelected));
+    if (firstSelected && onDelete) {
+      onDelete(Number(firstSelected));
+    }
   }, [selectedItems, onDelete]);
 
   const handleItemClick = useCallback(
     (item: T) => {
-      if (clickTimerRef.current) return;
+      if (clickTimerRef.current) {
+        clearTimeout(clickTimerRef.current);
+      }
+
       clickTimerRef.current = window.setTimeout(() => {
         clickTimerRef.current = null;
-        onItemSelect?.(item);
+        if (onItemSelect) {
+          onItemSelect(item);
+        }
       }, CLICK_DELAY);
     },
     [onItemSelect],
@@ -202,7 +258,9 @@ export function GenericTree<T>({
         clearTimeout(clickTimerRef.current);
         clickTimerRef.current = null;
       }
-      onDoubleClick?.(itemId);
+      if (onDoubleClick) {
+        onDoubleClick(itemId);
+      }
     },
     [onDoubleClick],
   );
@@ -213,6 +271,11 @@ export function GenericTree<T>({
 
       if (!q) {
         setSearchQuery("");
+        setExpandedItems((prev) => {
+          // بازگرداندن به حالت بدون search
+          const validIds = new Set(Array.from(itemsMap.keys()).map(String));
+          return prev.filter((id) => validIds.has(id));
+        });
         return;
       }
 
@@ -223,17 +286,21 @@ export function GenericTree<T>({
       for (const [id, item] of Array.from(itemsMap.entries())) {
         const name = getItemName(item).toLowerCase();
         if (!name.includes(q)) continue;
+
         nextExpanded.add(String(id));
-        getAncestorIds(id).forEach((ancestorId) =>
-          nextExpanded.add(ancestorId),
-        );
+        getAncestorIds(id).forEach((ancestorId) => {
+          nextExpanded.add(ancestorId);
+        });
       }
 
       if (nextExpanded.size > 0) {
         setExpandedItems(Array.from(nextExpanded));
+      } else {
+        // اگر نتیجه‌ای نیافت، حداقل root ها باز باشن
+        setExpandedItems(rootIds.map(String));
       }
     },
-    [itemsMap, getItemName, getAncestorIds],
+    [itemsMap, getItemName, getAncestorIds, rootIds],
   );
 
   return (

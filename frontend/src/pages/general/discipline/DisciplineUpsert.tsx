@@ -10,6 +10,7 @@ import { Controller } from "react-hook-form";
 import { tblDiscipline, TypeTblDiscipline } from "@/core/api/generated/api";
 import { requiredStringField } from "@/core/helper";
 import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
+import FieldNumber from "@/shared/components/fields/FieldNumber";
 
 // === Schema ===
 const schema = z.object({
@@ -100,7 +101,7 @@ function DisciplineUpsert({
           name="orderNo"
           control={control}
           render={({ field }) => (
-            <TextField
+            <FieldNumber
               {...field}
               label="Order No"
               size="small"

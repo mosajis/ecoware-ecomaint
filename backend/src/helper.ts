@@ -36,20 +36,14 @@ export const generateDocumentNumber = async ({
   padSize = 3,
   useRandomSuffix = true,
 }: GenerateNumberOptions) => {
-  const now = new Date();
-  const year = now.getFullYear();
-
   const repo = (tx as any)[model];
+  const count = (await repo.count()) + 1;
 
-  const count = await repo.count();
-
-  const padded = String(count + 1).padStart(padSize, "0");
-
+  const padded = String(count).padStart(padSize, "0");
+  const year = useYear ? `-${new Date().getFullYear()}` : "";
   const suffix = useRandomSuffix ? `-${Date.now().toString().slice(-3)}` : "";
 
-  return useYear
-    ? `${prefix}-${year}-${padded}${suffix}`
-    : `${prefix}-${padded}${suffix}`;
+  return `${prefix}${year}-${padded}${suffix}`;
 };
 
 export const removeNulls = (obj: any) => {

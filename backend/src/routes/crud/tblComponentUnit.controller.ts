@@ -76,9 +76,6 @@ const ControllerTblComponentUnit = new BaseController({
         params: t.Object({
           componentUnitId: t.Numeric(),
         }),
-        body: t.Object({
-          userId: t.Number(),
-        }),
       },
     );
   },

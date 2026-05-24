@@ -109,7 +109,7 @@ const ControllerTblCompCounter = new BaseController({
               //     employeeId: data.tblEmployee?.connect?.employeeId ?? 0,
               //   },
               // },
-              dependsOnId: data.tblCompCounter?.connect?.compCounterId,
+              dependsOnId: data.tblCompCounter?.connect?.compCounterId || null,
               orderNo: data.orderNo,
               startDate: data.startDate,
               startValue: data.startValue,

@@ -69,48 +69,18 @@ function ComponentUnitUpsert({
       });
 
       return {
-        compType: res.tblCompType
-          ? {
-              compTypeId: res.tblCompType.compTypeId,
-              compName: res.tblCompType.compName,
-            }
-          : null,
-
-        location: res.tblLocation
-          ? {
-              locationId: res.tblLocation.locationId,
-              name: res.tblLocation.name,
-            }
-          : null,
-
-        parentComp: res.tblComponentUnit
-          ? {
-              compId: res.tblComponentUnit.compId,
-              compNo: res.tblComponentUnit.compNo ?? null,
-            }
-          : null,
-
-        status: res.tblCompStatus
-          ? {
-              compStatusId: res.tblCompStatus.compStatusId,
-              compStatusName: res.tblCompStatus.compStatusName,
-            }
-          : null,
-
-        vendor: res.tblAddress
-          ? {
-              addressId: res.tblAddress.addressId,
-              name: res.tblAddress.name,
-            }
-          : null,
-
+        compType: res.tblCompType,
+        location: res.tblLocation,
+        parentComp: res.tblComponentUnit,
+        status: res.tblCompStatus,
+        vendor: res.tblAddress,
         compNo: res.compNo ?? "",
-        serialNo: res.serialNo ?? null,
-        assetNo: res.assetNo ?? null,
-        model: res.model ?? null,
-        comment1: res.comment1 ?? null,
-        comment2: res.comment2 ?? null,
-        comment3: res.comment3 ?? null,
+        serialNo: res.serialNo ?? "",
+        assetNo: res.assetNo ?? "",
+        model: res.model ?? "",
+        comment1: res.comment1 ?? "",
+        comment2: res.comment2 ?? "",
+        comment3: res.comment3 ?? "",
         isCritical: !!res.isCritical,
         orderNo: res.orderNo ?? null,
       };
@@ -171,8 +141,11 @@ function ComponentUnitUpsert({
     onClose,
   });
 
-  const { control } = form;
-
+  const {
+    control,
+    formState: { errors },
+  } = form;
+  console.log(errors);
   return (
     <FormDialog
       maxWidth="sm"

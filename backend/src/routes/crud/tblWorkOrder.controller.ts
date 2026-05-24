@@ -20,7 +20,6 @@ export const ServiceTblWorkOrder = new BaseService(prisma.tblWorkOrder);
 export const WorkOrderItemSchema = t.Object({
   workOrderId: t.Number(),
   compId: t.Union([t.Number(), t.Null()]),
-  maintLogId: t.Union([t.Number(), t.Null()]),
   // compId: t.Optional(t.Number()),
   title: t.String(),
   priority: t.Nullable(t.Number()),
@@ -98,7 +97,6 @@ export const WorkOrderListResponseSchema = t.Object({
 
 export const TblWorkOrderSchema = t.Object({
   workOrderId: t.Number(),
-  maintLogId: t.Union([t.Number(), t.Null()]),
   // compId: t.Nullable(t.Optional(t.Number())),
   compId: t.Union([t.Number(), t.Null()]),
   pendingdate: t.Union([t.Date(), t.Null()]),
@@ -120,7 +118,7 @@ export const TblWorkOrderSchema = t.Object({
       compNo: t.Optional(t.String()),
       serialNo: t.Optional(t.String()),
       isCritical: t.Optional(t.Number()),
-
+      notes: t.Optional(t.Number()),
       tblLocation: t.Optional(
         t.Object({
           name: t.Optional(t.String()),
@@ -208,7 +206,6 @@ const ControllerTblWorkOrder = new BaseController({
         const usePagination = !!paginate;
 
         const defaultSelect = {
-          maintLogId: true,
           workOrderId: true,
           compId: true,
           pendingdate: true,
@@ -230,7 +227,7 @@ const ControllerTblWorkOrder = new BaseController({
               compNo: true,
               serialNo: true,
               isCritical: true,
-              description: true,
+              notes: true,
               tblLocation: {
                 select: { name: true },
               },

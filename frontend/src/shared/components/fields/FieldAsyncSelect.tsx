@@ -21,6 +21,7 @@ export interface AsyncSelectProps<T> {
   label?: string;
   placeholder?: string;
   disabled?: boolean;
+  readOnly?: boolean; // 👈 اضافه شد
   sx?: any;
   selectionMode?: SelectionMode;
   value?: any | null;
@@ -42,6 +43,7 @@ export default function FieldAsyncSelect<T>({
   label,
   placeholder,
   disabled = false,
+  readOnly = false, // 👈 اضافه شد
   sx,
   selectionMode = "single",
   value,
@@ -71,15 +73,6 @@ export default function FieldAsyncSelect<T>({
     data: initialOptions,
   });
 
-  useEffect(() => {
-    if (initialOptions.length > 0) {
-      const mergedOptions = mergeOptions(cacheRef.current.data, initialOptions);
-      cacheRef.current.data = mergedOptions;
-      setAllOptions(mergedOptions);
-      setFilteredOptions(mergedOptions);
-    }
-  }, [initialOptions]);
-
   const mergeOptions = (existing: T[], newOptions: T[]): T[] => {
     const map = new Map<string | number, T>();
 
@@ -96,7 +89,15 @@ export default function FieldAsyncSelect<T>({
     return Array.from(map.values());
   };
 
-  // فیلتر سمت کلاینت
+  useEffect(() => {
+    if (initialOptions.length > 0) {
+      const mergedOptions = mergeOptions(cacheRef.current.data, initialOptions);
+      cacheRef.current.data = mergedOptions;
+      setAllOptions(mergedOptions);
+      setFilteredOptions(mergedOptions);
+    }
+  }, [initialOptions]);
+
   const filterOptionsLocally = useCallback(
     (query: string) => {
       if (!query || !enableClientSideFilter) {
@@ -111,7 +112,6 @@ export default function FieldAsyncSelect<T>({
     [allOptions, enableClientSideFilter, getOptionLabel],
   );
 
-  // لود اولیه از سرور (فقط یک بار)
   const loadOptionsFromServer = useCallback(async () => {
     if (cacheRef.current.loaded || loading) return;
 
@@ -133,11 +133,10 @@ export default function FieldAsyncSelect<T>({
     }
   }, [request, extractRows, loading]);
 
-  // دیباونس شده برای سرچ سمت سرور (در صورت نیاز)
   const searchOnServer = useMemo(
     () =>
       debounce(async (query: string) => {
-        if (enableClientSideFilter) return; // اگر فیلتر کلاینت فعاله، سرور رو نزن
+        if (enableClientSideFilter) return;
 
         setLoading(true);
         try {
@@ -153,7 +152,6 @@ export default function FieldAsyncSelect<T>({
     [request, extractRows, enableClientSideFilter],
   );
 
-  // کلین‌آپ دیباونس
   useEffect(() => {
     return () => {
       searchOnServer.cancel();
@@ -161,15 +159,17 @@ export default function FieldAsyncSelect<T>({
   }, [searchOnServer]);
 
   const handleOpen = () => {
+    if (readOnly) return;
     loadOptionsFromServer();
   };
 
   const handleInputChange = (newValue: string, reason: string) => {
+    if (readOnly) return;
+
     setInputValue(newValue);
 
     if (reason !== "input") return;
 
-    // اگر فیلتر سمت کلاینت فعاله
     if (enableClientSideFilter) {
       if (newValue.length >= minCharsToSearch) {
         const filtered = filterOptionsLocally(newValue);
@@ -178,7 +178,6 @@ export default function FieldAsyncSelect<T>({
         setFilteredOptions(allOptions);
       }
     } else {
-      // سرچ سمت سرور
       if (newValue.length >= minCharsToSearch) {
         searchOnServer(newValue);
       }
@@ -189,6 +188,8 @@ export default function FieldAsyncSelect<T>({
     selected: T | T[] | null,
     fieldOnChange?: (value: any) => void,
   ) => {
+    if (readOnly) return;
+
     fieldOnChange?.(selected);
     onChange?.(selected);
   };
@@ -199,18 +200,19 @@ export default function FieldAsyncSelect<T>({
       options={filteredOptions}
       value={field?.value ?? value ?? (multiple ? [] : null)}
       getOptionLabel={getOptionLabel}
-      isOptionEqualToValue={(option, val) => {
-        return getOptionKey(option) === getOptionKey(val);
-      }}
+      isOptionEqualToValue={(option, val) =>
+        getOptionKey(option) === getOptionKey(val)
+      }
       fullWidth
+      disabled={disabled}
+      readOnly={readOnly}
       onChange={(_, v) => handleChange(v, field?.onChange)}
       inputValue={inputValue}
       onInputChange={(_, newValue, reason) =>
         handleInputChange(newValue, reason)
       }
-      onOpen={handleOpen}
+      onOpen={readOnly ? undefined : handleOpen}
       loading={loading}
-      disabled={disabled}
       filterOptions={(x) => x}
       renderInput={(params) => (
         <TextField
@@ -222,6 +224,7 @@ export default function FieldAsyncSelect<T>({
           helperText={helperText}
           InputProps={{
             ...params.InputProps,
+            readOnly, // 👈 جلوگیری از تایپ
             endAdornment: (
               <>
                 {loading && <CircularProgress size={20} color="inherit" />}
@@ -235,7 +238,6 @@ export default function FieldAsyncSelect<T>({
     />
   );
 
-  // RHF mode
   if (control && name) {
     return (
       <Controller
@@ -246,6 +248,5 @@ export default function FieldAsyncSelect<T>({
     );
   }
 
-  // Controlled mode
   return renderAutocomplete();
 }

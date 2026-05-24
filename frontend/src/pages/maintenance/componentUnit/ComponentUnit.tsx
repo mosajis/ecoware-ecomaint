@@ -289,6 +289,7 @@ export default function PageComponentUnit() {
       {/* WORKSHOP */}
 
       <WorkShopUpsert
+        initialCompId={selectedRowId}
         open={dialogs.workShop}
         onClose={() => closeDialog("workShop")}
         onSuccess={(workShop) => {

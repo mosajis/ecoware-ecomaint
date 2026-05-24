@@ -8,9 +8,9 @@ import { lazy } from "react";
 import { TypeTblCompTypeJob } from "@/core/api/generated/api";
 
 // Lazy imports
-const TabCounter = lazy(() => import("./tabs/TabCounter"));
-const TabMeasures = lazy(() => import("./tabs/TabMasures"));
-const TabTrigger = lazy(() => import("./tabs/TabTrigger"));
+const TabCounter = lazy(() => import("./tabs/counter/TabCounter"));
+const TabMeasures = lazy(() => import("./tabs/measure/TabMasures"));
+const TabTrigger = lazy(() => import("./tabs/trigger/TabTrigger"));
 const TabJobDescription = lazy(() => import("./tabs/TabJobDescription"));
 
 // Define tabs using the reusable format

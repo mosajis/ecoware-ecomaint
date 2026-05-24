@@ -22,7 +22,10 @@ const schema = z.object({
       counterTypeId: z.number(),
       name: z.string().optional().nullable(),
     })
-    .nullable(),
+    .nullable()
+    .refine((val) => !!val, {
+      message: "Counter is required",
+    }),
 
   averageCountRate: z.number().nullable(),
   useCalcAverage: z.boolean().nullable(),

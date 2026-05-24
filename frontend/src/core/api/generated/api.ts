@@ -3151,7 +3151,6 @@ export const tblUserInstallation = {
     ),
 };
 
-//@ts-ignore
 export type TypeTblWorkOrder = DynamicResponse<"getTblWorkOrder">["items"][0];
 export const tblWorkOrder = {
   getAll: (query?: DynamicQuery<"getTblWorkOrder">) =>

@@ -8,9 +8,9 @@ import TabsContainer, {
 } from "@/shared/components/TabsContainer";
 
 // Lazy imports
-const TabCounter = lazy(() => import("./tabs/TabCounter"));
-const TabMeasures = lazy(() => import("./tabs/TabMasures"));
-const TabTrigger = lazy(() => import("./tabs/TabTrigger"));
+const TabCounter = lazy(() => import("./tabs/counter/TabCounter"));
+const TabMeasures = lazy(() => import("./tabs/measure/TabMeasure"));
+const TabTrigger = lazy(() => import("./tabs/trigger/TabTrigger"));
 const TabJobDescription = lazy(() => import("./tabs/TabJobDescription"));
 
 // Define tabs using the reusable format

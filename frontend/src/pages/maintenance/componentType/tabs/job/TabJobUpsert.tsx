@@ -26,32 +26,28 @@ import {
 
 // ========= Schema =========
 const schema = z.object({
-  compType: z
-    .object({
-      compTypeId: z.number(),
-      compName: z.string(),
-    })
-    .nullable()
-    .optional(),
-
+  lastDone: z.string().nullable().optional(),
+  nextDueDate: z.string().nullable().optional(),
   jobDesc: z
     .object({
       jobDescId: z.number(),
       jobDescTitle: z.string().nullable().optional(),
     })
     .nullable()
-    .refine((val) => val !== null, {
+    .optional()
+    .refine((val) => !!val, {
       message: "Job Description is required",
     }),
 
   disc: z
     .object({
       discId: z.number(),
-      descr: z.string().nullable().optional(),
+      name: z.string().nullable().optional(),
     })
+    .optional()
     .nullable()
-    .refine((val) => val !== null, {
-      message: "Job Description is required",
+    .refine((val) => !!val, {
+      message: "Discipline is required",
     }),
 
   maintClass: z
@@ -61,7 +57,7 @@ const schema = z.object({
     })
     .nullable()
     .optional()
-    .refine((val) => val !== null, {
+    .refine((val) => !!val, {
       message: "required",
     }),
 
@@ -72,7 +68,7 @@ const schema = z.object({
     })
     .nullable()
     .optional()
-    .refine((val) => val !== null, {
+    .refine((val) => !!val, {
       message: "required",
     }),
 
@@ -88,10 +84,11 @@ const schema = z.object({
     }),
 
   frequency: z.number().nullable().optional(),
+
   frequencyPeriod: z
     .object({
       periodId: z.number(),
-      name: z.string(),
+      name: z.string().nullable().optional(),
     })
     .nullable()
     .optional(),
@@ -99,15 +96,15 @@ const schema = z.object({
   priority: z.number().nullable().optional(),
   window: z.number().nullable().optional(),
 
-  statusNone: z.boolean().nullable().optional(),
-  statusAvailable: z.boolean().nullable().optional(),
-  statusInUse: z.boolean().nullable().optional(),
-  statusRepair: z.boolean().nullable().optional(),
+  statusNone: z.boolean().optional(),
+  statusAvailable: z.boolean().optional(),
+  statusInUse: z.boolean().optional(),
+  statusRepair: z.boolean().optional(),
 
-  planningMethod: z.string().nullable().optional(),
+  planningMethod: z.enum(["Variable", "Fixed"]).optional(),
 
-  active: z.boolean().nullable().optional(),
-  mandatoryHistory: z.boolean().nullable().optional(),
+  active: z.boolean().optional(),
+  mandatoryHistory: z.boolean().optional(),
 });
 
 type JobFormValues = z.input<typeof schema>;
@@ -125,14 +122,15 @@ type Props = {
 };
 
 const DEFAULT_VALUES: JobFormValues = {
-  compType: null,
-  jobDesc: null,
-  disc: null,
-  maintClass: null,
-  maintCause: null,
-  maintType: null,
+  lastDone: null,
+  nextDueDate: null,
+  jobDesc: undefined,
+  disc: undefined,
+  maintClass: undefined,
+  maintCause: undefined,
+  maintType: undefined,
   frequency: null,
-  frequencyPeriod: null,
+  frequencyPeriod: undefined,
   priority: null,
   window: null,
   statusNone: true,
@@ -186,15 +184,15 @@ function ComponentTypeJobUpsert({
       });
 
       reset({
-        jobDesc: res?.tblJobDescription ?? null,
-        disc: res?.tblDiscipline ?? null,
-        maintClass: res?.tblMaintClass ?? null,
-        maintCause: res?.tblMaintCause ?? null,
-        maintType: res?.tblMaintType ?? null,
-        frequency: res?.frequency ?? null,
-        frequencyPeriod: res.tblPeriod as any,
-        priority: res?.priority ?? null,
-        window: res?.window ?? null,
+        jobDesc: res?.tblJobDescription,
+        disc: res?.tblDiscipline,
+        maintClass: res?.tblMaintClass,
+        maintCause: res?.tblMaintCause,
+        maintType: res?.tblMaintType,
+        frequency: res?.frequency,
+        frequencyPeriod: res.tblPeriod,
+        priority: res?.priority,
+        window: res?.window,
         statusNone: !!res?.statusNone,
         statusAvailable: !!res?.statusAvailable,
         statusInUse: !!res?.statusInUse,
@@ -224,9 +222,9 @@ function ComponentTypeJobUpsert({
         setSubmitting(true);
 
         const body = {
-          frequency: v.frequency ?? null,
-          priority: v.priority ?? null,
-          window: v.window ?? null,
+          frequency: v.frequency,
+          priority: v.priority,
+          window: v.window,
           planningMethod: v.planningMethod === "Fixed" ? 1 : 0,
           statusNone: v.statusNone ? 1 : 0,
           statusAvailable: v.statusAvailable ? 1 : 0,

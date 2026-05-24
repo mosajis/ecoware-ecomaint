@@ -142,12 +142,14 @@ export default function PageWorkShop() {
         <WorkShopTabs workShopId={selectedRowId} label={selectedLabel} />
       </Splitter>
 
-      <WorkShopUpsert
-        open={dialogs.upsert}
-        workShopId={selectedRowId}
-        onClose={() => closeDialog("upsert")}
-        onSuccess={handleSuccessUpsert}
-      />
+      {dialogs.upsert && (
+        <WorkShopUpsert
+          open={dialogs.upsert}
+          workShopId={selectedRowId}
+          onClose={() => closeDialog("upsert")}
+          onSuccess={handleSuccessUpsert}
+        />
+      )}
 
       <WorkShopDialogComplete
         open={dialogs.close}

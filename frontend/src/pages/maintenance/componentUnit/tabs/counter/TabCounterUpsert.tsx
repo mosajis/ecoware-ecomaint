@@ -72,7 +72,7 @@ function CompCounterUpsert({
 
   const defaultValues: FormValues = {
     counterType: null,
-    dependOn: null,
+    dependOn: undefined,
     startDate: new Date(),
     startValue: 0,
     averageCountRate: null,
@@ -80,7 +80,7 @@ function CompCounterUpsert({
     orderNo: null,
   };
 
-  const { control, handleSubmit, reset } = useForm<FormValues>({
+  const { control, handleSubmit, reset, watch } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues,
   });
@@ -100,14 +100,15 @@ function CompCounterUpsert({
           tblCompCounter: {
             include: {
               tblCounterType: true,
+              tblComponentUnit: true,
             },
           },
         },
       });
 
       reset({
-        counterType: res.tblCounterType ?? null,
-        dependOn: res?.tblCompCounter ?? null,
+        counterType: res.tblCounterType,
+        dependOn: res?.tblCompCounter,
         startDate: res.startDate ?? new Date(),
         startValue: res.startValue ?? 0,
         averageCountRate: res.averageCountRate ?? null,
@@ -139,11 +140,11 @@ function CompCounterUpsert({
         );
 
         // If dependOn is not provided, we can skip building the relation
-        // const dependOnRelation = buildRelation(
-        //   "tblCompCounter",
-        //   "compCounterId",
-        //   parsed.data?.dependOn?.compCounterId,
-        // );
+        const dependOnRelation = buildRelation(
+          "tblCompCounter",
+          "compCounterId",
+          parsed.data?.dependOn,
+        );
         const compRelation = buildRelation("tblComponentUnit", "compId", {
           compId,
         });
@@ -155,7 +156,7 @@ function CompCounterUpsert({
           useCalcAverage: parsed.data.useCalcAverage ? 1 : 0,
           orderNo: parsed.data.orderNo,
           ...counterTypeRelation,
-          // ...dependOnRelation,
+          ...dependOnRelation,
           ...compRelation,
         };
 
@@ -175,6 +176,8 @@ function CompCounterUpsert({
     },
     [mode, recordId, compId, onSuccess, onClose],
   );
+
+  const selectedCounterType = watch("counterType");
 
   return (
     <FormDialog
@@ -295,16 +298,20 @@ function CompCounterUpsert({
             <FieldAsyncSelectGrid
               label="Depends On"
               value={field.value}
-              disabled={isDisabled}
+              disabled={isDisabled || !selectedCounterType}
               getOptionLabel={(row) => row?.tblComponentUnit?.compNo}
               onChange={field.onChange}
               request={() =>
                 tblCompCounter.getAll({
                   filter: {
-                    compCounterId: {
-                      not: recordId,
-                    },
+                    dependsOnId: null,
+                    // tblCompCounter: null,
+                    // counterType متفاوت
+                    // counterTypeId: {
+                    //   not: selectedCounterType?.counterTypeId,
+                    // },
                   },
+
                   include: {
                     tblCounterType: true,
                     tblComponentUnit: true,
@@ -313,14 +320,20 @@ function CompCounterUpsert({
               }
               columns={[
                 {
-                  field: "name",
-                  headerName: "Name",
+                  field: "compNo",
+                  headerName: "CompNo",
                   flex: 1,
                   valueGetter: (_: any, row: any) =>
                     row?.tblComponentUnit?.compNo,
                 },
+                {
+                  field: "counterType",
+                  headerName: "Counter",
+                  flex: 1,
+                  valueGetter: (_: any, row: any) => row?.tblCounterType?.name,
+                },
               ]}
-              getRowId={(row) => row.counterTypeId}
+              getRowId={(row) => row.compCounterId}
               error={!!fieldState.error}
               helperText={fieldState.error?.message}
             />

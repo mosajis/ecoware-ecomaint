@@ -22,6 +22,7 @@ export const schema = z.object({
       compId: z.number(),
       compNo: z.string().nullable(),
     })
+    .optional()
     .nullable(),
 
   vendor: z
@@ -53,10 +54,10 @@ export type SchemaValue = z.input<typeof schema>;
 
 export const DEFAULT_VALUES: SchemaValue = {
   compType: null,
-  location: null,
-  parentComp: null,
-  vendor: null,
-  status: null,
+  location: undefined,
+  parentComp: undefined,
+  vendor: undefined,
+  status: undefined,
   compNo: "",
   serialNo: null,
   assetNo: null,

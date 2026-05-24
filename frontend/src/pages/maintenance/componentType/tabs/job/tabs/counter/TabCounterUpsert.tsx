@@ -5,7 +5,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import NumberField from "@/shared/components/fields/FieldNumber";
 import { memo, useCallback, useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import { buildRelation } from "@/core/helper";
@@ -13,7 +13,6 @@ import {
   tblCompTypeJobCounter,
   tblCompTypeCounter,
   TypeTblCompTypeJobCounter,
-  TypeTblCompTypeJob,
 } from "@/core/api/generated/api";
 
 /* === Schema === */
@@ -23,7 +22,10 @@ const schema = z.object({
       compTypeCounterId: z.number(),
     })
     .nullable()
-    .refine(Boolean, { message: "Counter is required" }),
+    .refine((val) => !!val, {
+      message: "Counter is required",
+    }),
+
   frequency: z.number().nullable(),
   window: z.number().nullable(),
   showInAlert: z.boolean(),
@@ -65,7 +67,7 @@ function JobCounterUpsert({
   };
 
   const { control, handleSubmit, reset } = useForm<FormValues>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schema as any),
     defaultValues,
   });
 
@@ -89,7 +91,7 @@ function JobCounterUpsert({
       });
 
       reset({
-        compTypeCounter: res.tblCompTypeCounter,
+        compTypeCounter: res.tblCompTypeCounter || undefined,
         frequency: res.frequency ?? null,
         window: res.window ?? null,
         showInAlert: res.showInAlert ?? false,
@@ -106,8 +108,8 @@ function JobCounterUpsert({
   }, [open, fetchData]);
 
   // === Submit ===
-  const onSubmit = useCallback(
-    async (values: FormValues) => {
+  const onSubmit: SubmitHandler<FormValues> = useCallback(
+    async (values) => {
       const parsed = schema.safeParse(values);
       if (!parsed.success) return;
 
@@ -134,22 +136,6 @@ function JobCounterUpsert({
 
         if (mode === "create") {
           result = await tblCompTypeJobCounter.create(payload);
-          // const jobDescId = compTypeJob?.jobDescId
-          // const compTypeId = compTypeJob?.compTypeId
-
-          // const units = await tblComponentUnit.getAll({
-          //   filter: {
-          //     compTypeId: compTypeId
-          //   }
-          // })
-
-          // const compIds = units.items.map(u => u.compId)
-
-          // tblCompJob.getAll({
-          //   filter: {
-          //     jobDescId: jobDescId,
-          //   },
-          // })
         } else {
           result = await tblCompTypeJobCounter.update(recordId!, payload);
         }

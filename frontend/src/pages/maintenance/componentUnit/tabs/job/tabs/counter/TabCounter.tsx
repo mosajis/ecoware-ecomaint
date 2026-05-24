@@ -1,32 +1,15 @@
-import Upsert from "./TabTriggerUpsert";
+import JobCounterUpsert from "./TabCounterUpsert";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useCallback, useState } from "react";
-import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import {
-  tblCompJobTrigger,
-  TypeTblCompJob,
-  TypeTblCompJobTrigger,
-} from "@/core/api/generated/api";
+import { tblCompJobCounter, TypeTblCompJob } from "@/core/api/generated/api";
+import { columns, getRowId } from "./TabCounterColumns";
 
 type Props = {
   compJob?: TypeTblCompJob | null;
 };
 
-const getRowId = (row: TypeTblCompJobTrigger) => row.compJobTriggerId;
-
-// === Columns ===
-const columns: GridColDef<TypeTblCompJobTrigger>[] = [
-  {
-    field: "Trigger",
-    headerName: "Trigger",
-    flex: 1,
-    valueGetter: (_, row) => row.tblJobTrigger?.descr,
-  },
-  { field: "orderNo", headerName: "Order No", width: 80 },
-];
-
-const TabJobTrigger = ({ compJob }: Props) => {
+const TabCounter = ({ compJob }: Props) => {
   const compJobId = compJob?.compJobId;
   const compId = compJob?.compId;
 
@@ -38,9 +21,13 @@ const TabJobTrigger = ({ compJob }: Props) => {
 
   // === getAll ===
   const getAll = useCallback(() => {
-    return tblCompJobTrigger.getAll({
+    return tblCompJobCounter.getAll({
       include: {
-        tblJobTrigger: true,
+        tblCompCounter: {
+          include: {
+            tblCounterType: true,
+          },
+        },
       },
       filter: {
         compJobId,
@@ -51,7 +38,7 @@ const TabJobTrigger = ({ compJob }: Props) => {
   // === useDataGrid ===
   const { rows, loading, handleDelete, handleRefresh } = useDataGrid(
     getAll,
-    tblCompJobTrigger.deleteById,
+    tblCompJobCounter.deleteById,
     "compJobId",
     !!compJobId,
   );
@@ -80,7 +67,6 @@ const TabJobTrigger = ({ compJob }: Props) => {
   return (
     <>
       <CustomizedDataGrid
-        disableEdit
         label={label}
         rows={rows}
         columns={columns}
@@ -96,7 +82,7 @@ const TabJobTrigger = ({ compJob }: Props) => {
 
       {/* === UPSERT === */}
       {compJobId && compId && (
-        <Upsert
+        <JobCounterUpsert
           open={openForm}
           mode={mode}
           recordId={selectedId}
@@ -110,4 +96,4 @@ const TabJobTrigger = ({ compJob }: Props) => {
   );
 };
 
-export default TabJobTrigger;
+export default TabCounter;

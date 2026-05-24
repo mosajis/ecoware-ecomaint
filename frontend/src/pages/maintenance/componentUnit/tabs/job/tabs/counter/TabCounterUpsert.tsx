@@ -1,31 +1,44 @@
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import * as z from "zod";
+
 import Box from "@mui/material/Box";
-import FormDialog from "@/shared/components/formDialog/FormDialog";
-import NumberField from "@/shared/components/fields/FieldNumber";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { memo, useCallback, useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+
+import { Controller, useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import NumberField from "@/shared/components/fields/FieldNumber";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
+
 import { buildRelation } from "@/core/helper";
+
 import { tblCompCounter, tblCompJobCounter } from "@/core/api/generated/api";
 
-/* === Schema === */
-const schema = z.object({
-  compCounter: z
-    .object({
-      compCounterId: z.number(),
-    })
-    .nullable()
-    .refine(Boolean, { message: "Counter is required" }),
+/* =========================================================
+ * Schema
+ * =======================================================*/
 
-  frequency: z.number().nullable(),
-  window: z.number().nullable(),
-  showInAlert: z.boolean(),
-  updateByFunction: z.boolean(),
-  orderNo: z.number().nullable(),
-});
+const schema = z
+  .object({
+    compCounter: z
+      .object({
+        compCounterId: z.number(),
+      })
+      .nullable(),
+
+    frequency: z.nullable(z.number()),
+    window: z.nullable(z.number()),
+    orderNo: z.nullable(z.number()),
+
+    showInAlert: z.boolean(),
+    updateByFunction: z.boolean(),
+  })
+  .refine((data) => data.compCounter !== null, {
+    message: "Counter is required",
+    path: ["compCounter"],
+  });
 
 type FormValues = z.infer<typeof schema>;
 
@@ -39,6 +52,10 @@ type Props = {
   onSuccess: () => void;
 };
 
+/* =========================================================
+ * Component
+ * =======================================================*/
+
 function JobCounterUpsert({
   open,
   mode,
@@ -51,29 +68,38 @@ function JobCounterUpsert({
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const defaultValues: FormValues = {
-    compCounter: null as any,
-    frequency: null,
-    window: null,
-    showInAlert: false,
-    updateByFunction: true,
-    orderNo: null,
-  };
+  const defaultValues = useMemo<FormValues>(
+    () => ({
+      compCounter: null,
+
+      frequency: null,
+      window: null,
+      orderNo: null,
+
+      showInAlert: false,
+      updateByFunction: true,
+    }),
+    [],
+  );
 
   const { control, handleSubmit, reset } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues,
   });
 
-  // === Load edit ===
+  /* =========================================================
+   * Load Update Data
+   * =======================================================*/
+
   const fetchData = useCallback(async () => {
     if (mode !== "update" || !recordId) {
       reset(defaultValues);
       return;
     }
 
-    setLoading(true);
     try {
+      setLoading(true);
+
       const res = await tblCompJobCounter.getById(recordId, {
         include: {
           tblCompCounter: {
@@ -85,27 +111,35 @@ function JobCounterUpsert({
       });
 
       reset({
-        compCounter: res.tblCompCounter,
-        frequency: res.frequency ?? null,
-        window: res.window ?? null,
-        showInAlert: res.showInAlert ?? false,
-        updateByFunction: res.updateByFunction ?? false,
-        orderNo: res.orderNo ?? null,
+        compCounter: res.tblCompCounter || null,
+        frequency: res.frequency,
+        window: res.window,
+        orderNo: res.orderNo,
+        showInAlert: Boolean(res.showInAlert),
+        updateByFunction: Boolean(res.updateByFunction),
       });
     } finally {
       setLoading(false);
     }
-  }, [mode, recordId, reset]);
+  }, [mode, recordId, reset, defaultValues]);
 
   useEffect(() => {
-    if (open) fetchData();
+    if (!open) return;
+
+    fetchData();
   }, [open, fetchData]);
 
-  // === Submit ===
-  const onSubmit = useCallback(
-    async (values: FormValues) => {
+  /* =========================================================
+   * Submit
+   * =======================================================*/
+
+  const onSubmit: SubmitHandler<FormValues> = useCallback(
+    async (values) => {
       const parsed = schema.safeParse(values);
-      if (!parsed.success) return;
+
+      if (!parsed.success) {
+        return;
+      }
 
       try {
         setSubmitting(true);
@@ -113,14 +147,17 @@ function JobCounterUpsert({
         const payload = {
           frequency: parsed.data.frequency,
           window: parsed.data.window,
+          orderNo: parsed.data.orderNo,
+
           showInAlert: parsed.data.showInAlert,
           updateByFunction: parsed.data.updateByFunction,
-          orderNo: parsed.data.orderNo,
+
           ...buildRelation(
             "tblCompCounter",
             "compCounterId",
             parsed.data.compCounter,
           ),
+
           ...buildRelation("tblCompJob", "compJobId", { compJobId }),
         };
 
@@ -139,6 +176,10 @@ function JobCounterUpsert({
     [mode, recordId, compJobId, onSuccess, onClose],
   );
 
+  /* =========================================================
+   * Render
+   * =======================================================*/
+
   return (
     <FormDialog
       open={open}
@@ -148,8 +189,11 @@ function JobCounterUpsert({
       submitting={submitting}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Box display="grid" gap={1.5}>
-        {/* Counter */}
+      <Box display="grid" gap={2}>
+        {/* =====================================================
+         * Counter
+         * ===================================================*/}
+
         <Controller
           name="compCounter"
           control={control}
@@ -158,14 +202,17 @@ function JobCounterUpsert({
               label="Counter *"
               value={field.value}
               onChange={field.onChange}
-              getOptionLabel={(row: any) => row?.tblCounterType?.name}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message}
+              getRowId={(row: any) => row.compCounterId}
+              getOptionLabel={(row: any) => row?.tblCounterType?.name ?? ""}
               request={() =>
                 tblCompCounter.getAll({
                   include: {
                     tblCounterType: true,
                   },
                   filter: {
-                    compId: compId,
+                    compId,
                   },
                 })
               }
@@ -174,59 +221,85 @@ function JobCounterUpsert({
                   field: "tblCounterType.name",
                   headerName: "Counter Type",
                   flex: 1,
-                  valueGetter: (_: any, row: any) => row?.tblCounterType?.name,
+                  valueGetter: (_: any, row: any) =>
+                    row?.tblCounterType?.name ?? "",
                 },
               ]}
-              getRowId={(row) => row.compCounterId}
-              error={!!fieldState.error}
-              helperText={fieldState.error?.message}
             />
           )}
         />
-        <Box display={"grid"} gridTemplateColumns={"1fr 1fr"} gap={1.5}>
+
+        {/* =====================================================
+         * Numbers
+         * ===================================================*/}
+
+        <Box display="grid" gridTemplateColumns="1fr 1fr" gap={2}>
           <Controller
             name="frequency"
             control={control}
             render={({ field }) => (
-              <NumberField fullWidth {...field} label="Frequency *" />
+              <NumberField fullWidth label="Frequency" {...field} />
             )}
           />
+
           <Controller
             name="window"
             control={control}
             render={({ field }) => (
-              <NumberField fullWidth {...field} label="Window" />
+              <NumberField fullWidth label="Window" {...field} />
             )}
           />
         </Box>
-        <Box display={"grid"} gridTemplateColumns={"2fr 3fr"} gap={2}>
+
+        {/* =====================================================
+         * Order + Checkboxes
+         * ===================================================*/}
+
+        <Box
+          display="grid"
+          gridTemplateColumns="1fr auto"
+          gap={2}
+          alignItems="center"
+        >
           <Controller
             name="orderNo"
             control={control}
             render={({ field }) => (
-              <NumberField fullWidth {...field} label="Order No" />
+              <NumberField fullWidth label="Order No" {...field} />
             )}
           />
-          <Box display={"flex"} flexDirection={"row"} gap={3}>
+
+          <Box display="flex" gap={3}>
             <Controller
               name="showInAlert"
               control={control}
               render={({ field }) => (
                 <FormControlLabel
-                  sx={{ margin: 0 }}
-                  control={<Checkbox checked={field.value} {...field} />}
+                  sx={{ m: 0 }}
                   label="Show In Alert"
+                  control={
+                    <Checkbox
+                      checked={field.value}
+                      onChange={(e) => field.onChange(e.target.checked)}
+                    />
+                  }
                 />
               )}
             />
+
             <Controller
               name="updateByFunction"
               control={control}
               render={({ field }) => (
                 <FormControlLabel
-                  sx={{ margin: 0 }}
-                  control={<Checkbox checked={field.value} {...field} />}
+                  sx={{ m: 0 }}
                   label="Update By Function"
+                  control={
+                    <Checkbox
+                      checked={field.value}
+                      onChange={(e) => field.onChange(e.target.checked)}
+                    />
+                  }
                 />
               )}
             />
