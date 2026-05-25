@@ -1,8 +1,8 @@
 import CellFileSize from "@/shared/components/dataGrid/cells/CellFileSize";
 import CellDownload from "@/shared/components/dataGrid/cells/CellDownload";
-import { GridColDef } from "@mui/x-data-grid";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import CellFullName from "@/shared/components/dataGrid/cells/CellFullName";
+import { GridColDef } from "@mui/x-data-grid";
 
 export const attachmentColumns: GridColDef[] = [
   { field: "title", headerName: "Title", flex: 1 },

@@ -20,6 +20,7 @@ export default function PageComponentJob() {
   const userId = user?.userId as number;
 
   const [selected, setSelected] = useState<TypeTblCompJob | null>(null);
+  const [generating, setGenerating] = useState(false);
 
   const getAll = useCallback(() => {
     return tblCompJob.getAll({
@@ -47,13 +48,15 @@ export default function PageComponentJob() {
   }, []);
 
   const onGenerateWorkOrder = async () => {
-    generateWorkOrder()
-      .then((res) => {
-        toast.success(`Generated SuccessFuly (${res.createdWorkOrders})`);
-      })
-      .catch(() => {
-        toast.error("Faild Generation");
-      });
+    setGenerating(true);
+    try {
+      const res = await generateWorkOrder();
+      toast.success(`Generated Successfully (${res.createdWorkOrders})`);
+    } catch (e) {
+      toast.error("Failed Generation");
+    } finally {
+      setGenerating(false);
+    }
   };
 
   return (
@@ -77,6 +80,7 @@ export default function PageComponentJob() {
             onClick={onGenerateWorkOrder}
             variant="contained"
             size="small"
+            loading={generating}
           >
             Generate Work Order
           </Button>

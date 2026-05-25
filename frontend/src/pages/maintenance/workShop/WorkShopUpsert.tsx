@@ -387,7 +387,7 @@ function WorkShopUpsert({
           <Controller
             name="personInChargeApprove"
             control={control}
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FieldAsyncSelectGrid<TypeTblEmployee>
                 label="ToolPusher *"
                 columns={EMPLOYEE_COLUMNS}

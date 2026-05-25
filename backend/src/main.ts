@@ -22,6 +22,7 @@ const app = new Elysia()
     cors({
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization", "x-inst-id"],
+      exposeHeaders: ["Content-Disposition"],
     }),
   )
 

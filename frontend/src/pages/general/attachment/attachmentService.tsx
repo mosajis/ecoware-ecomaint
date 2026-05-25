@@ -2,6 +2,7 @@ import Axios from "axios";
 import { TypeTblAttachment } from "@/core/api/generated/api";
 import { configAxios } from "@/config";
 import { api } from "@/service/axios";
+import { LOCAL_STORAGE } from "@/const";
 
 const axios = Axios.create({
   baseURL: configAxios.httpURL,
@@ -45,30 +46,47 @@ export async function createAttachment(
 }
 
 export async function downloadAttachment(id: number) {
-  const res = await api.get(`/tblAttachment/${id}/download`, {
-    responseType: "blob",
+  const token = localStorage.getItem(LOCAL_STORAGE.ACCESS_KEY);
+
+  const isProduction = process.env.NODE_ENV === "production";
+  const httpURL = isProduction ? "" : `http://localhost:5273`;
+
+  const response = await fetch(`${httpURL}/tblAttachment/${id}/download`, {
+    method: "GET",
+    headers: {
+      Authorization: token ? `Bearer ${token}` : "",
+    },
   });
 
-  const blob = new Blob([res.data]);
-  const url = window.URL.createObjectURL(blob);
-
-  const link = document.createElement("a");
-  link.href = url;
-
-  const disposition =
-    res.headers?.["content-disposition"] ||
-    res.headers?.["Content-Disposition"];
-
-  let fileName = `attachment-${id}`;
-
-  if (disposition) {
-    const match = disposition.match(/filename="?(.*?)"?$/);
-    if (match?.[1]) fileName = match[1];
+  if (!response.ok) {
+    throw new Error("Download failed");
   }
 
+  const blob = await response.blob();
+
+  const url = window.URL.createObjectURL(blob);
+
+  const disposition = response.headers.get("Content-Disposition");
+
+  let fileName = `attachment-${id}.pdf`;
+
+  if (disposition) {
+    const match = disposition.match(
+      /filename\*=UTF-8''([^;]+)|filename="?([^"]+)"?/i,
+    );
+
+    fileName = decodeURIComponent(match?.[1] || match?.[2] || fileName);
+  }
+
+  const link = document.createElement("a");
+
+  link.href = url;
   link.download = fileName;
+
   document.body.appendChild(link);
+
   link.click();
+
   link.remove();
 
   window.URL.revokeObjectURL(url);
