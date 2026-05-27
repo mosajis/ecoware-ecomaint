@@ -40,6 +40,13 @@ export default function PageCounterUpdate() {
         ? undefined
         : {
             dependsOnId: null,
+            tblComponentUnit: {
+              is: {
+                statusId: {
+                  notIn: [5, 6], // Scrapped, Transfer
+                },
+              },
+            },
           },
       include: {
         tblCounterType: true,
@@ -47,7 +54,6 @@ export default function PageCounterUpdate() {
       },
     });
   }, [showAll]);
-
   const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
     tblCounterType.deleteById,
