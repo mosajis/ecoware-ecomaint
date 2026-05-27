@@ -16,6 +16,7 @@ import {
   tblCompCounter,
   tblCompCounterLog,
   tblCounterType,
+  tblEmployee,
 } from "@/core/api/generated/api";
 
 /* ================= Page ================= */
@@ -51,6 +52,7 @@ export default function PageCounterUpdate() {
       include: {
         tblCounterType: true,
         tblComponentUnit: true,
+        tblEmployee: true,
       },
     });
   }, [showAll]);

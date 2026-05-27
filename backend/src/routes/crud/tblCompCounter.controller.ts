@@ -11,6 +11,7 @@ import {
   TblCompCounterPlain,
 } from "orm/generated/prismabox/TblCompCounter";
 import { diffHours } from "@/helper";
+import { authPlugin } from "../auth/auth.guard";
 
 export const ServiceTblCompCounter = new BaseService(prisma.tblCompCounter);
 const ControllerTblCompCounter = new BaseController({
@@ -74,9 +75,9 @@ const ControllerTblCompCounter = new BaseController({
       },
     );
 
-    app.put(
+    app.use(authPlugin).put(
       "/:compCounterId",
-      async ({ params, body, set, headers }) => {
+      async ({ params, body, set, headers, userId }) => {
         const instId = Number(headers["x-inst-id"] || 0);
 
         if (!instId) {
@@ -87,6 +88,12 @@ const ControllerTblCompCounter = new BaseController({
         const data = body;
 
         const result = await prisma.$transaction(async (tx) => {
+          const user = await tx.tblUser.findFirst({
+            where: {
+              userId: Number(userId),
+            },
+          });
+
           // ۱. اعتبارسنجی تاریخ (طبق منطق قبلی خودت)
           const lastLog = await tx.tblCompCounterLog.findFirst({
             where: { compCounterId, instId },
@@ -104,11 +111,7 @@ const ControllerTblCompCounter = new BaseController({
           let counter = await tx.tblCompCounter.update({
             where: { compCounterId, instId },
             data: {
-              // tblEmployee:  {
-              //   connect: {
-              //     employeeId: data.tblEmployee?.connect?.employeeId ?? 0,
-              //   },
-              // },
+              changedBy: user?.employeeId,
               dependsOnId: data.tblCompCounter?.connect?.compCounterId || null,
               orderNo: data.orderNo,
               startDate: data.startDate,

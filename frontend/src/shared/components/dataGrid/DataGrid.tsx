@@ -241,6 +241,7 @@ export default function GenericDataGrid({
         getRowId={getRowId}
         onRowClick={handleRowClick}
         onRowDoubleClick={handleRowDoubleClick}
+        rowHeight={46}
         {...rest}
       />
 

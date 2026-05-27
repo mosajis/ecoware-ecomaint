@@ -4,6 +4,7 @@ import { RouteDetail as RouteComponentTypeDetail } from "../componentType/Compon
 import { TypeTblCompCounter } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 import CellLink from "@/shared/components/dataGrid/cells/CellLink";
+import CellFullName from "@/shared/components/dataGrid/cells/CellFullName";
 
 export const getRowId = (row: TypeTblCompCounter) => row.compCounterId;
 
@@ -47,6 +48,14 @@ export const columns: GridColDef<TypeTblCompCounter>[] = [
     field: "averageCountRate",
     headerName: "Avg Rate",
     flex: 1,
+  },
+
+  {
+    field: "changedBy",
+    headerName: "Changed By",
+    flex: 1,
+    valueGetter: (_, row) => row.tblEmployee,
+    renderCell: ({ value }) => <CellFullName value={value} />,
   },
   {
     field: "orderNo",
