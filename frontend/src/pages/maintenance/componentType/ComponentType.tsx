@@ -20,6 +20,7 @@ export default function PageComponentType() {
       mapToTree(items, "compTypeId", "parentCompTypeId"),
     [],
   );
+
   const { rows, tree, loading, refetch, handleDelete } =
     useDataTree<TypeTblCompType>({
       getAll: tblCompType.getAll,

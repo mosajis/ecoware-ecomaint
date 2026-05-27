@@ -79,7 +79,7 @@ const schema = z.object({
     })
     .nullable()
     .optional()
-    .refine((val) => val !== null, {
+    .refine((val) => !!val, {
       message: "required",
     }),
 

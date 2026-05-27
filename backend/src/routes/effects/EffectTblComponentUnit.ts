@@ -231,11 +231,11 @@ export async function effectComponentUnitChange({
           createdEmployeeId: employeeId,
         };
       })
-      .filter(Boolean);
+      .filter((item): item is NonNullable<typeof item> => item !== null);
 
     if (jobCounterData.length > 0) {
       await tx.tblCompJobCounter.createMany({
-        data: jobCounterData as any[],
+        data: jobCounterData,
       });
     }
 
