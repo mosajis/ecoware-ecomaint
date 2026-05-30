@@ -128,10 +128,12 @@ export default function PageMaintLog() {
         <TabsComponent selectedMaintLog={selectedRow} persistInUrl={true} />
       </Splitter>
 
-      <MaintLogUpsert
-        title={selectedRow?.tblComponentUnit?.compNo || "MaintLog View"}
-        {...dialogProps}
-      />
+      {selectedRow && (
+        <MaintLogUpsert
+          title={selectedRow?.tblComponentUnit?.compNo || "MaintLog View"}
+          {...dialogProps}
+        />
+      )}
 
       <MaintLogFilterDialog
         open={dialogs.filter}

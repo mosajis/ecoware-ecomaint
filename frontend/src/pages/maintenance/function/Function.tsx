@@ -63,14 +63,19 @@ export default function PageFunction() {
       const row = rows.find((i) => i.functionId === rowId);
       if (!row) return;
 
-      router.navigate({
+      const href = router.buildLocation({
         to: RouteDetail.to,
-        params: { id: rowId },
-        search: { breadcrumb: row.funcNo },
-      });
+        params: { rowId },
+        search: {
+          breadcrumb: row.funcNo ?? "",
+        },
+      }).href;
+
+      window.open(href, "_blank");
     },
     [router, rows],
   );
+
   return (
     <>
       <Splitter initialPrimarySize="35%">

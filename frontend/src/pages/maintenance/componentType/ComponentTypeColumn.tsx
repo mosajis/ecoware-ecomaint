@@ -11,19 +11,19 @@ export const columns: GridColDef<TypeTblCompType>[] = [
     field: "compTypeNo",
     headerName: "Code",
     width: 120,
+    renderCell: ({ value, row }) => (
+      <CellLink
+        breadcrumb={row.compName || ""}
+        value={row.compTypeNo}
+        to={RouteDetail.to}
+        params={{ id: row.compTypeId }}
+      />
+    ),
   },
   {
     field: "compName",
     headerName: "Name",
     flex: 1,
-    renderCell: ({ value, row }) => (
-      <CellLink
-        breadcrumb={row.compName || ""}
-        value={row.compName}
-        to={RouteDetail.to}
-        params={{ id: row.compTypeId }}
-      />
-    ),
   },
   { field: "compType", headerName: "Model/Type", width: 200 },
   { field: "orderNo", headerName: "OrderNo", width: 100 },

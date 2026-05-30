@@ -10,9 +10,14 @@ const commands = {
   push: "Push schema to database",
   format: "Format schema file",
   studio: "Open Prisma Studio",
+  "fix-lastupdate": "Fix lastUpdate fields",
   "fix-relations": "Fix relation fields in generated files",
   "fix-datetimes": "Fix DateTime types in generated files",
 };
+
+function fixLastUpdate() {
+  runCommand(`bun run ./scripts/prisma/fix-lastUpdate.js`, "Fix lastUpdate");
+}
 
 /**
  * Log message with timestamp and type icon
@@ -20,6 +25,7 @@ const commands = {
  * @param {string} message - Log message
  * @param {string} type - Type: info, success, error, warn
  */
+
 function log(title, message, type = "info") {
   const timestamp = new Date().toLocaleTimeString("en-US", {
     hour: "2-digit",
@@ -77,6 +83,7 @@ function generate() {
  */
 function pull() {
   runCommand(`prisma db pull --schema=${SCHEMA}`, "Pull Database");
+  fixLastUpdate();
   format();
   generate();
   // log('Prisma', 'Pushing changes to database...', 'info')
@@ -92,6 +99,7 @@ function push() {
     `prisma db push --accept-data-loss --schema=${SCHEMA}`,
     "Push Database",
   );
+  fixLastUpdate();
   format();
   generate();
 }
@@ -165,6 +173,7 @@ function main() {
     studio,
     "fix-relations": fixRelations,
     "fix-datetimes": fixDateTimes,
+    "fix-lastupdate": fixLastUpdate,
   };
 
   if (commandMap[command]) {

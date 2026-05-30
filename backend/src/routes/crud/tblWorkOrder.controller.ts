@@ -316,28 +316,10 @@ const ControllerTblWorkOrder = new BaseController({
         const now = new Date();
 
         return await prisma.$transaction(async (tx) => {
-          // const _workorders = await tx.tblWorkOrder.findMany({
-          //   select: {
-          //     compJobId: true,
-          //   },
-          //   where: {
-          //     workOrderStatusId: {
-          //       in: [2, 3, 4, 7, 8], // Plan, Issue, Pend, Cancel, Postponed
-          //     },
-          //   },
-          // });
-
-          // const compJobIds = _workorders.map((i) => i.compJobId);
-
           const compJobs = await tx.tblCompJob.findMany({
             where: {
               nextDueDate: null,
               instId,
-              // tblWorkOrders: {
-              //   none: {
-              //     compJobId: compJobIds,
-              //   },
-              // },
             },
             select: {
               compJobId: true,
@@ -446,6 +428,7 @@ const ControllerTblWorkOrder = new BaseController({
               maintLogId: true,
               workOrderId: true,
               dateDone: true,
+              tblLogCounters: true,
             },
           });
 
@@ -512,6 +495,8 @@ const ControllerTblWorkOrder = new BaseController({
 
           const isFixed = compJob.planningMethod === 1;
 
+          // در صورت فیکس بودن تاریخ دیودیت الزامی است
+          // در صورت متغیر بودن که تقریبا 100 درصد هم همین طور هست دیت دان الزامی است
           if (
             (!isFixed && !maintLog.dateDone) ||
             (isFixed && !workOrder.dueDate)
@@ -542,21 +527,22 @@ const ControllerTblWorkOrder = new BaseController({
 
           /* 7. Counter-based calculation -------------------------------------------------------- */
           compJob.tblCompJobCounters?.forEach((compJobCounter) => {
-            const frequency = compJobCounter.frequency || 0;
-            const calcAvg = compJobCounter.tblCompCounter?.averageCountRate;
+            const frequency = compJobCounter.frequency ?? 0;
+            const averageCountRate =
+              compJobCounter.tblCompCounter?.averageCountRate;
 
             if (frequency === 0) {
               nextDueDateArray.push(now);
               return;
             }
 
-            if (calcAvg === -1 || calcAvg === null) {
+            if (averageCountRate === -1 || averageCountRate === null) {
               // Error in calc avg (Average Count Rate)
               nextDueDateArray.push(now);
               return;
             }
 
-            if (calcAvg === 0) {
+            if (averageCountRate === 0) {
               // Sample: Engine is off
               const cn = new Date(now);
               cn.setMonth(cn.getMonth() + 6);
@@ -564,12 +550,33 @@ const ControllerTblWorkOrder = new BaseController({
               return;
             }
 
-            if (calcAvg && frequency) {
-              const x = frequency / calcAvg;
+            if (averageCountRate && frequency) {
+              //جهت محاسبه تاریخ بعدی در ابتدا باید مقدار فعلی کانتر از جدول اپدیت کانتر خوانده شود
+              //سپس مقدار کانت بعدی که در واقع لست کانت به اضافه فرکونسی است به عنوان نکست کانت محاسبه می شود
+              //.اکنون نکست کانت از کارنت کانتت داخل اپدیت کانتر کم شده و بر اساس میانگین کارکرد تاریخ بعدی محاسبه می شود
 
-              // x must be plus to maintLog.dateDone
-              // const nextDate = maintLog.dateDone.setD(nextDate.getMonth() + 6);
-              // nextDueDateArray.push(nextDate);
+              //اگر در اپدیت کانتر هیچ مقداری نباشد مقدار گرفته شده ار کاربر به عنوان مبنا محاسبه قرار می گیرد
+              let baseValue = compJobCounter.tblCompCounter?.currentValue ?? 0;
+
+              const logCounter = maintLog.tblLogCounters[0];
+
+              if (!baseValue) baseValue = logCounter?.reportedCount ?? 0;
+
+              const reportedCount = logCounter?.reportedCount ?? 0;
+              const frequency = compJobCounter.frequency ?? 0;
+
+              const nextCount = reportedCount + frequency;
+
+              const diffCount = nextCount - baseValue;
+              const diffDay = diffCount / averageCountRate;
+
+              const dateDone = maintLog?.dateDone ?? new Date();
+
+              const nextDate = new Date(
+                dateDone.setDate(dateDone.getDate() + diffDay),
+              );
+
+              nextDueDateArray.push(nextDate);
 
               return;
             }
@@ -602,6 +609,10 @@ const ControllerTblWorkOrder = new BaseController({
               workOrderStatusId: 2,
               workOrderTypeId: 1,
               instId,
+              plannedBy: employeeId,
+              maintCauseId: compJob.maintCauseId,
+              maintClassId: compJob.maintClassId,
+              maintTypeId: compJob.maintTypeId,
             },
           });
 

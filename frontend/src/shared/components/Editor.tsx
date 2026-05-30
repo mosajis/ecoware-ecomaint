@@ -86,9 +86,10 @@ const EditorToolbar = memo(
 
     const rightBtnColors = getButtonColors(theme, disabled || loading);
 
-    const muiMode = localStorage.getItem("mui-mode");
+    const { mode, systemMode } = useColorScheme();
 
-    const isLight = muiMode === "light";
+    const currentMode = mode === "system" ? systemMode : mode;
+    const isLight = currentMode === "light";
 
     const saveBtnStyle: React.CSSProperties = {
       padding: "6px 12px",

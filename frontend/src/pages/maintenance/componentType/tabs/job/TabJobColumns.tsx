@@ -79,16 +79,4 @@ export const columns: GridColDef<TypeTblCompTypeJob>[] = [
     width: 90,
     type: "boolean",
   },
-  {
-    field: "lastDone",
-    headerName: "Last Done",
-    width: 150,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-  {
-    field: "nextDueDate",
-    headerName: "Next Due Date",
-    width: 150,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
 ];

@@ -4,7 +4,6 @@ import { memo, useCallback, useMemo, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { BaseAttachmentGridProps, MapRelationConfig } from "./AttachmentType";
 import { attachmentTableColumns } from "./AttachmentMapColumn";
-import { tblEmployee } from "@/core/api/generated/api";
 
 export type AttachmentMapProps<T = any> = BaseAttachmentGridProps<T> & {
   onAfterAdd?: (id: number) => void;

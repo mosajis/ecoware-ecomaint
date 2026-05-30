@@ -98,6 +98,7 @@ export default function WorkOrderDialogReschedule({
   const onSubmit = async (data: formValues) => {
     if (!workOrder) return;
 
+    console.log(data);
     const compJobId = workOrder?.tblCompJob?.compJobId;
 
     try {
@@ -105,7 +106,7 @@ export default function WorkOrderDialogReschedule({
       if (compJobId && data.newDueDate) {
         await tblCompJob.update(compJobId, {
           nextDueDate: data.newDueDate,
-          lastUpdate: new Date().toISOString(),
+          lastUpdate: new Date().toString(),
         });
       }
 
@@ -147,7 +148,6 @@ export default function WorkOrderDialogReschedule({
           },
         },
       );
-
       // 3. Create RescheduleLog
       await tblReScheduleLog.create({
         tblWorkOrder: {

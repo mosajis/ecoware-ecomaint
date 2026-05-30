@@ -119,13 +119,15 @@ export default function PageComponentUnit() {
 
       if (!row) return;
 
-      router.navigate({
+      const href = router.buildLocation({
         to: RouteDetail.to,
-        params: { id: rowId },
+        params: { rowId },
         search: {
-          breadcrumb: row.compNo,
+          breadcrumb: row.compNo ?? "",
         },
-      });
+      }).href;
+
+      window.open(href, "_blank");
     },
     [router, rows],
   );

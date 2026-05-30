@@ -1,6 +1,6 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import TabMeasurePointUpsert from "./TabMeasurePointUpsert";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { atomUser } from "@/pages/auth/auth.atom";
 import { columns, getRowId } from "./TabMeasurePointColumns";
@@ -8,28 +8,38 @@ import { useAtomValue } from "jotai";
 import {
   tblCompJobMeasurePoint,
   tblCompMeasurePoint,
+  tblWorkOrder,
   TypeTblCompJobMeasurePoint,
   TypeTblMaintLog,
 } from "@/core/api/generated/api";
 
 type Props = {
-  selected: TypeTblMaintLog;
+  selected: any;
 };
 
 const TabMeasures = ({ selected }: Props) => {
+  if (!selected.maintLogId) return;
+
   const [selectedRow, setSelectedRow] =
     useState<TypeTblCompJobMeasurePoint | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const user = useAtomValue(atomUser);
-  const userId = user?.userId as number;
-  // const compJobId = workOrder?.tblCompJob?.compJobId;
+  const [compJobId, setCompJobId] = useState<number | null>(null);
+
+  useEffect(() => {
+    const getWorkOrder = async () => {
+      const workOrder = await tblWorkOrder.getById(selected.workOrderId);
+      setCompJobId(workOrder.compJobId);
+    };
+
+    getWorkOrder();
+  }, [selected.maintLogId]);
 
   const getAll = useCallback(
     () =>
       tblCompJobMeasurePoint.getAll({
         filter: {
-          // compJobId,
+          compJobId,
         },
         include: {
           tblCompMeasurePoint: {
@@ -40,14 +50,14 @@ const TabMeasures = ({ selected }: Props) => {
           },
         },
       }),
-    [],
+    [compJobId],
   );
 
   const { rows, loading, handleRefresh, optimisticUpdate } = useDataGrid(
     getAll,
     tblCompMeasurePoint.deleteById,
     "compJobMeasurePointId",
-    // !!compJobId,
+    !!compJobId,
   );
 
   const handleEdit = useCallback(
@@ -87,7 +97,6 @@ const TabMeasures = ({ selected }: Props) => {
     <>
       <CustomizedDataGrid
         showToolbar
-        disableAdd
         label="Component Measures"
         rows={rows}
         columns={columns}

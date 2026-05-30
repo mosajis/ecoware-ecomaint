@@ -33,6 +33,7 @@ const tabs: ReusableTabItem[] = [
   { label: "History", icon: <AccountTree />, component: TabHistory },
   { label: "Resource Used", icon: <Build />, component: TabResourceUsed },
   { label: "Spare Used", icon: <Inventory />, component: TabStockUsed },
+  { label: "WorkOrders", icon: <Work />, component: TabWorkOrders },
   { label: "Follow", icon: <TrackChanges />, component: TabFollow },
   {
     label: "Failure Report",
@@ -41,7 +42,6 @@ const tabs: ReusableTabItem[] = [
   },
   { label: "Log Counter", icon: <Speed />, component: TabLogCounter },
   { label: "Measure Point", icon: <Straighten />, component: TabMeasurePoint },
-  { label: "WorkOrders", icon: <Work />, component: TabWorkOrders },
 
   { label: "Attachment", icon: <AttachFile />, component: TabAttachment },
 ];

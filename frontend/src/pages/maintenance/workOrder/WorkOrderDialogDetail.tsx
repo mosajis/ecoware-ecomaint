@@ -71,7 +71,12 @@ function DetailRow({
   value: React.ReactNode;
 }) {
   return (
-    <Stack direction="row" spacing={1} alignItems="flex-start" sx={{ py: 0.5 }}>
+    <Stack
+      direction="row"
+      spacing={0.5}
+      alignItems="flex-start"
+      sx={{ py: 0.5 }}
+    >
       <Typography
         variant="caption"
         sx={{
@@ -366,337 +371,173 @@ export default function WorkOrderDetailDialog({
     const nextDueCount = firstCounter?.nextDueCount;
 
     return (
-      <Box>
-        {/* ── Tabs ── */}
-        <Tabs
-          value={tabValue}
-          onChange={handleTabChange}
-          aria-label="work order tabs"
-          sx={{ borderBottom: 1, borderColor: "divider" }}
-        >
-          <Tab label="Main Info" id="tab-0" />
-          <Tab label="Maintenance History" id="tab-1" />
-          <Tab label="Reschedules" id="tab-2" />
-          <Tab label="Child Work Orders" id="tab-3" />
-          <Tab label="Employees" id="tab-4" />
-        </Tabs>
+      <Box gap={1.5} gridTemplateColumns={"1fr 1fr"} display={"grid"}>
+        {/* Basic Information */}
+        <Box>
+          <SectionTitle>Basic Information</SectionTitle>
+          <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
+            <Stack spacing={0.5}>
+              <DetailRow label="Work Order ID" value={wo.workOrderId} />
+              <DetailRow label="WO Number" value={wo.woNo} />
+              <DetailRow label="Title" value={wo.title} />
+              <DetailRow label="Description" value={wo.description} />
+              <DetailRow label="Status" value={wo.tblWorkOrderStatus?.name} />
+              <DetailRow label="Priority" value={wo.priority} />
+              <DetailRow label="Order Number" value={wo.orderNo} />
+              <DetailRow label="Reporting Method" value={wo.reportingMethod} />
+              <DetailRow
+                label="Installation"
+                value={wo.tblInstallation?.name}
+              />
+            </Stack>
+          </Paper>
+        </Box>
 
-        {/* ── Tab 1: معلومات اصلی ── */}
-        <TabPanel value={tabValue} index={0}>
-          <Stack spacing={3}>
-            {/* Basic Information */}
-            <Box>
-              <SectionTitle>Basic Information</SectionTitle>
-              <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
-                <Stack spacing={1}>
-                  <DetailRow label="Work Order ID" value={wo.workOrderId} />
-                  <DetailRow label="WO Number" value={wo.woNo} />
-                  <DetailRow label="Title" value={wo.title} />
-                  <DetailRow label="Description" value={wo.description} />
-                  <DetailRow
-                    label="Status"
-                    value={wo.tblWorkOrderStatus?.name}
-                  />
-                  <DetailRow label="Priority" value={wo.priority} />
-                  <DetailRow label="Order Number" value={wo.orderNo} />
-                  <DetailRow
-                    label="Reporting Method"
-                    value={wo.reportingMethod}
-                  />
-                  <DetailRow
-                    label="Installation"
-                    value={wo.tblInstallation?.name}
-                  />
-                </Stack>
-              </Paper>
-            </Box>
+        {/* Dates and Timing */}
+        <Box>
+          <SectionTitle>Dates & Timing</SectionTitle>
+          <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
+            <Stack spacing={0.5}>
+              <DetailRow label="Issued Date" value={fmt(wo.issuedDate)} />
+              <DetailRow label="Due Date" value={fmt(wo.dueDate)} />
+              <DetailRow label="Due Count" value={nextDueCount} />
+              <DetailRow label="Created Date" value={fmt(wo.created)} />
+              <DetailRow label="Started Date" value={fmt(wo.started)} />
+              <DetailRow label="Completed Date" value={fmt(wo.completed)} />
+              <DetailRow label="Last Update" value={fmt(wo.lastUpdate)} />
+              <DetailRow
+                label="Est. Total Duration"
+                value={
+                  wo.estTotalDuration ? `${wo.estTotalDuration} minutes` : "—"
+                }
+              />
+              <DetailRow label="Time Window" value={wo.window} />
+            </Stack>
+          </Paper>
+        </Box>
 
-            {/* Dates and Timing */}
-            <Box>
-              <SectionTitle>Dates & Timing</SectionTitle>
-              <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
-                <Stack spacing={1}>
-                  <DetailRow label="Issued Date" value={fmt(wo.issuedDate)} />
-                  <DetailRow label="Due Date" value={fmt(wo.dueDate)} />
-                  <DetailRow label="Due Count" value={nextDueCount} />
-                  <DetailRow label="Created Date" value={fmt(wo.created)} />
-                  <DetailRow label="Started Date" value={fmt(wo.started)} />
-                  <DetailRow label="Completed Date" value={fmt(wo.completed)} />
-                  <DetailRow label="Last Update" value={fmt(wo.lastUpdate)} />
-                  <DetailRow
-                    label="Est. Total Duration"
-                    value={
-                      wo.estTotalDuration
-                        ? `${wo.estTotalDuration} minutes`
-                        : "—"
-                    }
-                  />
-                  <DetailRow label="Time Window" value={wo.window} />
-                </Stack>
-              </Paper>
-            </Box>
+        {/* Classification */}
+        <Box>
+          <SectionTitle>Classification & Categories</SectionTitle>
+          <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
+            <Stack spacing={0.5}>
+              <DetailRow
+                label="Maintenance Class"
+                value={wo.tblMaintClass?.descr}
+              />
+              <DetailRow
+                label="Maintenance Type"
+                value={wo.tblMaintType?.descr}
+              />
+              <DetailRow
+                label="Maintenance Cause"
+                value={wo.tblMaintCause?.descr}
+              />
+              <DetailRow label="Discipline" value={wo.tblDiscipline?.name} />
+              <DetailRow label="Round" value={wo.tblRound?.roundTitle} />
+            </Stack>
+          </Paper>
+        </Box>
 
-            {/* Classification */}
-            <Box>
-              <SectionTitle>Classification & Categories</SectionTitle>
-              <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
-                <Stack spacing={1}>
-                  <DetailRow
-                    label="Maintenance Class"
-                    value={wo.tblMaintClass?.descr}
-                  />
-                  <DetailRow
-                    label="Maintenance Type"
-                    value={wo.tblMaintType?.descr}
-                  />
-                  <DetailRow
-                    label="Maintenance Cause"
-                    value={wo.tblMaintCause?.descr}
-                  />
-                  <DetailRow
-                    label="Discipline"
-                    value={wo.tblDiscipline?.name}
-                  />
-                  <DetailRow label="Round" value={wo.tblRound?.roundTitle} />
-                </Stack>
-              </Paper>
-            </Box>
+        {/* Components & Equipment */}
+        <Box>
+          <SectionTitle>Components & Equipment</SectionTitle>
+          <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
+            <Stack spacing={0.5}>
+              <DetailRow
+                label="Component Number"
+                value={wo.tblComponentUnit?.compNo}
+              />
+              <DetailRow
+                label="Component Name"
+                value={wo.tblComponentUnit?.compName}
+              />
+              <DetailRow
+                label="Serial Number"
+                value={wo.tblComponentUnit?.serialNo}
+              />
+              <DetailRow label="Model" value={wo.tblComponentUnit?.model} />
+              <DetailRow
+                label="Asset Number"
+                value={wo.tblComponentUnit?.assetNo}
+              />
+              <DetailRow
+                label="Total Component Jobs"
+                value={wo.tblComponentUnit?.tblCompJobs?.length ?? 0}
+              />
+            </Stack>
+          </Paper>
+        </Box>
 
-            {/* Components & Equipment */}
-            <Box>
-              <SectionTitle>Components & Equipment</SectionTitle>
-              <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
-                <Stack spacing={1}>
-                  <DetailRow
-                    label="Component Number"
-                    value={wo.tblComponentUnit?.compNo}
-                  />
-                  <DetailRow
-                    label="Component Name"
-                    value={wo.tblComponentUnit?.compName}
-                  />
-                  <DetailRow
-                    label="Serial Number"
-                    value={wo.tblComponentUnit?.serialNo}
-                  />
-                  <DetailRow label="Model" value={wo.tblComponentUnit?.model} />
-                  <DetailRow
-                    label="Asset Number"
-                    value={wo.tblComponentUnit?.assetNo}
-                  />
-                  <DetailRow
-                    label="Total Component Jobs"
-                    value={wo.tblComponentUnit?.tblCompJobs?.length ?? 0}
-                  />
-                </Stack>
-              </Paper>
-            </Box>
+        {/* Component Job */}
+        {wo.tblCompJob && (
+          <Box>
+            <SectionTitle>Component Job & Counter</SectionTitle>
+            <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
+              <Stack spacing={0.5}>
+                <DetailRow label="Frequency" value={wo.tblCompJob.frequency} />
+                <DetailRow
+                  label="Frequency Period"
+                  value={wo.tblCompJob.tblPeriod?.name}
+                />
+                <DetailRow
+                  label="Last Done"
+                  value={fmt(wo.tblCompJob.lastDone)}
+                />
+                <DetailRow
+                  label="Next Due Date"
+                  value={fmt(wo.tblCompJob.nextDueDate)}
+                />
+                <DetailRow
+                  label="Total Counters"
+                  value={wo.tblCompJob.tblCompJobCounters?.length ?? 0}
+                />
+              </Stack>
+            </Paper>
+          </Box>
+        )}
 
-            {/* Component Job */}
-            {wo.tblCompJob && (
-              <Box>
-                <SectionTitle>Component Job & Counter</SectionTitle>
-                <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
-                  <Stack spacing={1}>
-                    <DetailRow
-                      label="Frequency"
-                      value={wo.tblCompJob.frequency}
-                    />
-                    <DetailRow
-                      label="Frequency Period"
-                      value={wo.tblCompJob.tblPeriod?.name}
-                    />
-                    <DetailRow
-                      label="Last Done"
-                      value={fmt(wo.tblCompJob.lastDone)}
-                    />
-                    <DetailRow
-                      label="Next Due Date"
-                      value={fmt(wo.tblCompJob.nextDueDate)}
-                    />
-                    <DetailRow
-                      label="Total Counters"
-                      value={wo.tblCompJob.tblCompJobCounters?.length ?? 0}
-                    />
-                  </Stack>
-                </Paper>
-              </Box>
-            )}
+        {/* Pending Information */}
+        {(wo.pendTypeId || wo.pendingBy || wo.pendingdate) && (
+          <Box>
+            <SectionTitle>Pending Information</SectionTitle>
+            <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
+              <Stack spacing={0.5}>
+                <DetailRow
+                  label="Pending Type"
+                  value={wo.tblPendingType?.pendTypeName}
+                />
+                <DetailRow label="Pending Date" value={fmt(wo.pendingdate)} />
+                <DetailRow
+                  label="Pending By"
+                  value={`${wo.tblEmployeeTblWorkOrderPendingByTotblEmployee?.firstName} ${wo.tblEmployeeTblWorkOrderPendingByTotblEmployee?.lastName}`}
+                />
+                <DetailRow label="User Comment" value={wo.userComment} />
+              </Stack>
+            </Paper>
+          </Box>
+        )}
 
-            {/* Pending Information */}
-            {(wo.pendTypeId || wo.pendingBy || wo.pendingdate) && (
-              <Box>
-                <SectionTitle>Pending Information</SectionTitle>
-                <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
-                  <Stack spacing={1}>
-                    <DetailRow
-                      label="Pending Type"
-                      value={wo.tblPendingType?.pendTypeName}
-                    />
-                    <DetailRow
-                      label="Pending Date"
-                      value={fmt(wo.pendingdate)}
-                    />
-                    <DetailRow
-                      label="Pending By"
-                      value={`${wo.tblEmployeeTblWorkOrderPendingByTotblEmployee?.firstName} ${wo.tblEmployeeTblWorkOrderPendingByTotblEmployee?.lastName}`}
-                    />
-                    <DetailRow label="User Comment" value={wo.userComment} />
-                  </Stack>
-                </Paper>
-              </Box>
-            )}
-
-            {/* Related Employees */}
-            <Box>
-              <SectionTitle>Related Employees</SectionTitle>
-              <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
-                <Stack spacing={1}>
-                  <DetailRow
-                    label="Created By"
-                    value={`${wo.tblEmployeeTblWorkOrderCreatedByTotblEmployee?.firstName} ${wo.tblEmployeeTblWorkOrderCreatedByTotblEmployee?.lastName}`}
-                  />
-                  <DetailRow
-                    label="Issued By"
-                    value={`${wo.tblEmployeeTblWorkOrderIssuedByTotblEmployee?.firstName} ${wo.tblEmployeeTblWorkOrderIssuedByTotblEmployee?.lastName}`}
-                  />
-                  <DetailRow
-                    label="Planned By"
-                    value={`${wo.tblEmployeeTblWorkOrderPlannedByTotblEmployee?.firstName} ${wo.tblEmployeeTblWorkOrderPlannedByTotblEmployee?.lastName}`}
-                  />
-                </Stack>
-              </Paper>
-            </Box>
-          </Stack>
-        </TabPanel>
-
-        {/* ── Tab 2: Maintenance History ── */}
-        <TabPanel value={tabValue} index={1}>
-          <NestedGrid
-            title="Maintenance History"
-            rows={wo.tblMaintLogs || []}
-            columns={maintLogColumns}
-            getRowId={(r: any) => r.maintLogId}
-          />
-          {(!wo.tblMaintLogs || wo.tblMaintLogs.length === 0) && (
-            <Typography color="text.secondary" sx={{ p: 2 }}>
-              No maintenance history available
-            </Typography>
-          )}
-        </TabPanel>
-
-        {/* ── Tab 3: Reschedules ── */}
-        <TabPanel value={tabValue} index={2}>
-          <NestedGrid
-            title="Reschedule History"
-            rows={wo.tblReScheduleLogs || []}
-            columns={reScheduleColumns}
-            getRowId={(r: any) => r.rescheduleLogId}
-          />
-          {(!wo.tblReScheduleLogs || wo.tblReScheduleLogs.length === 0) && (
-            <Typography color="text.secondary" sx={{ p: 2 }}>
-              No reschedule history available
-            </Typography>
-          )}
-        </TabPanel>
-
-        {/* ── Tab 4: Child Work Orders ── */}
-        <TabPanel value={tabValue} index={3}>
-          <NestedGrid
-            title="Child Work Orders"
-            rows={wo.otherTblWorkOrders || []}
-            columns={childWoColumns}
-            getRowId={(r: any) => r.workOrderId}
-          />
-          {(!wo.otherTblWorkOrders || wo.otherTblWorkOrders.length === 0) && (
-            <Typography color="text.secondary" sx={{ p: 2 }}>
-              No child work orders available
-            </Typography>
-          )}
-        </TabPanel>
-
-        {/* ── Tab 5: Employees ── */}
-        <TabPanel value={tabValue} index={4}>
-          <Stack spacing={3}>
-            {wo.tblEmployeeTblWorkOrderCreatedByTotblEmployee && (
-              <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
-                <SectionTitle>Creator</SectionTitle>
-                <Stack spacing={1}>
-                  <DetailRow
-                    label="Full Name"
-                    value={`${wo.tblEmployeeTblWorkOrderCreatedByTotblEmployee?.firstName} ${wo.tblEmployeeTblWorkOrderCreatedByTotblEmployee?.lastName}`}
-                  />
-                  <DetailRow
-                    label="Employee Code"
-                    value={
-                      wo.tblEmployeeTblWorkOrderCreatedByTotblEmployee?.code
-                    }
-                  />
-                  <DetailRow
-                    label="Title"
-                    value={
-                      wo.tblEmployeeTblWorkOrderCreatedByTotblEmployee?.title
-                    }
-                  />
-                </Stack>
-              </Paper>
-            )}
-
-            {wo.tblEmployeeTblWorkOrderIssuedByTotblEmployee && (
-              <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
-                <SectionTitle>Issuer</SectionTitle>
-                <Stack spacing={1}>
-                  <DetailRow
-                    label="Full Name"
-                    value={`${wo.tblEmployeeTblWorkOrderIssuedByTotblEmployee?.firstName} ${wo.tblEmployeeTblWorkOrderIssuedByTotblEmployee?.lastName}`}
-                  />
-                  <DetailRow
-                    label="Employee Code"
-                    value={
-                      wo.tblEmployeeTblWorkOrderIssuedByTotblEmployee?.code
-                    }
-                  />
-                </Stack>
-              </Paper>
-            )}
-
-            {wo.tblEmployeeTblWorkOrderPlannedByTotblEmployee && (
-              <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
-                <SectionTitle>Planner</SectionTitle>
-                <Stack spacing={1}>
-                  <DetailRow
-                    label="Full Name"
-                    value={`${wo.tblEmployeeTblWorkOrderPlannedByTotblEmployee?.firstName} ${wo.tblEmployeeTblWorkOrderPlannedByTotblEmployee?.lastName}`}
-                  />
-                  <DetailRow
-                    label="Employee Code"
-                    value={
-                      wo.tblEmployeeTblWorkOrderPlannedByTotblEmployee?.code
-                    }
-                  />
-                </Stack>
-              </Paper>
-            )}
-
-            {wo.tblEmployeeTblWorkOrderPendingByTotblEmployee && (
-              <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
-                <SectionTitle>On Pending</SectionTitle>
-                <Stack spacing={1}>
-                  <DetailRow
-                    label="Full Name"
-                    value={`${wo.tblEmployeeTblWorkOrderPendingByTotblEmployee?.firstName} ${wo.tblEmployeeTblWorkOrderPendingByTotblEmployee?.lastName}`}
-                  />
-                  <DetailRow
-                    label="Employee Code"
-                    value={
-                      wo.tblEmployeeTblWorkOrderPendingByTotblEmployee?.code
-                    }
-                  />
-                </Stack>
-              </Paper>
-            )}
-          </Stack>
-        </TabPanel>
+        {/* Related Employees */}
+        <Box>
+          <SectionTitle>Related Employees</SectionTitle>
+          <Paper variant="outlined" sx={{ p: 2, borderRadius: 1 }}>
+            <Stack spacing={0.5}>
+              <DetailRow
+                label="Created By"
+                value={`${wo.tblEmployeeTblWorkOrderCreatedByTotblEmployee?.firstName} ${wo.tblEmployeeTblWorkOrderCreatedByTotblEmployee?.lastName}`}
+              />
+              <DetailRow
+                label="Issued By"
+                value={`${wo.tblEmployeeTblWorkOrderIssuedByTotblEmployee?.firstName} ${wo.tblEmployeeTblWorkOrderIssuedByTotblEmployee?.lastName}`}
+              />
+              <DetailRow
+                label="Planned By"
+                value={`${wo.tblEmployeeTblWorkOrderPlannedByTotblEmployee?.firstName} ${wo.tblEmployeeTblWorkOrderPlannedByTotblEmployee?.lastName}`}
+              />
+            </Stack>
+          </Paper>
+        </Box>
       </Box>
     );
   };
@@ -705,44 +546,57 @@ export default function WorkOrderDetailDialog({
     <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth>
       <DialogTitle
         sx={{
+          padding: 1.5,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
         }}
       >
-        <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap">
-          {wo.title && (
-            <Typography variant="h6" color="textSecondary">
-              {wo.title}
-            </Typography>
-          )}
-          {wo.tblWorkOrderStatus?.name && (
-            <Chip
-              label={wo.tblWorkOrderStatus.name}
-              size="small"
-              color="primary"
-              variant="outlined"
-            />
-          )}
-          {wo.priority !== null && wo.priority !== undefined && (
-            <Chip
-              label={`Priority ${wo.priority}`}
-              size="small"
-              variant="outlined"
-            />
-          )}
-          {wo.unexpected && (
-            <Chip
-              label="Unexpected"
-              size="small"
-              color="warning"
-              variant="filled"
-            />
-          )}
-          {wo.filed && (
-            <Chip label="Filed" size="small" color="success" variant="filled" />
-          )}
-        </Stack>
+        {wo && (
+          <Stack
+            direction="row"
+            spacing={2}
+            alignItems="center"
+            flexWrap="wrap"
+          >
+            {wo.title && (
+              <Typography variant="h6" color="textSecondary">
+                {wo.title}
+              </Typography>
+            )}
+            {wo.tblWorkOrderStatus?.name && (
+              <Chip
+                label={wo.tblWorkOrderStatus.name}
+                size="small"
+                color="primary"
+                variant="outlined"
+              />
+            )}
+            {wo.priority !== null && wo.priority !== undefined && (
+              <Chip
+                label={`Priority ${wo.priority}`}
+                size="small"
+                variant="outlined"
+              />
+            )}
+            {wo.unexpected && (
+              <Chip
+                label="Unexpected"
+                size="small"
+                color="warning"
+                variant="filled"
+              />
+            )}
+            {wo.filed && (
+              <Chip
+                label="Filed"
+                size="small"
+                color="success"
+                variant="filled"
+              />
+            )}
+          </Stack>
+        )}
         <IconButton size="small" onClick={onClose} sx={{ color: "inherit" }}>
           <CloseIcon fontSize="small" />
         </IconButton>

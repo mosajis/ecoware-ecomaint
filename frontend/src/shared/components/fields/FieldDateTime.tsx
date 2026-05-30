@@ -3,6 +3,9 @@ import CalendarToday from "@mui/icons-material/CalendarToday";
 import AccessTime from "@mui/icons-material/AccessTime";
 import Event from "@mui/icons-material/Event";
 import ClearIcon from "@mui/icons-material/Clear";
+import { DATE_FORMATS, DateTimeType } from "@/const";
+import { useAtomValue } from "jotai";
+import { atomLanguage } from "@/shared/atoms/general.atom";
 import {
   DatePicker,
   DatePickerProps,
@@ -11,9 +14,6 @@ import {
   TimePicker,
   TimePickerProps,
 } from "@mui/x-date-pickers";
-import { DATE_FORMATS, DateTimeType } from "@/const";
-import { useAtomValue } from "jotai";
-import { atomLanguage } from "@/shared/atoms/general.atom";
 
 interface DateFieldProps {
   label: string;
@@ -41,10 +41,33 @@ const FieldDateTime: React.FC<DateFieldProps> = ({
   const language = useAtomValue(atomLanguage);
   const locale = language === "fa" ? "FA" : "EN";
 
-  const dateValue = field.value ? new Date(field.value) : null;
+  const dateValue = (() => {
+    if (!field.value) return null;
+
+    if (type === "DATE" && typeof field.value === "string") {
+      const [y, m, d] = field.value.slice(0, 10).split("-").map(Number);
+      return new Date(y, m - 1, d);
+    }
+
+    return new Date(field.value);
+  })();
 
   const handleChange = (newValue: Date | null) => {
-    field.onChange(newValue ? newValue.toISOString() : null);
+    if (!newValue) {
+      field.onChange(null);
+      return;
+    }
+
+    if (type === "DATE") {
+      const year = newValue.getFullYear();
+      const month = String(newValue.getMonth() + 1).padStart(2, "0");
+      const day = String(newValue.getDate()).padStart(2, "0");
+
+      field.onChange(`${year}-${month}-${day}`);
+      return;
+    }
+
+    field.onChange(newValue.toISOString());
   };
 
   const getIcon = () => {
@@ -103,9 +126,7 @@ const FieldDateTime: React.FC<DateFieldProps> = ({
         openPickerButton: { sx: { ...buttonStyle, marginRight: "-8px" } },
         clearButton: { sx: buttonStyle },
       }}
-      // مهم: props اضافی که از بیرون پاس داده می‌شود
       {...pickerProps}
-      // اگر خواستی ampm و timeSteps فقط برای TIME و DATETIME اعمال بشه
       {...((type === "TIME" || type === "DATETIME") && {
         ampm: false,
         timeSteps: { minutes: 1 },

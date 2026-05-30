@@ -117,7 +117,10 @@ export function useAttachmentForm<T>({
 
     newForm.reset({
       title: "",
-      attachmentType: null,
+      attachmentType: {
+        attachmentTypeId: 0,
+        name: "UserAttachment",
+      },
       isUserAttachment: true,
       file: new File([], ""),
     });

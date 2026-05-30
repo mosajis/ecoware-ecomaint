@@ -21,7 +21,6 @@ import { GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
 import { atomUser } from "@/pages/auth/auth.atom";
 import { useDialogs } from "@/shared/hooks/useDialogs";
 import { toast } from "sonner";
-import { over } from "lodash-es";
 import { useRouter } from "@tanstack/react-router";
 
 const getRowId = (row: TypeTblWorkOrder) => row.workOrderId;
@@ -511,11 +510,13 @@ export default function WorkOrderPage() {
         />
       )}
 
-      <WorkOrderDetailDialog
-        open={dialogs.workOrderDetail}
-        onClose={() => closeDialog("workOrderDetail")}
-        workOrderId={selectedRowId}
-      />
+      {dialogs.workOrderDetail && (
+        <WorkOrderDetailDialog
+          open={dialogs.workOrderDetail}
+          onClose={() => closeDialog("workOrderDetail")}
+          workOrderId={selectedRowId}
+        />
+      )}
 
       <ConfirmDialog
         open={dialogs.pendingRedirect}

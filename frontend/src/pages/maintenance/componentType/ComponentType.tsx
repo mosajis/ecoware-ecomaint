@@ -38,11 +38,15 @@ export default function PageComponentType() {
       const row = rows.find((i) => i.compTypeId === rowId);
       if (!row) return;
 
-      router.navigate({
+      const href = router.buildLocation({
         to: RouteDetail.to,
-        params: { id: rowId },
-        search: { breadcrumb: row.compName },
-      });
+        params: { rowId },
+        search: {
+          breadcrumb: row.compName ?? "",
+        },
+      }).href;
+
+      window.open(href, "_blank");
     },
     [router, rows],
   );

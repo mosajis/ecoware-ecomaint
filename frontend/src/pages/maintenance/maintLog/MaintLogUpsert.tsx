@@ -183,10 +183,11 @@ function MaintLogUpsert({
     if (!open || mode !== "create") return;
 
     const loadContext = async () => {
-      if (!initialCompId && !workOrderId) return;
+      // if (!initialCompId && !workOrderId) return;
 
       try {
         const contextData = await getMaintLogContext({
+          maintLogId: recordId!,
           compId: initialCompId,
           workOrderId,
         });
@@ -222,7 +223,12 @@ function MaintLogUpsert({
       maxWidth="lg"
     >
       <Box display="grid" gap={1.5} gridTemplateColumns="1fr 1fr">
-        <Box display="grid" gap={1.5} gridTemplateColumns="1fr 1fr">
+        <Box
+          display="grid"
+          gap={1.5}
+          gridTemplateColumns="3fr 
+        2fr"
+        >
           <Box
             gridColumn={"span 2"}
             display={"flex"}
@@ -254,6 +260,9 @@ function MaintLogUpsert({
                 <FieldDateTime
                   field={field}
                   type="DATETIME"
+                  pickerProps={{
+                    maxDate: new Date(),
+                  }}
                   label="Date Done"
                   error={!!fieldState.error}
                   helperText={fieldState.error?.message}
@@ -347,7 +356,6 @@ function MaintLogUpsert({
               <FieldDateTime
                 type="DATETIME"
                 label="Last Date"
-                disabled
                 field={{
                   name: "lastDate",
                   value: context?.counterData?.lastDate || null,
@@ -357,7 +365,6 @@ function MaintLogUpsert({
               />
               <NumberField
                 label="Last Value"
-                disabled
                 field={{
                   name: "lastValue",
                   value: context?.counterData?.lastValue || null,

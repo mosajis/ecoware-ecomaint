@@ -33,7 +33,7 @@ export const schema = z.object({
     message: "Maint Class is required",
   }),
 
-  reportedCount: z.number().min(0, "must be positive"),
+  reportedCount: z.number(),
 });
 
 export type TypeValues = z.input<typeof schema>;

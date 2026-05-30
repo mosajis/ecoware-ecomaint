@@ -127,6 +127,9 @@ function CountersUpdate({ open, recordId, onClose, onSuccess }: Props) {
           control={control}
           render={({ field }) => (
             <FieldDateTime
+              pickerProps={{
+                maxDate: new Date(),
+              }}
               label="Current Date"
               field={field}
               type="DATETIME"

@@ -1,58 +1,30 @@
+import Splitter from "@/shared/components/Splitter/Splitter";
+import Editor from "@/shared/components/Editor";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
-import { useCallback } from "react";
-import { GridColDef } from "@mui/x-data-grid";
+import { useCallback, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
   tblReScheduleLog,
   TypeTblReScheduleLog,
   TypeTblWorkOrder,
 } from "@/core/api/generated/api";
+import { columns, getRowId } from "./TabRescheduleLogColumns";
 
 interface Props {
   workOrder?: TypeTblWorkOrder;
   label?: string;
 }
 
-const getRowId = (row: TypeTblReScheduleLog) => row.rescheduleLogId;
-
-// === Columns ===
-const columns: GridColDef<TypeTblReScheduleLog>[] = [
-  {
-    field: "fromDueDate",
-    headerName: "From Due Date",
-    flex: 1,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-  {
-    field: "toDueDate",
-    headerName: "To Due Date",
-    flex: 1,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-  {
-    field: "rescheduledDate",
-    headerName: "Re Schedule Date",
-    flex: 1,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-  {
-    field: "rescheduledBy",
-    headerName: "Username SET REL",
-    flex: 1,
-  },
-  {
-    field: "reason",
-    headerName: "Reason",
-    flex: 1,
-  },
-];
-
 const TabRescheduleLog = ({ workOrder, label }: Props) => {
+  const [selectedReason, setSelectedReason] = useState<string | null>(null);
+
   const workOrderId = workOrder?.workOrderId;
 
   const getAll = useCallback(() => {
     return tblReScheduleLog.getAll({
+      include: {
+        tblEmployee: true,
+      },
       filter: {
         workOrderId,
       },
@@ -67,19 +39,30 @@ const TabRescheduleLog = ({ workOrder, label }: Props) => {
     !!workOrderId,
   );
 
+  const handleRowClick = useCallback(
+    ({ row }: { row: TypeTblReScheduleLog }) => {
+      setSelectedReason(row.reason);
+    },
+    [],
+  );
+
   return (
-    <CustomizedDataGrid
-      disableAdd
-      disableEdit
-      disableDelete
-      showToolbar={!!label}
-      label={label}
-      rows={rows}
-      columns={columns}
-      loading={loading}
-      onRefreshClick={handleRefresh}
-      getRowId={getRowId}
-    />
+    <Splitter initialPrimarySize="60%">
+      <CustomizedDataGrid
+        disableAdd
+        disableEdit
+        disableDelete
+        showToolbar={!!label}
+        label={label}
+        rows={rows}
+        columns={columns}
+        loading={loading}
+        onRowClick={handleRowClick}
+        onRefreshClick={handleRefresh}
+        getRowId={getRowId}
+      />
+      <Editor label="Reason" readOnly disabled initValue={selectedReason} />
+    </Splitter>
   );
 };
 
