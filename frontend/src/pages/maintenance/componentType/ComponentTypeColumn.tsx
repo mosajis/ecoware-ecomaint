@@ -10,7 +10,7 @@ export const columns: GridColDef<TypeTblCompType>[] = [
   {
     field: "compTypeNo",
     headerName: "Code",
-    width: 120,
+    width: 80,
     renderCell: ({ value, row }) => (
       <CellLink
         breadcrumb={row.compName || ""}

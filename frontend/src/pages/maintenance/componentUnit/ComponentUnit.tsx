@@ -25,6 +25,7 @@ import {
   TypeTblMaintLog,
 } from "@/core/api/generated/api";
 import MaintLogUpsert from "../maintLog/MaintLogUpsert";
+import CellLink from "@/shared/components/dataGrid/cells/CellLink";
 
 const PERMIT_ID = 1310;
 
@@ -121,7 +122,7 @@ export default function PageComponentUnit() {
 
       const href = router.buildLocation({
         to: RouteDetail.to,
-        params: { rowId },
+        params: { id: rowId },
         search: {
           breadcrumb: row.compNo ?? "",
         },
@@ -228,7 +229,6 @@ export default function PageComponentUnit() {
 
         <CustomizedDataGrid
           showToolbar
-          disableRowNumber
           label="List View"
           elementId={PERMIT_ID}
           rows={rows}
@@ -241,6 +241,14 @@ export default function PageComponentUnit() {
           onDoubleClick={openView}
           onRefreshClick={refetch}
           onRowClick={handleRowClick}
+          rowNumberCell={(row: TypeTblComponentUnit, index) => (
+            <CellLink
+              breadcrumb={row.compNo || ""}
+              value={index}
+              to={RouteDetail.to}
+              params={{ id: row.compId }}
+            />
+          )}
           toolbarChildren={
             <ComponentUnitActions
               selectedRow={selectedRow}

@@ -3,7 +3,6 @@ import MeasurePointUpsert from "./TabMeasuresUpsert";
 import ConfirmDialog from "@/shared/components/ConfirmDialog";
 import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import { useCallback, useState } from "react";
-import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { toast } from "sonner";
 import {
@@ -11,49 +10,13 @@ import {
   TypeTblCompType,
   TypeTblCompTypeMeasurePoint,
 } from "@/core/api/generated/api";
-import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import { effectTblCompTypeMeasurePoint } from "@/core/api/apiEffects";
+import { columns, getRowId } from "./TabMeasuresColumn";
 
 type Props = {
   compType?: TypeTblCompType | null;
   label?: string;
 };
-
-const getRowId = (row: TypeTblCompTypeMeasurePoint) =>
-  row.compTypeMeasurePointId;
-
-// === Columns ===
-const columns: GridColDef<TypeTblCompTypeMeasurePoint>[] = [
-  {
-    field: "measureName",
-    headerName: "Measure",
-    flex: 1,
-    valueGetter: (_, row) => row.tblCounterType?.name || "",
-  },
-  {
-    field: "currentDate",
-    headerName: "Current Date",
-    width: 135,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-  { field: "currentValue", headerName: "Current Value", width: 120 },
-  {
-    field: "unitName",
-    headerName: "Unit",
-    flex: 1,
-    valueGetter: (_, row) => row.tblUnit?.name || "",
-  },
-  {
-    field: "unitDescription",
-    headerName: "Unit Description",
-    flex: 1,
-    valueGetter: (_, row) => row.tblUnit?.description || "",
-  },
-  { field: "setValue", headerName: "Set Value", width: 110 },
-  { field: "operationalMinValue", headerName: "Min", width: 100 },
-  { field: "operationalMaxValue", headerName: "Max", width: 100 },
-  { field: "orderNo", headerName: "Order", width: 80 },
-];
 
 const TabMeasuresPage = ({ compType, label }: Props) => {
   const compTypeId = compType?.compTypeId;

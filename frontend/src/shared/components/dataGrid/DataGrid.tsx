@@ -9,9 +9,11 @@ import {
   type GridCallbackDetails,
 } from "@mui/x-data-grid";
 
-import { useMemo, useCallback, useState, useRef } from "react";
+import { useMemo, useCallback, useState, useRef, ReactNode } from "react";
 
-const rowNumberColumn: GridColDef = {
+const rowNumberColumn = (
+  rowNumberCell?: (rowId: number, index: number) => ReactNode,
+): GridColDef => ({
   field: "rowNumber",
   headerName: "#",
   width: 35,
@@ -20,8 +22,11 @@ const rowNumberColumn: GridColDef = {
   disableColumnMenu: true,
   align: "center",
   headerAlign: "center",
-  renderCell: (params) => params.api.getAllRowIds().indexOf(params.id) + 1,
-};
+  renderCell: (params) => {
+    const index = params.api.getAllRowIds().indexOf(params.id) + 1;
+    return rowNumberCell ? rowNumberCell(params.row, index) : index;
+  },
+});
 
 interface CustomizedDataGridProps extends DataGridProps {
   label?: string;
@@ -45,6 +50,7 @@ interface CustomizedDataGridProps extends DataGridProps {
   elementId?: number;
   children?: React.ReactNode;
   externalRowSelection?: boolean;
+  rowNumberCell?: (row: any, index: number) => ReactNode;
 }
 
 export default function GenericDataGrid({
@@ -73,6 +79,7 @@ export default function GenericDataGrid({
   elementId,
   children,
   externalRowSelection = false,
+  rowNumberCell,
   ...rest
 }: CustomizedDataGridProps) {
   let { canCreate, canUpdate, canDelete, canView, canExport } = getPermit(
@@ -88,7 +95,6 @@ export default function GenericDataGrid({
 
   if (!canView) return null;
 
-  // ✅ FIX: stable ref instead of variable
   const clickTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [internalRowSelectionModel, setInternalRowSelectionModel] =
@@ -97,10 +103,8 @@ export default function GenericDataGrid({
       ids: new Set<GridRowId>([]),
     });
 
-  // اگر selection بیرونی است، از props استفاده کن، وگرنه از state داخلی
   const rowSelectionModel: GridRowSelectionModel = externalRowSelection
     ? (rest.rowSelectionModel ?? {
-        // اگر undefined بود، default value استفاده کن
         type: "include",
         ids: new Set<GridRowId>([]),
       })
@@ -120,8 +124,10 @@ export default function GenericDataGrid({
     : handleRowSelectionChangeInternal;
 
   const columnsWithRowNumber = useMemo(() => {
-    return disableRowNumber ? columns : [rowNumberColumn, ...columns];
-  }, [columns, disableRowNumber]);
+    return disableRowNumber
+      ? columns
+      : [rowNumberColumn(rowNumberCell), ...columns];
+  }, [columns, disableRowNumber, rowNumberCell]);
 
   const mergedInitialState = useMemo(() => {
     return {
@@ -130,7 +136,6 @@ export default function GenericDataGrid({
     };
   }, [initialState]);
 
-  // ✅ FIX: Edit فقط برای یک ردیف انتخاب شده
   const handleEdit = useCallback(() => {
     if (rowSelectionModel.ids.size !== 1) return;
 
@@ -139,7 +144,6 @@ export default function GenericDataGrid({
     onEditClick?.(Number(rowId));
   }, [rowSelectionModel, onEditClick]);
 
-  // ✅ FIX: Delete فقط برای یک ردیف انتخاب شده
   const handleDelete = useCallback(() => {
     if (rowSelectionModel.ids.size !== 1) return;
 

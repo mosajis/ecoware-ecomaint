@@ -15,6 +15,7 @@ import { columns, getItemName, getRowId } from "./FunctionColumn";
 import { tblFunction, TypeTblFunction } from "@/core/api/generated/api";
 import { PERMIT_ID } from "./FunctionPermit";
 import { useDialogs } from "@/shared/hooks/useDialogs";
+import CellLink from "@/shared/components/dataGrid/cells/CellLink";
 
 export default function PageFunction() {
   const router = useRouter();
@@ -65,7 +66,7 @@ export default function PageFunction() {
 
       const href = router.buildLocation({
         to: RouteDetail.to,
-        params: { rowId },
+        params: { id: rowId },
         search: {
           breadcrumb: row.funcNo ?? "",
         },
@@ -107,6 +108,14 @@ export default function PageFunction() {
           onAddClick={openCreate}
           onRefreshClick={refetch}
           onDoubleClick={openView}
+          rowNumberCell={(row: TypeTblFunction, index) => (
+            <CellLink
+              breadcrumb={row.funcNo || ""}
+              value={index}
+              to={RouteDetail.to}
+              params={{ id: row.functionId }}
+            />
+          )}
           toolbarChildren={
             <FunctionActions
               selectedRow={selectedRow}

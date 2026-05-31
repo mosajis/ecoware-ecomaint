@@ -12,14 +12,6 @@ export const columns: GridColDef<TypeTblFunction>[] = [
     field: "funcNo",
     headerName: "Function No",
     flex: 1,
-    renderCell: ({ value, row }) => (
-      <CellLink
-        breadcrumb={value}
-        value={value}
-        to={RouteDetail.to}
-        params={{ id: row.functionId }}
-      />
-    ),
   },
   { field: "funcDesc", headerName: "Function Desc", flex: 1 },
   {

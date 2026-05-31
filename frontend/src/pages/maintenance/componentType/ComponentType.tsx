@@ -40,7 +40,7 @@ export default function PageComponentType() {
 
       const href = router.buildLocation({
         to: RouteDetail.to,
-        params: { rowId },
+        params: { id: rowId },
         search: {
           breadcrumb: row.compName ?? "",
         },

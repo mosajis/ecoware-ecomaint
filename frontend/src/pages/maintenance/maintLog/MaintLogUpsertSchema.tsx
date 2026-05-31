@@ -33,7 +33,18 @@ export const schema = z.object({
     message: "Maint Class is required",
   }),
 
-  reportedCount: z.number(),
+  reportedCount: z.number().nullable().optional(),
 });
+
+export const buildSchema = (isCounter: boolean) =>
+  schema.superRefine((data, ctx) => {
+    if (isCounter && (!data.reportedCount || data.reportedCount === 0)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Counter value is required and must be greater than 0",
+        path: ["reportedCount"],
+      });
+    }
+  });
 
 export type TypeValues = z.input<typeof schema>;

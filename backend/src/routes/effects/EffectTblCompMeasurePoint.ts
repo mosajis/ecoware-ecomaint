@@ -17,9 +17,9 @@ export async function effectCompMeasurePoint(
       currentDate: measurePoint.currentDate,
       currentValue: measurePoint.currentValue,
       changedBy: measurePoint.changedBy ?? null,
-      changedDate: new Date(),
       orderNo: measurePoint.orderNo,
       unitId: measurePoint.unitId ?? null,
+      changedDate: new Date(),
       lastUpdate: new Date(),
     },
   });

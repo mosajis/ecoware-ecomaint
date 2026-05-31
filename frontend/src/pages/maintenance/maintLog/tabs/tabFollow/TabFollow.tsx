@@ -1,7 +1,13 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
-import { useCallback } from "react";
+import Splitter from "@/shared/components/Splitter/Splitter";
+import Editor from "@/shared/components/Editor";
+import { useCallback, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { tblMaintLogFollow, TypeTblMaintLog } from "@/core/api/generated/api";
+import {
+  tblMaintLogFollow,
+  TypeTblMaintLog,
+  TypeTblMaintLogFollow,
+} from "@/core/api/generated/api";
 import { columns, getRowId } from "./TabFollowColumns";
 
 type props = {
@@ -11,6 +17,7 @@ type props = {
 
 const TabFollow = (props: props) => {
   const { label, selected } = props;
+  const [selectedDesc, setSelectedDesc] = useState<string | null>(null);
 
   // === DataGrid ===
   const getAll = useCallback(() => {
@@ -25,27 +32,39 @@ const TabFollow = (props: props) => {
     });
   }, [selected?.maintLogId]);
 
-  const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
+  const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
     tblMaintLogFollow.deleteById,
     "followId",
     !!selected?.maintLogId,
   );
 
+  const handleRowClick = useCallback(
+    ({ row }: { row: TypeTblMaintLogFollow }) => {
+      setSelectedDesc(row.followDesc);
+    },
+    [],
+  );
+
   return (
-    <CustomizedDataGrid
-      showToolbar
-      disableRowSelectionOnClick
-      disableAdd
-      disableEdit
-      disableDelete
-      label={label || "Follow"}
-      columns={columns}
-      loading={loading}
-      rows={rows}
-      getRowId={getRowId}
-      onRefreshClick={handleRefresh}
-    />
+    <Splitter initialPrimarySize="60%">
+      <CustomizedDataGrid
+        showToolbar
+        disableRowSelectionOnClick
+        disableAdd
+        disableEdit
+        disableDelete
+        label={label || "Follow"}
+        columns={columns}
+        loading={loading}
+        rows={rows}
+        getRowId={getRowId}
+        onRefreshClick={handleRefresh}
+        onRowClick={handleRowClick}
+      />
+
+      <Editor label="Follow Desc" readOnly disabled initValue={selectedDesc} />
+    </Splitter>
   );
 };
 

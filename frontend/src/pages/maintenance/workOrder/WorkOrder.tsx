@@ -113,12 +113,18 @@ export default function WorkOrderPage() {
   );
 
   const openInNewTab = useCallback(
-    (route: { to: string }, id: number, breadcrumb?: string | null) => {
+    (
+      route: { to: string },
+      id: number,
+      breadcrumb?: string | null,
+      extraSearch?: Record<string, any>,
+    ) => {
       const href = router.buildLocation({
         to: route.to,
         params: { id },
         search: {
           breadcrumb: breadcrumb ?? "",
+          ...extraSearch,
         },
       }).href;
 
@@ -137,7 +143,9 @@ export default function WorkOrderPage() {
     const route = routes[pendingRedirect.type];
 
     if (route?.to) {
-      openInNewTab(route, pendingRedirect.id, pendingRedirect.breadcrumb);
+      openInNewTab(route, pendingRedirect.id, pendingRedirect.breadcrumb, {
+        tab: "Resource Used",
+      });
     }
 
     setPendingRedirect(DEFAULT_PENDING_REDIRECT);

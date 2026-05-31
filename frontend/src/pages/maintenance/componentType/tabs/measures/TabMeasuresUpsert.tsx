@@ -20,10 +20,15 @@ const schema = z.object({
     counterTypeId: z.number(),
     name: z.string().optional(),
   }),
-  unit: z.object({
-    unitId: z.number(),
-    name: z.string().optional(),
-  }),
+  unit: z
+    .object({
+      unitId: z.number(),
+      name: z.string().optional(),
+    })
+    .nullable()
+    .refine(Boolean, {
+      message: "Unit is required",
+    }),
   setValue: z.number().nullable(),
   operationalMinValue: z.number().nullable(),
   operationalMaxValue: z.number().nullable(),

@@ -1,5 +1,6 @@
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import CellLink from "@/shared/components/dataGrid/cells/CellLink";
+import CellUnexpected from "@/shared/components/dataGrid/cells/CellUnexpected";
 import { TypeTblMaintLog } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 import { RouteDetail } from "./MaintLogRoute";
@@ -10,7 +11,7 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
   {
     field: "maintLogId",
     headerName: "No",
-    width: 50,
+    width: 60,
     renderCell: ({ value, row }) => (
       <CellLink
         breadcrumb={row.tblComponentUnit?.compNo!}
@@ -69,8 +70,14 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
     flex: 1,
   },
   {
+    field: "totalTimeSpent",
+    headerName: "totalTimeSpent",
+    width: 160,
+  },
+  {
     field: "unexpected",
-    headerName: "UnPlanned",
+    headerName: "Type",
     flex: 1,
+    renderCell: ({ _, row }: any) => <CellUnexpected value={row.unexpected} />,
   },
 ];

@@ -1,4 +1,6 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 import { useState, useCallback } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { columns, getRowId } from "./TabResourceUsedColumns";
@@ -58,6 +60,12 @@ const TabResourceUsed = ({ selected }: Props) => {
   };
   return (
     <>
+      {rows.length <= 0 && selected?.maintLogId && (
+        <Alert severity="warning" sx={{ mb: 0.5 }}>
+          No resources found for this Maintenance Log. Please add at least one
+          record.
+        </Alert>
+      )}
       <CustomizedDataGrid
         showToolbar
         disableEdit

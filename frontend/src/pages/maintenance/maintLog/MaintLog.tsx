@@ -5,7 +5,6 @@ import MaintLogFollowDialog from "./MaintLogDialogFollow";
 import MaintLogDialogPrint from "./MaintLogDialogPrint";
 import Actions from "./MaintLogActions";
 import MaintLogUpsert from "./MaintLogUpsert";
-import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback, useMemo, useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
@@ -21,21 +20,30 @@ import MaintLogFilterDialog, {
 } from "./MaintLogDialogFilter";
 
 export default function PageMaintLog() {
+  /* ---------------- dialogs ---------------- */
   const { dialogs, openDialog, closeDialog } = useDialogs({
     filter: true,
     follow: false,
     print: false,
+    detail: false,
+    edit: false,
+    create: false,
   });
 
+  /* ---------------- state ---------------- */
   const [selectedRow, setSelectedRow] = useState<TypeTblMaintLog | null>(null);
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+
   const [selectionModel, setSelectionModel] = useState<GridRowSelectionModel>({
     type: "include",
     ids: new Set(),
   });
+
   const [filter, setFilter] = useState<MaintLogFilter | null>(null);
 
   const hasFilter = Array.isArray(filter?.AND) && filter.AND.length > 0;
 
+  /* ---------------- data ---------------- */
   const getAll = useCallback(() => {
     return tblMaintLog.getAll({
       filter: filter ?? undefined,
@@ -46,31 +54,34 @@ export default function PageMaintLog() {
   const { rows, loading, handleRefresh, optimisticUpdate, handleDelete } =
     useDataGrid(getAll, tblMaintLog.deleteById, "maintLogId", !dialogs.filter);
 
-  const { openCreate, openEdit, openView, dialogProps } = useUpsertDialog({
-    onSuccess: handleRefresh,
-  });
-
+  /* ---------------- selection ---------------- */
   const selectedRows = useMemo<TypeTblMaintLog[]>(() => {
     const hasId = (id: number) =>
       selectionModel.ids.has(id) || selectionModel.ids.has(String(id));
 
-    if (selectionModel.type === "include") {
-      return rows.filter((r) => hasId(r.maintLogId));
-    } else {
-      return rows.filter((r) => !hasId(r.maintLogId));
-    }
+    return selectionModel.type === "include"
+      ? rows.filter((r) => hasId(r.maintLogId))
+      : rows.filter((r) => !hasId(r.maintLogId));
   }, [selectionModel, rows]);
 
-  // Row
+  /* ---------------- row events ---------------- */
   const handleRowClick = useCallback((params: any) => {
     setSelectedRow(params.row);
   }, []);
 
+  const handleRowDoubleClick = useCallback(
+    (rowId: number) => {
+      setSelectedRowId(rowId);
+      openDialog("detail");
+    },
+    [openDialog],
+  );
+
   const handleSelectionChange = useCallback((m: GridRowSelectionModel) => {
-    setSelectionModel(m as GridRowSelectionModel);
+    setSelectionModel(m);
   }, []);
 
-  // Filter
+  /* ---------------- filter ---------------- */
   const handleSubmitFilter = useCallback(
     (f: MaintLogFilter | null) => {
       setFilter(f);
@@ -79,20 +90,23 @@ export default function PageMaintLog() {
     [closeDialog],
   );
 
-  // Follow
+  /* ---------------- follow ---------------- */
   const handleFollowSuccess = useCallback(
     (selectedFollowStatus: TypeTblFollowStatus) => {
       if (!selectedRow?.maintLogId) return;
+
       optimisticUpdate(selectedRow.maintLogId, {
         tblFollowStatus: {
           fsName: selectedFollowStatus.fsName,
         },
       });
-      setTimeout(() => handleRefresh(), 1800);
+
+      setTimeout(() => handleRefresh(), 1500);
     },
     [selectedRow?.maintLogId, optimisticUpdate, handleRefresh],
   );
 
+  /* ---------------- render ---------------- */
   return (
     <>
       <Splitter horizontal>
@@ -101,20 +115,27 @@ export default function PageMaintLog() {
           checkboxSelection
           disableRowNumber
           disableRowSelectionOnClick
+          externalRowSelection
           label="Maint Log"
           elementId={1420}
-          externalRowSelection={true}
           rows={rows}
           columns={columns}
           loading={loading}
-          onEditClick={openEdit}
-          onDoubleClick={openView}
-          onDeleteClick={handleDelete}
-          onRowClick={handleRowClick}
-          onRefreshClick={handleRefresh}
           getRowId={getRowId}
           rowSelectionModel={selectionModel}
           onRowSelectionModelChange={handleSelectionChange}
+          onRowClick={handleRowClick}
+          onDoubleClick={handleRowDoubleClick}
+          onDeleteClick={handleDelete}
+          onRefreshClick={handleRefresh}
+          onEditClick={() => {
+            const id = selectionModel.ids.values().next().value;
+            if (id) {
+              setSelectedRowId(Number(id));
+              openDialog("edit");
+            }
+          }}
+          onAddClick={() => openDialog("create")}
           toolbarChildren={
             <Actions
               onFilter={() => openDialog("filter")}
@@ -125,29 +146,63 @@ export default function PageMaintLog() {
             />
           }
         />
+
         <TabsComponent selectedMaintLog={selectedRow} persistInUrl={true} />
       </Splitter>
 
-      {selectedRow && (
+      {/* -------- Edit Dialog -------- */}
+      {dialogs.edit && selectedRowId && (
         <MaintLogUpsert
-          title={selectedRow?.tblComponentUnit?.compNo || "MaintLog View"}
-          {...dialogProps}
+          mode="update"
+          open={dialogs.edit}
+          recordId={selectedRowId}
+          title="Edit MaintLog"
+          onClose={() => closeDialog("edit")}
+          onSuccess={handleRefresh}
         />
       )}
 
+      {/* -------- Detail Dialog -------- */}
+      {dialogs.detail && selectedRowId && (
+        <MaintLogUpsert
+          mode="update"
+          open={dialogs.detail}
+          recordId={selectedRowId}
+          title="Edit MaintLog"
+          onClose={() => closeDialog("detail")}
+          onSuccess={handleRefresh}
+        />
+      )}
+
+      {/* -------- Create Dialog -------- */}
+      {dialogs.create && (
+        <MaintLogUpsert
+          mode="create"
+          open={dialogs.create}
+          title="Create MaintLog"
+          onClose={() => closeDialog("create")}
+          onSuccess={handleRefresh}
+        />
+      )}
+
+      {/* -------- Filter -------- */}
       <MaintLogFilterDialog
         open={dialogs.filter}
         onClose={() => closeDialog("filter")}
         onSubmit={handleSubmitFilter}
       />
 
-      <MaintLogFollowDialog
-        open={dialogs.follow}
-        onClose={() => closeDialog("follow")}
-        maintLogId={selectedRow?.maintLogId! ?? null}
-        onSuccess={handleFollowSuccess}
-      />
+      {/* -------- Follow -------- */}
+      {selectedRow?.maintLogId && (
+        <MaintLogFollowDialog
+          open={dialogs.follow}
+          onClose={() => closeDialog("follow")}
+          maintLogId={selectedRow.maintLogId}
+          onSuccess={handleFollowSuccess}
+        />
+      )}
 
+      {/* -------- Print -------- */}
       <MaintLogDialogPrint
         open={dialogs.print}
         onClose={() => closeDialog("print")}

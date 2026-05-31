@@ -22,16 +22,16 @@ import type {
   TblMaintType,
   TblMaintLog as TypeTblMaintLog,
 } from "orm/generated/prisma/client";
-import { connect } from "node:http2";
-import { TblCompJobCounter } from "orm/generated/prismabox/TblCompJobCounter";
 
 const MaintLogItemSchema = t.Object({
+  totalTimeSpent: t.Nullable(t.Number()),
+  workOrderId: t.Nullable(t.Number()),
   maintLogId: t.Number(),
   dateDone: t.Nullable(t.Date()),
   downTime: t.Nullable(t.Number()),
   totalDuration: t.Nullable(t.Number()),
   history: t.Nullable(t.String()),
-  unexpected: t.Nullable(t.Union([t.Boolean(), t.Number(), t.Null()])),
+  unexpected: t.Nullable(t.Union([t.Number(), t.Null()])),
   tblComponentUnit: t.Optional(
     t.Nullable(
       t.Object({
@@ -122,9 +122,13 @@ const ControllerTblMaintLog = new BaseController({
 
         const parsedFilter = filter ? JSON.parse(filter) : {};
         const sortObj = parseSortString(sort);
+
         const usePagination = false;
 
-        return ServiceTblMaintLog.findAll({
+        // =========================
+        // MAIN DATA
+        // =========================
+        const result = await ServiceTblMaintLog.findAll({
           where: { ...parsedFilter, instId },
           orderBy: sortObj,
           page: usePagination ? Number(page) : undefined,
@@ -137,6 +141,7 @@ const ControllerTblMaintLog = new BaseController({
             unexpected: true,
             history: true,
             totalDuration: true,
+            workOrderId: true,
             tblWorkOrder: {
               select: { description: true },
             },
@@ -166,10 +171,53 @@ const ControllerTblMaintLog = new BaseController({
             },
           },
         });
+
+        // =========================
+        // FETCH TIME SPENT PER maintLog
+        // =========================
+        const timeSpentRows = await prisma.tblLogDiscipline.groupBy({
+          by: ["maintLogId"],
+          where: {
+            instId,
+            maintLogId: { not: null },
+          },
+          _sum: {
+            timeSpent: true,
+          },
+        });
+
+        const timeSpentMap = new Map<number, number>();
+
+        for (const row of timeSpentRows) {
+          if (row.maintLogId != null) {
+            timeSpentMap.set(row.maintLogId, row._sum.timeSpent ?? 0);
+          }
+        }
+
+        // =========================
+        // ENRICH ITEMS
+        // =========================
+        const enrichedItems = result.items.map((item: any) => ({
+          ...item,
+          totalTimeSpent: timeSpentMap.get(item.maintLogId) ?? 0,
+        }));
+
+        // =========================
+        // RESPONSE (NO SUMMARY, NO BREAKING CHANGE)
+        // =========================
+
+        console.log({
+          ...result,
+          items: enrichedItems,
+        });
+        return {
+          ...result,
+          items: enrichedItems,
+        };
       },
       {
         tags: ["tblMaintLog"],
-        detail: { summary: "Get all" },
+        detail: { summary: "Get all with per-maintLog timeSpent" },
         query: querySchema,
         response: MaintLogListResponseSchema,
       },
@@ -763,6 +811,48 @@ const ControllerTblMaintLog = new BaseController({
         }),
         response: buildResponseSchema(TblMaintLogPlain, TblMaintLog),
         detail: { summary: "Create" },
+      },
+    );
+
+    app.use(authPlugin).put(
+      "/:maintLogId",
+      async ({ params, body }) => {
+        const maintLogId = Number(params.maintLogId);
+        const { reportedCount, ...restBody } = body;
+
+        // Update maintLog
+        const updated = await prisma.tblMaintLog.update({
+          where: { maintLogId },
+          data: restBody as any,
+        });
+
+        // فقط اگه reportedCount اومد، logCounter رو آپدیت کن
+        if (reportedCount !== undefined) {
+          const logCounter = await prisma.tblLogCounter.findFirst({
+            where: { maintLogId },
+          });
+
+          if (logCounter) {
+            await prisma.tblLogCounter.update({
+              where: { logCounterId: logCounter.logCounterId },
+              data: { reportedCount },
+            });
+          }
+        }
+
+        return updated;
+      },
+      {
+        tags: ["tblMaintLog"],
+        params: t.Object({
+          maintLogId: t.Numeric(),
+        }),
+        body: t.Object({
+          ...TblMaintLogInputUpdate.properties,
+          reportedCount: t.Optional(t.Number()),
+        }),
+        response: buildResponseSchema(TblMaintLogPlain, TblMaintLog),
+        detail: { summary: "Update with optional counter" },
       },
     );
   },

@@ -79,31 +79,6 @@ function TabMeasurePointUpsert({
           currentValue: values.currentValue,
         });
 
-        // Create log entry
-        await tblCompMeasurePointLog.create({
-          tblEmployee: {
-            connect: {
-              employeeId,
-            },
-          },
-          changedDate: new Date().toISOString(),
-          currentDate: currentDate,
-          currentValue: values.currentValue,
-          lastUpdate: new Date().toISOString(),
-          tblCompMeasurePoint: {
-            connect: {
-              compMeasurePointId: compMeasurePointId,
-            },
-          },
-          ...(unitId && {
-            tblUnit: {
-              connect: {
-                unitId: unitId,
-              },
-            },
-          }),
-        });
-
         // Pass new value and date to parent for optimistic update
         onSuccess(values.currentValue, currentDate);
         onClose();

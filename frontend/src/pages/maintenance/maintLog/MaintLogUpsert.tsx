@@ -1,4 +1,3 @@
-import * as z from "zod";
 import Box from "@mui/material/Box";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import FieldDateTime from "@/shared/components/fields/FieldDateTime";
@@ -10,20 +9,20 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import Editor from "@/shared/components/Editor";
 import { Controller } from "react-hook-form";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { generateNextWorkOrder, getMaintLogContext } from "@/core/api/api";
 import { MaintLogContex } from "@/core/api/api.types";
 import { toast } from "sonner";
+import { buildRelation } from "@/core/helper";
+import { Divider, TextField } from "@mui/material";
 import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
-import { schema, TypeValues } from "./MaintLogUpsertSchema";
+import { buildSchema, TypeValues } from "./MaintLogUpsertSchema";
 import {
   tblMaintCause,
   tblMaintClass,
   tblMaintLog,
   tblMaintType,
 } from "@/core/api/generated/api";
-import { buildRelation } from "@/core/helper";
-import { Divider, TextField } from "@mui/material";
 
 type MaintLogUpsertProps = {
   open: boolean;
@@ -60,6 +59,11 @@ function MaintLogUpsert({
 }: MaintLogUpsertProps) {
   const [context, setContext] = useState<MaintLogContex | null>(null);
 
+  const dynamicSchema = useMemo(
+    () => buildSchema(context?.isCounter ?? false),
+    [context?.isCounter],
+  );
+
   const {
     form,
     loadingInitial,
@@ -72,41 +76,49 @@ function MaintLogUpsert({
     open,
     mode,
     recordId,
-    schema,
+    schema: dynamicSchema,
     defaultValues,
 
     onFetch: async (id) => {
-      // Fetch MaintLog record
-      const maintLog = await tblMaintLog.getById(id, {
-        include: {
-          tblMaintCause: true,
-          tblMaintType: true,
-          tblMaintClass: true,
-        },
-      });
+      const maintLog = await tblMaintLog.getById(id);
 
-      // Get compId from the fetched record
       const fetchedCompId = maintLog?.compId;
 
-      // Load context with compId
       if (fetchedCompId) {
         const contextData = await getMaintLogContext({
           compId: fetchedCompId,
           maintLogId: id,
         });
         setContext(contextData);
+
+        // ✅ Fix 1: از contextData بخون نه context (که هنوز stale هست)
+        return {
+          dateDone: maintLog?.dateDone
+            ? new Date(maintLog.dateDone)
+            : new Date(),
+          totalDuration: maintLog?.totalDuration ?? 0,
+          waitingMin: maintLog?.downTime ?? 0,
+          maintType: contextData?.maintType ?? null,
+          maintCause: contextData?.maintCause ?? null,
+          maintClass: contextData?.maintClass ?? null,
+          history: maintLog?.history ?? "",
+          unexpected: maintLog?.unexpected,
+          reportedCount: contextData?.isCounter
+            ? contextData.reportedCount
+            : undefined,
+        };
       }
 
       return {
         dateDone: maintLog?.dateDone ? new Date(maintLog.dateDone) : new Date(),
         totalDuration: maintLog?.totalDuration ?? 0,
         waitingMin: maintLog?.downTime ?? 0,
-        maintType: context?.maintType ?? null,
-        maintCause: context?.maintCause ?? null,
-        maintClass: context?.maintClass ?? null,
+        maintType: null,
+        maintCause: null,
+        maintClass: null,
         history: maintLog?.history ?? "",
         unexpected: maintLog?.unexpected,
-        reportedCount: context?.isCounter ? context.reportedCount : undefined,
+        reportedCount: undefined,
       };
     },
 
@@ -135,7 +147,7 @@ function MaintLogUpsert({
 
           if (workOrderId) {
             generateNextWorkOrder(res.maintLogId)
-              .then((woRes) => {
+              .then(() => {
                 toast.success("Next Work Order generated successfully");
               })
               .catch(() => {
@@ -178,16 +190,12 @@ function MaintLogUpsert({
     reset,
   } = form;
 
-  // Load context when dialog opens for create mode
   useEffect(() => {
     if (!open || mode !== "create") return;
 
     const loadContext = async () => {
-      // if (!initialCompId && !workOrderId) return;
-
       try {
         const contextData = await getMaintLogContext({
-          maintLogId: recordId!,
           compId: initialCompId,
           workOrderId,
         });
@@ -207,7 +215,7 @@ function MaintLogUpsert({
     };
 
     loadContext();
-  }, [open, mode, initialCompId, workOrderId]);
+  }, [open, mode, initialCompId, workOrderId, reset]);
 
   const disabledCounterFields = !context?.isCounter;
 
@@ -223,12 +231,7 @@ function MaintLogUpsert({
       maxWidth="lg"
     >
       <Box display="grid" gap={1.5} gridTemplateColumns="1fr 1fr">
-        <Box
-          display="grid"
-          gap={1.5}
-          gridTemplateColumns="3fr 
-        2fr"
-        >
+        <Box display="grid" gap={1.5} gridTemplateColumns="3fr 2fr">
           <Box
             gridColumn={"span 2"}
             display={"flex"}
@@ -251,6 +254,7 @@ function MaintLogUpsert({
             />
             <Divider />
           </Box>
+
           {/* Column 1: Date & Duration */}
           <Box display="grid" gap={1.5}>
             <Controller
@@ -356,6 +360,7 @@ function MaintLogUpsert({
               <FieldDateTime
                 type="DATETIME"
                 label="Last Date"
+                disabled={disabledCounterFields}
                 field={{
                   name: "lastDate",
                   value: context?.counterData?.lastDate || null,
@@ -365,6 +370,7 @@ function MaintLogUpsert({
               />
               <NumberField
                 label="Last Value"
+                disabled={disabledCounterFields}
                 field={{
                   name: "lastValue",
                   value: context?.counterData?.lastValue || null,
@@ -380,8 +386,8 @@ function MaintLogUpsert({
               render={({ field, fieldState }) => (
                 <NumberField
                   {...field}
-                  label="Counter"
                   disabled={disabledCounterFields}
+                  label="Counter"
                   error={!!fieldState.error}
                   helperText={fieldState.error?.message}
                 />

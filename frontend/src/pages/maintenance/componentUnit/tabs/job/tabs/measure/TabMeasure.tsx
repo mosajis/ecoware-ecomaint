@@ -1,14 +1,12 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import JobMeasureUpsert from "./TabMeasureUpsert";
 import { useCallback, useState } from "react";
-import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
+import { columns, getRowId } from "./TabMeasureColumns";
 import {
   tblCompJobMeasurePoint,
   TypeTblCompJob,
-  TypeTblCompJobMeasurePoint,
 } from "@/core/api/generated/api";
-import { columns, getRowId } from "./TabMeasureColumns";
 
 type Props = {
   compJob?: TypeTblCompJob;
