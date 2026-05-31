@@ -202,14 +202,6 @@ const ControllerTblMaintLog = new BaseController({
           totalTimeSpent: timeSpentMap.get(item.maintLogId) ?? 0,
         }));
 
-        // =========================
-        // RESPONSE (NO SUMMARY, NO BREAKING CHANGE)
-        // =========================
-
-        console.log({
-          ...result,
-          items: enrichedItems,
-        });
         return {
           ...result,
           items: enrichedItems,

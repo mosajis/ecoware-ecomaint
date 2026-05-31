@@ -1,100 +1,117 @@
 import * as z from "zod";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import Editor from "@/shared/components/Editor";
-import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
-import FieldAsyncSelect from "@/shared/components/fields/FieldAsyncSelect";
+import TextField from "@mui/material/TextField";
+import Divider from "@mui/material/Divider";
+import Box from "@mui/material/Box";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { memo, useCallback, useEffect, useState } from "react";
-import {
-  buildRelation,
-  extractFullName,
-  requiredStringField,
-} from "@/core/helper";
+import { buildRelation, extractFullName } from "@/core/helper";
 import { useAtomValue } from "jotai";
 import { atomUser, atomUserDiscipline } from "@/pages/auth/auth.atom";
 import { toast } from "sonner";
-import { Divider } from "@mui/material";
+
 import {
   tblWorkShop,
-  TypeTblWorkShop,
   tblEmployee,
-  TypeTblEmployee,
   tblComponentUnit,
+  TypeTblWorkShop,
+  TypeTblEmployee,
   TypeTblComponentUnit,
 } from "@/core/api/generated/api";
 
-// ─── Schema ───────────────────────────────────────────────────────────────────
+// ─────────────────────────────
+// Schemas
+// ─────────────────────────────
 
-const schema = z.object({
-  componentUnit: z
-    .object({
-      compId: z.number(),
-      compNo: z.string().nullable(),
-    })
-    .nullable()
-    .refine((val) => val !== null, {
-      message: "Component Unit is required",
-    }),
-  title: requiredStringField(),
-  workShopNo: z.string().nullable(),
-  awardingDate: z.string().nullable(),
-  personInCharge: z.any().nullable(),
-  personInChargeApprove: z.any().nullable(),
-  repairDescription: z.string().nullable(),
-  followDesc: z.string().nullable(),
+const componentUnitSchema = z
+  .object({
+    compId: z.number(),
+    compNo: z.string().nullable(),
+  })
+  .nullable()
+  .refine((v) => v !== null, {
+    message: "Component Unit is required",
+  });
+
+const employeeSchema = z
+  .object({
+    employeeId: z.number(),
+    tblDiscipline: z.any().optional(),
+  })
+  .nullable()
+  .refine((v) => v !== null, {
+    message: "Person in charge is required",
+  });
+
+const employeeApproveSchema = z
+  .object({
+    employeeId: z.number(),
+  })
+  .nullable()
+  .refine((v) => v !== null, {
+    message: "ToolPusher is required",
+  });
+
+// ─────────────────────────────
+// Main Schema
+// ─────────────────────────────
+
+export const schema = z.object({
+  componentUnit: componentUnitSchema,
+
+  title: z.string().min(1, "Title is required"),
+
+  personInCharge: employeeSchema,
+
+  personInChargeApprove: employeeApproveSchema,
+
+  workShopNo: z.string().nullable().optional(),
+  awardingDate: z.string().nullable().optional(),
+  repairDescription: z.string().nullable().optional(),
+  followDesc: z.string().nullable().optional(),
 });
 
-type SchemaValue = z.input<typeof schema>;
+// ─────────────────────────────
+// Types
+// ─────────────────────────────
+
+export type SchemaValue = z.input<typeof schema>;
+
+// ─────────────────────────────
+// Defaults
+// ─────────────────────────────
 
 const DEFAULT_VALUES: SchemaValue = {
-  componentUnit: null,
+  componentUnit: null as any,
   title: "",
   workShopNo: "",
-  awardingDate: new Date().toString(),
-  personInCharge: undefined,
-  personInChargeApprove: undefined,
+  awardingDate: new Date().toISOString(),
+  personInCharge: null as any,
+  personInChargeApprove: null as any,
   repairDescription: "",
   followDesc: "",
 };
 
-// ─── Shared include query ─────────────────────────────────────────────────────
-
-const INCLUDE = {
-  tblDiscipline: true,
-  tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee: true,
-  tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee: true,
-} as const;
-
-// ─── User columns helper ──────────────────────────────────────────────────────
+// ─────────────────────────────
 
 const EMPLOYEE_COLUMNS = [
-  {
-    field: "firstName",
-    headerName: "First Name",
-    flex: 1,
-  },
-  {
-    field: "lastName",
-    headerName: "Last Name",
-    flex: 1,
-  },
+  { field: "firstName", headerName: "First Name", flex: 1 },
+  { field: "lastName", headerName: "Last Name", flex: 1 },
 ];
-
-// ─── Props ────────────────────────────────────────────────────────────────────
 
 type Props = {
   open: boolean;
   workShopId?: number | null;
-  initialCompId?: number | null; // ⭐ compId اختیاری
+  initialCompId?: number | null;
   onClose: () => void;
   onSuccess: (data: TypeTblWorkShop) => void;
 };
 
-// ─── Component ────────────────────────────────────────────────────────────────
+// ─────────────────────────────
 
 function WorkShopUpsert({
   open,
@@ -106,7 +123,7 @@ function WorkShopUpsert({
   const user = useAtomValue(atomUser);
   const userDiscipline = useAtomValue(atomUserDiscipline);
 
-  const [loadingInitial, setLoadingInitial] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
   const mode = workShopId ? "update" : "create";
@@ -124,98 +141,75 @@ function WorkShopUpsert({
   });
 
   const personInCharge = watch("personInCharge");
-  const componentUnit = watch("componentUnit");
-
-  // ─────────────────────────────
-  // Derived state (NO FORM FIELD)
-  // ─────────────────────────────
   const discipline = personInCharge?.tblDiscipline ?? userDiscipline;
 
   // ─────────────────────────────
-  // auto set default user
+  // Auto user
   // ─────────────────────────────
   useEffect(() => {
     if (!open || mode !== "create") return;
-
     if (user?.tblEmployee) {
       setValue("personInCharge", user.tblEmployee);
     }
   }, [open, mode, user, setValue]);
 
   // ─────────────────────────────
-  // auto set initial component
+  // Initial component
   // ─────────────────────────────
   useEffect(() => {
     if (!open || mode !== "create" || !initialCompId) return;
 
-    // 📌 Fetch component data
-    const setComponent = async () => {
-      try {
-        const component = await tblComponentUnit.getById(initialCompId);
-        if (component) {
-          setValue("componentUnit", {
-            compId: component.compId,
-            compNo: component.compNo,
-          });
-        }
-      } catch (error) {
-        console.error("Failed to load component:", error);
-      }
-    };
-
-    setComponent();
+    tblComponentUnit
+      .getById(initialCompId)
+      .then((c) => {
+        if (!c) return;
+        setValue("componentUnit", {
+          compId: c.compId,
+          compNo: c.compNo,
+        } as any);
+      })
+      .catch(console.error);
   }, [open, mode, initialCompId, setValue]);
 
   // ─────────────────────────────
-  // fetch data
+  // Fetch edit data
   // ─────────────────────────────
   const fetchData = useCallback(async () => {
     if (!workShopId) return;
 
-    setLoadingInitial(true);
+    setLoading(true);
 
     try {
       const data: any = await tblWorkShop.getById(workShopId, {
         include: {
-          ...INCLUDE,
-          tblWorkShopComponents: {
-            include: {
-              tblComponentUnit: true,
-            },
-          },
+          tblDiscipline: true,
+          tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee: true,
+          tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee: true,
         },
       });
 
       if (!data) return;
 
-      // 📌 گرفتن اولین component اگر وجود داشت
-      const firstCompId = data.tblWorkShopComponents?.[0]?.compId;
-
-      let componentUnit = null;
-
-      if (firstCompId) {
-        try {
-          const component = await tblComponentUnit.getById(firstCompId);
-
-          if (component) {
-            componentUnit = {
-              compId: component.compId,
-              compNo: component.compNo,
-            };
-          }
-        } catch (e) {
-          console.error("Failed to fetch component unit:", e);
-        }
-      }
       reset({
-        componentUnit,
+        componentUnit: data.tblWorkShopComponents?.[0]?.tblComponentUnit
+          ? {
+              compId: data.tblWorkShopComponents[0].tblComponentUnit.compId,
+              compNo: data.tblWorkShopComponents[0].tblComponentUnit.compNo,
+            }
+          : (null as any),
+
         title: data.title,
         workShopNo: data.workShopNo ?? "",
-        awardingDate: data.awardingDate?.toString(),
+        awardingDate: data.awardingDate
+          ? new Date(data.awardingDate).toISOString()
+          : null,
+
         repairDescription: data.repairDescription ?? "",
         followDesc: data.followDesc ?? "",
+
         personInCharge:
           data.tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee ?? null,
+
         personInChargeApprove:
           data.tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee ??
           null,
@@ -223,7 +217,7 @@ function WorkShopUpsert({
     } catch {
       toast.error("Failed to load WorkShop");
     } finally {
-      setLoadingInitial(false);
+      setLoading(false);
     }
   }, [workShopId, reset]);
 
@@ -232,7 +226,7 @@ function WorkShopUpsert({
   }, [open, fetchData]);
 
   // ─────────────────────────────
-  // submit
+  // Submit
   // ─────────────────────────────
   const onSubmit = useCallback(
     async (values: SchemaValue) => {
@@ -241,51 +235,56 @@ function WorkShopUpsert({
       try {
         const body = {
           title: values.title,
-          // ⭐ workShopNo حذف شد - backend خودش تولید می‌کند
-          awardingDate: values.awardingDate?.toString(),
+          awardingDate: values.awardingDate
+            ? new Date(values.awardingDate).toISOString()
+            : null,
+
           repairDescription: values.repairDescription,
           followDesc: values.followDesc,
 
-          ...buildRelation("tblDiscipline", "discId", discipline),
+          ...(discipline
+            ? buildRelation("tblDiscipline", "discId", discipline)
+            : {}),
 
-          ...buildRelation(
-            "tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee",
-            "employeeId",
-            values.personInCharge,
-          ),
+          ...(values.personInCharge
+            ? buildRelation(
+                "tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee",
+                "employeeId",
+                values.personInCharge,
+              )
+            : {}),
 
-          ...buildRelation(
-            "tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee",
-            "employeeId",
-            values.personInChargeApprove,
-          ),
+          ...(values.personInChargeApprove
+            ? buildRelation(
+                "tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee",
+                "employeeId",
+                values.personInChargeApprove,
+              )
+            : {}),
 
-          // ⭐ اضافه کردن compId برای ایجاد WorkShopComponent
           ...(values.componentUnit && {
             compId: values.componentUnit.compId,
           }),
         };
 
-        let result: TypeTblWorkShop;
+        let result;
 
         if (mode === "create") {
-          // ⭐ backend خودش workShopNo و createdDate رو تولید می‌کند
           const created = await tblWorkShop.create(body);
-
           result = await tblWorkShop.getById(created.workShopId, {
-            include: INCLUDE,
+            include: true,
           });
         } else {
           result = await tblWorkShop.update(workShopId!, body, {
-            include: INCLUDE,
+            include: true,
           });
         }
 
-        toast.success("WorkShop saved");
+        toast.success("Saved successfully");
         onSuccess(result);
         onClose();
       } catch {
-        toast.error("Error saving WorkShop");
+        toast.error("Save failed");
       } finally {
         setSubmitting(false);
       }
@@ -293,7 +292,7 @@ function WorkShopUpsert({
     [mode, workShopId, discipline, onSuccess, onClose],
   );
 
-  const isDisabled = loadingInitial || submitting;
+  const isDisabled = loading || submitting;
 
   // ─────────────────────────────
   // UI
@@ -304,7 +303,7 @@ function WorkShopUpsert({
       onClose={onClose}
       title={mode === "create" ? "Create WorkShop" : "Edit WorkShop"}
       submitting={submitting}
-      loadingInitial={loadingInitial}
+      loadingInitial={loading}
       maxWidth="lg"
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -397,6 +396,8 @@ function WorkShopUpsert({
                 value={field.value}
                 onChange={field.onChange}
                 disabled={isDisabled}
+                error={!!fieldState.error?.message}
+                helperText={fieldState.error?.message}
               />
             )}
           />
@@ -453,4 +454,5 @@ function WorkShopUpsert({
     </FormDialog>
   );
 }
+
 export default memo(WorkShopUpsert);
