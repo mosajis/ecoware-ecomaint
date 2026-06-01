@@ -10,8 +10,9 @@ export type AttachmentMapProps<T = any> = BaseAttachmentGridProps<T> & {
   onAskDelete?: (id: number, deleteFn: () => Promise<void>) => void;
   refreshTrigger?: number;
   elementId?: number;
-};
 
+  extraFilter?: Record<string, any>;
+};
 function AttachmentMap<T = any>({
   elementId,
   disableAdd,
@@ -25,6 +26,7 @@ function AttachmentMap<T = any>({
   onAfterAdd,
   onAskDelete,
   refreshTrigger,
+  extraFilter,
 }: AttachmentMapProps<T>) {
   const [openForm, setOpenForm] = useState(false);
 
@@ -32,6 +34,7 @@ function AttachmentMap<T = any>({
     return mapService.getAll({
       filter: {
         [filterKey]: filterId,
+        ...extraFilter,
       },
       include: {
         tblAttachment: {
@@ -42,7 +45,7 @@ function AttachmentMap<T = any>({
         },
       },
     });
-  }, [filterId, filterKey, mapService]);
+  }, [filterId, filterKey, mapService, extraFilter]);
 
   const { rows, loading, handleRefresh } = useDataGrid(
     getAll,

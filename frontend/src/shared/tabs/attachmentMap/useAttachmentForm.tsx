@@ -60,7 +60,7 @@ export function useAttachmentForm<T>({
     defaultValues: {
       title: "",
       attachmentType: {
-        attachmentTypeId: 0,
+        attachmentTypeId: 1,
         name: "",
       },
       isUserAttachment: true,
@@ -118,7 +118,7 @@ export function useAttachmentForm<T>({
     newForm.reset({
       title: "",
       attachmentType: {
-        attachmentTypeId: 0,
+        attachmentTypeId: 1,
         name: "UserAttachment",
       },
       isUserAttachment: true,

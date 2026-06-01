@@ -87,7 +87,7 @@ function ComponentUnitUpsert({
     },
 
     onCreate: async (values) => {
-      const compStatusId = values.status?.compStatusId ?? 1;
+      const compStatusId = 1;
 
       const body = {
         compNo: values.compNo,
@@ -251,7 +251,7 @@ function ComponentUnitUpsert({
               <FieldAsyncSelectGrid<TypeTblCompStatus>
                 label="Status"
                 value={field.value}
-                disabled={isDisabled}
+                disabled={isDisabled || mode === "create"}
                 selectionMode="single"
                 request={tblCompStatus.getAll}
                 columns={[

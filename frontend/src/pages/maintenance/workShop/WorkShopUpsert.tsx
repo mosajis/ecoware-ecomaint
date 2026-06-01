@@ -21,6 +21,7 @@ import {
   TypeTblWorkShop,
   TypeTblEmployee,
   TypeTblComponentUnit,
+  tblWorkShopComponent,
 } from "@/core/api/generated/api";
 
 // ─────────────────────────────
@@ -182,21 +183,27 @@ function WorkShopUpsert({
     try {
       const data: any = await tblWorkShop.getById(workShopId, {
         include: {
+          tblWorkShopComponents: true,
           tblDiscipline: true,
           tblEmployeeTblWorkShopPersonInChargeIdTotblEmployee: true,
           tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee: true,
         },
       });
 
-      if (!data) return;
+      let componentUnit = null;
+
+      const compId = data?.tblWorkShopComponents[0]?.compId;
+      if (compId) {
+        componentUnit = await tblComponentUnit.getById(compId);
+      }
 
       reset({
-        componentUnit: data.tblWorkShopComponents?.[0]?.tblComponentUnit
+        componentUnit: componentUnit
           ? {
-              compId: data.tblWorkShopComponents[0].tblComponentUnit.compId,
-              compNo: data.tblWorkShopComponents[0].tblComponentUnit.compNo,
+              compId: componentUnit.compId,
+              compNo: componentUnit.compNo,
             }
-          : (null as any),
+          : null,
 
         title: data.title,
         workShopNo: data.workShopNo ?? "",
@@ -214,6 +221,8 @@ function WorkShopUpsert({
           data.tblEmployeeTblWorkShopPersonInChargeApproveIdTotblEmployee ??
           null,
       });
+
+      if (!data) return;
     } catch {
       toast.error("Failed to load WorkShop");
     } finally {

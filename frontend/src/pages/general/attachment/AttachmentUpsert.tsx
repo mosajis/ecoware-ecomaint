@@ -30,7 +30,7 @@ export type AttachmentFormValues = z.input<typeof newAttachmentSchema>;
 const defaultValues: AttachmentFormValues = {
   title: "",
   attachmentType: {
-    attachmentTypeId: 0,
+    attachmentTypeId: 1,
     name: "UserAttachment",
   },
   isUserAttachment: true,

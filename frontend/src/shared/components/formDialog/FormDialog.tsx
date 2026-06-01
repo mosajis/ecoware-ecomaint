@@ -81,7 +81,14 @@ export default function FormDialog({
   return (
     <Dialog
       open={open}
-      onClose={isDisabled && !readonly ? undefined : onClose}
+      onClose={
+        isDisabled && !readonly
+          ? undefined
+          : (_, reason) => {
+              if (reason === "backdropClick") return;
+              onClose();
+            }
+      }
       fullWidth
       maxWidth={maxWidth}
     >

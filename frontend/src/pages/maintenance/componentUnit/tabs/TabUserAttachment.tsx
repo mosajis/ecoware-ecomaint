@@ -13,6 +13,11 @@ interface Props {
 export function TabComponentUnitAttachment({ componentUnit, label }: Props) {
   return (
     <AttachmentMap
+      extraFilter={{
+        tblAttachment: {
+          isUserAttachment: true,
+        },
+      }}
       filterId={componentUnit?.compId}
       filterKey="compId"
       relName="tblComponentUnit"

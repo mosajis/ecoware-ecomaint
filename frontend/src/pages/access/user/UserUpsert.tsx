@@ -21,44 +21,62 @@ import {
   TypeTblEmployee,
 } from "@/core/api/generated/api";
 
-import { extractFullName, requiredStringField } from "@/core/helper";
+import {
+  buildRelation,
+  extractFullName,
+  requiredStringField,
+} from "@/core/helper";
 import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
 
-// === Schema ===
+/* =======================
+   Schema Builder
+======================= */
 
-const schema = z.object({
-  userName: requiredStringField(),
+const createSchema = (mode: "create" | "update" | "view") =>
+  z.object({
+    userName: requiredStringField(),
 
-  password: z.string(),
+    password:
+      mode === "create"
+        ? z.string().min(1, "Password is required")
+        : z.string(),
 
-  accountDisabled: z.boolean(),
+    accountDisabled: z.boolean(),
 
-  forcePasswordChange: z.boolean(),
+    forcePasswordChange: z.boolean(),
 
-  tblEmployee: z
-    .object({
-      employeeId: z.number(),
-    })
-    .nullable()
-    .optional(),
-
-  tblUserGroup: z
-    .object({
-      userGroupId: z.number(),
-    })
-    .nullable()
-    .optional(),
-
-  tblUserInstallations: z
-    .array(
-      z.object({
-        instId: z.number(),
+    tblEmployee: z
+      .object({
+        employeeId: z.number(),
+      })
+      .nullable()
+      .refine((v) => v !== null, {
+        message: "Employee is required",
       }),
-    )
-    .min(1, "Select at least one well"),
-});
 
-type UserFormValues = z.infer<typeof schema>;
+    tblUserGroup: z
+      .object({
+        userGroupId: z.number(),
+      })
+      .nullable()
+      .refine((v) => v !== null, {
+        message: "User Group is required",
+      }),
+
+    tblUserInstallations: z
+      .array(
+        z.object({
+          instId: z.number(),
+        }),
+      )
+      .min(1, "Select at least one well"),
+  });
+
+type UserFormValues = z.input<ReturnType<typeof createSchema>>;
+
+/* =======================
+   Default Values
+======================= */
 
 const defaultValues: UserFormValues = {
   userName: "",
@@ -70,6 +88,10 @@ const defaultValues: UserFormValues = {
   tblUserInstallations: [],
 };
 
+/* =======================
+   Component
+======================= */
+
 function UserUpsert({
   entityName,
   open,
@@ -78,6 +100,8 @@ function UserUpsert({
   onClose,
   onSuccess,
 }: UpsertProps) {
+  const schema = createSchema(mode);
+
   const {
     form,
     loadingInitial,
@@ -118,7 +142,6 @@ function UserUpsert({
         forcePasswordChange: userRes.forcePasswordChange ?? false,
         tblEmployee: userRes.tblEmployee,
         tblUserGroup: userRes.tblUserGroup,
-
         tblUserInstallations:
           userInstallRes.items.map((x) => ({
             instId: x.instId,
@@ -133,23 +156,17 @@ function UserUpsert({
         password: values.password,
         accountDisabled: values.accountDisabled,
         forcePasswordChange: false,
-        employeeId: values.tblEmployee?.employeeId || 0,
-        userGroupId: values.tblUserGroup?.userGroupId || 0,
+        employeeId: values.tblEmployee!.employeeId,
+        userGroupId: values.tblUserGroup!.userGroupId,
       });
 
-      const userId = createdUser.userId;
-
-      for (const installation of values.tblUserInstallations) {
+      for (const inst of values.tblUserInstallations) {
         await tblUserInstallation.create({
           tblInstallation: {
-            connect: {
-              instId: installation.instId,
-            },
+            connect: { instId: inst.instId },
           },
           tblUser: {
-            connect: {
-              userId,
-            },
+            connect: { userId: createdUser.userId },
           },
         });
       }
@@ -162,8 +179,8 @@ function UserUpsert({
         userName: values.userName,
         accountDisabled: values.accountDisabled,
         forcePasswordChange: false,
-        employeeId: values.tblEmployee?.employeeId || null,
-        userGroupId: values.tblUserGroup?.userGroupId || null,
+        ...buildRelation("tblEmployee", "employeeId", values.tblEmployee),
+        ...buildRelation("tblUserGroup", "userGroupId", values.tblUserGroup),
       };
 
       if (values.password) {
@@ -178,42 +195,27 @@ function UserUpsert({
         },
       });
 
-      const currentInstallationIds =
+      const currentIds =
         currentUser.tblUserInstallations?.map((x) => x.instId) ?? [];
+      const desiredIds = values.tblUserInstallations.map((x) => x.instId);
 
-      const desiredInstallationIds = values.tblUserInstallations.map(
-        (x) => x.instId,
-      );
+      const toAdd = desiredIds.filter((x) => !currentIds.includes(x));
+      const toRemove = currentIds.filter((x) => !desiredIds.includes(x));
 
-      const installationsToAdd = desiredInstallationIds.filter(
-        (x) => !currentInstallationIds.includes(x),
-      );
-
-      const installationsToRemove = currentInstallationIds.filter(
-        (x) => !desiredInstallationIds.includes(x),
-      );
-
-      for (const instId of installationsToAdd) {
+      for (const instId of toAdd) {
         await tblUserInstallation.create({
           tblInstallation: {
-            connect: {
-              instId,
-            },
+            connect: { instId },
           },
           tblUser: {
-            connect: {
-              userId: id,
-            },
+            connect: { userId: id },
           },
         });
       }
 
-      for (const instId of installationsToRemove) {
+      for (const instId of toRemove) {
         await tblUserInstallation.deleteAll({
-          filter: {
-            userId: id,
-            instId,
-          },
+          filter: { userId: id, instId },
         });
       }
 
@@ -276,31 +278,15 @@ function UserUpsert({
           control={control}
           render={({ field }) => (
             <FieldAsyncSelectGrid<TypeTblEmployee>
-              label="Employee"
+              label="Employee *"
               columns={[
-                {
-                  field: "firstName",
-                  headerName: "First Name",
-                  flex: 1,
-                },
-                {
-                  field: "lastName",
-                  headerName: "Last Name",
-                  flex: 1,
-                },
+                { field: "firstName", headerName: "First Name", flex: 1 },
+                { field: "lastName", headerName: "Last Name", flex: 1 },
               ]}
               disabled={isDisabled}
               error={!!errors.tblEmployee}
               helperText={errors.tblEmployee?.message}
-              request={() =>
-                tblEmployee.getAll({
-                  filter: {
-                    tblUsers: {
-                      none: {},
-                    },
-                  },
-                })
-              }
+              request={tblEmployee.getAll}
               getOptionLabel={extractFullName}
               getRowId={(row) => row.employeeId}
               value={field.value}
@@ -314,7 +300,7 @@ function UserUpsert({
           control={control}
           render={({ field }) => (
             <FieldAsyncSelect<TypeTblUserGroup>
-              label="User Group"
+              label="User Group *"
               disabled={isDisabled}
               error={!!errors.tblUserGroup}
               helperText={errors.tblUserGroup?.message}
@@ -354,16 +340,8 @@ function UserUpsert({
               <FieldAsyncSelectGrid
                 label="Rig Access *"
                 columns={[
-                  {
-                    field: "name",
-                    headerName: "Name",
-                    flex: 1,
-                  },
-                  {
-                    field: "caption",
-                    headerName: "Caption",
-                    flex: 1,
-                  },
+                  { field: "name", headerName: "Name", flex: 1 },
+                  { field: "caption", headerName: "Caption", flex: 1 },
                 ]}
                 disabled={isDisabled}
                 error={!!errors.tblUserInstallations}
