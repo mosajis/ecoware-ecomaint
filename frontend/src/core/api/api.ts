@@ -7,6 +7,25 @@ import {
   TypeStatistics,
 } from "./api.types";
 
+export type TypeKPIMetric = {
+  value: number;
+  numerator: number;
+  denominator: number;
+  percentage: number;
+};
+
+export type TypeKPI = {
+  pmp: TypeKPIMetric;
+  pmc: TypeKPIMetric;
+  backlogRatio: TypeKPIMetric;
+  backlogRatioWithPend: TypeKPIMetric;
+  timestamp: string;
+  period: {
+    startDate: string;
+    endDate: string;
+  };
+};
+
 export const generateWorkOrder = () => api.post(`/tblWorkOrder/generate`);
 
 export const generateJobTrigger = (jobTriggerId: number) =>
@@ -39,6 +58,9 @@ export const getMaintLogContext = async (
 
 export const getStatistics = (): Promise<TypeStatistics> =>
   api.get(`/statistics/`);
+
+export const getStatisticsKpi = (): Promise<TypeKPI> =>
+  api.get(`/statistics/kpi`);
 
 export const getCountersAlert = () => api.get(`/tblCompJobCounter/alert`);
 

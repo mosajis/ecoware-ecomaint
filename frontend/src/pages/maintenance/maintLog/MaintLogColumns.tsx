@@ -4,6 +4,7 @@ import CellUnexpected from "@/shared/components/dataGrid/cells/CellUnexpected";
 import { TypeTblMaintLog } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 import { RouteDetail } from "./MaintLogRoute";
+import CellOverdueCount from "./customCell/CellOverDueCount";
 
 export const getRowId = (row: TypeTblMaintLog) => row.maintLogId;
 
@@ -21,6 +22,7 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
       />
     ),
   },
+
   {
     field: "component",
     headerName: "Component",
@@ -71,8 +73,16 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
   },
   {
     field: "totalTimeSpent",
-    headerName: "totalTimeSpent",
+    headerName: "Emp / Hrs",
     width: 160,
+  },
+  {
+    field: "overdueCount",
+    headerName: "OverDue",
+    width: 80,
+    renderCell: ({ _, row }: any) => (
+      <CellOverdueCount value={row.overdueCount} />
+    ),
   },
   {
     field: "unexpected",

@@ -7,40 +7,47 @@ import DisciplineCard from "./_components/CardDiscipline";
 import CardSection from "./_components/CardSection";
 import { useEffect, useState } from "react";
 import { PageHeader } from "../../shared/components/PageHeader";
-import { getStatistics } from "@/core/api/api";
+import { getStatistics, getStatisticsKpi, TypeKPI } from "@/core/api/api";
 import { buildWorkOrderCardsData } from "./cards/cardsWorkOrder";
 import { buildFailureCardsData } from "./cards/cardsFailure";
 import { buildUnplannedCardsData } from "./cards/cardsUnplanned";
 import { TypeStatistics } from "@/core/api/api.types";
+import { buildKPICardsData } from "./cards/cardsKpi";
 import { useAtomValue } from "jotai";
 import { atomRig } from "@/shared/atoms/general.atom";
 
 const Dashboard = () => {
   const [counts, setCounts] = useState<TypeStatistics | null>(null);
   const [loading, setLoading] = useState(true);
-  
-  const rig = useAtomValue(atomRig)
-  const rigId = rig?.instId
+  const [kpiData, setKpiData] = useState<TypeKPI | null>(null);
 
-  
+  const inst = useAtomValue(atomRig);
+  const instId = inst?.instId;
+
   useEffect(() => {
     const initFetch = async () => {
       setLoading(true);
-      const counts = await getStatistics();
-      setCounts(counts);
+      const [statistics, kpi] = await Promise.all([
+        getStatistics(),
+        getStatisticsKpi(),
+      ]);
+
+      setCounts(statistics);
+      setKpiData(kpi);
       setLoading(false);
     };
 
     initFetch();
-  }, [rigId]);
+  }, [instId]);
 
-  if (loading || !counts) {
+  if (loading || !counts || !kpiData) {
     return <Spinner />;
   }
 
   const workOrderCardsData = buildWorkOrderCardsData(counts);
   const failureCardsData = buildFailureCardsData(counts);
   const unplannedCardsData = buildUnplannedCardsData(counts);
+  const kpiCardsData = buildKPICardsData(kpiData);
 
   return (
     <Box display={"flex"} flexDirection={"column"} gap={1.5}>
@@ -68,17 +75,27 @@ const Dashboard = () => {
               <WorkOrdersPieChart counts={counts} />
             </Box>
 
+            <Box>
+              <CardSection
+                cols={2}
+                title="Failure Report"
+                subtitle="Breakdown of failure-related maintenance"
+                cards={failureCardsData}
+              />
+              <Divider sx={{ mx: 1.5 }} />
+              <CardSection
+                cols={2}
+                title="Unplanned Jobs"
+                subtitle="Reactive and unscheduled maintenance tasks"
+                cards={unplannedCardsData}
+              />
+            </Box>
+
             <CardSection
               cols={2}
-              title="Failure Report"
-              subtitle="Breakdown of failure-related maintenance"
-              cards={failureCardsData}
-            />
-            <CardSection
-              cols={2}
-              title="Unplanned Jobs"
-              subtitle="Reactive and unscheduled maintenance tasks"
-              cards={unplannedCardsData}
+              title="KPI"
+              subtitle="Maintenance KPI"
+              cards={kpiCardsData}
             />
           </Stack>
         </Box>

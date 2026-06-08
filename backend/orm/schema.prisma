@@ -1526,8 +1526,8 @@ model TblWorkShopComponent {
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model TblDailyReort {
-  dailyReortId      Int      @default(dbgenerated("NEXT VALUE FOR [Seq_DailyReort]"), map: "DF_tblDailyReort_DailyReortId") @map("DailyReortId")
+model TblDailyReport {
+  dailyReportId     Int      @default(dbgenerated("NEXT VALUE FOR [Seq_DailyReort]"), map: "DF_tblDailyReort_DailyReortId") @map("DailyReportID")
   reportTitle       String   @map("ReportTitle") @db.NVarChar(200)
   reportText        String?  @map("ReportText") @db.NVarChar(Max)
   reportDate        DateTime @map("ReportDate") @db.DateTime
@@ -1535,9 +1535,9 @@ model TblDailyReort {
   createdDate       DateTime @map("CreatedDate") @db.DateTime
   userComment       String?  @map("UserComment") @db.NVarChar(Max)
   totalwaiting      Int?     @map("Totalwaiting")
-  lastUpdate        DateTime @map("LastUpdate") @db.DateTime
+  lastUpdate        DateTime @updatedAt
   instId            Int      @map("InstId")
 
-  @@map("tblDailyReort")
+  @@map("tblDailyReport")
   @@ignore
 }

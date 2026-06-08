@@ -39,7 +39,7 @@ const calculateOverdueFromDueDate = (
   if (isNaN(due.getTime())) return 0;
 
   const diffDays = Math.ceil(
-    (due.getTime() - referenceDate.getTime()) / (1000 * 60 * 60 * 24),
+    (referenceDate.getTime() - due.getTime()) / (1000 * 60 * 60 * 24),
   );
   return diffDays;
 };
@@ -65,7 +65,7 @@ export const ControllerKPI = new Elysia().group("/statistics/kpi", (app) =>
     .get(
       "/",
       async ({ headers, query }) => {
-        const instId = 100;
+        const instId = Number(headers["x-inst-id"] || 0);
 
         if (!instId) {
           throw new Error("Instance ID is required");
@@ -92,7 +92,7 @@ export const ControllerKPI = new Elysia().group("/statistics/kpi", (app) =>
               gte: startDate,
               lte: endDate,
             },
-            unexpected: { in: [0, 1] }, // Routine + KPI
+            unexpected: { in: [0, 1] }, // Routine + KPI unplanned
           },
         });
 
@@ -110,7 +110,7 @@ export const ControllerKPI = new Elysia().group("/statistics/kpi", (app) =>
               gte: startDate,
               lte: endDate,
             },
-            unexpected: { in: [0, 1] }, // Routine + KPI
+            unexpected: 0, // Only Routine
           },
           include: {
             tblWorkOrder: true,
@@ -132,14 +132,25 @@ export const ControllerKPI = new Elysia().group("/statistics/kpi", (app) =>
             ? Math.round((pmcNumerator / pmcDenominator) * 100 * 100) / 100
             : 0;
 
-        // ===== 3. Backlog Ratio (overdue < 7) =====
-        const backlogNumerator = await prisma.tblWorkOrder.count({
+        // ===== 3. Backlog Ratio (overdue < -7) =====
+        const NumeratorCount = await prisma.tblWorkOrder.findMany({
           where: {
             instId,
-            dueDate: { lt: endDate },
             workOrderStatusId: { in: [1, 2, 3] },
           },
+          select: {
+            dueDate: true,
+          },
         });
+
+        const backlogNumerator = NumeratorCount.filter((wo) => {
+          if (!wo.dueDate) return false;
+          const overdueCount = calculateOverdueFromDueDate(
+            new Date(),
+            new Date(wo.dueDate),
+          );
+          return overdueCount < -7;
+        }).length;
 
         // محاسبه تعداد workorder های با overdue <= 0
         const allOpenWorkOrders = await prisma.tblWorkOrder.findMany({
@@ -156,6 +167,7 @@ export const ControllerKPI = new Elysia().group("/statistics/kpi", (app) =>
         const backlogDenominator = allOpenWorkOrders.filter((wo) => {
           if (!wo.dueDate) return false;
           const overdueCount = calculateOverdueFromDueDate(
+            new Date(),
             new Date(wo.dueDate),
           );
           return overdueCount <= 0;
@@ -168,13 +180,23 @@ export const ControllerKPI = new Elysia().group("/statistics/kpi", (app) =>
             : 0;
 
         // ===== 4. Backlog Ratio with Pending =====
-        const backlogWithPendNumerator = await prisma.tblWorkOrder.count({
+        const backlogWithPendWorkOrders = await prisma.tblWorkOrder.findMany({
           where: {
             instId,
-            dueDate: { lt: endDate },
             workOrderStatusId: { in: [1, 2, 3, 4] },
           },
         });
+
+        const backlogWithPendNumerator = backlogWithPendWorkOrders.filter(
+          (wo) => {
+            if (!wo.dueDate) return false;
+            const overdueCount = calculateOverdueFromDueDate(
+              new Date(),
+              new Date(wo.dueDate),
+            );
+            return overdueCount < -7;
+          },
+        ).length;
 
         const allOpenWithPendWorkOrders = await prisma.tblWorkOrder.findMany({
           where: {

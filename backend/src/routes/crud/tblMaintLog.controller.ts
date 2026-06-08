@@ -24,6 +24,7 @@ import type {
 } from "orm/generated/prisma/client";
 
 const MaintLogItemSchema = t.Object({
+  overdueCount: t.Nullable(t.Number()),
   totalTimeSpent: t.Nullable(t.Number()),
   workOrderId: t.Nullable(t.Number()),
   maintLogId: t.Number(),
@@ -135,6 +136,7 @@ const ControllerTblMaintLog = new BaseController({
           perPage: usePagination ? Number(perPage) : 250_000,
 
           select: {
+            overdueCount: true,
             maintLogId: true,
             dateDone: true,
             downTime: true,

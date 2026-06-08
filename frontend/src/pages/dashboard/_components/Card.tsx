@@ -1,3 +1,4 @@
+import { Tooltip } from "@mui/material";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -8,6 +9,7 @@ export type DashboardCardProps = {
   value: string | number;
   color?: string;
   percent?: string | number;
+  tooltip?: string;
 };
 
 export function DashboardCard({
@@ -15,6 +17,7 @@ export function DashboardCard({
   value,
   color,
   percent,
+  tooltip,
 }: DashboardCardProps) {
   return (
     <Card
@@ -25,31 +28,37 @@ export function DashboardCard({
         background: `rgba(${color}, 0.065) !important`,
       })}
     >
-      <CardContent>
-        <Typography variant="caption" color="textSecondary" fontWeight={"bold"}>
-          {label}
-        </Typography>
-        <Box
-          mt={"5px"}
-          display={"flex"}
-          alignItems={"baseline"}
-          justifyContent={"space-between"}
-        >
-          <Typography variant="h6" sx={{ color }}>
-            {value}
+      <Tooltip title={tooltip} placement="top">
+        <CardContent>
+          <Typography
+            variant="caption"
+            color="textSecondary"
+            fontWeight={"bold"}
+          >
+            {label}
           </Typography>
-          {percent && (
-            <Typography
-              textAlign={"center"}
-              variant="h6"
-              fontWeight={700}
-              sx={{ color }}
-            >
-              {percent}%
+          <Box
+            mt={"5px"}
+            display={"flex"}
+            alignItems={"baseline"}
+            justifyContent={"space-between"}
+          >
+            <Typography variant="h6" sx={{ color }}>
+              {value}
             </Typography>
-          )}
-        </Box>
-      </CardContent>
+            {percent && (
+              <Typography
+                textAlign={"center"}
+                variant="h6"
+                fontWeight={700}
+                sx={{ color }}
+              >
+                {percent}%
+              </Typography>
+            )}
+          </Box>
+        </CardContent>
+      </Tooltip>
     </Card>
   );
 }
