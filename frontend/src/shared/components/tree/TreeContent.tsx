@@ -8,6 +8,7 @@ interface TreeContentProps<T> {
   getItemId: (item: T) => string | number;
   onItemClick?: (item: T) => void;
   onItemDoubleClick?: (rowId: number) => void;
+  onItemContextMenu?: (event: React.MouseEvent, item: T) => void;
   searchQuery?: string;
 }
 
@@ -95,6 +96,7 @@ interface TreeItemProps<T> {
   isFocused: boolean;
   isExpanded: boolean;
   isFolder: boolean;
+  onItemContextMenu?: (event: React.MouseEvent, item: T) => void;
 }
 
 // Create a wrapper to preserve generics with memo
@@ -107,6 +109,7 @@ function TreeItemComponent<T>({
   searchQuery,
   onItemClick,
   onItemDoubleClick,
+  onItemContextMenu,
   clickTimerRef,
   CLICK_DELAY,
   isSelected,
@@ -115,6 +118,17 @@ function TreeItemComponent<T>({
   isFolder,
 }: TreeItemProps<T>) {
   const itemData = item.getItemData();
+
+  const handleContextMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // ✅ itemId از props موجوده، نیازی به getItemId نیست
+    item.getTree().setSelectedItems([itemId]);
+    onItemClick?.(itemData);
+
+    onItemContextMenu?.(e, itemData);
+  };
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -168,6 +182,7 @@ function TreeItemComponent<T>({
       style={style}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
+      onContextMenu={handleContextMenu}
     >
       <div className={itemClassName}>
         {item.isFolder() && (
@@ -196,6 +211,7 @@ function TreeContent<T>({
   getItemId,
   onItemClick,
   onItemDoubleClick,
+  onItemContextMenu,
 }: TreeContentProps<T>) {
   const clickTimerRef = useRef<number | null>(null);
   const CLICK_DELAY = 200;
@@ -285,6 +301,7 @@ function TreeContent<T>({
               isFocused={isFocused}
               isExpanded={isExpanded}
               isFolder={isFolder}
+              onItemContextMenu={onItemContextMenu}
             />
           );
         },

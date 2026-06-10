@@ -11,6 +11,13 @@ import {
 
 import "./tree.css";
 import { getPermit } from "@/shared/hooks/usePermison";
+import { ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material";
+import { ContentCopy } from "@mui/icons-material";
+
+interface ContextMenuItem<T> {
+  label: string;
+  onClick: (row: T) => void;
+}
 
 interface GenericTreeProps<T> {
   label?: string;
@@ -25,6 +32,7 @@ interface GenericTreeProps<T> {
   onDelete?: (itemId: number) => void;
   loading?: boolean;
   elementId?: number;
+  contextMenuItems?: ContextMenuItem<T>[];
 }
 
 export function GenericTree<T>({
@@ -40,6 +48,7 @@ export function GenericTree<T>({
   onDoubleClick,
   loading = false,
   elementId,
+  contextMenuItems,
 }: GenericTreeProps<T>) {
   // ✅ اصلاح: permission logic درست
   const defaultPermissions = {
@@ -49,6 +58,12 @@ export function GenericTree<T>({
     canView: true,
     canExport: true,
   };
+
+  const [contextMenu, setContextMenu] = useState<{
+    mouseX: number;
+    mouseY: number;
+    row: T;
+  } | null>(null);
 
   const permissions = elementId ? getPermit(elementId) : defaultPermissions;
 
@@ -303,14 +318,28 @@ export function GenericTree<T>({
     [itemsMap, getItemName, getAncestorIds, rootIds],
   );
 
+  const handleContextMenu = (event: React.MouseEvent, row: T) => {
+    event.preventDefault();
+
+    setContextMenu(null);
+
+    setTimeout(() => {
+      setContextMenu({
+        mouseX: event.clientX,
+        mouseY: event.clientY,
+        row,
+      });
+    }, 0);
+  };
+
   return (
-    <div className="tree-container">
+    <div className="tree-container" onContextMenu={(e) => e.preventDefault()}>
       <TreeHeader
         label={label || "Tree View"}
         onSearch={handleSearch}
-        onDelete={canDelete ? handleDelete : undefined}
-        onEdit={canUpdate ? handleEdit : undefined}
-        onAdd={canCreate ? onAdd : undefined}
+        onDelete={canDelete && onDelete ? handleDelete : undefined}
+        onEdit={canUpdate && onEdit ? handleEdit : undefined}
+        onAdd={canCreate && onAdd ? onAdd : undefined}
         onRefresh={onRefresh}
         onExpandAll={handleExpandAll}
         onCollapseAll={handleCollapseAll}
@@ -322,9 +351,40 @@ export function GenericTree<T>({
         searchQuery={searchQuery}
         onItemClick={handleItemClick}
         onItemDoubleClick={handleItemDoubleClick}
+        onItemContextMenu={handleContextMenu}
         getItemName={getItemName}
         getItemId={getItemId}
       />
+      <Menu
+        slotProps={{
+          root: {
+            onContextMenu: (e: any) => {
+              e.preventDefault();
+              setContextMenu(null);
+            },
+          },
+        }}
+        open={!!contextMenu}
+        onClose={() => setContextMenu(null)}
+        anchorReference="anchorPosition"
+        anchorPosition={
+          contextMenu
+            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
+            : undefined
+        }
+      >
+        {contextMenuItems?.map((menuItem, index) => (
+          <MenuItem
+            key={index}
+            onClick={() => {
+              menuItem.onClick(contextMenu!.row);
+              setContextMenu(null);
+            }}
+          >
+            {menuItem.label}
+          </MenuItem>
+        ))}
+      </Menu>
     </div>
   );
 }

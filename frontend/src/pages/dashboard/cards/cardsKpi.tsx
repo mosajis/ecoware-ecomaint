@@ -31,7 +31,7 @@ export const buildKPICardsData = (kpi: TypeKPI) => [
   },
   {
     label: "Backlog Ratio (with Pend)",
-    value: kpi.backlogRatio.percentage + " %",
+    value: kpi.backlogRatioWithPend.percentage + " %",
     color: KPI_COLORS.blue,
   },
 ];

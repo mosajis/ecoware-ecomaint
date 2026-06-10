@@ -1,7 +1,9 @@
 import Splitter from "@/shared/components/Splitter/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import ComponentUnitUpsert from "./ComponentUnitUpsert";
-import ComponentUnitActions from "./ComponentUnitActions";
+import ComponentUnitActions, {
+  getComponentUnitActions,
+} from "./ComponentUnitActions";
 import WorkShopUpsert from "../workShop/WorkShopUpsert";
 import FailureReportUpsert from "@/pages/report/failureReport/FailureReportUpsert";
 import ConfirmDialog from "@/shared/components/ConfirmDialog";
@@ -55,6 +57,8 @@ export default function PageComponentUnit() {
   const [pendingRedirect, setPendingRedirect] = useState<PendingRedirect>(
     DEFAULT_PENDING_REDIRECT,
   );
+
+  const [deleteItemId, setDeleteItemId] = useState<number | null>(null);
 
   const { dialogs, openDialog, closeDialog } = useDialogs({
     reportWork: false,
@@ -210,6 +214,34 @@ export default function PageComponentUnit() {
     }
   };
 
+  const treeActions = useMemo(
+    () => [
+      {
+        label: "Open Detail",
+        onClick: (item: TypeTblComponentUnit) => handleOpenDetail(item.compId),
+      },
+
+      ...getComponentUnitActions({
+        isSelected: true,
+        onRoutine: handleRoutineClick,
+        onNoneRoutine: () => openDialog("dialogComplete"),
+        onFailureReport: () => openDialog("failureReport"),
+        onWorkShop: () => openDialog("workShop"),
+      }),
+
+      {
+        label: "Edit",
+        onClick: (item: TypeTblComponentUnit) => openEdit(item.compId),
+      },
+
+      {
+        label: "Delete",
+        onClick: (item: TypeTblComponentUnit) => setDeleteItemId(item.compId),
+      },
+    ],
+    [handleOpenDetail, handleRoutineClick, openDialog, openEdit],
+  );
+
   return (
     <>
       <Splitter initialPrimarySize="30%">
@@ -219,12 +251,12 @@ export default function PageComponentUnit() {
           loading={loading}
           data={tree}
           onDoubleClick={handleOpenDetail}
-          onEdit={openEdit}
-          onDelete={handleDelete}
           onAdd={openCreate}
           onRefresh={refetch}
           getItemId={getRowId}
           getItemName={getItemName}
+          contextMenuItems={treeActions}
+          onItemSelect={(item) => setSelectedRowId(item.compId)}
         />
 
         <CustomizedDataGrid
@@ -327,6 +359,23 @@ export default function PageComponentUnit() {
         icon={null}
         onCancel={handleRedirectCancel}
         onConfirm={handleRedirectConfirm}
+      />
+
+      <ConfirmDialog
+        open={deleteItemId !== null}
+        title="Delete Item"
+        message="Are you sure you want to delete this item?"
+        confirmText="Delete"
+        cancelText="Cancel"
+        confirmColor="error"
+        onCancel={() => setDeleteItemId(null)}
+        onConfirm={async () => {
+          if (deleteItemId) {
+            await handleDelete(deleteItemId);
+          }
+
+          setDeleteItemId(null);
+        }}
       />
     </>
   );
