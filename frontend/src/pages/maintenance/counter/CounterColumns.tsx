@@ -1,17 +1,18 @@
+import CellFullName from "@/shared/components/dataGrid/cells/CellFullName";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import { TypeTblCompCounter } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
-import CellFullName from "@/shared/components/dataGrid/cells/CellFullName";
 
 export const getRowId = (row: TypeTblCompCounter) => row.compCounterId;
 
-export const buildColumns = (): GridColDef<TypeTblCompCounter>[] => [
+export const columns: GridColDef<TypeTblCompCounter>[] = [
   {
     field: "component",
-    headerName: "Component",
+    headerName: "component",
     flex: 1,
     valueGetter: (_, row) => row.tblComponentUnit?.compNo,
   },
+
   {
     field: "currentDate",
     headerName: "Current Date",
@@ -45,6 +46,7 @@ export const buildColumns = (): GridColDef<TypeTblCompCounter>[] => [
     headerName: "Avg Rate",
     flex: 1,
   },
+
   {
     field: "changedBy",
     headerName: "Changed By",
@@ -53,10 +55,13 @@ export const buildColumns = (): GridColDef<TypeTblCompCounter>[] => [
     renderCell: ({ value }) => <CellFullName value={value} />,
   },
   {
+    field: "mtbf",
+    headerName: "MTBF",
+    flex: 1,
+  },
+  {
     field: "orderNo",
     headerName: "Order No",
     width: 85,
   },
 ];
-
-export const columns = buildColumns();

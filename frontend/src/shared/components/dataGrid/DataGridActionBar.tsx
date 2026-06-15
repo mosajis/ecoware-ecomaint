@@ -58,7 +58,7 @@ const DataGridActionBar = ({
         </Fragment>
       ))}
       {children && (
-        <Box display={"flex"} gap={0.25}>
+        <Box display={"flex"} gap={1.5}>
           <Divider orientation="vertical" variant="middle" flexItem />
           {children}
         </Box>

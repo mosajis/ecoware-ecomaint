@@ -4,14 +4,10 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import CountersUpdate from "./CounterUpdate";
 import Checkbox from "@mui/material/Checkbox";
 import Actions from "./CounterActions";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
-import { GridColDef, GridRowSelectionModel } from "@mui/x-data-grid";
+import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { buildColumns, getRowId } from "./CounterColumns";
-import { TypeTblCompCounter } from "@/core/api/generated/api";
-import { api } from "@/service/axios";
+import { useCallback, useMemo, useState } from "react";
+import { columns, getRowId } from "./CounterColumns";
 import {
   columns as logColumns,
   getRowId as logGetRowId,
@@ -20,18 +16,13 @@ import {
   tblCompCounter,
   tblCompCounterLog,
   tblCounterType,
+  tblEmployee,
 } from "@/core/api/generated/api";
-
-const getMtbf = async (compCounterId: number) => {
-  return api.get("/tblCompCounterLog/mtbf", { params: { compCounterId } });
-};
 
 /* ================= Page ================= */
 export default function PageCounterUpdate() {
   const [showAll, setShowAll] = useState(false);
   const [openForm, setOpenForm] = useState(false);
-  const [mtbfMap, setMtbfMap] = useState<Record<number, number | null>>({});
-  const [mtbfLoading, setMtbfLoading] = useState(false);
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>({
       type: "include",
@@ -53,7 +44,7 @@ export default function PageCounterUpdate() {
             tblComponentUnit: {
               is: {
                 statusId: {
-                  notIn: [5, 6],
+                  notIn: [5, 6], // Scrapped, Transfer
                 },
               },
             },
@@ -65,7 +56,6 @@ export default function PageCounterUpdate() {
       },
     });
   }, [showAll]);
-
   const { rows, loading, handleRefresh } = useDataGrid(
     getAll,
     tblCounterType.deleteById,
@@ -74,28 +64,10 @@ export default function PageCounterUpdate() {
 
   const selectedRow = useMemo(
     () => rows.find((r) => r.compCounterId === selectedRowId),
-    [rows, selectedRowId],
+    [selectedRowId],
   );
 
   const label = selectedRow?.tblCounterType?.name ?? null;
-
-  const mtbfMapRef = useRef(mtbfMap);
-
-  useEffect(() => {
-    mtbfMapRef.current = mtbfMap;
-  }, [mtbfMap]);
-
-  const mtbfColumn = useMemo<GridColDef<TypeTblCompCounter>>(
-    () => ({
-      field: "mtbf",
-      headerName: "MTBF",
-      width: 110,
-      renderCell: ({ row }) => mtbfMap[row.compCounterId] ?? "-",
-    }),
-    [mtbfMap],
-  );
-
-  const columns = useMemo(() => [...buildColumns(), mtbfColumn], [mtbfColumn]);
 
   /* === Logs Grid === */
   const logGetAll = useCallback(() => {
@@ -126,24 +98,6 @@ export default function PageCounterUpdate() {
     "compCounterLogId",
     !!selectedRowId,
   );
-
-  /* === Calc MTBF === */
-  const handleCalcMtbf = useCallback(async () => {
-    if (!selectedRowId) return;
-    setMtbfLoading(true);
-    try {
-      const result = await getMtbf(selectedRowId);
-
-      setMtbfMap((prev) => ({
-        ...prev,
-        [selectedRowId]: result?.mtbf,
-      }));
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setMtbfLoading(false);
-    }
-  }, [selectedRowId]);
 
   /* ================= Render ================= */
   return (
@@ -184,16 +138,6 @@ export default function PageCounterUpdate() {
                 }
                 label="Show All"
               />
-              <Button
-                variant="outlined"
-                disabled={!selectedRowId || mtbfLoading}
-                onClick={handleCalcMtbf}
-                startIcon={
-                  mtbfLoading ? <CircularProgress size={14} /> : undefined
-                }
-              >
-                Calc MTBF
-              </Button>
             </Actions>
           }
         />

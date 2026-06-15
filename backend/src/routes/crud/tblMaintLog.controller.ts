@@ -151,7 +151,7 @@ const ControllerTblMaintLog = new BaseController({
     app.use(authPlugin).get(
       "/",
       async ({ query, headers }) => {
-        const { page = 1, perPage = 20, sort, filter } = query;
+        const { sort, filter } = query;
         const instId = Number(headers["x-inst-id"] || 0);
 
         if (!instId) throw new Error("Instance ID is required");
