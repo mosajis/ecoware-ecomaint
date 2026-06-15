@@ -1,6 +1,7 @@
 import treeGeneral from "@/pages/general/GeneralRoutes";
 import treeAccess from "@/pages/access/AccessRoutes";
 import treeDashboard from "@/pages/dashboard/DashboardRoute";
+import treeDashboardOveral from "@/pages/dashboardOveral/DashboardOveralRoute";
 import treeSpare from "@/pages/spare/SpareRoutes";
 import treeReport from "@/pages/report/ReportRoutes";
 import { createRoute } from "@tanstack/react-router";
@@ -26,6 +27,7 @@ export const routesTree = rootRoute.addChildren([
   AuthLoginRoute,
   protectedRoute.addChildren([
     treeDashboard,
+    treeDashboardOveral,
     treeGeneral,
     treeAccess,
     treeSpare,

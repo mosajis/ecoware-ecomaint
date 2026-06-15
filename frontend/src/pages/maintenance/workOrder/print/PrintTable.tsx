@@ -1,3 +1,5 @@
+import DOMPurify from "dompurify";
+import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import {
   calculateOverdue,
   extractFullName,
@@ -5,7 +7,6 @@ import {
   val,
 } from "@/core/helper";
 import { OutputFormat } from "./PrintTypes";
-import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import { TypeTblWorkOrder } from "@/core/api/generated/api";
 
 const extractData = (wo: TypeTblWorkOrder) => ({
@@ -39,6 +40,9 @@ type Props = {
 
 const PrintTable = ({ workorder, outputFormat }: Props) => {
   const data = extractData(workorder);
+
+  const sanitizedJobDesc = DOMPurify.sanitize(data.jobDesc);
+  const sanitizedPendDesc = DOMPurify.sanitize(data.pendDesc);
 
   return (
     <div className="print">
@@ -134,9 +138,13 @@ const PrintTable = ({ workorder, outputFormat }: Props) => {
                 </td>
               </tr>
               <tr>
-                <td colSpan={6} className="print__cell print__content">
-                  {val(data.jobDesc)}
-                </td>
+                <td
+                  colSpan={6}
+                  className="print__cell print__content"
+                  dangerouslySetInnerHTML={{
+                    __html: sanitizedJobDesc || "-",
+                  }}
+                />
               </tr>
 
               <tr>
@@ -157,9 +165,13 @@ const PrintTable = ({ workorder, outputFormat }: Props) => {
                 </td>
               </tr>
               <tr>
-                <td colSpan={6} className="print__cell print__content">
-                  {val(data.pendDesc)}
-                </td>
+                <td
+                  colSpan={6}
+                  className="print__cell print__content"
+                  dangerouslySetInnerHTML={{
+                    __html: sanitizedPendDesc || "-",
+                  }}
+                />
               </tr>
             </>
           )}

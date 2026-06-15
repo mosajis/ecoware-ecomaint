@@ -10,6 +10,7 @@ import NumberField from "@/shared/components/fields/FieldNumber";
 import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
+import { api } from "@/service/axios";
 
 /* ================= Schema ================= */
 const schema = z.object({

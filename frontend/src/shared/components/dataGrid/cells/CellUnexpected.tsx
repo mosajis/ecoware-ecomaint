@@ -5,14 +5,14 @@ type Props = {
   value?: number | null;
 };
 
-const unexpected = {
+export const unexpectedMap = {
   0: "Routine",
   1: "UnPlanned (KPI)",
   2: "UnPlanned (Ignore)",
 } as any;
 
 const CellUnexpected: FC<Props> = ({ value }) => {
-  return unexpected[value as any] || "-";
+  return unexpectedMap[value as any] || "-";
 };
 
 export default CellUnexpected;

@@ -1,14 +1,16 @@
+import { SxProps } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 type Props = {
   title: string;
   subtitle?: string;
+  sx?: SxProps;
 };
 
-export function PageHeader({ title, subtitle }: Props) {
+export function PageHeader({ title, subtitle, sx }: Props) {
   return (
-    <Box gap={1.5} mb={2}>
+    <Box gap={1.5} mb={2} sx={sx}>
       <Typography variant="h4" fontWeight={700}>
         {title}
       </Typography>

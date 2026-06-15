@@ -87,14 +87,6 @@ export const WorkOrderItemSchema = t.Object({
   ),
 });
 
-export const WorkOrderListResponseSchema = t.Object({
-  items: t.Array(WorkOrderItemSchema),
-  total: t.Number(),
-  page: t.Number(),
-  perPage: t.Number(),
-  totalPages: t.Number(),
-});
-
 export const TblWorkOrderSchema = t.Object({
   workOrderId: t.Number(),
   // compId: t.Nullable(t.Optional(t.Number())),

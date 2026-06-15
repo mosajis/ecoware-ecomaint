@@ -1,3 +1,4 @@
+import { responseSchemaList } from "@/types";
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
 import { t } from "elysia";
@@ -15,82 +16,122 @@ import {
   TblMaintLogInputUpdate,
   TblMaintLogPlain,
 } from "orm/generated/prismabox/TblMaintLog";
+import { TblEmployee } from "orm/generated/prismabox/TblEmployee";
+import { TblComponentUnit } from "orm/generated/prismabox/TblComponentUnit";
+import { TblJobDescription } from "orm/generated/prismabox/TblJobDescription";
+import { TblFollowStatus } from "orm/generated/prismabox/TblFollowStatus";
+import { TblDiscipline } from "orm/generated/prismabox/TblDiscipline";
+import { TblMaintClass } from "orm/generated/prismabox/TblMaintClass";
+import { TblMaintType } from "orm/generated/prismabox/TblMaintType";
+import { TblMaintCause } from "orm/generated/prismabox/TblMaintCause";
+import { TblWorkOrder } from "orm/generated/prismabox/TblWorkOrder";
 import type {
-  TblComponentUnit,
-  TblMaintCause,
-  TblMaintClass,
-  TblMaintType,
-  TblMaintLog as TypeTblMaintLog,
+  Prisma,
+  TblComponentUnit as TblComponentUnitType,
+  TblMaintCause as TblMaintCauseType,
+  TblMaintClass as TblMaintClassType,
+  TblMaintType as TblMaintTypeType,
 } from "orm/generated/prisma/client";
 
-const MaintLogItemSchema = t.Object({
-  overdueCount: t.Nullable(t.Number()),
-  totalTimeSpent: t.Nullable(t.Number()),
-  workOrderId: t.Nullable(t.Number()),
-  maintLogId: t.Number(),
-  dateDone: t.Nullable(t.Date()),
-  downTime: t.Nullable(t.Number()),
-  totalDuration: t.Nullable(t.Number()),
-  history: t.Nullable(t.String()),
-  unexpected: t.Nullable(t.Union([t.Number(), t.Null()])),
-  tblComponentUnit: t.Optional(
-    t.Nullable(
-      t.Object({
-        compNo: t.Nullable(t.String()),
-        compId: t.Nullable(t.Number()),
-      }),
+// =========================
+// SCHEMA
+// =========================
+const MaintLogItemSchema = t.Composite([
+  t.Pick(TblMaintLog, [
+    "maintLogId",
+    "overdueCount",
+    "dateDone",
+    "downTime",
+    "totalDuration",
+    "history",
+    "unexpected",
+    "workOrderId",
+  ]),
+  t.Object({
+    countAttachment: t.Number(),
+    countSpare: t.Number(),
+    totalTimeSpent: t.Nullable(t.Number()),
+    totalTimeSpentEmp: t.Nullable(t.Number()),
+    tblEmployee: t.Optional(
+      t.Nullable(t.Pick(TblEmployee, ["firstName", "lastName"])),
     ),
-  ),
-  tblJobDescription: t.Nullable(
-    t.Object({
-      jobDescCode: t.Nullable(t.String()),
-      jobDescTitle: t.Nullable(t.String()),
-    }),
-  ),
-  tblWorkOrder: t.Optional(
-    t.Nullable(
-      t.Object({
-        description: t.Nullable(t.String()),
-      }),
+    tblComponentUnit: t.Optional(
+      t.Nullable(t.Pick(TblComponentUnit, ["compNo", "compId"])),
     ),
-  ),
-  tblFollowStatus: t.Nullable(
-    t.Object({
-      fsName: t.Nullable(t.String()),
-    }),
-  ),
-  tblMaintClass: t.Nullable(
-    t.Object({
-      descr: t.Nullable(t.String()),
-    }),
-  ),
-  tblMaintType: t.Nullable(
-    t.Object({
-      descr: t.Nullable(t.String()),
-    }),
-  ),
-  tblMaintCause: t.Nullable(
-    t.Object({
-      descr: t.Nullable(t.String()),
-    }),
-  ),
-  tblDiscipline: t.Nullable(
-    t.Object({
-      name: t.Nullable(t.String()),
-    }),
-  ),
-});
+    tblWorkOrder: t.Optional(t.Nullable(t.Pick(TblWorkOrder, ["description"]))),
+    tblJobDescription: t.Nullable(
+      t.Pick(TblJobDescription, ["jobDescCode", "jobDescTitle"]),
+    ),
+    tblFollowStatus: t.Nullable(t.Pick(TblFollowStatus, ["fsName"])),
+    tblDiscipline: t.Nullable(t.Pick(TblDiscipline, ["name"])),
+    tblMaintClass: t.Nullable(t.Pick(TblMaintClass, ["descr"])),
+    tblMaintType: t.Nullable(t.Pick(TblMaintType, ["descr"])),
+    tblMaintCause: t.Nullable(t.Pick(TblMaintCause, ["descr"])),
+  }),
+]);
 
-const MaintLogListResponseSchema = t.Object({
-  items: t.Array(MaintLogItemSchema),
-  total: t.Number(),
-  page: t.Number(),
-  perPage: t.Number(),
-  totalPages: t.Number(),
-});
+// =========================
+// SELECT
+// =========================
+const maintLogListSelect = {
+  tblEmployee: {
+    select: {
+      lastName: true,
+      firstName: true,
+    },
+  },
+  overdueCount: true,
+  maintLogId: true,
+  dateDone: true,
+  downTime: true,
+  unexpected: true,
+  history: true,
+  totalDuration: true,
+  workOrderId: true,
+  tblWorkOrder: {
+    select: { description: true },
+  },
+  tblComponentUnit: {
+    select: { compNo: true, compId: true },
+  },
+  tblJobDescription: {
+    select: {
+      jobDescCode: true,
+      jobDescTitle: true,
+    },
+  },
+  tblDiscipline: {
+    select: { name: true },
+  },
+  tblFollowStatus: {
+    select: { fsName: true },
+  },
+  tblMaintClass: {
+    select: { descr: true },
+  },
+  tblMaintType: {
+    select: { descr: true },
+  },
+  tblMaintCause: {
+    select: { descr: true },
+  },
+} satisfies Prisma.TblMaintLogSelect;
 
+export type MaintLogItem = Prisma.TblMaintLogGetPayload<{
+  select: typeof maintLogListSelect;
+}> & {
+  totalTimeSpent: number;
+  totalTimeSpentEmp: number;
+};
+
+// =========================
+// SERVICE
+// =========================
 const ServiceTblMaintLog = new BaseService(prisma.tblMaintLog);
 
+// =========================
+// CONTROLLER
+// =========================
 const ControllerTblMaintLog = new BaseController({
   prefix: "/tblMaintLog",
   swagger: {
@@ -104,119 +145,97 @@ const ControllerTblMaintLog = new BaseController({
   scope: true,
 
   extend: (app) => {
+    // =========================
+    // GET LIST
+    // =========================
     app.use(authPlugin).get(
       "/",
       async ({ query, headers }) => {
-        const {
-          page = 1,
-          perPage = 20,
-          sort,
-          filter,
-          paginate = false,
-        } = query;
-
+        const { page = 1, perPage = 20, sort, filter } = query;
         const instId = Number(headers["x-inst-id"] || 0);
 
-        if (!instId) {
-          throw new Error("Instance ID is required");
-        }
+        if (!instId) throw new Error("Instance ID is required");
 
-        const parsedFilter = filter ? JSON.parse(filter) : {};
-        const sortObj = parseSortString(sort);
+        const [
+          result,
+          timeSpentRows,
+          allTimeSpentAgg,
+          attachmentRows,
+          spareRows,
+        ] = await Promise.all([
+          ServiceTblMaintLog.findAll({
+            where: { ...(filter ? JSON.parse(filter) : {}), instId },
+            orderBy: parseSortString(sort),
+            perPage: 250_000,
+            select: maintLogListSelect,
+          }),
+          prisma.tblLogDiscipline.groupBy({
+            by: ["maintLogId"],
+            where: { instId, maintLogId: { not: null } },
+            _sum: { timeSpent: true },
+          }),
+          prisma.tblLogDiscipline.aggregate({
+            where: { instId },
+            _sum: { timeSpent: true },
+          }),
 
-        const usePagination = false;
+          // +
+          prisma.tblMaintLogAttachment.groupBy({
+            by: ["maintLogId"],
+            where: { instId },
+            _count: { maintLogAttachmentId: true },
+          }),
 
-        // =========================
-        // MAIN DATA
-        // =========================
-        const result = await ServiceTblMaintLog.findAll({
-          where: { ...parsedFilter, instId },
-          orderBy: sortObj,
-          page: usePagination ? Number(page) : undefined,
-          perPage: usePagination ? Number(perPage) : 250_000,
+          // +
+          prisma.tblMaintLogSpare.groupBy({
+            by: ["maintLogId"],
+            where: { instId },
+            _count: { maintLogSpareId: true },
+          }),
+        ]);
 
-          select: {
-            overdueCount: true,
-            maintLogId: true,
-            dateDone: true,
-            downTime: true,
-            unexpected: true,
-            history: true,
-            totalDuration: true,
-            workOrderId: true,
-            tblWorkOrder: {
-              select: { description: true },
-            },
-            tblComponentUnit: {
-              select: { compNo: true, compId: true },
-            },
-            tblJobDescription: {
-              select: {
-                jobDescCode: true,
-                jobDescTitle: true,
-              },
-            },
-            tblDiscipline: {
-              select: { name: true },
-            },
-            tblFollowStatus: {
-              select: { fsName: true },
-            },
-            tblMaintClass: {
-              select: { descr: true },
-            },
-            tblMaintType: {
-              select: { descr: true },
-            },
-            tblMaintCause: {
-              select: { descr: true },
-            },
-          },
-        });
+        const attachmentCountMap = new Map(
+          attachmentRows.map((r) => [
+            r.maintLogId,
+            r._count.maintLogAttachmentId,
+          ]),
+        );
 
-        // =========================
-        // FETCH TIME SPENT PER maintLog
-        // =========================
-        const timeSpentRows = await prisma.tblLogDiscipline.groupBy({
-          by: ["maintLogId"],
-          where: {
-            instId,
-            maintLogId: { not: null },
-          },
-          _sum: {
-            timeSpent: true,
-          },
-        });
+        const spareCountMap = new Map(
+          spareRows.map((r) => [r.maintLogId, r._count.maintLogSpareId]),
+        );
 
-        const timeSpentMap = new Map<number, number>();
+        const timeSpentMap = new Map(
+          timeSpentRows
+            .filter((r) => r.maintLogId != null)
+            .map((r) => [r.maintLogId!, r._sum.timeSpent ?? 0]),
+        );
 
-        for (const row of timeSpentRows) {
-          if (row.maintLogId != null) {
-            timeSpentMap.set(row.maintLogId, row._sum.timeSpent ?? 0);
-          }
-        }
-
-        // =========================
-        // ENRICH ITEMS
-        // =========================
-        const enrichedItems = result.items.map((item: any) => ({
-          ...item,
-          totalTimeSpent: timeSpentMap.get(item.maintLogId) ?? 0,
-        }));
+        const totalTimeSpent = allTimeSpentAgg._sum.timeSpent ?? 0;
 
         return {
           ...result,
-          items: enrichedItems,
+          items: result.items.map((item: MaintLogItem) => ({
+            ...item,
+            totalTimeSpentEmp: timeSpentMap.get(item.maintLogId) ?? 0,
+            totalTimeSpent,
+
+            countAttachment: attachmentCountMap.get(item.maintLogId) ?? 0, // +
+            countSpare: spareCountMap.get(item.maintLogId) ?? 0,
+          })),
         };
       },
       {
         tags: ["tblMaintLog"],
         detail: { summary: "Get all with per-maintLog timeSpent" },
         query: querySchema,
-        response: MaintLogListResponseSchema,
+        response: responseSchemaList(MaintLogItemSchema),
       },
     );
 
+    // =========================
+    // GET CONTEXT
+    // =========================
     app.use(authPlugin).get(
       "/context",
       async ({ query }) => {
@@ -242,13 +261,12 @@ const ControllerTblMaintLog = new BaseController({
         };
 
         let maintLog: any = null;
-        let componentUnit: TblComponentUnit | null = null;
+        let componentUnit: TblComponentUnitType | null = null;
+        let maintCause: TblMaintCauseType | null = null;
+        let maintClass: TblMaintClassType | null = null;
+        let maintType: TblMaintTypeType | null = null;
 
-        let maintCause: TblMaintCause | null = null;
-        let maintClass: TblMaintClass | null = null;
-        let maintType: TblMaintType | null = null;
-
-        // ── حالت ۱: Edit Mode - گرفتن اطلاعات موجود ──
+        // ── Edit Mode ──
         if (maintLogId) {
           maintLog = await prisma.tblMaintLog.findUnique({
             where: { maintLogId: Number(maintLogId) },
@@ -275,7 +293,6 @@ const ControllerTblMaintLog = new BaseController({
             const compJob = maintLog.tblWorkOrder?.tblCompJob;
             isPlanned = !!compJob;
 
-            // Job Description
             if (compJob?.tblJobDescription) {
               jobDescription = {
                 title: compJob.tblJobDescription.jobDescTitle ?? null,
@@ -284,7 +301,6 @@ const ControllerTblMaintLog = new BaseController({
               };
             }
 
-            // Frequency
             if (compJob) {
               frequency = {
                 value: compJob.frequency ?? null,
@@ -297,7 +313,6 @@ const ControllerTblMaintLog = new BaseController({
               };
             }
 
-            // Counter data
             const logCounter = await prisma.tblLogCounter.findFirst({
               where: { maintLogId: Number(maintLogId) },
             });
@@ -313,7 +328,7 @@ const ControllerTblMaintLog = new BaseController({
           }
         }
 
-        // ── حالت ۲: از روی Work Order (Planned) ──
+        // ── از روی Work Order (Planned) ──
         if (workOrderId && !maintLogId) {
           isPlanned = true;
 
@@ -328,7 +343,6 @@ const ControllerTblMaintLog = new BaseController({
                   tblJobDescription: true,
                   tblPeriod: true,
                   tblComponentUnit: true,
-
                   tblCompJobCounters: {
                     include: {
                       tblCompCounter: true,
@@ -347,14 +361,12 @@ const ControllerTblMaintLog = new BaseController({
           if (workOrder?.tblCompJob) {
             const compJob = workOrder.tblCompJob;
 
-            // Job Description
             jobDescription = {
               title: compJob.tblJobDescription?.jobDescTitle ?? null,
               content: compJob.tblJobDescription?.jobDesc ?? null,
               jobDescId: compJob.tblJobDescription?.jobDescId ?? null,
             };
 
-            // Frequency
             frequency = {
               value: compJob.frequency ?? null,
               period: compJob.tblPeriod
@@ -365,11 +377,9 @@ const ControllerTblMaintLog = new BaseController({
                 : null,
             };
 
-            // Check if this job has counter
             if (compJob.tblCompJobCounters?.length > 0) {
               isCounter = true;
 
-              // Get counter data from tblCompCounter
               const compCounter = await prisma.tblCompCounter.findFirst({
                 where: {
                   compId: workOrder.compId,
@@ -387,7 +397,7 @@ const ControllerTblMaintLog = new BaseController({
           }
         }
 
-        // ── حالت ۳: بدون Work Order → فقط بر اساس compId (Unplanned) ──
+        // ── بدون Work Order (Unplanned) ──
         if (compId && !workOrderId && !maintLogId) {
           const component = await prisma.tblComponentUnit.findUnique({
             where: { compId: Number(compId) },
@@ -411,7 +421,7 @@ const ControllerTblMaintLog = new BaseController({
           }
         }
 
-        // ── در Edit Mode هم counter data را بگیر ──
+        // ── Edit Mode counter data ──
         if (maintLogId && maintLog?.compId) {
           const compCounter = await prisma.tblCompCounter.findFirst({
             where: {
@@ -506,14 +516,15 @@ const ControllerTblMaintLog = new BaseController({
       },
     );
 
+    // =========================
+    // POST
+    // =========================
     app.use(authPlugin).post(
       "/",
       async ({ body, userId, headers }) => {
         const instId = Number(headers["x-inst-id"] || 0);
 
-        if (!instId) {
-          throw new Error("Instance ID is required");
-        }
+        if (!instId) throw new Error("Instance ID is required");
 
         const now = new Date().toISOString();
 
@@ -531,17 +542,12 @@ const ControllerTblMaintLog = new BaseController({
         } = body;
 
         const user = await prisma.tblUser.findFirst({
-          where: {
-            userId,
-          },
-          include: {
-            tblEmployee: true,
-          },
+          where: { userId },
+          include: { tblEmployee: true },
         });
+
         const tblFunction = await prisma.tblFunction.findFirst({
-          where: {
-            compId,
-          },
+          where: { compId },
         });
 
         const functionId = tblFunction?.functionId;
@@ -549,6 +555,7 @@ const ControllerTblMaintLog = new BaseController({
 
         if (body.mode === "unPlanned") {
           const discId = user?.tblEmployee?.discId;
+
           const newLog = await prisma.tblMaintLog.create({
             data: {
               overdueCount: 0,
@@ -560,41 +567,15 @@ const ControllerTblMaintLog = new BaseController({
               downTime: restData.downTime || 0,
               dateDone: dateDone || now,
 
-              ...(functionId && {
-                tblFunction: {
-                  connect: {
-                    functionId,
-                  },
-                },
-              }),
-              ...(discId && {
-                tblDiscipline: {
-                  connect: {
-                    discId: discId,
-                  },
-                },
-              }),
+              ...(functionId && { tblFunction: { connect: { functionId } } }),
+              ...(discId && { tblDiscipline: { connect: { discId } } }),
               ...(employeeId && {
                 updatedEmployeeId: employeeId,
-                tblEmployee: {
-                  connect: {
-                    employeeId,
-                  },
-                },
+                tblEmployee: { connect: { employeeId } },
               }),
-              ...(instId && {
-                tblInstallation: {
-                  connect: {
-                    instId,
-                  },
-                },
-              }),
+              ...(instId && { tblInstallation: { connect: { instId } } }),
               ...(compId && {
-                tblComponentUnit: {
-                  connect: {
-                    compId: Number(compId),
-                  },
-                },
+                tblComponentUnit: { connect: { compId: Number(compId) } },
               }),
               ...(maintClassId && {
                 tblMaintClass: {
@@ -616,9 +597,7 @@ const ControllerTblMaintLog = new BaseController({
         }
 
         const tblWorkOrder = await prisma.tblWorkOrder.findFirst({
-          where: {
-            workOrderId,
-          },
+          where: { workOrderId },
           select: {
             dueDate: true,
             respDiscId: true,
@@ -643,11 +622,8 @@ const ControllerTblMaintLog = new BaseController({
             overdueCount: tblWorkOrder?.dueDate
               ? diffDay(dateDone, tblWorkOrder?.dueDate)
               : null,
-
             workOrderStatusId: 5,
-
             history: restData.history,
-
             reportedDate: now,
             unexpected: restData.unexpected,
             frequency,
@@ -655,48 +631,20 @@ const ControllerTblMaintLog = new BaseController({
             downTime: restData.downTime || 0,
             dateDone: dateDone || now,
 
-            ...(functionId && {
-              tblFunction: {
-                connect: {
-                  functionId,
-                },
-              },
-            }),
+            ...(functionId && { tblFunction: { connect: { functionId } } }),
             ...(respDiscId && {
-              tblDiscipline: {
-                connect: {
-                  discId: respDiscId,
-                },
-              },
+              tblDiscipline: { connect: { discId: respDiscId } },
             }),
             ...(employeeId && {
               updatedEmployeeId: employeeId,
-              tblEmployee: {
-                connect: {
-                  employeeId,
-                },
-              },
+              tblEmployee: { connect: { employeeId } },
             }),
             ...(frequencyPeriod && {
-              tblPeriod: {
-                connect: {
-                  periodId: frequencyPeriod,
-                },
-              },
+              tblPeriod: { connect: { periodId: frequencyPeriod } },
             }),
-            ...(instId && {
-              tblInstallation: {
-                connect: {
-                  instId,
-                },
-              },
-            }),
+            ...(instId && { tblInstallation: { connect: { instId } } }),
             ...(compId && {
-              tblComponentUnit: {
-                connect: {
-                  compId: Number(compId),
-                },
-              },
+              tblComponentUnit: { connect: { compId: Number(compId) } },
             }),
             ...(workOrderId && {
               tblWorkOrder: { connect: { workOrderId: Number(workOrderId) } },
@@ -730,14 +678,10 @@ const ControllerTblMaintLog = new BaseController({
           const compJobCounters = await prisma.tblWorkOrder.findFirst({
             include: {
               tblCompJob: {
-                include: {
-                  tblCompJobCounters: true,
-                },
+                include: { tblCompJobCounters: true },
               },
             },
-            where: {
-              workOrderId,
-            },
+            where: { workOrderId },
           });
 
           const compJobCounter =
@@ -746,22 +690,20 @@ const ControllerTblMaintLog = new BaseController({
           const frequency = compJobCounter?.frequency || 0;
 
           await prisma.tblCompJobCounter.update({
-            where: {
-              compJobCounterId: compJobCounter?.compJobCounterId,
-            },
+            where: { compJobCounterId: compJobCounter?.compJobCounterId },
             data: {
               lastDoneCount: Number(reportedCount),
               nextDueCount: Number(reportedCount) + frequency,
               lastUpdate: now,
             },
           });
+
           await prisma.tblLogCounter.create({
             data: {
               frequency,
               counterTypeId: 10001,
               reportedCount: Number(reportedCount),
               overdueCount: reportedCount - dueCount,
-
               maintLogId: newLog.maintLogId,
               createdEmployeeId: employeeId,
               instId,
@@ -772,9 +714,7 @@ const ControllerTblMaintLog = new BaseController({
         if (workOrderId) {
           await prisma.tblWorkOrder.update({
             where: { workOrderId },
-            include: {
-              tblWorkOrderStatus: true,
-            },
+            include: { tblWorkOrderStatus: true },
             data: {
               workOrderStatusId: 5,
               completed: now,
@@ -782,6 +722,7 @@ const ControllerTblMaintLog = new BaseController({
             },
           });
         }
+
         return newLog;
       },
       {
@@ -808,19 +749,20 @@ const ControllerTblMaintLog = new BaseController({
       },
     );
 
+    // =========================
+    // PUT
+    // =========================
     app.use(authPlugin).put(
       "/:maintLogId",
       async ({ params, body }) => {
         const maintLogId = Number(params.maintLogId);
         const { reportedCount, ...restBody } = body;
 
-        // Update maintLog
         const updated = await prisma.tblMaintLog.update({
           where: { maintLogId },
           data: restBody as any,
         });
 
-        // فقط اگه reportedCount اومد، logCounter رو آپدیت کن
         if (reportedCount !== undefined) {
           const logCounter = await prisma.tblLogCounter.findFirst({
             where: { maintLogId },

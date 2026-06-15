@@ -9,6 +9,7 @@
     "preview": "bunx vite preview"
   },
   "dependencies": {
+    "@elysia/eden": "^1.4.10",
     "@emotion/styled": "^11.14.1",
     "@geoffcox/react-splitter": "^2.1.2",
     "@headless-tree/core": "^1.6.3",

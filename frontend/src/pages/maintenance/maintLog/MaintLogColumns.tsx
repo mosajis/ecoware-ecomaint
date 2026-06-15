@@ -1,10 +1,14 @@
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import CellLink from "@/shared/components/dataGrid/cells/CellLink";
-import CellUnexpected from "@/shared/components/dataGrid/cells/CellUnexpected";
+import CellUnexpected, {
+  unexpectedMap,
+} from "@/shared/components/dataGrid/cells/CellUnexpected";
+import CellOverdueCount from "./customCell/CellOverDueCount";
+import CellFullName from "@/shared/components/dataGrid/cells/CellFullName";
 import { TypeTblMaintLog } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 import { RouteDetail } from "./MaintLogRoute";
-import CellOverdueCount from "./customCell/CellOverDueCount";
+import { Tooltip } from "@mui/material";
 
 export const getRowId = (row: TypeTblMaintLog) => row.maintLogId;
 
@@ -67,6 +71,18 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
     flex: 1,
   },
   {
+    field: "maintType",
+    headerName: "Maint Type",
+    valueGetter: (_, row) => row?.tblMaintType?.descr ?? "",
+    flex: 1,
+  },
+  {
+    field: "maintCase",
+    headerName: "Maint Case",
+    valueGetter: (_, row) => row?.tblMaintCause?.descr ?? "",
+    flex: 1,
+  },
+  {
     field: "downTime",
     headerName: "DownTime",
     flex: 1,
@@ -74,7 +90,24 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
   {
     field: "totalTimeSpent",
     headerName: "Emp / Hrs",
-    width: 160,
+    width: 80,
+    renderCell: ({ _, row }: any) => (
+      <Tooltip title={` Total Time Spent: ${row.totalTimeSpent}`}>
+        <div style={{ width: "100%", height: "100%" }}>
+          {row.totalTimeSpentEmp}
+        </div>
+      </Tooltip>
+    ),
+  },
+  {
+    field: "countSpare",
+    headerName: "Spare Count",
+    width: 80,
+  },
+  {
+    field: "countAttachment",
+    headerName: "Attachment Count",
+    width: 80,
   },
   {
     field: "overdueCount",
@@ -85,9 +118,18 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
     ),
   },
   {
+    field: "tblEmployee",
+    headerName: "ReportedBy",
+    width: 80,
+    renderCell: ({ _, row }: any) => <CellFullName value={row.tblEmployee} />,
+  },
+  {
     field: "unexpected",
     headerName: "Type",
     flex: 1,
+    valueGetter: (_, row) =>
+      unexpectedMap[row.unexpected as keyof typeof unexpectedMap] ?? "-",
+
     renderCell: ({ _, row }: any) => <CellUnexpected value={row.unexpected} />,
   },
 ];

@@ -41,14 +41,6 @@ const TypeUser = t.Object({
   ),
 });
 
-const ResponseSchema = t.Object({
-  items: t.Array(TypeUser),
-  total: t.Number(),
-  page: t.Number(),
-  perPage: t.Number(),
-  totalPages: t.Number(),
-});
-
 const ControllerTblUser = new BaseController({
   prefix: "/tblUser",
   swagger: {
