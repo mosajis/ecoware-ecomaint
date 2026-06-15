@@ -20,6 +20,7 @@ export const ServiceTblCompCounter = new BaseService(prisma.tblCompCounter);
 const TblCompCounterWithMtbf = t.Object({
   ...buildResponseSchema(TblCompCounterPlain, TblCompCounterSchema).properties,
   mtbf: t.Number(),
+  mttr: t.Number(),
 });
 
 const ControllerTblCompCounter = new BaseController({
@@ -111,9 +112,13 @@ const ControllerTblCompCounter = new BaseController({
               select: {
                 compId: true,
                 dateDone: true,
+                downTime: true,
               },
             }),
           ]);
+
+          type CounterLog = (typeof counterLogs)[number];
+          type MaintLog = (typeof maintLogs)[number];
 
           const logsByCounter = counterLogs.reduce(
             (acc, log) => {
@@ -129,7 +134,7 @@ const ControllerTblCompCounter = new BaseController({
 
               return acc;
             },
-            {} as Record<number, typeof counterLogs>,
+            {} as Record<number, CounterLog[]>,
           );
 
           const maintLogsByComp = maintLogs.reduce(
@@ -146,29 +151,24 @@ const ControllerTblCompCounter = new BaseController({
 
               return acc;
             },
-            {} as Record<number, typeof maintLogs>,
+            {} as Record<number, MaintLog[]>,
           );
 
           return {
             ...result,
             items: result.items.map((counter: TblCompCounter) => {
               let mtbf = -1;
+              let mttr = -1;
 
               try {
                 if (!counter.compId) {
-                  return {
-                    ...counter,
-                    mtbf,
-                  };
+                  return { ...counter, mtbf, mttr };
                 }
 
                 const logs = logsByCounter[counter.compCounterId] ?? [];
 
                 if (logs.length < 2) {
-                  return {
-                    ...counter,
-                    mtbf,
-                  };
+                  return { ...counter, mtbf, mttr };
                 }
 
                 const minLog = logs[0];
@@ -180,50 +180,62 @@ const ControllerTblCompCounter = new BaseController({
                   minLog?.currentDate == null ||
                   maxLog?.currentDate == null
                 ) {
-                  return {
-                    ...counter,
-                    mtbf,
-                  };
+                  return { ...counter, mtbf, mttr };
                 }
+
+                const minDate: Date = minLog.currentDate;
+                const maxDate: Date = maxLog.currentDate;
 
                 const usage = maxLog.currentValue - minLog.currentValue;
 
                 if (usage <= 0) {
-                  return {
-                    ...counter,
-                    mtbf,
-                  };
+                  return { ...counter, mtbf, mttr };
                 }
+
+                const durationMs = maxDate.getTime() - minDate.getTime();
+
+                if (durationMs <= 0) {
+                  return { ...counter, mtbf, mttr };
+                }
+
+                // نرخ مصرف counter به ازای هر میلی‌ثانیه
+                const usageRate = usage / durationMs;
 
                 const failures = (maintLogsByComp[counter.compId] ?? []).filter(
                   (m) =>
-                    m.dateDone &&
-                    m.dateDone >= minLog.currentDate! &&
-                    m.dateDone <= maxLog.currentDate!,
-                ).length;
+                    m.dateDone != null &&
+                    m.dateDone >= minDate &&
+                    m.dateDone <= maxDate,
+                );
 
-                if (failures <= 0) {
-                  return {
-                    ...counter,
-                    mtbf,
-                  };
+                const failureCount = failures.length;
+
+                if (failureCount <= 0) {
+                  return { ...counter, mtbf, mttr };
                 }
 
-                mtbf = usage / failures;
+                // MTBF: مقدار counter تقسیم بر تعداد خرابی‌ها
+                mtbf = usage / failureCount;
+                if (!Number.isFinite(mtbf)) mtbf = -1;
 
-                if (!Number.isFinite(mtbf)) {
-                  mtbf = -1;
+                // MTTR: میانگین مدت تعمیر به واحد counter
+                const totalRepairUsage = failures.reduce((sum, m) => {
+                  if (!m.downTime || m.downTime <= 0) return sum;
+
+                  // downTime به دقیقه → تبدیل به میلی‌ثانیه → ضرب در نرخ مصرف counter
+                  const downTimeMs = m.downTime * 60 * 1000;
+
+                  return sum + downTimeMs * usageRate;
+                }, 0);
+
+                if (totalRepairUsage > 0) {
+                  mttr = totalRepairUsage / failureCount;
+                  if (!Number.isFinite(mttr)) mttr = -1;
                 }
 
-                return {
-                  ...counter,
-                  mtbf,
-                };
+                return { ...counter, mtbf, mttr };
               } catch {
-                return {
-                  ...counter,
-                  mtbf: -1,
-                };
+                return { ...counter, mtbf: -1, mttr: -1 };
               }
             }),
           };

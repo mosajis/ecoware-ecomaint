@@ -60,6 +60,11 @@ export const columns: GridColDef<TypeTblCompCounter>[] = [
     flex: 1,
   },
   {
+    field: "mttr",
+    headerName: "MTTR",
+    flex: 1,
+  },
+  {
     field: "orderNo",
     headerName: "Order No",
     width: 85,
