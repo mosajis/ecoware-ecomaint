@@ -20,3 +20,8 @@ export const logout = () =>
 
 export const authorization = () =>
   api.get<DynamicResponse<"getAuthAuthorization">>("/auth/authorization");
+
+export const changePassword = async (data: {
+  oldPassword: string;
+  newPassword: string;
+}) => api.post("/auth/change-password", { data });

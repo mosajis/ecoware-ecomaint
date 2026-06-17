@@ -1412,21 +1412,3 @@ export const tblWorkShopComponent = {
     api.delete<DynamicResponse<'deleteTblWorkShopComponent'>>('/tblWorkShopComponent', { params: stringifyQuery(query) }),
 };
 
-export type TypeStatisticsKpi = DynamicResponse<'getStatisticsKpi'>['items'][0];
-export const statisticsKpi = {
-  getAll: (query?: DynamicQuery<'getStatisticsKpi'>) =>
-    api.get<DynamicResponse<'getStatisticsKpi'>>('/statisticsKpi', { params: stringifyQuery(query) }),
-};
-
-export type TypeStatisticsKpiPmp = DynamicResponse<'getStatisticsKpiPmp'>['items'][0];
-export const statisticsKpiPmp = {
-  getAll: (query?: DynamicQuery<'getStatisticsKpiPmp'>) =>
-    api.get<DynamicResponse<'getStatisticsKpiPmp'>>('/statisticsKpiPmp', { params: stringifyQuery(query) }),
-};
-
-export type TypeStatisticsKpiPmc = DynamicResponse<'getStatisticsKpiPmc'>['items'][0];
-export const statisticsKpiPmc = {
-  getAll: (query?: DynamicQuery<'getStatisticsKpiPmc'>) =>
-    api.get<DynamicResponse<'getStatisticsKpiPmc'>>('/statisticsKpiPmc', { params: stringifyQuery(query) }),
-};
-

@@ -258,5 +258,71 @@ export const ControllerAuth = new Elysia().group("/auth", (app) =>
           summary: "Get authorized user from token",
         },
       },
+    )
+
+    .post(
+      "/change-password",
+      async ({ jwt, headers, body, set }) => {
+        const authHeader = headers["authorization"];
+        const token = authHeader?.split(" ")[1];
+
+        if (!token) {
+          set.status = 401;
+          return { status: "error", message: "Authorization token missing" };
+        }
+
+        const payload = await jwt.verify(token);
+        if (!payload || !payload.username) {
+          set.status = 401;
+          return { status: "error", message: "Invalid or expired token" };
+        }
+
+        const user = await prisma.tblUser.findFirst({
+          where: { userName: String(payload.username) },
+        });
+
+        if (!user) {
+          set.status = 404;
+          return { status: "error", message: "User not found" };
+        }
+
+        const isOldPasswordValid = await authService.comparePassword(
+          body.oldPassword,
+          user.password,
+        );
+
+        if (!isOldPasswordValid) {
+          set.status = 400;
+          return { status: "error", message: "Old password is incorrect" };
+        }
+
+        const hashedNewPassword = await authService.hashPassword(
+          body.newPassword,
+        );
+
+        await prisma.tblUser.update({
+          where: { userId: user.userId },
+          data: {
+            password: hashedNewPassword,
+            forcePasswordChange: false,
+          },
+        });
+
+        return { status: "success", message: "Password changed successfully" };
+      },
+      {
+        body: t.Object({
+          oldPassword: t.String(),
+          newPassword: t.String(),
+        }),
+        response: t.Object({
+          status: t.String(),
+          message: t.String(),
+        }),
+        detail: {
+          tags: ["auth"],
+          summary: "Change Password",
+        },
+      },
     ),
 );

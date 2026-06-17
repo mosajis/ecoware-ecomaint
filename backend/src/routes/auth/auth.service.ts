@@ -47,6 +47,14 @@ export class AuthService {
     return { accessToken };
   }
 
+  async comparePassword(plain: string, hashed: string): Promise<boolean> {
+    return bcrypt.compare(plain, hashed);
+  }
+
+  async hashPassword(password: string): Promise<string> {
+    return bcrypt.hash(password, 10);
+  }
+
   async register(registerDto: any) {
     const {
       userName,

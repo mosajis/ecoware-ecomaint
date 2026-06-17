@@ -287,6 +287,18 @@ export default function MaintLogFilterDialog({
       onCancelClick={handleClearFilter}
     >
       <Box display="flex" flexDirection="column" gap={1.5}>
+        <Box display={"flex"} flexDirection={"column"} gap={1.5}>
+          <FieldAsyncSelectGrid<TypeTblComponentUnit>
+            columns={[{ field: "compNo", headerName: "Component", flex: 1 }]}
+            label="Component"
+            value={filters.component}
+            selectionMode="single"
+            getOptionLabel={(row) => row.compNo}
+            request={tblComponentUnit.getAll}
+            getRowId={(r) => r.compId}
+            onChange={(v) => setFilters((p) => ({ ...p, component: v as any }))}
+          />
+        </Box>
         {/* ===== Async Selects ===== */}
         <Box display="grid" gridTemplateColumns="1fr 1fr" gap={1.5}>
           <Box display={"flex"} flexDirection={"column"} gap={1.5}>
@@ -377,39 +389,7 @@ export default function MaintLogFilterDialog({
             /> */}
           </Box>
         </Box>
-        <Box display={"flex"} flexDirection={"column"} gap={1.5}>
-          {/* <FieldAsyncSelectGrid
-            columns={[
-              {
-                field: "title",
-                headerName: "Title",
-                flex: 1,
-              },
-            ]}
-            label="Work Order"
-            getOptionLabel={(row) => row.title}
-            value={filters.workOrder}
-            selectionMode="single"
-            request={() =>
-              tblWorkOrder.getAll({
-                
-                select: { workOrderId: true, title: true },
-              })
-            }
-            getRowId={(r) => r.workOrderId}
-            onChange={(v) => setFilters((p) => ({ ...p, workOrder: v as any }))}
-          /> */}
-          <FieldAsyncSelectGrid<TypeTblComponentUnit>
-            columns={[{ field: "compNo", headerName: "Component", flex: 1 }]}
-            label="Component"
-            value={filters.component}
-            selectionMode="single"
-            getOptionLabel={(row) => row.compNo}
-            request={tblComponentUnit.getAll}
-            getRowId={(r) => r.compId}
-            onChange={(v) => setFilters((p) => ({ ...p, component: v as any }))}
-          />
-        </Box>
+
         <Divider />
 
         {/* ===== Job Code ===== */}

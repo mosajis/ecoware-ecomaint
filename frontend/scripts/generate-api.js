@@ -27,6 +27,7 @@ const ignoreResources = [
   "tblAttachmentByAttachmentIdDownload",
   "tblMaintLogSpareUniqueSpareUnit",
   "tblMaintLogContext",
+  "statisticsKpi",
 ];
 
 // helper camelCase
