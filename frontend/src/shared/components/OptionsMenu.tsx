@@ -65,8 +65,8 @@ export default function OptionsMenu() {
       setError("New password and confirmation do not match.");
       return;
     }
-    if (newPassword.length < 6) {
-      setError("New password must be at least 6 characters.");
+    if (newPassword.length < 3) {
+      setError("New password must be at least 3 characters.");
       return;
     }
 
