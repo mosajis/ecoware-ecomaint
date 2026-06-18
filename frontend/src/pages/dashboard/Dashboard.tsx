@@ -28,8 +28,8 @@ const Dashboard = () => {
     const initFetch = async () => {
       setLoading(true);
       const [statistics, kpi] = await Promise.all([
-        getStatistics(),
-        getStatisticsKpi(),
+        getStatistics(instId),
+        getStatisticsKpi(instId),
       ]);
 
       setCounts(statistics);

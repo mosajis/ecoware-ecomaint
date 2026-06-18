@@ -3,6 +3,7 @@ import Divider from "@mui/material/Divider";
 import Spinner from "@/shared/components/Spinner";
 import CardSection from "../dashboard/_components/CardSection";
 import WorkOrdersPieChart from "../dashboard/_components/charts/ChartPie";
+import { columns, getRowId } from "./DashboardOverallColumns";
 import { useEffect, useState } from "react";
 import { PageHeader } from "../../shared/components/PageHeader";
 import { TypeStatistics } from "@/core/api/api.types";
@@ -15,6 +16,9 @@ import {
 } from "@/core/api/generated/api";
 import { useAtomValue } from "jotai";
 import { atomUser } from "../auth/auth.atom";
+import GenericDataGrid from "@/shared/components/dataGrid/DataGrid";
+import { BarChart } from "@mui/x-charts";
+import { KPI_COLORS } from "./_consts/colors";
 
 type DashboardItem = {
   installation: TypeTblInstallation;
@@ -45,8 +49,8 @@ const Dashboard = () => {
             const instId = installation.instId;
 
             const [statistics, kpi] = await Promise.all([
-              getStatistics(),
-              getStatisticsKpi(),
+              getStatistics(instId),
+              getStatisticsKpi(instId),
             ]);
 
             return {
@@ -72,8 +76,85 @@ const Dashboard = () => {
     return <Spinner />;
   }
 
+  const comparisonRows = dashboardData.map((item) => ({
+    id: item.installation.instId,
+    installation: item.installation.name,
+
+    // Work Order
+    total: item.statistics.workOrder.total,
+    open: item.statistics.workOrder.open,
+    overdue: item.statistics.workOrder.overdue,
+    completed: item.statistics.workOrder.completed,
+    failureOpen: item.statistics.failure.open,
+
+    plan: item.statistics.workOrder.plan,
+    issue: item.statistics.workOrder.issue,
+    pending: item.statistics.workOrder.pending,
+
+    // KPI
+    pmp: item.kpi.pmp.percentage,
+    pmc: item.kpi.pmc.percentage,
+  }));
+
   return (
     <Box display="flex" flexDirection="column" gap={1.5}>
+      <Box
+        display={"grid"}
+        gridTemplateColumns={"2fr auto 1fr"}
+        gap={1.5}
+        margin={1.5}
+      >
+        <Box>
+          <PageHeader title="Comparison" subtitle="Compare all installations" />
+          <GenericDataGrid
+            rows={comparisonRows}
+            columns={columns}
+            getRowId={getRowId}
+            style={{ height: 350 }}
+          />
+        </Box>
+
+        <Divider flexItem orientation="vertical" />
+        <Box>
+          <PageHeader title="Comparison" subtitle="Compare all Work Orders" />
+          <BarChart
+            height={350}
+            xAxis={[
+              {
+                scaleType: "band",
+                data: comparisonRows.map((x) => x.installation),
+              },
+            ]}
+            series={[
+              {
+                label: "Plan",
+                data: comparisonRows.map((x) => x.plan),
+                stack: "current",
+                color: `rgba(${KPI_COLORS.blue}, 0.7)`,
+              },
+              {
+                label: "Pend",
+                data: comparisonRows.map((x) => x.pending),
+                stack: "current",
+                color: `rgba(${KPI_COLORS.yellow}, 0.6)`,
+              },
+              {
+                label: "Issue",
+                data: comparisonRows.map((x) => x.issue),
+                stack: "current",
+                color: `rgba(${KPI_COLORS.red}, 0.6)`,
+              },
+              {
+                label: "Overdue",
+                data: comparisonRows.map((x) => x.overdue),
+                color: `rgba(${KPI_COLORS.red})`,
+              },
+            ]}
+          />
+        </Box>
+      </Box>
+
+      <Divider sx={{ m: 1.5 }} />
       {dashboardData.map((item) => {
         const statisticsCards = buildWorkOrderCardsData(item.statistics);
         const kpiCards = buildKPICardsData(item.kpi);
@@ -107,7 +188,7 @@ const Dashboard = () => {
                 cards={kpiCards}
               />
               <Divider flexItem orientation="vertical" />
-              <Box>
+              <Box margin={1.5}>
                 <PageHeader
                   title="WorkOrder"
                   subtitle="Open work order status"

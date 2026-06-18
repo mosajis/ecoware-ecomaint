@@ -56,11 +56,15 @@ export const getMaintLogContext = async (
   });
 };
 
-export const getStatistics = (): Promise<TypeStatistics> =>
-  api.get(`/statistics/`);
+export const getStatistics = (instId?: number): Promise<TypeStatistics> =>
+  api.get(`/statistics`, {
+    params: { instId },
+  });
 
-export const getStatisticsKpi = (): Promise<TypeKPI> =>
-  api.get(`/statistics/kpi`);
+export const getStatisticsKpi = (instId?: number): Promise<TypeKPI> =>
+  api.get(`/statistics/kpi`, {
+    params: { instId },
+  });
 
 export const getCountersAlert = () => api.get(`/tblCompJobCounter/alert`);
 

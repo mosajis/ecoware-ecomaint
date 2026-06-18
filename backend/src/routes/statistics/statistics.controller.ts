@@ -45,8 +45,8 @@ export const ControllerStatistics = new Elysia()
   .group("/statistics", (app) =>
     app.get(
       "/",
-      async ({ headers }) => {
-        const instId = Number(headers["x-inst-id"] || 0);
+      async ({ headers, query }) => {
+        const instId = Number(query.instId ?? headers["x-inst-id"] ?? 0);
 
         if (!instId) {
           throw new Error("Instance ID is required");
@@ -304,6 +304,9 @@ export const ControllerStatistics = new Elysia()
         };
       },
       {
+        query: t.Object({
+          instId: t.Nullable(t.Number()),
+        }),
         response: StatisticsSchema,
         detail: {
           tags: ["Statistics"],
