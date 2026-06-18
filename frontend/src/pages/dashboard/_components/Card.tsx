@@ -1,4 +1,4 @@
-import { Tooltip } from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";

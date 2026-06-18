@@ -2,7 +2,7 @@ import DataGridActionBar from "@/shared/components/dataGrid/DataGridActionBar";
 import FilterList from "@mui/icons-material/FilterList";
 import FollowTheSignsIcon from "@mui/icons-material/FollowTheSigns";
 import PrintIcon from "@mui/icons-material/Print";
-import { Badge } from "@mui/material";
+import Badge from "@mui/material/Badge";
 
 type Props = {
   onFilter: () => void;

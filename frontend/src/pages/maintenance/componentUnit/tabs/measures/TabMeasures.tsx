@@ -3,16 +3,15 @@ import Upsert from "./TabMeasuresUpsert";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import Button from "@mui/material/Button";
 import MeasurePointsTrend from "@/pages/maintenance/measurePoint/MeasurePointTrend";
-import { useCallback, useMemo, useState } from "react";
-import { GridColDef, GridRowSelectionModel } from "@mui/x-data-grid";
+import BarChartSharp from "@mui/icons-material/BarChartSharp";
+import { useCallback, useState } from "react";
+import { GridColDef } from "@mui/x-data-grid";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import {
   tblCompMeasurePoint,
   TypeTblComponentUnit,
   TypeTblCompMeasurePoint,
 } from "@/core/api/generated/api";
-import { LineChart } from "@mui/x-charts";
-import { BarChartSharp, ChairAlt, StackedLineChart } from "@mui/icons-material";
 
 type Props = {
   componentUnit?: TypeTblComponentUnit | null;

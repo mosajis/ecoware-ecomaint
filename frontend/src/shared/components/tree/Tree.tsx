@@ -1,5 +1,8 @@
 import TreeHeader from "./TreeHeader";
 import TreeContent from "./TreeContent";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import { getPermit } from "@/shared/hooks/usePermison";
 import { useTree } from "@headless-tree/react";
 import { useEffect, useCallback, useState, useMemo, useRef } from "react";
 import { TreeDataMapper } from "@/shared/hooks/useDataTree";
@@ -10,9 +13,6 @@ import {
 } from "@headless-tree/core";
 
 import "./tree.css";
-import { getPermit } from "@/shared/hooks/usePermison";
-import { ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material";
-import { ContentCopy } from "@mui/icons-material";
 
 interface ContextMenuItem<T> {
   label: string;

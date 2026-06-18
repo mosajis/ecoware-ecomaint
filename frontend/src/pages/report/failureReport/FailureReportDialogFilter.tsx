@@ -7,6 +7,7 @@ import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGri
 import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 import FieldAsyncSelect from "@/shared/components/fields/FieldAsyncSelect";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import Divider from "@mui/material/Divider";
 import { useState } from "react";
 import {
   tblComponentUnit,
@@ -21,7 +22,6 @@ import {
   TypeTblFailureStatus,
 } from "@/core/api/generated/api";
 import { extractFullName } from "@/core/helper";
-import { Divider } from "@mui/material";
 
 export interface FailureReportFilter {
   AND?: any[];

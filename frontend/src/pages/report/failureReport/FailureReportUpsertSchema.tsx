@@ -60,6 +60,9 @@ export const schema = z.object({
 
   nextFollowDate: z.string().nullable().optional(),
 
+  employee: z.any().nullable().optional(),
+  discipline: z.any().nullable().optional(),
+
   // Maintenance Info
   maintClass: z
     .object({

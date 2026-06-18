@@ -96,7 +96,7 @@ export const columns: GridColDef<TypeTblFailureReport>[] = [
   {
     field: "severity",
     headerName: "Severity",
-    flex: 1,
+    width: 85,
     renderCell: ({ row }) => (
       <CellSeverity value={row.tblFailureSeverityLevel} />
     ),
