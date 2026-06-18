@@ -135,8 +135,8 @@ const TreeToolbar = memo(function TreeToolbar({
   return (
     <Box
       sx={(theme) => ({
-        px: 0.5,
-        py: 0.4,
+        px: 1,
+        py: 0.5,
         borderRadius: `${theme.shape.borderRadius}px ${theme.shape.borderRadius}px 0 0`,
         bgcolor: (theme.vars || theme).palette.background.paper,
 

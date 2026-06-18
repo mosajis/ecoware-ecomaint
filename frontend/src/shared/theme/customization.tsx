@@ -238,7 +238,7 @@ export const dataDisplayCustomizations: Components<Theme> = {
           color: (theme.vars || theme).palette.text.secondary,
         },
         [`& .${typographyClasses.root}`]: {
-          fontWeight: 500,
+          // fontWeight: 550,
         },
         [`& .${buttonBaseClasses.root}`]: {
           display: "flex",
@@ -246,21 +246,31 @@ export const dataDisplayCustomizations: Components<Theme> = {
           padding: "2px 8px",
           borderRadius: (theme.vars || theme).shape.borderRadius,
           opacity: 0.8,
-          // "&.Mui-selected": {
-          //   opacity: 1,
-          //   backgroundColor: alpha(theme.palette.action.selected, 0.3),
-          //   [`& .${svgIconClasses.root}`]: {
-          //     color: (theme.vars || theme).palette.text.primary,
-          //   },
-          //   "&:focus-visible": {
-          //     backgroundColor: alpha(theme.palette.action.selected, 0.3),
-          //   },
-          //   "&:hover": {
-          //     backgroundColor: alpha(theme.palette.action.selected, 0.5),
-          //   },
-          // },
           "&:focus-visible": {
             backgroundColor: "transparent",
+          },
+        },
+
+        [`& .${buttonBaseClasses.root}`]: {
+          display: "flex",
+          gap: 8,
+          padding: "2px 8px",
+          borderRadius: (theme.vars || theme).shape.borderRadius,
+          opacity: 0.8,
+
+          "&:focus-visible": {
+            backgroundColor: "transparent",
+          },
+          "&.Mui-selected": {
+            backgroundColor: alpha(theme.palette.primary.main, 0.1),
+            opacity: 1,
+            [`& .${svgIconClasses.root}`]: {
+              color: (theme.vars || theme).palette.primary.main,
+            },
+            [`& .${typographyClasses.root}`]: {
+              color: (theme.vars || theme).palette.primary.main,
+              // fontWeight: "bold",
+            },
           },
         },
       }),

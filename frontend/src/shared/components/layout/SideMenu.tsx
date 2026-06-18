@@ -12,6 +12,7 @@ import OptionsMenu from "../OptionsMenu";
 import { useAtomValue } from "jotai";
 import { atomAuth } from "@/pages/auth/auth.atom";
 import { atomSideMenuOpen } from "@/shared/atoms/general.atom";
+import { blue } from "@mui/material/colors";
 
 const drawerWidth = 240;
 const drawerClosedWidth = 0;
@@ -77,8 +78,18 @@ export default function SideMenu() {
           justifyContent: open ? "initial" : "center",
         }}
       >
-        <Avatar alt={auth.user?.userName} sx={{ width: 36, height: 36 }}>
-          {auth.user?.userName?.[0]}
+        <Avatar
+          alt={auth.user?.tblEmployee?.firstName || ""}
+          sx={{
+            width: 38,
+            height: 38,
+            fontSize: 15,
+            fontWeight: "bold",
+            backgroundColor: blue["900"],
+          }}
+        >
+          {auth.user?.tblEmployee?.firstName?.[0]}
+          {auth.user?.tblEmployee?.lastName?.[0]}
         </Avatar>
 
         <Box sx={{ mr: "auto" }}>
@@ -86,7 +97,8 @@ export default function SideMenu() {
             {auth?.user?.userName}
           </Typography>
           <Typography variant="caption" sx={{ color: "text.secondary" }}>
-            {auth?.user?.tblEmployee?.firstName} {auth?.user?.tblEmployee?.lastName}
+            {auth?.user?.tblEmployee?.firstName}{" "}
+            {auth?.user?.tblEmployee?.lastName}
           </Typography>
         </Box>
 

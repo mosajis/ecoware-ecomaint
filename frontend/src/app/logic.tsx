@@ -1,17 +1,15 @@
+import Spinner from "@/shared/components/Spinner";
 import { useEffect, useCallback, ReactElement, useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
-
+import { LOCAL_STORAGE } from "@/const";
+import { atomUser } from "@/pages/auth/auth.atom";
+import { atomUserGroupElements } from "./logic.atom";
+import { atomInstallations, atomRig } from "@/shared/atoms/general.atom";
 import {
   tblUserGroupElement,
   tblUserInstallation,
   TypeTblInstallation,
 } from "@/core/api/generated/api";
-
-import { LOCAL_STORAGE } from "@/const";
-import { atomUser } from "@/pages/auth/auth.atom";
-import { atomUserGroupElements } from "./logic.atom";
-import { atomInstallations, atomRig } from "@/shared/atoms/general.atom";
-import Spinner from "@/shared/components/Spinner";
 
 type Props = {
   children: ReactElement;

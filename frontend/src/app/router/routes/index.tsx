@@ -1,7 +1,7 @@
 import treeGeneral from "@/pages/general/GeneralRoutes";
 import treeAccess from "@/pages/access/AccessRoutes";
-import treeDashboard from "@/pages/dashboard/DashboardRoute";
-import treeDashboardOveral from "@/pages/dashboardOveral/DashboardOveralRoute";
+import treeDashboard, { RouteLocal } from "@/pages/dashboard/DashboardRoute";
+
 import treeSpare from "@/pages/spare/SpareRoutes";
 import treeReport from "@/pages/report/ReportRoutes";
 import { createRoute } from "@tanstack/react-router";
@@ -17,7 +17,7 @@ export const indexRoute = createRoute({
   getParentRoute: () => protectedRoute,
   path: "/",
   beforeLoad: async () => {
-    throw redirect({ to: "/dashboard" });
+    throw redirect({ to: RouteLocal.to });
   },
 });
 
@@ -27,7 +27,7 @@ export const routesTree = rootRoute.addChildren([
   AuthLoginRoute,
   protectedRoute.addChildren([
     treeDashboard,
-    treeDashboardOveral,
+
     treeGeneral,
     treeAccess,
     treeSpare,

@@ -1,7 +1,9 @@
 import type { ReactNode } from "react";
 // ================= ICONS =================
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
+import CompareArrowsRoundedIcon from "@mui/icons-material/CompareArrowsRounded";
 import CategoryRoundedIcon from "@mui/icons-material/CategoryRounded";
+import InsightsRoundedIcon from "@mui/icons-material/InsightsRounded";
 import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
 import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded";
 import BadgeRoundedIcon from "@mui/icons-material/BadgeRounded";
@@ -41,6 +43,7 @@ import PeopleRoundedIcon from "@mui/icons-material/AccountBoxRounded";
 import SecurityRoundedIcon from "@mui/icons-material/SecurityRounded";
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
 import { getPermit } from "@/shared/hooks/usePermison";
+import { yellow } from "@mui/material/colors";
 // ================= TYPES =================
 export type MenuItem = {
   text: string;
@@ -71,14 +74,32 @@ export const menuContentItems: MenuSection[] = [
   {
     title: "Dashboard",
     icon: <DashboardRoundedIcon sx={iconStyle} />,
+    permit: true,
     path: "/dashboard",
-    items: [],
+    items: [
+      {
+        text: "Local",
+        path: "/dashboard/local",
+        id: "dashboard:local",
+        icon: <InsightsRoundedIcon sx={iconStyle} />,
+        permit: true,
+      },
+      {
+        text: "Overall",
+        path: "/dashboard/Overall",
+        id: "dashboard:overall",
+        icon: <CompareArrowsRoundedIcon sx={iconStyle} />,
+        permit: true,
+      },
+    ],
   },
 
   // ================= QUICK ACCESS =================
   {
     title: "Quick Access",
-    icon: <StartIcon sx={iconStyle} />,
+    icon: (
+      <StartIcon sx={{ ...iconStyle, color: yellow[700] + " !important" }} />
+    ),
     noActiveHighlight: true,
     items: [
       {
